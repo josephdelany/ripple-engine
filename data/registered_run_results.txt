@@ -1,0 +1,106 @@
+####################################################################################################
+REGISTERED RUN — H1–H3 conditioning results
+Repo: ripple-engine | Analysis plan: BRIEF_SKELETON.md (pre-registered 2026-07-21)
+Generated: 2026-07-22T00:47:56+00:00
+Decision rule (fixed pre-run): a hypothesis HOLDS if the CLUSTERED amplification
+exceeds +5pp in the PRE-REGISTERED predicted direction; otherwise it FAILS.
+State variables measured at t-1 (last reading strictly before each event; no lookahead).
+####################################################################################################
+
+
+>>>>>>>>>> conditioned_study.py <<<<<<<<<<
+
+====================================================================================================
+EVENT-LEVEL DETAIL -- the ripple, and the state of the system the day before
+====================================================================================================
+event                       date           CAR+5  CAR+20      VIX %ile      Inv σ   COT %ile  Brent vol      B-W z      USD z      2s10s
+----------------------------------------------------------------------------------------------------
+iraq_invades_kuwait_1990    1990-08-02    +32.5%  +40.5%           n/a       5.10        n/a      36.28      -0.58        n/a       0.44
+iraq_war_begins_2003        2003-03-20    -24.2%  -33.9%         85.71      -2.02        n/a      41.65      -0.07        n/a       2.26
+lehman_collapse_2008        2008-09-15     -2.7%  -33.6%         94.91      -0.53      12.71      43.43      -2.31      -0.54       1.51
+libya_civil_war_2011        2011-02-17     +8.2%   +7.2%         27.34       0.86      91.02      19.77       5.83      -1.04       2.76
+opec_declines_cut_2014      2014-11-27     -9.9%  -22.1%          4.17       0.73      40.38      24.12      -0.80       2.69       1.71
+opec_agrees_cut_2016        2016-11-30    +13.4%  +21.2%         17.85       2.28      31.54      39.90      -1.18       2.03       1.21
+iran_sanctions_reimposed_20 2018-05-08     +2.7%   -7.6%         63.33      -0.13      93.85      30.22       0.33       0.57       0.46
+venezuela_sanctions_2019    2019-01-28     +2.0%   +7.0%         78.59       0.42      15.00      47.78       1.44       0.75       0.16
+abqaiq_attack_2019          2019-09-14     +6.1%   -2.3%         45.88      -0.03      57.31      40.48       0.75       1.26       0.11
+soleimani_strike_2020       2020-01-03     -4.4%  -19.9%         28.78      -0.01      78.08      22.91       0.51       0.73       0.30
+opec_talks_collapse_2020    2020-03-06    -48.4%  -77.0%         99.84      -0.36      13.85      35.09       0.39       1.23       0.33
+covid_pandemic_declared_202 2020-03-11    -82.2%  -71.1%         99.92      -0.25      26.92     102.43      -0.95       1.58       0.26
+opec_record_cut_2020        2020-04-12    -72.1%  +50.0%         98.04       0.67      42.69     220.20      -2.05       2.71       0.50
+suez_ever_given_2021        2021-03-23    -13.0%  -16.5%         68.14       0.71      80.38      45.65      -0.49      -0.38       1.54
+russia_invades_ukraine_2022 2022-02-24    +13.3%  +15.7%         93.06      -1.20      32.69      31.51       0.81       0.14       0.41
+nord_stream_sabotage_2022   2022-09-26     +4.0%   +8.4%         89.66      -0.23      16.54      45.91       0.09       3.19      -0.51
+eu_embargo_price_cap_2022   2022-12-05     -3.7%   -1.3%         46.26      -1.80      10.38      30.28       0.52       1.46      -0.77
+opec_surprise_cut_2023      2023-04-02    +19.7%   +2.7%         40.67       0.55       4.23      37.56      -0.44       0.69      -0.58
+israel_hamas_war_2023       2023-10-07     -6.9%  -13.2%         33.87      -0.46      72.31      33.73       0.10       1.58      -0.30
+red_sea_attacks_2023        2023-12-01     -7.5%   -7.6%          5.26       0.04       3.46      38.60       0.46       0.70      -0.36
+
+====================================================================================================
+CONDITIONED RIPPLE -- ripple MAGNITUDE by pre-event state
+====================================================================================================
+
+  Split on Brent vol at median 38.08
+    high  n=10   mean |CAR+20| =  25.1%
+    low   n=10   mean |CAR+20| =  20.7%
+    amplification: +4.4 pp
+
+  Split on VIX %ile at median 63.33
+    high  n=10   mean |CAR+20| =  32.1%
+    low   n=9   mean |CAR+20| =  10.8%
+    amplification: +21.2 pp
+
+  Split on surprise (1-5) at median 4.00
+    high  n=11   mean |CAR+20| =  22.2%
+    low   n=9   mean |CAR+20| =  23.9%
+    amplification: -1.7 pp
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+HONESTY CHECK: n = 20 events. This is FAR too few to conclude anything.
+The machinery is correct and will sharpen with every sourced event you add.
+Report these as illustrative, never as findings.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Saved chart to /Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/conditioned_ripple.png
+
+>>>>>>>>>> robustness.py (all three registered variables + verdict) <<<<<<<<<<
+
+==========================================================================================
+CLUSTERS (events measured inside the same window = one episode)
+==========================================================================================
+  cluster 11: opec_talks_collapse_2020, covid_pandemic_declared_2020, opec_record_cut_2020   -> keeping first only
+
+==========================================================================================
+H1: DOES HIGH VIX (STRESS) AMPLIFIES SURVIVE?   (split on derived.vix_pct)
+==========================================================================================
+  1. baseline (all events)   n=19   high |CAR+20|= 32.1% (n=10)   low= 10.8% (n=9)   amplification +21.2 pp
+  2. clustered               n=17   high |CAR+20|= 22.3% (n=9)   low= 12.0% (n=8)   amplification +10.3 pp
+  3. clustered, no outlier   n=17   high |CAR+20|= 22.3% (n=9)   low= 12.0% (n=8)   amplification +10.3 pp
+  -> predicted direction: high>low; clustered directional amplification +10.3 pp (threshold +5 pp)
+
+==========================================================================================
+H2: DOES TIGHT INVENTORIES (LOW SIGMA) AMPLIFY SURVIVE?   (split on derived.inv_sigma)
+==========================================================================================
+  1. baseline (all events)   n=20   high |CAR+20|= 19.5% (n=10)   low= 26.4% (n=10)   amplification -7.0 pp
+  2. clustered               n=18   high |CAR+20|= 16.1% (n=9)   low= 21.4% (n=9)   amplification -5.4 pp
+  3. clustered, no outlier   n=18   high |CAR+20|= 16.1% (n=9)   low= 21.4% (n=9)   amplification -5.4 pp
+  -> predicted direction: low>high; clustered directional amplification +5.4 pp (threshold +5 pp)
+
+==========================================================================================
+H3: DOES CROWDED NET-LONG (HIGH PERCENTILE) AMPLIFIES SURVIVE?   (split on derived.cot_pct)
+==========================================================================================
+  1. baseline (all events)   n=18   high |CAR+20|= 17.2% (n=9)   low= 25.5% (n=9)   amplification -8.4 pp
+  2. clustered               n=16   high |CAR+20|= 13.1% (n=8)   low= 19.8% (n=8)   amplification -6.8 pp
+  3. clustered, no outlier   n=16   high |CAR+20|= 13.1% (n=8)   low= 19.8% (n=8)   amplification -6.8 pp
+  -> predicted direction: high>low; clustered directional amplification -6.8 pp (threshold +5 pp)
+
+How to read this: down each variable's three rows, if the amplification stays large and
+in the predicted direction, the finding survives its own best rebuttals. If it shrinks or
+flips when the 2020 cluster collapses, it was that episode all along -- also reportable.
+
+##########################################################################################
+REGISTERED VERDICT (BRIEF_SKELETON.md §4 rule: +5pp clustered, predicted direction)
+##########################################################################################
+  H1 HOLDS (clustered +10.3 pp in predicted direction)
+  H2 HOLDS (clustered +5.4 pp in predicted direction)
+  H3 FAILS (clustered -6.8 pp in predicted direction)
