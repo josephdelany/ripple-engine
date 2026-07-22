@@ -83,6 +83,13 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "system_health": {
+        "name": "System Health",
+        "description": "Data freshness per series (OK/STALE/DEAD) from heartbeat.py",
+        "endpoint": "system_health",
+        "gridData": {"w": 30, "h": 12},
+        "type": "table",
+    },
 }
 
 
@@ -212,6 +219,35 @@ def forecast_log():
             "outcome": outcome,
             "brier": brier,
         })
+    return rows
+
+
+@app.get("/system_health")
+def system_health():
+    """Data-freshness panel, read from the JSON heartbeat.py writes."""
+    health_path = ROOT / "data" / "health_status.json"
+    if not health_path.exists():
+        # The file is a runtime artifact -- if heartbeat hasn't run, say so plainly.
+        return [{"series": "(no health report yet)",
+                 "last_update": "-", "cadence": "-",
+                 "status": "run: python3 src/heartbeat.py"}]
+    health = json.loads(health_path.read_text())
+    rows = [{
+        "series": s["series_id"],
+        "last_update": s["last_obs"] or "never",
+        "cadence": s["frequency"],
+        "status": s["status"],
+    } for s in health.get("series", [])]
+    # Sort worst-first so trouble is at the top of the widget.
+    order = {"DEAD": 0, "STALE": 1, "OK": 2}
+    rows.sort(key=lambda r: order.get(r["status"], 3))
+    # A summary row so the overall state is visible at a glance.
+    rows.insert(0, {
+        "series": f"== OVERALL: {health.get('overall', '?')} ==",
+        "last_update": health.get("generated_at", "")[:16],
+        "cadence": f"events={health.get('events_count', '?')}",
+        "status": health.get("last_refresh", {}).get("state", "?"),
+    })
     return rows
 
 
