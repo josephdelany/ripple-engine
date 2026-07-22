@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent: run the Ripple Engine refresh + health check once a day.
+
+  It runs, at 07:30 local time every day:
+      python3 src/refresh.py && python3 src/heartbeat.py
+  refresh.py always exits 0 (failures are logged), so heartbeat.py always runs
+  after it and records freshness. Both stdout and stderr are captured to a log.
+
+  Joe installs this himself -- see ops/INSTALL.md. Nothing here installs it.
+
+  NOTE: paths are absolute and machine-specific (python3 at /usr/local/bin,
+  repo under /Users/default/...). If either differs on your machine, edit the
+  two paths below before installing. `which python3` shows the interpreter path.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ripple.refresh</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-lc</string>
+        <string>cd '/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine' &amp;&amp; /usr/local/bin/python3 src/refresh.py &amp;&amp; /usr/local/bin/python3 src/heartbeat.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine</string>
+
+    <!-- Run daily at 07:30 local time. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <!-- Do not run on load; only on the schedule. Test manually with launchctl start. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- Capture everything the run prints, so a failed night is never invisible. -->
+    <key>StandardOutPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_refresh.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_refresh.log</string>
+</dict>
+</plist>
