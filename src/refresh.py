@@ -1,0 +1,142 @@
+"""
+refresh.py -- ONE command that brings the whole engine up to date.
+
+WHY THIS EXISTS:
+The engine has half a dozen little fetchers. Running them by hand, in order,
+remembering which one failed -- that is how an engine quietly rots. This is the
+single orchestrator. It runs every ingestion step in order, and -- this is the
+important part -- it ISOLATES each step: if one fails, the others still run, and
+the failure is written down loudly, never swallowed. Silent failure is this
+project's historic killer; this file is the answer to it.
+
+Each step runs as its own subprocess (so a crash in one cannot take down the
+orchestrator), is timed, and its net rows-written is measured from the database
+itself (not by trusting the step's own printout). Every step appends a line to
+data/refresh_log.csv and the run ends with a clean summary table.
+
+This script always exits 0 even if steps failed -- the failures are recorded in
+the log and it is heartbeat.py's job to raise the alarm. That way the scheduled
+`refresh.py && heartbeat.py` still reaches the health check.
+
+Run:  python3 src/refresh.py
+"""
+
+import csv
+import subprocess
+import sqlite3
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "data" / "oil.db"
+LOG = ROOT / "data" / "refresh_log.csv"
+PY = sys.executable
+
+STEP_TIMEOUT = 900   # seconds; fetch_cot pulls ~20 zip archives, so be generous
+
+# (step name, script, which table its "rows written" is measured against)
+STEPS = [
+    ("fetch_prices",   "src/fetch_prices.py",   "prices"),
+    ("fetch_series",   "src/fetch_series.py",   "observations"),
+    ("fetch_eia",      "src/fetch_eia.py",      "observations"),
+    ("fetch_cot",      "src/fetch_cot.py",      "observations"),
+    ("derive_signals", "src/derive_signals.py", "observations"),
+    ("load_events",    "src/load_events.py",    "events"),
+]
+
+
+def table_count(metric):
+    """Current row count of the table a step writes to (0 if it doesn't exist yet)."""
+    try:
+        conn = sqlite3.connect(DB)
+        try:
+            return conn.execute(f"SELECT COUNT(*) FROM {metric}").fetchone()[0]
+        finally:
+            conn.close()
+    except sqlite3.Error:
+        return 0
+
+
+def run_step(name, script, metric):
+    """Run one step in isolation. Returns a result dict; never raises."""
+    started = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    before = table_count(metric)
+    t0 = time.perf_counter()
+    status, detail_err = "OK", ""
+    try:
+        proc = subprocess.run(
+            [PY, script], cwd=ROOT, capture_output=True, text=True,
+            timeout=STEP_TIMEOUT)
+        if proc.returncode != 0:
+            status = "FAILED"
+            # Prefer stderr; fall back to the tail of stdout.
+            msg = (proc.stderr or proc.stdout or "").strip()
+            detail_err = msg.splitlines()[-1] if msg else f"exit code {proc.returncode}"
+    except subprocess.TimeoutExpired:
+        status = "FAILED"
+        detail_err = f"timeout after {STEP_TIMEOUT}s"
+    except Exception as e:                       # e.g. python missing, OS error
+        status = "FAILED"
+        detail_err = f"{type(e).__name__}: {e}"
+    dur = time.perf_counter() - t0
+    after = table_count(metric)
+    rows = after - before                        # net rows written to the DB
+
+    if status == "OK":
+        detail = f"started={started} dur={dur:.1f}s rows_added={rows} ({metric})"
+    else:
+        detail = f"started={started} dur={dur:.1f}s ERROR: {detail_err[:300]}"
+    return {"name": name, "status": status, "dur": dur, "rows": rows,
+            "metric": metric, "detail": detail, "err": detail_err}
+
+
+def main():
+    run_id = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    print(f"Ripple Engine refresh -- {run_id}")
+    print("Running each step in isolation; a failure in one will not stop the rest.\n")
+
+    results = []
+    for name, script, metric in STEPS:
+        print(f"  -> {name:<14} ...", end="", flush=True)
+        r = run_step(name, script, metric)
+        results.append(r)
+        if r["status"] == "OK":
+            print(f" OK   {r['dur']:>5.1f}s  +{r['rows']} rows")
+        else:
+            print(f" FAILED  {r['dur']:>5.1f}s  {r['err'][:80]}")
+
+    # --- Append to the log (one row per step; run_id is shared so heartbeat can
+    #     find "the last run" as the rows sharing the newest timestamp). ---
+    new_file = not LOG.exists()
+    with open(LOG, "a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if new_file:
+            w.writerow(["timestamp", "step", "status", "detail"])
+        for r in results:
+            w.writerow([run_id, r["name"], r["status"], r["detail"]])
+
+    # --- Clean end-of-run summary ---
+    ok = sum(1 for r in results if r["status"] == "OK")
+    failed = len(results) - ok
+    print("\n" + "=" * 68)
+    print(f"REFRESH SUMMARY   {ok} OK / {failed} FAILED")
+    print("=" * 68)
+    print(f"  {'step':<15}{'status':<9}{'dur':>7}{'rows':>8}   note")
+    print("  " + "-" * 64)
+    for r in results:
+        note = "" if r["status"] == "OK" else r["err"][:34]
+        print(f"  {r['name']:<15}{r['status']:<9}{r['dur']:>6.1f}s{r['rows']:>8}   {note}")
+    print("  " + "-" * 64)
+    print(f"  Log: {LOG}")
+    if failed:
+        print(f"  {failed} step(s) FAILED -- heartbeat.py will flag this run.")
+    print("\nNext: python3 src/heartbeat.py   (freshness + health check)")
+
+    # Always exit 0 so a chained heartbeat still runs. Failures live in the log.
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

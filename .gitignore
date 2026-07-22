@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 data/*.db
+# Runtime ops artifacts, regenerated every run (refresh.py / heartbeat.py)
+data/refresh_log.csv
+data/health_status.json
