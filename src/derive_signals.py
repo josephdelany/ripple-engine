@@ -58,6 +58,10 @@ MECHANISMS = {
         "Brent realised volatility (20d, annualised)", "percent",
         "The market's current sensitivity. High prevailing vol means a given shock "
         "produces a larger absolute move."),
+    "derived.cot_pct": (
+        "Managed-money net-long percentile (5y)", "percentile",
+        "H3 (pre-registered): crowded speculative positioning is fragile; "
+        "extremes of net-long amplify shocks via forced unwinds."),
 }
 
 
@@ -107,6 +111,17 @@ def build_signals(w):
         # realised volatility: std of daily log returns, annualised
         r = np.log(brent).diff()
         out["derived.brent_vol20"] = r.rolling(20).std() * np.sqrt(252) * 100
+
+    if "cftc.mm_net_wti" in w:
+        # Weekly series on a daily index: forward-fill so each day carries the
+        # latest known Tuesday reading (that IS the point-in-time value).
+        # Percentile lookback is 260 weekly obs ~= 5 years.
+        cot = w["cftc.mm_net_wti"].ffill()
+        out["derived.cot_pct"] = (
+            w["cftc.mm_net_wti"].dropna()
+            .rolling(260, min_periods=52).rank(pct=True).mul(100)
+            .reindex(w.index).ffill()
+        )
 
     return out
 
