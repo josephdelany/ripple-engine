@@ -90,6 +90,13 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 12},
         "type": "table",
     },
+    "engine_read": {
+        "name": "Engine Read",
+        "description": "If a shock landed today: amplifier status + historical base rates",
+        "endpoint": "engine_read",
+        "gridData": {"w": 30, "h": 10},
+        "type": "table",
+    },
 }
 
 
@@ -248,6 +255,30 @@ def system_health():
         "cadence": f"events={health.get('events_count', '?')}",
         "status": health.get("last_refresh", {}).get("state", "?"),
     })
+    return rows
+
+
+@app.get("/engine_read")
+def engine_read():
+    """Today's conditional read, from the JSON engine_read.py writes."""
+    path = ROOT / "data" / "engine_read.json"
+    if not path.exists():
+        return [{"item": "(no engine read yet)",
+                 "detail": "run: python3 src/engine_read.py",
+                 "verdict": "", "amplifier": ""}]
+    r = json.loads(path.read_text())
+    rows = [{"item": f"READ ({r.get('as_of', '')})", "detail": r.get("read", ""),
+             "verdict": "", "amplifier": ""}]
+    for hid in ("H1", "H2", "H3"):
+        h = r.get("hypotheses", {}).get(hid)
+        if not h:
+            continue
+        rows.append({
+            "item": f"{hid} {h['label']}",
+            "detail": f"latest {h['latest']} vs event-median {h['event_median']} ({h['unit']})",
+            "verdict": h["verdict"],
+            "amplifier": h["amplifier"],
+        })
     return rows
 
 

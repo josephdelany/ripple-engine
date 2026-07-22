@@ -44,6 +44,10 @@ STEPS = [
     ("fetch_cot",      "src/fetch_cot.py",      "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
+    # FINAL step: the synthesis read. It writes engine_read.json/.md (files, not
+    # DB rows), so its measured "rows" is 0 by design -- the point is that every
+    # refresh ends with a fresh Engine Read.
+    ("engine_read",    "src/engine_read.py",    "observations"),
 ]
 
 
