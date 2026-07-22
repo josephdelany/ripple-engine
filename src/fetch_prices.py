@@ -13,6 +13,7 @@ Run it with:   python3 src/fetch_prices.py
 
 import io
 import sqlite3
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -25,6 +26,8 @@ import requests
 # Each "series id" is one dataset. DCOILWTICO = WTI crude, DCOILBRENTEU = Brent crude.
 FRED = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}"
 SERIES = {"WTI": "DCOILWTICO", "Brent": "DCOILBRENTEU"}
+# The canonical series ids the ANALYSIS actually reads (the observations table).
+LABEL_TO_SERIES = {"WTI": "fred.DCOILWTICO", "Brent": "fred.DCOILBRENTEU"}
 
 # Folders (data/ holds the database and the chart)
 ROOT = Path(__file__).resolve().parent.parent
@@ -58,8 +61,23 @@ def main():
     db_path = DATA / "oil.db"
     conn = sqlite3.connect(db_path)
     prices.to_sql("prices", conn, if_exists="replace", index=False)
+
+    # --- 3b. Keep the canonical `observations` table current too. THAT table
+    # (not `prices`) is what the analysis reads, so the daily refresh must land
+    # here or Brent/WTI silently go stale. Key = (series_id, obs_date, as_of);
+    # as_of = obs_date to match the original migration, and INSERT OR REPLACE so
+    # re-runs update each row in place and never create a duplicate.
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    obs = [
+        (LABEL_TO_SERIES[r.commodity], r.date.strftime("%Y-%m-%d"),
+         float(r.price), r.date.strftime("%Y-%m-%d"), now)
+        for r in prices.itertuples()
+    ]
+    conn.executemany("INSERT OR REPLACE INTO observations VALUES (?,?,?,?,?)", obs)
+    conn.commit()
     conn.close()
-    print(f"\nSaved {len(prices):,} rows to {db_path}")
+    print(f"\nSaved {len(prices):,} rows to {db_path} "
+          f"(prices table + {len(obs):,} observations rows)")
 
     # --- 4. Draw a chart of both prices over time ---
     fig, ax = plt.subplots(figsize=(11, 5))
