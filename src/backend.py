@@ -97,6 +97,13 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "scenario_playbook": {
+        "name": "Scenario Playbook",
+        "description": "Per event type: clustered base-rate ripple + today's conditioning",
+        "endpoint": "scenario_playbook",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
 }
 
 
@@ -278,6 +285,34 @@ def engine_read():
             "detail": f"latest {h['latest']} vs event-median {h['event_median']} ({h['unit']})",
             "verdict": h["verdict"],
             "amplifier": h["amplifier"],
+        })
+    return rows
+
+
+@app.get("/scenario_playbook")
+def scenario_playbook():
+    """One row per event type: clustered base-rate ripple + today's conditioning.
+    Computed live (like the other analytic widgets); the amplifier context is the
+    same current-state summary for every row."""
+    try:
+        import scenario
+        pb = scenario.build_playbook()
+    except Exception as e:                     # never 500 the dashboard
+        return [{"event_type": "(error)", "n": "", "note": str(e)[:100]}]
+    today = scenario.conditioning_summary(pb["conditioning"])
+    rows = []
+    for c in pb["cards"]:
+        b = c["base"]
+        fmt = lambda k: f"{b[k]:+.1f}%" if k in b else "-"
+        rng = (f"[{b['car20_min']:+.1f}%, {b['car20_max']:+.1f}%]"
+               if "car20_min" in b else "-")
+        rows.append({
+            "event_type": c["type"],
+            "n": c["n"],
+            "CAR+1": fmt("car1"), "CAR+5": fmt("car5"),
+            "CAR+10": fmt("car10"), "CAR+20": fmt("car20"),
+            "range(CAR+20)": rng,
+            "today": today,
         })
     return rows
 

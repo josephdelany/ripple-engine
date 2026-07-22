@@ -8,3 +8,4 @@ data/health_status.json
 data/launchd_refresh.log
 data/engine_read.json
 data/engine_read.md
+data/playbook.md

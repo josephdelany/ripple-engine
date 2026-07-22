@@ -44,10 +44,12 @@ STEPS = [
     ("fetch_cot",      "src/fetch_cot.py",      "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
-    # FINAL step: the synthesis read. It writes engine_read.json/.md (files, not
-    # DB rows), so its measured "rows" is 0 by design -- the point is that every
-    # refresh ends with a fresh Engine Read.
+    # Synthesis read. Writes engine_read.json/.md (files, not DB rows) -> 0 rows
+    # by design; the point is that every refresh ends with a fresh Engine Read.
     ("engine_read",    "src/engine_read.py",    "observations"),
+    # FINAL step: regenerate the scenario playbook with today's conditioning.
+    # Also file output (playbook.md), so measured rows is 0 by design.
+    ("scenario",       "src/scenario.py --all", "observations"),
 ]
 
 
@@ -70,8 +72,9 @@ def run_step(name, script, metric):
     t0 = time.perf_counter()
     status, detail_err = "OK", ""
     try:
+        # script may carry args (e.g. "src/scenario.py --all"); split into argv.
         proc = subprocess.run(
-            [PY, script], cwd=ROOT, capture_output=True, text=True,
+            [PY, *script.split()], cwd=ROOT, capture_output=True, text=True,
             timeout=STEP_TIMEOUT)
         if proc.returncode != 0:
             status = "FAILED"
