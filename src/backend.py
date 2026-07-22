@@ -76,6 +76,13 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "forecast_log": {
+        "name": "Forecast Log",
+        "description": "Joe's logged forecasts vs Kalshi, Brier-scored once resolved",
+        "endpoint": "forecast_log",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
 }
 
 
@@ -181,6 +188,31 @@ def event_database():
         "confidence, source_url FROM events ORDER BY event_date DESC", conn)
     conn.close()
     return json.loads(df.to_json(orient="records"))
+
+
+@app.get("/forecast_log")
+def forecast_log():
+    """The forecast track record. Brier is filled only for resolved forecasts."""
+    conn = sqlite3.connect(DB)
+    df = pd.read_sql(
+        "SELECT forecast_id, question, made_at, my_prob, market_prob, "
+        "outcome FROM forecasts ORDER BY forecast_id DESC", conn)
+    conn.close()
+    rows = []
+    for _, r in df.iterrows():
+        outcome = None if pd.isna(r["outcome"]) else int(r["outcome"])
+        # Brier = (forecast - outcome)^2; only defined once the outcome is known.
+        brier = None if outcome is None else round((r["my_prob"] - outcome) ** 2, 3)
+        rows.append({
+            "id": int(r["forecast_id"]),
+            "question": r["question"],
+            "made_at": (r["made_at"] or "")[:10],
+            "my_prob": round(float(r["my_prob"]), 2) if pd.notna(r["my_prob"]) else None,
+            "market_prob": round(float(r["market_prob"]), 2) if pd.notna(r["market_prob"]) else None,
+            "outcome": outcome,
+            "brier": brier,
+        })
+    return rows
 
 
 if __name__ == "__main__":
