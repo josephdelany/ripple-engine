@@ -48,6 +48,7 @@ DB = ROOT / "data" / "oil.db"
 # The state variables that condition a ripple, with why each should matter.
 STATE_VARS = {
     "derived.vix_pct":            "VIX %ile",   # H1
+    "derived.inv_sigma":          "Inv σ",      # H2
     "derived.cot_pct":            "COT %ile",   # H3
     "derived.brent_vol20":        "Brent vol",
     "derived.brent_wti_spread_z": "B-W z",

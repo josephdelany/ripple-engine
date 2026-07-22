@@ -62,6 +62,11 @@ MECHANISMS = {
         "Managed-money net-long percentile (5y)", "percentile",
         "H3 (pre-registered): crowded speculative positioning is fragile; "
         "extremes of net-long amplify shocks via forced unwinds."),
+    "derived.inv_sigma": (
+        "Inventory deviation from seasonal norm (5y)", "sigma",
+        "H2 (pre-registered): thin physical buffers cannot absorb supply risk, "
+        "so price must; crude stocks below their seasonal norm (negative sigma) "
+        "amplify shock transmission."),
 }
 
 
@@ -85,6 +90,27 @@ def zscore(s):
 def percentile(s):
     """Where it sits in its own 5-year distribution (0-100)."""
     return s.rolling(LOOKBACK, min_periods=MIN_OBS).rank(pct=True) * 100
+
+
+def seasonal_sigma(s):
+    """Deviation from the SEASONAL norm, in standard deviations.
+
+    Inventories are hugely seasonal -- stocks always build in spring and draw in
+    summer -- so a plain z-score would just measure the calendar. Instead we
+    compare each weekly reading to the SAME week-of-year over the trailing 5
+    years: mean and std of the five prior occurrences of that week (shift(1) so
+    the current reading never contaminates its own norm -- point-in-time, no
+    lookahead). Negative = tighter (lower stocks) than normal for the season.
+    """
+    s = s.dropna()
+    woy = s.index.isocalendar().week.to_numpy()
+    df = pd.DataFrame({"val": s.to_numpy(), "woy": woy}, index=s.index)
+    grp = df.groupby("woy")["val"]
+    # rolling(5) over the same-week history, then shift so it uses the PRIOR
+    # five years only; need >=3 to say anything about a seasonal band.
+    mean = grp.transform(lambda x: x.rolling(5, min_periods=3).mean().shift(1))
+    std = grp.transform(lambda x: x.rolling(5, min_periods=3).std().shift(1))
+    return (df["val"] - mean) / std
 
 
 def build_signals(w):
@@ -120,6 +146,15 @@ def build_signals(w):
         out["derived.cot_pct"] = (
             w["cftc.mm_net_wti"].dropna()
             .rolling(260, min_periods=52).rank(pct=True).mul(100)
+            .reindex(w.index).ffill()
+        )
+
+    if "eia.crude_stocks_xspr" in w:
+        # Weekly stock level on a daily index: compute the seasonal sigma on the
+        # native weekly observations, then forward-fill so each day carries the
+        # latest known reading -- exactly the ffill discipline cot_pct uses.
+        out["derived.inv_sigma"] = (
+            seasonal_sigma(w["eia.crude_stocks_xspr"])
             .reindex(w.index).ffill()
         )
 
