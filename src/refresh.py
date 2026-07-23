@@ -48,9 +48,11 @@ STEPS = [
     # Synthesis read. Writes engine_read.json/.md (files, not DB rows) -> 0 rows
     # by design; the point is that every refresh ends with a fresh Engine Read.
     ("engine_read",    "src/engine_read.py",    "observations"),
-    # FINAL step: regenerate the scenario playbook with today's conditioning.
-    # Also file output (playbook.md), so measured rows is 0 by design.
+    # regenerate the scenario playbook with today's conditioning (file output).
     ("scenario",       "src/scenario.py --all", "observations"),
+    # FINAL step: cross-asset propagation map. Writes edge rows (one per
+    # event x asset) -- measured against the edges table.
+    ("cross_asset",    "src/cross_asset.py",    "edges"),
 ]
 
 

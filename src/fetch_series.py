@@ -39,6 +39,8 @@ CATALOG = [
      "Macro regime + the risk-free backdrop shocks land against."),
     ("DGS2",      "macro.rates",     "2-Year Treasury Yield",      "percent",      "daily",
      "With the 10Y gives the 2s10s curve -- a regime signal."),
+    ("DGS5",      "macro.rates",     "5-Year Treasury Yield",      "percent",      "daily",
+     "The belly of the curve -- a cross-asset reaction target (TASK_BRIEF_10)."),
     ("VIXCLS",    "macro.vol",       "CBOE Volatility Index",      "index",        "daily",
      "Risk appetite. Shocks transmit harder when volatility is already elevated."),
 ]

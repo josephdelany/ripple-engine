@@ -104,6 +104,13 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "propagation_map": {
+        "name": "Propagation Map (cross-asset)",
+        "description": "Clustered mean CAR+20 by event type x asset (% for prices, bps for yields)",
+        "endpoint": "propagation_map",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
 }
 
 
@@ -326,6 +333,27 @@ def scenario_playbook():
             "range(CAR+20)": rng,
             "today": today,
         })
+    return rows
+
+
+@app.get("/propagation_map")
+def propagation_map():
+    """Cross-asset grid: clustered mean CAR+20 per event type x asset.
+    Descriptive only -- units differ (% for prices, bps for yields)."""
+    try:
+        import cross_asset
+        conn = sqlite3.connect(DB)
+        summary = cross_asset.propagation_summary(cross_asset.build_table(conn))
+        conn.close()
+    except Exception as e:
+        return [{"event_type": "(error)", "note": str(e)[:100]}]
+    rows = []
+    for etype, info in summary.items():
+        row = {"event_type": etype, "n": info["n_type"]}
+        for a in cross_asset.ASSETS:
+            v = info["cells"][a["series"]]["car20"]
+            row[a["label"]] = "n/a" if v is None else f"{v:+.1f}{a['unit']}"
+        rows.append(row)
     return rows
 
 
