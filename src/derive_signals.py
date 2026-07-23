@@ -71,10 +71,20 @@ MECHANISMS = {
 
 
 def load_wide(conn):
-    """Pull every series into one date-indexed table (one column per series)."""
+    """Pull every SIGNAL-INPUT series into one date-indexed table (one col each).
+
+    CRITICAL: we must NOT let a calendar-daily series (one that carries values on
+    weekends too, like the GPR index) into this table. The rolling windows below
+    assume a TRADING-DAY index -- LOOKBACK=1260 means '5 years of trading days',
+    and rolling(20) volatility needs 20 consecutive trading days. If weekend rows
+    leak in, every column gets weekend NaNs: rolling(20) then never sees 20
+    non-NaN in a row (brent_vol20 goes all-NaN) and the 1260-row lookbacks shrink
+    to ~3.4 calendar-years. So exclude derived.* (outputs) and gpr.* (a
+    calendar-daily external measure that is read directly elsewhere, never a
+    signal input here)."""
     df = pd.read_sql(
         "SELECT series_id, obs_date, value FROM observations "
-        "WHERE series_id NOT LIKE 'derived.%'", conn)
+        "WHERE series_id NOT LIKE 'derived.%' AND series_id NOT LIKE 'gpr.%'", conn)
     df["obs_date"] = pd.to_datetime(df["obs_date"])
     wide = df.pivot_table(index="obs_date", columns="series_id", values="value")
     return wide.sort_index()
