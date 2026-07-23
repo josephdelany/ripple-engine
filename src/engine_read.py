@@ -40,6 +40,7 @@ import pandas as pd
 from robustness import assign_clusters, REGISTERED, CLUSTER_DAYS
 from event_study import load_returns, car_for_event, PRE, HORIZONS
 from derive_signals import load_wide, build_signals, MECHANISMS
+import h5_gpr   # for the DESCRIPTIVE-only GPR context (never an amplifier)
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
@@ -203,6 +204,9 @@ def compute():
         "clustered_event_n": int(len(clustered)),
         "hypotheses": hyps,
         "base_rates": base_rates,
+        # H5 GPR: DESCRIPTIVE context only. H5 registered no direction, so it can
+        # never set an amplifier flag -- it is a plain readout, fenced like H3.
+        "gpr_context": h5_gpr.gpr_context(),
         "read": build_read(hyps),
         "note": ("Amplifier thresholds/base rates computed from data/oil.db with "
                  "robustness.py clustering; verdicts consumed from the pre-registered "
@@ -228,8 +232,15 @@ def write_md(r):
         lines.append(f"| {hid} | {h['label']} ({h['unit']}) | {latest} | {med} "
                      f"| {h['verdict']} | **{h['amplifier']}** |")
     lines += ["", "_H3 is shown for completeness only: it failed pre-registration "
-              "and is never used as an amplifier._", "",
-              "## Historical base rates — clustered mean CAR by event type", "",
+              "and is never used as an amplifier._", ""]
+    gc = r.get("gpr_context") or {}
+    if gc.get("gpr_pct") is not None:
+        lines += ["## Descriptive context (NOT an amplifier)", "",
+                  f"- **GPR (geopolitical risk) percentile today: {_ordinal(gc['gpr_pct'])}** "
+                  f"(index {gc['gpr_value']}, as of {gc['as_of']}). H5 registered no "
+                  f"direction, so GPR can never set an amplifier flag — this is a readout only.",
+                  ""]
+    lines += ["## Historical base rates — clustered mean CAR by event type", "",
               "| Event type | n | CAR+1 | CAR+5 | CAR+10 | CAR+20 |",
               "|------------|---|-------|-------|--------|--------|"]
     for b in r["base_rates"]:
@@ -244,6 +255,11 @@ def print_console(r):
     print(f"ENGINE READ  —  as of {r['as_of']}   (clustered n={r['clustered_event_n']})")
     print("=" * 72)
     print(f"\n  {r['read']}\n")
+    gc = r.get("gpr_context") or {}
+    if gc.get("gpr_pct") is not None:
+        print(f"  Descriptive context (NOT an amplifier): GPR percentile today "
+              f"{_ordinal(gc['gpr_pct'])} (index {gc['gpr_value']}, as of {gc['as_of']}). "
+              f"H5 registered no direction.\n")
     print("  AMPLIFIER STATUS (verdicts from the pre-registered record)")
     print("  " + "-" * 68)
     print(f"  {'hyp':<5}{'what':<22}{'latest':>10}{'median':>10}{'verdict':>9}{'amp':>8}")

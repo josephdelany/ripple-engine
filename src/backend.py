@@ -286,6 +286,15 @@ def engine_read():
             "verdict": h["verdict"],
             "amplifier": h["amplifier"],
         })
+    gc = r.get("gpr_context") or {}
+    if gc.get("gpr_pct") is not None:
+        rows.append({
+            "item": "H5 GPR (descriptive)",
+            "detail": f"GPR percentile today {gc['gpr_pct']} (index {gc['gpr_value']}, "
+                      f"as of {gc['as_of']})",
+            "verdict": "exploratory",
+            "amplifier": "n/a (no registered direction)",
+        })
     return rows
 
 
@@ -300,6 +309,9 @@ def scenario_playbook():
     except Exception as e:                     # never 500 the dashboard
         return [{"event_type": "(error)", "n": "", "note": str(e)[:100]}]
     today = scenario.conditioning_summary(pb["conditioning"])
+    gc = pb.get("gpr_context") or {}
+    if gc.get("gpr_pct") is not None:      # descriptive only -- never an amplifier
+        today += f" | GPR p{gc['gpr_pct']} (desc)"
     rows = []
     for c in pb["cards"]:
         b = c["base"]

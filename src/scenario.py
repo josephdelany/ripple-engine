@@ -42,6 +42,7 @@ from robustness import REGISTERED
 from event_study import load_returns, HORIZONS
 from derive_signals import load_wide, build_signals
 from load_events import VALID_TYPES
+import h5_gpr   # DESCRIPTIVE-only GPR context (H5 has no direction, never an amplifier)
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
@@ -126,7 +127,9 @@ def build_playbook():
             base["car20_max"] = round(grp["car20"].max() * 100, 1)
         cards.append({"type": etype, "n": n, "analogs": analogs, "base": base})
     cards.sort(key=lambda c: c["n"], reverse=True)   # best-evidenced first
-    return {"as_of": as_of, "conditioning": conditioning, "cards": cards}
+    return {"as_of": as_of, "conditioning": conditioning, "cards": cards,
+            # H5 GPR: descriptive readout only; can never be an amplifier.
+            "gpr_context": h5_gpr.gpr_context()}
 
 
 def conditioning_summary(conditioning):
@@ -144,7 +147,7 @@ def conditioning_summary(conditioning):
 
 # ---------------------------------------------------------------- console output
 
-def print_conditioning(conditioning, as_of):
+def print_conditioning(conditioning, as_of, gpr=None):
     print(f"TODAY'S CONDITIONING (point-in-time, as of {as_of})")
     for c in conditioning:
         line = f"  {c['hid']} {c['label']:<24}{c['amplifier']:<7}"
@@ -156,9 +159,13 @@ def print_conditioning(conditioning, as_of):
         if c["amplifier"] == "FAILED":
             line += "  [fenced off -- failed pre-registration; never applied]"
         print(line)
+    if gpr and gpr.get("gpr_pct") is not None:
+        print(f"  H5 GPR (descriptive)      readout GPR percentile today "
+              f"{gpr['gpr_pct']} (index {gpr['gpr_value']})  "
+              f"[no registered direction -- never an amplifier]")
 
 
-def print_card(card, conditioning, as_of):
+def print_card(card, conditioning, as_of, gpr=None):
     et, n, b = card["type"], card["n"], card["base"]
     print("=" * 76)
     print(f'SCENARIO -- {et}   "if an event of this type happened today"')
@@ -181,7 +188,7 @@ def print_card(card, conditioning, as_of):
     print(f"  >>> {n_flag(n)} <<<")
 
     print()
-    print_conditioning(conditioning, as_of)
+    print_conditioning(conditioning, as_of, gpr)
     print(f"\n{CAVEAT}")
 
 
@@ -202,6 +209,11 @@ def write_md(pb):
             extra = " -- fenced off (failed pre-registration)"
         L.append(f"- **{c['hid']} {c['label']}**: **{c['amplifier']}** "
                  f"(latest {c['latest']} vs median {c['median']}){extra}")
+    gc = pb.get("gpr_context") or {}
+    if gc.get("gpr_pct") is not None:
+        L.append(f"- **H5 GPR (descriptive)**: GPR percentile today "
+                 f"{gc['gpr_pct']} (index {gc['gpr_value']}) — no registered "
+                 f"direction, so **never an amplifier**, readout only")
     L.append("")
 
     for card in pb["cards"]:
@@ -229,7 +241,7 @@ def main():
 
     if args and args[0] == "--all":
         for card in pb["cards"]:
-            print_card(card, pb["conditioning"], pb["as_of"])
+            print_card(card, pb["conditioning"], pb["as_of"], pb.get("gpr_context"))
             print()
         write_md(pb)
         print(f"Wrote {MD_OUT}")
@@ -237,7 +249,7 @@ def main():
 
     if len(args) == 1 and args[0] in VALID_TYPES:
         card = next(c for c in pb["cards"] if c["type"] == args[0])
-        print_card(card, pb["conditioning"], pb["as_of"])
+        print_card(card, pb["conditioning"], pb["as_of"], pb.get("gpr_context"))
         return
 
     print("Usage: python3 src/scenario.py <event_type> | --all")
