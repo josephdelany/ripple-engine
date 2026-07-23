@@ -42,6 +42,8 @@ This brief tests both questions against four decades of daily price data and a h
 
 **Decision rule, fixed now:** a hypothesis "holds" if the clustered amplification exceeds +5pp in the predicted direction; "fails" otherwise. Partial/mixed outcomes reported as such. No re-splitting, re-windowing, or metric substitution after results are seen.
 
+**H5 — GPR conditioning (EXPLORATORY, registered 2026-07-23, before computation).** Question: do shocks arriving when the Caldara–Iacoviello daily GPR index sits above its sample-median percentile at t−1 produce systematically different |CAR+20| than shocks arriving in geopolitically calm conditions? **No direction is predicted.** The analyst's stated position at registration: "not sure" — two plausible mechanisms point opposite ways (elevated tension → fragility/amplification, vs. elevated tension → anticipation/pre-pricing → dampening). Accordingly H5 is registered as a two-sided exploratory question: results will be reported as hypothesis-generating, with a two-sided permutation p, and may NOT be described as confirming a prediction, because none was made. The +5pp directional decision rule does not apply to H5. Same splits, clustering, standardization, and honesty rules as H1–H3.
+
 ## 5. Results — [PENDING — DO NOT WRITE UNTIL THE ANALYSIS RUNS]
 
 *[Table: mean CAR by event type (already computed, stable). Table: H1–H3 conditioning results, raw and clustered. The ripple figure and conditioned-ripple figure. Whatever the numbers say, verbatim honesty.]*
