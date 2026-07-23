@@ -1,0 +1,65 @@
+============================================================================================
+GPR EVENT-LIST VALIDATION -- do our 42 events line up with the field-standard salience measure?
+============================================================================================
+GPR history: 1985-01-01 to 2026-07-20  (15,176 daily obs).  Percentiles are full-history.
+'peak' = highest GPRD within +/-3 days of the event.  Sorted by peak percentile (most salient first).
+--------------------------------------------------------------------------------------------
+event_id                        date            GPRD  pctile       peak pk pctile
+--------------------------------------------------------------------------------------------
+september_11_attacks_2001       2001-09-11     154.1     87%      725.5      100%
+iraq_war_begins_2003            2003-03-20     479.0    100%      595.0      100%
+desert_storm_air_campaign_1991  1991-01-17     565.6    100%      572.3      100%
+russia_invades_ukraine_2022     2022-02-24     370.7     99%      515.9      100%
+iran_strikes_israel_apr_2024    2024-04-13     130.1     78%      340.5       99%
+israel_iran_war_2025            2025-06-13     166.8     90%      307.3       99%
+iran_sanctions_reimposed_2018   2018-05-08     125.4     76%      284.2       98%
+israel_hamas_war_2023           2023-10-07      54.1     13%      259.1       98%
+abqaiq_attack_2019              2019-09-14      46.4      8%      253.3       98%
+soleimani_strike_2020           2020-01-03      80.8     38%      252.0       98%
+iraq_invades_kuwait_1990        1990-08-02     108.9     65%      250.4       98%
+venezuela_financial_sanctions_2 2017-08-25      86.6     45%      250.0       98%
+iran_strikes_israel_oct_2024    2024-10-01     135.9     81%      237.1       97%
+operation_desert_fox_1998       1998-12-16      86.9     45%      208.0       96%
+opec_plus_cut_2022              2022-10-05     171.1     91%      202.7       95%
+nord_stream_sabotage_2022       2022-09-26     163.0     89%      202.6       95%
+saudi_intervention_yemen_2015   2015-03-26     103.4     60%      199.3       95%
+red_sea_attacks_2023            2023-12-01      94.8     53%      194.9       95%
+stena_impero_seizure_2019       2019-07-19      48.8      9%      193.0       94%
+gulf_of_oman_tanker_attacks_201 2019-06-13     114.7     69%      192.6       94%
+israel_hezbollah_war_2006       2006-07-12     154.6     87%      180.9       93%
+bridgeton_mine_strike_1987      1987-07-24     176.9     92%      179.6       93%
+venezuela_sanctions_2019        2019-01-28     101.1     59%      173.7       92%
+opec_declines_cut_2014          2014-11-27      80.8     38%      163.6       90%
+saudi_suspends_bab_el_mandeb_20 2018-07-25     105.2     62%      161.7       89%
+us_ends_iran_waivers_2019       2019-04-22      95.9     54%      156.5       88%
+opec_agrees_cut_2016            2016-11-30     120.2     73%      146.6       85%
+opec_talks_collapse_2020        2020-03-06      51.3     11%      144.9       84%
+russia_georgia_war_2008         2008-08-08      68.1     26%      144.5       84%
+eu_embargo_price_cap_2022       2022-12-05      99.0     57%      141.0       83%
+opec_cut_1999                   1999-03-23      99.0     57%      131.1       78%
+opec_surprise_cut_2023          2023-04-02      43.6      6%      129.3       78%
+lehman_collapse_2008            2008-09-15      72.9     31%      127.5       77%
+suez_ever_given_2021            2021-03-23      99.5     57%      119.2       72%
+eu_iran_oil_embargo_2012        2012-01-23     109.5     65%      109.5       65%
+colonial_pipeline_shutdown_2021 2021-05-07      55.9     14%       93.9       52%
+opec_record_cut_2020            2020-04-12      42.7      6%       91.2       49%
+covid_pandemic_declared_2020    2020-03-11      91.0     49%       91.0       49%
+ras_tanura_attack_2021          2021-03-07      16.3      0%       89.0       47%
+libya_civil_war_2011            2011-02-17      88.4     46%       88.4       46%
+opec_jakarta_quota_increase_199 1997-12-01      72.0     30%       72.0       30%
+thai_baht_float_1997            1997-07-02      36.1      3%       49.4       10%
+--------------------------------------------------------------------------------------------
+
+SUMMARY
+  events validated:                 42
+  median peak-GPR percentile:       93rd   (median on-date percentile: 57th)
+  events below the 50th percentile (peak): 6
+  -> selection-bias candidates to discuss (F4): even their +/-3d GPR peak ranks below the median GPR day.
+        10th  thai_baht_float_1997             (1997-07-02, demand_shock)
+        30th  opec_jakarta_quota_increase_1997 (1997-12-01, opec_decision)
+        46th  libya_civil_war_2011             (2011-02-17, conflict_escalation)
+        47th  ras_tanura_attack_2021           (2021-03-07, infrastructure_attack)
+        49th  covid_pandemic_declared_2020     (2020-03-11, demand_shock)
+        49th  opec_record_cut_2020             (2020-04-12, opec_decision)
+
+NOTE: this is validation only. Conditioning blocked pending registered H4 (Joe).

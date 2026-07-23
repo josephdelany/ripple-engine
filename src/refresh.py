@@ -42,6 +42,7 @@ STEPS = [
     ("fetch_series",   "src/fetch_series.py",   "observations"),
     ("fetch_eia",      "src/fetch_eia.py",      "observations"),
     ("fetch_cot",      "src/fetch_cot.py",      "observations"),
+    ("fetch_gpr",      "src/fetch_gpr.py",      "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Synthesis read. Writes engine_read.json/.md (files, not DB rows) -> 0 rows
