@@ -16,16 +16,29 @@ This tool never invents a value and never approves anything on its own.
 
 Only load_events.py then moves approved rows from events.csv into the database.
 
+It also WARNS (never blocks) when an approved event falls inside the 35-day
+episode window of one already in the dataset: under the pre-registered clustering
+those collapse into one episode (earliest kept), so the new event adds no
+independent clustered observation. Joe still decides -- the warning is a heads-up,
+not a gate.
+
 Run:  python3 src/apply_review.py
 """
 
 import csv
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REVIEW = ROOT / "data" / "candidate_review.csv"
 CANDIDATES = ROOT / "data" / "candidate_events.csv"
 EVENTS = ROOT / "data" / "events.csv"
+
+# 35-day episode window. Mirrors robustness.py's CLUSTER_DAYS; kept as a local
+# constant so this lightweight CLI needn't import the whole analysis stack for one
+# number. Two events within this many CALENDAR days collapse to one clustered
+# episode (the earliest is kept), which is what the collision warning is about.
+CLUSTER_DAYS = 35
 
 CAND_FIELDS = ["event_id", "event_date", "date_precision", "type", "title",
                "description", "severity", "surprise", "confidence", "source_url",
@@ -40,6 +53,14 @@ def load(path):
     if not path.exists():
         return []
     return list(csv.DictReader(open(path, newline="", encoding="utf-8")))
+
+
+def parse_date(s):
+    """Parse an event_date; return a date or None if it isn't YYYY-MM-DD."""
+    try:
+        return datetime.strptime((s or "")[:10], "%Y-%m-%d").date()
+    except ValueError:
+        return None
 
 
 def missing_required(row):
@@ -80,9 +101,16 @@ def main():
 
     candidates = load(CANDIDATES)
     cand_by_id = {r["event_id"]: r for r in candidates}
-    existing_event_ids = {r["event_id"] for r in load(EVENTS)}
+    existing_rows = load(EVENTS)
+    existing_event_ids = {r["event_id"] for r in existing_rows}
+    # Running (date, id) list for collision detection -- seeded with the events
+    # already in the dataset, and grown as we approve so a batch that approves two
+    # nearby candidates flags the second against the first.
+    prior_events = [(parse_date(r.get("event_date", "")), r["event_id"])
+                    for r in existing_rows]
 
     approved, rejected, needs_input, dup, unknown, pending = [], [], [], [], [], 0
+    collisions = []
 
     for eid, dec in decided.items():
         if dec == "":
@@ -97,6 +125,13 @@ def main():
             if problems:
                 needs_input.append((eid, problems))
                 continue
+            # Cluster-collision check (informational, NON-blocking): is this event
+            # inside the 35-day window of one already present or approved earlier
+            # this run? If so it won't add an independent clustered observation.
+            ed = parse_date(row.get("event_date", ""))
+            hits = [(oid, od, abs((ed - od).days)) for (od, oid) in prior_events
+                    if ed is not None and od is not None
+                    and abs((ed - od).days) <= CLUSTER_DAYS]
             # Append to events.csv (Joe approved; this is the sanctioned path).
             write_header = not EVENTS.exists()
             with open(EVENTS, "a", newline="", encoding="utf-8") as f:
@@ -105,6 +140,9 @@ def main():
                     w.writeheader()
                 w.writerow({k: row.get(k, "") for k in EVENT_FIELDS})
             existing_event_ids.add(eid)
+            prior_events.append((ed, eid))    # later approvals can collide with it
+            if hits:
+                collisions.append((eid, ed, hits))
             if eid in cand_by_id:
                 cand_by_id[eid]["status"] = "approved"
             approved.append(eid)
@@ -143,6 +181,16 @@ def main():
         print(f"\n  Unrecognised joe_decision values (left pending): {len(unknown)}")
         for eid, dec in unknown:
             print(f"      ? {eid}: '{dec}'  (use approve or reject)")
+    if collisions:
+        print(f"\n  CLUSTER COLLISIONS ({len(collisions)}): approved, but within "
+              f"{CLUSTER_DAYS}d of another event.")
+        print(f"  Under the pre-registered clustering these collapse into ONE "
+              f"episode (earliest kept), so")
+        print(f"  they add no INDEPENDENT clustered observation. Approved anyway "
+              f"(your call) -- just so you know:")
+        for eid, ed, hits in collisions:
+            for oid, od, gap in hits:
+                print(f"      ~ {eid} ({ed}) <-> {oid} ({od}, {gap}d apart)")
     if pending:
         print(f"\n  Still blank / undecided: {pending}")
     if needs_input or pending or unknown:
