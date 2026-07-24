@@ -58,11 +58,20 @@ ASSETS = [
      "kind": "yield", "unit": "bps"},
     {"series": "fred.DGS10",        "label": "10Y yield",  "entity": "macro.rates",
      "kind": "yield", "unit": "bps"},
+    # Gasoline is WEEKLY -- measured on a weekly clock (+1/+2/+4 WEEKS), never
+    # pretended to be daily. Its car5/car20 slots hold +1 week / +4 weeks.
+    {"series": "fred.GASREGW",      "label": "Gasoline",   "entity": "commodity.gasoline",
+     "kind": "weekly", "unit": "%"},
 ]
 
 # Trading days the CAR+20 accumulates over (t-5..t+20 inclusive) -- recorded as
-# provenance in each edge row.
+# provenance in each edge row (daily assets only).
 N_DAYS = PRE + POST + 1
+
+# Weekly gasoline event study: a constant-mean model on WEEKLY returns.
+EST_WEEKS = 26           # ~ the weekly equivalent of the daily t-130..t-11 window
+GAP_WEEKS = 1            # small gap before the event (mirrors the daily t-11 gap)
+WEEKLY_HORIZONS = (1, 2, 4)   # weeks after the last weekly reading before the event
 
 SMALL_N_ANECDOTE = 3   # shout at or below this, same as the scenario playbook
 
@@ -77,9 +86,24 @@ def asset_returns(conn, series_id, kind):
         return None
     df["obs_date"] = pd.to_datetime(df["obs_date"])
     s = df.set_index("obs_date")["value"].sort_index().dropna()
-    if kind == "price":
-        return np.log(s).diff().dropna()            # log returns (fractions)
+    if kind in ("price", "weekly"):
+        # log returns; for a weekly series the consecutive diff IS the weekly return
+        return np.log(s).diff().dropna()
     return s.diff().dropna() * 100                  # yield change in basis points
+
+
+def weekly_car(returns, event_date):
+    """Weekly constant-mean CAR at +1/+2/+4 WEEKS from the last weekly reading
+    before the event. This is a WEEKLY clock -- do not read the horizons as days.
+    Returns {1: %, 2: %, 4: %} (log-return CAR) or None if too little weekly history."""
+    dates = returns.index
+    start = dates.searchsorted(pd.Timestamp(event_date))   # first weekly return on/after event
+    max_h = max(WEEKLY_HORIZONS)
+    if start - GAP_WEEKS - EST_WEEKS < 0 or start + max_h > len(dates):
+        return None
+    mu = returns.iloc[start - GAP_WEEKS - EST_WEEKS: start - GAP_WEEKS].mean()
+    cum = (returns.iloc[start: start + max_h] - mu).cumsum().to_numpy()
+    return {h: float(cum[h - 1]) * 100 for h in WEEKLY_HORIZONS}
 
 
 def build_table(conn):
@@ -94,6 +118,12 @@ def build_table(conn):
         row = {"event_id": ev["event_id"], "date": ev["date"], "type": ev["type"]}
         for a in ASSETS:
             ret = returns[a["series"]]
+            if a["kind"] == "weekly":                       # gasoline: weekly clock
+                wc = weekly_car(ret, ev["date"]) if ret is not None else None
+                row[f"{a['series']}_car5"] = np.nan if wc is None else wc[1]   # +1 week
+                row[f"{a['series']}_car20"] = np.nan if wc is None else wc[4]  # +4 weeks
+                row[f"{a['series']}_car2w"] = np.nan if wc is None else wc[2]  # +2 weeks
+                continue
             car = car_for_event(ret, ev["date"]) if ret is not None else None
             if car is None:
                 row[f"{a['series']}_car5"] = np.nan
@@ -131,12 +161,14 @@ def populate_edges(conn, table):
             c5, c20 = r[f"{a['series']}_car5"], r[f"{a['series']}_car20"]
             if pd.isna(c20):
                 continue
+            weekly = a["kind"] == "weekly"
             conn.execute(
                 "INSERT INTO edges (to_entity, mechanism, event_id, target_series, "
                 "car5, car20, units, n_days) VALUES (?,?,?,?,?,?,?,?)",
-                (a["entity"], "cross-asset event-study reaction (descriptive, "
-                 "TASK_BRIEF_10)", r["event_id"], a["series"],
-                 round(float(c5), 2), round(float(c20), 2), a["unit"], N_DAYS))
+                (a["entity"], "cross-asset event-study reaction (descriptive)",
+                 r["event_id"], a["series"], round(float(c5), 2), round(float(c20), 2),
+                 "% (WEEKLY: car5=+1wk, car20=+4wk)" if weekly else a["unit"],
+                 max(WEEKLY_HORIZONS) if weekly else N_DAYS))
             written += 1
     conn.commit()
     return written
@@ -173,16 +205,20 @@ def _cell(v, unit):
 def write_results(table, summary):
     L = []
     w = L.append
+    n_events = int(table["event_id"].nunique())
     w("=" * 100)
-    w("CROSS-ASSET PROPAGATION MAP -- the 42 shocks measured beyond oil "
-      "(DESCRIPTIVE, no verdicts)")
+    w(f"CROSS-ASSET PROPAGATION MAP -- the {n_events} registered shocks measured "
+      f"beyond oil (DESCRIPTIVE, no verdicts)")
     w("=" * 100)
     w("Same constant-mean event study and windows as the oil study; clustered "
       "(overlapping events collapsed, first kept).")
-    w("Units: PRICE assets (oil, gas, USD) in % (log-return CAR); YIELD assets "
+    w("Units: PRICE assets (Brent, natgas, USD) in % (log-return CAR); YIELD assets "
       "(5Y, 10Y) in bps (CAR of daily level changes).")
-    w("Coverage note: natgas begins 1997, the broad-dollar index begins 2006 -- "
-      "earlier events show n/a for those, honestly.")
+    w("GASOLINE is WEEKLY, on its own clock: its CAR+5 column = +1 WEEK and its "
+      "CAR+20 column = +4 WEEKS (in %). Not daily -- see the gasoline appendix for "
+      "+1/+2/+4 weeks.")
+    w("Coverage note: natgas begins 1997, the broad-dollar index 2006, weekly "
+      "retail gasoline 1990 -- earlier events show n/a, honestly.")
     w("")
 
     hdr = f"  {'event type':<24}{'n':>3}  " + "".join(
@@ -205,6 +241,25 @@ def write_results(table, summary):
         w(f"SMALL-n WARNING: event types with n<= {SMALL_N_ANECDOTE} clustered "
           f"episodes are ANECDOTE, NOT STATISTICS: {', '.join(small)}")
         w("")
+
+    # --- Gasoline pass-through appendix (weekly clock: +1 / +2 / +4 weeks) ---
+    w("=" * 100)
+    w("GASOLINE PASS-THROUGH TO THE PUMP -- clustered mean retail-gasoline CAR by "
+      "event type (WEEKLY, %)")
+    w("=" * 100)
+    gclust = table.groupby("cluster").first().reset_index()
+    w(f"  {'event type':<24}{'n':>3}{'+1 week':>10}{'+2 weeks':>10}{'+4 weeks':>10}")
+    w("  " + "-" * 57)
+    for t in [x for x in sorted(VALID_TYPES) if (gclust['type'] == x).any()]:
+        grp = gclust[gclust["type"] == t]
+        c1, c2, c4 = (grp["fred.GASREGW_car5"].dropna(),
+                      grp["fred.GASREGW_car2w"].dropna(),
+                      grp["fred.GASREGW_car20"].dropna())
+        if len(c4):
+            w(f"  {t:<24}{len(c4):>3}{c1.mean():>+9.1f}%{c2.mean():>+9.1f}%{c4.mean():>+9.1f}%")
+        else:
+            w(f"  {t:<24}{0:>3}{'n/a':>10}{'n/a':>10}{'n/a':>10}")
+    w("")
 
     # --- September 11 appendix: the flight-to-safety canary ---
     w("=" * 100)

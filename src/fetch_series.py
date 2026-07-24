@@ -43,6 +43,8 @@ CATALOG = [
      "The belly of the curve -- a cross-asset reaction target (TASK_BRIEF_10)."),
     ("VIXCLS",    "macro.vol",       "CBOE Volatility Index",      "index",        "daily",
      "Risk appetite. Shocks transmit harder when volatility is already elevated."),
+    ("GASREGW",   "commodity.gasoline", "US Regular Retail Gasoline", "USD/gallon", "weekly",
+     "Pass-through to the pump: does an oil shock reach retail gasoline? (TASK_BRIEF_11)"),
 ]
 
 ENTITIES = [
@@ -50,6 +52,7 @@ ENTITIES = [
     ("macro.usd",        "macro",     "US Dollar",          "Broad trade-weighted index"),
     ("macro.rates",      "macro",     "US Treasury Yields", "Risk-free curve"),
     ("macro.vol",        "macro",     "Equity Volatility",  "VIX"),
+    ("commodity.gasoline","commodity", "Retail Gasoline",   "US regular retail, weekly"),
 ]
 
 
