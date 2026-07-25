@@ -16,3 +16,4 @@ data/alert_queue.csv
 # The Daily is re-rendered every refresh; data/digest_sample.html is the committed
 # snapshot receipt.
 data/digest.html
+data/daily.lock

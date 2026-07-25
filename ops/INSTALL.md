@@ -8,11 +8,12 @@ control: nothing schedules itself.
 Every day at **07:30 local time**, macOS runs:
 
 ```
-python3 src/refresh.py && python3 src/heartbeat.py
+python3 src/daily.py
 ```
 
-`refresh.py` pulls fresh data (and always exits 0, logging any step failures);
-`heartbeat.py` then checks freshness and writes `data/health_status.json`. All
+`daily.py` runs the whole pipeline in order — **refresh → heartbeat → watcher →
+digest** — behind a lockfile (so two runs can never overlap), times each step, and
+ends with a one-line **OK / DEGRADED** verdict that says what to look at. All
 output is captured to `data/launchd_refresh.log`.
 
 ## Before you install — sanity-check the paths
