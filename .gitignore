@@ -17,3 +17,6 @@ data/alert_queue.csv
 # snapshot receipt.
 data/digest.html
 data/daily.lock
+# integrity.py runtime: rotated DB backups and the row-count state
+data/backups/
+data/integrity_state.json

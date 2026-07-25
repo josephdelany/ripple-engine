@@ -31,10 +31,11 @@ STEP_TIMEOUT = 1200                 # generous; refresh pulls ~20 COT archives
 # (name, argv-after-python, is_health_gate). heartbeat's non-zero exit is health,
 # not a crash; every other step's non-zero exit is a crash.
 STEPS = [
-    ("refresh",   ["src/refresh.py"],  False),
+    ("refresh",   ["src/refresh.py"],   False),
+    ("integrity", ["src/integrity.py"], False),   # right after refresh: guard + backup
     ("heartbeat", ["src/heartbeat.py"], True),
-    ("watcher",   ["src/watcher.py"],  False),
-    ("digest",    ["src/digest.py"],   False),
+    ("watcher",   ["src/watcher.py"],   False),
+    ("digest",    ["src/digest.py"],    False),
 ]
 
 

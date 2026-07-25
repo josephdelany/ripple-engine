@@ -1,0 +1,22 @@
+======================================================================
+INTEGRITY REPORT  --  2026-07-25T12:12:20+00:00
+======================================================================
+1. PRAGMA integrity_check: ok
+
+2. Row counts (delta vs last run):
+   edges                   292   +0
+   entities                 31   +0
+   event_entities          154   +0
+   events                   52   +0
+   forecasts                 0   +0
+   observations        212,680   +0
+   prices               20,142   +0
+   quiet_events              6   +0
+   series                   22   +0
+
+3. Orphans:  event_entities -> events: 0   edges -> events: 0
+4. Duplicate observation (series_id, obs_date) keys: 0
+
+Backup: wrote data/backups/oil_20260725_121221.db.gz (keeping 2 of last 7).
+======================================================================
+STATUS: OK -- structure sound, no shrink, no orphans, no dup keys.
