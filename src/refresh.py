@@ -109,8 +109,12 @@ def main():
     print(f"Ripple Engine refresh -- {run_id}")
     print("Running each step in isolation; a failure in one will not stop the rest.\n")
 
+    steps = list(STEPS)
+    if "--figures" in sys.argv:          # optional heavy step, off by default
+        steps.append(("figures", "src/figures.py", "observations"))
+
     results = []
-    for name, script, metric in STEPS:
+    for name, script, metric in steps:
         print(f"  -> {name:<14} ...", end="", flush=True)
         r = run_step(name, script, metric)
         results.append(r)
