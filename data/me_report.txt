@@ -1,0 +1,59 @@
+========================================================================================
+MIDDLE EAST SUBSET -- data prep for the 'ME conflict & the global economy' paper
+DESCRIPTIVE ONLY. No trend test, no verdict. Decade means at this n are anecdote, not statistics.
+========================================================================================
+ME entities: bab_el_mandeb, hormuz, iran, iraq, israel, kuwait, lebanon, saudi_arabia, suez, yemen
+ME events in corpus: 26  (types: conflict_escalation=11, sanctions=6, chokepoint_disruption=4, infrastructure_attack=3, opec_decision=2)
+
+1. PER-DECADE CAR+20 -- ME conflict + infrastructure shocks (clustered, Brent)
+   decade       n   mean CAR+20                 range
+   --------------------------------------------------
+   1990s        3        +11.5%      [-18.9%, +40.5%]  << n<=3, ANECDOTE
+   2000s        2        -14.8%       [-33.9%, +4.3%]  << n<=3, ANECDOTE
+   2010s        3        +10.9%       [-2.3%, +30.0%]  << n<=3, ANECDOTE
+   2020s        6         -8.9%       [-19.9%, +9.9%]
+   >>> Every cell above is a small-sample mean. Read as illustration, not trend. <<<
+
+2. PER-EVENT APPENDIX -- all ME events (Brent CAR+20)
+   date        type                       CAR+20  event_id
+   --------------------------------------------------------------------------
+   1990-08-02  conflict_escalation        +40.5%  iraq_invades_kuwait_1990
+   1991-01-17  conflict_escalation        -18.9%  desert_storm_air_campaign_1991
+   1996-08-05  sanctions                  +10.1%  ilsa_sanctions_1996
+   1998-12-16  conflict_escalation        +12.9%  operation_desert_fox_1998
+   2003-03-20  conflict_escalation        -33.9%  iraq_war_begins_2003
+   2006-07-12  conflict_escalation         +4.3%  israel_hezbollah_war_2006
+   2011-12-31  sanctions                   +3.4%  ndaa_cbi_sanctions_2011
+   2012-01-23  sanctions                   +7.7%  eu_iran_oil_embargo_2012
+   2012-03-15  sanctions                   -8.5%  swift_cutoff_iran_2012
+   2015-03-26  conflict_escalation        +30.0%  saudi_intervention_yemen_2015
+   2018-05-08  sanctions                   -7.6%  iran_sanctions_reimposed_2018
+   2018-07-25  chokepoint_disruption       +0.5%  saudi_suspends_bab_el_mandeb_2018
+   2019-04-22  sanctions                   +6.2%  us_ends_iran_waivers_2019
+   2019-06-13  infrastructure_attack       +5.1%  gulf_of_oman_tanker_attacks_2019
+   2019-07-19  chokepoint_disruption      -15.4%  stena_impero_seizure_2019
+   2019-09-14  infrastructure_attack       -2.3%  abqaiq_attack_2019
+   2020-01-03  conflict_escalation        -19.9%  soleimani_strike_2020
+   2020-03-06  opec_decision              -77.0%  opec_talks_collapse_2020
+   2021-03-07  infrastructure_attack      -15.1%  ras_tanura_attack_2021
+   2021-03-23  chokepoint_disruption      -16.5%  suez_ever_given_2021
+   2022-10-05  opec_decision              +16.5%  opec_plus_cut_2022
+   2023-10-07  conflict_escalation        -13.2%  israel_hamas_war_2023
+   2023-12-01  chokepoint_disruption       -7.6%  red_sea_attacks_2023
+   2024-04-13  conflict_escalation        -13.1%  iran_strikes_israel_apr_2024
+   2024-10-01  conflict_escalation         -1.9%  iran_strikes_israel_oct_2024
+   2025-06-13  conflict_escalation         +9.9%  israel_iran_war_2025
+
+3. CROSS-ASSET REACTION -- the 5 biggest ME ripples (|CAR+20|), from edges table
+   opec_talks_collapse_2020 (2020-03-06, Brent CAR+20 -77.0%):
+       DCOILBRENTEU=-77.0%   DGS10=-68.4bps   DGS5=-71.6bps   DHHNGSP=-14.8%   DTWEXBGS=+5.9%   GASREGW=-18.3%
+   iraq_invades_kuwait_1990 (1990-08-02, Brent CAR+20 +40.5%):
+       DCOILBRENTEU=+40.5%   DGS10=+36.6bps   DGS5=+21.2bps
+   iraq_war_begins_2003 (2003-03-20, Brent CAR+20 -33.9%):
+       DCOILBRENTEU=-33.9%   DGS10=+46.7bps   DGS5=+52.7bps   DHHNGSP=-22.8%   GASREGW=-11.2%
+   saudi_intervention_yemen_2015 (2015-03-26, Brent CAR+20 +30.0%):
+       DCOILBRENTEU=+30.0%   DGS10=+13.1bps   DGS5=-0.1bps   DHHNGSP=+0.1%   DTWEXBGS=-4.7%   GASREGW=+6.2%
+   soleimani_strike_2020 (2020-01-03, Brent CAR+20 -19.9%):
+       DCOILBRENTEU=-19.9%   DGS10=-33.6bps   DGS5=-36.8bps   DHHNGSP=-10.8%   DTWEXBGS=+0.1%   GASREGW=-1.8%
+
+DESCRIPTIVE MEASUREMENT ONLY. Conditioning or trend claims require a future registered hypothesis (Joe's gate).
