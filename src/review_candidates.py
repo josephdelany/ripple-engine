@@ -33,7 +33,8 @@ EDITABLE = ["event_date", "date_precision", "type", "title", "description",
             "severity", "surprise", "confidence", "source_url", "entities"]
 
 VALID_TYPES = {"chokepoint_disruption", "opec_decision", "sanctions",
-               "conflict_escalation", "infrastructure_attack", "demand_shock"}
+               "conflict_escalation", "infrastructure_attack", "demand_shock",
+               "policy_response"}   # amendment 2026-07-23 (batch 3); see load_events.py
 
 
 def load(path, fields=None):

@@ -19,9 +19,9 @@ PER-EVENT REACTIONS (quiet set)
 |CAR+20| DISTRIBUTION -- quiet set (Fujairah excluded) vs clustered main corpus
 ============================================================================================
   quiet set        n=5   mean |CAR+20| =   4.2%   median =   4.9%   [0.5% .. 8.7%]
-  main corpus      n=41  mean |CAR+20| =  15.3%   median =  12.9%   [0.5% .. 77.0%]
-  difference in means (main - quiet): +11.1 pp
-  two-sided permutation p (seed=19900802, N=10,000): 0.0784
+  main corpus      n=44  mean |CAR+20| =  14.9%   median =  12.1%   [0.5% .. 77.0%]
+  difference in means (main - quiet): +10.7 pp
+  two-sided permutation p (seed=19900802, N=10,000): 0.0820
 
   Fujairah reported above but EXCLUDED from this pool: its +20 window overlaps the in-corpus
   Gulf of Oman attacks (2019-06-13, 32 days later), which would contaminate its |CAR+20|.

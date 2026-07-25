@@ -1,5 +1,5 @@
 ====================================================================================================
-CROSS-ASSET PROPAGATION MAP -- the 48 registered shocks measured beyond oil (DESCRIPTIVE, no verdicts)
+CROSS-ASSET PROPAGATION MAP -- the 52 registered shocks measured beyond oil (DESCRIPTIVE, no verdicts)
 ====================================================================================================
 Same constant-mean event study and windows as the oil study; clustered (overlapping events collapsed, first kept).
 Units: PRICE assets (Brent, natgas, USD) in % (log-return CAR); YIELD assets (5Y, 10Y) in bps (CAR of daily level changes).
@@ -14,6 +14,7 @@ CLUSTERED MEAN CAR+20 by event type x asset:
   demand_shock              2         -8.7%       -8.6%       +6.2%    -24.3bps     -3.0bps       -3.7%
   infrastructure_attack     5         -2.2%      -16.3%       -0.1%    +17.8bps    +18.8bps       +2.3%
   opec_decision             6        -10.1%       -0.7%       +1.9%     -5.6bps     -7.7bps       -1.1%
+  policy_response           3        -10.0%       -7.2%       -0.1%     +5.5bps     +6.8bps       -1.7%
   sanctions                10         +3.3%      -10.6%       -0.1%     +0.2bps     +0.4bps       +1.9%
 
 CLUSTERED MEAN CAR+5 by event type x asset:
@@ -24,9 +25,10 @@ CLUSTERED MEAN CAR+5 by event type x asset:
   demand_shock              2         +0.9%       +4.5%       -1.7%     -5.2bps     -1.2bps       +2.1%
   infrastructure_attack     5         +2.5%       -9.2%       +0.1%     +7.3bps     +7.6bps       +0.4%
   opec_decision             6         -2.0%       +2.3%       +0.7%     -2.2bps     -3.1bps       +1.4%
+  policy_response           3         -9.6%       -7.8%       +0.2%     +1.0bps     +2.2bps       +3.7%
   sanctions                10         +3.0%       +7.0%       +0.1%     +0.1bps     +1.5bps       +0.2%
 
-SMALL-n WARNING: event types with n<= 3 clustered episodes are ANECDOTE, NOT STATISTICS: demand_shock
+SMALL-n WARNING: event types with n<= 3 clustered episodes are ANECDOTE, NOT STATISTICS: demand_shock, policy_response
 
 ====================================================================================================
 GASOLINE PASS-THROUGH TO THE PUMP -- clustered mean retail-gasoline CAR by event type (WEEKLY, %)
@@ -38,6 +40,7 @@ GASOLINE PASS-THROUGH TO THE PUMP -- clustered mean retail-gasoline CAR by event
   demand_shock              2     +2.1%     +0.2%     -3.7%
   infrastructure_attack     5     +0.4%     +2.1%     +2.3%
   opec_decision             6     +1.4%     +1.2%     -1.1%
+  policy_response           3     +3.7%     +1.3%     -1.7%
   sanctions                10     +0.2%     +1.8%     +1.9%
 
 ====================================================================================================

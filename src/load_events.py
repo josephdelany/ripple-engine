@@ -28,6 +28,9 @@ VALID_TYPES = {
     "conflict_escalation",
     "infrastructure_attack",
     "demand_shock",
+    # Amendment 2026-07-23, approved by Joe with batch 3: deliberate government/
+    # agency market interventions (SPR/IEA releases). Severity = scale of intervention.
+    "policy_response",
 }
 VALID_PRECISION = {"day", "week", "month"}
 VALID_CONFIDENCE = {"high", "medium", "low"}
