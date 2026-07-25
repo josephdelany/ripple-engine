@@ -50,9 +50,11 @@ STEPS = [
     ("engine_read",    "src/engine_read.py",    "observations"),
     # regenerate the scenario playbook with today's conditioning (file output).
     ("scenario",       "src/scenario.py --all", "observations"),
-    # FINAL step: cross-asset propagation map. Writes edge rows (one per
-    # event x asset) -- measured against the edges table.
+    # cross-asset propagation map. Writes edge rows (one per event x asset).
     ("cross_asset",    "src/cross_asset.py",    "edges"),
+    # TRUE FINAL step: render The Daily so the static front page is always fresh
+    # after the pipeline. File output (digest.html), so measured rows is 0.
+    ("digest",         "src/digest.py",         "observations"),
 ]
 
 

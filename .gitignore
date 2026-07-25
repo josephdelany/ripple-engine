@@ -13,3 +13,6 @@ data/playbook.md
 # The live alert queue grows every cycle; data/alert_queue_sample.csv is the
 # committed snapshot receipt instead.
 data/alert_queue.csv
+# The Daily is re-rendered every refresh; data/digest_sample.html is the committed
+# snapshot receipt.
+data/digest.html

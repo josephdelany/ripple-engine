@@ -29,6 +29,7 @@ import pandas as pd
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 
 from derive_signals import load_wide, build_signals, MECHANISMS
 from event_study import load_returns, car_for_event, PRE
@@ -124,6 +125,14 @@ WIDGETS = {
 @app.get("/")
 def root():
     return {"status": "ok", "engine": "ripple-engine"}
+
+
+@app.get("/digest", response_class=HTMLResponse)
+def digest_page():
+    """The Daily -- a calm front page. Re-rendered from committed artifacts on each
+    request (cheap). Open http://127.0.0.1:5050/digest in a browser."""
+    import digest
+    return digest.render()
 
 
 @app.get("/widgets.json")
