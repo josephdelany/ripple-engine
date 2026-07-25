@@ -1,0 +1,30 @@
+############ WATCHER SAMPLE -- real cycles (TASK_BRIEF_12 receipt) ############
+# Cycle 1 (fresh): net hits become alert cards.
+
+Watcher cycle 2026-07-25T10:41:27+00:00  |  36 keywords, 23 entity terms, 13 country codes
+
+New alerts this cycle: 52  (gdelt=9, rss=43)
+Today's read (context copied onto each card): Inventories 1.5σ below seasonal norm (H2 amplifier ON); VIX 56th pct (H1 ON). A supply shock today lands on a physically primed but psychologically stressed market.
+
+  [gdelt] unmapped               [GDELT] DJIBOUTI / SAUDI ARABIA: fight/clash signal
+     ents: SAU  | kw: -
+     https://www.gdnonline.com:443/Details/1401607/Saudi-vessel-damaged-in-Red-Sea-attack,-crew
+  [gdelt] conflict_escalation    [GDELT] PRESIDENT / IRAN: assault signal
+     ents: IRN  | kw: escalation
+     https://www.westhawaiitoday.com/2026/07/25/nation-world-news/trump-meets-with-top-advisers
+  [gdelt] unmapped               [GDELT] ISRAELI / ?: fight/clash signal
+     ents: ISR  | kw: -
+     https://english.wafa.ps/Pages/Details/172901
+  [gdelt] unmapped               [GDELT] ISRAELI / CITIZEN: assault signal
+     ents: ISR  | kw: -
+     https://imemc.org/article/west-bank-colonizers-attack-palestinians-burn-homes-soldiers-inj
+  [gdelt] unmapped               [GDELT] JERUSALEM / MILITARY: fight/clash signal
+     ents: ISR  | kw: -
+     https://english.wafa.ps/Pages/Details/172904
+
+############ Cycle 2 (seconds later): dedup -- same stories are NOT re-alerted ############
+
+
+=== WATCHER DIGEST -- 0 new alert(s) ===
+read: Inventories 1.5σ below seasonal norm (H2 amplifier ON); VIX 56th pct (H1 ON). A supply shock today lands on a physically primed but psychologically stressed market.
+  (nothing new hit the net this cycle)

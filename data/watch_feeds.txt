@@ -1,0 +1,15 @@
+# Watcher RSS feeds -- domains 1-4 of NEWS_WATCHLIST (Tier 1). One per line.
+# Format:  <feedname> <url>     ( # = comment )   Joe owns this file; edit freely.
+# All feeds below were verified to resolve and parse at build time (TASK_BRIEF_12).
+# Removed as dead at build time (never silently kept): state.gov press feed
+#   (0 entries), Reuters worldNews (public RSS discontinued), OPEC press (403).
+#
+# Domain 1 -- War & armed conflict
+bbc_world   https://feeds.bbci.co.uk/news/world/rss.xml
+aljazeera   https://www.aljazeera.com/xml/rss/all.xml
+# Domain 2 -- Geopolitics & foreign policy
+un_news     https://news.un.org/feed/subscribe/en/news/all/rss.xml
+# Domain 3 -- Energy & commodities
+eia_energy  https://www.eia.gov/rss/todayinenergy.xml
+# Domain 4 -- Macro & central banks
+fed_press   https://www.federalreserve.gov/feeds/press_all.xml

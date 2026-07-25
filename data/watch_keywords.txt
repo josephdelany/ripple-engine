@@ -1,0 +1,38 @@
+# Keyword net for the news watcher (one per line; case-insensitive substring).
+# Joe owns this file — add/remove freely; the watcher reloads it every cycle.
+strait
+tanker
+pipeline
+refinery
+oil field
+crude
+opec
+spare capacity
+embargo
+sanctions
+price cap
+spr
+strategic reserve
+enrichment
+nuclear
+missile
+drone strike
+airstrike
+blockade
+chokepoint
+suez
+hormuz
+bab el-mandeb
+red sea
+houthi
+ceasefire
+escalation
+mobilization
+coup
+martial law
+export ban
+lng
+natural gas
+inventory draw
+production cut
+force majeure

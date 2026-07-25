@@ -111,6 +111,13 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "alert_queue": {
+        "name": "Watcher Alert Queue",
+        "description": "Live news alerts (curated attention, never conclusions) -- newest first",
+        "endpoint": "alert_queue",
+        "gridData": {"w": 40, "h": 14},
+        "type": "table",
+    },
 }
 
 
@@ -354,6 +361,31 @@ def propagation_map():
             v = info["cells"][a["series"]]["car20"]
             row[a["label"]] = "n/a" if v is None else f"{v:+.1f}{a['unit']}"
         rows.append(row)
+    return rows
+
+
+@app.get("/alert_queue")
+def alert_queue():
+    """The watcher's alert cards, newest first. Read-only view; Joe edits status
+    in the CSV. These are curated attention -- never conclusions."""
+    path = ROOT / "data" / "alert_queue.csv"
+    if not path.exists():
+        return [{"timestamp_utc": "(no alerts yet)",
+                 "headline": "run: python3 src/watcher.py", "source": "",
+                 "heuristic_type": "", "status": ""}]
+    df = pd.read_csv(path).fillna("")
+    df = df.iloc[::-1]                                    # newest first
+    rows = []
+    for _, r in df.head(200).iterrows():
+        rows.append({
+            "timestamp_utc": str(r.get("timestamp_utc", ""))[:16],
+            "source": r.get("source", ""),
+            "heuristic_type": r.get("heuristic_type", ""),
+            "headline": str(r.get("headline", ""))[:90],
+            "matched": f"{r.get('matched_keywords', '')} / {r.get('matched_entities', '')}"[:40],
+            "status": r.get("status", ""),
+            "url": r.get("url", ""),
+        })
     return rows
 
 

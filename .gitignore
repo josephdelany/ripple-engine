@@ -9,3 +9,7 @@ data/launchd_refresh.log
 data/engine_read.json
 data/engine_read.md
 data/playbook.md
+# Watcher runtime artifacts (watch_seen.db already covered by data/*.db).
+# The live alert queue grows every cycle; data/alert_queue_sample.csv is the
+# committed snapshot receipt instead.
+data/alert_queue.csv
