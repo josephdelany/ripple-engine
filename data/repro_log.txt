@@ -1,0 +1,346 @@
+
+==== 1/14  schema (init_db) ====
+observations already has 0 rows - skipping migration.
+
+Canonical schema in /private/tmp/repro_scratch/data/oil.db
+  edges                   0 rows
+  entities                2 rows
+  event_entities          0 rows
+  events                  0 rows
+  forecasts               0 rows
+  observations            0 rows
+  series                  2 rows
+
+==== 2/14  Brent & WTI prices (FRED) ====
+Downloading WTI (DCOILWTICO) ...
+  got 10,205 days, 1986-01-02 to 2026-07-20
+Downloading Brent (DCOILBRENTEU) ...
+  got 9,937 days, 1987-05-20 to 2026-07-20
+
+Saved 20,142 rows to /private/tmp/repro_scratch/data/oil.db (prices table + 20,142 observations rows)
+Saved chart to /private/tmp/repro_scratch/data/oil_prices.png
+
+==== 3/14  macro series (FRED) ====
+Downloading US Crude Oil Stocks (WCESTUS1) ...
+  ! failed: 404 Client Error: Not Found for url: https://fred.stlouisfed.org/graph/fredgraph.csv?id=WCESTUS1
+Downloading Henry Hub Natural Gas Spot (DHHNGSP) ...
+  7,415 rows, 1997-01-07 to 2026-07-20
+Downloading Broad US Dollar Index (DTWEXBGS) ...
+  5,149 rows, 2006-01-02 to 2026-07-17
+Downloading 10-Year Treasury Yield (DGS10) ...
+  16,124 rows, 1962-01-02 to 2026-07-23
+Downloading 2-Year Treasury Yield (DGS2) ...
+  12,532 rows, 1976-06-01 to 2026-07-23
+Downloading 5-Year Treasury Yield (DGS5) ...
+  16,124 rows, 1962-01-02 to 2026-07-23
+Downloading CBOE Volatility Index (VIXCLS) ...
+  9,236 rows, 1990-01-02 to 2026-07-23
+Downloading US Regular Retail Gasoline (GASREGW) ...
+  1,869 rows, 1990-08-20 to 2026-07-20
+
+The database now holds these series:
+  fred.DCOILBRENTEU        Brent Crude Oil Spot Price   daily       9,937 obs
+  fred.DCOILWTICO          WTI Crude Oil Spot Price     daily      10,205 obs
+  fred.DGS10               10-Year Treasury Yield       daily      16,124 obs
+  fred.DGS2                2-Year Treasury Yield        daily      12,532 obs
+  fred.DGS5                5-Year Treasury Yield        daily      16,124 obs
+  fred.DHHNGSP             Henry Hub Natural Gas Spot   daily       7,415 obs
+  fred.DTWEXBGS            Broad US Dollar Index        daily       5,149 obs
+  fred.GASREGW             US Regular Retail Gasoline   weekly      1,869 obs
+  fred.VIXCLS              CBOE Volatility Index        daily       9,236 obs
+
+Total observations: 88,591  (no new tables were needed)
+
+==== 4/14  EIA crude inventories ====
+Fetched 2,286 weekly observations, 1982-08-20 to 2026-07-17
+Saved 2,286 rows as eia.crude_stocks_xspr. Next: python3 src/derive_signals.py to compute the seasonal tightness signal.
+
+==== 5/14  CFTC Commitment of Traders ====
+fut_disagg_txt_hist_2006_2016.zip        551 WTI weekly rows
+fut_disagg_txt_2017.zip                   52 WTI weekly rows
+fut_disagg_txt_2018.zip                   53 WTI weekly rows
+fut_disagg_txt_2019.zip                   52 WTI weekly rows
+fut_disagg_txt_2020.zip                   52 WTI weekly rows
+fut_disagg_txt_2021.zip                   52 WTI weekly rows
+fut_disagg_txt_2022.zip                   52 WTI weekly rows
+fut_disagg_txt_2023.zip                   52 WTI weekly rows
+fut_disagg_txt_2024.zip                   53 WTI weekly rows
+fut_disagg_txt_2025.zip                   52 WTI weekly rows
+fut_disagg_txt_2026.zip                   29 WTI weekly rows
+
+Total: 1,050 weekly observations, 2006-06-13 to 2026-07-21
+Saved 1,050 rows as cftc.mm_net_wti. Next: python3 src/derive_signals.py to compute the percentile signal.
+
+==== 6/14  Geopolitical Risk index ====
+  gpr.GPRD           15,176 obs  1985-01-01 to 2026-07-20
+  gpr.GPRD_ACT       15,176 obs  1985-01-01 to 2026-07-20
+  gpr.GPRD_THREAT    15,176 obs  1985-01-01 to 2026-07-20
+
+Loaded 45,528 GPR observations (as_of 2026-07-25). Next: python3 src/validate_gpr.py
+
+==== 7/14  event corpus (load_events) ====
+
+Loaded 52 events (0 rejected).
+Database now holds: 52 events, 30 entities, 154 event-entity links.
+
+Events by type (this is your sample size per category):
+  conflict_escalation      15
+  sanctions                12
+  opec_decision            8
+  infrastructure_attack    5
+  chokepoint_disruption    5
+  policy_response          4
+  demand_shock             3
+
+==== 8/14  quiet comparison set ====
+Loaded 6 quiet comparison events into quiet_events (table now holds 6). These NEVER enter the events table.
+
+==== 9/14  derived signals ====
+Brent-WTI Spread                               9,760 obs
+Brent-WTI Spread (z-score, 5y)                 9,509 obs
+2s10s Treasury Curve                          12,532 obs
+Broad Dollar (z-score, 5y)                     4,898 obs
+VIX percentile (5y)                            8,985 obs
+Brent realised volatility (20d, annualised)    6,622 obs
+Managed-money net-long percentile (5y)         4,970 obs
+Inventory deviation from seasonal norm (5y)   10,624 obs
+
+====================================================================
+CURRENT STATE OF THE SYSTEM (latest available reading)
+====================================================================
+  Brent-WTI Spread                                 2.61   (2026-07-20)
+  Brent-WTI Spread (z-score, 5y)                  -0.72   (2026-07-20)
+  2s10s Treasury Curve                             0.34   (2026-07-23)
+  Broad Dollar (z-score, 5y)                      -0.13   (2026-07-17)
+  VIX percentile (5y)                             56.26   (2026-07-23)
+  Brent realised volatility (20d, annualised)     56.63   (2026-07-20)
+  Managed-money net-long percentile (5y)          12.69   (2026-07-23)
+  Inventory deviation from seasonal norm (5y)     -1.49   (2026-07-23)
+
+These are the MODULATORS. A shock landing today lands into this state.
+
+==== 10/14 event study ====
+Price series: 9,936 daily returns, 1987-05-21 to 2026-07-20
+Estimation window: t-130 to t-11 | Event window: t-5 to t+20
+
+Skipped: bridgeton_mine_strike_1987 (outside price history) 
+
+event type                n  CAR+1      CAR+5      CAR+10     CAR+20     t-stat(+20)
+------------------------------------------------------------------------------
+chokepoint_disruption     4    -4.9%    -7.1%    -9.2%    -9.7%    -2.46
+conflict_escalation      15    -0.7%    +1.5%    -0.6%    -2.2%    -0.40
+demand_shock              3   -21.9%   -26.8%   -23.5%   -29.5%    -1.17
+infrastructure_attack     5    +0.8%    +2.5%    +0.2%    -2.2%    -0.52
+opec_decision             8    +0.5%    -9.2%    -7.4%    +0.8%    +0.05
+policy_response           4    -8.8%   -14.0%   -10.4%   -13.9%    -2.77
+sanctions                12    +0.9%    +1.6%    +2.7%    +2.9%    +1.36
+
+CAR = cumulative abnormal return (log), i.e. the move beyond normal.
+|t| > ~2 is the rough significance threshold -- but with a small n,
+treat these as INDICATIVE, not conclusive. Report the uncertainty honestly.
+
+Saved ripple chart to /private/tmp/repro_scratch/data/ripple.png
+
+==== 11/14 conditioned study ====
+====================================================================================================
+EVENT-LEVEL DETAIL -- the ripple, and the state of the system the day before
+====================================================================================================
+event                       date           CAR+5  CAR+20      VIX %ile      Inv σ   COT %ile  Brent vol      B-W z      USD z      2s10s
+----------------------------------------------------------------------------------------------------
+iraq_invades_kuwait_1990    1990-08-02    +32.5%  +40.5%           n/a       5.10        n/a      36.28      -0.58        n/a       0.44
+desert_storm_air_campaign_1 1991-01-17    -11.1%  -18.9%         97.35      -0.43        n/a     107.24      -0.96        n/a       1.03
+ilsa_sanctions_1996         1996-08-05     +6.8%  +10.1%         78.74      -1.49        n/a      26.77      -0.66        n/a       0.60
+thai_baht_float_1997        1997-07-02     +4.5%  +16.2%         97.63      -0.74        n/a      30.64      -0.31        n/a       0.43
+opec_jakarta_quota_increase 1997-12-01     -5.2%  -17.2%         98.36      -0.08        n/a      27.64       1.49        n/a       0.10
+operation_desert_fox_1998   1998-12-16     +3.1%  +12.9%         93.62       0.78        n/a      44.54      -0.98        n/a       0.15
+opec_cut_1999               1999-03-23    +18.8%  +32.1%         85.01       1.39        n/a      40.98      -0.85        n/a       0.13
+september_11_attacks_2001   2001-09-11     +3.6%  -25.5%         94.42      -0.29        n/a      25.65       1.60        n/a       1.31
+iraq_war_begins_2003        2003-03-20    -24.2%  -33.9%         85.62      -2.02        n/a      41.65      -0.07        n/a       2.26
+iea_release_katrina_2005    2005-09-02     -7.1%  -11.3%         10.34       2.70        n/a      31.88      -0.57        n/a       0.30
+israel_hezbollah_war_2006   2006-07-12     -3.2%   +4.3%         21.94       1.91        n/a      19.54       0.80        n/a      -0.07
+russia_georgia_war_2008     2008-08-08    -16.2%  -27.7%         85.06      -0.77      45.13      37.46      -0.62      -1.33       1.49
+lehman_collapse_2008        2008-09-15     -2.7%  -33.6%         94.91      -0.53      12.71      43.43      -2.31      -0.54       1.51
+libya_civil_war_2011        2011-02-17     +8.2%   +7.2%         26.80       0.86      91.02      19.77       5.81      -1.03       2.76
+iea_release_libya_2011      2011-06-23     -4.9%   -1.8%         33.59       0.64      84.62      25.37       3.55      -1.47       2.62
+ndaa_cbi_sanctions_2011     2011-12-31     +4.7%   +3.4%         50.37       0.47      81.15      24.40       0.81      -0.01       1.64
+eu_iran_oil_embargo_2012    2012-01-23     -2.0%   +7.7%         21.38       0.32      79.62      24.40       0.93      -0.24       1.79
+swift_cutoff_iran_2012      2012-03-15     -3.2%   -8.5%          3.11       0.28      94.23      14.56       2.17      -0.30       1.89
+opec_declines_cut_2014      2014-11-27     -9.9%  -22.1%          4.24       0.73      40.38      24.12      -0.83       2.68       1.71
+saudi_intervention_yemen_20 2015-03-26    +10.9%  +30.0%         37.83       7.28      20.77      35.29      -0.70       3.36       1.34
+opec_agrees_cut_2016        2016-11-30    +13.4%  +21.2%         18.01       2.28      31.54      39.90      -1.18       2.02       1.21
+venezuela_financial_sanctio 2017-08-25     +5.8%  +15.5%         18.79       1.09      76.15      25.36      -0.16       0.67       0.86
+iran_sanctions_reimposed_20 2018-05-08     +2.7%   -7.6%         63.70      -0.13      93.85      30.22       0.33       0.56       0.46
+saudi_suspends_bab_el_mande 2018-07-25     +1.0%   +0.5%         30.20      -0.15      89.62      35.96      -0.33       0.82       0.32
+venezuela_sanctions_2019    2019-01-28     +2.0%   +7.0%         78.57       0.42      15.00      47.78       1.45       0.75       0.16
+us_ends_iran_waivers_2019   2019-04-22     +1.4%   +6.2%         24.98       0.04      77.31      20.81       0.97       0.81       0.19
+gulf_of_oman_tanker_attacks 2019-06-13     +3.8%   +5.1%         67.91       0.60      14.23      25.76       2.04       0.93       0.25
+stena_impero_seizure_2019   2019-07-19     -8.7%  -15.4%         43.48       0.38      56.15      34.27       0.51       0.82       0.27
+venezuela_asset_freeze_2019 2019-08-05     -8.7%   -6.0%         77.87       0.20      36.92      33.12       0.45       1.12       0.14
+abqaiq_attack_2019          2019-09-14     +6.1%   -2.3%         45.94      -0.03      57.31      40.48       0.75       1.28       0.11
+soleimani_strike_2020       2020-01-03     -4.4%  -19.9%         28.89      -0.01      78.08      22.91       0.52       0.72       0.30
+opec_talks_collapse_2020    2020-03-06    -48.4%  -77.0%         99.84      -0.36      13.85      35.09       0.39       1.23       0.33
+covid_pandemic_declared_202 2020-03-11    -82.2%  -71.1%         99.92      -0.25      26.92     102.43      -0.94       1.58       0.26
+opec_record_cut_2020        2020-04-12    -72.1%  +50.0%         98.03       0.67      42.69     220.20      -2.05       2.71       0.50
+ras_tanura_attack_2021      2021-03-07     +0.6%  -15.1%         84.00       0.73      81.15      30.25      -0.07      -0.16       1.42
+suez_ever_given_2021        2021-03-23    -13.0%  -16.5%         68.01       0.71      80.38      45.65      -0.50      -0.39       1.54
+colonial_pipeline_shutdown_ 2021-05-07     -2.2%   -7.2%         66.20      -0.24      77.31      55.08      -0.11      -0.73       1.42
+spr_release_2021            2021-11-23    -16.7%  -16.9%         66.69      -1.55      43.46      28.16      -0.07       0.42       1.00
+russia_invades_ukraine_2022 2022-02-24    +13.3%  +15.7%         93.03      -1.20      32.69      31.51       0.81       0.14       0.41
+spr_release_2022            2022-03-31    -27.1%  -25.8%         61.23      -1.43      28.85      85.14       0.95       0.25       0.04
+nord_stream_sabotage_2022   2022-09-26     +4.0%   +8.4%         89.61      -0.23      16.54      45.91       0.09       3.18      -0.51
+opec_plus_cut_2022          2022-10-05    +10.6%  +16.5%         87.65      -0.32      15.77      45.91       0.59       2.79      -0.48
+eu_embargo_price_cap_2022   2022-12-05     -3.7%   -1.3%         46.08      -1.80      10.38      30.28       0.52       1.46      -0.77
+products_price_cap_2023     2023-02-05     +3.2%   +6.5%         40.86       0.81      18.08      27.42       0.14       0.79      -0.77
+opec_surprise_cut_2023      2023-04-02    +19.7%   +2.7%         40.42       0.55       4.23      37.56      -0.44       0.69      -0.58
+israel_hamas_war_2023       2023-10-07     -6.9%  -13.2%         33.93      -0.46      72.31      33.73       0.11       1.57      -0.30
+red_sea_attacks_2023        2023-12-01     -7.5%   -7.6%          5.28       0.04       3.46      38.60       0.47       0.70      -0.36
+iran_strikes_israel_apr_202 2024-04-13     -5.9%  -13.1%         36.15      -0.18      52.31      20.52       0.82       1.11      -0.38
+iran_strikes_israel_oct_202 2024-10-01     +5.7%   -1.9%         31.52      -0.59      28.85      29.23      -0.17       0.66       0.15
+russia_shadow_fleet_sanctio 2025-01-10    +10.4%   +2.3%         39.81      -0.98      65.00      20.89      -0.21       2.29       0.41
+israel_iran_war_2025        2025-06-13    +17.1%   +9.9%         42.33      -0.88      36.54      43.36      -0.95       0.14       0.46
+
+====================================================================================================
+CONDITIONED RIPPLE -- ripple MAGNITUDE by pre-event state
+====================================================================================================
+
+  Split on Brent vol at median 33.12
+    high  n=26   mean |CAR+20| =  22.6%
+    low   n=25   mean |CAR+20| =  10.5%
+    amplification: +12.1 pp
+
+  Split on VIX %ile at median 55.80
+    high  n=25   mean |CAR+20| =  23.0%
+    low   n=25   mean |CAR+20| =   9.4%
+    amplification: +13.5 pp
+
+  Split on surprise (1-5) at median 3.00
+    high  n=41   mean |CAR+20| =  16.1%
+    low   n=10   mean |CAR+20| =  18.9%
+    amplification: -2.8 pp
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+HONESTY CHECK: n = 51 events. This is FAR too few to conclude anything.
+The machinery is correct and will sharpen with every sourced event you add.
+Report these as illustrative, never as findings.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Saved chart to /private/tmp/repro_scratch/data/conditioned_ripple.png
+
+==== 12/14 robustness ====
+==========================================================================================
+CLUSTERS (events measured inside the same window = one episode)
+==========================================================================================
+  cluster 16: ndaa_cbi_sanctions_2011, eu_iran_oil_embargo_2012   -> keeping first only
+  cluster 27: stena_impero_seizure_2019, venezuela_asset_freeze_2019   -> keeping first only
+  cluster 30: opec_talks_collapse_2020, covid_pandemic_declared_2020, opec_record_cut_2020   -> keeping first only
+  cluster 31: ras_tanura_attack_2021, suez_ever_given_2021   -> keeping first only
+  cluster 34: russia_invades_ukraine_2022, spr_release_2022   -> keeping first only
+  cluster 35: nord_stream_sabotage_2022, opec_plus_cut_2022   -> keeping first only
+
+  outlier dropped in test 3: desert_storm_air_campaign_1991 (Brent vol > 100%)
+
+==========================================================================================
+H1: DOES HIGH VIX (STRESS) AMPLIFIES SURVIVE?   (split on derived.vix_pct)
+==========================================================================================
+  1. baseline (all events)   n=50   high |CAR+20|= 23.0% (n=25)   low=  9.4% (n=25)   amplification +13.5 pp
+  2. clustered               n=43   high |CAR+20|= 18.0% (n=22)   low= 10.5% (n=21)   amplification +7.4 pp
+  3. clustered, no outlier   n=42   high |CAR+20|= 17.9% (n=21)   low= 10.5% (n=21)   amplification +7.4 pp
+  -> predicted direction: high>low; clustered directional amplification +7.4 pp (threshold +5 pp)
+
+==========================================================================================
+H2: DOES TIGHT INVENTORIES (LOW SIGMA) AMPLIFY SURVIVE?   (split on derived.inv_sigma)
+==========================================================================================
+  1. baseline (all events)   n=51   high |CAR+20|= 14.5% (n=26)   low= 18.9% (n=25)   amplification -4.5 pp
+  2. clustered               n=44   high |CAR+20|= 13.5% (n=22)   low= 16.4% (n=22)   amplification -2.9 pp
+  3. clustered, no outlier   n=43   high |CAR+20|= 13.5% (n=22)   low= 16.3% (n=21)   amplification -2.8 pp
+  -> predicted direction: low>high; clustered directional amplification +2.9 pp (threshold +5 pp)
+
+==========================================================================================
+H3: DOES CROWDED NET-LONG (HIGH PERCENTILE) AMPLIFIES SURVIVE?   (split on derived.cot_pct)
+==========================================================================================
+  1. baseline (all events)   n=40   high |CAR+20|= 10.4% (n=20)   low= 21.0% (n=20)   amplification -10.6 pp
+  2. clustered               n=33   high |CAR+20|=  9.8% (n=17)   low= 16.7% (n=16)   amplification -6.9 pp
+  3. clustered, no outlier   n=33   high |CAR+20|=  9.8% (n=17)   low= 16.7% (n=16)   amplification -6.9 pp
+  -> predicted direction: high>low; clustered directional amplification -6.9 pp (threshold +5 pp)
+
+How to read this: down each variable's three rows, if the amplification stays large and
+in the predicted direction, the finding survives its own best rebuttals. If it shrinks or
+flips when the 2020 cluster collapses, it was that episode all along -- also reportable.
+
+##########################################################################################
+REGISTERED VERDICT (BRIEF_SKELETON.md §4 rule: +5pp clustered, predicted direction)
+##########################################################################################
+  H1 HOLDS (clustered +7.4 pp in predicted direction)
+  H2 FAILS (clustered +2.9 pp in predicted direction)
+  H3 FAILS (clustered -6.9 pp in predicted direction)
+
+==== 13/14 cross-asset edges ====
+====================================================================================================
+CROSS-ASSET PROPAGATION MAP -- the 52 registered shocks measured beyond oil (DESCRIPTIVE, no verdicts)
+====================================================================================================
+Same constant-mean event study and windows as the oil study; clustered (overlapping events collapsed, first kept).
+Units: PRICE assets (Brent, natgas, USD) in % (log-return CAR); YIELD assets (5Y, 10Y) in bps (CAR of daily level changes).
+GASOLINE is WEEKLY, on its own clock: its CAR+5 column = +1 WEEK and its CAR+20 column = +4 WEEKS (in %). Not daily -- see the gasoline appendix for +1/+2/+4 weeks.
+Coverage note: natgas begins 1997, the broad-dollar index 2006, weekly retail gasoline 1990 -- earlier events show n/a, honestly.
+
+CLUSTERED MEAN CAR+20 by event type x asset:
+  event type                n     Brent oil   HH natgas   Broad USD    5Y yield   10Y yield    Gasoline
+  -----------------------------------------------------------------------------------------------------
+  chokepoint_disruption     4         -7.5%       -1.9%       +0.0%    -23.8bps    -26.3bps       -4.6%
+  conflict_escalation      15         -2.2%       -0.1%       +0.5%     -1.7bps     -1.4bps       -0.9%
+  demand_shock              2         -8.7%       -8.6%       +6.2%    -24.3bps     -3.0bps       -3.7%
+  infrastructure_attack     5         -2.2%      -16.3%       -0.1%    +17.8bps    +18.8bps       +2.3%
+  opec_decision             6        -10.1%       -0.7%       +1.9%     -5.6bps     -7.7bps       -1.1%
+  policy_response           3        -10.0%       -7.2%       -0.1%     +5.5bps     +6.8bps       -1.7%
+  sanctions                10         +3.3%      -10.6%       -0.1%     +0.2bps     +0.4bps       +1.9%
+
+CLUSTERED MEAN CAR+5 by event type x asset:
+  event type                n     Brent oil   HH natgas   Broad USD    5Y yield   10Y yield    Gasoline
+  -----------------------------------------------------------------------------------------------------
+  chokepoint_disruption     4         -5.1%       -5.3%       -0.0%     +0.1bps     +0.3bps       -0.6%
+  conflict_escalation      15         +1.5%       +0.0%       +0.6%     +0.3bps     +2.3bps       -0.3%
+  demand_shock              2         +0.9%       +4.5%       -1.7%     -5.2bps     -1.2bps       +2.1%
+  infrastructure_attack     5         +2.5%       -9.2%       +0.1%     +7.3bps     +7.6bps       +0.4%
+  opec_decision             6         -2.0%       +2.3%       +0.7%     -2.2bps     -3.1bps       +1.4%
+  policy_response           3         -9.6%       -7.8%       +0.2%     +1.0bps     +2.2bps       +3.7%
+  sanctions                10         +3.0%       +7.0%       +0.1%     +0.1bps     +1.5bps       +0.2%
+
+SMALL-n WARNING: event types with n<= 3 clustered episodes are ANECDOTE, NOT STATISTICS: demand_shock, policy_response
+
+====================================================================================================
+GASOLINE PASS-THROUGH TO THE PUMP -- clustered mean retail-gasoline CAR by event type (WEEKLY, %)
+====================================================================================================
+  event type                n   +1 week  +2 weeks  +4 weeks
+  ---------------------------------------------------------
+  chokepoint_disruption     3     -0.6%     -2.2%     -4.6%
+  conflict_escalation      13     -0.3%     +0.4%     -0.9%
+  demand_shock              2     +2.1%     +0.2%     -3.7%
+  infrastructure_attack     5     +0.4%     +2.1%     +2.3%
+  opec_decision             6     +1.4%     +1.2%     -1.1%
+  policy_response           3     +3.7%     +1.3%     -1.7%
+  sanctions                10     +0.2%     +1.8%     +1.9%
+
+====================================================================================================
+APPENDIX -- September 11, 2001 (flight-to-safety canary: assets should react in DIFFERENT directions)
+====================================================================================================
+  asset                CAR+5      CAR+20   unit
+  ----------------------------------------------------
+  Brent oil             +3.6       -25.5   %
+  HH natgas             +7.0       +11.4   %
+  Broad USD              n/a         n/a   %
+  5Y yield             -46.6       -39.3   bps
+  10Y yield             -9.1       -14.8   bps
+  Gasoline              -0.2       -13.5   %
+
+  Read (descriptive): a genuine flight-to-safety shows up as yields FALLING (negative bps) while
+  oil and equities-linked assets move the other way -- the assets parting company is the signal.
+
+DESCRIPTIVE MEASUREMENT ONLY. Conditioning any of these reactions on market state would require a
+future REGISTERED hypothesis (Joe's gate). Nothing here is a verdict.
+
+Wrote /private/tmp/repro_scratch/data/cross_asset_results.txt  |  populated 292 edge rows (one per event x asset).
+
+==== 14/14 data dictionary ====
+Wrote /private/tmp/repro_scratch/DATA_DICTIONARY.md (9 tables).
+
+==== repro complete: data/oil.db rebuilt from zero ====

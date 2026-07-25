@@ -150,8 +150,13 @@ def main():
     cur.executemany("INSERT OR IGNORE INTO series VALUES (?,?,?,?,?,?,?,?)", SERIES)
 
     # 3. Migrate the existing prices table into the generic observations table.
+    # On a FRESH build there is no `prices` table yet (fetch_prices creates it and
+    # now writes observations directly), so guard the migration -- otherwise a
+    # from-zero rebuild (repro.sh) would crash here.
+    have_prices = cur.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name='prices'").fetchone()
     existing = cur.execute("SELECT COUNT(*) FROM observations").fetchone()[0]
-    if existing == 0:
+    if existing == 0 and have_prices:
         rows = cur.execute("SELECT date, price, commodity FROM prices").fetchall()
         payload = [
             (LABEL_TO_SERIES[label], str(date)[:10], float(price), str(date)[:10], now)
