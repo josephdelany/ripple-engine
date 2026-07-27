@@ -45,6 +45,9 @@ STEPS = [
     ("fetch_gpr",      "src/fetch_gpr.py",      "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
+    # Record keeper: link any situation atom whose source_url now matches a
+    # freshly-gated coded event (read-of-events / update-of-log only).
+    ("backfill_promo",  "src/backfill_promotions.py", "situation_log"),
     # Synthesis read. Writes engine_read.json/.md (files, not DB rows) -> 0 rows
     # by design; the point is that every refresh ends with a fresh Engine Read.
     ("engine_read",    "src/engine_read.py",    "observations"),
@@ -53,6 +56,9 @@ STEPS = [
     # Situation Memory: attach watcher alerts into per-conflict timelines and
     # render the dossiers. Consumes engine_read.json (must run after it).
     ("situation",      "src/situation.py",      "situation_log"),
+    # Record keeper: resolve any logged read whose 20-day window has elapsed and
+    # score the engine's magnitude calibration (realized - expected).
+    ("resolve_reads",   "src/resolve_reads.py",  "reads"),
     # cross-asset propagation map. Writes edge rows (one per event x asset).
     ("cross_asset",    "src/cross_asset.py",    "edges"),
     # TRUE FINAL step: render The Daily so the static front page is always fresh

@@ -26,6 +26,17 @@ CREATE TABLE situation_log (
 """
 
 
+_READS_DDL = """
+CREATE TABLE reads (
+    read_id INTEGER PRIMARY KEY AUTOINCREMENT, made_at TEXT NOT NULL,
+    situation_id TEXT, kind TEXT NOT NULL, anchor_date TEXT NOT NULL,
+    anchor_series TEXT NOT NULL, anchor_value REAL, horizon_days INTEGER NOT NULL,
+    expected_car REAL NOT NULL, basis TEXT, amp_context TEXT, resolved_at TEXT,
+    realized_car REAL, error REAL, notes TEXT);
+CREATE TABLE observations (series_id TEXT, obs_date TEXT, value REAL, as_of TEXT);
+"""
+
+
 def _temp_conn():
     conn = sqlite3.connect(":memory:")
     conn.executescript(_SITUATION_LOG_DDL)
@@ -242,4 +253,36 @@ def test_s3c_rejects_out_of_vocab(tmp_path, monkeypatch):
                  "synthesis": "words only."}
     r2 = asa.apply(bad_actor, conn)
     assert r2["applied"] is False and any("member" in e for e in r2["errors"])
+    conn.close()
+
+
+# ---- Wire 4: the record keeper (log -> resolve -> score) -------------------
+
+# s4 -- resolution scores magnitude honestly: on a perfectly FLAT price series the
+# abnormal return (CAR) is exactly 0, so a read that expected -7.5% resolves with
+# error = 0 - (-7.5) = +7.5pp, and the calibration bias reflects it.
+def test_s4_resolve_scores_magnitude_error():
+    import sqlite3
+    import pandas as pd
+    import resolve_reads
+    conn = sqlite3.connect(":memory:")
+    conn.executescript(_READS_DDL)
+    # 200 business days of flat Brent=100 -> log-returns 0 -> CAR 0.
+    days = pd.bdate_range("2020-01-01", periods=200)
+    conn.executemany("INSERT INTO observations VALUES ('fred.DCOILBRENTEU',?,?,?)",
+                     [(d.strftime("%Y-%m-%d"), 100.0, d.strftime("%Y-%m-%d"))
+                      for d in days])
+    anchor = days[150].strftime("%Y-%m-%d")   # 150 days before, 49 after -> resolvable
+    conn.execute("INSERT INTO reads (made_at, kind, anchor_date, anchor_series, "
+                 "horizon_days, expected_car) VALUES "
+                 "('2020-01-01','chokepoint_disruption',?, 'fred.DCOILBRENTEU', 20, -7.5)",
+                 (anchor,))
+    n = resolve_reads.resolve_pending(conn, now="2020-12-31T00:00:00")
+    assert n == 1
+    realized, error = conn.execute(
+        "SELECT realized_car, error FROM reads WHERE read_id=1").fetchone()
+    assert abs(realized) < 1e-6            # flat series -> zero abnormal return
+    assert abs(error - 7.5) < 1e-6         # 0 - (-7.5) = +7.5pp
+    cal = resolve_reads.calibration(conn)
+    assert cal["n"] == 1 and abs(cal["overall"]["bias_pp"] - 7.5) < 1e-6
     conn.close()

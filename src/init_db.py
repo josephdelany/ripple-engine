@@ -135,6 +135,31 @@ CREATE TABLE IF NOT EXISTS situation_log (
     -- re-running the attach step must add 0 rows: one atom per (situation, source).
     UNIQUE (situation_id, source_url)
 );
+
+-- RECORD KEEPER: the calibration ledger of the engine's conditional reads.
+-- A "read" logs the engine's magnitude EXPECTATION (a base-rate CAR at a horizon)
+-- anchored to a date; when the window closes, resolve_reads.py records the
+-- REALIZED abnormal return and the error (realized - expected). This is how the
+-- engine is held accountable and learns its own calibration -- magnitude, not a
+-- probability, and never a forecast of whether an event occurs. Distinct from
+-- `forecasts` (which is probability/Brier) so the two are never blended.
+CREATE TABLE IF NOT EXISTS reads (
+    read_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    made_at       TEXT NOT NULL,       -- when the read was logged
+    situation_id  TEXT REFERENCES entities(entity_id),   -- optional link
+    kind          TEXT NOT NULL,       -- the event type the read is about
+    anchor_date   TEXT NOT NULL,       -- t0 the horizon counts from
+    anchor_series TEXT NOT NULL,       -- the priced series (e.g. fred.DCOILBRENTEU)
+    anchor_value  REAL,                -- series level at t0 (context)
+    horizon_days  INTEGER NOT NULL,    -- trading-day horizon (1|5|10|20)
+    expected_car  REAL NOT NULL,       -- engine base-rate expectation, % (signed)
+    basis         TEXT,                -- how expected_car was derived
+    amp_context   TEXT,                -- amplifier snapshot at t0
+    resolved_at   TEXT,                -- when resolved (NULL = pending)
+    realized_car  REAL,                -- realized abnormal return at +horizon, %
+    error         REAL,                -- realized_car - expected_car (pp)
+    notes         TEXT
+);
 """
 
 # Seed entities + series for what we already have.
