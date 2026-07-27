@@ -333,3 +333,37 @@ def test_s5_state_roundtrip_is_lossless(tmp_path, monkeypatch):
     import_state.import_table(dst, "situation_log")
     assert dst.execute("SELECT COUNT(*) FROM situation_log").fetchone()[0] == 2
     dst.close()
+
+
+# ---- Operating model: notify selection (high-signal + primed + fresh) -------
+
+# s6 -- the push gate: only high-signal, market-primed, fresh, unseen alerts fire;
+# nothing fires when amplifiers are OFF.
+def test_s6_notify_selection_gate():
+    import notify
+    from datetime import datetime, timezone
+    now = datetime(2026, 7, 27, tzinfo=timezone.utc)
+    alerts = [
+        {"url": "u1", "heuristic_type": "chokepoint_disruption",
+         "timestamp_utc": "2026-07-27T00:00:00", "headline": "hot+fresh"},
+        {"url": "u2", "heuristic_type": "unmapped",              # not high-signal
+         "timestamp_utc": "2026-07-27T00:00:00", "headline": "noise"},
+        {"url": "u3", "heuristic_type": "conflict_escalation",    # already seen
+         "timestamp_utc": "2026-07-27T00:00:00", "headline": "seen"},
+        {"url": "u4", "heuristic_type": "sanctions",              # too old
+         "timestamp_utc": "2026-07-01T00:00:00", "headline": "stale"},
+    ]
+    # amplifiers OFF -> nothing, ever.
+    assert notify.select_to_notify(alerts, set(), False, now) == []
+    # amplifiers ON -> only u1 (u2 low-signal, u3 seen, u4 stale).
+    picked = notify.select_to_notify(alerts, {"u3"}, True, now)
+    assert [a["url"] for a in picked] == ["u1"]
+
+
+# s6b -- amplifiers_on reads engine_read correctly.
+def test_s6b_amplifiers_on():
+    import notify
+    on, label = notify.amplifiers_on(
+        {"hypotheses": {"H1": {"amplifier": "ON"}, "H2": {"amplifier": "OFF"}}})
+    assert on is True and label == "H1"
+    assert notify.amplifiers_on({"hypotheses": {}}) == (False, "")
