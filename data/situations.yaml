@@ -1,0 +1,35 @@
+# situations.yaml -- the human-owned definition of tracked situations.
+#
+# A "situation" is a named, ongoing conflict or theme the engine keeps a running
+# memory of (its timeline, actor postures, channels fired, what history prices).
+# This file is the ONLY place situations are defined -- the research agent may
+# SUGGEST a new one in prose, but it NEVER edits this file. Situations are a
+# deliberate human act, like watch_keywords.txt. This is the anti-sprawl guard.
+#
+# Each situation's `situation_id` must also exist as an entities row
+# (type='situation') -- init_db.py seeds the first one.
+#
+# member_entities  : entity_ids whose watcher alerts attach to this situation.
+#                    An alert attaches if its matched_entities intersect this set.
+# dominant_kinds   : the event types whose historical base rates the dossier shows
+#                    (from engine_read.json). Must be registered event types.
+
+situations:
+  - situation_id: situation.israel_iran_war_2025
+    title: "Israel-Iran War (2025- )"
+    archetype: war_geopolitical
+    status: active            # active | dormant | closed
+    started_at: "2025-06-13"  # Operation Rising Lion onset (coded event)
+    member_entities:
+      - country.israel
+      - country.iran
+      - country.saudi_arabia
+      - country.yemen
+      - country.lebanon
+      - chokepoint.hormuz
+      - chokepoint.bab_el_mandeb
+      - commodity.brent
+    dominant_kinds:
+      - conflict_escalation
+      - chokepoint_disruption
+      - infrastructure_attack

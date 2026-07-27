@@ -111,12 +111,41 @@ CREATE TABLE IF NOT EXISTS forecasts (
     outcome       INTEGER,             -- 1 = happened, 0 = didn't, NULL = pending
     notes         TEXT
 );
+
+-- SITUATION MEMORY: the running per-conflict timeline (the "middle clock").
+-- This is NOT the gated events table -- it is a memory of what appeared and is
+-- relevant to an ongoing situation. Rows are auto-attached from the watcher
+-- (deterministic) and, later, typed/summarised by the scoped agent. An item
+-- becomes canon ONLY via the untouched human gate (which then backfills
+-- promoted_event_id). Every atom is sourced; status is one value, never blended.
+CREATE TABLE IF NOT EXISTS situation_log (
+    log_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    situation_id      TEXT NOT NULL REFERENCES entities(entity_id),  -- 'situation.*'
+    ts                TEXT NOT NULL,       -- when the item is dated (from the alert)
+    kind              TEXT,                -- playbook vocab; 'unmapped' until typed
+    actor_entity      TEXT REFERENCES entities(entity_id),
+    headline          TEXT NOT NULL,
+    detail            TEXT,                -- prose; meaning fixed by `status`
+    source_url        TEXT NOT NULL,       -- every atom MUST be sourced
+    retrieved_at      TEXT NOT NULL,
+    status            TEXT NOT NULL,       -- observed | inferred | promoted (never blended)
+    confidence        TEXT,                -- display-only; NEVER fed to math
+    alert_url         TEXT,                -- provenance back to the alert_queue row
+    promoted_event_id TEXT REFERENCES events(event_id),  -- set ONLY by the human-gate backfill
+    -- re-running the attach step must add 0 rows: one atom per (situation, source).
+    UNIQUE (situation_id, source_url)
+);
 """
 
 # Seed entities + series for what we already have.
 ENTITIES = [
     ("commodity.wti",   "commodity", "WTI Crude Oil",   "US benchmark crude"),
     ("commodity.brent", "commodity", "Brent Crude Oil", "Global benchmark crude"),
+    # Situation Memory identity row. type='situation' is invisible to the watcher's
+    # entity net (it filters to country/chokepoint/commodity/institution), so this
+    # never creates false alert matches. Membership lives in data/situations.yaml.
+    ("situation.israel_iran_war_2025", "situation", "Israel-Iran War (2025- )",
+     "Ongoing multi-front conflict; membership + config in data/situations.yaml."),
 ]
 SERIES = [
     ("fred.DCOILWTICO",   "WTI Crude Oil Spot Price",   "commodity.wti",
