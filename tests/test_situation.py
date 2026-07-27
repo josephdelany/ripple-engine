@@ -286,3 +286,50 @@ def test_s4_resolve_scores_magnitude_error():
     cal = resolve_reads.calibration(conn)
     assert cal["n"] == 1 and abs(cal["overall"]["bias_pp"] - 7.5) < 1e-6
     conn.close()
+
+
+# ---- Operating model: state round-trip (export -> rebuild -> import) --------
+
+# s5 -- the durable memory survives a DB rebuild losslessly: export situation_log
+# + reads to CSV, rebuild an empty DB, import, and every row (incl. NULLs) returns.
+def test_s5_state_roundtrip_is_lossless(tmp_path, monkeypatch):
+    import sqlite3
+    import export_state
+    import import_state
+    monkeypatch.setattr(export_state, "STATE", tmp_path)
+    monkeypatch.setattr(import_state, "STATE", tmp_path)
+
+    src = sqlite3.connect(":memory:")
+    src.executescript(_SITUATION_LOG_DDL + _READS_DDL)
+    # one full row + one with NULL actor/detail/promoted -> tests NULL round-trip.
+    src.execute("INSERT INTO situation_log (situation_id, ts, kind, actor_entity, "
+                "headline, detail, source_url, retrieved_at, status) VALUES "
+                "('situation.test','2026-07-27','infrastructure_attack','country.iran',"
+                "'full row','detail here','http://x/a','2026-07-27','observed')")
+    src.execute("INSERT INTO situation_log (situation_id, ts, headline, source_url, "
+                "retrieved_at, status) VALUES ('situation.test','2026-07-26',"
+                "'sparse row','http://x/b','2026-07-26','observed')")
+    src.execute("INSERT INTO reads (made_at, kind, anchor_date, anchor_series, "
+                "horizon_days, expected_car) VALUES ('2026-07-27',"
+                "'chokepoint_disruption','2026-07-20','fred.DCOILBRENTEU',20,-7.5)")
+    src.commit()
+    for t in ("situation_log", "reads"):
+        export_state.export_table(src, t)
+    src.close()
+
+    dst = sqlite3.connect(":memory:")
+    dst.executescript(_SITUATION_LOG_DDL + _READS_DDL)
+    for t in ("situation_log", "reads"):
+        import_state.import_table(dst, t)
+    assert dst.execute("SELECT COUNT(*) FROM situation_log").fetchone()[0] == 2
+    assert dst.execute("SELECT COUNT(*) FROM reads").fetchone()[0] == 1
+    # the sparse row's actor_entity came back as NULL, not "".
+    got = dst.execute("SELECT actor_entity FROM situation_log WHERE "
+                      "source_url='http://x/b'").fetchone()[0]
+    assert got is None
+    # a pending read's realized_car is NULL, not "".
+    assert dst.execute("SELECT realized_car FROM reads").fetchone()[0] is None
+    # re-importing is idempotent (UNIQUE guard) -> still 2 situation_log rows.
+    import_state.import_table(dst, "situation_log")
+    assert dst.execute("SELECT COUNT(*) FROM situation_log").fetchone()[0] == 2
+    dst.close()

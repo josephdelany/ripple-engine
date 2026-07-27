@@ -52,7 +52,13 @@ SERIES_ROW = (
 
 
 def read_api_key():
-    """Pull the EIA key from OpenBB's settings file. Fail loudly if it's gone."""
+    """Pull the EIA key. In CI (GitHub Actions) it comes from the EIA_API_KEY
+    environment variable, sourced from an encrypted repo Secret -- so the key is
+    never committed. Locally it comes from OpenBB's settings file. Fail loudly if
+    neither is present."""
+    env_key = os.environ.get("EIA_API_KEY")
+    if env_key:
+        return env_key.strip()
     if not SETTINGS.exists():
         raise SystemExit(f"STOP: settings file not found at {SETTINGS}. Tell Joe.")
     creds = json.load(open(SETTINGS)).get("credentials", {})

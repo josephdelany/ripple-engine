@@ -2,6 +2,10 @@ __pycache__/
 *.pyc
 .venv/
 data/*.db
+# oil.db is a derived artifact (rebuilt from sources). But watch_seen.db is the
+# watcher's dedup ledger -- durable memory that CANNOT be re-fetched, so it is
+# committed (persists the "what news have we already surfaced" state across runs).
+!data/watch_seen.db
 # Runtime ops artifacts, regenerated every run (refresh.py / heartbeat.py)
 data/refresh_log.csv
 data/health_status.json
@@ -9,10 +13,10 @@ data/launchd_refresh.log
 data/engine_read.json
 data/engine_read.md
 data/playbook.md
-# Watcher runtime artifacts (watch_seen.db already covered by data/*.db).
-# The live alert queue grows every cycle; data/alert_queue_sample.csv is the
-# committed snapshot receipt instead.
-data/alert_queue.csv
+# NOTE: data/alert_queue.csv is now COMMITTED (durable memory: the running feed of
+# what the watcher has surfaced). data/state/*.csv (situation_log, reads exports)
+# are committed too. These are the source of truth the rebuilt oil.db is refilled
+# from. Only the big derived DB and the re-rendered views below stay ignored.
 # The Daily is re-rendered every refresh; data/digest_sample.html is the committed
 # snapshot receipt.
 data/digest.html
