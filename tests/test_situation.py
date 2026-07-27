@@ -157,3 +157,89 @@ def test_s2_render_is_deterministic_and_sourced():
     assert "| chokepoint_disruption | 3 |" in md
     assert "http://src/abqaiq" in md                 # every atom sourced
     assert "not a forecast" in md.lower()             # the discipline caveat is on it
+
+
+# ---- Slice 3b: the cage around the synthesizer agent -----------------------
+
+def _agent_fixture(tmp_path, monkeypatch):
+    """A temp DB (situation_log + observations + one atom) and a patched situation
+    module so the agent validator runs in isolation from the live repo."""
+    import situation
+    conn = _temp_conn()
+    conn.execute("CREATE TABLE observations (series_id TEXT, obs_date TEXT, "
+                 "value REAL, as_of TEXT)")
+    conn.execute("INSERT INTO observations VALUES "
+                 "('fred.DCOILBRENTEU','2026-07-20',86.99,'2026-07-20')")
+    conn.execute("INSERT INTO situation_log (situation_id, ts, kind, headline, "
+                 "source_url, retrieved_at, status) VALUES "
+                 "('situation.test','2026-07-27','unmapped','Abqaiq struck, 5pct "
+                 "of supply','http://src/abqaiq','2026-07-27','observed')")
+    conn.commit()
+    sit = {"situation_id": "situation.test", "title": "Test War", "status": "active",
+           "started_at": "2025-06-13", "member_entities": ["country.yemen"],
+           "dominant_kinds": ["chokepoint_disruption"]}
+    er = {"as_of": "2026-07-24", "read": "primed.", "hypotheses": {},
+          "base_rates": [{"type": "chokepoint_disruption", "n": 3, "car1": 0.1,
+                          "car5": -1.0, "car10": -3.0, "car20": -7.5}]}
+    monkeypatch.setattr(situation, "load_situations", lambda: [sit])
+    monkeypatch.setattr(situation, "load_engine_read", lambda: er)
+    monkeypatch.setattr(situation, "DOSSIER_DIR", tmp_path)
+    monkeypatch.setattr(situation, "ROOT", tmp_path)
+    return conn
+
+
+# s3a -- a CLEAN agent output applies: a valid typing refines the atom, and the
+# synthesis (using only allowed numbers + words) is written as a tagged file.
+def test_s3a_clean_agent_output_applies(tmp_path, monkeypatch):
+    import apply_situation_agent as asa
+    conn = _agent_fixture(tmp_path, monkeypatch)
+    out = {"situation_id": "situation.test",
+           "typings": [{"source_url": "http://src/abqaiq",
+                        "kind": "infrastructure_attack",
+                        "actor_entity": "country.yemen"}],
+           "synthesis": "Abqaiq was struck (5pct of supply). History prices "
+                        "chokepoint shocks near -7.5 at twenty days; Brent sits at "
+                        "86.99. Direction, not a call.",
+           "gaps": ["did Saudi flow resume?"]}
+    res = asa.apply(out, conn)
+    assert res["applied"] is True and res["typings_applied"] == 1
+    row = conn.execute("SELECT kind, actor_entity, status FROM situation_log "
+                       "WHERE source_url='http://src/abqaiq'").fetchone()
+    assert row == ("infrastructure_attack", "country.yemen", "observed")
+    assert (tmp_path / "situation.test.synthesis.md").exists()
+    conn.close()
+
+
+# s3b -- the fabrication guard bites: a synthesis with a number that is neither
+# engine-computed nor in a sourced headline (here $120) is rejected, nothing writes.
+def test_s3b_rejects_fabricated_number(tmp_path, monkeypatch):
+    import apply_situation_agent as asa
+    conn = _agent_fixture(tmp_path, monkeypatch)
+    out = {"situation_id": "situation.test", "typings": [],
+           "synthesis": "Brent is heading to 120 dollars imminently."}
+    res = asa.apply(out, conn)
+    assert res["applied"] is False
+    assert any("fabrication" in e for e in res["errors"])
+    assert not (tmp_path / "situation.test.synthesis.md").exists()
+    conn.close()
+
+
+# s3c -- closed-vocab guard: an out-of-vocab kind (or a non-member actor) is
+# rejected before anything is written.
+def test_s3c_rejects_out_of_vocab(tmp_path, monkeypatch):
+    import apply_situation_agent as asa
+    conn = _agent_fixture(tmp_path, monkeypatch)
+    bad_kind = {"situation_id": "situation.test",
+                "typings": [{"source_url": "http://src/abqaiq",
+                             "kind": "alien_invasion", "actor_entity": None}],
+                "synthesis": "words only."}
+    r1 = asa.apply(bad_kind, conn)
+    assert r1["applied"] is False and any("registered" in e for e in r1["errors"])
+    bad_actor = {"situation_id": "situation.test",
+                 "typings": [{"source_url": "http://src/abqaiq",
+                              "kind": "infrastructure_attack",
+                              "actor_entity": "country.narnia"}],
+                 "synthesis": "words only."}
+    r2 = asa.apply(bad_actor, conn)
+    assert r2["applied"] is False and any("member" in e for e in r2["errors"])
+    conn.close()

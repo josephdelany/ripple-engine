@@ -248,17 +248,26 @@ def _timeline_md(conn, sid):
 def render_dossier(conn, sit, er, now):
     """Assemble the full dossier markdown for one situation. Pure formatter."""
     sid = sit["situation_id"]
+    # The synthesis (agent-authored, tagged inferred) lives in a separate file so
+    # observed and inferred are never blended. Injected here when present.
+    syn_path = DOSSIER_DIR / f"{sid}.synthesis.md"
+    if syn_path.exists():
+        synthesis = ["## Where we stand — synthesis (inferred)", "",
+                     syn_path.read_text().strip(), ""]
+    else:
+        synthesis = [
+            "## Where we stand — synthesis (pending)", "",
+            "> The narrative read (\"where we stand\": actor postures, which "
+            "channels have fired, the plain-English situation) is written by the "
+            "scoped research agent (run apply_situation_agent.py). It is blank now "
+            "— the engine never fabricates prose. The facts below are "
+            "deterministic and sourced.", ""]
     md = [f"# Situation dossier — {sit.get('title', sid)}", "",
           f"_situation_id: `{sid}` · status: **{sit.get('status', '?')}** · "
           f"started {sit.get('started_at', '?')} · generated {now}_", "",
-          "_Deterministic assembly (attach + priced-state). The synthesis section "
-          "is agent-authored and currently pending._", "",
-          "## Where we stand — synthesis (pending)", "",
-          "> The narrative read (\"where we stand\": actor postures, which channels "
-          "have fired, the plain-English situation) is written by the scoped "
-          "research agent in a later slice. It is intentionally blank now — the "
-          "engine never fabricates prose. The facts below are deterministic and "
-          "sourced.", "",
+          "_Deterministic assembly (attach + priced-state) + agent synthesis "
+          "(tagged inferred, if present)._", "",
+          *synthesis,
           _priced_state_md(conn, sit, er), "",
           _timeline_md(conn, sid), "",
           "---", f"_{CAVEAT}_", ""]

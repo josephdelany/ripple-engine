@@ -1,12 +1,19 @@
 # Situation dossier — Israel-Iran War (2025- )
 
-_situation_id: `situation.israel_iran_war_2025` · status: **active** · started 2025-06-13 · generated 2026-07-27T19:49:19+00:00_
+_situation_id: `situation.israel_iran_war_2025` · status: **active** · started 2025-06-13 · generated 2026-07-27T20:53:17+00:00_
 
-_Deterministic assembly (attach + priced-state). The synthesis section is agent-authored and currently pending._
+_Deterministic assembly (attach + priced-state) + agent synthesis (tagged inferred, if present)._
 
-## Where we stand — synthesis (pending)
+## Where we stand — synthesis (inferred)
 
-> The narrative read ("where we stand": actor postures, which channels have fired, the plain-English situation) is written by the scoped research agent in a later slice. It is intentionally blank now — the engine never fabricates prose. The facts below are deterministic and sourced.
+<!-- status=inferred agent-authored generated=2026-07-27T20:53:07+00:00 -->
+_Synthesis — **inferred**, agent-authored (2026-07-27). Uses only engine-computed or sourced numbers._
+
+Israel-Iran is in an active phase (Phase II, Day 16), not a threat: alongside the Iran front, Saudi Arabia is defending against Iran-aligned drone strikes and a new Yemen/Houthi front is opening. On the map the engine keeps, this sits in chokepoint, infrastructure-attack and conflict-escalation territory at once -- several channels live, where the historical analogues were mostly single-channel. Today the state is doubly primed: both amplifiers read ON and geopolitical risk sits at its 94.8th percentile. History conditioned on that state prices chokepoint shocks near -7.5 at twenty days, with wide dispersion -- magnitude, not direction, and never a call on whether escalation continues. Brent last committed at 86.99; the live tape has since moved, and the open question is whether reroutes restore flow or facility strikes take barrels offline.
+
+**Open questions (gaps to research):**
+- Did Saudi Bab el-Mandeb flow resume after the Suez reroute?
+- Are the drone strikes hitting oil infrastructure or territory?
 
 ## Priced-state — what history says, conditioned on today
 
@@ -35,8 +42,8 @@ GPR context: 94.8th percentile (195.9) — descriptive only.
 
 | date | status | kind | headline | source |
 |---|---|---|---|---|
-| 2026-07-27 | observed | unmapped | War on Iran: Phase II: Day 16 | [link](https://www.aljazeera.com/video/newsfeed/2026/7/27/war-on-iran-phase-ii-day-16?traffic_source=rss) |
-| 2026-07-27 | observed | unmapped | Saudi Arabia defends against drone strikes from ‘Iran-backed’ groups | [link](https://www.aljazeera.com/news/2026/7/27/saudi-arabia-defends-against-drone-strikes-from-iran-backed-groups?traffic_source=rss) |
+| 2026-07-27 | observed | conflict_escalation | War on Iran: Phase II: Day 16 | [link](https://www.aljazeera.com/video/newsfeed/2026/7/27/war-on-iran-phase-ii-day-16?traffic_source=rss) |
+| 2026-07-27 | observed | infrastructure_attack | Saudi Arabia defends against drone strikes from ‘Iran-backed’ groups | [link](https://www.aljazeera.com/news/2026/7/27/saudi-arabia-defends-against-drone-strikes-from-iran-backed-groups?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | Lebanon’s displaced endure ‘exhaustion and despair’ | [link](https://www.aljazeera.com/video/newsfeed/2026/7/27/lebanons-displaced-endure-exhaustion-and?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | [GDELT] ISRAELI / LEBANESE: fight/clash signal | [link](https://www.arabnews.com/node/2652493/middle-east) |
 | 2026-07-27 | observed | unmapped | [GDELT] ISRAEL / FINANCE MINIST: mass-violence signal | [link](https://english.aawsat.com/world/5300599-israeli-generals-accuse-netanyahu-seeking-ignite-%E2%80%98third-intifada%E2%80%99) |
@@ -46,7 +53,7 @@ GPR context: 94.8th percentile (195.9) — descriptive only.
 | 2026-07-27 | observed | unmapped | Gaza student tops national exams despite war and displacement | [link](https://www.aljazeera.com/video/newsfeed/2026/7/27/gaza-student-tops-national-exams-despite-war-and-displacement?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | Israel’s approval of limited Gaza force a calculated manoeuvre, experts say | [link](https://www.aljazeera.com/news/2026/7/27/israels-approval-of-limited-gaza-force-a-calculated-manoeuvre-experts-say?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | Five decades of Israeli covert strategy to push US, Iran into confrontation | [link](https://www.aljazeera.com/opinions/2026/7/27/five-decades-of-israeli-covert-strategy-to-push-us-iran-into-confrontation?traffic_source=rss) |
-| 2026-07-27 | observed | unmapped | Why a new war in Yemen could be different for the Houthis | [link](https://www.aljazeera.com/news/2026/7/27/why-a-new-war-in-yemen-could-be-different-for-the-houthis?traffic_source=rss) |
+| 2026-07-27 | observed | conflict_escalation | Why a new war in Yemen could be different for the Houthis | [link](https://www.aljazeera.com/news/2026/7/27/why-a-new-war-in-yemen-could-be-different-for-the-houthis?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | How Israel uses settler-soldier terror to colonise the West Bank | [link](https://www.aljazeera.com/opinions/2026/7/27/how-israel-uses-settler-soldier-terror-to-colonise-the-west-bank?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | Iran: Currently no negotiations with the US | [link](https://www.aljazeera.com/video/newsfeed/2026/7/27/iran-currently-no-negotiations-with-the-us?traffic_source=rss) |
 | 2026-07-27 | observed | unmapped | Will UNESCO’s heritage listing halt Israeli plans for West Bank’s Sebastia? | [link](https://www.aljazeera.com/news/2026/7/27/will-unescos-heritage-listing-halt-israeli-plans-for-west-banks-sebastia?traffic_source=rss) |
@@ -58,27 +65,27 @@ GPR context: 94.8th percentile (195.9) — descriptive only.
 | 2026-07-27 | observed | unmapped | [GDELT] ISRAELI / SYRIA: fight/clash signal | [link](https://www.thehindu.com/news/international/syria-president-tells-al-jazeera-his-country-seeks-security-deal-with-israel/article71274325.ece) |
 | 2026-07-27 | observed | unmapped | [GDELT] ISRAELI / GAZA: assault signal | [link](https://oswegocountytoday.com/opinion/letters-to-the-editor/children-pay-the-highest-price/) |
 | 2026-07-27 | observed | unmapped | [GDELT] IRAN / UKRAINE: fight/clash signal | [link](https://www.dailykos.com/stories/2026/7/27/800075505/community/russian-stuff-blowing-up/) |
-| 2026-07-25 | observed | unmapped | [GDELT] US OFFICIAL / IRAN: fight/clash signal | [link](https://www.dailymail.com/news/us-politics/article-16003741/US-spies-fear-Trumps-brutal-war-Iran-driven-new-leader-CLOSER-thermonuclear-warhead.html) |
-| 2026-07-25 | observed | unmapped | [GDELT] IRAN / SAUDI ARABIAN: fight/clash signal | [link](https://www.foxnews.com/live-news/iran-war-trump-houthis-saudi-arabia-escalation-07-25-26) |
+| 2026-07-25 | observed | conflict_escalation | [GDELT] US OFFICIAL / IRAN: fight/clash signal | [link](https://www.dailymail.com/news/us-politics/article-16003741/US-spies-fear-Trumps-brutal-war-Iran-driven-new-leader-CLOSER-thermonuclear-warhead.html) |
+| 2026-07-25 | observed | chokepoint_disruption | [GDELT] IRAN / SAUDI ARABIAN: fight/clash signal | [link](https://www.foxnews.com/live-news/iran-war-trump-houthis-saudi-arabia-escalation-07-25-26) |
 | 2026-07-25 | observed | unmapped | [GDELT] LONDON / SAUDI: assault signal | [link](https://tribuneonlineng.com/how-young-saudi-prince-died-in-london-hotel-after-taking-cocktail-of-drugs/) |
-| 2026-07-25 | observed | unmapped | U.S. jet fuel production rises after prices doubled in March | [link](https://www.eia.gov/todayinenergy/detail.php?id=67764) |
-| 2026-07-25 | observed | unmapped | UAE's exit from OPEC+ reduced the group's share of crude oil production and capacity | [link](https://www.eia.gov/todayinenergy/detail.php?id=67804) |
-| 2026-07-25 | observed | unmapped | U.S. exports of crude oil and petroleum products reached record in April | [link](https://www.eia.gov/todayinenergy/detail.php?id=67825) |
-| 2026-07-25 | observed | unmapped | Petroleum markets responded to disruptions in the Middle East in the second quarter | [link](https://www.eia.gov/todayinenergy/detail.php?id=67865) |
-| 2026-07-25 | observed | unmapped | Security Council LIVE: Spotlight on Syria as Guterres heads to Damascus | [link](https://news.un.org/feed/view/en/story/2026/07/1167984) |
+| 2026-07-25 | observed | infrastructure_attack | U.S. jet fuel production rises after prices doubled in March | [link](https://www.eia.gov/todayinenergy/detail.php?id=67764) |
+| 2026-07-25 | observed | opec_decision | UAE's exit from OPEC+ reduced the group's share of crude oil production and capacity | [link](https://www.eia.gov/todayinenergy/detail.php?id=67804) |
+| 2026-07-25 | observed | infrastructure_attack | U.S. exports of crude oil and petroleum products reached record in April | [link](https://www.eia.gov/todayinenergy/detail.php?id=67825) |
+| 2026-07-25 | observed | infrastructure_attack | Petroleum markets responded to disruptions in the Middle East in the second quarter | [link](https://www.eia.gov/todayinenergy/detail.php?id=67865) |
+| 2026-07-25 | observed | infrastructure_attack | Security Council LIVE: Spotlight on Syria as Guterres heads to Damascus | [link](https://news.un.org/feed/view/en/story/2026/07/1167984) |
 | 2026-07-25 | observed | unmapped | Guterres calls for stepping up diplomatic efforts to end US-Iran conflict | [link](https://news.un.org/feed/view/en/story/2026/07/1167989) |
 | 2026-07-25 | observed | unmapped | Thousands prevented from returning home to southern Lebanon | [link](https://news.un.org/feed/view/en/story/2026/07/1168003) |
-| 2026-07-25 | observed | unmapped | Stranded seafarers remain trapped as Hormuz shipping stalls | [link](https://news.un.org/feed/view/en/story/2026/07/1168004) |
+| 2026-07-25 | observed | chokepoint_disruption | Stranded seafarers remain trapped as Hormuz shipping stalls | [link](https://news.un.org/feed/view/en/story/2026/07/1168004) |
 | 2026-07-25 | observed | unmapped | Iran urged to stop protest-related executions | [link](https://news.un.org/feed/view/en/story/2026/07/1168009) |
-| 2026-07-25 | observed | unmapped | Middle East: UN warns against wider escalation after Houthi attacks in the Red Sea | [link](https://news.un.org/feed/view/en/story/2026/07/1168016) |
-| 2026-07-25 | observed | unmapped | Trump says ‘it’s time’ for Saudi Arabia to normalise ties with Israel | [link](https://www.aljazeera.com/news/2026/7/24/trump-says-its-time-for-saudi-arabia-to-normalise-ties-with-israel?traffic_source=rss) |
+| 2026-07-25 | observed | chokepoint_disruption | Middle East: UN warns against wider escalation after Houthi attacks in the Red Sea | [link](https://news.un.org/feed/view/en/story/2026/07/1168016) |
+| 2026-07-25 | observed | conflict_escalation | Trump says ‘it’s time’ for Saudi Arabia to normalise ties with Israel | [link](https://www.aljazeera.com/news/2026/7/24/trump-says-its-time-for-saudi-arabia-to-normalise-ties-with-israel?traffic_source=rss) |
 | 2026-07-25 | observed | unmapped | Iran war live: Trump says US ‘locked and loaded’ as it seeks Iran talks | [link](https://www.aljazeera.com/news/liveblog/2026/7/25/iran-war-live-trump-says-us-locked-and-loaded-as-it-seeks-iran-talks?traffic_source=rss) |
 | 2026-07-25 | observed | unmapped | Born too soon: Premature babies fight for survival in Gaza | [link](https://www.aljazeera.com/features/2026/7/25/born-too-soon-premature-babies-fighting-for-survival-in-gaza?traffic_source=rss) |
 | 2026-07-25 | observed | unmapped | Israel arrests dozens of Palestinians in West Bank amid settler attacks | [link](https://www.aljazeera.com/news/2026/7/25/israel-arrests-dozens-of-palestinians-in-west-bank-amid-settler-attacks?traffic_source=rss) |
 | 2026-07-25 | observed | unmapped | How Volker Turk won a new term as UN rights chief despite Israel opposition | [link](https://www.aljazeera.com/news/2026/7/25/how-volker-turk-won-a-new-term-as-un-rights-chief-despite-israel-opposition?traffic_source=rss) |
 | 2026-07-25 | observed | unmapped | 'What was their crime?': BBC visits Iran school where strike killed 120 children | [link](https://www.bbc.co.uk/news/articles/cewrx0ldlkko?at_medium=RSS&at_campaign=rss) |
-| 2026-07-25 | observed | unmapped | Houthi attacks raise fears of wider Middle East conflict and more global economic damage | [link](https://www.bbc.co.uk/news/articles/cvgve0vxy1yo?at_medium=RSS&at_campaign=rss) |
-| 2026-07-25 | observed | unmapped | Iran-backed Houthis claim missile attack on Saudi Arabia | [link](https://www.bbc.co.uk/news/articles/cj9d27v70j1o?at_medium=RSS&at_campaign=rss) |
+| 2026-07-25 | observed | chokepoint_disruption | Houthi attacks raise fears of wider Middle East conflict and more global economic damage | [link](https://www.bbc.co.uk/news/articles/cvgve0vxy1yo?at_medium=RSS&at_campaign=rss) |
+| 2026-07-25 | observed | infrastructure_attack | Iran-backed Houthis claim missile attack on Saudi Arabia | [link](https://www.bbc.co.uk/news/articles/cj9d27v70j1o?at_medium=RSS&at_campaign=rss) |
 | 2026-07-25 | observed | unmapped | [GDELT] TURK / LEBANON: assault signal | [link](https://www.aljazeera.com/news/2026/7/25/how-volker-turk-won-a-new-term-as-un-rights-chief-despite-israel-opposition) |
 | 2026-07-25 | observed | unmapped | [GDELT] ISRAELI / PALESTINIAN: fight/clash signal | [link](https://dailypioneer.com/news/4-palestinians-1-israeli-dead-after-west-bank-shooting) |
 | 2026-07-25 | observed | unmapped | [GDELT] ISRAELI / PALESTINIAN: fight/clash signal | [link](https://www.naharnet.com/stories/en/321466-palestinians-bury-four-killed-in-west-bank-clash-with-israeli-settlers) |
@@ -86,7 +93,7 @@ GPR context: 94.8th percentile (195.9) — descriptive only.
 | 2026-07-25 | observed | unmapped | [GDELT] JERUSALEM / MILITARY: fight/clash signal | [link](https://english.wafa.ps/Pages/Details/172904) |
 | 2026-07-25 | observed | unmapped | [GDELT] ISRAELI / CITIZEN: assault signal | [link](https://imemc.org/article/west-bank-colonizers-attack-palestinians-burn-homes-soldiers-injure-two/) |
 | 2026-07-25 | observed | unmapped | [GDELT] ISRAELI / ?: fight/clash signal | [link](https://english.wafa.ps/Pages/Details/172901) |
-| 2026-07-25 | observed | unmapped | [GDELT] PRESIDENT / IRAN: assault signal | [link](https://www.westhawaiitoday.com/2026/07/25/nation-world-news/trump-meets-with-top-advisers-as-he-weighs-a-major-escalation-in-iran/) |
+| 2026-07-25 | observed | conflict_escalation | [GDELT] PRESIDENT / IRAN: assault signal | [link](https://www.westhawaiitoday.com/2026/07/25/nation-world-news/trump-meets-with-top-advisers-as-he-weighs-a-major-escalation-in-iran/) |
 | 2026-07-25 | observed | unmapped | [GDELT] DJIBOUTI / SAUDI ARABIA: fight/clash signal | [link](https://www.gdnonline.com:443/Details/1401607/Saudi-vessel-damaged-in-Red-Sea-attack,-crew-safe,-says-report) |
 
 
