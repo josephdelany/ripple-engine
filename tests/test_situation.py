@@ -93,7 +93,28 @@ def test_s1_attach_matches_both_formats_and_is_idempotent():
     assert len(rows) == 2
     for src, ret, status, conf, kind in rows:
         assert src and ret and status == "observed" and conf == "low"
-        assert kind == "unmapped"
+        assert kind == "unmapped"      # no heuristic_type on these fixtures
+
+
+# s1b -- the watcher's heuristic_type flows into `kind` deterministically (a
+# labelled hint, no LLM), and a later re-run backfills any legacy 'unmapped' row.
+def test_s1b_heuristic_type_becomes_kind():
+    import situation
+    sit = [{"situation_id": "situation.test", "status": "active",
+            "member_entities": ["country.iran"]}]
+    typed = [{"timestamp_utc": "2026-07-20T00:00:00", "headline": "Hormuz strike",
+              "url": "http://x/9", "matched_entities": "IRN",
+              "heuristic_type": "chokepoint_disruption", "status": "new"}]
+    conn = _temp_conn()
+    situation.attach(conn, sit, typed, "2026-07-27T00:00:00")
+    kind = conn.execute("SELECT kind FROM situation_log").fetchone()[0]
+    assert kind == "chokepoint_disruption"
+    # Simulate a legacy 'unmapped' row, then re-attach: it must be backfilled.
+    conn.execute("UPDATE situation_log SET kind='unmapped'")
+    situation.attach(conn, sit, typed, "2026-07-27T00:00:00")
+    assert conn.execute("SELECT kind FROM situation_log").fetchone()[0] == \
+        "chokepoint_disruption"
+    conn.close()
 
 
 # s2 -- the dossier renders deterministically: it shows the synthesis-pending

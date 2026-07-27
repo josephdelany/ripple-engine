@@ -93,8 +93,9 @@ def alert_tokens(alert):
 def attach(conn, situations, alerts, now):
     """File every situation-touching alert into situation_log as a sourced,
     tagged 'observed' atom. Idempotent: UNIQUE(situation_id, source_url) + INSERT
-    OR IGNORE means re-running adds 0 rows. Returns rows actually inserted."""
-    before = conn.total_changes
+    OR IGNORE means re-running adds 0 rows. Returns rows actually inserted
+    (counted directly, so the backfill UPDATE below never inflates it)."""
+    inserted = 0
     cur = conn.cursor()
     for sit in situations:
         if sit.get("status") == "closed":
@@ -107,19 +108,29 @@ def attach(conn, situations, alerts, now):
             url = (a.get("url") or "").strip()
             if not url or not (alert_tokens(a) & want):
                 continue
-            # Provenance is COPIED, never generated. kind stays 'unmapped' (the
-            # agent types it later); status is 'observed' (a real sourced
-            # headline); confidence 'low' (unvetted), mirroring promote_alert.
+            # Provenance is COPIED, never generated. `kind` is seeded from the
+            # watcher's heuristic_type -- a deterministic labelled HINT (not a
+            # coding), so the timeline is typed without any LLM; the agent refines
+            # it later. status='observed' (a real sourced headline); confidence
+            # 'low' (unvetted), mirroring promote_alert.
+            kind = (a.get("heuristic_type") or "unmapped").strip() or "unmapped"
             cur.execute(
                 "INSERT OR IGNORE INTO situation_log "
                 "(situation_id, ts, kind, actor_entity, headline, detail, "
                 " source_url, retrieved_at, status, confidence, alert_url, "
                 " promoted_event_id) "
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-                (sid, a.get("timestamp_utc") or now, "unmapped", None,
+                (sid, a.get("timestamp_utc") or now, kind, None,
                  a.get("headline") or "(no headline)", None, url, now,
                  "observed", "low", url, None))
-    return conn.total_changes - before
+            inserted += cur.rowcount        # 1 on insert, 0 when ignored
+            # Backfill legacy rows that were stored before typing existed. Only
+            # touches rows still 'unmapped' -- never clobbers an agent refinement.
+            if kind != "unmapped":
+                cur.execute(
+                    "UPDATE situation_log SET kind=? WHERE situation_id=? AND "
+                    "source_url=? AND kind='unmapped'", (kind, sid, url))
+    return inserted
 
 
 # ---------------------------------------------------------------- Slice 2: render
