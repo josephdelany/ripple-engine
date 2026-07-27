@@ -94,3 +94,45 @@ def test_s1_attach_matches_both_formats_and_is_idempotent():
     for src, ret, status, conf, kind in rows:
         assert src and ret and status == "observed" and conf == "low"
         assert kind == "unmapped"
+
+
+# s2 -- the dossier renders deterministically: it shows the synthesis-pending
+# marker (never fabricated prose), the priced-state numbers copied verbatim from
+# engine_read (no new metric), a base-rate row per dominant kind, and a sourced
+# link for every timeline atom.
+def test_s2_render_is_deterministic_and_sourced():
+    import situation
+    sit = {"situation_id": "situation.test", "title": "Test War",
+           "status": "active", "started_at": "2025-06-13",
+           "member_entities": ["country.iran"],
+           "dominant_kinds": ["conflict_escalation", "chokepoint_disruption"]}
+    # a canned engine_read: render must echo THESE numbers, invent none.
+    er = {"as_of": "2026-07-24", "read": "primed but stressed.",
+          "hypotheses": {"H1": {"label": "Market stress", "amplifier": "ON",
+                                "latest": 54.93, "event_median": 45.94}},
+          "gpr_context": {"gpr_pct": 94.8, "gpr_value": 195.9},
+          "base_rates": [
+              {"type": "conflict_escalation", "n": 15, "car1": -0.7, "car5": 1.5,
+               "car10": -0.6, "car20": -2.2},
+              {"type": "chokepoint_disruption", "n": 3, "car1": 0.1, "car5": -1.0,
+               "car10": -3.0, "car20": -7.5}]}
+    conn = _temp_conn()
+    # observations table for the Brent lookup + one sourced atom.
+    conn.execute("CREATE TABLE observations (series_id TEXT, obs_date TEXT, "
+                 "value REAL, as_of TEXT)")
+    conn.execute("INSERT INTO observations VALUES "
+                 "('fred.DCOILBRENTEU','2026-07-20',86.99,'2026-07-20')")
+    conn.execute("INSERT INTO situation_log (situation_id, ts, kind, headline, "
+                 "source_url, retrieved_at, status) VALUES "
+                 "('situation.test','2026-07-27','unmapped','Abqaiq struck',"
+                 "'http://src/abqaiq','2026-07-27','observed')")
+    md = situation.render_dossier(conn, sit, er, "2026-07-27T00:00:00")
+    conn.close()
+    assert "synthesis (pending)" in md.lower()      # never fabricated prose
+    assert "86.99" in md                             # Brent echoed verbatim
+    assert "54.93" in md and "45.94" in md           # amplifier numbers verbatim
+    assert "94.8" in md                              # GPR descriptive
+    assert "| conflict_escalation | 15 |" in md      # base-rate row per kind
+    assert "| chokepoint_disruption | 3 |" in md
+    assert "http://src/abqaiq" in md                 # every atom sourced
+    assert "not a forecast" in md.lower()             # the discipline caveat is on it

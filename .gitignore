@@ -20,3 +20,6 @@ data/daily.lock
 # integrity.py runtime: rotated DB backups and the row-count state
 data/backups/
 data/integrity_state.json
+# Situation dossiers are re-rendered every refresh; data/situations_sample.md is
+# the committed snapshot receipt. (situations.yaml IS committed -- it's config.)
+data/situations/

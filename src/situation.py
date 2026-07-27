@@ -40,9 +40,20 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
+ENGINE_READ = ROOT / "data" / "engine_read.json"
+DOSSIER_DIR = ROOT / "data" / "situations"
+BRENT = "fred.DCOILBRENTEU"
+TIMELINE_CAP = 60          # newest-N atoms shown in the dossier (says so if more)
 
 # Alerts Joe has explicitly marked noise are not woven into the memory.
 SKIP_ALERT_STATUS = {"dismissed"}
+
+# Copied from the engine's standing discipline: the dossier is a conditional read
+# of history, not a forecast; small n; the engine never forecasts occurrence.
+CAVEAT = ("History conditioned on today, NOT a forecast. Base rates are clustered "
+          "CARs on small n; GPR is descriptive only (never an amplifier); H3 "
+          "positioning FAILED pre-registration. The engine measures market "
+          "CONSEQUENCES of events, never whether an event will occur.")
 
 
 def load_situations(path=SIT_CONFIG):
@@ -111,6 +122,138 @@ def attach(conn, situations, alerts, now):
     return conn.total_changes - before
 
 
+# ---------------------------------------------------------------- Slice 2: render
+# Everything below only FORMATS numbers the engine already computed. It performs
+# no new analysis (a bespoke priced-vs-realized metric would be a derive_signals
+# change with a declared mechanism -- out of scope). No LLM: the "where we stand"
+# synthesis is left blank for the scoped agent, because prose is where fabrication
+# lives and the engine never invents it.
+
+def load_engine_read(path=ENGINE_READ):
+    """engine_read.json as a dict, or {} if the pipeline hasn't produced it."""
+    if not Path(path).exists():
+        return {}
+    try:
+        return __import__("json").loads(Path(path).read_text())
+    except (ValueError, OSError):
+        return {}
+
+
+def latest_brent(conn):
+    """The two most recent distinct-date Brent closes as [(date, value), ...].
+    Read-only display; no arithmetic beyond picking the latest as_of per date."""
+    seen, out = set(), []
+    for dt, val, _asof in conn.execute(
+            "SELECT obs_date, value, as_of FROM observations WHERE series_id=? "
+            "ORDER BY obs_date DESC, as_of DESC", (BRENT,)):
+        if dt in seen:
+            continue
+        seen.add(dt)
+        out.append((dt, val))
+        if len(out) >= 2:
+            break
+    return out
+
+
+def _priced_state_md(conn, sit, er):
+    """The priced-state block: Brent + amplifiers + the situation's channel base
+    rates, all pulled verbatim from engine_read.json / observations."""
+    lines = ["## Priced-state — what history says, conditioned on today", ""]
+
+    brent = latest_brent(conn)
+    if brent:
+        head = f"**Brent** ${brent[0][1]:.2f} ({brent[0][0]})"
+        if len(brent) > 1:
+            head += f"  ·  prior ${brent[1][1]:.2f} ({brent[1][0]})"
+        lines += [head + "  _(observations; the engine's last committed close — "
+                  "the live tape may sit above this)_", ""]
+    else:
+        lines += ["**Brent** — no observations found.", ""]
+
+    if not er:
+        lines += ["_engine_read.json not generated yet — run refresh.py for "
+                  "amplifier status and base rates._", ""]
+        return "\n".join(lines)
+
+    lines += [f"_Engine read as of {er.get('as_of', '?')}:_ "
+              + (er.get("read", "").strip() or "(no read line)"), ""]
+    lines += ["**Amplifiers** (magnitude, not direction):", ""]
+    for hid in ("H1", "H2", "H3"):
+        h = er.get("hypotheses", {}).get(hid)
+        if not h:
+            continue
+        lines.append(
+            f"- **{hid} {h.get('label', '')}** — {h.get('amplifier', '?')} "
+            f"(latest {h.get('latest', '?')} vs event median "
+            f"{h.get('event_median', '?')})")
+    gpr = er.get("gpr_context") or {}
+    if gpr:
+        lines += ["", f"GPR context: {gpr.get('gpr_pct', '?')}th percentile "
+                  f"({gpr.get('gpr_value', '?')}) — descriptive only.", ""]
+
+    # This situation's channels -> their clustered base rates (verbatim).
+    by_type = {b["type"]: b for b in er.get("base_rates", [])}
+    kinds = sit.get("dominant_kinds", [])
+    lines += ["**Base rates for this situation's channels** (clustered abnormal "
+              "return vs baseline, %):", "",
+              "| channel | n | CAR+1 | CAR+5 | CAR+10 | CAR+20 |",
+              "|---|---|---|---|---|---|"]
+    for k in kinds:
+        b = by_type.get(k)
+        if b:
+            lines.append(f"| {k} | {b['n']} | {b['car1']} | {b['car5']} | "
+                         f"{b['car10']} | {b['car20']} |")
+        else:
+            lines.append(f"| {k} | — | (not in engine_read base rates) | | | |")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _timeline_md(conn, sid):
+    """The observed, sourced timeline (newest first), capped for readability."""
+    total = conn.execute("SELECT COUNT(*) FROM situation_log WHERE situation_id=?",
+                         (sid,)).fetchone()[0]
+    rows = conn.execute(
+        "SELECT ts, status, kind, headline, source_url FROM situation_log "
+        "WHERE situation_id=? ORDER BY ts DESC, log_id DESC LIMIT ?",
+        (sid, TIMELINE_CAP)).fetchall()
+    out = [f"## Timeline — observed & sourced ({total} atoms"
+           + (f", newest {TIMELINE_CAP} shown" if total > TIMELINE_CAP else "")
+           + ")", ""]
+    if not rows:
+        out += ["_No atoms attached yet — run the attach step against the "
+                "watcher's alert queue._", ""]
+        return "\n".join(out)
+    out += ["| date | status | kind | headline | source |",
+            "|---|---|---|---|---|"]
+    for ts, status, kind, headline, url in rows:
+        safe = (headline or "").replace("|", "\\|")
+        out.append(f"| {(ts or '')[:10]} | {status} | {kind} | {safe} | "
+                   f"[link]({url}) |")
+    out.append("")
+    return "\n".join(out)
+
+
+def render_dossier(conn, sit, er, now):
+    """Assemble the full dossier markdown for one situation. Pure formatter."""
+    sid = sit["situation_id"]
+    md = [f"# Situation dossier — {sit.get('title', sid)}", "",
+          f"_situation_id: `{sid}` · status: **{sit.get('status', '?')}** · "
+          f"started {sit.get('started_at', '?')} · generated {now}_", "",
+          "_Deterministic assembly (attach + priced-state). The synthesis section "
+          "is agent-authored and currently pending._", "",
+          "## Where we stand — synthesis (pending)", "",
+          "> The narrative read (\"where we stand\": actor postures, which channels "
+          "have fired, the plain-English situation) is written by the scoped "
+          "research agent in a later slice. It is intentionally blank now — the "
+          "engine never fabricates prose. The facts below are deterministic and "
+          "sourced.", "",
+          _priced_state_md(conn, sit, er), "",
+          _timeline_md(conn, sid), "",
+          "---", f"_{CAVEAT}_", ""]
+    return "\n".join(md)
+
+
 def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     situations = load_situations()
@@ -121,14 +264,19 @@ def main():
     conn = sqlite3.connect(DB)
     inserted = attach(conn, situations, alerts, now)
     conn.commit()
-    print(f"Situation Memory attach -- {now}")
-    print(f"  situations: {len(situations)}   alerts scanned: {len(alerts)}")
-    print(f"  new situation_log atoms: {inserted}")
+
+    DOSSIER_DIR.mkdir(parents=True, exist_ok=True)
+    er = load_engine_read()
+    print(f"Situation Memory -- {now}")
+    print(f"  situations: {len(situations)}   alerts scanned: {len(alerts)}   "
+          f"new atoms: {inserted}")
     for sit in situations:
         sid = sit["situation_id"]
         n = conn.execute("SELECT COUNT(*) FROM situation_log WHERE situation_id=?",
                          (sid,)).fetchone()[0]
-        print(f"    {sid:<34} {n:>4} atoms")
+        out = DOSSIER_DIR / f"{sid}.md"
+        out.write_text(render_dossier(conn, sit, er, now))
+        print(f"    {sid:<34} {n:>4} atoms  ->  {out.relative_to(ROOT)}")
     conn.close()
 
 

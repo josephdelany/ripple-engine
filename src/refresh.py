@@ -50,6 +50,9 @@ STEPS = [
     ("engine_read",    "src/engine_read.py",    "observations"),
     # regenerate the scenario playbook with today's conditioning (file output).
     ("scenario",       "src/scenario.py --all", "observations"),
+    # Situation Memory: attach watcher alerts into per-conflict timelines and
+    # render the dossiers. Consumes engine_read.json (must run after it).
+    ("situation",      "src/situation.py",      "situation_log"),
     # cross-asset propagation map. Writes edge rows (one per event x asset).
     ("cross_asset",    "src/cross_asset.py",    "edges"),
     # TRUE FINAL step: render The Daily so the static front page is always fresh
