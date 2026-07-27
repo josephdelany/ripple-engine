@@ -1,0 +1,77 @@
+# track.yml -- the free, always-on tracker (GitHub Actions).
+#
+# Runs the whole deterministic engine daily in GitHub's cloud, so no machine of
+# Joe's has to stay on. It rebuilds oil.db from the free sources, restores the
+# durable memory from committed CSVs, runs the live cycle, snapshots the memory
+# back, pushes high-signal alerts to the phone (ntfy), and commits the updated
+# state. The LLM synthesis is NOT here -- that runs on the Mac Pro, on Joe's
+# subscription (see ops/SYNTHESIZE.md). Cost: $0.
+#
+# One-time setup by Joe: ops/GITHUB_ACTIONS.md (add the EIA_API_KEY + NTFY_TOPIC
+# secrets, enable Actions).
+
+name: track
+
+on:
+  schedule:
+    - cron: "0 11 * * *"    # daily at 11:00 UTC
+  workflow_dispatch: {}       # and on-demand from the Actions tab
+
+permissions:
+  contents: write            # to commit the refreshed state back to the repo
+
+concurrency:                 # never let two runs overlap
+  group: track
+  cancel-in-progress: false
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild schema + restore durable memory
+        run: |
+          python3 src/init_db.py
+          python3 src/import_state.py   # situation_log + reads, BEFORE any attach
+
+      - name: Run the daily cycle (fetch -> derive -> memory -> resolve -> render)
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python3 src/refresh.py
+
+      - name: Snapshot memory + push high-signal alerts
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}   # unset -> notify is a no-op dry run
+        run: |
+          python3 src/export_state.py
+          python3 src/notify.py
+
+      - name: Upload The Daily (dashboard) as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-daily
+          path: |
+            data/digest.html
+            data/situations/
+          if-no-files-found: warn
+
+      - name: Commit the refreshed state
+        run: |
+          git config user.name  "ripple-bot"
+          git config user.email "ripple-bot@users.noreply.github.com"
+          git add data/state data/alert_queue.csv data/watch_seen.db
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+          else
+            git commit -m "chore(track): daily state $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi

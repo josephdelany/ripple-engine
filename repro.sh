@@ -21,6 +21,7 @@ step "4/14  EIA crude inventories";       python3 src/fetch_eia.py
 step "5/14  CFTC Commitment of Traders";  python3 src/fetch_cot.py
 step "6/14  Geopolitical Risk index";     python3 src/fetch_gpr.py
 step "7/14  event corpus (load_events)";  python3 src/load_events.py
+step "7b/14 restore durable memory";      python3 src/import_state.py
 step "8/14  quiet comparison set";        python3 src/load_quiet.py
 step "9/14  derived signals";             python3 src/derive_signals.py
 step "10/14 event study";                 python3 src/event_study.py
