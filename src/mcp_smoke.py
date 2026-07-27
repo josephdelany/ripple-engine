@@ -28,6 +28,8 @@ CALLS = [
     ("scenario_card", {"event_type": "conflict_escalation"}),
     ("query_series", {"series_id": "fred.DCOILBRENTEU", "start": "2026-07-01"}),
     ("get_alerts", {"limit": 3}),
+    ("list_situations", {}),
+    ("get_situation", {"situation_id": "situation.israel_iran_war_2025"}),
     ("get_results", {"name": "registered_run_results"}),
 ]
 

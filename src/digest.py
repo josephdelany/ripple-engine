@@ -22,11 +22,14 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
+SIT_CONFIG = ROOT / "data" / "situations.yaml"
 OUT = ROOT / "data" / "digest.html"
 
 # The ribbon: (label, series_id, unit, decimals). GPR is handled separately (it
@@ -121,6 +124,33 @@ h2.sec{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#8b93a
 """
 
 
+def situations_summary(conn):
+    """Active situations with atom count + their most recent atoms. Reads the
+    human-owned config directly; [] if none defined or the table is absent."""
+    if not SIT_CONFIG.exists():
+        return []
+    try:
+        cfg = yaml.safe_load(SIT_CONFIG.read_text()) or {}
+    except (OSError, yaml.YAMLError):
+        return []
+    out = []
+    for sit in cfg.get("situations", []):
+        if sit.get("status") == "closed":
+            continue
+        sid = sit["situation_id"]
+        try:
+            n = conn.execute("SELECT COUNT(*) FROM situation_log WHERE "
+                             "situation_id=?", (sid,)).fetchone()[0]
+            recent = conn.execute(
+                "SELECT ts, kind, headline, source_url FROM situation_log WHERE "
+                "situation_id=? ORDER BY ts DESC, log_id DESC LIMIT 3",
+                (sid,)).fetchall()
+        except sqlite3.Error:
+            n, recent = 0, []
+        out.append({"sit": sit, "n": n, "recent": recent})
+    return out
+
+
 def e(x):
     return html.escape(str(x if x is not None else ""))
 
@@ -207,6 +237,29 @@ def render():
         for hid in on_amps:
             if hid in pb:
                 parts.append(f"<div class=baserate>{e(pb[hid])}</div>")
+
+    # e2. Situations -- the running memory, so the front page shows "where we
+    # stand" alongside the numbers. Full dossier + synthesis in data/situations/.
+    conn = sqlite3.connect(DB)
+    sits = situations_summary(conn)
+    conn.close()
+    if sits:
+        parts.append("<h2 class=sec>Situations</h2>")
+        parts.append("<div class=lbl>running memory · full dossier in "
+                     "data/situations/</div>")
+        for s in sits:
+            sit, n = s["sit"], s["n"]
+            parts.append(
+                f"<div class=alert><b>{e(sit.get('title', sit['situation_id']))}"
+                f"</b> <span class=tag>{e(sit.get('status',''))}</span> "
+                f"<span style='color:#6b7280'>· {e(n)} atoms · since "
+                f"{e(sit.get('started_at',''))}</span>")
+            for ts, kind, headline, url in s["recent"]:
+                parts.append(
+                    f"<div class=meta><a href='{e(url)}' target=_blank "
+                    f"rel=noopener>{e(headline)}</a> · "
+                    f"<span class=tag>{e(kind)}</span> · {e((ts or '')[:10])}</div>")
+            parts.append("</div>")
 
     # f. Footer
     parts.append("<div class=foot>Every number is computed from committed data. "

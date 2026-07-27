@@ -35,6 +35,7 @@ from cross_asset import asset_returns
 from derive_signals import load_wide, build_signals
 from robustness import REGISTERED
 import scenario
+import situation
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
@@ -220,6 +221,59 @@ def get_alerts(status: str = "", limit: int = 25) -> list:
     if status:
         rows = [r for r in rows if r.get("status") == status]
     return list(reversed(rows))[:max(1, min(limit, 200))]
+
+
+@mcp.tool()
+def list_situations() -> list:
+    """The tracked situations (the running memory / 'middle clock'): for each, its
+    id, title, status, when it started, and how many sourced timeline atoms it
+    holds. Situations are human-defined in data/situations.yaml -- never invented
+    by the engine. CAVEAT: atoms are curated ATTENTION (sourced headlines), not
+    coded events; typing is a heuristic hint until the agent refines it."""
+    conn = _ro_conn()
+    out = []
+    for sit in situation.load_situations():
+        sid = sit["situation_id"]
+        try:
+            n = conn.execute("SELECT COUNT(*) FROM situation_log WHERE "
+                             "situation_id=?", (sid,)).fetchone()[0]
+        except sqlite3.Error:
+            n = 0
+        out.append({"situation_id": sid, "title": sit.get("title"),
+                    "status": sit.get("status"), "started_at": sit.get("started_at"),
+                    "n_atoms": n})
+    conn.close()
+    return out
+
+
+@mcp.tool()
+def get_situation(situation_id: str) -> dict:
+    """One situation's full dossier: its config, atom count, most-recent sourced
+    timeline atoms, and the rendered 'where we stand' markdown (timeline +
+    priced-state). This joins the engine's history, today's state, and the live
+    memory on one read. CAVEAT: the synthesis prose (if present) is agent-authored
+    and tagged; the priced-state numbers are the engine's, the atoms are sourced
+    attention, and NONE of it forecasts whether an event will occur."""
+    sit = next((s for s in situation.load_situations()
+                if s["situation_id"] == situation_id), None)
+    if sit is None:
+        return {"error": f"no situation '{situation_id}'",
+                "known": [s["situation_id"] for s in situation.load_situations()]}
+    conn = _ro_conn()
+    n = conn.execute("SELECT COUNT(*) FROM situation_log WHERE situation_id=?",
+                     (situation_id,)).fetchone()[0]
+    recent = [{"ts": ts, "kind": k, "status": st, "headline": h, "source_url": u}
+              for ts, k, st, h, u in conn.execute(
+                  "SELECT ts, kind, status, headline, source_url FROM situation_log "
+                  "WHERE situation_id=? ORDER BY ts DESC, log_id DESC LIMIT 15",
+                  (situation_id,))]
+    now = pd.Timestamp.utcnow().isoformat(timespec="seconds")
+    dossier_md = situation.render_dossier(conn, sit, situation.load_engine_read(), now)
+    conn.close()
+    return {"situation_id": situation_id, "title": sit.get("title"),
+            "status": sit.get("status"), "member_entities": sit.get("member_entities"),
+            "dominant_kinds": sit.get("dominant_kinds"), "n_atoms": n,
+            "recent_atoms": recent, "dossier_md": dossier_md, "caveat": CAVEATS}
 
 
 @mcp.tool()

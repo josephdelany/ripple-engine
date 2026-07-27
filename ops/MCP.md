@@ -29,9 +29,11 @@ no network port and every tool is read-only.
 
 ## Verify the tools appeared
 In a Claude Desktop chat, open the tools/attachments menu — you should see the
-`ripple-engine` server with eight tools: `get_daily_read`, `get_health`,
+`ripple-engine` server with ten tools: `get_daily_read`, `get_health`,
 `list_events`, `get_event`, `scenario_card`, `query_series`, `get_alerts`,
-`get_results`. Ask e.g. *"use get_daily_read"* — it returns today's engine read.
+`list_situations`, `get_situation`, `get_results`. Ask e.g. *"use get_daily_read"*
+— it returns today's engine read; *"get_situation for the Israel-Iran war"* returns
+the running dossier (timeline + priced-state) so the terminal reads the memory.
 
 To check the server runs at all outside the app:
 ```bash

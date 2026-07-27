@@ -1,5 +1,27 @@
-Engine MCP smoke test -- server exposed 8 tools:
-  get_daily_read, get_health, list_events, get_event, scenario_card, query_series, get_alerts, get_results
+[07/27/26 16:48:58] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/27/26 16:48:59] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+Engine MCP smoke test -- server exposed 10 tools:
+  get_daily_read, get_health, list_events, get_event, scenario_card, query_series, get_alerts, list_situations, get_situation, get_results
 
   get_daily_read   OK   { "as_of": "2026-07-24", "generated_at": "2026-07-27T18:30:59+00:00", "clustered_event_n": 44, "hypotheses": { "H1": { "hypothesis": "H1", "
   get_health       OK   { "overall": "TROUBLE", "generated_at": "2026-07-27T18:31:20+00:00", "events_count": 52, "forecasts_pending": 0, "last_refresh": { "state": 
@@ -8,6 +30,8 @@ Engine MCP smoke test -- server exposed 8 tools:
   scenario_card    OK   { "as_of": "2026-07-24", "card": { "type": "conflict_escalation", "n": 15, "analogs": [ { "event_id": "iraq_invades_kuwait_1990", "date": "1
   query_series     OK   { "series_id": "fred.DCOILBRENTEU", "n_returned": 14, "truncated_at_2000": false, "observations": [ { "date": "2026-07-01", "value": 69.24 }
   get_alerts       OK   { "timestamp_utc": "2026-07-27T18:31:07+00:00", "source": "rss:aljazeera", "headline": "War on Iran: Phase II: Day 16", "url": "https://www.
+  list_situations  OK   { "situation_id": "situation.israel_iran_war_2025", "title": "Israel-Iran War (2025- )", "status": "active", "started_at": "2025-06-13", "n_
+  get_situation    OK   { "situation_id": "situation.israel_iran_war_2025", "title": "Israel-Iran War (2025- )", "status": "active", "member_entities": [ "country.i
   get_results      OK   #################################################################################################### REGISTERED RUN — H1–H3 conditioning res
 
 All tools are READ-ONLY. No tool writes, approves, promotes, or logs anything.
