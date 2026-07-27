@@ -19,6 +19,8 @@ on:
 
 permissions:
   contents: write            # to commit the refreshed state back to the repo
+  pages: write               # to publish The Daily to GitHub Pages
+  id-token: write            # required by the Pages deploy action
 
 concurrency:                 # never let two runs overlap
   group: track
@@ -55,15 +57,6 @@ jobs:
           python3 src/export_state.py
           python3 src/notify.py
 
-      - name: Upload The Daily (dashboard) as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: the-daily
-          path: |
-            data/digest.html
-            data/situations/
-          if-no-files-found: warn
-
       - name: Commit the refreshed state
         run: |
           git config user.name  "ripple-bot"
@@ -75,3 +68,33 @@ jobs:
             git commit -m "chore(track): daily state $(date -u +%Y-%m-%dT%H:%MZ)"
             git push
           fi
+
+      - name: Build the Pages site (The Daily as index.html)
+        run: |
+          mkdir -p _site
+          cp data/digest.html _site/index.html
+          if [ -d data/situations ]; then cp -r data/situations _site/situations; fi
+
+      - name: Upload The Daily as a downloadable artifact (fallback before Pages is on)
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-daily
+          path: _site
+          if-no-files-found: warn
+
+      - name: Upload the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # Second job: publish what the track job built to GitHub Pages.
+  deploy-pages:
+    needs: track
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -42,10 +42,15 @@ keep the name private.
 - Check it goes green; the run commits a `chore(track): daily state …` commit and
   attaches `the-daily` (the dashboard HTML) as an artifact you can download.
 
-## Viewing the dashboard
-- **Simplest:** download the `the-daily` artifact from any run and open `digest.html`.
-- **Optional (view from anywhere):** enable **GitHub Pages** and publish `digest.html`
-  — a small add we can wire later; the artifact path is enough to start.
+## Viewing the dashboard (GitHub Pages — already wired)
+The workflow publishes The Daily to GitHub Pages every run. Turn Pages on once:
+- Repo → **Settings → Pages** → **Build and deployment → Source: GitHub Actions**.
+- After the next run, your dashboard is live at
+  `https://<your-username>.github.io/ripple-engine/` (viewable from your phone).
+
+Until Pages is enabled the `deploy-pages` job shows a red X (harmless — tracking
+still succeeds); every run also uploads a **`the-daily`** artifact you can download
+and open as a fallback.
 
 ## Notes / gotchas
 - Scheduled runs are **best-effort** (GitHub may delay them under load) and are
