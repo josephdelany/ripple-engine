@@ -251,3 +251,41 @@ def test_cr2_watch_list():
     wl = criticality.watch_list(commodities)
     assert set(c[0] for c in wl["kazakhstan"]) == {"uranium", "copper"}
     assert wl["kazakhstan"][0][0] == "uranium"    # sorted by share (39 > 2)
+
+
+# ---- Oil/energy propagation graph ------------------------------------------
+
+# pr1 -- a chain is LIVE iff one of its trigger countries is in an active situation;
+# chokepoint chains sort before bulk ones.
+def test_pr1_propagation_live_chains():
+    import propagation
+    chains = {
+        "palladium": {"geometry": "chokepoint", "countries": ["russia"],
+                      "downstream": "autocatalysts"},
+        "gas_food": {"geometry": "bulk", "countries": ["russia", "ukraine"],
+                     "downstream": "food"},
+        "rare_earths": {"geometry": "chokepoint", "countries": ["china"],
+                        "downstream": "magnets"}}
+    live = propagation.live_chains(chains, {"russia"})            # china NOT active
+    names = [d["chain"] for d in live]
+    assert names == ["palladium", "gas_food"]     # rare_earths excluded; choke before bulk
+    assert live[0]["triggered_by"] == ["russia"]
+    assert live[1]["triggered_by"] == ["russia"]  # only russia, not ukraine
+
+
+# pr2 -- downstream_markets flattens the live chains to distinct 'so what' markets.
+def test_pr2_downstream_markets():
+    import propagation
+    live = [{"downstream": "food"}, {"downstream": "autocatalysts"}, {"downstream": "food"}]
+    assert propagation.downstream_markets(live) == ["autocatalysts", "food"]
+
+
+# pr3 -- active-situation reader ignores closed situations (matches criticality's rule).
+def test_pr3_active_situation_reader(tmp_path):
+    import propagation
+    y = tmp_path / "situations.yaml"
+    y.write_text(
+        "situations:\n"
+        "  - status: active\n    member_entities: [country.russia, chokepoint.hormuz]\n"
+        "  - status: closed\n    member_entities: [country.france]\n")
+    assert propagation.active_situation_countries(y) == {"russia"}

@@ -253,6 +253,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "transmission_chains": {
+        "name": "Oil Ripple: Live Transmission Chains",
+        "description": "'Everything oil touches' -- transmission paths (trigger -> choke -> "
+                       "downstream market) that are LIVE given active situations. Sourced "
+                       "mechanism + lag; chokepoint chains first. Context, not magnitude.",
+        "endpoint": "transmission_chains",
+        "gridData": {"w": 40, "h": 13},
+        "type": "table",
+    },
     # --- Charts (Plotly) -- the visual layer, not just tables ---
     "chart_brent": {
         "name": "Brent Crude ($/bbl)",
@@ -303,6 +312,7 @@ APPS = [{
                 _lw("chart_attention", 20, 25, 20, 9),
                 _lw("engine_read", 0, 34, 20, 9),
                 _lw("alert_queue", 20, 34, 20, 9),
+                _lw("transmission_chains", 0, 43, 40, 13),
             ],
         },
         "physical": {
@@ -701,6 +711,22 @@ def commodity_exposure():
                      "at_risk_share": f"{r.get('at_risk_share', 0)}%",
                      "producers_in_conflict": who, "source": r.get("source", "")})
     return rows or [{"commodity": "(run src/criticality.py)", "stage": ""}]
+
+
+@app.get("/transmission_chains")
+def transmission_chains():
+    """'Everything oil touches': the transmission paths that are LIVE given the active
+    situations -- trigger geography -> choke -> downstream market, with sourced mechanism
+    and lag. Chokepoint chains first (the sharp, hard-to-substitute paths)."""
+    live = _read_json("propagation.json", {}).get("live_chains", [])
+    rows = []
+    for d in live:
+        kind = "CHOKEPOINT" if d.get("geometry") == "chokepoint" else "bulk"
+        rows.append({"chain": d["chain"], "type": kind,
+                     "triggered_by": ", ".join(d.get("triggered_by", [])),
+                     "choke": d.get("choke", ""), "downstream": d.get("downstream", ""),
+                     "lag": d.get("lag", ""), "source": d.get("source", "")})
+    return rows or [{"chain": "(run src/propagation.py)", "type": ""}]
 
 
 @app.get("/risk_gauge")

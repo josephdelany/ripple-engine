@@ -43,3 +43,5 @@ data/corroboration_calibration.json
 data/divergence.json
 # Criticality report, regenerated every run; sample committed as receipt.
 data/criticality.json
+# Propagation report, regenerated every run; sample committed as receipt.
+data/propagation.json

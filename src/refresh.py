@@ -79,6 +79,9 @@ STEPS = [
     # Strategic-commodity criticality: which critical commodities are under
     # stress because a key producer is in an active situation. File output.
     ("criticality",    "src/criticality.py",    "observations"),
+    # Oil/energy propagation graph: which transmission paths (trigger->choke->
+    # downstream market) are LIVE given active situations. File output.
+    ("propagation",    "src/propagation.py",    "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),
