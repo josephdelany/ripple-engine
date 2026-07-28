@@ -1,0 +1,596 @@
+{
+  "generated": "2026-06-08T17:49:52",
+  "n_observations": 511,
+  "primary_edges": [
+    {
+      "edge_id": "fomc_hike__sp500",
+      "description": "FOMC rate hike \u2192 S&P 500",
+      "total": 38,
+      "confirmed": 27,
+      "contradicted": 1,
+      "ambiguous": 5,
+      "mixed": 5,
+      "confirmation_rate": 0.711,
+      "contradiction_rate": 0.026,
+      "pattern_counts": {
+        "clean_absorption": 4,
+        "confounded_signal": 5,
+        "slow_absorption": 13,
+        "bifurcated": 5,
+        "overshoot": 10,
+        "directional_error": 1
+      }
+    },
+    {
+      "edge_id": "fomc_cut__sp500",
+      "description": "FOMC rate cut \u2192 S&P 500",
+      "total": 31,
+      "confirmed": 25,
+      "contradicted": 1,
+      "ambiguous": 5,
+      "mixed": 0,
+      "confirmation_rate": 0.806,
+      "contradiction_rate": 0.032,
+      "pattern_counts": {
+        "overshoot": 16,
+        "slow_absorption": 5,
+        "confounded_signal": 5,
+        "clean_absorption": 4,
+        "directional_error": 1
+      }
+    },
+    {
+      "edge_id": "fomc_hike__treasury_yield",
+      "description": "FOMC rate hike \u2192 US Treasury yields",
+      "total": 76,
+      "confirmed": 55,
+      "contradicted": 15,
+      "ambiguous": 4,
+      "mixed": 2,
+      "confirmation_rate": 0.724,
+      "contradiction_rate": 0.197,
+      "pattern_counts": {
+        "slow_absorption": 22,
+        "clean_absorption": 27,
+        "directional_error": 15,
+        "confounded_signal": 4,
+        "bifurcated": 2,
+        "overshoot": 6
+      }
+    },
+    {
+      "edge_id": "fomc_cut__treasury_yield",
+      "description": "FOMC rate cut \u2192 US Treasury yields",
+      "total": 62,
+      "confirmed": 48,
+      "contradicted": 9,
+      "ambiguous": 3,
+      "mixed": 2,
+      "confirmation_rate": 0.774,
+      "contradiction_rate": 0.145,
+      "pattern_counts": {
+        "overshoot": 11,
+        "slow_absorption": 22,
+        "clean_absorption": 15,
+        "bifurcated": 2,
+        "directional_error": 9,
+        "confounded_signal": 3
+      }
+    },
+    {
+      "edge_id": "fomc_hike__vix",
+      "description": "FOMC rate hike \u2192 VIX",
+      "total": 38,
+      "confirmed": 29,
+      "contradicted": 2,
+      "ambiguous": 4,
+      "mixed": 3,
+      "confirmation_rate": 0.763,
+      "contradiction_rate": 0.053,
+      "pattern_counts": {
+        "clean_absorption": 11,
+        "bifurcated": 3,
+        "slow_absorption": 7,
+        "confounded_signal": 4,
+        "directional_error": 2,
+        "overshoot": 11
+      }
+    },
+    {
+      "edge_id": "fomc_hike__gold",
+      "description": "FOMC rate hike \u2192 gold",
+      "total": 38,
+      "confirmed": 24,
+      "contradicted": 3,
+      "ambiguous": 10,
+      "mixed": 1,
+      "confirmation_rate": 0.632,
+      "contradiction_rate": 0.079,
+      "pattern_counts": {
+        "confounded_signal": 10,
+        "slow_absorption": 8,
+        "overshoot": 8,
+        "clean_absorption": 8,
+        "bifurcated": 1,
+        "directional_error": 3
+      }
+    },
+    {
+      "edge_id": "fomc_hold__sp500",
+      "description": "FOMC rate hold \u2192 S&P 500 (background drift)",
+      "total": 131,
+      "confirmed": 93,
+      "contradicted": 7,
+      "ambiguous": 23,
+      "mixed": 8,
+      "confirmation_rate": 0.71,
+      "contradiction_rate": 0.053,
+      "pattern_counts": {
+        "slow_absorption": 49,
+        "confounded_signal": 23,
+        "directional_error": 7,
+        "clean_absorption": 25,
+        "bifurcated": 8,
+        "overshoot": 19
+      }
+    },
+    {
+      "edge_id": "ecb_any__fx",
+      "description": "ECB decision \u2192 EUR/FX",
+      "total": 30,
+      "confirmed": 20,
+      "contradicted": 4,
+      "ambiguous": 4,
+      "mixed": 2,
+      "confirmation_rate": 0.667,
+      "contradiction_rate": 0.133,
+      "pattern_counts": {
+        "slow_absorption": 10,
+        "clean_absorption": 7,
+        "confounded_signal": 4,
+        "overshoot": 3,
+        "directional_error": 4,
+        "bifurcated": 2
+      }
+    },
+    {
+      "edge_id": "ecb_any__intl_yield",
+      "description": "ECB decision \u2192 European yields",
+      "total": 16,
+      "confirmed": 11,
+      "contradicted": 3,
+      "ambiguous": 2,
+      "mixed": 0,
+      "confirmation_rate": 0.688,
+      "contradiction_rate": 0.188,
+      "pattern_counts": {
+        "overshoot": 4,
+        "clean_absorption": 7,
+        "confounded_signal": 2,
+        "directional_error": 3
+      }
+    },
+    {
+      "edge_id": "boj_any__fx",
+      "description": "BOJ decision \u2192 JPY/FX",
+      "total": 9,
+      "confirmed": 3,
+      "contradicted": 4,
+      "ambiguous": 1,
+      "mixed": 1,
+      "confirmation_rate": 0.333,
+      "contradiction_rate": 0.444,
+      "pattern_counts": {
+        "slow_absorption": 1,
+        "overshoot": 1,
+        "directional_error": 4,
+        "clean_absorption": 1,
+        "confounded_signal": 1,
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "boj_any__intl_equity",
+      "description": "BOJ decision \u2192 Nikkei",
+      "total": 9,
+      "confirmed": 7,
+      "contradicted": 1,
+      "ambiguous": 1,
+      "mixed": 0,
+      "confirmation_rate": 0.778,
+      "contradiction_rate": 0.111,
+      "pattern_counts": {
+        "clean_absorption": 2,
+        "slow_absorption": 3,
+        "confounded_signal": 1,
+        "overshoot": 2,
+        "directional_error": 1
+      }
+    },
+    {
+      "edge_id": "cpi__treasury_yield",
+      "description": "CPI release \u2192 US Treasury yields",
+      "total": 80,
+      "confirmed": 54,
+      "contradicted": 15,
+      "ambiguous": 9,
+      "mixed": 2,
+      "confirmation_rate": 0.675,
+      "contradiction_rate": 0.188,
+      "pattern_counts": {
+        "clean_absorption": 33,
+        "directional_error": 15,
+        "slow_absorption": 16,
+        "confounded_signal": 9,
+        "bifurcated": 2,
+        "overshoot": 5
+      }
+    },
+    {
+      "edge_id": "cpi__sp500",
+      "description": "CPI release \u2192 S&P 500",
+      "total": 40,
+      "confirmed": 27,
+      "contradicted": 0,
+      "ambiguous": 12,
+      "mixed": 1,
+      "confirmation_rate": 0.675,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "slow_absorption": 8,
+        "confounded_signal": 12,
+        "overshoot": 3,
+        "clean_absorption": 16,
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "cpi__gold",
+      "description": "CPI release \u2192 gold",
+      "total": 40,
+      "confirmed": 27,
+      "contradicted": 5,
+      "ambiguous": 7,
+      "mixed": 1,
+      "confirmation_rate": 0.675,
+      "contradiction_rate": 0.125,
+      "pattern_counts": {
+        "confounded_signal": 7,
+        "clean_absorption": 16,
+        "directional_error": 5,
+        "slow_absorption": 2,
+        "bifurcated": 1,
+        "overshoot": 9
+      }
+    },
+    {
+      "edge_id": "nfp__treasury_yield",
+      "description": "NFP release \u2192 US Treasury yields",
+      "total": 76,
+      "confirmed": 61,
+      "contradicted": 4,
+      "ambiguous": 11,
+      "mixed": 0,
+      "confirmation_rate": 0.803,
+      "contradiction_rate": 0.053,
+      "pattern_counts": {
+        "clean_absorption": 27,
+        "overshoot": 18,
+        "slow_absorption": 16,
+        "directional_error": 4,
+        "confounded_signal": 11
+      }
+    },
+    {
+      "edge_id": "nfp__sp500",
+      "description": "NFP release \u2192 S&P 500",
+      "total": 38,
+      "confirmed": 25,
+      "contradicted": 2,
+      "ambiguous": 8,
+      "mixed": 3,
+      "confirmation_rate": 0.658,
+      "contradiction_rate": 0.053,
+      "pattern_counts": {
+        "slow_absorption": 10,
+        "confounded_signal": 8,
+        "bifurcated": 3,
+        "directional_error": 2,
+        "clean_absorption": 10,
+        "overshoot": 5
+      }
+    },
+    {
+      "edge_id": "gdp__sp500",
+      "description": "GDP release \u2192 S&P 500",
+      "total": 16,
+      "confirmed": 10,
+      "contradicted": 2,
+      "ambiguous": 4,
+      "mixed": 0,
+      "confirmation_rate": 0.625,
+      "contradiction_rate": 0.125,
+      "pattern_counts": {
+        "slow_absorption": 2,
+        "clean_absorption": 7,
+        "overshoot": 1,
+        "confounded_signal": 4,
+        "directional_error": 2
+      }
+    },
+    {
+      "edge_id": "opec__oil",
+      "description": "OPEC decision \u2192 oil",
+      "total": 16,
+      "confirmed": 11,
+      "contradicted": 0,
+      "ambiguous": 2,
+      "mixed": 3,
+      "confirmation_rate": 0.688,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "slow_absorption": 7,
+        "clean_absorption": 2,
+        "bifurcated": 3,
+        "confounded_signal": 2,
+        "overshoot": 2
+      }
+    },
+    {
+      "edge_id": "opec__sp500",
+      "description": "OPEC decision \u2192 S&P 500",
+      "total": 10,
+      "confirmed": 2,
+      "contradicted": 0,
+      "ambiguous": 8,
+      "mixed": 0,
+      "confirmation_rate": 0.2,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "confounded_signal": 8,
+        "clean_absorption": 1,
+        "slow_absorption": 1
+      }
+    },
+    {
+      "edge_id": "geo__vix",
+      "description": "Geopolitical event \u2192 VIX",
+      "total": 12,
+      "confirmed": 11,
+      "contradicted": 1,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": 0.917,
+      "contradiction_rate": 0.083,
+      "pattern_counts": {
+        "clean_absorption": 2,
+        "slow_absorption": 2,
+        "overshoot": 7,
+        "directional_error": 1
+      }
+    },
+    {
+      "edge_id": "geo__gold",
+      "description": "Geopolitical event \u2192 gold",
+      "total": 13,
+      "confirmed": 11,
+      "contradicted": 0,
+      "ambiguous": 1,
+      "mixed": 1,
+      "confirmation_rate": 0.846,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "clean_absorption": 5,
+        "slow_absorption": 5,
+        "bifurcated": 1,
+        "confounded_signal": 1,
+        "overshoot": 1
+      }
+    },
+    {
+      "edge_id": "geo__sp500",
+      "description": "Geopolitical event \u2192 S&P 500",
+      "total": 15,
+      "confirmed": 13,
+      "contradicted": 1,
+      "ambiguous": 0,
+      "mixed": 1,
+      "confirmation_rate": 0.867,
+      "contradiction_rate": 0.067,
+      "pattern_counts": {
+        "overshoot": 7,
+        "slow_absorption": 3,
+        "directional_error": 1,
+        "clean_absorption": 3,
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "sovereign__intl_yield",
+      "description": "Sovereign credit event \u2192 European yields",
+      "total": 1,
+      "confirmed": 0,
+      "contradicted": 0,
+      "ambiguous": 0,
+      "mixed": 1,
+      "confirmation_rate": 0.0,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "fed_speech__treasury_yield",
+      "description": "Fed speech \u2192 US Treasury yields",
+      "total": 26,
+      "confirmed": 20,
+      "contradicted": 0,
+      "ambiguous": 3,
+      "mixed": 3,
+      "confirmation_rate": 0.769,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "clean_absorption": 7,
+        "slow_absorption": 10,
+        "bifurcated": 3,
+        "confounded_signal": 3,
+        "overshoot": 3
+      }
+    }
+  ],
+  "surprise_conditioned_edges": [
+    {
+      "edge_id": "fomc_hike__sp500__zero",
+      "description": "FOMC rate hike (surprise=zero) \u2192 S&P 500",
+      "total": 9,
+      "confirmed": 6,
+      "contradicted": 0,
+      "ambiguous": 2,
+      "mixed": 1,
+      "confirmation_rate": 0.667,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "clean_absorption": 2,
+        "slow_absorption": 3,
+        "confounded_signal": 2,
+        "overshoot": 1,
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "cpi__treasury_yield__zero",
+      "description": "CPI release (surprise=zero) \u2192 US Treasury yields",
+      "total": 2,
+      "confirmed": 0,
+      "contradicted": 2,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": 0.0,
+      "contradiction_rate": 1.0,
+      "pattern_counts": {
+        "directional_error": 2
+      }
+    },
+    {
+      "edge_id": "fomc_hike__sp500__low",
+      "description": "FOMC rate hike (surprise=low) \u2192 S&P 500",
+      "total": 7,
+      "confirmed": 5,
+      "contradicted": 1,
+      "ambiguous": 0,
+      "mixed": 1,
+      "confirmation_rate": 0.714,
+      "contradiction_rate": 0.143,
+      "pattern_counts": {
+        "slow_absorption": 4,
+        "bifurcated": 1,
+        "overshoot": 1,
+        "directional_error": 1
+      }
+    },
+    {
+      "edge_id": "cpi__treasury_yield__low",
+      "description": "CPI release (surprise=low) \u2192 US Treasury yields",
+      "total": 12,
+      "confirmed": 10,
+      "contradicted": 1,
+      "ambiguous": 0,
+      "mixed": 1,
+      "confirmation_rate": 0.833,
+      "contradiction_rate": 0.083,
+      "pattern_counts": {
+        "clean_absorption": 5,
+        "slow_absorption": 5,
+        "directional_error": 1,
+        "bifurcated": 1
+      }
+    },
+    {
+      "edge_id": "fomc_hike__sp500__moderate",
+      "description": "FOMC rate hike (surprise=moderate) \u2192 S&P 500",
+      "total": 0,
+      "confirmed": 0,
+      "contradicted": 0,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": null,
+      "contradiction_rate": null,
+      "pattern_counts": {}
+    },
+    {
+      "edge_id": "cpi__treasury_yield__moderate",
+      "description": "CPI release (surprise=moderate) \u2192 US Treasury yields",
+      "total": 26,
+      "confirmed": 18,
+      "contradicted": 5,
+      "ambiguous": 3,
+      "mixed": 0,
+      "confirmation_rate": 0.692,
+      "contradiction_rate": 0.192,
+      "pattern_counts": {
+        "clean_absorption": 13,
+        "directional_error": 5,
+        "overshoot": 2,
+        "confounded_signal": 3,
+        "slow_absorption": 3
+      }
+    },
+    {
+      "edge_id": "fomc_hike__sp500__high",
+      "description": "FOMC rate hike (surprise=high) \u2192 S&P 500",
+      "total": 0,
+      "confirmed": 0,
+      "contradicted": 0,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": null,
+      "contradiction_rate": null,
+      "pattern_counts": {}
+    },
+    {
+      "edge_id": "cpi__treasury_yield__high",
+      "description": "CPI release (surprise=high) \u2192 US Treasury yields",
+      "total": 14,
+      "confirmed": 11,
+      "contradicted": 2,
+      "ambiguous": 1,
+      "mixed": 0,
+      "confirmation_rate": 0.786,
+      "contradiction_rate": 0.143,
+      "pattern_counts": {
+        "clean_absorption": 7,
+        "slow_absorption": 2,
+        "confounded_signal": 1,
+        "directional_error": 2,
+        "overshoot": 2
+      }
+    },
+    {
+      "edge_id": "fomc_hike__sp500__extreme",
+      "description": "FOMC rate hike (surprise=extreme) \u2192 S&P 500",
+      "total": 0,
+      "confirmed": 0,
+      "contradicted": 0,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": null,
+      "contradiction_rate": null,
+      "pattern_counts": {}
+    },
+    {
+      "edge_id": "cpi__treasury_yield__extreme",
+      "description": "CPI release (surprise=extreme) \u2192 US Treasury yields",
+      "total": 6,
+      "confirmed": 6,
+      "contradicted": 0,
+      "ambiguous": 0,
+      "mixed": 0,
+      "confirmation_rate": 1.0,
+      "contradiction_rate": 0.0,
+      "pattern_counts": {
+        "clean_absorption": 5,
+        "slow_absorption": 1
+      }
+    }
+  ]
+}

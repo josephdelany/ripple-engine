@@ -315,3 +315,56 @@ def test_gp2_divergence():
     assert b == "wide gap" and gap == 50 and "HOTTER" in d
     gap, b, d = gpr_signal.divergence(30, 60)          # market more nervous
     assert b == "mild gap" and gap == -30 and "nervous" in d
+
+
+# ---- Analogue probability function (Stage 1: predictive engine) -------------
+
+_LIB = [
+    {"event_id": "a", "event_type": "geo", "archetype": "geopolitical_shock",
+     "event_date": "1990-08-02",
+     "gap_patterns": [{"asset_token": "wti", "pattern": "overshoot"},
+                      {"asset_token": "sp500", "pattern": "clean_absorption"}]},
+    {"event_id": "b", "event_type": "geo", "archetype": "war_geopolitical",
+     "event_date": "2022-02-24",
+     "gap_patterns": [{"asset_token": "wti", "pattern": "overshoot"}]},
+    {"event_id": "c", "event_type": "cpi", "archetype": "economic_release",
+     "event_date": "2021-01-01",
+     "gap_patterns": [{"asset_token": "sp500", "pattern": "directional_error"}]},
+]
+
+
+# an1 -- scoring: exact event_type=40 + archetype=15; a non-matching type scores 0.
+def test_an1_score():
+    import analogue
+    q = {"event_type": "geo", "archetype": "geopolitical_shock"}
+    assert analogue.score(q, _LIB[0])[0] == 55        # type + archetype
+    assert analogue.score(q, _LIB[1])[0] == 40        # type only (archetype differs)
+    assert analogue.score(q, _LIB[2])[0] == 0         # cpi: no overlap
+
+
+# an2 -- search_multi pools across queries and keeps each event once at its BEST score.
+def test_an2_search_multi_dedup():
+    import analogue
+    lib = [_LIB[0]]                                    # single geo/geopolitical_shock event
+    m = analogue.search_multi([{"event_type": "geo"},               # scores 40
+                               {"archetype": "geopolitical_shock"}], # scores 15
+                              lib)
+    assert len(m) == 1 and m[0][0] == 40               # deduped, kept the higher score
+
+
+# an3 -- outcome_distribution tallies the dominant pattern + share per asset.
+def test_an3_outcome_distribution():
+    import analogue
+    matches = [(55, _LIB[0]), (40, _LIB[1])]           # two geo analogues
+    dist, overall = analogue.outcome_distribution(matches)
+    assert dist["wti"]["dominant"] == "overshoot" and dist["wti"]["share"] == 1.0
+    assert dist["wti"]["n"] == 2
+    assert overall["overshoot"] == 2
+
+
+# an4 -- thin support returns the honest 'no good analogue' band (never manufactured).
+def test_an4_confidence_thin():
+    import analogue
+    matches = [(55, _LIB[0]), (40, _LIB[1])]           # only 2 < MIN_ANALOGUES
+    _, overall = analogue.outcome_distribution(matches)
+    assert "no good analogue" in analogue.confidence(matches, overall)["band"]

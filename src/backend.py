@@ -262,6 +262,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "analogue_forecast": {
+        "name": "Analogue Forecast (what usually happens next)",
+        "description": "kNN over a 511-event seed library: for each active situation, the "
+                       "nearest historical analogues by signature and the pattern markets "
+                       "showed (oil/equities/gold/VIX). Basis shown; 'thin' = no good analogue.",
+        "endpoint": "analogue_forecast",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
     "transmission_chains": {
         "name": "Oil Ripple: Live Transmission Chains",
         "description": "'Everything oil touches' -- transmission paths (trigger -> choke -> "
@@ -339,11 +348,12 @@ APPS = [{
         "history": {
             "id": "history", "name": "The Study",
             "layout": [
-                _lw("ripple_by_type", 0, 0, 20, 9),
-                _lw("scenario_playbook", 20, 0, 20, 9),
-                _lw("event_detail", 0, 9, 40, 11),
-                _lw("event_database", 0, 20, 20, 11),
-                _lw("propagation_map", 20, 20, 20, 11),
+                _lw("analogue_forecast", 0, 0, 40, 12),
+                _lw("ripple_by_type", 0, 12, 20, 9),
+                _lw("scenario_playbook", 20, 12, 20, 9),
+                _lw("event_detail", 0, 21, 40, 11),
+                _lw("event_database", 0, 32, 20, 11),
+                _lw("propagation_map", 20, 32, 20, 11),
             ],
         },
     },
@@ -721,6 +731,29 @@ def commodity_exposure():
                      "at_risk_share": f"{r.get('at_risk_share', 0)}%",
                      "producers_in_conflict": who, "source": r.get("source", "")})
     return rows or [{"commodity": "(run src/criticality.py)", "stage": ""}]
+
+
+@app.get("/analogue_forecast")
+def analogue_forecast():
+    """The analogue probability function (src/analogue.py): for each active situation, the
+    historical playbook -- what oil/equities/gold/VIX usually did in the nearest analogues,
+    with confidence and the single closest historical match."""
+    def _cell(ka, tok):
+        v = ka.get(tok)
+        return f"{v['dominant']} {int(v['share']*100)}%" if v else "-"
+    rows = []
+    for fc in _read_json("analogue.json", {}).get("forecasts", []):
+        ka = fc.get("key_assets", {})
+        c = fc.get("confidence", {})
+        near = (fc.get("nearest") or [{}])[0]
+        rows.append({
+            "situation": fc.get("situation", ""),
+            "confidence": f"{c.get('band','')} (N={c.get('n','')})",
+            "oil": _cell(ka, "wti") if ka.get("wti") else _cell(ka, "brent"),
+            "equities": _cell(ka, "sp500"), "gold": _cell(ka, "gold"),
+            "vix": _cell(ka, "vix"), "10y": _cell(ka, "10y_treasury"),
+            "nearest_analogue": f"{near.get('event_id','')} ({near.get('score','')})"})
+    return rows or [{"situation": "(run src/analogue.py)", "confidence": ""}]
 
 
 @app.get("/transmission_chains")

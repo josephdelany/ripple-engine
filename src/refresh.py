@@ -85,6 +85,9 @@ STEPS = [
     # Risk-vs-priced divergence read: is the oil market pricing the geopolitical
     # risk in the air? (GPR percentile vs Brent-vol percentile). File output.
     ("gpr_signal",     "src/gpr_signal.py",     "observations"),
+    # Analogue probability function: kNN over the 511-event seed library -> the
+    # historical playbook for each active situation. File output.
+    ("analogue",       "src/analogue.py",       "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

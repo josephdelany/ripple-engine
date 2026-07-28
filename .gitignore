@@ -47,3 +47,5 @@ data/criticality.json
 data/propagation.json
 # Risk-vs-priced read, regenerated every run; sample committed as receipt.
 data/gpr_signal.json
+# Analogue forecast, regenerated every run; sample committed as receipt.
+data/analogue.json

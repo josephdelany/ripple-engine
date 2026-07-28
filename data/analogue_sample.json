@@ -1,0 +1,3599 @@
+{
+  "as_of": "2026-07-28",
+  "generated_at": "2026-07-28T17:25:20+00:00",
+  "library_n": 511,
+  "note": "Analogue probability function (kNN over 511-event seed library). For each active situation: nearest historical analogues by signature + the pattern distribution markets showed. Basis shown; 'thin' = no good analogue. DISPLAY/context; not a calibrated trade signal.",
+  "forecasts": [
+    {
+      "queries": [
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        },
+        {
+          "event_type": "commodity_supply",
+          "archetype": "commodity_supply_shock"
+        },
+        {
+          "event_type": "commodity_supply",
+          "archetype": "commodity_supply_shock"
+        }
+      ],
+      "n_analogues": 60,
+      "confidence": {
+        "band": "indicative",
+        "n": 60,
+        "mean_similarity": 52.0,
+        "agreement": 0.28
+      },
+      "overall_pattern": {
+        "clean_absorption": 52,
+        "overshoot": 36,
+        "slow_absorption": 36,
+        "directional_error": 25,
+        "confounded_signal": 23,
+        "bifurcated": 12
+      },
+      "key_assets": {
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        }
+      },
+      "all_assets": {
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "nikkei": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "usdjpy": {
+          "n": 2,
+          "dominant": "overshoot",
+          "share": 0.5,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "nuclear_sector": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "uranium": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "eur_usd": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "eurusd": {
+          "n": 4,
+          "dominant": "clean_absorption",
+          "share": 0.75,
+          "patterns": {
+            "clean_absorption": 3,
+            "confounded_signal": 1
+          }
+        },
+        "eurostoxx": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 0.5,
+          "patterns": {
+            "clean_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "bund_10y": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nasdaq": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "wti_crude": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "2y_treasury": {
+          "n": 5,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 5
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        },
+        "gme": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "at1_global": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "usdchf": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "cobalt": {
+          "n": 2,
+          "dominant": "directional_error",
+          "share": 0.5,
+          "patterns": {
+            "directional_error": 1,
+            "overshoot": 1
+          }
+        },
+        "glen": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "confounded_signal": 1
+          }
+        },
+        "cmoc": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "tsla": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "lit": {
+          "n": 2,
+          "dominant": "confounded_signal",
+          "share": 0.5,
+          "patterns": {
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "spy": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "usdcdf": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "oil_directional_error_vs_naive": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "lme_nickel": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "class1_class2_bifurcation": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "lit_ev_battery": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "idr": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "mining_equities": {
+          "n": 2,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 2
+          }
+        },
+        "tsla_f": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "henry_hub_natgas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "nxpi": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "samsung_005930": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "infineon_ifx": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "nvda": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "amd": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "soxx_smh": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "f_ford": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "gm": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "toyota_tm": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vw_volkswagen": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "usd_krw": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "renesas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "auto_oems": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auto_oems_t_plus_0d_directional_error": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "soxx": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "competitor_mcu_makers": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "auto_suppliers": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "brent_t0d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "brent_t30d": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_rates": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "eu_utility_equities": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "eu_cpi_nowcast": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_eu_equities": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "henry_hub": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "eua_carbon": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "norilsk": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_oems_tsla": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_supply_chain_proxies": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "broad_equities_attribution": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "ttf_t30d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "macro_aggregate": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_freight_wci": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "asia_usec_lane": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "lng_carrier_rates": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "zim": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "lpg_exporters": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_shipping": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "cheniere": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auction_premia": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "suez_ever_given_comparison_fires": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "container_futures": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "rivn": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nio": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "alb": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "nickel": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vxo": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "fed_funds": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "international_equities": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        }
+      },
+      "nearest": [
+        {
+          "event_id": "geo_1985-09-22",
+          "date": "1985-09-22",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1989-11-09",
+          "date": "1989-11-09",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-08-02",
+          "date": "1990-08-02",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-10-03",
+          "date": "1990-10-03",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1991-01-17",
+          "date": "1991-01-17",
+          "type": "geo",
+          "score": 55
+        }
+      ],
+      "situation": "Israel-Iran War (2025- )",
+      "kinds": [
+        "conflict_escalation",
+        "chokepoint_disruption",
+        "infrastructure_attack"
+      ]
+    },
+    {
+      "queries": [
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        },
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        },
+        {
+          "event_type": "commodity_supply",
+          "archetype": "commodity_supply_shock"
+        }
+      ],
+      "n_analogues": 60,
+      "confidence": {
+        "band": "indicative",
+        "n": 60,
+        "mean_similarity": 52.0,
+        "agreement": 0.28
+      },
+      "overall_pattern": {
+        "clean_absorption": 52,
+        "overshoot": 36,
+        "slow_absorption": 36,
+        "directional_error": 25,
+        "confounded_signal": 23,
+        "bifurcated": 12
+      },
+      "key_assets": {
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        }
+      },
+      "all_assets": {
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "nikkei": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "usdjpy": {
+          "n": 2,
+          "dominant": "overshoot",
+          "share": 0.5,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "nuclear_sector": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "uranium": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "eur_usd": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "eurusd": {
+          "n": 4,
+          "dominant": "clean_absorption",
+          "share": 0.75,
+          "patterns": {
+            "clean_absorption": 3,
+            "confounded_signal": 1
+          }
+        },
+        "eurostoxx": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 0.5,
+          "patterns": {
+            "clean_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "bund_10y": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nasdaq": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "wti_crude": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "2y_treasury": {
+          "n": 5,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 5
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        },
+        "gme": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "at1_global": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "usdchf": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "cobalt": {
+          "n": 2,
+          "dominant": "directional_error",
+          "share": 0.5,
+          "patterns": {
+            "directional_error": 1,
+            "overshoot": 1
+          }
+        },
+        "glen": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "confounded_signal": 1
+          }
+        },
+        "cmoc": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "tsla": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "lit": {
+          "n": 2,
+          "dominant": "confounded_signal",
+          "share": 0.5,
+          "patterns": {
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "spy": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "usdcdf": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "oil_directional_error_vs_naive": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "lme_nickel": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "class1_class2_bifurcation": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "lit_ev_battery": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "idr": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "mining_equities": {
+          "n": 2,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 2
+          }
+        },
+        "tsla_f": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "henry_hub_natgas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "nxpi": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "samsung_005930": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "infineon_ifx": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "nvda": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "amd": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "soxx_smh": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "f_ford": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "gm": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "toyota_tm": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vw_volkswagen": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "usd_krw": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "renesas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "auto_oems": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auto_oems_t_plus_0d_directional_error": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "soxx": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "competitor_mcu_makers": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "auto_suppliers": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "brent_t0d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "brent_t30d": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_rates": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "eu_utility_equities": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "eu_cpi_nowcast": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_eu_equities": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "henry_hub": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "eua_carbon": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "norilsk": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_oems_tsla": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_supply_chain_proxies": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "broad_equities_attribution": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "ttf_t30d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "macro_aggregate": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_freight_wci": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "asia_usec_lane": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "lng_carrier_rates": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "zim": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "lpg_exporters": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_shipping": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "cheniere": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auction_premia": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "suez_ever_given_comparison_fires": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "container_futures": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "rivn": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nio": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "alb": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "nickel": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vxo": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "fed_funds": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "international_equities": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        }
+      },
+      "nearest": [
+        {
+          "event_id": "geo_1985-09-22",
+          "date": "1985-09-22",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1989-11-09",
+          "date": "1989-11-09",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-08-02",
+          "date": "1990-08-02",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-10-03",
+          "date": "1990-10-03",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1991-01-17",
+          "date": "1991-01-17",
+          "type": "geo",
+          "score": 55
+        }
+      ],
+      "situation": "Russia-Ukraine War",
+      "kinds": [
+        "conflict_escalation",
+        "sanctions",
+        "infrastructure_attack"
+      ]
+    },
+    {
+      "queries": [
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        },
+        {
+          "event_type": "commodity_supply",
+          "archetype": "commodity_supply_shock"
+        },
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        }
+      ],
+      "n_analogues": 60,
+      "confidence": {
+        "band": "indicative",
+        "n": 60,
+        "mean_similarity": 52.0,
+        "agreement": 0.28
+      },
+      "overall_pattern": {
+        "clean_absorption": 52,
+        "overshoot": 36,
+        "slow_absorption": 36,
+        "directional_error": 25,
+        "confounded_signal": 23,
+        "bifurcated": 12
+      },
+      "key_assets": {
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        }
+      },
+      "all_assets": {
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "nikkei": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "usdjpy": {
+          "n": 2,
+          "dominant": "overshoot",
+          "share": 0.5,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "nuclear_sector": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "uranium": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "eur_usd": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "eurusd": {
+          "n": 4,
+          "dominant": "clean_absorption",
+          "share": 0.75,
+          "patterns": {
+            "clean_absorption": 3,
+            "confounded_signal": 1
+          }
+        },
+        "eurostoxx": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 0.5,
+          "patterns": {
+            "clean_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "bund_10y": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nasdaq": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "wti_crude": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "2y_treasury": {
+          "n": 5,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 5
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        },
+        "gme": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "at1_global": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "usdchf": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "cobalt": {
+          "n": 2,
+          "dominant": "directional_error",
+          "share": 0.5,
+          "patterns": {
+            "directional_error": 1,
+            "overshoot": 1
+          }
+        },
+        "glen": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "confounded_signal": 1
+          }
+        },
+        "cmoc": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "tsla": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "lit": {
+          "n": 2,
+          "dominant": "confounded_signal",
+          "share": 0.5,
+          "patterns": {
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "spy": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "usdcdf": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "oil_directional_error_vs_naive": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "lme_nickel": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "class1_class2_bifurcation": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "lit_ev_battery": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "idr": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "mining_equities": {
+          "n": 2,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 2
+          }
+        },
+        "tsla_f": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "henry_hub_natgas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "nxpi": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "samsung_005930": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "infineon_ifx": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "nvda": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "amd": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "soxx_smh": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "f_ford": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "gm": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "toyota_tm": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vw_volkswagen": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "usd_krw": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "renesas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "auto_oems": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auto_oems_t_plus_0d_directional_error": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "soxx": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "competitor_mcu_makers": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "auto_suppliers": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "brent_t0d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "brent_t30d": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_rates": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "eu_utility_equities": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "eu_cpi_nowcast": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_eu_equities": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "henry_hub": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "eua_carbon": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "norilsk": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_oems_tsla": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_supply_chain_proxies": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "broad_equities_attribution": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "ttf_t30d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "macro_aggregate": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_freight_wci": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "asia_usec_lane": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "lng_carrier_rates": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "zim": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "lpg_exporters": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_shipping": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "cheniere": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auction_premia": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "suez_ever_given_comparison_fires": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "container_futures": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "rivn": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nio": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "alb": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "nickel": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vxo": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "fed_funds": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "international_equities": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        }
+      },
+      "nearest": [
+        {
+          "event_id": "geo_1985-09-22",
+          "date": "1985-09-22",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1989-11-09",
+          "date": "1989-11-09",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-08-02",
+          "date": "1990-08-02",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-10-03",
+          "date": "1990-10-03",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1991-01-17",
+          "date": "1991-01-17",
+          "type": "geo",
+          "score": 55
+        }
+      ],
+      "situation": "China-Taiwan Tension",
+      "kinds": [
+        "conflict_escalation",
+        "chokepoint_disruption",
+        "sanctions"
+      ]
+    },
+    {
+      "queries": [
+        {
+          "event_type": "geo",
+          "archetype": "geopolitical_shock"
+        },
+        {
+          "event_type": "commodity_supply",
+          "archetype": "commodity_supply_shock"
+        }
+      ],
+      "n_analogues": 60,
+      "confidence": {
+        "band": "indicative",
+        "n": 60,
+        "mean_similarity": 52.0,
+        "agreement": 0.28
+      },
+      "overall_pattern": {
+        "clean_absorption": 52,
+        "overshoot": 36,
+        "slow_absorption": 36,
+        "directional_error": 25,
+        "confounded_signal": 23,
+        "bifurcated": 12
+      },
+      "key_assets": {
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        }
+      },
+      "all_assets": {
+        "sp500": {
+          "n": 22,
+          "dominant": "clean_absorption",
+          "share": 0.41,
+          "patterns": {
+            "overshoot": 7,
+            "slow_absorption": 3,
+            "clean_absorption": 9,
+            "bifurcated": 1,
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "10y_treasury": {
+          "n": 11,
+          "dominant": "clean_absorption",
+          "share": 0.36,
+          "patterns": {
+            "slow_absorption": 2,
+            "clean_absorption": 4,
+            "confounded_signal": 2,
+            "bifurcated": 1,
+            "directional_error": 2
+          }
+        },
+        "gold": {
+          "n": 16,
+          "dominant": "clean_absorption",
+          "share": 0.38,
+          "patterns": {
+            "slow_absorption": 5,
+            "clean_absorption": 6,
+            "confounded_signal": 2,
+            "overshoot": 1,
+            "directional_error": 1,
+            "bifurcated": 1
+          }
+        },
+        "nikkei": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "usdjpy": {
+          "n": 2,
+          "dominant": "overshoot",
+          "share": 0.5,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1
+          }
+        },
+        "vix": {
+          "n": 21,
+          "dominant": "overshoot",
+          "share": 0.48,
+          "patterns": {
+            "overshoot": 10,
+            "directional_error": 1,
+            "clean_absorption": 7,
+            "confounded_signal": 2,
+            "slow_absorption": 1
+          }
+        },
+        "nuclear_sector": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "uranium": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "wti": {
+          "n": 8,
+          "dominant": "confounded_signal",
+          "share": 0.25,
+          "patterns": {
+            "confounded_signal": 2,
+            "overshoot": 2,
+            "slow_absorption": 2,
+            "clean_absorption": 2
+          }
+        },
+        "eur_usd": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "eurusd": {
+          "n": 4,
+          "dominant": "clean_absorption",
+          "share": 0.75,
+          "patterns": {
+            "clean_absorption": 3,
+            "confounded_signal": 1
+          }
+        },
+        "eurostoxx": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 0.5,
+          "patterns": {
+            "clean_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "bund_10y": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nasdaq": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "wti_crude": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "clean_absorption": 1,
+            "directional_error": 1
+          }
+        },
+        "2y_treasury": {
+          "n": 5,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 5
+          }
+        },
+        "dxy": {
+          "n": 3,
+          "dominant": "overshoot",
+          "share": 0.33,
+          "patterns": {
+            "overshoot": 1,
+            "slow_absorption": 1,
+            "bifurcated": 1
+          }
+        },
+        "gme": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "at1_global": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "usdchf": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "cobalt": {
+          "n": 2,
+          "dominant": "directional_error",
+          "share": 0.5,
+          "patterns": {
+            "directional_error": 1,
+            "overshoot": 1
+          }
+        },
+        "glen": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "confounded_signal": 1
+          }
+        },
+        "cmoc": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 2
+          }
+        },
+        "tsla": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "lit": {
+          "n": 2,
+          "dominant": "confounded_signal",
+          "share": 0.5,
+          "patterns": {
+            "confounded_signal": 1,
+            "directional_error": 1
+          }
+        },
+        "spy": {
+          "n": 2,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 2
+          }
+        },
+        "usdcdf": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "oil_directional_error_vs_naive": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "lme_nickel": {
+          "n": 2,
+          "dominant": "slow_absorption",
+          "share": 0.5,
+          "patterns": {
+            "slow_absorption": 1,
+            "overshoot": 1
+          }
+        },
+        "class1_class2_bifurcation": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "lit_ev_battery": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "idr": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "mining_equities": {
+          "n": 2,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 2
+          }
+        },
+        "tsla_f": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "henry_hub_natgas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "nxpi": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "samsung_005930": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "infineon_ifx": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "nvda": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "amd": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "soxx_smh": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "f_ford": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "gm": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "toyota_tm": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vw_volkswagen": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "usd_krw": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "xle": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "renesas": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "auto_oems": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auto_oems_t_plus_0d_directional_error": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "soxx": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "competitor_mcu_makers": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "auto_suppliers": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "brent_t0d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "brent_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "brent_t30d": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_rates": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "eu_utility_equities": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "eu_cpi_nowcast": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_eu_equities": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "henry_hub": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "eua_carbon": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "norilsk": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_oems_tsla": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "ev_supply_chain_proxies": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "broad_equities_attribution": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "ttf_t1d": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "ttf_t30d": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "macro_aggregate": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "container_freight_wci": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "asia_usec_lane": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "lng_carrier_rates": {
+          "n": 1,
+          "dominant": "bifurcated",
+          "share": 1.0,
+          "patterns": {
+            "bifurcated": 1
+          }
+        },
+        "zim": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "lpg_exporters": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "broad_shipping": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "cheniere": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "auction_premia": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "suez_ever_given_comparison_fires": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "container_futures": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        },
+        "rivn": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "nio": {
+          "n": 1,
+          "dominant": "directional_error",
+          "share": 1.0,
+          "patterns": {
+            "directional_error": 1
+          }
+        },
+        "alb": {
+          "n": 1,
+          "dominant": "confounded_signal",
+          "share": 1.0,
+          "patterns": {
+            "confounded_signal": 1
+          }
+        },
+        "nickel": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "vxo": {
+          "n": 1,
+          "dominant": "slow_absorption",
+          "share": 1.0,
+          "patterns": {
+            "slow_absorption": 1
+          }
+        },
+        "fed_funds": {
+          "n": 1,
+          "dominant": "clean_absorption",
+          "share": 1.0,
+          "patterns": {
+            "clean_absorption": 1
+          }
+        },
+        "international_equities": {
+          "n": 1,
+          "dominant": "overshoot",
+          "share": 1.0,
+          "patterns": {
+            "overshoot": 1
+          }
+        }
+      },
+      "nearest": [
+        {
+          "event_id": "geo_1985-09-22",
+          "date": "1985-09-22",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1989-11-09",
+          "date": "1989-11-09",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-08-02",
+          "date": "1990-08-02",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1990-10-03",
+          "date": "1990-10-03",
+          "type": "geo",
+          "score": 55
+        },
+        {
+          "event_id": "geo_1991-01-17",
+          "date": "1991-01-17",
+          "type": "geo",
+          "score": 55
+        }
+      ],
+      "situation": "Israel-Lebanon (Hezbollah)",
+      "kinds": [
+        "conflict_escalation",
+        "infrastructure_attack"
+      ]
+    }
+  ]
+}
