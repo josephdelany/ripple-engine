@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-07-27",
-  "generated_at": "2026-07-28T16:36:28+00:00",
-  "note": "Risk-vs-priced divergence. GPR = geopolitical risk in the air; derived.brent_vol20 = oil-market realised vol (priced risk). Descriptive over full history; NOT the pre-registered study, NOT a calibrated signal.",
+  "as_of": "2026-07-28",
+  "generated_at": "2026-07-28T19:59:39+00:00",
+  "note": "Source-aware transmission read. Channel (supply vs demand) is inferred from which theatres are active; the REAL Brent move (live feed) confirms or contradicts the expected direction. Descriptive; not the pre-registered study.",
   "gpr": {
     "value": 195.9,
     "date": "2026-07-27",
@@ -9,18 +9,36 @@
     "band": "high",
     "posture": "realised (acts >= threats)"
   },
-  "priced": {
+  "transmission": {
+    "channel": "supply",
+    "expected": "up",
+    "actual": "down",
+    "oil_5d": -7.88,
+    "supply_countries": [
+      "iran",
+      "russia",
+      "saudi_arabia"
+    ],
+    "verdict": "DIVERGENCE \u2014 supply-fear theatre active (iran, russia, saudi_arabia) yet Brent is FALLING (-7.88% 5d): the market is discounting the supply premium (de-escalation or demand fear). The oil-price signal contradicts the risk level.",
+    "flag": "divergence"
+  },
+  "oil_live": {
+    "chg1d": -5.12,
+    "chg5d": -7.88,
+    "as_of": "2026-07-28"
+  },
+  "priced_vol": {
     "series": "derived.brent_vol20",
     "value": 56.63,
     "date": "2026-07-20",
     "percentile": 93.6,
     "band": "high"
   },
-  "divergence": {
+  "vol_divergence": {
     "gap_pctpts": 1.2,
     "band": "aligned",
     "direction": "market in line with risk"
   },
   "live_chokepoint_chains": 9,
-  "headline": "Geopolitical risk high (94.8th pct); oil-market risk priced high (93.6th pct) -> aligned: market in line with risk. 9 chokepoint chains live."
+  "headline": "Geopolitical risk high (94.8th pct). DIVERGENCE \u2014 supply-fear theatre active (iran, russia, saudi_arabia) yet Brent is FALLING (-7.88% 5d): the market is discounting the supply premium (de-escalation or demand fear). The oil-price signal contradicts the risk level. (9 chokepoint chains live.)"
 }

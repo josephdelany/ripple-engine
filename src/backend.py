@@ -189,12 +189,12 @@ WIDGETS = {
         "type": "metric",
     },
     "risk_vs_priced": {
-        "name": "Risk vs Priced (GPR divergence)",
-        "description": "Is the oil market pricing the geopolitical risk that's in the air? "
-                       "GPR percentile vs Brent realised-vol percentile. Descriptive read, "
-                       "not the pre-registered study.",
+        "name": "Risk vs Priced (source-aware)",
+        "description": "Is the risk supply-channel (country-specific -> oil up) or demand "
+                       "(diffuse -> oil down), and does the REAL Brent move confirm or "
+                       "contradict it? Replaces the old vol-only read that lied.",
         "endpoint": "risk_vs_priced",
-        "gridData": {"w": 40, "h": 6},
+        "gridData": {"w": 40, "h": 7},
         "type": "markdown",
     },
     "where_we_stand": {
@@ -898,23 +898,24 @@ def risk_gauge():
 
 @app.get("/risk_vs_priced")
 def risk_vs_priced():
-    """The risk-vs-priced divergence read (from src/gpr_signal.py) as a legible markdown
-    card -- the 'is the market pricing the risk in the air?' insight."""
+    """The SOURCE-AWARE transmission read (src/gpr_signal.py): is the risk supply- or demand-
+    channel, and does the REAL oil move confirm or contradict it? Replaces the old vol-only
+    'aligned' read that contradicted reality."""
     s = _read_json("gpr_signal.json", {})
-    if not s or "error" in s or "gpr" not in s:
-        return "_Run `python3 src/gpr_signal.py` to generate the risk-vs-priced read._"
-    g, p, d = s["gpr"], s["priced"], s["divergence"]
+    if not s or "error" in s or "transmission" not in s:
+        return "_Run `python3 src/gpr_signal.py` (after fetch_market_live.py) for the read._"
+    g, t, o = s["gpr"], s["transmission"], s.get("oil_live", {})
     return (
-        f"### Risk vs Priced &nbsp; · &nbsp; _{s.get('as_of','')}_\n\n"
+        f"### Risk vs Priced &nbsp;·&nbsp; source-aware &nbsp;·&nbsp; _{s.get('as_of','')}_\n\n"
         f"**{s.get('headline','')}**\n\n"
-        f"| | percentile (of own history) | band |\n|---|---|---|\n"
-        f"| Geopolitical risk (GPR) | {g['percentile']}th | **{g['band']}** |\n"
-        f"| Oil-market risk priced (Brent 20d vol) | {p['percentile']}th | **{p['band']}** |\n"
-        f"| Divergence | {d['gap_pctpts']:+} pts | **{d['band']}** |\n\n"
-        f"- **Read:** {d['direction']}.\n"
-        f"- **GPR posture:** {g['posture']} — is the risk anticipated or already realised?\n"
-        f"- **Live chokepoint chains:** {s.get('live_chokepoint_chains','n/a')} "
-        f"(see Live Transmission Chains).\n\n"
+        f"| | |\n|---|---|\n"
+        f"| Geopolitical risk (GPR) | {g['percentile']}th pct — **{g['band']}** |\n"
+        f"| Transmission channel | **{t.get('channel','')}** (expected oil: {t.get('expected','')}) |\n"
+        f"| Real Brent move | {o.get('chg1d')}% 1d, **{o.get('chg5d')}% 5d** |\n"
+        f"| Verdict | **{t.get('flag','')}** |\n\n"
+        f"- **Read:** {t.get('verdict','')}\n"
+        f"- **GPR posture:** {g.get('posture','')}\n"
+        f"- **Live chokepoint chains:** {s.get('live_chokepoint_chains','n/a')}\n\n"
         f"_{s.get('note','')}_")
 
 

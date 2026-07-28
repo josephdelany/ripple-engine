@@ -1,0 +1,80 @@
+{
+  "as_of": "2026-07-28",
+  "generated_at": "2026-07-28T19:56:55+00:00",
+  "stale": false,
+  "source": "Yahoo (yfinance)",
+  "assets": {
+    "live.brent": {
+      "name": "Brent crude",
+      "unit": "USD/bbl",
+      "price": 83.84,
+      "chg1d": -5.12,
+      "chg5d": -7.88,
+      "as_of": "2026-07-28"
+    },
+    "live.wti": {
+      "name": "WTI crude",
+      "unit": "USD/bbl",
+      "price": 79.06,
+      "chg1d": -4.3,
+      "chg5d": -6.89,
+      "as_of": "2026-07-28"
+    },
+    "live.natgas": {
+      "name": "Henry Hub natgas",
+      "unit": "USD/MMBtu",
+      "price": 2.69,
+      "chg1d": -2.82,
+      "chg5d": -6.14,
+      "as_of": "2026-07-28"
+    },
+    "live.gold": {
+      "name": "Gold",
+      "unit": "USD/oz",
+      "price": 4025.6,
+      "chg1d": -1.2,
+      "chg5d": -1.12,
+      "as_of": "2026-07-28"
+    },
+    "live.vix": {
+      "name": "VIX",
+      "unit": "index",
+      "price": 18.26,
+      "chg1d": -2.2,
+      "chg5d": 7.1,
+      "as_of": "2026-07-28"
+    },
+    "live.us10y": {
+      "name": "US 10Y yield",
+      "unit": "percent",
+      "price": 4.6,
+      "chg1d": -0.8,
+      "chg5d": -0.52,
+      "as_of": "2026-07-28"
+    },
+    "live.dxy": {
+      "name": "US dollar index",
+      "unit": "index",
+      "price": 101.38,
+      "chg1d": -0.09,
+      "chg5d": 0.39,
+      "as_of": "2026-07-28"
+    },
+    "live.xle": {
+      "name": "Energy equities (XLE)",
+      "unit": "USD",
+      "price": 57.64,
+      "chg1d": -1.23,
+      "chg5d": -1.47,
+      "as_of": "2026-07-28"
+    },
+    "live.sp500": {
+      "name": "S&P 500",
+      "unit": "index",
+      "price": 7434.21,
+      "chg1d": 0.28,
+      "chg5d": -1.0,
+      "as_of": "2026-07-28"
+    }
+  }
+}

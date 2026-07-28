@@ -426,3 +426,29 @@ def test_ci1_conflict_intensity():
     assert ci.intensity_band(0.9) == "normal"
     assert ci.intensity_band(0.4) == "quiet"
     assert ci.intensity_band(None) == "n/a"
+
+
+# ---- Source-aware transmission (the 'stop lying' fix) -----------------------
+
+# sa1 -- channel classification: an oil-producer theatre = supply channel; else demand.
+def test_sa1_channel_of():
+    import gpr_signal as g
+    assert g.channel_of(["iran"]) == "supply"
+    assert g.channel_of([]) == "demand"
+
+
+# sa2 -- the verdict compares EXPECTED direction (from source) to the REAL oil move.
+def test_sa2_source_aware_verdict():
+    import gpr_signal as g
+    # supply theatre + oil FALLING = the divergence the old engine missed
+    d = g.source_aware_verdict("supply", -7.9, ["iran"])
+    assert d["flag"] == "divergence" and d["expected"] == "up" and d["actual"] == "down"
+    # supply theatre + oil rising = premium confirming
+    assert g.source_aware_verdict("supply", 5.0, ["iran"])["flag"] == "confirmed"
+    # diffuse risk + oil falling = the demand channel, consistent
+    assert g.source_aware_verdict("demand", -3.0, [])["flag"] == "consistent"
+    # diffuse risk + oil rising = watch (a supply factor may be emerging)
+    assert g.source_aware_verdict("demand", 4.0, [])["flag"] == "watch"
+    # flat / missing
+    assert g.source_aware_verdict("supply", 0.4, ["iran"])["flag"] == "flat"
+    assert g.source_aware_verdict("supply", None, ["iran"])["flag"] == "unknown"

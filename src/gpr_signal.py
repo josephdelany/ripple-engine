@@ -32,7 +32,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 PROP = ROOT / "data" / "propagation.json"
+SITUATIONS = ROOT / "data" / "situations.yaml"
+MARKET = ROOT / "data" / "market_live.json"
 OUT = ROOT / "data" / "gpr_signal.json"
+
+# Oil-producer / chokepoint-controlling countries. A shock concentrated HERE is a
+# SUPPLY-fear shock (country-specific -> oil UP). A diffuse/global risk is a DEMAND-fear
+# shock (-> oil DOWN). Grounded in ECB/AER-2022: global GPR pushes Brent ~-1.2%, country-
+# specific (Iran/Russia/producers) pushes it +0.8-1.5%. This is the source-aware fix.
+OIL_STATES = {"iran", "russia", "saudi_arabia", "uae", "iraq", "kuwait", "qatar",
+              "venezuela", "libya", "nigeria", "algeria"}
 
 # The priced-risk proxy: 20-day realised Brent vol (what the oil market prices as risk).
 PRICED_SERIES = "derived.brent_vol20"
@@ -95,6 +104,65 @@ def n_live_chokepoint():
     return json.loads(PROP.read_text()).get("n_live_chokepoint")
 
 
+def active_supply_countries():
+    """Oil-producer/chokepoint countries in any ACTIVE situation -- the SUPPLY-channel set."""
+    if not SITUATIONS.exists():
+        return []
+    import yaml
+    cfg = yaml.safe_load(SITUATIONS.read_text()) or {}
+    out = set()
+    for s in cfg.get("situations", []):
+        if s.get("status") == "closed":
+            continue
+        for eid in s.get("member_entities", []):
+            if eid.startswith("country.") and eid.split(".", 1)[1] in OIL_STATES:
+                out.add(eid.split(".", 1)[1])
+    return sorted(out)
+
+
+def channel_of(supply_countries):
+    """Which transmission channel dominates: SUPPLY (country-specific -> oil up) or DEMAND
+    (diffuse/global -> oil down). Pure -- unit-tested."""
+    return "supply" if supply_countries else "demand"
+
+
+def fresh_oil_move():
+    """(chg1d, chg5d, as_of) for Brent from the live feed, or (None, None, None)."""
+    if not MARKET.exists():
+        return None, None, None
+    a = (json.loads(MARKET.read_text()).get("assets") or {}).get("live.brent") or {}
+    return a.get("chg1d"), a.get("chg5d"), a.get("as_of")
+
+
+def source_aware_verdict(channel, oil_5d, supply_countries):
+    """Compare the EXPECTED oil direction (from the shock's source) to the REAL move. This is
+    the fix for the engine's old 'aligned while oil craters' lie. Pure -- unit-tested."""
+    expected = "up" if channel == "supply" else "down"
+    if oil_5d is None:
+        return {"expected": expected, "actual": "n/a", "verdict": "no live oil price",
+                "flag": "unknown"}
+    actual = "up" if oil_5d > 1 else "down" if oil_5d < -1 else "flat"
+    who = ", ".join(supply_countries) if supply_countries else "no oil-producer theatre"
+    if channel == "supply" and actual == "down":
+        v, flag = (f"DIVERGENCE — supply-fear theatre active ({who}) yet Brent is FALLING "
+                   f"({oil_5d}% 5d): the market is discounting the supply premium (de-escalation "
+                   f"or demand fear). The oil-price signal contradicts the risk level.", "divergence")
+    elif channel == "supply" and actual == "up":
+        v, flag = (f"CONFIRMED — supply premium pricing in: Brent UP ({oil_5d}% 5d) with a "
+                   f"country-specific shock ({who}).", "confirmed")
+    elif channel == "demand" and actual == "down":
+        v, flag = (f"CONSISTENT — diffuse/global risk with Brent falling ({oil_5d}% 5d): the "
+                   f"demand-fear channel, as expected.", "consistent")
+    elif channel == "demand" and actual == "up":
+        v, flag = (f"WATCH — diffuse risk but Brent RISING ({oil_5d}% 5d): a supply factor may "
+                   f"be emerging that the broad read misses.", "watch")
+    else:
+        v, flag = (f"NEUTRAL — Brent roughly flat ({oil_5d}% 5d); no clear directional signal.",
+                   "flat")
+    return {"channel": channel, "expected": expected, "actual": actual,
+            "oil_5d": oil_5d, "supply_countries": supply_countries, "verdict": v, "flag": flag}
+
+
 def build():
     conn = sqlite3.connect(DB)
     gpr = series_values(conn, "gpr.GPRD")
@@ -121,22 +189,32 @@ def build():
         posture = "anticipatory (threats > acts)" if t_val > a_val else "realised (acts >= threats)"
 
     n_choke = n_live_chokepoint()
+
+    # SOURCE-AWARE transmission: is the risk supply-channel (country-specific -> oil up) or
+    # demand-channel (diffuse -> oil down), and does the REAL oil move confirm or contradict it?
+    supply = active_supply_countries()
+    channel = channel_of(supply)
+    oil_1d, oil_5d, oil_date = fresh_oil_move()
+    transmission = source_aware_verdict(channel, oil_5d, supply)
+
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    headline = (f"Geopolitical risk {band(g_pct)} ({g_pct}th pct); oil-market risk priced "
-                f"{band(p_pct)} ({p_pct}th pct) -> {gband}: {direction}.")
+    # The headline now LEADS with the directional, source-aware read (the fix), not vol-only.
+    headline = (f"Geopolitical risk {band(g_pct)} ({g_pct}th pct). {transmission['verdict']}")
     if n_choke:
-        headline += f" {n_choke} chokepoint chains live."
+        headline += f" ({n_choke} chokepoint chains live.)"
 
     return {
-        "as_of": g_date, "generated_at": now,
-        "note": "Risk-vs-priced divergence. GPR = geopolitical risk in the air; "
-                "derived.brent_vol20 = oil-market realised vol (priced risk). Descriptive "
-                "over full history; NOT the pre-registered study, NOT a calibrated signal.",
+        "as_of": oil_date or g_date, "generated_at": now,
+        "note": "Source-aware transmission read. Channel (supply vs demand) is inferred from "
+                "which theatres are active; the REAL Brent move (live feed) confirms or "
+                "contradicts the expected direction. Descriptive; not the pre-registered study.",
         "gpr": {"value": round(g_val, 1), "date": g_date, "percentile": g_pct,
                 "band": band(g_pct), "posture": posture},
-        "priced": {"series": PRICED_SERIES, "value": round(p_val, 2), "date": p_date,
-                   "percentile": p_pct, "band": band(p_pct)},
-        "divergence": {"gap_pctpts": gap, "band": gband, "direction": direction},
+        "transmission": transmission,
+        "oil_live": {"chg1d": oil_1d, "chg5d": oil_5d, "as_of": oil_date},
+        "priced_vol": {"series": PRICED_SERIES, "value": round(p_val, 2), "date": p_date,
+                       "percentile": p_pct, "band": band(p_pct)},
+        "vol_divergence": {"gap_pctpts": gap, "band": gband, "direction": direction},
         "live_chokepoint_chains": n_choke,
         "headline": headline}
 

@@ -59,6 +59,7 @@ STEPS = [
     ("fetch_gdelt_tone", "src/fetch_gdelt_tone.py", "observations"),
     # Per-situation media conflict intensity (GDELT volume+tone). File output.
     ("conflict_intens", "src/fetch_conflict_intensity.py", "observations"),
+    ("fetch_market",   "src/fetch_market_live.py", "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Record keeper: link any situation atom whose source_url now matches a
