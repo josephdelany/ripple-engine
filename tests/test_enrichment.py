@@ -161,3 +161,41 @@ def test_e7_gdelt_latest_tone():
     assert g.latest_tone(js) == -3.5
     assert g.latest_tone('{"timeline":[]}') is None
     assert g.latest_tone("not json") is None
+
+
+# ---- Calibration: corroboration weights vs resolved outcomes ---------------
+
+# c1 -- Brier is a proper score: perfect confident predictions ~0, confident-wrong ~1.
+def test_c1_brier():
+    import calibrate_corroboration as cal
+    assert cal.brier([1.0, 0.0], [1, 0]) == 0.0
+    assert cal.brier([0.9, 0.9, 0.1, 0.1], [1, 1, 0, 0]) == 0.01
+    assert cal.brier([0.9, 0.9], [0, 0]) == 0.81
+    assert cal.brier([], []) is None
+
+
+# c2 -- reliability diagram: each band reports mean predicted vs observed real-rate.
+def test_c2_reliability_and_refit():
+    import calibrate_corroboration as cal
+    rb = cal.reliability_buckets([0.8, 0.85, 0.2, 0.15], [1, 1, 0, 0])
+    hi = [b for b in rb if b["band"].startswith("0.75")][0]
+    assert hi["observed_rate"] == 1.0 and hi["n"] == 2
+    # refit only fires on a sufficient, balanced labeled set.
+    small = {str(i): {"confidence": "0.8", "label": "1", "n_independent": "3"}
+             for i in range(5)}
+    assert cal.calibrate(small)["refit"] is None            # too few + one class
+    balanced = {str(i): {"confidence": "0.8", "label": str(i % 2),
+                         "n_independent": "3"} for i in range(40)}
+    assert cal.calibrate(balanced)["refit"]["prior_prob"] == 0.5   # base rate
+
+
+# c3 -- gate auto-confirm labels a logged event 1 when its source_url is now a
+# coded event; positive-only (never auto-negative).
+def test_c3_gate_auto_confirm():
+    import calibrate_corroboration as cal
+    rows = {"k1": {"label": "", "source_urls": "http://a/1|http://b/2",
+                   "resolved_at": ""},
+            "k2": {"label": "", "source_urls": "http://c/3", "resolved_at": ""}}
+    n = cal.auto_confirm(rows, {"http://a/1"}, "2026-07-28T00:00:00")
+    assert n == 1 and rows["k1"]["label"] == "1"
+    assert rows["k2"]["label"] == ""                        # unmatched stays unlabeled

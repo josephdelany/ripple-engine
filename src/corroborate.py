@@ -47,12 +47,37 @@ FACILITY_TERMS = {"abqaiq": "abqaiq", "ras tanura": "ras_tanura",
                   "khurais": "khurais", "kharg": "kharg",
                   "ras laffan": "ras_laffan", "jamnagar": "jamnagar"}
 
-# --- the weight-of-evidence model (engine-chosen constants, tunable, to calibrate) ---
-PRIOR_PROB = 0.10            # base rate that a raw alert marks a real, significant event
-# Decibans added by the 1st, 2nd, ... INDEPENDENT source (diminishing returns).
-ADDL_DECIBANS = [6, 5, 4, 3, 2, 1]
-CAP_PROB = 0.97             # never claim certainty -- correlated evidence is real
+# --- the weight-of-evidence model -----------------------------------------------
+# These are the CALIBRATABLE layer. They start as engine-chosen constants and are
+# refined by calibrate_corroboration.py against resolved outcomes (the human gate),
+# written to data/corroboration_weights.json. Read that file if present so learned
+# weights survive across runs; fall back to these defaults otherwise.
+WEIGHTS_FILE = ROOT / "data" / "corroboration_weights.json"
+DEFAULT_WEIGHTS = {
+    "prior_prob": 0.10,          # base rate that a raw alert marks a real event
+    "addl_decibans": [6, 5, 4, 3, 2, 1],   # weight of the 1st,2nd,... indep source
+    "cap_prob": 0.97,            # never claim certainty (correlated evidence is real)
+}
 SIM_THRESHOLD = 72         # rapidfuzz token_sort_ratio to call two headlines "same event"
+# Back-compat references to the default weights (score() uses the loaded weights).
+PRIOR_PROB = DEFAULT_WEIGHTS["prior_prob"]
+ADDL_DECIBANS = DEFAULT_WEIGHTS["addl_decibans"]
+CAP_PROB = DEFAULT_WEIGHTS["cap_prob"]
+
+
+def load_weights():
+    """The calibratable weights: learned file over defaults."""
+    w = dict(DEFAULT_WEIGHTS)
+    if WEIGHTS_FILE.exists():
+        try:
+            w.update({k: v for k, v in json.loads(WEIGHTS_FILE.read_text()).items()
+                      if k in DEFAULT_WEIGHTS})
+        except (ValueError, OSError):
+            pass
+    return w
+
+
+_WEIGHTS = load_weights()
 
 
 def _domain(url):
@@ -90,13 +115,16 @@ def cluster_atoms(atoms, threshold=SIM_THRESHOLD):
     return clusters
 
 
-def score(n_independent):
+def score(n_independent, weights=None):
     """Weight-of-evidence -> (decibans, probability, confidence tag) for a cluster
-    backed by n_independent sources. Diminishing returns; capped below certainty."""
-    db = _prob_to_db(PRIOR_PROB)
+    backed by n_independent sources. Diminishing returns; capped below certainty.
+    Uses the calibratable weights (learned file, or defaults)."""
+    w = weights or _WEIGHTS
+    addl = w["addl_decibans"]
+    db = _prob_to_db(w["prior_prob"])
     for i in range(n_independent):
-        db += ADDL_DECIBANS[i] if i < len(ADDL_DECIBANS) else 0
-    p = min(_db_to_prob(db), CAP_PROB)
+        db += addl[i] if i < len(addl) else 0
+    p = min(_db_to_prob(db), w["cap_prob"])
     tag = ("corroborated" if p >= 0.75 else "likely" if p >= 0.45
            else "possible" if p >= 0.25 else "unverified")
     return round(db, 1), round(p, 3), tag
@@ -174,6 +202,7 @@ def corroborate_situation(conn, sid, disrupted=None, elevated=None):
             "headline": rep["headline"], "kind": rep["kind"],
             "n_atoms": len(c), "n_independent_sources": n_indep,
             "sources": domains[:8], "modalities": modalities,
+            "source_urls": sorted({a["source_url"] for a in c if a["source_url"]})[:10],
             "confidence": p, "confidence_db": db, "tag": tag,
             "latest_ts": max(a["ts"] for a in c)[:10]})
     events.sort(key=lambda e: (e["confidence"], e["n_atoms"]), reverse=True)

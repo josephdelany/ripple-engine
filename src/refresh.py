@@ -73,6 +73,9 @@ STEPS = [
     # Corroboration brain: cluster the timeline into events + score confidence by
     # independent-source convergence (weight-of-evidence). File output, 0 DB rows.
     ("corroborate",    "src/corroborate.py",    "observations"),
+    # Calibration loop: log corroboration predictions, gate-confirm, score
+    # reliability (Brier) -- calibrates the weights as labels accrue.
+    ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),
     # Record keeper: resolve any logged read whose 20-day window has elapsed and
     # score the engine's magnitude calibration (realized - expected).
     ("resolve_reads",   "src/resolve_reads.py",  "reads"),

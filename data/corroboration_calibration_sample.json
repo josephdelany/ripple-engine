@@ -1,0 +1,5 @@
+{
+  "n_labeled": 0,
+  "note": "no labeled events yet -- tag the `label` column (1=real, 0=noise) to begin calibrating.",
+  "as_of": "2026-07-28"
+}

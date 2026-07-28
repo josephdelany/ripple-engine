@@ -37,3 +37,5 @@ data/corroboration.json
 data/portwatch.json
 # Wikipedia attention snapshot, regenerated every run; committed sample is the receipt.
 data/wiki_attention.json
+# Calibration report, regenerated every run; committed sample is the receipt.
+data/corroboration_calibration.json
