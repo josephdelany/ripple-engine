@@ -395,6 +395,13 @@ def root():
     return {"status": "ok", "engine": "ripple-engine"}
 
 
+@app.get("/agents.json")
+def agents():
+    """OpenBB probes this for a custom AI copilot (a paid feature we don't use). Return an
+    empty list so the Workspace stops 404-ing -- no copilot, by design."""
+    return []
+
+
 @app.get("/apps.json")
 def apps():
     """A pre-built, arranged dashboard so OpenBB shows a ready-made 'Ripple Engine'
