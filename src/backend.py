@@ -48,6 +48,35 @@ def _read_json(name, default=None):
         return json.loads(p.read_text())
     except (ValueError, OSError):
         return default if default is not None else {}
+
+
+def _series(conn, series_id, days=140):
+    """(dates, values) for one series, newest-`days`, de-duped by date. For charts."""
+    seen, out = set(), []
+    for d, v in conn.execute(
+            "SELECT obs_date, value FROM observations WHERE series_id=? "
+            "ORDER BY obs_date DESC, as_of DESC", (series_id,)):
+        if d in seen or v is None:
+            continue
+        seen.add(d)
+        out.append((d, v))
+        if len(out) >= days:
+            break
+    out.reverse()
+    return [d for d, _ in out], [v for _, v in out]
+
+
+def _line_fig(title, traces, ytitle=""):
+    """A dark-mode-friendly Plotly line figure as a plain dict (no plotly dep).
+    traces = [(name, dates, values), ...]."""
+    return {
+        "data": [{"x": x, "y": y, "type": "scatter", "mode": "lines", "name": n}
+                 for n, x, y in traces if x],
+        "layout": {"title": {"text": title}, "margin": {"t": 40, "r": 15, "b": 35, "l": 45},
+                   "paper_bgcolor": "rgba(0,0,0,0)", "plot_bgcolor": "rgba(0,0,0,0)",
+                   "font": {"color": "#c7ccd6"}, "yaxis": {"title": ytitle},
+                   "legend": {"orientation": "h"}, "template": "plotly_dark"},
+    }
 PORT = 5050
 
 app = FastAPI(title="Ripple Engine backend")
@@ -171,6 +200,29 @@ WIDGETS = {
         "endpoint": "supply_fundamentals",
         "gridData": {"w": 30, "h": 10},
         "type": "table",
+    },
+    # --- Charts (Plotly) -- the visual layer, not just tables ---
+    "chart_brent": {
+        "name": "Brent Crude ($/bbl)",
+        "description": "Brent spot price (FRED). The market's headline number over time.",
+        "endpoint": "chart_brent",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
+    },
+    "chart_chokepoints": {
+        "name": "Chokepoint Tanker Flow",
+        "description": "Daily tanker transits through Hormuz / Bab el-Mandeb / Suez "
+                       "(IMF PortWatch) -- the physical-flow trend.",
+        "endpoint": "chart_chokepoints",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
+    },
+    "chart_attention": {
+        "name": "Attention Over Time",
+        "description": "Wikipedia pageviews for the situation's pages -- attention spikes.",
+        "endpoint": "chart_attention",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
     },
 }
 
@@ -524,6 +576,42 @@ def supply_fundamentals():
                         "unit": unit, "as_of": row[0]})
     conn.close()
     return out or [{"series": "(run fetch_eia_fundamentals.py)", "latest": ""}]
+
+
+@app.get("/chart_brent")
+def chart_brent():
+    """Brent spot price line chart (Plotly)."""
+    conn = sqlite3.connect(DB)
+    x, y = _series(conn, "fred.DCOILBRENTEU", 180)
+    conn.close()
+    return _line_fig("Brent crude spot ($/bbl)", [("Brent", x, y)], "$/bbl")
+
+
+@app.get("/chart_chokepoints")
+def chart_chokepoints():
+    """Daily tanker transits through the key chokepoints (Plotly, multi-line)."""
+    conn = sqlite3.connect(DB)
+    traces = []
+    for name, slug in (("Hormuz", "hormuz"), ("Bab el-Mandeb", "bab_el_mandeb"),
+                       ("Suez", "suez")):
+        x, y = _series(conn, f"portwatch.{slug}.n_tanker", 120)
+        traces.append((name, x, y))
+    conn.close()
+    return _line_fig("Chokepoint tanker transits / day (IMF PortWatch)", traces,
+                     "tankers/day")
+
+
+@app.get("/chart_attention")
+def chart_attention():
+    """Wikipedia pageviews over time for the situation's pages (Plotly, multi-line)."""
+    conn = sqlite3.connect(DB)
+    traces = []
+    for name, slug in (("Hormuz", "hormuz"), ("Bab el-Mandeb", "bab_el_mandeb"),
+                       ("Iran war", "iran_war")):
+        x, y = _series(conn, f"wiki.views.{slug}", 90)
+        traces.append((name, x, y))
+    conn.close()
+    return _line_fig("Wikipedia pageviews (attention)", traces, "views/day")
 
 
 if __name__ == "__main__":
