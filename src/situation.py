@@ -23,6 +23,7 @@ Run:  python3 src/situation.py
 """
 
 import csv
+import json
 import sqlite3
 import sys
 from datetime import datetime, timezone
@@ -41,6 +42,7 @@ DB = ROOT / "data" / "oil.db"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
+PREDMKT = ROOT / "data" / "predmkt.json"
 DOSSIER_DIR = ROOT / "data" / "situations"
 BRENT = "fred.DCOILBRENTEU"
 TIMELINE_CAP = 60          # newest-N atoms shown in the dossier (says so if more)
@@ -145,9 +147,28 @@ def load_engine_read(path=ENGINE_READ):
     if not Path(path).exists():
         return {}
     try:
-        return __import__("json").loads(Path(path).read_text())
+        return json.loads(Path(path).read_text())
     except (ValueError, OSError):
         return {}
+
+
+def relevant_markets(sit, limit=6):
+    """Prediction-market odds whose question matches this situation's members --
+    the live 'what's priced' for the same events. Display/context only, never a stat.
+    Matched by keyword so it needs no schema coupling."""
+    if not PREDMKT.exists():
+        return []
+    try:
+        markets = json.loads(PREDMKT.read_text()).get("markets", [])
+    except (ValueError, OSError):
+        return []
+    terms = {"oil", "crude", "brent", "wti", "opec"}
+    for eid in sit.get("member_entities", []):
+        key = eid.split(".", 1)[1] if "." in eid else eid
+        terms.add(key.replace("_", " "))
+    hits = [m for m in markets
+            if any(t in (m.get("question") or "").lower() for t in terms)]
+    return sorted(hits, key=lambda m: m.get("volume", 0), reverse=True)[:limit]
 
 
 def latest_brent(conn):
@@ -166,9 +187,11 @@ def latest_brent(conn):
     return out
 
 
-def _priced_state_md(conn, sit, er):
+def _priced_state_md(conn, sit, er, include_markets=True):
     """The priced-state block: Brent + amplifiers + the situation's channel base
-    rates, all pulled verbatim from engine_read.json / observations."""
+    rates, all pulled verbatim from engine_read.json / observations. Optionally the
+    live market-implied board (display); the fabrication guard calls this with
+    include_markets=False so its allowed-number set stays deterministic + tight."""
     lines = ["## Priced-state — what history says, conditioned on today", ""]
 
     brent = latest_brent(conn)
@@ -217,6 +240,18 @@ def _priced_state_md(conn, sit, er):
         else:
             lines.append(f"| {k} | — | (not in engine_read base rates) | | | |")
     lines.append("")
+
+    # What the CROWD prices for this situation's events -- history (above) vs the
+    # live market-implied probability (here). Context only, never a registered stat.
+    mk = relevant_markets(sit) if include_markets else []
+    if mk:
+        lines += ["**Market-implied (Polymarket)** — what's priced for these events "
+                  "_(context only, not a stat):_", ""]
+        for m in mk:
+            lines.append(f"- **{m.get('prob', 0) * 100:.0f}%** {m.get('outcome', '')} "
+                         f"— [{m.get('question', '')}]({m.get('url', '')}) "
+                         f"(vol ${m.get('volume', 0):,.0f})")
+        lines.append("")
     return "\n".join(lines)
 
 

@@ -89,7 +89,10 @@ def validate(agent_out, conn):
     syn = (agent_out.get("synthesis") or "").strip()
     if not syn:
         errors.append("synthesis is empty")
-    priced = situation._priced_state_md(conn, sit, situation.load_engine_read())
+    # include_markets=False: the fabrication guard's allowed-number set must be the
+    # engine's stable computed numbers, not the volatile prediction-market board.
+    priced = situation._priced_state_md(conn, sit, situation.load_engine_read(),
+                                        include_markets=False)
     allowed = allowed_numbers(conn, sid, priced)
     bad = sorted(n for n in _numbers(syn) if n not in allowed)
     if bad:
