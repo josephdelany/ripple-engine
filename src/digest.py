@@ -30,6 +30,7 @@ ENGINE_READ = ROOT / "data" / "engine_read.json"
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
+PREDMKT = ROOT / "data" / "predmkt.json"
 OUT = ROOT / "data" / "digest.html"
 
 # The ribbon: (label, series_id, unit, decimals). GPR is handled separately (it
@@ -151,6 +152,21 @@ def situations_summary(conn):
     return out
 
 
+def predmkt_top(limit=8):
+    """Top oil/geopolitics prediction markets by volume (already sorted). [] if
+    not generated. Prefers markets that aren't near-resolved (0.02<p<0.98) so the
+    board shows live uncertainty, not settled questions."""
+    if not PREDMKT.exists():
+        return []
+    try:
+        data = json.loads(PREDMKT.read_text())
+    except (OSError, ValueError):
+        return []
+    mk = data.get("markets", [])
+    live = [m for m in mk if 0.02 < m.get("prob", 0) < 0.98] or mk
+    return live[:limit]
+
+
 def e(x):
     return html.escape(str(x if x is not None else ""))
 
@@ -262,6 +278,23 @@ def render():
                     f"rel=noopener>{e(headline)}</a> · "
                     f"<span class=tag>{e(kind)}</span> · {e((ts or '')[:10])}</div>")
             parts.append("</div>")
+
+    # e3. Market-implied odds -- what the crowd PRICES for the same events (the
+    # engine's "read vs priced" thesis, made live). Context only, never the stats.
+    pm = predmkt_top(8)
+    if pm:
+        parts.append("<h2 class=sec>Market-implied odds</h2>")
+        parts.append("<div class=lbl>Polymarket · what's priced · context only, not "
+                     "a stat</div>")
+        for m in pm:
+            pct = f"{m.get('prob', 0) * 100:.0f}"
+            vol = f"{m.get('volume', 0):,.0f}"
+            ends = f" · ends {e(m.get('end_date',''))}" if m.get("end_date") else ""
+            parts.append(
+                f"<div class=alert><a href='{e(m.get('url',''))}' target=_blank "
+                f"rel=noopener>{e(m.get('question',''))}</a>"
+                f"<div class=meta><b>{pct}%</b> {e(m.get('outcome',''))} · "
+                f"vol ${e(vol)}{ends}</div></div>")
 
     # f. Footer
     parts.append("<div class=foot>Every number is computed from committed data. "

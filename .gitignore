@@ -29,3 +29,5 @@ data/integrity_state.json
 # Situation dossiers are re-rendered every refresh; data/situations_sample.md is
 # the committed snapshot receipt. (situations.yaml IS committed -- it's config.)
 data/situations/
+# Prediction-market snapshot, regenerated every run; data/predmkt_sample.json is the receipt.
+data/predmkt.json
