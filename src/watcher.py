@@ -68,11 +68,26 @@ ALERT_FIELDS = ["timestamp_utc", "source", "headline", "url", "matched_entities"
 # USA is deliberately OMITTED from the GDELT actor net: as a lone actor it floods
 # the stream with domestic-politics noise. US oil relevance still surfaces via the
 # OTHER actor (e.g. "USA sanctions IRAN" matches on IRN) and via RSS keywords.
+# Eyes on the whole world (with the Gulf as the deep lens). GDELT is global; this is
+# the country net it matches against. Comprehensive on the geopolitically-active
+# world; extend freely. slug -> ISO-3 actor code. (USA deliberately omitted from the
+# GDELT actor net -- it floods on domestic-politics noise.)
 COUNTRY_CC = {
-    "iran": "IRN", "iraq": "IRQ", "saudi_arabia": "SAU", "russia": "RUS",
-    "libya": "LBY", "venezuela": "VEN", "kuwait": "KWT", "uae": "ARE",
-    "ukraine": "UKR", "georgia": "GEO", "israel": "ISR", "lebanon": "LBN",
-    "yemen": "YEM", "thailand": "THA",
+    # Middle East + North Africa (the deep lens)
+    "iran": "IRN", "iraq": "IRQ", "saudi_arabia": "SAU", "israel": "ISR",
+    "lebanon": "LBN", "yemen": "YEM", "syria": "SYR", "uae": "ARE", "qatar": "QAT",
+    "kuwait": "KWT", "oman": "OMN", "bahrain": "BHR", "jordan": "JOR", "egypt": "EGY",
+    "turkey": "TUR", "libya": "LBY",
+    # Russia / Ukraine / Europe
+    "russia": "RUS", "ukraine": "UKR", "belarus": "BLR", "poland": "POL",
+    "germany": "DEU", "france": "FRA", "united_kingdom": "GBR", "georgia": "GEO",
+    # Asia-Pacific (the second flashpoint belt)
+    "china": "CHN", "taiwan": "TWN", "north_korea": "PRK", "south_korea": "KOR",
+    "japan": "JPN", "india": "IND", "pakistan": "PAK", "afghanistan": "AFG",
+    "philippines": "PHL", "thailand": "THA", "myanmar": "MMR", "indonesia": "IDN",
+    # Americas + Africa
+    "venezuela": "VEN", "mexico": "MEX", "sudan": "SDN", "nigeria": "NGA",
+    "ethiopia": "ETH",
 }
 
 # Heuristic keyword -> closest playbook event type. LABELLED heuristic; it is a
@@ -122,17 +137,16 @@ def load_entity_net(conn):
     """Entity match terms (for RSS text) and country codes (for GDELT actors).
     Skips tiny/ambiguous names (usa/eu/who) that would false-match everything."""
     rows = conn.execute("SELECT entity_id, type, name FROM entities").fetchall()
-    terms, codes = {}, set()
+    # Eyes on everything: the GDELT actor net is the WHOLE country map, not just the
+    # countries that happen to have an entity row. RSS text-matching still uses the
+    # (richer, named) entity terms.
+    terms, codes = {}, set(COUNTRY_CC.values())
     stop = {"usa", "eu", "who"}
     for eid, etype, name in rows:
         if etype in ("country", "chokepoint", "commodity", "institution"):
             nm = (name or "").lower()
             if len(nm) >= 3 and nm not in stop:
                 terms[nm] = eid                      # matchable name -> entity id
-        if etype == "country":
-            key = eid.split(".", 1)[1]               # 'country.iran' -> 'iran'
-            if key in COUNTRY_CC:
-                codes.add(COUNTRY_CC[key])
     return terms, codes
 
 

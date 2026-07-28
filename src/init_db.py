@@ -171,6 +171,18 @@ ENTITIES = [
     # never creates false alert matches. Membership lives in data/situations.yaml.
     ("situation.israel_iran_war_2025", "situation", "Israel-Iran War (2025- )",
      "Ongoing multi-front conflict; membership + config in data/situations.yaml."),
+    # Focus entities for the non-Gulf theaters (the rest of the world is watched via
+    # the GDELT country net; these get named entities for RSS + situations).
+    ("situation.russia_ukraine_war", "situation", "Russia-Ukraine War",
+     "Membership + config in data/situations.yaml."),
+    ("situation.china_taiwan_tension", "situation", "China-Taiwan Tension",
+     "Membership + config in data/situations.yaml."),
+    ("situation.israel_lebanon_hezbollah", "situation", "Israel-Lebanon (Hezbollah)",
+     "Membership + config in data/situations.yaml."),
+    ("country.china", "country", "China", "Asia-Pacific flashpoint (Taiwan, trade)"),
+    ("country.taiwan", "country", "Taiwan", "Cross-strait tension; semiconductors"),
+    ("chokepoint.taiwan_strait", "chokepoint", "Taiwan Strait", "Cross-strait shipping"),
+    ("chokepoint.malacca", "chokepoint", "Malacca Strait", "Asia energy/trade artery"),
 ]
 SERIES = [
     ("fred.DCOILWTICO",   "WTI Crude Oil Spot Price",   "commodity.wti",

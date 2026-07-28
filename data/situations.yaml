@@ -33,3 +33,47 @@ situations:
       - conflict_escalation
       - chokepoint_disruption
       - infrastructure_attack
+
+  - situation_id: situation.russia_ukraine_war
+    title: "Russia-Ukraine War"
+    archetype: war_geopolitical
+    status: active
+    started_at: "2022-02-24"
+    member_entities:
+      - country.russia
+      - country.ukraine
+      - country.belarus
+      - commodity.brent
+      - commodity.natgas
+    dominant_kinds:
+      - conflict_escalation
+      - sanctions
+      - infrastructure_attack
+
+  - situation_id: situation.china_taiwan_tension
+    title: "China-Taiwan Tension"
+    archetype: great_power_standoff
+    status: active
+    started_at: "2022-08-02"
+    member_entities:
+      - country.china
+      - country.taiwan
+      - chokepoint.taiwan_strait
+      - chokepoint.malacca
+    dominant_kinds:
+      - conflict_escalation
+      - chokepoint_disruption
+      - sanctions
+
+  - situation_id: situation.israel_lebanon_hezbollah
+    title: "Israel-Lebanon (Hezbollah)"
+    archetype: war_geopolitical
+    status: active
+    started_at: "2023-10-08"
+    member_entities:
+      - country.israel
+      - country.lebanon
+      - country.iran
+    dominant_kinds:
+      - conflict_escalation
+      - infrastructure_attack
