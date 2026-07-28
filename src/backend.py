@@ -254,6 +254,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "chart_oil_map": {
+        "name": "Oil Transit Map",
+        "description": "The physical map: oil chokepoints sized by throughput (Mb/d, EIA), "
+                       "coloured by live status -- red disrupted (PortWatch flow), amber "
+                       "watch (active-situation theatre), blue normal. Key oil ports shown.",
+        "endpoint": "chart_oil_map",
+        "gridData": {"w": 40, "h": 13},
+        "type": "chart",
+    },
     "commodity_exposure": {
         "name": "Strategic Commodity Exposure",
         "description": "Critical commodities under geopolitical stress -- a key producer "
@@ -346,12 +355,13 @@ APPS = [{
         "physical": {
             "id": "physical", "name": "Physical & Market",
             "layout": [
-                _lw("chart_brent", 0, 0, 40, 9),
-                _lw("supply_fundamentals", 0, 9, 20, 9),
-                _lw("chokepoint_transits", 20, 9, 20, 9),
-                _lw("state_of_system", 0, 18, 20, 9),
-                _lw("attention", 20, 18, 20, 9),
-                _lw("commodity_exposure", 0, 27, 40, 12),
+                _lw("chart_oil_map", 0, 0, 40, 13),
+                _lw("chart_brent", 0, 13, 40, 9),
+                _lw("supply_fundamentals", 0, 22, 20, 9),
+                _lw("chokepoint_transits", 20, 22, 20, 9),
+                _lw("state_of_system", 0, 31, 20, 9),
+                _lw("attention", 20, 31, 20, 9),
+                _lw("commodity_exposure", 0, 40, 40, 12),
             ],
         },
         "history": {
@@ -893,6 +903,64 @@ def where_we_stand(situation: str = _SIT_DEFAULT):
     # Keep everything up to the raw timeline table (synthesis + priced-state + odds).
     cut = text.find("## Timeline")
     return text[:cut].strip() if cut > 0 else text
+
+
+def oil_map_status(flag, adj_active):
+    """Status bucket for a chokepoint: physical-flow anomaly (PortWatch) wins; else whether
+    its theatre is in an active situation; else normal. Pure -- unit-tested."""
+    if flag == "reduced":
+        return "disrupted"
+    if flag == "elevated":
+        return "elevated"
+    return "watch" if adj_active else "normal"
+
+
+_STATUS_COLOR = {"disrupted": "#e8663a", "elevated": "#d9a441",
+                 "watch": "#c9b23a", "normal": "#4a90d9"}
+
+
+@app.get("/chart_oil_map")
+def chart_oil_map():
+    """The physical oil map (Plotly scattergeo, no map token): chokepoints sized by mb/d,
+    coloured by live status (PortWatch flow anomaly + active-situation theatre), key oil
+    ports as reference. The geography is sourced in data/oil_map.yaml (EIA)."""
+    import yaml
+    cfg = yaml.safe_load((DATA / "oil_map.yaml").read_text()) or {}
+    pw = {c.get("chokepoint"): c.get("flag")
+          for c in _read_json("portwatch.json", {}).get("chokepoints", [])}
+    active = set(_read_json("propagation.json", {}).get("active_situation_countries", []))
+
+    lat, lon, size, color, text = [], [], [], [], []
+    for slug, c in (cfg.get("chokepoints") or {}).items():
+        adj_active = any(a in active for a in c.get("adjacent", []))
+        status = oil_map_status(pw.get(slug), adj_active)
+        lat.append(c["lat"]); lon.append(c["lon"])
+        size.append(9 + float(c.get("mbd", 3)))
+        color.append(_STATUS_COLOR[status])
+        text.append(f"{c['name']} — {c.get('mbd','?')} Mb/d — {status}")
+    choke = {"type": "scattergeo", "lat": lat, "lon": lon, "text": text, "mode": "markers",
+             "name": "chokepoints", "hoverinfo": "text",
+             "marker": {"size": size, "color": color, "line": {"width": 0.5, "color": "#0b0d10"},
+                        "opacity": 0.9}}
+
+    plat, plon, ptext = [], [], []
+    for slug, p in (cfg.get("ports") or {}).items():
+        plat.append(p["lat"]); plon.append(p["lon"]); ptext.append(p["name"])
+    ports = {"type": "scattergeo", "lat": plat, "lon": plon, "text": ptext, "mode": "markers",
+             "name": "oil ports", "hoverinfo": "text",
+             "marker": {"size": 6, "color": "#8a93a3", "symbol": "diamond"}}
+
+    return {
+        "data": [choke, ports],
+        "layout": {"title": {"text": "Oil transit map — chokepoints by throughput & status"},
+                   "margin": {"t": 40, "r": 0, "b": 0, "l": 0},
+                   "paper_bgcolor": "rgba(0,0,0,0)", "font": {"color": "#c7ccd6"},
+                   "legend": {"orientation": "h"}, "template": "plotly_dark",
+                   "geo": {"projection": {"type": "natural earth"}, "bgcolor": "rgba(0,0,0,0)",
+                           "showland": True, "landcolor": "#1a1d24", "showocean": True,
+                           "oceancolor": "#0f1116", "showcountries": True,
+                           "countrycolor": "#2a2e37", "coastlinecolor": "#2a2e37"}},
+    }
 
 
 @app.get("/chart_brent")

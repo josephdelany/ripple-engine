@@ -397,3 +397,14 @@ def test_fc2_backtest():
                           {"p": 0.9, "outcome": 1}])
     assert rel[0]["n"] == 2 and rel[0]["mean_outcome"] == 0.5
     assert rel[-1]["n"] == 1 and rel[-1]["mean_pred"] == 0.9
+
+
+# ---- Oil map status --------------------------------------------------------
+
+# om1 -- chokepoint status: PortWatch anomaly wins; else active theatre; else normal.
+def test_om1_oil_map_status():
+    import backend
+    assert backend.oil_map_status("reduced", False) == "disrupted"
+    assert backend.oil_map_status("elevated", False) == "elevated"
+    assert backend.oil_map_status(None, True) == "watch"      # theatre active
+    assert backend.oil_map_status(None, False) == "normal"
