@@ -26,6 +26,7 @@ Run:  python3 src/heartbeat.py
 
 import csv
 import json
+import os
 import sqlite3
 import sys
 from datetime import datetime, timezone
@@ -35,6 +36,41 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 LOG = ROOT / "data" / "refresh_log.csv"
 OUT = ROOT / "data" / "health_status.json"
+NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
+ALERT_SEEN = ROOT / "data" / "state" / "health_alert_seen.txt"
+
+
+def push_health_alert(health):
+    """Push a phone alert (ntfy) when DATA health is TROUBLE -- so the engine tells you when
+    it's broken, not just news. Deduped by the trouble fingerprint so a durable break doesn't
+    spam every run; cleared on recovery. No-op (dry-run print) if NTFY_TOPIC is unset."""
+    prev = ALERT_SEEN.read_text().strip() if ALERT_SEEN.exists() else ""
+    if health["overall"] != "TROUBLE":
+        if prev:                                     # recovered -> reset so next break re-alerts
+            ALERT_SEEN.write_text("")
+        return
+    bad = sorted(f"{r['series_id']}:{r['status']}" for r in health["series"]
+                 if r["status"] != "OK")
+    if health["last_refresh"].get("state") == "failures":
+        bad.append("refresh:failures")
+    fingerprint = ";".join(bad)
+    if fingerprint == prev:                          # same trouble already alerted
+        return
+    ALERT_SEEN.parent.mkdir(parents=True, exist_ok=True)
+    ALERT_SEEN.write_text(fingerprint)
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic:
+        print(f"  [health alert dry-run] would push: {fingerprint or 'trouble'}")
+        return
+    try:
+        import requests
+        body = "Data health TROUBLE: " + (", ".join(bad[:6]) or "refresh failed")
+        requests.post(f"{NTFY_SERVER}/{topic}", data=body.encode("utf-8"),
+                      headers={"Title": "Ripple Engine: data health", "Priority": "high",
+                               "Tags": "warning"}, timeout=15)
+        print(f"  [health alert] pushed to ntfy ({len(bad)} issue(s)).")
+    except Exception as e:
+        print(f"  [health alert] push failed ({type(e).__name__}).")
 
 CADENCE_DAYS = {"daily": 1, "weekly": 7, "monthly": 30}
 STALE_MULT, DEAD_MULT = 2, 4
@@ -133,6 +169,7 @@ def main():
         "last_refresh": refresh,
     }
     OUT.write_text(json.dumps(health, indent=2))
+    push_health_alert(health)                        # ping the phone if data is broken
 
     # --- Human-readable report ---
     print("=" * 72)

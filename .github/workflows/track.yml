@@ -40,6 +40,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run tests (gate -- a broken build never reaches prod)
+        run: |
+          pip install pytest
+          python3 -m pytest -q
+
       - name: Rebuild schema + restore durable memory
         run: |
           python3 src/init_db.py
@@ -50,6 +55,12 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
           FIRMS_KEY: ${{ secrets.FIRMS_KEY }}   # optional: satellite-fire modality
         run: python3 src/refresh.py
+
+      - name: Data health check + alert (non-gating -- pings phone if data broke)
+        continue-on-error: true
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 src/heartbeat.py
 
       - name: Snapshot memory + push high-signal alerts
         env:
