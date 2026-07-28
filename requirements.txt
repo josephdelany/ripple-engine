@@ -7,6 +7,7 @@ requests
 matplotlib
 pyyaml          # situations.yaml + digest situations card
 feedparser      # watcher RSS feeds
+rapidfuzz       # corroborate.py headline clustering (fast, C++-backed, CI-light)
 xlrd            # fetch_gpr reads the GPR .xls
 # NOTE: the local MCP server (src/mcp_server.py) additionally needs `mcp`; it runs
 # only on your workstation, not in CI -- install it there per ops/MCP.md.

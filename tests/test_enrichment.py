@@ -39,3 +39,44 @@ def test_e1b_parse_rejects_dead_markets():
     assert fetch_predmkt.parse_market({**base, "outcomePrices": "[]"}) is None
     assert fetch_predmkt.parse_market(None) is None
     assert fetch_predmkt.parse_market({**base}) is not None      # the good one
+
+
+# ---- E3: corroboration (cluster + weight-of-evidence) ----------------------
+
+# e3 -- near-duplicate headlines cluster together; a distinct one stays separate.
+def test_e3_cluster_collapses_duplicates():
+    import corroborate
+    atoms = [
+        {"headline": "Houthis strike Saudi oil facility in Red Sea", "source_url": "http://a.com/1"},
+        {"headline": "Saudi oil facility struck by Houthis in Red Sea", "source_url": "http://b.com/2"},
+        {"headline": "Fed holds interest rates steady", "source_url": "http://c.com/3"},
+    ]
+    clusters = corroborate.cluster_atoms(atoms, threshold=72)
+    sizes = sorted(len(c) for c in clusters)
+    assert sizes == [1, 2]                     # the two Houthi items merge; Fed alone
+
+
+# e3b -- weight-of-evidence: more INDEPENDENT sources -> higher confidence, and it
+# never reaches certainty (correlated evidence can't manufacture 100%).
+def test_e3b_score_monotonic_and_capped():
+    import corroborate
+    p1 = corroborate.score(1)[1]
+    p2 = corroborate.score(2)[1]
+    p4 = corroborate.score(4)[1]
+    assert p1 < p2 < p4                          # more independent sources -> more confident
+    assert corroborate.score(50)[1] <= corroborate.CAP_PROB   # never certain
+    assert corroborate.score(1)[2] in ("unverified", "possible")   # one source is weak
+    assert corroborate.score(4)[2] in ("likely", "corroborated")   # four is strong
+
+
+# e3c -- the independence key is the domain: reprints of one wire (same domain)
+# count ONCE, not many times (the correlated-source fix).
+def test_e3c_domain_independence():
+    import corroborate
+    assert corroborate._domain("https://www.reuters.com/world/x") == "reuters.com"
+    # two atoms, same domain -> one independent source -> 'possible', not inflated.
+    atoms = [{"headline": "X happened", "source_url": "https://reuters.com/a"},
+             {"headline": "X happened", "source_url": "https://reuters.com/b"}]
+    c = corroborate.cluster_atoms(atoms)[0]
+    domains = {corroborate._domain(a["source_url"]) for a in c}
+    assert len(domains) == 1

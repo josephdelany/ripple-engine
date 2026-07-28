@@ -59,6 +59,9 @@ STEPS = [
     # Situation Memory: attach watcher alerts into per-conflict timelines and
     # render the dossiers. Consumes engine_read.json (must run after it).
     ("situation",      "src/situation.py",      "situation_log"),
+    # Corroboration brain: cluster the timeline into events + score confidence by
+    # independent-source convergence (weight-of-evidence). File output, 0 DB rows.
+    ("corroborate",    "src/corroborate.py",    "observations"),
     # Record keeper: resolve any logged read whose 20-day window has elapsed and
     # score the engine's magnitude calibration (realized - expected).
     ("resolve_reads",   "src/resolve_reads.py",  "reads"),

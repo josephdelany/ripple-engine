@@ -31,6 +31,7 @@ PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
 PREDMKT = ROOT / "data" / "predmkt.json"
+CORROBORATION = ROOT / "data" / "corroboration.json"
 OUT = ROOT / "data" / "digest.html"
 
 # The ribbon: (label, series_id, unit, decimals). GPR is handled separately (it
@@ -167,6 +168,22 @@ def predmkt_top(limit=8):
     return live[:limit]
 
 
+def corroborated_events(limit=6):
+    """Top corroborated events across situations (tag likely/corroborated), the
+    output of the triangulation brain. [] if not generated."""
+    if not CORROBORATION.exists():
+        return []
+    try:
+        data = json.loads(CORROBORATION.read_text())
+    except (OSError, ValueError):
+        return []
+    evs = []
+    for situ in data.get("situations", {}).values():
+        evs += [e for e in situ if e.get("tag") in ("corroborated", "likely")]
+    evs.sort(key=lambda e: e.get("confidence", 0), reverse=True)
+    return evs[:limit]
+
+
 def e(x):
     return html.escape(str(x if x is not None else ""))
 
@@ -278,6 +295,22 @@ def render():
                     f"rel=noopener>{e(headline)}</a> · "
                     f"<span class=tag>{e(kind)}</span> · {e((ts or '')[:10])}</div>")
             parts.append("</div>")
+
+    # e2b. Corroborated events -- the triangulation brain's output: the timeline
+    # collapsed into events, scored by how many INDEPENDENT sources converge.
+    cor = corroborated_events(6)
+    if cor:
+        parts.append("<h2 class=sec>Corroborated events</h2>")
+        parts.append("<div class=lbl>independent-source convergence · confidence, "
+                     "not fact</div>")
+        for ev in cor:
+            conf = f"{ev.get('confidence', 0) * 100:.0f}"
+            parts.append(
+                f"<div class=alert>{e(ev.get('headline',''))}"
+                f"<div class=meta><span class=tag>{e(ev.get('tag',''))} {conf}%</span>"
+                f" · {e(ev.get('n_independent_sources',0))} independent sources · "
+                f"<span class=tag>{e(ev.get('kind',''))}</span> · "
+                f"{e(ev.get('latest_ts',''))}</div></div>")
 
     # e3. Market-implied odds -- what the crowd PRICES for the same events (the
     # engine's "read vs priced" thesis, made live). Context only, never the stats.
