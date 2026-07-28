@@ -281,10 +281,10 @@ WIDGETS = {
         "type": "table",
     },
     "analogue_backtest": {
-        "name": "Analogue Backtest (does the oil-spike forecast work?)",
-        "description": "Point-in-time walk-forward: the analogue engine's P(Brent +5% in "
-                       "20td) vs what oil actually did, across 52 historical events. Brier, "
-                       "skill vs base rate, and the reliability curve. Honest -- nulls shown.",
+        "name": "Analogue Backtest (does the oil-turbulence forecast work?)",
+        "description": "Point-in-time walk-forward: the analogue engine's P(realised oil vol "
+                       "rises in 20td) vs what oil actually did, across 52 historical events. "
+                       "Brier, skill vs base rate, reliability curve. Honest -- nulls shown.",
         "endpoint": "analogue_backtest",
         "gridData": {"w": 40, "h": 9},
         "type": "markdown",
@@ -788,14 +788,13 @@ def analogue_backtest():
     return (
         f"### Analogue oil-spike forecast — calibration &nbsp;·&nbsp; _{r.get('as_of','')}_\n\n"
         f"Point-in-time walk-forward over **{r.get('n_scored')}/{r.get('n_events')}** events "
-        f"(prior-only analogues). P(Brent +{int(r.get('spike_threshold',0.05)*100)}% in "
-        f"{r.get('horizon_td')}td).\n\n"
+        f"(prior-only analogues). Target: {r.get('target','')}.\n\n"
         f"| metric | value |\n|---|---|\n"
         f"| Brier (engine) | **{r.get('brier')}** |\n"
         f"| Brier (base rate) | {r.get('base_rate_brier')} |\n"
         f"| skill vs base | **{skill:+}** |\n"
         f"| base rate of spikes | {r.get('base_rate')} |\n\n"
-        f"**Verdict:** the analogue overshoot-share {verdict}.\n\n"
+        f"**Verdict:** the analogue non-clean (turbulence) share {verdict}.\n\n"
         f"| pred range | n | mean pred | realised |\n|---|---|---|---|\n{rows}\n"
         f"_{r.get('note','')}_")
 

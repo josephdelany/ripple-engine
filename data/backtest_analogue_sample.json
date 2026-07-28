@@ -3,31 +3,43 @@
   "n_events": 52,
   "n_scored": 42,
   "n_skipped": 10,
-  "spike_threshold": 0.05,
+  "target": "P(realised Brent vol rises over 20 trading days)",
   "horizon_td": 20,
-  "note": "Point-in-time walk-forward: analogue P(Brent +5% in 20td) vs realised, prior-only analogues. Reuses src/analogue.py. Small N -- indicative.",
-  "brier": 0.5035,
-  "base_rate": 0.476,
-  "base_rate_brier": 0.2494,
-  "skill_vs_base": -0.2541,
+  "note": "Point-in-time walk-forward: analogue non-clean share vs whether realised Brent vol rose. Prior-only analogues; reuses src/analogue.py. Small N.",
+  "brier": 0.4014,
+  "base_rate": 0.595,
+  "base_rate_brier": 0.2409,
+  "skill_vs_base": -0.1605,
   "reliability": [
     {
       "range": "0.0-0.2",
-      "n": 35,
-      "mean_pred": 0.038,
-      "mean_outcome": 0.514
+      "n": 9,
+      "mean_pred": 0.0,
+      "mean_outcome": 0.778
     },
     {
       "range": "0.2-0.4",
-      "n": 1,
-      "mean_pred": 0.2,
+      "n": 3,
+      "mean_pred": 0.333,
       "mean_outcome": 0.0
     },
     {
+      "range": "0.4-0.6",
+      "n": 8,
+      "mean_pred": 0.5,
+      "mean_outcome": 0.5
+    },
+    {
+      "range": "0.6-0.8",
+      "n": 11,
+      "mean_pred": 0.72,
+      "mean_outcome": 0.818
+    },
+    {
       "range": "0.8-1.0",
-      "n": 6,
-      "mean_pred": 1.0,
-      "mean_outcome": 0.333
+      "n": 11,
+      "mean_pred": 0.99,
+      "mean_outcome": 0.455
     }
   ],
   "records": [
@@ -44,14 +56,14 @@
       "date": "2003-03-20",
       "type": "conflict_escalation",
       "p": 0.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 14
     },
     {
       "event_id": "libya_civil_war_2011",
       "date": "2011-02-17",
       "type": "conflict_escalation",
-      "p": 0.0,
+      "p": 0.5,
       "outcome": 1,
       "n_analogues": 21
     },
@@ -59,15 +71,15 @@
       "event_id": "opec_agrees_cut_2016",
       "date": "2016-11-30",
       "type": "opec_decision",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 1.0,
+      "outcome": 0,
       "n_analogues": 6
     },
     {
       "event_id": "iran_sanctions_reimposed_2018",
       "date": "2018-05-08",
       "type": "sanctions",
-      "p": 0.0,
+      "p": 0.5,
       "outcome": 1,
       "n_analogues": 36
     },
@@ -75,24 +87,24 @@
       "event_id": "venezuela_sanctions_2019",
       "date": "2019-01-28",
       "type": "sanctions",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 0.5,
+      "outcome": 0,
       "n_analogues": 38
     },
     {
       "event_id": "soleimani_strike_2020",
       "date": "2020-01-03",
       "type": "conflict_escalation",
-      "p": 0.2,
-      "outcome": 0,
+      "p": 0.6,
+      "outcome": 1,
       "n_analogues": 41
     },
     {
       "event_id": "opec_talks_collapse_2020",
       "date": "2020-03-06",
       "type": "opec_decision",
-      "p": 0.0,
-      "outcome": 0,
+      "p": 1.0,
+      "outcome": 1,
       "n_analogues": 9
     },
     {
@@ -100,14 +112,14 @@
       "date": "2020-03-11",
       "type": "demand_shock",
       "p": 1.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 5
     },
     {
       "event_id": "opec_record_cut_2020",
       "date": "2020-04-12",
       "type": "opec_decision",
-      "p": 0.0,
+      "p": 1.0,
       "outcome": 1,
       "n_analogues": 10
     },
@@ -116,14 +128,14 @@
       "date": "2021-03-23",
       "type": "chokepoint_disruption",
       "p": 1.0,
-      "outcome": 1,
+      "outcome": 0,
       "n_analogues": 7
     },
     {
       "event_id": "russia_invades_ukraine_2022",
       "date": "2022-02-24",
       "type": "conflict_escalation",
-      "p": 0.143,
+      "p": 0.714,
       "outcome": 1,
       "n_analogues": 48
     },
@@ -132,22 +144,22 @@
       "date": "2022-09-26",
       "type": "infrastructure_attack",
       "p": 1.0,
-      "outcome": 1,
+      "outcome": 0,
       "n_analogues": 12
     },
     {
       "event_id": "eu_embargo_price_cap_2022",
       "date": "2022-12-05",
       "type": "sanctions",
-      "p": 0.143,
-      "outcome": 0,
+      "p": 0.714,
+      "outcome": 1,
       "n_analogues": 52
     },
     {
       "event_id": "opec_surprise_cut_2023",
       "date": "2023-04-02",
       "type": "opec_decision",
-      "p": 0.0,
+      "p": 0.889,
       "outcome": 0,
       "n_analogues": 16
     },
@@ -155,8 +167,8 @@
       "event_id": "israel_hamas_war_2023",
       "date": "2023-10-07",
       "type": "conflict_escalation",
-      "p": 0.125,
-      "outcome": 0,
+      "p": 0.75,
+      "outcome": 1,
       "n_analogues": 56
     },
     {
@@ -180,7 +192,7 @@
       "date": "1998-12-16",
       "type": "conflict_escalation",
       "p": 0.0,
-      "outcome": 1,
+      "outcome": 0,
       "n_analogues": 12
     },
     {
@@ -188,7 +200,7 @@
       "date": "2001-09-11",
       "type": "conflict_escalation",
       "p": 0.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 13
     },
     {
@@ -204,30 +216,30 @@
       "date": "2008-08-08",
       "type": "conflict_escalation",
       "p": 0.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 16
     },
     {
       "event_id": "saudi_intervention_yemen_2015",
       "date": "2015-03-26",
       "type": "conflict_escalation",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 0.5,
+      "outcome": 0,
       "n_analogues": 32
     },
     {
       "event_id": "iran_strikes_israel_apr_2024",
       "date": "2024-04-13",
       "type": "conflict_escalation",
-      "p": 0.125,
-      "outcome": 0,
+      "p": 0.75,
+      "outcome": 1,
       "n_analogues": 60
     },
     {
       "event_id": "iran_strikes_israel_oct_2024",
       "date": "2024-10-01",
       "type": "conflict_escalation",
-      "p": 0.125,
+      "p": 0.75,
       "outcome": 1,
       "n_analogues": 60
     },
@@ -235,7 +247,7 @@
       "event_id": "israel_iran_war_2025",
       "date": "2025-06-13",
       "type": "conflict_escalation",
-      "p": 0.125,
+      "p": 0.75,
       "outcome": 1,
       "n_analogues": 60
     },
@@ -243,15 +255,15 @@
       "event_id": "eu_iran_oil_embargo_2012",
       "date": "2012-01-23",
       "type": "sanctions",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 0.333,
+      "outcome": 0,
       "n_analogues": 25
     },
     {
       "event_id": "us_ends_iran_waivers_2019",
       "date": "2019-04-22",
       "type": "sanctions",
-      "p": 0.0,
+      "p": 0.5,
       "outcome": 1,
       "n_analogues": 38
     },
@@ -259,8 +271,8 @@
       "event_id": "venezuela_financial_sanctions_2017",
       "date": "2017-08-25",
       "type": "sanctions",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 0.5,
+      "outcome": 0,
       "n_analogues": 36
     },
     {
@@ -268,7 +280,7 @@
       "date": "2021-05-07",
       "type": "infrastructure_attack",
       "p": 1.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 8
     },
     {
@@ -276,14 +288,14 @@
       "date": "2021-03-07",
       "type": "infrastructure_attack",
       "p": 1.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 6
     },
     {
       "event_id": "opec_plus_cut_2022",
       "date": "2022-10-05",
       "type": "opec_decision",
-      "p": 0.0,
+      "p": 1.0,
       "outcome": 0,
       "n_analogues": 15
     },
@@ -299,7 +311,7 @@
       "event_id": "ndaa_cbi_sanctions_2011",
       "date": "2011-12-31",
       "type": "sanctions",
-      "p": 0.0,
+      "p": 0.333,
       "outcome": 0,
       "n_analogues": 25
     },
@@ -307,7 +319,7 @@
       "event_id": "swift_cutoff_iran_2012",
       "date": "2012-03-15",
       "type": "sanctions",
-      "p": 0.0,
+      "p": 0.333,
       "outcome": 0,
       "n_analogues": 25
     },
@@ -315,24 +327,24 @@
       "event_id": "venezuela_asset_freeze_2019",
       "date": "2019-08-05",
       "type": "sanctions",
-      "p": 0.0,
-      "outcome": 0,
+      "p": 0.5,
+      "outcome": 1,
       "n_analogues": 39
     },
     {
       "event_id": "products_price_cap_2023",
       "date": "2023-02-05",
       "type": "sanctions",
-      "p": 0.143,
-      "outcome": 1,
+      "p": 0.714,
+      "outcome": 0,
       "n_analogues": 52
     },
     {
       "event_id": "russia_shadow_fleet_sanctions_2025",
       "date": "2025-01-10",
       "type": "sanctions",
-      "p": 0.125,
-      "outcome": 0,
+      "p": 0.75,
+      "outcome": 1,
       "n_analogues": 60
     },
     {
@@ -340,30 +352,30 @@
       "date": "2005-09-02",
       "type": "policy_response",
       "p": 0.0,
-      "outcome": 0,
+      "outcome": 1,
       "n_analogues": 16
     },
     {
       "event_id": "iea_release_libya_2011",
       "date": "2011-06-23",
       "type": "policy_response",
-      "p": 0.0,
-      "outcome": 1,
+      "p": 0.5,
+      "outcome": 0,
       "n_analogues": 22
     },
     {
       "event_id": "spr_release_2021",
       "date": "2021-11-23",
       "type": "policy_response",
-      "p": 0.143,
-      "outcome": 0,
+      "p": 0.714,
+      "outcome": 1,
       "n_analogues": 48
     },
     {
       "event_id": "spr_release_2022",
       "date": "2022-03-31",
       "type": "policy_response",
-      "p": 0.143,
+      "p": 0.714,
       "outcome": 0,
       "n_analogues": 49
     }

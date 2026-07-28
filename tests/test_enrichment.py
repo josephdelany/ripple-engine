@@ -372,27 +372,30 @@ def test_an4_confidence_thin():
 
 # ---- Calibration loop: engine forecasts + point-in-time backtest -----------
 
-# fc1 -- analogue-implied P(oil overshoot), spike detection, and Brier.
+# fc1 -- re-specced target: P(turbulence) = non-clean share; realised vol + Brier.
 def test_fc1_auto_forecast_helpers():
     import auto_forecast as af
     fc = {"key_assets": {"wti": {"n": 4, "patterns": {"overshoot": 3, "clean_absorption": 1}}}}
-    assert af.p_overshoot(fc) == 0.75
-    assert af.p_overshoot({"key_assets": {}}) is None
-    assert af.is_spike(100, [103, 106, 102]) is True         # 106/100-1 = .06 >= .05
-    assert af.is_spike(100, [101, 102]) is False
+    assert af.p_turbulence(fc) == 0.75                       # (4-1)/4 non-clean
+    assert af.p_turbulence({"key_assets": {}}) is None
+    assert af.realized_vol([100, 100, 100, 100]) == 0.0      # flat -> zero vol
+    assert af.realized_vol([100, 110, 100, 110]) > 0
+    assert af.vol_rose([100, 100, 100], [100, 110, 100]) is True   # calm -> turbulent
+    assert af.vol_rose([100, 110, 100], [100, 100, 100]) is False
     assert af.brier(0.7, 1) == 0.09 and af.brier(0.2, 0) == 0.04
 
 
-# fc2 -- backtest resolution is point-in-time and reliability bins correctly.
+# fc2 -- backtest resolution (vol rose, point-in-time) + reliability bins.
 def test_fc2_backtest():
     import backtest_analogue as bt
-    dates = [f"2020-01-{d:02d}" for d in range(1, 27)]        # 26 daily points
-    vals = [100.0] * 26
-    vals[6] = 107.0                                            # +7% inside the 20d window
-    assert bt.resolve_spike(dates, vals, "2020-01-01") == 1
-    flat = [100.0] * 26
-    assert bt.resolve_spike(dates, flat, "2020-01-01") == 0
-    assert bt.resolve_spike(dates, vals, "2025-01-01") is None  # no forward data
+    dates = [f"2020-{1+(d//28):02d}-{1+(d%28):02d}" for d in range(60)]   # 60 daily points
+    vals = [100.0] * 60
+    for k in range(30, 45):                                  # inject post-event turbulence
+        vals[k] = 100.0 + (5 if k % 2 else -5)
+    # anchor at index 25 (>=20 both sides): pre calm, post turbulent -> vol rose -> 1
+    assert bt.resolve_turbulence(dates, vals, dates[25]) == 1
+    assert bt.resolve_turbulence(dates, [100.0] * 60, dates[25]) == 0   # flat both sides
+    assert bt.resolve_turbulence(dates, vals, dates[2]) is None         # not enough pre-data
     rel = bt.reliability([{"p": 0.1, "outcome": 1}, {"p": 0.1, "outcome": 0},
                           {"p": 0.9, "outcome": 1}])
     assert rel[0]["n"] == 2 and rel[0]["mean_outcome"] == 0.5
