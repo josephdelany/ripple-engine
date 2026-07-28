@@ -54,3 +54,5 @@ data/backtest_analogue.json
 data/forecast_calibration.json
 # Per-situation conflict intensity, regenerated each run.
 data/conflict_intensity.json
+# OPEC fiscal-stress board, regenerated each run; sample committed.
+data/breakevens.json

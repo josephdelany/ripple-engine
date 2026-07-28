@@ -1,0 +1,89 @@
+{
+  "as_of": "2026-07-28",
+  "generated_at": "2026-07-28T22:01:21+00:00",
+  "brent": 83.76,
+  "note": "Fiscal-stress gap = live Brent - IMF fiscal breakeven. Negative = the state is running its oil economy underwater. Source IMF REO via FRED. Annual breakeven vs live oil; DISPLAY/context.",
+  "producers": [
+    {
+      "country": "iran",
+      "breakeven": 124.12,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": -40.36,
+      "band": "acute stress",
+      "source": "IRNPZPIOILBEGUSD"
+    },
+    {
+      "country": "algeria",
+      "breakeven": 118.95,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": -35.19,
+      "band": "acute stress",
+      "source": "DZAPZPIOILBEGUSD"
+    },
+    {
+      "country": "kazakhstan",
+      "breakeven": 115.93,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": -32.17,
+      "band": "acute stress",
+      "source": "KAZPZPIOILBEGUSD"
+    },
+    {
+      "country": "iraq",
+      "breakeven": 92.43,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": -8.67,
+      "band": "stress",
+      "source": "IRQPZPIOILBEGUSD"
+    },
+    {
+      "country": "saudi_arabia",
+      "breakeven": 90.94,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": -7.18,
+      "band": "stress",
+      "source": "SAUPZPIOILBEGUSD"
+    },
+    {
+      "country": "kuwait",
+      "breakeven": 81.84,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": 1.92,
+      "band": "balanced",
+      "source": "KWTPZPIOILBEGUSD"
+    },
+    {
+      "country": "oman",
+      "breakeven": 57.31,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": 26.45,
+      "band": "comfortable",
+      "source": "OMNPZPIOILBEGUSD"
+    },
+    {
+      "country": "uae",
+      "breakeven": 49.95,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": 33.81,
+      "band": "comfortable",
+      "source": "AREPZPIOILBEGUSD"
+    },
+    {
+      "country": "qatar",
+      "breakeven": 44.74,
+      "be_year": "2025",
+      "brent": 83.76,
+      "gap": 39.02,
+      "band": "comfortable",
+      "source": "QATPZPIOILBEGUSD"
+    }
+  ]
+}

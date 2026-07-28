@@ -254,6 +254,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "opec_stress": {
+        "name": "OPEC Fiscal Stress (breakeven vs oil)",
+        "description": "Each producer's IMF fiscal breakeven oil price vs live Brent. Negative "
+                       "gap = running the budget underwater. The fault line behind OPEC+ "
+                       "cohesion (UAE/Qatar comfortable; Iran/Algeria/Saudi stressed).",
+        "endpoint": "opec_stress",
+        "gridData": {"w": 20, "h": 11},
+        "type": "table",
+    },
     "chart_oil_map": {
         "name": "Oil Transit Map",
         "description": "The physical map: oil chokepoints sized by throughput (Mb/d, EIA), "
@@ -371,7 +380,8 @@ APPS = [{
                 _lw("chokepoint_transits", 20, 22, 20, 9),
                 _lw("state_of_system", 0, 31, 20, 9),
                 _lw("attention", 20, 31, 20, 9),
-                _lw("commodity_exposure", 0, 40, 40, 12),
+                _lw("opec_stress", 0, 40, 20, 11),
+                _lw("commodity_exposure", 20, 40, 20, 12),
             ],
         },
         "history": {
@@ -753,6 +763,17 @@ def supply_fundamentals():
                         "unit": unit, "as_of": row[0]})
     conn.close()
     return out or [{"series": "(run fetch_eia_fundamentals.py)", "latest": ""}]
+
+
+@app.get("/opec_stress")
+def opec_stress():
+    """OPEC producers ranked by fiscal stress: IMF breakeven vs live Brent (src/fetch_
+    breakevens.py). Negative gap = the state is running its oil budget underwater."""
+    d = _read_json("breakevens.json", {})
+    rows = [{"country": r["country"], "breakeven": f"${r['breakeven']}",
+             "brent": f"${r.get('brent','')}", "gap": f"{r['gap']:+.2f}" if r.get("gap") is not None else "-",
+             "stress": r.get("band", "")} for r in d.get("producers", [])]
+    return rows or [{"country": "(run src/fetch_breakevens.py)", "breakeven": ""}]
 
 
 @app.get("/commodity_exposure")
