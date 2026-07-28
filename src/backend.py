@@ -227,9 +227,64 @@ WIDGETS = {
 }
 
 
+def _lw(i, x, y, w, h):
+    """One layout entry (widget id + grid position) for an apps.json tab."""
+    return {"i": i, "x": x, "y": y, "w": w, "h": h, "groups": []}
+
+
+# A ready-made, arranged dashboard (served at /apps.json). 40-column grid.
+# Three tabs: the live read, the physical picture, and the historical study.
+APPS = [{
+    "name": "Ripple Engine",
+    "description": "Multi-modal geopolitical-oil intelligence: live read, physical "
+                   "supply, and the historical event study.",
+    "allowCustomization": True,
+    "tabs": {
+        "situation": {
+            "id": "situation", "name": "Where We Stand",
+            "layout": [
+                _lw("engine_read", 0, 0, 20, 9),
+                _lw("corroborated_events", 20, 0, 20, 9),
+                _lw("chart_chokepoints", 0, 9, 20, 9),
+                _lw("chart_attention", 20, 9, 20, 9),
+                _lw("prediction_markets", 0, 18, 20, 10),
+                _lw("alert_queue", 20, 18, 20, 10),
+            ],
+        },
+        "physical": {
+            "id": "physical", "name": "Physical & Market",
+            "layout": [
+                _lw("chart_brent", 0, 0, 40, 9),
+                _lw("supply_fundamentals", 0, 9, 20, 9),
+                _lw("chokepoint_transits", 20, 9, 20, 9),
+                _lw("state_of_system", 0, 18, 20, 9),
+                _lw("attention", 20, 18, 20, 9),
+            ],
+        },
+        "history": {
+            "id": "history", "name": "The Study",
+            "layout": [
+                _lw("ripple_by_type", 0, 0, 20, 9),
+                _lw("scenario_playbook", 20, 0, 20, 9),
+                _lw("event_detail", 0, 9, 40, 11),
+                _lw("event_database", 0, 20, 20, 11),
+                _lw("propagation_map", 20, 20, 20, 11),
+            ],
+        },
+    },
+}]
+
+
 @app.get("/")
 def root():
     return {"status": "ok", "engine": "ripple-engine"}
+
+
+@app.get("/apps.json")
+def apps():
+    """A pre-built, arranged dashboard so OpenBB shows a ready-made 'Ripple Engine'
+    app (3 tabs) instead of loose widgets to drag around."""
+    return APPS
 
 
 @app.get("/digest", response_class=HTMLResponse)
