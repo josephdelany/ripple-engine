@@ -33,6 +33,7 @@ SIT_CONFIG = ROOT / "data" / "situations.yaml"
 PREDMKT = ROOT / "data" / "predmkt.json"
 CORROBORATION = ROOT / "data" / "corroboration.json"
 PORTWATCH = ROOT / "data" / "portwatch.json"
+WIKI = ROOT / "data" / "wiki_attention.json"
 OUT = ROOT / "data" / "digest.html"
 
 # The ribbon: (label, series_id, unit, decimals). GPR is handled separately (it
@@ -356,6 +357,26 @@ def render():
                 f"<div class=cell><div class=lab>{e(c.get('chokepoint',''))}</div>"
                 f"<div class='num {cls}'>{e(c.get('latest',''))}</div>"
                 f"<div class=dt>{e(c.get('flag',''))} · {e(c.get('pct_of_median',''))}x"
+                f"</div></div>")
+        parts.append("</div>")
+
+    # e2d. Wikipedia attention -- how alarmed the world is (pageview spikes).
+    try:
+        wp = json.loads(WIKI.read_text()).get("pages", []) if WIKI.exists() else []
+    except (OSError, ValueError):
+        wp = []
+    if wp:
+        parts.append("<h2 class=sec>Attention</h2>")
+        parts.append("<div class=lbl>Wikipedia pageviews · spike = surge of global "
+                     "attention · context</div><div class=ribbon>")
+        for p in wp:
+            cls = ("up" if p.get("flag") in ("spike", "elevated")
+                   else "down" if p.get("flag") == "quiet" else "flat")
+            views = f"{p.get('latest', 0):,}"
+            parts.append(
+                f"<div class=cell><div class=lab>{e(p.get('page',''))}</div>"
+                f"<div class='num {cls}'>{e(views)}</div>"
+                f"<div class=dt>{e(p.get('flag',''))} · {e(p.get('pct_of_median',''))}x"
                 f"</div></div>")
         parts.append("</div>")
 

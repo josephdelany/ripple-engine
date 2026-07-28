@@ -35,3 +35,5 @@ data/predmkt.json
 data/corroboration.json
 # PortWatch snapshot, regenerated every run; committed sample is the receipt.
 data/portwatch.json
+# Wikipedia attention snapshot, regenerated every run; committed sample is the receipt.
+data/wiki_attention.json

@@ -109,3 +109,16 @@ def test_e4b_physical_corroboration():
         [{"headline": "Fed holds rates", "source_url": "x"}], {"hormuz"}) is None
     # one physical vote on top of one news source is strictly more confident.
     assert corroborate.score(2)[1] > corroborate.score(1)[1]
+
+
+# ---- E6: Wikipedia attention anomaly --------------------------------------
+
+# e6 -- assess (oldest-first) flags a pageview surge as 'spike', a collapse as
+# 'quiet', steady as 'normal'.
+def test_e6_wiki_assess_flags():
+    import fetch_wiki_attention as w
+    assert w.assess([100, 100, 100, 100, 500])["flag"] == "spike"      # 5x
+    assert w.assess([100, 100, 100, 100, 145])["flag"] == "elevated"   # 1.45x
+    assert w.assess([100, 100, 100, 100, 40])["flag"] == "quiet"       # 0.4x
+    assert w.assess([100, 100, 100, 100, 110])["flag"] == "normal"
+    assert w.assess([]) is None
