@@ -36,8 +36,8 @@ SITUATIONS = {
     "China-Taiwan": '("China" "Taiwan") OR "Taiwan Strait"',
     "Israel-Lebanon": '("Israel" "Lebanon") OR "Hezbollah"',
 }
-PACING = 6
-RETRIES = 3
+PACING = 8            # > GDELT's 5s floor, with margin
+RETRIES = 4
 
 
 def timeline_values(json_text):
@@ -69,7 +69,10 @@ def _fetch(query, mode):
     for _ in range(RETRIES):
         try:
             r = requests.get(API, params=params, headers=UA, timeout=40)
-            if r.status_code == 429:
+            # GDELT returns its "limit requests to one every 5 seconds" notice as plain
+            # TEXT with HTTP 200 (not a 429) -- treat any non-JSON 200 as a throttle.
+            throttled = r.ok and not r.text.lstrip().startswith("{")
+            if r.status_code == 429 or throttled:
                 time.sleep(delay); delay *= 2; continue
             return r.text if r.ok else None
         except requests.RequestException:
