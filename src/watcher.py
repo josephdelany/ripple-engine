@@ -88,6 +88,15 @@ COUNTRY_CC = {
     # Americas + Africa
     "venezuela": "VEN", "mexico": "MEX", "sudan": "SDN", "nigeria": "NGA",
     "ethiopia": "ETH",
+    # Strategic-commodity producers (watched because they're supply-critical -- see
+    # data/criticality.yaml. Kazakhstan=uranium, DRC=cobalt, Guinea=bauxite,
+    # Netherlands=EUV lithography, Chile=copper/lithium, etc.)
+    "kazakhstan": "KAZ", "canada": "CAN", "australia": "AUS", "netherlands": "NLD",
+    "south_africa": "ZAF", "congo_drc": "COD", "guinea": "GIN", "chile": "CHL",
+    "peru": "PER", "argentina": "ARG", "brazil": "BRA", "bolivia": "BOL",
+    "morocco": "MAR", "namibia": "NAM", "uzbekistan": "UZB", "zimbabwe": "ZWE",
+    "madagascar": "MDG", "mozambique": "MOZ", "vietnam": "VNM", "malaysia": "MYS",
+    "qatar": "QAT", "norway": "NOR",
 }
 
 # Heuristic keyword -> closest playbook event type. LABELLED heuristic; it is a

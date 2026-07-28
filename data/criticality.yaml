@@ -1,0 +1,125 @@
+# Strategic commodity criticality map -- WHERE the world's critical inputs come from.
+#
+# The point: don't watch everywhere equally -- watch the countries that are supply-
+# critical for a strategic commodity, because a shock there has outsized market impact
+# (Kazakhstan is invisible to most people but is ~39% of world uranium).
+#
+# Every figure is SOURCED (no invented numbers). `stage` marks the REAL chokepoint:
+# for many commodities the processing/refining concentration (usually China) is far
+# tighter than mining, so a mine-only view mis-prices the risk. `share` = approx % of
+# global supply at that stage; treat as directional (vintages/rounding vary, flagged).
+#
+# Country keys are slugs; src/criticality.py maps them to the watch-net + entities.
+
+commodities:
+  uranium:
+    stage: mine
+    top: {kazakhstan: 39, canada: 24, namibia: 12, australia: 8, uzbekistan: 7, russia: 5}
+    source: "World Nuclear Association, 2024"
+
+  rare_earths:
+    stage: processing        # China ~99.9% of HEAVY REE refining; the true chokepoint
+    top: {china: 91}
+    mine_top: {china: 69, usa: 12, myanmar: 8, australia: 3}
+    source: "IEA Critical Minerals Outlook 2025 (processing); USGS MCS 2025 (mine)"
+
+  cobalt:
+    stage: mine
+    top: {congo_drc: 76, indonesia: 10, russia: 3}
+    refining_top: {china: 78}
+    source: "USGS MCS 2025; Cobalt Institute (refining)"
+
+  lithium:
+    stage: refining          # battery-grade chemical refining is the chokepoint
+    top: {china: 68}
+    mine_top: {australia: 37, chile: 20, china: 17, zimbabwe: 9, argentina: 8}
+    source: "IEA 2025 (refining); USGS MCS 2025 (mine)"
+
+  graphite:
+    stage: processing        # anode/graphitization ~90-98% China
+    top: {china: 92}
+    mine_top: {china: 79, madagascar: 6, mozambique: 5, brazil: 4}
+    source: "EIA / USGS MCS 2025"
+
+  gallium:
+    stage: production
+    top: {china: 99}
+    source: "USGS MCS 2025"
+
+  germanium:
+    stage: production
+    top: {china: 64}
+    source: "USGS MCS 2025 (estimate)"
+
+  tungsten:
+    stage: mine
+    top: {china: 83, vietnam: 4}
+    source: "USGS MCS 2025"
+
+  copper:
+    stage: refining          # smelting/refining ~45% China is the chokepoint
+    top: {china: 45}
+    mine_top: {chile: 23, congo_drc: 14, peru: 12, china: 8}
+    source: "ICSG (refining); USGS MCS 2025 (mine)"
+
+  nickel:
+    stage: mine
+    top: {indonesia: 65, philippines: 11}
+    source: "USGS MCS 2025/26"
+
+  palladium:
+    stage: mine
+    top: {russia: 40, south_africa: 40}
+    source: "Johnson Matthey / USGS 2024 (Russia+SA duopoly ~80%)"
+
+  platinum:
+    stage: mine
+    top: {south_africa: 70, russia: 10}
+    source: "USGS MCS 2025"
+
+  phosphate:
+    stage: reserves          # Morocco ~68% of RESERVES (long-run food-security lever)
+    top: {morocco: 68}
+    mine_top: {china: 44, morocco: 14, usa: 8, russia: 6}
+    source: "USGS MCS 2026"
+
+  bauxite:
+    stage: mine
+    top: {guinea: 26, australia: 21, china: 14}
+    smelting_top: {china: 55}    # aluminium smelting is the real chokepoint
+    source: "USGS MCS 2026; IAI (smelting)"
+
+  potash:
+    stage: mine
+    top: {canada: 31, russia: 20, china: 13, belarus: 12}
+    source: "USGS MCS 2026"
+
+  crude_oil:
+    stage: production
+    top: {usa: 21, russia: 12, saudi_arabia: 11}
+    source: "Energy Institute Statistical Review 2026"
+
+  natural_gas:
+    stage: lng_exports       # LNG exports are the tradeable chokepoint
+    top: {usa: 21, australia: 20, qatar: 19}
+    source: "IGU World LNG Report 2025"
+
+  wheat:
+    stage: exports
+    top: {russia: 14, canada: 11, usa: 10, australia: 9, ukraine: 6}
+    source: "USDA PSD 2024/25 (by volume)"
+
+  palm_oil:
+    stage: production
+    top: {indonesia: 58, malaysia: 25}
+    source: "USDA 2024/25"
+
+  semiconductors_advanced:
+    stage: fabrication       # leading-edge (<10nm) logic
+    top: {taiwan: 92, south_korea: 8}
+    source: "USITC 2024 (Taiwan 92% of <10nm; TSMC ~90% leading-edge)"
+
+  euv_lithography:
+    stage: equipment         # the single tightest chokepoint in tech
+    top: {netherlands: 100}  # ASML is the sole EUV maker
+    source: "CSET/ETO, TrendForce 2024"

@@ -76,6 +76,9 @@ STEPS = [
     # Autonomous analyst (eyes): deterministic divergences between what the
     # engine sees and what the market prices. File output.
     ("divergence",     "src/divergence.py",     "observations"),
+    # Strategic-commodity criticality: which critical commodities are under
+    # stress because a key producer is in an active situation. File output.
+    ("criticality",    "src/criticality.py",    "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

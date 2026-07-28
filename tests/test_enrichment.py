@@ -224,3 +224,30 @@ def test_a1_attention_vs_priced():
     assert bab["priced_disruption"] == "16%"      # 'closed' framing = direct
     suez = [d for d in g if d["subject"] == "Suez Canal"][0]
     assert suez["priced_disruption"] == "5%"      # 'closed' 5% stays 5% (direct)
+
+
+# ---- Strategic-commodity criticality ---------------------------------------
+
+# cr1 -- at_risk flags a commodity iff a critical producer is in an active situation,
+# with the correct at-risk share, sorted by share.
+def test_cr1_criticality_at_risk():
+    import criticality
+    commodities = {
+        "uranium": {"top": {"kazakhstan": 39, "russia": 5}, "stage": "mine"},
+        "chips": {"top": {"taiwan": 92}, "stage": "fab"},
+        "palm": {"top": {"indonesia": 58}, "stage": "prod"}}
+    r = criticality.at_risk(commodities, {"russia", "taiwan"})
+    names = [x["commodity"] for x in r]
+    assert names == ["chips", "uranium"]          # sorted by share; palm excluded
+    assert r[0]["at_risk_share"] == 92
+    assert r[1]["at_risk_share"] == 5             # only russia's 5%, not kazakhstan's
+
+
+# cr2 -- watch_list maps each critical country to what it's critical for.
+def test_cr2_watch_list():
+    import criticality
+    commodities = {"uranium": {"top": {"kazakhstan": 39}, "stage": "mine"},
+                   "copper": {"top": {"chile": 23, "kazakhstan": 2}, "stage": "mine"}}
+    wl = criticality.watch_list(commodities)
+    assert set(c[0] for c in wl["kazakhstan"]) == {"uranium", "copper"}
+    assert wl["kazakhstan"][0][0] == "uranium"    # sorted by share (39 > 2)

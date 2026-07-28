@@ -245,6 +245,14 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "commodity_exposure": {
+        "name": "Strategic Commodity Exposure",
+        "description": "Critical commodities under geopolitical stress -- a key producer "
+                       "is in an active situation. Sourced (USGS/WNA/EI/USDA/IEA).",
+        "endpoint": "commodity_exposure",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
     # --- Charts (Plotly) -- the visual layer, not just tables ---
     "chart_brent": {
         "name": "Brent Crude ($/bbl)",
@@ -305,6 +313,7 @@ APPS = [{
                 _lw("chokepoint_transits", 20, 9, 20, 9),
                 _lw("state_of_system", 0, 18, 20, 9),
                 _lw("attention", 20, 18, 20, 9),
+                _lw("commodity_exposure", 0, 27, 40, 12),
             ],
         },
         "history": {
@@ -677,6 +686,21 @@ def supply_fundamentals():
                         "unit": unit, "as_of": row[0]})
     conn.close()
     return out or [{"series": "(run fetch_eia_fundamentals.py)", "latest": ""}]
+
+
+@app.get("/commodity_exposure")
+def commodity_exposure():
+    """Strategic commodities under geopolitical stress: a supply-critical producer is
+    in an ACTIVE situation. Sourced concentration (criticality.yaml). DISPLAY/context."""
+    risks = _read_json("criticality.json", {}).get("commodities_at_risk", [])
+    rows = []
+    for r in risks:
+        who = ", ".join(f"{c['country']} {c['share']}%"
+                        for c in r.get("at_risk_countries", []))
+        rows.append({"commodity": r["commodity"], "stage": r.get("stage", ""),
+                     "at_risk_share": f"{r.get('at_risk_share', 0)}%",
+                     "producers_in_conflict": who, "source": r.get("source", "")})
+    return rows or [{"commodity": "(run src/criticality.py)", "stage": ""}]
 
 
 @app.get("/risk_gauge")

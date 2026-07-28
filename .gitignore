@@ -41,3 +41,5 @@ data/wiki_attention.json
 data/corroboration_calibration.json
 # Divergence report, regenerated every run; sample committed as receipt.
 data/divergence.json
+# Criticality report, regenerated every run; sample committed as receipt.
+data/criticality.json
