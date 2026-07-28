@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 STATE = ROOT / "data" / "state"
-TABLES = ("situation_log", "reads")
+TABLES = ("situation_log", "reads", "forecasts")
 
 
 def exportable_columns(conn, table):

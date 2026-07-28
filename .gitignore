@@ -49,3 +49,6 @@ data/propagation.json
 data/gpr_signal.json
 # Analogue forecast, regenerated every run; sample committed as receipt.
 data/analogue.json
+# Backtest + engine calibration, regenerated each run; samples committed.
+data/backtest_analogue.json
+data/forecast_calibration.json

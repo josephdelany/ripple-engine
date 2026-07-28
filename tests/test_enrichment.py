@@ -368,3 +368,32 @@ def test_an4_confidence_thin():
     matches = [(55, _LIB[0]), (40, _LIB[1])]           # only 2 < MIN_ANALOGUES
     _, overall = analogue.outcome_distribution(matches)
     assert "no good analogue" in analogue.confidence(matches, overall)["band"]
+
+
+# ---- Calibration loop: engine forecasts + point-in-time backtest -----------
+
+# fc1 -- analogue-implied P(oil overshoot), spike detection, and Brier.
+def test_fc1_auto_forecast_helpers():
+    import auto_forecast as af
+    fc = {"key_assets": {"wti": {"n": 4, "patterns": {"overshoot": 3, "clean_absorption": 1}}}}
+    assert af.p_overshoot(fc) == 0.75
+    assert af.p_overshoot({"key_assets": {}}) is None
+    assert af.is_spike(100, [103, 106, 102]) is True         # 106/100-1 = .06 >= .05
+    assert af.is_spike(100, [101, 102]) is False
+    assert af.brier(0.7, 1) == 0.09 and af.brier(0.2, 0) == 0.04
+
+
+# fc2 -- backtest resolution is point-in-time and reliability bins correctly.
+def test_fc2_backtest():
+    import backtest_analogue as bt
+    dates = [f"2020-01-{d:02d}" for d in range(1, 27)]        # 26 daily points
+    vals = [100.0] * 26
+    vals[6] = 107.0                                            # +7% inside the 20d window
+    assert bt.resolve_spike(dates, vals, "2020-01-01") == 1
+    flat = [100.0] * 26
+    assert bt.resolve_spike(dates, flat, "2020-01-01") == 0
+    assert bt.resolve_spike(dates, vals, "2025-01-01") is None  # no forward data
+    rel = bt.reliability([{"p": 0.1, "outcome": 1}, {"p": 0.1, "outcome": 0},
+                          {"p": 0.9, "outcome": 1}])
+    assert rel[0]["n"] == 2 and rel[0]["mean_outcome"] == 0.5
+    assert rel[-1]["n"] == 1 and rel[-1]["mean_pred"] == 0.9

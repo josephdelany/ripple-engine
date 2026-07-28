@@ -88,6 +88,10 @@ STEPS = [
     # Analogue probability function: kNN over the 511-event seed library -> the
     # historical playbook for each active situation. File output.
     ("analogue",       "src/analogue.py",       "observations"),
+    # Calibration loop: log the engine's own P(oil spike) forecast + self-resolve
+    # matured ones (Brier). And the point-in-time backtest of that forecast.
+    ("auto_forecast",  "src/auto_forecast.py",  "observations"),
+    ("backtest_analog","src/backtest_analogue.py","observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

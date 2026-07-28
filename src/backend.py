@@ -262,6 +262,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "analogue_backtest": {
+        "name": "Analogue Backtest (does the oil-spike forecast work?)",
+        "description": "Point-in-time walk-forward: the analogue engine's P(Brent +5% in "
+                       "20td) vs what oil actually did, across 52 historical events. Brier, "
+                       "skill vs base rate, and the reliability curve. Honest -- nulls shown.",
+        "endpoint": "analogue_backtest",
+        "gridData": {"w": 40, "h": 9},
+        "type": "markdown",
+    },
     "analogue_forecast": {
         "name": "Analogue Forecast (what usually happens next)",
         "description": "kNN over a 511-event seed library: for each active situation, the "
@@ -349,11 +358,12 @@ APPS = [{
             "id": "history", "name": "The Study",
             "layout": [
                 _lw("analogue_forecast", 0, 0, 40, 12),
-                _lw("ripple_by_type", 0, 12, 20, 9),
-                _lw("scenario_playbook", 20, 12, 20, 9),
-                _lw("event_detail", 0, 21, 40, 11),
-                _lw("event_database", 0, 32, 20, 11),
-                _lw("propagation_map", 20, 32, 20, 11),
+                _lw("analogue_backtest", 0, 12, 40, 9),
+                _lw("ripple_by_type", 0, 21, 20, 9),
+                _lw("scenario_playbook", 20, 21, 20, 9),
+                _lw("event_detail", 0, 30, 40, 11),
+                _lw("event_database", 0, 41, 20, 11),
+                _lw("propagation_map", 20, 41, 20, 11),
             ],
         },
     },
@@ -731,6 +741,33 @@ def commodity_exposure():
                      "at_risk_share": f"{r.get('at_risk_share', 0)}%",
                      "producers_in_conflict": who, "source": r.get("source", "")})
     return rows or [{"commodity": "(run src/criticality.py)", "stage": ""}]
+
+
+@app.get("/analogue_backtest")
+def analogue_backtest():
+    """The honest calibration verdict on the analogue oil-spike forecast (src/backtest_
+    analogue.py) -- rendered as markdown, nulls and negative skill shown, not hidden."""
+    r = _read_json("backtest_analogue.json", {})
+    if not r or not r.get("n_scored"):
+        return "_Run `python3 src/backtest_analogue.py` to score the analogue forecast._"
+    skill = r.get("skill_vs_base", 0)
+    verdict = ("**carries information** (beats the base rate)" if skill > 0.01
+               else "**no skill yet** — does not beat just predicting the base rate")
+    rows = "".join(f"| {b['range']} | {b['n']} | {b['mean_pred']} | {b['mean_outcome']} |\n"
+                   for b in r.get("reliability", []))
+    return (
+        f"### Analogue oil-spike forecast — calibration &nbsp;·&nbsp; _{r.get('as_of','')}_\n\n"
+        f"Point-in-time walk-forward over **{r.get('n_scored')}/{r.get('n_events')}** events "
+        f"(prior-only analogues). P(Brent +{int(r.get('spike_threshold',0.05)*100)}% in "
+        f"{r.get('horizon_td')}td).\n\n"
+        f"| metric | value |\n|---|---|\n"
+        f"| Brier (engine) | **{r.get('brier')}** |\n"
+        f"| Brier (base rate) | {r.get('base_rate_brier')} |\n"
+        f"| skill vs base | **{skill:+}** |\n"
+        f"| base rate of spikes | {r.get('base_rate')} |\n\n"
+        f"**Verdict:** the analogue overshoot-share {verdict}.\n\n"
+        f"| pred range | n | mean pred | realised |\n|---|---|---|---|\n{rows}\n"
+        f"_{r.get('note','')}_")
 
 
 @app.get("/analogue_forecast")
