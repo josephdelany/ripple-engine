@@ -1,0 +1,66 @@
+# watch.yml -- the near-live news watcher (every 15 minutes).
+#
+# News is the ONLY thing that moves intraday, and GDELT itself only republishes
+# every 15 minutes -- so this polls news + fires phone alerts on that cadence,
+# while the heavy market rebuild stays daily (track.yml). It does NO market fetch
+# (polite to FRED/EIA/CFTC), only GDELT + RSS, so it is fast (~1 min).
+#
+# Latency: a breaking story reaches your phone within ~15-30 min (GitHub's cron is
+# best-effort). For rock-solid timing you'd move to an always-on box; this is the
+# free, zero-server path. Cost: $0 on a public repo (unlimited Actions minutes).
+
+name: watch
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes (GitHub runs it best-effort)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build entities + restore memory (no market fetch)
+        run: |
+          python3 src/init_db.py
+          python3 src/load_events.py     # entities from committed events.csv (no network)
+          python3 src/import_state.py    # restore situation_log + reads
+
+      - name: Poll news, attach to situations, push alerts
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}   # unset -> notify is a dry-run no-op
+        run: |
+          python3 src/watcher.py     # GDELT + RSS -> alert_queue.csv (+ watch_seen.db)
+          python3 src/situation.py   # attach new alerts into the timeline
+          python3 src/notify.py      # phone push if high-signal AND amplifier ON
+
+      - name: Snapshot memory + commit new news
+        run: |
+          python3 src/export_state.py
+          git config user.name  "ripple-bot"
+          git config user.email "ripple-bot@users.noreply.github.com"
+          git add data/state data/alert_queue.csv data/watch_seen.db
+          if git diff --cached --quiet; then
+            echo "No new news this cycle."
+          else
+            git pull --rebase --autostash origin main || true
+            git commit -m "chore(watch): news $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi

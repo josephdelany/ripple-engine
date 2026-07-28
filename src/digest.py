@@ -161,6 +161,8 @@ def render():
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     parts = [f"<!doctype html><html lang=en><head><meta charset=utf-8>",
              "<meta name=viewport content='width=device-width,initial-scale=1'>",
+             # Auto-reload so an open tab pulls each fresh publish (near-live feel).
+             "<meta http-equiv=refresh content=900>",
              "<title>The Daily — News to Markets</title>",
              f"<style>{CSS}</style></head><body><div class=wrap>"]
 
