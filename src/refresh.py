@@ -41,6 +41,8 @@ STEPS = [
     ("fetch_prices",   "src/fetch_prices.py",   "prices"),
     ("fetch_series",   "src/fetch_series.py",   "observations"),
     ("fetch_eia",      "src/fetch_eia.py",      "observations"),
+    # Physical oil fundamentals (Cushing, refinery utilization, SPR) -- stats-safe.
+    ("fetch_eia_fund", "src/fetch_eia_fundamentals.py", "observations"),
     ("fetch_cot",      "src/fetch_cot.py",      "observations"),
     ("fetch_gpr",      "src/fetch_gpr.py",      "observations"),
     # Prediction-market odds (Polymarket, free) -- the priced-probability anchor.

@@ -313,6 +313,31 @@ def render():
                 f"<span class=tag>{e(ev.get('kind',''))}</span> · "
                 f"{e(ev.get('latest_ts',''))}</div></div>")
 
+    # e2a2. Supply fundamentals (EIA) -- the physical "material": storage + refinery
+    # runs + strategic reserve. Stats-safe, weekly.
+    FUNDAMENTALS = [("Cushing", "eia.cushing_stocks", "kbbl", 0),
+                    ("Refinery use", "eia.refinery_util", "%", 1),
+                    ("SPR", "eia.spr_stocks", "kbbl", 0)]
+    conn = sqlite3.connect(DB)
+    fund = [(lab, unit, dec, *latest_two(conn, sid)) for lab, sid, unit, dec in FUNDAMENTALS]
+    conn.close()
+    if any(v is not None for _, _, _, v, _, _ in fund):
+        parts.append("<h2 class=sec>Supply fundamentals</h2>")
+        parts.append("<div class=lbl>EIA weekly · storage, refinery runs, reserve</div>"
+                     "<div class=ribbon>")
+        for lab, unit, dec, val, date, prev in fund:
+            if val is None:
+                continue
+            cls = "flat"
+            if prev is not None:
+                cls = "up" if val > prev else "down" if val < prev else "flat"
+            arrow = " ▲" if cls == "up" else " ▼" if cls == "down" else ""
+            parts.append(f"<div class=cell><div class=lab>{e(lab)} <span "
+                         f"style='color:#6b7280'>{e(unit)}</span></div>"
+                         f"<div class='num {cls}'>{val:,.{dec}f}{arrow}</div>"
+                         f"<div class=dt>{e(date)}</div></div>")
+        parts.append("</div>")
+
     # e2c. Chokepoint transits (IMF PortWatch) -- the physical-flow layer: are ships
     # actually moving through Hormuz / Bab el-Mandeb / Suez?
     try:
