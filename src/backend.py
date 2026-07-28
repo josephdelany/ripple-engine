@@ -271,6 +271,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
+    "conflict_intensity": {
+        "name": "Conflict Media Intensity (GDELT)",
+        "description": "Per active theatre: news coverage VOLUME vs its 7-day baseline "
+                       "(surge/elevated/normal/quiet) and TONE. Media claims -- attention & "
+                       "sentiment, not verified facts. Free, no token.",
+        "endpoint": "conflict_intensity",
+        "gridData": {"w": 20, "h": 9},
+        "type": "table",
+    },
     "analogue_backtest": {
         "name": "Analogue Backtest (does the oil-spike forecast work?)",
         "description": "Point-in-time walk-forward: the analogue engine's P(Brent +5% in "
@@ -350,6 +359,7 @@ APPS = [{
                 _lw("engine_read", 0, 40, 20, 9),
                 _lw("alert_queue", 20, 40, 20, 9),
                 _lw("transmission_chains", 0, 49, 40, 13),
+                _lw("conflict_intensity", 0, 62, 40, 9),
             ],
         },
         "physical": {
@@ -751,6 +761,16 @@ def commodity_exposure():
                      "at_risk_share": f"{r.get('at_risk_share', 0)}%",
                      "producers_in_conflict": who, "source": r.get("source", "")})
     return rows or [{"commodity": "(run src/criticality.py)", "stage": ""}]
+
+
+@app.get("/conflict_intensity")
+def conflict_intensity():
+    """Per-situation media coverage volume + tone (src/fetch_conflict_intensity.py)."""
+    sits = _read_json("conflict_intensity.json", {}).get("situations", [])
+    rows = [{"situation": s.get("situation", ""), "intensity": s.get("band", ""),
+             "volume_vs_baseline": f"x{s.get('vol_ratio')}" if s.get("vol_ratio") else "-",
+             "tone": s.get("tone"), "mood": s.get("mood", "")} for s in sits]
+    return rows or [{"situation": "(run fetch_conflict_intensity.py)", "intensity": ""}]
 
 
 @app.get("/analogue_backtest")

@@ -408,3 +408,18 @@ def test_om1_oil_map_status():
     assert backend.oil_map_status("elevated", False) == "elevated"
     assert backend.oil_map_status(None, True) == "watch"      # theatre active
     assert backend.oil_map_status(None, False) == "normal"
+
+
+# ---- Conflict media intensity (GDELT per-situation) ------------------------
+
+# ci1 -- timeline parsing + volume-ratio banding.
+def test_ci1_conflict_intensity():
+    import fetch_conflict_intensity as ci
+    js = '{"timeline":[{"data":[{"value":1.0},{"value":2.0},{"value":3.0}]}]}'
+    assert ci.timeline_values(js) == [1.0, 2.0, 3.0]
+    assert ci.timeline_values("garbage") == []
+    assert ci.intensity_band(2.0) == "surge"
+    assert ci.intensity_band(1.4) == "elevated"
+    assert ci.intensity_band(0.9) == "normal"
+    assert ci.intensity_band(0.4) == "quiet"
+    assert ci.intensity_band(None) == "n/a"

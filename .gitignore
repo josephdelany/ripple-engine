@@ -52,3 +52,5 @@ data/analogue.json
 # Backtest + engine calibration, regenerated each run; samples committed.
 data/backtest_analogue.json
 data/forecast_calibration.json
+# Per-situation conflict intensity, regenerated each run.
+data/conflict_intensity.json
