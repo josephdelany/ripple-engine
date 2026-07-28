@@ -1,6 +1,6 @@
 {
   "as_of": "2026-07-24",
-  "generated_at": "2026-07-27T21:18:47+00:00",
+  "generated_at": "2026-07-28T02:19:51+00:00",
   "clustered_event_n": 44,
   "hypotheses": {
     "H1": {
@@ -22,12 +22,12 @@
       "signal": "derived.inv_sigma",
       "signal_name": "Inventory sigma vs seasonal norm",
       "unit": "sigma",
-      "latest": -1.49,
-      "as_of_reading": "2026-07-24",
-      "event_median": -0.02,
+      "latest": null,
+      "as_of_reading": null,
+      "event_median": null,
       "direction": "low (tight) amplifies",
       "verdict": "HOLDS",
-      "amplifier": "ON"
+      "amplifier": "UNKNOWN"
     },
     "H3": {
       "hypothesis": "H3",
@@ -106,6 +106,6 @@
     "gpr_value": 195.9,
     "as_of": "2026-07-27"
   },
-  "read": "Inventories 1.5\u03c3 below seasonal norm (H2 amplifier ON); VIX 55th pct (H1 ON). A supply shock today lands on a physically primed but psychologically stressed market.",
+  "read": "VIX 55th pct (H1 ON). A supply shock today lands on a physically well-supplied but psychologically stressed market.",
   "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast."
 }
