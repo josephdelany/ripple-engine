@@ -22,8 +22,8 @@ permissions:
   pages: write               # to publish The Daily to GitHub Pages
   id-token: write            # required by the Pages deploy action
 
-concurrency:                 # never let two runs overlap
-  group: track
+concurrency:                 # shared with watch.yml so state-writers never overlap
+  group: ripple-engine-state
   cancel-in-progress: false
 
 jobs:
@@ -63,12 +63,18 @@ jobs:
           git config user.email "ripple-bot@users.noreply.github.com"
           git add data/state data/alert_queue.csv data/watch_seen.db data/engine_read.json
           if git diff --cached --quiet; then
-            echo "No state changes to commit."
-          else
-            git pull --rebase --autostash origin main || true
-            git commit -m "chore(track): daily state $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            echo "No state changes to commit."; exit 0
           fi
+          git commit -m "chore(track): daily state $(date -u +%Y-%m-%dT%H:%MZ)"
+          # Commit FIRST, then push with a rebase-retry. On the rare conflict on a
+          # generated file, -X theirs keeps our fresh snapshot. (Serialized with
+          # watch.yml via the shared concurrency group, so this rarely fires.)
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            echo "push rejected; rebasing on latest..."
+            git pull --rebase -X theirs origin main || git rebase --abort
+          done
+          git push
 
       - name: Build the Pages site (The Daily as index.html)
         run: |
