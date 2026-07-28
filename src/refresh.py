@@ -73,6 +73,9 @@ STEPS = [
     # Corroboration brain: cluster the timeline into events + score confidence by
     # independent-source convergence (weight-of-evidence). File output, 0 DB rows.
     ("corroborate",    "src/corroborate.py",    "observations"),
+    # Autonomous analyst (eyes): deterministic divergences between what the
+    # engine sees and what the market prices. File output.
+    ("divergence",     "src/divergence.py",     "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

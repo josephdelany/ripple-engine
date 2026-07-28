@@ -1,0 +1,19 @@
+{
+  "as_of": "2026-07-28",
+  "generated_at": "2026-07-28T04:57:40+00:00",
+  "note": "Deterministic divergences between what the engine sees and what the market prices. DISPLAY/context -- surfaces gaps, never forecasts.",
+  "attention_vs_priced": [
+    {
+      "type": "attention_vs_priced",
+      "subject": "Bab el-Mandeb",
+      "attention": "4.7x (spike)",
+      "attention_pct": 4.7,
+      "priced_disruption": "16%",
+      "priced_volume": 1393951.0,
+      "market": "Bab el-Mandeb Strait effectively closed by September 30?",
+      "market_url": "https://polymarket.com/event/bab-el-mandeb-strait-effectively-closed-by-september-30-999-671",
+      "note": "Bab el-Mandeb: attention 4.7x while the market prices disruption at 16% ($1,393,951 vol) -- signal rising ahead of price."
+    }
+  ],
+  "market_movers": []
+}

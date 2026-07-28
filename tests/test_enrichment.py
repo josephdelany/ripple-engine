@@ -199,3 +199,28 @@ def test_c3_gate_auto_confirm():
     n = cal.auto_confirm(rows, {"http://a/1"}, "2026-07-28T00:00:00")
     assert n == 1 and rows["k1"]["label"] == "1"
     assert rows["k2"]["label"] == ""                        # unmatched stays unlabeled
+
+
+# ---- Autonomous analyst: deterministic divergence detection ---------------
+
+# a1 -- a spiking-attention chokepoint with a cheap priced disruption is flagged;
+# a quiet one is not. 'normal'-framed markets are inverted to a disruption prob.
+def test_a1_attention_vs_priced():
+    import divergence
+    wiki = [{"page": "Bab el-Mandeb", "pct_of_median": 4.7, "flag": "spike"},
+            {"page": "Strait of Hormuz", "pct_of_median": 0.71, "flag": "normal"},
+            {"page": "Suez Canal", "pct_of_median": 1.3, "flag": "elevated"}]
+    mk = [{"question": "Bab el-Mandeb Strait effectively closed by Sep 30?",
+           "prob": 0.16, "volume": 1_393_951, "url": "x"},
+          {"question": "Strait of Hormuz traffic returns to normal by Dec 31?",
+           "prob": 0.56, "volume": 6_000_000, "url": "y"},
+          {"question": "Suez Canal effectively closed?", "prob": 0.05,
+           "volume": 100, "url": "z"}]
+    g = divergence.attention_vs_priced(wiki, mk)
+    subjects = [d["subject"] for d in g]
+    assert "Bab el-Mandeb" in subjects            # spike + cheap -> flagged
+    assert "Strait of Hormuz" not in subjects     # attention normal -> not flagged
+    bab = [d for d in g if d["subject"] == "Bab el-Mandeb"][0]
+    assert bab["priced_disruption"] == "16%"      # 'closed' framing = direct
+    suez = [d for d in g if d["subject"] == "Suez Canal"][0]
+    assert suez["priced_disruption"] == "5%"      # 'closed' 5% stays 5% (direct)

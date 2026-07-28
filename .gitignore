@@ -39,3 +39,5 @@ data/portwatch.json
 data/wiki_attention.json
 # Calibration report, regenerated every run; committed sample is the receipt.
 data/corroboration_calibration.json
+# Divergence report, regenerated every run; sample committed as receipt.
+data/divergence.json
