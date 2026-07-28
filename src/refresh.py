@@ -82,6 +82,9 @@ STEPS = [
     # Oil/energy propagation graph: which transmission paths (trigger->choke->
     # downstream market) are LIVE given active situations. File output.
     ("propagation",    "src/propagation.py",    "observations"),
+    # Risk-vs-priced divergence read: is the oil market pricing the geopolitical
+    # risk in the air? (GPR percentile vs Brent-vol percentile). File output.
+    ("gpr_signal",     "src/gpr_signal.py",     "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

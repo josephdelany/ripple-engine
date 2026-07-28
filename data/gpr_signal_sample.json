@@ -1,0 +1,26 @@
+{
+  "as_of": "2026-07-27",
+  "generated_at": "2026-07-28T16:36:28+00:00",
+  "note": "Risk-vs-priced divergence. GPR = geopolitical risk in the air; derived.brent_vol20 = oil-market realised vol (priced risk). Descriptive over full history; NOT the pre-registered study, NOT a calibrated signal.",
+  "gpr": {
+    "value": 195.9,
+    "date": "2026-07-27",
+    "percentile": 94.8,
+    "band": "high",
+    "posture": "realised (acts >= threats)"
+  },
+  "priced": {
+    "series": "derived.brent_vol20",
+    "value": 56.63,
+    "date": "2026-07-20",
+    "percentile": 93.6,
+    "band": "high"
+  },
+  "divergence": {
+    "gap_pctpts": 1.2,
+    "band": "aligned",
+    "direction": "market in line with risk"
+  },
+  "live_chokepoint_chains": 9,
+  "headline": "Geopolitical risk high (94.8th pct); oil-market risk priced high (93.6th pct) -> aligned: market in line with risk. 9 chokepoint chains live."
+}

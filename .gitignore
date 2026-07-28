@@ -45,3 +45,5 @@ data/divergence.json
 data/criticality.json
 # Propagation report, regenerated every run; sample committed as receipt.
 data/propagation.json
+# Risk-vs-priced read, regenerated every run; sample committed as receipt.
+data/gpr_signal.json

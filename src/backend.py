@@ -188,6 +188,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 5},
         "type": "metric",
     },
+    "risk_vs_priced": {
+        "name": "Risk vs Priced (GPR divergence)",
+        "description": "Is the oil market pricing the geopolitical risk that's in the air? "
+                       "GPR percentile vs Brent realised-vol percentile. Descriptive read, "
+                       "not the pre-registered study.",
+        "endpoint": "risk_vs_priced",
+        "gridData": {"w": 40, "h": 6},
+        "type": "markdown",
+    },
     "where_we_stand": {
         "name": "Where We Stand",
         "description": "The situation dossier as prose -- history + state + what's priced. "
@@ -305,14 +314,15 @@ APPS = [{
             "id": "situation", "name": "Where We Stand",
             "layout": [
                 _lw("risk_gauge", 0, 0, 40, 5),
-                _lw("where_we_stand", 0, 5, 40, 11),
-                _lw("corroborated_events", 0, 16, 20, 9),
-                _lw("prediction_markets", 20, 16, 20, 9),
-                _lw("chart_chokepoints", 0, 25, 20, 9),
-                _lw("chart_attention", 20, 25, 20, 9),
-                _lw("engine_read", 0, 34, 20, 9),
-                _lw("alert_queue", 20, 34, 20, 9),
-                _lw("transmission_chains", 0, 43, 40, 13),
+                _lw("risk_vs_priced", 0, 5, 40, 6),
+                _lw("where_we_stand", 0, 11, 40, 11),
+                _lw("corroborated_events", 0, 22, 20, 9),
+                _lw("prediction_markets", 20, 22, 20, 9),
+                _lw("chart_chokepoints", 0, 31, 20, 9),
+                _lw("chart_attention", 20, 31, 20, 9),
+                _lw("engine_read", 0, 40, 20, 9),
+                _lw("alert_queue", 20, 40, 20, 9),
+                _lw("transmission_chains", 0, 49, 40, 13),
             ],
         },
         "physical": {
@@ -778,6 +788,28 @@ def risk_gauge():
         cards.append({"label": "Attention spike", "value": f"{top['page'][:16]} "
                       f"{top['pct_of_median']}x", "delta": "0"})
     return cards or [{"label": "Engine", "value": "run refresh.py", "delta": "0"}]
+
+
+@app.get("/risk_vs_priced")
+def risk_vs_priced():
+    """The risk-vs-priced divergence read (from src/gpr_signal.py) as a legible markdown
+    card -- the 'is the market pricing the risk in the air?' insight."""
+    s = _read_json("gpr_signal.json", {})
+    if not s or "error" in s or "gpr" not in s:
+        return "_Run `python3 src/gpr_signal.py` to generate the risk-vs-priced read._"
+    g, p, d = s["gpr"], s["priced"], s["divergence"]
+    return (
+        f"### Risk vs Priced &nbsp; · &nbsp; _{s.get('as_of','')}_\n\n"
+        f"**{s.get('headline','')}**\n\n"
+        f"| | percentile (of own history) | band |\n|---|---|---|\n"
+        f"| Geopolitical risk (GPR) | {g['percentile']}th | **{g['band']}** |\n"
+        f"| Oil-market risk priced (Brent 20d vol) | {p['percentile']}th | **{p['band']}** |\n"
+        f"| Divergence | {d['gap_pctpts']:+} pts | **{d['band']}** |\n\n"
+        f"- **Read:** {d['direction']}.\n"
+        f"- **GPR posture:** {g['posture']} — is the risk anticipated or already realised?\n"
+        f"- **Live chokepoint chains:** {s.get('live_chokepoint_chains','n/a')} "
+        f"(see Live Transmission Chains).\n\n"
+        f"_{s.get('note','')}_")
 
 
 @app.get("/where_we_stand")

@@ -289,3 +289,29 @@ def test_pr3_active_situation_reader(tmp_path):
         "  - status: active\n    member_entities: [country.russia, chokepoint.hormuz]\n"
         "  - status: closed\n    member_entities: [country.france]\n")
     assert propagation.active_situation_countries(y) == {"russia"}
+
+
+# ---- GPR risk-vs-priced divergence read ------------------------------------
+
+# gp1 -- pct_rank is the share of history at-or-below the value; band buckets it.
+def test_gp1_pct_rank_and_band():
+    import gpr_signal
+    assert gpr_signal.pct_rank([1, 2, 3, 4], 3) == 75.0
+    assert gpr_signal.pct_rank([1, 2, 3, 4], 4) == 100.0     # highest ever
+    assert gpr_signal.pct_rank([], 5) is None
+    assert gpr_signal.band(10) == "calm"
+    assert gpr_signal.band(30) == "normal"
+    assert gpr_signal.band(60) == "elevated"
+    assert gpr_signal.band(90) == "high"
+    assert gpr_signal.band(97) == "extreme"
+
+
+# gp2 -- divergence: small gap = aligned; risk running hotter than priced is flagged.
+def test_gp2_divergence():
+    import gpr_signal
+    gap, b, d = gpr_signal.divergence(95, 90)
+    assert b == "aligned" and gap == 5
+    gap, b, d = gpr_signal.divergence(90, 40)          # risk hot, market calm
+    assert b == "wide gap" and gap == 50 and "HOTTER" in d
+    gap, b, d = gpr_signal.divergence(30, 60)          # market more nervous
+    assert b == "mild gap" and gap == -30 and "nervous" in d
