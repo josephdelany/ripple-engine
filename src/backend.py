@@ -27,6 +27,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import uvicorn
+import yaml
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -64,6 +65,24 @@ def _series(conn, series_id, days=140):
             break
     out.reverse()
     return [d for d, _ in out], [v for _, v in out]
+
+
+def _situation_options():
+    """Dropdown options for the Situation selector, from the human-owned config.
+    Computed at startup (restart the backend to pick up new situations)."""
+    p = DATA / "situations.yaml"
+    if not p.exists():
+        return [{"label": "Israel-Iran War", "value": "situation.israel_iran_war_2025"}]
+    try:
+        cfg = yaml.safe_load(p.read_text()) or {}
+    except (OSError, yaml.YAMLError):
+        return []
+    return [{"label": s.get("title", s["situation_id"]), "value": s["situation_id"]}
+            for s in cfg.get("situations", []) if s.get("status") != "closed"]
+
+
+_SIT_OPTIONS = _situation_options()
+_SIT_DEFAULT = _SIT_OPTIONS[0]["value"] if _SIT_OPTIONS else ""
 
 
 def _line_fig(title, traces, ytitle=""):
@@ -160,6 +179,31 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 14},
         "type": "table",
     },
+    # --- Phase 2 cockpit: the headline read ---
+    "risk_gauge": {
+        "name": "Gulf Risk Gauge",
+        "description": "At-a-glance KPIs: escalation, amplifiers, chokepoint status, "
+                       "top corroboration, and what's priced.",
+        "endpoint": "risk_gauge",
+        "gridData": {"w": 40, "h": 5},
+        "type": "metric",
+    },
+    "where_we_stand": {
+        "name": "Where We Stand",
+        "description": "The situation dossier as prose -- history + state + what's priced. "
+                       "Pick a situation.",
+        "endpoint": "where_we_stand",
+        "gridData": {"w": 40, "h": 11},
+        "type": "markdown",
+        "params": [{
+            "paramName": "situation",
+            "label": "Situation",
+            "description": "Which Gulf situation to read",
+            "value": _SIT_DEFAULT,
+            "type": "text",
+            "options": _SIT_OPTIONS,
+        }],
+    },
     # --- Enrichment layer: the multi-modal signals + the corroboration brain ---
     "corroborated_events": {
         "name": "Corroborated Events",
@@ -243,12 +287,14 @@ APPS = [{
         "situation": {
             "id": "situation", "name": "Where We Stand",
             "layout": [
-                _lw("engine_read", 0, 0, 20, 9),
-                _lw("corroborated_events", 20, 0, 20, 9),
-                _lw("chart_chokepoints", 0, 9, 20, 9),
-                _lw("chart_attention", 20, 9, 20, 9),
-                _lw("prediction_markets", 0, 18, 20, 10),
-                _lw("alert_queue", 20, 18, 20, 10),
+                _lw("risk_gauge", 0, 0, 40, 5),
+                _lw("where_we_stand", 0, 5, 40, 11),
+                _lw("corroborated_events", 0, 16, 20, 9),
+                _lw("prediction_markets", 20, 16, 20, 9),
+                _lw("chart_chokepoints", 0, 25, 20, 9),
+                _lw("chart_attention", 20, 25, 20, 9),
+                _lw("engine_read", 0, 34, 20, 9),
+                _lw("alert_queue", 20, 34, 20, 9),
             ],
         },
         "physical": {
@@ -631,6 +677,70 @@ def supply_fundamentals():
                         "unit": unit, "as_of": row[0]})
     conn.close()
     return out or [{"series": "(run fetch_eia_fundamentals.py)", "latest": ""}]
+
+
+@app.get("/risk_gauge")
+def risk_gauge():
+    """The headline KPI row (metric widget): escalation, amplifiers, chokepoint
+    status, top corroboration, and what's priced -- all from committed artifacts."""
+    er = _read_json("engine_read.json")
+    cards = []
+
+    # Brent + day change.
+    conn = sqlite3.connect(DB)
+    bx, by = _series(conn, "fred.DCOILBRENTEU", 5)
+    conn.close()
+    if by:
+        delta = f"{by[-1] - by[-2]:+.2f}" if len(by) > 1 else "0"
+        cards.append({"label": "Brent ($/bbl)", "value": f"{by[-1]:.2f}", "delta": delta})
+
+    # Amplifiers (H1/H2 ON) + GPR percentile.
+    hyp = er.get("hypotheses", {})
+    on = [h for h in ("H1", "H2") if hyp.get(h, {}).get("amplifier") == "ON"]
+    cards.append({"label": "Amplifiers ON", "value": f"{len(on)}/2 ({'+'.join(on) or 'none'})",
+                  "delta": "0"})
+    gpr = (er.get("gpr_context") or {}).get("gpr_pct")
+    if gpr is not None:
+        cards.append({"label": "Geopolitical risk %ile", "value": f"{gpr}", "delta": "0"})
+
+    # Chokepoint status (worst-flagged) from PortWatch.
+    cps = _read_json("portwatch.json").get("chokepoints", [])
+    hot = [c for c in cps if c.get("flag") in ("reduced", "elevated")]
+    pick = hot[0] if hot else (cps[0] if cps else None)
+    if pick:
+        cards.append({"label": f"{pick['chokepoint'][:16]} flow",
+                      "value": f"{pick.get('latest','')} ({pick.get('flag','')})",
+                      "delta": f"{(pick.get('pct_of_median') or 1) - 1:+.2f}"})
+
+    # Top corroborated event confidence.
+    cor = [e for evs in (_read_json("corroboration.json").get("situations") or {}).values()
+           for e in evs]
+    if cor:
+        top = max(cor, key=lambda e: e.get("confidence", 0))
+        cards.append({"label": "Top corroboration", "value": f"{top['confidence']*100:.0f}% "
+                      f"({top['tag']})", "delta": "0"})
+
+    # Attention: the top-spiking page.
+    pages = [p for p in _read_json("wiki_attention.json").get("pages", [])
+             if p.get("flag") in ("spike", "elevated")]
+    if pages:
+        top = max(pages, key=lambda p: p.get("pct_of_median", 0))
+        cards.append({"label": "Attention spike", "value": f"{top['page'][:16]} "
+                      f"{top['pct_of_median']}x", "delta": "0"})
+    return cards or [{"label": "Engine", "value": "run refresh.py", "delta": "0"}]
+
+
+@app.get("/where_we_stand")
+def where_we_stand(situation: str = _SIT_DEFAULT):
+    """The chosen situation's dossier as prose (markdown), trimmed to the read (the
+    full timeline table lives in its own widget). Driven by the Situation dropdown."""
+    md = DATA / "situations" / f"{situation}.md"
+    if not md.exists():
+        return f"_No dossier for **{situation}** yet — run `python3 src/situation.py`._"
+    text = md.read_text()
+    # Keep everything up to the raw timeline table (synthesis + priced-state + odds).
+    cut = text.find("## Timeline")
+    return text[:cut].strip() if cut > 0 else text
 
 
 @app.get("/chart_brent")
