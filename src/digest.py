@@ -32,6 +32,7 @@ ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
 PREDMKT = ROOT / "data" / "predmkt.json"
 CORROBORATION = ROOT / "data" / "corroboration.json"
+PORTWATCH = ROOT / "data" / "portwatch.json"
 OUT = ROOT / "data" / "digest.html"
 
 # The ribbon: (label, series_id, unit, decimals). GPR is handled separately (it
@@ -311,6 +312,27 @@ def render():
                 f" · {e(ev.get('n_independent_sources',0))} independent sources · "
                 f"<span class=tag>{e(ev.get('kind',''))}</span> · "
                 f"{e(ev.get('latest_ts',''))}</div></div>")
+
+    # e2c. Chokepoint transits (IMF PortWatch) -- the physical-flow layer: are ships
+    # actually moving through Hormuz / Bab el-Mandeb / Suez?
+    try:
+        cps = json.loads(PORTWATCH.read_text()).get("chokepoints", []) \
+            if PORTWATCH.exists() else []
+    except (OSError, ValueError):
+        cps = []
+    if cps:
+        parts.append("<h2 class=sec>Chokepoint transits</h2>")
+        parts.append("<div class=lbl>IMF PortWatch · daily tanker flow (data lags "
+                     "~1 week)</div><div class=ribbon>")
+        for c in cps:
+            cls = ("down" if c.get("flag") == "reduced"
+                   else "up" if c.get("flag") == "elevated" else "flat")
+            parts.append(
+                f"<div class=cell><div class=lab>{e(c.get('chokepoint',''))}</div>"
+                f"<div class='num {cls}'>{e(c.get('latest',''))}</div>"
+                f"<div class=dt>{e(c.get('flag',''))} · {e(c.get('pct_of_median',''))}x"
+                f"</div></div>")
+        parts.append("</div>")
 
     # e3. Market-implied odds -- what the crowd PRICES for the same events (the
     # engine's "read vs priced" thesis, made live). Context only, never the stats.

@@ -46,6 +46,8 @@ STEPS = [
     # Prediction-market odds (Polymarket, free) -- the priced-probability anchor.
     # DISPLAY/context only; never feeds the registered statistics.
     ("fetch_predmkt",  "src/fetch_predmkt.py",  "observations"),
+    # IMF PortWatch chokepoint transits (free) -- the physical-flow modality.
+    ("fetch_portwatch", "src/fetch_portwatch.py", "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Record keeper: link any situation atom whose source_url now matches a

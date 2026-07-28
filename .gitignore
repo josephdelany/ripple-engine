@@ -33,3 +33,5 @@ data/situations/
 data/predmkt.json
 # Corroboration report, regenerated every run; committed sample is the receipt.
 data/corroboration.json
+# PortWatch snapshot, regenerated every run; committed sample is the receipt.
+data/portwatch.json

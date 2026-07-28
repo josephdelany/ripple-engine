@@ -80,3 +80,32 @@ def test_e3c_domain_independence():
     c = corroborate.cluster_atoms(atoms)[0]
     domains = {corroborate._domain(a["source_url"]) for a in c}
     assert len(domains) == 1
+
+
+# ---- E4: IMF PortWatch physical-flow anomaly ------------------------------
+
+# e4 -- assess flags a sharp drop in tanker transits as 'reduced' (a physical
+# disruption), a surge as 'elevated', and steady flow as 'normal'.
+def test_e4_portwatch_assess_flags():
+    import fetch_portwatch as fp
+    # newest-first; latest far below the trailing median -> reduced.
+    assert fp.assess([2, 10, 11, 9, 12])["flag"] == "reduced"
+    assert fp.assess([25, 10, 11, 9, 12])["flag"] == "elevated"
+    assert fp.assess([10, 10, 11, 9, 12])["flag"] == "normal"
+    assert fp.assess([])  is None
+    r = fp.assess([6, 12, 12])            # 6 vs median 12 -> 0.5x -> reduced
+    assert r["pct_of_median"] == 0.5 and r["flag"] == "reduced"
+
+
+# e4b -- cross-modal boost: a physical disruption at a chokepoint named in a news
+# cluster adds an independent vote (news + ships stopping > either alone).
+def test_e4b_physical_corroboration():
+    import corroborate
+    cluster = [{"headline": "Tankers avoid Strait of Hormuz amid tension",
+                "source_url": "http://x/1"}]
+    assert corroborate._physical_hit(cluster, {"hormuz"}) == "hormuz"
+    assert corroborate._physical_hit(cluster, set()) is None         # not disrupted
+    assert corroborate._physical_hit(
+        [{"headline": "Fed holds rates", "source_url": "x"}], {"hormuz"}) is None
+    # one physical vote on top of one news source is strictly more confident.
+    assert corroborate.score(2)[1] > corroborate.score(1)[1]

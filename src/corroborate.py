@@ -32,7 +32,14 @@ from rapidfuzz import fuzz
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
+PORTWATCH = ROOT / "data" / "portwatch.json"
 OUT = ROOT / "data" / "corroboration.json"
+
+# Headline terms -> chokepoint slug, so a physical disruption can corroborate a
+# news cluster about that chokepoint (cross-modal convergence, the strongest signal).
+CHOKEPOINT_TERMS = {"hormuz": "hormuz", "bab el-mandeb": "bab_el_mandeb",
+                    "bab al-mandeb": "bab_el_mandeb", "red sea": "bab_el_mandeb",
+                    "suez": "suez"}
 
 # --- the weight-of-evidence model (engine-chosen constants, tunable, to calibrate) ---
 PRIOR_PROB = 0.10            # base rate that a raw alert marks a real, significant event
@@ -89,9 +96,32 @@ def score(n_independent):
     return round(db, 1), round(p, 3), tag
 
 
-def corroborate_situation(conn, sid):
-    """Cluster + score a situation's atoms. Returns events sorted most-corroborated
-    first."""
+def disrupted_chokepoints():
+    """Chokepoint slugs PortWatch currently flags 'reduced' (physical disruption)."""
+    if not PORTWATCH.exists():
+        return set()
+    try:
+        cps = json.loads(PORTWATCH.read_text()).get("chokepoints", [])
+    except (ValueError, OSError):
+        return set()
+    return {c["slug"] for c in cps if c.get("flag") == "reduced"}
+
+
+def _physical_hit(cluster, disrupted):
+    """Does a physical disruption corroborate this news cluster? Returns the
+    chokepoint slug if any headline names a chokepoint that PortWatch flags reduced."""
+    text = " ".join((a.get("headline") or "").lower() for a in cluster)
+    for term, slug in CHOKEPOINT_TERMS.items():
+        if term in text and slug in disrupted:
+            return slug
+    return None
+
+
+def corroborate_situation(conn, sid, disrupted=None):
+    """Cluster + score a situation's atoms. A physical-flow disruption (PortWatch)
+    that matches a cluster's chokepoint adds an independent, CROSS-MODAL vote --
+    news + ships stopping is far stronger than either alone. Sorted most-corroborated."""
+    disrupted = disrupted if disrupted is not None else disrupted_chokepoints()
     rows = conn.execute(
         "SELECT ts, kind, headline, source_url FROM situation_log "
         "WHERE situation_id=? ORDER BY ts DESC, log_id DESC", (sid,)).fetchall()
@@ -100,13 +130,20 @@ def corroborate_situation(conn, sid):
     events = []
     for c in cluster_atoms(atoms):
         domains = sorted({_domain(a["source_url"]) for a in c if a["source_url"]})
-        db, p, tag = score(len(domains))
+        modalities = ["news"]
+        n_indep = len(domains)
+        phys = _physical_hit(c, disrupted)
+        if phys:                       # cross-modal physical corroboration
+            n_indep += 1
+            modalities.append(f"physical:portwatch:{phys}")
+        db, p, tag = score(n_indep)
         rep = max(c, key=lambda a: len(a.get("headline") or ""))  # fullest headline
         events.append({
             "headline": rep["headline"], "kind": rep["kind"],
-            "n_atoms": len(c), "n_independent_sources": len(domains),
-            "sources": domains[:8], "confidence": p, "confidence_db": db,
-            "tag": tag, "latest_ts": max(a["ts"] for a in c)[:10]})
+            "n_atoms": len(c), "n_independent_sources": n_indep,
+            "sources": domains[:8], "modalities": modalities,
+            "confidence": p, "confidence_db": db, "tag": tag,
+            "latest_ts": max(a["ts"] for a in c)[:10]})
     events.sort(key=lambda e: (e["confidence"], e["n_atoms"]), reverse=True)
     return events
 
