@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
 PORTWATCH = ROOT / "data" / "portwatch.json"
+FIRMS = ROOT / "data" / "firms.json"
 OUT = ROOT / "data" / "corroboration.json"
 
 # Headline terms -> chokepoint slug, so a physical disruption can corroborate a
@@ -40,6 +41,11 @@ OUT = ROOT / "data" / "corroboration.json"
 CHOKEPOINT_TERMS = {"hormuz": "hormuz", "bab el-mandeb": "bab_el_mandeb",
                     "bab al-mandeb": "bab_el_mandeb", "red sea": "bab_el_mandeb",
                     "suez": "suez"}
+# Facility terms -> FIRMS slug (oil infra only; chokepoints stay physical-flow's job,
+# so the two modalities never vote on the same location = no double-count).
+FACILITY_TERMS = {"abqaiq": "abqaiq", "ras tanura": "ras_tanura",
+                  "khurais": "khurais", "kharg": "kharg",
+                  "ras laffan": "ras_laffan", "jamnagar": "jamnagar"}
 
 # --- the weight-of-evidence model (engine-chosen constants, tunable, to calibrate) ---
 PRIOR_PROB = 0.10            # base rate that a raw alert marks a real, significant event
@@ -98,13 +104,12 @@ def score(n_independent):
 
 def disrupted_chokepoints():
     """Chokepoint slugs PortWatch currently flags 'reduced' (physical disruption)."""
-    if not PORTWATCH.exists():
-        return set()
-    try:
-        cps = json.loads(PORTWATCH.read_text()).get("chokepoints", [])
-    except (ValueError, OSError):
-        return set()
-    return {c["slug"] for c in cps if c.get("flag") == "reduced"}
+    return _flagged(PORTWATCH, "chokepoints", "reduced")
+
+
+def elevated_facilities():
+    """Facility slugs FIRMS currently flags 'elevated' (thermal anomaly / strike)."""
+    return _flagged(FIRMS, "facilities", "elevated")
 
 
 def _physical_hit(cluster, disrupted):
@@ -117,11 +122,34 @@ def _physical_hit(cluster, disrupted):
     return None
 
 
-def corroborate_situation(conn, sid, disrupted=None):
-    """Cluster + score a situation's atoms. A physical-flow disruption (PortWatch)
-    that matches a cluster's chokepoint adds an independent, CROSS-MODAL vote --
-    news + ships stopping is far stronger than either alone. Sorted most-corroborated."""
+def _thermal_hit(cluster, elevated):
+    """Does a satellite thermal anomaly corroborate this cluster? Returns the
+    facility slug if any headline names a facility FIRMS flags elevated (a strike)."""
+    text = " ".join((a.get("headline") or "").lower() for a in cluster)
+    for term, slug in FACILITY_TERMS.items():
+        if term in text and slug in elevated:
+            return slug
+    return None
+
+
+def _flagged(path, key, flag):
+    """Slugs in a signal JSON whose 'flag' == flag (portwatch/firms readers)."""
+    if not path.exists():
+        return set()
+    try:
+        items = json.loads(path.read_text()).get(key, [])
+    except (ValueError, OSError):
+        return set()
+    return {c["slug"] for c in items if c.get("flag") == flag}
+
+
+def corroborate_situation(conn, sid, disrupted=None, elevated=None):
+    """Cluster + score a situation's atoms. Cross-modal votes add independence:
+    a physical-flow disruption (PortWatch ships stopped) or a satellite thermal
+    anomaly (FIRMS fire at a named facility) that matches a cluster is far stronger
+    than news alone. Sorted most-corroborated first."""
     disrupted = disrupted if disrupted is not None else disrupted_chokepoints()
+    elevated = elevated if elevated is not None else elevated_facilities()
     rows = conn.execute(
         "SELECT ts, kind, headline, source_url FROM situation_log "
         "WHERE situation_id=? ORDER BY ts DESC, log_id DESC", (sid,)).fetchall()
@@ -136,6 +164,10 @@ def corroborate_situation(conn, sid, disrupted=None):
         if phys:                       # cross-modal physical corroboration
             n_indep += 1
             modalities.append(f"physical:portwatch:{phys}")
+        therm = _thermal_hit(c, elevated)
+        if therm:                      # cross-modal satellite-thermal corroboration
+            n_indep += 1
+            modalities.append(f"thermal:firms:{therm}")
         db, p, tag = score(n_indep)
         rep = max(c, key=lambda a: len(a.get("headline") or ""))  # fullest headline
         events.append({

@@ -52,6 +52,9 @@ STEPS = [
     ("fetch_portwatch", "src/fetch_portwatch.py", "observations"),
     # Wikipedia pageview attention (free) -- the attention modality (context).
     ("fetch_wiki",     "src/fetch_wiki_attention.py", "observations"),
+    # NASA FIRMS satellite fire near oil facilities -- overhead/thermal modality.
+    # Dormant until FIRMS_KEY is set; skips cleanly otherwise.
+    ("fetch_firms",    "src/fetch_firms.py",    "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Record keeper: link any situation atom whose source_url now matches a

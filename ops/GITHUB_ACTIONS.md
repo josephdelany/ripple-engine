@@ -30,6 +30,11 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
   Without it the weekly-inventory (H2) series just goes stale; everything else still runs.
 - **`NTFY_TOPIC`** — a hard-to-guess topic name you invent, e.g. `ripple-joe-8f3k`.
   (Optional: leave it unset and no phone pushes are sent — the run still works.)
+- **`FIRMS_KEY`** *(optional)* — a free NASA FIRMS map key from
+  [firms.modaps.eosdis.nasa.gov/api/map_key](https://firms.modaps.eosdis.nasa.gov/api/map_key/).
+  Activates the satellite-fire modality (thermal anomalies near oil facilities →
+  cross-modal corroboration). Unset = that one adapter stays dormant; everything
+  else runs.
 
 ### 3. Get the notifications on your phone
 Install the **ntfy** app (iOS/Android), and **subscribe to the exact same topic**

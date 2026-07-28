@@ -122,3 +122,29 @@ def test_e6_wiki_assess_flags():
     assert w.assess([100, 100, 100, 100, 40])["flag"] == "quiet"       # 0.4x
     assert w.assess([100, 100, 100, 100, 110])["flag"] == "normal"
     assert w.assess([]) is None
+
+
+# ---- E2: NASA FIRMS satellite-fire modality --------------------------------
+
+# e2 -- the FIRMS CSV parser extracts detections with FRP; malformed rows drop.
+def test_e2_firms_parser():
+    import fetch_firms
+    csv = ("latitude,longitude,bright_ti4,acq_date,confidence,frp\n"
+           "25.93,49.67,340.1,2026-07-28,h,55.4\n"
+           "bad,row,,,,\n"
+           "25.94,49.66,330.0,2026-07-28,n,12.1\n")
+    d = fetch_firms.parse_firms_csv(csv)
+    assert len(d) == 2 and round(sum(x["frp"] for x in d), 1) == 67.5
+    b = fetch_firms.bbox(25.93, 49.67)
+    assert b.count(",") == 3        # west,south,east,north
+
+
+# e2b -- a thermal anomaly at a NAMED facility corroborates a news cluster
+# (cross-modal), and only when that facility is actually flagged elevated.
+def test_e2b_thermal_corroboration():
+    import corroborate
+    cluster = [{"headline": "Drone strike hits Abqaiq oil facility", "source_url": "x"}]
+    assert corroborate._thermal_hit(cluster, {"abqaiq"}) == "abqaiq"
+    assert corroborate._thermal_hit(cluster, set()) is None      # not flagged
+    assert corroborate._thermal_hit(
+        [{"headline": "Fed holds rates", "source_url": "x"}], {"abqaiq"}) is None

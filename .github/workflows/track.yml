@@ -48,6 +48,7 @@ jobs:
       - name: Run the daily cycle (fetch -> derive -> memory -> resolve -> render)
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+          FIRMS_KEY: ${{ secrets.FIRMS_KEY }}   # optional: satellite-fire modality
         run: python3 src/refresh.py
 
       - name: Snapshot memory + push high-signal alerts
