@@ -148,3 +148,16 @@ def test_e2b_thermal_corroboration():
     assert corroborate._thermal_hit(cluster, set()) is None      # not flagged
     assert corroborate._thermal_hit(
         [{"headline": "Fed holds rates", "source_url": "x"}], {"abqaiq"}) is None
+
+
+# ---- E7: GDELT DOC coverage tone ------------------------------------------
+
+# e7 -- latest_tone parses the DOC TimelineTone JSON to the most recent value.
+def test_e7_gdelt_latest_tone():
+    import fetch_gdelt_tone as g
+    js = ('{"timeline":[{"series":"Average Tone","data":['
+          '{"date":"20260720T000000Z","value":-1.2},'
+          '{"date":"20260728T000000Z","value":-3.5}]}]}')
+    assert g.latest_tone(js) == -3.5
+    assert g.latest_tone('{"timeline":[]}') is None
+    assert g.latest_tone("not json") is None

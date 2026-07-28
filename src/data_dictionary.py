@@ -37,12 +37,21 @@ def main():
                      f"| {'yes' if c[5] else ''} |")
         L.append("")
 
-    # The series catalogue: every series_id with its provenance.
+    # The series catalogue: every series_id with its provenance. The prediction-
+    # market series (predmkt.*) are EPHEMERAL -- one per live Polymarket market, they
+    # come and go by the hundred -- so they're summarised, not enumerated (they would
+    # otherwise bury the catalogue).
     L += ["## Series catalogue (`series_id` → unit, cadence, source)", "",
           "| series_id | unit | frequency | source |", "|---|---|---|---|"]
     for sid, unit, freq, src in conn.execute(
-            "SELECT series_id, unit, frequency, source FROM series ORDER BY series_id"):
+            "SELECT series_id, unit, frequency, source FROM series "
+            "WHERE series_id NOT LIKE 'predmkt.%' ORDER BY series_id"):
         L.append(f"| `{sid}` | {unit or ''} | {freq or ''} | {src or ''} |")
+    n_pm = conn.execute("SELECT COUNT(*) FROM series WHERE series_id LIKE "
+                        "'predmkt.%'").fetchone()[0]
+    if n_pm:
+        L.append(f"| `predmkt.*` ({n_pm} live markets) | probability | daily | "
+                 f"Polymarket |")
     conn.close()
 
     OUT.write_text("\n".join(L) + "\n")

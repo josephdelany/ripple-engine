@@ -55,6 +55,8 @@ STEPS = [
     # NASA FIRMS satellite fire near oil facilities -- overhead/thermal modality.
     # Dormant until FIRMS_KEY is set; skips cleanly otherwise.
     ("fetch_firms",    "src/fetch_firms.py",    "observations"),
+    # GDELT DOC coverage tone (free) -- the media-sentiment modality (context).
+    ("fetch_gdelt_tone", "src/fetch_gdelt_tone.py", "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Record keeper: link any situation atom whose source_url now matches a

@@ -21,7 +21,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | units | TEXT |  |  |
 | n_days | INTEGER |  |  |
 
-## `entities` — 31 rows
+## `entities` — 32 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -69,7 +69,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | outcome | INTEGER |  |  |
 | notes | TEXT |  |  |
 
-## `observations` — 212,680 rows
+## `observations` — 219,286 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -103,7 +103,27 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | source_url | TEXT | yes |  |
 | added_at | TEXT |  |  |
 
-## `series` — 22 rows
+## `reads` — 1 rows
+
+| column | type | not null | pk |
+|---|---|---|---|
+| read_id | INTEGER |  | yes |
+| made_at | TEXT | yes |  |
+| situation_id | TEXT |  |  |
+| kind | TEXT | yes |  |
+| anchor_date | TEXT | yes |  |
+| anchor_series | TEXT | yes |  |
+| anchor_value | REAL |  |  |
+| horizon_days | INTEGER | yes |  |
+| expected_car | REAL | yes |  |
+| basis | TEXT |  |  |
+| amp_context | TEXT |  |  |
+| resolved_at | TEXT |  |  |
+| realized_car | REAL |  |  |
+| error | REAL |  |  |
+| notes | TEXT |  |  |
+
+## `series` — 213 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -115,6 +135,24 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | source | TEXT |  |  |
 | source_url | TEXT |  |  |
 | notes | TEXT |  |  |
+
+## `situation_log` — 71 rows
+
+| column | type | not null | pk |
+|---|---|---|---|
+| log_id | INTEGER |  | yes |
+| situation_id | TEXT | yes |  |
+| ts | TEXT | yes |  |
+| kind | TEXT |  |  |
+| actor_entity | TEXT |  |  |
+| headline | TEXT | yes |  |
+| detail | TEXT |  |  |
+| source_url | TEXT | yes |  |
+| retrieved_at | TEXT | yes |  |
+| status | TEXT | yes |  |
+| confidence | TEXT |  |  |
+| alert_url | TEXT |  |  |
+| promoted_event_id | TEXT |  |  |
 
 ## Series catalogue (`series_id` → unit, cadence, source)
 
@@ -130,6 +168,9 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | `derived.usd_z` | sigma | daily | derived (this repo) |
 | `derived.vix_pct` | percentile | daily | derived (this repo) |
 | `eia.crude_stocks_xspr` | thousand bbl | weekly | EIA |
+| `eia.cushing_stocks` | thousand bbl | weekly | EIA |
+| `eia.refinery_util` | percent | weekly | EIA |
+| `eia.spr_stocks` | thousand bbl | weekly | EIA |
 | `fred.DCOILBRENTEU` | USD/bbl | daily | FRED |
 | `fred.DCOILWTICO` | USD/bbl | daily | FRED |
 | `fred.DGS10` | percent | daily | FRED |
@@ -142,3 +183,18 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | `gpr.GPRD` | index | daily | Caldara & Iacoviello, Geopolitical Risk index (matteoiacoviello.com) |
 | `gpr.GPRD_ACT` | index | daily | Caldara & Iacoviello, Geopolitical Risk index (matteoiacoviello.com) |
 | `gpr.GPRD_THREAT` | index | daily | Caldara & Iacoviello, Geopolitical Risk index (matteoiacoviello.com) |
+| `portwatch.bab_el_mandeb.capacity_tanker` | dwt | daily | IMF PortWatch |
+| `portwatch.bab_el_mandeb.n_tanker` | count | daily | IMF PortWatch |
+| `portwatch.cape_of_good_hope.capacity_tanker` | dwt | daily | IMF PortWatch |
+| `portwatch.cape_of_good_hope.n_tanker` | count | daily | IMF PortWatch |
+| `portwatch.hormuz.capacity_tanker` | dwt | daily | IMF PortWatch |
+| `portwatch.hormuz.n_tanker` | count | daily | IMF PortWatch |
+| `portwatch.suez.capacity_tanker` | dwt | daily | IMF PortWatch |
+| `portwatch.suez.n_tanker` | count | daily | IMF PortWatch |
+| `wiki.views.aramco` | views | daily | Wikimedia |
+| `wiki.views.bab_el_mandeb` | views | daily | Wikimedia |
+| `wiki.views.hormuz` | views | daily | Wikimedia |
+| `wiki.views.houthis` | views | daily | Wikimedia |
+| `wiki.views.iran_war` | views | daily | Wikimedia |
+| `wiki.views.suez` | views | daily | Wikimedia |
+| `predmkt.*` (174 live markets) | probability | daily | Polymarket |
