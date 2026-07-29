@@ -38,20 +38,24 @@ human view; the market is the null hypothesis.
 
 Data spine: one SQLite DB (`data/oil.db`, 10 tables), point-in-time (`as_of`/`retrieved_at`,
 no lookahead). ~15 free feeds in; autonomous GitHub Actions loop; self-monitoring (heartbeat).
+Event corpus: **161 sourced shocks (1987–2025)**, every row carrying a verified `source_url`
+(grown 52→161 via web-sourced, human-gated, codebook-coded batches — Phase B).
 
 ## VALIDATION STATUS — the honest core (a quant reads this first)
 | Piece | Method | Status | Evidence |
 |---|---|---|---|
-| **H1 — stress amplifies (VIX)** | conditioned event study | ✅ **VALIDATED (robust)** | registered n=20 **+10.3pp**; expanded n=52 **+7.4pp**, 95% CI excludes 0, survives FDR@10% — holds as N grows |
-| **H2 — tight inventories amplify** | conditioned event study | ⚠️ **SAMPLE-DEPENDENT** | registered n=20 **+5.4pp** (held); expanded n=52 **+2.9pp** — decays BELOW the +5pp bar, CI includes 0 → no longer a validated edge. See `REGISTERED_SAMPLE.md` |
-| **H3 — crowded positioning amplifies** | conditioned event study | ❌ **REJECTED** | clustered **−6.8pp** (n=20) / **−6.9pp** (n=52), wrong direction — reported, not buried |
+| **H1 — stress amplifies (VIX)** | conditioned event study | ✅ **VALIDATED (robust, strengthening)** | n=20 **+10.3pp** → n=161 **+5.0pp**, 95% CI [+1.1,+9.0] excludes 0, perm p=0.005, **survives FDR AND Bonferroni** — the effect got MORE credible with N |
+| **H2 — tight inventories amplify** | conditioned event study | ❌ **NULL (was small-sample noise)** | n=20 **+5.4pp** (held) → n=161 **−0.8pp** (now wrong-signed, CI includes 0) — the registered "hold" did not survive the 8× larger sample. See `REGISTERED_SAMPLE.md` |
+| **H3 — crowded positioning amplifies** | conditioned event study | ❌ **REJECTED** | clustered **−6.8pp** (n=20) → **−3.9pp** (n=161), wrong direction — reported, not buried |
+| **Analogue at big-N (N scored 42→105)** | kNN turbulence forecast | ⚠️ **NULL SURVIVED corpus growth** | CPCV skill −0.14, PBO 0.0, Diebold-Mariano p=0.0002 (base rate wins) — more N did not manufacture an edge |
 | **Analogue forecaster** (P oil turbulence) | kNN over 511-shock library | ⚠️ **NO OOS EDGE (null)** | raw Brier 0.40 / LOO-isotonic 0.29 vs base-rate 0.24 → skill still **−0.05** at N=42 |
 | **Source-aware gap read** | rules (global vs country GPR sign) | 🟨 **DESCRIPTIVE** | agrees with reality (oil down while Gulf risk high) but unscored |
 | **Propagation graph / criticality / OPEC stress** | sourced maps | 🟨 **DESCRIPTIVE** | context, not a scored edge |
 
 **The rule this enforces:** the only thing the engine may present as *predictive edge* today is
-the **A×B conditioning via H1 (VIX stress)** — the one hypothesis robust from n=20 to n=52.
-H2 is now sample-dependent (below the bar at n=52). The analogue is in the **penalty box** — visible, honestly
+the **A×B conditioning via H1 (VIX stress)** — the one hypothesis robust from n=20 to n=161,
+now surviving even Bonferroni. H2 is a null at big-N (below the bar, wrong-signed at n=161).
+The analogue is in the **penalty box** — visible, honestly
 labelled a null, promoted to the forecast only if it beats the base rate out-of-sample. Gap and
 story layers **describe**; they do not claim edge. This is what keeps it from being Frontier Alpha.
 
@@ -66,8 +70,8 @@ a much larger analogue library), then re-run `backtest_analogue.py` + `calibrate
 
 ## What #1 and #2 settled (2026-07-28)
 - **#1 finished:** the registered study is closed (frozen at n=20, `REGISTERED_SAMPLE.md`). On the
-  registered sample 2 of 3 held (H1, H2); H3 rejected. **Under expansion to n=52, only H1 remains
-  an edge** — H2 decays below the +5pp bar (sample-dependent). H1 is the honest, robust core.
+  registered sample 2 of 3 held (H1, H2); H3 rejected. **Under expansion to n=161, only H1 remains
+  an edge** — and it strengthened (survives Bonferroni); H2 fell to a null. H1 is the robust core.
 - **#2 proven — as a null:** the analogue forecaster has no OOS edge at current N. Rigorously
   shown (LOO isotonic). It stays experimental until the corpus makes it earn its place.
 

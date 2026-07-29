@@ -1,20 +1,20 @@
 {
   "what": "OOS validation gate on the analogue turbulence forecaster",
-  "n_scored": 42,
-  "base_rate": 0.595,
-  "full_sample_brier": 0.4014,
-  "base_rate_brier": 0.2409,
-  "full_sample_skill_vs_base": -0.1605,
+  "n_scored": 105,
+  "base_rate": 0.524,
+  "full_sample_brier": 0.3993,
+  "base_rate_brier": 0.2494,
+  "full_sample_skill_vs_base": -0.1499,
   "cpcv": {
     "n_paths": 15,
-    "skill_mean": -0.1402,
-    "skill_std": 0.1084,
-    "skill_median": -0.1029,
+    "skill_mean": -0.1424,
+    "skill_std": 0.0683,
+    "skill_median": -0.1497,
     "share_paths_positive": 0.067
   },
   "pbo": {
     "ok": true,
-    "pbo": 0.057,
+    "pbo": 0.0,
     "n_splits": 70,
     "verdict": "overfit risk acceptable",
     "configs": {
@@ -31,10 +31,10 @@
   },
   "diebold_mariano": {
     "ok": true,
-    "dm_stat": 2.546,
-    "p_value": 0.0147,
-    "mean_loss_diff": 0.16051,
-    "n": 42,
+    "dm_stat": 3.844,
+    "p_value": 0.0002,
+    "mean_loss_diff": 0.14991,
+    "n": 105,
     "better": "B",
     "significant_5pct": true
   },

@@ -439,12 +439,12 @@ def validate_claims():
         "discipline": ("Applies the SAME registered +5pp clustered rule, and adds (a) a "
                        "cluster-bootstrap 95% CI on each amplification and (b) BH-FDR + "
                        "Bonferroni correction across the three hypotheses tested together."),
-        "SAMPLE_DRIFT_WARNING": (
-            "The pre-registration was run once on 20 events (2026-07-22); the DB now holds "
-            "%d events (history loaded back to 1987). The registered scripts recompute on the "
-            "grown sample, so today's numbers differ from what ENGINE.md documents. Drifted "
-            "verdicts: %s. This is a scientific-integrity decision for Joe: freeze the "
-            "registered sample, or re-baseline the study on the expanded N."
+        "SAMPLE_NOTE": (
+            "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, "
+            "REGISTERED_SAMPLE.md). The corpus has since grown to %d events (history to 1987). "
+            "Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 "
+            "anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: %s "
+            "-- reported honestly, not overwritten."
             % (n_events_total, drifted or "none")),
         "n_hypotheses": len(rows),
         "current_sample_events": n_events_total,
@@ -466,15 +466,15 @@ def _print_claims(r):
     print("VALIDATION -- H1/H2/H3 conditioning claims (post-registration rigor)")
     print("=" * 82)
     print(r["discipline"])
-    print("!! SAMPLE DRIFT: " + r["SAMPLE_DRIFT_WARNING"])
+    print("NOTE (sample): " + r["SAMPLE_NOTE"])
     print("-" * 82)
     for h in r["hypotheses"]:
         ci = h["ci95_pp"]
         ci_s = f"[{ci[0]:+.1f}, {ci[1]:+.1f}] pp" if ci[0] is not None else "n/a"
         drift = "  <-- DRIFTED" if h["drifted"] else ""
         print(f"{h['hid']} ({h['variable'].split('.')[-1]:<9}) doc(20ev)={h['documented_verdict_20ev']}@"
-              f"{h['documented_amp_pp']:+.1f}  now(52ev)={h['current_verdict']}@{h['amp_pp']:+.1f}pp"
-              f"  95%CI {ci_s}{drift}")
+              f"{h['documented_amp_pp']:+.1f}  now({r['current_sample_events']}ev)={h['current_verdict']}"
+              f"@{h['amp_pp']:+.1f}pp  95%CI {ci_s}{drift}")
         print(f"     CI excludes 0: {h['ci_excludes_zero']!s:<5}   "
               f"boot P(predicted dir)={h['boot_share_predicted_dir']}   "
               f"perm p(raw)={h['perm_p_raw']}")
