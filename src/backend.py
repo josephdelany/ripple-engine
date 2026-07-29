@@ -188,6 +188,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 5},
         "type": "metric",
     },
+    "story_opec": {
+        "name": "Story: OPEC Fiscal Stress",
+        "description": "A tracked story: who can afford this oil price (IMF breakeven vs live "
+                       "Brent), what changed since last run, and the next catalyst. The first "
+                       "story built to the new architecture.",
+        "endpoint": "story_opec",
+        "gridData": {"w": 40, "h": 9},
+        "type": "markdown",
+    },
     "risk_vs_priced": {
         "name": "Risk vs Priced (source-aware)",
         "description": "Is the risk supply-channel (country-specific -> oil up) or demand "
@@ -367,8 +376,9 @@ APPS = [{
                 _lw("chart_attention", 20, 31, 20, 9),
                 _lw("engine_read", 0, 40, 20, 9),
                 _lw("alert_queue", 20, 40, 20, 9),
-                _lw("transmission_chains", 0, 49, 40, 13),
-                _lw("conflict_intensity", 0, 62, 40, 9),
+                _lw("story_opec", 0, 49, 40, 9),
+                _lw("transmission_chains", 0, 58, 40, 13),
+                _lw("conflict_intensity", 0, 71, 40, 9),
             ],
         },
         "physical": {
@@ -763,6 +773,29 @@ def supply_fundamentals():
                         "unit": unit, "as_of": row[0]})
     conn.close()
     return out or [{"series": "(run fetch_eia_fundamentals.py)", "latest": ""}]
+
+
+@app.get("/story_opec")
+def story_opec():
+    """The OPEC Fiscal Stress story as a legible markdown card (src/story.py)."""
+    s = _read_json("stories/opec_fiscal_stress.state.json", {})
+    if not s or "read" not in s:
+        return "_Run `python3 src/story.py` (after fetch_breakevens.py) to build the story._"
+    top = s.get("board", [])[:5]
+    rows = "".join(f"| {r['country']} | ${r['breakeven']} | {r['gap']:+.1f} | {r['band']} |\n"
+                   for r in top)
+    changes = s.get("changes") or []
+    chg = ("\n".join(f"- ⚠️ {c}" for c in changes)) if changes else "_no material change since last run_"
+    wn = s.get("whats_next") or {}
+    return (
+        f"### {s.get('title','')} &nbsp;·&nbsp; _{s.get('as_of','')}_\n\n"
+        f"**{s.get('n_underwater')}/{len(s.get('board',[]))} producers underwater at Brent "
+        f"${s.get('brent')}.**\n\n"
+        f"| most stressed | breakeven | gap | band |\n|---|---|---|---|\n{rows}\n"
+        f"**What changed:**\n{chg}\n\n"
+        f"**Next catalyst:** {wn.get('event','—')}"
+        + (f" — in {wn['days_away']}d ({wn['date']})" if wn else "") + "\n\n"
+        f"**Watch:** {', '.join(s.get('watch_gauges', [])) or '—'}\n")
 
 
 @app.get("/opec_stress")

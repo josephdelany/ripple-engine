@@ -452,3 +452,22 @@ def test_sa2_source_aware_verdict():
     # flat / missing
     assert g.source_aware_verdict("supply", 0.4, ["iran"])["flag"] == "flat"
     assert g.source_aware_verdict("supply", None, ["iran"])["flag"] == "unknown"
+
+
+# ---- Stories layer (thin first version) ------------------------------------
+
+# st1 -- band severity: stress detection + change detection + nearest watch date.
+def test_st1_story_logic():
+    import story
+    assert story.worsened("comfortable", "stress") is True
+    assert story.worsened("stress", "comfortable") is False
+    assert story.worsened("stress", "stress") is False
+    prev = [{"country": "saudi", "band": "balanced", "gap": 5.0}]
+    new = [{"country": "saudi", "band": "stress", "gap": -7.0}]
+    ch = story.detect_changes(prev, new)
+    assert len(ch) == 2                                    # worsened + crossed breakeven
+    assert any("worsened" in c for c in ch) and any("below" in c for c in ch)
+    assert story.detect_changes(prev, prev) == []         # no change -> nothing pings
+    w = story.nearest_watch([{"date": "2026-08-02", "event": "OPEC+"}], "2026-07-28")
+    assert w["days_away"] == 5 and w["event"] == "OPEC+"
+    assert story.nearest_watch([{"date": "2020-01-01", "event": "past"}], "2026-07-28") is None

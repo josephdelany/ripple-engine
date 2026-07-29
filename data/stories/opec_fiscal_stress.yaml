@@ -1,0 +1,19 @@
+# A tracked STORY (human-curated) -- the first, thin version of the Stories layer.
+# The engine assembles its live state (src/story.py) from signals already tracked.
+story_id: opec_fiscal_stress
+title: "OPEC Fiscal Stress — who can afford this oil price"
+thesis: >
+  OPEC's real fault line is fiscal, not diplomatic. The low-breakeven Gulf (UAE, Qatar,
+  Oman) can pump profitably in the $80s; the high-breakeven states (Iran, Algeria, Iraq,
+  and even Saudi with its Vision-2030 load) run their budgets underwater at the same price.
+  That divergence -- not any single quarrel -- is the force behind the UAE's OPEC exit and
+  the cartel's fraying production discipline.
+tracks:
+  producers: [saudi_arabia, uae, iraq, kuwait, iran, algeria, qatar, oman, kazakhstan]
+  signals: ["imf.breakeven.*", "live.brent"]
+watch_dates:
+  - {date: "2026-08-02", event: "OPEC+ meeting (sets September quota) -- another hike = share war continues"}
+watch_gauges:
+  - "Saudi sovereign debt issuance (fiscal stress tell)"
+  - "Aramco dividend / borrowing moves"
+  - "NEOM / PIF spending cuts"

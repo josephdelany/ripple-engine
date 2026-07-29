@@ -56,3 +56,5 @@ data/forecast_calibration.json
 data/conflict_intensity.json
 # OPEC fiscal-stress board, regenerated each run; sample committed.
 data/breakevens.json
+# Story live state (regenerated); yaml + sample are committed.
+data/stories/*.state.json

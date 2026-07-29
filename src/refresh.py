@@ -62,6 +62,8 @@ STEPS = [
     ("fetch_market",   "src/fetch_market_live.py", "observations"),
     # OPEC fiscal-stress gap: IMF breakeven (via FRED) vs live Brent. Needs live price first.
     ("breakevens",     "src/fetch_breakevens.py", "observations"),
+    # Stories layer: assemble tracked-story state + detect material changes (ping trigger).
+    ("story",          "src/story.py",          "observations"),
     ("derive_signals", "src/derive_signals.py", "observations"),
     ("load_events",    "src/load_events.py",    "events"),
     # Record keeper: link any situation atom whose source_url now matches a
