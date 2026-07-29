@@ -208,6 +208,36 @@ def permutation_p(mags, states, sign, n_perm=10000, seed=19900802):
 
 
 # ======================================================================================
+# CORRELATION + CAUSAL-CONTROL PRIMITIVES (for the discovery scan, Step 5)
+# ======================================================================================
+def pearson(x, y):
+    """Pearson correlation, 0 if either series is constant."""
+    x, y = np.asarray(x, float), np.asarray(y, float)
+    if x.std() == 0 or y.std() == 0:
+        return 0.0
+    return float(np.corrcoef(x, y)[0, 1])
+
+
+def partial_corr(x, y, z):
+    """Partial correlation r(x,y | z): does X->Y survive controlling for confounder Z? If the
+    raw X-Y link is really Z driving both, this collapses toward 0."""
+    x, y, z = np.asarray(x, float), np.asarray(y, float), np.asarray(z, float)
+    rxy, rxz, ryz = pearson(x, y), pearson(x, z), pearson(y, z)
+    denom = np.sqrt(max(1e-9, (1 - rxz ** 2) * (1 - ryz ** 2)))
+    return (rxy - rxz * ryz) / denom
+
+
+def perm_corr_p(x, y, n_perm=5000, seed=19900802):
+    """Permutation p-value for |corr(x,y)|: shuffle y many times, count how often chance alone
+    matches/beats the observed |r|. Assumption-free (no normality). Seeded -> reproducible."""
+    x, y = np.asarray(x, float), np.asarray(y, float)
+    obs = abs(pearson(x, y))
+    rng = np.random.default_rng(seed)
+    cnt = sum(1 for _ in range(n_perm) if abs(pearson(x, rng.permutation(y))) >= obs)
+    return (cnt + 1) / (n_perm + 1)
+
+
+# ======================================================================================
 # OUT-OF-SAMPLE / ANTI-OVERFITTING
 # ======================================================================================
 def cpcv_splits(n, k_folds=6, k_test=2, embargo=0):
