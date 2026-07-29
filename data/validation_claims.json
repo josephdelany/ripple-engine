@@ -1,9 +1,9 @@
 {
   "what": "Rigor lens on the pre-registered H1/H2/H3 conditioning claims",
   "discipline": "Applies the SAME registered +5pp clustered rule, and adds (a) a cluster-bootstrap 95% CI on each amplification and (b) BH-FDR + Bonferroni correction across the three hypotheses tested together.",
-  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 161 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H2'] -- reported honestly, not overwritten.",
+  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 218 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H1', 'H2'] -- reported honestly, not overwritten.",
   "n_hypotheses": 3,
-  "current_sample_events": 161,
+  "current_sample_events": 218,
   "multiple_testing": {
     "fdr_q": 0.1,
     "n_survive_fdr": 1,
@@ -16,21 +16,22 @@
       "desc": "high VIX (stress) amplifies",
       "documented_verdict_20ev": "HOLDS",
       "documented_amp_pp": 10.3,
-      "current_verdict": "HOLDS",
-      "drifted": false,
-      "amp_pp": 5.029,
-      "n_episodes": 90,
+      "current_verdict": "FAILS",
+      "drifted": true,
+      "amp_pp": 4.9823,
+      "n_episodes": 91,
       "ci95_pp": [
-        1.0799,
-        8.9834
+        0.6469,
+        8.592
       ],
       "ci_excludes_zero": true,
-      "boot_share_predicted_dir": 0.994,
-      "perm_p_raw": 0.0054,
-      "fdr_qvalue": 0.0162,
+      "boot_share_predicted_dir": 0.989,
+      "perm_p_raw": 0.0043,
+      "fdr_qvalue": 0.0129,
       "survives_fdr_10pct": true,
-      "bonferroni_p": 0.0162,
-      "survives_bonferroni_5pct": true
+      "bonferroni_p": 0.0129,
+      "survives_bonferroni_5pct": true,
+      "statistically_validated": true
     },
     {
       "hid": "H2",
@@ -40,19 +41,20 @@
       "documented_amp_pp": 5.4,
       "current_verdict": "FAILS",
       "drifted": true,
-      "amp_pp": -0.7621,
-      "n_episodes": 92,
+      "amp_pp": -0.5182,
+      "n_episodes": 93,
       "ci95_pp": [
-        -4.9543,
-        3.2463
+        -4.6598,
+        3.3947
       ],
       "ci_excludes_zero": false,
-      "boot_share_predicted_dir": 0.344,
-      "perm_p_raw": 0.6429,
-      "fdr_qvalue": 0.9469,
+      "boot_share_predicted_dir": 0.384,
+      "perm_p_raw": 0.599,
+      "fdr_qvalue": 0.8985,
       "survives_fdr_10pct": false,
       "bonferroni_p": 1.0,
-      "survives_bonferroni_5pct": false
+      "survives_bonferroni_5pct": false,
+      "statistically_validated": false
     },
     {
       "hid": "H3",
@@ -62,20 +64,21 @@
       "documented_amp_pp": -6.8,
       "current_verdict": "FAILS",
       "drifted": false,
-      "amp_pp": -3.8963,
-      "n_episodes": 57,
+      "amp_pp": -4.6891,
+      "n_episodes": 58,
       "ci95_pp": [
-        -8.1055,
-        2.1127
+        -9.2519,
+        0.3656
       ],
       "ci_excludes_zero": false,
-      "boot_share_predicted_dir": 0.111,
-      "perm_p_raw": 0.9469,
-      "fdr_qvalue": 0.9469,
+      "boot_share_predicted_dir": 0.033,
+      "perm_p_raw": 0.9742,
+      "fdr_qvalue": 0.9742,
       "survives_fdr_10pct": false,
       "bonferroni_p": 1.0,
-      "survives_bonferroni_5pct": false
+      "survives_bonferroni_5pct": false,
+      "statistically_validated": false
     }
   ],
-  "honest_note": "At N ~ 92 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
+  "honest_note": "At N ~ 93 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
 }

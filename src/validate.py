@@ -432,6 +432,11 @@ def validate_claims():
         r["survives_fdr_10pct"] = bool(surv)
         r["bonferroni_p"] = badj
         r["survives_bonferroni_5pct"] = bool(bsurv)
+        # The honest "is it an edge NOW" flag: statistical validity (a CI that excludes zero AND
+        # survival of multiple-testing correction), NOT the knife-edge +5pp point-estimate rule.
+        # At large N the point estimate can hover at the +5pp bar while the effect is precisely
+        # estimated and highly significant -- CI + FDR is the right criterion for the live tier.
+        r["statistically_validated"] = bool(r["ci_excludes_zero"] and surv)
 
     drifted = [r["hid"] for r in rows if r["drifted"]]
     report = {

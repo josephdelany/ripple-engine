@@ -309,7 +309,7 @@ def render():
     # Only VALIDATED hypotheses (current-tier HOLDS + survives FDR) count as amplifiers now --
     # H2 held at n=20 but is a null at N=161, so it must not surface as an active amplifier.
     _validated = {h.get("hid") for h in vc.get("hypotheses", [])
-                  if h.get("current_verdict") == "HOLDS" and h.get("survives_fdr_10pct")}
+                  if h.get("statistically_validated")}
     on_amps = [hid for hid in ("H1", "H2")
                if hid in _validated
                and (er or {}).get("hypotheses", {}).get(hid, {}).get("amplifier") == "ON"]
