@@ -1,0 +1,67 @@
+{
+  "what": "kNN P(|CAR+20| >= historical median) from the pre-event state signature",
+  "declared_before_testing": true,
+  "k": 12,
+  "signature_vars": [
+    "derived.vix_pct",
+    "derived.inv_sigma",
+    "derived.cot_pct",
+    "derived.brent_vol20",
+    "derived.brent_wti_spread_z",
+    "derived.usd_z",
+    "derived.curve_2s10s"
+  ],
+  "primary_sample": "clustered (de-overlapped -- the honest test)",
+  "clustered": {
+    "n_scored": 63,
+    "base_rate": 0.397,
+    "brier": 0.2123,
+    "base_rate_brier": 0.2394,
+    "skill_vs_base": 0.027,
+    "cpcv_skill_mean": 0.0403,
+    "cpcv_share_positive": 1.0,
+    "pbo": {
+      "ok": true,
+      "pbo": 0.443,
+      "n_splits": 70,
+      "verdict": "overfit risk elevated"
+    },
+    "diebold_mariano": {
+      "ok": true,
+      "dm_stat": -1.62,
+      "p_value": 0.1104,
+      "mean_loss_diff": -0.02701,
+      "n": 63,
+      "better": "A",
+      "significant_5pct": false
+    },
+    "gate_passes": false
+  },
+  "all_events": {
+    "n_scored": 187,
+    "base_rate": 0.396,
+    "brier": 0.2057,
+    "base_rate_brier": 0.2391,
+    "skill_vs_base": 0.0334,
+    "cpcv_skill_mean": 0.0453,
+    "cpcv_share_positive": 1.0,
+    "pbo": {
+      "ok": true,
+      "pbo": 0.086,
+      "n_splits": 70,
+      "verdict": "overfit risk acceptable"
+    },
+    "diebold_mariano": {
+      "ok": true,
+      "dm_stat": -2.63,
+      "p_value": 0.0092,
+      "mean_loss_diff": -0.0334,
+      "n": 187,
+      "better": "A",
+      "significant_5pct": true
+    },
+    "gate_passes": true
+  },
+  "gate_passes": false,
+  "verdict": "DOES NOT PASS on the de-overlapped sample -- reported as a null. Any all-events 'skill' was inflated by overlapping/clustered episodes, not a real edge."
+}

@@ -716,6 +716,8 @@ def h1_live_edge():
         "- **H3** (crowded positioning): rejected (wrong direction).",
         "- **Analogue turbulence forecaster**: no OOS edge (CPCV skill −0.14, PBO 0.0, "
         "Diebold-Mariano p=0.0002 — the base rate wins).",
+        "- **kNN state-signature probability**: no validated edge on the de-overlapped sample "
+        "(PBO 0.44, DM p=0.11) — the apparent all-events skill was a clustering artifact.",
         "",
         "*Receipts: `data/validation_claims.json`, `data/registered_sample_n20.csv` "
         "(`REGISTERED_SAMPLE.md`). A conditional read of history, not a forecast — the engine "
