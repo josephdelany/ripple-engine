@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "signal_registry": {
+        "name": "Signal Registry — what's proven",
+        "description": "Every signal the engine has tested, tiered live / experimental / rejected "
+                       "by its validation evidence (status derived, not asserted). The factor-style "
+                       "'what's proven, how sure, the receipts' view.",
+        "endpoint": "signal_registry",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
     "h1_live_edge": {
         "name": "H1 — The Validated Edge",
         "description": "The one signal that passed the full validation gate: geopolitical "
@@ -628,6 +637,28 @@ def engine_read():
                       f"as of {gc['as_of']})",
             "verdict": "exploratory",
             "amplifier": "n/a (no registered direction)",
+        })
+    return rows
+
+
+@app.get("/signal_registry")
+def signal_registry():
+    """The factor-style registry: every tested signal, tiered by its validation evidence.
+    Status is derived from the committed artifacts (see src/signal_registry.py), not asserted."""
+    reg = _read_json("signal_registry.json")
+    sigs = reg.get("signals", [])
+    if not sigs:
+        return [{"status": "(none)", "name": "run: python3 src/signal_registry.py"}]
+    tag = {"live": "LIVE", "experimental": "EXPERIMENTAL", "rejected": "REJECTED"}
+    order = {"live": 0, "experimental": 1, "rejected": 2}
+    rows = []
+    for s in sorted(sigs, key=lambda x: (order.get(x["status"], 3), x["signal_id"])):
+        rows.append({
+            "tier": tag.get(s["status"], s["status"]),
+            "signal": s["name"],
+            "mechanism": s["mechanism"],
+            "OOS": f"{s['oos_metric']}: {s['oos_value']}",
+            "evidence": s["evidence"],
         })
     return rows
 
