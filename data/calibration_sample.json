@@ -1,0 +1,10 @@
+{
+  "n": 42,
+  "base_rate": 0.595,
+  "raw_brier": 0.4014,
+  "base_rate_brier": 0.2409,
+  "calibrated_brier_loo": 0.2927,
+  "raw_skill": -0.1605,
+  "calibrated_skill_loo": -0.0518,
+  "verdict": "NO OOS EDGE at this N: even a leave-one-out isotonic calibration does not beat always-predicting the base rate. The signal is not yet a validated edge -- more N (the corpus) is the honest fix, not tuning. Report the null; do not ship it as an edge."
+}

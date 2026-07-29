@@ -471,3 +471,15 @@ def test_st1_story_logic():
     w = story.nearest_watch([{"date": "2026-08-02", "event": "OPEC+"}], "2026-07-28")
     assert w["days_away"] == 5 and w["event"] == "OPEC+"
     assert story.nearest_watch([{"date": "2020-01-01", "event": "past"}], "2026-07-28") is None
+
+
+# ---- Calibration (honest OOS validation of the analogue math) --------------
+
+# cal1 -- isotonic (PAV) is monotone non-decreasing; predict clamps to [0,1].
+def test_cal1_isotonic():
+    import calibrate
+    sx, fit = calibrate.isotonic([1, 2, 3], [0.0, 1.0, 0.0])
+    assert fit == sorted(fit)                       # monotone non-decreasing (PAV)
+    assert abs(fit[1] - 0.5) < 1e-9                 # the 1,0 violators pool to 0.5
+    assert 0.0 <= calibrate.predict(sx, fit, 2.5) <= 1.0
+    assert abs(calibrate.brier(0.7, 1) - 0.09) < 1e-9

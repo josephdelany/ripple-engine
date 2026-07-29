@@ -99,6 +99,8 @@ STEPS = [
     # matured ones (Brier). And the point-in-time backtest of that forecast.
     ("auto_forecast",  "src/auto_forecast.py",  "observations"),
     ("backtest_analog","src/backtest_analogue.py","observations"),
+    # Honest OOS validation of the analogue math (leave-one-out isotonic).
+    ("calibrate",      "src/calibrate.py",      "observations"),
     # Calibration loop: log corroboration predictions, gate-confirm, score
     # reliability (Brier) -- calibrates the weights as labels accrue.
     ("calibrate_corr", "src/calibrate_corroboration.py", "observations"),

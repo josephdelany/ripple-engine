@@ -58,3 +58,5 @@ data/conflict_intensity.json
 data/breakevens.json
 # Story live state (regenerated); yaml + sample are committed.
 data/stories/*.state.json
+# calibration + registered-run receipts are regenerated/committed as appropriate.
+data/calibration.json
