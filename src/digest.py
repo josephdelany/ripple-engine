@@ -27,6 +27,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
+VALIDATION = ROOT / "data" / "validation_claims.json"   # the honest N=161 tier (H1 live; H2/H3 null)
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
@@ -222,6 +223,33 @@ def render():
     else:
         parts.append("<p class=quiet>Not yet generated — run engine_read.py.</p>")
 
+    # b2. The validated edge (H1) -- the honest tier, from validation_claims.json (N=161).
+    # This is the one signal that passed the full gate; H2/H3 are shown as the nulls they are.
+    vc = _read_json(VALIDATION) or {}
+    vhyps = {h.get("hid"): h for h in vc.get("hypotheses", [])}
+    h1v = vhyps.get("H1")
+    if h1v:
+        n = vc.get("current_sample_events", "?")
+        ci = h1v.get("ci95_pp") or [None, None]
+        bonf = ("survives Bonferroni" if h1v.get("survives_bonferroni_5pct")
+                else "survives FDR@10%" if h1v.get("survives_fdr_10pct")
+                else "not corrected-significant")
+        e1 = (er or {}).get("hypotheses", {}).get("H1", {})
+        amp_today = e1.get("amplifier", "?")
+        parts.append("<h2 class=sec>The validated edge</h2>")
+        parts.append(
+            f"<p class=read><b>H1 — geopolitical shocks ripple harder into oil when VIX stress "
+            f"is elevated.</b> The one signal that passed the full validation gate: "
+            f"<b>{h1v.get('amp_pp'):+.1f}pp</b> amplification, 95% CI "
+            f"[{ci[0]:+.1f}, {ci[1]:+.1f}]pp, {e(bonf)}, N={e(n)}. "
+            f"Today the H1 amplifier is <b>{e(amp_today)}</b>.</p>")
+        h2v, h3v = vhyps.get("H2", {}), vhyps.get("H3", {})
+        parts.append(
+            f"<div class=lbl>not edges (reported, not buried): "
+            f"H2 tight-inventories is a null at N={e(n)} "
+            f"({h2v.get('amp_pp', 0):+.1f}pp, CI spans 0) · "
+            f"H3 positioning rejected · analogue forecaster no OOS edge</div>")
+
     # c. New on the wire
     parts.append("<h2 class=sec>New on the wire</h2>")
     alerts = new_alerts(10)
@@ -264,9 +292,14 @@ def render():
                      f"<div class=dt>{e(gc.get('as_of',''))}</div></div>")
     parts.append("</div>")
 
-    # e. If an amplifier is ON -- base-rate line per ON amplifier (from playbook.md)
+    # e. If an amplifier is ON -- base-rate line per ON amplifier (from playbook.md).
+    # Only VALIDATED hypotheses (current-tier HOLDS + survives FDR) count as amplifiers now --
+    # H2 held at n=20 but is a null at N=161, so it must not surface as an active amplifier.
+    _validated = {h.get("hid") for h in vc.get("hypotheses", [])
+                  if h.get("current_verdict") == "HOLDS" and h.get("survives_fdr_10pct")}
     on_amps = [hid for hid in ("H1", "H2")
-               if (er or {}).get("hypotheses", {}).get(hid, {}).get("amplifier") == "ON"]
+               if hid in _validated
+               and (er or {}).get("hypotheses", {}).get(hid, {}).get("amplifier") == "ON"]
     pb = playbook_amp_lines()
     if on_amps and pb:
         parts.append("<h2 class=sec>Amplifier context</h2>")

@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "h1_live_edge": {
+        "name": "H1 — The Validated Edge",
+        "description": "The one signal that passed the full validation gate: geopolitical "
+                       "shocks ripple harder into oil when VIX stress is elevated. Live "
+                       "amplifier state + the receipts (CI, FDR/Bonferroni, N).",
+        "endpoint": "h1_live_edge",
+        "gridData": {"w": 40, "h": 11},
+        "type": "markdown",
+    },
     "scenario_playbook": {
         "name": "Scenario Playbook",
         "description": "Per event type: clustered base-rate ripple + today's conditioning",
@@ -621,6 +630,81 @@ def engine_read():
             "amplifier": "n/a (no registered direction)",
         })
     return rows
+
+
+@app.get("/h1_live_edge")
+def h1_live_edge():
+    """THE READ for the one validated edge (H1). Markdown, assembled purely from committed
+    artifacts -- validation_claims.json (the receipts) + engine_read.json (today's live
+    amplifier state). No new analysis; honest tiering (H2/H3/analogue shown as the nulls
+    they are). Never presented as a forecast of whether a shock occurs."""
+    vc = _read_json("validation_claims.json")
+    er = _read_json("engine_read.json")
+    hyps = {h.get("hid"): h for h in vc.get("hypotheses", [])}
+    h1 = hyps.get("H1", {})
+    h2 = hyps.get("H2", {})
+    if not h1:
+        return "### H1 — The Validated Edge\n\n_Run `python3 src/validate.py claims` first._"
+
+    n = vc.get("current_sample_events", "?")
+    amp = h1.get("amp_pp")
+    lo, hi = (h1.get("ci95_pp") or [None, None])[:2]
+    doc = h1.get("documented_amp_pp")
+    bonf = "survives Bonferroni" if h1.get("survives_bonferroni_5pct") else \
+           ("survives FDR@10%" if h1.get("survives_fdr_10pct") else "does not survive correction")
+
+    # today's live amplifier state, from the (frozen-verdict) engine read
+    e1 = (er.get("hypotheses") or {}).get("H1", {})
+    latest, median = e1.get("latest"), e1.get("event_median")
+    ampstate, asof = e1.get("amplifier", "?"), e1.get("as_of_reading", "")
+
+    def pp(x):
+        return "n/a" if x is None else f"{x:+.1f}"
+
+    lines = [
+        "## H1 — the validated edge",
+        "",
+        "**Geopolitical shocks ripple harder into oil when market stress (VIX) is already "
+        "elevated.** This is the one signal in the engine that has passed the full "
+        "validation gate.",
+        "",
+        "| | |",
+        "|---|---|",
+        f"| Amplification | **{pp(amp)} pp** ( \\|CAR+20\\|, high-VIX minus low-VIX) |",
+        f"| 95% CI | [{pp(lo)}, {pp(hi)}] pp — {'excludes zero' if (lo is not None and lo > 0) else 'spans zero'} |",
+        f"| Significance | perm p={h1.get('perm_p_raw')}, FDR q={h1.get('fdr_qvalue')}, **{bonf}** |",
+        f"| Sample | N={n} events (1987–2025); frozen pre-registered anchor n=20 |",
+        f"| Trajectory | {pp(doc)}pp (n=20) → {pp(amp)}pp (n={n}) — *strengthened as N grew* |",
+        "",
+        "### Today",
+    ]
+    if latest is not None and median is not None:
+        lines.append(f"VIX at **{latest} percentile** vs the event-sample median **{median}** "
+                     f"→ **H1 amplifier {ampstate}** *(as of {asof})*.")
+        # H1-ONLY read sentence -- deliberately NOT the engine_read.json line, which still
+        # mentions H2 as an amplifier (it reads the frozen n=20 verdict where H2 held; H2 is
+        # now a null at N=161). Keeping this H1-only avoids contradicting the honest tier below.
+        mood = ("psychologically stressed — a shock today would ripple toward the WIDER end of "
+                "its historical range" if ampstate == "ON" else
+                "psychologically calm — a shock today would ripple toward the NARROWER end of "
+                "its historical range")
+        lines += ["", f"> A supply shock today would land on a market that is {mood}."]
+    else:
+        lines.append("_Live VIX reading unavailable — run `python3 src/engine_read.py`._")
+    lines += [
+        "",
+        "### The honest tier (what is *not* an edge)",
+        f"- **H2** (tight inventories): NULL at N={n} ({pp(h2.get('amp_pp'))}pp, CI includes 0) "
+        "— the n=20 \"hold\" was small-sample noise.",
+        "- **H3** (crowded positioning): rejected (wrong direction).",
+        "- **Analogue turbulence forecaster**: no OOS edge (CPCV skill −0.14, PBO 0.0, "
+        "Diebold-Mariano p=0.0002 — the base rate wins).",
+        "",
+        "*Receipts: `data/validation_claims.json`, `data/registered_sample_n20.csv` "
+        "(`REGISTERED_SAMPLE.md`). A conditional read of history, not a forecast — the engine "
+        "never predicts whether a shock occurs, only how oil has rippled when one did.*",
+    ]
+    return "\n".join(lines)
 
 
 @app.get("/scenario_playbook")
