@@ -55,24 +55,42 @@ def resolve_pending(conn, now=None):
     return resolved
 
 
+def _h1_state(amp_context):
+    """Parse the H1 amplifier state that was recorded when the read was logged
+    (amp_context looks like 'H1:ON H2:ON H3:FAILED'). Returns 'ON'/'OFF'/None."""
+    for tok in (amp_context or "").split():
+        if tok.startswith("H1:"):
+            s = tok.split(":", 1)[1]
+            return s if s in ("ON", "OFF") else None
+    return None
+
+
 def calibration(conn):
-    """Summary stats over all resolved reads: n, bias (mean error), MAE."""
+    """Summary stats over all resolved reads: n, bias (mean error), MAE -- overall, by event
+    kind, and stratified by the H1 amplifier state at log time (the live, forward-accruing
+    counterpart to read_backtest.py: were realized ripples bigger when H1 was ON?)."""
     rows = conn.execute(
-        "SELECT kind, expected_car, realized_car, error FROM reads "
+        "SELECT kind, expected_car, realized_car, error, amp_context FROM reads "
         "WHERE resolved_at IS NOT NULL").fetchall()
-    out = {"n": len(rows), "overall": None, "by_kind": {}}
+    out = {"n": len(rows), "overall": None, "by_kind": {}, "by_h1": {}}
     if not rows:
         return out
     errs = np.array([r[3] for r in rows], dtype=float)
     out["overall"] = {"bias_pp": round(float(errs.mean()), 2),
                       "mae_pp": round(float(np.abs(errs).mean()), 2)}
-    kinds = {}
-    for kind, _exp, _real, err in rows:
+    kinds, h1 = {}, {}
+    for kind, _exp, realized, err, amp in rows:
         kinds.setdefault(kind, []).append(err)
+        st = _h1_state(amp)
+        if st is not None and realized is not None:
+            h1.setdefault(st, []).append(abs(float(realized)))   # realized magnitude by regime
     for kind, es in kinds.items():
         a = np.array(es, dtype=float)
         out["by_kind"][kind] = {"n": len(es), "bias_pp": round(float(a.mean()), 2),
                                 "mae_pp": round(float(np.abs(a).mean()), 2)}
+    for st, mags in h1.items():
+        a = np.array(mags, dtype=float)
+        out["by_h1"][st] = {"n": len(mags), "mean_realized_abs_pp": round(float(a.mean()), 2)}
     return out
 
 

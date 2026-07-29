@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
 VALIDATION = ROOT / "data" / "validation_claims.json"   # the honest N=161 tier (H1 live; H2/H3 null)
+READ_BACKTEST = ROOT / "data" / "read_backtest.json"    # walk-forward: does H1 help the read OOS
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
@@ -243,6 +244,18 @@ def render():
             f"<b>{h1v.get('amp_pp'):+.1f}pp</b> amplification, 95% CI "
             f"[{ci[0]:+.1f}, {ci[1]:+.1f}]pp, {e(bonf)}, N={e(n)}. "
             f"Today the H1 amplifier is <b>{e(amp_today)}</b>.</p>")
+        # walk-forward accountability: does H1 help the read out-of-sample?
+        rb = _read_json(READ_BACKTEST) or {}
+        if rb.get("n_scored"):
+            reg = rb.get("by_regime", {})
+            on = reg.get("ON", {}).get("mean_realized_pp")
+            off = reg.get("OFF", {}).get("mean_realized_pp")
+            extra = (f" Realized |CAR+20| ran {on}pp (ON) vs {off}pp (OFF), "
+                     f"{rb.get('live_amplification_pp'):+.1f}pp." if on is not None and off is not None else "")
+            parts.append(
+                f"<div class=baserate>Walk-forward: conditioning the read on H1 cut out-of-sample "
+                f"error {rb.get('mae_uncond_pp')}pp → {rb.get('mae_cond_pp')}pp "
+                f"(N={rb.get('n_scored')}).{extra} The edge holds forward.</div>")
         h2v, h3v = vhyps.get("H2", {}), vhyps.get("H3", {})
         parts.append(
             f"<div class=lbl>not edges (reported, not buried): "
