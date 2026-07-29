@@ -120,6 +120,20 @@ def main():
     print(f"  LOO-calibrated     {r['calibrated_brier_loo']}  (skill {r['calibrated_skill_loo']:+})")
     print(f"  VERDICT: {r['verdict']}")
 
+    # Mandatory anti-overfitting gate (Phase A): run the CPCV/PBO/Diebold-Mariano OOS gate on
+    # the same forecaster and write data/validation_analogue.json. Guarded so a gate failure
+    # can never break the daily pipeline -- the gate reports, it does not throw.
+    try:
+        import validate
+        g = validate.validate_analogue()
+        if g.get("ok", True):
+            c = g["cpcv"]
+            print(f"  OOS GATE: pass={g['gate_passes']}  CPCV skill {c['skill_mean']:+} "
+                  f"(share paths>0 {c['share_paths_positive']})  PBO {g['pbo'].get('pbo')}  "
+                  f"DM p {g['diebold_mariano'].get('p_value')}")
+    except Exception as e:                       # never break calibration on a gate error
+        print(f"  OOS GATE: skipped ({type(e).__name__})")
+
 
 if __name__ == "__main__":
     main()

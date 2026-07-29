@@ -1,0 +1,81 @@
+{
+  "what": "Rigor lens on the pre-registered H1/H2/H3 conditioning claims",
+  "discipline": "Applies the SAME registered +5pp clustered rule, and adds (a) a cluster-bootstrap 95% CI on each amplification and (b) BH-FDR + Bonferroni correction across the three hypotheses tested together.",
+  "SAMPLE_DRIFT_WARNING": "The pre-registration was run once on 20 events (2026-07-22); the DB now holds 52 events (history loaded back to 1987). The registered scripts recompute on the grown sample, so today's numbers differ from what ENGINE.md documents. Drifted verdicts: ['H2']. This is a scientific-integrity decision for Joe: freeze the registered sample, or re-baseline the study on the expanded N.",
+  "n_hypotheses": 3,
+  "current_sample_events": 52,
+  "multiple_testing": {
+    "fdr_q": 0.1,
+    "n_survive_fdr": 1,
+    "n_survive_bonferroni": 0
+  },
+  "hypotheses": [
+    {
+      "hid": "H1",
+      "variable": "derived.vix_pct",
+      "desc": "high VIX (stress) amplifies",
+      "documented_verdict_20ev": "HOLDS",
+      "documented_amp_pp": 10.3,
+      "current_verdict": "HOLDS",
+      "drifted": false,
+      "amp_pp": 7.4288,
+      "n_episodes": 43,
+      "ci95_pp": [
+        0.2615,
+        17.393
+      ],
+      "ci_excludes_zero": true,
+      "boot_share_predicted_dir": 0.979,
+      "perm_p_raw": 0.0297,
+      "fdr_qvalue": 0.0891,
+      "survives_fdr_10pct": true,
+      "bonferroni_p": 0.0891,
+      "survives_bonferroni_5pct": false
+    },
+    {
+      "hid": "H2",
+      "variable": "derived.inv_sigma",
+      "desc": "tight inventories (LOW sigma) amplify",
+      "documented_verdict_20ev": "HOLDS",
+      "documented_amp_pp": 5.4,
+      "current_verdict": "FAILS",
+      "drifted": true,
+      "amp_pp": 2.9162,
+      "n_episodes": 44,
+      "ci95_pp": [
+        -4.7122,
+        12.7496
+      ],
+      "ci_excludes_zero": false,
+      "boot_share_predicted_dir": 0.787,
+      "perm_p_raw": 0.2545,
+      "fdr_qvalue": 0.3818,
+      "survives_fdr_10pct": false,
+      "bonferroni_p": 0.7635,
+      "survives_bonferroni_5pct": false
+    },
+    {
+      "hid": "H3",
+      "variable": "derived.cot_pct",
+      "desc": "crowded net-long (HIGH percentile) amplifies",
+      "documented_verdict_20ev": "FAILS",
+      "documented_amp_pp": -6.8,
+      "current_verdict": "FAILS",
+      "drifted": false,
+      "amp_pp": -6.8583,
+      "n_episodes": 33,
+      "ci95_pp": [
+        -17.5189,
+        2.9533
+      ],
+      "ci_excludes_zero": false,
+      "boot_share_predicted_dir": 0.09,
+      "perm_p_raw": 0.9126,
+      "fdr_qvalue": 0.9126,
+      "survives_fdr_10pct": false,
+      "bonferroni_p": 1.0,
+      "survives_bonferroni_5pct": false
+    }
+  ],
+  "honest_note": "At N ~ 44 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
+}
