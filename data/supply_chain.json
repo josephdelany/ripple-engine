@@ -10,11 +10,11 @@
       "producer_share": 40,
       "commodity": "palladium",
       "node": "yf.palladium",
-      "n": 16,
-      "car": -7.4233,
+      "n": 20,
+      "car": -3.949,
       "ci": [
-        -17.9039,
-        0.8585
+        -13.2837,
+        3.977
       ],
       "unit": "%",
       "status": "null",
@@ -26,7 +26,7 @@
       "producer_share": 40,
       "commodity": "palladium",
       "node": "yf.palladium",
-      "n": 0,
+      "n": 4,
       "car": null,
       "ci": null,
       "unit": "%",
@@ -39,11 +39,11 @@
       "producer_share": 14,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 16,
-      "car": -0.5976,
+      "n": 20,
+      "car": -0.4101,
       "ci": [
-        -8.288,
-        6.1882
+        -6.7697,
+        5.3703
       ],
       "unit": "%",
       "status": "null",
@@ -97,7 +97,7 @@
       "producer_share": 6,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 3,
+      "n": 5,
       "car": null,
       "ci": null,
       "unit": "%",
@@ -142,11 +142,11 @@
       "producer_share": 12,
       "commodity": "crude_oil",
       "node": "fred.DCOILBRENTEU",
-      "n": 17,
-      "car": -4.4899,
+      "n": 21,
+      "car": -1.6616,
       "ci": [
-        -15.937,
-        4.0538
+        -11.3665,
+        5.7703
       ],
       "unit": "%",
       "status": "null",

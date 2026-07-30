@@ -1,9 +1,9 @@
 {
   "what": "Rigor lens on the pre-registered H1/H2/H3 conditioning claims",
   "discipline": "Applies the SAME registered +5pp clustered rule, and adds (a) a cluster-bootstrap 95% CI on each amplification and (b) BH-FDR + Bonferroni correction across the three hypotheses tested together.",
-  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 253 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H1', 'H2'] -- reported honestly, not overwritten.",
+  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 289 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H2'] -- reported honestly, not overwritten.",
   "n_hypotheses": 3,
-  "current_sample_events": 253,
+  "current_sample_events": 289,
   "multiple_testing": {
     "fdr_q": 0.1,
     "n_survive_fdr": 1,
@@ -16,20 +16,20 @@
       "desc": "high VIX (stress) amplifies",
       "documented_verdict_20ev": "HOLDS",
       "documented_amp_pp": 10.3,
-      "current_verdict": "FAILS",
-      "drifted": true,
-      "amp_pp": 4.5271,
-      "n_episodes": 88,
+      "current_verdict": "HOLDS",
+      "drifted": false,
+      "amp_pp": 5.0003,
+      "n_episodes": 86,
       "ci95_pp": [
-        0.5948,
-        8.717
+        0.7659,
+        8.9484
       ],
       "ci_excludes_zero": true,
-      "boot_share_predicted_dir": 0.988,
-      "perm_p_raw": 0.0102,
-      "fdr_qvalue": 0.0306,
+      "boot_share_predicted_dir": 0.99,
+      "perm_p_raw": 0.0069,
+      "fdr_qvalue": 0.0207,
       "survives_fdr_10pct": true,
-      "bonferroni_p": 0.0306,
+      "bonferroni_p": 0.0207,
       "survives_bonferroni_5pct": true,
       "statistically_validated": true
     },
@@ -41,16 +41,16 @@
       "documented_amp_pp": 5.4,
       "current_verdict": "FAILS",
       "drifted": true,
-      "amp_pp": -0.4586,
-      "n_episodes": 90,
+      "amp_pp": 0.7852,
+      "n_episodes": 88,
       "ci95_pp": [
-        -4.4812,
-        3.715
+        -4.3465,
+        4.2263
       ],
       "ci_excludes_zero": false,
-      "boot_share_predicted_dir": 0.428,
-      "perm_p_raw": 0.583,
-      "fdr_qvalue": 0.8745,
+      "boot_share_predicted_dir": 0.506,
+      "perm_p_raw": 0.3528,
+      "fdr_qvalue": 0.5292,
       "survives_fdr_10pct": false,
       "bonferroni_p": 1.0,
       "survives_bonferroni_5pct": false,
@@ -64,21 +64,21 @@
       "documented_amp_pp": -6.8,
       "current_verdict": "FAILS",
       "drifted": false,
-      "amp_pp": -6.3743,
-      "n_episodes": 55,
+      "amp_pp": -5.6471,
+      "n_episodes": 53,
       "ci95_pp": [
-        -10.8627,
-        -0.8843
+        -11.4314,
+        -0.9753
       ],
       "ci_excludes_zero": true,
       "boot_share_predicted_dir": 0.011,
-      "perm_p_raw": 0.9948,
-      "fdr_qvalue": 0.9948,
+      "perm_p_raw": 0.9845,
+      "fdr_qvalue": 0.9845,
       "survives_fdr_10pct": false,
       "bonferroni_p": 1.0,
       "survives_bonferroni_5pct": false,
       "statistically_validated": false
     }
   ],
-  "honest_note": "At N ~ 90 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
+  "honest_note": "At N ~ 88 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
 }
