@@ -93,6 +93,10 @@ CONDITIONING = [
      "gold is a real-rate asset -> ripples harder when real rates are LOW (apt driver vs generic VIX)"),
     ("hy_credit_stress",  "derived.credit_stress", "yf.hyg",    "high",
      "a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test)"),
+    # UCDP amendment (pre-registered 2026-07-30, before results -- see PRE_REGISTRATION.md):
+    ("conflict_intensity_gold", "derived.conflict_intensity_pct", "yf.gold", "high",
+     "gold ripples harder into the safe-haven bid when background (UCDP-verified) conflict intensity is "
+     "already high; read at t-1 (prior completed month, no lookahead)"),
 ]
 
 # ---- CLASS 2: event-type heterogeneity of the oil edge (two-group tests on |CAR+20| in Brent).

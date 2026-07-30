@@ -38,7 +38,8 @@ DB = ROOT / "data" / "oil.db"
 CACHE = ROOT / "data" / "cache" / "ucdp_ged_26.1.json"
 VERSION = "26.1"
 API = f"https://ucdpapi.pcr.uu.se/api/gedevents/{VERSION}"
-PAGESIZE = 1000
+PAGESIZE = 20000   # large on purpose: UCDP's public API rejects deep page NUMBERS (400 past ~page 358);
+                   # at pagesize 20000 the whole 417k-event GED is ~21 pages -> complete 1989..now, no wall.
 # region label -> our series id (UCDP 'region' values)
 REGIONS = {"Middle East": "ucdp.fat_middle_east", "Africa": "ucdp.fat_africa",
            "Asia": "ucdp.fat_asia", "Europe": "ucdp.fat_europe", "Americas": "ucdp.fat_americas"}

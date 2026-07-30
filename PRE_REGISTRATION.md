@@ -103,6 +103,24 @@ nodes (platinum `PL=F`, freight `BDRY/STNG/FRO`, ags `ZC=F/ZS=F`, miners `COPX/G
 the same generalization gate; and codebook-gated event backfill to give underpowered producer/chokepoint
 cells a fair test. All re-runs re-report honestly; nulls that stay null are reported.
 
+## Amendment 2026-07-30b (UCDP verified-conflict conditioner)
+Declared **before** the amended battery is run (register-then-run; git proves it). Adds the gold-standard
+UCDP conflict feed as a pre-registered conditioner. Family-wise FDR denominator grows to include it;
+genuine null stays null.
+
+**New conditioner** (added to `derive_signals.MECHANISMS`, $0/free-token):
+- `derived.conflict_intensity_pct` — global UCDP monthly-fatalities percentile (5y). Point-in-time:
+  monthly, forward-filled to daily, read at t−1 (the last *completed* month; a shock's day never sees
+  its own month's not-yet-complete total).
+
+**New pre-declared hypothesis:**
+| name | conditioner | asset | dir | mechanism |
+|---|---|---|---|---|
+| conflict_intensity_gold | derived.conflict_intensity_pct | yf.gold | high | gold ripples harder into the safe-haven bid when background verified conflict intensity is already high |
+
+Expectation stated up front: this may well be **null** (gold's safe-haven bid may not depend on trailing
+conflict intensity) — reported honestly either way.
+
 ---
 *Results (after running `python3 src/edge_battery.py`) live in `data/edge_battery.json` and are written
 up in `EDGE_PORTFOLIO.md`. The original battery section above is frozen; amendments are dated and appended.*

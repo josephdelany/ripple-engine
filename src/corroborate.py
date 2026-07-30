@@ -47,6 +47,87 @@ FACILITY_TERMS = {"abqaiq": "abqaiq", "ras tanura": "ras_tanura",
                   "khurais": "khurais", "kharg": "kharg",
                   "ras laffan": "ras_laffan", "jamnagar": "jamnagar"}
 
+# --- verified-conflict modality (UCDP GED) --------------------------------------
+# A 4th independent modality: a news cluster about a conflict situation is corroborated when UCDP -- the
+# gold-standard verified-fatality dataset -- codes an organized-violence event in one of the situation's
+# countries within a window of the news date. This is CONFIRMATION by an independent, vetted source, not
+# another headline. The country join is DETERMINISTIC and FROZEN: situation entity id -> exact UCDP
+# country string (UCDP keeps historical names, e.g. "Yemen (North Yemen)"). A test asserts every
+# country.* in situations.yaml has an entry here, so a new situation can never silently miss.
+UCDP_CACHE = ROOT / "data" / "cache" / "ucdp_ged_26.1.json"
+UCDP_WINDOW_DAYS = 30
+ENTITY_TO_UCDP = {
+    "iran": "Iran", "israel": "Israel", "lebanon": "Lebanon",
+    "russia": "Russia (Soviet Union)", "ukraine": "Ukraine",
+    "yemen": "Yemen (North Yemen)", "saudi_arabia": "Saudi Arabia",
+    "china": "China", "taiwan": "Taiwan", "belarus": "Belarus",
+}
+
+
+def _load_ucdp_cache():
+    """Raw UCDP GED events (date_start, country, best) from the cached pull; [] if absent."""
+    try:
+        return json.loads(UCDP_CACHE.read_text()) if UCDP_CACHE.exists() else []
+    except (ValueError, OSError):
+        return []
+
+
+def index_ucdp(events):
+    """country -> sorted list of datetime.date of its verified events (for fast window matching)."""
+    from datetime import date
+    idx = {}
+    for e in events or []:
+        d = (e.get("date_start") or "")[:10]
+        cty = e.get("country")
+        if len(d) != 10 or not cty:
+            continue
+        try:
+            idx.setdefault(cty, []).append(date.fromisoformat(d))
+        except ValueError:
+            continue
+    for cty in idx:
+        idx[cty].sort()
+    return idx
+
+
+def situation_countries_for_sid(sid):
+    """The UCDP country strings for a situation, from its member_entities (deterministic, frozen map)."""
+    sit = next((s for s in load_situations() if s["situation_id"] == sid), None)
+    if not sit:
+        return set()
+    out = set()
+    for eid in sit.get("member_entities", []):
+        if eid.startswith("country."):
+            nm = ENTITY_TO_UCDP.get(eid.split(".", 1)[1])
+            if nm:
+                out.add(nm)
+    return out
+
+
+def _ucdp_hit(cluster, situation_countries, ucdp_index, window_days=UCDP_WINDOW_DAYS):
+    """Returns 'country:date' if UCDP coded a verified event in one of the situation's countries within
+    window_days of the news cluster's date; else None. Independent of news/portwatch/firms/markets."""
+    import bisect
+    from datetime import date, timedelta
+    if not ucdp_index or not situation_countries:
+        return None
+    dates = [(a.get("ts") or "")[:10] for a in cluster if (a.get("ts") or "")[:10]]
+    if not dates:
+        return None
+    try:
+        cdate = date.fromisoformat(max(dates))
+    except ValueError:
+        return None
+    lo, hi = cdate - timedelta(days=window_days), cdate + timedelta(days=window_days)
+    for cty in situation_countries:
+        lst = ucdp_index.get(cty)
+        if not lst:
+            continue
+        i = bisect.bisect_left(lst, lo)
+        if i < len(lst) and lst[i] <= hi:
+            return f"{cty}:{lst[i].isoformat()}"
+    return None
+
 # --- the weight-of-evidence model -----------------------------------------------
 # These are the CALIBRATABLE layer. They start as engine-chosen constants and are
 # refined by calibrate_corroboration.py against resolved outcomes (the human gate),
@@ -186,7 +267,7 @@ def _flagged(path, key, flag):
     return {c["slug"] for c in items if c.get("flag") == flag}
 
 
-def corroborate_situation(conn, sid, disrupted=None, elevated=None, moved=None):
+def corroborate_situation(conn, sid, disrupted=None, elevated=None, moved=None, ucdp_index=None):
     """Cluster + score a situation's atoms. Cross-modal votes add independence:
     a physical-flow disruption (PortWatch ships stopped), a satellite thermal anomaly
     (FIRMS fire at a named facility), or a repricing PREDICTION MARKET (money moving)
@@ -218,6 +299,11 @@ def corroborate_situation(conn, sid, disrupted=None, elevated=None, moved=None):
         if priced:                     # cross-modal prediction-market corroboration (money moving)
             n_indep += 1
             modalities.append(f"priced:market:{priced[:40]}")
+        if ucdp_index is not None:     # cross-modal VERIFIED-CONFLICT corroboration (UCDP fatality data)
+            uc = _ucdp_hit(c, situation_countries_for_sid(sid), ucdp_index)
+            if uc:
+                n_indep += 1
+                modalities.append(f"verified_conflict:ucdp:{uc}")
         classes = sorted({m.split(":")[0] for m in modalities})
         db, p, tag = score(n_indep)
         rep = max(c, key=lambda a: len(a.get("headline") or ""))  # fullest headline
@@ -269,20 +355,21 @@ def _moved_markets():
 def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     moved = _moved_markets()
+    ucdp_index = index_ucdp(_load_ucdp_cache())      # verified-conflict modality (built once)
     conn = sqlite3.connect(DB)
     report, summary = {}, {}
     for sit in load_situations():
         if sit.get("status") == "closed":
             continue
-        evs = corroborate_situation(conn, sit["situation_id"], moved=moved)
+        evs = corroborate_situation(conn, sit["situation_id"], moved=moved, ucdp_index=ucdp_index)
         report[sit["situation_id"]] = evs
         summary[sit["situation_id"]] = convergence_summary(evs)
     conn.close()
     OUT.write_text(json.dumps(
         {"as_of": now[:10], "generated_at": now,
          "method": "weight-of-evidence over independent domains + cross-modal votes (news / "
-                   "physical PortWatch / thermal FIRMS / priced markets). Correlated reprints "
-                   "collapse; certainty capped; multi-modal = confirmed beyond headlines.",
+                   "physical PortWatch / thermal FIRMS / priced markets / verified-conflict UCDP). "
+                   "Correlated reprints collapse; certainty capped; multi-modal = confirmed beyond headlines.",
          "situations": report, "convergence": summary}, indent=2))
     total = sum(len(v) for v in report.values())
     print(f"corroborate -- scored {total} event clusters across {len(report)} situation(s).")

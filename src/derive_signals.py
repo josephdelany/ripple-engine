@@ -94,6 +94,14 @@ MECHANISMS = {
         "(keyless, 2003+). Gold and haven assets are real-rate assets -- they should "
         "ripple harder when real rates are LOW (the apt conditioner for gold that "
         "generic VIX-stress was not)."),
+    "derived.conflict_intensity_pct": (
+        "Background conflict intensity (UCDP fatalities) percentile (5y)", "percentile",
+        "Verified-conflict regime (UCDP amendment 2026-07-30). Percentile of global "
+        "UCDP monthly fatalities (gold-standard vetted data, 1989+) in its own 5y range. "
+        "Pre-registered conditioner: a shock landing when background conflict is already "
+        "intense may ripple harder into safe-haven assets (gold). POINT-IN-TIME: monthly "
+        "data forward-filled to daily, read at t-1 -> sees the last COMPLETED month, never "
+        "the current one (no lookahead)."),
 }
 
 
@@ -219,6 +227,14 @@ def build_signals(w):
 
     if "fred.DFII10" in w:
         out["derived.real_rate"] = percentile(w["fred.DFII10"])      # real-rate regime (low = haven-supportive)
+
+    if "ucdp.fat_global" in w:
+        # UCDP is monthly: rank each month's fatalities in its own 5y (~60-month) window, then forward-
+        # fill so each day carries the latest COMPLETED month's percentile. t-1 reads the prior month
+        # (point-in-time: a shock's day never sees its own month's not-yet-complete total).
+        u = w["ucdp.fat_global"].dropna()
+        pct = u.rolling(60, min_periods=12).rank(pct=True).mul(100)
+        out["derived.conflict_intensity_pct"] = pct.reindex(w.index).ffill()
 
     return out
 
