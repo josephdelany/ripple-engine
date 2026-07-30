@@ -35,8 +35,10 @@ STEPS = [
     ("integrity", ["src/integrity.py"], False),   # right after refresh: guard + backup
     ("heartbeat", ["src/heartbeat.py"], True),
     ("watcher",   ["src/watcher.py"],   False),
+    ("notify",    ["src/notify.py"],    False),   # push high-signal alerts (idempotent; dry-run w/o NTFY_TOPIC)
     ("digest",    ["src/digest.py"],    False),
 ]
+LAST_RUN = ROOT / "data" / "last_run.json"
 
 
 def acquire_lock():
@@ -76,6 +78,7 @@ def main():
         run_id = datetime.now(timezone.utc).isoformat(timespec="seconds")
         print(f"Daily run {run_id}\n" + "=" * 60)
         crashes, health_trouble = [], False
+        t_start = time.perf_counter()
         for name, argv, is_health in STEPS:
             rc, dur, note = run_step(argv)
             ok = (rc == 0)
@@ -88,6 +91,7 @@ def main():
 
         # --- One honest verdict line ---
         print("=" * 60)
+        verdict = "OK" if not (crashes or health_trouble) else "DEGRADED"
         if crashes:
             print(f"VERDICT: DEGRADED -- step(s) failed: {', '.join(crashes)}. "
                   f"Look at data/refresh_log.csv and rerun that step.")
@@ -97,6 +101,13 @@ def main():
         else:
             print("VERDICT: OK -- pipeline fresh. Read it at "
                   "http://127.0.0.1:5050/digest")
+
+        # --- Machine-readable verdict for the monitoring surface + conversational layer ---
+        import json
+        LAST_RUN.write_text(json.dumps({
+            "run_id": run_id, "verdict": verdict, "duration_s": round(time.perf_counter() - t_start, 1),
+            "failed_steps": crashes, "health_trouble": health_trouble,
+        }, indent=2))
         sys.exit(1 if (crashes or health_trouble) else 0)
     finally:
         LOCK.unlink(missing_ok=True)

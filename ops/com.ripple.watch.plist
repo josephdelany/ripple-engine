@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent: the LIGHT hourly news pass (separate from the heavy daily refresh).
+
+  Runs every hour (and once on load/wake): python3 src/watch_cycle.py
+  which pulls live news (watcher) and pushes any high-signal alert to your phone
+  (notify), behind its OWN watch.lock so it never collides with the daily refresh.
+
+  StartInterval (a RELATIVE timer) is deliberate: if the laptop sleeps through
+  several hours, launchd fires ONCE on wake and resumes the hourly cadence -- no
+  thundering herd of missed runs. Set NTFY_TOPIC below to your private ntfy topic
+  to make phone alerts fire (leave it and it's a harmless dry-run).
+
+  Joe installs this himself -- see ops/INSTALL.md. Edit the two absolute paths if
+  your python3 or repo location differs. Nothing here installs it.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ripple.watch</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-lc</string>
+        <string>cd '/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine' &amp;&amp; /usr/local/bin/python3 src/watch_cycle.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine</string>
+
+    <!-- Every hour, relative timer -> catches up once on wake instead of bursting. -->
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <!-- Fire on load/login/wake too, so a freshly-woken laptop pulls news immediately. -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Set your private ntfy topic here to enable phone alerts (else dry-run). -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>NTFY_TOPIC</key>
+        <string></string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_watch.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_watch.log</string>
+</dict>
+</plist>
