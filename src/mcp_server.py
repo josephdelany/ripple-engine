@@ -277,6 +277,58 @@ def get_situation(situation_id: str) -> dict:
 
 
 @mcp.tool()
+def get_sowhat() -> dict:
+    """The live 'so-what' read: today's regime, the VALIDATED propagation (the only claims), the
+    market-priced gap, and the active situations ranked by multi-modal corroboration, with receipts.
+    CAVEAT: only validated-backbone edges are claims; directional/lead links are null/trap; the engine
+    measures consequences, never whether an event will occur."""
+    return _json_load("sowhat.json")
+
+
+@mcp.tool()
+def get_propagation_graph() -> dict:
+    """The validated propagation network: the VALIDATED backbone (shock -> node ripples that survived
+    the gate, FDR-corrected), the honest null layer (directional event->node, mostly weak at this N),
+    and the TRAP edges (nodes that co-move but where neither reliably leads). CAVEAT: only 'validated'
+    edges are claims; 'trap' means do-not-trade-the-lead; small-N."""
+    r = _json_load("propagation_graph.json")
+    if "error" in r:
+        return r
+    return {"backbone_validated": r.get("backbone_validated", []),
+            "node_to_node": r.get("node_to_node", []),
+            "event_to_node_note": "directional event->node is a null layer at this N (see file)",
+            "caveat": CAVEATS}
+
+
+@mcp.tool()
+def get_gaps() -> dict:
+    """The gap ledger (market-as-null): the live gap (engine view vs the market's implied oil vol,
+    OVX) and the resolving, Brier-scored scorecard by gap direction. CAVEAT: the disagreement finding
+    is small-N and SUGGESTIVE, not a validated edge; the scorecard is published either way."""
+    g = _json_load("gaps.json")
+    if "error" in g:
+        return g
+    return {"live_gap": g.get("live_gap"), "ledger": g.get("ledger"), "caveat": CAVEATS}
+
+
+@mcp.tool()
+def test_hypothesis(state: str, asset: str = "fred.DCOILBRENTEU",
+                    sign: str = "high", horizon: int = 20) -> dict:
+    """Run a hypothesis through the full validation gate, read-only: does `state` (a derived.* signal,
+    e.g. derived.vix_pct), on its `sign` side (high|low), amplify the |CAR+horizon| ripple in `asset`
+    (a fred.* series)? Returns amplification + cluster-bootstrap 95% CI + permutation p + a HOLDS/
+    no-effect verdict. This is the research bench, callable in conversation. CAVEAT: a single test is
+    one hypothesis -- correct for multiple testing if you scan many; small-N; believe the wide CIs."""
+    import research
+    conn = _ro_conn()
+    r = research.run_test(conn, state, asset, sign, horizon)
+    conn.close()
+    if r.get("ok"):
+        r["caveat"] = CAVEATS
+    return r
+
+
+@mcp.tool()
 def get_results(name: str) -> str:
     """Verbatim contents of a committed results file (WHITELISTED only): one of
     registered_run_results, expanded_run_results, inference_results, h5_results,
