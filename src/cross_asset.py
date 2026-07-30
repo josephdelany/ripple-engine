@@ -66,6 +66,24 @@ ASSETS = [
      "kind": "yield", "unit": "bps"},
     {"series": "fred.T10YIE",       "label": "10Y breakeven", "entity": "macro.inflation",
      "kind": "yield", "unit": "bps"},
+    # Wider domains (Step 1): commodities (safe-haven / growth / food / supply-chain) + macro
+    # (risk / credit-stress / China). Each is validated-or-nulled through the ripple map.
+    {"series": "yf.gold",           "label": "Gold",        "entity": "commodity.gold",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.copper",         "label": "Copper",      "entity": "commodity.copper",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.silver",         "label": "Silver",      "entity": "commodity.silver",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.wheat",          "label": "Wheat",       "entity": "commodity.wheat",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.palladium",      "label": "Palladium",   "entity": "commodity.palladium",
+     "kind": "price", "unit": "%"},
+    {"series": "fred.SP500",        "label": "S&P 500",     "entity": "macro.equities",
+     "kind": "price", "unit": "%"},
+    {"series": "fred.BAMLH0A0HYM2", "label": "HY spread",   "entity": "macro.credit",
+     "kind": "yield", "unit": "bps"},
+    {"series": "fred.DEXCHUS",      "label": "CNY/USD",     "entity": "country.china",
+     "kind": "price", "unit": "%"},
     # Gasoline is WEEKLY -- measured on a weekly clock (+1/+2/+4 WEEKS), never
     # pretended to be daily. Its car5/car20 slots hold +1 week / +4 weeks.
     {"series": "fred.GASREGW",      "label": "Gasoline",   "entity": "commodity.gasoline",

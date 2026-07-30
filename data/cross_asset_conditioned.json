@@ -1,12 +1,13 @@
 {
   "what": "Does H1 (VIX stress amplifies the geopolitical ripple) generalize across assets? Same gate as oil: clustered median split + bootstrap CI + permutation + BH-FDR.",
   "sample": "clustered (de-overlapped), state at t-1",
-  "n_assets": 8,
+  "n_assets": 16,
   "assets_generalizing": [
     "Brent oil",
     "Heating oil",
     "5Y breakeven",
-    "10Y breakeven"
+    "10Y breakeven",
+    "Gold"
   ],
   "fdr_q": 0.1,
   "map": [
@@ -22,7 +23,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0043,
       "survives_fdr": true,
-      "fdr_q": 0.012,
+      "fdr_q": 0.024,
       "generalizes": true
     },
     {
@@ -37,7 +38,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.5603,
       "survives_fdr": false,
-      "fdr_q": 0.5603,
+      "fdr_q": 0.5977,
       "generalizes": false
     },
     {
@@ -52,7 +53,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0899,
       "survives_fdr": false,
-      "fdr_q": 0.1438,
+      "fdr_q": 0.2055,
       "generalizes": false
     },
     {
@@ -67,7 +68,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.2046,
       "survives_fdr": false,
-      "fdr_q": 0.2338,
+      "fdr_q": 0.2604,
       "generalizes": false
     },
     {
@@ -82,7 +83,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1625,
       "survives_fdr": false,
-      "fdr_q": 0.2167,
+      "fdr_q": 0.2604,
       "generalizes": false
     },
     {
@@ -97,7 +98,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0042,
       "survives_fdr": true,
-      "fdr_q": 0.012,
+      "fdr_q": 0.024,
       "generalizes": true
     },
     {
@@ -112,7 +113,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0045,
       "survives_fdr": true,
-      "fdr_q": 0.012,
+      "fdr_q": 0.024,
       "generalizes": true
     },
     {
@@ -127,9 +128,129 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0224,
       "survives_fdr": true,
-      "fdr_q": 0.0448,
+      "fdr_q": 0.0826,
       "generalizes": true
+    },
+    {
+      "label": "Gold",
+      "unit": "%",
+      "n_episodes": 75,
+      "amp": 1.3389,
+      "ci95": [
+        0.1548,
+        2.8272
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0258,
+      "survives_fdr": true,
+      "fdr_q": 0.0826,
+      "generalizes": true
+    },
+    {
+      "label": "Copper",
+      "unit": "%",
+      "n_episodes": 75,
+      "amp": 0.54,
+      "ci95": [
+        -1.5034,
+        3.545
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.3344,
+      "survives_fdr": false,
+      "fdr_q": 0.3822,
+      "generalizes": false
+    },
+    {
+      "label": "Silver",
+      "unit": "%",
+      "n_episodes": 75,
+      "amp": 1.4874,
+      "ci95": [
+        -1.3937,
+        4.7133
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1714,
+      "survives_fdr": false,
+      "fdr_q": 0.2604,
+      "generalizes": false
+    },
+    {
+      "label": "Wheat",
+      "unit": "%",
+      "n_episodes": 75,
+      "amp": 1.7264,
+      "ci95": [
+        -1.7948,
+        6.0658
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.2005,
+      "survives_fdr": false,
+      "fdr_q": 0.2604,
+      "generalizes": false
+    },
+    {
+      "label": "Palladium",
+      "unit": "%",
+      "n_episodes": 79,
+      "amp": 4.3104,
+      "ci95": [
+        -0.0388,
+        9.1829
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.0322,
+      "survives_fdr": true,
+      "fdr_q": 0.0859,
+      "generalizes": false
+    },
+    {
+      "label": "S&P 500",
+      "unit": "%",
+      "n_episodes": 30,
+      "amp": 0.7599,
+      "ci95": [
+        -1.5131,
+        2.5105
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.2116,
+      "survives_fdr": false,
+      "fdr_q": 0.2604,
+      "generalizes": false
+    },
+    {
+      "label": "HY spread",
+      "unit": "bps",
+      "n_episodes": 5,
+      "amp": 16.6078,
+      "ci95": [
+        -12.1597,
+        29.542
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.2032,
+      "survives_fdr": false,
+      "fdr_q": 0.2604,
+      "generalizes": false
+    },
+    {
+      "label": "CNY/USD",
+      "unit": "%",
+      "n_episodes": 91,
+      "amp": -0.2811,
+      "ci95": [
+        -0.675,
+        0.3011
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.9099,
+      "survives_fdr": false,
+      "fdr_q": 0.9099,
+      "generalizes": false
     }
   ],
-  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven. Other assets are honest null cells."
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven, Gold. Other assets are honest null cells."
 }
