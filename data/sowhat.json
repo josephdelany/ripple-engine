@@ -1,0 +1,190 @@
+{
+  "generated_at": "2026-07-30T02:38:07+00:00",
+  "regime": "OFF",
+  "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.0%, Heating oil +4.7%, 5Y breakeven +16.2bps, 10Y breakeven +7.6bps. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
+  "validated_propagation": [
+    {
+      "to": "Brent oil",
+      "strength": 4.9823,
+      "unit": "%",
+      "ci": [
+        0.6469,
+        8.592
+      ]
+    },
+    {
+      "to": "Heating oil",
+      "strength": 4.7353,
+      "unit": "%",
+      "ci": [
+        1.1164,
+        8.1436
+      ]
+    },
+    {
+      "to": "5Y breakeven",
+      "strength": 16.219,
+      "unit": "bps",
+      "ci": [
+        5.6063,
+        31.0269
+      ]
+    },
+    {
+      "to": "10Y breakeven",
+      "strength": 7.5939,
+      "unit": "bps",
+      "ci": [
+        0.8603,
+        16.1659
+      ]
+    }
+  ],
+  "base_rate_ripple_by_type": [
+    {
+      "type": "opec_decision",
+      "n": 32,
+      "car1": 2.7,
+      "car5": 2.4,
+      "car10": 1.7,
+      "car20": 2.7
+    },
+    {
+      "type": "conflict_escalation",
+      "n": 16,
+      "car1": 0.7,
+      "car5": 3.5,
+      "car10": 1.9,
+      "car20": 2.7
+    },
+    {
+      "type": "sanctions",
+      "n": 16,
+      "car1": -1.1,
+      "car5": 0.1,
+      "car10": 0.6,
+      "car20": -0.6
+    },
+    {
+      "type": "infrastructure_attack",
+      "n": 11,
+      "car1": -0.9,
+      "car5": 0.1,
+      "car10": 0.8,
+      "car20": -0.6
+    },
+    {
+      "type": "chokepoint_disruption",
+      "n": 6,
+      "car1": -2.2,
+      "car5": -2.5,
+      "car10": -0.8,
+      "car20": -1.9
+    },
+    {
+      "type": "demand_shock",
+      "n": 6,
+      "car1": -3.7,
+      "car5": -0.7,
+      "car10": -4.3,
+      "car20": -8.4
+    },
+    {
+      "type": "policy_response",
+      "n": 6,
+      "car1": 0.9,
+      "car5": -1.4,
+      "car10": -3.2,
+      "car20": -3.7
+    }
+  ],
+  "priced_gap": {
+    "gap_id": "gap.LIVE",
+    "as_of": "2026-07-30T01:38:01+00:00",
+    "anchor_date": "2026-07-27",
+    "subject": "LIVE state (no dated shock -- standing read)",
+    "engine_call": "turbulent",
+    "engine_p": 0.6,
+    "priced_ovx": 57.15,
+    "priced_ovx_pct": 91.6,
+    "gap_direction": "aligned",
+    "horizon_days": 20,
+    "outcome": null,
+    "brier": null,
+    "resolved_at": null,
+    "source_url": "",
+    "notes": "Live: H1 ON (VIX %ile 56); market OVX 57 (p91.6); gap=aligned."
+  },
+  "active_situations": [
+    {
+      "situation": "israel_iran_war_2025",
+      "events": 66,
+      "multi_modal": 5,
+      "max_modality_classes": 3,
+      "top_event": "Houthis want to copy Iran\u2019s Hormuz control in the Red Sea: Yemeni FM",
+      "top_tag": "corroborated",
+      "confirmed_by": [
+        "news",
+        "physical",
+        "priced"
+      ],
+      "receipts": [
+        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
+        "https://www.aljazeera.com/video/newsfeed/2026/7/28/iran-rejects-trump-frozen-funds-plan-warns-ships-of-hormuz-transit-ban?traffic_source=rss"
+      ]
+    },
+    {
+      "situation": "israel_lebanon_hezbollah",
+      "events": 62,
+      "multi_modal": 5,
+      "max_modality_classes": 3,
+      "top_event": "Houthis want to copy Iran\u2019s Hormuz control in the Red Sea: Yemeni FM",
+      "top_tag": "corroborated",
+      "confirmed_by": [
+        "news",
+        "physical",
+        "priced"
+      ],
+      "receipts": [
+        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
+        "https://www.aljazeera.com/video/newsfeed/2026/7/28/iran-rejects-trump-frozen-funds-plan-warns-ships-of-hormuz-transit-ban?traffic_source=rss"
+      ]
+    },
+    {
+      "situation": "russia_ukraine_war",
+      "events": 28,
+      "multi_modal": 0,
+      "max_modality_classes": 1,
+      "top_event": "[GDELT] DEFENSE SECRETARY / RUSSIAN: fight/clash signal",
+      "top_tag": "corroborated",
+      "confirmed_by": [
+        "news"
+      ],
+      "receipts": [
+        "https://abcnews.com/International/wireStory/nato-member-romania-shoots-stray-drones-ukraine-war-135145424",
+        "https://asia.nikkei.com/politics/ukraine-war/trump-zelenskyy-discuss-patriot-deal-and-reviving-talks-with-russia",
+        "https://dailycaller.com/2026/07/28/ukraine-hits-iranian-ship-after-influencer-visit/",
+        "https://economictimes.indiatimes.com/news/international/global-trends/us-senators-announce-deal-on-new-russia-iran-sanctions-bill/articleshow/132691105.cms"
+      ]
+    },
+    {
+      "situation": "china_taiwan_tension",
+      "events": 2,
+      "multi_modal": 0,
+      "max_modality_classes": 1,
+      "top_event": "[GDELT] CHINESE / PHILIPPINE: fight/clash signal",
+      "top_tag": "likely",
+      "confirmed_by": [
+        "news"
+      ],
+      "receipts": [
+        "https://www.bbc.co.uk/news/articles/cx27mjvxgg1o?at_medium=RSS&at_campaign=rss",
+        "https://www.forbes.com/sites/petersuciu/2026/07/28/us-navys-forward-deployed-carrier-now-in-waters-claimed-by-beijing/",
+        "https://www.thenationalnews.com/news/us/2026/07/28/trump-confident-in-us-arms-stockpile-after-private-sector-commitments/"
+      ]
+    }
+  ],
+  "discipline": "Only validated-backbone edges are claims; base rates carry their n; the gap is market-as-null; situations are ranked by multi-modal corroboration, with receipts."
+}

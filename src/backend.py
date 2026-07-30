@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "sowhat": {
+        "name": "The So-What Wire — event → consequence → decision",
+        "description": "Closes the warning-response gap: today's regime, the VALIDATED propagation "
+                       "(the only claims), the market-priced gap, and the live situations ranked by "
+                       "multi-modal corroboration — with receipts. Decision-relevant, not 'an alert.'",
+        "endpoint": "sowhat",
+        "gridData": {"w": 40, "h": 11},
+        "type": "markdown",
+    },
     "propagation_graph": {
         "name": "Propagation Graph — validated edges + traps",
         "description": "The consequence network: a validated backbone (shocks ripple into these nodes, "
@@ -684,6 +693,27 @@ def engine_read():
             "amplifier": "n/a (no registered direction)",
         })
     return rows
+
+
+@app.get("/sowhat")
+def sowhat():
+    """The live so-what read (markdown). Reads data/sowhat.json (src/sowhat.py)."""
+    r = _read_json("sowhat.json")
+    if not r.get("so_what"):
+        return "### The So-What Wire\n\n_run: `python3 src/sowhat.py`_"
+    lines = [f"## The So-What Wire — regime: **{r.get('regime','?')}**", "",
+             r["so_what"], "", "### Validated propagation (the only claims)"]
+    for b in r.get("validated_propagation", []):
+        ci = b.get("ci") or [None, None]
+        cis = f" · CI [{ci[0]:+.1f}, {ci[1]:+.1f}]" if ci[0] is not None else ""
+        lines.append(f"- shock → **{b['to']}** {b['strength']:+.1f}{b['unit']}{cis}")
+    lines += ["", "### Active situations (by multi-modal corroboration)"]
+    for s in r.get("active_situations", [])[:5]:
+        cb = ", ".join(s.get("confirmed_by", [])) or "news only"
+        lines.append(f"- **{s['situation']}** — {s['events']} events, {s['multi_modal']} multi-modal "
+                     f"[{cb}]; top: {s.get('top_event','')[:60]}")
+    lines += ["", f"*{r.get('discipline','')}*"]
+    return "\n".join(lines)
 
 
 @app.get("/propagation_graph")
