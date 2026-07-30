@@ -138,9 +138,13 @@ def build_signals(w):
     wti = w.get("fred.DCOILWTICO")
 
     if brent is not None and wti is not None:
-        spread = brent - wti
-        out["derived.brent_wti_spread"] = spread
-        out["derived.brent_wti_spread_z"] = zscore(spread)
+        # Compute on the spread's OWN trading-day index (dates where BOTH prices exist), then reindex
+        # back to the wide frame. If we computed on the wide union, weekend/holiday rows injected by
+        # newer calendar-daily feeds (portwatch/predmkt/wiki) would leave NaN gaps that stall the
+        # rolling z-score's tail -- the bug that silently froze this signal ~5 days behind Brent.
+        spread = (brent - wti).dropna()
+        out["derived.brent_wti_spread"] = spread.reindex(w.index)
+        out["derived.brent_wti_spread_z"] = zscore(spread).reindex(w.index)
 
     if "fred.DGS10" in w and "fred.DGS2" in w:
         out["derived.curve_2s10s"] = w["fred.DGS10"] - w["fred.DGS2"]
@@ -152,9 +156,12 @@ def build_signals(w):
         out["derived.vix_pct"] = percentile(w["fred.VIXCLS"])
 
     if brent is not None:
-        # realised volatility: std of daily log returns, annualised
-        r = np.log(brent).diff()
-        out["derived.brent_vol20"] = r.rolling(20).std() * np.sqrt(252) * 100
+        # realised volatility: std of daily log returns, annualised -- computed on Brent's OWN
+        # trading-day index (dropna) so weekend NaNs from other feeds can't stall the rolling tail,
+        # then reindexed back to the wide frame.
+        b = brent.dropna()
+        r = np.log(b).diff()
+        out["derived.brent_vol20"] = (r.rolling(20).std() * np.sqrt(252) * 100).reindex(w.index)
 
     if "cftc.mm_net_wti" in w:
         # Weekly series on a daily index: forward-fill so each day carries the

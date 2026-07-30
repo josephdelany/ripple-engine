@@ -1,0 +1,8 @@
+{
+  "_comment": "Per-series cadence/publish-lag overrides for heartbeat.classify. Keys are exact series_id or a 'prefix.*' glob. cadence_days forces the cadence; publish_lag_days is subtracted from elapsed so a feed's inherent publish lag isn't read as overdue. Keeps STALE/DEAD meaningful (a feed past lag+2x cadence still trips).",
+  "imf.breakeven.*": {"cadence_days": 365, "publish_lag_days": 30},
+  "fred.*":          {"cadence_days": 1,   "publish_lag_days": 3},
+  "gpr.*":           {"cadence_days": 1,   "publish_lag_days": 4},
+  "portwatch.*":     {"cadence_days": 1,   "publish_lag_days": 5},
+  "derived.*":       {"cadence_days": 1,   "publish_lag_days": 4}
+}

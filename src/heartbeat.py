@@ -72,8 +72,39 @@ def push_health_alert(health):
     except Exception as e:
         print(f"  [health alert] push failed ({type(e).__name__}).")
 
-CADENCE_DAYS = {"daily": 1, "weekly": 7, "monthly": 30}
+CADENCE_DAYS = {"daily": 1, "weekly": 7, "monthly": 30,
+                "quarterly": 91, "yearly": 365, "annual": 365}
 STALE_MULT, DEAD_MULT = 2, 4
+
+# Per-series publish-lag overrides: some feeds publish with an inherent lag (FRED daily series post
+# 2-3 business days late; the GPR index and PortWatch transits lag several days), so "overdue" must be
+# measured AFTER subtracting that known lag -- otherwise a perfectly-current feed reads STALE/DEAD.
+# Loaded from data/series_cadence_overrides.json (glob or exact series_id -> {cadence_days, publish_lag_days}).
+OVERRIDES_FILE = ROOT / "data" / "series_cadence_overrides.json"
+
+
+def load_overrides():
+    import json
+    try:
+        return json.loads(OVERRIDES_FILE.read_text()) if OVERRIDES_FILE.exists() else {}
+    except (ValueError, OSError):
+        return {}
+
+
+def override_for(series_id, overrides):
+    """Return (cadence_days_or_None, publish_lag_days) for a series, matching exact id first then a
+    'prefix.*' glob (e.g. 'fred.*'). Longest matching prefix wins."""
+    if series_id in overrides:
+        o = overrides[series_id]
+        return o.get("cadence_days"), o.get("publish_lag_days", 0)
+    best = None
+    for key, o in overrides.items():
+        if key.endswith(".*") and series_id.startswith(key[:-1]):
+            if best is None or len(key) > len(best[0]):
+                best = (key, o)
+    if best:
+        return best[1].get("cadence_days"), best[1].get("publish_lag_days", 0)
+    return None, 0
 
 
 def business_days_between(d1, d2):
@@ -88,15 +119,18 @@ def business_days_between(d1, d2):
     return days
 
 
-def classify(last_obs, frequency, today):
-    """Return (status, elapsed, cadence_days) for one series."""
-    cadence = CADENCE_DAYS.get((frequency or "").lower(), 1)
+def classify(last_obs, frequency, today, cadence_override=None, publish_lag_days=0):
+    """Return (status, elapsed, cadence_days) for one series. `cadence_override` forces the cadence
+    (for a series whose declared frequency is missing/wrong); `publish_lag_days` is subtracted from
+    elapsed so a feed's inherent publish lag doesn't read as overdue."""
+    cadence = cadence_override or CADENCE_DAYS.get((frequency or "").lower(), 1)
     if last_obs is None:
         return "DEAD", None, cadence
     if (frequency or "").lower() == "daily":
         elapsed = business_days_between(last_obs, today)
     else:
         elapsed = (today - last_obs).days
+    elapsed = max(0, elapsed - (publish_lag_days or 0))     # discount the feed's inherent publish lag
     ratio = elapsed / cadence
     if ratio > DEAD_MULT:
         return "DEAD", elapsed, cadence
@@ -134,10 +168,12 @@ def main():
         "FROM series s LEFT JOIN observations o ON o.series_id = s.series_id "
         "GROUP BY s.series_id ORDER BY s.series_id").fetchall()
 
+    overrides = load_overrides()
     reports = []
     for sid, freq, last in series:
         last_date = datetime.strptime(last[:10], "%Y-%m-%d").date() if last else None
-        status, elapsed, cadence = classify(last_date, freq, today)
+        cad_over, lag = override_for(sid, overrides)
+        status, elapsed, cadence = classify(last_date, freq, today, cad_over, lag)
         reports.append({
             "series_id": sid,
             "frequency": freq,

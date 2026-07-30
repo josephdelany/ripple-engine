@@ -38,6 +38,14 @@ SITUATIONS = {
 }
 PACING = 8            # > GDELT's 5s floor, with margin
 RETRIES = 4
+BUDGET_SECS = 240     # global deadline: GDELT throttling could make 4 theatres x 2 modes x backoff
+                      # exceed the pipeline step timeout and HANG the whole run. Past this, we write
+                      # whatever we have and exit 0 -- a partial cycle is fine; a hang is not.
+_DEADLINE = None      # set in main()
+
+
+def past_deadline():
+    return _DEADLINE is not None and time.monotonic() >= _DEADLINE
 
 
 def timeline_values(json_text):
@@ -67,6 +75,8 @@ def _fetch(query, mode):
     params = {"query": query, "mode": mode, "timespan": "7d", "format": "json"}
     delay = PACING
     for _ in range(RETRIES):
+        if past_deadline():
+            return None                       # out of time budget -- give up this fetch cleanly
         try:
             r = requests.get(API, params=params, headers=UA, timeout=40)
             # GDELT returns its "limit requests to one every 5 seconds" notice as plain
@@ -96,9 +106,15 @@ def assess(query):
 
 
 def main():
+    global _DEADLINE
+    _DEADLINE = time.monotonic() + BUDGET_SECS
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out = []
     for i, (label, query) in enumerate(SITUATIONS.items()):
+        if past_deadline():
+            print(f"  (time budget {BUDGET_SECS}s reached -- writing {len(out)} of "
+                  f"{len(SITUATIONS)} theatres, partial is fine)")
+            break
         if i:
             time.sleep(PACING)
         a = assess(query)
