@@ -1,0 +1,80 @@
+# PRE-REGISTRATION — the edge battery
+
+**Frozen:** 2026-07-30, at corpus N=289 events (1987–2025).
+**Discipline:** this document + the `HYPOTHESES`/`CONDITIONING` tuples in `src/edge_battery.py` are
+committed and git-tagged **before** `data/edge_battery.json` (the results) exists. The mechanism for
+each test is declared here, in advance. Nothing below was chosen after seeing a result.
+
+This follows the convention of `REGISTERED_SAMPLE.md` (the frozen n=20 sample) and the module-docstring
+pre-registration already used in `src/domain_conditioning.py` (copper-under-growth).
+
+## Why a battery, and why family-wise correction
+The portfolio today is one mechanism (H1: VIX-stress amplifies the oil ripple, generalized to four
+assets) plus one apt-conditioned second edge (copper under a growth regime). To grow it **without
+p-hacking**, we declare a fixed set of economically-distinct hypotheses up front, run each through the
+**same gate** (clustered median split → cluster-bootstrap 95% CI → 10k-permutation p), and **correct
+across the whole family** (BH-FDR q=0.10 **and** Bonferroni α=0.05), reporting **every** verdict.
+
+Expected outcome: **most of the battery is null.** That is not failure — the honest scorecard (with its
+nulls) is the deliverable. The count of new edges is not the success metric; the discipline is.
+
+## The decision rule (fixed, binding)
+A hypothesis is **`validated`** iff **all** of:
+1. the 95% cluster-bootstrap CI **excludes zero**, and
+2. the amplification points in the **pre-declared direction** (amp > 0 as defined), and
+3. it **survives BH-FDR at q=0.10** across the full family, and
+4. it **survives leave-one-cluster-out** (the sign never flips when any single episode is dropped).
+
+Bonferroni survival is reported too (stricter), but FDR is the gate. Windows and metric are **frozen**
+to the existing study: estimation t−130..t−11, event t−5..t+20, horizon **+20 trading days**, median
+split on the state read at **t−1** (point-in-time, no lookahead), |CAR| magnitude in the asset's unit.
+
+## The family (10 amplification hypotheses, corrected together)
+
+**Prior (already run in `domain_conditioning.py`; folded in for honest multiple-comparisons counting):**
+| # | name | conditioner | asset | dir | mechanism |
+|---|------|-------------|-------|-----|-----------|
+| P1 | gold_safe_haven | derived.vix_pct | yf.gold | high | gold as safe haven under stress |
+| P2 | silver_precious | derived.vix_pct | yf.silver | high | silver shares gold's stress channel |
+| P3 | copper_growth | derived.curve_2s10s | yf.copper | high | copper is a growth metal (steep curve) |
+| P4 | palladium_supply | derived.vix_pct | yf.palladium | high | palladium supply-concentrated → stress |
+
+**New — Class 1 (apt conditioners for assets that were null under generic VIX-stress):**
+| # | name | conditioner | asset | dir | mechanism |
+|---|------|-------------|-------|-----|-----------|
+| 1 | silver_growth | derived.curve_2s10s | yf.silver | high | silver is precious+**industrial** → growth metal |
+| 2 | palladium_growth | derived.curve_2s10s | yf.palladium | high | autocatalyst/industrial → growth regime |
+| 3 | gold_weak_dollar | derived.usd_z | yf.gold | low | gold rises as USD weakens; amplifies when USD already soft |
+| 4 | yields_inflation | derived.be_level | fred.DGS10 | high | oil shock → nominal yields more when inflation regime hot |
+
+**New — Class 2 (event-type heterogeneity of the oil edge; two-group tests on |CAR+20| in Brent):**
+| # | name | comparison | mechanism |
+|---|------|------------|-----------|
+| 5 | chokepoint_gt_sanction | chokepoint_disruption vs sanctions | physical route shocks ripple harder than financial ones |
+| 6 | severity_dose_response | severity 4–5 vs 1–2 | higher coded severity ripples harder (validates the coding) |
+
+`derived.be_level` (10Y breakeven percentile, 5y) and `derived.usd_z` are added to `derive_signals.py`
+with pre-declared mechanisms.
+
+## Reported alongside, NOT in the FDR family
+**`under_priced_risk_oos`** (Class 3, the mispricing edge) — when the engine flags under-priced risk
+(H1 ON while OVX prices calm), does realized +20d turbulence follow? This is a **forecast-skill** test,
+not an amplification, so it is **not** folded into the amplification FDR. It is **small-N (~14)** and its
+direction is defined in-sample, so it is reported with a **Wilson CI vs the base rate** and labeled
+**SUGGESTIVE — never `validated`** at this N. It becomes a real test only as the corpus grows.
+
+## Honest exclusions (declared, not force-fit)
+- **natural gas** — weather/storage-driven; no clean market-state proxy in the engine.
+- **wheat** — supply/weather-driven; no clean market-state proxy (already excluded upstream).
+- **HY credit** — keyless FRED caps the HY spread (`fred.BAMLH0A0HYM2`) at ~3y of history, so a
+  point-in-time credit-cycle state cannot be built for events before 2024. Excluded rather than tested
+  on an unfairly short window.
+
+## Collinearity check
+The conditioners (vix_pct, curve_2s10s, usd_z, be_level) are pairwise-correlated on their common dates
+and the max |r| reported, to demonstrate the panel is **not "the VIX effect in disguise"** but distinct
+economic drivers.
+
+---
+*Results (after running `python3 src/edge_battery.py`) live in `data/edge_battery.json` and are written
+up in `EDGE_PORTFOLIO.md`. This file is not edited once the results exist.*

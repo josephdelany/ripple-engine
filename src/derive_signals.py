@@ -67,6 +67,14 @@ MECHANISMS = {
         "H2 (pre-registered): thin physical buffers cannot absorb supply risk, "
         "so price must; crude stocks below their seasonal norm (negative sigma) "
         "amplify shock transmission."),
+    "derived.be_level": (
+        "10Y inflation breakeven percentile (5y)", "percentile",
+        "Inflation-expectations regime (pre-registered conditioner for the "
+        "yields-inflation-regime hypothesis in the edge battery). When breakevens "
+        "sit high in their own 5y range the market reads an oil shock as "
+        "inflationary and passes it into nominal yields; when low/anchored the same "
+        "shock reads growth-negative (flight-to-quality). So the |yield move| a "
+        "shock produces should be larger when this sits high."),
 }
 
 
@@ -167,6 +175,11 @@ def build_signals(w):
             seasonal_sigma(w["eia.crude_stocks_xspr"])
             .reindex(w.index).ffill()
         )
+
+    if "fred.T10YIE" in w:
+        # 10Y inflation breakeven, ranked in its own 5y range -> the inflation-regime
+        # conditioner for the edge battery (keyless FRED, daily from 2003).
+        out["derived.be_level"] = percentile(w["fred.T10YIE"])
 
     return out
 
