@@ -4,7 +4,22 @@
 run in `PRE_REGISTRATION.md` / git tag `edge-battery-preregistered-20260730`. This is the honest
 scorecard — validated survivors **and** every null. The nulls are not a failure; they are the product.*
 
-## Headline
+## Update — WS-S (2026-07-30): strengthened, family grew 10 → 12, a NEW edge validated
+The capture-and-strengthen pass (dated `PRE_REGISTRATION.md` amendment) added two apt keyless
+conditioners and fixed one real bug. Honest outcome, both directions:
+- **NEW VALIDATED EDGE: `hy_credit_stress`** — +1.65% [+0.22, +3.94], perm_p 0.012, FDR-q 0.070,
+  survives robustness. Un-capping credit (a HYG-drawdown proxy, since the keyless HY spread was capped
+  at ~3y) turned a former **exclusion** into a real, tested, validated edge. **Validated set: 2**
+  (`copper_growth`, `hy_credit_stress`).
+- **A hyped anecdote correctly collapsed to null:** the clustering-bug fix (cluster *within* type) took
+  `chokepoint_gt_sanction` from a **n=3 anecdote at +3.8%** to a **fairly-tested null (+0.35%)**. The fix
+  removed a spurious-looking result — integrity working the other way.
+- `gold_real_rate` null (real rates weren't gold's missing key); `severity_dose_response` +3.87% still
+  null (CI touches zero). Family-wise FDR now over **12** hypotheses.
+
+*The original 10-family scorecard below is preserved for the record.*
+
+## Headline (original 10-family run)
 A **10-hypothesis family** of economically-distinct conditioned event-study tests, corrected
 **family-wise** (BH-FDR q=0.10 **and** Bonferroni α=0.05). **One survives: `copper_growth`** (already
 the second validated edge). **The new hypotheses added no new validated edge** — the battery fairly

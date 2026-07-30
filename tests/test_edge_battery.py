@@ -24,12 +24,12 @@ def test_eb1_pre_registration_is_fixed():
     """The hypothesis set is frozen in code (the pre-registration), not chosen after seeing results."""
     import edge_battery as EB
     import domain_conditioning as DC
-    # 4 new apt conditioners + 4 prior domain tests + 2 event-type = a family of 10.
-    assert len(EB.CONDITIONING) == 4
+    # 6 apt conditioners (4 + WS-S credit/real-rate) + 4 prior domain tests + 2 event-type = 12.
+    assert len(EB.CONDITIONING) == 6
     assert len(DC.HYPOTHESES) == 4
     r = _load()
-    assert r["family_size"] == 10
-    assert len(r["amplification"]) == 10
+    assert r["family_size"] == 12
+    assert len(r["amplification"]) == 12
 
 
 def test_eb2_family_wise_correction_applied():
@@ -79,6 +79,7 @@ def test_eb6_exclusions_declared_and_conditioners_distinct():
     """Honest exclusions are named (not force-fit) and the conditioners are shown to be distinct
     drivers, not one collinear proxy for VIX."""
     r = _load()
-    for key in ("natural_gas", "wheat", "hy_credit"):
+    for key in ("natural_gas", "wheat"):           # credit was un-capped (WS-S) -> no longer excluded
         assert key in r["exclusions"]
+    assert "hy_credit" not in r["exclusions"]       # now a tested hypothesis, not an exclusion
     assert r["collinearity"]["abs_max"] < 0.6      # distinct economic drivers, not VIX in disguise

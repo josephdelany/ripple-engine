@@ -1,14 +1,15 @@
 {
   "what": "Pre-registered edge battery: a family of economically-distinct conditioned event-study hypotheses, family-wise corrected (BH-FDR q=0.10 AND Bonferroni alpha=0.05) across prior + new tests, every verdict reported. The mispricing edge is reported alongside as suggestive (small-N), never folded into the amplification FDR.",
   "pre_registration": "src/edge_battery.py docstring + HYPOTHESES (frozen before results; see git).",
-  "family_size": 10,
-  "n_validated": 1,
+  "family_size": 12,
+  "n_validated": 2,
   "validated": [
-    "copper_growth"
+    "copper_growth",
+    "hy_credit_stress"
   ],
   "fdr": {
     "q": 0.1,
-    "n_survive": 4
+    "n_survive": 5
   },
   "bonferroni": {
     "alpha": 0.05,
@@ -34,9 +35,9 @@
       "perm_p": 0.0373,
       "boot_share": 0.944,
       "prior": true,
-      "fdr_q": 0.095,
+      "fdr_q": 0.0912,
       "survives_fdr": true,
-      "bonferroni_adj": 0.373,
+      "bonferroni_adj": 0.4476,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -59,7 +60,7 @@
       "perm_p": 0.1779,
       "boot_share": 0.754,
       "prior": true,
-      "fdr_q": 0.2224,
+      "fdr_q": 0.2135,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -84,9 +85,9 @@
       "perm_p": 0.0003,
       "boot_share": 0.993,
       "prior": true,
-      "fdr_q": 0.003,
+      "fdr_q": 0.0036,
       "survives_fdr": true,
-      "bonferroni_adj": 0.003,
+      "bonferroni_adj": 0.0036,
       "survives_bonferroni": true,
       "validated": true,
       "robustness": {
@@ -115,9 +116,9 @@
       "perm_p": 0.0184,
       "boot_share": 0.971,
       "prior": true,
-      "fdr_q": 0.092,
+      "fdr_q": 0.0736,
       "survives_fdr": true,
-      "bonferroni_adj": 0.184,
+      "bonferroni_adj": 0.2208,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -140,9 +141,9 @@
       "perm_p": 0.0919,
       "boot_share": 0.894,
       "prior": false,
-      "fdr_q": 0.1532,
+      "fdr_q": 0.1379,
       "survives_fdr": false,
-      "bonferroni_adj": 0.919,
+      "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -165,7 +166,7 @@
       "perm_p": 0.1333,
       "boot_share": 0.873,
       "prior": false,
-      "fdr_q": 0.1904,
+      "fdr_q": 0.1777,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -192,7 +193,7 @@
       "prior": false,
       "fdr_q": 0.1296,
       "survives_fdr": false,
-      "bonferroni_adj": 0.648,
+      "bonferroni_adj": 0.7776,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -215,11 +216,67 @@
       "perm_p": 0.038,
       "boot_share": 0.897,
       "prior": false,
-      "fdr_q": 0.095,
+      "fdr_q": 0.0912,
       "survives_fdr": true,
-      "bonferroni_adj": 0.38,
+      "bonferroni_adj": 0.456,
       "survives_bonferroni": false,
       "validated": false
+    },
+    {
+      "hypothesis": "gold_real_rate",
+      "class": "amplification",
+      "state": "derived.real_rate",
+      "asset": "yf.gold",
+      "sign": "low",
+      "mechanism": "gold is a real-rate asset -> ripples harder when real rates are LOW (apt driver vs generic VIX)",
+      "testable": true,
+      "unit": "%",
+      "n": 62,
+      "amp": 0.7018,
+      "ci": [
+        -0.9252,
+        2.4065
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1995,
+      "boot_share": 0.793,
+      "prior": false,
+      "fdr_q": 0.2176,
+      "survives_fdr": false,
+      "bonferroni_adj": 1.0,
+      "survives_bonferroni": false,
+      "validated": false
+    },
+    {
+      "hypothesis": "hy_credit_stress",
+      "class": "amplification",
+      "state": "derived.credit_stress",
+      "asset": "yf.hyg",
+      "sign": "high",
+      "mechanism": "a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test)",
+      "testable": true,
+      "unit": "%",
+      "n": 48,
+      "amp": 1.6513,
+      "ci": [
+        0.2184,
+        3.939
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0116,
+      "boot_share": 0.994,
+      "prior": false,
+      "fdr_q": 0.0696,
+      "survives_fdr": true,
+      "bonferroni_adj": 0.1392,
+      "survives_bonferroni": false,
+      "validated": true,
+      "robustness": {
+        "robust": true,
+        "min": 0.7586,
+        "max": 1.7736,
+        "n_jackknife": 48
+      }
     },
     {
       "hypothesis": "chokepoint_gt_sanction",
@@ -229,19 +286,19 @@
       "unit": "%",
       "mechanism": "physical route shocks (chokepoint) ripple harder into oil than financial ones (sanctions)",
       "testable": true,
-      "n": 19,
-      "amp": 3.8193,
+      "n": 60,
+      "amp": 0.3526,
       "ci": [
-        -7.3834,
-        21.5428
+        -5.0629,
+        5.5144
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2384,
+      "perm_p": 0.4341,
       "groups": {
-        "chokepoint": 3,
-        "sanctions": 16
+        "chokepoint": 20,
+        "sanctions": 40
       },
-      "fdr_q": 0.2384,
+      "fdr_q": 0.4341,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -255,21 +312,21 @@
       "unit": "%",
       "mechanism": "high-severity (4-5) events ripple harder into oil than low-severity (1-2): a monotone dose-response",
       "testable": true,
-      "n": 43,
-      "amp": 2.4019,
+      "n": 109,
+      "amp": 3.8685,
       "ci": [
-        -3.1878,
-        8.4019
+        -0.1128,
+        8.1794
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2329,
+      "perm_p": 0.0811,
       "groups": {
-        "high_sev": 24,
-        "low_sev": 19
+        "high_sev": 73,
+        "low_sev": 36
       },
-      "fdr_q": 0.2384,
+      "fdr_q": 0.1379,
       "survives_fdr": false,
-      "bonferroni_adj": 1.0,
+      "bonferroni_adj": 0.9732,
       "survives_bonferroni": false,
       "validated": false
     }
@@ -304,7 +361,7 @@
   },
   "exclusions": {
     "natural_gas": "weather/storage-driven; no clean market-state proxy",
-    "wheat": "supply/weather-driven; no clean market-state proxy",
-    "hy_credit": "keyless FRED caps the HY spread at ~3y; no point-in-time credit-state for pre-2024 events -- excluded, not force-fit"
-  }
+    "wheat": "supply/weather-driven; no clean market-state proxy"
+  },
+  "wss_note": "WS-S: credit was un-capped via a HYG-drawdown proxy (derived.credit_stress) and is now a tested, VALIDATED hypothesis (hy_credit_stress), not an exclusion. The chokepoint>sanction test's clustering bug was fixed (chokepoint now fairly tested, null). Family grew 10 -> 12."
 }

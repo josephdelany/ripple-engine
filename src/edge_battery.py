@@ -331,9 +331,11 @@ def run():
         "bonferroni": {"alpha": bon["alpha"], "n_survive": bon["n_survive"]},
         "amplification": amp, "mispricing": mis, "collinearity": coll,
         "exclusions": {"natural_gas": "weather/storage-driven; no clean market-state proxy",
-                       "wheat": "supply/weather-driven; no clean market-state proxy",
-                       "hy_credit": "keyless FRED caps the HY spread at ~3y; no point-in-time "
-                                    "credit-state for pre-2024 events -- excluded, not force-fit"},
+                       "wheat": "supply/weather-driven; no clean market-state proxy"},
+        "wss_note": "WS-S: credit was un-capped via a HYG-drawdown proxy (derived.credit_stress) and is "
+                    "now a tested, VALIDATED hypothesis (hy_credit_stress), not an exclusion. The "
+                    "chokepoint>sanction test's clustering bug was fixed (chokepoint now fairly tested, "
+                    "null). Family grew 10 -> 12.",
     }
     OUT.write_text(json.dumps(report, indent=2, default=str))
     return report
