@@ -4,5 +4,6 @@
   "fred.*":          {"cadence_days": 1,   "publish_lag_days": 3},
   "gpr.*":           {"cadence_days": 1,   "publish_lag_days": 4},
   "portwatch.*":     {"cadence_days": 1,   "publish_lag_days": 5},
-  "derived.*":       {"cadence_days": 1,   "publish_lag_days": 4}
+  "derived.*":       {"cadence_days": 1,   "publish_lag_days": 4},
+  "ucdp.*":          {"cadence_days": 365, "publish_lag_days": 200}
 }

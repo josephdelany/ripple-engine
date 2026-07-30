@@ -59,6 +59,9 @@ STEPS = [
     ("fetch_gdelt_tone", "src/fetch_gdelt_tone.py", "observations"),
     # Per-situation media conflict intensity (GDELT volume+tone). File output.
     ("conflict_intens", "src/fetch_conflict_intensity.py", "observations"),
+    # UCDP verified conflict intensity (monthly). Uses the cached raw pull by default (no API hit / no
+    # token needed once cached); refresh the cache monthly with `python3 src/fetch_ucdp.py --refresh`.
+    ("fetch_ucdp",     "src/fetch_ucdp.py",     "observations"),
     ("fetch_market",   "src/fetch_market_live.py", "observations"),
     # OPEC fiscal-stress gap: IMF breakeven (via FRED) vs live Brent. Needs live price first.
     ("breakevens",     "src/fetch_breakevens.py", "observations"),
