@@ -33,11 +33,13 @@ YF_NODES = {
     "yf.silver":    ("SI=F", "commodity.silver",    "Silver (COMEX front)",    "USD/oz"),
     "yf.wheat":     ("ZW=F", "commodity.wheat",     "Wheat (CBOT front)",      "USc/bu"),
     "yf.palladium": ("PA=F", "commodity.palladium", "Palladium (NYMEX front)", "USD/oz"),
+    # macro nodes via yfinance for FULL history (FRED keyless caps SP500 to 10y and HY-spread to 3y,
+    # which was an UNFAIR test at n=30/n=5). ^GSPC -> 1927; HYG (HY-credit ETF, inverse of spreads) -> 2007.
+    "yf.sp500":     ("^GSPC", "macro.equities",     "S&P 500 index",           "index"),
+    "yf.hyg":       ("HYG",   "macro.credit",       "HY credit ETF (HYG)",     "USD"),
 }
-# FRED keyless macro nodes
+# FRED keyless macro nodes (full-history ones only)
 FRED_NODES = {
-    "fred.SP500":        ("macro.equities", "S&P 500 index",              "index"),
-    "fred.BAMLH0A0HYM2": ("macro.credit",   "US High-Yield credit spread", "percent"),
     "fred.DEXCHUS":      ("country.china",  "CNY per USD (China FX)",      "CNY/USD"),
 }
 ENTITIES = [

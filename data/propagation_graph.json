@@ -1,6 +1,6 @@
 {
   "what": "Validated propagation graph, three honest layers: (1) stress->node amplification (the validated backbone), (2) event-type->node directional ripple (mostly null at this N -- reported, not hidden), (3) crude->node lead-lag (co-move vs lead vs trap).",
-  "n_edges": 137,
+  "n_edges": 143,
   "backbone_validated": [
     {
       "kind": "stress->node",
@@ -79,6 +79,19 @@
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Palladium"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "S&P 500",
+      "unit": "%",
+      "strength": 1.617,
+      "ci": [
+        0.1153,
+        3.3159
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into S&P 500"
     }
   ],
   "amplification": [
@@ -256,26 +269,26 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "S&P 500",
       "unit": "%",
-      "strength": 1.5027,
+      "strength": 1.617,
       "ci": [
-        -1.6776,
-        4.077
+        0.1153,
+        3.3159
       ],
-      "status": "null",
-      "mechanism": "under stress, a shock ripples no more into S&P 500"
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into S&P 500"
     },
     {
       "kind": "stress->node",
       "from": "geopolitical shock (VIX-stress regime)",
-      "to": "HY spread",
-      "unit": "bps",
-      "strength": 11.563,
+      "to": "HY credit",
+      "unit": "%",
+      "strength": 1.544,
       "ci": [
-        null,
-        null
+        -0.2758,
+        3.9428
       ],
       "status": "null",
-      "mechanism": "under stress, a shock ripples no more into HY spread"
+      "mechanism": "under stress, a shock ripples no more into HY credit"
     },
     {
       "kind": "stress->node",
@@ -306,7 +319,7 @@
       "excludes_zero": true,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 5Y breakeven",
-      "fdr_q": 0.8573,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -323,7 +336,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 10Y breakeven",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -340,7 +353,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 5Y yield",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -357,7 +370,7 @@
       "excludes_zero": true,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to Palladium",
-      "fdr_q": 0.8573,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -374,7 +387,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "infrastructure_attack shock propagates to HH natgas",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -391,7 +404,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "sanctions shock propagates to 5Y breakeven",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -408,7 +421,7 @@
       "excludes_zero": false,
       "polarity": "+",
       "mechanism": "infrastructure_attack shock propagates to 5Y yield",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     },
     {
@@ -425,11 +438,11 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "opec_decision shock propagates to HH natgas",
-      "fdr_q": 0.9604,
+      "fdr_q": 0.9594,
       "status": "null"
     }
   ],
-  "event_to_node_n_ci_excludes_zero": 5,
+  "event_to_node_n_ci_excludes_zero": 6,
   "node_to_node": [
     {
       "kind": "node->node",
@@ -568,22 +581,22 @@
       "from": "Brent oil",
       "to": "S&P 500",
       "lag_days": 2,
-      "lead_corr": 0.085,
-      "contemp_corr": 0.197,
-      "perm_p": 0.0003,
+      "lead_corr": 0.031,
+      "contemp_corr": 0.098,
+      "perm_p": 0.0033,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->S&P 500 link"
     },
     {
       "kind": "node->node",
       "from": "Brent oil",
-      "to": "HY spread",
-      "lag_days": 2,
-      "lead_corr": -0.03,
-      "contemp_corr": -0.063,
-      "perm_p": 0.4209,
-      "status_pre_fdr": "null",
-      "mechanism": "no material crude->HY spread link"
+      "to": "HY credit",
+      "lag_days": 4,
+      "lead_corr": 0.04,
+      "contemp_corr": 0.202,
+      "perm_p": 0.009,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & HY credit co-move same-day; no reliable daily lead"
     },
     {
       "kind": "node->node",
@@ -597,5 +610,5 @@
       "mechanism": "no material crude->CNY/USD link"
     }
   ],
-  "n_traps": 5
+  "n_traps": 6
 }

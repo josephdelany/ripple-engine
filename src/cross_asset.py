@@ -78,10 +78,10 @@ ASSETS = [
      "kind": "price", "unit": "%"},
     {"series": "yf.palladium",      "label": "Palladium",   "entity": "commodity.palladium",
      "kind": "price", "unit": "%"},
-    {"series": "fred.SP500",        "label": "S&P 500",     "entity": "macro.equities",
+    {"series": "yf.sp500",          "label": "S&P 500",     "entity": "macro.equities",
      "kind": "price", "unit": "%"},
-    {"series": "fred.BAMLH0A0HYM2", "label": "HY spread",   "entity": "macro.credit",
-     "kind": "yield", "unit": "bps"},
+    {"series": "yf.hyg",            "label": "HY credit",   "entity": "macro.credit",
+     "kind": "price", "unit": "%"},
     {"series": "fred.DEXCHUS",      "label": "CNY/USD",     "entity": "country.china",
      "kind": "price", "unit": "%"},
     # Gasoline is WEEKLY -- measured on a weekly clock (+1/+2/+4 WEEKS), never

@@ -8,7 +8,8 @@
     "5Y breakeven",
     "10Y breakeven",
     "Gold",
-    "Palladium"
+    "Palladium",
+    "S&P 500"
   ],
   "fdr_q": 0.1,
   "map": [
@@ -54,7 +55,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.139,
       "survives_fdr": false,
-      "fdr_q": 0.2918,
+      "fdr_q": 0.2471,
       "generalizes": false
     },
     {
@@ -69,7 +70,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1888,
       "survives_fdr": false,
-      "fdr_q": 0.3094,
+      "fdr_q": 0.2813,
       "generalizes": false
     },
     {
@@ -84,7 +85,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1934,
       "survives_fdr": false,
-      "fdr_q": 0.3094,
+      "fdr_q": 0.2813,
       "generalizes": false
     },
     {
@@ -129,7 +130,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0273,
       "survives_fdr": true,
-      "fdr_q": 0.0853,
+      "fdr_q": 0.0728,
       "generalizes": true
     },
     {
@@ -144,7 +145,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.032,
       "survives_fdr": true,
-      "fdr_q": 0.0853,
+      "fdr_q": 0.0731,
       "generalizes": true
     },
     {
@@ -159,7 +160,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.3328,
       "survives_fdr": false,
-      "fdr_q": 0.4096,
+      "fdr_q": 0.3803,
       "generalizes": false
     },
     {
@@ -174,7 +175,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.2681,
       "survives_fdr": false,
-      "fdr_q": 0.3648,
+      "fdr_q": 0.3367,
       "generalizes": false
     },
     {
@@ -189,7 +190,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.2736,
       "survives_fdr": false,
-      "fdr_q": 0.3648,
+      "fdr_q": 0.3367,
       "generalizes": false
     },
     {
@@ -210,31 +211,31 @@
     {
       "label": "S&P 500",
       "unit": "%",
-      "n_episodes": 27,
-      "amp": 1.5027,
+      "n_episodes": 88,
+      "amp": 1.617,
       "ci95": [
-        -1.6776,
-        4.077
+        0.1153,
+        3.3159
       ],
-      "ci_excludes_zero": false,
-      "perm_p": 0.1459,
-      "survives_fdr": false,
-      "fdr_q": 0.2918,
-      "generalizes": false
+      "ci_excludes_zero": true,
+      "perm_p": 0.0231,
+      "survives_fdr": true,
+      "fdr_q": 0.0728,
+      "generalizes": true
     },
     {
-      "label": "HY spread",
-      "unit": "bps",
-      "n_episodes": 2,
-      "amp": 11.563,
+      "label": "HY credit",
+      "unit": "%",
+      "n_episodes": 54,
+      "amp": 1.544,
       "ci95": [
-        null,
-        null
+        -0.2758,
+        3.9428
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.4865,
+      "perm_p": 0.1038,
       "survives_fdr": false,
-      "fdr_q": 0.556,
+      "fdr_q": 0.2076,
       "generalizes": false
     },
     {
@@ -253,5 +254,5 @@
       "generalizes": false
     }
   ],
-  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven, Gold, Palladium. Other assets are honest null cells."
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven, Gold, Palladium, S&P 500. Other assets are honest null cells."
 }
