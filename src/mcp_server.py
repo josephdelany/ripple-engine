@@ -346,6 +346,35 @@ def get_edge_portfolio() -> dict:
 
 
 @mcp.tool()
+def list_claims() -> list:
+    """List every claim that has an inspectable evidence pack (validated edges + ripple nodes). Each id
+    can be passed to get_evidence_pack for its exact underlying episodes, CI, method, and commit hashes."""
+    import evidence
+    return evidence.list_claims()
+
+
+@mcp.tool()
+def get_evidence_pack(claim_id: str) -> dict:
+    """The airtight receipt for one claim (e.g. 'edge.copper_growth', 'hyp.H1', 'node.product_tankers'):
+    the EXACT underlying episodes (event ids + dates + source URLs), the statistics (CI, permutation p,
+    FDR, robustness), the source artifact + commit hashes, and the repro command. This is what lets a
+    quant verify any surfaced number down to its rows. Read-only; whitelisted by pack existence."""
+    import evidence
+    return evidence.get_pack(claim_id)
+
+
+@mcp.tool()
+def get_evaluation() -> dict:
+    """The engine's comprehensive self-evaluation: the negative-control placebo (must be null), surface
+    consistency, calibration (Brier + Murphy decomposition), power/robustness of every validated claim,
+    and the miss-audit. Reads data/evaluation.json. This is the 'is it sound?' answer, with receipts."""
+    e = _json_load("evaluation.json")
+    if "error" in e:
+        return e
+    return {**e, "caveat": CAVEATS}
+
+
+@mcp.tool()
 def get_results(name: str) -> str:
     """Verbatim contents of a committed results file (WHITELISTED only): one of
     registered_run_results, expanded_run_results, inference_results, h5_results,

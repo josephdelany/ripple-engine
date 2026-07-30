@@ -32,6 +32,8 @@ STEPS=(
   "read_backtest.py"
   "signal_registry.py"
   "sowhat.py"
+  "evaluate.py"
+  "evidence.py"
 )
 for s in "${STEPS[@]}"; do
   if python3 src/$s >/dev/null 2>&1; then echo "   ok  $s"; else echo "   WARN  $s (skipped)"; fi

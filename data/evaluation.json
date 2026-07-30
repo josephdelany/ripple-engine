@@ -1,0 +1,150 @@
+{
+  "corpus": {
+    "n_events": 289
+  },
+  "placebo": {
+    "ran": true,
+    "real_amp": 5.0003,
+    "placebo_mean": -0.0425,
+    "placebo_ci95": [
+      -4.0172,
+      3.9264
+    ],
+    "null_as_expected": true,
+    "note": "state labels shuffled on H1's episodes; amplification collapses to ~0 (CI spans 0). A non-null placebo would mean the framework finds signal in noise -- it does not."
+  },
+  "surface_consistency": {
+    "quantity": "H1 amplification (Brent, pp)",
+    "values": {
+      "validation_claims": 5.0003,
+      "cross_asset_conditioned": 5.0003,
+      "sowhat": 5.0003
+    },
+    "all_consistent": true
+  },
+  "calibration": {
+    "ran": true,
+    "n_scored": 240,
+    "brier": 0.2483,
+    "base_rate_brier": 0.2496,
+    "skill_vs_base": 0.0012,
+    "decomposition": {
+      "reliability": 0.0019,
+      "resolution": 0.0032,
+      "uncertainty": 0.2496
+    },
+    "reliability_bins": [
+      {
+        "forecast_p": 0.4,
+        "n": 107,
+        "observed": 0.458,
+        "observed_ci95": [
+          0.367,
+          0.552
+        ]
+      },
+      {
+        "forecast_p": 0.6,
+        "n": 133,
+        "observed": 0.571,
+        "observed_ci95": [
+          0.486,
+          0.652
+        ]
+      }
+    ],
+    "note": "Brier = Reliability - Resolution + Uncertainty. Lower reliability = better calibrated; higher resolution = more discriminating. Overall skill vs base is the honest headline."
+  },
+  "power": {
+    "claims": [
+      {
+        "claim": "H1",
+        "n": 86,
+        "robust_leave_one_out": true,
+        "jackknife_amp_range": [
+          4.3847,
+          5.4953
+        ]
+      },
+      {
+        "claim": "copper_growth",
+        "n": 70,
+        "robust_leave_one_out": true,
+        "jackknife_amp_range": [
+          3.5185,
+          4.6891
+        ]
+      },
+      {
+        "claim": "hy_credit_stress",
+        "n": 48,
+        "robust_leave_one_out": true,
+        "jackknife_amp_range": [
+          0.7586,
+          1.7736
+        ]
+      }
+    ],
+    "note": "n = clustered episodes; robust = the amplification keeps its predicted sign when any single episode is dropped (not driven by one event)."
+  },
+  "miss_audit": [
+    {
+      "gap_id": "gap.opec_2007_09_11",
+      "subject": "OPEC agrees 500000 bpd output increase effective November",
+      "engine_call": "turbulent",
+      "outcome": 0,
+      "brier": 0.36,
+      "root_cause": "regime_misread (engine saw turbulence; calm realised -- vol mean-reverted / priced-in)",
+      "source_url": "https://www.opec.org/opec_web/en/press_room/1009.htm"
+    },
+    {
+      "gap_id": "gap.sa_power_crisis_2008",
+      "subject": "2008 South Africa power crisis mine shutdowns",
+      "engine_call": "turbulent",
+      "outcome": 0,
+      "brier": 0.36,
+      "root_cause": "regime_misread (engine saw turbulence; calm realised -- vol mean-reverted / priced-in)",
+      "source_url": "https://www.aljazeera.com/amp/news/2008/1/30/s-africa-mines-hope-to-reopen"
+    },
+    {
+      "gap_id": "gap.opec_emergency_cut_2008",
+      "subject": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+      "engine_call": "turbulent",
+      "outcome": 0,
+      "brier": 0.36,
+      "root_cause": "regime_misread (engine saw turbulence; calm realised -- vol mean-reverted / priced-in)",
+      "source_url": "https://money.cnn.com/2008/10/24/markets/oil/index.htm"
+    },
+    {
+      "gap_id": "gap.iran_cisada_2010",
+      "subject": "Iran CISADA sanctions signed",
+      "engine_call": "turbulent",
+      "outcome": 0,
+      "brier": 0.36,
+      "root_cause": "regime_misread (engine saw turbulence; calm realised -- vol mean-reverted / priced-in)",
+      "source_url": "https://en.wikipedia.org/wiki/Comprehensive_Iran_Sanctions,_Accountability,_and_Divestment_Act_of_2010"
+    },
+    {
+      "gap_id": "gap.egypt_revolution_2011",
+      "subject": "Egyptian revolution erupts raising Suez transit risk",
+      "engine_call": "calm",
+      "outcome": 1,
+      "brier": 0.36,
+      "root_cause": "surprise_turbulence (engine saw calm; turbulence realised)",
+      "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=12371"
+    },
+    {
+      "gap_id": "gap.libya_civil_war_2011",
+      "subject": "Libyan civil war begins and production halts",
+      "engine_call": "calm",
+      "outcome": 1,
+      "brier": 0.36,
+      "root_cause": "surprise_turbulence (engine saw calm; turbulence realised)",
+      "source_url": "https://press.un.org/en/2011/sc10187.doc.htm"
+    }
+  ],
+  "overall": {
+    "framework_sound": true,
+    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0012"
+  }
+}
