@@ -837,6 +837,12 @@ def track_record():
                   f"(turbulence base rate {g['turbulence_base_rate']}).",
                   f"- Where the engine *disagrees* with the market it leans right — but the CIs are "
                   f"wide (small-N); suggestive, not yet validated.", ""]
+    pg = _read_json("propagation_graph.json")
+    bb = pg.get("backbone_validated") or []
+    if bb:
+        lines += ["**Validated propagation backbone (edges that survived the gate):**",
+                  f"- {len(bb)} validated edges: " + ", ".join(f"{e['to']} {e['strength']:+.1f}{e['unit']}"
+                                                               for e in bb) + ".", ""]
     if reg:
         lines += ["**Signal registry (status derived from the evidence, not asserted):**",
                   f"- {len(reg.get('live', []))} live · {len(reg.get('experimental', []))} experimental · "
