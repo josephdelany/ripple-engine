@@ -37,10 +37,20 @@ YF_NODES = {
     # which was an UNFAIR test at n=30/n=5). ^GSPC -> 1927; HYG (HY-credit ETF, inverse of spreads) -> 2007.
     "yf.sp500":     ("^GSPC", "macro.equities",     "S&P 500 index",           "index"),
     "yf.hyg":       ("HYG",   "macro.credit",       "HY credit ETF (HYG)",     "USD"),
+    # WS-S: wider priceable nodes so more domains get a fair shot at a validated ripple node (keyless).
+    "yf.platinum":  ("PL=F",  "commodity.platinum", "Platinum (NYMEX front)",  "USD/oz"),
+    "yf.corn":      ("ZC=F",  "commodity.corn",     "Corn (CBOT front)",       "USc/bu"),
+    "yf.soybean":   ("ZS=F",  "commodity.soybean",  "Soybeans (CBOT front)",   "USc/bu"),
+    "yf.miners":    ("GDX",   "macro.miners",       "Gold-miners ETF (GDX)",   "USD"),
+    "yf.copper_miners": ("COPX", "commodity.copper_miners", "Copper-miners ETF (COPX)", "USD"),
+    "yf.freight":   ("BDRY",  "supplychain.freight", "Dry-bulk freight ETF (BDRY)", "USD"),
+    "yf.tankers":   ("STNG",  "supplychain.tankers", "Product-tanker (STNG)",   "USD"),
 }
 # FRED keyless macro nodes (full-history ones only)
 FRED_NODES = {
     "fred.DEXCHUS":      ("country.china",  "CNY per USD (China FX)",      "CNY/USD"),
+    "fred.DEXUSEU":      ("macro.fx",       "USD per EUR",                 "USD/EUR"),
+    "fred.DEXJPUS":      ("macro.fx",       "JPY per USD",                 "JPY/USD"),
 }
 ENTITIES = [
     ("commodity.gold", "commodity", "Gold", "safe-haven metal"),
@@ -51,6 +61,15 @@ ENTITIES = [
     ("macro.equities", "macro", "Equities", "S&P 500"),
     ("macro.credit", "macro", "Credit", "US high-yield spread"),
     ("country.china", "country", "China", "CNY FX / demand"),
+    # WS-S wider nodes
+    ("commodity.platinum", "commodity", "Platinum", "SA-concentrated PGM"),
+    ("commodity.corn", "commodity", "Corn", "food-security grain"),
+    ("commodity.soybean", "commodity", "Soybeans", "food-security oilseed"),
+    ("macro.miners", "macro", "Gold miners", "leveraged gold-equity proxy"),
+    ("commodity.copper_miners", "commodity", "Copper miners", "leveraged copper-equity proxy"),
+    ("supplychain.freight", "supplychain", "Dry-bulk freight", "shipping-cost node (BDRY)"),
+    ("supplychain.tankers", "supplychain", "Product tankers", "oil-shipping node (STNG)"),
+    ("macro.fx", "macro", "Major FX", "EUR/JPY crosses"),
 ]
 
 

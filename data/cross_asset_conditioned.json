@@ -1,12 +1,14 @@
 {
   "what": "Does H1 (VIX stress amplifies the geopolitical ripple) generalize across assets? Same gate as oil: clustered median split + bootstrap CI + permutation + BH-FDR.",
   "sample": "clustered (de-overlapped), state at t-1",
-  "n_assets": 16,
+  "n_assets": 25,
   "assets_generalizing": [
     "Brent oil",
     "Heating oil",
     "5Y breakeven",
-    "S&P 500"
+    "S&P 500",
+    "Platinum",
+    "Product tankers"
   ],
   "fdr_q": 0.1,
   "map": [
@@ -22,7 +24,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0069,
       "survives_fdr": true,
-      "fdr_q": 0.0344,
+      "fdr_q": 0.0358,
       "generalizes": true
     },
     {
@@ -37,7 +39,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.8412,
       "survives_fdr": false,
-      "fdr_q": 0.8973,
+      "fdr_q": 0.9143,
       "generalizes": false
     },
     {
@@ -52,7 +54,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1178,
       "survives_fdr": false,
-      "fdr_q": 0.1571,
+      "fdr_q": 0.2104,
       "generalizes": false
     },
     {
@@ -67,7 +69,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0885,
       "survives_fdr": false,
-      "fdr_q": 0.1416,
+      "fdr_q": 0.1844,
       "generalizes": false
     },
     {
@@ -82,7 +84,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0836,
       "survives_fdr": false,
-      "fdr_q": 0.1416,
+      "fdr_q": 0.1844,
       "generalizes": false
     },
     {
@@ -97,7 +99,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0078,
       "survives_fdr": true,
-      "fdr_q": 0.0344,
+      "fdr_q": 0.0358,
       "generalizes": true
     },
     {
@@ -112,7 +114,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0053,
       "survives_fdr": true,
-      "fdr_q": 0.0344,
+      "fdr_q": 0.0358,
       "generalizes": true
     },
     {
@@ -127,7 +129,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0658,
       "survives_fdr": false,
-      "fdr_q": 0.1416,
+      "fdr_q": 0.1828,
       "generalizes": false
     },
     {
@@ -141,8 +143,8 @@
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.0373,
-      "survives_fdr": true,
-      "fdr_q": 0.0995,
+      "survives_fdr": false,
+      "fdr_q": 0.1166,
       "generalizes": false
     },
     {
@@ -157,7 +159,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.082,
       "survives_fdr": false,
-      "fdr_q": 0.1416,
+      "fdr_q": 0.1844,
       "generalizes": false
     },
     {
@@ -172,7 +174,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1779,
       "survives_fdr": false,
-      "fdr_q": 0.219,
+      "fdr_q": 0.2616,
       "generalizes": false
     },
     {
@@ -187,7 +189,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.2968,
       "survives_fdr": false,
-      "fdr_q": 0.3392,
+      "fdr_q": 0.3533,
       "generalizes": false
     },
     {
@@ -202,7 +204,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0184,
       "survives_fdr": true,
-      "fdr_q": 0.0589,
+      "fdr_q": 0.0657,
       "generalizes": false
     },
     {
@@ -217,7 +219,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0086,
       "survives_fdr": true,
-      "fdr_q": 0.0344,
+      "fdr_q": 0.0358,
       "generalizes": true
     },
     {
@@ -232,7 +234,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1084,
       "survives_fdr": false,
-      "fdr_q": 0.1571,
+      "fdr_q": 0.2085,
       "generalizes": false
     },
     {
@@ -249,7 +251,142 @@
       "survives_fdr": false,
       "fdr_q": 0.9657,
       "generalizes": false
+    },
+    {
+      "label": "Platinum",
+      "unit": "%",
+      "n_episodes": 78,
+      "amp": 7.2986,
+      "ci95": [
+        1.8478,
+        14.791
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0041,
+      "survives_fdr": true,
+      "fdr_q": 0.0358,
+      "generalizes": true
+    },
+    {
+      "label": "Corn",
+      "unit": "%",
+      "n_episodes": 70,
+      "amp": 1.5476,
+      "ci95": [
+        -1.9892,
+        5.1963
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1974,
+      "survives_fdr": false,
+      "fdr_q": 0.2742,
+      "generalizes": false
+    },
+    {
+      "label": "Soybeans",
+      "unit": "%",
+      "n_episodes": 69,
+      "amp": 1.0427,
+      "ci95": [
+        -2.2511,
+        4.2168
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.2552,
+      "survives_fdr": false,
+      "fdr_q": 0.3358,
+      "generalizes": false
+    },
+    {
+      "label": "Gold miners",
+      "unit": "%",
+      "n_episodes": 54,
+      "amp": 2.2849,
+      "ci95": [
+        -1.582,
+        7.1268
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1489,
+      "survives_fdr": false,
+      "fdr_q": 0.2327,
+      "generalizes": false
+    },
+    {
+      "label": "Copper miners",
+      "unit": "%",
+      "n_episodes": 43,
+      "amp": 1.2578,
+      "ci95": [
+        -3.6577,
+        5.7716
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.285,
+      "survives_fdr": false,
+      "fdr_q": 0.3533,
+      "generalizes": false
+    },
+    {
+      "label": "Dry-bulk freight",
+      "unit": "%",
+      "n_episodes": 16,
+      "amp": 4.255,
+      "ci95": [
+        -12.4975,
+        30.384
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.3976,
+      "survives_fdr": false,
+      "fdr_q": 0.4518,
+      "generalizes": false
+    },
+    {
+      "label": "Product tankers",
+      "unit": "%",
+      "n_episodes": 43,
+      "amp": 7.234,
+      "ci95": [
+        0.466,
+        12.1636
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0061,
+      "survives_fdr": true,
+      "fdr_q": 0.0358,
+      "generalizes": true
+    },
+    {
+      "label": "USD/EUR",
+      "unit": "%",
+      "n_episodes": 74,
+      "amp": 0.5604,
+      "ci95": [
+        -0.3758,
+        1.6937
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1468,
+      "survives_fdr": false,
+      "fdr_q": 0.2327,
+      "generalizes": false
+    },
+    {
+      "label": "JPY/USD",
+      "unit": "%",
+      "n_episodes": 86,
+      "amp": -0.817,
+      "ci95": [
+        -1.6854,
+        0.4974
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.9391,
+      "survives_fdr": false,
+      "fdr_q": 0.9657,
+      "generalizes": false
     }
   ],
-  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, S&P 500. Other assets are honest null cells."
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, S&P 500, Platinum, Product tankers. Other assets are honest null cells."
 }

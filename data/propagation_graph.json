@@ -1,6 +1,6 @@
 {
   "what": "Validated propagation graph, three honest layers: (1) stress->node amplification (the validated backbone), (2) event-type->node directional ripple (mostly null at this N -- reported, not hidden), (3) crude->node lead-lag (co-move vs lead vs trap).",
-  "n_edges": 143,
+  "n_edges": 224,
   "backbone_validated": [
     {
       "kind": "stress->node",
@@ -53,6 +53,32 @@
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into S&P 500"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Platinum",
+      "unit": "%",
+      "strength": 7.2986,
+      "ci": [
+        1.8478,
+        14.791
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Platinum"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Product tankers",
+      "unit": "%",
+      "strength": 7.234,
+      "ci": [
+        0.466,
+        12.1636
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Product tankers"
     }
   ],
   "amplification": [
@@ -263,6 +289,123 @@
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into CNY/USD"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Platinum",
+      "unit": "%",
+      "strength": 7.2986,
+      "ci": [
+        1.8478,
+        14.791
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Platinum"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Corn",
+      "unit": "%",
+      "strength": 1.5476,
+      "ci": [
+        -1.9892,
+        5.1963
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Corn"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Soybeans",
+      "unit": "%",
+      "strength": 1.0427,
+      "ci": [
+        -2.2511,
+        4.2168
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Soybeans"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Gold miners",
+      "unit": "%",
+      "strength": 2.2849,
+      "ci": [
+        -1.582,
+        7.1268
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Gold miners"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Copper miners",
+      "unit": "%",
+      "strength": 1.2578,
+      "ci": [
+        -3.6577,
+        5.7716
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Copper miners"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Dry-bulk freight",
+      "unit": "%",
+      "strength": 4.255,
+      "ci": [
+        -12.4975,
+        30.384
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Dry-bulk freight"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Product tankers",
+      "unit": "%",
+      "strength": 7.234,
+      "ci": [
+        0.466,
+        12.1636
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Product tankers"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "USD/EUR",
+      "unit": "%",
+      "strength": 0.5604,
+      "ci": [
+        -0.3758,
+        1.6937
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into USD/EUR"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "JPY/USD",
+      "unit": "%",
+      "strength": -0.817,
+      "ci": [
+        -1.6854,
+        0.4974
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into JPY/USD"
     }
   ],
   "event_to_node_strongest": [
@@ -280,7 +423,7 @@
       "excludes_zero": true,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 5Y breakeven",
-      "fdr_q": 0.7654,
+      "fdr_q": 0.8024,
       "status": "null"
     },
     {
@@ -297,7 +440,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 10Y breakeven",
-      "fdr_q": 0.7834,
+      "fdr_q": 0.8161,
       "status": "null"
     },
     {
@@ -314,7 +457,41 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 5Y yield",
-      "fdr_q": 0.9201,
+      "fdr_q": 0.9309,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "Dry-bulk freight",
+      "unit": "%",
+      "n": 8,
+      "strength": -9.0992,
+      "ci": [
+        -18.546,
+        0.3686
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to Dry-bulk freight",
+      "fdr_q": 0.8024,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.chokepoint_disruption",
+      "to": "Dry-bulk freight",
+      "unit": "%",
+      "n": 13,
+      "strength": 9.08,
+      "ci": [
+        -4.5092,
+        23.0032
+      ],
+      "excludes_zero": false,
+      "polarity": "+",
+      "mechanism": "chokepoint_disruption shock propagates to Dry-bulk freight",
+      "fdr_q": 0.9141,
       "status": "null"
     },
     {
@@ -331,7 +508,7 @@
       "excludes_zero": true,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to Palladium",
-      "fdr_q": 0.7654,
+      "fdr_q": 0.8024,
       "status": "null"
     },
     {
@@ -348,7 +525,7 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "policy_response shock propagates to 5Y breakeven",
-      "fdr_q": 0.7654,
+      "fdr_q": 0.8024,
       "status": "null"
     },
     {
@@ -365,45 +542,11 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "infrastructure_attack shock propagates to HH natgas",
-      "fdr_q": 0.8853,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.policy_response",
-      "to": "10Y breakeven",
-      "unit": "bps",
-      "n": 35,
-      "strength": -6.9906,
-      "ci": [
-        -13.3621,
-        -0.7632
-      ],
-      "excludes_zero": true,
-      "polarity": "-",
-      "mechanism": "policy_response shock propagates to 10Y breakeven",
-      "fdr_q": 0.7654,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.sanctions",
-      "to": "5Y breakeven",
-      "unit": "bps",
-      "n": 34,
-      "strength": -6.3636,
-      "ci": [
-        -18.422,
-        3.7196
-      ],
-      "excludes_zero": false,
-      "polarity": "-",
-      "mechanism": "sanctions shock propagates to 5Y breakeven",
-      "fdr_q": 0.8853,
+      "fdr_q": 0.9309,
       "status": "null"
     }
   ],
-  "event_to_node_n_ci_excludes_zero": 7,
+  "event_to_node_n_ci_excludes_zero": 11,
   "node_to_node": [
     {
       "kind": "node->node",
@@ -412,7 +555,7 @@
       "lag_days": 4,
       "lead_corr": 0.016,
       "contemp_corr": 0.074,
-      "perm_p": 0.1559,
+      "perm_p": 0.1713,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->HH natgas link"
     },
@@ -422,8 +565,8 @@
       "to": "Broad USD",
       "lag_days": 3,
       "lead_corr": -0.027,
-      "contemp_corr": -0.253,
-      "perm_p": 0.0443,
+      "contemp_corr": -0.251,
+      "perm_p": 0.058,
       "status_pre_fdr": "trap",
       "mechanism": "crude & Broad USD co-move same-day; no reliable daily lead"
     },
@@ -434,7 +577,7 @@
       "lag_days": 2,
       "lead_corr": 0.017,
       "contemp_corr": 0.099,
-      "perm_p": 0.0933,
+      "perm_p": 0.0953,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->5Y yield link"
     },
@@ -444,8 +587,8 @@
       "to": "10Y yield",
       "lag_days": 2,
       "lead_corr": 0.015,
-      "contemp_corr": 0.122,
-      "perm_p": 0.1313,
+      "contemp_corr": 0.123,
+      "perm_p": 0.1376,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->10Y yield link"
     },
@@ -455,7 +598,7 @@
       "to": "Heating oil",
       "lag_days": 4,
       "lead_corr": 0.04,
-      "contemp_corr": 0.53,
+      "contemp_corr": 0.531,
       "perm_p": 0.0007,
       "status_pre_fdr": "trap",
       "mechanism": "crude & Heating oil co-move same-day; no reliable daily lead"
@@ -465,9 +608,9 @@
       "from": "Brent oil",
       "to": "5Y breakeven",
       "lag_days": 4,
-      "lead_corr": 0.034,
+      "lead_corr": 0.033,
       "contemp_corr": 0.277,
-      "perm_p": 0.0133,
+      "perm_p": 0.0143,
       "status_pre_fdr": "trap",
       "mechanism": "crude & 5Y breakeven co-move same-day; no reliable daily lead"
     },
@@ -477,8 +620,8 @@
       "to": "10Y breakeven",
       "lag_days": 1,
       "lead_corr": 0.039,
-      "contemp_corr": 0.305,
-      "perm_p": 0.003,
+      "contemp_corr": 0.306,
+      "perm_p": 0.0027,
       "status_pre_fdr": "trap",
       "mechanism": "crude & 10Y breakeven co-move same-day; no reliable daily lead"
     },
@@ -488,8 +631,8 @@
       "to": "Gold",
       "lag_days": 3,
       "lead_corr": -0.025,
-      "contemp_corr": 0.137,
-      "perm_p": 0.0506,
+      "contemp_corr": 0.135,
+      "perm_p": 0.0467,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->Gold link"
     },
@@ -499,8 +642,8 @@
       "to": "Copper",
       "lag_days": 1,
       "lead_corr": -0.015,
-      "contemp_corr": 0.244,
-      "perm_p": 0.2236,
+      "contemp_corr": 0.243,
+      "perm_p": 0.2406,
       "status_pre_fdr": "trap",
       "mechanism": "crude & Copper co-move same-day; no reliable daily lead"
     },
@@ -509,9 +652,9 @@
       "from": "Brent oil",
       "to": "Silver",
       "lag_days": 3,
-      "lead_corr": -0.018,
-      "contemp_corr": 0.177,
-      "perm_p": 0.1723,
+      "lead_corr": -0.017,
+      "contemp_corr": 0.176,
+      "perm_p": 0.1636,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->Silver link"
     },
@@ -522,7 +665,7 @@
       "lag_days": 3,
       "lead_corr": -0.019,
       "contemp_corr": 0.117,
-      "perm_p": 0.1126,
+      "perm_p": 0.1153,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->Wheat link"
     },
@@ -532,8 +675,8 @@
       "to": "Palladium",
       "lag_days": 1,
       "lead_corr": 0.037,
-      "contemp_corr": 0.156,
-      "perm_p": 0.004,
+      "contemp_corr": 0.154,
+      "perm_p": 0.0053,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->Palladium link"
     },
@@ -544,7 +687,7 @@
       "lag_days": 2,
       "lead_corr": 0.031,
       "contemp_corr": 0.098,
-      "perm_p": 0.0033,
+      "perm_p": 0.0047,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->S&P 500 link"
     },
@@ -554,8 +697,8 @@
       "to": "HY credit",
       "lag_days": 4,
       "lead_corr": 0.04,
-      "contemp_corr": 0.202,
-      "perm_p": 0.009,
+      "contemp_corr": 0.201,
+      "perm_p": 0.007,
       "status_pre_fdr": "trap",
       "mechanism": "crude & HY credit co-move same-day; no reliable daily lead"
     },
@@ -566,10 +709,109 @@
       "lag_days": 5,
       "lead_corr": 0.01,
       "contemp_corr": -0.027,
-      "perm_p": 0.2726,
+      "perm_p": 0.2672,
       "status_pre_fdr": "null",
       "mechanism": "no material crude->CNY/USD link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Platinum",
+      "lag_days": 1,
+      "lead_corr": 0.03,
+      "contemp_corr": 0.151,
+      "perm_p": 0.0177,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Platinum link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Corn",
+      "lag_days": 1,
+      "lead_corr": -0.015,
+      "contemp_corr": 0.14,
+      "perm_p": 0.2226,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Corn link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Soybeans",
+      "lag_days": 2,
+      "lead_corr": -0.009,
+      "contemp_corr": 0.145,
+      "perm_p": 0.4885,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Soybeans link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Gold miners",
+      "lag_days": 3,
+      "lead_corr": -0.026,
+      "contemp_corr": 0.149,
+      "perm_p": 0.0596,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Gold miners link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Copper miners",
+      "lag_days": 2,
+      "lead_corr": 0.037,
+      "contemp_corr": 0.284,
+      "perm_p": 0.0193,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & Copper miners co-move same-day; no reliable daily lead"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Dry-bulk freight",
+      "lag_days": 5,
+      "lead_corr": 0.047,
+      "contemp_corr": 0.077,
+      "perm_p": 0.0377,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Dry-bulk freight link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Product tankers",
+      "lag_days": 1,
+      "lead_corr": -0.073,
+      "contemp_corr": 0.138,
+      "perm_p": 0.0003,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->Product tankers link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "USD/EUR",
+      "lag_days": 2,
+      "lead_corr": 0.013,
+      "contemp_corr": 0.095,
+      "perm_p": 0.2616,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->USD/EUR link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "JPY/USD",
+      "lag_days": 5,
+      "lead_corr": -0.016,
+      "contemp_corr": 0.054,
+      "perm_p": 0.1076,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->JPY/USD link"
     }
   ],
-  "n_traps": 6
+  "n_traps": 7
 }

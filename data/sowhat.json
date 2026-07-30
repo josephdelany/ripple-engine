@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T04:48:56+00:00",
+  "generated_at": "2026-07-30T17:45:15+00:00",
   "regime": "ON",
-  "so_what": "Regime is ON (VIX-stress elevated). If a shock lands, the VALIDATED propagation is into Brent oil +5.0%, Heating oil +4.3%, 5Y breakeven +16.7bps, S&P 500 +1.8%. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
+  "so_what": "Regime is ON (VIX-stress elevated). If a shock lands, the VALIDATED propagation is into Brent oil +5.0%, Heating oil +4.3%, 5Y breakeven +16.7bps, S&P 500 +1.8%, Platinum +7.3%, Product tankers +7.2%. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
   "validated_propagation": [
     {
       "to": "Brent oil",
@@ -37,6 +37,24 @@
       "ci": [
         0.0875,
         3.2298
+      ]
+    },
+    {
+      "to": "Platinum",
+      "strength": 7.2986,
+      "unit": "%",
+      "ci": [
+        1.8478,
+        14.791
+      ]
+    },
+    {
+      "to": "Product tankers",
+      "strength": 7.234,
+      "unit": "%",
+      "ci": [
+        0.466,
+        12.1636
       ]
     }
   ],
