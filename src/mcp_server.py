@@ -346,6 +346,86 @@ def get_edge_portfolio() -> dict:
 
 
 @mcp.tool()
+def orient_on_topic(topic: str = "me-risk") -> dict:
+    """"What should I pay attention to about <topic> right now?" -- the read-support brief. Give a topic
+    or keyword ('middle east', 'iran', 'shipping', 'commodities', 'macro', 'ukraine', ...) and get the
+    engine's relevant RAW MATERIAL in one call: the regime, the VALIDATED edges + nulls for that domain,
+    base rates, the live market gap, corroborated live situations, the coverage GAPS (where the engine is
+    silent, so you don't over-claim), and a receipts index (each claim -> its evidence pack). This is
+    material for YOUR read; the engine never writes the analysis. Every number is tiered; nulls shown."""
+    import orient as O
+    r = O.orient(topic)
+    if r.get("ok"):
+        r["caveat"] = CAVEATS
+    return r
+
+
+@mcp.tool()
+def get_domain_lens(domain: str = "me-risk") -> dict:
+    """The validated engine filtered to one analyst domain (me-risk / commodities / macro / energy /
+    conflict / geopolitics / supply-chain): its validated ripple nodes, nulls, supply-chain edges, event
+    coverage, and live situations. Only 'validated' items are claims; nulls shown, not hidden."""
+    import research
+    r = research.lens_data(domain)
+    if not r.get("ok"):
+        return {"error": "unknown domain", "domains": r.get("domains", [])}
+    return {**r, "caveat": CAVEATS}
+
+
+@mcp.tool()
+def list_testables() -> dict:
+    """What you can test: the state variables (derived.*), the assets/nodes, the event types, and the
+    domains -- so you can ask naturally instead of guessing tool arguments. Feed any of these to
+    test_hypothesis / query the engine."""
+    import sqlite3 as _sq
+    from derive_signals import load_wide, build_signals
+    from cross_asset import ASSETS
+    import research
+    conn = _ro_conn()
+    sig = build_signals(load_wide(conn))
+    states = sorted(c for c in sig.columns if str(c).startswith("derived."))
+    types = [r[0] for r in conn.execute("SELECT DISTINCT type FROM events ORDER BY type")]
+    conn.close()
+    return {"state_variables": states,
+            "assets": [{"series": a["series"], "label": a["label"]} for a in ASSETS],
+            "event_types": types, "domains": sorted(research.DOMAINS), "caveat": CAVEATS}
+
+
+@mcp.tool()
+def get_review_queue() -> dict:
+    """The living engine's review queue: LLM-extracted candidate events awaiting your coding/approval,
+    plus the cage's rejects (bad source / out-of-vocab). Nothing here is in the corpus yet -- it's the
+    gated waiting room. Auto-admitted (strongly-corroborated) events arrive pre-approved with a receipt."""
+    import csv as _csv
+    pending, rejects = [], []
+    review = DATA / "candidate_review.csv"
+    if review.exists():
+        for r in _csv.DictReader(open(review, newline="", encoding="utf-8")):
+            if r.get("candidate_source") == "llm_extract" and not (r.get("joe_decision") or "").strip():
+                pending.append({"event_id": r.get("event_id"), "date": r.get("event_date"),
+                                "type": r.get("type"), "title": r.get("title"),
+                                "source_url": r.get("source_url"), "why": r.get("rec_reason", "")[:120]})
+    rq = DATA / "extract" / "review_queue.csv"
+    if rq.exists():
+        rejects = list(_csv.DictReader(open(rq, newline="", encoding="utf-8")))[-20:]
+    return {"pending_review": pending, "n_pending": len(pending),
+            "cage_rejects": rejects, "note": "Fill joe_decision in candidate_review.csv, then run "
+            "apply_review.py + load_events.py to admit. Auto-admits are pre-approved -- veto if wrong."}
+
+
+@mcp.tool()
+def get_new_events(limit: int = 20) -> list:
+    """What the living engine has auto-admitted into the corpus recently (with the corroboration receipt
+    that cleared each one). Read-only view of data/extract/admission_log.csv."""
+    import csv as _csv
+    log = DATA / "extract" / "admission_log.csv"
+    if not log.exists():
+        return [{"note": "no auto-admitted events yet"}]
+    rows = list(_csv.DictReader(open(log, newline="", encoding="utf-8")))
+    return rows[-limit:]
+
+
+@mcp.tool()
 def list_claims() -> list:
     """List every claim that has an inspectable evidence pack (validated edges + ripple nodes). Each id
     can be passed to get_evidence_pack for its exact underlying episodes, CI, method, and commit hashes."""
