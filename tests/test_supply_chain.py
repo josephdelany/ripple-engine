@@ -32,8 +32,9 @@ def test_sc2_thin_producer_is_insufficient_not_guessed():
     conn = sqlite3.connect(DB)
     r = supply_chain.build(conn)
     conn.close()
-    # China (only ~4 events) -> copper must NOT be asserted as validated
+    # China -> copper must NOT be asserted as a validated edge on thin/ambiguous evidence
+    # (it is honestly 'null' or 'insufficient' depending on how many China events exist).
     china_copper = [e for e in r["all_edges"]
                     if e["producer"] == "china" and e["commodity"] == "copper"]
     if china_copper:
-        assert china_copper[0]["status"] == "insufficient"
+        assert china_copper[0]["status"] in ("insufficient", "null")

@@ -7,250 +7,251 @@
     "Heating oil",
     "5Y breakeven",
     "10Y breakeven",
-    "Gold"
+    "Gold",
+    "Palladium"
   ],
   "fdr_q": 0.1,
   "map": [
     {
       "label": "Brent oil",
       "unit": "%",
-      "n_episodes": 91,
-      "amp": 4.9823,
+      "n_episodes": 88,
+      "amp": 4.5271,
       "ci95": [
-        0.6469,
-        8.592
+        0.5948,
+        8.717
       ],
       "ci_excludes_zero": true,
-      "perm_p": 0.0043,
+      "perm_p": 0.0102,
       "survives_fdr": true,
-      "fdr_q": 0.024,
+      "fdr_q": 0.0544,
       "generalizes": true
     },
     {
       "label": "HH natgas",
       "unit": "%",
-      "n_episodes": 85,
-      "amp": -0.5325,
+      "n_episodes": 82,
+      "amp": -2.4109,
       "ci95": [
-        -7.0284,
-        7.0806
+        -7.8383,
+        6.6334
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.5603,
+      "perm_p": 0.7479,
       "survives_fdr": false,
-      "fdr_q": 0.5977,
+      "fdr_q": 0.7978,
       "generalizes": false
     },
     {
       "label": "Broad USD",
       "unit": "%",
-      "n_episodes": 60,
-      "amp": 0.4395,
+      "n_episodes": 57,
+      "amp": 0.3691,
       "ci95": [
-        -0.1371,
-        1.1571
+        -0.2703,
+        1.083
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.0899,
+      "perm_p": 0.139,
       "survives_fdr": false,
-      "fdr_q": 0.2055,
+      "fdr_q": 0.2918,
       "generalizes": false
     },
     {
       "label": "5Y yield",
       "unit": "bps",
-      "n_episodes": 91,
-      "amp": 3.3319,
+      "n_episodes": 88,
+      "amp": 3.6986,
       "ci95": [
-        -5.2536,
-        10.9768
+        -5.184,
+        11.9179
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2046,
+      "perm_p": 0.1888,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.3094,
       "generalizes": false
     },
     {
       "label": "10Y yield",
       "unit": "bps",
-      "n_episodes": 91,
-      "amp": 3.3605,
+      "n_episodes": 88,
+      "amp": 2.9513,
       "ci95": [
-        -3.5794,
-        9.3549
+        -3.8151,
+        9.9558
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.1625,
+      "perm_p": 0.1934,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.3094,
       "generalizes": false
     },
     {
       "label": "Heating oil",
       "unit": "%",
-      "n_episodes": 91,
-      "amp": 4.7353,
+      "n_episodes": 88,
+      "amp": 4.0462,
       "ci95": [
-        1.1164,
-        8.1436
+        0.8089,
+        8.2147
       ],
       "ci_excludes_zero": true,
-      "perm_p": 0.0042,
+      "perm_p": 0.0145,
       "survives_fdr": true,
-      "fdr_q": 0.024,
+      "fdr_q": 0.058,
       "generalizes": true
     },
     {
       "label": "5Y breakeven",
       "unit": "bps",
-      "n_episodes": 68,
-      "amp": 16.219,
+      "n_episodes": 65,
+      "amp": 16.4035,
       "ci95": [
-        5.6063,
-        31.0269
+        5.5209,
+        31.6982
       ],
       "ci_excludes_zero": true,
-      "perm_p": 0.0045,
+      "perm_p": 0.0047,
       "survives_fdr": true,
-      "fdr_q": 0.024,
+      "fdr_q": 0.0544,
       "generalizes": true
     },
     {
       "label": "10Y breakeven",
       "unit": "bps",
-      "n_episodes": 68,
-      "amp": 7.5939,
+      "n_episodes": 65,
+      "amp": 7.699,
       "ci95": [
-        0.8603,
-        16.1659
+        0.7577,
+        16.5072
       ],
       "ci_excludes_zero": true,
-      "perm_p": 0.0224,
+      "perm_p": 0.0273,
       "survives_fdr": true,
-      "fdr_q": 0.0826,
+      "fdr_q": 0.0853,
       "generalizes": true
     },
     {
       "label": "Gold",
       "unit": "%",
-      "n_episodes": 75,
-      "amp": 1.3389,
+      "n_episodes": 72,
+      "amp": 1.3252,
       "ci95": [
-        0.1548,
-        2.8272
+        0.1118,
+        2.8543
       ],
       "ci_excludes_zero": true,
-      "perm_p": 0.0258,
+      "perm_p": 0.032,
       "survives_fdr": true,
-      "fdr_q": 0.0826,
+      "fdr_q": 0.0853,
       "generalizes": true
     },
     {
       "label": "Copper",
       "unit": "%",
-      "n_episodes": 75,
-      "amp": 0.54,
+      "n_episodes": 72,
+      "amp": 0.5647,
       "ci95": [
-        -1.5034,
-        3.545
+        -1.4991,
+        3.9775
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.3344,
+      "perm_p": 0.3328,
       "survives_fdr": false,
-      "fdr_q": 0.3822,
+      "fdr_q": 0.4096,
       "generalizes": false
     },
     {
       "label": "Silver",
       "unit": "%",
-      "n_episodes": 75,
-      "amp": 1.4874,
+      "n_episodes": 72,
+      "amp": 1.0208,
       "ci95": [
-        -1.3937,
-        4.7133
+        -1.765,
+        4.6176
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.1714,
+      "perm_p": 0.2681,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.3648,
       "generalizes": false
     },
     {
       "label": "Wheat",
       "unit": "%",
-      "n_episodes": 75,
-      "amp": 1.7264,
+      "n_episodes": 72,
+      "amp": 1.101,
       "ci95": [
-        -1.7948,
-        6.0658
+        -2.3721,
+        4.8427
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2005,
+      "perm_p": 0.2736,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.3648,
       "generalizes": false
     },
     {
       "label": "Palladium",
       "unit": "%",
-      "n_episodes": 79,
-      "amp": 4.3104,
+      "n_episodes": 76,
+      "amp": 5.5528,
       "ci95": [
-        -0.0388,
-        9.1829
+        0.5639,
+        10.2643
       ],
-      "ci_excludes_zero": false,
-      "perm_p": 0.0322,
+      "ci_excludes_zero": true,
+      "perm_p": 0.0088,
       "survives_fdr": true,
-      "fdr_q": 0.0859,
-      "generalizes": false
+      "fdr_q": 0.0544,
+      "generalizes": true
     },
     {
       "label": "S&P 500",
       "unit": "%",
-      "n_episodes": 30,
-      "amp": 0.7599,
+      "n_episodes": 27,
+      "amp": 1.5027,
       "ci95": [
-        -1.5131,
-        2.5105
+        -1.6776,
+        4.077
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2116,
+      "perm_p": 0.1459,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.2918,
       "generalizes": false
     },
     {
       "label": "HY spread",
       "unit": "bps",
-      "n_episodes": 5,
-      "amp": 16.6078,
+      "n_episodes": 2,
+      "amp": 11.563,
       "ci95": [
-        -12.1597,
-        29.542
+        null,
+        null
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2032,
+      "perm_p": 0.4865,
       "survives_fdr": false,
-      "fdr_q": 0.2604,
+      "fdr_q": 0.556,
       "generalizes": false
     },
     {
       "label": "CNY/USD",
       "unit": "%",
-      "n_episodes": 91,
-      "amp": -0.2811,
+      "n_episodes": 88,
+      "amp": -0.2709,
       "ci95": [
-        -0.675,
-        0.3011
+        -0.6919,
+        0.2436
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.9099,
+      "perm_p": 0.8912,
       "survives_fdr": false,
-      "fdr_q": 0.9099,
+      "fdr_q": 0.8912,
       "generalizes": false
     }
   ],
-  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven, Gold. Other assets are honest null cells."
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven, Gold, Palladium. Other assets are honest null cells."
 }

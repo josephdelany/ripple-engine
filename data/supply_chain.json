@@ -2,24 +2,7 @@
   "what": "Validated supply-chain transmission: producer-conflict -> strategic-commodity ripple, gated (signed CAR+20 + bootstrap CI). Closes criticality's 'transmission magnitude' gap.",
   "min_producer_events": 6,
   "n_edges_tested": 14,
-  "validated": [
-    {
-      "kind": "supplychain",
-      "producer": "usa",
-      "producer_share": 21,
-      "commodity": "crude_oil",
-      "node": "fred.DCOILBRENTEU",
-      "n": 20,
-      "car": -7.1031,
-      "ci": [
-        -13.5464,
-        -0.9491
-      ],
-      "unit": "%",
-      "status": "validated",
-      "mechanism": "usa (21% of crude_oil) conflict -> crude_oil CAR+20"
-    }
-  ],
+  "validated": [],
   "all_edges": [
     {
       "kind": "supplychain",
@@ -27,11 +10,11 @@
       "producer_share": 40,
       "commodity": "palladium",
       "node": "yf.palladium",
-      "n": 17,
-      "car": -7.906,
+      "n": 16,
+      "car": -7.4233,
       "ci": [
-        -17.8905,
-        0.1391
+        -17.9039,
+        0.8585
       ],
       "unit": "%",
       "status": "null",
@@ -56,11 +39,11 @@
       "producer_share": 14,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 17,
-      "car": -0.6356,
+      "n": 16,
+      "car": -0.5976,
       "ci": [
-        -8.0483,
-        5.8749
+        -8.288,
+        6.1882
       ],
       "unit": "%",
       "status": "null",
@@ -72,7 +55,7 @@
       "producer_share": 11,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 0,
+      "n": 1,
       "car": null,
       "ci": null,
       "unit": "%",
@@ -85,11 +68,11 @@
       "producer_share": 10,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 17,
-      "car": -0.3572,
+      "n": 23,
+      "car": -1.045,
       "ci": [
-        -4.1315,
-        3.2659
+        -3.948,
+        1.7459
       ],
       "unit": "%",
       "status": "null",
@@ -114,7 +97,7 @@
       "producer_share": 6,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 1,
+      "n": 3,
       "car": null,
       "ci": null,
       "unit": "%",
@@ -127,11 +110,14 @@
       "producer_share": 45,
       "commodity": "copper",
       "node": "yf.copper",
-      "n": 4,
-      "car": null,
-      "ci": null,
+      "n": 16,
+      "car": 1.7621,
+      "ci": [
+        -1.8518,
+        5.0499
+      ],
       "unit": "%",
-      "status": "insufficient",
+      "status": "null",
       "mechanism": "china (45% of copper) conflict -> copper CAR+20"
     },
     {
@@ -140,14 +126,14 @@
       "producer_share": 21,
       "commodity": "crude_oil",
       "node": "fred.DCOILBRENTEU",
-      "n": 20,
-      "car": -7.1031,
+      "n": 26,
+      "car": -4.4104,
       "ci": [
-        -13.5464,
-        -0.9491
+        -9.8076,
+        0.7278
       ],
       "unit": "%",
-      "status": "validated",
+      "status": "null",
       "mechanism": "usa (21% of crude_oil) conflict -> crude_oil CAR+20"
     },
     {
@@ -156,11 +142,11 @@
       "producer_share": 12,
       "commodity": "crude_oil",
       "node": "fred.DCOILBRENTEU",
-      "n": 18,
-      "car": -4.3492,
+      "n": 17,
+      "car": -4.4899,
       "ci": [
-        -15.0483,
-        3.6169
+        -15.937,
+        4.0538
       ],
       "unit": "%",
       "status": "null",
@@ -188,11 +174,11 @@
       "producer_share": 21,
       "commodity": "natural_gas",
       "node": "fred.DHHNGSP",
-      "n": 18,
-      "car": -6.7788,
+      "n": 24,
+      "car": -3.2368,
       "ci": [
-        -17.2184,
-        2.2811
+        -13.4807,
+        7.5084
       ],
       "unit": "%",
       "status": "null",
