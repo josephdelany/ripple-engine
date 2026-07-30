@@ -15,7 +15,9 @@ def test_p1_graph_layers_and_backbone():
     import propagation_graph as P
     conn = sqlite3.connect(DB)
     r = P.build(conn)
-    n_table = conn.execute("SELECT COUNT(*) FROM propagation_edges").fetchone()[0]
+    # count only THIS module's kinds (supply_chain.py shares the table with kind='supplychain')
+    n_table = conn.execute("SELECT COUNT(*) FROM propagation_edges WHERE kind IN "
+                           "('stress->node','event->node','node->node')").fetchone()[0]
     conn.close()
     assert r["n_edges"] == n_table and r["n_edges"] > 0
 

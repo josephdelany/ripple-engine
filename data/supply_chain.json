@@ -1,0 +1,228 @@
+{
+  "what": "Validated supply-chain transmission: producer-conflict -> strategic-commodity ripple, gated (signed CAR+20 + bootstrap CI). Closes criticality's 'transmission magnitude' gap.",
+  "min_producer_events": 6,
+  "n_edges_tested": 14,
+  "validated": [
+    {
+      "kind": "supplychain",
+      "producer": "usa",
+      "producer_share": 21,
+      "commodity": "crude_oil",
+      "node": "fred.DCOILBRENTEU",
+      "n": 20,
+      "car": -7.1031,
+      "ci": [
+        -13.5464,
+        -0.9491
+      ],
+      "unit": "%",
+      "status": "validated",
+      "mechanism": "usa (21% of crude_oil) conflict -> crude_oil CAR+20"
+    }
+  ],
+  "all_edges": [
+    {
+      "kind": "supplychain",
+      "producer": "russia",
+      "producer_share": 40,
+      "commodity": "palladium",
+      "node": "yf.palladium",
+      "n": 17,
+      "car": -7.906,
+      "ci": [
+        -17.8905,
+        0.1391
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "russia (40% of palladium) conflict -> palladium CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "south_africa",
+      "producer_share": 40,
+      "commodity": "palladium",
+      "node": "yf.palladium",
+      "n": 0,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "south_africa (40% of palladium) conflict -> palladium CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "russia",
+      "producer_share": 14,
+      "commodity": "wheat",
+      "node": "yf.wheat",
+      "n": 17,
+      "car": -0.6356,
+      "ci": [
+        -8.0483,
+        5.8749
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "russia (14% of wheat) conflict -> wheat CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "canada",
+      "producer_share": 11,
+      "commodity": "wheat",
+      "node": "yf.wheat",
+      "n": 0,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "canada (11% of wheat) conflict -> wheat CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "usa",
+      "producer_share": 10,
+      "commodity": "wheat",
+      "node": "yf.wheat",
+      "n": 17,
+      "car": -0.3572,
+      "ci": [
+        -4.1315,
+        3.2659
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "usa (10% of wheat) conflict -> wheat CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "australia",
+      "producer_share": 9,
+      "commodity": "wheat",
+      "node": "yf.wheat",
+      "n": 0,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "australia (9% of wheat) conflict -> wheat CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "ukraine",
+      "producer_share": 6,
+      "commodity": "wheat",
+      "node": "yf.wheat",
+      "n": 1,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "ukraine (6% of wheat) conflict -> wheat CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "china",
+      "producer_share": 45,
+      "commodity": "copper",
+      "node": "yf.copper",
+      "n": 4,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "china (45% of copper) conflict -> copper CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "usa",
+      "producer_share": 21,
+      "commodity": "crude_oil",
+      "node": "fred.DCOILBRENTEU",
+      "n": 20,
+      "car": -7.1031,
+      "ci": [
+        -13.5464,
+        -0.9491
+      ],
+      "unit": "%",
+      "status": "validated",
+      "mechanism": "usa (21% of crude_oil) conflict -> crude_oil CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "russia",
+      "producer_share": 12,
+      "commodity": "crude_oil",
+      "node": "fred.DCOILBRENTEU",
+      "n": 18,
+      "car": -4.3492,
+      "ci": [
+        -15.0483,
+        3.6169
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "russia (12% of crude_oil) conflict -> crude_oil CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "saudi_arabia",
+      "producer_share": 11,
+      "commodity": "crude_oil",
+      "node": "fred.DCOILBRENTEU",
+      "n": 10,
+      "car": -3.4007,
+      "ci": [
+        -23.2446,
+        12.5378
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "saudi_arabia (11% of crude_oil) conflict -> crude_oil CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "usa",
+      "producer_share": 21,
+      "commodity": "natural_gas",
+      "node": "fred.DHHNGSP",
+      "n": 18,
+      "car": -6.7788,
+      "ci": [
+        -17.2184,
+        2.2811
+      ],
+      "unit": "%",
+      "status": "null",
+      "mechanism": "usa (21% of natural_gas) conflict -> natural_gas CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "australia",
+      "producer_share": 20,
+      "commodity": "natural_gas",
+      "node": "fred.DHHNGSP",
+      "n": 0,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "australia (20% of natural_gas) conflict -> natural_gas CAR+20"
+    },
+    {
+      "kind": "supplychain",
+      "producer": "qatar",
+      "producer_share": 19,
+      "commodity": "natural_gas",
+      "node": "fred.DHHNGSP",
+      "n": 1,
+      "car": null,
+      "ci": null,
+      "unit": "%",
+      "status": "insufficient",
+      "mechanism": "qatar (19% of natural_gas) conflict -> natural_gas CAR+20"
+    }
+  ]
+}

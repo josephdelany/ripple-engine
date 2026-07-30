@@ -186,6 +186,8 @@ def build(conn):
         rows.append((f"n2n.{e['from']}.{e['to']}", "node->node", e["from"], e["to"],
                      f"{e['lag_days']}d", e["lead_corr"], None, None, e["perm_p"],
                      e["status_pre_fdr"], e["mechanism"]))
+    # idempotent for OUR kinds only -- supply_chain.py shares this table with kind='supplychain'.
+    conn.execute("DELETE FROM propagation_edges WHERE kind IN ('stress->node','event->node','node->node')")
     conn.executemany("INSERT OR REPLACE INTO propagation_edges VALUES (?,?,?,?,?,?,?,?,?,?,?)", rows)
     conn.commit()
 

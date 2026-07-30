@@ -167,6 +167,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 11},
         "type": "markdown",
     },
+    "supply_chain": {
+        "name": "Supply-Chain Transmission — producer-conflict → commodity",
+        "description": "Closes the criticality-exposure gap with validated transmission: when a "
+                       "commodity's critical producer is in conflict, what has the commodity actually "
+                       "done? validated / null / insufficient — refuses to assert what the data can't.",
+        "endpoint": "supply_chain",
+        "gridData": {"w": 40, "h": 10},
+        "type": "table",
+    },
     "propagation_graph": {
         "name": "Propagation Graph — validated edges + traps",
         "description": "The consequence network: a validated backbone (shocks ripple into these nodes, "
@@ -714,6 +723,26 @@ def sowhat():
                      f"[{cb}]; top: {s.get('top_event','')[:60]}")
     lines += ["", f"*{r.get('discipline','')}*"]
     return "\n".join(lines)
+
+
+@app.get("/supply_chain")
+def supply_chain():
+    """Validated supply-chain transmission. Reads data/supply_chain.json (src/supply_chain.py)."""
+    r = _read_json("supply_chain.json")
+    edges = r.get("all_edges")
+    if not edges:
+        return [{"edge": "(none)", "detail": "run: python3 src/supply_chain.py"}]
+    order = {"validated": 0, "null": 1, "insufficient": 2}
+    rows = []
+    for e in sorted(edges, key=lambda e: (order.get(e["status"], 3), -(abs(e.get("car") or 0)))):
+        ci = e.get("ci") or [None, None]
+        rows.append({
+            "edge": f"{e['producer']} conflict → {e['commodity']}",
+            "producer_share": f"{e.get('producer_share','?')}%",
+            "ripple": (f"{e['car']:+.1f}{e['unit']}" if e.get("car") is not None else "—"),
+            "ci95": (f"[{ci[0]:+.1f}, {ci[1]:+.1f}]" if ci[0] is not None else f"n={e['n']}"),
+            "status": e["status"].upper()})
+    return rows
 
 
 @app.get("/propagation_graph")
