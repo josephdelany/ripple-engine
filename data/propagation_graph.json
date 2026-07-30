@@ -1,0 +1,383 @@
+{
+  "what": "Validated propagation graph, three honest layers: (1) stress->node amplification (the validated backbone), (2) event-type->node directional ripple (mostly null at this N -- reported, not hidden), (3) crude->node lead-lag (co-move vs lead vs trap).",
+  "n_edges": 71,
+  "backbone_validated": [
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Brent oil",
+      "unit": "%",
+      "strength": 4.9823,
+      "ci": [
+        0.6469,
+        8.592
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Brent oil"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Heating oil",
+      "unit": "%",
+      "strength": 4.7353,
+      "ci": [
+        1.1164,
+        8.1436
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Heating oil"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "5Y breakeven",
+      "unit": "bps",
+      "strength": 16.219,
+      "ci": [
+        5.6063,
+        31.0269
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into 5Y breakeven"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "10Y breakeven",
+      "unit": "bps",
+      "strength": 7.5939,
+      "ci": [
+        0.8603,
+        16.1659
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into 10Y breakeven"
+    }
+  ],
+  "amplification": [
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Brent oil",
+      "unit": "%",
+      "strength": 4.9823,
+      "ci": [
+        0.6469,
+        8.592
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Brent oil"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "HH natgas",
+      "unit": "%",
+      "strength": -0.5325,
+      "ci": [
+        -7.0284,
+        7.0806
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into HH natgas"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Broad USD",
+      "unit": "%",
+      "strength": 0.4395,
+      "ci": [
+        -0.1371,
+        1.1571
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Broad USD"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "5Y yield",
+      "unit": "bps",
+      "strength": 3.3319,
+      "ci": [
+        -5.2536,
+        10.9768
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into 5Y yield"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "10Y yield",
+      "unit": "bps",
+      "strength": 3.3605,
+      "ci": [
+        -3.5794,
+        9.3549
+      ],
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into 10Y yield"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Heating oil",
+      "unit": "%",
+      "strength": 4.7353,
+      "ci": [
+        1.1164,
+        8.1436
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Heating oil"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "5Y breakeven",
+      "unit": "bps",
+      "strength": 16.219,
+      "ci": [
+        5.6063,
+        31.0269
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into 5Y breakeven"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
+      "to": "10Y breakeven",
+      "unit": "bps",
+      "strength": 7.5939,
+      "ci": [
+        0.8603,
+        16.1659
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into 10Y breakeven"
+    }
+  ],
+  "event_to_node_strongest": [
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "5Y breakeven",
+      "unit": "bps",
+      "n": 9,
+      "strength": -26.4192,
+      "ci": [
+        -56.1724,
+        -0.3436
+      ],
+      "excludes_zero": true,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to 5Y breakeven",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "10Y breakeven",
+      "unit": "bps",
+      "n": 9,
+      "strength": -14.9337,
+      "ci": [
+        -34.9649,
+        1.5372
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to 10Y breakeven",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "5Y yield",
+      "unit": "bps",
+      "n": 13,
+      "strength": -9.331,
+      "ci": [
+        -33.784,
+        14.0116
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to 5Y yield",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.policy_response",
+      "to": "HH natgas",
+      "unit": "%",
+      "n": 15,
+      "strength": -8.7942,
+      "ci": [
+        -21.8868,
+        3.4968
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "policy_response shock propagates to HH natgas",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.infrastructure_attack",
+      "to": "HH natgas",
+      "unit": "%",
+      "n": 20,
+      "strength": -8.3401,
+      "ci": [
+        -22.0601,
+        5.1348
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "infrastructure_attack shock propagates to HH natgas",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.sanctions",
+      "to": "HH natgas",
+      "unit": "%",
+      "n": 31,
+      "strength": -7.851,
+      "ci": [
+        -17.7778,
+        0.9155
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "sanctions shock propagates to HH natgas",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.policy_response",
+      "to": "5Y breakeven",
+      "unit": "bps",
+      "n": 14,
+      "strength": -7.0792,
+      "ci": [
+        -21.3464,
+        7.7032
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "policy_response shock propagates to 5Y breakeven",
+      "fdr_q": 0.9785,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.policy_response",
+      "to": "Brent oil",
+      "unit": "%",
+      "n": 15,
+      "strength": -7.0718,
+      "ci": [
+        -20.0957,
+        2.9746
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "policy_response shock propagates to Brent oil",
+      "fdr_q": 0.9785,
+      "status": "null"
+    }
+  ],
+  "event_to_node_n_ci_excludes_zero": 2,
+  "node_to_node": [
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "HH natgas",
+      "lag_days": 4,
+      "lead_corr": 0.016,
+      "contemp_corr": 0.074,
+      "perm_p": 0.1559,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->HH natgas link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Broad USD",
+      "lag_days": 3,
+      "lead_corr": -0.027,
+      "contemp_corr": -0.253,
+      "perm_p": 0.0443,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & Broad USD co-move same-day; no reliable daily lead"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "5Y yield",
+      "lag_days": 2,
+      "lead_corr": 0.017,
+      "contemp_corr": 0.099,
+      "perm_p": 0.0933,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->5Y yield link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "10Y yield",
+      "lag_days": 2,
+      "lead_corr": 0.015,
+      "contemp_corr": 0.122,
+      "perm_p": 0.1313,
+      "status_pre_fdr": "null",
+      "mechanism": "no material crude->10Y yield link"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "Heating oil",
+      "lag_days": 4,
+      "lead_corr": 0.04,
+      "contemp_corr": 0.53,
+      "perm_p": 0.0007,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & Heating oil co-move same-day; no reliable daily lead"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "5Y breakeven",
+      "lag_days": 4,
+      "lead_corr": 0.034,
+      "contemp_corr": 0.277,
+      "perm_p": 0.0133,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & 5Y breakeven co-move same-day; no reliable daily lead"
+    },
+    {
+      "kind": "node->node",
+      "from": "Brent oil",
+      "to": "10Y breakeven",
+      "lag_days": 1,
+      "lead_corr": 0.039,
+      "contemp_corr": 0.305,
+      "perm_p": 0.003,
+      "status_pre_fdr": "trap",
+      "mechanism": "crude & 10Y breakeven co-move same-day; no reliable daily lead"
+    }
+  ],
+  "n_traps": 4
+}

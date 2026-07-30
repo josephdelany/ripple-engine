@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "propagation_graph": {
+        "name": "Propagation Graph — validated edges + traps",
+        "description": "The consequence network: a validated backbone (shocks ripple into these nodes, "
+                       "FDR-corrected), an honest null layer, and TRAP flags where nodes co-move but "
+                       "neither leads. Draws only what survives, and flags what doesn't.",
+        "endpoint": "propagation_graph",
+        "gridData": {"w": 40, "h": 11},
+        "type": "table",
+    },
     "ripple_map": {
         "name": "Conditioned Ripple Map — does the edge generalize?",
         "description": "Does H1 (VIX stress amplifies the geopolitical ripple) hold across oil, gas, "
@@ -674,6 +683,31 @@ def engine_read():
             "verdict": "exploratory",
             "amplifier": "n/a (no registered direction)",
         })
+    return rows
+
+
+@app.get("/propagation_graph")
+def propagation_graph():
+    """The validated propagation network. Reads data/propagation_graph.json (src/propagation_graph.py).
+    Backbone (validated) + honest null layer + trap flags -- the consequence map with confidence."""
+    r = _read_json("propagation_graph.json")
+    if not r.get("n_edges"):
+        return [{"layer": "(none)", "detail": "run: python3 src/propagation_graph.py"}]
+    rows = []
+    for e in sorted(r.get("backbone_validated", []), key=lambda e: -abs(e.get("strength") or 0)):
+        ci = e.get("ci") or [None, None]
+        rows.append({"layer": "BACKBONE (validated)", "edge": f"shock → {e['to']}",
+                     "strength": f"{e['strength']:+.1f} {e['unit']}",
+                     "ci95": f"[{ci[0]:+.1f}, {ci[1]:+.1f}]" if ci[0] is not None else "n/a",
+                     "note": "ripples harder under stress (FDR-corrected)"})
+    for e in r.get("node_to_node", []):
+        if e.get("status_pre_fdr") == "trap":
+            rows.append({"layer": "TRAP (co-move, no lead)", "edge": f"{e['from']} → {e['to']}",
+                         "strength": f"contemp {e['contemp_corr']:+.2f}",
+                         "ci95": f"lead {e['lead_corr']:+.2f}@{e['lag_days']}d",
+                         "note": "co-moves same-day; does NOT reliably lead — don't trade the lead"})
+    rows.append({"layer": "— honest —", "edge": "event-type → node (directional)", "strength": "",
+                 "ci95": "", "note": "null layer at this N: signed effects mixed/weak, none survive FDR"})
     return rows
 
 
