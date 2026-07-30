@@ -109,6 +109,10 @@ STEPS = [
     ("resolve_reads",   "src/resolve_reads.py",  "reads"),
     # cross-asset propagation map. Writes edge rows (one per event x asset).
     ("cross_asset",    "src/cross_asset.py",    "edges"),
+    # the pre-registered edge battery: re-score the family on fresh data. Writes a JSON artifact
+    # (0 measured rows). Amplification results use the rebuilt DB; the mispricing sub-block reads
+    # the existing gap ledger (suggestive either way).
+    ("edge_battery",   "src/edge_battery.py",   "observations"),
     # TRUE FINAL step: render The Daily so the static front page is always fresh
     # after the pipeline. File output (digest.html), so measured rows is 0.
     ("digest",         "src/digest.py",         "observations"),

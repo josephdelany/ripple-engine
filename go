@@ -28,6 +28,7 @@ STEPS=(
   "supply_chain.py"
   "domain_conditioning.py"
   "gaps.py"
+  "edge_battery.py"
   "read_backtest.py"
   "signal_registry.py"
   "sowhat.py"

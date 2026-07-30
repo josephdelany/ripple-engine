@@ -209,10 +209,12 @@ def _mispricing(conn):
                 "verdict": "suggestive", "note": "gap ledger not built yet"}
     k = int(round(rate * n))
     w = validate.wilson_ci(k, n)
-    beats_base = bool(base is not None and w["lo"] is not None and w["lo"] > base)
+    lo = None if w["lo"] is None else round(float(w["lo"]), 3)
+    hi = None if w["hi"] is None else round(float(w["hi"]), 3)
+    beats_base = bool(base is not None and lo is not None and lo > base)
     return {"hypothesis": "under_priced_risk_oos", "class": "mispricing", "testable": True,
             "verdict": "suggestive",                       # never 'validated' at this N -- by design
-            "n": n, "turbulence_rate": rate, "wilson_ci": [w["lo"], w["hi"]],
+            "n": n, "turbulence_rate": rate, "wilson_ci": [lo, hi],
             "base_rate": base, "lower_bound_beats_base": beats_base, "brier": sub.get("brier"),
             "note": "small-N, direction defined in-sample -> suggestive; grows into a real test as N rises"}
 
@@ -350,8 +352,9 @@ def main():
     print("-" * 92)
     m = r["mispricing"]
     if m.get("testable"):
+        ci = m["wilson_ci"]
         print(f"  under_priced_risk_oos    n={m['n']} turbulence={m['turbulence_rate']} "
-              f"Wilson{m['wilson_ci']} vs base {m['base_rate']}  [SUGGESTIVE -- never validated at this N]")
+              f"Wilson[{ci[0]},{ci[1]}] vs base {m['base_rate']}  [SUGGESTIVE -- never validated at this N]")
     coll = r["collinearity"]
     print(f"  conditioner collinearity: |r|max={coll['abs_max']} across {coll['n_days']} common days "
           f"(distinct drivers, not VIX in disguise)")

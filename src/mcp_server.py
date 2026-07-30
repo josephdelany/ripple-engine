@@ -329,6 +329,23 @@ def test_hypothesis(state: str, asset: str = "fred.DCOILBRENTEU",
 
 
 @mcp.tool()
+def get_edge_portfolio() -> dict:
+    """The pre-registered edge battery: a family of economically-distinct conditioned hypotheses,
+    family-wise corrected (BH-FDR + Bonferroni across prior + new tests), with EVERY verdict reported.
+    Returns the validated survivors, the full amplification table (validated/prior/null), the mispricing
+    edge (suggestive, small-N), the conditioner-collinearity check, and the honest exclusions. Only
+    'validated' rows are claims; the nulls are the point. Registration frozen in PRE_REGISTRATION.md."""
+    b = _json_load("edge_battery.json")
+    if "error" in b:
+        return b
+    return {"validated": b.get("validated"), "family_size": b.get("family_size"),
+            "fdr": b.get("fdr"), "bonferroni": b.get("bonferroni"),
+            "amplification": b.get("amplification"), "mispricing": b.get("mispricing"),
+            "collinearity": b.get("collinearity"), "exclusions": b.get("exclusions"),
+            "caveat": CAVEATS}
+
+
+@mcp.tool()
 def get_results(name: str) -> str:
     """Verbatim contents of a committed results file (WHITELISTED only): one of
     registered_run_results, expanded_run_results, inference_results, h5_results,

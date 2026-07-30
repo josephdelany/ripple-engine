@@ -176,6 +176,16 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 8},
         "type": "table",
     },
+    "edge_portfolio": {
+        "name": "Edge Portfolio — the pre-registered battery",
+        "description": "A pre-registered family of economically-distinct conditioned hypotheses, "
+                       "family-wise corrected (BH-FDR + Bonferroni across prior + new), EVERY verdict "
+                       "shown. Only survivors are claims; the nulls are the credibility. Frozen "
+                       "registration: PRE_REGISTRATION.md.",
+        "endpoint": "edge_portfolio",
+        "gridData": {"w": 40, "h": 12},
+        "type": "table",
+    },
     "domain_lens": {
         "name": "Domain Lens — your analyst view",
         "description": "The one validated engine, filtered to your domain: ME-risk / commodities / "
@@ -765,6 +775,35 @@ def domain_conditioning():
                      "amp": f"{x['amp']:+.1f}%",
                      "ci95": f"[{ci[0]:+.1f},{ci[1]:+.1f}]" if ci[0] is not None else "n/a",
                      "verdict": "VALIDATED" if x.get("validated") else "null"})
+    return rows
+
+
+@app.get("/edge_portfolio")
+def edge_portfolio():
+    """The pre-registered edge battery, family-wise corrected. Reads data/edge_battery.json.
+    Every hypothesis carries a verdict; only 'validated' rows are claims. Nulls shown, not hidden."""
+    r = _read_json("edge_battery.json")
+    amp = r.get("amplification")
+    if not amp:
+        return [{"hypothesis": "(none)", "detail": "run: python3 src/edge_battery.py"}]
+    rows = []
+    for x in sorted(amp, key=lambda z: (not z.get("validated"), z.get("fdr_q") or 1.0)):
+        if not x.get("testable"):
+            rows.append({"hypothesis": x["hypothesis"], "amp": "n/a", "ci95": "",
+                         "perm_p": "", "fdr_q": "", "verdict": "not testable"})
+            continue
+        ci = x.get("ci") or [None, None]
+        unit = x.get("unit", "")
+        v = "VALIDATED" if x.get("validated") else ("prior" if x.get("prior") else "null")
+        rows.append({"hypothesis": x["hypothesis"], "amp": f"{x['amp']:+.2f}{unit}",
+                     "ci95": f"[{ci[0]:+.2f},{ci[1]:+.2f}]" if ci[0] is not None else "n/a",
+                     "perm_p": x.get("perm_p"), "fdr_q": x.get("fdr_q"), "verdict": v})
+    m = r.get("mispricing") or {}
+    if m.get("testable"):
+        ci = m.get("wilson_ci") or [None, None]
+        rows.append({"hypothesis": "under_priced_risk_oos", "amp": f"{m['turbulence_rate']} turb",
+                     "ci95": f"Wilson[{ci[0]},{ci[1]}]", "perm_p": f"base {m['base_rate']}",
+                     "fdr_q": "", "verdict": "SUGGESTIVE (small-N)"})
     return rows
 
 

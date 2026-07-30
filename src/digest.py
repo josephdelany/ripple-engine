@@ -30,6 +30,7 @@ ENGINE_READ = ROOT / "data" / "engine_read.json"
 VALIDATION = ROOT / "data" / "validation_claims.json"   # the honest N=161 tier (H1 live; H2/H3 null)
 READ_BACKTEST = ROOT / "data" / "read_backtest.json"    # walk-forward: does H1 help the read OOS
 GAPS = ROOT / "data" / "gaps.json"                      # the live gap + resolving scorecard
+EDGE_BATTERY = ROOT / "data" / "edge_battery.json"      # the pre-registered, family-wise-corrected battery
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
@@ -263,6 +264,16 @@ def render():
             f"H2 tight-inventories is a null at N={e(n)} "
             f"({h2v.get('amp_pp', 0):+.1f}pp, CI spans 0) · "
             f"H3 positioning rejected · analogue forecaster no OOS edge</div>")
+        # b2b. The pre-registered edge battery: the honest portfolio scorecard (family-wise corrected).
+        eb = _read_json(EDGE_BATTERY) or {}
+        if eb.get("family_size"):
+            val = eb.get("validated") or []
+            parts.append(
+                f"<div class=baserate>Edge portfolio (pre-registered, family-wise corrected): "
+                f"of {eb['family_size']} economically-distinct hypotheses, "
+                f"<b>{len(val)} validated</b> ({', '.join(val) if val else 'none new'}); the rest are "
+                f"honest nulls. Discipline over count — receipts in <code>data/edge_battery.json</code>, "
+                f"registration frozen in <code>PRE_REGISTRATION.md</code>.</div>")
 
     # b3. The Gap (market-as-null): where the engine disagrees with the market's priced vol.
     gp = _read_json(GAPS) or {}
