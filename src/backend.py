@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "corroboration_convergence": {
+        "name": "Corroboration — confirmation, not headlines",
+        "description": "Cross-modal convergence per situation: how many independent evidence TYPES "
+                       "(news / physical ship-transits / thermal fires / repricing markets) confirm "
+                       "each event. Multi-modal = confirmed beyond attention. The anti-noise layer.",
+        "endpoint": "corroboration_convergence",
+        "gridData": {"w": 40, "h": 10},
+        "type": "table",
+    },
     "gap_board": {
         "name": "The Gap Board — where the engine disagrees with the market",
         "description": "Market-as-null: the engine's H1-conditioned view vs the market's implied "
@@ -656,6 +665,29 @@ def engine_read():
             "verdict": "exploratory",
             "amplifier": "n/a (no registered direction)",
         })
+    return rows
+
+
+@app.get("/corroboration_convergence")
+def corroboration_convergence():
+    """Cross-modal convergence per situation (news/physical/thermal/priced). Reads
+    data/corroboration.json (src/corroborate.py). The 'confirmation not headlines' layer."""
+    c = _read_json("corroboration.json")
+    conv = c.get("convergence") or {}
+    sits = c.get("situations") or {}
+    if not conv:
+        return [{"situation": "(none)", "detail": "run: python3 src/corroborate.py"}]
+    rows = []
+    for sid, s in conv.items():
+        top = s.get("top") or {}
+        rows.append({
+            "situation": sid.replace("situation.", ""),
+            "events": s.get("n_events", 0),
+            "multi_modal": f"{s.get('n_multi_modal', 0)} (max {s.get('max_modality_classes', 0)} types)",
+            "top_event": (top.get("headline") or "")[:60],
+            "confirmed_by": ", ".join(top.get("modality_classes", [])) or "news only",
+        })
+    rows.sort(key=lambda r: r["events"], reverse=True)
     return rows
 
 

@@ -160,6 +160,21 @@ def _thermal_hit(cluster, elevated):
     return None
 
 
+def _priced_hit(cluster, moved_markets):
+    """Does a PREDICTION MARKET that has repriced corroborate this cluster? A 4th, independent
+    modality: if the market is quietly repricing the same subject the news cluster names, that is
+    money moving on the story -- far stronger than headlines alone. Returns the market question."""
+    text = " ".join((a.get("headline") or "").lower() for a in cluster)
+    terms = list(CHOKEPOINT_TERMS) + list(FACILITY_TERMS) + ["iran", "israel", "opec", "oil", "crude"]
+    for m in moved_markets or []:
+        q = (m.get("market") or m.get("question") or "").lower()
+        if not q:
+            continue
+        if any(t in text and t in q for t in terms):
+            return m.get("market") or m.get("question")
+    return None
+
+
 def _flagged(path, key, flag):
     """Slugs in a signal JSON whose 'flag' == flag (portwatch/firms readers)."""
     if not path.exists():
@@ -171,13 +186,16 @@ def _flagged(path, key, flag):
     return {c["slug"] for c in items if c.get("flag") == flag}
 
 
-def corroborate_situation(conn, sid, disrupted=None, elevated=None):
+def corroborate_situation(conn, sid, disrupted=None, elevated=None, moved=None):
     """Cluster + score a situation's atoms. Cross-modal votes add independence:
-    a physical-flow disruption (PortWatch ships stopped) or a satellite thermal
-    anomaly (FIRMS fire at a named facility) that matches a cluster is far stronger
-    than news alone. Sorted most-corroborated first."""
+    a physical-flow disruption (PortWatch ships stopped), a satellite thermal anomaly
+    (FIRMS fire at a named facility), or a repricing PREDICTION MARKET (money moving)
+    that matches a cluster is far stronger than news alone. Sorted most-corroborated first.
+    Each event carries `modality_classes` -- the count of distinct evidence TYPES (news /
+    physical / thermal / priced) -- the anti-attention-noise metric: confirmation, not headlines."""
     disrupted = disrupted if disrupted is not None else disrupted_chokepoints()
     elevated = elevated if elevated is not None else elevated_facilities()
+    moved = moved or []
     rows = conn.execute(
         "SELECT ts, kind, headline, source_url FROM situation_log "
         "WHERE situation_id=? ORDER BY ts DESC, log_id DESC", (sid,)).fetchall()
@@ -196,17 +214,37 @@ def corroborate_situation(conn, sid, disrupted=None, elevated=None):
         if therm:                      # cross-modal satellite-thermal corroboration
             n_indep += 1
             modalities.append(f"thermal:firms:{therm}")
+        priced = _priced_hit(c, moved)
+        if priced:                     # cross-modal prediction-market corroboration (money moving)
+            n_indep += 1
+            modalities.append(f"priced:market:{priced[:40]}")
+        classes = sorted({m.split(":")[0] for m in modalities})
         db, p, tag = score(n_indep)
         rep = max(c, key=lambda a: len(a.get("headline") or ""))  # fullest headline
         events.append({
             "headline": rep["headline"], "kind": rep["kind"],
             "n_atoms": len(c), "n_independent_sources": n_indep,
             "sources": domains[:8], "modalities": modalities,
+            "modality_classes": classes, "n_modality_classes": len(classes),
+            "multi_modal": len(classes) >= 2,       # confirmed beyond headlines
             "source_urls": sorted({a["source_url"] for a in c if a["source_url"]})[:10],
             "confidence": p, "confidence_db": db, "tag": tag,
             "latest_ts": max(a["ts"] for a in c)[:10]})
-    events.sort(key=lambda e: (e["confidence"], e["n_atoms"]), reverse=True)
+    events.sort(key=lambda e: (e["n_modality_classes"], e["confidence"], e["n_atoms"]), reverse=True)
     return events
+
+
+def convergence_summary(events):
+    """Per-situation headline: how many events are MULTI-MODAL (confirmed beyond news), and the
+    best modality-class count. The differentiator vs attention-only products in one number."""
+    if not events:
+        return {"n_events": 0, "n_multi_modal": 0, "max_modality_classes": 0, "top": None}
+    top = max(events, key=lambda e: (e["n_modality_classes"], e["confidence"]))
+    return {"n_events": len(events),
+            "n_multi_modal": sum(1 for e in events if e["multi_modal"]),
+            "max_modality_classes": top["n_modality_classes"],
+            "top": {"headline": top.get("headline", ""), "tag": top.get("tag", ""),
+                    "modality_classes": top["modality_classes"], "confidence": top.get("confidence")}}
 
 
 def load_situations():
@@ -216,29 +254,45 @@ def load_situations():
     return (yaml.safe_load(SIT_CONFIG.read_text()) or {}).get("situations", [])
 
 
+def _moved_markets():
+    """Prediction markets that have repriced (the priced modality), via the divergence detector."""
+    try:
+        import divergence
+        conn = sqlite3.connect(DB)
+        movers = divergence.market_movers(conn)
+        conn.close()
+        return movers
+    except Exception:
+        return []
+
+
 def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    moved = _moved_markets()
     conn = sqlite3.connect(DB)
-    report = {}
+    report, summary = {}, {}
     for sit in load_situations():
         if sit.get("status") == "closed":
             continue
-        report[sit["situation_id"]] = corroborate_situation(conn, sit["situation_id"])
+        evs = corroborate_situation(conn, sit["situation_id"], moved=moved)
+        report[sit["situation_id"]] = evs
+        summary[sit["situation_id"]] = convergence_summary(evs)
     conn.close()
     OUT.write_text(json.dumps(
         {"as_of": now[:10], "generated_at": now,
-         "method": "weight-of-evidence over independent domains (v1, heuristic; "
-                   "to be calibrated). Correlated reprints collapse; certainty capped.",
-         "situations": report}, indent=2))
+         "method": "weight-of-evidence over independent domains + cross-modal votes (news / "
+                   "physical PortWatch / thermal FIRMS / priced markets). Correlated reprints "
+                   "collapse; certainty capped; multi-modal = confirmed beyond headlines.",
+         "situations": report, "convergence": summary}, indent=2))
     total = sum(len(v) for v in report.values())
-    print(f"corroborate -- scored {total} event clusters across "
-          f"{len(report)} situation(s).")
+    print(f"corroborate -- scored {total} event clusters across {len(report)} situation(s).")
     for sid, evs in report.items():
-        conf = [e for e in evs if e["tag"] in ("corroborated", "likely")]
-        print(f"  {sid}: {len(evs)} events, {len(conf)} likely+ corroborated")
-        for e in conf[:4]:
-            print(f"     [{e['tag']:>12} {e['confidence']:.2f}] "
-                  f"{e['n_independent_sources']}src  {e['headline'][:50]}")
+        cs = summary[sid]
+        print(f"  {sid}: {len(evs)} events, {cs['n_multi_modal']} multi-modal "
+              f"(max {cs['max_modality_classes']} modality classes)")
+        for e in [e for e in evs if e["multi_modal"]][:4]:
+            print(f"     [{e['tag']:>12} {e['confidence']:.2f}] classes={e['modality_classes']}  "
+                  f"{e['headline'][:46]}")
 
 
 if __name__ == "__main__":
