@@ -29,6 +29,7 @@ DB = ROOT / "data" / "oil.db"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
 VALIDATION = ROOT / "data" / "validation_claims.json"   # the honest N=161 tier (H1 live; H2/H3 null)
 READ_BACKTEST = ROOT / "data" / "read_backtest.json"    # walk-forward: does H1 help the read OOS
+GAPS = ROOT / "data" / "gaps.json"                      # the live gap + resolving scorecard
 PLAYBOOK = ROOT / "data" / "playbook.md"
 ALERT_QUEUE = ROOT / "data" / "alert_queue.csv"
 SIT_CONFIG = ROOT / "data" / "situations.yaml"
@@ -262,6 +263,24 @@ def render():
             f"H2 tight-inventories is a null at N={e(n)} "
             f"({h2v.get('amp_pp', 0):+.1f}pp, CI spans 0) · "
             f"H3 positioning rejected · analogue forecaster no OOS edge</div>")
+
+    # b3. The Gap (market-as-null): where the engine disagrees with the market's priced vol.
+    gp = _read_json(GAPS) or {}
+    live = gp.get("live_gap"); led = gp.get("ledger") or {}
+    if live:
+        parts.append("<h2 class=sec>The Gap (vs the market)</h2>")
+        parts.append(
+            f"<p class=read>Live: engine reads <b>{e(live['engine_call'])}</b>; the market prices "
+            f"OVX <b>{e(live['priced_ovx'])}</b> (p{e(live['priced_ovx_pct'])}) → "
+            f"<b>{e(live['gap_direction'].replace('_',' '))}</b>.</p>")
+        upr = (led.get("by_gap_direction") or {}).get("under_priced_risk")
+        opf = (led.get("by_gap_direction") or {}).get("over_priced_fear")
+        if upr and opf:
+            parts.append(
+                f"<div class=lbl>resolving scorecard (small-N, suggestive not validated): "
+                f"under-priced-risk gaps resolved turbulent {upr['turbulence_rate']} of the time "
+                f"(n={upr['n']}), over-priced-fear {opf['turbulence_rate']} (n={opf['n']}), vs a "
+                f"{led.get('turbulence_base_rate')} base. Value is in the disagreement, honestly scored.</div>")
 
     # c. New on the wire
     parts.append("<h2 class=sec>New on the wire</h2>")

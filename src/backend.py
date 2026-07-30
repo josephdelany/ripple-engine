@@ -158,6 +158,24 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "gap_board": {
+        "name": "The Gap Board — where the engine disagrees with the market",
+        "description": "Market-as-null: the engine's H1-conditioned view vs the market's implied "
+                       "oil vol (OVX), tiered under-priced-risk / over-priced-fear / aligned, with "
+                       "the resolving Brier scorecard. The value is in the disagreement, honestly scored.",
+        "endpoint": "gap_board",
+        "gridData": {"w": 40, "h": 11},
+        "type": "table",
+    },
+    "track_record": {
+        "name": "Track Record — how sure, and scored",
+        "description": "The calibration/accountability view: H1's walk-forward out-of-sample skill, "
+                       "the gap ledger's Brier by regime, and the signal registry's live/rejected "
+                       "tally. Every claim resolves and is scored.",
+        "endpoint": "track_record",
+        "gridData": {"w": 40, "h": 10},
+        "type": "markdown",
+    },
     "signal_registry": {
         "name": "Signal Registry — what's proven",
         "description": "Every signal the engine has tested, tiered live / experimental / rejected "
@@ -639,6 +657,67 @@ def engine_read():
             "amplifier": "n/a (no registered direction)",
         })
     return rows
+
+
+@app.get("/gap_board")
+def gap_board():
+    """The gap board: the live gap + the resolving scorecard, tiered by where the engine disagrees
+    with the market's priced vol. Reads data/gaps.json (src/gaps.py). Market-as-null, honestly scored."""
+    g = _read_json("gaps.json")
+    led = g.get("ledger", {})
+    if not led.get("n_scored"):
+        return [{"tier": "(none)", "detail": "run: python3 src/gaps.py"}]
+    rows = []
+    live = g.get("live_gap")
+    if live:
+        rows.append({"tier": "LIVE", "engine_call": live["engine_call"],
+                     "market": f"OVX {live['priced_ovx']} (p{live['priced_ovx_pct']})",
+                     "gap": live["gap_direction"], "detail": live["notes"]})
+    labels = {"under_priced_risk": "UNDER-PRICED RISK", "over_priced_fear": "OVER-PRICED FEAR",
+              "aligned": "aligned (no disagreement)"}
+    for d, lbl in labels.items():
+        grp = (led.get("by_gap_direction") or {}).get(d)
+        if grp:
+            ci = grp["turbulence_rate_ci95"]
+            rows.append({"tier": lbl, "engine_call": "", "market": f"n={grp['n']}",
+                         "gap": f"turb rate {grp['turbulence_rate']}",
+                         "detail": f"95% CI [{ci[0]}, {ci[1]}]  ·  Brier {grp['brier']}  "
+                                   f"(base rate {led['turbulence_base_rate']})"})
+    rows.append({"tier": "— honest —", "engine_call": "", "market": "",
+                 "gap": f"overall skill {led['skill_vs_base']:+}",
+                 "detail": "SUGGESTIVE, small-N: value is in the DISAGREEMENT, not the average. "
+                           "Not yet a validated edge; the ledger tests it as N grows."})
+    return rows
+
+
+@app.get("/track_record")
+def track_record():
+    """How sure, and scored: H1 walk-forward OOS + the gap ledger Brier + the registry tally.
+    The anti-black-box accountability view -- every claim resolves and is scored. Markdown."""
+    rb = _read_json("read_backtest.json")
+    g = _read_json("gaps.json").get("ledger", {})
+    reg = _read_json("signal_registry.json").get("by_status", {})
+    lines = ["## Track record — how sure, and scored", "",
+             "Everything here resolves and is Brier-scored. Nothing is asserted.", ""]
+    if rb.get("n_scored"):
+        lines += ["**H1 (the validated edge), walk-forward out-of-sample:**",
+                  f"- Conditioning the ripple read on H1 cut error {rb.get('mae_uncond_pp')}pp → "
+                  f"{rb.get('mae_cond_pp')}pp (N={rb.get('n_scored')}).",
+                  f"- Realized amplification ON vs OFF: **{rb.get('live_amplification_pp'):+.1f}pp** "
+                  f"out-of-sample.", ""]
+    if g.get("n_scored"):
+        lines += ["**The gap ledger (engine view vs market-implied vol), resolved:**",
+                  f"- {g['n_scored']} gaps scored; overall skill vs base {g['skill_vs_base']:+} "
+                  f"(turbulence base rate {g['turbulence_base_rate']}).",
+                  f"- Where the engine *disagrees* with the market it leans right — but the CIs are "
+                  f"wide (small-N); suggestive, not yet validated.", ""]
+    if reg:
+        lines += ["**Signal registry (status derived from the evidence, not asserted):**",
+                  f"- {len(reg.get('live', []))} live · {len(reg.get('experimental', []))} experimental · "
+                  f"{len(reg.get('rejected', []))} rejected.", ""]
+    lines.append("*This is the glass-box the black boxes can't be: what's proven, how sure, and the "
+                 "receipts — including what we rejected.*")
+    return "\n".join(lines)
 
 
 @app.get("/signal_registry")
