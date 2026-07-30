@@ -23,6 +23,7 @@ Examples:
 """
 
 import argparse
+import json
 import sqlite3
 from pathlib import Path
 
@@ -36,8 +37,38 @@ from robustness import assign_clusters
 import validate
 
 ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
 DB = ROOT / "data" / "oil.db"
 ASSET_BY_SERIES = {a["series"]: a for a in ASSETS}
+
+# Domain lenses: each analyst's view over the ONE validated core. A domain selects which validated
+# nodes (ripple-map labels), event types, supply-chain edges, and situations are 'theirs'.
+DOMAINS = {
+    "commodities": {"labels": {"Gold", "Copper", "Silver", "Wheat", "Palladium", "Heating oil",
+                               "Gasoline", "HH natgas", "Brent oil"},
+                    "event_types": {"opec_decision"}, "supply_chain": True},
+    "macro":       {"labels": {"Broad USD", "5Y yield", "10Y yield", "5Y breakeven", "10Y breakeven",
+                               "S&P 500", "HY spread", "CNY/USD"},
+                    "event_types": {"demand_shock", "policy_response"}},
+    "energy":      {"labels": {"Brent oil", "HH natgas", "Heating oil", "Gasoline"},
+                    "event_types": {"opec_decision", "chokepoint_disruption"}},
+    "me-risk":     {"labels": {"Brent oil", "Heating oil"},
+                    "event_types": {"conflict_escalation", "infrastructure_attack", "chokepoint_disruption"},
+                    "situations_like": ["iran", "israel", "hezbollah", "hormuz", "gulf", "yemen"]},
+    "conflict":    {"event_types": {"conflict_escalation", "infrastructure_attack"},
+                    "situations_like": [""]},
+    "geopolitics": {"event_types": {"sanctions", "policy_response", "opec_decision"}},
+    "supply-chain": {"labels": {"Copper", "Wheat", "Palladium", "Silver"},
+                     "event_types": {"chokepoint_disruption"}, "supply_chain": True},
+}
+
+
+def _rj(name):
+    p = DATA / name
+    try:
+        return json.loads(p.read_text()) if p.exists() else {}
+    except (ValueError, OSError):
+        return {}
 
 
 def _events(conn):
@@ -212,6 +243,65 @@ def cmd_vars(_args):
     print("  add your own events/variables/assets -> see RESEARCH_BENCH.md")
 
 
+def lens_data(domain):
+    """The validated content for one analyst domain, filtered from the committed artifacts."""
+    d = DOMAINS.get(domain)
+    if not d:
+        return {"ok": False, "domains": sorted(DOMAINS)}
+    labels = d.get("labels", set())
+    # validated ripple-map nodes in this domain
+    cells = [c for c in _rj("cross_asset_conditioned.json").get("map", []) if c["label"] in labels]
+    nodes = [{"node": c["label"], "amp": c["amp"], "unit": c["unit"], "ci": c.get("ci95", [None, None]),
+              "verdict": "validated" if c.get("generalizes") else "null"} for c in cells]
+    # supply-chain edges
+    sc = []
+    if d.get("supply_chain"):
+        sc = [{"edge": f"{e['producer']}→{e['commodity']}", "car": e.get("car"),
+               "status": e["status"]} for e in _rj("supply_chain.json").get("all_edges", [])]
+    # event coverage by this domain's types
+    conn = sqlite3.connect(DB)
+    ev = {t: conn.execute("SELECT COUNT(*) FROM events WHERE type=?", (t,)).fetchone()[0]
+          for t in sorted(d.get("event_types", []))}
+    conn.close()
+    # situations (corroboration) matching this domain
+    sits = []
+    like = d.get("situations_like")
+    if like is not None:
+        conv = _rj("corroboration.json").get("convergence", {})
+        for sid, c in conv.items():
+            if any(k in sid.lower() for k in like) or like == [""]:
+                sits.append({"situation": sid.replace("situation.", ""),
+                             "multi_modal": c.get("n_multi_modal", 0), "events": c.get("n_events", 0)})
+        sits.sort(key=lambda s: s["events"], reverse=True)
+    return {"ok": True, "domain": domain, "validated_nodes": [n for n in nodes if n["verdict"] == "validated"],
+            "null_nodes": [n for n in nodes if n["verdict"] == "null"], "supply_chain": sc,
+            "event_coverage": ev, "situations": sits[:6]}
+
+
+def cmd_lens(args):
+    r = lens_data(args.domain)
+    if not r["ok"]:
+        print(f"  unknown domain. Choose: {', '.join(r['domains'])}"); return
+    print("=" * 78)
+    print(f"DOMAIN LENS -- {args.domain}   (a view over the one validated core)")
+    print("=" * 78)
+    if r["validated_nodes"]:
+        print("  VALIDATED nodes (stress amplifies the ripple here):")
+        for n in r["validated_nodes"]:
+            print(f"    {n['node']:<14} {n['amp']:+.1f}{n['unit']:<3} CI[{n['ci'][0]:+.1f},{n['ci'][1]:+.1f}]")
+    if r["null_nodes"]:
+        print("  null nodes (no validated amplification): " + ", ".join(n["node"] for n in r["null_nodes"]))
+    if r["supply_chain"]:
+        val = [e for e in r["supply_chain"] if e["status"] == "validated"]
+        print(f"  supply-chain edges: {len(val)} validated of {len(r['supply_chain'])} "
+              f"(rest null/insufficient -- honest)")
+    if r["event_coverage"]:
+        print("  event coverage: " + ", ".join(f"{t}={n}" for t, n in r["event_coverage"].items()))
+    if r["situations"]:
+        print("  live situations: " + ", ".join(f"{s['situation']}({s['multi_modal']}mm)" for s in r["situations"]))
+    print("  Only 'validated' items are claims; nulls shown, not hidden.")
+
+
 def main():
     ap = argparse.ArgumentParser(description="The research bench -- interrogate the engine.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -223,6 +313,8 @@ def main():
     q.add_argument("--sign", choices=["high", "low"], default="high"); q.set_defaults(func=cmd_query)
     sub.add_parser("gaps").set_defaults(func=cmd_gaps)
     sub.add_parser("vars").set_defaults(func=cmd_vars)
+    ln = sub.add_parser("lens"); ln.add_argument("--domain", required=True, choices=sorted(DOMAINS))
+    ln.set_defaults(func=cmd_lens)
     args = ap.parse_args()
     args.func(args)
 

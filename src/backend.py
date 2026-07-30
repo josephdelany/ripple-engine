@@ -167,6 +167,20 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 11},
         "type": "markdown",
     },
+    "domain_lens": {
+        "name": "Domain Lens — your analyst view",
+        "description": "The one validated engine, filtered to your domain: ME-risk / commodities / "
+                       "macro / conflict / geopolitics / supply-chain. Shows that domain's validated "
+                       "nodes, supply-chain edges, event coverage, and live situations — nulls shown.",
+        "endpoint": "domain_lens",
+        "gridData": {"w": 40, "h": 11},
+        "type": "table",
+        "params": [{"paramName": "domain", "label": "Domain", "description": "Which analyst lens",
+                    "value": "me-risk", "type": "text",
+                    "options": [{"label": d, "value": d} for d in
+                                ["me-risk", "commodities", "macro", "conflict", "geopolitics",
+                                 "energy", "supply-chain"]]}],
+    },
     "supply_chain": {
         "name": "Supply-Chain Transmission — producer-conflict → commodity",
         "description": "Closes the criticality-exposure gap with validated transmission: when a "
@@ -723,6 +737,35 @@ def sowhat():
                      f"[{cb}]; top: {s.get('top_event','')[:60]}")
     lines += ["", f"*{r.get('discipline','')}*"]
     return "\n".join(lines)
+
+
+@app.get("/domain_lens")
+def domain_lens(domain: str = "me-risk"):
+    """The one validated engine filtered to an analyst domain. Reuses research.lens_data."""
+    import research
+    r = research.lens_data(domain)
+    if not r.get("ok"):
+        return [{"row": "(pick a domain)", "detail": ", ".join(r.get("domains", []))}]
+    rows = []
+    for n in r["validated_nodes"]:
+        ci = n["ci"]
+        rows.append({"row": "VALIDATED node", "item": n["node"],
+                     "value": f"{n['amp']:+.1f}{n['unit']}",
+                     "detail": f"CI[{ci[0]:+.1f},{ci[1]:+.1f}] — stress amplifies the ripple here"})
+    if r["null_nodes"]:
+        rows.append({"row": "null nodes", "item": ", ".join(n["node"] for n in r["null_nodes"]),
+                     "value": "", "detail": "no validated amplification (honest)"})
+    if r["supply_chain"]:
+        val = sum(1 for e in r["supply_chain"] if e["status"] == "validated")
+        rows.append({"row": "supply-chain", "item": f"{val}/{len(r['supply_chain'])} validated",
+                     "value": "", "detail": "producer→commodity edges (rest null/insufficient)"})
+    if r["event_coverage"]:
+        rows.append({"row": "event coverage", "item": "", "value": "",
+                     "detail": ", ".join(f"{t}={n}" for t, n in r["event_coverage"].items())})
+    for s in r["situations"]:
+        rows.append({"row": "live situation", "item": s["situation"], "value": f"{s['multi_modal']} multi-modal",
+                     "detail": f"{s['events']} corroborated events"})
+    return rows
 
 
 @app.get("/supply_chain")
