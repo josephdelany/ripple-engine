@@ -36,3 +36,20 @@ natural gas
 inventory draw
 production cut
 force majeure
+# WS-C domain keyword packs (commodities / macro / supply-chain / geopolitics)
+lng
+diesel
+refinery
+copper
+platinum
+port strike
+canal
+tanker
+freight
+congestion
+force majeure
+sanction
+export ban
+tariff
+rate decision
+inflation

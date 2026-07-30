@@ -36,6 +36,7 @@ STEPS = [
     ("heartbeat", ["src/heartbeat.py"], True),
     ("watcher",   ["src/watcher.py"],   False),
     ("notify",    ["src/notify.py"],    False),   # push high-signal alerts (idempotent; dry-run w/o NTFY_TOPIC)
+    ("coverage",  ["src/coverage.py"],  False),   # per-domain coverage + dead-feed check -> coverage_report.json
     ("digest",    ["src/digest.py"],    False),
 ]
 LAST_RUN = ROOT / "data" / "last_run.json"

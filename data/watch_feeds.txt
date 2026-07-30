@@ -13,3 +13,14 @@ un_news     https://news.un.org/feed/subscribe/en/news/all/rss.xml
 eia_energy  https://www.eia.gov/rss/todayinenergy.xml
 # Domain 4 -- Macro & central banks
 fed_press   https://www.federalreserve.gov/feeds/press_all.xml
+#
+# WS-C coverage widening (keyless RSS; verified live by coverage.py at add time -- dead ones pruned:
+# imf_news, arabnews, reliefweb resolved to 0 entries and were not kept).
+# Domain 3 -- Energy & commodities (domain-native wires, not just EIA)
+oilprice    https://oilprice.com/rss/main
+mining_com  https://www.mining.com/feed/
+# Domain 5 -- Supply chain & shipping (was a real blind spot: no maritime/freight wire)
+gcaptain    https://gcaptain.com/feed/
+freightwaves https://www.freightwaves.com/feed
+# Domain 6 -- Middle-East regional wires
+timesofisrael https://www.timesofisrael.com/feed/
