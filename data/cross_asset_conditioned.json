@@ -1,0 +1,87 @@
+{
+  "what": "Does H1 (VIX stress amplifies the geopolitical ripple) generalize across assets? Same gate as oil: clustered median split + bootstrap CI + permutation + BH-FDR.",
+  "sample": "clustered (de-overlapped), state at t-1",
+  "n_assets": 5,
+  "assets_generalizing": [
+    "Brent oil"
+  ],
+  "fdr_q": 0.1,
+  "map": [
+    {
+      "label": "Brent oil",
+      "unit": "%",
+      "n_episodes": 91,
+      "amp": 4.9823,
+      "ci95": [
+        0.6469,
+        8.592
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0043,
+      "survives_fdr": true,
+      "fdr_q": 0.0215,
+      "generalizes": true
+    },
+    {
+      "label": "HH natgas",
+      "unit": "%",
+      "n_episodes": 85,
+      "amp": -0.5325,
+      "ci95": [
+        -7.0284,
+        7.0806
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.5603,
+      "survives_fdr": false,
+      "fdr_q": 0.5603,
+      "generalizes": false
+    },
+    {
+      "label": "Broad USD",
+      "unit": "%",
+      "n_episodes": 60,
+      "amp": 0.4395,
+      "ci95": [
+        -0.1371,
+        1.1571
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.0899,
+      "survives_fdr": false,
+      "fdr_q": 0.2247,
+      "generalizes": false
+    },
+    {
+      "label": "5Y yield",
+      "unit": "bps",
+      "n_episodes": 91,
+      "amp": 3.3319,
+      "ci95": [
+        -5.2536,
+        10.9768
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.2046,
+      "survives_fdr": false,
+      "fdr_q": 0.2558,
+      "generalizes": false
+    },
+    {
+      "label": "10Y yield",
+      "unit": "bps",
+      "n_episodes": 91,
+      "amp": 3.3605,
+      "ci95": [
+        -3.5794,
+        9.3549
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1625,
+      "survives_fdr": false,
+      "fdr_q": 0.2558,
+      "generalizes": false
+    }
+  ],
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil. Other assets are honest null cells."
+}

@@ -158,6 +158,15 @@ WIDGETS = {
         "gridData": {"w": 30, "h": 10},
         "type": "table",
     },
+    "ripple_map": {
+        "name": "Conditioned Ripple Map — does the edge generalize?",
+        "description": "Does H1 (VIX stress amplifies the geopolitical ripple) hold across oil, gas, "
+                       "the dollar and rates? Each asset validated through the SAME gate (bootstrap CI "
+                       "+ permutation + FDR). Honest null cells where it doesn't generalize.",
+        "endpoint": "ripple_map",
+        "gridData": {"w": 40, "h": 9},
+        "type": "table",
+    },
     "corroboration_convergence": {
         "name": "Corroboration — confirmation, not headlines",
         "description": "Cross-modal convergence per situation: how many independent evidence TYPES "
@@ -664,6 +673,27 @@ def engine_read():
                       f"as of {gc['as_of']})",
             "verdict": "exploratory",
             "amplifier": "n/a (no registered direction)",
+        })
+    return rows
+
+
+@app.get("/ripple_map")
+def ripple_map():
+    """The conditioned ripple map: does H1 generalize across assets? Reads
+    data/cross_asset_conditioned.json (src/cross_asset_conditioned.py). Honest null cells shown."""
+    r = _read_json("cross_asset_conditioned.json")
+    cells = r.get("map") or []
+    if not cells:
+        return [{"asset": "(none)", "detail": "run: python3 src/cross_asset_conditioned.py"}]
+    rows = []
+    for c in cells:
+        ci = c.get("ci95") or [None, None]
+        cis = f"[{ci[0]:+.1f}, {ci[1]:+.1f}]" if ci[0] is not None else "n/a"
+        rows.append({
+            "asset": c["label"], "n": c["n_episodes"],
+            "amplification": f"{c['amp']:+.1f} {c['unit']}",
+            "ci95": cis, "perm_p": c.get("perm_p"),
+            "verdict": "GENERALIZES" if c.get("generalizes") else "null (honest)",
         })
     return rows
 
