@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-07-24",
-  "generated_at": "2026-07-28T02:19:51+00:00",
-  "clustered_event_n": 44,
+  "as_of": "2026-07-30",
+  "generated_at": "2026-07-30T04:45:36+00:00",
+  "clustered_event_n": 88,
   "hypotheses": {
     "H1": {
       "hypothesis": "H1",
@@ -9,9 +9,9 @@
       "signal": "derived.vix_pct",
       "signal_name": "VIX percentile",
       "unit": "percentile",
-      "latest": 54.93,
-      "as_of_reading": "2026-07-24",
-      "event_median": 45.94,
+      "latest": 55.84,
+      "as_of_reading": "2026-07-27",
+      "event_median": 49.0,
       "direction": "high amplifies",
       "verdict": "HOLDS",
       "amplifier": "ON"
@@ -22,12 +22,12 @@
       "signal": "derived.inv_sigma",
       "signal_name": "Inventory sigma vs seasonal norm",
       "unit": "sigma",
-      "latest": null,
-      "as_of_reading": null,
-      "event_median": null,
+      "latest": -1.49,
+      "as_of_reading": "2026-07-30",
+      "event_median": 0.33,
       "direction": "low (tight) amplifies",
       "verdict": "HOLDS",
-      "amplifier": "UNKNOWN"
+      "amplifier": "ON"
     },
     "H3": {
       "hypothesis": "H3",
@@ -36,8 +36,8 @@
       "signal_name": "Managed-money net-long percentile",
       "unit": "percentile",
       "latest": 12.69,
-      "as_of_reading": "2026-07-24",
-      "event_median": 45.13,
+      "as_of_reading": "2026-07-30",
+      "event_median": 68.08,
       "direction": "high amplifies",
       "verdict": "FAILS",
       "amplifier": "FAILED"
@@ -45,60 +45,60 @@
   },
   "base_rates": [
     {
-      "type": "conflict_escalation",
-      "n": 15,
-      "car1": -0.7,
-      "car5": 1.5,
-      "car10": -0.6,
-      "car20": -2.2
+      "type": "opec_decision",
+      "n": 30,
+      "car1": 2.7,
+      "car5": 2.3,
+      "car10": 1.8,
+      "car20": 2.8
     },
     {
       "type": "sanctions",
-      "n": 10,
-      "car1": 2.1,
-      "car5": 3.0,
-      "car10": 3.4,
-      "car20": 3.3
+      "n": 16,
+      "car1": -1.1,
+      "car5": 0.1,
+      "car10": 0.6,
+      "car20": -0.6
     },
     {
-      "type": "opec_decision",
-      "n": 6,
-      "car1": -1.7,
-      "car5": -2.0,
-      "car10": -9.0,
-      "car20": -10.1
+      "type": "conflict_escalation",
+      "n": 13,
+      "car1": 0.6,
+      "car5": 2.6,
+      "car10": 1.1,
+      "car20": 2.8
+    },
+    {
+      "type": "policy_response",
+      "n": 13,
+      "car1": 0.9,
+      "car5": -0.5,
+      "car10": -0.8,
+      "car20": -0.3
     },
     {
       "type": "infrastructure_attack",
-      "n": 5,
-      "car1": 0.8,
-      "car5": 2.5,
-      "car10": 0.2,
-      "car20": -2.2
+      "n": 7,
+      "car1": -1.3,
+      "car5": -1.0,
+      "car10": -0.3,
+      "car20": -2.7
+    },
+    {
+      "type": "demand_shock",
+      "n": 6,
+      "car1": -3.7,
+      "car5": -0.7,
+      "car10": -4.3,
+      "car20": -8.4
     },
     {
       "type": "chokepoint_disruption",
       "n": 3,
-      "car1": -3.0,
-      "car5": -5.1,
-      "car10": -6.6,
-      "car20": -7.5
-    },
-    {
-      "type": "policy_response",
-      "n": 3,
-      "car1": -5.1,
-      "car5": -9.6,
-      "car10": -7.9,
-      "car20": -10.0
-    },
-    {
-      "type": "demand_shock",
-      "n": 2,
-      "car1": -7.0,
-      "car5": 0.9,
-      "car10": -0.2,
-      "car20": -8.7
+      "car1": -4.2,
+      "car5": -8.1,
+      "car10": -5.8,
+      "car20": -11.0
     }
   ],
   "gpr_context": {
@@ -106,6 +106,6 @@
     "gpr_value": 195.9,
     "as_of": "2026-07-27"
   },
-  "read": "VIX 55th pct (H1 ON). A supply shock today lands on a physically well-supplied but psychologically stressed market.",
+  "read": "Inventories 1.5\u03c3 below seasonal norm (H2 amplifier ON); VIX 56th pct (H1 ON). A supply shock today lands on a physically primed but psychologically stressed market.",
   "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast."
 }

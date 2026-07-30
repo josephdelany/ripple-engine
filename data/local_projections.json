@@ -1,111 +1,111 @@
 {
   "what": "Jord\u00e0-style local-projection IRF of ripple magnitude on VIX-stress state, per horizon, raw and standardized (vol-clustering defeater); + hierarchical pooling.",
   "sample": "clustered (de-overlapped)",
-  "n": 93,
+  "n": 88,
   "note": "Post-registration method lens; does not change the registered +5pp verdict.",
   "irf": [
     {
       "horizon": 1,
       "raw_pp_per_sd": {
-        "slope": 1.4466,
-        "lo": 0.4144,
-        "hi": 2.5423,
-        "n": 91,
+        "slope": 1.8761,
+        "lo": 0.8052,
+        "hi": 2.9878,
+        "n": 86,
         "excludes_zero": true
       },
       "standardized_per_sd": {
-        "slope": 0.1235,
-        "lo": -0.0651,
-        "hi": 0.317,
-        "n": 91,
-        "excludes_zero": false
+        "slope": 0.1894,
+        "lo": 0.0006,
+        "hi": 0.3854,
+        "n": 86,
+        "excludes_zero": true
       }
     },
     {
       "horizon": 5,
       "raw_pp_per_sd": {
-        "slope": 0.8251,
-        "lo": -0.347,
-        "hi": 1.9465,
-        "n": 91,
+        "slope": 1.0513,
+        "lo": -0.1537,
+        "hi": 2.2043,
+        "n": 86,
         "excludes_zero": false
       },
       "standardized_per_sd": {
-        "slope": -0.015,
-        "lo": -0.1863,
-        "hi": 0.1534,
-        "n": 91,
+        "slope": 0.0145,
+        "lo": -0.154,
+        "hi": 0.1788,
+        "n": 86,
         "excludes_zero": false
       }
     },
     {
       "horizon": 10,
       "raw_pp_per_sd": {
-        "slope": 1.9881,
-        "lo": 0.6077,
-        "hi": 3.4347,
-        "n": 91,
+        "slope": 2.2429,
+        "lo": 0.7896,
+        "hi": 3.6956,
+        "n": 86,
         "excludes_zero": true
       },
       "standardized_per_sd": {
-        "slope": 0.0632,
-        "lo": -0.131,
-        "hi": 0.2483,
-        "n": 91,
+        "slope": 0.0843,
+        "lo": -0.1119,
+        "hi": 0.264,
+        "n": 86,
         "excludes_zero": false
       }
     },
     {
       "horizon": 20,
       "raw_pp_per_sd": {
-        "slope": 2.4054,
-        "lo": 0.4762,
-        "hi": 4.2648,
-        "n": 91,
+        "slope": 2.8657,
+        "lo": 0.8494,
+        "hi": 4.7691,
+        "n": 86,
         "excludes_zero": true
       },
       "standardized_per_sd": {
-        "slope": 0.0421,
-        "lo": -0.1588,
-        "hi": 0.2366,
-        "n": 91,
+        "slope": 0.0737,
+        "lo": -0.1337,
+        "hi": 0.2623,
+        "n": 86,
         "excludes_zero": false
       }
     }
   ],
   "pooling": {
-    "grand_mean_pp": 4.6,
-    "shrinkage_k": 12.5,
+    "grand_mean_pp": 4.27,
+    "shrinkage_k": 12.0,
     "by_type": {
       "chokepoint_disruption": {
-        "n": 6,
-        "raw_amp_pp": -10.01,
-        "pooled_amp_pp": -0.14
+        "n": 3,
+        "raw_amp_pp": -14.38,
+        "pooled_amp_pp": 0.54
       },
       "conflict_escalation": {
-        "n": 14,
-        "raw_amp_pp": 7.61,
-        "pooled_amp_pp": 6.19
+        "n": 11,
+        "raw_amp_pp": 13.6,
+        "pooled_amp_pp": 8.73
       },
       "infrastructure_attack": {
-        "n": 11,
-        "raw_amp_pp": 13.28,
-        "pooled_amp_pp": 8.66
+        "n": 7,
+        "raw_amp_pp": 14.16,
+        "pooled_amp_pp": 7.91
       },
       "opec_decision": {
-        "n": 32,
-        "raw_amp_pp": 8.05,
-        "pooled_amp_pp": 7.08
+        "n": 30,
+        "raw_amp_pp": 4.75,
+        "pooled_amp_pp": 4.61
       },
       "policy_response": {
-        "n": 6,
-        "raw_amp_pp": -2.91,
-        "pooled_amp_pp": 2.16
+        "n": 13,
+        "raw_amp_pp": 2.68,
+        "pooled_amp_pp": 3.44
       },
       "sanctions": {
         "n": 16,
         "raw_amp_pp": -2.62,
-        "pooled_amp_pp": 0.55
+        "pooled_amp_pp": 0.33
       }
     }
   },

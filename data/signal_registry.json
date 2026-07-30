@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T23:13:25+00:00",
+  "generated_at": "2026-07-30T04:49:20+00:00",
   "n_signals": 7,
   "by_status": {
     "live": [
@@ -24,9 +24,9 @@
       "method": "conditioned event study + Jorda local projection",
       "inputs": "derived.vix_pct (t-1); |CAR+20|",
       "oos_metric": "walk-forward realized amplification (ON minus OFF), pp",
-      "oos_value": 4.0,
+      "oos_value": 5.61,
       "status": "live",
-      "evidence": "amp 4.9823pp, 95%CI [0.6469, 8.592], FDR q=0.0129, survives_bonferroni=True; walk-forward OOS +4.0pp"
+      "evidence": "amp 5.0003pp, 95%CI [0.7659, 8.9484], FDR q=0.0207, survives_bonferroni=True; walk-forward OOS +5.61pp"
     },
     {
       "signal_id": "h2_conditioning",
@@ -35,9 +35,9 @@
       "method": "conditioned event study",
       "inputs": "derived.inv_sigma (t-1); |CAR+20|",
       "oos_metric": "clustered amplification, pp",
-      "oos_value": -0.5182,
+      "oos_value": 0.7852,
       "status": "rejected",
-      "evidence": "amp -0.5182pp, 95%CI [-4.6598, 3.3947], CI excludes 0=False (was small-sample noise at n=20)"
+      "evidence": "amp 0.7852pp, 95%CI [-4.3465, 4.2263], CI excludes 0=False (was small-sample noise at n=20)"
     },
     {
       "signal_id": "h3_conditioning",
@@ -46,9 +46,9 @@
       "method": "conditioned event study",
       "inputs": "derived.cot_pct (t-1); |CAR+20|",
       "oos_metric": "clustered amplification, pp",
-      "oos_value": -4.6891,
+      "oos_value": -5.6471,
       "status": "rejected",
-      "evidence": "amp -4.6891pp, 95%CI [-9.2519, 0.3656], CI excludes 0=False (was small-sample noise at n=20)"
+      "evidence": "amp -5.6471pp, 95%CI [-11.4314, -0.9753], CI excludes 0=True (was small-sample noise at n=20)"
     },
     {
       "signal_id": "analogue_turbulence",
@@ -68,9 +68,9 @@
       "method": "walk-forward kNN over derived-state signature",
       "inputs": "7 derived state vars (t-1)",
       "oos_metric": "CPCV skill vs base rate (clustered)",
-      "oos_value": 0.027,
+      "oos_value": 0.0182,
       "status": "rejected",
-      "evidence": "clustered Brier 0.2123 vs 0.2394, PBO 0.443, DM p=0.1104 -> null (all-events 'skill' was a clustering artifact)"
+      "evidence": "clustered Brier 0.2128 vs 0.231, PBO 0.786, DM p=0.3727 -> null (all-events 'skill' was a clustering artifact)"
     },
     {
       "signal_id": "realized_vol_magnitude",
@@ -79,9 +79,9 @@
       "method": "discovery scan (perm+FDR+OOS+partial-corr)",
       "inputs": "derived.brent_vol20 (t-1); |CAR+20|",
       "oos_metric": "partial correlation (controlled for VIX)",
-      "oos_value": 0.379,
+      "oos_value": 0.381,
       "status": "experimental",
-      "evidence": "survives 4 gates (r=0.41, partial_r=0.379) BUT likely volatility clustering -- needs the standardization defeater before promotion"
+      "evidence": "survives 4 gates (r=0.428, partial_r=0.381) BUT likely volatility clustering -- needs the standardization defeater before promotion"
     },
     {
       "signal_id": "nowcast_inventory",

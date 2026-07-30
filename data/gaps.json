@@ -1,42 +1,42 @@
 {
-  "generated_at": "2026-07-30T03:42:48+00:00",
+  "generated_at": "2026-07-30T04:46:40+00:00",
   "what": "The GAP ledger: engine's H1-conditioned turbulence view vs the market's implied vol (OVX), resolved and Brier-scored. Market-as-null; the scorecard IS the product.",
-  "n_gaps": 205,
+  "n_gaps": 241,
   "ledger": {
-    "n_scored": 204,
-    "turbulence_base_rate": 0.52,
-    "brier": 0.2512,
+    "n_scored": 240,
+    "turbulence_base_rate": 0.521,
+    "brier": 0.2483,
     "base_rate_brier": 0.2496,
-    "skill_vs_base": -0.0016,
+    "skill_vs_base": 0.0012,
     "by_h1_regime": {
       "turbulent(ON)": {
-        "n": 109,
-        "turbulence_rate": 0.56,
+        "n": 133,
+        "turbulence_rate": 0.571,
         "turbulence_rate_ci95": [
-          0.466,
-          0.649
+          0.486,
+          0.652
         ],
-        "brier": 0.2481
+        "brier": 0.2457
       },
       "calm(OFF)": {
-        "n": 95,
-        "turbulence_rate": 0.474,
+        "n": 107,
+        "turbulence_rate": 0.458,
         "turbulence_rate_ci95": [
-          0.376,
-          0.573
+          0.367,
+          0.552
         ],
-        "brier": 0.2547
+        "brier": 0.2516
       }
     },
     "by_gap_direction": {
       "under_priced_risk": {
-        "n": 12,
-        "turbulence_rate": 0.917,
+        "n": 14,
+        "turbulence_rate": 0.929,
         "turbulence_rate_ci95": [
-          0.646,
-          0.985
+          0.685,
+          0.987
         ],
-        "brier": 0.1767
+        "brier": 0.1743
       },
       "over_priced_fear": {
         "n": 19,
@@ -48,19 +48,19 @@
         "brier": 0.2021
       },
       "aligned": {
-        "n": 173,
-        "turbulence_rate": 0.526,
+        "n": 207,
+        "turbulence_rate": 0.522,
         "turbulence_rate_ci95": [
-          0.452,
-          0.599
+          0.454,
+          0.589
         ],
-        "brier": 0.2617
+        "brier": 0.2576
       }
     }
   },
   "live_gap": {
     "gap_id": "gap.LIVE",
-    "as_of": "2026-07-30T03:42:48+00:00",
+    "as_of": "2026-07-30T04:46:40+00:00",
     "anchor_date": "2026-07-27",
     "subject": "LIVE state (no dated shock -- standing read)",
     "engine_call": "turbulent",
@@ -77,25 +77,8 @@
   },
   "recent_gaps": [
     {
-      "gap_id": "gap.israel_iran_war_2025",
-      "as_of": "2026-07-30T03:42:48+00:00",
-      "anchor_date": "2025-06-13",
-      "subject": "Israel-Iran war onset (Operation Rising Lion)",
-      "engine_call": "calm",
-      "engine_p": 0.4,
-      "priced_ovx": 57.23,
-      "priced_ovx_pct": 93.1,
-      "gap_direction": "over_priced_fear",
-      "horizon_days": 20,
-      "outcome": 1,
-      "brier": 0.36,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
-      "source_url": "https://www.timesofisrael.com/liveblog-june-13-2025/",
-      "notes": "H1 amplifier OFF (VIX %ile 43 vs 43); market OVX 57 (p93.1); gap=over_priced_fear."
-    },
-    {
       "gap_id": "gap.me_midnight_hammer_2025",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-06-22",
       "subject": "US strikes Iranian nuclear sites Fordow Natanz and Isfahan",
       "engine_call": "turbulent",
@@ -106,13 +89,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.36,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://en.wikipedia.org/wiki/2025_United_States_strikes_on_Iranian_nuclear_sites",
       "notes": "H1 amplifier ON (VIX %ile 60 vs 43); market OVX 65 (p94.9); gap=aligned."
     },
     {
       "gap_id": "gap.redsea_houthi_resume_2025",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-07-06",
       "subject": "Houthis resume Red Sea attacks sinking Magic Seas",
       "engine_call": "calm",
@@ -123,13 +106,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://en.wikipedia.org/wiki/Attacks_on_the_Eternity_C",
       "notes": "H1 amplifier OFF (VIX %ile 39 vs 43); market OVX 38 (p59.1); gap=aligned."
     },
     {
       "gap_id": "gap.us_russia_sectariff_2025",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-07-14",
       "subject": "Trump threatens 100pct secondary tariffs on Russian oil buyers",
       "engine_call": "calm",
@@ -140,13 +123,30 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://www.cnbc.com/2025/08/07/trump-putin-russia-oil-secondary-tariffs-sanctions-india-china-ukraine.html",
       "notes": "H1 amplifier OFF (VIX %ile 30 vs 43); market OVX 34 (p43.1); gap=aligned."
     },
     {
+      "gap_id": "gap.codelco_elteniente_2025",
+      "as_of": "2026-07-30T04:46:40+00:00",
+      "anchor_date": "2025-07-31",
+      "subject": "Codelco El Teniente collapse 2025",
+      "engine_call": "calm",
+      "engine_p": 0.4,
+      "priced_ovx": 36.78,
+      "priced_ovx_pct": 56.1,
+      "gap_direction": "aligned",
+      "horizon_days": 20,
+      "outcome": 0,
+      "brier": 0.16,
+      "resolved_at": "2026-07-30T04:46:40+00:00",
+      "source_url": "https://www.mining-technology.com/news/codelco-el-teniente-copper-mine/",
+      "notes": "H1 amplifier OFF (VIX %ile 23 vs 43); market OVX 37 (p56.1); gap=aligned."
+    },
+    {
       "gap_id": "gap.rus_saratov_strike_2025a",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-08-11",
       "subject": "Ukrainian drone strike halts Rosneft Saratov refinery",
       "engine_call": "calm",
@@ -157,13 +157,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/08/11/ukrainian-drone-strike-halts-operations-at-rosneft-refinery-in-saratov-a90168",
       "notes": "H1 amplifier OFF (VIX %ile 21 vs 43); market OVX 31 (p33.4); gap=aligned."
     },
     {
       "gap_id": "gap.rus_druzhba_strike_2025a",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-08-18",
       "subject": "Ukrainian strike halts Druzhba pipeline oil flow to Hungary and Slovakia",
       "engine_call": "calm",
@@ -174,13 +174,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://kyivindependent.com/druzhba-pipeline/",
       "notes": "H1 amplifier OFF (VIX %ile 21 vs 43); market OVX 32 (p36.6); gap=aligned."
     },
     {
       "gap_id": "gap.rus_ryazan_strike_2025b",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-09-05",
       "subject": "Ukrainian drone strike on Rosneft Ryazan refinery",
       "engine_call": "calm",
@@ -191,13 +191,13 @@
       "horizon_days": 20,
       "outcome": 1,
       "brier": 0.36,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/09/05/ukrainian-drones-strike-rosneft-refinery-in-ryazan-region-a90438",
       "notes": "H1 amplifier OFF (VIX %ile 23 vs 43); market OVX 33 (p42.2); gap=aligned."
     },
     {
       "gap_id": "gap.rus_novorossiysk_terminal_2025",
-      "as_of": "2026-07-30T03:42:48+00:00",
+      "as_of": "2026-07-30T04:46:40+00:00",
       "anchor_date": "2025-11-14",
       "subject": "Ukrainian drone strike halts oil loadings at Novorossiysk Sheskharis terminal",
       "engine_call": "turbulent",
@@ -208,7 +208,7 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.36,
-      "resolved_at": "2026-07-30T03:42:48+00:00",
+      "resolved_at": "2026-07-30T04:46:40+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122",
       "notes": "H1 amplifier ON (VIX %ile 65 vs 43); market OVX 33 (p40.9); gap=aligned."
     }
