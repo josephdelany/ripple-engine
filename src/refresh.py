@@ -80,6 +80,13 @@ STEPS = [
     # Corroboration brain: cluster the timeline into events + score confidence by
     # independent-source convergence (weight-of-evidence). File output, 0 DB rows.
     ("corroborate",    "src/corroborate.py",    "observations"),
+    # Living engine (SAFE ingestion half): bundle un-extracted sourced alerts for the Cowork worker,
+    # then cage whatever proposals it left into candidate_events.csv. This is additive and never
+    # touches Joe's review sheet or canon -- the admission half (triage + admit_events + apply_review
+    # + load_events) stays a deliberate, human-in-the-loop step. If the worker hasn't run, both are
+    # no-ops. File output, 0 DB rows.
+    ("extract_prepare", "src/extract_prepare.py", "observations"),
+    ("extract_events",  "src/extract_events.py",  "observations"),
     # Autonomous analyst (eyes): deterministic divergences between what the
     # engine sees and what the market prices. File output.
     ("divergence",     "src/divergence.py",     "observations"),
