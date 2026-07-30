@@ -807,6 +807,28 @@ def edge_portfolio():
     return rows
 
 
+@app.get("/engine_status")
+def engine_status():
+    """One-glance GREEN/AMBER/RED verdict (freshness + coverage + last run + review queue + backups +
+    framework soundness). Reads data/engine_status.json."""
+    s = _read_json("engine_status.json")
+    if not s:
+        return [{"row": "(no status yet)", "detail": "run: python3 src/status.py"}]
+    rows = [{"row": "VERDICT", "item": s.get("verdict"), "detail": "; ".join(s.get("reasons", []))}]
+    fr = s.get("freshness", {}); rows.append({"row": "freshness", "item": fr.get("overall"),
+        "detail": f"{fr.get('n_dead')} dead / {fr.get('n_stale')} stale series"})
+    cv = s.get("coverage", {}); rows.append({"row": "coverage", "item":
+        f"{len(cv.get('undercovered_domains', []))} undercovered", "detail":
+        f"{cv.get('n_dead_feeds')} dead feeds"})
+    rows.append({"row": "review queue", "item": s.get("review_queue", {}).get("n_pending"),
+                 "detail": "LLM-extracted events awaiting your coding"})
+    bk = s.get("backups", {}); rows.append({"row": "backups", "item": bk.get("count"),
+        "detail": f"restore_tested={bk.get('restore_tested')}"})
+    rows.append({"row": "framework", "item": s.get("evaluation", {}).get("framework_sound"),
+                 "detail": "placebo null + surfaces consistent"})
+    return rows
+
+
 @app.get("/domain_lens")
 def domain_lens(domain: str = "me-risk"):
     """The one validated engine filtered to an analyst domain. Reuses research.lens_data."""

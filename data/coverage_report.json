@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T17:49:29+00:00",
-  "n_feeds": 13,
-  "n_dead_feeds": 3,
+  "generated_at": "2026-07-30T18:09:17+00:00",
+  "n_feeds": 10,
+  "n_dead_feeds": 0,
   "undercovered_domains": [],
   "domains": [
     {
@@ -93,7 +93,7 @@
     {
       "feed": "bbc_world",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "entries": 28,
+      "entries": 29,
       "status": "ok"
     },
     {
@@ -119,12 +119,6 @@
       "url": "https://www.federalreserve.gov/feeds/press_all.xml",
       "entries": 20,
       "status": "ok"
-    },
-    {
-      "feed": "imf_news",
-      "url": "https://www.imf.org/en/News/RSS?Language=ENG",
-      "entries": 0,
-      "status": "DEAD (0 entries)"
     },
     {
       "feed": "oilprice",
@@ -153,20 +147,8 @@
     {
       "feed": "timesofisrael",
       "url": "https://www.timesofisrael.com/feed/",
-      "entries": 14,
+      "entries": 15,
       "status": "ok"
-    },
-    {
-      "feed": "arabnews",
-      "url": "https://www.arabnews.com/rss.xml",
-      "entries": 0,
-      "status": "DEAD (0 entries)"
-    },
-    {
-      "feed": "reliefweb",
-      "url": "https://reliefweb.int/updates/rss.xml",
-      "entries": 0,
-      "status": "DEAD (0 entries)"
     }
   ],
   "note": "Coverage = corpus depth + live-alert flow per domain. UNDERCOVERED = <10 corpus events OR no alerts in 30d. DEAD feed = resolves to 0 entries; prune or replace."

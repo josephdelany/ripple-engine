@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-07-30T18:14:12+00:00",
+  "verdict": "AMBER",
+  "freshness": {
+    "overall": "TROUBLE",
+    "n_dead": 0,
+    "n_stale": 0,
+    "dead_series": []
+  },
+  "coverage": {
+    "undercovered_domains": [],
+    "n_dead_feeds": 0
+  },
+  "review_queue": {
+    "n_pending": 0
+  },
+  "last_run": {
+    "verdict": null,
+    "failed_steps": [],
+    "run_id": null
+  },
+  "backups": {
+    "count": 7,
+    "newest": "oil_20260730_133339.db.gz",
+    "restore_tested": true
+  },
+  "evaluation": {
+    "framework_sound": true
+  },
+  "reasons": [
+    "AMBER: no last-run record yet (run daily.py)"
+  ]
+}

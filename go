@@ -34,6 +34,8 @@ STEPS=(
   "sowhat.py"
   "evaluate.py"
   "evidence.py"
+  "coverage.py"
+  "status.py"
 )
 for s in "${STEPS[@]}"; do
   if python3 src/$s >/dev/null 2>&1; then echo "   ok  $s"; else echo "   WARN  $s (skipped)"; fi

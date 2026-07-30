@@ -346,6 +346,14 @@ def get_edge_portfolio() -> dict:
 
 
 @mcp.tool()
+def engine_status() -> dict:
+    """Is the engine healthy AND complete right now? One verdict GREEN/AMBER/RED composed from data
+    freshness, coverage, the last run, review-queue depth, backups (restore-tested), and the framework
+    soundness check. Reads data/engine_status.json -- the one-glance 'can I trust it today?' answer."""
+    return _json_load("engine_status.json")
+
+
+@mcp.tool()
 def orient_on_topic(topic: str = "me-risk") -> dict:
     """"What should I pay attention to about <topic> right now?" -- the read-support brief. Give a topic
     or keyword ('middle east', 'iran', 'shipping', 'commodities', 'macro', 'ukraine', ...) and get the
