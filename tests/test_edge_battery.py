@@ -24,12 +24,13 @@ def test_eb1_pre_registration_is_fixed():
     """The hypothesis set is frozen in code (the pre-registration), not chosen after seeing results."""
     import edge_battery as EB
     import domain_conditioning as DC
-    # 6 apt conditioners (4 + WS-S credit/real-rate) + 4 prior domain tests + 2 event-type = 12.
-    assert len(EB.CONDITIONING) == 6
+    # 7 apt conditioners (4 + WS-S credit/real-rate + UCDP conflict-intensity) + 4 prior domain tests
+    # + 2 event-type = 13.
+    assert len(EB.CONDITIONING) == 7
     assert len(DC.HYPOTHESES) == 4
     r = _load()
-    assert r["family_size"] == 12
-    assert len(r["amplification"]) == 12
+    assert r["family_size"] == 13
+    assert len(r["amplification"]) == 13
 
 
 def test_eb2_family_wise_correction_applied():

@@ -17,6 +17,12 @@ conditioners and fixed one real bug. Honest outcome, both directions:
 - `gold_real_rate` null (real rates weren't gold's missing key); `severity_dose_response` +3.87% still
   null (CI touches zero). Family-wise FDR now over **12** hypotheses.
 
+**UCDP amendment (2026-07-30b):** added `conflict_intensity_gold` (does gold ripple harder when
+UCDP-verified background conflict intensity is high?). Pre-registered before results; **null** (+0.93%,
+CI [−0.36, +2.87]). Gold's safe-haven bid doesn't measurably depend on trailing verified conflict
+intensity — reported, not chased. Family-wise FDR now over **13** hypotheses; validated set unchanged
+(copper_growth, hy_credit_stress).
+
 *The original 10-family scorecard below is preserved for the record.*
 
 ## Headline (original 10-family run)

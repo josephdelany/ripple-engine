@@ -43,6 +43,15 @@ soybeans, gold/copper miners, dry-bulk freight, most producer→commodity supply
   amendments only.
 - **Point-in-time** — state read at t−1; no lookahead (tested).
 
+## Verified-conflict backbone (UCDP)
+The gold-standard Uppsala Conflict Data Program feed is integrated ($0, free-token, kept out of the
+repo): complete 1989→2025 monthly fatalities (`ucdp.fat_global` + regions). It's used two ways —
+(1) a **4th corroboration modality** (`verified_conflict`) that confirms news-sourced conflict situations
+against vetted fatality data (logic proven on historical dates; *dormant for the freshest live news*
+because UCDP's annual GED lags ~6–18 months — UCDP's monthly *Candidate* set is the recency follow-on);
+and (2) a pre-registered **conditioner** (`conflict_intensity_gold`) — honestly **null**, reported not
+chased. So the conflict signal is *verified*, not merely news-inferred.
+
 ## The living loop (it grows itself, safely)
 Live news → **caged LLM extraction** (Cowork worker, no API key) → codebook gate (`load_events.check`) →
 corroboration-tiered admission → review queue. It **cannot fabricate** (every admitted event keeps a

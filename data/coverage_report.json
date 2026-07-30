@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T18:09:17+00:00",
+  "generated_at": "2026-07-30T21:25:38+00:00",
   "n_feeds": 10,
   "n_dead_feeds": 0,
   "undercovered_domains": [],
@@ -93,62 +93,62 @@
     {
       "feed": "bbc_world",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "entries": 29,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "aljazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
-      "entries": 25,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "un_news",
       "url": "https://news.un.org/feed/subscribe/en/news/all/rss.xml",
-      "entries": 30,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "eia_energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "entries": 23,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "fed_press",
       "url": "https://www.federalreserve.gov/feeds/press_all.xml",
-      "entries": 20,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "oilprice",
       "url": "https://oilprice.com/rss/main",
-      "entries": 15,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "mining_com",
       "url": "https://www.mining.com/feed/",
-      "entries": 36,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "gcaptain",
       "url": "https://gcaptain.com/feed/",
-      "entries": 12,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "freightwaves",
       "url": "https://www.freightwaves.com/feed",
-      "entries": 50,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     },
     {
       "feed": "timesofisrael",
       "url": "https://www.timesofisrael.com/feed/",
-      "entries": 15,
-      "status": "ok"
+      "entries": null,
+      "status": "unchecked (--no-net)"
     }
   ],
   "note": "Coverage = corpus depth + live-alert flow per domain. UNDERCOVERED = <10 corpus events OR no alerts in 30d. DEAD feed = resolves to 0 entries; prune or replace."

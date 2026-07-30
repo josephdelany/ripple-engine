@@ -62,7 +62,7 @@
         "n": 86,
         "robust_leave_one_out": true,
         "jackknife_amp_range": [
-          4.3847,
+          4.0063,
           5.4953
         ]
       },
