@@ -12,6 +12,10 @@ GDELT media-tone), available as context / a future conditioner / a corroboration
     the API when the cache is missing or --refresh is passed.
   * Point-in-time: aggregated by event date_start (the day it occurred). UCDP publishes with a lag, so
     the most recent months are incomplete -- flagged via the cadence override, not pretended fresh.
+  * KNOWN LIMIT: UCDP's public API rejects deep OFFSET pagination past ~page 358 (HTTP 400). Since GED
+    is id-ordered oldest->newest, a simple full pull lands 1989..~2018 (still real history) and stops.
+    The fetcher keeps that PARTIAL rather than crashing. Getting the most-recent years cleanly needs a
+    per-year pull (loop year=2018..now, each staying shallow) -- a documented follow-up, not done here.
 
 Run:  python3 src/fetch_ucdp.py                 # use cache if present, else pull, then aggregate + load
       python3 src/fetch_ucdp.py --refresh        # force a fresh API pull
@@ -67,11 +71,19 @@ def _get_page(url, token, tries=4):
 
 
 def pull(token, max_pages=None):
-    """Follow NextPageUrl, collecting a slim projection of each event. Returns list of dicts."""
-    events, url, page = [], f"{API}?pagesize={PAGESIZE}", 0
+    """Follow NextPageUrl, collecting a slim projection of each event. Returns (events, complete).
+    RESILIENT: if a page fails (UCDP's public API rejects deep offset pagination past ~page 358 with a
+    400), keep whatever we collected so far rather than crash-and-lose -- and report it as partial."""
+    events, url, page, complete = [], f"{API}?pagesize={PAGESIZE}", 0, True
     while url:
         page += 1
-        d = _get_page(url, token)
+        try:
+            d = _get_page(url, token)
+        except requests.HTTPError as e:
+            print(f"  (page {page} failed: {e} -- UCDP caps deep pagination; keeping {len(events)} "
+                  f"events so far as a PARTIAL pull. Recent years need a per-year pull -- see docstring.)")
+            complete = False
+            break
         for e in d.get("Result", []):
             events.append({"date_start": e.get("date_start"), "region": e.get("region"),
                            "country": e.get("country"), "best": e.get("best") or 0,
@@ -81,19 +93,22 @@ def pull(token, max_pages=None):
         url = d.get("NextPageUrl") or None
         if max_pages and page >= max_pages:
             print(f"  (stopped at max-pages={max_pages}; partial)")
+            complete = False
             break
         time.sleep(0.2)                          # be polite; well under 5000/day
-    return events
+    return events, complete
 
 
 def load_cache_or_pull(token, refresh, max_pages):
     if CACHE.exists() and not refresh and not max_pages:
         return json.loads(CACHE.read_text()), "cache"
-    events = pull(token, max_pages=max_pages)
-    if not max_pages:                            # only persist a COMPLETE pull as the cache
+    events, complete = pull(token, max_pages=max_pages)
+    # Persist even a PARTIAL pull as the cache (so it's usable + re-runnable) EXCEPT a tiny --max-pages
+    # test. A partial full-pull (UCDP deep-pagination wall) still gives real 1989..~2018 history.
+    if not max_pages and events:
         CACHE.parent.mkdir(parents=True, exist_ok=True)
         CACHE.write_text(json.dumps(events))
-    return events, "api"
+    return events, ("api-complete" if complete else "api-partial")
 
 
 def aggregate(events):
