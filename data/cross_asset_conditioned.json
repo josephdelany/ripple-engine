@@ -1,9 +1,12 @@
 {
   "what": "Does H1 (VIX stress amplifies the geopolitical ripple) generalize across assets? Same gate as oil: clustered median split + bootstrap CI + permutation + BH-FDR.",
   "sample": "clustered (de-overlapped), state at t-1",
-  "n_assets": 5,
+  "n_assets": 8,
   "assets_generalizing": [
-    "Brent oil"
+    "Brent oil",
+    "Heating oil",
+    "5Y breakeven",
+    "10Y breakeven"
   ],
   "fdr_q": 0.1,
   "map": [
@@ -19,7 +22,7 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0043,
       "survives_fdr": true,
-      "fdr_q": 0.0215,
+      "fdr_q": 0.012,
       "generalizes": true
     },
     {
@@ -49,7 +52,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0899,
       "survives_fdr": false,
-      "fdr_q": 0.2247,
+      "fdr_q": 0.1438,
       "generalizes": false
     },
     {
@@ -64,7 +67,7 @@
       "ci_excludes_zero": false,
       "perm_p": 0.2046,
       "survives_fdr": false,
-      "fdr_q": 0.2558,
+      "fdr_q": 0.2338,
       "generalizes": false
     },
     {
@@ -79,9 +82,54 @@
       "ci_excludes_zero": false,
       "perm_p": 0.1625,
       "survives_fdr": false,
-      "fdr_q": 0.2558,
+      "fdr_q": 0.2167,
       "generalizes": false
+    },
+    {
+      "label": "Heating oil",
+      "unit": "%",
+      "n_episodes": 91,
+      "amp": 4.7353,
+      "ci95": [
+        1.1164,
+        8.1436
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0042,
+      "survives_fdr": true,
+      "fdr_q": 0.012,
+      "generalizes": true
+    },
+    {
+      "label": "5Y breakeven",
+      "unit": "bps",
+      "n_episodes": 68,
+      "amp": 16.219,
+      "ci95": [
+        5.6063,
+        31.0269
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0045,
+      "survives_fdr": true,
+      "fdr_q": 0.012,
+      "generalizes": true
+    },
+    {
+      "label": "10Y breakeven",
+      "unit": "bps",
+      "n_episodes": 68,
+      "amp": 7.5939,
+      "ci95": [
+        0.8603,
+        16.1659
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0224,
+      "survives_fdr": true,
+      "fdr_q": 0.0448,
+      "generalizes": true
     }
   ],
-  "verdict": "The stress-amplification mechanism generalizes to: Brent oil. Other assets are honest null cells."
+  "verdict": "The stress-amplification mechanism generalizes to: Brent oil, Heating oil, 5Y breakeven, 10Y breakeven. Other assets are honest null cells."
 }

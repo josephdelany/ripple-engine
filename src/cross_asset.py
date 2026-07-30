@@ -58,6 +58,14 @@ ASSETS = [
      "kind": "yield", "unit": "bps"},
     {"series": "fred.DGS10",        "label": "10Y yield",  "entity": "macro.rates",
      "kind": "yield", "unit": "bps"},
+    # Downstream energy-spine nodes (Step 1): the refined-fuel channel and the macro/inflation
+    # channel a crude shock propagates INTO -- the nodes the propagation network connects to.
+    {"series": "fred.DHOILNYH",     "label": "Heating oil",  "entity": "commodity.diesel",
+     "kind": "price", "unit": "%"},
+    {"series": "fred.T5YIE",        "label": "5Y breakeven", "entity": "macro.inflation",
+     "kind": "yield", "unit": "bps"},
+    {"series": "fred.T10YIE",       "label": "10Y breakeven", "entity": "macro.inflation",
+     "kind": "yield", "unit": "bps"},
     # Gasoline is WEEKLY -- measured on a weekly clock (+1/+2/+4 WEEKS), never
     # pretended to be daily. Its car5/car20 slots hold +1 week / +4 weeks.
     {"series": "fred.GASREGW",      "label": "Gasoline",   "entity": "commodity.gasoline",
