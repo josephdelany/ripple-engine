@@ -167,6 +167,15 @@ WIDGETS = {
         "gridData": {"w": 40, "h": 11},
         "type": "markdown",
     },
+    "domain_conditioning": {
+        "name": "Apt Conditioning — each commodity vs its natural driver",
+        "description": "Pre-declared, FDR-corrected: does each commodity ripple harder under its "
+                       "ECONOMIC driver (not generic stress)? Copper validates under a growth-regime "
+                       "(steep-curve) conditioner it was null under stress. Honest — nulls shown.",
+        "endpoint": "domain_conditioning",
+        "gridData": {"w": 40, "h": 8},
+        "type": "table",
+    },
     "domain_lens": {
         "name": "Domain Lens — your analyst view",
         "description": "The one validated engine, filtered to your domain: ME-risk / commodities / "
@@ -737,6 +746,26 @@ def sowhat():
                      f"[{cb}]; top: {s.get('top_event','')[:60]}")
     lines += ["", f"*{r.get('discipline','')}*"]
     return "\n".join(lines)
+
+
+@app.get("/domain_conditioning")
+def domain_conditioning():
+    """Pre-declared apt-conditioning tests. Reads data/domain_conditioning.json."""
+    r = _read_json("domain_conditioning.json")
+    res = r.get("results")
+    if not res:
+        return [{"hypothesis": "(none)", "detail": "run: python3 src/domain_conditioning.py"}]
+    rows = []
+    for x in res:
+        if "amp" not in x:
+            continue
+        ci = x.get("ci") or [None, None]
+        rows.append({"hypothesis": x["hypothesis"], "commodity": x["asset"],
+                     "conditioner": x["state"].split(".")[-1],
+                     "amp": f"{x['amp']:+.1f}%",
+                     "ci95": f"[{ci[0]:+.1f},{ci[1]:+.1f}]" if ci[0] is not None else "n/a",
+                     "verdict": "VALIDATED" if x.get("validated") else "null"})
+    return rows
 
 
 @app.get("/domain_lens")

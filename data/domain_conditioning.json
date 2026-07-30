@@ -1,0 +1,78 @@
+{
+  "what": "Pre-declared, apt, FDR-corrected conditioning: each commodity vs its natural driver (not generic VIX-stress). Pre-registration is the module docstring.",
+  "n_hypotheses": 4,
+  "validated": [
+    "copper_growth"
+  ],
+  "results": [
+    {
+      "hypothesis": "gold_safe_haven",
+      "state": "derived.vix_pct",
+      "asset": "yf.gold",
+      "sign": "high",
+      "mechanism": "gold is a safe haven -> a shock ripples harder when VIX stress is elevated",
+      "n": 70,
+      "amp": 1.3605,
+      "ci": [
+        -0.2899,
+        2.804
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.0373,
+      "fdr_q": 0.0497,
+      "validated": false
+    },
+    {
+      "hypothesis": "silver_precious",
+      "state": "derived.vix_pct",
+      "asset": "yf.silver",
+      "sign": "high",
+      "mechanism": "silver (precious+industrial) shares gold's stress channel",
+      "n": 70,
+      "amp": 1.629,
+      "ci": [
+        -2.2218,
+        4.875
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.1779,
+      "fdr_q": 0.1779,
+      "validated": false
+    },
+    {
+      "hypothesis": "copper_growth",
+      "state": "derived.curve_2s10s",
+      "asset": "yf.copper",
+      "sign": "high",
+      "mechanism": "copper is a growth metal -> amplifies in a growth-on regime (steep 2s10s curve)",
+      "n": 70,
+      "amp": 4.3404,
+      "ci": [
+        0.9741,
+        6.5539
+      ],
+      "ci_excludes_zero": true,
+      "perm_p": 0.0003,
+      "fdr_q": 0.0012,
+      "validated": true
+    },
+    {
+      "hypothesis": "palladium_supply",
+      "state": "derived.vix_pct",
+      "asset": "yf.palladium",
+      "sign": "high",
+      "mechanism": "palladium is supply-concentrated (Russia/SA) -> stress channel",
+      "n": 74,
+      "amp": 5.2005,
+      "ci": [
+        -0.1599,
+        10.1856
+      ],
+      "ci_excludes_zero": false,
+      "perm_p": 0.0184,
+      "fdr_q": 0.0368,
+      "validated": false
+    }
+  ],
+  "note": "wheat excluded on purpose (supply/weather-driven; no clean market-state proxy)."
+}
