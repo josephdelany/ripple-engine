@@ -75,6 +75,34 @@ The conditioners (vix_pct, curve_2s10s, usd_z, be_level) are pairwise-correlated
 and the max |r| reported, to demonstrate the panel is **not "the VIX effect in disguise"** but distinct
 economic drivers.
 
+## Amendment 2026-07-30 (WS-S — capture more + strengthen)
+Declared **before** the amended battery is run (register-then-run preserved; git history proves it).
+Rationale: give economically-apt, keyless conditioners a fair, pre-registered test — and fix a real
+clustering bug — rather than leave cells unfairly excluded/underpowered. Mechanisms fixed here in
+advance; the family-wise FDR denominator grows to include these; the mispricing edge stays out of the
+amplification FDR; genuine nulls stay null.
+
+**New conditioners** (added to `derive_signals.MECHANISMS`, keyless):
+- `derived.credit_stress` — HY credit-cycle stress (HYG drawdown-from-252d-high percentile, 2007+).
+- `derived.real_rate` — 10Y TIPS real-yield percentile (`fred.DFII10`, 2003+).
+- `derived.ovx_pct` — oil implied-vol (OVX) percentile (`fred.OVXCLS`, 2007+). [registered; available]
+
+**New pre-declared hypotheses** (added to the family; direction fixed here before results):
+| name | conditioner | asset | dir | mechanism |
+|---|---|---|---|---|
+| gold_real_rate | derived.real_rate | yf.gold | low | gold is a real-rate asset → amplifies when real rates are low |
+| hy_credit_stress | derived.credit_stress | yf.hyg | high | a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test) |
+
+**Correctness fix (declared):** `edge_battery._oil_type_frame` now clusters **within event type** for the
+two-group tests (`chokepoint_gt_sanction`, `severity_dose_response`). Clustering all types together
+cannibalised the chokepoint arm (n=3 despite 24 raw events); within-type clustering earns those tests a
+fair episode count. This is a bug fix, not a specification change to the hypotheses.
+
+**Also planned under WS-S** (dated amendments filed as each is added, before its result): new priceable
+nodes (platinum `PL=F`, freight `BDRY/STNG/FRO`, ags `ZC=F/ZS=F`, miners `COPX/GDX`, FX) tested through
+the same generalization gate; and codebook-gated event backfill to give underpowered producer/chokepoint
+cells a fair test. All re-runs re-report honestly; nulls that stay null are reported.
+
 ---
 *Results (after running `python3 src/edge_battery.py`) live in `data/edge_battery.json` and are written
-up in `EDGE_PORTFOLIO.md`. This file is not edited once the results exist.*
+up in `EDGE_PORTFOLIO.md`. The original battery section above is frozen; amendments are dated and appended.*

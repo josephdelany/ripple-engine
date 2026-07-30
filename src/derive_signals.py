@@ -75,6 +75,25 @@ MECHANISMS = {
         "inflationary and passes it into nominal yields; when low/anchored the same "
         "shock reads growth-negative (flight-to-quality). So the |yield move| a "
         "shock produces should be larger when this sits high."),
+    "derived.credit_stress": (
+        "HY credit stress percentile (5y)", "percentile",
+        "Credit-cycle regime (WS-S amendment). Built from the HYG high-yield ETF's "
+        "drawdown from its trailing-252d high (keyless, 2007+), ranked in its own 5y "
+        "range -- high = credit already stressed. Un-caps the credit hypothesis the "
+        "battery had to exclude (the keyless HY spread was capped at ~3y). A shock "
+        "should ripple harder into HY credit when credit is already stressed."),
+    "derived.ovx_pct": (
+        "Oil implied-vol (OVX) percentile (5y)", "percentile",
+        "Oil-specific risk regime (WS-S amendment). Percentile of OVX, the oil VIX "
+        "(keyless, 2007+). Distinct from equity VIX: measures how much oil-risk the "
+        "options market is ALREADY pricing. A shock into an already-fearful oil "
+        "market may transmit differently than into a complacent one."),
+    "derived.real_rate": (
+        "10Y real yield (TIPS) percentile (5y)", "percentile",
+        "Real-rate regime (WS-S amendment). Percentile of the 10Y TIPS real yield "
+        "(keyless, 2003+). Gold and haven assets are real-rate assets -- they should "
+        "ripple harder when real rates are LOW (the apt conditioner for gold that "
+        "generic VIX-stress was not)."),
 }
 
 
@@ -187,6 +206,19 @@ def build_signals(w):
         # 10Y inflation breakeven, ranked in its own 5y range -> the inflation-regime
         # conditioner for the edge battery (keyless FRED, daily from 2003).
         out["derived.be_level"] = percentile(w["fred.T10YIE"])
+
+    if "yf.hyg" in w:
+        # Credit-cycle stress from the HYG high-yield ETF: drawdown from the trailing-252d high
+        # (own trading-day index, then reindex), ranked in its own 5y range. High = credit stressed.
+        hyg = w["yf.hyg"].dropna()
+        dd = hyg / hyg.rolling(252, min_periods=126).max() - 1.0     # <= 0
+        out["derived.credit_stress"] = percentile(-dd).reindex(w.index)
+
+    if "fred.OVXCLS" in w:
+        out["derived.ovx_pct"] = percentile(w["fred.OVXCLS"])        # oil implied-vol regime
+
+    if "fred.DFII10" in w:
+        out["derived.real_rate"] = percentile(w["fred.DFII10"])      # real-rate regime (low = haven-supportive)
 
     return out
 

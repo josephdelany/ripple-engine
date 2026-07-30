@@ -88,6 +88,11 @@ CONDITIONING = [
      "gold rises as the dollar weakens; a shock ripples harder into gold when USD is already soft"),
     ("yields_inflation",  "derived.be_level",    "fred.DGS10",  "high",
      "an oil shock passes into 10Y nominal yields more when the inflation regime is already hot"),
+    # WS-S amendments (pre-registered 2026-07-30, before results -- see PRE_REGISTRATION.md):
+    ("gold_real_rate",    "derived.real_rate",   "yf.gold",     "low",
+     "gold is a real-rate asset -> ripples harder when real rates are LOW (apt driver vs generic VIX)"),
+    ("hy_credit_stress",  "derived.credit_stress", "yf.hyg",    "high",
+     "a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test)"),
 ]
 
 # ---- CLASS 2: event-type heterogeneity of the oil edge (two-group tests on |CAR+20| in Brent).
@@ -108,8 +113,16 @@ def _oil_type_frame(conn, horizon=HORIZON):
             rows.append({"event_id": ev["event_id"], "date": ev["event_date"],
                          "type": ev["type"], "mag": mags[ev["event_id"]],
                          "severity": sev.get(ev["event_id"])})
-    df = assign_clusters(pd.DataFrame(rows))
-    return df.groupby("cluster").first().reset_index()
+    df = pd.DataFrame(rows)
+    # CLUSTER WITHIN TYPE (WS-S correctness fix). The two-group tests compare event TYPES, so clustering
+    # all types together let a chokepoint within 35 days of a sanction be cannibalised -- starving the
+    # chokepoint arm to n=3 despite 24 raw chokepoints. Clustering within type keeps each type's episodes
+    # intact for the comparison (35-day de-dup of same-type overlaps still applies).
+    parts = []
+    for _, sub in df.groupby("type"):
+        c = assign_clusters(sub.reset_index(drop=True)).groupby("cluster").first().reset_index()
+        parts.append(c)
+    return pd.concat(parts, ignore_index=True) if parts else df
 
 
 def _diff_test(a, b, sign=+1, n_iter=10000, seed=SEED):

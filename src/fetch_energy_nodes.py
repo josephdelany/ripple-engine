@@ -33,10 +33,14 @@ CATALOG = [
      "Macro node: does the shock reprice 5Y inflation expectations?"),
     ("T10YIE", "macro.inflation", "10-Year Breakeven Inflation", "percent",
      "Macro node: 10Y inflation expectations -- the rates channel of an energy shock."),
+    ("DFII10", "macro.rates", "10-Year TIPS Real Yield", "percent",
+     "Real-rate regime conditioner (keyless, 2003+): gold/haven assets ripple harder when real "
+     "rates are low. Used to build derived.real_rate for the edge battery."),
 ]
 ENTITIES = [
     ("commodity.diesel", "commodity", "Diesel / Heating Oil", "NY Harbor No.2 distillate"),
     ("macro.inflation", "macro", "Inflation Expectations", "TIPS breakeven inflation"),
+    ("macro.rates", "macro", "Real Rates", "TIPS real yields"),
 ]
 
 
