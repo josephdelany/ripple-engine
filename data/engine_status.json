@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T20:03:09+00:00",
+  "generated_at": "2026-08-03T22:13:08+00:00",
   "verdict": "GREEN",
   "freshness": {
     "overall": "OK",
@@ -26,6 +26,9 @@
   },
   "evaluation": {
     "framework_sound": true
+  },
+  "audit": {
+    "blocked_types": []
   },
   "reasons": [
     "GREEN: fresh, covered, last run OK, framework sound"

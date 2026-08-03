@@ -16,6 +16,7 @@ Run:  python3 src/backfill.py
 """
 
 import csv
+import json
 import sqlite3
 from collections import Counter
 from datetime import datetime, timezone
@@ -28,7 +29,18 @@ DB = ROOT / "data" / "oil.db"
 CANDIDATES = ROOT / "data" / "candidate_events.csv"
 REVIEW = ROOT / "data" / "candidate_review.csv"
 QUEUE = ROOT / "data" / "borderline_queue.csv"
+FLAGS = ROOT / "data" / "audit_flags.json"          # V2.3: audit-blocked event types
 QUEUE_CAP = 300
+
+
+def _blocked_types():
+    """Event types with an open audit flag -> auto-admission blocked until Joe clears them."""
+    if not FLAGS.exists():
+        return set()
+    try:
+        return set(json.loads(FLAGS.read_text()).keys())
+    except (ValueError, OSError):
+        return set()
 
 
 def _review_index():
@@ -56,9 +68,13 @@ def run():
              if r.get("status") == "candidate" and (r.get("event_id") or "").strip() not in have] \
         if CANDIDATES.exists() else []
 
+    blocked = _blocked_types()
     auto, borderline, gate_fail = [], [], Counter()
     for r in cands:
         res = AR.evaluate(r, existing, today)
+        if res["verdict"] == "AUTO_ADMIT" and r.get("type") in blocked:
+            res = {"verdict": "BORDERLINE", "gates": res["gates"],
+                   "reasons": [f"audit-blocked domain '{r.get('type')}' (open flag; Joe must clear)"]}
         if res["verdict"] == "AUTO_ADMIT":
             auto.append(r)
         else:

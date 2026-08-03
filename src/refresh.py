@@ -127,6 +127,9 @@ STEPS = [
     # (0 measured rows). Amplification results use the rebuilt DB; the mispricing sub-block reads
     # the existing gap ledger (suggestive either way).
     ("edge_battery",   "src/edge_battery.py",   "observations"),
+    # V2 admission machine: route candidates through the registered rule; monthly audit (idempotent).
+    ("backfill",       "src/backfill.py",       "observations"),
+    ("audit",          "src/audit.py",          "observations"),
     # V-Q1 reproducibility receipts (run on the fully-built DB): freeze this quarter's vintage
     # (idempotent, once per quarter) and re-check whether any headline depends on revised history.
     ("db_snapshot",    "src/db_snapshot.py",    "observations"),

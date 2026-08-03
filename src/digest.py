@@ -233,6 +233,18 @@ def render():
     parts.append(f"<div class=mast><h1>The Daily <span style='color:#8b93a3'>·"
                  f" News to Markets</span></h1><div class=as>as of {e(now)}</div></div>")
 
+    # a2. Corpus audit banner (V2.3) -- only shows when an auto-admission flag is open.
+    _af = ROOT / "data" / "audit_flags.json"
+    if _af.exists():
+        try:
+            _flags = json.loads(_af.read_text())
+        except (ValueError, OSError):
+            _flags = {}
+        if _flags:
+            parts.append(f"<div class=cell style='border-color:#8a5a1a;background:#221a10'>"
+                         f"⚠ <b>Corpus audit flag</b> — auto-admission blocked in "
+                         f"{e(', '.join(sorted(_flags)))} until cleared (src/audit.py --clear).</div>")
+
     # b. Today's Read
     parts.append("<h2 class=sec>Today's Read</h2>")
     if er and er.get("read"):

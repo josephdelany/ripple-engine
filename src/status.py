@@ -66,10 +66,20 @@ def run():
 
     framework_sound = (ev.get("overall", {}) or {}).get("framework_sound")
 
+    # V2.3 auto-admission audit: open flags block a domain -> surface as AMBER until Joe clears
+    audit_flags = {}
+    af = DATA / "audit_flags.json"
+    if af.exists():
+        try:
+            audit_flags = json.loads(af.read_text())
+        except (ValueError, OSError):
+            audit_flags = {}
+    blocked_types = sorted(audit_flags)
+
     # roll up
     red = bool(dead or last_crashed or framework_sound is False)
     amber = bool(undercov or dead_feeds or fresh_amber or n_pending >= 15
-                 or last_verdict is None or framework_sound is None)
+                 or last_verdict is None or framework_sound is None or blocked_types)
     verdict = "RED" if red else ("AMBER" if amber else "GREEN")
 
     report = {
@@ -84,15 +94,19 @@ def run():
         "backups": {"count": len(backups), "newest": backups[-1].name if backups else None,
                     "restore_tested": restore_tested},
         "evaluation": {"framework_sound": framework_sound},
+        "audit": {"blocked_types": blocked_types},
         "reasons": _reasons(dead, stale, undercov, dead_feeds, n_pending, last_verdict, last_crashed,
-                            framework_sound),
+                            framework_sound, blocked_types),
     }
     OUT.write_text(json.dumps(report, indent=2, default=str))
     return report
 
 
-def _reasons(dead, stale, undercov, dead_feeds, n_pending, last_verdict, last_crashed, fw):
+def _reasons(dead, stale, undercov, dead_feeds, n_pending, last_verdict, last_crashed, fw,
+             blocked_types=()):
     r = []
+    if blocked_types:
+        r.append(f"AMBER: auto-admission blocked in {list(blocked_types)} (open audit flag -- clear it)")
     if dead:
         r.append(f"RED: {len(dead)} DEAD series (data broken)")
     if last_crashed:
