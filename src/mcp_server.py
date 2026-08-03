@@ -477,5 +477,32 @@ def get_results(name: str) -> str:
     return p.read_text() if p.exists() else f"{fname} not generated yet."
 
 
+# --- Reference tier (V2.4): machine-scale GDELT background. NEVER corpus, NEVER causal. ---
+@mcp.tool()
+def reference_count() -> dict:
+    """BACKGROUND TIER count: how many machine-scale (GDELT) background events exist, by type and
+    year. These are single-source, UNVERIFIED, and NEVER part of the causal corpus or any analysis --
+    context only. Every result is stamped 'BACKGROUND ... NEVER analyzed causally, NEVER corpus'."""
+    import reference_tier as RT
+    return RT.count()
+
+
+@mcp.tool()
+def reference_list(type: str = "", since: str = "", entity: str = "", limit: int = 50) -> dict:
+    """List BACKGROUND-tier (GDELT) events -- optional filters type / since (YYYY-MM-DD) / entity.
+    NOT corpus, NOT evidence, single-source and unverified: context only. Loudly labelled."""
+    import reference_tier as RT
+    return RT.listing(type=type, since=since, entity=entity, limit=limit)
+
+
+@mcp.tool()
+def reference_nearest(date: str, type: str = "", entity: str = "", k: int = 8) -> dict:
+    """The BACKGROUND-tier (GDELT) events most similar to a query (date proximity + type + entity
+    overlap) -- 'what else was going on around then?'. These are NOT analogues and NOT evidence; they
+    are unverified single-source background, never corpus. Loudly labelled on every result."""
+    import reference_tier as RT
+    return RT.nearest(date, type=type, entity=entity, k=k)
+
+
 if __name__ == "__main__":
     mcp.run()          # stdio transport; launched by the Claude app
