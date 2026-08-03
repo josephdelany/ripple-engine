@@ -108,17 +108,27 @@ def _one_sample(vals, sign, n_iter=10000, seed=SEED):
 def _event_test(conn, h, events, shuffle_dates=None):
     ret = _value_returns(conn, h["series"], h["ret"])
     ev = events[events["type"].isin(h["types"])].copy()
-    dates = shuffle_dates if shuffle_dates is not None else ev["event_date"].tolist()
+    if shuffle_dates is not None:                         # placebo: fake dates, no episode receipts
+        src = [{"event_id": None, "date": d, "source_url": ""} for d in shuffle_dates]
+    else:
+        src = [{"event_id": r.event_id, "date": r.event_date, "source_url": r.source_url}
+               for r in ev.itertuples()]
     rows = []
-    for d in dates:
-        c = _signed_car(ret, d, h["post"])
+    for s in src:
+        c = _signed_car(ret, s["date"], h["post"])
         if c is not None:
-            rows.append({"date": pd.Timestamp(str(d)), "car": c})
+            rows.append({"event_id": s["event_id"], "date": pd.Timestamp(str(s["date"])),
+                         "source_url": s["source_url"], "car": c})
     if len(rows) < 6:
         return {"id": h["id"], "ok": False, "reason": f"too few episodes ({len(rows)})", "n": len(rows)}
-    df = assign_clusters(pd.DataFrame(rows)).groupby("cluster").first()
+    df = assign_clusters(pd.DataFrame(rows)).groupby("cluster").first().reset_index()
     r = _one_sample(df["car"].to_numpy(float), h["sign"])
     r["id"] = h["id"]; r["unit"] = h["unit"]; r["predicted_sign"] = "+" if h["sign"] > 0 else "-"
+    # per-episode receipts (real run only) so the evidence pack can re-derive n and trace sources
+    r["episodes"] = ([] if shuffle_dates is not None else
+                     [{"event_id": e.event_id, "date": str(e.date.date()),
+                       "source_url": e.source_url or "", "car": round(float(e.car), 4)}
+                      for e in df.itertuples()])
     return r
 
 
@@ -149,7 +159,7 @@ def _passthrough_test(conn, h, n_iter=10000, seed=SEED):
 
 def run():
     conn = sqlite3.connect(DB)
-    events = pd.read_sql("SELECT event_id, event_date, type FROM events ORDER BY event_date", conn)
+    events = pd.read_sql("SELECT event_id, event_date, type, source_url FROM events ORDER BY event_date", conn)
     results = []
     for h in HYPOTHESES:
         results.append(_event_test(conn, h, events) if h["kind"] == "event"

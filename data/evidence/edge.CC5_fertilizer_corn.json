@@ -21,9 +21,9 @@
     "predicted_direction": "+"
   },
   "underlying_episodes": [],
-  "n_episodes": 311,
+  "n_episodes": 0,
   "source_artifact": "cross_chain.json",
-  "source_commit": "uncommitted",
+  "source_commit": "bb5bc8f",
   "db_commit": "uncommitted (rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"
 }

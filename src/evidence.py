@@ -158,7 +158,12 @@ def build_all():
                            "survives_fdr": r.get("survives_fdr"),
                            "survives_bonferroni": r.get("survives_bonferroni"),
                            "predicted_direction": r.get("predicted_sign")},
-            "underlying_episodes": [], "n_episodes": r["n"], "source_artifact": "cross_chain.json",
+            # event-based edges (cracks) carry their clustered event episodes (event_id + source);
+            # node-to-node passthrough edges (food) have no discrete events -> 0 episodes, n is in stats.
+            "underlying_episodes": [{"event_id": e["event_id"], "date": e["date"],
+                                     "source_url": e["source_url"], "car": e["car"]}
+                                    for e in r.get("episodes", [])],
+            "n_episodes": len(r.get("episodes", [])), "source_artifact": "cross_chain.json",
             "source_commit": git_hash(DATA / "cross_chain.json"),
             "db_commit": git_hash(DB) if git_hash(DB) != "uncommitted" else "uncommitted (rebuild via repro.sh)",
             "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"})
