@@ -70,6 +70,29 @@ def latest_two(conn, series_id):
     return val, date, prev
 
 
+def recent_values(conn, series_id, n=30):
+    """The last n de-duped values (oldest->newest) for a ribbon sparkline."""
+    rows = conn.execute(
+        "SELECT obs_date, value FROM observations WHERE series_id=? AND value IS NOT NULL "
+        "GROUP BY obs_date ORDER BY obs_date DESC LIMIT ?", (series_id, n)).fetchall()
+    return [v for _, v in reversed(rows)]
+
+
+def _sparkline(values, color, w=68, h=18):
+    """A tiny inline-SVG sparkline of RAW recent values (no smoothing -- shows the real shape).
+    Auto-scales to the window's min/max (a sparkline shows trajectory, not absolute level)."""
+    vals = [v for v in values if v is not None]
+    if len(vals) < 2:
+        return ""
+    lo, hi = min(vals), max(vals)
+    rng = (hi - lo) or 1.0
+    n = len(vals)
+    pts = " ".join(f"{i*(w-2)/(n-1)+1:.1f},{(h-2)-(v-lo)/rng*(h-4)+1:.1f}" for i, v in enumerate(vals))
+    return (f"<svg class=spark width={w} height={h} viewBox='0 0 {w} {h}' "
+            f"preserveAspectRatio='none'><polyline points='{pts}' fill='none' "
+            f"stroke='{color}' stroke-width='1.2'/></svg>")
+
+
 def new_alerts(limit=10):
     """Up to `limit` status=new alert cards, newest first."""
     if not ALERT_QUEUE.exists():
@@ -122,6 +145,7 @@ h2.sec{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#8b93a
  border-radius:8px;padding:9px 11px}
 .cell .lab{color:#8b93a3;font-size:11px}
 .cell .num{font-size:19px;font-weight:600;margin-top:2px}
+.cell .spark{display:block;margin:3px 0 1px;opacity:.85}
 .cell .dt{color:#6b7280;font-size:10px;margin-top:2px}
 .up{color:#6ee7a0}.down{color:#f28b82}.flat{color:#e7e9ee}
 .baserate{background:#15171d;border-left:3px solid #3a4152;padding:9px 12px;
@@ -322,9 +346,12 @@ def render():
         if prev is not None:
             cls = "up" if val > prev else "down" if val < prev else "flat"
         arrow = " ▲" if cls == "up" else " ▼" if cls == "down" else ""
+        spark_col = {"up": "#3fb950", "down": "#f85149", "flat": "#8b949e"}[cls]
+        spark = _sparkline(recent_values(conn, sid, 30), spark_col)
         parts.append(f"<div class=cell><div class=lab>{e(lab)} <span "
                      f"style='color:#6b7280'>{e(unit)}</span></div>"
                      f"<div class='num {cls}'>{val:.{dec}f}{arrow}</div>"
+                     f"{spark}"
                      f"<div class=dt>{e(date)}</div></div>")
     conn.close()
     gc = (er or {}).get("gpr_context") or {}
