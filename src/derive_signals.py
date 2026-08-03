@@ -94,6 +94,20 @@ MECHANISMS = {
         "(keyless, 2003+). Gold and haven assets are real-rate assets -- they should "
         "ripple harder when real rates are LOW (the apt conditioner for gold that "
         "generic VIX-stress was not)."),
+    "derived.diesel_crack": (
+        "Diesel/heating-oil crack (distillate margin)", "USD/bbl",
+        "Value-chain transmission (V1). The refiner's distillate margin: NY Harbor "
+        "heating-oil/diesel (x42 gal->bbl) minus WTI crude. The crack IS the crude->fuel "
+        "transmission channel -- a widening margin means product tightness is outrunning "
+        "crude, i.e. the shock is passing THROUGH to the distillate that moves the real "
+        "economy (trucking, farming, heating), not staying in crude. Point-in-time: "
+        "same-day prices, no lookahead."),
+    "derived.gasoline_crack": (
+        "Gasoline crack (consumer-fuel margin)", "USD/bbl",
+        "Value-chain transmission (V1). US Gulf Coast wholesale gasoline (x42 gal->bbl) "
+        "minus WTI crude -- the crude->pump margin. Distinct from the diesel crack: "
+        "gasoline is the consumer/driving-season channel, distillate the industrial one. "
+        "Widening = the shock is reaching motor fuel. Point-in-time: same-day prices."),
     "derived.conflict_intensity_pct": (
         "Background conflict intensity (UCDP fatalities) percentile (5y)", "percentile",
         "Verified-conflict regime (UCDP amendment 2026-07-30). Percentile of global "
@@ -227,6 +241,18 @@ def build_signals(w):
 
     if "fred.DFII10" in w:
         out["derived.real_rate"] = percentile(w["fred.DFII10"])      # real-rate regime (low = haven-supportive)
+
+    # Value-chain cracks (V1): refined-product margin = product ($/gal x42 -> $/bbl) - WTI ($/bbl).
+    # Computed on each pair's OWN trading-day index (dropna), then reindexed -- the brent_wti_spread
+    # discipline, so weekend NaNs from calendar-daily feeds can't stall the tail. A level, not a
+    # rolling stat, so no lookback needed.
+    GAL_PER_BBL = 42.0
+    if wti is not None and "fred.DHOILNYH" in w:
+        diesel_bbl = (w["fred.DHOILNYH"] * GAL_PER_BBL - wti).dropna()
+        out["derived.diesel_crack"] = diesel_bbl.reindex(w.index)
+    if wti is not None and "fred.DGASUSGULF" in w:
+        gaso_bbl = (w["fred.DGASUSGULF"] * GAL_PER_BBL - wti).dropna()
+        out["derived.gasoline_crack"] = gaso_bbl.reindex(w.index)
 
     if "ucdp.fat_global" in w:
         # UCDP is monthly: rank each month's fatalities in its own 5y (~60-month) window, then forward-
