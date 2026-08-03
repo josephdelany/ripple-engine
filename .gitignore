@@ -60,3 +60,6 @@ data/breakevens.json
 data/stories/*.state.json
 # calibration + registered-run receipts are regenerated/committed as appropriate.
 data/calibration.json
+# V-Q1 quarterly frozen DB snapshots: large derived DB copies. data/vintage_check.txt IS the
+# committed receipt; the .db.gz vintages themselves are not source.
+data/vintages/

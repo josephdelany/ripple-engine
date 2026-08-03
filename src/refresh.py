@@ -127,6 +127,10 @@ STEPS = [
     # (0 measured rows). Amplification results use the rebuilt DB; the mispricing sub-block reads
     # the existing gap ledger (suggestive either way).
     ("edge_battery",   "src/edge_battery.py",   "observations"),
+    # V-Q1 reproducibility receipts (run on the fully-built DB): freeze this quarter's vintage
+    # (idempotent, once per quarter) and re-check whether any headline depends on revised history.
+    ("db_snapshot",    "src/db_snapshot.py",    "observations"),
+    ("vintage_check",  "src/vintage_check.py",  "observations"),
     # TRUE FINAL step: render The Daily so the static front page is always fresh
     # after the pipeline. File output (digest.html), so measured rows is 0.
     ("digest",         "src/digest.py",         "observations"),
