@@ -1,0 +1,29 @@
+{
+  "claim_id": "edge.CC2_supply_gasoline_crack",
+  "tier": "validated",
+  "statement": "Physical supply-shock events widen the gasoline crack over +10 trading days.",
+  "mechanism": "refined product tightens faster than crude",
+  "quantity": {
+    "value": 2.2375,
+    "unit": "$/bbl",
+    "metric": "signed CAR+10 (crack change, $/bbl)"
+  },
+  "method": "pre-registered cross-chain test (PRE_REGISTRATION.md amendment 2026-08-03): signed constant-mean event study (crack) or monthly pass-through regression (food); 95% bootstrap CI; sign-flip/permutation p; family-wise BH-FDR q=0.10 + Bonferroni; placebo-controlled (shuffled dates -> null). Directions fixed BEFORE results.",
+  "statistics": {
+    "n": 36,
+    "ci95": [
+      0.611,
+      3.914
+    ],
+    "perm_p_raw": 0.005,
+    "survives_fdr": true,
+    "survives_bonferroni": true,
+    "predicted_direction": "+"
+  },
+  "underlying_episodes": [],
+  "n_episodes": 36,
+  "source_artifact": "cross_chain.json",
+  "source_commit": "uncommitted",
+  "db_commit": "uncommitted (rebuild via repro.sh)",
+  "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"
+}

@@ -134,6 +134,34 @@ def build_all():
                             "fdr_q": x.get("fdr_q"), "survives_fdr": x.get("survives_fdr"),
                             "robustness": x.get("robustness")},
                            "edge_battery.json", eps, x.get("mechanism", "")))
+
+    # V3 cross-chain validated edges (a SEPARATE pre-registered family; its own test + method).
+    _CC_META = {
+        "CC2_supply_gasoline_crack": ("Physical supply-shock events widen the gasoline crack over +10 "
+                                      "trading days.", "refined product tightens faster than crude",
+                                      "signed CAR+10 (crack change, $/bbl)"),
+        "CC5_fertilizer_corn": ("Fertilizer prices transmit to corn prices (monthly pass-through).",
+                                "fertilizer cost lifts crop prices", "monthly pass-through beta"),
+    }
+    for r in _rj("cross_chain.json").get("results", []):
+        if not r.get("validated"):
+            continue
+        stmt, mech, metric = _CC_META.get(r["id"], (r["id"], "", "cross-chain effect"))
+        packs.append({
+            "claim_id": f"edge.{r['id']}", "tier": "validated", "statement": stmt, "mechanism": mech,
+            "quantity": {"value": r["signed_amp"], "unit": r.get("unit", ""), "metric": metric},
+            "method": "pre-registered cross-chain test (PRE_REGISTRATION.md amendment 2026-08-03): signed "
+                      "constant-mean event study (crack) or monthly pass-through regression (food); 95% "
+                      "bootstrap CI; sign-flip/permutation p; family-wise BH-FDR q=0.10 + Bonferroni; "
+                      "placebo-controlled (shuffled dates -> null). Directions fixed BEFORE results.",
+            "statistics": {"n": r["n"], "ci95": r["ci"], "perm_p_raw": r["perm_p"],
+                           "survives_fdr": r.get("survives_fdr"),
+                           "survives_bonferroni": r.get("survives_bonferroni"),
+                           "predicted_direction": r.get("predicted_sign")},
+            "underlying_episodes": [], "n_episodes": r["n"], "source_artifact": "cross_chain.json",
+            "source_commit": git_hash(DATA / "cross_chain.json"),
+            "db_commit": git_hash(DB) if git_hash(DB) != "uncommitted" else "uncommitted (rebuild via repro.sh)",
+            "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"})
     conn.close()
 
     for p in packs:

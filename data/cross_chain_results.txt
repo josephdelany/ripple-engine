@@ -1,0 +1,12 @@
+============================================================================================
+CROSS-CHAIN BATTERY (V3) -- confirmatory, directions pre-registered, FDR-corrected + raw
+============================================================================================
+  CC1_supply_diesel_crack      amp=  +1.415 $/bbl  CI[-0.890,+4.361] dir=+ raw_p=0.173 FDR=n n= 36  null
+  CC2_supply_gasoline_crack    amp=  +2.237 $/bbl  CI[+0.611,+3.914] dir=+ raw_p=0.005 FDR=Y n= 36  VALIDATED
+  CC3_sanctions_copper         amp=  +0.001 %      CI[-0.028,+0.030] dir=- raw_p=0.474 FDR=n n= 36  null
+  CC4_fertilizer_wheat         amp=  +0.141 beta   CI[-0.064,+0.356] dir=+ raw_p=0.106 FDR=n n=311  null
+  CC5_fertilizer_corn          amp=  +0.363 beta   CI[+0.136,+0.587] dir=+ raw_p=0.000 FDR=Y n=311  VALIDATED
+
+  validated (CI excludes 0 in predicted dir AND survives BH-FDR q=0.1): ['CC2_supply_gasoline_crack', 'CC5_fertilizer_corn']
+  placebo false-positives (shuffled dates): 0 (a sound family -> ~0)
+  Raw perm-p shown next to every corrected verdict; nulls are results.

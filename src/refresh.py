@@ -127,6 +127,7 @@ STEPS = [
     # (0 measured rows). Amplification results use the rebuilt DB; the mispricing sub-block reads
     # the existing gap ledger (suggestive either way).
     ("edge_battery",   "src/edge_battery.py",   "observations"),
+    ("cross_chain",    "src/cross_chain.py",    "observations"),
     # V2 admission machine: route candidates through the registered rule; monthly audit (idempotent).
     ("backfill",       "src/backfill.py",       "observations"),
     ("audit",          "src/audit.py",          "observations"),

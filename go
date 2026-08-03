@@ -35,6 +35,7 @@ STEPS=(
   "holdout.py"
   "calibration_report.py"
   "evaluate.py"
+  "cross_chain.py"
   "evidence.py"
   "coverage.py"
   "status.py"
