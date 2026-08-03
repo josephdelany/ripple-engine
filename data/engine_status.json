@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-30T21:28:15+00:00",
-  "verdict": "AMBER",
+  "generated_at": "2026-08-03T18:19:44+00:00",
+  "verdict": "GREEN",
   "freshness": {
-    "overall": "TROUBLE",
+    "overall": "OK",
     "n_dead": 0,
     "n_stale": 0,
     "dead_series": []
@@ -15,19 +15,19 @@
     "n_pending": 0
   },
   "last_run": {
-    "verdict": null,
+    "verdict": "DEGRADED",
     "failed_steps": [],
-    "run_id": null
+    "run_id": "2026-08-03T14:04:16+00:00"
   },
   "backups": {
     "count": 7,
-    "newest": "oil_20260730_133339.db.gz",
+    "newest": "oil_20260803_141550.db.gz",
     "restore_tested": true
   },
   "evaluation": {
     "framework_sound": true
   },
   "reasons": [
-    "AMBER: no last-run record yet (run daily.py)"
+    "GREEN: fresh, covered, last run OK, framework sound"
   ]
 }

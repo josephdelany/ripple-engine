@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T21:25:38+00:00",
+  "generated_at": "2026-08-03T18:13:11+00:00",
   "n_feeds": 10,
   "n_dead_feeds": 0,
   "undercovered_domains": [],
@@ -11,7 +11,7 @@
       ],
       "n_events": 50,
       "last_event": "2025-05-03",
-      "n_alerts_30d": 1,
+      "n_alerts_30d": 5,
       "n_nodes": 9,
       "status": "ok"
     },
@@ -23,7 +23,7 @@
       ],
       "n_events": 69,
       "last_event": "2025-05-12",
-      "n_alerts_30d": 8,
+      "n_alerts_30d": 15,
       "n_nodes": 8,
       "status": "ok"
     },
@@ -35,7 +35,7 @@
       ],
       "n_events": 74,
       "last_event": "2025-11-14",
-      "n_alerts_30d": 18,
+      "n_alerts_30d": 37,
       "n_nodes": 4,
       "status": "ok"
     },
@@ -48,7 +48,7 @@
       ],
       "n_events": 115,
       "last_event": "2025-11-14",
-      "n_alerts_30d": 74,
+      "n_alerts_30d": 126,
       "n_nodes": 2,
       "status": "ok"
     },
@@ -60,7 +60,7 @@
       ],
       "n_events": 91,
       "last_event": "2025-09-05",
-      "n_alerts_30d": 57,
+      "n_alerts_30d": 94,
       "n_nodes": 0,
       "status": "ok"
     },
@@ -73,7 +73,7 @@
       ],
       "n_events": 159,
       "last_event": "2025-07-14",
-      "n_alerts_30d": 16,
+      "n_alerts_30d": 28,
       "n_nodes": 0,
       "status": "ok"
     },
@@ -84,7 +84,7 @@
       ],
       "n_events": 24,
       "last_event": "2025-11-14",
-      "n_alerts_30d": 17,
+      "n_alerts_30d": 32,
       "n_nodes": 4,
       "status": "ok"
     }
@@ -93,62 +93,62 @@
     {
       "feed": "bbc_world",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 27,
+      "status": "ok"
     },
     {
       "feed": "aljazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 25,
+      "status": "ok"
     },
     {
       "feed": "un_news",
       "url": "https://news.un.org/feed/subscribe/en/news/all/rss.xml",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 30,
+      "status": "ok"
     },
     {
       "feed": "eia_energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 12,
+      "status": "ok"
     },
     {
       "feed": "fed_press",
       "url": "https://www.federalreserve.gov/feeds/press_all.xml",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 20,
+      "status": "ok"
     },
     {
       "feed": "oilprice",
       "url": "https://oilprice.com/rss/main",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 15,
+      "status": "ok"
     },
     {
-      "feed": "mining_com",
-      "url": "https://www.mining.com/feed/",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "feed": "mining_tech",
+      "url": "https://www.mining-technology.com/feed/",
+      "entries": 10,
+      "status": "ok"
     },
     {
       "feed": "gcaptain",
       "url": "https://gcaptain.com/feed/",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 12,
+      "status": "ok"
     },
     {
       "feed": "freightwaves",
       "url": "https://www.freightwaves.com/feed",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 50,
+      "status": "ok"
     },
     {
       "feed": "timesofisrael",
       "url": "https://www.timesofisrael.com/feed/",
-      "entries": null,
-      "status": "unchecked (--no-net)"
+      "entries": 13,
+      "status": "ok"
     }
   ],
   "note": "Coverage = corpus depth + live-alert flow per domain. UNDERCOVERED = <10 corpus events OR no alerts in 30d. DEAD feed = resolves to 0 entries; prune or replace."

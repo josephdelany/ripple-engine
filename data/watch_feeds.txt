@@ -18,7 +18,10 @@ fed_press   https://www.federalreserve.gov/feeds/press_all.xml
 # imf_news, arabnews, reliefweb resolved to 0 entries and were not kept).
 # Domain 3 -- Energy & commodities (domain-native wires, not just EIA)
 oilprice    https://oilprice.com/rss/main
-mining_com  https://www.mining.com/feed/
+# mining_com (https://www.mining.com/feed/) removed 2026-08-03: HTTP 403 Cloudflare
+#   anti-bot block, 0 entries via feedparser -- a real dead feed (publisher blocks
+#   automated fetches), not our bug. Replaced with a live metals/mining wire below.
+mining_tech https://www.mining-technology.com/feed/
 # Domain 5 -- Supply chain & shipping (was a real blind spot: no maritime/freight wire)
 gcaptain    https://gcaptain.com/feed/
 freightwaves https://www.freightwaves.com/feed

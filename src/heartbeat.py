@@ -27,6 +27,7 @@ Run:  python3 src/heartbeat.py
 import csv
 import json
 import os
+import re
 import sqlite3
 import sys
 from datetime import datetime, timezone
@@ -50,7 +51,7 @@ def push_health_alert(health):
             ALERT_SEEN.write_text("")
         return
     bad = sorted(f"{r['series_id']}:{r['status']}" for r in health["series"]
-                 if r["status"] != "OK")
+                 if r["status"] not in ("OK", "CLOSED"))
     if health["last_refresh"].get("state") == "failures":
         bad.append("refresh:failures")
     fingerprint = ";".join(bad)
@@ -105,6 +106,25 @@ def override_for(series_id, overrides):
     if best:
         return best[1].get("cadence_days"), best[1].get("publish_lag_days", 0)
     return None, 0
+
+
+_ENDS_RE = re.compile(r"ends\s+(\d{4}-\d{2}-\d{2})")
+
+
+def contract_end_date(notes):
+    """A dated event-contract (e.g. a Polymarket market) records 'ends YYYY-MM-DD' in its notes.
+    Return that date if present, else None. A contract whose end date is in the past has RESOLVED --
+    it is terminal and will never update again, so it should read CLOSED, not STALE (a resolved
+    contract is not a broken feed; flagging it STALE is a false alarm)."""
+    if not notes:
+        return None
+    m = _ENDS_RE.search(notes)
+    if not m:
+        return None
+    try:
+        return datetime.strptime(m.group(1), "%Y-%m-%d").date()
+    except ValueError:
+        return None
 
 
 def business_days_between(d1, d2):
@@ -164,16 +184,23 @@ def main():
     conn = sqlite3.connect(DB)
 
     series = conn.execute(
-        "SELECT s.series_id, s.frequency, MAX(o.obs_date) "
+        "SELECT s.series_id, s.frequency, MAX(o.obs_date), s.notes "
         "FROM series s LEFT JOIN observations o ON o.series_id = s.series_id "
         "GROUP BY s.series_id ORDER BY s.series_id").fetchall()
 
     overrides = load_overrides()
     reports = []
-    for sid, freq, last in series:
+    for sid, freq, last, notes in series:
         last_date = datetime.strptime(last[:10], "%Y-%m-%d").date() if last else None
         cad_over, lag = override_for(sid, overrides)
         status, elapsed, cadence = classify(last_date, freq, today, cad_over, lag)
+        # A dated contract past its end date that has ALSO stopped updating (STALE/DEAD) has
+        # resolved: mark it CLOSED, not a broken feed. But if it's still getting fresh snapshots
+        # (classify -> OK), it's genuinely live (Polymarket keeps some past-dated markets open) --
+        # leave it OK. The fresh-obs signal wins over the nominal end date.
+        end_date = contract_end_date(notes)
+        if status in ("STALE", "DEAD") and end_date is not None and end_date < today:
+            status, elapsed, cadence = "CLOSED", None, None
         reports.append({
             "series_id": sid,
             "frequency": freq,
@@ -191,7 +218,8 @@ def main():
     refresh = last_refresh_status()
 
     # Overall status = worst series status, or trouble if last refresh failed.
-    order = {"OK": 0, "STALE": 1, "DEAD": 2}
+    # CLOSED (resolved contracts) ranks below OK -- it is never trouble.
+    order = {"CLOSED": -1, "OK": 0, "STALE": 1, "DEAD": 2}
     worst = max((r["status"] for r in reports), key=lambda s: order[s], default="OK")
     trouble = worst in ("STALE", "DEAD") or refresh["state"] == "failures"
     overall = "TROUBLE" if trouble else "OK"
@@ -225,8 +253,9 @@ def main():
           + (f"  ({refresh['run_id']})" if refresh.get("run_id") else ""))
     print(f"\n  Wrote {OUT}")
 
-    counts = {s: sum(1 for r in reports if r["status"] == s) for s in ("OK", "STALE", "DEAD")}
-    print(f"  Series: {counts['OK']} OK, {counts['STALE']} STALE, {counts['DEAD']} DEAD")
+    counts = {s: sum(1 for r in reports if r["status"] == s) for s in ("OK", "STALE", "DEAD", "CLOSED")}
+    print(f"  Series: {counts['OK']} OK, {counts['STALE']} STALE, {counts['DEAD']} DEAD, "
+          f"{counts['CLOSED']} CLOSED (resolved contracts)")
     if trouble:
         print("\n  STATUS: TROUBLE -- something is stale/dead or the last refresh failed.")
         print("  ('overdue' column = business days (daily) or calendar days since last "
