@@ -1,0 +1,98 @@
+================================================================================
+LONDON STRATEGIC EDGE (LSE) -- data-source evaluation
+  londonstrategicedge.com | github.com/londonstrategicedge/lse-data | pip: lse-data
+  Evaluated 2026-08-03. Bounded side task. NOTHING wired into the pipeline.
+================================================================================
+
+VERDICT: QUARANTINE (data-quality validation BLOCKED -- needs an API key from Joe).
+  Not adopted, not rejected. See "Verdict" section for the precise conditions.
+
+--------------------------------------------------------------------------------
+1. IS IT REAL?  YES.
+--------------------------------------------------------------------------------
+  - Website live (londonstrategicedge.com), fully JavaScript-rendered.
+  - GitHub repo londonstrategicedge/lse-data: real Python client, MIT-licensed,
+    CHANGELOG, examples, published to PyPI as `lse-data`.
+  - Live API at https://api.londonstrategicedge.com/vault responds with proper
+    auth errors: `GET /vault/usage` -> HTTP 401 {"detail":"missing x-api-key"}.
+  - Claimed scope: "largest free archive", 133B ticks, 118k datasets, stocks (to
+    2003), FX (to 2009), crypto (to 2017), options (to 2014), 14,000+ macro series.
+    Coverage claims are UNVERIFIED (no key -- see blocker).
+
+--------------------------------------------------------------------------------
+2. TERMS -- does research use qualify?  YES for research; NO redistribution.
+--------------------------------------------------------------------------------
+  The full Terms of Service (/terms) is JavaScript-rendered and could NOT be read
+  by automated tools. The authoritative data terms in the client README state:
+
+    "That licence [MIT] extends to the library alone and confers no rights in the
+     data obtained through it. Data retrieved with an LSE key may be used for your
+     own research, trading and model training, including for commercial purposes.
+     It may not be redistributed, resold, or otherwise made available to third
+     parties, sourced from LSE."
+
+  READING:
+   * Research use: EXPLICITLY PERMITTED (satisfies the registration gate).
+   * Redistribution / resale / making-available-to-third-parties: PROHIBITED.
+
+  >>> DECISIVE CONSTRAINT FOR THIS REPO <<<
+  This repository commits data artifacts (samples/receipts) as source-of-truth and
+  is a shareable research object. Committing LSE-sourced data would be
+  REDISTRIBUTION -- forbidden by the terms. Therefore LSE data can NEVER be
+  committed here and can NEVER be a canonical, checked-in series. FRED/EIA are
+  public-domain and committable; that asymmetry alone keeps them canonical.
+
+--------------------------------------------------------------------------------
+3. REGISTRATION / ACCESS -- BLOCKED for automated tooling.
+--------------------------------------------------------------------------------
+  - A key is required for ALL data (vault REST + websocket): no key -> 401.
+  - No keyless / demo / sandbox endpoint was found.
+  - A key is obtained ONLY via the web signup form at londonstrategicedge.com/data
+    (email signup, JavaScript-rendered). No programmatic signup endpoint returns a
+    key (probes of /register,/signup,/key,... were 401/404, ambiguous, none usable).
+  - Terms permit research use, so registration IS authorized -- but it cannot be
+    completed with available tools (JS form). I did NOT brute-force account creation
+    with Joe's email against guessed endpoints (overreach; and the verdict is capped
+    at quarantine regardless -- see below).
+
+  API shape (from the client, for when a key exists):
+    base  https://api.londonstrategicedge.com/vault
+    auth  header  x-api-key: <key>
+    read  client.history(symbol=..., dataset=..., timeframe="1d"|"tick"|..., ...)
+    quota one free key = 10 downloads/hr, up to 1,000,000 rows each, + REST + WS.
+
+--------------------------------------------------------------------------------
+4. CROSS-VALIDATION vs canonical FRED -- NOT PERFORMED (no data fetched).
+--------------------------------------------------------------------------------
+  The requested checks -- Brent + WTI daily history, one intraday series, one macro
+  series, and a daily-close match-rate against our FRED data -- could NOT be run
+  because no sample could be fetched without a key. No match rate is reported here
+  because none was measured; a fabricated number would violate the no-fabrication
+  rule. This section stays empty until a key is provided and the fetch runs.
+
+--------------------------------------------------------------------------------
+5. VERDICT -- QUARANTINE, with conditions.
+--------------------------------------------------------------------------------
+  QUARANTINE (not adopt, not reject), for three independent reasons:
+    (a) No-redistribution term -> LSE data can never be committed or canonical here.
+    (b) Data quality UNVALIDATED (couldn't fetch) -- adoption on unproven data
+        would violate the engine's discipline.
+    (c) FRED/EIA already cover Brent/WTI/macro, are public-domain, committable, and
+        canonical -- LSE offers no advantage for anything both provide.
+
+  WHERE LSE COULD EARN A LOCAL-ONLY ROLE (reassess ONLY after a key + validation):
+    - series FRED/EIA lack: intraday/tick candles, options greeks/flow, exotic
+      instruments -- used LOCAL-ONLY (gitignored), never committed, never canonical,
+      gather -> cache -> engine reads offline.
+  ADOPT (canonical/committed): NONE.
+  REJECT (outright): NO -- it is a legitimate service with permissive research terms.
+
+  TO COMPLETE THE VALIDATION (Joe's move, ~2 min):
+    1. Register at londonstrategicedge.com/data (browser, your email); confirm the
+       full /terms page matches the README summary above (esp. no-redistribution).
+    2. Put the key in tools/config.json (gitignored) or export LSE_API_KEY.
+    3. I will then fetch Brent/WTI daily + one intraday + one macro series, run the
+       daily-close match-rate vs FRED, and fill sections 4-5 with real numbers.
+    Even if quality validates, enforcement rule stands: LSE data stays gitignored,
+    never committed, FRED/EIA remain canonical for anything both provide.
+================================================================================
