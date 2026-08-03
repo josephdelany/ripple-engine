@@ -299,3 +299,5 @@ gdelt_sau_sau_20150415,2015-04-15,conflict_escalation,GDELT candidate: military 
 gdelt_usa_irn_20160115,2016-01-15,sanctions,GDELT candidate: sanctions action involving Iran (2016-01-15),reject,459,G1: only 1 independent source(s) (need >= 2); G5: cluster-duplicate of an existing same-type event (<= 35d),2026-08-03
 gdelt_rus_x_20130715,2013-07-15,sanctions,GDELT candidate: sanctions action involving Russia (2013-07-15),reject,457,G1: only 1 independent source(s) (need >= 2),2026-08-03
 gdelt_sau_yem_20150715,2015-07-15,conflict_escalation,GDELT candidate: military clash / attack involving Saudi Arabia (2015-07-15),reject,453,G1: only 1 independent source(s) (need >= 2),2026-08-03
+angola_leaves_opec_2023,2023-12-21,opec_decision,Angola announces exit from OPEC,keep,0,G5: cluster-duplicate of existing same-type event (2-source verified; Joe decides),2026-08-03
+keystone_xl_revoked_2021,2021-01-20,policy_response,Biden revokes Keystone XL permit,keep,0,G5: cluster-duplicate of existing same-type event (2-source verified; Joe decides),2026-08-03
