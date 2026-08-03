@@ -18,8 +18,8 @@
       "n_episodes": 86,
       "amp": 5.0003,
       "ci95": [
-        0.7659,
-        8.9484
+        0.7839,
+        8.8205
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0069,
@@ -31,15 +31,15 @@
       "label": "HH natgas",
       "unit": "%",
       "n_episodes": 80,
-      "amp": -3.6968,
+      "amp": -2.5841,
       "ci95": [
-        -10.7478,
-        3.8922
+        -10.802,
+        3.896
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.8412,
+      "perm_p": 0.7546,
       "survives_fdr": false,
-      "fdr_q": 0.9143,
+      "fdr_q": 0.8202,
       "generalizes": false
     },
     {
@@ -48,13 +48,13 @@
       "n_episodes": 55,
       "amp": 0.4277,
       "ci95": [
-        -0.2423,
-        1.2007
+        -0.2318,
+        1.2328
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.1178,
       "survives_fdr": false,
-      "fdr_q": 0.2104,
+      "fdr_q": 0.1963,
       "generalizes": false
     },
     {
@@ -63,13 +63,13 @@
       "n_episodes": 86,
       "amp": 5.6873,
       "ci95": [
-        -2.5332,
-        14.1801
+        -2.4314,
+        14.2431
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.0885,
       "survives_fdr": false,
-      "fdr_q": 0.1844,
+      "fdr_q": 0.1702,
       "generalizes": false
     },
     {
@@ -79,12 +79,12 @@
       "amp": 4.7921,
       "ci95": [
         -2.4274,
-        11.1399
+        11.1564
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.0836,
       "survives_fdr": false,
-      "fdr_q": 0.1844,
+      "fdr_q": 0.1702,
       "generalizes": false
     },
     {
@@ -93,8 +93,8 @@
       "n_episodes": 86,
       "amp": 4.2758,
       "ci95": [
-        0.7754,
-        7.6786
+        0.8589,
+        7.7826
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0078,
@@ -108,8 +108,8 @@
       "n_episodes": 63,
       "amp": 16.6725,
       "ci95": [
-        4.166,
-        30.9569
+        4.3174,
+        31.1597
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0053,
@@ -123,13 +123,13 @@
       "n_episodes": 63,
       "amp": 6.1712,
       "ci95": [
-        -0.7839,
-        14.9132
+        -0.7111,
+        15.0662
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.0658,
       "survives_fdr": false,
-      "fdr_q": 0.1828,
+      "fdr_q": 0.1645,
       "generalizes": false
     },
     {
@@ -138,8 +138,8 @@
       "n_episodes": 70,
       "amp": 1.3605,
       "ci95": [
-        -0.2899,
-        2.804
+        -0.2975,
+        2.7938
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.0373,
@@ -153,13 +153,13 @@
       "n_episodes": 70,
       "amp": 1.9308,
       "ci95": [
-        -1.2568,
-        4.2867
+        -1.2822,
+        4.2586
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.082,
       "survives_fdr": false,
-      "fdr_q": 0.1844,
+      "fdr_q": 0.1702,
       "generalizes": false
     },
     {
@@ -168,8 +168,8 @@
       "n_episodes": 70,
       "amp": 1.629,
       "ci95": [
-        -2.2218,
-        4.875
+        -2.2198,
+        4.8573
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.1779,
@@ -183,8 +183,8 @@
       "n_episodes": 70,
       "amp": 0.9726,
       "ci95": [
-        -2.2301,
-        4.6796
+        -2.273,
+        4.6372
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.2968,
@@ -196,15 +196,15 @@
       "label": "Palladium",
       "unit": "%",
       "n_episodes": 74,
-      "amp": 5.2005,
+      "amp": 4.8419,
       "ci95": [
-        -0.1599,
-        10.1856
+        -0.2008,
+        10.1427
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.0184,
-      "survives_fdr": true,
-      "fdr_q": 0.0657,
+      "perm_p": 0.0288,
+      "survives_fdr": false,
+      "fdr_q": 0.1029,
       "generalizes": false
     },
     {
@@ -213,8 +213,8 @@
       "n_episodes": 86,
       "amp": 1.7995,
       "ci95": [
-        0.0875,
-        3.2298
+        0.0771,
+        3.2084
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0086,
@@ -228,13 +228,13 @@
       "n_episodes": 52,
       "amp": 1.5859,
       "ci95": [
-        -0.2067,
-        4.1113
+        -0.2029,
+        4.1018
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.1084,
       "survives_fdr": false,
-      "fdr_q": 0.2085,
+      "fdr_q": 0.1936,
       "generalizes": false
     },
     {
@@ -243,8 +243,8 @@
       "n_episodes": 86,
       "amp": -0.3907,
       "ci95": [
-        -0.7462,
-        0.4129
+        -0.7187,
+        0.3864
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.9657,
@@ -258,8 +258,8 @@
       "n_episodes": 78,
       "amp": 7.2986,
       "ci95": [
-        1.8478,
-        14.791
+        1.8497,
+        14.7665
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0041,
@@ -273,8 +273,8 @@
       "n_episodes": 70,
       "amp": 1.5476,
       "ci95": [
-        -1.9892,
-        5.1963
+        -2.0698,
+        5.1099
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.1974,
@@ -288,8 +288,8 @@
       "n_episodes": 69,
       "amp": 1.0427,
       "ci95": [
-        -2.2511,
-        4.2168
+        -2.3194,
+        4.059
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.2552,
@@ -303,8 +303,8 @@
       "n_episodes": 54,
       "amp": 2.2849,
       "ci95": [
-        -1.582,
-        7.1268
+        -1.5493,
+        7.1804
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.1489,
@@ -318,8 +318,8 @@
       "n_episodes": 43,
       "amp": 1.2578,
       "ci95": [
-        -3.6577,
-        5.7716
+        -3.6228,
+        5.8004
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.285,
@@ -333,8 +333,8 @@
       "n_episodes": 16,
       "amp": 4.255,
       "ci95": [
-        -12.4975,
-        30.384
+        -13.6038,
+        29.2965
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.3976,
@@ -348,8 +348,8 @@
       "n_episodes": 43,
       "amp": 7.234,
       "ci95": [
-        0.466,
-        12.1636
+        0.527,
+        12.1604
       ],
       "ci_excludes_zero": true,
       "perm_p": 0.0061,
@@ -361,15 +361,15 @@
       "label": "USD/EUR",
       "unit": "%",
       "n_episodes": 74,
-      "amp": 0.5604,
+      "amp": 0.8389,
       "ci95": [
-        -0.3758,
-        1.6937
+        -0.354,
+        1.7212
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.1468,
+      "perm_p": 0.055,
       "survives_fdr": false,
-      "fdr_q": 0.2327,
+      "fdr_q": 0.1528,
       "generalizes": false
     },
     {
@@ -378,8 +378,8 @@
       "n_episodes": 86,
       "amp": -0.817,
       "ci95": [
-        -1.6854,
-        0.4974
+        -1.6343,
+        0.5361
       ],
       "ci_excludes_zero": false,
       "perm_p": 0.9391,

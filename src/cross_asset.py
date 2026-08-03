@@ -109,6 +109,29 @@ ASSETS = [
      "kind": "weekly", "unit": "%"},
 ]
 
+# ---- V1 value-chain nodes: DESCRIPTIVE-ONLY extension ------------------------------------------
+# Deliberately SEPARATE from the registered family ASSETS. The confirmatory conditioned map
+# (cross_asset_conditioned.py) and the evidence/figure packs import ASSETS and MUST stay pinned to
+# the frozen pre-registered set -- so a descriptive new node can never silently become a confirmatory
+# claim without a registered amendment (Joe's gate). The descriptive event-study table + the edges
+# table below iterate MAP_ASSETS, so the new nodes get measured and shown; nothing else changes.
+# The MONTHLY petchem/fertilizer PPIs are intentionally NOT here -- a monthly series does not belong
+# in a daily/weekly event-study table ('never mix cadences silently'). They are measured on a monthly
+# clock in the value-chain CHAIN VIEW (src/chain_view.py).
+VALUE_CHAIN = [
+    {"series": "fred.DGASUSGULF",   "label": "Gasoline sp", "entity": "commodity.gasoline_spot",
+     "kind": "price", "unit": "%"},
+    {"series": "fred.DPROPANEMBTX", "label": "Propane",     "entity": "commodity.propane",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.ttf",            "label": "TTF gas",     "entity": "commodity.eu_gas",
+     "kind": "price", "unit": "%"},
+    {"series": "yf.jkm",            "label": "JKM LNG",     "entity": "commodity.lng_asia",
+     "kind": "price", "unit": "%"},
+]
+
+# The descriptive map + edges measure the registered family AND the value-chain nodes.
+MAP_ASSETS = ASSETS + VALUE_CHAIN
+
 # Trading days the CAR+20 accumulates over (t-5..t+20 inclusive) -- recorded as
 # provenance in each edge row (daily assets only).
 N_DAYS = PRE + POST + 1
@@ -156,12 +179,12 @@ def build_table(conn):
     NaN where an asset lacks enough history around that event (reported honestly)."""
     events = pd.read_sql(
         "SELECT event_id, event_date AS date, type FROM events ORDER BY event_date", conn)
-    returns = {a["series"]: asset_returns(conn, a["series"], a["kind"]) for a in ASSETS}
+    returns = {a["series"]: asset_returns(conn, a["series"], a["kind"]) for a in MAP_ASSETS}
 
     rows = []
     for _, ev in events.iterrows():
         row = {"event_id": ev["event_id"], "date": ev["date"], "type": ev["type"]}
-        for a in ASSETS:
+        for a in MAP_ASSETS:
             ret = returns[a["series"]]
             if a["kind"] == "weekly":                       # gasoline: weekly clock
                 wc = weekly_car(ret, ev["date"]) if ret is not None else None
@@ -202,7 +225,7 @@ def populate_edges(conn, table):
     conn.execute("DELETE FROM edges WHERE target_series IS NOT NULL")
     written = 0
     for _, r in table.iterrows():
-        for a in ASSETS:
+        for a in MAP_ASSETS:
             c5, c20 = r[f"{a['series']}_car5"], r[f"{a['series']}_car20"]
             if pd.isna(c20):
                 continue
@@ -231,7 +254,7 @@ def propagation_summary(table):
     for t in types:
         grp = clustered[clustered["type"] == t]
         cells = {}
-        for a in ASSETS:
+        for a in MAP_ASSETS:
             c5 = grp[f"{a['series']}_car5"].dropna()
             c20 = grp[f"{a['series']}_car20"].dropna()
             cells[a["series"]] = {
@@ -267,15 +290,15 @@ def write_results(table, summary):
     w("")
 
     hdr = f"  {'event type':<24}{'n':>3}  " + "".join(
-        f"{a['label']:>12}" for a in ASSETS)
+        f"{a['label']:>12}" for a in MAP_ASSETS)
     for horizon in ("car20", "car5"):
         w(f"CLUSTERED MEAN {'CAR+20' if horizon == 'car20' else 'CAR+5'} "
           f"by event type x asset:")
         w(hdr)
-        w("  " + "-" * (29 + 12 * len(ASSETS)))
+        w("  " + "-" * (29 + 12 * len(MAP_ASSETS)))
         for t, info in summary.items():
             line = f"  {t:<24}{info['n_type']:>3}  "
-            for a in ASSETS:
+            for a in MAP_ASSETS:
                 cell = info["cells"][a["series"]][horizon]
                 line += f"{_cell(cell, a['unit']):>12}"
             w(line)
@@ -318,7 +341,7 @@ def write_results(table, summary):
         r = row.iloc[0]
         w(f"  {'asset':<14}{'CAR+5':>12}{'CAR+20':>12}   unit")
         w("  " + "-" * 52)
-        for a in ASSETS:
+        for a in MAP_ASSETS:
             c5, c20 = r[f"{a['series']}_car5"], r[f"{a['series']}_car20"]
             c5s = "n/a" if pd.isna(c5) else f"{c5:+.1f}"
             c20s = "n/a" if pd.isna(c20) else f"{c20:+.1f}"
