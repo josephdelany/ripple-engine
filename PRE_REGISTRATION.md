@@ -121,6 +121,27 @@ genuine null stays null.
 Expectation stated up front: this may well be **null** (gold's safe-haven bid may not depend on trailing
 conflict intensity) — reported honestly either way.
 
+## Amendment 2026-08-03 (V3 — the cross-chain battery)
+Declared **before** the battery is run (register-then-run; git proves `src/cross_chain.py` predates
+`data/cross_chain.json`). A SEPARATE family from the oil edge battery: does the V1 value chain transmit
+under a decision rule fixed in advance? Directions are fixed here; tested on the grown corpus (N=291).
+
+**Registered family (directions fixed):**
+| id | test | direction | mechanism |
+|---|---|---|---|
+| CC1 | supply events (chokepoint ∪ infrastructure) → diesel crack, CAR+10 | **+** (widens) | refined product tightens faster than crude |
+| CC2 | supply events → gasoline crack, CAR+10 | **+** (widens) | same, motor-fuel channel |
+| CC3 | sanctions events → copper, CAR+20 | **−** (down) | trade friction is growth-negative for the industrial metal |
+| CC4 | fertilizer PPI → wheat, monthly pass-through β | **+** | fertilizer cost lifts crop prices |
+| CC5 | fertilizer PPI → corn, monthly pass-through β | **+** | same |
+
+**Decision rule (fixed):** VALIDATED iff the 95% bootstrap CI excludes zero *in the predicted direction*
+**and** it survives family-wise **BH-FDR (q=0.10)**. Bonferroni (α=0.05) and the **raw** perm-p are
+reported alongside every verdict — breadth never manufactures a discovery. A **placebo** (shuffled event
+dates) must send the family null. Expectation stated up front: **most are expected null** (chain_view
+showed cracks strong-contemporaneous, fertilizer→food weak); nulls are reported as results.
+
 ---
-*Results (after running `python3 src/edge_battery.py`) live in `data/edge_battery.json` and are written
-up in `EDGE_PORTFOLIO.md`. The original battery section above is frozen; amendments are dated and appended.*
+*Results (after running `python3 src/edge_battery.py` / `src/cross_chain.py`) live in
+`data/edge_battery.json` / `data/cross_chain.json`. The original battery section above is frozen;
+amendments are dated and appended.*
