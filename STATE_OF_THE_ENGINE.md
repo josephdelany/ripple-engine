@@ -137,9 +137,10 @@ single active plan ("other Claude Code sessions retire from this repo"). Moved t
 - `GULF_RISK_VISION.md` → subsumed by the roadmap's Vision section + `NORTH_STAR.md`.
 - `STORIES_HUB_PLAN.md` → subsumed by roadmap V5 (surfaces / The Daily).
 - `OPENBB_TERMINAL_DESIGN.md` → subsumed by roadmap V5 (surfaces).
-- `TASK_BRIEF_01–13,22.md`, `TASK_QUEUE_A.md` → historical per-sprint work
-  orders (execution records, like git history); archived, superseded by the
-  roadmap as the only active plan.
+
+`TASK_BRIEF_*.md` and `TASK_QUEUE_A.md` are NOT archived — they are historical
+per-sprint execution records (closed tickets, like git history), not competing
+roadmaps, so they stay in root untouched.
 
 ### Kept as canonical (NOT roadmaps — specs, results, method)
 `CLAUDE.md`, `VISION_ROADMAP.md`, `BRIEF_SKELETON.md`, `PRE_REGISTRATION.md`,

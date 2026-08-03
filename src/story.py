@@ -5,7 +5,8 @@ A "story" is a human-curated, self-updating view onto signals the engine already
 (data/stories/<id>.yaml). This assembles a story's LIVE STATE from those signals, detects
 MATERIAL CHANGES since the last run (the phone-ping trigger), and writes a plain read.
 
-This is the disciplined MVP from STORIES_HUB_PLAN.md: a story is a view + a change-detector,
+This is the disciplined MVP from docs/superseded/STORIES_HUB_PLAN.md (archived under VISION_ROADMAP
+V0.3; its plan now lives in roadmap V5): a story is a view + a change-detector,
 NOT (yet) the full gap/hypothesis/Brier machinery -- that follows the roadmap. Deterministic
 assembly; the thesis prose is human-curated in the yaml (no LLM in the loop, no fabrication).
 
