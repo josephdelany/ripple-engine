@@ -63,6 +63,8 @@ STEPS = [
     # token needed once cached); refresh the cache monthly with `python3 src/fetch_ucdp.py --refresh`.
     ("fetch_ucdp",     "src/fetch_ucdp.py",     "observations"),
     ("fetch_market",   "src/fetch_market_live.py", "observations"),
+    # Value chain (V1): refined fuels, petchem/fertilizer PPIs, European TTF + Asian LNG.
+    ("fetch_value_chain", "src/fetch_value_chain.py", "observations"),
     # OPEC fiscal-stress gap: IMF breakeven (via FRED) vs live Brent. Needs live price first.
     ("breakevens",     "src/fetch_breakevens.py", "observations"),
     # Stories layer: assemble tracked-story state + detect material changes (ping trigger).
