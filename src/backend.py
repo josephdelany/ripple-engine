@@ -487,6 +487,28 @@ WIDGETS = {
         "gridData": {"w": 20, "h": 10},
         "type": "chart",
     },
+    "chart_corpus_growth": {
+        "name": "Corpus Growth",
+        "description": "Cumulative count of verified coded events over time -- the corpus accreting.",
+        "endpoint": "chart_corpus_growth",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
+    },
+    "chart_calibration": {
+        "name": "Calibration (reliability)",
+        "description": "Observed frequency vs forecast probability per band, against the perfect-"
+                       "calibration diagonal (marker size ~ n). From the resolved forecast log.",
+        "endpoint": "chart_calibration",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
+    },
+    "chart_alert_timeline": {
+        "name": "Alert Timeline",
+        "description": "Watcher alerts per day from the alert queue -- when the wire lit up.",
+        "endpoint": "chart_alert_timeline",
+        "gridData": {"w": 20, "h": 9},
+        "type": "chart",
+    },
 }
 
 
@@ -517,7 +539,8 @@ APPS = [{
                 _lw("alert_queue", 20, 40, 20, 9),
                 _lw("story_opec", 0, 49, 40, 9),
                 _lw("transmission_chains", 0, 58, 40, 13),
-                _lw("conflict_intensity", 0, 71, 40, 9),
+                _lw("conflict_intensity", 0, 71, 20, 9),
+                _lw("chart_alert_timeline", 20, 71, 20, 9),     # V5.0
             ],
         },
         "physical": {
@@ -541,9 +564,11 @@ APPS = [{
                 _lw("chart_propagation", 20, 12, 20, 10),       # heatmap (was a table)
                 _lw("analogue_forecast", 0, 22, 40, 12),
                 _lw("analogue_backtest", 0, 34, 40, 9),
-                _lw("scenario_playbook", 0, 43, 20, 9),
-                _lw("event_detail", 20, 43, 20, 9),
-                _lw("event_database", 0, 52, 40, 11),           # table -- correct form here
+                _lw("chart_corpus_growth", 0, 43, 20, 9),       # V5.0
+                _lw("chart_calibration", 20, 43, 20, 9),        # V5.0
+                _lw("scenario_playbook", 0, 52, 20, 9),
+                _lw("event_detail", 20, 52, 20, 9),
+                _lw("event_database", 0, 61, 40, 11),           # table -- correct form here
             ],
         },
     },
@@ -1720,6 +1745,65 @@ def chart_propagation():
     return {"data": [heat],
             "layout": _base_layout("Propagation: mean CAR+20 by event type × asset (price assets, %)",
                                    "event type", "asset")}
+
+
+@app.get("/chart_corpus_growth")
+def chart_corpus_growth():
+    """Corpus growth: cumulative count of coded events over time (by event date). Units: events."""
+    conn = sqlite3.connect(DB)
+    dates = [d for (d,) in conn.execute(
+        "SELECT event_date FROM events WHERE event_date IS NOT NULL ORDER BY event_date")]
+    conn.close()
+    x, y = dates, list(range(1, len(dates) + 1))
+    line = {"x": x, "y": y, "type": "scatter", "mode": "lines", "name": f"corpus (n={len(dates)})",
+            "line": {"color": "#5fb87a", "width": 2, "shape": "hv"}}     # step: a count, not interpolated
+    return {"data": [line],
+            "layout": _base_layout(f"Corpus growth: {len(dates)} verified events pinned in time",
+                                   "cumulative events", "event date")}
+
+
+@app.get("/chart_calibration")
+def chart_calibration():
+    """Reliability plot from the forecast log: observed frequency vs forecast probability per band,
+    against the perfect-calibration diagonal. Marker size ~ n. Units: probability on both axes."""
+    rep = _read_json("calibration_report.json")
+    bins = (rep.get("overall") or {}).get("reliability", []) if rep.get("ran") else []
+    px = [b["mean_forecast"] for b in bins]
+    py = [b["observed"] for b in bins]
+    sizes = [max(8, min(40, 6 + b["n"] ** 0.5 * 2)) for b in bins]
+    text = [f"band {b['band']}: forecast {b['mean_forecast']}, observed {b['observed']} (n={b['n']})"
+            for b in bins]
+    diag = {"x": [0, 1], "y": [0, 1], "type": "scatter", "mode": "lines", "name": "perfect calibration",
+            "line": {"color": "#6a7280", "width": 1, "dash": "dash"}, "hoverinfo": "skip"}
+    pts = {"x": px, "y": py, "type": "scatter", "mode": "markers+lines", "text": text,
+           "hoverinfo": "text", "name": "engine", "marker": {"color": "#4c9be8", "size": sizes},
+           "line": {"color": "#4c9be8", "width": 1}}
+    o = rep.get("overall") or {}
+    title = (f"Calibration (n={o.get('n','?')}, Brier {o.get('brier','?')}, skill {o.get('skill_vs_base','?')})"
+             if bins else "Calibration -- no resolved forecasts yet")
+    lay = _base_layout(title, "observed frequency", "forecast probability")
+    lay["yaxis"].update({"range": [0, 1]}); lay["xaxis"].update({"range": [0, 1]})
+    return {"data": [diag, pts], "layout": lay}
+
+
+@app.get("/chart_alert_timeline")
+def chart_alert_timeline():
+    """Alert timeline: watcher alerts per day from the alert queue. Units: alerts/day."""
+    import csv as _csv
+    from collections import Counter
+    per_day = Counter()
+    p = DATA / "alert_queue.csv"
+    if p.exists():
+        for r in _csv.DictReader(open(p, newline="", encoding="utf-8")):
+            ts = (r.get("timestamp_utc") or "")[:10]
+            if len(ts) == 10:
+                per_day[ts] += 1
+    days = sorted(per_day)
+    bar = {"x": days, "y": [per_day[d] for d in days], "type": "bar", "name": "alerts/day",
+           "marker": {"color": "#e8894c"}}
+    return {"data": [bar],
+            "layout": _base_layout(f"Watcher alert timeline ({sum(per_day.values())} alerts)",
+                                   "alerts / day", "date")}
 
 
 if __name__ == "__main__":
