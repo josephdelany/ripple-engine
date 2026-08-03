@@ -30,8 +30,10 @@ step "12/14 robustness";                  python3 src/robustness.py
 step "13/17 cross-asset edges";           python3 src/cross_asset.py
 step "14/17 data dictionary";             python3 src/data_dictionary.py
 # V-Q rigor lenses (additive; reproduce the H1 robustness receipts from Brent/VIX/events above).
-step "15/17 H1 spec curve (V-Q2)";        python3 src/spec_curve.py
-step "16/17 H1 influence (V-Q3)";         python3 src/influence.py
-step "17/17 vintage check (V-Q1)";        python3 src/vintage_check.py
+step "15/19 H1 spec curve (V-Q2)";        python3 src/spec_curve.py
+step "16/19 H1 influence (V-Q3)";         python3 src/influence.py
+step "17/19 H1 temporal hold-out (V-Q4)"; python3 src/holdout.py
+step "18/19 quarterly calibration (V-Q4)";python3 src/calibration_report.py
+step "19/19 vintage check (V-Q1)";        python3 src/vintage_check.py
 
 echo; echo "==== repro complete: data/oil.db rebuilt from zero ===="

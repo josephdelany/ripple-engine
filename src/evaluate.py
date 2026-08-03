@@ -168,14 +168,28 @@ def run():
     ma = miss_audit(conn)
     n_events = conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
     conn.close()
+    # V-Q4: fold the temporal hold-out + quarterly calibration receipts in as headline lenses
+    # (read from their committed JSON; ADDITIVE -- they never affect framework_sound).
+    ho = _rj("holdout.json")
+    qc = _rj("calibration_report.json")
+    holdout = {"holds_out_of_sample": ho.get("holds_out_of_sample"),
+               "oos_2019plus_amp_pp": (ho.get("out_of_sample_2019plus") or {}).get("amp_pp"),
+               "in_sample_pre2019_amp_pp": (ho.get("in_sample_pre2019") or {}).get("amp_pp")} if ho else {}
+    qcal = {"n": (qc.get("overall") or {}).get("n"), "span": qc.get("span"),
+            "brier": (qc.get("overall") or {}).get("brier"),
+            "skill_vs_base": (qc.get("overall") or {}).get("skill_vs_base"),
+            "n_quarters": qc.get("n_quarters")} if qc.get("ran") else {}
+
     framework_ok = bool(pl.get("null_as_expected") and sc.get("all_consistent"))
     report = {"corpus": {"n_events": n_events},
               "placebo": pl, "surface_consistency": sc, "calibration": cal, "power": pw,
-              "miss_audit": ma,
+              "miss_audit": ma, "temporal_holdout": holdout, "quarterly_calibration": qcal,
               "overall": {"framework_sound": framework_ok,
                           "headline": f"placebo {'null (good)' if pl.get('null_as_expected') else 'NOT NULL (!!)'}; "
                           f"surfaces {'consistent' if sc.get('all_consistent') else 'INCONSISTENT (!!)'}; "
-                          f"gap-ledger skill vs base {cal.get('skill_vs_base')}"}}
+                          f"gap-ledger skill vs base {cal.get('skill_vs_base')}"
+                          + (f"; H1 holds out-of-sample ({holdout.get('oos_2019plus_amp_pp')}pp on 2019+)"
+                             if holdout.get("holds_out_of_sample") else "")}}
     OUT.write_text(json.dumps(report, indent=2, default=str))
     _write_md(report)
     return report
@@ -211,6 +225,17 @@ def _write_md(r):
     L += ["", "## 5. Miss-audit (worst-scored resolved gaps)", "", "| gap | call | outcome | Brier | root cause |", "|---|---|---|---|---|"]
     for m in r["miss_audit"]:
         L.append(f"| {m['subject']} | {m['engine_call']} | {m['outcome']} | {m['brier']} | {m['root_cause']} |")
+    ho, qc = r.get("temporal_holdout") or {}, r.get("quarterly_calibration") or {}
+    if ho:
+        L += ["", "## 6. Temporal hold-out (V-Q4) — H1 conditioning rule fit pre-2019, tested 2019+",
+              f"In-sample (pre-2019) **{ho.get('in_sample_pre2019_amp_pp')}pp** vs out-of-sample (2019+) "
+              f"**{ho.get('oos_2019plus_amp_pp')}pp** using the FROZEN pre-2019 VIX threshold — "
+              f"{'holds out-of-sample ✓' if ho.get('holds_out_of_sample') else 'does NOT clearly hold (reported honestly)'}."]
+    if qc:
+        L += ["", "## 7. Quarterly calibration (V-Q4) — the forecast log as a standing OOS test",
+              f"Overall n={qc.get('n')} ({qc.get('span')}), Brier **{qc.get('brier')}**, skill vs base "
+              f"**{qc.get('skill_vs_base')}** across {qc.get('n_quarters')} quarters. "
+              f"Full breakdown in data/calibration_report.txt."]
     L.append("")
     MD.write_text("\n".join(L))
 

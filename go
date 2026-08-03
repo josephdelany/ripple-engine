@@ -32,6 +32,8 @@ STEPS=(
   "read_backtest.py"
   "signal_registry.py"
   "sowhat.py"
+  "holdout.py"
+  "calibration_report.py"
   "evaluate.py"
   "evidence.py"
   "coverage.py"
