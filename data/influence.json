@@ -1,0 +1,49 @@
+{
+  "headline": "H1 VIX-stress amplification of |CAR+20| Brent, registered spec (130/+20/35/median/raw)",
+  "baseline_amp_pp": 5.0003,
+  "baseline_n": 86,
+  "n_events_tested": 289,
+  "max_single_event_influence_pp": 3.162,
+  "most_load_bearing": {
+    "event_id": "libya_haftar_blockade_2020",
+    "amp_without": 3.7363,
+    "delta": -1.264
+  },
+  "most_dampening": {
+    "event_id": "rosneft_trading_venez_2020",
+    "amp_without": 8.1623,
+    "delta": 3.162
+  },
+  "min_amp_when_any_one_removed_pp": 3.736,
+  "sign_ever_flips": false,
+  "decisive_floor_pp": 1.0,
+  "any_single_event_decisive": false,
+  "top5_load_bearing": [
+    {
+      "event_id": "libya_haftar_blockade_2020",
+      "amp_without": 3.7363,
+      "delta": -1.264
+    },
+    {
+      "event_id": "opec_extend_june_2020",
+      "amp_without": 4.4813,
+      "delta": -0.519
+    },
+    {
+      "event_id": "lehman_collapse_2008",
+      "amp_without": 4.5372,
+      "delta": -0.4631
+    },
+    {
+      "event_id": "opec_deeper_cut_dec_2019",
+      "amp_without": 4.5655,
+      "delta": -0.4348
+    },
+    {
+      "event_id": "opec_cut_1999",
+      "amp_without": 4.5737,
+      "delta": -0.4266
+    }
+  ],
+  "verdict": "No single event is decisive: removing any one leaves the amplification at >= 3.74pp (never below 1.0pp, never flips sign); the largest single-event swing is 3.16pp."
+}

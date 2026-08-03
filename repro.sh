@@ -27,7 +27,11 @@ step "9/14  derived signals";             python3 src/derive_signals.py
 step "10/14 event study";                 python3 src/event_study.py
 step "11/14 conditioned study";           python3 src/conditioned_study.py
 step "12/14 robustness";                  python3 src/robustness.py
-step "13/14 cross-asset edges";           python3 src/cross_asset.py
-step "14/14 data dictionary";             python3 src/data_dictionary.py
+step "13/17 cross-asset edges";           python3 src/cross_asset.py
+step "14/17 data dictionary";             python3 src/data_dictionary.py
+# V-Q rigor lenses (additive; reproduce the H1 robustness receipts from Brent/VIX/events above).
+step "15/17 H1 spec curve (V-Q2)";        python3 src/spec_curve.py
+step "16/17 H1 influence (V-Q3)";         python3 src/influence.py
+step "17/17 vintage check (V-Q1)";        python3 src/vintage_check.py
 
 echo; echo "==== repro complete: data/oil.db rebuilt from zero ===="
