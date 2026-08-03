@@ -462,6 +462,31 @@ WIDGETS = {
         "gridData": {"w": 20, "h": 9},
         "type": "chart",
     },
+    # --- V5.0 study charts ---
+    "chart_brent_events": {
+        "name": "Brent + Corpus Events (the signature view)",
+        "description": "Brent's full price history ($/bbl) with every coded corpus event pinned on "
+                       "the line. The picture the whole engine is built on.",
+        "endpoint": "chart_brent_events",
+        "gridData": {"w": 40, "h": 12},
+        "type": "chart",
+    },
+    "chart_ripple": {
+        "name": "The Ripple (CAR curves by event type)",
+        "description": "Mean cumulative abnormal return in Brent around each event type, with a "
+                       "+/-1 SE band (dispersion shown). Units: CAR %, x = trading days.",
+        "endpoint": "chart_ripple",
+        "gridData": {"w": 20, "h": 10},
+        "type": "chart",
+    },
+    "chart_propagation": {
+        "name": "Propagation Heatmap (CAR+20 by type × asset)",
+        "description": "Mean CAR+20 by event type x PRICE asset, coloured red/blue. Price assets "
+                       "only (%) -- yields (bps) are not mixed into one grid.",
+        "endpoint": "chart_propagation",
+        "gridData": {"w": 20, "h": 10},
+        "type": "chart",
+    },
 }
 
 
@@ -511,13 +536,14 @@ APPS = [{
         "history": {
             "id": "history", "name": "The Study",
             "layout": [
-                _lw("analogue_forecast", 0, 0, 40, 12),
-                _lw("analogue_backtest", 0, 12, 40, 9),
-                _lw("ripple_by_type", 0, 21, 20, 9),
-                _lw("scenario_playbook", 20, 21, 20, 9),
-                _lw("event_detail", 0, 30, 40, 11),
-                _lw("event_database", 0, 41, 20, 11),
-                _lw("propagation_map", 20, 41, 20, 11),
+                _lw("chart_brent_events", 0, 0, 40, 12),        # V5.0 signature view
+                _lw("chart_ripple", 0, 12, 20, 10),             # ripple curves (was a table)
+                _lw("chart_propagation", 20, 12, 20, 10),       # heatmap (was a table)
+                _lw("analogue_forecast", 0, 22, 40, 12),
+                _lw("analogue_backtest", 0, 34, 40, 9),
+                _lw("scenario_playbook", 0, 43, 20, 9),
+                _lw("event_detail", 20, 43, 20, 9),
+                _lw("event_database", 0, 52, 40, 11),           # table -- correct form here
             ],
         },
     },
@@ -1585,6 +1611,115 @@ def chart_attention():
         traces.append((name, x, y))
     conn.close()
     return _line_fig("Wikipedia pageviews (attention)", traces, "views/day")
+
+
+# ============================================================================
+# V5.0 visual overhaul -- real Plotly charts where a chart is the honest form.
+# Standard: every chart labelled with units and n; no truncated axes, no
+# smoothing that hides dispersion. Figures are plain dicts (OpenBB renders them).
+# ============================================================================
+
+def _base_layout(title, ytitle="", xtitle=""):
+    return {"title": {"text": title}, "margin": {"t": 44, "r": 15, "b": 40, "l": 52},
+            "paper_bgcolor": "rgba(0,0,0,0)", "plot_bgcolor": "rgba(0,0,0,0)",
+            "font": {"color": "#c7ccd6"}, "yaxis": {"title": ytitle},
+            "xaxis": {"title": xtitle}, "legend": {"orientation": "h"},
+            "template": "plotly_dark"}
+
+
+@app.get("/chart_brent_events")
+def chart_brent_events():
+    """THE signature view: Brent's full price history with every corpus event pinned on the line
+    (marker at the price on the event's day). Units $/bbl; n = events shown."""
+    import bisect
+    conn = sqlite3.connect(DB)
+    rows = [(d, v) for d, v in conn.execute(
+        "SELECT obs_date, value FROM observations WHERE series_id='fred.DCOILBRENTEU' "
+        "AND value IS NOT NULL GROUP BY obs_date ORDER BY obs_date")]
+    evs = conn.execute("SELECT event_date, title, type FROM events ORDER BY event_date").fetchall()
+    conn.close()
+    bx = [d for d, _ in rows]; by = [v for _, v in rows]
+    mx, my, mtext = [], [], []
+    for d, title, typ in evs:                       # pin each event at the price on/just before its day
+        i = bisect.bisect_right(bx, d) - 1
+        if i >= 0:
+            mx.append(d); my.append(by[i]); mtext.append(f"{d} — {title} [{typ}]")
+    line = {"x": bx, "y": by, "type": "scatter", "mode": "lines", "name": "Brent ($/bbl)",
+            "line": {"color": "#4c9be8", "width": 1}}
+    marks = {"x": mx, "y": my, "type": "scatter", "mode": "markers",
+             "name": f"corpus events (n={len(mx)})", "text": mtext, "hoverinfo": "text",
+             "marker": {"color": "#e8894c", "size": 6, "line": {"width": 0.5, "color": "#0b0d10"}}}
+    return {"data": [line, marks],
+            "layout": _base_layout(f"Brent crude with the {len(mx)}-event corpus pinned on it",
+                                   "$/bbl", "date")}
+
+
+@app.get("/chart_ripple")
+def chart_ripple():
+    """Ripple curves: the mean cumulative abnormal return (CAR) path in Brent around each event type,
+    with a +/-1 standard-error band (dispersion shown, not hidden). Units: CAR %, x = trading days."""
+    import numpy as np
+    import event_study as ES
+    conn = sqlite3.connect(DB)
+    ret = ES.load_returns(conn)
+    evs = conn.execute("SELECT event_date, type FROM events ORDER BY event_date").fetchall()
+    conn.close()
+    paths = {}
+    for date, typ in evs:
+        car = ES.car_for_event(ret, date)
+        if car is not None:
+            paths.setdefault(typ, []).append(car)
+    rel = list(range(-ES.PRE, ES.POST + 1))
+    top = sorted(paths, key=lambda t: len(paths[t]), reverse=True)[:5]      # 5 best-sampled types
+    palette = ["#4c9be8", "#e8894c", "#5fb87a", "#c76fd0", "#d0b24c"]
+    data = []
+    for typ, col in zip(top, palette):
+        arr = np.vstack(paths[typ]) * 100.0                                 # -> %
+        n = len(arr); mean = arr.mean(axis=0)
+        se = arr.std(axis=0, ddof=1) / np.sqrt(n) if n > 1 else np.zeros_like(mean)
+        hexa = col.lstrip("#"); rgb = tuple(int(hexa[i:i+2], 16) for i in (0, 2, 4))
+        band = f"rgba({rgb[0]},{rgb[1]},{rgb[2]},0.15)"
+        data.append({"x": rel + rel[::-1], "y": list(mean + se) + list((mean - se)[::-1]),
+                     "fill": "toself", "fillcolor": band, "line": {"color": "rgba(0,0,0,0)"},
+                     "hoverinfo": "skip", "showlegend": False, "type": "scatter"})
+        data.append({"x": rel, "y": list(mean), "type": "scatter", "mode": "lines",
+                     "name": f"{typ} (n={n})", "line": {"color": col, "width": 2}})
+    lay = _base_layout("The ripple: mean CAR in Brent by event type (+/-1 SE band)",
+                       "cumulative abnormal return (%)", "trading days relative to event")
+    lay["shapes"] = [{"type": "line", "x0": 0, "x1": 0, "y0": 0, "y1": 1, "yref": "paper",
+                      "line": {"color": "#6a7280", "width": 1, "dash": "dash"}}]
+    return {"data": data, "layout": lay}
+
+
+@app.get("/chart_propagation")
+def chart_propagation():
+    """Propagation heatmap: mean CAR+20 by event type x PRICE asset, coloured (red/blue), not numbers.
+    PRICE assets only (unit %, comparable) -- yields (bps) are NOT mixed into the same grid (that would
+    lie). Built from the precomputed cross-asset edges. Hover shows the value and n."""
+    conn = sqlite3.connect(DB)
+    rows = conn.execute(
+        "SELECT e.type, ed.target_series, AVG(ed.car20), COUNT(*) "
+        "FROM edges ed JOIN events e ON e.event_id = ed.event_id "
+        "WHERE ed.target_series IS NOT NULL AND ed.units = '%' "
+        "GROUP BY e.type, ed.target_series").fetchall()
+    conn.close()
+    types = sorted({r[0] for r in rows})
+    assets = sorted({r[1] for r in rows})
+    zmap = {(r[0], r[1]): (r[2], r[3]) for r in rows}
+    z, text = [], []
+    for t in types:
+        zr, tr = [], []
+        for a in assets:
+            cell = zmap.get((t, a))
+            zr.append(round(cell[0], 2) if cell else None)
+            tr.append(f"{t} → {a}: {cell[0]:+.1f}% (n={cell[1]})" if cell else f"{t} → {a}: n/a")
+        z.append(zr); text.append(tr)
+    heat = {"type": "heatmap", "z": z, "x": assets, "y": types, "text": text, "hoverinfo": "text",
+            "colorscale": "RdBu", "reversescale": True, "zmid": 0,
+            "colorbar": {"title": "CAR+20 (%)"}}
+    return {"data": [heat],
+            "layout": _base_layout("Propagation: mean CAR+20 by event type × asset (price assets, %)",
+                                   "event type", "asset")}
 
 
 if __name__ == "__main__":
