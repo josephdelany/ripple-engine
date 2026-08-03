@@ -121,6 +121,8 @@ STEPS = [
     ("resolve_reads",   "src/resolve_reads.py",  "reads"),
     # cross-asset propagation map. Writes edge rows (one per event x asset).
     ("cross_asset",    "src/cross_asset.py",    "edges"),
+    # Value-chain CHAIN VIEW (V1): hop-by-hop pass-through crude->products->petchem/fertilizer->food.
+    ("chain_view",     "src/chain_view.py",     "observations"),
     # the pre-registered edge battery: re-score the family on fresh data. Writes a JSON artifact
     # (0 measured rows). Amplification results use the rebuilt DB; the mispricing sub-block reads
     # the existing gap ledger (suggestive either way).

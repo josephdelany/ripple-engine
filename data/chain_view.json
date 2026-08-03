@@ -1,0 +1,173 @@
+{
+  "what": "value-chain hop-by-hop pass-through (descriptive)",
+  "hops": [
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "fred.DGASUSGULF",
+      "down_label": "Gasoline (Gulf)",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.648,
+        "corr": 0.599,
+        "n": 10078,
+        "strength": "strong"
+      }
+    },
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "fred.DHOILNYH",
+      "down_label": "Diesel/heat-oil",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.603,
+        "corr": 0.641,
+        "n": 10080,
+        "strength": "strong"
+      }
+    },
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "fred.DPROPANEMBTX",
+      "down_label": "Propane",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.391,
+        "corr": 0.406,
+        "n": 8522,
+        "strength": "moderate"
+      }
+    },
+    {
+      "up": "fred.DHHNGSP",
+      "up_label": "HH natgas",
+      "down": "yf.ttf",
+      "down_label": "TTF (EU gas)",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.043,
+        "corr": 0.083,
+        "n": 2184,
+        "strength": "negligible"
+      }
+    },
+    {
+      "up": "fred.DHHNGSP",
+      "up_label": "HH natgas",
+      "down": "yf.jkm",
+      "down_label": "JKM (Asia LNG)",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.013,
+        "corr": 0.027,
+        "n": 2771,
+        "strength": "negligible"
+      }
+    },
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "yf.jkm",
+      "down_label": "JKM (Asia LNG)",
+      "cadence": "daily",
+      "result": {
+        "lag": 0,
+        "beta": 0.071,
+        "corr": 0.059,
+        "n": 2770,
+        "strength": "negligible"
+      }
+    },
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "fred.PCU325211325211",
+      "down_label": "Petchem PPI",
+      "cadence": "monthly",
+      "result": {
+        "lag": 2,
+        "beta": 0.068,
+        "corr": 0.371,
+        "n": 483,
+        "strength": "moderate"
+      }
+    },
+    {
+      "up": "fred.DHHNGSP",
+      "up_label": "HH natgas",
+      "down": "fred.PCU325211325211",
+      "down_label": "Petchem PPI",
+      "cadence": "monthly",
+      "result": {
+        "lag": 2,
+        "beta": 0.013,
+        "corr": 0.117,
+        "n": 351,
+        "strength": "negligible"
+      }
+    },
+    {
+      "up": "fred.DHHNGSP",
+      "up_label": "HH natgas",
+      "down": "fred.PCU325311325311",
+      "down_label": "Fertilizer PPI",
+      "cadence": "monthly",
+      "result": {
+        "lag": 3,
+        "beta": 0.043,
+        "corr": 0.197,
+        "n": 350,
+        "strength": "weak"
+      }
+    },
+    {
+      "up": "fred.DCOILWTICO",
+      "up_label": "WTI crude",
+      "down": "fred.PCU325311325311",
+      "down_label": "Fertilizer PPI",
+      "cadence": "monthly",
+      "result": {
+        "lag": 2,
+        "beta": 0.058,
+        "corr": 0.162,
+        "n": 483,
+        "strength": "weak"
+      }
+    },
+    {
+      "up": "fred.PCU325311325311",
+      "up_label": "Fertilizer PPI",
+      "down": "yf.wheat",
+      "down_label": "Wheat",
+      "cadence": "monthly",
+      "result": {
+        "lag": 0,
+        "beta": 0.141,
+        "corr": 0.072,
+        "n": 311,
+        "strength": "negligible"
+      }
+    },
+    {
+      "up": "fred.PCU325311325311",
+      "up_label": "Fertilizer PPI",
+      "down": "yf.corn",
+      "down_label": "Corn",
+      "cadence": "monthly",
+      "result": {
+        "lag": 0,
+        "beta": 0.363,
+        "corr": 0.195,
+        "n": 311,
+        "strength": "weak"
+      }
+    }
+  ]
+}
