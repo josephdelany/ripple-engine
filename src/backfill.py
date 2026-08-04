@@ -88,9 +88,21 @@ def run():
                                "failed_gates": "; ".join(res["reasons"]),
                                "queued_at": today.isoformat()})
 
+    # PRESERVE genuine manually-added borderline entries (real 2-source events held on G5, e.g. Wagner/
+    # Angola/Keystone) -- they are NOT in the candidate pool, so don't let the rewrite drop them.
+    cand_ids = {(r.get("event_id") or "").strip() for r in cands}
+    fresh_ids = {r["event_id"] for r in borderline}
+    manual = []
+    if QUEUE.exists():
+        for r in csv.DictReader(open(QUEUE, newline="", encoding="utf-8")):
+            eid = (r.get("event_id") or "").strip()
+            if eid and eid not in cand_ids and eid not in fresh_ids and eid not in have:
+                manual.append(r)
+
     # rank: triage 'keep' first, then higher salience, then most-recent event_date. Cap (expire the tail).
     borderline.sort(key=lambda r: (r["triage"] != "keep", -r["salience"], r["event_date"]), reverse=False)
-    kept, dropped = borderline[:QUEUE_CAP], borderline[QUEUE_CAP:]
+    # manual (real) entries always kept, ahead of the GDELT-derived pool (which is capped/expiring)
+    kept, dropped = manual + borderline[:QUEUE_CAP], borderline[QUEUE_CAP:]
     QUEUE.parent.mkdir(parents=True, exist_ok=True)
     with open(QUEUE, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["event_id", "event_date", "type", "title", "triage",
