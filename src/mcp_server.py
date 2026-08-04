@@ -504,5 +504,18 @@ def reference_nearest(date: str, type: str = "", entity: str = "", k: int = 8) -
     return RT.nearest(date, type=type, entity=entity, k=k)
 
 
+# --- Live triage (V4): throw any news item at the engine, get one caged card. ---
+@mcp.tool()
+def triage(text_or_url: str) -> dict:
+    """Throw ANY news item (headline / paragraph / URL) at the engine and get ONE card: deterministic
+    entity+type extraction (no LLM, no fabrication); EXPECTED MAGNITUDE = the event class's historical
+    base-rate |CAR+20| x today's registered H1/VIX amplifier state, with n AND range always shown;
+    nearest VERIFIED corpus analogues (real events + sources, never invented); a labelled reference-tier
+    background count; tradeable terms in $/bbl (research, not advice); caveats + a latency receipt.
+    CAGE: the score is an expected MAGNITUDE, never an occurrence probability; analogues are real only."""
+    import triage as _T
+    return _T.triage(text_or_url)
+
+
 if __name__ == "__main__":
     mcp.run()          # stdio transport; launched by the Claude app
