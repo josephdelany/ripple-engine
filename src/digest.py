@@ -50,6 +50,17 @@ RIBBON = [
     ("Inv σ", "derived.inv_sigma", "σ", 2),
 ]
 
+# V5.1 chain ribbon: the value chain at a glance (crude -> products -> petchem/fertilizer, + gas hubs).
+CHAIN_RIBBON = [
+    ("Diesel crack", "derived.diesel_crack", "$/bbl", 1),
+    ("Gaso crack", "derived.gasoline_crack", "$/bbl", 1),
+    ("Propane", "fred.DPROPANEMBTX", "$/gal", 2),
+    ("TTF", "yf.ttf", "€/MWh", 1),
+    ("JKM", "yf.jkm", "$/MMBtu", 1),
+    ("Petchem", "fred.PCU325211325211", "idx", 0),
+    ("Fertilizer", "fred.PCU325311325311", "idx", 0),
+]
+
 
 def _read_json(path):
     try:
@@ -387,6 +398,25 @@ def render():
                      f"style='color:#6b7280'>%ile</span></div>"
                      f"<div class='num flat'>{e(gc['gpr_pct'])}</div>"
                      f"<div class=dt>{e(gc.get('as_of',''))}</div></div>")
+    parts.append("</div>")
+
+    # d2. The chain ribbon (V5.1): the value chain at a glance, each with a sparkline.
+    parts.append("<h2 class=sec>The chain ribbon <span style='color:#6b7280;font-size:12px'>"
+                 "· crude → products → petchem/fertilizer</span></h2><div class=ribbon>")
+    conn = sqlite3.connect(DB)
+    for lab, sid, unit, dec in CHAIN_RIBBON:
+        val, date, prev = latest_two(conn, sid)
+        if val is None:
+            parts.append(f"<div class=cell><div class=lab>{e(lab)}</div>"
+                         f"<div class='num flat'>—</div></div>")
+            continue
+        cls = "up" if (prev is not None and val > prev) else "down" if (prev is not None and val < prev) else "flat"
+        arrow = " ▲" if cls == "up" else " ▼" if cls == "down" else ""
+        spark = _sparkline(recent_values(conn, sid, 30), {"up": "#3fb950", "down": "#f85149", "flat": "#8b949e"}[cls])
+        parts.append(f"<div class=cell><div class=lab>{e(lab)} <span style='color:#6b7280'>{e(unit)}</span></div>"
+                     f"<div class='num {cls}'>{val:.{dec}f}{arrow}</div>{spark}"
+                     f"<div class=dt>{e(date)}</div></div>")
+    conn.close()
     parts.append("</div>")
 
     # e. If an amplifier is ON -- base-rate line per ON amplifier (from playbook.md).

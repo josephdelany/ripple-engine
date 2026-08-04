@@ -116,13 +116,8 @@ WIDGETS = {
         "gridData": {"w": 20, "h": 9},
         "type": "table",
     },
-    "ripple_by_type": {
-        "name": "The Ripple (CAR by event type)",
-        "description": "Mean cumulative abnormal return in Brent around geopolitical shocks",
-        "endpoint": "ripple_by_type",
-        "gridData": {"w": 20, "h": 9},
-        "type": "table",
-    },
+    # ripple_by_type + propagation_map (tables) RETIRED in V5.1 -- replaced by chart_ripple +
+    # chart_propagation (V5.0a). Their endpoints remain callable but are no longer advertised widgets.
     "event_detail": {
         "name": "Conditioned Events",
         "description": "Each event's ripple and the market state the day before it hit",
@@ -276,13 +271,6 @@ WIDGETS = {
         "name": "Scenario Playbook",
         "description": "Per event type: clustered base-rate ripple + today's conditioning",
         "endpoint": "scenario_playbook",
-        "gridData": {"w": 40, "h": 12},
-        "type": "table",
-    },
-    "propagation_map": {
-        "name": "Propagation Map (cross-asset)",
-        "description": "Clustered mean CAR+20 by event type x asset (% for prices, bps for yields)",
-        "endpoint": "propagation_map",
         "gridData": {"w": 40, "h": 12},
         "type": "table",
     },
@@ -509,6 +497,23 @@ WIDGETS = {
         "gridData": {"w": 20, "h": 9},
         "type": "chart",
     },
+    # --- V5.1 chain view + triage queue ---
+    "chain_view": {
+        "name": "Value Chain (hop-by-hop pass-through)",
+        "description": "crude -> products -> petchem/fertilizer -> food: measured pass-through beta, "
+                       "lag, correlation, strength, n and cadence per hop (descriptive).",
+        "endpoint": "chain_view",
+        "gridData": {"w": 40, "h": 11},
+        "type": "table",
+    },
+    "triage_queue": {
+        "name": "Triage Queue (by expected magnitude)",
+        "description": "New wire alerts ranked by expected magnitude (class base-rate |CAR+20|). "
+                       "Expected magnitude, never an occurrence probability.",
+        "endpoint": "triage_queue",
+        "gridData": {"w": 40, "h": 11},
+        "type": "table",
+    },
 }
 
 
@@ -539,8 +544,9 @@ APPS = [{
                 _lw("alert_queue", 20, 40, 20, 9),
                 _lw("story_opec", 0, 49, 40, 9),
                 _lw("transmission_chains", 0, 58, 40, 13),
-                _lw("conflict_intensity", 0, 71, 20, 9),
-                _lw("chart_alert_timeline", 20, 71, 20, 9),     # V5.0
+                _lw("triage_queue", 0, 71, 40, 11),             # V5.1 -- wire by expected magnitude
+                _lw("conflict_intensity", 0, 82, 20, 9),
+                _lw("chart_alert_timeline", 20, 82, 20, 9),     # V5.0
             ],
         },
         "physical": {
@@ -566,9 +572,10 @@ APPS = [{
                 _lw("analogue_backtest", 0, 34, 40, 9),
                 _lw("chart_corpus_growth", 0, 43, 20, 9),       # V5.0
                 _lw("chart_calibration", 20, 43, 20, 9),        # V5.0
-                _lw("scenario_playbook", 0, 52, 20, 9),
-                _lw("event_detail", 20, 52, 20, 9),
-                _lw("event_database", 0, 61, 40, 11),           # table -- correct form here
+                _lw("chain_view", 0, 52, 40, 11),               # V5.1 value-chain pass-through
+                _lw("scenario_playbook", 0, 63, 20, 9),
+                _lw("event_detail", 20, 63, 20, 9),
+                _lw("event_database", 0, 72, 40, 11),           # table -- correct form here
             ],
         },
     },
@@ -1784,6 +1791,41 @@ def chart_calibration():
     lay = _base_layout(title, "observed frequency", "forecast probability")
     lay["yaxis"].update({"range": [0, 1]}); lay["xaxis"].update({"range": [0, 1]})
     return {"data": [diag, pts], "layout": lay}
+
+
+@app.get("/chain_view")
+def chain_view():
+    """The value chain measured hop by hop (V1/V5): pass-through beta, lag, correlation, strength, n,
+    cadence per hop. Descriptive; a table is the right form (heterogeneous per-hop stats + cadences)."""
+    hops = _read_json("chain_view.json", {}).get("hops", [])
+    out = []
+    for h in hops:
+        r = h.get("result") or {}
+        out.append({"hop": f"{h['up_label']} → {h['down_label']}", "cadence": h["cadence"],
+                    "pass_through_beta": r.get("beta"), "lag": r.get("lag"),
+                    "corr": r.get("corr"), "strength": r.get("strength", "n/a"), "n": r.get("n")})
+    return out
+
+
+@app.get("/triage_queue")
+def triage_queue():
+    """The live triage queue (V4/V5): new wire alerts ranked by EXPECTED MAGNITUDE (class base-rate
+    |CAR+20| via the caged triage classifier). Expected magnitude, never an occurrence probability."""
+    import csv as _csv
+    import triage as _T
+    p = DATA / "alert_queue.csv"
+    if not p.exists():
+        return []
+    rates = _T.base_rate_by_type()
+    rows = [r for r in _csv.DictReader(open(p, newline="", encoding="utf-8")) if r.get("status") == "new"]
+    out = []
+    for r in rows:
+        s = _T.wire_score(r.get("headline", ""), rates)
+        out.append({"expected_magnitude_pct": s["expected_magnitude_pct"], "type": s["type"] or "—",
+                    "headline": (r.get("headline") or "")[:120], "source": r.get("source", ""),
+                    "when": (r.get("timestamp_utc") or "")[:16]})
+    out.sort(key=lambda r: r["expected_magnitude_pct"], reverse=True)
+    return out[:25]
 
 
 @app.get("/chart_alert_timeline")
