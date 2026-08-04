@@ -1,9 +1,46 @@
-# STATE OF THE ENGINE — reconciliation inventory (VISION_ROADMAP Phase V0.1)
+# STATE OF THE ENGINE — reconciliation inventory + after-picture
 
-*Written 2026-08-03. A one-time snapshot of what the parallel workstreams
-(WS0–WS-G, WS-S, UCDP, and the earlier Step/Pillar/Whole sprints) left behind:
-what exists, what's registered, what's stale, what's orphaned. This is a map,
-not a plan — the plan is `VISION_ROADMAP.md`.*
+*§0 (written 2026-08-04) is the AFTER-PICTURE — what the VISION_ROADMAP build
+delivered end to end. §1 onward is the original 2026-08-03 reconciliation
+inventory (kept as the before-picture). The plan is `VISION_ROADMAP.md`.*
+
+## §0. AFTER PICTURE — what the roadmap built (V0 → V5, all phases COMMISSIONED)
+
+`python3 src/acceptance.py` → **COMMISSIONED**: 147 tests pass, framework_sound=true,
+engine_status not-RED, cage present + tested, **11 evidence packs**. Every phase was
+committed one-slice-per-commit with acceptance green at each phase end; the frozen
+registered H1–H5 record was never recomputed into silence (the battery + its evidence
+packs stay pinned at the registration corpus N=289 — corpus growth feeds only NEW
+registered analyses, e.g. the V3 cross-chain family).
+
+**Before → after:** corpus **289 → 293** verified events · series **361 → 384** ·
+observations **418k → 464k** · edges **6,844 → 7,909** · evidence packs **9 → 11** ·
+~30 commits. `engine_status` was **GREEN** at build; in a frozen snapshot it reads
+**AMBER** once the clock advances past the last data pull (honest publication-lag
+drift — daily series a few days old — not breakage; a live daily refresh keeps it
+GREEN). AMBER is not-RED, so acceptance still COMMISSIONS.
+
+| phase | delivered |
+|---|---|
+| **V0** reconcile | `STATE_OF_THE_ENGINE.md`; AMBER fixed honestly (dead `mining_com` replaced; FRED H.10 FX = publication lag verified vs FRED's own CSV; GASREGW cadence; a `CLOSED` status for resolved contracts); 5 competing roadmap docs archived to `docs/superseded/`. |
+| **V1** value chain | keyless value-chain nodes (`fetch_value_chain.py`: Gulf gasoline, propane, petchem+fertilizer PPIs, TTF, JKM); derived **diesel/gasoline cracks** (mechanism-gated); `cross_asset` extended (frozen family protected); **CHAIN VIEW** (`chain_view.py` → `chain_report.txt`) — crude→products STRONG, gas complex decoupled (honest null). |
+| **V-Q** bulletproofing | quarterly frozen snapshots + honest vintage receipt; **spec curve** (H1 +5pp reproduced exactly, 100% of raw specs positive); **influence** (no single event decisive); **temporal hold-out** (pre-2019 rule holds OOS +5.86pp on 2019+) + **quarterly calibration** wired into the evaluation. |
+| **V5.0** visuals | dashboard converted to real Plotly charts — Brent+event markers, ripple curves (±SE band), propagation heatmap, corpus growth, calibration, alert timeline; The Daily ribbon sparklines. |
+| **V2** admission machine | registered 5-gate auto-admit rule (codebook amendment, before results); backfill routes 561 candidates (0 auto-admit — GDELT single-source by design) to a ranked/capped/expiring queue; **reference tier** (600 GDELT background, queryable via MCP, never corpus); monthly **audit** (dead-source FLAG blocks a domain). |
+| **V3** cross-chain science | pre-registered cross-chain battery (before results); **2 VALIDATED** edges (supply→gasoline crack; fertilizer→corn), 3 honest nulls, **placebo clean**, FDR+raw side by side; 2 new receipted evidence packs. |
+| **V4** live triage | `triage(text_or_url)` CLI + MCP + Daily hook: caged extraction → expected-**magnitude** (base rate × amplifier, n+range, never a probability) + real analogues + labelled background + latency receipt; the wire sorts by expected magnitude. |
+| **V5.1–3** surfaces + receipt | chain-view + triage-queue widgets, chain ribbon, obsoleted tables retired; `repro.sh` (22 steps), `DATA_DICTIONARY`, figures pack (9, incl. chain heatmap / corpus growth / calibration) regenerated; this after-picture. |
+
+**Guardrails held throughout:** $0/keyless; no fabrication (real sources web-searched
+for every admitted event; London Strategic Edge quarantined pending a key); frozen
+record untouched; register-then-run proven by git; nulls reported as results.
+
+---
+## §1. Reconciliation inventory (before-picture, 2026-08-03)
+
+*A one-time snapshot of what the parallel workstreams (WS0–WS-G, WS-S, UCDP, and
+the earlier Step/Pillar/Whole sprints) left behind: what exists, what's registered,
+what's stale, what's orphaned.*
 
 Baseline at write time: `python3 src/acceptance.py` → **COMMISSIONED**
 (131 tests pass, framework_sound=true, engine_status=AMBER, cage present,
