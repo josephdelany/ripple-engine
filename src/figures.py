@@ -192,6 +192,68 @@ def f6_policy_vs_conflict(clustered):
     fig.tight_layout(); fig.savefig(FIGDIR / "f6_policy_vs_conflict.png"); plt.close(fig)
 
 
+def f7_chain_heatmap():
+    """V5.2 -- value-chain hop-by-hop correlation heatmap (upstream x downstream), from chain_view.json."""
+    import json
+    hops = json.loads((ROOT / "data" / "chain_view.json").read_text()).get("hops", [])
+    hops = [h for h in hops if h.get("result")]
+    if not hops:
+        return
+    ups = list(dict.fromkeys(h["up_label"] for h in hops))
+    downs = list(dict.fromkeys(h["down_label"] for h in hops))
+    grid = np.full((len(downs), len(ups)), np.nan)
+    for h in hops:
+        grid[downs.index(h["down_label"]), ups.index(h["up_label"])] = h["result"]["corr"]
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+    ax.imshow(grid, cmap="RdBu_r", vmin=-1, vmax=1, aspect="auto")
+    ax.set_xticks(range(len(ups))); ax.set_xticklabels(ups, fontsize=8, rotation=30, ha="right")
+    ax.set_yticks(range(len(downs))); ax.set_yticklabels(downs, fontsize=8)
+    for h in hops:
+        i, j = downs.index(h["down_label"]), ups.index(h["up_label"])
+        ax.text(j, i, f"{h['result']['corr']:+.2f}\n{h['result']['strength'][:4]}", ha="center",
+                va="center", fontsize=7, color="black" if abs(grid[i, j]) < 0.6 else "white")
+    ax.set_title("F7 — Value chain: hop-by-hop return correlation\n"
+                 "(upstream → downstream; cadence per hop in chain_report.txt)")
+    fig.tight_layout(); fig.savefig(FIGDIR / "f7_chain_heatmap.png"); plt.close(fig)
+
+
+def f8_corpus_growth(conn):
+    """V5.2 -- cumulative verified events over time (the corpus accreting)."""
+    dates = [d for (d,) in conn.execute(
+        "SELECT event_date FROM events WHERE event_date IS NOT NULL ORDER BY event_date")]
+    x = [pd.Timestamp(d) for d in dates]
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax.step(x, range(1, len(x) + 1), where="post", color="#2c7fb8", lw=2)
+    ax.set_ylabel("cumulative verified events"); ax.set_xlabel("event date")
+    ax.set_title(f"F8 — Corpus growth ({len(x)} verified events)")
+    ax.grid(alpha=0.3)
+    fig.tight_layout(); fig.savefig(FIGDIR / "f8_corpus_growth.png"); plt.close(fig)
+
+
+def f9_calibration():
+    """V5.2 -- reliability plot from the forecast log (observed vs forecast, vs the perfect diagonal)."""
+    import json
+    p = ROOT / "data" / "calibration_report.json"
+    rep = json.loads(p.read_text()) if p.exists() else {}
+    bins = (rep.get("overall") or {}).get("reliability", []) if rep.get("ran") else []
+    if not bins:
+        return
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    ax.plot([0, 1], [0, 1], ls="--", color="grey", lw=1, label="perfect calibration")
+    ax.plot([b["mean_forecast"] for b in bins], [b["observed"] for b in bins], "-o",
+            color="#2c7fb8", label="engine")
+    for b in bins:
+        ax.annotate(f"n={b['n']}", (b["mean_forecast"], b["observed"]), fontsize=7,
+                    textcoords="offset points", xytext=(5, -8))
+    o = rep.get("overall", {})
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    ax.set_xlabel("forecast probability"); ax.set_ylabel("observed frequency")
+    ax.set_title(f"F9 — Calibration (n={o.get('n')}, Brier {o.get('brier')}, "
+                 f"skill {o.get('skill_vs_base')})")
+    ax.legend(fontsize=9); ax.grid(alpha=0.3)
+    fig.tight_layout(); fig.savefig(FIGDIR / "f9_calibration.png"); plt.close(fig)
+
+
 def main():
     FIGDIR.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB)
@@ -202,6 +264,9 @@ def main():
     f4_propagation_heatmap(conn)
     f5_quiet_vs_corpus(conn, clustered)
     f6_policy_vs_conflict(clustered)
+    f7_chain_heatmap()            # V5.2
+    f8_corpus_growth(conn)        # V5.2
+    f9_calibration()              # V5.2
     conn.close()
     pngs = sorted(p.name for p in FIGDIR.glob("*.png"))
     print(f"Wrote {len(pngs)} figures to {FIGDIR}:")
