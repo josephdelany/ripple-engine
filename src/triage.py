@@ -53,6 +53,29 @@ TYPE_RULES = [
 ]
 
 
+def classify_type(text):
+    """Type-only classifier (no DB) -- used to rank the wire by expected magnitude. Returns type|None."""
+    low = (text or "").lower()
+    return next((t for t, pat in TYPE_RULES if re.search(pat, low)), None)
+
+
+def base_rate_by_type():
+    """{event_type -> expected-magnitude %} for ranking, from the committed engine_read base rates
+    (|mean CAR+20|). Fast (no recompute); 0 for types not present."""
+    try:
+        br = json.loads(ENGINE_READ.read_text()).get("base_rates", [])
+        return {r["type"]: abs(float(r.get("car20") or 0)) for r in br}
+    except (OSError, ValueError, KeyError):
+        return {}
+
+
+def wire_score(headline, rates=None):
+    """Expected-magnitude rank score for one wire headline: base-rate |CAR20| of its classified type."""
+    rates = base_rate_by_type() if rates is None else rates
+    t = classify_type(headline)
+    return {"type": t, "expected_magnitude_pct": round(rates.get(t, 0.0), 2) if t else 0.0}
+
+
 def _text_from(arg):
     """Return (text, was_url). If arg looks like a URL, fetch + crude-strip HTML (keyless)."""
     if re.match(r"^https?://", arg.strip()):

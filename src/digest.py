@@ -94,12 +94,23 @@ def _sparkline(values, color, w=68, h=18):
 
 
 def new_alerts(limit=10):
-    """Up to `limit` status=new alert cards, newest first."""
+    """Up to `limit` status=new alert cards, SORTED BY EXPECTED MAGNITUDE (V4): each alert carries its
+    triage expected-magnitude (class base-rate |CAR+20|), highest first, recency breaking ties."""
     if not ALERT_QUEUE.exists():
         return []
     rows = [r for r in csv.DictReader(open(ALERT_QUEUE, newline="", encoding="utf-8"))
             if r.get("status") == "new"]
-    return list(reversed(rows))[:limit]
+    try:
+        import triage
+        rates = triage.base_rate_by_type()
+        for i, r in enumerate(rows):
+            s = triage.wire_score(r.get("headline", ""), rates)
+            r["_mag"] = s["expected_magnitude_pct"]; r["_mag_type"] = s["type"] or ""; r["_ord"] = i
+    except Exception:
+        for i, r in enumerate(rows):
+            r["_mag"], r["_mag_type"], r["_ord"] = 0.0, "", i
+    rows.sort(key=lambda r: (r["_mag"], r["_ord"]), reverse=True)     # magnitude desc, then newest
+    return rows[:limit]
 
 
 def playbook_amp_lines():
@@ -329,17 +340,21 @@ def render():
                 f"(n={upr['n']}), over-priced-fear {opf['turbulence_rate']} (n={opf['n']}), vs a "
                 f"{led.get('turbulence_base_rate')} base. Value is in the disagreement, honestly scored.</div>")
 
-    # c. New on the wire
-    parts.append("<h2 class=sec>New on the wire</h2>")
+    # c. New on the wire -- SORTED BY EXPECTED MAGNITUDE (V4); each alert carries its triage read.
+    parts.append("<h2 class=sec>New on the wire <span style='color:#6b7280;font-size:12px'>"
+                 "· sorted by expected magnitude</span></h2>")
     alerts = new_alerts(10)
     if alerts:
         for a in alerts:
             t = e((a.get("timestamp_utc") or "")[:16].replace("T", " "))
             ents = e(a.get("matched_entities") or "")
+            mag = a.get("_mag", 0.0)
+            magtag = (f"<span class=tag style='background:#1c2a1c;color:#8fd19e'>~{mag:.1f}% "
+                      f"exp · {e(a.get('_mag_type') or 'unclassified')}</span> · " if mag else "")
             parts.append(
                 f"<div class=alert><a href='{e(a.get('url',''))}' target=_blank "
                 f"rel=noopener>{e(a.get('headline',''))}</a>"
-                f"<div class=meta>{e(a.get('source',''))} · "
+                f"<div class=meta>{magtag}{e(a.get('source',''))} · "
                 f"<span class=tag>{e(a.get('heuristic_type',''))}</span>"
                 f"{' · ' + ents if ents else ''} · {t}</div></div>")
     else:
