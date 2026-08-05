@@ -40,10 +40,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run tests (gate -- a broken build never reaches prod)
+      - name: Run tests (gate -- deterministic logic tests; a broken build never reaches prod)
         run: |
           pip install pytest
-          python3 -m pytest -q
+          # CI has no built data/oil.db (it is a gitignored derived artifact, rebuilt from free sources
+          # by the steps below). So the DB-INTEGRATION tests SKIP here (tests/conftest.py logs each with
+          # a clear reason) and the ~98 deterministic LOGIC tests run as the gate. The full integration
+          # suite runs locally via `python3 src/acceptance.py`; the engine's real end-to-end rebuild is
+          # then exercised by refresh.py + heartbeat.py below. -rs prints the skip reasons in the log.
+          python3 -m pytest -q -rs
 
       - name: Rebuild schema + restore durable memory
         run: |

@@ -406,7 +406,11 @@ def test_fc2_backtest():
 
 # om1 -- chokepoint status: PortWatch anomaly wins; else active theatre; else normal.
 def test_om1_oil_map_status():
-    import backend
+    # backend.py is the OpenBB dashboard server (fastapi/uvicorn) -- a workstation surface, not part
+    # of the CI daily pipeline. Skip cleanly if those web deps aren't installed (e.g. in CI).
+    import pytest
+    backend = pytest.importorskip("backend",
+                                  reason="backend needs fastapi/uvicorn (workstation surface, not CI)")
     assert backend.oil_map_status("reduced", False) == "disrupted"
     assert backend.oil_map_status("elevated", False) == "elevated"
     assert backend.oil_map_status(None, True) == "watch"      # theatre active

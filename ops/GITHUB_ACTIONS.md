@@ -64,3 +64,11 @@ and open as a fallback.
   `alert_queue.csv` + `watch_seen.db` are. That's by design (see `import_state.py`).
 - If `main` is branch-protected, allow the Actions bot to push, or point the commit
   step at a branch.
+- **CI test scope (by design):** the pytest gate in `track.yml` runs the ~98
+  deterministic **logic** tests. The DB-**integration** tests need a built
+  `data/oil.db` (gitignored, rebuilt from free sources by `refresh.py`), so they
+  are **skipped in CI** (with a clear per-test reason logged by `tests/conftest.py`)
+  and run **locally** via `python3 src/acceptance.py`. The engine's real end-to-end
+  rebuild is still exercised in CI by `refresh.py` + `heartbeat.py`. The
+  OpenBB-server unit test (`test_om1`) also skips in CI, since `fastapi`/`uvicorn`
+  are a workstation surface, not a CI-pipeline dependency. Nothing is faked.
