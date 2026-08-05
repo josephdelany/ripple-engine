@@ -1,71 +1,71 @@
 {
-  "generated_at": "2026-07-30T17:45:15+00:00",
-  "regime": "ON",
-  "so_what": "Regime is ON (VIX-stress elevated). If a shock lands, the VALIDATED propagation is into Brent oil +5.0%, Heating oil +4.3%, 5Y breakeven +16.7bps, S&P 500 +1.8%, Platinum +7.3%, Product tankers +7.2%. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
+  "generated_at": "2026-08-05T20:44:11+00:00",
+  "regime": "OFF",
+  "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.6%, Heating oil +5.6%, 5Y breakeven +16.7bps, Palladium +5.2%, S&P 500 +2.1%, Platinum +7.2%. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
   "validated_propagation": [
     {
       "to": "Brent oil",
-      "strength": 5.0003,
+      "strength": 5.5615,
       "unit": "%",
       "ci": [
-        0.7659,
-        8.9484
+        0.9436,
+        9.6525
       ]
     },
     {
       "to": "Heating oil",
-      "strength": 4.2758,
+      "strength": 5.5688,
       "unit": "%",
       "ci": [
-        0.7754,
-        7.6786
+        1.4905,
+        9.3587
       ]
     },
     {
       "to": "5Y breakeven",
-      "strength": 16.6725,
+      "strength": 16.7429,
       "unit": "bps",
       "ci": [
-        4.166,
-        30.9569
+        4.1071,
+        30.5914
+      ]
+    },
+    {
+      "to": "Palladium",
+      "strength": 5.2181,
+      "unit": "%",
+      "ci": [
+        0.2974,
+        10.521
       ]
     },
     {
       "to": "S&P 500",
-      "strength": 1.7995,
+      "strength": 2.1192,
       "unit": "%",
       "ci": [
-        0.0875,
-        3.2298
+        0.3418,
+        3.489
       ]
     },
     {
       "to": "Platinum",
-      "strength": 7.2986,
+      "strength": 7.2205,
       "unit": "%",
       "ci": [
-        1.8478,
-        14.791
-      ]
-    },
-    {
-      "to": "Product tankers",
-      "strength": 7.234,
-      "unit": "%",
-      "ci": [
-        0.466,
-        12.1636
+        2.0387,
+        14.6252
       ]
     }
   ],
   "base_rate_ripple_by_type": [
     {
       "type": "opec_decision",
-      "n": 30,
+      "n": 29,
       "car1": 2.7,
-      "car5": 2.3,
+      "car5": 2.6,
       "car10": 1.8,
-      "car20": 2.8
+      "car20": 2.9
     },
     {
       "type": "sanctions",
@@ -77,19 +77,27 @@
     },
     {
       "type": "conflict_escalation",
-      "n": 13,
-      "car1": 0.6,
-      "car5": 2.6,
-      "car10": 1.1,
-      "car20": 2.8
+      "n": 14,
+      "car1": 1.5,
+      "car5": 4.2,
+      "car10": 3.4,
+      "car20": 6.2
     },
     {
       "type": "policy_response",
       "n": 13,
-      "car1": 0.9,
-      "car5": -0.5,
-      "car10": -0.8,
-      "car20": -0.3
+      "car1": -0.5,
+      "car5": -2.5,
+      "car10": -3.1,
+      "car20": -1.3
+    },
+    {
+      "type": "demand_shock",
+      "n": 7,
+      "car1": -3.7,
+      "car5": -0.1,
+      "car10": -3.5,
+      "car20": -7.2
     },
     {
       "type": "infrastructure_attack",
@@ -98,14 +106,6 @@
       "car5": -1.0,
       "car10": -0.3,
       "car20": -2.7
-    },
-    {
-      "type": "demand_shock",
-      "n": 6,
-      "car1": -3.7,
-      "car5": -0.7,
-      "car10": -4.3,
-      "car20": -8.4
     },
     {
       "type": "chokepoint_disruption",
@@ -136,10 +136,10 @@
   "active_situations": [
     {
       "situation": "israel_iran_war_2025",
-      "events": 66,
-      "multi_modal": 5,
+      "events": 193,
+      "multi_modal": 35,
       "max_modality_classes": 3,
-      "top_event": "Houthis want to copy Iran\u2019s Hormuz control in the Red Sea: Yemeni FM",
+      "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
       "top_tag": "corroborated",
       "confirmed_by": [
         "news",
@@ -147,17 +147,18 @@
         "priced"
       ],
       "receipts": [
-        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://gcaptain.com/clarksons-posts-record-first-half-profit-as-hormuz-crisis-drives-shipping-boom/",
         "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
-        "https://www.aljazeera.com/video/newsfeed/2026/7/28/iran-rejects-trump-frozen-funds-plan-warns-ships-of-hormuz-transit-ban?traffic_source=rss"
+        "https://www.aljazeera.com/news/2026/7/29/iran-and-oman-swap-proposals-to-manage-strait-of-hormuz-what-we-know?traffic_source=rss",
+        "https://www.timesofisrael.com/us-treasury-secretary-says-deal-with-iran-to-reopen-hormuz-could-be-sealed-by-wednesday/"
       ]
     },
     {
       "situation": "israel_lebanon_hezbollah",
-      "events": 62,
-      "multi_modal": 5,
+      "events": 170,
+      "multi_modal": 20,
       "max_modality_classes": 3,
-      "top_event": "Houthis want to copy Iran\u2019s Hormuz control in the Red Sea: Yemeni FM",
+      "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
       "top_tag": "corroborated",
       "confirmed_by": [
         "news",
@@ -165,40 +166,44 @@
         "priced"
       ],
       "receipts": [
-        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://gcaptain.com/trump-says-u-s-controls-strait-of-hormuz-as-iran-denies-talks/",
         "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
-        "https://www.aljazeera.com/video/newsfeed/2026/7/28/iran-rejects-trump-frozen-funds-plan-warns-ships-of-hormuz-transit-ban?traffic_source=rss"
+        "https://www.aljazeera.com/news/2026/7/29/iran-and-oman-swap-proposals-to-manage-strait-of-hormuz-what-we-know?traffic_source=rss",
+        "https://www.timesofisrael.com/us-treasury-secretary-says-deal-with-iran-to-reopen-hormuz-could-be-sealed-by-wednesday/"
       ]
     },
     {
       "situation": "russia_ukraine_war",
-      "events": 28,
-      "multi_modal": 0,
-      "max_modality_classes": 1,
-      "top_event": "[GDELT] DEFENSE SECRETARY / RUSSIAN: fight/clash signal",
+      "events": 54,
+      "multi_modal": 9,
+      "max_modality_classes": 3,
+      "top_event": "Greek LNG Ship Safely Clears Hormuz After Maritime Incident",
       "top_tag": "corroborated",
       "confirmed_by": [
-        "news"
+        "news",
+        "physical",
+        "priced"
       ],
       "receipts": [
-        "https://abcnews.com/International/wireStory/nato-member-romania-shoots-stray-drones-ukraine-war-135145424",
-        "https://asia.nikkei.com/politics/ukraine-war/trump-zelenskyy-discuss-patriot-deal-and-reviving-talks-with-russia",
-        "https://dailycaller.com/2026/07/28/ukraine-hits-iranian-ship-after-influencer-visit/",
-        "https://economictimes.indiatimes.com/news/international/global-trends/us-senators-announce-deal-on-new-russia-iran-sanctions-bill/articleshow/132691105.cms"
+        "https://oilprice.com/Energy/Energy-General/Russia-Is-Running-Out-of-Soldiers-Oil-and-Time.html",
+        "https://oilprice.com/Latest-Energy-News/World-News/Greek-LNG-Ship-Safely-Clears-Hormuz-After-Maritime-Incident.html",
+        "https://oilprice.com/Latest-Energy-News/World-News/India-Expands-Oil-Storage-Sites-After-Shock-Supply-Disruption.html"
       ]
     },
     {
       "situation": "china_taiwan_tension",
-      "events": 2,
-      "multi_modal": 0,
-      "max_modality_classes": 1,
-      "top_event": "[GDELT] CHINESE / PHILIPPINE: fight/clash signal",
+      "events": 14,
+      "multi_modal": 2,
+      "max_modality_classes": 2,
+      "top_event": "\u2018Significant Shrinking\u2019 in Crude Cushion In Coming Months \u2013 Vortexa",
       "top_tag": "likely",
       "confirmed_by": [
-        "news"
+        "news",
+        "priced"
       ],
       "receipts": [
-        "https://www.bbc.co.uk/news/articles/cx27mjvxgg1o?at_medium=RSS&at_campaign=rss",
+        "https://gcaptain.com/significant-shrinking-in-crude-cushion-in-coming-month-vortexa/",
+        "https://www.eia.gov/todayinenergy/detail.php?id=67905",
         "https://www.forbes.com/sites/petersuciu/2026/07/28/us-navys-forward-deployed-carrier-now-in-waters-claimed-by-beijing/",
         "https://www.thenationalnews.com/news/us/2026/07/28/trump-confident-in-us-arms-stockpile-after-private-sector-commitments/"
       ]

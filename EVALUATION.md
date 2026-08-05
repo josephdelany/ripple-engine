@@ -5,26 +5,27 @@
 **Overall:** placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0029; H1 holds out-of-sample (5.857pp on 2019+).
 
 ## 1. Negative control (placebo)
-Shuffling H1's state labels collapses the amplification from **5.0003** to a placebo mean **-0.0425**, CI [-4.0172, 3.9264] — spans zero ✓ (the gate is not finding signal in noise).
+Shuffling H1's state labels collapses the amplification from **5.5615** to a placebo mean **-0.0113**, CI [-4.3937, 4.3591] — spans zero ✓ (the gate is not finding signal in noise).
 
 ## 2. Surface consistency
-H1 amplification (Brent, pp) across surfaces: {'validation_claims': 5.0003, 'cross_asset_conditioned': 5.0003, 'sowhat': 5.0003} — all agree ✓.
+H1 amplification (Brent, pp) across surfaces: {'validation_claims': 5.5615, 'cross_asset_conditioned': 5.5615, 'sowhat': 5.5615} — all agree ✓.
 
 ## 3. Calibration (resolved gap ledger)
-n=240, Brier **0.2467** vs base 0.2496 (skill 0.0029). Murphy decomposition — reliability 0.0013, resolution 0.0042, uncertainty 0.2496.
+n=247, Brier **0.2466** vs base 0.2495 (skill 0.0029). Murphy decomposition — reliability 0.0013, resolution 0.0042, uncertainty 0.2495.
 
 | forecast p | n | observed | 95% CI |
 |---|---|---|---|
-| 0.4 | 105 | 0.448 | [np.float64(0.356), np.float64(0.543)] |
-| 0.6 | 135 | 0.578 | [np.float64(0.493), np.float64(0.658)] |
+| 0.4 | 109 | 0.45 | [np.float64(0.359), np.float64(0.543)] |
+| 0.6 | 138 | 0.58 | [np.float64(0.496), np.float64(0.659)] |
 
 ## 4. Power / robustness of validated claims
 
 | claim | n | robust (leave-one-out) | jackknife amp range |
 |---|---|---|---|
-| H1 | 86 | True | [4.0063, 5.4953] |
-| copper_growth | 70 | True | [3.5185, 4.6891] |
-| hy_credit_stress | 48 | True | [0.7586, 1.7736] |
+| H1 | 87 | True | [4.7323, 6.5494] |
+| copper_growth | 71 | True | [3.2659, 4.4243] |
+| palladium_supply | 75 | True | [3.7776, 6.317] |
+| hy_credit_stress | 49 | True | [0.5695, 1.6892] |
 
 ## 5. Miss-audit (worst-scored resolved gaps)
 

@@ -4,16 +4,17 @@ Each validated claim below has a machine pack at `data/evidence/<claim_id>.json`
 
 | claim_id | tier | quantity | n | receipt |
 |---|---|---|---|---|
-| `edge.CC2_supply_gasoline_crack` | [VALIDATED] | 2.2375$/bbl | 36 | `data/evidence/edge.CC2_supply_gasoline_crack.json` |
-| `edge.CC5_fertilizer_corn` | [VALIDATED] | 0.3631beta | 311 | `data/evidence/edge.CC5_fertilizer_corn.json` |
-| `edge.copper_growth` | [VALIDATED] | 4.3404% | 70 | `data/evidence/edge.copper_growth.json` |
-| `edge.hy_credit_stress` | [VALIDATED] | 1.6513% | 48 | `data/evidence/edge.hy_credit_stress.json` |
-| `hyp.H1` | [VALIDATED] | 5.0003pp | 86 | `data/evidence/hyp.H1.json` |
-| `node.5y_breakeven` | [VALIDATED] | 16.9585bps | 63 | `data/evidence/node.5y_breakeven.json` |
-| `node.brent_oil` | [VALIDATED] | 5.0299% | 86 | `data/evidence/node.brent_oil.json` |
-| `node.heating_oil` | [VALIDATED] | 4.33% | 86 | `data/evidence/node.heating_oil.json` |
-| `node.platinum` | [VALIDATED] | 7.1741% | 78 | `data/evidence/node.platinum.json` |
-| `node.product_tankers` | [VALIDATED] | 6.5959% | 43 | `data/evidence/node.product_tankers.json` |
-| `node.s&p_500` | [VALIDATED] | 1.8659% | 86 | `data/evidence/node.s&p_500.json` |
+| `edge.CC2_supply_gasoline_crack` | [VALIDATED] | 2.9611$/bbl | 37 | `data/evidence/edge.CC2_supply_gasoline_crack.json` |
+| `edge.CC5_fertilizer_corn` | [VALIDATED] | 0.3631beta | 0 | `data/evidence/edge.CC5_fertilizer_corn.json` |
+| `edge.copper_growth` | [VALIDATED] | 3.8163% | 71 | `data/evidence/edge.copper_growth.json` |
+| `edge.hy_credit_stress` | [VALIDATED] | 1.4854% | 49 | `data/evidence/edge.hy_credit_stress.json` |
+| `edge.palladium_supply` | [VALIDATED] | 5.2181% | 75 | `data/evidence/edge.palladium_supply.json` |
+| `hyp.H1` | [VALIDATED] | 5.5615pp | 87 | `data/evidence/hyp.H1.json` |
+| `node.5y_breakeven` | [VALIDATED] | 16.7429bps | 64 | `data/evidence/node.5y_breakeven.json` |
+| `node.brent_oil` | [VALIDATED] | 5.5615% | 87 | `data/evidence/node.brent_oil.json` |
+| `node.heating_oil` | [VALIDATED] | 5.5688% | 87 | `data/evidence/node.heating_oil.json` |
+| `node.palladium` | [VALIDATED] | 5.2181% | 75 | `data/evidence/node.palladium.json` |
+| `node.platinum` | [VALIDATED] | 7.2205% | 79 | `data/evidence/node.platinum.json` |
+| `node.s&p_500` | [VALIDATED] | 2.1192% | 87 | `data/evidence/node.s&p_500.json` |
 
-*11 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*
+*12 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*

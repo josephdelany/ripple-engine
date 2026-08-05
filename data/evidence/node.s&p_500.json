@@ -3,19 +3,19 @@
   "tier": "validated",
   "statement": "A shock ripples harder into S&P 500 when VIX stress is elevated.",
   "quantity": {
-    "value": 1.7995,
+    "value": 2.1192,
     "unit": "%",
     "metric": "|CAR+20| amplification"
   },
   "mechanism": "H1 generalization",
   "method": "conditioned constant-mean event study; clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; family-wise FDR+Bonferroni where applicable; leave-one-cluster-out robustness. Point-in-time (state read at t-1).",
   "statistics": {
-    "n_episodes": 86,
+    "n_episodes": 87,
     "ci95": [
-      0.0875,
-      3.2298
+      0.3418,
+      3.489
     ],
-    "perm_p": 0.0086,
+    "perm_p": 0.0022,
     "survives_fdr": true
   },
   "underlying_episodes": [
@@ -44,7 +44,7 @@
       "date": "1995-04-14",
       "car20_or_state": {
         "|CAR|": 1.999,
-        "state_t_minus_1": 8.0
+        "state_t_minus_1": 8.221
       },
       "title": "UN Resolution 986 oil-for-food adopted",
       "source_url": "https://digitallibrary.un.org/record/176622"
@@ -54,7 +54,7 @@
       "date": "1996-08-05",
       "car20_or_state": {
         "|CAR|": 2.25,
-        "state_t_minus_1": 78.741
+        "state_t_minus_1": 79.513
       },
       "title": "US Iran and Libya Sanctions Act signed",
       "source_url": "https://www.congress.gov/bill/104th-congress/house-bill/3107"
@@ -64,7 +64,7 @@
       "date": "1996-12-10",
       "car20_or_state": {
         "|CAR|": 2.205,
-        "state_t_minus_1": 93.944
+        "state_t_minus_1": 94.635
       },
       "title": "Iraq oil-for-food exports begin",
       "source_url": "https://www.un.org/depts/oip/background/oilexports.html"
@@ -74,7 +74,7 @@
       "date": "1997-07-02",
       "car20_or_state": {
         "|CAR|": 2.462,
-        "state_t_minus_1": 97.627
+        "state_t_minus_1": 97.647
       },
       "title": "Thailand floats the baht - Asian crisis begins",
       "source_url": "https://www.bot.or.th/en/our-roles/special-measures/Tom-Yum-Kung-lesson.html"
@@ -84,7 +84,7 @@
       "date": "1997-11-21",
       "car20_or_state": {
         "|CAR|": 1.264,
-        "state_t_minus_1": 98.529
+        "state_t_minus_1": 98.491
       },
       "title": "South Korea requests IMF bailout",
       "source_url": "https://www.washingtonpost.com/archive/politics/1997/11/21/s-korea-changes-stance-begins-talks-for-imf-aid/5d029a3f-6d3b-4e8e-917b-9445f3de620d/"
@@ -94,7 +94,7 @@
       "date": "1998-03-30",
       "car20_or_state": {
         "|CAR|": 3.872,
-        "state_t_minus_1": 93.699
+        "state_t_minus_1": 93.524
       },
       "title": "OPEC agrees first 1998 production cut in Vienna",
       "source_url": "https://en.wikipedia.org/wiki/1998_world_oil_market_chronology"
@@ -104,7 +104,7 @@
       "date": "1998-06-24",
       "car20_or_state": {
         "|CAR|": 1.477,
-        "state_t_minus_1": 78.846
+        "state_t_minus_1": 78.259
       },
       "title": "OPEC deepens 1998 cuts at Amsterdam-era conference",
       "source_url": "https://en.wikipedia.org/wiki/1998_world_oil_market_chronology"
@@ -114,7 +114,7 @@
       "date": "1998-08-17",
       "car20_or_state": {
         "|CAR|": 7.554,
-        "state_t_minus_1": 99.427
+        "state_t_minus_1": 99.411
       },
       "title": "Russian sovereign default and LTCM crisis",
       "source_url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis"
@@ -124,7 +124,7 @@
       "date": "1998-12-16",
       "car20_or_state": {
         "|CAR|": 3.769,
-        "state_t_minus_1": 93.617
+        "state_t_minus_1": 93.429
       },
       "title": "Operation Desert Fox airstrikes on Iraq",
       "source_url": "https://www.presidency.ucsb.edu/documents/address-the-nation-announcing-military-strikes-iraq"
@@ -134,7 +134,7 @@
       "date": "1999-03-23",
       "car20_or_state": {
         "|CAR|": 2.493,
-        "state_t_minus_1": 85.012
+        "state_t_minus_1": 84.596
       },
       "title": "OPEC ratifies 1.7 mb/d production cut",
       "source_url": "https://www.rferl.org/a/1090869.html"
@@ -144,7 +144,7 @@
       "date": "2000-03-28",
       "car20_or_state": {
         "|CAR|": 1.116,
-        "state_t_minus_1": 77.805
+        "state_t_minus_1": 77.208
       },
       "title": "OPEC raises quotas 1.452 million bpd",
       "source_url": "https://en.wikipedia.org/wiki/2000_world_oil_market_chronology"
@@ -154,7 +154,7 @@
       "date": "2000-06-21",
       "car20_or_state": {
         "|CAR|": 0.781,
-        "state_t_minus_1": 46.519
+        "state_t_minus_1": 44.987
       },
       "title": "OPEC lifts quotas 708000 bpd in Vienna",
       "source_url": "https://en.wikipedia.org/wiki/2000_world_oil_market_chronology"
@@ -164,7 +164,7 @@
       "date": "2000-09-10",
       "car20_or_state": {
         "|CAR|": 9.657,
-        "state_t_minus_1": 23.852
+        "state_t_minus_1": 21.735
       },
       "title": "OPEC boosts quotas 800000 bpd",
       "source_url": "https://en.wikipedia.org/wiki/2000_world_oil_market_chronology"
@@ -174,7 +174,7 @@
       "date": "2001-01-17",
       "car20_or_state": {
         "|CAR|": 3.815,
-        "state_t_minus_1": 75.492
+        "state_t_minus_1": 74.789
       },
       "title": "OPEC cuts quotas 1.5 million bpd",
       "source_url": "https://en.wikipedia.org/wiki/2001_world_oil_market_chronology"
@@ -184,7 +184,7 @@
       "date": "2001-03-01",
       "car20_or_state": {
         "|CAR|": 6.342,
-        "state_t_minus_1": 88.361
+        "state_t_minus_1": 88.027
       },
       "title": "US 2001 recession onset (dot-com bust)",
       "source_url": "https://www.nber.org/news/business-cycle-dating-committee-announcement-november-26-2001"
@@ -194,7 +194,7 @@
       "date": "2001-07-25",
       "car20_or_state": {
         "|CAR|": 1.869,
-        "state_t_minus_1": 71.475
+        "state_t_minus_1": 70.633
       },
       "title": "OPEC cuts 1 million bpd effective September",
       "source_url": "https://money.cnn.com/2001/07/25/europe/opec/"
@@ -204,7 +204,7 @@
       "date": "2001-09-11",
       "car20_or_state": {
         "|CAR|": 2.263,
-        "state_t_minus_1": 94.422
+        "state_t_minus_1": 94.257
       },
       "title": "September 11 terrorist attacks",
       "source_url": "https://www.govinfo.gov/content/pkg/GPO-911REPORT/pdf/GPO-911REPORT.pdf"
@@ -214,7 +214,7 @@
       "date": "2001-12-28",
       "car20_or_state": {
         "|CAR|": 3.013,
-        "state_t_minus_1": 30.279
+        "state_t_minus_1": 28.505
       },
       "title": "OPEC agrees 1.5 million bpd cut in Cairo",
       "source_url": "https://www.voanews.com/a/a-13-a-2001-12-28-27-opec-66954747/378104.html"
@@ -224,7 +224,7 @@
       "date": "2002-04-08",
       "car20_or_state": {
         "|CAR|": 11.302,
-        "state_t_minus_1": 6.949
+        "state_t_minus_1": 6.419
       },
       "title": "Iraq suspends oil exports for 30 days",
       "source_url": "https://money.cnn.com/2002/04/08/news/international/iraq/index.htm"
@@ -234,7 +234,7 @@
       "date": "2003-01-12",
       "car20_or_state": {
         "|CAR|": 7.167,
-        "state_t_minus_1": 51.478
+        "state_t_minus_1": 50.253
       },
       "title": "OPEC raises quota 6.5% amid Venezuela strike",
       "source_url": "https://en.wikipedia.org/wiki/2003_world_oil_market_chronology"
@@ -244,7 +244,7 @@
       "date": "2003-03-20",
       "car20_or_state": {
         "|CAR|": 12.749,
-        "state_t_minus_1": 85.62
+        "state_t_minus_1": 85.22
       },
       "title": "US-led invasion of Iraq begins",
       "source_url": "https://georgewbush-whitehouse.archives.gov/news/releases/2003/03/20030319-17.html"
@@ -254,7 +254,7 @@
       "date": "2003-09-24",
       "car20_or_state": {
         "|CAR|": 3.522,
-        "state_t_minus_1": 10.074
+        "state_t_minus_1": 10.329
       },
       "title": "OPEC surprises with 900000 bpd cut",
       "source_url": "https://en.wikipedia.org/wiki/2003_world_oil_market_chronology"
@@ -264,7 +264,7 @@
       "date": "2004-04-23",
       "car20_or_state": {
         "|CAR|": 5.195,
-        "state_t_minus_1": 0.656
+        "state_t_minus_1": 0.676
       },
       "title": "US lifts most Libya sanctions",
       "source_url": "https://home.treasury.gov/news/press-releases/js1457"
@@ -274,7 +274,7 @@
       "date": "2004-06-03",
       "car20_or_state": {
         "|CAR|": 0.447,
-        "state_t_minus_1": 4.184
+        "state_t_minus_1": 4.307
       },
       "title": "OPEC raises quotas 2 million bpd in Beirut",
       "source_url": "https://en.wikipedia.org/wiki/2004_world_oil_market_chronology"
@@ -284,7 +284,7 @@
       "date": "2004-08-03",
       "car20_or_state": {
         "|CAR|": 2.889,
-        "state_t_minus_1": 4.02
+        "state_t_minus_1": 4.146
       },
       "title": "Insurgents bomb Kirkuk-Ceyhan pipeline halting northern Iraq exports",
       "source_url": "https://www.globalsecurity.org/military/library/news/2004/08/mil-040830-rferl01.htm"
@@ -294,7 +294,7 @@
       "date": "2004-11-08",
       "car20_or_state": {
         "|CAR|": 4.28,
-        "state_t_minus_1": 0.984
+        "state_t_minus_1": 1.013
       },
       "title": "Tanker Tropic Brilliance runs aground and blocks the Suez Canal",
       "source_url": "https://maritime-executive.com/article/2004-11-08suez-canal-closed-due-to-grounding"
@@ -304,7 +304,7 @@
       "date": "2005-09-02",
       "car20_or_state": {
         "|CAR|": 0.875,
-        "state_t_minus_1": 10.336
+        "state_t_minus_1": 10.642
       },
       "title": "IEA coordinated 60M bbl release after Katrina",
       "source_url": "https://www.iea.org/news/contributions-of-iea-member-countries-to-the-hurricane-katrina-oil-supply-disruption"
@@ -314,7 +314,7 @@
       "date": "2005-12-12",
       "car20_or_state": {
         "|CAR|": 1.061,
-        "state_t_minus_1": 4.586
+        "state_t_minus_1": 4.722
       },
       "title": "OPEC holds output ceiling at Kuwait meeting",
       "source_url": "https://www.industryweek.com/the-economy/article/21957417/opec-leaves-oil-output-ceiling-unchanged"
@@ -324,7 +324,7 @@
       "date": "2006-02-18",
       "car20_or_state": {
         "|CAR|": 1.652,
-        "state_t_minus_1": 8.45
+        "state_t_minus_1": 8.692
       },
       "title": "MEND attacks Shell Forcados terminal cutting Nigeria exports",
       "source_url": "https://www.washingtonpost.com/archive/politics/2006/02/19/militants-attack-nigerian-oil-facilities-seize-nine-foreign-workers/2ae077a4-1aaa-4ce9-92af-32befe7ea6fd/"
@@ -334,7 +334,7 @@
       "date": "2006-07-12",
       "car20_or_state": {
         "|CAR|": 0.696,
-        "state_t_minus_1": 21.944
+        "state_t_minus_1": 22.536
       },
       "title": "Israel-Hezbollah (Second Lebanon) war begins",
       "source_url": "https://press.un.org/en/2006/sc8808.doc.htm"
@@ -344,7 +344,7 @@
       "date": "2006-12-14",
       "car20_or_state": {
         "|CAR|": 0.981,
-        "state_t_minus_1": 0.491
+        "state_t_minus_1": 0.505
       },
       "title": "OPEC cuts 500000 bpd at Abuja",
       "source_url": "https://www.cbsnews.com/news/opec-slashes-oil-production/"
@@ -354,7 +354,7 @@
       "date": "2007-09-11",
       "car20_or_state": {
         "|CAR|": 4.975,
-        "state_t_minus_1": 93.191
+        "state_t_minus_1": 94.768
       },
       "title": "OPEC agrees 500000 bpd output increase effective November",
       "source_url": "https://www.opec.org/opec_web/en/press_room/1009.htm"
@@ -364,7 +364,7 @@
       "date": "2008-01-25",
       "car20_or_state": {
         "|CAR|": 2.319,
-        "state_t_minus_1": 98.44
+        "state_t_minus_1": 99.073
       },
       "title": "2008 South Africa power crisis mine shutdowns",
       "source_url": "https://www.aljazeera.com/amp/news/2008/1/30/s-africa-mines-hope-to-reopen"
@@ -374,7 +374,7 @@
       "date": "2008-05-19",
       "car20_or_state": {
         "|CAR|": 1.736,
-        "state_t_minus_1": 65.956
+        "state_t_minus_1": 67.734
       },
       "title": "Bush signs halt to SPR deposits",
       "source_url": "http://www.washingtonpost.com/wp-dyn/content/article/2008/05/16/AR2008051603579.html"
@@ -384,7 +384,7 @@
       "date": "2008-08-05",
       "car20_or_state": {
         "|CAR|": 4.931,
-        "state_t_minus_1": 90.312
+        "state_t_minus_1": 90.051
       },
       "title": "Baku-Tbilisi-Ceyhan pipeline explosion in Turkey",
       "source_url": "https://www.aljazeera.com/news/2008/8/7/pkk-claims-oil-pipeline-fire"
@@ -394,7 +394,7 @@
       "date": "2008-09-15",
       "car20_or_state": {
         "|CAR|": 21.505,
-        "state_t_minus_1": 94.906
+        "state_t_minus_1": 94.777
       },
       "title": "Lehman Brothers collapses",
       "source_url": "https://www.sec.gov/Archives/edgar/data/806085/000110465908059632/a08-22764_4ex99d1.htm"
@@ -404,7 +404,7 @@
       "date": "2008-10-24",
       "car20_or_state": {
         "|CAR|": 9.307,
-        "state_t_minus_1": 99.672
+        "state_t_minus_1": 99.664
       },
       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
       "source_url": "https://money.cnn.com/2008/10/24/markets/oil/index.htm"
@@ -414,7 +414,7 @@
       "date": "2008-12-17",
       "car20_or_state": {
         "|CAR|": 6.395,
-        "state_t_minus_1": 96.062
+        "state_t_minus_1": 95.966
       },
       "title": "OPEC announces record 2.2 million bpd cut at Oran",
       "source_url": "https://money.cnn.com/2008/12/17/markets/oil/"
@@ -424,7 +424,7 @@
       "date": "2009-05-28",
       "car20_or_state": {
         "|CAR|": 0.126,
-        "state_t_minus_1": 86.524
+        "state_t_minus_1": 86.172
       },
       "title": "OPEC keeps production quotas unchanged in Vienna",
       "source_url": "https://www.opec.org/opec_web/en/799.htm"
@@ -434,7 +434,7 @@
       "date": "2009-08-06",
       "car20_or_state": {
         "|CAR|": 0.179,
-        "state_t_minus_1": 75.431
+        "state_t_minus_1": 74.725
       },
       "title": "Nigeria offers MEND militants amnesty",
       "source_url": "https://www.aljazeera.com/news/2009/7/15/nigeria-rebels-declare-ceasefire"
@@ -444,7 +444,7 @@
       "date": "2010-07-01",
       "car20_or_state": {
         "|CAR|": 0.926,
-        "state_t_minus_1": 86.689
+        "state_t_minus_1": 86.329
       },
       "title": "Iran CISADA sanctions signed",
       "source_url": "https://en.wikipedia.org/wiki/Comprehensive_Iran_Sanctions,_Accountability,_and_Divestment_Act_of_2010"
@@ -454,7 +454,7 @@
       "date": "2011-01-25",
       "car20_or_state": {
         "|CAR|": 2.448,
-        "state_t_minus_1": 31.337
+        "state_t_minus_1": 29.427
       },
       "title": "Egyptian revolution erupts raising Suez transit risk",
       "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=12371"
@@ -464,7 +464,7 @@
       "date": "2011-06-08",
       "car20_or_state": {
         "|CAR|": 2.064,
-        "state_t_minus_1": 31.829
+        "state_t_minus_1": 29.933
       },
       "title": "OPEC fails to agree output increase in Vienna",
       "source_url": "https://www.aljazeera.com/economy/2011/6/8/opec-rejects-increase-in-oil-supply"
@@ -474,7 +474,7 @@
       "date": "2011-11-21",
       "car20_or_state": {
         "|CAR|": 0.656,
-        "state_t_minus_1": 80.581
+        "state_t_minus_1": 80.059
       },
       "title": "US signs EO 13590 targeting Iran energy sector",
       "source_url": "https://www.presidency.ucsb.edu/documents/executive-order-13590-authorizing-the-imposition-certain-sanctions-with-respect-the"
@@ -484,7 +484,7 @@
       "date": "2012-03-15",
       "car20_or_state": {
         "|CAR|": 1.66,
-        "state_t_minus_1": 3.112
+        "state_t_minus_1": 0.925
       },
       "title": "SWIFT disconnects Iranian banks",
       "source_url": "https://www.swift.com/insights/press-releases/swift-instructed-to-disconnect-sanctioned-iranian-banks-following-eu-council-decision"
@@ -494,7 +494,7 @@
       "date": "2012-06-05",
       "car20_or_state": {
         "|CAR|": 1.58,
-        "state_t_minus_1": 66.585
+        "state_t_minus_1": 66.639
       },
       "title": "OPEC rolls over 30 million bpd ceiling in Vienna",
       "source_url": "https://gulfnews.com/business/energy/opec-adheres-to-production-ceiling-of-30-million-barrels-a-day-1.1122678"
@@ -504,7 +504,7 @@
       "date": "2012-08-16",
       "car20_or_state": {
         "|CAR|": 3.994,
-        "state_t_minus_1": 0.409
+        "state_t_minus_1": 0.42
       },
       "title": "Marikana / Lonmin platinum strike",
       "source_url": "https://sahistory.org.za/article/marikana-massacre-16-august-2012"
@@ -514,7 +514,7 @@
       "date": "2013-05-31",
       "car20_or_state": {
         "|CAR|": 6.795,
-        "state_t_minus_1": 8.422
+        "state_t_minus_1": 8.655
       },
       "title": "OPEC maintains 30 million bpd output ceiling",
       "source_url": "https://www.opec.org/opec_web/en/press_room/2553.htm"
@@ -524,7 +524,7 @@
       "date": "2013-11-24",
       "car20_or_state": {
         "|CAR|": 0.938,
-        "state_t_minus_1": 0.816
+        "state_t_minus_1": 0.838
       },
       "title": "JPOA interim deal pauses Iran oil sanctions",
       "source_url": "https://ofac.treasury.gov/system/files/126/jpoa.pdf"
@@ -534,7 +534,7 @@
       "date": "2014-01-12",
       "car20_or_state": {
         "|CAR|": 3.065,
-        "state_t_minus_1": 0.652
+        "state_t_minus_1": 0.67
       },
       "title": "Indonesia bans unprocessed ore exports 2014",
       "source_url": "https://www.loc.gov/item/global-legal-monitor/2014-01-23/indonesia-export-ban-on-unprocessed-minerals-comes-into-effect/"
@@ -544,7 +544,7 @@
       "date": "2014-03-02",
       "car20_or_state": {
         "|CAR|": 0.095,
-        "state_t_minus_1": 13.785
+        "state_t_minus_1": 14.178
       },
       "title": "ISIS attacks sever the Kirkuk-Ceyhan pipeline",
       "source_url": "https://www.gem.wiki/Kirkuk-Ceyhan_Oil_Pipeline"
@@ -554,7 +554,7 @@
       "date": "2014-06-10",
       "car20_or_state": {
         "|CAR|": 1.432,
-        "state_t_minus_1": 0.163
+        "state_t_minus_1": 0.168
       },
       "title": "ISIS captures Mosul and advances in northern Iraq",
       "source_url": "https://fortune.com/2014/06/12/oil-prices-at-three-month-high-as-iraq-chaos-threatens-supply/"
@@ -564,7 +564,7 @@
       "date": "2014-07-16",
       "car20_or_state": {
         "|CAR|": 2.285,
-        "state_t_minus_1": 2.694
+        "state_t_minus_1": 2.773
       },
       "title": "US sectoral sanctions on Russian energy (EO 13662)",
       "source_url": "https://home.treasury.gov/news/press-releases/jl2629"
@@ -574,7 +574,7 @@
       "date": "2014-09-12",
       "car20_or_state": {
         "|CAR|": 6.065,
-        "state_t_minus_1": 9.714
+        "state_t_minus_1": 9.992
       },
       "title": "US and EU ban Russian Arctic deepwater shale oil tech",
       "source_url": "https://home.treasury.gov/news/press-releases/jl2629"
@@ -584,7 +584,7 @@
       "date": "2014-11-27",
       "car20_or_state": {
         "|CAR|": 0.478,
-        "state_t_minus_1": 4.238
+        "state_t_minus_1": 4.355
       },
       "title": "OPEC declines to cut production",
       "source_url": "https://www.opec.org/pr-detail/84-27-nov-2014.html"
@@ -594,7 +594,7 @@
       "date": "2015-03-26",
       "car20_or_state": {
         "|CAR|": 0.403,
-        "state_t_minus_1": 37.826
+        "state_t_minus_1": 39.001
       },
       "title": "Saudi-led intervention in Yemen (Operation Decisive Storm)",
       "source_url": "https://www.aljazeera.com/news/2015/3/26/saudi-and-arab-allies-bomb-houthi-positions-in-yemen"
@@ -604,7 +604,7 @@
       "date": "2015-07-14",
       "car20_or_state": {
         "|CAR|": 0.129,
-        "state_t_minus_1": 26.732
+        "state_t_minus_1": 27.563
       },
       "title": "JCPOA nuclear deal reached; path to lifting Iran oil sanctions",
       "source_url": "https://www.europarl.europa.eu/cmsdata/122460/full-text-of-the-iran-nuclear-deal.pdf"
@@ -614,7 +614,7 @@
       "date": "2015-12-04",
       "car20_or_state": {
         "|CAR|": 2.872,
-        "state_t_minus_1": 71.213
+        "state_t_minus_1": 71.807
       },
       "title": "OPEC drops output ceiling and fails to agree a limit",
       "source_url": "https://www.euronews.com/2015/12/04/oil-output-to-stay-high-as-opec-fails-to-agree-ceiling"
@@ -624,7 +624,7 @@
       "date": "2016-05-25",
       "car20_or_state": {
         "|CAR|": 3.12,
-        "state_t_minus_1": 37.612
+        "state_t_minus_1": 38.814
       },
       "title": "Niger Delta Avengers bomb Chevron Escravos facilities",
       "source_url": "https://www.vanguardngr.com/2016/05/breaking-avengers-bomb-chevrons-escravos-tank-farm-in-delta/"
@@ -634,7 +634,7 @@
       "date": "2016-09-28",
       "car20_or_state": {
         "|CAR|": 1.29,
-        "state_t_minus_1": 20.204
+        "state_t_minus_1": 20.816
       },
       "title": "OPEC reaches Algiers accord to cut output",
       "source_url": "https://www.drillingcontractor.org/opec-agrees-cut-production-40999"
@@ -644,7 +644,7 @@
       "date": "2016-11-30",
       "car20_or_state": {
         "|CAR|": 1.538,
-        "state_t_minus_1": 18.011
+        "state_t_minus_1": 18.571
       },
       "title": "OPEC agrees to cut production",
       "source_url": "https://www.opec.org/pr-detail/458-30-nov-2016.html"
@@ -654,7 +654,7 @@
       "date": "2017-02-02",
       "car20_or_state": {
         "|CAR|": 2.623,
-        "state_t_minus_1": 5.265
+        "state_t_minus_1": 5.429
       },
       "title": "Philippines orders 23 nickel-mine closures",
       "source_url": "https://pcij.org/2021/01/31/philippine-mines-continue-unhampered-4-years-after-ginas-shutdown-order/"
@@ -664,7 +664,7 @@
       "date": "2017-05-25",
       "car20_or_state": {
         "|CAR|": 1.321,
-        "state_t_minus_1": 0.245
+        "state_t_minus_1": 0.253
       },
       "title": "OPEC extends cuts nine months in Vienna",
       "source_url": "https://www.aljazeera.com/economy/2017/5/25/opec-extends-cuts-in-oil-output-by-nine-months"
@@ -674,7 +674,7 @@
       "date": "2017-08-25",
       "car20_or_state": {
         "|CAR|": 1.593,
-        "state_t_minus_1": 18.791
+        "state_t_minus_1": 19.328
       },
       "title": "US financial sanctions on Venezuela (EO 13808)",
       "source_url": "https://www.presidency.ucsb.edu/documents/executive-order-13808-imposing-additional-sanctions-with-respect-the-situation-venezuela"
@@ -684,7 +684,7 @@
       "date": "2017-10-16",
       "car20_or_state": {
         "|CAR|": 0.01,
-        "state_t_minus_1": 1.061
+        "state_t_minus_1": 1.092
       },
       "title": "Iraqi forces seize oil-rich Kirkuk from Kurds",
       "source_url": "https://www.washingtoninstitute.org/policy-analysis/kurdish-referendum-and-kirkuk-lessons-us-policymakers"
@@ -694,7 +694,7 @@
       "date": "2017-12-04",
       "car20_or_state": {
         "|CAR|": 2.831,
-        "state_t_minus_1": 14.082
+        "state_t_minus_1": 14.34
       },
       "title": "Kazatomprom 20pct three-year uranium cut",
       "source_url": "https://www.world-nuclear-news.org/Articles/Kazakhstan-to-cut-uranium-production"
@@ -704,7 +704,7 @@
       "date": "2018-03-08",
       "car20_or_state": {
         "|CAR|": 6.4,
-        "state_t_minus_1": 85.119
+        "state_t_minus_1": 84.764
       },
       "title": "US Section 232 steel and aluminium tariffs",
       "source_url": "https://www.congress.gov/crs-product/IN12519"
@@ -714,7 +714,7 @@
       "date": "2018-06-14",
       "car20_or_state": {
         "|CAR|": 0.544,
-        "state_t_minus_1": 38.093
+        "state_t_minus_1": 38.964
       },
       "title": "Armed offensive seizes Libya's Es Sider and Ras Lanuf oil ports",
       "source_url": "https://www.crisisgroup.org/middle-east-north-africa/north-africa/libya/189-after-showdown-libyas-oil-crescent"
@@ -724,7 +724,7 @@
       "date": "2018-10-09",
       "car20_or_state": {
         "|CAR|": 8.193,
-        "state_t_minus_1": 73.628
+        "state_t_minus_1": 73.148
       },
       "title": "IMF cuts global growth on trade war",
       "source_url": "https://www.cnbc.com/2018/10/09/world-economic-outlook-imf-cuts-global-growth-forecasts-on-trade-fight.html"
@@ -734,7 +734,7 @@
       "date": "2019-01-28",
       "car20_or_state": {
         "|CAR|": 7.6,
-        "state_t_minus_1": 78.566
+        "state_t_minus_1": 77.951
       },
       "title": "US sanctions on PDVSA",
       "source_url": "https://home.treasury.gov/news/press-releases/sm594"
@@ -744,7 +744,7 @@
       "date": "2019-12-06",
       "car20_or_state": {
         "|CAR|": 0.189,
-        "state_t_minus_1": 55.455
+        "state_t_minus_1": 55.976
       },
       "title": "OPEC+ agrees deeper 500kbd production cut",
       "source_url": "https://www.cnbc.com/2019/12/05/opec-december-meeting-opec-production-cuts-in-question.html"
@@ -754,7 +754,7 @@
       "date": "2020-06-06",
       "car20_or_state": {
         "|CAR|": 4.563,
-        "state_t_minus_1": 89.951
+        "state_t_minus_1": 90.767
       },
       "title": "OPEC+ extends record cuts through July",
       "source_url": "https://www.cnbc.com/2020/06/06/opec-and-allies-reportedly-agree-to-extend-record-production-cut.html"
@@ -764,7 +764,7 @@
       "date": "2020-09-18",
       "car20_or_state": {
         "|CAR|": 1.507,
-        "state_t_minus_1": 90.148
+        "state_t_minus_1": 89.882
       },
       "title": "Haftar conditionally lifts Libya oil blockade",
       "source_url": "https://www.aljazeera.com/economy/2020/9/18/haftar-announces-conditional-lifting-of-libya-oil-blockade"
@@ -774,7 +774,7 @@
       "date": "2020-11-23",
       "car20_or_state": {
         "|CAR|": 1.193,
-        "state_t_minus_1": 83.142
+        "state_t_minus_1": 83.516
       },
       "title": "Houthi cruise missile hits Aramco North Jeddah fuel depot",
       "source_url": "https://www.timesofisrael.com/fire-at-saudi-oil-depot-in-jeddah-as-iran-backed-houthis-claim-attack/"
@@ -784,7 +784,7 @@
       "date": "2021-05-07",
       "car20_or_state": {
         "|CAR|": 4.966,
-        "state_t_minus_1": 66.202
+        "state_t_minus_1": 65.203
       },
       "title": "Colonial Pipeline ransomware shutdown",
       "source_url": "https://www.energy.gov/ceser/colonial-pipeline-cyber-incident"
@@ -794,7 +794,7 @@
       "date": "2021-07-01",
       "car20_or_state": {
         "|CAR|": 0.467,
-        "state_t_minus_1": 52.666
+        "state_t_minus_1": 51.855
       },
       "title": "OPEC+ talks collapse over UAE quota dispute",
       "source_url": "https://www.malaymail.com/amp/news/money---international/2021/07/02/opec-to-reconvene-after-wrangling-over-production-rise/1986769"
@@ -804,7 +804,7 @@
       "date": "2021-09-05",
       "car20_or_state": {
         "|CAR|": 6.528,
-        "state_t_minus_1": 55.004
+        "state_t_minus_1": 54.181
       },
       "title": "Guinea bauxite coup shuts borders",
       "source_url": "https://www.crugroup.com/knowledge-and-insights/insights/2021/guinea-coup-ignites-uncertainty-in-bauxite/"
@@ -814,7 +814,7 @@
       "date": "2021-11-23",
       "car20_or_state": {
         "|CAR|": 2.596,
-        "state_t_minus_1": 66.694
+        "state_t_minus_1": 65.77
       },
       "title": "US-led six-nation coordinated SPR release (50M bbl)",
       "source_url": "https://www.energy.gov/ceser/articles/doe-make-available-release-50-million-barrels-crude-oil-strategic-petroleum-reserve"
@@ -824,7 +824,7 @@
       "date": "2021-12-31",
       "car20_or_state": {
         "|CAR|": 5.663,
-        "state_t_minus_1": 55.446
+        "state_t_minus_1": 54.17
       },
       "title": "Russia sets 2022 grain export quota",
       "source_url": "https://www.fao.org/giews/food-prices/food-policies/detail/en/c/1467626/"
@@ -834,7 +834,7 @@
       "date": "2022-12-05",
       "car20_or_state": {
         "|CAR|": 3.322,
-        "state_t_minus_1": 46.085
+        "state_t_minus_1": 45.851
       },
       "title": "EU seaborne embargo and G7 price cap take effect",
       "source_url": "https://www.ecb.europa.eu/press/economic-bulletin/focus/2023/html/ecb.ebbox202302_02~59c965249a.en.html"
@@ -844,45 +844,59 @@
       "date": "2023-02-05",
       "car20_or_state": {
         "|CAR|": 0.83,
-        "state_t_minus_1": 40.865
+        "state_t_minus_1": 39.849
       },
       "title": "G7 price cap on Russian petroleum products takes effect",
       "source_url": "https://enlargement.ec.europa.eu/news/ukraine-eu-and-g7-partners-agree-price-cap-russian-petroleum-products-2023-02-04_en"
     },
     {
-      "event_id": "saudi_voluntary_cut_june_2023",
-      "date": "2023-06-04",
+      "event_id": "nigeria_fuel_subsidy_removed_2023",
+      "date": "2023-05-29",
       "car20_or_state": {
-        "|CAR|": 6.175,
-        "state_t_minus_1": 14.425
+        "|CAR|": 3.32,
+        "state_t_minus_1": 33.696
       },
-      "title": "Saudi Arabia announces extra 1 million bpd voluntary cut",
-      "source_url": "https://www.cnbc.com/amp/2023/06/04/opec-sticks-to-2023-oil-production-targets-as-saudi-arabia-announces-further-voluntary-cuts.html"
-    },
-    {
-      "event_id": "eu_cbam_2023",
-      "date": "2023-10-01",
-      "car20_or_state": {
-        "|CAR|": 6.369,
-        "state_t_minus_1": 34.54
-      },
-      "title": "EU Carbon Border Adjustment Mechanism takes effect",
-      "source_url": "https://icapcarbonaction.com/en/news/eu-carbon-border-adjustment-mechanism-cbam-takes-effect-transitional-phase"
+      "title": "Nigeria ends fuel subsidy ('subsidy is gone')",
+      "source_url": "https://www.channelstv.com/2023/05/29/breaking-fuel-subsidy-is-gone-president-tinubu-declares-in-inaugural-speech/"
     },
     {
       "event_id": "rus_novorossiysk_terminal_2025",
       "date": "2025-11-14",
       "car20_or_state": {
         "|CAR|": 2.878,
-        "state_t_minus_1": 64.708
+        "state_t_minus_1": 66.238
       },
       "title": "Ukrainian drone strike halts oil loadings at Novorossiysk Sheskharis terminal",
       "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122"
+    },
+    {
+      "event_id": "iran_israel_us_strike_2026",
+      "date": "2026-02-28",
+      "car20_or_state": {
+        "|CAR|": 10.42,
+        "state_t_minus_1": 65.669
+      },
+      "title": "US and Israel strike Iran (Feb 2026 escalation)",
+      "source_url": "https://hormuzstraitmonitor.com/crisis-timeline/"
+    },
+    {
+      "event_id": "us_iran_hormuz_mou_2026",
+      "date": "2026-06-17",
+      "car20_or_state": {
+        "|CAR|": 1.324,
+        "state_t_minus_1": 35.438
+      },
+      "title": "US-Iran MOU reopens the Strait of Hormuz",
+      "source_url": "https://www.cnn.com/2026/06/17/middleeast/us-iran-war-mou-text-intl"
     }
   ],
-  "n_episodes": 86,
+  "n_episodes": 87,
   "source_artifact": "cross_asset_conditioned.json",
-  "source_commit": "93da81b",
+  "source_commit": "f1f2b72",
   "db_commit": "uncommitted (oil.db is gitignored; rebuild via repro.sh)",
-  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/cross_asset_conditioned.json"
+  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/cross_asset_conditioned.json",
+  "corpus": {
+    "n_events": 296,
+    "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  }
 }

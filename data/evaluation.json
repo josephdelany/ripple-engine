@@ -1,14 +1,14 @@
 {
   "corpus": {
-    "n_events": 289
+    "n_events": 296
   },
   "placebo": {
     "ran": true,
-    "real_amp": 5.0003,
-    "placebo_mean": -0.0425,
+    "real_amp": 5.5615,
+    "placebo_mean": -0.0113,
     "placebo_ci95": [
-      -4.0172,
-      3.9264
+      -4.3937,
+      4.3591
     ],
     "null_as_expected": true,
     "note": "state labels shuffled on H1's episodes; amplification collapses to ~0 (CI spans 0). A non-null placebo would mean the framework finds signal in noise -- it does not."
@@ -16,40 +16,40 @@
   "surface_consistency": {
     "quantity": "H1 amplification (Brent, pp)",
     "values": {
-      "validation_claims": 5.0003,
-      "cross_asset_conditioned": 5.0003,
-      "sowhat": 5.0003
+      "validation_claims": 5.5615,
+      "cross_asset_conditioned": 5.5615,
+      "sowhat": 5.5615
     },
     "all_consistent": true
   },
   "calibration": {
     "ran": true,
-    "n_scored": 240,
-    "brier": 0.2467,
-    "base_rate_brier": 0.2496,
+    "n_scored": 247,
+    "brier": 0.2466,
+    "base_rate_brier": 0.2495,
     "skill_vs_base": 0.0029,
     "decomposition": {
       "reliability": 0.0013,
       "resolution": 0.0042,
-      "uncertainty": 0.2496
+      "uncertainty": 0.2495
     },
     "reliability_bins": [
       {
         "forecast_p": 0.4,
-        "n": 105,
-        "observed": 0.448,
+        "n": 109,
+        "observed": 0.45,
         "observed_ci95": [
-          0.356,
+          0.359,
           0.543
         ]
       },
       {
         "forecast_p": 0.6,
-        "n": 135,
-        "observed": 0.578,
+        "n": 138,
+        "observed": 0.58,
         "observed_ci95": [
-          0.493,
-          0.658
+          0.496,
+          0.659
         ]
       }
     ],
@@ -59,29 +59,38 @@
     "claims": [
       {
         "claim": "H1",
-        "n": 86,
+        "n": 87,
         "robust_leave_one_out": true,
         "jackknife_amp_range": [
-          4.0063,
-          5.4953
+          4.7323,
+          6.5494
         ]
       },
       {
         "claim": "copper_growth",
-        "n": 70,
+        "n": 71,
         "robust_leave_one_out": true,
         "jackknife_amp_range": [
-          3.5185,
-          4.6891
+          3.2659,
+          4.4243
+        ]
+      },
+      {
+        "claim": "palladium_supply",
+        "n": 75,
+        "robust_leave_one_out": true,
+        "jackknife_amp_range": [
+          3.7776,
+          6.317
         ]
       },
       {
         "claim": "hy_credit_stress",
-        "n": 48,
+        "n": 49,
         "robust_leave_one_out": true,
         "jackknife_amp_range": [
-          0.7586,
-          1.7736
+          0.5695,
+          1.6892
         ]
       }
     ],

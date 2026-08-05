@@ -167,9 +167,17 @@ def build_all():
             "source_commit": git_hash(DATA / "cross_chain.json"),
             "db_commit": git_hash(DB) if git_hash(DB) != "uncommitted" else "uncommitted (rebuild via repro.sh)",
             "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"})
+    corpus_n = conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
     conn.close()
 
+    # F1: mark every pack with the CURRENT-SAMPLE corpus version. The registered study is FROZEN at
+    # its own N (see PRE_REGISTRATION.md / EDGE_PORTFOLIO.md); these packs are the live post-sweep read.
+    corpus_marker = {"n_events": corpus_n,
+                     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately "
+                             "(PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs "
+                             "track the growing corpus, versioned by n_events."}
     for p in packs:
+        p["corpus"] = corpus_marker
         (EVID / f"{p['claim_id']}.json").write_text(json.dumps(p, indent=2, default=str))
     _write_index(packs)
     return packs

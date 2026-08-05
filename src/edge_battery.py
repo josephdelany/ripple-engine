@@ -200,6 +200,28 @@ def _leave_one_cluster_out(mags, states, sign):
             "n_jackknife": len(amps)}
 
 
+def _leave_one_out_diff(a, b, sign):
+    """Leave-one-out robustness for a TWO-GROUP test (e.g. severity high-vs-low): drop each observation
+    once (from whichever group), recompute sign*(mean(a)-mean(b)); does the difference keep its predicted
+    sign EVERY time? Same 'a winner that flips on a single drop is not robust' bar as the amplification
+    jackknife -- so a validated two-group edge clears the SAME full gate the docstring registers."""
+    a = np.asarray([x for x in a if np.isfinite(x)], float)
+    b = np.asarray([x for x in b if np.isfinite(x)], float)
+    amps = []
+    for i in range(len(a)):
+        aa = np.delete(a, i)
+        if len(aa) and len(b):
+            amps.append(sign * (aa.mean() - b.mean()))
+    for j in range(len(b)):
+        bb = np.delete(b, j)
+        if len(a) and len(bb):
+            amps.append(sign * (a.mean() - bb.mean()))
+    if not amps:
+        return {"robust": False, "min": None, "max": None}
+    return {"robust": bool(all(x > 0 for x in amps)), "min": round(min(amps), 4),
+            "max": round(max(amps), 4), "n_jackknife": len(amps)}
+
+
 def _run_amplification(conn, name, state, asset, sign, mech):
     """One amplification hypothesis through the gate -> a normalized result row."""
     r = research.run_test(conn, state, asset, sign, HORIZON)
@@ -270,25 +292,33 @@ def run():
     frame = _oil_type_frame(conn)
     choke = frame.loc[frame["type"] == "chokepoint_disruption", "mag"]
     sanc = frame.loc[frame["type"] == "sanctions", "mag"]
-    d1 = _diff_test(choke.to_numpy(float), sanc.to_numpy(float), sign=+1)
-    amp.append({"hypothesis": "chokepoint_gt_sanction", "class": "amplification", "prior": False,
-                "asset": OIL, "unit": "%", "mechanism": "physical route shocks (chokepoint) ripple "
-                "harder into oil than financial ones (sanctions)", "testable": d1.get("ok", False),
-                **({"n": d1["n"], "amp": d1["amp"], "ci": d1["ci"],
-                    "ci_excludes_zero": d1["ci_excludes_zero"], "perm_p": d1["perm_p"],
-                    "groups": {"chokepoint": d1["n_a"], "sanctions": d1["n_b"]}}
-                   if d1.get("ok") else {"error": d1.get("reason")})})
+    choke_a, sanc_a = choke.to_numpy(float), sanc.to_numpy(float)
+    d1 = _diff_test(choke_a, sanc_a, sign=+1)
+    r1 = {"hypothesis": "chokepoint_gt_sanction", "class": "amplification", "prior": False,
+          "asset": OIL, "unit": "%", "mechanism": "physical route shocks (chokepoint) ripple "
+          "harder into oil than financial ones (sanctions)", "testable": d1.get("ok", False),
+          **({"n": d1["n"], "amp": d1["amp"], "ci": d1["ci"],
+              "ci_excludes_zero": d1["ci_excludes_zero"], "perm_p": d1["perm_p"],
+              "groups": {"chokepoint": d1["n_a"], "sanctions": d1["n_b"]}}
+             if d1.get("ok") else {"error": d1.get("reason")})}
+    if d1.get("ok"):
+        r1["_two_group"] = (choke_a, sanc_a, +1)          # arrays for the two-group jackknife (popped later)
+    amp.append(r1)
 
     sev = pd.to_numeric(frame["severity"], errors="coerce")
     hi = frame.loc[sev >= 4, "mag"]; lo = frame.loc[sev <= 2, "mag"]
-    d2 = _diff_test(hi.to_numpy(float), lo.to_numpy(float), sign=+1)
-    amp.append({"hypothesis": "severity_dose_response", "class": "amplification", "prior": False,
-                "asset": OIL, "unit": "%", "mechanism": "high-severity (4-5) events ripple harder "
-                "into oil than low-severity (1-2): a monotone dose-response", "testable": d2.get("ok", False),
-                **({"n": d2["n"], "amp": d2["amp"], "ci": d2["ci"],
-                    "ci_excludes_zero": d2["ci_excludes_zero"], "perm_p": d2["perm_p"],
-                    "groups": {"high_sev": d2["n_a"], "low_sev": d2["n_b"]}}
-                   if d2.get("ok") else {"error": d2.get("reason")})})
+    hi_a, lo_a = hi.to_numpy(float), lo.to_numpy(float)
+    d2 = _diff_test(hi_a, lo_a, sign=+1)
+    r2 = {"hypothesis": "severity_dose_response", "class": "amplification", "prior": False,
+          "asset": OIL, "unit": "%", "mechanism": "high-severity (4-5) events ripple harder "
+          "into oil than low-severity (1-2): a monotone dose-response", "testable": d2.get("ok", False),
+          **({"n": d2["n"], "amp": d2["amp"], "ci": d2["ci"],
+              "ci_excludes_zero": d2["ci_excludes_zero"], "perm_p": d2["perm_p"],
+              "groups": {"high_sev": d2["n_a"], "low_sev": d2["n_b"]}}
+             if d2.get("ok") else {"error": d2.get("reason")})}
+    if d2.get("ok"):
+        r2["_two_group"] = (hi_a, lo_a, +1)
+    amp.append(r2)
 
     # 2) family-wise correction across ALL testable amplification hypotheses (prior + new).
     testable = [r for r in amp if r.get("testable") and r.get("perm_p") is not None]
@@ -306,18 +336,26 @@ def run():
     for r in amp:
         r.setdefault("validated", False)
 
-    # 3) leave-one-cluster-out robustness on winners (state-conditioned ones only; two-group winners
-    #    get a group-size note instead). A winner that flips sign on any drop is downgraded.
+    # 3) leave-one-out robustness on winners -- EVERY validated edge must clear it (the docstring's gate).
+    #    State-conditioned edges use the clustered amplification jackknife; two-group edges (severity /
+    #    chokepoint-vs-sanction) use the group-difference jackknife. A winner that flips sign on any single
+    #    drop is downgraded to not-validated.
     for r in amp:
-        if r.get("validated") and r.get("state") and r.get("asset"):
+        if not r.get("validated"):
+            continue
+        if r.get("state") and r.get("asset"):                      # state-conditioned amplification edge
             m, s = _amp_arrays(conn, r["state"], r["asset"], HORIZON)
             if m is not None:
-                sign = +1 if r["sign"] == "high" else -1
-                rob = _leave_one_cluster_out(m, s, sign)
+                rob = _leave_one_cluster_out(m, s, +1 if r["sign"] == "high" else -1)
                 r["robustness"] = rob
-                if not rob["robust"]:
-                    r["validated"] = False
-                    r["downgraded"] = "failed leave-one-cluster-out (sign flips on a single drop)"
+        elif r.get("_two_group"):                                  # two-group heterogeneity edge
+            a, b, sign = r["_two_group"]
+            r["robustness"] = _leave_one_out_diff(a, b, sign)
+        if r.get("robustness") and not r["robustness"]["robust"]:
+            r["validated"] = False
+            r["downgraded"] = "failed leave-one-out robustness (sign flips on a single drop)"
+    for r in amp:
+        r.pop("_two_group", None)                                  # strip the non-serializable arrays
 
     mis = _mispricing(conn)
     coll = _collinearity(conn)

@@ -3,26 +3,26 @@
   "tier": "validated",
   "statement": "hy_credit_stress: a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test)",
   "quantity": {
-    "value": 1.6513,
+    "value": 1.4854,
     "unit": "%",
     "metric": "|CAR+20| amplification"
   },
   "mechanism": "a shock widens HY credit more when credit is already stressed (un-caps the excluded credit test)",
   "method": "conditioned constant-mean event study; clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; family-wise FDR+Bonferroni where applicable; leave-one-cluster-out robustness. Point-in-time (state read at t-1).",
   "statistics": {
-    "n_episodes": 48,
+    "n_episodes": 49,
     "ci95": [
-      0.2184,
-      3.939
+      0.1568,
+      3.7388
     ],
-    "perm_p": 0.0116,
-    "fdr_q": 0.0696,
+    "perm_p": 0.025,
+    "fdr_q": 0.0698,
     "survives_fdr": true,
     "robustness": {
       "robust": true,
-      "min": 0.7586,
-      "max": 1.7736,
-      "n_jackknife": 48
+      "min": 0.5695,
+      "max": 1.6892,
+      "n_jackknife": 49
     }
   },
   "underlying_episodes": [
@@ -477,24 +477,14 @@
       "source_url": "https://enlargement.ec.europa.eu/news/ukraine-eu-and-g7-partners-agree-price-cap-russian-petroleum-products-2023-02-04_en"
     },
     {
-      "event_id": "saudi_voluntary_cut_june_2023",
-      "date": "2023-06-04",
+      "event_id": "nigeria_fuel_subsidy_removed_2023",
+      "date": "2023-05-29",
       "car20_or_state": {
-        "|CAR|": 1.707,
-        "state_t_minus_1": 55.556
+        "|CAR|": 0.609,
+        "state_t_minus_1": 66.19
       },
-      "title": "Saudi Arabia announces extra 1 million bpd voluntary cut",
-      "source_url": "https://www.cnbc.com/amp/2023/06/04/opec-sticks-to-2023-oil-production-targets-as-saudi-arabia-announces-further-voluntary-cuts.html"
-    },
-    {
-      "event_id": "eu_cbam_2023",
-      "date": "2023-10-01",
-      "car20_or_state": {
-        "|CAR|": 2.7,
-        "state_t_minus_1": 58.81
-      },
-      "title": "EU Carbon Border Adjustment Mechanism takes effect",
-      "source_url": "https://icapcarbonaction.com/en/news/eu-carbon-border-adjustment-mechanism-cbam-takes-effect-transitional-phase"
+      "title": "Nigeria ends fuel subsidy ('subsidy is gone')",
+      "source_url": "https://www.channelstv.com/2023/05/29/breaking-fuel-subsidy-is-gone-president-tinubu-declares-in-inaugural-speech/"
     },
     {
       "event_id": "rus_novorossiysk_terminal_2025",
@@ -505,11 +495,35 @@
       },
       "title": "Ukrainian drone strike halts oil loadings at Novorossiysk Sheskharis terminal",
       "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122"
+    },
+    {
+      "event_id": "iran_israel_us_strike_2026",
+      "date": "2026-02-28",
+      "car20_or_state": {
+        "|CAR|": 3.053,
+        "state_t_minus_1": 38.254
+      },
+      "title": "US and Israel strike Iran (Feb 2026 escalation)",
+      "source_url": "https://hormuzstraitmonitor.com/crisis-timeline/"
+    },
+    {
+      "event_id": "us_iran_hormuz_mou_2026",
+      "date": "2026-06-17",
+      "car20_or_state": {
+        "|CAR|": 0.044,
+        "state_t_minus_1": 14.206
+      },
+      "title": "US-Iran MOU reopens the Strait of Hormuz",
+      "source_url": "https://www.cnn.com/2026/06/17/middleeast/us-iran-war-mou-text-intl"
     }
   ],
-  "n_episodes": 48,
+  "n_episodes": 49,
   "source_artifact": "edge_battery.json",
-  "source_commit": "95d4fcb",
+  "source_commit": "5f540cf",
   "db_commit": "uncommitted (oil.db is gitignored; rebuild via repro.sh)",
-  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/edge_battery.json"
+  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/edge_battery.json",
+  "corpus": {
+    "n_events": 296,
+    "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  }
 }

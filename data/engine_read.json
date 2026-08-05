@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-07-30",
-  "generated_at": "2026-07-30T04:45:36+00:00",
-  "clustered_event_n": 88,
+  "as_of": "2026-08-05",
+  "generated_at": "2026-08-05T20:39:58+00:00",
+  "clustered_event_n": 89,
   "hypotheses": {
     "H1": {
       "hypothesis": "H1",
@@ -9,12 +9,12 @@
       "signal": "derived.vix_pct",
       "signal_name": "VIX percentile",
       "unit": "percentile",
-      "latest": 55.84,
-      "as_of_reading": "2026-07-27",
-      "event_median": 49.0,
+      "latest": 30.48,
+      "as_of_reading": "2026-08-03",
+      "event_median": 50.25,
       "direction": "high amplifies",
       "verdict": "HOLDS",
-      "amplifier": "ON"
+      "amplifier": "OFF"
     },
     "H2": {
       "hypothesis": "H2",
@@ -22,9 +22,9 @@
       "signal": "derived.inv_sigma",
       "signal_name": "Inventory sigma vs seasonal norm",
       "unit": "sigma",
-      "latest": -1.49,
-      "as_of_reading": "2026-07-30",
-      "event_median": 0.33,
+      "latest": -4.43,
+      "as_of_reading": "2026-08-05",
+      "event_median": 0.3,
       "direction": "low (tight) amplifies",
       "verdict": "HOLDS",
       "amplifier": "ON"
@@ -35,9 +35,9 @@
       "signal": "derived.cot_pct",
       "signal_name": "Managed-money net-long percentile",
       "unit": "percentile",
-      "latest": 12.69,
-      "as_of_reading": "2026-07-30",
-      "event_median": 68.08,
+      "latest": 25.77,
+      "as_of_reading": "2026-08-05",
+      "event_median": 66.35,
       "direction": "high amplifies",
       "verdict": "FAILS",
       "amplifier": "FAILED"
@@ -46,11 +46,11 @@
   "base_rates": [
     {
       "type": "opec_decision",
-      "n": 30,
+      "n": 29,
       "car1": 2.7,
-      "car5": 2.3,
+      "car5": 2.6,
       "car10": 1.8,
-      "car20": 2.8
+      "car20": 2.9
     },
     {
       "type": "sanctions",
@@ -62,19 +62,27 @@
     },
     {
       "type": "conflict_escalation",
-      "n": 13,
-      "car1": 0.6,
-      "car5": 2.6,
-      "car10": 1.1,
-      "car20": 2.8
+      "n": 14,
+      "car1": 1.5,
+      "car5": 4.2,
+      "car10": 3.4,
+      "car20": 6.2
     },
     {
       "type": "policy_response",
       "n": 13,
-      "car1": 0.9,
-      "car5": -0.5,
-      "car10": -0.8,
-      "car20": -0.3
+      "car1": -0.5,
+      "car5": -2.5,
+      "car10": -3.1,
+      "car20": -1.3
+    },
+    {
+      "type": "demand_shock",
+      "n": 7,
+      "car1": -3.7,
+      "car5": -0.1,
+      "car10": -3.5,
+      "car20": -7.2
     },
     {
       "type": "infrastructure_attack",
@@ -83,14 +91,6 @@
       "car5": -1.0,
       "car10": -0.3,
       "car20": -2.7
-    },
-    {
-      "type": "demand_shock",
-      "n": 6,
-      "car1": -3.7,
-      "car5": -0.7,
-      "car10": -4.3,
-      "car20": -8.4
     },
     {
       "type": "chokepoint_disruption",
@@ -102,10 +102,10 @@
     }
   ],
   "gpr_context": {
-    "gpr_pct": 94.8,
-    "gpr_value": 195.9,
-    "as_of": "2026-07-27"
+    "gpr_pct": 96.8,
+    "gpr_value": 225.2,
+    "as_of": "2026-08-03"
   },
-  "read": "Inventories 1.5\u03c3 below seasonal norm (H2 amplifier ON); VIX 56th pct (H1 ON). A supply shock today lands on a physically primed but psychologically stressed market.",
+  "read": "Inventories 4.4\u03c3 below seasonal norm (H2 amplifier ON); VIX 30th pct (H1 OFF). A supply shock today lands on a physically primed but psychologically calm market.",
   "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast."
 }

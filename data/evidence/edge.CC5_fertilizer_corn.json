@@ -23,7 +23,11 @@
   "underlying_episodes": [],
   "n_episodes": 0,
   "source_artifact": "cross_chain.json",
-  "source_commit": "bb5bc8f",
+  "source_commit": "10a4418",
   "db_commit": "uncommitted (rebuild via repro.sh)",
-  "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json"
+  "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json",
+  "corpus": {
+    "n_events": 296,
+    "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  }
 }

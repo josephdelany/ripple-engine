@@ -11,15 +11,15 @@
   "results": [
     {
       "ok": true,
-      "amp": 1.415,
-      "signed_amp": 1.415,
+      "amp": 2.4066,
+      "signed_amp": 2.4066,
       "ci": [
-        -0.8899,
-        4.3605
+        -0.4184,
+        5.8552
       ],
       "ci_excludes_zero_in_dir": false,
-      "perm_p": 0.1729,
-      "n": 36,
+      "perm_p": 0.0848,
+      "n": 37,
       "id": "CC1_supply_diesel_crack",
       "unit": "$/bbl",
       "predicted_sign": "+",
@@ -239,24 +239,30 @@
           "date": "2025-11-14",
           "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122",
           "car": -4.6779
+        },
+        {
+          "event_id": "hormuz_closure_2026",
+          "date": "2026-03-04",
+          "source_url": "https://www.congress.gov/crs-product/R45281",
+          "car": 38.102
         }
       ],
       "survives_fdr": false,
-      "fdr_q": 0.2161,
+      "fdr_q": 0.1328,
       "survives_bonferroni": false,
       "validated": false
     },
     {
       "ok": true,
-      "amp": 2.2375,
-      "signed_amp": 2.2375,
+      "amp": 2.9611,
+      "signed_amp": 2.9611,
       "ci": [
-        0.611,
-        3.914
+        0.9943,
+        5.2136
       ],
       "ci_excludes_zero_in_dir": true,
-      "perm_p": 0.005,
-      "n": 36,
+      "perm_p": 0.003,
+      "n": 37,
       "id": "CC2_supply_gasoline_crack",
       "unit": "$/bbl",
       "predicted_sign": "+",
@@ -476,10 +482,16 @@
           "date": "2025-11-14",
           "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122",
           "car": -2.0375
+        },
+        {
+          "event_id": "hormuz_closure_2026",
+          "date": "2026-03-04",
+          "source_url": "https://www.congress.gov/crs-product/R45281",
+          "car": 29.0076
         }
       ],
       "survives_fdr": true,
-      "fdr_q": 0.0125,
+      "fdr_q": 0.0075,
       "survives_bonferroni": true,
       "validated": true
     },
@@ -735,7 +747,7 @@
       "unit": "beta",
       "predicted_sign": "+",
       "survives_fdr": false,
-      "fdr_q": 0.177,
+      "fdr_q": 0.1328,
       "survives_bonferroni": false,
       "validated": false
     },

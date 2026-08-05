@@ -7,10 +7,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Brent oil",
       "unit": "%",
-      "strength": 5.0003,
+      "strength": 5.5615,
       "ci": [
-        0.7659,
-        8.9484
+        0.9436,
+        9.6525
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Brent oil"
@@ -20,10 +20,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Heating oil",
       "unit": "%",
-      "strength": 4.2758,
+      "strength": 5.5688,
       "ci": [
-        0.7754,
-        7.6786
+        1.4905,
+        9.3587
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Heating oil"
@@ -33,10 +33,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "5Y breakeven",
       "unit": "bps",
-      "strength": 16.6725,
+      "strength": 16.7429,
       "ci": [
-        4.166,
-        30.9569
+        4.1071,
+        30.5914
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into 5Y breakeven"
@@ -44,12 +44,25 @@
     {
       "kind": "stress->node",
       "from": "geopolitical shock (VIX-stress regime)",
+      "to": "Palladium",
+      "unit": "%",
+      "strength": 5.2181,
+      "ci": [
+        0.2974,
+        10.521
+      ],
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Palladium"
+    },
+    {
+      "kind": "stress->node",
+      "from": "geopolitical shock (VIX-stress regime)",
       "to": "S&P 500",
       "unit": "%",
-      "strength": 1.7995,
+      "strength": 2.1192,
       "ci": [
-        0.0875,
-        3.2298
+        0.3418,
+        3.489
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into S&P 500"
@@ -59,26 +72,13 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Platinum",
       "unit": "%",
-      "strength": 7.2986,
+      "strength": 7.2205,
       "ci": [
-        1.8478,
-        14.791
+        2.0387,
+        14.6252
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Platinum"
-    },
-    {
-      "kind": "stress->node",
-      "from": "geopolitical shock (VIX-stress regime)",
-      "to": "Product tankers",
-      "unit": "%",
-      "strength": 7.234,
-      "ci": [
-        0.466,
-        12.1636
-      ],
-      "status": "validated",
-      "mechanism": "under stress, a shock ripples harder into Product tankers"
     }
   ],
   "amplification": [
@@ -87,10 +87,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Brent oil",
       "unit": "%",
-      "strength": 5.0003,
+      "strength": 5.5615,
       "ci": [
-        0.7659,
-        8.9484
+        0.9436,
+        9.6525
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Brent oil"
@@ -100,10 +100,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "HH natgas",
       "unit": "%",
-      "strength": -3.6968,
+      "strength": -2.3208,
       "ci": [
-        -10.7478,
-        3.8922
+        -10.3116,
+        4.2523
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into HH natgas"
@@ -113,10 +113,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Broad USD",
       "unit": "%",
-      "strength": 0.4277,
+      "strength": 0.4338,
       "ci": [
-        -0.2423,
-        1.2007
+        -0.1652,
+        1.2856
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Broad USD"
@@ -126,10 +126,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "5Y yield",
       "unit": "bps",
-      "strength": 5.6873,
+      "strength": 5.9852,
       "ci": [
-        -2.5332,
-        14.1801
+        -2.1167,
+        14.2256
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into 5Y yield"
@@ -139,10 +139,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "10Y yield",
       "unit": "bps",
-      "strength": 4.7921,
+      "strength": 5.5371,
       "ci": [
-        -2.4274,
-        11.1399
+        -2.0419,
+        11.7391
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into 10Y yield"
@@ -152,10 +152,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Heating oil",
       "unit": "%",
-      "strength": 4.2758,
+      "strength": 5.5688,
       "ci": [
-        0.7754,
-        7.6786
+        1.4905,
+        9.3587
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Heating oil"
@@ -165,10 +165,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "5Y breakeven",
       "unit": "bps",
-      "strength": 16.6725,
+      "strength": 16.7429,
       "ci": [
-        4.166,
-        30.9569
+        4.1071,
+        30.5914
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into 5Y breakeven"
@@ -178,10 +178,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "10Y breakeven",
       "unit": "bps",
-      "strength": 6.1712,
+      "strength": 6.1744,
       "ci": [
-        -0.7839,
-        14.9132
+        -1.234,
+        14.4398
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into 10Y breakeven"
@@ -191,10 +191,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Gold",
       "unit": "%",
-      "strength": 1.3605,
+      "strength": 1.6369,
       "ci": [
-        -0.2899,
-        2.804
+        -0.0259,
+        3.4268
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Gold"
@@ -204,10 +204,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Copper",
       "unit": "%",
-      "strength": 1.9308,
+      "strength": 2.0695,
       "ci": [
-        -1.2568,
-        4.2867
+        -1.1274,
+        4.2752
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Copper"
@@ -217,10 +217,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Silver",
       "unit": "%",
-      "strength": 1.629,
+      "strength": 1.5468,
       "ci": [
-        -2.2218,
-        4.875
+        -2.0688,
+        5.4385
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Silver"
@@ -230,10 +230,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Wheat",
       "unit": "%",
-      "strength": 0.9726,
+      "strength": 0.5791,
       "ci": [
-        -2.2301,
-        4.6796
+        -2.3646,
+        4.524
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Wheat"
@@ -243,23 +243,23 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Palladium",
       "unit": "%",
-      "strength": 5.2005,
+      "strength": 5.2181,
       "ci": [
-        -0.1599,
-        10.1856
+        0.2974,
+        10.521
       ],
-      "status": "null",
-      "mechanism": "under stress, a shock ripples no more into Palladium"
+      "status": "validated",
+      "mechanism": "under stress, a shock ripples harder into Palladium"
     },
     {
       "kind": "stress->node",
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "S&P 500",
       "unit": "%",
-      "strength": 1.7995,
+      "strength": 2.1192,
       "ci": [
-        0.0875,
-        3.2298
+        0.3418,
+        3.489
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into S&P 500"
@@ -269,10 +269,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "HY credit",
       "unit": "%",
-      "strength": 1.5859,
+      "strength": 1.7332,
       "ci": [
-        -0.2067,
-        4.1113
+        -0.0171,
+        4.1505
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into HY credit"
@@ -282,10 +282,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "CNY/USD",
       "unit": "%",
-      "strength": -0.3907,
+      "strength": -0.4041,
       "ci": [
-        -0.7462,
-        0.4129
+        -0.7381,
+        0.4245
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into CNY/USD"
@@ -295,10 +295,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Platinum",
       "unit": "%",
-      "strength": 7.2986,
+      "strength": 7.2205,
       "ci": [
-        1.8478,
-        14.791
+        2.0387,
+        14.6252
       ],
       "status": "validated",
       "mechanism": "under stress, a shock ripples harder into Platinum"
@@ -308,10 +308,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Corn",
       "unit": "%",
-      "strength": 1.5476,
+      "strength": 1.3704,
       "ci": [
-        -1.9892,
-        5.1963
+        -2.2866,
+        4.7663
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Corn"
@@ -321,10 +321,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Soybeans",
       "unit": "%",
-      "strength": 1.0427,
+      "strength": 1.2433,
       "ci": [
-        -2.2511,
-        4.2168
+        -1.9784,
+        4.0177
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Soybeans"
@@ -334,10 +334,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Gold miners",
       "unit": "%",
-      "strength": 2.2849,
+      "strength": 2.4087,
       "ci": [
-        -1.582,
-        7.1268
+        -1.4052,
+        7.5919
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Gold miners"
@@ -347,10 +347,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Copper miners",
       "unit": "%",
-      "strength": 1.2578,
+      "strength": 2.4629,
       "ci": [
-        -3.6577,
-        5.7716
+        -2.8872,
+        7.4724
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Copper miners"
@@ -360,10 +360,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Dry-bulk freight",
       "unit": "%",
-      "strength": 4.255,
+      "strength": 2.3058,
       "ci": [
-        -12.4975,
-        30.384
+        -14.022,
+        24.481
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into Dry-bulk freight"
@@ -373,23 +373,23 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "Product tankers",
       "unit": "%",
-      "strength": 7.234,
+      "strength": 6.5168,
       "ci": [
-        0.466,
-        12.1636
+        -0.0674,
+        11.3853
       ],
-      "status": "validated",
-      "mechanism": "under stress, a shock ripples harder into Product tankers"
+      "status": "null",
+      "mechanism": "under stress, a shock ripples no more into Product tankers"
     },
     {
       "kind": "stress->node",
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "USD/EUR",
       "unit": "%",
-      "strength": 0.5604,
+      "strength": 0.8485,
       "ci": [
-        -0.3758,
-        1.6937
+        -0.3578,
+        1.6939
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into USD/EUR"
@@ -399,10 +399,10 @@
       "from": "geopolitical shock (VIX-stress regime)",
       "to": "JPY/USD",
       "unit": "%",
-      "strength": -0.817,
+      "strength": -0.8769,
       "ci": [
-        -1.6854,
-        0.4974
+        -1.6883,
+        0.4868
       ],
       "status": "null",
       "mechanism": "under stress, a shock ripples no more into JPY/USD"
@@ -414,16 +414,33 @@
       "from": "event.demand_shock",
       "to": "5Y breakeven",
       "unit": "bps",
-      "n": 11,
-      "strength": -24.7624,
+      "n": 13,
+      "strength": -21.4939,
       "ci": [
-        -50.3217,
-        -2.297
+        -44.2029,
+        -2.8573
       ],
       "excludes_zero": true,
       "polarity": "-",
       "mechanism": "demand_shock shock propagates to 5Y breakeven",
-      "fdr_q": 0.8024,
+      "fdr_q": 0.7764,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "Dry-bulk freight",
+      "unit": "%",
+      "n": 10,
+      "strength": -12.9571,
+      "ci": [
+        -21.6301,
+        -3.7959
+      ],
+      "excludes_zero": true,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to Dry-bulk freight",
+      "fdr_q": 0.7699,
       "status": "null"
     },
     {
@@ -431,84 +448,16 @@
       "from": "event.demand_shock",
       "to": "10Y breakeven",
       "unit": "bps",
-      "n": 11,
-      "strength": -13.1444,
-      "ci": [
-        -30.3912,
-        0.7426
-      ],
-      "excludes_zero": false,
-      "polarity": "-",
-      "mechanism": "demand_shock shock propagates to 10Y breakeven",
-      "fdr_q": 0.8161,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.demand_shock",
-      "to": "5Y yield",
-      "unit": "bps",
-      "n": 15,
-      "strength": -9.3361,
-      "ci": [
-        -31.3373,
-        12.2759
-      ],
-      "excludes_zero": false,
-      "polarity": "-",
-      "mechanism": "demand_shock shock propagates to 5Y yield",
-      "fdr_q": 0.9309,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.demand_shock",
-      "to": "Dry-bulk freight",
-      "unit": "%",
-      "n": 8,
-      "strength": -9.0992,
-      "ci": [
-        -18.546,
-        0.3686
-      ],
-      "excludes_zero": false,
-      "polarity": "-",
-      "mechanism": "demand_shock shock propagates to Dry-bulk freight",
-      "fdr_q": 0.8024,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.chokepoint_disruption",
-      "to": "Dry-bulk freight",
-      "unit": "%",
       "n": 13,
-      "strength": 9.08,
+      "strength": -12.0213,
       "ci": [
-        -4.5092,
-        23.0032
-      ],
-      "excludes_zero": false,
-      "polarity": "+",
-      "mechanism": "chokepoint_disruption shock propagates to Dry-bulk freight",
-      "fdr_q": 0.9141,
-      "status": "null"
-    },
-    {
-      "kind": "event->node",
-      "from": "event.demand_shock",
-      "to": "Palladium",
-      "unit": "%",
-      "n": 12,
-      "strength": -8.8504,
-      "ci": [
-        -17.4105,
-        -0.7962
+        -26.8023,
+        -0.2278
       ],
       "excludes_zero": true,
       "polarity": "-",
-      "mechanism": "demand_shock shock propagates to Palladium",
-      "fdr_q": 0.8024,
+      "mechanism": "demand_shock shock propagates to 10Y breakeven",
+      "fdr_q": 0.7764,
       "status": "null"
     },
     {
@@ -516,16 +465,33 @@
       "from": "event.policy_response",
       "to": "5Y breakeven",
       "unit": "bps",
-      "n": 35,
-      "strength": -7.9762,
+      "n": 36,
+      "strength": -8.3604,
       "ci": [
-        -17.1196,
-        0.3161
+        -17.4601,
+        -0.0254
       ],
-      "excludes_zero": false,
+      "excludes_zero": true,
       "polarity": "-",
       "mechanism": "policy_response shock propagates to 5Y breakeven",
-      "fdr_q": 0.8024,
+      "fdr_q": 0.7764,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "Palladium",
+      "unit": "%",
+      "n": 14,
+      "strength": -7.8239,
+      "ci": [
+        -15.5781,
+        -0.1682
+      ],
+      "excludes_zero": true,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to Palladium",
+      "fdr_q": 0.7764,
       "status": "null"
     },
     {
@@ -542,11 +508,45 @@
       "excludes_zero": false,
       "polarity": "-",
       "mechanism": "infrastructure_attack shock propagates to HH natgas",
-      "fdr_q": 0.9309,
+      "fdr_q": 0.9237,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.policy_response",
+      "to": "10Y breakeven",
+      "unit": "bps",
+      "n": 36,
+      "strength": -7.1314,
+      "ci": [
+        -13.3727,
+        -1.0126
+      ],
+      "excludes_zero": true,
+      "polarity": "-",
+      "mechanism": "policy_response shock propagates to 10Y breakeven",
+      "fdr_q": 0.7764,
+      "status": "null"
+    },
+    {
+      "kind": "event->node",
+      "from": "event.demand_shock",
+      "to": "5Y yield",
+      "unit": "bps",
+      "n": 17,
+      "strength": -7.0791,
+      "ci": [
+        -27.1754,
+        12.9104
+      ],
+      "excludes_zero": false,
+      "polarity": "-",
+      "mechanism": "demand_shock shock propagates to 5Y yield",
+      "fdr_q": 0.9237,
       "status": "null"
     }
   ],
-  "event_to_node_n_ci_excludes_zero": 11,
+  "event_to_node_n_ci_excludes_zero": 14,
   "node_to_node": [
     {
       "kind": "node->node",
@@ -566,7 +566,7 @@
       "lag_days": 3,
       "lead_corr": -0.027,
       "contemp_corr": -0.251,
-      "perm_p": 0.058,
+      "perm_p": 0.0543,
       "status_pre_fdr": "trap",
       "mechanism": "crude & Broad USD co-move same-day; no reliable daily lead"
     },
