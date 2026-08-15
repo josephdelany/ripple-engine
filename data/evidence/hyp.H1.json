@@ -39,7 +39,13 @@
       "result": "Vol-matched NON-EVENT dates reproduce the raw amplification: pseudo mean +3.04pp, 95% [-0.08, +6.43]; the real +5.56pp lies INSIDE the pseudo band (p=0.07). SAR pseudo +0.12sigma vs real +0.25sigma (p=0.20). The raw amplification is vol-clustering, not an event ripple.",
       "receipt": "data/placebo_vixmatched.json"
     },
-    "pending": "regime-block robustness (R3) and formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
+    "r3_regime_block": {
+      "attacks": [7, 8],
+      "result": "SAR headline CI includes zero in EVERY regime-block scenario (drop 2008 / 2020 / 2026 / all-three) and winsorized -- not robust. Raw |CAR| is significant ONLY with 2008 in: drop 2008 -> +3.66pp [-0.16, +8.49] (crosses zero); drop all three -> +3.41pp [-1.49, +6.48] (crosses zero). Winsorizing does not rescue it, so it is a 2008/GFC-regime effect, not a single outlier point.",
+      "receipt": "data/h1_regimeblock.json"
+    },
+    "which_versions_survive": "None. SAR (the correct metric) is null in every cut; raw |CAR| survives only when the 2008 crisis regime is included. H1 amplification is UNSUPPORTED as a general event ripple.",
+    "pending": "formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
   "underlying_episodes": [
     {
