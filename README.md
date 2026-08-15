@@ -24,10 +24,21 @@ fertilizer→corn) validated against pre-registered nulls. See `EDGE_PORTFOLIO.m
 
 > **Under adversarial review (red-team-1, in progress).** The H1 "VIX-stress
 > amplifies the oil ripple" headline was computed on raw `|CAR|`, a volatility
-> quantity. Re-run with BMP-standardized abnormal returns (SAR), the amplification
-> collapses from **+5.56pp [0.94, 9.65]** to **+0.25σ [−0.22, +0.65]** — CI
-> includes zero. On the standardized number, **H1 does not survive** — the original
-> figure was vol-clustering. Full disposition and remaining slices in
+> quantity. Re-run with BMP-standardized abnormal returns (SAR — the correct
+> metric), the amplification **does not survive** — the CI includes zero, and a
+> VIX-matched non-event placebo reproduces the raw amplification, so the original
+> figure was vol-clustering. The H1 number, presented honestly as a **ranked block**
+> (SAR is the headline metric; raw `|CAR|` shown as a secondary, vol-clustering-prone line):
+>
+> | tier | corpus | raw `\|CAR\|` amp | SAR amp (headline) |
+> |---|---|---|---|
+> | **1. frozen registered** | N=289 (frozen 2026-07-30) | +5.00pp [0.86, 8.95] | **+0.16σ [−0.25, +0.52]** — incl. 0 |
+> | **2. out-of-sample** (frozen pre-2019 threshold) | 2019+ (n=16) | +2.92pp [−12.34, 18.92] | **+0.60σ [−0.32, +1.62]** — incl. 0 |
+> | **3. current tracking** | N=296 (grows) | +6.07pp [0.99, 9.87] | **+0.30σ [−0.21, +0.67]** — incl. 0 |
+>
+> The genuinely-immutable registered-sample headline (n=20) was +10.3pp on raw
+> `|CAR|`. On the standardized number **H1 does not survive at any tier**, and the
+> raw effect shrinks out-of-sample. Full disposition and remaining slices in
 > `docs/red_team_1.md`; final claim wording awaits sign-off.
 
 ## Is it sound? One command

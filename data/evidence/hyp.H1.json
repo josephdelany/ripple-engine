@@ -44,7 +44,17 @@
       "result": "SAR headline CI includes zero in EVERY regime-block scenario (drop 2008 / 2020 / 2026 / all-three) and winsorized -- not robust. Raw |CAR| is significant ONLY with 2008 in: drop 2008 -> +3.66pp [-0.16, +8.49] (crosses zero); drop all three -> +3.41pp [-1.49, +6.48] (crosses zero). Winsorizing does not rescue it, so it is a 2008/GFC-regime effect, not a single outlier point.",
       "receipt": "data/h1_regimeblock.json"
     },
-    "which_versions_survive": "None. SAR (the correct metric) is null in every cut; raw |CAR| survives only when the 2008 crisis regime is included. H1 amplification is UNSUPPORTED as a general event ripple.",
+    "r5_frozen_numbers": {
+      "attacks": [9, 10],
+      "headline_block": "H1 presented as three ranked numbers, raw |CAR| and BMP-SAR side by side. RAW survives (CI excludes zero) on the frozen and current corpora, but that is the vol-clustering artifact of attack #2; SAR (the correct metric) INCLUDES ZERO at EVERY tier.",
+      "tier1_registered_sample_n20": "+10.3pp (immutable, cited from registered_run_results.txt; never recomputed).",
+      "tier1_frozen_corpus_289": "raw +5.00pp [0.86, 8.95] (excludes zero); SAR +0.158sigma [-0.247, 0.523] (includes zero). Computed on EXACTLY the 289 events frozen at tag edge-battery-preregistered-20260730.",
+      "tier2_out_of_sample_2019plus": "frozen pre-2019 VIX threshold applied forward (attack #10 lookahead fix): raw +2.92pp [-12.34, 18.92] (includes zero, n=16); SAR +0.60sigma [-0.32, 1.62] (includes zero). The number SHRINKS and its CI blows through zero out-of-sample.",
+      "tier3_current_tracking_296": "raw +6.07pp [0.99, 9.87]; SAR +0.297sigma [-0.21, 0.67]. Labelled THIRD -- a growing-corpus tracking figure, not a registered result.",
+      "attack10_lookahead": "Freezing the split threshold point-in-time barely moves the raw number (median-split +6.07pp -> frozen-threshold +5.22pp [1.15, 9.31]); lookahead in the conditioner is not the driver. Reported point-in-time regardless.",
+      "receipt": "data/h1_frozen_threshold.json"
+    },
+    "which_versions_survive": "None. SAR (the correct metric) is null in every cut and at every corpus tier (frozen-289, OOS-2019+, current-296); raw |CAR| survives only when the 2008 crisis regime is included, and is reproduced by non-events (R2). H1 amplification is UNSUPPORTED as a general event ripple.",
     "pending": "formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
   "underlying_episodes": [
