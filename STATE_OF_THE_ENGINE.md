@@ -15,6 +15,8 @@ registered analyses, e.g. the V3 cross-chain family).
 
 **Before → after:** corpus **289 → 293** verified events · series **361 → 384** ·
 observations **418k → 464k** · edges **6,844 → 7,909** · evidence packs **9 → 11** ·
+*(point-in-time snapshot of this reconciliation pass; **current counts live in
+`data/NUMBERS.md`** — corpus 296, tests 151, evidence packs 13 — see red-team-1 R9.)*
 ~30 commits. `engine_status` was **GREEN** at build; in a frozen snapshot it reads
 **AMBER** once the clock advances past the last data pull (honest publication-lag
 drift — daily series a few days old — not breakage; a live daily refresh keeps it

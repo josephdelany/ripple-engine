@@ -63,6 +63,12 @@
     "which_versions_survive": "None. SAR (the correct metric) is null in every cut and at every corpus tier (frozen-289, OOS-2019+, current-296); raw |CAR| survives only when the 2008 crisis regime is included, and is reproduced by non-events (R2). H1 amplification is UNSUPPORTED as a general event ripple.",
     "pending": "formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
+  "r9_vix_percentile_and_splice": {
+    "attack": 18,
+    "percentile_window": "derived.vix_pct = VIXCLS.rolling(1260, min_periods=252).rank(pct=True)*100 (src/derive_signals.py:149-151) -- a TRAILING ~5-year rolling rank, not full-sample. Point-in-time: the percentile at date t uses only data up to t. No lookahead in the conditioner.",
+    "vxo_splice": "None exists and none is needed. fred.VIXCLS starts 1990-01-02; with the 252-obs minimum the first usable VIX state is ~Jan 1991, and H1's first episode is 1991-01-17 (desert_storm_air_campaign_1991). The single 1990 event (iraq_invades_kuwait_1990) carries VIX state n/a and is correctly excluded. No H1 event uses pre-1990 VIX, so a VIX/VXO splice would change nothing. CC2 uses no VIX conditioner.",
+    "receipt": "data/NUMBERS.md"
+  },
   "underlying_episodes": [
     {
       "event_id": "desert_storm_air_campaign_1991",

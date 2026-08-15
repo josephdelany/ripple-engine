@@ -49,7 +49,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | entity_id | TEXT | yes | yes |
 | role | TEXT |  | yes |
 
-## `events` — 293 rows
+## `events` — 296 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
