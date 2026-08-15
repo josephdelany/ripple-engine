@@ -1,0 +1,215 @@
+{
+  "lens": "R4_endogenous_flags",
+  "attack": 4,
+  "status": "AWAITING JOE'S REVIEW -- sign-off gate per RED_TEAM_1_RESPONSE.md R4(i)",
+  "criterion": {
+    "rule": "endogenous_response = True iff type in {opec_decision, policy_response} AND |trailing 20-trading-day Brent return ending at t-1| > 15%",
+    "rationale": "flags policy/OPEC decisions made in reaction to a sharp price move already underway, whose +20d CAR reflects the ongoing move, not the event's ripple.",
+    "point_in_time": true,
+    "trailing_days": 20,
+    "threshold_pct": 15.0
+  },
+  "n_flagged": 25,
+  "flagged": [
+    {
+      "event_id": "opec_cut_june_1998",
+      "date": "1998-06-24",
+      "type": "opec_decision",
+      "title": "OPEC deepens 1998 cuts at Amsterdam-era conference",
+      "trailing_20d_return_pct": -24.4,
+      "reason": "opec_decision following a -24.4% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_cut_1999",
+      "date": "1999-03-23",
+      "type": "opec_decision",
+      "title": "OPEC ratifies 1.7 mb/d production cut",
+      "trailing_20d_return_pct": 24.5,
+      "reason": "opec_decision following a +24.5% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_hike_sept_2000",
+      "date": "2000-09-10",
+      "type": "opec_decision",
+      "title": "OPEC boosts quotas 800000 bpd",
+      "trailing_20d_return_pct": 25.6,
+      "reason": "opec_decision following a +25.6% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_emergency_cut_2008",
+      "date": "2008-10-24",
+      "type": "opec_decision",
+      "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+      "trailing_20d_return_pct": -48.4,
+      "reason": "opec_decision following a -48.4% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_2009_05_28",
+      "date": "2009-05-28",
+      "type": "opec_decision",
+      "title": "OPEC keeps production quotas unchanged in Vienna",
+      "trailing_20d_return_pct": 19.3,
+      "reason": "opec_decision following a +19.3% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "mend_amnesty_2009",
+      "date": "2009-08-06",
+      "type": "policy_response",
+      "title": "Nigeria offers MEND militants amnesty",
+      "trailing_20d_return_pct": 18.2,
+      "reason": "policy_response following a +18.2% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_2012_06_05",
+      "date": "2012-06-05",
+      "type": "opec_decision",
+      "title": "OPEC rolls over 30 million bpd ceiling in Vienna",
+      "trailing_20d_return_pct": -17.6,
+      "reason": "opec_decision following a -17.6% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "katanga_cobalt_halt_2018",
+      "date": "2018-11-06",
+      "type": "policy_response",
+      "title": "Glencore Katanga halts cobalt sales over uranium",
+      "trailing_20d_return_pct": -18.0,
+      "reason": "policy_response following a -18.0% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "uschina_truce_2018",
+      "date": "2018-12-01",
+      "type": "policy_response",
+      "title": "US and China agree 90-day trade truce at G20",
+      "trailing_20d_return_pct": -20.1,
+      "reason": "policy_response following a -20.1% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "trump_spr_fill_2020",
+      "date": "2020-03-13",
+      "type": "policy_response",
+      "title": "Trump orders SPR filled to the top",
+      "trailing_20d_return_pct": -47.8,
+      "reason": "policy_response following a -47.8% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "india_spr_fill_2020",
+      "date": "2020-03-20",
+      "type": "policy_response",
+      "title": "India tops up strategic reserve at low prices",
+      "trailing_20d_return_pct": -96.3,
+      "reason": "policy_response following a -96.3% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "kaz_wheat_ban_2020",
+      "date": "2020-03-22",
+      "type": "policy_response",
+      "title": "Kazakhstan bans wheat flour and staple exports",
+      "trailing_20d_return_pct": -91.0,
+      "reason": "policy_response following a -91.0% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "vnm_rice_suspend_2020",
+      "date": "2020-03-25",
+      "type": "policy_response",
+      "title": "Vietnam suspends new rice export contracts",
+      "trailing_20d_return_pct": -87.0,
+      "reason": "policy_response following a -87.0% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_record_cut_2020",
+      "date": "2020-04-12",
+      "type": "opec_decision",
+      "title": "OPEC+ agrees record production cut",
+      "trailing_20d_return_pct": -31.2,
+      "reason": "opec_decision following a -31.2% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "antamina_covid_2020",
+      "date": "2020-04-13",
+      "type": "policy_response",
+      "title": "Antamina COVID shutdown 2020",
+      "trailing_20d_return_pct": -31.2,
+      "reason": "policy_response following a -31.2% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_extend_june_2020",
+      "date": "2020-06-06",
+      "type": "opec_decision",
+      "title": "OPEC+ extends record cuts through July",
+      "trailing_20d_return_pct": 41.1,
+      "reason": "opec_decision following a +41.1% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "rus_wheat_tax_2020",
+      "date": "2020-12-14",
+      "type": "policy_response",
+      "title": "Russia announces wheat export tax and grain quota",
+      "trailing_20d_return_pct": 17.7,
+      "reason": "policy_response following a +17.7% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "antofagasta_drought_2022",
+      "date": "2022-01-20",
+      "type": "policy_response",
+      "title": "Antofagasta drought output cut 2022",
+      "trailing_20d_return_pct": 19.7,
+      "reason": "policy_response following a +19.7% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "hun_grain_ban_2022",
+      "date": "2022-03-04",
+      "type": "policy_response",
+      "title": "Hungary bans all grain exports",
+      "trailing_20d_return_pct": 26.3,
+      "reason": "policy_response following a +26.3% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "srb_grain_ban_2022",
+      "date": "2022-03-11",
+      "type": "policy_response",
+      "title": "Serbia bans wheat corn and oil exports",
+      "trailing_20d_return_pct": 20.5,
+      "reason": "policy_response following a +20.5% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "iea_120mb_release_2022",
+      "date": "2022-04-06",
+      "type": "policy_response",
+      "title": "IEA 120M-barrel second coordinated release",
+      "trailing_20d_return_pct": -17.6,
+      "reason": "policy_response following a -17.6% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_accelerate_hike_2022",
+      "date": "2022-06-02",
+      "type": "opec_decision",
+      "title": "OPEC+ accelerates output hike to 648kbd",
+      "trailing_20d_return_pct": 17.9,
+      "reason": "opec_decision following a +17.9% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "chile_lithium_nat_2023",
+      "date": "2023-04-20",
+      "type": "policy_response",
+      "title": "Chile announces plan to nationalize lithium",
+      "trailing_20d_return_pct": 18.5,
+      "reason": "policy_response following a +18.5% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "opec_hike_may_2025",
+      "date": "2025-05-03",
+      "type": "opec_decision",
+      "title": "OPEC+ second consecutive 411k bpd output hike for June",
+      "trailing_20d_return_pct": -22.1,
+      "reason": "opec_decision following a -22.1% 20d Brent move -> reacting to a price move already in progress"
+    },
+    {
+      "event_id": "us_iran_hormuz_mou_2026",
+      "date": "2026-06-17",
+      "type": "policy_response",
+      "title": "US-Iran MOU reopens the Strait of Hormuz",
+      "trailing_20d_return_pct": -30.1,
+      "reason": "policy_response following a -30.1% 20d Brent move -> reacting to a price move already in progress"
+    }
+  ]
+}

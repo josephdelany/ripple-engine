@@ -1,0 +1,90 @@
+{
+  "lens": "R4_claim_subsets",
+  "attacks": [
+    3,
+    4,
+    5
+  ],
+  "headline_metric": "SAR (|SCAR+20| high-minus-low)",
+  "endogenous_rule": "endogenous_response = True iff type in {opec_decision, policy_response} AND |trailing 20-trading-day Brent return ending at t-1| > 15%",
+  "n_flagged_endogenous": 25,
+  "flag_list_status": "AWAITING JOE'S REVIEW (data/endogenous_flags.json)",
+  "geopolitical_types": [
+    "chokepoint_disruption",
+    "conflict_escalation",
+    "infrastructure_attack",
+    "sanctions"
+  ],
+  "subsets": {
+    "full": {
+      "n_events": 296,
+      "sar": {
+        "amp": 0.2524,
+        "ci95": [
+          -0.2151,
+          0.651
+        ],
+        "perm_p": 0.1191,
+        "ci_excludes_zero": false,
+        "n_episodes": 87
+      },
+      "raw": {
+        "amp": 5.5615,
+        "ci95": [
+          0.9436,
+          9.6525
+        ],
+        "perm_p": 0.0054,
+        "ci_excludes_zero": true,
+        "n_episodes": 87
+      }
+    },
+    "ex_endogenous": {
+      "n_events": 271,
+      "sar": {
+        "amp": 0.2314,
+        "ci95": [
+          -0.237,
+          0.6901
+        ],
+        "perm_p": 0.1494,
+        "ci_excludes_zero": false,
+        "n_episodes": 83
+      },
+      "raw": {
+        "amp": 5.1673,
+        "ci95": [
+          0.56,
+          10.2263
+        ],
+        "perm_p": 0.0136,
+        "ci_excludes_zero": true,
+        "n_episodes": 83
+      }
+    },
+    "geopolitical_only": {
+      "n_events": 173,
+      "sar": {
+        "amp": 0.543,
+        "ci95": [
+          -0.0204,
+          1.0223
+        ],
+        "perm_p": 0.0199,
+        "ci_excludes_zero": false,
+        "n_episodes": 69
+      },
+      "raw": {
+        "amp": 6.9054,
+        "ci95": [
+          1.6235,
+          10.5605
+        ],
+        "perm_p": 0.0007,
+        "ci_excludes_zero": true,
+        "n_episodes": 69
+      }
+    }
+  },
+  "note": "ex_endogenous uses the PROVISIONAL flag list; numbers may shift after Joe edits it. Public claim re-wording is deferred to Joe's sign-off."
+}
