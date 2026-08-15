@@ -4,6 +4,16 @@
 run in `PRE_REGISTRATION.md` / git tag `edge-battery-preregistered-20260730`. This is the honest
 scorecard — validated survivors **and** every null. The nulls are not a failure; they are the product.*
 
+> **⚠ RED-TEAM-1 RE-TIER (R7, governing).** Under the single evidentiary bar
+> (SAR-standardized + regime-block-robust CI excluding zero + permutation-FDR;
+> see `EVALUATION.md` §0), the **entire prior validated set downgrades to
+> SUGGESTIVE** — H1, copper_growth, palladium_supply, hy_credit_stress,
+> severity_dose_response, CC2, CC5. On the raw-|CAR| metric below the numbers stand,
+> but raw |CAR| is a volatility quantity (attack #1); on the standardized metric the
+> validated set is **empty**. Receipts: `data/evidentiary_bar.json`,
+> `docs/red_team_1.md`. The tables below are the *as-registered raw-metric* record,
+> retained unedited; the bar in `EVALUATION.md` §0 governs tiering.
+
 ## Update — WS-S (2026-07-30): strengthened, family grew 10 → 12, a NEW edge validated
 The capture-and-strengthen pass (dated `PRE_REGISTRATION.md` amendment) added two apt keyless
 conditioners and fixed one real bug. Honest outcome, both directions:

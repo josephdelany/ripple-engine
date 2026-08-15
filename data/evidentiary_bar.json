@@ -1,0 +1,346 @@
+{
+  "lens": "R7_one_evidentiary_bar",
+  "attacks": [
+    15,
+    16
+  ],
+  "bar": "validated IFF (1) SAR-standardized effect AND (2) regime-block-robust 95% cluster-bootstrap CI excluding zero (full + drop 2008/2020/2026/all) AND (3) SAR permutation-p survives BH-FDR q=0.10 across the family.",
+  "adjudicated": {
+    "H1_vix_oil": {
+      "kind": "state_split",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": false
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "sar_full": {
+        "amp": 0.2524,
+        "ci95": [
+          -0.2151,
+          0.651
+        ],
+        "perm_p": 0.1191,
+        "ci_excludes_zero": false,
+        "n_episodes": 87
+      },
+      "sar_regime_block": {
+        "drop_2008": {
+          "amp": 0.0834,
+          "ci95": [
+            -0.3244,
+            0.5638
+          ],
+          "perm_p": 0.3544,
+          "ci_excludes_zero": false,
+          "n_episodes": 81
+        },
+        "drop_2020": {
+          "amp": 0.2264,
+          "ci95": [
+            -0.212,
+            0.6729
+          ],
+          "perm_p": 0.1438,
+          "ci_excludes_zero": false,
+          "n_episodes": 85
+        },
+        "drop_2026": {
+          "amp": 0.1587,
+          "ci95": [
+            -0.2768,
+            0.5124
+          ],
+          "perm_p": 0.2022,
+          "ci_excludes_zero": false,
+          "n_episodes": 85
+        },
+        "drop_all_three": {
+          "amp": 0.0698,
+          "ci95": [
+            -0.4308,
+            0.4108
+          ],
+          "perm_p": 0.3631,
+          "ci_excludes_zero": false,
+          "n_episodes": 77
+        }
+      }
+    },
+    "copper_growth": {
+      "kind": "state_split",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": true
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "sar_full": {
+        "amp": 0.4666,
+        "ci95": [
+          0.0878,
+          0.7393
+        ],
+        "perm_p": 0.0012,
+        "ci_excludes_zero": true,
+        "n_episodes": 71
+      },
+      "sar_regime_block": {
+        "drop_2008": {
+          "amp": 0.3273,
+          "ci95": [
+            -0.0631,
+            0.5854
+          ],
+          "perm_p": 0.0168,
+          "ci_excludes_zero": false,
+          "n_episodes": 65
+        },
+        "drop_2020": {
+          "amp": 0.5233,
+          "ci95": [
+            0.144,
+            0.7599
+          ],
+          "perm_p": 0.0005,
+          "ci_excludes_zero": true,
+          "n_episodes": 69
+        },
+        "drop_2026": {
+          "amp": 0.5189,
+          "ci95": [
+            0.1256,
+            0.7731
+          ],
+          "perm_p": 0.0002,
+          "ci_excludes_zero": true,
+          "n_episodes": 69
+        },
+        "drop_all_three": {
+          "amp": 0.368,
+          "ci95": [
+            0.0249,
+            0.6586
+          ],
+          "perm_p": 0.0068,
+          "ci_excludes_zero": true,
+          "n_episodes": 61
+        }
+      }
+    },
+    "palladium_supply": {
+      "kind": "state_split",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": false
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "sar_full": {
+        "amp": 0.1196,
+        "ci95": [
+          -0.2751,
+          0.5351
+        ],
+        "perm_p": 0.282,
+        "ci_excludes_zero": false,
+        "n_episodes": 75
+      },
+      "sar_regime_block": {
+        "drop_2008": {
+          "amp": 0.0353,
+          "ci95": [
+            -0.3773,
+            0.4797
+          ],
+          "perm_p": 0.4394,
+          "ci_excludes_zero": false,
+          "n_episodes": 69
+        },
+        "drop_2020": {
+          "amp": 0.1761,
+          "ci95": [
+            -0.2516,
+            0.5966
+          ],
+          "perm_p": 0.1973,
+          "ci_excludes_zero": false,
+          "n_episodes": 73
+        },
+        "drop_2026": {
+          "amp": 0.0876,
+          "ci95": [
+            -0.3053,
+            0.5229
+          ],
+          "perm_p": 0.3353,
+          "ci_excludes_zero": false,
+          "n_episodes": 73
+        },
+        "drop_all_three": {
+          "amp": 0.0507,
+          "ci95": [
+            -0.3811,
+            0.511
+          ],
+          "perm_p": 0.4076,
+          "ci_excludes_zero": false,
+          "n_episodes": 65
+        }
+      }
+    },
+    "hy_credit_stress": {
+      "kind": "state_split",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": false
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "sar_full": {
+        "amp": 0.3003,
+        "ci95": [
+          -0.2298,
+          0.9053
+        ],
+        "perm_p": 0.1304,
+        "ci_excludes_zero": false,
+        "n_episodes": 49
+      },
+      "sar_regime_block": {
+        "drop_2008": {
+          "amp": 0.2884,
+          "ci95": [
+            -0.235,
+            0.9157
+          ],
+          "perm_p": 0.1431,
+          "ci_excludes_zero": false,
+          "n_episodes": 47
+        },
+        "drop_2020": {
+          "amp": 0.3565,
+          "ci95": [
+            -0.1643,
+            0.9622
+          ],
+          "perm_p": 0.0874,
+          "ci_excludes_zero": false,
+          "n_episodes": 47
+        },
+        "drop_2026": {
+          "amp": 0.3943,
+          "ci95": [
+            -0.1964,
+            0.8741
+          ],
+          "perm_p": 0.0548,
+          "ci_excludes_zero": false,
+          "n_episodes": 47
+        },
+        "drop_all_three": {
+          "amp": 0.4121,
+          "ci95": [
+            -0.0765,
+            0.9397
+          ],
+          "perm_p": 0.0551,
+          "ci_excludes_zero": false,
+          "n_episodes": 43
+        }
+      }
+    },
+    "severity_dose_response": {
+      "kind": "two_group_severity",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": false
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "sar_full": {
+        "amp": 0.1755,
+        "ci95": [
+          -0.2611,
+          0.6701
+        ],
+        "perm_p": 0.2802,
+        "ci_excludes_zero": false,
+        "n_episodes": 76
+      },
+      "sar_regime_block": {
+        "drop_2008": {
+          "amp": 0.1135,
+          "ci95": [
+            -0.3386,
+            0.6205
+          ],
+          "perm_p": 0.3595,
+          "ci_excludes_zero": false,
+          "n_episodes": 72
+        },
+        "drop_2020": {
+          "amp": 0.0866,
+          "ci95": [
+            -0.3127,
+            0.5182
+          ],
+          "perm_p": 0.3736,
+          "ci_excludes_zero": false,
+          "n_episodes": 72
+        },
+        "drop_2026": {
+          "amp": 0.0894,
+          "ci95": [
+            -0.335,
+            0.5621
+          ],
+          "perm_p": 0.3816,
+          "ci_excludes_zero": false,
+          "n_episodes": 74
+        },
+        "drop_all_three": {
+          "amp": -0.0934,
+          "ci95": [
+            -0.4759,
+            0.3145
+          ],
+          "perm_p": 0.6711,
+          "ci_excludes_zero": false,
+          "n_episodes": 66
+        }
+      }
+    }
+  },
+  "adjudicated_elsewhere": {
+    "CC2_supply_gasoline_crack": {
+      "kind": "cross_chain_event",
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "why": "R6: survives outlier-drop OR seasonal alone but not jointly (+1.16 [-0.22,2.56]).",
+      "receipt": "data/cc2_seasonal.json"
+    },
+    "CC5_fertilizer_corn": {
+      "kind": "monthly_passthrough",
+      "retier": "SUGGESTIVE (bar leg-1 N/A)",
+      "why": "Monthly cost pass-through beta has no event-study abnormal return, so SAR-standardisation (leg 1) does not apply. Held as SUGGESTIVE under the one bar rather than validated, since it cannot clear the SAR/regime-block legs by construction.",
+      "receipt": "data/cross_chain.json"
+    },
+    "under_priced_risk_oos_MISPRICING": {
+      "kind": "forecast_skill",
+      "retier": "SUGGESTIVE (declared)",
+      "why": "attack #15: previously reported OUTSIDE the FDR family. Under one honest bar it is a small-N (~14), in-sample-direction forecast-skill test -- it is SUGGESTIVE, never validated at this N, and its exclusion from the amplification FDR is a property of being a different estimand (skill, not amplification), stated plainly -- not a shield.",
+      "receipt": "EVALUATION.md, PRE_REGISTRATION.md"
+    }
+  },
+  "summary": {
+    "H1_vix_oil": "DOWNGRADE (SUGGESTIVE)",
+    "copper_growth": "DOWNGRADE (SUGGESTIVE)",
+    "palladium_supply": "DOWNGRADE (SUGGESTIVE)",
+    "hy_credit_stress": "DOWNGRADE (SUGGESTIVE)",
+    "severity_dose_response": "DOWNGRADE (SUGGESTIVE)",
+    "CC2_supply_gasoline_crack": "DOWNGRADE (SUGGESTIVE)",
+    "CC5_fertilizer_corn": "SUGGESTIVE (bar leg-1 N/A)",
+    "under_priced_risk_oos_MISPRICING": "SUGGESTIVE (declared)"
+  },
+  "corpus_note": "additive lens; frozen registered record untouched."
+}

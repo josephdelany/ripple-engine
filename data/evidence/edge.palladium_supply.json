@@ -1,6 +1,6 @@
 {
   "claim_id": "edge.palladium_supply",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
   "statement": "palladium_supply: palladium is supply-concentrated (Russia/SA) -> stress channel",
   "quantity": {
     "value": 5.2181,
@@ -785,5 +785,27 @@
   "corpus": {
     "n_events": 296,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  },
+  "tier_status": "DOWNGRADED from validated (red-team-1, R7). SAR amplification is null (+0.12 [-0.28,0.54], p=0.28); the raw |CAR| effect did not survive standardization. See data/evidentiary_bar.json.",
+  "red_team_1_r7": {
+    "attacks": [
+      15,
+      16
+    ],
+    "bar": "validated IFF (1) SAR-standardized effect AND (2) regime-block-robust 95% cluster-bootstrap CI excluding zero (full + drop 2008/2020/2026/all) AND (3) SAR permutation-p survives BH-FDR q=0.10 across the family.",
+    "sar_full": "0.1196 [-0.2751, 0.5351] p=0.282 INCLUDES ZERO",
+    "sar_regime_block": {
+      "drop_2008": "0.0353 [-0.3773, 0.4797] incl0",
+      "drop_2020": "0.1761 [-0.2516, 0.5966] incl0",
+      "drop_2026": "0.0876 [-0.3053, 0.5229] incl0",
+      "drop_all_three": "0.0507 [-0.3811, 0.511] incl0"
+    },
+    "legs": {
+      "1_sar_computed": true,
+      "2_regime_block_robust_ci_excludes_zero": false,
+      "3_survives_perm_fdr": false
+    },
+    "disposition": "DOWNGRADE to SUGGESTIVE under the single SAR+regime-block+FDR bar.",
+    "receipt": "data/evidentiary_bar.json"
   }
 }

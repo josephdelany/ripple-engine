@@ -4,6 +4,30 @@
 
 **Overall:** placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0029; H1 holds out-of-sample (2.921pp on 2019+).
 
+## 0. The evidentiary bar (governing definition — red-team-1, R7)
+
+A claim is **`validated`** if and only if **all three** hold:
+1. **SAR-standardized effect** — the amplification is computed on BMP (1991) standardized abnormal returns (each event's CAR divided by its own estimation-window σ·√L), not raw |CAR| (a volatility quantity that inflates in noisy regimes).
+2. **Regime-block-robust CI excluding zero** — the 95% cluster-bootstrap CI on the SAR amplification excludes zero on the full corpus **and** in every regime-block leave-out (drop 2008 / 2020 / 2026 / all three).
+3. **Permutation-FDR** — the SAR permutation-p survives BH-FDR (q=0.10) across the family.
+
+Applied retroactively (receipt: `data/evidentiary_bar.json`), this bar **downgrades the entire prior validated set to SUGGESTIVE**:
+
+| claim | leg 1 SAR | leg 2 regime-robust | leg 3 FDR | re-tier |
+|---|---|---|---|---|
+| H1 (VIX→oil) | computed | ✗ (null every cut) | ✗ | **SUGGESTIVE** |
+| copper_growth | computed | ✗ (drop-2008 CI incl. 0) | ✓ | **SUGGESTIVE** (closest miss) |
+| palladium_supply | computed | ✗ (SAR null) | ✗ | **SUGGESTIVE** |
+| hy_credit_stress | computed | ✗ (SAR null) | ✗ | **SUGGESTIVE** |
+| severity_dose_response | computed | ✗ (SAR null) | ✗ | **SUGGESTIVE** |
+| CC2 (gasoline crack) | n/a (event $/bbl) | ✗ (seasonal+outlier CI incl. 0) | — | **SUGGESTIVE** (R6) |
+| CC5 (fertilizer→corn) | N/A (monthly β) | — | — | **SUGGESTIVE** (leg-1 N/A) |
+| under_priced_risk (mispricing) | — | — | outside family | **SUGGESTIVE** (declared) |
+
+**The mispricing edge (attack #15), one honest paragraph.** `under_priced_risk_oos` was reported *alongside* the battery and explicitly **outside** the amplification FDR family. Under one bar that is not a shield but a statement of estimand: it is a **forecast-skill** test (does flagged under-priced risk precede realized turbulence?), not an amplification, so it cannot be folded into the amplification FDR without mixing estimands. It is small-N (~14) and its direction is fixed in-sample, so it is **SUGGESTIVE — never `validated`** at this N, reported with a Wilson CI vs base rate. Its exclusion from the FDR family is disclosed here, plainly, as a property of being a different test — not a way to protect a survivor.
+
+*Under this bar the current validated set is **empty**; the honest scorecard is SUGGESTIVE signals + reported nulls. A published downgrade after adversarial review is the finding.*
+
 ## 1. Negative control (placebo)
 Shuffling H1's state labels collapses the amplification from **5.5615** to a placebo mean **-0.0113**, CI [-4.3937, 4.3591] — spans zero ✓ (the gate is not finding signal in noise).
 
@@ -18,7 +42,8 @@ n=247, Brier **0.2466** vs base 0.2495 (skill 0.0029). Murphy decomposition — 
 | 0.4 | 109 | 0.45 | [np.float64(0.359), np.float64(0.543)] |
 | 0.6 | 138 | 0.58 | [np.float64(0.496), np.float64(0.659)] |
 
-## 4. Power / robustness of validated claims
+## 4. Power / robustness — RAW |CAR| leave-one-out (secondary diagnostic)
+*Superseded for tiering by §0. This is the raw-metric jackknife only; under the SAR bar (§0) these claims are SUGGESTIVE, not validated.*
 
 | claim | n | robust (leave-one-out) | jackknife amp range |
 |---|---|---|---|

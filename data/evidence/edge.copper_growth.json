@@ -1,6 +1,6 @@
 {
   "claim_id": "edge.copper_growth",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
   "statement": "copper_growth: copper is a growth metal -> amplifies in a growth-on regime (steep 2s10s curve)",
   "quantity": {
     "value": 3.8163,
@@ -745,5 +745,27 @@
   "corpus": {
     "n_events": 296,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  },
+  "tier_status": "DOWNGRADED from validated (red-team-1, R7 one bar). Under BMP-SAR the full-corpus CI excludes zero (+0.47 [0.09,0.74], survives FDR) but the drop-2008 regime-block cut includes zero (+0.33 [-0.06,0.59]) -- not regime-block-robust. Closest miss in the family. See data/evidentiary_bar.json.",
+  "red_team_1_r7": {
+    "attacks": [
+      15,
+      16
+    ],
+    "bar": "validated IFF (1) SAR-standardized effect AND (2) regime-block-robust 95% cluster-bootstrap CI excluding zero (full + drop 2008/2020/2026/all) AND (3) SAR permutation-p survives BH-FDR q=0.10 across the family.",
+    "sar_full": "0.4666 [0.0878, 0.7393] p=0.0012 excludes zero",
+    "sar_regime_block": {
+      "drop_2008": "0.3273 [-0.0631, 0.5854] incl0",
+      "drop_2020": "0.5233 [0.144, 0.7599] excl0",
+      "drop_2026": "0.5189 [0.1256, 0.7731] excl0",
+      "drop_all_three": "0.368 [0.0249, 0.6586] excl0"
+    },
+    "legs": {
+      "1_sar_computed": true,
+      "2_regime_block_robust_ci_excludes_zero": false,
+      "3_survives_perm_fdr": true
+    },
+    "disposition": "DOWNGRADE to SUGGESTIVE under the single SAR+regime-block+FDR bar.",
+    "receipt": "data/evidentiary_bar.json"
   }
 }

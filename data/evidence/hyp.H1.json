@@ -1,7 +1,7 @@
 {
   "claim_id": "hyp.H1",
-  "tier": "validated",
-  "tier_status": "UNDER REVIEW (red-team-1). Headline switched to BMP-standardized SAR (R1); the SAR 95% CI INCLUDES ZERO, so the amplification does not survive standardization. Formal re-tier at R7; claim wording awaits Joe's sign-off. See docs/red_team_1.md.",
+  "tier": "SUGGESTIVE",
+  "tier_status": "DOWNGRADED from validated (red-team-1, R7 formal re-tier under the single bar). Headline is BMP-standardized SAR (R1); the SAR 95% CI INCLUDES ZERO on the full corpus and in EVERY regime-block cut (R3), and a VIX-matched non-event placebo reproduces the raw amplification (R2). Fails bar legs 2 and 3. Retained as SUGGESTIVE, not validated. Claim wording awaits Joe's sign-off. See docs/red_team_1.md, data/evidentiary_bar.json.",
   "statement": "Geopolitical shocks ripple harder into Brent oil when VIX stress is elevated.",
   "quantity": {
     "value": 0.2524,

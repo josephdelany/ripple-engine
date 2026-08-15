@@ -1,6 +1,6 @@
 {
   "claim_id": "edge.CC5_fertilizer_corn",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
   "statement": "Fertilizer prices transmit to corn prices (monthly pass-through).",
   "mechanism": "fertilizer cost lifts crop prices",
   "quantity": {
@@ -29,5 +29,12 @@
   "corpus": {
     "n_events": 296,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
+  },
+  "tier_status": "Re-tiered under red-team-1 R7. A monthly cost pass-through beta has no event-study abnormal return, so SAR-standardization (bar leg 1) does not apply; it cannot clear the SAR/regime-block legs by construction and is held SUGGESTIVE rather than validated under the one bar. Its own registered CI/FDR still hold, reported honestly.",
+  "red_team_1_r7": {
+    "kind": "monthly_passthrough",
+    "retier": "SUGGESTIVE (bar leg-1 N/A)",
+    "why": "Monthly cost pass-through beta has no event-study abnormal return, so SAR-standardisation (leg 1) does not apply. Held as SUGGESTIVE under the one bar rather than validated, since it cannot clear the SAR/regime-block legs by construction.",
+    "receipt": "data/cross_chain.json"
   }
 }
