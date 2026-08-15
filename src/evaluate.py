@@ -256,9 +256,11 @@ def _write_md(r):
     if cal.get("ran"):
         d = cal["decomposition"]
         L += ["## 3. Calibration (resolved gap ledger)",
+              "*Honest and near-baseline: the engine has **no demonstrated forecast edge** — "
+              "measuring and grounding, not predicting, is its job (see §0).*",
               f"n={cal['n_scored']}, Brier **{cal['brier']}** vs base {cal['base_rate_brier']} "
-              f"(skill {cal['skill_vs_base']}). Murphy decomposition — reliability {d['reliability']}, "
-              f"resolution {d['resolution']}, uncertainty {d['uncertainty']}.",
+              f"(skill {cal['skill_vs_base']} — indistinguishable from zero). Murphy decomposition — "
+              f"reliability {d['reliability']}, resolution {d['resolution']}, uncertainty {d['uncertainty']}.",
               "", "| forecast p | n | observed | 95% CI |", "|---|---|---|---|"]
         for b in cal["reliability_bins"]:
             L.append(f"| {b['forecast_p']} | {b['n']} | {b['observed']} | {b['observed_ci95']} |")

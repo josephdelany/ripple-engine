@@ -1,48 +1,48 @@
 # Ripple Engine
 
-A personal, **pre-registered event-study engine** that measures how geopolitical
-shocks ripple through oil prices — and, crucially, whether they ripple *bigger*
-when markets are already stressed. It is a research instrument, not a newsreader:
-every number is one hop from the evidence that produced it, failed hypotheses are
-reported not buried, and the whole thing runs on **free, keyless data at $0**.
+A personal, **pre-registered event-study engine** — a **measurement and grounding
+instrument** for how geopolitical shocks move oil prices. It documents *what
+happened* (a sourced, point-in-time event corpus), *what history says* about events
+of that class (conditioned event-study distributions with honest CIs), and *what
+state the market is in*. It **does not claim predictive edge** — the calibration
+record is published and is near baseline (see `EVALUATION.md`). It is a research
+instrument, not a newsreader: every number is one hop from the evidence that produced
+it, and failed hypotheses are reported, not buried. It runs on free, keyless,
+reproducible data — a **provenance/integrity guarantee (sourced, reproducible, no
+fabrication), not evidence that any finding is correct**.
 
 Flagship build for the News-to-Markets project. Single-user tool, held to a bar a
 quant could inspect.
 
 ## The headline finding
 
-Geopolitical-risk shocks are **not** systematically associated with higher oil
-prices — the average ripple is close to null, and the negative-control placebo is
-null too. This is an *honest null*, and it matches the frontier literature
-(Caldara & Iacoviello's GPR work), found here independently. The engine's job now
-is defending that result at frontier standard — see `PRE_REGISTRATION.md` and
-`EVALUATION.md`.
+**No conditioning effect survives standardized, regime-robust testing; the raw
+amplification result was volatility clustering, exposed by a matched placebo.
+Descriptive findings stand: conflict events average near-zero with large dispersion;
+SPR releases show the strongest measured effect; the 289-event two-source dataset and
+full adversarial review are published.**
 
-Where the engine *does* find structure, it is receipted: the crude→products value
-chain transmits strongly. The cross-asset/-chain edges are held to the same
-adversarial bar — the gasoline-crack edge (CC2) **downgraded to SUGGESTIVE** under
-red-team-1 (it survives dropping its two post-registration outliers *or* seasonal
-adjustment, but not both jointly: +1.16 $/bbl [−0.22, +2.56]); see
-`docs/red_team_1.md`. See `EDGE_PORTFOLIO.md`.
+This is the settled result of the first external adversarial review (red-team-1). The
+"VIX-stress amplifies the oil ripple" (H1) headline had been computed on raw `|CAR|`,
+a volatility quantity split by a volatility index. Under BMP-standardized abnormal
+returns (SAR — the correct metric) the amplification does not survive at any tier, and
+a VIX-matched **non-event** placebo reproduces the raw number — so it was
+vol-clustering. Under one consistent evidentiary bar (`EVALUATION.md` §0) **no edge in
+the portfolio is `validated`; all are SUGGESTIVE**, reported with their nulls
+(including the gasoline-crack edge CC2: +1.16 $/bbl [−0.22, +2.56] under the strictest
+cut). The H1 number, shown as a ranked block — SAR is the metric; raw `|CAR|` is a
+secondary, vol-clustering-prone line:
 
-> **Under adversarial review (red-team-1, in progress).** The H1 "VIX-stress
-> amplifies the oil ripple" headline was computed on raw `|CAR|`, a volatility
-> quantity. Re-run with BMP-standardized abnormal returns (SAR — the correct
-> metric), the amplification **does not survive** — the CI includes zero, and a
-> VIX-matched non-event placebo reproduces the raw amplification, so the original
-> figure was vol-clustering. The H1 number, presented honestly as a **ranked block**
-> (SAR is the headline metric; raw `|CAR|` shown as a secondary, vol-clustering-prone line):
->
-> | tier | corpus | raw `\|CAR\|` amp | SAR amp (headline) |
-> |---|---|---|---|
-> | **1. frozen registered** | N=289 (frozen 2026-07-30) | +5.00pp [0.86, 8.95] | **+0.16σ [−0.25, +0.52]** — incl. 0 |
-> | **2. out-of-sample** (frozen pre-2019 threshold) | 2019+ (n=16) | +2.92pp [−12.34, 18.92] | **+0.60σ [−0.32, +1.62]** — incl. 0 |
-> | **3. current tracking** | N=296 (grows) | +6.07pp [0.99, 9.87] | **+0.30σ [−0.21, +0.67]** — incl. 0 |
->
-> The genuinely-immutable registered-sample headline (n=20) was +10.3pp on raw
-> `|CAR|`. On the standardized number **H1 does not survive at any tier**, and the
-> raw effect shrinks out-of-sample. Full disposition and remaining slices in
-> `docs/red_team_1.md`; final claim wording awaits sign-off.
+| tier | corpus | raw `\|CAR\|` amp | SAR amp (metric) |
+|---|---|---|---|
+| **1. frozen registered** | N=289 (frozen 2026-07-30) | +5.00pp [0.86, 8.95] | **+0.16σ [−0.25, +0.52]** — incl. 0 |
+| **2. out-of-sample** (frozen pre-2019 threshold) | 2019+ (n=16) | +2.92pp [−12.34, 18.92] | **+0.60σ [−0.32, +1.62]** — incl. 0 |
+| **3. current tracking** | N=296 (grows) | +6.07pp [0.99, 9.87] | **+0.30σ [−0.21, +0.67]** — incl. 0 |
+
+The genuinely-immutable registered-sample headline (n=20) was +10.3pp on raw `|CAR|`.
+That a "validated" flagship did not survive adversarial standardization — and that the
+downgrade is published — is the integrity result. Full disposition and every number:
+`docs/red_team_1.md`, `data/NUMBERS.md`, `EDGE_PORTFOLIO.md`, `EVALUATION.md`.
 
 ## Is it sound? One command
 

@@ -1,7 +1,7 @@
 {
   "lens": "R4_endogenous_flags",
   "attack": 4,
-  "status": "AWAITING JOE'S REVIEW -- sign-off gate per RED_TEAM_1_RESPONSE.md R4(i)",
+  "status": "APPROVED by Joe 2026-08-15 (reviewed; spot-checked entries against sources). The endogenous_response flag list is accepted as listed; it may drive the claim-matched (ex-endogenous / geopolitical-only) subsets. Note: even the geopolitical-only subset is null under the SAR bar (R7), so approval does not resurrect H1.",
   "criterion": {
     "rule": "endogenous_response = True iff type in {opec_decision, policy_response} AND |trailing 20-trading-day Brent return ending at t-1| > 15%",
     "rationale": "flags policy/OPEC decisions made in reaction to a sharp price move already underway, whose +20d CAR reflects the ongoing move, not the event's ripple.",
@@ -211,5 +211,10 @@
       "trailing_20d_return_pct": -30.1,
       "reason": "policy_response following a -30.1% 20d Brent move -> reacting to a price move already in progress"
     }
-  ]
+  ],
+  "signed_off": {
+    "by": "Joe",
+    "date": "2026-08-15",
+    "decision": "approved_as_listed"
+  }
 }

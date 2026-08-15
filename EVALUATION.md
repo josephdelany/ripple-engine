@@ -35,7 +35,8 @@ Shuffling H1's state labels collapses the amplification from **5.5615** to a pla
 H1 amplification (Brent, pp) across surfaces: {'validation_claims': 5.5615, 'cross_asset_conditioned': 5.5615, 'sowhat': 5.5615} — all agree ✓.
 
 ## 3. Calibration (resolved gap ledger)
-n=247, Brier **0.2466** vs base 0.2495 (skill 0.0029). Murphy decomposition — reliability 0.0013, resolution 0.0042, uncertainty 0.2495.
+*Honest and near-baseline: the engine has **no demonstrated forecast edge** — measuring and grounding, not predicting, is its job (see §0).*
+n=247, Brier **0.2466** vs base 0.2495 (skill 0.0029 — indistinguishable from zero). Murphy decomposition — reliability 0.0013, resolution 0.0042, uncertainty 0.2495.
 
 | forecast p | n | observed | 95% CI |
 |---|---|---|---|

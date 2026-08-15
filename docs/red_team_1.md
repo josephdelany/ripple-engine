@@ -194,7 +194,7 @@ concede-and-compute.
 - R5 frozen/OOS/current block: **published as a ranked block; SAR null at every tier.** (1) Frozen registered corpus N=289 (exactly the 289 events at tag `edge-battery-preregistered-20260730`): raw +5.00pp [0.86, 8.95], **SAR +0.158σ [−0.247, 0.523] (incl. 0)**; immutable n=20 sample headline +10.3pp cited, not recomputed. (2) OOS 2019+, frozen pre-2019 threshold (attack-10 lookahead fix), WITH CI: raw +2.92pp [−12.34, 18.92], SAR +0.60σ [−0.32, 1.62] — both include zero, n=16. (3) Current tracking N=296: raw +6.07pp [0.99, 9.87], SAR +0.297σ [−0.21, 0.67] — labelled third. Attack-10 lookahead is not the driver: frozen-threshold point-in-time raw +5.22pp [1.15, 9.31] ≈ median-split +6.07pp. Receipts: `data/h1_frozen_threshold.json`, `data/registered_corpus_289.txt`.
 - R6 CC2 outlier-drop + seasonal: **DOWNGRADE to SUGGESTIVE.** Baseline reproduces (+2.96 $/bbl [0.99, 5.21], p=0.003, n=37). Outlier-drop alone survives — ex hormuz_2026 +2.24 [0.61, 3.91], ex venezuela_2019 +2.58 [0.71, 4.83], ex both +1.83 [0.36, 3.31]. Month-of-year seasonal adjustment alone survives (+2.17 [0.35, 4.25]). But the strictest cut — **seasonal + drop both outliers — crosses zero: +1.16 [−0.22, +2.56], perm p=0.060.** A robust edge should clear both controls jointly; CC2 does not → SUGGESTIVE in packs + portfolio. Receipt: `data/cc2_seasonal.json`.
 - R7 retroactive bar outcomes: **ONE bar applied; the entire validated set downgrades to SUGGESTIVE.** Bar (codified in EVALUATION.md §0): validated ⇔ SAR-standardized effect + regime-block-robust bootstrap CI excluding zero (full + drop 2008/2020/2026/all) + SAR permutation-FDR. Results (receipt `data/evidentiary_bar.json`): H1 SAR null every cut (✗ legs 2,3); **copper_growth** the closest miss — SAR full +0.47 [0.09, 0.74] excludes zero AND survives FDR, but drop-2008 cut +0.33 [−0.06, 0.59] includes zero (✗ leg 2); palladium_supply SAR +0.12 [−0.28, 0.54] null; hy_credit_stress +0.30 [−0.23, 0.91] null; severity_dose_response +0.18 [−0.26, 0.67] null. CC2 → SUGGESTIVE (R6); CC5 leg-1 N/A (monthly β); mispricing edge one honest paragraph (attack #15) — outside the FDR family because it is a *forecast-skill* estimand, disclosed plainly, SUGGESTIVE not validated. **Validated set under the one bar: empty.** Packs re-tiered.
-- R8 purpose reframe (Joe sign-off): **PREPARED — ⛔ AWAITING JOE (sign-off gate 2).** Factual part done: the miss-audit `regime_misread` finding is now cited in the H1 pack as a standing OOS caution (attack 12, receipted). The wording changes (attack 11 calibration-as-near-baseline; purpose = measurement/grounding instrument not predictive-edge product; attack 19 provenance-as-integrity-not-correctness) are drafted verbatim in `docs/red_team_1_R8_proposed_wording.md` and are NOT applied to NORTH_STAR/README/surfaces pending Joe's approval. Anchors are computed: calibration skill 0.0029 over n=247 (no demonstrated edge).
+- R8 purpose reframe (Joe sign-off): **✅ APPROVED & APPLIED 2026-08-15.** The miss-audit `regime_misread` finding is cited in the H1 pack as a standing OOS caution (attack 12). Wording applied to public surfaces: (11) calibration framed honest/near-baseline, no demonstrated forecast edge (skill 0.0029, n=247) — `README`, `EVALUATION` §3; (purpose) engine = measurement/grounding instrument, not a predictive-edge product — `README`, `NORTH_STAR` §2; (19) provenance = integrity property, never correctness — `README`, `NORTH_STAR`. Proposal receipt: `docs/red_team_1_R8_proposed_wording.md`.
 - R9 reconciliation: **`data/NUMBERS.md` is now the single source of truth** — every public number with its N, commit, and receipt. Count reconciliation (attack 17): two legitimate corpus N's, always labelled — **289 frozen registered** vs **296 current**; 291/293 were intermediate snapshots (293 in DATA_DICTIONARY corrected → 296; STATE gets a current-count pointer). Current tests **151**, evidence packs **13** (6 claim + 7 node). Caught + documented a latent convention split (`>=` vs `>` median → 5.5615 vs 6.07pp; canonical published H1 raw = **+5.5615pp**). Splice (attack 18): **no VXO splice exists or is needed** — `vix_pct` is a trailing-5y rolling rank (point-in-time, no lookahead); VIX starts 1990-01-02, first H1 event 1991-01-17, so no pre-1990 VIX event enters H1; CC2 uses no VIX. Receipts: `data/NUMBERS.md`, H1 pack `r9_vix_percentile_and_splice`.
 
 ### FINAL TIERS (after the one bar, R7) — every claim, honestly
@@ -212,18 +212,14 @@ concede-and-compute.
 **Validated set under the single evidentiary bar: empty.** The honest scorecard is
 SUGGESTIVE signals + reported nulls. This is the headline result of red-team-1.
 
-### Sign-off gates (stop for Joe) — STATUS
-1. **R4(i)** — `endogenous_response` flag list (25 events) — ⛔ **AWAITING JOE** (`data/endogenous_flags.json`).
-2. **R8** — purpose-reframe wording — ⛔ **AWAITING JOE** (`docs/red_team_1_R8_proposed_wording.md`).
-3. **Final headline wording** — ⛔ **AWAITING JOE** (proposed below).
+### Sign-off gates — ✅ ALL SIGNED OFF BY JOE 2026-08-15 (applied to surfaces)
+1. **R4(i)** — `endogenous_response` flag list (25 events) — ✅ **APPROVED as listed** (reviewed; spot-checked against sources). `data/endogenous_flags.json` marked approved. Even the geopolitical-only subset stays null under the SAR bar, so approval does not resurrect H1.
+2. **R8** — purpose reframe — ✅ **APPROVED & APPLIED**. Engine = measurement/grounding instrument, no predictive-edge claim, calibration published near-baseline; provenance = integrity property not correctness. Applied to `README.md`, `NORTH_STAR.md` §2, `EVALUATION.md` §0/§3, H1 pack.
+3. **Final headline wording** — ✅ **APPROVED & APPLIED** (below), now the README headline.
 
-### Proposed final headline wording (⛔ awaiting Joe)
-> **H1 (VIX-stress amplifies the oil ripple) is not supported.** On raw |CAR| the
-> amplification was +5.56pp, but |CAR| is a volatility quantity split by a volatility
-> index; under BMP-standardized abnormal returns (the correct metric) the effect is
-> +0.25σ, CI includes zero, and a VIX-matched non-event placebo reproduces the raw
-> number. It is null in every regime-block cut and shrinks out-of-sample. Under one
-> consistent evidentiary bar, **no edge in the portfolio is `validated`; all are
-> SUGGESTIVE**, reported with their nulls. The engine is credible as a *build and a
-> measurement instrument*; its earlier "validated" claims did not survive adversarial
-> standardization, and that published downgrade is the result.
+### Final headline wording (✅ approved by Joe, applied to README)
+> No conditioning effect survives standardized, regime-robust testing; the raw
+> amplification result was volatility clustering, exposed by a matched placebo.
+> Descriptive findings stand: conflict events average near-zero with large dispersion;
+> SPR releases show the strongest measured effect; the 289-event two-source dataset and
+> full adversarial review are published.
