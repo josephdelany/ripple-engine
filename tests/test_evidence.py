@@ -1,8 +1,9 @@
 """
 test_evidence.py -- the receipts are airtight (every number traces to its rows + a real source).
 
-Guards the "an Ergo quant can inspect it" promise: each validated claim has a pack whose value matches
-the artifact (no retyping), whose episode count is real, and whose every episode carries a source_url.
+Guards the "an Ergo quant can inspect it" promise: each surfaced claim (validated OR, post red-team-1,
+SUGGESTIVE) has a pack whose value matches the artifact (no retyping), whose episode count is real, and
+whose every episode carries a source_url.
 Run: python3 -m pytest -q tests/test_evidence.py
 """
 
@@ -18,11 +19,14 @@ def _packs():
     return [json.loads(p.read_text()) for p in EVID.glob("*.json")]
 
 
-def test_evd1_every_pack_is_a_validated_claim_with_a_value():
+def test_evd1_every_pack_is_a_receipted_claim_with_a_value():
+    # Post red-team-1 (R7): a pack may be `validated` OR `SUGGESTIVE`. Downgraded claims KEEP their
+    # packs on purpose -- publishing a downgrade with its receipts is the integrity evidence. Every
+    # pack still traces to a value + a real source artifact + commit.
     packs = _packs()
     assert len(packs) >= 3                       # at least H1 + the battery edges
     for p in packs:
-        assert p["tier"] == "validated"
+        assert p["tier"] in ("validated", "SUGGESTIVE")
         assert p["quantity"]["value"] is not None
         assert p["claim_id"] and p["source_artifact"] and p["source_commit"]
 

@@ -1,6 +1,6 @@
 {
   "claim_id": "node.product_tankers",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
   "statement": "A shock ripples harder into Product tankers when VIX stress is elevated.",
   "quantity": {
     "value": 7.234,
@@ -454,5 +454,6 @@
   "source_artifact": "cross_asset_conditioned.json",
   "source_commit": "93da81b",
   "db_commit": "uncommitted (oil.db is gitignored; rebuild via repro.sh)",
-  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/cross_asset_conditioned.json"
+  "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/cross_asset_conditioned.json",
+  "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. This is an H1-style amplification claim not yet SAR-certified. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md."
 }

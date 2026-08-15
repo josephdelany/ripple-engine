@@ -1,6 +1,6 @@
 {
   "claim_id": "node.5y_breakeven",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
   "statement": "A shock ripples harder into 5Y breakeven when VIX stress is elevated.",
   "quantity": {
     "value": 16.7429,
@@ -668,5 +668,6 @@
   "corpus": {
     "n_events": 296,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
-  }
+  },
+  "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. This is an H1-style amplification claim not yet SAR-certified. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md."
 }

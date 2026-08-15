@@ -197,7 +197,33 @@ concede-and-compute.
 - R8 purpose reframe (Joe sign-off): **PREPARED — ⛔ AWAITING JOE (sign-off gate 2).** Factual part done: the miss-audit `regime_misread` finding is now cited in the H1 pack as a standing OOS caution (attack 12, receipted). The wording changes (attack 11 calibration-as-near-baseline; purpose = measurement/grounding instrument not predictive-edge product; attack 19 provenance-as-integrity-not-correctness) are drafted verbatim in `docs/red_team_1_R8_proposed_wording.md` and are NOT applied to NORTH_STAR/README/surfaces pending Joe's approval. Anchors are computed: calibration skill 0.0029 over n=247 (no demonstrated edge).
 - R9 reconciliation: **`data/NUMBERS.md` is now the single source of truth** — every public number with its N, commit, and receipt. Count reconciliation (attack 17): two legitimate corpus N's, always labelled — **289 frozen registered** vs **296 current**; 291/293 were intermediate snapshots (293 in DATA_DICTIONARY corrected → 296; STATE gets a current-count pointer). Current tests **151**, evidence packs **13** (6 claim + 7 node). Caught + documented a latent convention split (`>=` vs `>` median → 5.5615 vs 6.07pp; canonical published H1 raw = **+5.5615pp**). Splice (attack 18): **no VXO splice exists or is needed** — `vix_pct` is a trailing-5y rolling rank (point-in-time, no lookahead); VIX starts 1990-01-02, first H1 event 1991-01-17, so no pre-1990 VIX event enters H1; CC2 uses no VIX. Receipts: `data/NUMBERS.md`, H1 pack `r9_vix_percentile_and_splice`.
 
-### Sign-off gates (stop for Joe)
-1. **R4(i)** — Joe reviews the `endogenous_response` flag list before it drives any claim change.
-2. **R8** — purpose-reframe wording.
-3. **Final** — exact new headline wording.
+### FINAL TIERS (after the one bar, R7) — every claim, honestly
+| claim | was | now | why |
+|---|---|---|---|
+| H1 (VIX-stress → oil) | validated | **SUGGESTIVE** | SAR null at every tier + every regime cut; placebo reproduces raw |
+| copper_growth | validated | **SUGGESTIVE** | SAR +0.47 [0.09,0.74] & FDR ✓, but drop-2008 cut crosses zero (closest miss) |
+| palladium_supply | validated | **SUGGESTIVE** | SAR null (+0.12 [−0.28,0.54]) |
+| hy_credit_stress | validated | **SUGGESTIVE** | SAR null (+0.30 [−0.23,0.91]) |
+| severity_dose_response | validated | **SUGGESTIVE** | SAR null (+0.18 [−0.26,0.67]) |
+| CC2 (gasoline crack) | validated | **SUGGESTIVE** | seasonal + outlier-drop CI crosses zero (+1.16 [−0.22,2.56]) |
+| CC5 (fertilizer→corn) | validated | **SUGGESTIVE** | monthly β; SAR leg N/A by construction |
+| under_priced_risk (mispricing) | suggestive | **SUGGESTIVE** | unchanged; forecast-skill estimand, outside FDR (disclosed) |
+
+**Validated set under the single evidentiary bar: empty.** The honest scorecard is
+SUGGESTIVE signals + reported nulls. This is the headline result of red-team-1.
+
+### Sign-off gates (stop for Joe) — STATUS
+1. **R4(i)** — `endogenous_response` flag list (25 events) — ⛔ **AWAITING JOE** (`data/endogenous_flags.json`).
+2. **R8** — purpose-reframe wording — ⛔ **AWAITING JOE** (`docs/red_team_1_R8_proposed_wording.md`).
+3. **Final headline wording** — ⛔ **AWAITING JOE** (proposed below).
+
+### Proposed final headline wording (⛔ awaiting Joe)
+> **H1 (VIX-stress amplifies the oil ripple) is not supported.** On raw |CAR| the
+> amplification was +5.56pp, but |CAR| is a volatility quantity split by a volatility
+> index; under BMP-standardized abnormal returns (the correct metric) the effect is
+> +0.25σ, CI includes zero, and a VIX-matched non-event placebo reproduces the raw
+> number. It is null in every regime-block cut and shrinks out-of-sample. Under one
+> consistent evidentiary bar, **no edge in the portfolio is `validated`; all are
+> SUGGESTIVE**, reported with their nulls. The engine is credible as a *build and a
+> measurement instrument*; its earlier "validated" claims did not survive adversarial
+> standardization, and that published downgrade is the result.
