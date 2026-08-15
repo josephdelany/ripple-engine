@@ -1,0 +1,40 @@
+{
+  "lens": "R2_vix_matched_placebo",
+  "attack": 2,
+  "config": {
+    "horizon": 20,
+    "k_reps": 2000,
+    "exclude_days_from_events": 30,
+    "match": "VIX-percentile decile",
+    "n_real_episodes": 87,
+    "candidate_pool_size": 3869
+  },
+  "raw_car": {
+    "pseudo_mean": 3.0438,
+    "pseudo_median": 2.9977,
+    "pseudo_ci95": [
+      -0.0818,
+      6.4279
+    ],
+    "real_amp": 5.5615,
+    "p_real_le_pseudo": 0.0695,
+    "n_pseudo_samples": 2000
+  },
+  "sar": {
+    "pseudo_mean": 0.1187,
+    "pseudo_median": 0.1171,
+    "pseudo_ci95": [
+      -0.1909,
+      0.4527
+    ],
+    "real_amp": 0.2524,
+    "p_real_le_pseudo": 0.204,
+    "n_pseudo_samples": 2000
+  },
+  "interpretation": {
+    "raw_real_inside_pseudo_ci": true,
+    "verdict": "RAW: vol-matched NON-EVENTS reproduce the amplification (real amp lies inside the pseudo 95% band) -> the raw |CAR| amplification is VOL-CLUSTERING, not an event ripple.",
+    "sar_note": "SAR amplification is ~0 for both real and pseudo, consistent with R1."
+  },
+  "note": "The label-shuffle placebo remains in EVALUATION as an ASSOCIATION check only."
+}

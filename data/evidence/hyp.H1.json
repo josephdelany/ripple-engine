@@ -34,6 +34,11 @@
     "disposition": "CONCEDE",
     "result": "H1 amplification collapses from 5.56pp (raw |CAR|, CI excludes zero) to 0.25 sigmas (SAR, CI [-0.215, 0.651] includes zero). The original headline was volatility clustering.",
     "receipt": "data/h1_sar.json",
+    "r2_vix_matched_placebo": {
+      "attack": 2,
+      "result": "Vol-matched NON-EVENT dates reproduce the raw amplification: pseudo mean +3.04pp, 95% [-0.08, +6.43]; the real +5.56pp lies INSIDE the pseudo band (p=0.07). SAR pseudo +0.12sigma vs real +0.25sigma (p=0.20). The raw amplification is vol-clustering, not an event ripple.",
+      "receipt": "data/placebo_vixmatched.json"
+    },
     "pending": "regime-block robustness (R3) and formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
   "underlying_episodes": [
