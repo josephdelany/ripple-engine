@@ -14,13 +14,13 @@ Tier 1  crude -> refined products
   --------------------------------------------------------------------------------------------
         WTI crude -> Gasoline (Gulf)  daily    n=10078  lag= 0d  beta=+0.648  corr=+0.599  strong
         WTI crude -> Diesel/heat-oil  daily    n=10080  lag= 0d  beta=+0.603  corr=+0.641  strong
-        WTI crude -> Propane          daily    n= 8522  lag= 0d  beta=+0.391  corr=+0.406  moderate
+        WTI crude -> Propane          daily    n= 8527  lag= 0d  beta=+0.391  corr=+0.406  moderate
 
 Tier 1' the gas complex
   --------------------------------------------------------------------------------------------
-        HH natgas -> TTF (EU gas)     daily    n= 2184  lag= 0d  beta=+0.043  corr=+0.083  negligible
-        HH natgas -> JKM (Asia LNG)   daily    n= 2771  lag= 0d  beta=+0.013  corr=+0.027  negligible
-        WTI crude -> JKM (Asia LNG)   daily    n= 2770  lag= 0d  beta=+0.071  corr=+0.059  negligible
+        HH natgas -> TTF (EU gas)     daily    n= 2189  lag= 0d  beta=+0.043  corr=+0.082  negligible
+        HH natgas -> JKM (Asia LNG)   daily    n= 2776  lag= 0d  beta=+0.013  corr=+0.027  negligible
+        WTI crude -> JKM (Asia LNG)   daily    n= 2775  lag= 0d  beta=+0.071  corr=+0.059  negligible
 
 Tier 2  feedstock -> petchem/fertilizer
   --------------------------------------------------------------------------------------------

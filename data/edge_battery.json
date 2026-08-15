@@ -381,19 +381,19 @@
       0.685,
       0.987
     ],
-    "base_rate": 0.521,
+    "base_rate": 0.522,
     "lower_bound_beats_base": true,
     "brier": 0.1743,
     "note": "small-N, direction defined in-sample -> suggestive; grows into a real test as N rises"
   },
   "collinearity": {
-    "n_days": 4865,
+    "n_days": 4867,
     "abs_max": 0.304,
     "pairwise": {
       "vix_pct x curve_2s10s": -0.013,
       "vix_pct x usd_z": -0.07,
       "vix_pct x be_level": -0.208,
-      "curve_2s10s x usd_z": -0.23,
+      "curve_2s10s x usd_z": -0.229,
       "curve_2s10s x be_level": -0.19,
       "usd_z x be_level": -0.304
     }

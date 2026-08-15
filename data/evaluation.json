@@ -154,18 +154,18 @@
   ],
   "temporal_holdout": {
     "holds_out_of_sample": true,
-    "oos_2019plus_amp_pp": 5.857,
+    "oos_2019plus_amp_pp": 2.921,
     "in_sample_pre2019_amp_pp": 5.562
   },
   "quarterly_calibration": {
-    "n": 240,
-    "span": "2007-09..2025-11",
-    "brier": 0.2467,
+    "n": 247,
+    "span": "2007-09..2026-06",
+    "brier": 0.2466,
     "skill_vs_base": 0.0029,
-    "n_quarters": 65
+    "n_quarters": 67
   },
   "overall": {
     "framework_sound": true,
-    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0029; H1 holds out-of-sample (5.857pp on 2019+)"
+    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0029; H1 holds out-of-sample (2.921pp on 2019+)"
   }
 }

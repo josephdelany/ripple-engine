@@ -78,7 +78,13 @@ jobs:
         run: |
           git config user.name  "ripple-bot"
           git config user.email "ripple-bot@users.noreply.github.com"
-          git add data/state data/alert_queue.csv data/watch_seen.db data/engine_read.json data/corroboration_weights.json
+          # Stage only the state paths that actually exist on this run. A run that
+          # produced no alerts -- or a build predating a given artifact -- legitimately
+          # lacks some of these, and `git add <missing pathspec>` is FATAL under
+          # `bash -e` (was killing this step once the pytest gate started passing).
+          for p in data/state data/alert_queue.csv data/watch_seen.db data/engine_read.json data/corroboration_weights.json; do
+            [ -e "$p" ] && git add "$p"
+          done
           if git diff --cached --quiet; then
             echo "No state changes to commit."; exit 0
           fi

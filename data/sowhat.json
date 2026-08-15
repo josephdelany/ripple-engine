@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-05T20:44:11+00:00",
+  "generated_at": "2026-08-15T13:56:30+00:00",
   "regime": "OFF",
-  "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.6%, Heating oil +5.6%, 5Y breakeven +16.7bps, Palladium +5.2%, S&P 500 +2.1%, Platinum +7.2%. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
+  "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.6%, Heating oil +5.6%, 5Y breakeven +16.7bps, Palladium +5.2%, S&P 500 +2.1%, Platinum +7.2%. Market-priced gap: over_priced_fear. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
   "validated_propagation": [
     {
       "to": "Brent oil",
@@ -118,26 +118,26 @@
   ],
   "priced_gap": {
     "gap_id": "gap.LIVE",
-    "as_of": "2026-07-30T04:46:40+00:00",
-    "anchor_date": "2026-07-27",
+    "as_of": "2026-08-15T13:18:22+00:00",
+    "anchor_date": "2026-08-04",
     "subject": "LIVE state (no dated shock -- standing read)",
-    "engine_call": "turbulent",
-    "engine_p": 0.6,
-    "priced_ovx": 57.15,
-    "priced_ovx_pct": 91.6,
-    "gap_direction": "aligned",
+    "engine_call": "calm",
+    "engine_p": 0.4,
+    "priced_ovx": 55.8,
+    "priced_ovx_pct": 90.8,
+    "gap_direction": "over_priced_fear",
     "horizon_days": 20,
     "outcome": null,
     "brier": null,
     "resolved_at": null,
     "source_url": "",
-    "notes": "Live: H1 ON (VIX %ile 56); market OVX 57 (p91.6); gap=aligned."
+    "notes": "Live: H1 OFF (VIX %ile 37); market OVX 56 (p90.8); gap=over_priced_fear."
   },
   "active_situations": [
     {
       "situation": "israel_iran_war_2025",
       "events": 193,
-      "multi_modal": 35,
+      "multi_modal": 96,
       "max_modality_classes": 3,
       "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
       "top_tag": "corroborated",
@@ -156,7 +156,7 @@
     {
       "situation": "israel_lebanon_hezbollah",
       "events": 170,
-      "multi_modal": 20,
+      "multi_modal": 82,
       "max_modality_classes": 3,
       "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
       "top_tag": "corroborated",
@@ -175,7 +175,7 @@
     {
       "situation": "russia_ukraine_war",
       "events": 54,
-      "multi_modal": 9,
+      "multi_modal": 15,
       "max_modality_classes": 3,
       "top_event": "Greek LNG Ship Safely Clears Hormuz After Maritime Incident",
       "top_tag": "corroborated",
@@ -185,9 +185,10 @@
         "priced"
       ],
       "receipts": [
+        "https://abcnews.com/International/wireStory/nato-member-romania-shoots-stray-drones-ukraine-war-135145424",
+        "https://asia.nikkei.com/politics/ukraine-war/trump-zelenskyy-discuss-patriot-deal-and-reviving-talks-with-russia",
         "https://oilprice.com/Energy/Energy-General/Russia-Is-Running-Out-of-Soldiers-Oil-and-Time.html",
-        "https://oilprice.com/Latest-Energy-News/World-News/Greek-LNG-Ship-Safely-Clears-Hormuz-After-Maritime-Incident.html",
-        "https://oilprice.com/Latest-Energy-News/World-News/India-Expands-Oil-Storage-Sites-After-Shock-Supply-Disruption.html"
+        "https://oilprice.com/Latest-Energy-News/World-News/Greek-LNG-Ship-Safely-Clears-Hormuz-After-Maritime-Incident.html"
       ]
     },
     {

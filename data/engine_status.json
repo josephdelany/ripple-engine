@@ -1,11 +1,17 @@
 {
-  "generated_at": "2026-08-05T20:44:11+00:00",
-  "verdict": "AMBER",
+  "generated_at": "2026-08-15T13:56:30+00:00",
+  "verdict": "RED",
   "freshness": {
     "overall": "TROUBLE",
-    "n_dead": 0,
-    "n_stale": 29,
-    "dead_series": []
+    "n_dead": 5,
+    "n_stale": 24,
+    "dead_series": [
+      "fred.BAMLH0A0HYM2",
+      "fred.SP500",
+      "predmkt.polymarket.will-wti-dip-to-75-in-august-2026",
+      "predmkt.polymarket.will-wti-dip-to-80-in-august-2026",
+      "predmkt.polymarket.will-wti-dip-to-85-in-august-2026"
+    ]
   },
   "coverage": {
     "undercovered_domains": [],
@@ -17,11 +23,11 @@
   "last_run": {
     "verdict": "DEGRADED",
     "failed_steps": [],
-    "run_id": "2026-08-05T12:14:30+00:00"
+    "run_id": "2026-08-06T11:40:08+00:00"
   },
   "backups": {
     "count": 7,
-    "newest": "oil_20260805_153945.db.gz",
+    "newest": "oil_20260806_131301.db.gz",
     "restore_tested": true
   },
   "evaluation": {
@@ -31,6 +37,6 @@
     "blocked_types": []
   },
   "reasons": [
-    "AMBER: 29 STALE series"
+    "RED: 5 DEAD series (data broken)"
   ]
 }

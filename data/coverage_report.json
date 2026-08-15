@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T18:13:11+00:00",
+  "generated_at": "2026-08-15T13:19:39+00:00",
   "n_feeds": 10,
   "n_dead_feeds": 0,
   "undercovered_domains": [],
@@ -9,9 +9,9 @@
       "event_types": [
         "opec_decision"
       ],
-      "n_events": 50,
+      "n_events": 51,
       "last_event": "2025-05-03",
-      "n_alerts_30d": 5,
+      "n_alerts_30d": 3,
       "n_nodes": 9,
       "status": "ok"
     },
@@ -21,9 +21,9 @@
         "demand_shock",
         "policy_response"
       ],
-      "n_events": 69,
-      "last_event": "2025-05-12",
-      "n_alerts_30d": 15,
+      "n_events": 72,
+      "last_event": "2026-06-17",
+      "n_alerts_30d": 12,
       "n_nodes": 8,
       "status": "ok"
     },
@@ -33,9 +33,9 @@
         "chokepoint_disruption",
         "opec_decision"
       ],
-      "n_events": 74,
-      "last_event": "2025-11-14",
-      "n_alerts_30d": 37,
+      "n_events": 76,
+      "last_event": "2026-03-04",
+      "n_alerts_30d": 22,
       "n_nodes": 4,
       "status": "ok"
     },
@@ -46,9 +46,9 @@
         "conflict_escalation",
         "infrastructure_attack"
       ],
-      "n_events": 115,
-      "last_event": "2025-11-14",
-      "n_alerts_30d": 126,
+      "n_events": 118,
+      "last_event": "2026-03-04",
+      "n_alerts_30d": 86,
       "n_nodes": 2,
       "status": "ok"
     },
@@ -58,9 +58,9 @@
         "conflict_escalation",
         "infrastructure_attack"
       ],
-      "n_events": 91,
-      "last_event": "2025-09-05",
-      "n_alerts_30d": 94,
+      "n_events": 93,
+      "last_event": "2026-02-28",
+      "n_alerts_30d": 67,
       "n_nodes": 0,
       "status": "ok"
     },
@@ -71,9 +71,9 @@
         "policy_response",
         "sanctions"
       ],
-      "n_events": 159,
-      "last_event": "2025-07-14",
-      "n_alerts_30d": 28,
+      "n_events": 161,
+      "last_event": "2026-06-17",
+      "n_alerts_30d": 24,
       "n_nodes": 0,
       "status": "ok"
     },
@@ -82,9 +82,9 @@
       "event_types": [
         "chokepoint_disruption"
       ],
-      "n_events": 24,
-      "last_event": "2025-11-14",
-      "n_alerts_30d": 32,
+      "n_events": 25,
+      "last_event": "2026-03-04",
+      "n_alerts_30d": 19,
       "n_nodes": 4,
       "status": "ok"
     }
@@ -93,7 +93,7 @@
     {
       "feed": "bbc_world",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "entries": 27,
+      "entries": 24,
       "status": "ok"
     },
     {
@@ -111,7 +111,7 @@
     {
       "feed": "eia_energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "entries": 12,
+      "entries": 16,
       "status": "ok"
     },
     {
@@ -147,7 +147,7 @@
     {
       "feed": "timesofisrael",
       "url": "https://www.timesofisrael.com/feed/",
-      "entries": 13,
+      "entries": 11,
       "status": "ok"
     }
   ],

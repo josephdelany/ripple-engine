@@ -68,11 +68,11 @@
       "producer_share": 10,
       "commodity": "wheat",
       "node": "yf.wheat",
-      "n": 23,
-      "car": -1.045,
+      "n": 25,
+      "car": -0.2798,
       "ci": [
-        -3.948,
-        1.7459
+        -3.1628,
+        2.5641
       ],
       "unit": "%",
       "status": "null",
@@ -110,11 +110,11 @@
       "producer_share": 45,
       "commodity": "copper",
       "node": "yf.copper",
-      "n": 16,
-      "car": 1.7621,
+      "n": 17,
+      "car": 1.1914,
       "ci": [
-        -1.8518,
-        5.0499
+        -2.3013,
+        4.4533
       ],
       "unit": "%",
       "status": "null",
@@ -126,11 +126,11 @@
       "producer_share": 21,
       "commodity": "crude_oil",
       "node": "fred.DCOILBRENTEU",
-      "n": 26,
-      "car": -4.4104,
+      "n": 28,
+      "car": -3.0621,
       "ci": [
-        -9.8076,
-        0.7278
+        -9.357,
+        3.423
       ],
       "unit": "%",
       "status": "null",
@@ -174,11 +174,11 @@
       "producer_share": 21,
       "commodity": "natural_gas",
       "node": "fred.DHHNGSP",
-      "n": 24,
-      "car": -3.2368,
+      "n": 26,
+      "car": -3.5729,
       "ci": [
-        -13.4807,
-        7.5084
+        -13.053,
+        6.2573
       ],
       "unit": "%",
       "status": "null",

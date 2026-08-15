@@ -1,20 +1,20 @@
 {
   "what": "Walk-forward accountability: does conditioning the read on H1 reduce magnitude error out-of-sample?",
-  "n_scored": 66,
+  "n_scored": 67,
   "min_prior": 20,
   "note": "Magnitude accountability (resolving track record), not a hypothesis re-test. |CAR+20| forecast from prior events only; H1 bucket set walk-forward.",
-  "mae_uncond_pp": 8.487,
-  "mae_cond_pp": 7.572,
-  "mae_improvement_pp": 0.915,
+  "mae_uncond_pp": 9.061,
+  "mae_cond_pp": 8.248,
+  "mae_improvement_pp": 0.814,
   "conditioning_helps": true,
   "by_regime": {
     "ON": {
-      "n": 25,
-      "mean_realized_pp": 14.54
+      "n": 26,
+      "mean_realized_pp": 15.93
     },
     "OFF": {
       "n": 41,
-      "mean_realized_pp": 8.93
+      "mean_realized_pp": 9.21
     }
   },
   "records": [
@@ -34,9 +34,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 1.26,
       "expected_uncond_pp": 13.22,
-      "expected_cond_pp": 10.25,
+      "expected_cond_pp": 11.0,
       "err_uncond": -11.96,
-      "err_cond": -8.99
+      "err_cond": -9.75
     },
     {
       "event_id": "iraq_war_begins_2003",
@@ -44,9 +44,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 33.86,
       "expected_uncond_pp": 12.67,
-      "expected_cond_pp": 15.92,
+      "expected_cond_pp": 15.23,
       "err_uncond": 21.18,
-      "err_cond": 17.94
+      "err_cond": 18.62
     },
     {
       "event_id": "opec_cut_sept_2003",
@@ -54,9 +54,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 9.77,
       "expected_uncond_pp": 13.6,
-      "expected_cond_pp": 9.43,
+      "expected_cond_pp": 10.12,
       "err_uncond": -3.82,
-      "err_cond": 0.34
+      "err_cond": -0.34
     },
     {
       "event_id": "libya_sanctions_lifted_2004",
@@ -64,9 +64,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 8.6,
       "expected_uncond_pp": 13.44,
-      "expected_cond_pp": 9.46,
+      "expected_cond_pp": 10.09,
       "err_uncond": -4.83,
-      "err_cond": -0.86
+      "err_cond": -1.49
     },
     {
       "event_id": "opec_hike_beirut_june_2004",
@@ -354,9 +354,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 1.75,
       "expected_uncond_pp": 12.04,
-      "expected_cond_pp": 7.84,
+      "expected_cond_pp": 8.02,
       "err_uncond": -10.29,
-      "err_cond": -6.09
+      "err_cond": -6.27
     },
     {
       "event_id": "russia_sectoral_sanctions_2014",
@@ -364,9 +364,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 6.15,
       "expected_uncond_pp": 11.85,
-      "expected_cond_pp": 7.61,
+      "expected_cond_pp": 7.78,
       "err_uncond": -5.7,
-      "err_cond": -1.47
+      "err_cond": -1.64
     },
     {
       "event_id": "russia_oiltech_ban_2014",
@@ -564,9 +564,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 1.85,
       "expected_uncond_pp": 12.14,
-      "expected_cond_pp": 14.5,
+      "expected_cond_pp": 15.17,
       "err_uncond": -10.3,
-      "err_cond": -12.65
+      "err_cond": -13.33
     },
     {
       "event_id": "saudi_jeddah_depot_2020",
@@ -574,9 +574,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 17.05,
       "expected_uncond_pp": 12.01,
-      "expected_cond_pp": 14.16,
+      "expected_cond_pp": 14.82,
       "err_uncond": 5.04,
-      "err_cond": 2.88
+      "err_cond": 2.22
     },
     {
       "event_id": "colonial_pipeline_shutdown_2021",
@@ -649,35 +649,45 @@
       "err_cond": -2.75
     },
     {
-      "event_id": "saudi_voluntary_cut_june_2023",
-      "date": "2023-06-04",
+      "event_id": "nigeria_fuel_subsidy_removed_2023",
+      "date": "2023-05-29",
       "h1_state": "OFF",
-      "realized_mag_pp": 1.57,
+      "realized_mag_pp": 0.29,
       "expected_uncond_pp": 11.96,
       "expected_cond_pp": 9.38,
-      "err_uncond": -10.4,
-      "err_cond": -7.81
-    },
-    {
-      "event_id": "eu_cbam_2023",
-      "date": "2023-10-01",
-      "h1_state": "OFF",
-      "realized_mag_pp": 8.94,
-      "expected_uncond_pp": 11.84,
-      "expected_cond_pp": 9.19,
-      "err_uncond": -2.9,
-      "err_cond": -0.25
+      "err_uncond": -11.67,
+      "err_cond": -9.08
     },
     {
       "event_id": "rus_novorossiysk_terminal_2025",
       "date": "2025-11-14",
       "h1_state": "ON",
       "realized_mag_pp": 1.44,
-      "expected_uncond_pp": 11.81,
-      "expected_cond_pp": 14.37,
-      "err_uncond": -10.37,
-      "err_cond": -12.93
+      "expected_uncond_pp": 11.83,
+      "expected_cond_pp": 14.49,
+      "err_uncond": -10.39,
+      "err_cond": -13.05
+    },
+    {
+      "event_id": "iran_israel_us_strike_2026",
+      "date": "2026-02-28",
+      "h1_state": "ON",
+      "realized_mag_pp": 50.67,
+      "expected_uncond_pp": 11.7,
+      "expected_cond_pp": 14.19,
+      "err_uncond": 38.97,
+      "err_cond": 36.48
+    },
+    {
+      "event_id": "us_iran_hormuz_mou_2026",
+      "date": "2026-06-17",
+      "h1_state": "OFF",
+      "realized_mag_pp": 21.74,
+      "expected_uncond_pp": 12.16,
+      "expected_cond_pp": 8.98,
+      "err_uncond": 9.58,
+      "err_cond": 12.76
     }
   ],
-  "live_amplification_pp": 5.61
+  "live_amplification_pp": 6.72
 }

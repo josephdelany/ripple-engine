@@ -1,23 +1,23 @@
 {
   "ran": true,
   "overall": {
-    "n": 240,
-    "base_rate": 0.521,
-    "brier": 0.2467,
-    "base_rate_brier": 0.2496,
+    "n": 247,
+    "base_rate": 0.522,
+    "brier": 0.2466,
+    "base_rate_brier": 0.2495,
     "skill_vs_base": 0.0029,
     "reliability": [
       {
         "band": "0.4-0.6",
-        "n": 105,
+        "n": 109,
         "mean_forecast": 0.4,
-        "observed": 0.448
+        "observed": 0.45
       },
       {
         "band": "0.6-0.8",
-        "n": 135,
+        "n": 138,
         "mean_forecast": 0.6,
-        "observed": 0.578
+        "observed": 0.58
       }
     ]
   },
@@ -383,20 +383,20 @@
       "thin": false
     },
     {
-      "n": 2,
-      "base_rate": 1.0,
-      "brier": 0.16,
-      "base_rate_brier": 0.0,
-      "skill_vs_base": -0.16,
+      "n": 3,
+      "base_rate": 0.667,
+      "brier": 0.2267,
+      "base_rate_brier": 0.2222,
+      "skill_vs_base": -0.0044,
       "quarter": "2019Q4",
       "thin": true
     },
     {
-      "n": 10,
+      "n": 11,
       "base_rate": 1.0,
-      "brier": 0.2,
+      "brier": 0.2145,
       "base_rate_brier": 0.0,
-      "skill_vs_base": -0.2,
+      "skill_vs_base": -0.2145,
       "quarter": "2020Q1",
       "thin": false
     },
@@ -509,16 +509,16 @@
       "thin": true
     },
     {
-      "n": 3,
-      "base_rate": 0.333,
-      "brier": 0.2267,
-      "base_rate_brier": 0.2222,
-      "skill_vs_base": -0.0044,
+      "n": 4,
+      "base_rate": 0.25,
+      "brier": 0.21,
+      "base_rate_brier": 0.1875,
+      "skill_vs_base": -0.0225,
       "quarter": "2023Q2",
       "thin": true
     },
     {
-      "n": 6,
+      "n": 7,
       "base_rate": 0.0,
       "brier": 0.16,
       "base_rate_brier": 0.0,
@@ -606,8 +606,26 @@
       "skill_vs_base": -0.36,
       "quarter": "2025Q4",
       "thin": true
+    },
+    {
+      "n": 2,
+      "base_rate": 1.0,
+      "brier": 0.16,
+      "base_rate_brier": 0.0,
+      "skill_vs_base": -0.16,
+      "quarter": "2026Q1",
+      "thin": true
+    },
+    {
+      "n": 1,
+      "base_rate": 1.0,
+      "brier": 0.36,
+      "base_rate_brier": 0.0,
+      "skill_vs_base": -0.36,
+      "quarter": "2026Q2",
+      "thin": true
     }
   ],
-  "n_quarters": 65,
-  "span": "2007-09..2025-11"
+  "n_quarters": 67,
+  "span": "2007-09..2026-06"
 }

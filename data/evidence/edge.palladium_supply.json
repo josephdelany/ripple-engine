@@ -779,7 +779,7 @@
   ],
   "n_episodes": 75,
   "source_artifact": "edge_battery.json",
-  "source_commit": "5f540cf",
+  "source_commit": "e196bc5",
   "db_commit": "uncommitted (oil.db is gitignored; rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/edge_battery.json",
   "corpus": {
