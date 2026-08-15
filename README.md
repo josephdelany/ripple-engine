@@ -22,6 +22,14 @@ Where the engine *does* find structure, it is receipted: the crude→products va
 chain transmits strongly, and two cross-asset edges (supply→gasoline crack;
 fertilizer→corn) validated against pre-registered nulls. See `EDGE_PORTFOLIO.md`.
 
+> **Under adversarial review (red-team-1, in progress).** The H1 "VIX-stress
+> amplifies the oil ripple" headline was computed on raw `|CAR|`, a volatility
+> quantity. Re-run with BMP-standardized abnormal returns (SAR), the amplification
+> collapses from **+5.56pp [0.94, 9.65]** to **+0.25σ [−0.22, +0.65]** — CI
+> includes zero. On the standardized number, **H1 does not survive** — the original
+> figure was vol-clustering. Full disposition and remaining slices in
+> `docs/red_team_1.md`; final claim wording awaits sign-off.
+
 ## Is it sound? One command
 
 ```

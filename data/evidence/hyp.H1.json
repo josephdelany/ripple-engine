@@ -1,22 +1,40 @@
 {
   "claim_id": "hyp.H1",
   "tier": "validated",
+  "tier_status": "UNDER REVIEW (red-team-1). Headline switched to BMP-standardized SAR (R1); the SAR 95% CI INCLUDES ZERO, so the amplification does not survive standardization. Formal re-tier at R7; claim wording awaits Joe's sign-off. See docs/red_team_1.md.",
   "statement": "Geopolitical shocks ripple harder into Brent oil when VIX stress is elevated.",
   "quantity": {
+    "value": 0.2524,
+    "unit": "sigmas (BMP-standardized SCAR)",
+    "metric": "|SCAR+20| high-minus-low amplification"
+  },
+  "secondary_unstandardized": {
     "value": 5.5615,
     "unit": "pp",
-    "metric": "|CAR+20| high-minus-low amplification"
+    "metric": "|CAR+20| high-minus-low amplification -- UNSTANDARDIZED (subject to vol-clustering)",
+    "ci95": [0.9436, 9.6525],
+    "perm_p": 0.0054,
+    "note": "This is the original headline number. It reproduces exactly, but |CAR| is a volatility quantity split by a volatility index; see attack #1."
   },
   "mechanism": "stress transmits shocks harder",
-  "method": "conditioned constant-mean event study; clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; family-wise FDR+Bonferroni where applicable; leave-one-cluster-out robustness. Point-in-time (state read at t-1).",
+  "method": "conditioned event study, BMP (1991) STANDARDIZED abnormal returns as the headline: each event's CAR divided by its own estimation-window sigma * sqrt(L) (removes vol-clustering). Clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; leave-one-cluster-out. Point-in-time (state read at t-1). Unstandardized |CAR| retained as a secondary line.",
   "statistics": {
     "n_episodes": 87,
     "ci95": [
-      0.9436,
-      9.6525
+      -0.2151,
+      0.651
     ],
-    "survives_fdr": true,
-    "survives_bonferroni": true
+    "perm_p": 0.1191,
+    "ci_excludes_zero": false,
+    "survives_fdr": false,
+    "survives_bonferroni": false
+  },
+  "red_team_1": {
+    "attack": 1,
+    "disposition": "CONCEDE",
+    "result": "H1 amplification collapses from 5.56pp (raw |CAR|, CI excludes zero) to 0.25 sigmas (SAR, CI [-0.215, 0.651] includes zero). The original headline was volatility clustering.",
+    "receipt": "data/h1_sar.json",
+    "pending": "regime-block robustness (R3) and formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
   "underlying_episodes": [
     {

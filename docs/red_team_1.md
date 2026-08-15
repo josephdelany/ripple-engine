@@ -187,7 +187,7 @@ concede-and-compute.
 | 19 | provenance ≠ correctness | CONCEDE | R8 | reframed as integrity property [Joe] | README, NORTH_STAR |
 
 ### Final numbers (filled as slices land)
-- R1 SAR H1: _pending_
+- R1 SAR H1: **DOWNGRADE.** SAR amp **+0.2524σ**, CI **[−0.2151, +0.651]**, perm p **0.1191** — CI includes zero. Raw \|CAR\| reproduces exactly at +5.5615pp [0.9436, 9.6525] p=0.0054 (machinery check passes). H1 does **not** survive standardization; original headline was vol-clustering. Receipt: `data/h1_sar.json`.
 - R2 VIX-matched placebo: _pending_
 - R3 regime-block CIs: _pending_
 - R4 subset re-runs: _pending_
