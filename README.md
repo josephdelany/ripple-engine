@@ -19,8 +19,11 @@ is defending that result at frontier standard — see `PRE_REGISTRATION.md` and
 `EVALUATION.md`.
 
 Where the engine *does* find structure, it is receipted: the crude→products value
-chain transmits strongly, and two cross-asset edges (supply→gasoline crack;
-fertilizer→corn) validated against pre-registered nulls. See `EDGE_PORTFOLIO.md`.
+chain transmits strongly. The cross-asset/-chain edges are held to the same
+adversarial bar — the gasoline-crack edge (CC2) **downgraded to SUGGESTIVE** under
+red-team-1 (it survives dropping its two post-registration outliers *or* seasonal
+adjustment, but not both jointly: +1.16 $/bbl [−0.22, +2.56]); see
+`docs/red_team_1.md`. See `EDGE_PORTFOLIO.md`.
 
 > **Under adversarial review (red-team-1, in progress).** The H1 "VIX-stress
 > amplifies the oil ripple" headline was computed on raw `|CAR|`, a volatility

@@ -1,6 +1,7 @@
 {
   "claim_id": "edge.CC2_supply_gasoline_crack",
-  "tier": "validated",
+  "tier": "SUGGESTIVE",
+  "tier_status": "DOWNGRADED from validated (red-team-1, R6). Survives dropping the two post-registration outliers alone (+1.83 [0.36, 3.31]) and month-of-year seasonal adjustment alone (+2.17 [0.35, 4.25]), but the two controls JOINTLY put the 95% CI across zero (+1.16 [-0.22, 2.56], perm p=0.06). A robust edge should survive both at once; CC2 does not, so it is SUGGESTIVE, not validated. See data/cc2_seasonal.json and docs/red_team_1.md.",
   "statement": "Physical supply-shock events widen the gasoline crack over +10 trading days.",
   "mechanism": "refined product tightens faster than crude",
   "quantity": {
@@ -19,6 +20,22 @@
     "survives_fdr": true,
     "survives_bonferroni": true,
     "predicted_direction": "+"
+  },
+  "red_team_1_r6": {
+    "attacks": [13, 14],
+    "baseline_reproduces": "+2.9611 [0.9943, 5.2136], perm p=0.003, n=37 (ties to cross_chain.json).",
+    "outlier_drop": {
+      "ex_hormuz_2026": "+2.24 [0.61, 3.91] p=0.005 -- still excludes zero",
+      "ex_venezuela_2019": "+2.58 [0.71, 4.83] p=0.005 -- still excludes zero",
+      "ex_both": "+1.83 [0.36, 3.31] p=0.012 -- still excludes zero (barely)"
+    },
+    "seasonal_adjustment": {
+      "method": "month-of-year climatology: subtract each calendar month's mean daily crack change (full-sample) from that day's change; recompute CAR on the deseasonalised series. Documented in data/cc2_seasonal.json.",
+      "seasonal_only": "+2.17 [0.35, 4.25] p=0.017 -- still excludes zero",
+      "seasonal_and_ex_both_outliers": "+1.16 [-0.22, 2.56] p=0.060 -- INCLUDES ZERO"
+    },
+    "disposition": "DOWNGRADE to SUGGESTIVE. CC2 is robust to each attack alone but not to both jointly; the strictest defensible cut (deseasonalised AND both post-registration outliers dropped) has a CI spanning zero. Reported honestly.",
+    "receipt": "data/cc2_seasonal.json"
   },
   "underlying_episodes": [
     {

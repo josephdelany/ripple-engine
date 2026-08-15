@@ -91,5 +91,15 @@ The one genuinely new *kind* of edge — **mispricing** (market error, not react
 most promising suggestive signal and the natural next brick: it becomes a real test only as the corpus
 (and the resolved gap ledger) grows. That is time, not code.
 
+## Red-team-1 update (R6) — CC2 downgraded to SUGGESTIVE
+The cross-chain edge **CC2 (supply → gasoline crack)** was `validated` (+2.96 $/bbl
+[0.99, 5.21]). Under adversarial review it survives dropping its two
+post-registration outliers alone (+1.83 [0.36, 3.31]) and month-of-year seasonal
+adjustment alone (+2.17 [0.35, 4.25]), but **not both controls jointly**
+(+1.16 [−0.22, +2.56], perm p=0.06 — CI includes zero). A robust edge should clear
+both at once; CC2 does not, so it is now **SUGGESTIVE**. Receipts:
+`data/cc2_seasonal.json`, `data/evidence/edge.CC2_supply_gasoline_crack.json`,
+`docs/red_team_1.md`.
+
 *Receipts: `data/edge_battery.json` · registration: `PRE_REGISTRATION.md` (tag
 `edge-battery-preregistered-20260730`) · method: `METHOD.md`, `src/validate.py`.*
