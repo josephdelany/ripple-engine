@@ -54,6 +54,12 @@
       "attack10_lookahead": "Freezing the split threshold point-in-time barely moves the raw number (median-split +6.07pp -> frozen-threshold +5.22pp [1.15, 9.31]); lookahead in the conditioner is not the driver. Reported point-in-time regardless.",
       "receipt": "data/h1_frozen_threshold.json"
     },
+    "r8_oos_caution_regime_misread": {
+      "attack": 12,
+      "finding": "The miss-audit (EVALUATION.md §5) shows the worst-scored resolved gaps are all 'regime_misread' — the engine saw turbulence (high VIX) and calm was realised — and they are the SAME high-VIX events that drive the in-sample raw amplification (OPEC-emergency-cut-2008, SA-power-2008, Iran-CISADA). In-sample amplification + out-of-sample anti-signal on the very same events is the signature of overfitting to volatility clustering.",
+      "so_what": "Cited here as a standing out-of-sample caution against reading the raw |CAR| amplification as predictive. Consistent with the SAR null (R1) and the placebo (R2).",
+      "receipt": "EVALUATION.md §5"
+    },
     "which_versions_survive": "None. SAR (the correct metric) is null in every cut and at every corpus tier (frozen-289, OOS-2019+, current-296); raw |CAR| survives only when the 2008 crisis regime is included, and is reproduced by non-events (R2). H1 amplification is UNSUPPORTED as a general event ripple.",
     "pending": "formal re-tier under the single evidentiary bar (R7); claim wording awaits Joe (R8/final)."
   },
