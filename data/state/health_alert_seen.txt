@@ -1,1 +1,1 @@
-fred.DCOILBRENTEU:STALE;fred.DCOILWTICO:STALE;fred.DHHNGSP:STALE;refresh:failures
+refresh:failures
