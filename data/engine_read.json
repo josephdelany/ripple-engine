@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-08-22",
-  "generated_at": "2026-08-22T11:36:13+00:00",
+  "as_of": "2026-08-23",
+  "generated_at": "2026-08-23T11:37:54+00:00",
   "clustered_event_n": 89,
   "hypotheses": {
     "H1": {
@@ -36,7 +36,7 @@
       "signal_name": "Managed-money net-long percentile",
       "unit": "percentile",
       "latest": 23.85,
-      "as_of_reading": "2026-08-22",
+      "as_of_reading": "2026-08-23",
       "event_median": 66.35,
       "direction": "high amplifies",
       "verdict": "FAILS",
