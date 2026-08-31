@@ -52,6 +52,26 @@ launchctl unload ~/Library/LaunchAgents/com.ripple.refresh.plist
 rm ~/Library/LaunchAgents/com.ripple.refresh.plist
 ```
 
+## Keep the Intelligence Desk always-on (optional, run once)
+The daily/hourly jobs above keep the DATA fresh. To keep the **Desk itself serving**
+at `http://127.0.0.1:5050/workbench` without leaving a Terminal open — so it survives
+logout, sleep, and reboot — install the keep-alive agent (`KeepAlive` restarts it if it
+ever exits):
+
+```bash
+cp "ops/com.ripple.desk.plist" ~/Library/LaunchAgents/com.ripple.desk.plist
+launchctl load ~/Library/LaunchAgents/com.ripple.desk.plist
+launchctl list | grep com.ripple.desk        # confirm it's registered
+```
+
+Then open http://127.0.0.1:5050/workbench any time. To stop/uninstall:
+```bash
+launchctl unload ~/Library/LaunchAgents/com.ripple.desk.plist
+rm ~/Library/LaunchAgents/com.ripple.desk.plist
+```
+If you'd rather not install it, just run `python3 src/backend.py` in a Terminal you
+leave open — same result while that window lives.
+
 ## Notes
 - If your Mac is asleep at 07:30, launchd runs the job at the next wake. That is
   expected launchd behaviour.

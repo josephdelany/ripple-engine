@@ -2000,6 +2000,39 @@ def wb_analyze(body: _AnalyzeIn):
     return _T.triage(text)
 
 
+class _BriefIn(BaseModel):
+    text: str
+    source: str = ""
+    url: str = ""
+
+
+@app.post("/wb_brief")
+def wb_brief(body: _BriefIn):
+    """The institutional ANALYTICAL BRIEF for any story (src/brief.py): BLUF + measured
+    quant read (base rate + bootstrap CI + null-baseline lift + cross-asset) + verified
+    precedent + live market state + the engine-vs-market gap + observable invalidation
+    criteria + confidence. Deterministic; reuses the engine; no new analysis, no LLM."""
+    from datetime import datetime, timezone
+    import brief as _B
+    text = (body.text or "").strip()
+    if not text:
+        return {"error": "empty input -- paste a headline, paragraph, or URL"}
+    b = _B.build_brief(text, source=body.source or None, url=body.url or None)
+    b["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return b
+
+
+@app.get("/wb_daily_brief")
+def wb_daily_brief():
+    """The DAILY BRIEF: a full analytical brief on today's auto-selected top real story
+    (highest-materiality entity-matched headline in the freshest watcher day)."""
+    from datetime import datetime, timezone
+    import brief as _B
+    b = _B.build_daily_brief()
+    b["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return b
+
+
 @app.get("/wb_history")
 def wb_history(q: str = "", limit: int = 50):
     """HISTORY panel: search the coded corpus by entity / type / date / title text.
@@ -2024,6 +2057,17 @@ def wb_history(q: str = "", limit: int = 50):
     conn.close()
     return [{"event_id": r[0], "date": r[1], "type": r[2], "title": r[3],
              "severity": r[4], "confidence": r[5], "source_url": r[6]} for r in rows]
+
+
+@app.get("/wb_series")
+def wb_series(series: str = "fred.DCOILBRENTEU", days: int = 180):
+    """A price/level series for inline sparklines (dates, values), newest-`days`.
+    Reuses the same de-duped reader the charts use. Read-only."""
+    conn = sqlite3.connect(DB)
+    x, y = _series(conn, series, days)
+    conn.close()
+    return {"series": series, "dates": x, "values": y,
+            "latest": (y[-1] if y else None), "as_of": (x[-1] if x else None)}
 
 
 @app.get("/wb_event")

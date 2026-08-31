@@ -10,6 +10,7 @@ data/*.db
 data/refresh_log.csv
 data/health_status.json
 data/launchd_refresh.log
+data/launchd_desk.log
 # engine_read.json is COMMITTED: the light 15-min watcher run reads today's
 # amplifier context from it (it does no market fetch of its own). Refreshed by the
 # daily full run.

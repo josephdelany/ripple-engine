@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent: keep the Intelligence Desk (backend.py) SERVING, always.
+
+  This is the piece that lets the Desk run WITHOUT a Claude Code session: it starts
+  python3 src/backend.py at login/load and, with KeepAlive, restarts it if it ever
+  exits or crashes. Open http://127.0.0.1:5050/workbench any time -- it's just there.
+
+  Separate from the two data jobs (com.ripple.refresh = daily pipeline; com.ripple.watch
+  = hourly news). This one only SERVES; the data jobs keep the data fresh underneath it.
+
+  Joe installs this himself -- see ops/INSTALL.md. Edit the two absolute paths if your
+  python3 or repo location differs. Nothing here installs it automatically.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ripple.desk</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-lc</string>
+        <string>cd '/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine' &amp;&amp; exec /usr/local/bin/python3 src/backend.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine</string>
+
+    <!-- Start on load/login, and keep it alive: relaunch if it ever exits. -->
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- If it crashes on start, don't hammer-loop faster than every 10s. -->
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_desk.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine/data/launchd_desk.log</string>
+</dict>
+</plist>

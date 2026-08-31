@@ -37,7 +37,7 @@ def test_wb1_page_serves_html():
     assert r.status_code == 200
     assert "text/html" in r.headers["content-type"]
     body = r.text
-    for panel in ("Today", "Analyze", "Notes", "History"):
+    for panel in ("Analyze", "Notes", "Wire", "Corpus", "Brief"):
         assert panel in body
 
 
