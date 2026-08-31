@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--
+  workbench.html -- Joe's daily analyst front door (TASK_BRIEF_PLATFORM.md).
+  One self-contained page: no framework, vanilla JS, everything inline. It only
+  DISPLAYS what the engine produces. Four panels:
+    TODAY   -- the freshest day's filtered watcher items, each with a one-line read
+    ANALYZE -- paste any headline/text -> the full triage card (the quant door)
+    NOTES   -- write your own take beside the numbers; insert quant blocks; export
+    HISTORY -- search the coded corpus; open any event's full record + CARs + source
+  All data comes from the /wb_* endpoints in backend.py. Served at /workbench.
+  The engine's honesty rules ride on every card: real analogues only, base rates
+  with n + range, expected magnitude (never a probability), an explicit flag.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripple Engine — Workbench</title>
+<style>
+  :root {
+    --bg: #0b0d10; --panel: #14171d; --panel2: #191d24; --line: #262b34;
+    --ink: #d7dbe2; --dim: #8b93a1; --faint: #6a7280;
+    --blue: #4c9be8; --orange: #e8894c; --green: #5fb87a; --amber: #d9a441; --red: #e8663a;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header {
+    display: flex; align-items: baseline; gap: 14px; padding: 14px 22px;
+    border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 5;
+  }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; letter-spacing: .2px; }
+  header .sub { color: var(--dim); font-size: 12.5px; }
+  .chip {
+    font: 11.5px var(--mono); padding: 2px 8px; border-radius: 10px;
+    border: 1px solid var(--line); color: var(--dim); background: var(--panel);
+  }
+  .chip.on { color: var(--amber); border-color: #4a3f20; }
+  .chip.off { color: var(--green); border-color: #234030; }
+  main { max-width: 1180px; margin: 0 auto; padding: 18px 22px 80px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 18px; }
+  .panel > h2 {
+    margin: 0; padding: 11px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .panel > h2 .meta { font-weight: 400; letter-spacing: .2px; text-transform: none; color: var(--faint); font-size: 11.5px; }
+  .body { padding: 14px 16px; }
+  .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+  /* TODAY */
+  .today-list { max-height: 360px; overflow-y: auto; }
+  .titem { padding: 10px 4px; border-bottom: 1px solid var(--line); }
+  .titem:last-child { border-bottom: 0; }
+  .titem .h { display: flex; gap: 10px; align-items: baseline; }
+  .titem .head { flex: 1; font-weight: 500; }
+  .titem .when { color: var(--faint); font: 11px var(--mono); white-space: nowrap; }
+  .titem .read { color: var(--dim); font-size: 12.5px; margin-top: 3px; }
+  .tag { font: 10.5px var(--mono); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--dim); }
+  .flag { font: 10.5px var(--mono); padding: 1px 6px; border-radius: 4px; }
+  .flag.supported { color: var(--green); border: 1px solid #234030; }
+  .flag.not { color: var(--amber); border: 1px solid #4a3f20; }
+  .flag.thin { color: var(--faint); border: 1px solid var(--line); }
+
+  /* ANALYZE */
+  textarea, input[type=text] {
+    width: 100%; background: var(--panel2); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 7px; padding: 9px 11px; font: 13.5px/1.5 inherit; resize: vertical;
+  }
+  textarea:focus, input:focus { outline: none; border-color: var(--blue); }
+  button {
+    background: var(--panel2); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 7px; padding: 7px 13px; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--blue); }
+  button.primary { background: #1c3350; border-color: #2f5686; color: #cfe2fb; }
+  .row { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-top: 9px; }
+  .card { margin-top: 14px; }
+  .card h3 { font-size: 13px; margin: 16px 0 6px; color: var(--ink); }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+  .kv .k { color: var(--faint); }
+  .big { font: 22px var(--mono); color: var(--orange); }
+  .muted { color: var(--dim); }
+  .caveat { color: var(--faint); font-size: 12px; font-style: italic; }
+  table.analogs { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 4px; }
+  table.analogs td, table.analogs th { text-align: left; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.analogs th { color: var(--faint); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+  .num { font-family: var(--mono); text-align: right; }
+  .pill { display: inline-block; font: 11px var(--mono); padding: 1px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--dim); }
+
+  /* NOTES */
+  #notes { min-height: 300px; font-family: var(--mono); font-size: 13px; }
+  .savestate { color: var(--faint); font: 11px var(--mono); }
+
+  /* HISTORY */
+  .results { max-height: 300px; overflow-y: auto; margin-top: 10px; }
+  .ritem { padding: 7px 4px; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; gap: 10px; align-items: baseline; }
+  .ritem:hover { background: var(--panel2); }
+  .ritem .rdate { font: 11px var(--mono); color: var(--faint); white-space: nowrap; }
+  .ritem .rtitle { flex: 1; }
+  #eventDetail { margin-top: 12px; padding: 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; display: none; }
+  .empty { color: var(--faint); padding: 10px 2px; }
+  .spin { color: var(--faint); }
+  .disc { color: var(--faint); font-size: 11.5px; margin-top: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ripple Engine · Workbench</h1>
+  <span class="sub" id="dayLabel">loading…</span>
+  <span style="flex:1"></span>
+  <span class="chip" id="ampChip">amplifier —</span>
+</header>
+
+<main>
+  <!-- 1. TODAY -->
+  <section class="panel">
+    <h2>Today
+      <span class="meta" id="todayMeta"></span>
+      <span style="flex:1"></span>
+      <button onclick="loadToday(true)" style="padding:3px 9px;font-size:11px">refresh</button>
+    </h2>
+    <div class="body">
+      <div class="today-list" id="todayList"><div class="spin">loading today…</div></div>
+      <div class="disc" id="todayNote"></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <!-- 2. ANALYZE -->
+    <section class="panel">
+      <h2>Analyze <span class="meta">paste any headline, paragraph, or URL</span></h2>
+      <div class="body">
+        <textarea id="analyzeInput" rows="3" placeholder="e.g. Iran seizes an oil tanker in the Strait of Hormuz amid rising tensions"></textarea>
+        <div class="row">
+          <button class="primary" onclick="runAnalyze()">Analyze</button>
+          <span class="spin" id="analyzeSpin"></span>
+        </div>
+        <div class="card" id="cardOut"></div>
+      </div>
+    </section>
+
+    <!-- 3. NOTES -->
+    <section class="panel">
+      <h2>Notes <span class="meta">your take, beside the numbers</span>
+        <span style="flex:1"></span>
+        <span class="savestate" id="saveState"></span>
+      </h2>
+      <div class="body">
+        <textarea id="notes" placeholder="Write your analysis here. Use “insert quant summary” to drop the current card's numbers in as a quotable block — your writing always keeps the receipts."></textarea>
+        <div class="row">
+          <button onclick="insertQuant()">↳ insert quant summary</button>
+          <button class="primary" onclick="exportDraft()">export draft →</button>
+          <span class="spin" id="exportState"></span>
+        </div>
+        <div class="disc" id="exportPath"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 4. HISTORY -->
+  <section class="panel">
+    <h2>History <span class="meta">search the coded corpus — your reference shelf</span></h2>
+    <div class="body">
+      <input type="text" id="histQuery" placeholder="entity, type, date, or words in the title — e.g. hormuz, opec_decision, 2019">
+      <div class="results" id="histResults"></div>
+      <div id="eventDetail"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+"use strict";
+// ---- tiny helpers ----------------------------------------------------------
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = (v) => (v == null ? "n/a" : (v >= 0 ? "" : "") + Number(v).toFixed(1) + "%");
+async function getJSON(url) { const r = await fetch(url); return r.json(); }
+async function postJSON(url, body) {
+  const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body) });
+  return r.json();
+}
+
+// currentCard holds the last ANALYZE result (for "insert quant summary").
+// referencedEvents accumulates every corpus event_id Joe pulls in, so export can cite them all.
+let currentCard = null;
+const referencedEvents = new Set();
+
+// ---- 1. TODAY --------------------------------------------------------------
+async function loadToday(force) {
+  const list = $("todayList");
+  if (force) list.innerHTML = '<div class="spin">refreshing…</div>';
+  const d = await getJSON("/wb_today?limit=40");
+  // header: day + amplifier
+  $("dayLabel").textContent = d.day ? ("data day: " + d.day) : "no watcher data yet";
+  const amp = d.amplifier || {};
+  const chip = $("ampChip");
+  const st = (amp.state || "?");
+  chip.textContent = "H1/VIX amplifier: " + st;
+  chip.className = "chip " + (st === "ON" ? "on" : st === "OFF" ? "off" : "");
+  $("todayMeta").textContent = d.day
+    ? `${d.items.length} shown · ${d.n_classified} classified of ${d.n_total} items`
+    : "";
+  $("todayNote").textContent = d.note || "";
+  if (!d.items || !d.items.length) {
+    list.innerHTML = '<div class="empty">No classified items for the latest day. '
+      + '(The watcher surfaces attention; only items matching an event type carry a read.)</div>';
+    return;
+  }
+  list.innerHTML = d.items.map(it => {
+    const br = it.base_rate, an = it.closest_analog;
+    const fcls = it.flag === "supported" ? "supported" : it.flag === "thin data" ? "thin" : "not";
+    let read = "";
+    if (br) read += `base rate |CAR+20| <b>${br.mean_abs_car20_pct}%</b> (n=${br.n}, range [${br.range_pct[0]}, ${br.range_pct[1]}]%)`;
+    if (an) read += `${br ? " · " : ""}nearest: ${esc(an.date)} ${an.abs_car20_pct != null ? "(|CAR+20| " + an.abs_car20_pct.toFixed(1) + "%)" : ""} ${esc(an.title)}`;
+    return `<div class="titem">
+      <div class="h">
+        <span class="head">${esc(it.headline)}</span>
+        <span class="when">${esc(it.when)}</span>
+      </div>
+      <div class="read">
+        <span class="tag">${esc(it.type)}</span>
+        <span class="flag ${fcls}">${esc(it.flag)}</span>
+        ${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.source)}↗</a>` : esc(it.source)}
+        &nbsp; ${read}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ---- 2. ANALYZE ------------------------------------------------------------
+async function runAnalyze() {
+  const text = $("analyzeInput").value.trim();
+  if (!text) return;
+  $("analyzeSpin").textContent = "analyzing…";
+  $("cardOut").innerHTML = "";
+  const card = await postJSON("/wb_analyze", { text });
+  $("analyzeSpin").textContent = "";
+  if (card.error) { $("cardOut").innerHTML = `<div class="empty">${esc(card.error)}</div>`; return; }
+  currentCard = card;
+  // any analogue in the card is a real corpus event -> available to cite
+  (card.nearest_verified_analogs || []).forEach(a => referencedEvents.add(a.event_id));
+  renderCard(card);
+}
+
+function renderCard(c) {
+  const ex = c.extracted || {};
+  const em = c.expected_magnitude;
+  let h = `<div class="kv">
+      <span class="k">type</span><span>${esc(ex.event_type || "UNCLASSIFIED")}</span>
+      <span class="k">entities</span><span class="muted">${(ex.entities || []).map(esc).join(", ") || "none matched"}</span>
+    </div>`;
+
+  if (em) {
+    const br = em.base_rate, amp = em.current_amplifier || {};
+    const ampcls = amp.state === "ON" ? "on" : amp.state === "OFF" ? "off" : "";
+    h += `<h3>Expected magnitude — ${esc(em.event_class)}</h3>
+      <div class="big">${br.mean_abs_car20_pct}%</div>
+      <div class="muted">mean |CAR+20| in Brent · n=${br.n} · range [${br.range_pct[0]}, ${br.range_pct[1]}]% · IQR [${br.iqr_pct[0]}, ${br.iqr_pct[1]}]%</div>
+      <div class="row"><span class="chip ${ampcls}">${esc(amp.registered_amplifier || "H1")}: ${esc(amp.state || "?")}</span>
+        <span class="muted">${esc(amp.note || "")}</span></div>`;
+    if (em.tradeable_terms) h += `<div class="muted" style="margin-top:6px">${esc(em.tradeable_terms)}</div>`;
+    h += `<div class="caveat">${esc(em.caveat)}</div>`;
+  } else {
+    h += `<h3>Expected magnitude</h3><div class="muted">n/a — event type not classified from the vocab.</div>`;
+  }
+
+  const ana = c.nearest_verified_analogs || [];
+  h += `<h3>Nearest verified analogues <span class="pill">real corpus events only</span></h3>`;
+  if (ana.length) {
+    h += `<table class="analogs"><tr><th>date</th><th>type</th><th class="num">|CAR+20|</th><th>headline</th><th>src</th></tr>`
+      + ana.map(a => `<tr>
+          <td class="num">${esc(a.date)}</td>
+          <td>${esc(a.type)}</td>
+          <td class="num">${a.abs_car20_pct != null ? a.abs_car20_pct.toFixed(1) + "%" : "n/a"}</td>
+          <td>${esc((a.title || "").slice(0, 60))}</td>
+          <td>${a.source_url ? `<a href="${esc(a.source_url)}" target="_blank" rel="noopener">↗</a>` : ""}</td>
+        </tr>`).join("")
+      + `</table>`;
+  } else {
+    h += `<div class="muted">(none — no corpus event shares this type/entities)</div>`;
+  }
+
+  const bg = c.background_reference || {};
+  h += `<div class="disc">background: ${bg.n_nearby || 0} nearby reference-tier events [${esc((bg.label || "").slice(0, 60))}]</div>`;
+  h += `<div class="caveat" style="margin-top:8px">${(c.caveats || []).map(esc).join(" · ")}</div>`;
+  h += `<div class="disc">latency ${c.latency_ms}ms · deterministic extraction, no LLM, no fabrication</div>`;
+  $("cardOut").innerHTML = h;
+}
+
+// ---- 3. NOTES --------------------------------------------------------------
+let saveTimer = null;
+async function loadNote() {
+  const d = await getJSON("/wb_note");
+  $("notes").value = d.text || "";
+}
+function scheduleSave() {
+  $("saveState").textContent = "editing…";
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    await postJSON("/wb_note", { text: $("notes").value });
+    const t = new Date().toLocaleTimeString();
+    $("saveState").textContent = "saved " + t;
+  }, 700);
+}
+function insertQuant() {
+  if (!currentCard) { $("saveState").textContent = "analyze something first"; return; }
+  const c = currentCard, em = c.expected_magnitude, ex = c.extracted || {};
+  const ana = (c.nearest_verified_analogs || [])[0];
+  let block = `\n> **Engine read — ${ex.event_type || "unclassified"}**\n`;
+  if (em) {
+    const br = em.base_rate, amp = em.current_amplifier || {};
+    block += `> Base-rate |CAR+20| in Brent: **${br.mean_abs_car20_pct}%** (n=${br.n}, range [${br.range_pct[0]}, ${br.range_pct[1]}]%).\n`;
+    block += `> Amplifier ${amp.registered_amplifier || "H1"}: **${amp.state || "?"}**${amp.vix_pct != null ? ` (VIX pct ${amp.vix_pct} vs median ${amp.event_median})` : ""}.\n`;
+  }
+  if (ana) block += `> Nearest verified analogue: ${ana.date} — ${ana.title}${ana.abs_car20_pct != null ? ` (|CAR+20| ${ana.abs_car20_pct.toFixed(1)}%)` : ""}.\n`;
+  block += `> _Expected magnitude, not an occurrence probability. Real corpus analogues only._\n`;
+  const ta = $("notes");
+  const pos = ta.selectionStart || ta.value.length;
+  ta.value = ta.value.slice(0, pos) + block + ta.value.slice(pos);
+  (c.nearest_verified_analogs || []).forEach(a => referencedEvents.add(a.event_id));
+  scheduleSave();
+}
+async function exportDraft() {
+  $("exportState").textContent = "exporting…";
+  await postJSON("/wb_note", { text: $("notes").value });   // make sure the draft is saved first
+  const d = await postJSON("/wb_export", { text: $("notes").value, events: Array.from(referencedEvents) });
+  $("exportState").textContent = "";
+  if (d.ok) $("exportPath").innerHTML = `exported → <code>${esc(d.file)}</code> (${referencedEvents.size} source${referencedEvents.size === 1 ? "" : "s"} cited)`;
+  else $("exportPath").textContent = "export failed";
+}
+
+// ---- 4. HISTORY ------------------------------------------------------------
+let histTimer = null;
+function scheduleSearch() { clearTimeout(histTimer); histTimer = setTimeout(searchHistory, 250); }
+async function searchHistory() {
+  const q = $("histQuery").value.trim();
+  const rows = await getJSON("/wb_history?q=" + encodeURIComponent(q) + "&limit=50");
+  const box = $("histResults");
+  if (!rows.length) { box.innerHTML = '<div class="empty">no matching corpus events</div>'; return; }
+  box.innerHTML = rows.map(r => `<div class="ritem" onclick="openEvent('${esc(r.event_id)}')">
+      <span class="rdate">${esc(r.date)}</span>
+      <span class="tag">${esc(r.type)}</span>
+      <span class="rtitle">${esc(r.title)}</span>
+    </div>`).join("");
+}
+async function openEvent(id) {
+  const e = await getJSON("/wb_event?id=" + encodeURIComponent(id));
+  const box = $("eventDetail");
+  box.style.display = "block";
+  if (e.error) { box.innerHTML = `<div class="empty">${esc(e.error)}</div>`; return; }
+  referencedEvents.add(e.event_id);                          // viewed = available to cite
+  const cars = e.cars_pct || {};
+  box.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:baseline">
+      <b>${esc(e.title)}</b><span style="flex:1"></span>
+      <span class="rdate">${esc(e.date)}${e.date_precision ? " (" + esc(e.date_precision) + ")" : ""}</span>
+    </div>
+    <div class="row"><span class="tag">${esc(e.type)}</span>
+      <span class="muted">severity ${e.severity ?? "?"} · confidence ${esc(e.confidence || "?")} · surprise ${e.surprise ?? "?"}</span></div>
+    ${e.description ? `<div class="muted" style="margin:6px 0">${esc(e.description)}</div>` : ""}
+    <div class="kv" style="margin-top:6px">
+      <span class="k">CARs in Brent</span>
+      <span class="num">+1 ${pct(cars["CAR+1"])} · +5 ${pct(cars["CAR+5"])} · +10 ${pct(cars["CAR+10"])} · +20 ${pct(cars["CAR+20"])}</span>
+      <span class="k">entities</span><span class="muted">${(e.entities || []).map(x => esc(x.entity_id) + (x.role ? " (" + esc(x.role) + ")" : "")).join(", ") || "—"}</span>
+      <span class="k">source</span><span><a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a></span>
+    </div>
+    <div class="row"><button onclick="citeEvent('${esc(e.event_id)}')">↳ cite in notes</button>
+      <span class="disc">event_id ${esc(e.event_id)}</span></div>`;
+}
+function citeEvent(id) {
+  referencedEvents.add(id);
+  const ta = $("notes");
+  ta.value += `\n[see corpus event ${id}]`;
+  scheduleSave();
+  $("saveState").textContent = "cited " + id;
+}
+
+// ---- wire up + initial load ------------------------------------------------
+$("analyzeInput").addEventListener("keydown", e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === "Enter") runAnalyze();
+});
+$("notes").addEventListener("input", scheduleSave);
+$("histQuery").addEventListener("input", scheduleSearch);
+loadToday();
+loadNote();
+searchHistory();
+</script>
+</body>
+</html>

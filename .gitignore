@@ -63,3 +63,6 @@ data/calibration.json
 # V-Q1 quarterly frozen DB snapshots: large derived DB copies. data/vintage_check.txt IS the
 # committed receipt; the .db.gz vintages themselves are not source.
 data/vintages/
+# Workbench notes: Joe's private analysis drafts + exports (local writing pane).
+# Personal, never source -- the tool writes them; they never belong in the repo.
+data/notes/

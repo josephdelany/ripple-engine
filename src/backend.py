@@ -1848,8 +1848,254 @@ def chart_alert_timeline():
                                    "alerts / day", "date")}
 
 
+# ============================================================================
+# THE WORKBENCH -- Joe's daily analyst front door (TASK_BRIEF_PLATFORM.md).
+# One page at /workbench + a handful of /wb_* JSON endpoints. Every endpoint is
+# a THIN wrapper over existing engine logic (triage / event_study / engine_read /
+# the corpus): it REUSES, never recomputes the study, and makes NO new analysis
+# claim. The engine's honesty rules ride on every card -- real analogues only,
+# base rates with n + range, expected magnitude (never an occurrence probability),
+# an explicit narrative/data flag. Local only; writes drafts to data/notes/.
+# ============================================================================
+
+from pydantic import BaseModel
+
+WORKBENCH_HTML = ROOT / "src" / "workbench.html"
+NOTES_DIR = DATA / "notes"
+CURRENT_NOTE = NOTES_DIR / "current.md"
+
+# TODAY is recomputed only when the watcher's queue actually changes (keyed on the
+# file's mtime), so opening the page is instant even though each row carries a read.
+_today_cache = {"mtime": None, "data": None}
+
+# Data-sufficiency thresholds for the one-line read's flag. Kept explicit so the
+# label is auditable -- it reports whether real precedent exists, nothing more.
+_FLAG_MIN_N = 5
+
+
+def _narrative_flag(etype, br, ana):
+    """The TODAY read's honest flag. NOT a new statistical claim -- purely a
+    precedent/data-sufficiency label over REAL corpus events:
+      'thin data'      -- unclassified, no base rate, small n (<5), or no analogues
+      'supported'      -- classified, n>=5, and real historical precedent exists
+      'not supported'  -- classified with a base rate, but no analogue precedent found
+    """
+    if not etype or not br or br.get("n", 0) < _FLAG_MIN_N:
+        return "thin data"
+    return "supported" if ana else "not supported"
+
+
+def _today_rows():
+    """(day, rows) for the most recent CALENDAR DAY present in the watcher queue,
+    newest-first. The pipeline may be older than 'today' (laptop asleep) -- we show
+    the freshest day the loop actually produced, labelled, rather than a fake empty."""
+    import csv as _csv
+    p = DATA / "alert_queue.csv"
+    if not p.exists():
+        return None, []
+    rows = list(_csv.DictReader(open(p, newline="", encoding="utf-8")))
+    days = sorted({(r.get("timestamp_utc") or "")[:10] for r in rows if r.get("timestamp_utc")})
+    if not days:
+        return None, []
+    day = days[-1]
+    todays = [r for r in rows if (r.get("timestamp_utc") or "")[:10] == day]
+    todays.reverse()                                   # file is oldest-first -> newest-first
+    return day, todays
+
+
+@app.get("/wb_today")
+def wb_today(limit: int = 40):
+    """TODAY panel: the freshest day's watcher items that CLASSIFY to an event type,
+    newest first, each with the engine's one-line read (nearest verified analogue +
+    base-rate |CAR+20| + range + narrative flag). Reuses triage; returns loaded ONCE
+    and shared across rows; the whole result is cached until the queue file changes."""
+    import triage as _T
+    p = DATA / "alert_queue.csv"
+    mtime = p.stat().st_mtime if p.exists() else None
+    if _today_cache["mtime"] == mtime and _today_cache["data"] is not None:
+        c = _today_cache["data"]
+        return {**c, "items": c["items"][:limit]}
+
+    day, todays = _today_rows()
+    if not todays:
+        out = {"day": None, "n_total": 0, "n_classified": 0, "amplifier": _T.amplifier(),
+               "items": [], "note": "no watcher items yet -- run src/watcher.py (or the daily loop)."}
+        _today_cache.update(mtime=mtime, data=out)
+        return out
+
+    conn = sqlite3.connect(DB)
+    ret = load_returns(conn)                           # loaded once, reused for every row
+    br_cache, items, n_class = {}, [], 0
+    for r in todays:
+        head = r.get("headline") or ""
+        etype = _T.classify_type(head)
+        if not etype:                                  # only items that have a real read
+            continue
+        n_class += 1
+        if len(items) >= 200:                          # hard compute cap per refresh
+            continue
+        ents, _ = _T.extract(conn, head)
+        if etype not in br_cache:
+            br_cache[etype] = _T.base_rate(conn, ret, etype)
+        br = br_cache[etype]
+        ana = _T.analogs(conn, ret, ents, etype, k=1)
+        top = ana[0] if ana else None
+        items.append({
+            "when": (r.get("timestamp_utc") or "")[:16],
+            "source": r.get("source", ""),
+            "headline": head[:160],
+            "url": r.get("url", ""),
+            "type": etype,
+            "closest_analog": (None if not top else {
+                "event_id": top["event_id"], "date": top["date"],
+                "title": (top["title"] or "")[:90], "abs_car20_pct": top["abs_car20_pct"],
+                "source_url": top["source_url"]}),
+            "base_rate": (None if not br else {
+                "mean_abs_car20_pct": br["mean_abs_car20_pct"],
+                "range_pct": br["range_pct"], "n": br["n"]}),
+            "flag": _narrative_flag(etype, br, ana),
+        })
+    conn.close()
+    out = {"day": day, "n_total": len(todays), "n_classified": n_class,
+           "amplifier": _T.amplifier(), "items": items,
+           "note": "reuses triage/event_study/engine_read -- the study is not recomputed; "
+                   "only items that classify to an event type (and so have a read) are shown."}
+    _today_cache.update(mtime=mtime, data=out)
+    return {**out, "items": out["items"][:limit]}
+
+
+class _AnalyzeIn(BaseModel):
+    text: str
+
+
+@app.post("/wb_analyze")
+def wb_analyze(body: _AnalyzeIn):
+    """ANALYZE panel: paste any headline/paragraph/URL -> the FULL triage card
+    (event type, nearest VERIFIED analogues with dates + measured CARs, base rate +
+    range + n, live amplifier state, honesty caveats). Verbatim src/triage.py -- the
+    same ~100ms path the CLI uses. No new logic, no fabrication."""
+    import triage as _T
+    text = (body.text or "").strip()
+    if not text:
+        return {"error": "empty input -- paste a headline or paragraph"}
+    return _T.triage(text)
+
+
+@app.get("/wb_history")
+def wb_history(q: str = "", limit: int = 50):
+    """HISTORY panel: search the coded corpus by entity / type / date / title text.
+    REAL corpus events only -- never an invented row. Empty query = most recent events."""
+    conn = sqlite3.connect(DB)
+    q = (q or "").strip()
+    if q:
+        like = f"%{q}%"
+        rows = conn.execute(
+            "SELECT DISTINCT e.event_id, e.event_date, e.type, e.title, e.severity, "
+            "e.confidence, e.source_url FROM events e "
+            "LEFT JOIN event_entities ee ON ee.event_id = e.event_id "
+            "LEFT JOIN entities en ON en.entity_id = ee.entity_id "
+            "WHERE e.title LIKE ? OR e.type LIKE ? OR e.event_id LIKE ? OR e.event_date LIKE ? "
+            "OR en.name LIKE ? OR en.entity_id LIKE ? "
+            "ORDER BY e.event_date DESC LIMIT ?",
+            (like, like, like, like, like, like, limit)).fetchall()
+    else:
+        rows = conn.execute(
+            "SELECT event_id, event_date, type, title, severity, confidence, source_url "
+            "FROM events ORDER BY event_date DESC LIMIT ?", (limit,)).fetchall()
+    conn.close()
+    return [{"event_id": r[0], "date": r[1], "type": r[2], "title": r[3],
+             "severity": r[4], "confidence": r[5], "source_url": r[6]} for r in rows]
+
+
+@app.get("/wb_event")
+def wb_event(id: str):
+    """One corpus event's full record: fields + entities + MEASURED CARs (+1/+5/+10/+20
+    in Brent, via event_study -- the same path the study uses) + its source."""
+    conn = sqlite3.connect(DB)
+    row = conn.execute(
+        "SELECT event_id, event_date, type, title, description, severity, confidence, "
+        "source_url, date_precision, surprise FROM events WHERE event_id=?", (id,)).fetchone()
+    if not row:
+        conn.close()
+        return {"error": f"no event {id}"}
+    ents = [{"entity_id": a, "role": b} for a, b in conn.execute(
+        "SELECT entity_id, role FROM event_entities WHERE event_id=?", (id,))]
+    ret = load_returns(conn)
+    conn.close()
+    car = car_for_event(ret, row[1])
+
+    def carh(h):
+        return round(float(car[PRE + h]) * 100, 1) if car is not None else None
+
+    return {"event_id": row[0], "date": row[1], "type": row[2], "title": row[3],
+            "description": row[4], "severity": row[5], "confidence": row[6],
+            "source_url": row[7], "date_precision": row[8], "surprise": row[9],
+            "entities": ents,
+            "cars_pct": {"CAR+1": carh(1), "CAR+5": carh(5), "CAR+10": carh(10), "CAR+20": carh(20)}}
+
+
+class _NoteIn(BaseModel):
+    text: str
+
+
+@app.get("/wb_note")
+def wb_note_load():
+    """Load the working draft (data/notes/current.md) -- survives restarts, gitignored."""
+    return {"text": CURRENT_NOTE.read_text() if CURRENT_NOTE.exists() else ""}
+
+
+@app.post("/wb_note")
+def wb_note_save(body: _NoteIn):
+    """Autosave the working draft to data/notes/current.md (local, gitignored)."""
+    NOTES_DIR.mkdir(parents=True, exist_ok=True)
+    CURRENT_NOTE.write_text(body.text or "")
+    return {"ok": True, "bytes": len(body.text or "")}
+
+
+class _ExportIn(BaseModel):
+    text: str
+    events: list[str] = []
+
+
+@app.post("/wb_export")
+def wb_export(body: _ExportIn):
+    """Export a Substack-ready draft: Joe's text + an auto-appended SOURCES section
+    citing every corpus event referenced (real event_id + date + source_url only).
+    Writes data/notes/draft_<UTC timestamp>.md and returns the path + the markdown."""
+    from datetime import datetime, timezone
+    NOTES_DIR.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    lines = [(body.text or "").rstrip()]
+    ids = list(dict.fromkeys(body.events or []))       # de-dup, preserve order
+    if ids:
+        conn = sqlite3.connect(DB)
+        cites = []
+        for eid in ids:
+            r = conn.execute("SELECT event_id, event_date, title, source_url FROM events "
+                             "WHERE event_id=?", (eid,)).fetchone()
+            if r:
+                cites.append(f"- **{r[0]}** ({r[1]}) — {r[2]} — <{r[3]}>")
+        conn.close()
+        if cites:
+            lines += ["", "---", "", "## Sources", ""] + cites
+    md = "\n".join(lines) + "\n"
+    out = NOTES_DIR / f"draft_{ts}.md"
+    out.write_text(md)
+    return {"ok": True, "file": str(out.relative_to(ROOT)), "markdown": md}
+
+
+@app.get("/workbench", response_class=HTMLResponse)
+def workbench_page():
+    """Joe's daily workbench -- one self-contained page (src/workbench.html) that pulls
+    everything from the /wb_* endpoints above. Open http://127.0.0.1:5050/workbench."""
+    if not WORKBENCH_HTML.exists():
+        return HTMLResponse("<h1>workbench.html is missing</h1>", status_code=500)
+    return HTMLResponse(WORKBENCH_HTML.read_text())
+
+
 if __name__ == "__main__":
     print(f"Ripple Engine backend -> http://127.0.0.1:{PORT}")
     print("In OpenBB Workspace: Apps -> Connect backend -> "
           f"URL http://127.0.0.1:{PORT}")
+    print(f"Workbench (daily analyst front door): http://127.0.0.1:{PORT}/workbench")
     uvicorn.run(app, host="127.0.0.1", port=PORT)
