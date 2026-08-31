@@ -1868,21 +1868,9 @@ CURRENT_NOTE = NOTES_DIR / "current.md"
 # file's mtime), so opening the page is instant even though each row carries a read.
 _today_cache = {"mtime": None, "data": None}
 
-# Data-sufficiency thresholds for the one-line read's flag. Kept explicit so the
-# label is auditable -- it reports whether real precedent exists, nothing more.
+# Minimum base-rate n for the read's flag to claim precedent (below this = 'thin data').
+# Kept explicit so the label is auditable -- it reports data sufficiency, nothing more.
 _FLAG_MIN_N = 5
-
-
-def _narrative_flag(etype, br, ana):
-    """The TODAY read's honest flag. NOT a new statistical claim -- purely a
-    precedent/data-sufficiency label over REAL corpus events:
-      'thin data'      -- unclassified, no base rate, small n (<5), or no analogues
-      'supported'      -- classified, n>=5, and real historical precedent exists
-      'not supported'  -- classified with a base rate, but no analogue precedent found
-    """
-    if not etype or not br or br.get("n", 0) < _FLAG_MIN_N:
-        return "thin data"
-    return "supported" if ana else "not supported"
 
 
 def _today_rows():
@@ -1925,9 +1913,15 @@ def wb_today(limit: int = 40):
 
     conn = sqlite3.connect(DB)
     ret = load_returns(conn)                           # loaded once, reused for every row
-    br_cache, items, n_class = {}, [], 0
+    br_cache, items, n_class, n_noise = {}, [], 0, 0
     for r in todays:
         head = r.get("headline") or ""
+        # GDELT '[GDELT] X / Y: ... signal' rows are machine event-codes, not headlines --
+        # attention pings that swamp the real news (261 of 368 on a typical day). Hide them
+        # from the analyst feed (counted below, never silently dropped); real RSS headlines stay.
+        if head.startswith("[GDELT]"):
+            n_noise += 1
+            continue
         etype = _T.classify_type(head)
         if not etype:                                  # only items that have a real read
             continue
@@ -1940,12 +1934,28 @@ def wb_today(limit: int = 40):
         br = br_cache[etype]
         ana = _T.analogs(conn, ret, ents, etype, k=1)
         top = ana[0] if ana else None
+        # Honest match quality: does the nearest analogue actually share an ENTITY with
+        # this item, or is it only the same event TYPE? A Morocco scuffle matched to
+        # "US-Israel strike Iran" purely because both are conflict_escalation is a
+        # type-only match -- weak precedent, and it must NOT read as "supported".
+        overlap = 0
+        if top:
+            tents = {x[0] for x in conn.execute(
+                "SELECT entity_id FROM event_entities WHERE event_id=?", (top["event_id"],))}
+            overlap = len(set(ents) & tents)
+        if not br or br.get("n", 0) < _FLAG_MIN_N or not top:
+            flag = "thin data"
+        elif overlap > 0:
+            flag = "supported"
+        else:
+            flag = "not supported"
         items.append({
             "when": (r.get("timestamp_utc") or "")[:16],
             "source": r.get("source", ""),
             "headline": head[:160],
             "url": r.get("url", ""),
             "type": etype,
+            "match": "entity+type" if overlap else "type-only",
             "closest_analog": (None if not top else {
                 "event_id": top["event_id"], "date": top["date"],
                 "title": (top["title"] or "")[:90], "abs_car20_pct": top["abs_car20_pct"],
@@ -1953,13 +1963,22 @@ def wb_today(limit: int = 40):
             "base_rate": (None if not br else {
                 "mean_abs_car20_pct": br["mean_abs_car20_pct"],
                 "range_pct": br["range_pct"], "n": br["n"]}),
-            "flag": _narrative_flag(etype, br, ana),
+            "flag": flag,
         })
     conn.close()
-    out = {"day": day, "n_total": len(todays), "n_classified": n_class,
+    # Rank by MATERIALITY, not raw recency: entity-specific precedent first, then by the
+    # event class's expected |CAR+20|, then newest. Opening the page shows the items most
+    # worth Joe's attention -- not the loudest GDELT keyword ping. (when is kept + shown.)
+    items.sort(key=lambda it: (
+        1 if it["flag"] == "supported" else 0,
+        (it["base_rate"] or {}).get("mean_abs_car20_pct", 0),
+        it["when"]), reverse=True)
+    out = {"day": day, "n_total": len(todays), "n_classified": n_class, "n_hidden_noise": n_noise,
            "amplifier": _T.amplifier(), "items": items,
-           "note": "reuses triage/event_study/engine_read -- the study is not recomputed; "
-                   "only items that classify to an event type (and so have a read) are shown."}
+           "note": f"reuses triage/event_study/engine_read -- the study is not recomputed. {n_noise} "
+                   "GDELT machine-signal pings hidden; showing real headlines that classify to an event "
+                   "type, ranked by materiality (entity-specific precedent, then expected |CAR+20|, then "
+                   "newest). 'type-only' = same event class but no shared entity (weak precedent)."}
     _today_cache.update(mtime=mtime, data=out)
     return {**out, "items": out["items"][:limit]}
 

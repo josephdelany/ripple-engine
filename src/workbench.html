@@ -32,7 +32,7 @@
   a:hover { text-decoration: underline; }
   header {
     display: flex; align-items: baseline; gap: 14px; padding: 14px 22px;
-    border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 5;
+    border-bottom: 1px solid var(--line); background: var(--bg);
   }
   header h1 { font-size: 16px; margin: 0; font-weight: 600; letter-spacing: .2px; }
   header .sub { color: var(--dim); font-size: 12.5px; }
@@ -198,42 +198,47 @@ const referencedEvents = new Set();
 async function loadToday(force) {
   const list = $("todayList");
   if (force) list.innerHTML = '<div class="spin">refreshing…</div>';
-  const d = await getJSON("/wb_today?limit=40");
-  // header: day + amplifier
-  $("dayLabel").textContent = d.day ? ("data day: " + d.day) : "no watcher data yet";
-  const amp = d.amplifier || {};
-  const chip = $("ampChip");
-  const st = (amp.state || "?");
-  chip.textContent = "H1/VIX amplifier: " + st;
-  chip.className = "chip " + (st === "ON" ? "on" : st === "OFF" ? "off" : "");
-  $("todayMeta").textContent = d.day
-    ? `${d.items.length} shown · ${d.n_classified} classified of ${d.n_total} items`
-    : "";
-  $("todayNote").textContent = d.note || "";
-  if (!d.items || !d.items.length) {
-    list.innerHTML = '<div class="empty">No classified items for the latest day. '
-      + '(The watcher surfaces attention; only items matching an event type carry a read.)</div>';
-    return;
+  try {
+    const d = await getJSON("/wb_today?limit=40");
+    $("dayLabel").textContent = d.day ? ("data day: " + d.day) : "no watcher data yet";
+    const amp = d.amplifier || {};
+    const chip = $("ampChip");
+    const st = (amp.state || "?");
+    chip.textContent = "H1/VIX amplifier: " + st;
+    chip.className = "chip " + (st === "ON" ? "on" : st === "OFF" ? "off" : "");
+    const items = d.items || [];
+    $("todayMeta").textContent = d.day
+      ? `${items.length} shown · ${d.n_classified} classified of ${d.n_total} · ranked by materiality`
+      : "";
+    $("todayNote").textContent = d.note || "";
+    if (!items.length) {
+      list.innerHTML = '<div class="empty">No classified items for the latest day. '
+        + '(The watcher surfaces attention; only items matching an event type carry a read.)</div>';
+      return;
+    }
+    list.innerHTML = items.map(it => {
+      const br = it.base_rate, an = it.closest_analog;
+      const fcls = it.flag === "supported" ? "supported" : it.flag === "thin data" ? "thin" : "not";
+      let read = "";
+      if (br) read += `base-rate |CAR+20| <b>${br.mean_abs_car20_pct}%</b> <span class="muted">(n=${br.n}, range ${br.range_pct[0]}–${br.range_pct[1]}%)</span>`;
+      if (an) read += `${br ? " · " : ""}<span class="muted">nearest [${esc(it.match)}]:</span> ${esc(an.date)} ${an.abs_car20_pct != null ? "(" + an.abs_car20_pct.toFixed(1) + "%)" : ""} ${esc(an.title)}`;
+      return `<div class="titem">
+        <div class="h">
+          <span class="head">${esc(it.headline)}</span>
+          <span class="when">${esc(it.when)}</span>
+        </div>
+        <div class="read">
+          <span class="tag">${esc(it.type)}</span>
+          <span class="flag ${fcls}">${esc(it.flag)}</span>
+          ${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.source)}↗</a>` : esc(it.source)}
+          &nbsp; ${read}
+        </div>
+      </div>`;
+    }).join("");
+  } catch (e) {
+    list.innerHTML = `<div class="empty">TODAY failed to load: ${esc(e.message || e)}. `
+      + `Is the backend running? (python3 src/backend.py)</div>`;
   }
-  list.innerHTML = d.items.map(it => {
-    const br = it.base_rate, an = it.closest_analog;
-    const fcls = it.flag === "supported" ? "supported" : it.flag === "thin data" ? "thin" : "not";
-    let read = "";
-    if (br) read += `base rate |CAR+20| <b>${br.mean_abs_car20_pct}%</b> (n=${br.n}, range [${br.range_pct[0]}, ${br.range_pct[1]}]%)`;
-    if (an) read += `${br ? " · " : ""}nearest: ${esc(an.date)} ${an.abs_car20_pct != null ? "(|CAR+20| " + an.abs_car20_pct.toFixed(1) + "%)" : ""} ${esc(an.title)}`;
-    return `<div class="titem">
-      <div class="h">
-        <span class="head">${esc(it.headline)}</span>
-        <span class="when">${esc(it.when)}</span>
-      </div>
-      <div class="read">
-        <span class="tag">${esc(it.type)}</span>
-        <span class="flag ${fcls}">${esc(it.flag)}</span>
-        ${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.source)}↗</a>` : esc(it.source)}
-        &nbsp; ${read}
-      </div>
-    </div>`;
-  }).join("");
 }
 
 // ---- 2. ANALYZE ------------------------------------------------------------
