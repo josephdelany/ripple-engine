@@ -43,7 +43,8 @@ TYPE_RULES = [
                               r"oil field|terminal|facility|set (on )?fire)\b"),
     ("opec_decision",         r"\b(opec|opec\+|quota|production (cut|hike|target)|output (cut|target)|"
                               r"barrels per day|mb/?d|voluntary cut)\b"),
-    ("sanctions",             r"\b(sanction|embargo|price cap|export ban|blacklist|designat|waiver)\b"),
+    ("sanctions",             r"\b(sanctions?|sanctioned|embargo|price cap|export ban|blacklist|"
+                              r"designat|waiver)\b"),
     ("conflict_escalation",   r"\b(invade|invasion|war|coup|mutiny|offensive|escalat|militar|troops|"
                               r"clash|airstrike|rebellion)\b"),
     ("demand_shock",          r"\b(recession|demand|pandemic|lockdown|stimulus|tariff|trade (deal|war)|"
