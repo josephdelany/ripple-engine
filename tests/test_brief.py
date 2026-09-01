@@ -53,12 +53,83 @@ def test_br2_language_is_association_not_causation_and_discloses_limits():
     """No causal verbs in the generated prose; the mandatory disclosures are present."""
     b = _brief()
     prose = (b["bottom_line"] + " " + b["synthesis"]).lower()
-    assert "associated with" in prose
+    assert "association" in prose and "cause" in prose     # the standing honesty framing
     assert not any(v in f" {prose} " for v in CAUSAL_VERBS)
     # selection + confounder disclosures must be present (upper-bound honesty, Kilian confounders)
     disc = b["quant_read"]["disclosures"]
     assert "upper bound" in disc["selection"].lower()
     assert "opec" in disc["confounders"].lower() and "not isolated" in disc["confounders"].lower()
+
+
+def test_br10_unclassified_is_a_clean_gap_with_no_story_read():
+    """An off-topic story yields a documented gap: no quant read, no synthesis, no story-
+    specific watch-items -- it must NOT render a confident read about an unrelated theatre."""
+    b = B.build_brief("Apple unveils new iPhone at its annual event")
+    assert b["quant_read"] is None
+    assert b["synthesis"] == ""
+    assert b["what_would_change"] == []
+    assert "documented gap" in b["bottom_line"].lower()
+    assert "context only" in b["bottom_line"].lower()
+
+
+def test_br11_ordinals_are_correct_never_53th():
+    """The lead sentence must never ship '53th'/'1th'/'2th'."""
+    assert (B._ordinal(1), B._ordinal(2), B._ordinal(3)) == ("1st", "2nd", "3rd")
+    assert (B._ordinal(11), B._ordinal(13), B._ordinal(53)) == ("11th", "13th", "53rd")
+    import re
+    for hl in (HEADLINE, "OPEC+ agrees a surprise output cut"):
+        assert not re.search(r"\b\d*[123]th\b", B.build_brief(hl)["bottom_line"])
+
+
+def test_br12_bluf_carries_no_market_gap_clause():
+    """The market-wide gap is a standing read shown in its own section -- it must NOT be
+    restated in every BLUF as if freshly derived from each story."""
+    for hl in (HEADLINE, "OPEC+ agrees a surprise output cut", "US sanctions Russian oil exports"):
+        bl = B.build_brief(hl)["bottom_line"].lower()
+        assert "pricing the fear" not in bl and "pricing the risk" not in bl
+
+
+def test_br13_type_only_match_is_flagged_and_capped_low():
+    """A classified headline with no recognised entities is a type-only match: flagged in the
+    BLUF and capped at low confidence however large n is."""
+    b = B.build_brief("New sanctions announced today")
+    if b["quant_read"] and not b["story"]["entities"]:
+        assert b["confidence"]["tier"] == "low"
+        assert "type-only" in b["bottom_line"].lower()
+
+
+def test_br14_magnitude_is_disclosed_as_size_not_direction():
+    b = _brief()
+    assert "size, not direction" in b["bottom_line"].lower()
+    d = b["quant_read"]["direction"]
+    assert d["up_pct"] + d["down_pct"] == 100
+
+
+def test_br15_decision_read_present_and_hedged():
+    b = _brief()
+    dr = b["decision_read"].lower()
+    assert "for a decision-maker" in dr and "watch" in dr
+
+
+def test_br16_opec_does_not_borrow_conflict_corroboration():
+    """An OPEC/sanctions story must never inherit a conflict theatre's multi-modal corroboration,
+    even if a shared country is a member of that situation."""
+    b = B.build_brief("Saudi Arabia announces an OPEC+ output cut of 1 million barrels per day")
+    if b["quant_read"]:
+        c = b.get("corroboration")
+        assert not (c and c.get("story_relevant"))        # opec_decision is not a conflict class
+        assert b["confidence"]["tier"] != "moderate"
+
+
+def test_br17_relevant_corroboration_only_for_conflict_classes():
+    """If corroboration is flagged story-relevant, the story must be a conflict-class event and the
+    confidence 'why' must not simultaneously deny it."""
+    b = B.build_brief("Israel strikes military targets inside Iran overnight")
+    c = b.get("corroboration")
+    if c and c.get("story_relevant"):
+        assert b["story"]["event_class"] in {"conflict_escalation", "infrastructure_attack",
+                                             "chokepoint_disruption"}
+        assert "no story-relevant corroboration" not in b["confidence"]["why"]
 
 
 def test_br3_magnitude_not_probability():

@@ -36,21 +36,28 @@ DB = ROOT / "data" / "oil.db"
 ENGINE_READ = ROOT / "data" / "engine_read.json"
 
 # Event-type keyword rules (deterministic classifier; first match by priority wins).
+# Deterministic event-type classifier. Stems are inflection-aware -- a closing \b after a bare
+# stem silently fails on the commonest headline forms ("strikeS", "invadeS", "missileS",
+# "escalatION", "militarY", "clashES"), which is exactly what a live demo pastes. Where a stem
+# should match its family we use \w* (open) or spell the suffixes; where an exact word is right
+# (to avoid "war"->"warehouse") we keep a tight boundary.
 TYPE_RULES = [
-    ("chokepoint_disruption", r"\b(strait|canal|chokepoint|blockade|blocked|transit|hormuz|suez|"
-                              r"bab[- ]el[- ]mandeb|pipeline (halt|closed|shut)|reroute)\b"),
-    ("infrastructure_attack", r"\b(strike|struck|attack|drone|missile|sabotage|explosion|refinery|"
-                              r"oil field|terminal|facility|set (on )?fire)\b"),
-    ("opec_decision",         r"\b(opec|opec\+|quota|production (cut|hike|target)|output (cut|target)|"
-                              r"barrels per day|mb/?d|voluntary cut)\b"),
-    ("sanctions",             r"\b(sanctions?|sanctioned|embargo|price cap|export ban|blacklist|"
-                              r"designat|waiver)\b"),
-    ("conflict_escalation",   r"\b(invade|invasion|war|coup|mutiny|offensive|escalat|militar|troops|"
-                              r"clash|airstrike|rebellion)\b"),
-    ("demand_shock",          r"\b(recession|demand|pandemic|lockdown|stimulus|tariff|trade (deal|war)|"
-                              r"subsidy|gdp|growth outlook)\b"),
-    ("policy_response",       r"\b(spr|strategic (petroleum )?reserve|release|permit|revoke|intervention|"
-                              r"price control)\b"),
+    ("chokepoint_disruption", r"\b(straits?|canals?|chokepoints?|blockad\w*|block(ed|ing)|"
+                              r"transits?|hormuz|suez|bab[- ]el[- ]mandeb|pipelines?|reroute\w*)\b"),
+    ("infrastructure_attack", r"\b(strikes?|struck|attacks?|attacked|drones?|missiles?|sabotag\w*|"
+                              r"explosion\w*|refiner(y|ies)|oil ?fields?|terminals?|facilit(y|ies)|"
+                              r"set (on )?fire)\b"),
+    ("opec_decision",         r"\b(opec\+?|quotas?|production (cut|hike|target)s?|output (cut|target)s?|"
+                              r"barrels? per day|mb/?d|voluntary cuts?)\b"),
+    ("sanctions",             r"\b(sanctions?|sanction(ed|ing)|embargo\w*|price caps?|export bans?|"
+                              r"blacklist\w*|designat\w*|waivers?)\b"),
+    ("conflict_escalation",   r"\b(invad\w*|invasions?|wars?|warfare|coups?|mutin\w*|offensives?|"
+                              r"escalat\w*|militar\w*|troops|clash\w*|air ?strikes?|rebellion\w*|"
+                              r"militants?|insurgen\w*)\b"),
+    ("demand_shock",          r"\b(recession\w*|demand|pandemic\w*|lockdown\w*|stimulus|tariffs?|"
+                              r"trade (deal|war)s?|subsid\w*|gdp|growth outlook)\b"),
+    ("policy_response",       r"\b(spr|strategic (petroleum )?reserves?|releas\w*|permits?|revok\w*|"
+                              r"intervention\w*|price controls?)\b"),
 ]
 
 

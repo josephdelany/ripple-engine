@@ -52,9 +52,11 @@ Run:  python3 src/brief.py "Iran seizes a tanker in the Strait of Hormuz"
 """
 
 import json
+import re
 import sqlite3
 import sys
 import time
+from datetime import date as _date
 from pathlib import Path
 
 import numpy as np
@@ -76,6 +78,12 @@ BASELINE_N = 500       # random ordinary windows for the null distribution of |C
 # shock, not the headline, sets the price).
 CONFOUNDERS = ("global demand, OPEC+ supply decisions, inventories, the US dollar, "
                "and the precautionary risk premium")
+
+# Topical allowlist so a prediction-market panel in an OIL brief can never surface an unrelated
+# sports/entertainment market even if the upstream feed changes.
+_OIL_KEYWORDS = ("oil", "brent", "wti", "crude", "hormuz", "opec", "iran", "russia", "saudi",
+                 "strait", "sanction", "tanker", "gas", "venezuela", "houthi", "bab el",
+                 "petroleum", "barrel", "energy", "pipeline")
 
 # Cross-asset panel for the brief: a curated, legible subset (series -> label, unit).
 # Historical CARs come from the `edges` table (populated by cross_asset.py); live feeds
@@ -103,6 +111,39 @@ def _load_json(name, default=None):
         return default if default is not None else {}
 
 
+_NUM_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+              8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve"}
+
+
+def _num_word(n):
+    """Spell small counts (reads like prose); numerals above twelve."""
+    return _NUM_WORDS.get(n, str(n))
+
+
+def _ordinal(n):
+    """1 -> '1st', 2 -> '2nd', 53 -> '53rd'. Fixes the '53th' tell in the lead sentence."""
+    if n is None:
+        return "n/a"
+    n = int(round(n))
+    if 10 <= n % 100 <= 20:
+        suf = "th"
+    else:
+        suf = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suf}"
+
+
+def _matched_keywords(text, etype):
+    """The vocab terms that DROVE the classification, so a wrong match is visible and
+    challengeable rather than silent (a managing editor must be able to audit the label)."""
+    if not etype:
+        return []
+    low = (text or "").lower()
+    for t, pat in T.TYPE_RULES:
+        if t == etype:
+            return sorted({m.group(0) for m in re.finditer(pat, low)})
+    return []
+
+
 # --------------------------------------------------------------------------- stats
 
 def _abs_car20(ret, date):
@@ -115,7 +156,9 @@ def baseline_abs_car20(ret):
     """The NULL distribution: |CAR+20| of a random ORDINARY 20-day window. This is the
     denominator that turns a naked class number into a LIFT (research R1). Sampled once
     per price series with a fixed seed -> deterministic. Returns a numpy array (%)."""
-    key = (id(ret), len(ret))
+    # Keyed on the series length only -- ret is always the Brent return series, so this is stable
+    # and avoids the id() reuse-after-GC hazard of keying on object identity.
+    key = len(ret)
     if key in _baseline_cache:
         return _baseline_cache[key]
     rng = np.random.default_rng(BOOT_SEED)
@@ -181,12 +224,25 @@ def quant_read(conn, ret, etype):
         return None
     arrs = np.vstack([c for _, c in paths])                 # n x window
     abs20 = np.abs(arrs[:, ES.PRE + 20]) * 100              # |CAR+20| per event (%)
+    signed20 = arrs[:, ES.PRE + 20] * 100                   # signed CAR+20 (%) -- for direction
     mean_path = arrs.mean(axis=0) * 100                     # % CAR path
     se_path = (arrs.std(axis=0, ddof=1) / np.sqrt(n)) * 100 if n > 1 else np.zeros_like(mean_path)
 
     gate = sample_gate(n)
     med = round(float(np.median(abs20)), 2)
     mean = round(float(abs20.mean()), 2)
+
+    # Direction split -- |CAR+20| throws away sign; a reader must be told the move was
+    # magnitude, not a directional call. Report up/down share + the signed median.
+    up_pct = round(float((signed20 > 0).mean() * 100))
+    direction = {"up_pct": up_pct, "down_pct": 100 - up_pct,
+                 "median_signed_pct": round(float(np.median(signed20)), 2)}
+    # The single largest event -- so a range dominated by one outlier is named, not hidden.
+    imax = int(np.argmax(abs20))
+    mx_row = conn.execute("SELECT event_date, title FROM events WHERE event_id=?",
+                          (paths[imax][0],)).fetchone()
+    max_event = ({"date": mx_row[0], "title": (mx_row[1] or "")[:60],
+                  "abs_car20_pct": round(float(abs20[imax]), 2)} if mx_row else None)
 
     # Null baseline -> lift. Where does this class's typical move sit among ordinary moves?
     base = baseline_abs_car20(ret)
@@ -207,6 +263,7 @@ def quant_read(conn, ret, etype):
 
     return {
         "event_class": etype, "n": n, "gate": gate,
+        "direction": direction,
         "abs_car20": {
             "mean_pct": mean, "median_pct": med,
             "range_pct": [round(float(abs20.min()), 2), round(float(abs20.max()), 2)],
@@ -214,6 +271,7 @@ def quant_read(conn, ret, etype):
                         round(float(np.percentile(abs20, 75)), 2)],
             "ci90_median_pct": bootstrap_ci(abs20, stat="median"),
             "ci90_mean_pct": bootstrap_ci(abs20, stat="mean"),
+            "max_event": max_event,
         },
         "baseline": {"ordinary_median_pct": base_median, "n_windows": int(len(base)),
                      "class_median_percentile": pctile_of_class,
@@ -300,18 +358,38 @@ def priced_vs_view(conn):
     gpr = _load_json("gpr_signal.json")
     trans = gpr.get("transmission") or {}
     gaps = _load_json("gaps.json")
-    live = gaps.get("live_gap") or {}
+    live_gap = gaps.get("live_gap") or {}
     led = gaps.get("ledger") or {}
     predmkt = _load_json("predmkt.json").get("markets") or []
-    # Top prediction markets by volume -- context only, explicitly "priced", never a stat.
-    top_mkts = sorted([m for m in predmkt if m.get("prob") is not None],
-                      key=lambda m: m.get("volume", 0), reverse=True)[:5]
+    # Prediction markets are CONTEXT only, never a stat. Guard hard against three failure modes a
+    # live demo would expose: (a) resolved/near-resolved rows (prob ~0/1 or past end_date look
+    # broken), (b) off-topic noise (sports/entertainment one refresh from surfacing next to a
+    # Hormuz brief), (c) near-duplicate rows (the same "Hormuz returns to normal by X" family).
+    today = _date.today().isoformat()
+    top_mkts, seen = [], set()
+    for m in sorted(predmkt, key=lambda m: m.get("volume", 0), reverse=True):
+        p = m.get("prob")
+        if p is None or not (0.02 <= float(p) <= 0.98):
+            continue
+        if m.get("end_date") and str(m.get("end_date")) <= today:      # strictly future only
+            continue
+        q = (m.get("question") or "")
+        ql = q.lower()
+        if not any(re.search(r"\b" + re.escape(k) + r"\b", ql) for k in _OIL_KEYWORDS):  # topical, word-boundary
+            continue                                                   # (so "Brentford" != "brent")
+        key = re.sub(r"[^a-z ]", "", re.sub(r"\b(by|before|in|on|until)\b.*$", "", q.lower()))[:46].strip()
+        if key in seen:                                                # collapse the duplicate family
+            continue
+        seen.add(key)
+        top_mkts.append(m)
+        if len(top_mkts) >= 5:
+            break
     return {
         "transmission": {"channel": trans.get("channel"), "expected": trans.get("expected"),
                          "actual": trans.get("actual"), "flag": trans.get("flag"),
                          "verdict": trans.get("verdict")},
-        "gap": {"direction": live.get("gap_direction"), "engine_call": live.get("engine_call"),
-                "ovx_percentile": live.get("priced_ovx_pct"), "notes": live.get("notes")},
+        "gap": {"direction": live_gap.get("gap_direction"), "engine_call": live_gap.get("engine_call"),
+                "ovx_percentile": live_gap.get("priced_ovx_pct"), "notes": live_gap.get("notes")},
         "prediction_markets": [{"question": (m.get("question") or "")[:110],
                                 "prob_pct": round(float(m.get("prob", 0)) * 100),
                                 "outcome": m.get("outcome"), "source": "Polymarket (priced, context only)"}
@@ -326,24 +404,50 @@ def priced_vs_view(conn):
     }
 
 
-def corroboration(conn, ents):
-    """Multi-modal confirmation for the most relevant active situation (news + physical
-    ship-transits + thermal fires + repricing markets). Confidence, not fact."""
+def _situation_entities():
+    """situation_id -> its member entity_ids (from the human-owned situations.yaml). Used to
+    decide whether a situation's corroboration is actually RELEVANT to the story at hand."""
+    p = DATA / "situations.yaml"
+    if not p.exists():
+        return {}
+    try:
+        import yaml
+        cfg = yaml.safe_load(p.read_text()) or {}
+    except Exception:
+        return {}
+    return {s.get("situation_id"): set(s.get("member_entities", []))
+            for s in cfg.get("situations", [])}
+
+
+# Multi-modal corroboration is about a CONFLICT THEATRE; it can be evidence for a conflict/attack/
+# chokepoint story, but a war's ship-transit and thermal-fire signals do NOT corroborate an OPEC
+# quota or a sanctions announcement even if a shared country appears in both.
+_CONFLICT_CLASSES = {"conflict_escalation", "infrastructure_attack", "chokepoint_disruption"}
+
+
+def corroboration(conn, ents, etype):
+    """Multi-modal confirmation (news + physical ship-transits + thermal fires + repricing markets)
+    for the situation that ACTUALLY matches this story. We pick the situation whose member entities
+    intersect the story's entities (so a Russia/Ukraine story gets russia_ukraine, not the global
+    max), and flag it story_relevant only when that overlap exists AND the story is a conflict-class
+    event -- so a standing war can never lend conviction to an OPEC/sanctions story."""
     c = _load_json("corroboration.json")
     conv = c.get("convergence") or {}
     if not conv:
         return None
-    # Prefer the situation with the most multi-modal confirmation.
-    best = max(conv.items(), key=lambda kv: kv[1].get("n_multi_modal", 0), default=None)
-    if not best:
-        return None
-    sid, s = best
+    sit_ents = _situation_entities()
+    entset = set(ents)
+    overlapping = [(sid, s) for sid, s in conv.items() if entset & sit_ents.get(sid, set())]
+    pool = overlapping or list(conv.items())
+    sid, s = max(pool, key=lambda kv: kv[1].get("n_multi_modal", 0))
     top = s.get("top") or {}
+    relevant = bool(overlapping) and etype in _CONFLICT_CLASSES
     return {"situation": sid.replace("situation.", ""),
             "n_events": s.get("n_events"), "n_multi_modal": s.get("n_multi_modal"),
             "max_modality_classes": s.get("max_modality_classes"),
             "confirmed_by": top.get("modality_classes") or ["news only"],
-            "top_event": (top.get("headline") or "")[:90]}
+            "top_event": (top.get("headline") or "")[:90],
+            "story_relevant": relevant}
 
 
 # --------------------------------------------------------------------------- prose
@@ -354,98 +458,170 @@ def _pp(x, plus=True):
     return f"{x:+.1f}" if plus else f"{x:.1f}"
 
 
-def bottom_line(story, qr, amp, pv):
-    """BLUF: the single honest lead sentence -- conclusion first, association not cause,
-    magnitude with its base rate, and today's priced gap. No forecast of whether a shock
-    occurs; only how oil has behaved when one of this class did."""
+def bottom_line(story, qr, amp):
+    """BLUF: the single honest lead sentence -- conclusion first. It leads with the LIFT
+    VERDICT (is this move actually bigger than everyday oil volatility?), not a scary raw
+    number; states magnitude is size not direction; and flags a type-only match. It carries
+    NO market-gap clause -- that gap is a market-wide standing read, shown in its own section,
+    not re-derived per story."""
     if not qr:
-        return (f"This reads as **{story['event_class'] or 'unclassified'}**, but the corpus has no "
-                "measured precedent of this class yet — a documented gap, not a guess.")
-    b = qr["abs_car20"]; base = qr["baseline"]; gate = qr["gate"]
-    gapdir = (pv.get("gap") or {}).get("direction") or "aligned"
-    gaptxt = {"under_priced_risk": "the market looks to be UNDER-pricing the risk",
-              "over_priced_fear": "the market looks to be OVER-pricing the fear",
-              "aligned": "the market is roughly in line with the engine"}.get(gapdir, gapdir)
+        return ("This item does not classify to any oil-relevant event class the corpus measures, "
+                "so there is no measured precedent to read — a documented gap, not a guess. The live "
+                "market backdrop shown below is context only, not a read on this story.")
+    b = qr["abs_car20"]; base = qr["baseline"]; gate = qr["gate"]; d = qr["direction"]
+    cls = story["event_class"]; typeonly = not story["entities"]
+    pctile = base.get("class_median_percentile")
     if gate in ("cases_only", "insufficient"):
-        return (f"With only n={qr['n']} comparable events, we do not estimate a rate — but in those "
-                f"cases oil's 20-day abnormal move ran {b['range_pct'][0]}–{b['range_pct'][1]}% "
-                f"(median {b['median_pct']}%). Today the H1/VIX amplifier is {amp.get('state','?')} and "
-                f"{gaptxt}.")
-    lift = (f"about the {int(base['class_median_percentile'])}th percentile of ordinary 20-day moves"
-            if base.get("class_median_percentile") is not None else "of uncertain size vs ordinary moves")
-    return (f"**{story['event_class']}** events have historically been *associated with* a median "
-            f"20-day abnormal Brent move of **{b['median_pct']}%** "
-            f"(n={qr['n']}, 90% CI [{b['ci90_median_pct'][0]}, {b['ci90_median_pct'][1]}]%) — {lift}. "
-            f"Today the H1/VIX amplifier is **{amp.get('state','?')}** and {gaptxt}.")
+        lead = (f"With only {qr['n']} comparable **{cls}** events we do not estimate a rate; in those "
+                f"cases Brent's 20-day move beyond its normal drift ran {b['range_pct'][0]}–"
+                f"{b['range_pct'][1]}% (typical band {b['iqr_pct'][0]}–{b['iqr_pct'][1]}%).")
+    elif pctile is not None and pctile < 60:
+        lead = (f"**{cls}** events have moved Brent about as much as an ordinary month does "
+                f"(median {b['median_pct']}% vs a {base['ordinary_median_pct']}% baseline — the "
+                f"{_ordinal(pctile)} percentile), so on the numbers this is **not clearly "
+                f"distinguishable from everyday oil volatility** (typical band {b['iqr_pct'][0]}–"
+                f"{b['iqr_pct'][1]}%).")
+    else:
+        lead = (f"**{cls}** events have historically been *associated with* a larger-than-usual move — "
+                f"a median **{b['median_pct']}%** over the following month (typical band "
+                f"{b['iqr_pct'][0]}–{b['iqr_pct'][1]}%, the {_ordinal(pctile)} percentile of ordinary "
+                f"moves; 90% CI [{b['ci90_median_pct'][0]}, {b['ci90_median_pct'][1]}]).")
+    # Direction is size, not a call -- and near 50/50 (or at small n) it is a coin-flip, so say so
+    # rather than print a precise-looking split.
+    near_coinflip = abs(d["up_pct"] - 50) <= 10 or qr["n"] < 30
+    if near_coinflip:
+        direction = (f" That figure is size, not direction — at this sample the up/down split "
+                     f"({d['up_pct']}/{d['down_pct']}) is close to a coin-flip, so read only the magnitude.")
+    else:
+        direction = (f" That figure is size, not direction — the move split roughly {d['up_pct']}% up / "
+                     f"{d['down_pct']}% down.")
+    # The amplifier clause only makes sense when there IS a distinguishable move to amplify; drop it
+    # for the 'not distinguishable from everyday churn' case (it would be filler).
+    distinguishable = pctile is None or pctile >= 60
+    ampt = ""
+    if distinguishable:
+        ampt = (" Market stress is currently elevated, so a shock would land toward the wider end of that "
+                "range." if amp.get("state") == "ON" else
+                " Market stress is currently calm, so expect the un-amplified base rate.")
+    typ = (" This is a **type-only** keyword match — no specific entities were recognised — so treat "
+           "the precedent as weak." if typeonly else "")
+    return lead + direction + ampt + typ
 
 
 def synthesis(story, qr, mn, pv, corro):
-    """A short, sourced synthesis paragraph -- the fusion of narrative and numbers, in the
-    honest phrasings the research prescribes. Templated from real values; no LLM."""
-    L = []
-    if qr:
-        b = qr["abs_car20"]; base = qr["baseline"]
-        L.append(f"Across {qr['n']} verified events of this class, Brent's 20-day abnormal move "
-                 f"was a median {b['median_pct']}% (mean {b['mean_pct']}%, range "
-                 f"{b['range_pct'][0]}–{b['range_pct'][1]}%). For scale, an ordinary 20-day window "
-                 f"moves a median {base['ordinary_median_pct']}%, and a move at least as large as this "
-                 f"class's typical one happens on roughly {int(base['base_rate_ge_class_median_pct'])}% "
-                 f"of ordinary windows — so this is "
-                 f"{'a genuine amplification over' if (base.get('base_rate_ge_class_median_pct') or 100) < 45 else 'not clearly distinguishable from'} "
-                 f"the everyday churn.")
-    # The live divergence / transmission read.
+    """The fusion paragraph, written as prose (no 'Label:' seams), in the honest phrasings the
+    research prescribes. Empty when the story does not classify (the BLUF handles that gap)."""
+    if not qr:
+        return ""
+    b = qr["abs_car20"]; base = qr["baseline"]; d = qr["direction"]; cls = story["event_class"]
+    parts = []
+    s1 = (f"{_num_word(qr['n'])} comparable {cls} events moved Brent a median {b['median_pct']}% over "
+          f"the following month (typical band {b['iqr_pct'][0]}–{b['iqr_pct'][1]}%")
+    mx = b.get("max_event")
+    if mx and mx.get("date"):
+        s1 += f"; the {b['range_pct'][1]}% extreme was “{mx['title']}” in {mx['date'][:7]}, an outlier)."
+    else:
+        s1 += ")."
+    if base.get("class_median_percentile") is not None:
+        p = base["class_median_percentile"]
+        flip = " and its direction was close to a coin-flip at this sample size" if (
+            abs(d["up_pct"] - 50) <= 10 or qr["n"] < 30) else (
+            f" and the direction skewed about {d['up_pct']}% up / {d['down_pct']}% down")
+        s1 += (f" That is only the {_ordinal(p)} percentile of ordinary monthly moves, so on the measured "
+               f"history a headline like this is hard to separate from everyday oil volatility,{flip}."
+               if p < 60 else
+               f" That runs meaningfully hotter than everyday churn (the {_ordinal(p)} percentile of "
+               f"ordinary moves),{flip}.")
+    parts.append(s1)
     tr = pv.get("transmission") or {}
     if tr.get("verdict"):
-        L.append(tr["verdict"])
-    gp = pv.get("gap") or {}
-    if gp.get("direction"):
-        L.append(f"Against the market: the engine reads a **{gp['direction'].replace('_',' ')}** gap "
-                 f"(engine call '{gp.get('engine_call')}' vs oil vol priced at the "
-                 f"{gp.get('ovx_percentile')}th percentile).")
-    if corro:
-        L.append(f"Corroboration: the '{corro['situation']}' situation is confirmed across "
-                 f"{corro['n_multi_modal']} multi-modal event(s) "
-                 f"[{', '.join(corro['confirmed_by'])}] — confidence, not proof.")
-    if qr:
-        L.append(f"Caveat: {qr['disclosures']['confounders']} {qr['disclosures']['selection']}")
-    return " ".join(L)
+        parts.append("The wider market backdrop is unrelated to this specific story but worth stating: "
+                     + _soften(tr["verdict"]))
+    if corro and corro.get("story_relevant"):
+        parts.append(f"The linked standing situation ({corro['situation']}) is multi-modally corroborated "
+                     f"[{', '.join(corro['confirmed_by'])}] — background confidence in the theatre, not proof "
+                     f"of this story.")
+    parts.append(f"Read all of the above as association rather than cause — {CONFOUNDERS} were all moving, "
+                 f"most large oil moves have no single news trigger, and the hand-curated corpus makes these "
+                 f"magnitudes an upper bound, not an unbiased estimate.")
+    return " ".join(parts)
 
 
-def what_would_change(story, qr, pv):
-    """Observable, falsifiable invalidation markers -- the decision-relevant payload. Every
-    item is something you could actually watch for (research R5/R8)."""
-    items = [
-        "A chokepoint flow disruption in PortWatch (Hormuz / Bab el-Mandeb transits falling "
-        "materially below their median) — would move this from priced fear toward realised supply loss.",
-        "Brent's realised 20-day volatility rising while OVX is already elevated — would resolve the "
-        "over-priced-fear gap against the engine.",
-    ]
+def _soften(verdict):
+    """Trim in-house jargon from a reused engine verdict so it reads in an institutional register."""
+    return (verdict.replace("supply-fear theatre active", "supply-risk narrative active")
+                   .replace("theatre", "situation"))
+
+
+def decision_read(story, qr, mn):
+    """The one 'so what for a decision' line a principal actually asks for -- carefully hedged,
+    never a trade call, and PARAMETERISED by class / entity strength (not a two-branch template)."""
+    watch = "whether Brent's realised volatility actually rises and chokepoint flows hold — not the headline"
+    if not qr:
+        return ("For a decision-maker: the corpus has no measured precedent for this item, so the engine "
+                "offers no read on it — treat it as outside the oil-shock frame.")
+    cls = story["event_class"]; typeonly = not story["entities"]
+    p = (qr["baseline"] or {}).get("class_median_percentile")
+    med = qr["abs_car20"]["median_pct"]
+    if typeonly:
+        return (f"For a decision-maker: this is a type-only keyword match on {cls} with no specific entity "
+                f"recognised, so treat the precedent as weak and don't act on it alone; watch {watch}.")
+    if p is not None and p < 60:
+        return (f"For a decision-maker: {cls} events have historically moved oil about as much as an "
+                f"ordinary month (median ~{med}%), so the headline alone does not warrant repositioning; "
+                f"watch {watch}.")
+    return (f"For a decision-maker: {cls} is one of the classes that has historically moved oil more than "
+            f"ordinary churn (median ~{med}%), but as size not direction and with wide uncertainty; "
+            f"watch {watch}.")
+
+
+def what_would_change(story, qr, mn, pv):
+    """Observable, falsifiable invalidation markers, made CONDITIONAL on the current state (so we
+    never list a criterion that is already met as if it were still pending)."""
+    if not qr:
+        return []
+    items = []
+    hot = mn.get("chokepoints_flagged") or []
+    if hot:
+        names = ", ".join(c.get("chokepoint", "") for c in hot)
+        items.append(f"Chokepoint flow is ALREADY disrupted ({names}); a further drop, or a second "
+                     "chokepoint going offline, would turn today's priced fear into realised supply loss.")
+    else:
+        items.append("A chokepoint flow disruption (Hormuz / Bab el-Mandeb transits falling materially "
+                     "below their median in PortWatch) — would move this toward realised supply loss.")
+    items.append("Brent's realised 20-day volatility rising while oil vol is already priced high — would "
+                 "resolve the standing over-priced-fear gap against the engine.")
     tr = pv.get("transmission") or {}
     if tr.get("channel") == "supply" and tr.get("actual") == "down":
-        items.append("Brent turning UP on the same supply-fear theatre — would flip the current "
-                     "divergence (risk hot, price falling) into a confirmed supply-premium repricing.")
-    if story.get("event_class"):
-        items.append(f"A second, entity-overlapping {story['event_class']} event within the window — "
-                     "would strengthen a currently type-only precedent match.")
+        items.append("Brent turning up on the same supply-fear backdrop — would flip today's divergence "
+                     "(risk hot, price falling) into a confirmed supply-premium repricing.")
+    if not story["entities"]:
+        items.append("A version of this story naming a specific oil producer or chokepoint — would turn a "
+                     "weak type-only match into entity-specific precedent.")
     return items
 
 
-def confidence_tier(qr, corro):
-    """A confidence label kept SEPARATE from likelihood (they are orthogonal). Driven by
-    sample size and corroboration, not by how dramatic the number is."""
+def confidence_tier(story, qr, corro):
+    """A confidence label kept SEPARATE from likelihood. Driven by sample size and STORY-RELEVANT
+    corroboration only; a type-only (entity-less) match is capped low however large n is."""
     if not qr:
         return {"tier": "insufficient", "why": "no measured precedent for this event class"}
     gate = qr["gate"]
-    modal = (corro or {}).get("n_multi_modal", 0)
-    if gate == "full" and modal >= 1:
-        t = "moderate"
+    typeonly = not story["entities"]
+    # Only story-relevant corroboration counts (a standing situation cannot lend conviction).
+    has_corr = bool((corro or {}).get("story_relevant") and (corro or {}).get("n_multi_modal", 0))
+    corr_txt = "the linked situation is multi-modally corroborated" if has_corr else \
+               "no story-relevant corroboration"
+    if typeonly:
+        t, extra = "low", "type-only keyword match (no entities recognised)"
+    elif gate in ("full", "caveat") and has_corr:
+        t, extra = "moderate", corr_txt
     elif gate in ("full", "caveat"):
-        t = "low-moderate"
+        t, extra = "low-moderate", corr_txt
     else:
-        t = "low"
-    return {"tier": t, "why": f"sample gate={gate} (n={qr['n']}), "
-                             f"multi-modal corroboration={modal}. Confidence is about evidence "
-                             f"quality, NOT the probability of any outcome."}
+        t, extra = "low", "small sample"
+    return {"tier": t, "why": f"{extra}; sample gate={gate} (n={qr['n']}). Confidence is about evidence "
+                              f"quality, NOT the probability of any outcome."}
 
 
 # --------------------------------------------------------------------------- build
@@ -459,16 +635,21 @@ def build_brief(arg, source=None, url=None, date=None):
     ents, etype = T.extract(conn, text)
     amp = T.amplifier()
 
+    # Honest date: use an explicit YYYY-MM-DD found in the text, else "not specified" -- never a
+    # guessed/fabricated timestamp in the story header.
+    m = re.search(r"\b20\d{2}-\d{2}-\d{2}\b", text)
+    story_date = date or (m.group(0) if m else "not specified")
     story = {"input": arg[:240], "was_url": was_url, "source": source,
-             "url": url, "date": date or T._guess_date(text),
+             "url": url, "date": story_date,
              "entities": ents, "event_class": etype,
+             "classification_evidence": _matched_keywords(text, etype),
              "classification_note": "deterministic vocab/keyword extraction — no LLM, no fabrication"}
 
     qr = quant_read(conn, ret, etype) if etype else None
     prec = precedent(conn, ret, ents, etype) if etype else []
     mn = market_now(conn)
     pv = priced_vs_view(conn)
-    corro = corroboration(conn, ents)
+    corro = corroboration(conn, ents, etype)
     conn.close()
 
     brief = {
@@ -477,15 +658,16 @@ def build_brief(arg, source=None, url=None, date=None):
         "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
         "story": story,
         "amplifier": amp,
-        "bottom_line": bottom_line(story, qr, amp, pv),
+        "bottom_line": bottom_line(story, qr, amp),
+        "decision_read": decision_read(story, qr, mn),
         "quant_read": qr,
         "precedent": prec,
         "market_now": mn,
         "priced_vs_view": pv,
         "corroboration": corro,
         "synthesis": synthesis(story, qr, mn, pv, corro),
-        "what_would_change": what_would_change(story, qr, pv),
-        "confidence": confidence_tier(qr, corro),
+        "what_would_change": what_would_change(story, qr, mn, pv),
+        "confidence": confidence_tier(story, qr, corro),
         "receipts": [
             "quant read: src/event_study.py (constant-mean CAR, MacKinlay 1997) over the coded corpus",
             "base rate + lift: null distribution of |CAR+20| on random ordinary windows (seed-fixed)",

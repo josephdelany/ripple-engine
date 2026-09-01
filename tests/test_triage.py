@@ -49,3 +49,20 @@ def test_tr4_card_has_caveats_and_latency():
     assert c["caveats"] and c["latency_ms"] >= 0
     assert any("no invented" in x for x in c["caveats"])
     assert any("expected magnitude" in x.lower() for x in c["caveats"])
+
+
+def test_tr5_inflected_headlines_classify_not_dropped():
+    """The commonest live-demo headline forms are INFLECTED (strikeS, invadeS, missileS,
+    escalatION, clashES). A \\b-wrapped bare stem silently drops them -- regression guard."""
+    cases = {
+        "Israel strikes military targets inside Iran overnight": {"infrastructure_attack",
+                                                                  "conflict_escalation"},
+        "Russia invades a neighbouring region": {"conflict_escalation"},
+        "Houthi missiles hit a tanker in the Red Sea": {"infrastructure_attack", "conflict_escalation"},
+        "Iran-Israel tensions escalate sharply": {"conflict_escalation"},
+        "US sanctions Russian oil exporters": {"sanctions"},
+        "OPEC+ agrees a surprise output cut": {"opec_decision"},
+    }
+    for text, ok in cases.items():
+        assert T.classify_type(text) in ok, f"{text!r} -> {T.classify_type(text)}"
+    assert T.classify_type("Apple unveils a new iPhone at its annual event") is None
