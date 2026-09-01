@@ -30,12 +30,26 @@ verdict.** That is what "see the truth of the article" means when you cannot fab
    conflict-media), shown only when the article has a real class (else it would overclaim).
 
 ## The honesty gates (enforced + tested, `tests/test_deconstruct.py`)
+Hardened against a brutal markets-desk review — the tool passes its exact failure cases:
 - Verdicts are measured-only; no causal/opinion language; every stat cites history + n.
 - Expected magnitude, never an occurrence probability; association, not cause.
+- **Negation**: an event the article says did NOT happen ("denied", "no sanctions", "left
+  unchanged") gets a "negated"/"averted" read — no market read on a non-event. It never asserts
+  the opposite of the article.
+- **Polarity**: an easing/reversal ("sanctions lifted", "ceasefire") is flagged as such — the base
+  rate is directionless and easing points the opposite way to escalation. An OPEC **cut** is
+  labelled oil-supportive, a **hike** oil-negative — never conflated.
+- **"Materially larger"** is claimed only when the class median's 90% CI clears the *baseline's*
+  90% CI (a valid CI-to-CI test, not interval-vs-point), and the base rate is surfaced inline
+  ("an ordinary month moves this much ~33% of the time").
+- The fat tail is **dated** ("worst case, OPEC+ price war (2020-03), moved 76.98%").
+- The **hand-curated corpus** caveat is inline ("read the median as an upper bound").
 - Dominant class = the article's actual topic (salience), not a priority-ordered side-mention.
-- The mood block never renders on a non-geopolitical article.
 - A hypothetical clause is answered "if it occurs", not as an event.
-- The historical table states "the N most relevant of TOTAL" — never a count that contradicts the rows.
+- Out-of-frame honesty: a Fed/rates story reads "a markets story, outside this engine's oil
+  frame" — distinct from a genuinely off-topic story.
+- The mood block never renders on a non-geopolitical article; the historical table states "the N
+  most relevant of TOTAL" — never a count that contradicts the rows.
 
 ## The experience (`/workbench`, "The Read")
 Opens on a calm welcome (paste a story, or pick one of today's). Reading view: the data's verdict on
