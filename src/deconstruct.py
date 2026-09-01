@@ -202,6 +202,37 @@ def public_sentiment(conn, ents, etype):
     return out
 
 
+def market_alignment(dominant_qr, mn):
+    """History vs the tape RIGHT NOW: what this event class typically did to oil, set against
+    what oil is actually doing today, and whether the live move is confirming or diverging from
+    the risk (source-aware transmission from gpr_signal). Aligns the article to live market data."""
+    if not dominant_qr:
+        return None
+    gpr = BR._load_json("gpr_signal.json")
+    tr = gpr.get("transmission") or {}
+    brent = mn.get("brent") or {}
+    med = dominant_qr["abs_car20"]["median_pct"]
+    chg5 = brent.get("chg5d")
+    flag = tr.get("flag")
+    if flag in ("divergence", "watch"):
+        stance = "diverging"
+        read = ("History implies a move of that size; the tape right now is NOT confirming it — "
+                f"Brent is {chg5:+.1f}% over 5 days against elevated risk." if chg5 is not None else
+                "History implies a move; the live tape is not confirming it.")
+    elif flag in ("confirmed", "consistent"):
+        stance = "confirming"
+        read = (f"The live tape is moving with the risk — Brent {chg5:+.1f}% over 5 days — consistent "
+                "with the historical pattern." if chg5 is not None else
+                "The live tape is moving consistently with the historical pattern.")
+    else:
+        stance = "neutral"
+        read = (f"Brent is roughly flat ({chg5:+.1f}% 5d); no clear live confirmation either way."
+                if chg5 is not None else "No clear live signal from the tape.")
+    return {"history_median_pct": med, "brent_chg5d": chg5, "brent_chg1d": brent.get("chg1d"),
+            "gpr_band": (mn.get("gpr") or {}).get("band"), "stance": stance,
+            "transmission_verdict": tr.get("verdict"), "read": read}
+
+
 def historical_record(conn, ret, etype, ents, limit=14):
     """'What history says' -- the FULL measured record for the dominant class: every coded corpus
     event of that class with its measured 20-day Brent move + source, entity-matched first. The
@@ -262,6 +293,8 @@ def deconstruct(arg):
     # article overclaims (an unrelated signal presented as if about the input).
     sentiment = public_sentiment(conn, all_ents, dominant) if dominant else {}
     record = historical_record(conn, ret, dominant, all_ents) if dominant else None
+    dq = per_class.get(dominant, {}).get("quant") if dominant else None
+    alignment = market_alignment(dq, mn) if dominant else None
     conn.close()
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
     return {
@@ -272,6 +305,7 @@ def deconstruct(arg):
         "event_classes": sorted(per_class.keys()),
         "dominant_class": dominant,
         "historical_record": record,
+        "market_alignment": alignment,
         "market_now": mn, "public_sentiment": sentiment,
         "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
         "discipline": ("Every claim is answered by measured history + live market data, never by a "

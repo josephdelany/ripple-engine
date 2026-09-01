@@ -193,6 +193,10 @@
   .rd-ev{ margin-top:12px; }
   .rd-ev summary{ font:var(--t-cap) var(--mono); color:var(--info); cursor:pointer; letter-spacing:.3px; }
   .rd-ev .body{ margin-top:10px; padding:12px 14px; background:var(--bg1); border:1px solid var(--line); border-radius:6px; font-size:12.5px; }
+  .rd-align{ margin-top:36px; padding:18px 20px; background:var(--bg1); border:1px solid var(--line2); border-left:3px solid var(--info); border-radius:10px; }
+  .rd-align.warn{ border-left-color:var(--warn); } .rd-align.pos{ border-left-color:var(--pos); }
+  .rd-align-h{ font:var(--t-micro) var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin-bottom:10px; }
+  .rd-align-body{ font-size:15px; line-height:1.65; color:var(--ink); } .rd-align-body b{ color:var(--ink-hi); }
   .rd-mood{ margin-top:40px; padding:18px 20px; background:var(--bg1); border-radius:8px; }
   .rd-mood h4{ font:var(--t-micro) var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin-bottom:12px; }
   .rd-mood .row{ display:flex; gap:12px; align-items:baseline; padding:6px 0; border-bottom:1px solid var(--line); font-size:13px; }
@@ -398,7 +402,7 @@ function setChips(b){
 function skeleton(){ return `<div class="skel w-lead"></div><div class="skel w-3"></div><div class="skel w-2"></div><div style="height:24px"></div><div class="skel w-3"></div><div class="skel"></div><div class="skel w-2"></div>`; }
 function errorBox(msg){ return `<div class="errbox"><div class="k">Unavailable</div><div style="margin-top:6px">${esc(msg)}</div><div class="rail-actions"><button onclick="loadDaily()">Daily brief</button></div></div>`; }
 
-async function loadDaily(){ showDesk(); $("brief").innerHTML=skeleton();
+async function loadDaily(){ _fromRead=false; showDesk(); $("brief").innerHTML=skeleton();
   try{ const b=await getJSON("/wb_daily_brief"); let src=null;
     if(b.story && b.story.url){ src=await extractFor(b.story.url, b.story.source); }
     renderBrief(b, src); }
@@ -518,7 +522,7 @@ function renderBrief(b, src){
   h+=glossary();
   h+=`<div class="footer-note">CONFIDENCE ${esc(cf.tier||"?")} — ${esc(cf.why||"")}<br>${esc(b.discipline||"")} · latency ${b.latency_ms}ms</div>`;
 
-  $("brief").innerHTML=h;
+  $("brief").innerHTML=(_fromRead&&LAST_READ_ARG?`<button class="ghost" style="margin-bottom:14px" onclick="backToRead()">← back to the read</button>`:"")+h;
   drawBrentSpark();
   $("brief").querySelectorAll("tr.click").forEach(tr=>tr.addEventListener("click",()=>openEv(tr.dataset.ev)));
 }
@@ -526,17 +530,18 @@ async function drawBrentSpark(){ try{ const d=await getJSON("/wb_series?series=f
   const el=$("brentSpark"); if(el&&d.values&&d.values.length) el.innerHTML=sparkline(d.values,{color:"var(--info)"}); }catch(e){} }
 
 /* ---------------- THE READ (article deconstruction — the flagship) ---------------- */
-let CURRENT_READ=null;
+let CURRENT_READ=null, LAST_READ_ARG=null, _fromRead=false;
+function backToRead(){ if(LAST_READ_ARG) readArticle(LAST_READ_ARG); }
 function setChipsFromMarket(mn,ps){ mn=mn||{}; const bp=mn.brent||{}, gpr=mn.gpr||{};
   $("dateline").innerHTML="DATA AS OF "+esc(mn.as_of||"—")+(bp.level!=null?"   ·   BRENT "+esc(bp.level)+" ("+mnum(bp.chg5d,1)+"% 5d)":"");
   const chips=[]; if(gpr.percentile!=null) chips.push(`<span class="chip ${gpr.percentile>=80?"hot":""}">GEO-RISK <b>${ord(gpr.percentile)}</b> pct</span>`);
   $("chips").innerHTML=chips.join(""); }
-async function readArticle(text, src){ text=(text||"").trim(); if(!text) return; showDesk(); $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
+async function readArticle(text, src){ text=(text||"").trim(); if(!text) return; LAST_READ_ARG=text; _fromRead=false; showDesk(); $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
   try{ const d=await postJSON("/wb_deconstruct",{text});
     let extra=src||{}; if(isURL(text)){ extra=await extractFor(text,(src&&src.source)||""); }
     renderRead(d, extra);
   }catch(e){ $("brief").innerHTML=errorBox("Couldn't read that article."); } }
-function analyzeClaim(t){ $("q").value=t; analyze(); }
+function analyzeClaim(t){ _fromRead=true; $("q").value=t; analyze(); }
 function renderRead(d, src){
   if(!d || d.error){ $("brief").innerHTML=errorBox((d&&(d.note||d.error))||"no read"); return; }
   CURRENT_READ=d; setChipsFromMarket(d.market_now, d.public_sentiment); src=src||{};
@@ -568,6 +573,13 @@ function renderRead(d, src){
       }
       h+=`</div>`;
     });
+  }
+  // History vs the tape right now — align the article to live market data.
+  const al=d.market_alignment;
+  if(al){ const sc=al.stance==="diverging"?"warn":al.stance==="confirming"?"pos":"";
+    h+=`<div class="rd-align ${sc}"><div class="rd-align-h">History vs the tape right now</div>
+      <div class="rd-align-body">History: this class typically moved oil a median <b>${f1(al.history_median_pct)}%</b>. The tape now: Brent <span class="${cls(al.brent_chg5d)}">${mnum(al.brent_chg5d,1)}% 5d</span>, geopolitical risk ${esc(al.gpr_band||"—")}. <b>${esc(al.read)}</b></div>
+      ${al.transmission_verdict?`<div class="disc" style="margin-top:8px">${esc(al.transmission_verdict)}</div>`:""}</div>`;
   }
   // The historical record — every comparable event on file, with its measured move.
   const hr=d.historical_record;
