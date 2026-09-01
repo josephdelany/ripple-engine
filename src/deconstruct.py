@@ -410,12 +410,13 @@ def _headline_read(at, cs, per_class, dominant, n_material, scope=None):
     rng_hi = a["range_pct"][1]
     kind = "opinion piece" if at["type"] == "opinion" else "report"
     tail = f" — but the class is fat-tailed, with a worst case of {rng_hi}% on record"
+    corpus = " (a hand-curated corpus of memorable events — read the median as an upper bound)"
     if ci_lo is not None and base_ci[1] is not None and ci_lo > base_ci[1]:
-        return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of that "
-                f"class moved oil a median **{med}%** over 20 days — the {BR._ordinal(p)} percentile of "
+        return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}{corpus}), events "
+                f"of that class moved oil a median **{med}%** over 20 days — the {BR._ordinal(p)} percentile of "
                 f"ordinary moves, **materially larger than everyday volatility**{tail}. Size, not direction.")
-    return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), the TYPICAL 20-day "
-            f"oil move was **{med}%** — about the {BR._ordinal(p)} percentile of ordinary moves (everyday "
+    return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}{corpus}), the TYPICAL "
+            f"20-day oil move was **{med}%** — about the {BR._ordinal(p)} percentile of ordinary moves (everyday "
             f"median ~{om}%){tail}. So the central move is usually in line with normal volatility, though the "
             f"tail is real; the framing outruns the median.")
 
