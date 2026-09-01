@@ -31,6 +31,8 @@ import shock_tracer
 ROOT = Path(__file__).resolve().parent.parent
 TERMINAL_HTML = ROOT / "src" / "terminal.html"
 TRACE_HTML = ROOT / "src" / "trace.html"
+BACKTEST_HTML = ROOT / "src" / "backtest.html"
+QUESTION_HTML = ROOT / "src" / "question.html"
 
 # Curated catalog: series_id -> (group, display label). Only those actually present in
 # oil.db (with observations) are shown; anything missing is silently skipped (no fake rows).
@@ -234,6 +236,78 @@ def ripples(series_id):
                     "market priced risk, not a realized supply loss — the flow usually did not stop."}
 
 
+def backtest():
+    """The self-backtest console: how the engine scored against REALITY, out-of-sample.
+    Reads the existing backtest artifacts (holdout / read_backtest / backtest_analogue /
+    calibration) and the resolved gaps ledger. Reports the validated edges AND the honest
+    nulls — the null IS the retrain signal (more corpus, not tuning). Nothing recomputed."""
+    import json as _json
+    import statistics as _st
+
+    def rj(name):
+        p = ROOT / "data" / name
+        try:
+            return _json.loads(p.read_text())
+        except Exception:
+            return {}
+
+    hold = rj("holdout.json"); wf = rj("read_backtest.json")
+    an = rj("backtest_analogue.json"); cal = rj("calibration.json")
+
+    conn = connect(read_only=True); cur = conn.cursor()
+    gaps = cur.execute("SELECT gap_direction, outcome, brier FROM gaps "
+                       "WHERE resolved_at IS NOT NULL AND brier IS NOT NULL").fetchall()
+    conn.close()
+    briers = [g[2] for g in gaps]
+    dir_counts = {}
+    for g in gaps:
+        dir_counts[g[0]] = dir_counts.get(g[0], 0) + 1
+    gaps_summary = {
+        "n_resolved": len(gaps),
+        "mean_brier": round(_st.mean(briers), 3) if briers else None,
+        "coin_brier": 0.25,
+        "by_direction": dir_counts,
+    }
+    return {
+        "as_of": an.get("as_of"),
+        "panels": [
+            {"id": "holdout", "title": "Temporal hold-out — the validated edge (H1)",
+             "verdict": "HOLDS" if hold.get("holds_out_of_sample") else "FAILS",
+             "good": bool(hold.get("holds_out_of_sample")),
+             "detail": hold.get("verdict"),
+             "spec": hold.get("spec"), "split": hold.get("split_date")},
+            {"id": "walkforward", "title": "Walk-forward accountability — does conditioning cut error?",
+             "verdict": "HELPS" if wf.get("conditioning_helps") else "NO GAIN",
+             "good": bool(wf.get("conditioning_helps")),
+             "detail": f"MAE {wf.get('mae_uncond_pp')}pp → {wf.get('mae_cond_pp')}pp "
+                       f"(improvement {wf.get('mae_improvement_pp')}pp) on n={wf.get('n_scored')} "
+                       f"events, forecast from prior events only.",
+             "spec": wf.get("note")},
+            {"id": "analogue", "title": "Analogue forecaster — point-in-time Brier vs base rate",
+             "verdict": "NULL — no edge at this N" if (an.get("skill_vs_base", 0) or 0) <= 0 else "EDGE",
+             "good": (an.get("skill_vs_base", 0) or 0) > 0,
+             "detail": f"Brier {an.get('brier')} vs base-rate {an.get('base_rate_brier')} "
+                       f"(skill {an.get('skill_vs_base')}) on n={an.get('n_scored')}; "
+                       f"LOO-calibrated skill {cal.get('calibrated_skill_loo')}. "
+                       + (cal.get("verdict") or ""),
+             "spec": an.get("note")},
+            {"id": "gaps", "title": "Engine vs market, resolved against realized volatility",
+             "verdict": (f"Brier {gaps_summary['mean_brier']} vs 0.25 coin"
+                         if gaps_summary["mean_brier"] is not None else "—"),
+             "good": (gaps_summary["mean_brier"] is not None
+                      and gaps_summary["mean_brier"] < 0.25),
+             "detail": f"{gaps_summary['n_resolved']} resolved calls; direction mix "
+                       f"{gaps_summary['by_direction']}.",
+             "spec": "Each call resolved at +20 trading days vs whether Brent vol actually rose."},
+        ],
+        "honest_note": "Validated edges and nulls are shown side by side. Where the engine does "
+                       "NOT beat the base rate, that is reported as a null and the fix is more "
+                       "corpus, never tuning a test to pass. This is the backtest-against-reality "
+                       "spine: walk the modern-history corpus point-in-time, predict, score vs "
+                       "what actually happened, keep only what survives out-of-sample.",
+    }
+
+
 def register_terminal(app):
     @app.get("/terminal", response_class=HTMLResponse)
     def _terminal_page():
@@ -266,3 +340,19 @@ def register_terminal(app):
     @app.get("/trace")
     def _trace(entity: str = None, series: str = None, situation: str = None):
         return shock_tracer.trace(entity=entity, series=series, situation=situation)
+
+    @app.get("/backtest_view", response_class=HTMLResponse)
+    def _backtest_view():
+        if not BACKTEST_HTML.exists():
+            return HTMLResponse("<h1>backtest.html missing</h1>", status_code=500)
+        return HTMLResponse(BACKTEST_HTML.read_text())
+
+    @app.get("/backtest")
+    def _backtest():
+        return backtest()
+
+    @app.get("/question_view", response_class=HTMLResponse)
+    def _question_view():
+        if not QUESTION_HTML.exists():
+            return HTMLResponse("<h1>question.html missing</h1>", status_code=500)
+        return HTMLResponse(QUESTION_HTML.read_text())
