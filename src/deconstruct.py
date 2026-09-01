@@ -363,7 +363,14 @@ def deconstruct(arg):
     ef = _C(e for e in all_ents if e.startswith(("country.", "chokepoint.")))
     pulse_query = ef.most_common(1)[0][0].split(".")[-1].replace("_", " ").title() if ef else None
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
-    scope = None if dominant else ("markets_out_of_frame" if MARKETS.search(text) else "off_topic")
+    scope = None
+    if not dominant:
+        if any(c.get("negated") and c.get("event_class") for c in cs):
+            scope = "averted"                     # an oil event the article says did NOT happen
+        elif MARKETS.search(text):
+            scope = "markets_out_of_frame"
+        else:
+            scope = "off_topic"
     return {
         "input": (arg or "")[:200], "was_url": was_url, "url": url,
         "article_type": at, "scope": scope,
@@ -386,6 +393,10 @@ def _headline_read(at, cs, per_class, dominant, n_material, scope=None):
     States the typical move AND the tail (never 'ordinary' alone on a fat-tailed class), and only
     claims 'materially larger' when the median's 90% CI clears the everyday baseline."""
     if not dominant or not per_class.get(dominant, {}).get("quant"):
+        if scope == "averted":
+            return ("The article reports an oil-relevant event that did NOT happen (or is being reversed) "
+                    "— a non-event. The engine gives no market read; a measured base rate applies to events "
+                    "that actually occurred.")
         if scope == "markets_out_of_frame":
             return ("This is a markets story, but **outside this engine's frame** — the engine measures "
                     "the OIL and energy-geopolitics impact of events, not rates, equities, or FX directly. "

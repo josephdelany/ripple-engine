@@ -604,6 +604,7 @@ function renderRead(d, src){
     h+=`<div class="disc" style="margin-top:10px">${esc(ps.note||"")}</div></div>`;
   }
   if(d.pulse_query){ h+=`<div class="rd-mood" style="margin-top:14px"><h4>Live agitation pulse — ${esc(d.pulse_query)}</h4><div id="rdPulse" class="disc">checking the global press for protest / unrest coverage…</div></div>`; }
+  h+=glossary();
   h+=`<div class="rd-cta">${claims.length?`<button class="primary" id="rdCentral">Full quant brief on the central event →</button>`:""}
       <button class="ghost" onclick="window.print()">Print / PDF</button></div>`;
   h+=`<div class="rd-foot">${esc(d.discipline||"")} · latency ${d.latency_ms}ms</div></div>`;
