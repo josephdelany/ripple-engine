@@ -48,6 +48,10 @@ NEG = re.compile(r"\b(no|not|never|without|denied|denies|deny|unfounded|avoided|
 RELIEF = re.compile(r"\b(lift\w*|eas\w*|remov\w*|waiv\w*|rollback|roll back|suspend\w*|restore\w*|"
                     r"de-?escalat\w*|reopen\w*|resum\w*|unfreez\w*|normaliz\w*|ceasefire|truce|"
                     r"deal reached|agreement)\b", re.I)
+# OPEC direction: a production CUT is oil-supportive, an INCREASE oil-negative -- opposite signs
+# a commodities desk would never lump together, even though the class base rate is directionless.
+SUPPLY_DOWN = re.compile(r"\b(cut|cuts|cutting|reduc\w*|lower\w*|slash\w*|curb\w*|trim\w*)\b", re.I)
+SUPPLY_UP = re.compile(r"\b(hike\w*|rais\w*|increas\w*|boost\w*|ramp\w*|add\w* barrels|higher output)\b", re.I)
 
 
 def _negated(s):
@@ -141,10 +145,13 @@ def claims(conn, text, k=9):
         hypo = bool(HYPO.search(s)) and not bool(CONCRETE.search(s))
         neg = _negated(s)
         pol = "easing" if (RELIEF.search(s) and not neg) else "escalation"
+        dh = None
+        if etype == "opec_decision":
+            dh = "supply_up" if SUPPLY_UP.search(s) else "supply_down" if SUPPLY_DOWN.search(s) else None
         out.append({"text": s, "entities": ents, "event_class": etype, "figures": figs,
                     "assertive": bool(ASSERT.search(s)),
                     "modality": "hypothetical" if hypo else "asserted",
-                    "negated": neg, "polarity": pol})
+                    "negated": neg, "polarity": pol, "direction_hint": dh})
     # rank the most evidence-bearing claims first
     out.sort(key=lambda c: (bool(c["event_class"]), len(c["entities"]), len(c["figures"]),
                             c["assertive"]), reverse=True)
@@ -170,7 +177,7 @@ def _evidence(et, qr, prec):
     }
 
 
-def _verdict(et, qr, hypothetical=False, negated=False, polarity="escalation"):
+def _verdict(et, qr, hypothetical=False, negated=False, polarity="escalation", direction_hint=None):
     """The engine's one-line answer to a claim, rendered by the numbers. Honesty gates:
     NEGATED events (article says it didn't happen / is reversed) get no read; EASING/reversal is
     flagged (the directionless base rate points the other way); 'materially larger' needs the class
@@ -195,6 +202,10 @@ def _verdict(et, qr, hypothetical=False, negated=False, polarity="escalation"):
     iff = "If it occurs, " if hypothetical else ""
     ease = ("This is an EASING/reversal — the base rate below is directionless (size only), and an "
             "easing has historically pointed the opposite way to an escalation. " if polarity == "easing" else "")
+    if et == "opec_decision" and direction_hint:
+        ease = (("This is a production CUT — historically oil-supportive; " if direction_hint == "supply_down"
+                 else "This is a production INCREASE — historically oil-negative; ")
+                + "the base rate below is directionless (size). ") + ease
     tail = (f" The class is fat-tailed: the worst case, “{mx.get('title', '')[:52]}” ({(mx.get('date') or '')[:7]}), "
             f"moved {rng_hi}%." if mx.get("title") else f" Fat-tailed; worst case {rng_hi}%.")
     baserate = (f" An ordinary month moves at least this much about {int(brate)}% of the time."
@@ -253,20 +264,21 @@ def market_alignment(dominant_qr, mn):
     med = dominant_qr["abs_car20"]["median_pct"]
     chg5 = brent.get("chg5d")
     flag = tr.get("flag")
+    # This is the OIL MARKET'S CURRENT POSTURE (market-wide), not a per-story confirmation — the
+    # same daily oil-risk read applies to any oil-supply story. Labelled as such, honestly.
     if flag in ("divergence", "watch"):
         stance = "diverging"
-        read = ("History implies a move of that size; the tape right now is NOT confirming it — "
-                f"Brent is {chg5:+.1f}% over 5 days against elevated risk." if chg5 is not None else
-                "History implies a move; the live tape is not confirming it.")
+        read = (f"Risk is elevated, yet Brent is {chg5:+.1f}% over 5 days — the oil market is currently "
+                "DISCOUNTING a supply premium, not pricing one in." if chg5 is not None else
+                "Risk is elevated but the oil tape is not pricing a supply premium.")
     elif flag in ("confirmed", "consistent"):
         stance = "confirming"
-        read = (f"The live tape is moving with the risk — Brent {chg5:+.1f}% over 5 days — consistent "
-                "with the historical pattern." if chg5 is not None else
-                "The live tape is moving consistently with the historical pattern.")
+        read = (f"Brent is {chg5:+.1f}% over 5 days, moving WITH the risk — the market is pricing a supply "
+                "premium right now." if chg5 is not None else "The oil tape is moving with the risk.")
     else:
         stance = "neutral"
-        read = (f"Brent is roughly flat ({chg5:+.1f}% 5d); no clear live confirmation either way."
-                if chg5 is not None else "No clear live signal from the tape.")
+        read = (f"Brent is roughly flat ({chg5:+.1f}% 5d) — no clear directional signal from the tape."
+                if chg5 is not None else "No clear live signal from the oil tape.")
     return {"history_median_pct": med, "brent_chg5d": chg5, "brent_chg1d": brent.get("chg1d"),
             "gpr_band": (mn.get("gpr") or {}).get("band"), "stance": stance,
             "transmission_verdict": tr.get("verdict"), "read": read}
@@ -319,7 +331,8 @@ def deconstruct(arg):
         pc = per_class.get(et, {})
         c["evidence"] = _evidence(et, pc.get("quant"), pc.get("precedent"))
         c["verdict"] = _verdict(et, pc.get("quant"), hypothetical=(c.get("modality") == "hypothetical"),
-                                negated=c.get("negated", False), polarity=c.get("polarity", "escalation"))
+                                negated=c.get("negated", False), polarity=c.get("polarity", "escalation"),
+                                direction_hint=c.get("direction_hint"))
     # Dominant class = the class the article's claims MOST refer to (salience), tie-broken by
     # sample size. More robust than a priority-ordered full-text classify (which would pick a
     # chokepoint mentioned once in a retaliation clause over the article's actual sanctions topic).

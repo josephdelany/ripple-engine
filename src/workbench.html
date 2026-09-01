@@ -581,7 +581,7 @@ function renderRead(d, src){
   // History vs the tape right now — align the article to live market data.
   const al=d.market_alignment;
   if(al){ const sc=al.stance==="diverging"?"warn":al.stance==="confirming"?"pos":"";
-    h+=`<div class="rd-align ${sc}"><div class="rd-align-h">History vs the tape right now</div>
+    h+=`<div class="rd-align ${sc}"><div class="rd-align-h">The oil market's posture right now · market-wide</div>
       <div class="rd-align-body">History: this class typically moved oil a median <b>${f1(al.history_median_pct)}%</b>. The tape now: Brent <span class="${cls(al.brent_chg5d)}">${mnum(al.brent_chg5d,1)}% 5d</span>, geopolitical risk ${esc(al.gpr_band||"—")}. <b>${esc(al.read)}</b></div>
       ${al.transmission_verdict?`<div class="disc" style="margin-top:8px">${esc(al.transmission_verdict)}</div>`:""}</div>`;
   }
