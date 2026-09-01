@@ -50,6 +50,52 @@ def _reaction_read(avg, lo, hi):
             if abs(avg or 0) * 4 < (spread or 0) else "directional")
 
 
+def _asof(cur, series_id, date):
+    r = cur.execute("SELECT value FROM observations WHERE series_id=? AND obs_date<=? "
+                    "ORDER BY obs_date DESC LIMIT 1", (series_id, date)).fetchone()
+    return r[0] if r else None
+
+
+def state_context(cur, events):
+    """The 'then vs now' differencing, through the VALIDATED conditioner (H1: VIX stress
+    amplifies the oil ripple; H2 inventories / H3 positioning are REJECTED, shown as context
+    only). Point-in-time: VIX percentile as-of each past event date vs the current reading.
+    This is why history rhymes rather than repeats — the SAME shock lands in a different
+    world-state, so the measured reaction above must be read up or down accordingly."""
+    import statistics
+    bs = {r[0]: r[1] for r in cur.execute("SELECT variable_id, value FROM belief_state")}
+    now_vix = bs.get("derived.vix_pct")
+    thens = [v for v in (_asof(cur, "derived.vix_pct", e["date"]) for e in events) if v is not None]
+    if not thens or now_vix is None:
+        return {"available": False}
+    past_median = round(statistics.median(thens), 1)
+    share_on = round(100 * sum(1 for v in thens if v >= 50) / len(thens))
+    now_on = now_vix >= 50
+    if now_vix < past_median - 10:
+        read = (f"Today's stress is LOWER than most of these analogs (VIX {now_vix:.0f}th pct "
+                f"now vs ~{past_median:.0f}th typical then). Under the validated H1 edge, stress "
+                f"amplifies the oil ripple — so today is a DAMPENING regime and the measured "
+                f"reactions above likely OVERSTATE the move a similar shock would cause now.")
+    elif now_vix > past_median + 10:
+        read = (f"Today's stress is HIGHER than most of these analogs (VIX {now_vix:.0f}th pct "
+                f"now vs ~{past_median:.0f}th typical then). Under H1, stress amplifies the oil "
+                f"ripple — today is an AMPLIFYING regime, so a similar shock could move more "
+                f"than the measured averages above.")
+    else:
+        read = (f"Today's stress (VIX {now_vix:.0f}th pct) is broadly in line with these analogs "
+                f"(~{past_median:.0f}th typical). H1 conditioning is roughly neutral vs history.")
+    return {
+        "available": True,
+        "conditioner": "H1 — VIX stress (validated; H2 inventories & H3 positioning rejected)",
+        "now": {"vix_pct": now_vix, "inv_sigma": bs.get("derived.inv_sigma"),
+                "cot_pct": bs.get("derived.cot_pct"), "regime": "stress-ON" if now_on else "stress-OFF"},
+        "then": {"vix_pct_median": past_median, "pct_events_stress_on": share_on, "n": len(thens)},
+        "read": read,
+        "context_note": "inv_sigma (inventories) and cot_pct (positioning) shown as context; "
+                        "both were tested as amplifiers and REJECTED — not used to condition the read.",
+    }
+
+
 def _crit_exposure(country_slug):
     """Strategic commodities this country is supply-critical for (sourced)."""
     try:
@@ -159,6 +205,8 @@ def trace(entity=None, series=None, situation=None):
         """SELECT from_node, to_node, lag, strength, mechanism FROM propagation_edges
            WHERE status='validated' ORDER BY ABS(strength) DESC LIMIT 12""")]
 
+    state_ctx = state_context(cur, events) if events else {"available": False}
+
     anchor_live = None
     s = _series_for_entity(cur, entity_id)
     if s:
@@ -168,6 +216,7 @@ def trace(entity=None, series=None, situation=None):
 
     return {
         "anchor": ent, "anchor_live": anchor_live,
+        "state_context": state_ctx,
         "n_events_involving": len(events),
         "events_involving": events[:20],
         "measured_reactions": reactions,

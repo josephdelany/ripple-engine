@@ -41,6 +41,9 @@
  a{color:var(--accent);text-decoration:none} .foot{color:var(--dim);font:11px var(--mono);margin:22px 0 50px;border-top:1px solid var(--line);padding-top:10px}
  .spin{color:var(--faint);padding:40px;text-align:center;font:12px var(--mono)}
  .live{color:var(--ink)}
+ .statebox{background:var(--bg1);border:1px solid var(--gold);border-radius:8px;padding:12px 14px;margin:14px 0}
+ .statebox .tn{display:flex;gap:22px;align-items:center;font:13px var(--mono);margin:6px 0}
+ .statebox .read{font-size:13px;line-height:1.5;color:var(--ink);margin-top:6px}
 </style></head><body>
 <div class="mast">
   <div class="logo"><b>◆ RIPPLE</b> SHOCK-TRACER</div>
@@ -59,6 +62,8 @@ function sgn(v){return v>0?'up':(v<0?'down':'flat')}
 async function loadAnchors(){
   ANCHORS=await api('/trace_entities'); render();
   $('#q').oninput=render;
+  const pe=new URLSearchParams(location.search).get('entity');   // deep-link: /trace_view?entity=country.iran
+  if(pe){ const el=$('#anchors').querySelector(`.it[data-id="${pe}"]`); if(el) el.classList.add('sel'); go(pe); }
 }
 function render(){
   const f=($('#q').value||'').toLowerCase(); let h='';
@@ -78,6 +83,16 @@ async function go(entity){
   const d=await api('/trace?entity='+encodeURIComponent(entity));
   if(d.error){$('#main').innerHTML='<div class="spin">'+esc(d.error)+'</div>';return;}
   const a=d.anchor, live=d.anchor_live&&d.anchor_live.live;
+  const sc=d.state_context;
+  const scHtml=(sc&&sc.available)?`<div class="statebox">
+    <div class="lbl" style="border:0;margin:0">Then vs Now — world-state conditioning <span class="chip">${esc(sc.conditioner)}</span></div>
+    <div class="tn"><div><span class="faint">NOW</span><br><b>VIX ${(+sc.now.vix_pct).toFixed(0)}th</b> pct · ${esc(sc.now.regime)}<br>
+        <span class="faint">inv ${sc.now.inv_sigma!=null?(+sc.now.inv_sigma).toFixed(1)+'σ':'—'} · COT ${sc.now.cot_pct!=null?(+sc.now.cot_pct).toFixed(0)+'th':'—'}</span></div>
+      <div style="font-size:22px;color:var(--dim)">→</div>
+      <div><span class="faint">THEN · these ${sc.then.n} events</span><br><b>VIX ~${(+sc.then.vix_pct_median).toFixed(0)}th</b> median<br>
+        <span class="faint">${sc.then.pct_events_stress_on}% landed in stress-ON</span></div></div>
+    <div class="read">${esc(sc.read)}</div>
+    <div class="faint" style="font-size:10px;margin-top:4px">${esc(sc.context_note)}</div></div>`:'';
   const R=d.measured_reactions||[]; const mx=Math.max(1,...R.map(r=>Math.abs(r.avg20||0)));
   const bars=R.map(r=>{ const v=r.avg20||0, w=Math.abs(v)/mx*50, l=r.live;
     return `<div class="rrow"><div class="nm">${esc(r.name)}</div>
@@ -92,6 +107,7 @@ async function go(entity){
   $('#main').innerHTML=`
     <h2>${esc(a.name)} <span class="chip">${esc(a.type)}</span></h2>
     <div class="sub">${d.n_events_involving} corpus events involve this entity${live?` · anchor live ${(+live.value).toFixed(2)} (${esc(d.anchor_live.name)}, as of ${live.obs_date})`:''}</div>
+    ${scHtml}
     <div class="lbl">The ripple — what this entity's real events actually moved (measured, 20-day CAR)</div>
     ${R.length?bars:'<div class="faint">no measured reactions on record</div>'}
     ${exp?`<div class="lbl">Physical exposure — strategic commodities it is supply-critical for (sourced)</div><div>${exp}</div>`:''}
