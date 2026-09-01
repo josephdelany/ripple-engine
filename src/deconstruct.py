@@ -33,7 +33,10 @@ DB = ROOT / "data" / "oil.db"
 OPINION = re.compile(r"\b(i believe|i think|in my view|we must|we should|it is clear that|"
                      r"make no mistake|frankly|the truth is|arguably|one might argue|"
                      r"i argue|i suspect|should have|ought to|op-?ed|opinion|commentary)\b", re.I)
-FIRST_PERSON = re.compile(r"\b(I|we|our|my|us)\b")
+FIRST_PERSON = re.compile(r"\b(I|we|our|my)\b")            # NB: not "us"/"US" (matches United States)
+HYPO = re.compile(r"\b(could|would|may|might|if|possibly|potentially|threaten\w*|were to|risk of)\b", re.I)
+CONCRETE = re.compile(r"\b(announced?|impos\w*|reimpos\w*|signed?|struck|seiz\w*|closed?|halt\w*|"
+                      r"bann\w*|launch\w*|cut|raised?|declared?)\b", re.I)
 FIGURE = re.compile(r"(\$\s?\d[\d,.]*\s?(?:billion|million|trillion|bn|bbl|barrels?|bpd|%)?"
                     r"|\b\d[\d,.]*\s?(?:%|percent|billion|million|trillion|barrels?|bpd|"
                     r"basis points|bps|mb/?d)\b)", re.I)
@@ -55,10 +58,11 @@ def article_type(text):
     words = max(len((text or "").split()), 1)
     op = len(OPINION.findall(text or ""))
     fp = len(FIRST_PERSON.findall(text or ""))
-    density = (op * 4 + fp) / (words / 1000.0)
-    is_op = op >= 3 or density > 12
+    # density only meaningful on a real article (>=150 words); short inputs lean on the marker count
+    density = round((op * 4 + fp) / (words / 1000.0), 1) if words >= 150 else None
+    is_op = op >= 3 or (density is not None and density > 12)
     return {"type": "opinion" if is_op else "fact",
-            "opinion_markers": op, "first_person": fp, "density_per_1k": round(density, 1),
+            "opinion_markers": op, "first_person": fp, "density_per_1k": density,
             "note": ("Reads as an op-ed. The engine evaluates each assertion against measured "
                      "data rather than accepting the writer's synthesis." if is_op else
                      "Reads as reportage. Each claim is still bound to the measured evidence below.")}
@@ -109,8 +113,12 @@ def claims(conn, text, k=9):
         if not (etype or ents or figs or ASSERT.search(s)):
             continue
         seen.add(key)
+        # A hypothetical clause ("Iran could close Hormuz") is a possibility, not an event -- the
+        # base rate is for events that occurred, so we answer it as "if it occurs".
+        hypo = bool(HYPO.search(s)) and not bool(CONCRETE.search(s))
         out.append({"text": s, "entities": ents, "event_class": etype, "figures": figs,
-                    "assertive": bool(ASSERT.search(s))})
+                    "assertive": bool(ASSERT.search(s)),
+                    "modality": "hypothetical" if hypo else "asserted"})
     # rank the most evidence-bearing claims first
     out.sort(key=lambda c: (bool(c["event_class"]), len(c["entities"]), len(c["figures"]),
                             c["assertive"]), reverse=True)
@@ -136,27 +144,33 @@ def _evidence(et, qr, prec):
     }
 
 
-def _verdict(et, qr):
-    """The engine's one-line answer to a claim -- rendered by the numbers, not an opinion."""
+def _verdict(et, qr, hypothetical=False):
+    """The engine's one-line answer to a claim, rendered by the numbers. 'Materially larger' is
+    claimed ONLY when the class median's 90% CI clears the everyday baseline (not a knife-edge
+    percentile); the heavy TAIL is always cited (a fat-tailed class whose typical move is ordinary
+    can still have a huge worst case -- never say 'ordinary' next to a 51% precedent); small samples
+    are flagged; a hypothetical clause is answered as 'if it occurs', not as an event."""
     if not et:
-        return {"stance": "no measured class", "text": "This claim does not map to an event class "
-                "the engine measures — no market read."}
+        return {"stance": "no_class", "text": "This claim doesn't map to an event class the engine "
+                "measures — no market read."}
     if not qr:
         return {"stance": "insufficient", "text": f"'{et}' has no measured precedent in the corpus."}
-    p = (qr["baseline"] or {}).get("class_median_percentile")
-    med = qr["abs_car20"]["median_pct"]
-    if p is None:
-        return {"stance": "measured", "text": f"History (n={qr['n']}): median 20-day oil move {med}%."}
-    if p < 60:
-        return {"stance": "not_distinguishable",
-                "text": (f"History (n={qr['n']} {et} events): a median {med}% 20-day oil move — only the "
-                         f"{BR._ordinal(p)} percentile of ordinary moves, i.e. not clearly distinguishable "
-                         f"from everyday volatility. The market impact of this claim's event class is, on "
-                         f"the record, ordinary.")}
-    return {"stance": "material",
-            "text": (f"History (n={qr['n']} {et} events): a median {med}% 20-day oil move — the "
-                     f"{BR._ordinal(p)} percentile of ordinary moves, meaningfully larger than everyday "
-                     f"volatility. Size, not direction (≈{qr['direction']['up_pct']}% up).")}
+    a = qr["abs_car20"]; base = qr["baseline"]
+    p = base.get("class_median_percentile"); med = a["median_pct"]
+    om = base.get("ordinary_median_pct"); ci_lo = (a.get("ci90_median_pct") or [None])[0]
+    rng_hi = a["range_pct"][1]; n = qr["n"]; gate = qr["gate"]
+    small = f" Small sample (n={n}) — treat as indicative." if gate != "full" else ""
+    iff = "If it occurs, " if hypothetical else ""
+    tail = f" The class is fat-tailed: the worst case on record moved {rng_hi}%."
+    pc = f"the {BR._ordinal(p)} percentile of ordinary moves" if p is not None else "of uncertain rank"
+    if om is not None and ci_lo is not None and ci_lo > om:
+        return {"stance": "material",
+                "text": (f"{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc}, and "
+                         f"its 90% CI clears the everyday baseline (~{om}%), so **materially larger than "
+                         f"normal**.{tail}{small}")}
+    return {"stance": "in_line",
+            "text": (f"{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc} (everyday "
+                     f"median ~{om}%), so the TYPICAL move is in line with normal oil volatility.{tail}{small}")}
 
 
 def public_sentiment(conn, ents, etype):
@@ -209,7 +223,7 @@ def deconstruct(arg):
         et = c["event_class"]
         pc = per_class.get(et, {})
         c["evidence"] = _evidence(et, pc.get("quant"), pc.get("precedent"))
-        c["verdict"] = _verdict(et, pc.get("quant"))
+        c["verdict"] = _verdict(et, pc.get("quant"), hypothetical=(c.get("modality") == "hypothetical"))
     # Dominant class = the class the article's claims MOST refer to (salience), tie-broken by
     # sample size. More robust than a priority-ordered full-text classify (which would pick a
     # chokepoint mentioned once in a retaliation clause over the article's actual sanctions topic).
@@ -218,7 +232,10 @@ def deconstruct(arg):
     dominant = (max(freq, key=lambda e: (freq[e], per_class[e]["quant"]["n"]
                     if per_class.get(e, {}).get("quant") else 0)) if freq else None)
     mn = BR.market_now(conn)
-    sentiment = public_sentiment(conn, all_ents, dominant)
+    # Only surface the (global) public-mood signals when the article actually has a measurable
+    # geopolitical/market class -- otherwise showing "geopolitical risk 93rd pct" on an unrelated
+    # article overclaims (an unrelated signal presented as if about the input).
+    sentiment = public_sentiment(conn, all_ents, dominant) if dominant else {}
     conn.close()
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
     return {
@@ -236,22 +253,26 @@ def deconstruct(arg):
 
 
 def _headline_read(at, cs, per_class, dominant, n_material):
-    """The one honest sentence at the top: what the DATA says about this article's central claim."""
+    """The one honest sentence at the top: what the DATA says about this article's central claim.
+    States the typical move AND the tail (never 'ordinary' alone on a fat-tailed class), and only
+    claims 'materially larger' when the median's 90% CI clears the everyday baseline."""
     if not dominant or not per_class.get(dominant, {}).get("quant"):
         return ("No claim in this article maps to an event class the engine measures — the data offers "
                 "no market read on it.")
-    qr = per_class[dominant]["quant"]; p = (qr["baseline"] or {}).get("class_median_percentile")
-    med = qr["abs_car20"]["median_pct"]
+    qr = per_class[dominant]["quant"]; a = qr["abs_car20"]; base = qr["baseline"]
+    p = base.get("class_median_percentile"); med = a["median_pct"]
+    om = base.get("ordinary_median_pct"); ci_lo = (a.get("ci90_median_pct") or [None])[0]
+    rng_hi = a["range_pct"][1]
     kind = "opinion piece" if at["type"] == "opinion" else "report"
-    if p is not None and p < 60:
-        return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of "
-                f"that class moved oil a median {med}% over 20 days — the {BR._ordinal(p)} percentile of "
-                f"ordinary moves, i.e. **not distinguishable from everyday volatility**. The data does not "
-                f"support treating this as a large market event, whatever the framing.")
-    return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of that "
-            f"class moved oil a median {med}% over 20 days — the {BR._ordinal(p)} percentile of ordinary "
-            f"moves, **materially larger than everyday volatility** (size, not direction). "
-            f"{n_material} of {len(cs)} claims map to a measurably material class.")
+    tail = f" — but the class is fat-tailed, with a worst case of {rng_hi}% on record"
+    if om is not None and ci_lo is not None and ci_lo > om:
+        return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of that "
+                f"class moved oil a median **{med}%** over 20 days — the {BR._ordinal(p)} percentile of "
+                f"ordinary moves, **materially larger than everyday volatility**{tail}. Size, not direction.")
+    return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), the TYPICAL 20-day "
+            f"oil move was **{med}%** — about the {BR._ordinal(p)} percentile of ordinary moves (everyday "
+            f"median ~{om}%){tail}. So the central move is usually in line with normal volatility, though the "
+            f"tail is real; the framing outruns the median.")
 
 
 # --- CLI ----------------------------------------------------------------------------------

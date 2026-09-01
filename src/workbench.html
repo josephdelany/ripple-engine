@@ -174,11 +174,16 @@
   .rd-claim{ padding:24px 0; border-bottom:1px solid var(--line); }
   .rd-quote{ font:400 17px/1.62 ui-serif,"New York",Georgia,serif; color:var(--ink-max); margin:0; }
   .rd-quote:before{ content:"“"; color:var(--faint); } .rd-quote:after{ content:"”"; color:var(--faint); }
-  .rd-verdict{ display:flex; gap:11px; margin-top:14px; font-size:13.5px; line-height:1.6; color:var(--ink2); align-items:flex-start; }
-  .rd-verdict .dot{ flex:0 0 auto; width:9px; height:9px; border-radius:50%; margin-top:6px; background:var(--faint); }
-  .rd-verdict.material .dot{ background:var(--accent); } .rd-verdict.material{ color:var(--ink); }
-  .rd-verdict.not_distinguishable .dot{ background:var(--pos); }
-  .rd-verdict.insufficient .dot, .rd-verdict.no_measured_class .dot{ background:var(--faint); }
+  .rd-verdict{ display:flex; gap:11px; margin-top:14px; font-size:13.5px; line-height:1.62; color:var(--ink); align-items:flex-start; }
+  .rd-verdict b{ color:var(--ink-hi); }
+  .rd-verdict .dot{ flex:0 0 auto; width:9px; height:9px; border-radius:50%; margin-top:6px; background:var(--dim); }
+  .rd-verdict.material .dot{ background:var(--accent); }
+  .rd-verdict.in_line .dot{ background:var(--dim); }
+  .rd-verdict.insufficient .dot, .rd-verdict.no_class .dot{ background:var(--faint); }
+  .rd-legend{ font:var(--t-cap) var(--mono); color:var(--faint); margin:2px 0 4px; display:flex; gap:16px; flex-wrap:wrap; }
+  .rd-legend .lg{ display:inline-flex; gap:6px; align-items:center; }
+  .rd-legend .d{ width:8px; height:8px; border-radius:50%; }
+  .rd-legend .d.m{ background:var(--accent); } .rd-legend .d.i{ background:var(--dim); } .rd-legend .d.n{ background:var(--faint); }
   .rd-tags{ margin-top:10px; display:flex; gap:7px; flex-wrap:wrap; }
   .rd-ev{ margin-top:12px; }
   .rd-ev summary{ font:var(--t-cap) var(--mono); color:var(--info); cursor:pointer; letter-spacing:.3px; }
@@ -536,24 +541,32 @@ function renderRead(d, src){
   h+=`<h1 class="rd-head">${md(d.headline_read)}</h1>`;
   h+=`<div class="rd-src">${srcName?esc(srcName)+" · ":""}${srcUrl?`<a href="${esc(srcUrl)}" target="_blank" rel="noopener">read the original ↗</a> · `:""}<span>${d.n_claims} claims examined</span></div>`;
   if(at.note) h+=`<div class="rd-lead">${esc(at.note)}</div>`;
-  h+=`<div class="rd-section">Claim by claim — what the data says</div>`;
-  (d.claims||[]).forEach(c=>{ const v=c.verdict||{}, st=(v.stance||"").replace(/[^a-z_]/g,"");
-    h+=`<div class="rd-claim"><p class="rd-quote">${esc(c.text)}</p>`;
-    h+=`<div class="rd-verdict ${st}"><span class="dot"></span><span>${esc(v.text||"")}</span></div>`;
-    const tags=[]; if(c.event_class) tags.push(c.event_class); (c.entities||[]).slice(0,3).forEach(e=>tags.push(String(e).split(".").pop())); (c.figures||[]).forEach(f=>tags.push(f));
-    if(tags.length) h+=`<div class="rd-tags">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
-    const ev=c.evidence;
-    if(ev){ const pr=ev.nearest_precedent;
-      h+=`<details class="rd-ev"><summary>the measured evidence →</summary><div class="body"><div class="kv">
-        <span class="k">base rate</span><span>median 20-day move ${f1(ev.median_move_pct)}% · typical ${f1(ev.iqr_pct[0])}–${f1(ev.iqr_pct[1])}% · n=${ev.n} · ${ord(ev.class_percentile)} pct of ordinary moves</span>`
-        +(pr?`<span class="k">nearest precedent</span><span>${esc(pr.date)} — ${esc((pr.title||"").slice(0,60))} ${pr.abs_car20_pct!=null?"("+f1(pr.abs_car20_pct)+"%)":""} ${pr.source_url?`<a href="${esc(pr.source_url)}" target="_blank" rel="noopener">↗</a>`:""}</span>`:"")
-        +(ev.cross_asset&&ev.cross_asset.length?`<span class="k">cross-asset</span><span>${ev.cross_asset.map(a=>`${esc(a.label)} ${mnum(a.car20,1)}${a.unit==="%"?"%":"bps"}`).join(" · ")}</span>`:"")
-        +`</div><div class="rd-cta"><button onclick='analyzeClaim(${JSON.stringify(c.text)})'>full quant read →</button></div></div></details>`;
-    }
-    h+=`</div>`;
-  });
+  const claims=d.claims||[];
+  if(!claims.length){
+    h+=`<div class="rd-lead" style="margin-top:24px">No claim in this article maps to an event class the engine measures, so there is nothing to bind to the record. Paste an oil/markets/geopolitics story to see the data read it.</div>`;
+  } else {
+    h+=`<div class="rd-section">Claim by claim — what the data says</div>`;
+    h+=`<div class="rd-legend"><span class="lg"><span class="d m"></span>materially larger than normal</span><span class="lg"><span class="d i"></span>typical move in line</span><span class="lg"><span class="d n"></span>no measured class</span></div>`;
+    claims.forEach((c,idx)=>{ const v=c.verdict||{}, st=(v.stance||"no_class").replace(/[^a-z_]/g,"");
+      h+=`<div class="rd-claim"><p class="rd-quote">${esc(c.text)}</p>`;
+      h+=`<div class="rd-verdict ${st}"><span class="dot"></span><span>${md(v.text||"")}</span></div>`;
+      const tags=[]; if(c.event_class) tags.push(c.event_class); if(c.modality==="hypothetical") tags.push("hypothetical");
+      (c.entities||[]).slice(0,3).forEach(e=>tags.push(String(e).split(".").pop())); (c.figures||[]).forEach(f=>tags.push(f));
+      if(tags.length) h+=`<div class="rd-tags">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+      const ev=c.evidence;
+      if(ev){ const pr=ev.nearest_precedent;
+        h+=`<details class="rd-ev"><summary>the measured evidence →</summary><div class="body"><div class="kv">
+          <span class="k">base rate</span><span>median 20-day move ${f1(ev.median_move_pct)}% · typical ${f1(ev.iqr_pct[0])}–${f1(ev.iqr_pct[1])}% · n=${ev.n}${ev.gate&&ev.gate!=="full"?" (small sample)":""} · ${ord(ev.class_percentile)} pct of ordinary moves</span>`
+          +(pr?`<span class="k">nearest precedent</span><span>${esc(pr.date)} — ${esc((pr.title||"").slice(0,60))} ${pr.abs_car20_pct!=null?"("+f1(pr.abs_car20_pct)+"%)":""} ${pr.source_url?`<a href="${esc(pr.source_url)}" target="_blank" rel="noopener">↗</a>`:""}</span>`:"")
+          +(ev.cross_asset&&ev.cross_asset.length?`<span class="k">cross-asset</span><span>${ev.cross_asset.map(a=>`${esc(a.label)} ${mnum(a.car20,1)}${a.unit==="%"?"%":"bps"}`).join(" · ")}</span>`:"")
+          +`</div><div class="rd-cta"><button data-claim-idx="${idx}">full quant read →</button></div></div></details>`;
+      }
+      h+=`</div>`;
+    });
+  }
+  // Public mood ONLY when the article has a measurable class (else global signals would overclaim).
   const ps=d.public_sentiment||{};
-  if(Object.keys(ps).filter(k=>k!=="note").length){
+  if(d.dominant_class && Object.keys(ps).filter(k=>k!=="note").length){
     h+=`<div class="rd-mood"><h4>Public mood — sentiment as data</h4>`;
     const g=ps.geopolitical_risk; if(g) h+=`<div class="row"><span class="k">geopolitical risk</span><span>${ord(g.percentile)} percentile — ${esc(g.band||"")} <span class="faint">${esc(g.posture||"")}</span></span></div>`;
     if(ps.coverage_tone) h+=`<div class="row"><span class="k">coverage tone</span><span>${ps.coverage_tone.map(t=>`${esc(t.topic)} <span class="${(t.tone||0)<0?"neg":"pos"}">${esc(t.mood||"")}</span>`).join(" · ")}</span></div>`;
@@ -561,10 +574,13 @@ function renderRead(d, src){
     if(ps.conflict_media) h+=`<div class="row"><span class="k">conflict media</span><span>${ps.conflict_media.map(a=>`${esc(a.situation)} ${esc(a.band)}`).join(" · ")}</span></div>`;
     h+=`<div class="disc" style="margin-top:10px">${esc(ps.note||"")}</div></div>`;
   }
-  h+=`<div class="rd-cta">${(d.claims&&d.claims.length)?`<button class="primary" onclick='analyzeClaim(${JSON.stringify(d.claims[0].text)})'>Full quant brief on the central event →</button>`:""}
+  h+=`<div class="rd-cta">${claims.length?`<button class="primary" id="rdCentral">Full quant brief on the central event →</button>`:""}
       <button class="ghost" onclick="window.print()">Print / PDF</button></div>`;
   h+=`<div class="rd-foot">${esc(d.discipline||"")} · latency ${d.latency_ms}ms</div></div>`;
   $("brief").innerHTML=h;
+  // apostrophe-safe wiring (never interpolate claim text into an inline handler)
+  $("brief").querySelectorAll("[data-claim-idx]").forEach(b=>b.addEventListener("click",()=>analyzeClaim(claims[+b.dataset.claimIdx].text)));
+  const cen=$("rdCentral"); if(cen&&claims[0]) cen.addEventListener("click",()=>analyzeClaim(claims[0].text));
 }
 
 /* ---------------- sources (today + search) ---------------- */

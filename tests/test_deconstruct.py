@@ -34,9 +34,27 @@ def test_dc2_dominant_is_the_topic_not_a_side_mention():
 
 
 def test_dc3_verdict_stances_are_measured_labels():
-    allowed = {"material", "not_distinguishable", "insufficient", "measured", "no measured class"}
+    allowed = {"material", "in_line", "insufficient", "no_class"}
     for c in D.deconstruct(BESSENT)["claims"]:
         assert c["verdict"]["stance"] in allowed
+
+
+def test_dc7_no_verdict_calls_a_fat_tailed_class_ordinary_without_the_tail():
+    """The reviewer's honesty gate: an 'in_line' verdict must still cite the class tail (never
+    say 'ordinary' while hiding a large worst-case precedent)."""
+    for c in D.deconstruct(BESSENT)["claims"]:
+        v = c["verdict"]
+        if v["stance"] == "in_line" and c.get("evidence"):
+            assert "fat-tailed" in v["text"] or "worst case" in v["text"]
+
+
+def test_dc8_hypothetical_clause_is_flagged():
+    """A conditional retaliation clause is answered 'if it occurs', not as an event."""
+    d = D.deconstruct(BESSENT)
+    hypo = [c for c in d["claims"] if c.get("modality") == "hypothetical"]
+    for c in hypo:
+        if c.get("evidence"):
+            assert c["verdict"]["text"].lower().startswith("if it occurs")
 
 
 def test_dc4_opinion_vs_fact_detected():
