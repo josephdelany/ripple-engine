@@ -55,6 +55,7 @@
   button:hover{ border-color:var(--info); color:var(--ink-hi); } button:active{ transform:translateY(0.5px); }
   button.primary{ background:var(--primary-bg); border-color:var(--primary-line); color:var(--primary-ink); }
   button.ghost{ background:transparent; }
+  button.sel{ border-color:var(--info); color:var(--ink-hi); background:var(--bg3); }
 
   /* 3-column grid */
   .wrap{ display:grid; grid-template-columns:300px minmax(0,1fr) 330px; min-height:calc(100vh - 100px); }
@@ -185,6 +186,7 @@
   <input id="q" type="text" placeholder="Paste any headline, paragraph, or article URL — then press Enter to read it…">
   <button class="primary" onclick="analyze()">Read it</button>
   <button onclick="loadDaily()">Daily Brief</button>
+  <button id="navDb" onclick="showView('db')">Database</button>
   <button class="ghost" onclick="window.print()">Print / PDF</button>
 </div>
 
@@ -193,17 +195,18 @@
   <aside class="sources no-print">
     <div class="tabs">
       <button id="tabToday" class="sel" onclick="showTab('today')">Today</button>
-      <button id="tabSearch" onclick="showTab('search')">Search news</button>
+      <button id="tabSearch" onclick="showTab('search')">Web search</button>
     </div>
     <div id="paneSearch" style="display:none" class="srch">
-      <input id="asq" type="text" placeholder="search real articles — hormuz, opec, sanctions, iran…">
+      <input id="asq" type="text" placeholder="search the global press (GDELT) — any topic, e.g. Larak Island strike">
+      <div id="coverage" class="disc" style="margin-bottom:8px"></div>
     </div>
     <div class="meta" id="srcMeta" style="font:var(--t-micro) var(--mono);color:var(--faint);margin-bottom:8px"></div>
     <div class="list" id="srcList"><div class="spin">loading…</div></div>
   </aside>
 
-  <!-- THE BRIEF -->
-  <main><div class="brief" id="brief"></div></main>
+  <!-- THE BRIEF / DATABASE -->
+  <main><div class="brief" id="brief"></div><div id="dbview" style="display:none"></div></main>
 
   <!-- NOTES & DRAFT -->
   <aside class="notes no-print">
@@ -355,20 +358,20 @@ function setChips(b){
 function skeleton(){ return `<div class="skel w-lead"></div><div class="skel w-3"></div><div class="skel w-2"></div><div style="height:24px"></div><div class="skel w-3"></div><div class="skel"></div><div class="skel w-2"></div>`; }
 function errorBox(msg){ return `<div class="errbox"><div class="k">Unavailable</div><div style="margin-top:6px">${esc(msg)}</div><div class="rail-actions"><button onclick="loadDaily()">Daily brief</button></div></div>`; }
 
-async function loadDaily(){ $("brief").innerHTML=skeleton();
+async function loadDaily(){ showDesk(); $("brief").innerHTML=skeleton();
   try{ const b=await getJSON("/wb_daily_brief"); let src=null;
     if(b.story && b.story.url){ src=await extractFor(b.story.url, b.story.source); }
     renderBrief(b, src); }
   catch(e){ $("brief").innerHTML=errorBox("Couldn't load the daily brief. Is the backend running? (python3 src/backend.py)"); } }
 
-async function analyze(){ const t=$("q").value.trim(); if(!t) return; $("brief").innerHTML=skeleton();
+async function analyze(){ const t=$("q").value.trim(); if(!t) return; showDesk(); $("brief").innerHTML=skeleton();
   try{ const b=await postJSON("/wb_brief",{text:t}); let src=null;
     if(isURL(t)) src=await extractFor(t, "");
     renderBrief(b, src); }
   catch(e){ $("brief").innerHTML=errorBox("The read request failed."); } }
 
 async function openArticle(headline,url,source){
-  $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
+  showDesk(); $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
   try{ const [b,src]=await Promise.all([ postJSON("/wb_brief",{text:headline,source:source||"",url:url||""}),
         url?extractFor(url,source):Promise.resolve(null) ]);
     renderBrief(b, src||{source,url,excerpt:null}); }
@@ -488,7 +491,7 @@ async function drawBrentSpark(){ try{ const d=await getJSON("/wb_series?series=f
 let curTab="today";
 function showTab(t){ curTab=t; $("tabToday").classList.toggle("sel",t==="today"); $("tabSearch").classList.toggle("sel",t==="search");
   $("paneSearch").style.display=t==="search"?"block":"none";
-  if(t==="today") loadToday(); else { $("asq").focus(); searchArticles(); } }
+  if(t==="today") loadToday(); else { $("asq").focus(); searchNews(); } }
 function renderArticles(items, meta){
   $("srcMeta").textContent=meta||"";
   $("srcList").innerHTML=items.length?items.map(it=>{ const fc=it.flag==="supported"?"fl-supported":it.flag==="thin data"?"fl-thin":"fl-not";
@@ -501,10 +504,62 @@ function renderArticles(items, meta){
 async function loadToday(){ $("srcList").innerHTML='<div class="spin">loading…</div>';
   try{ const d=await getJSON("/wb_today?limit=30"); renderArticles(d.items||[], d.day?`${d.day} · ${d.n_classified} classified`:""); }
   catch(e){ $("srcList").innerHTML='<div class="empty">feed unavailable</div>'; } }
-let asT=null; function schedArticles(){ clearTimeout(asT); asT=setTimeout(searchArticles,250); }
-async function searchArticles(){ const q=$("asq").value.trim(); $("srcList").innerHTML='<div class="spin">searching…</div>';
-  try{ const d=await getJSON("/wb_articles?q="+encodeURIComponent(q)+"&limit=40"); renderArticles(d.items||[], `${d.n} article(s)${q?` for “${q}”`:""}`); }
-  catch(e){ $("srcList").innerHTML='<div class="empty">search unavailable</div>'; } }
+let asT=null; function schedNews(){ clearTimeout(asT); asT=setTimeout(searchNews,500); }
+function fmtGdeltDate(s){ return s&&s.length>=8?`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`:esc(s); }
+async function searchNews(){ const q=$("asq").value.trim();
+  if(!q){ $("srcList").innerHTML='<div class="empty">Type a topic to search the global press.</div>'; $("coverage").innerHTML=""; $("srcMeta").textContent=""; return; }
+  $("srcList").innerHTML='<div class="spin">searching the global press (GDELT)…</div>'; $("coverage").innerHTML="";
+  try{ const d=await getJSON("/wb_news_search?q="+encodeURIComponent(q)+"&timespan=1week&max=150");
+    if(!d.ok){ $("srcList").innerHTML=`<div class="empty">${esc(d.note||d.error||"no results")}</div>`; return; }
+    const c=d.coverage||{};
+    $("coverage").innerHTML=`<b class="num">${c.n_articles}</b> articles · <b class="num">${c.n_domains}</b> outlets · <b class="num">${c.n_countries}</b> countries`
+      +(c.top_countries&&c.top_countries.length?` · <span class="faint">${c.top_countries.slice(0,5).map(x=>esc(x[0])).join(" · ")}</span>`:"")
+      +`<br><span class="faint">${esc(d.attribution||"")} — source diversity, not political bias</span>`;
+    $("srcMeta").textContent="";
+    const items=d.articles||[];
+    $("srcList").innerHTML=items.length?items.map(it=>`<div class="item" tabindex="0" role="button" data-hl="${esc(it.title||"")}" data-url="${esc(it.url||"")}" data-src="${esc(it.domain||"")}">
+        <div class="hl">${esc(it.title||it.url||"")}</div>
+        <div class="sub">${it.country?`<span class="tag">${esc(it.country)}</span>`:""}<span class="faint">${esc(it.domain||"")}</span>${it.seendate?`<span class="faint">${fmtGdeltDate(it.seendate)}</span>`:""}</div></div>`).join("")
+      :'<div class="empty">No articles found. Try a broader phrase.</div>';
+  }catch(e){ $("srcList").innerHTML='<div class="empty">search unavailable</div>'; } }
+
+/* ---------------- database explorer ---------------- */
+function showDesk(){ $("dbview").style.display="none"; $("brief").style.display="block"; $("navDb").classList.remove("sel"); }
+function showView(v){ const db=v==="db"; $("dbview").style.display=db?"block":"none"; $("brief").style.display=db?"none":"block";
+  $("navDb").classList.toggle("sel",db); if(db) loadDbTables(); }
+async function loadDbTables(){ const v=$("dbview"); v.innerHTML='<div class="spin">loading engine database…</div>';
+  try{ renderDb((await getJSON("/wb_db_tables")).tables||[]); }catch(e){ v.innerHTML=errorBox("Couldn't load the database."); } }
+function dbTable(cols,rows){ if(!cols||!cols.length) return '<div class="empty">no columns</div>';
+  return '<div style="overflow:auto"><table class="grid"><tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join("")+"</tr>"
+    +rows.map(r=>"<tr>"+r.map(v=>`<td>${esc(v==null?"":String(v)).slice(0,140)}</td>`).join("")+"</tr>").join("")+"</table></div>"; }
+function renderDb(tables){
+  let h=`<div class="kicker">Engine Database · data/oil.db · read-only</div>
+    <div class="bluf" style="font-size:16px">Explore the actual engine database.</div>
+    <div class="disc" style="max-width:68ch;margin-bottom:14px">Every table the engine writes. Click one to browse rows, or run a read-only SELECT. Writes, drops, ATTACH, PRAGMA and multi-statements are rejected — the canonical DB is append-only and never touched here.</div>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start">
+      <div style="min-width:210px"><table class="grid"><tr><th>table</th><th class="n">rows</th></tr>`
+    +tables.map(t=>`<tr class="click" data-tbl="${esc(t.name)}"><td>${esc(t.name)}</td><td class="n">${t.rows==null?"—":Number(t.rows).toLocaleString()}</td></tr>`).join("")
+    +`</table></div><div style="flex:1;min-width:300px" id="dbResult"><div class="disc">Select a table →</div></div></div>
+    <section class="blk"><h3>Query <span class="ctx">— read-only SELECT / WITH only</span></h3>
+      <textarea id="sqlBox" style="min-height:64px">SELECT type, COUNT(*) n FROM events GROUP BY type ORDER BY n DESC</textarea>
+      <div class="rail-actions"><button class="primary" onclick="runSql()">Run</button><span class="disc" id="sqlNote"></span></div>
+      <div id="sqlResult" style="margin-top:12px"></div></section>`;
+  $("dbview").innerHTML=h;
+  $("dbview").querySelectorAll("tr.click").forEach(tr=>tr.addEventListener("click",()=>openTable(tr.dataset.tbl,0)));
+}
+async function openTable(name,offset){ offset=offset||0; const box=$("dbResult"); box.innerHTML='<div class="spin">loading…</div>';
+  try{ const d=await getJSON("/wb_db_rows?table="+encodeURIComponent(name)+"&limit=25&offset="+offset);
+    if(d.error){ box.innerHTML=`<div class="empty">${esc(d.error)}</div>`; return; }
+    box.innerHTML=`<div style="font:var(--t-cap) var(--mono);color:var(--ink2);margin-bottom:6px">${esc(name)}</div>`+dbTable(d.columns,d.rows)
+      +`<div class="disc" style="margin-top:6px">rows ${d.total?offset+1:0}–${Math.min(offset+d.rows.length,d.total)} of ${Number(d.total).toLocaleString()}
+        ${offset>0?` · <a href="#" onclick="openTable('${esc(name)}',${Math.max(offset-25,0)});return false">← prev</a>`:""}
+        ${offset+25<d.total?` · <a href="#" onclick="openTable('${esc(name)}',${offset+25});return false">next →</a>`:""}</div>`;
+  }catch(e){ box.innerHTML='<div class="empty">unavailable</div>'; } }
+async function runSql(){ const sql=$("sqlBox").value; $("sqlNote").textContent="running…"; $("sqlResult").innerHTML="";
+  try{ const d=await postJSON("/wb_db_query",{sql}); $("sqlNote").textContent="";
+    if(d.error){ $("sqlResult").innerHTML=`<div class="errbox"><div class="k">Rejected</div><div style="margin-top:4px">${esc(d.error)}</div></div>`; return; }
+    $("sqlResult").innerHTML=dbTable(d.columns,d.rows)+`<div class="disc" style="margin-top:6px">${d.n} row(s)${d.capped?" (capped at 500)":""}</div>`;
+  }catch(e){ $("sqlNote").textContent="query failed"; } }
 
 /* ---------------- notes ---------------- */
 let saveT=null;
@@ -543,7 +598,7 @@ async function openEv(id){ const box=$("eventDetail"); box.style.display="block"
 
 /* ---------------- wire up ---------------- */
 $("q").addEventListener("keydown",e=>{ if(e.key==="Enter") analyze(); });
-$("asq").addEventListener("input",schedArticles);
+$("asq").addEventListener("input",schedNews);
 $("notes").addEventListener("input",scheduleSave);
 $("hq").addEventListener("input",schedHist);
 $("srcList").addEventListener("click",e=>{ const it=e.target.closest(".item"); if(it) openArticle(it.dataset.hl,it.dataset.url,it.dataset.src); });

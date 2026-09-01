@@ -2088,6 +2088,43 @@ def wb_extract(url: str):
                     "generated summary."}
 
 
+@app.get("/wb_news_search")
+def wb_news_search(q: str = "", timespan: str = "1week", max: int = 150):
+    """Comprehensive WEB news search via GDELT (src/gdelt_search.py): any topic across the
+    global press, deduped, with honest source-diversity coverage stats. Keyless, $0. Metadata
+    + links only; the full read comes from opening an article (/wb_brief + /wb_extract)."""
+    import gdelt_search
+    if not (q or "").strip():
+        return {"ok": False, "error": "empty query"}
+    return gdelt_search.search(q, timespan=timespan, maxrecords=max)
+
+
+@app.get("/wb_db_tables")
+def wb_db_tables():
+    """The engine database map: every table + row count + columns (read-only)."""
+    import db_explore
+    return {"tables": db_explore.tables()}
+
+
+@app.get("/wb_db_rows")
+def wb_db_rows(table: str, limit: int = 50, offset: int = 0):
+    """A page of rows from one engine table (read-only, validated name, capped)."""
+    import db_explore
+    return db_explore.rows(table, limit, offset)
+
+
+class _SqlIn(BaseModel):
+    sql: str
+
+
+@app.post("/wb_db_query")
+def wb_db_query(body: _SqlIn):
+    """Run one read-only SELECT/WITH query against the engine DB. Hard read-only: mode=ro +
+    query_only + a statement authorizer + a row cap + a wall-clock interrupt (src/db_explore.py)."""
+    import db_explore
+    return db_explore.query(body.sql)
+
+
 class _AnalyzeIn(BaseModel):
     text: str
 
