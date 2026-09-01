@@ -220,10 +220,11 @@ def historical_record(conn, ret, etype, ents, limit=14):
         out.append({"date": d, "title": (title or "")[:80], "source_url": url,
                     "abs_car20_pct": move, "shared_entities": len(entset & eents)})
     out.sort(key=lambda r: (r["shared_entities"], r["abs_car20_pct"] or 0), reverse=True)
+    shown = min(limit, len(out))
     return {"event_class": etype, "n_total": len(out), "events": out[:limit],
-            "note": (f"Every one of the {len(out)} coded {etype} events in the corpus, with its "
-                     "measured 20-day Brent move. Entity-matched events first. Real, sourced events "
-                     "— the engine's history is measured market outcomes, not a geopolitical encyclopedia.")}
+            "note": (f"The {shown} most entity-relevant of {len(out)} coded {etype} events, each with its "
+                     "measured 20-day Brent move. Real, sourced — the engine's history is measured market "
+                     "outcomes, not a geopolitical encyclopedia.")}
 
 
 def deconstruct(arg):
