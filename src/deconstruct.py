@@ -74,6 +74,13 @@ _BOILER = ("subscribe", "advertise", "cookie", "sign in", "newsletter", "all rig
            "read more", "follow us", "share this", "watch cbs", "getty images")
 
 
+# Markets/macro vocabulary — a Fed/rates/equities story is a legitimate markets article that is
+# simply OUTSIDE this engine's oil frame; say so, rather than implying it isn't news.
+MARKETS = re.compile(r"\b(fed|federal reserve|interest rate|rate (cut|hike|decision)|inflation|"
+                     r"treasur\w*|bond yield|equit\w*|stock market|s&p|nasdaq|dow|the dollar|currenc\w*|"
+                     r"\bgdp\b|recession|tariff\w*|earnings|central bank|monetary policy)\b", re.I)
+
+
 def _sentences(text):
     parts = re.split(r"(?<=[.!?])\s+(?=[\"'A-Z0-9])", text or "")
     return [s.strip() for s in parts if 28 <= len(s.strip()) <= 400]
@@ -356,10 +363,11 @@ def deconstruct(arg):
     ef = _C(e for e in all_ents if e.startswith(("country.", "chokepoint.")))
     pulse_query = ef.most_common(1)[0][0].split(".")[-1].replace("_", " ").title() if ef else None
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
+    scope = None if dominant else ("markets_out_of_frame" if MARKETS.search(text) else "off_topic")
     return {
         "input": (arg or "")[:200], "was_url": was_url, "url": url,
-        "article_type": at,
-        "headline_read": _headline_read(at, cs, per_class, dominant, n_material),
+        "article_type": at, "scope": scope,
+        "headline_read": _headline_read(at, cs, per_class, dominant, n_material, scope),
         "n_claims": len(cs), "claims": cs,
         "event_classes": sorted(per_class.keys()),
         "dominant_class": dominant,
@@ -373,13 +381,17 @@ def deconstruct(arg):
     }
 
 
-def _headline_read(at, cs, per_class, dominant, n_material):
+def _headline_read(at, cs, per_class, dominant, n_material, scope=None):
     """The one honest sentence at the top: what the DATA says about this article's central claim.
     States the typical move AND the tail (never 'ordinary' alone on a fat-tailed class), and only
     claims 'materially larger' when the median's 90% CI clears the everyday baseline."""
     if not dominant or not per_class.get(dominant, {}).get("quant"):
-        return ("No claim in this article maps to an event class the engine measures — the data offers "
-                "no market read on it.")
+        if scope == "markets_out_of_frame":
+            return ("This is a markets story, but **outside this engine's frame** — the engine measures "
+                    "the OIL and energy-geopolitics impact of events, not rates, equities, or FX directly. "
+                    "No oil read applies here.")
+        return ("No claim here maps to an oil/energy event class the engine measures — this looks outside "
+                "the engine's scope (it reads the oil-market impact of geopolitics). No market read.")
     qr = per_class[dominant]["quant"]; a = qr["abs_car20"]; base = qr["baseline"]
     p = base.get("class_median_percentile"); med = a["median_pct"]
     om = base.get("ordinary_median_pct"); ci_lo = (a.get("ci90_median_pct") or [None])[0]
