@@ -214,13 +214,21 @@ def sample_gate(n):
 
 # --------------------------------------------------------------------------- blocks
 
+_QR_CACHE = {}                      # etype -> computed read (stable within a serving process)
+
+
 def quant_read(conn, ret, etype):
     """The measured behaviour of Brent around events of this class: base-rate |CAR+20|
     (mean/median, range, IQR, bootstrap CI), the null-baseline LIFT, the multi-horizon
-    CAR path + curve, and the honest small-N gate + disclosures. Magnitude, not probability."""
+    CAR path + curve, and the honest small-N gate + disclosures. Magnitude, not probability.
+    Cached per class: the corpus + Brent series are fixed within a process (the server restarts
+    on a data refresh), so the heavy bootstrap runs once per class, not once per request."""
+    if etype in _QR_CACHE:
+        return _QR_CACHE[etype]
     paths = class_paths(conn, ret, etype)
     n = len(paths)
     if n == 0:
+        _QR_CACHE[etype] = None
         return None
     arrs = np.vstack([c for _, c in paths])                 # n x window
     abs20 = np.abs(arrs[:, ES.PRE + 20]) * 100              # |CAR+20| per event (%)
@@ -278,7 +286,7 @@ def quant_read(conn, ret, etype):
     curve = [{"t": int(t), "mean": round(float(mean_path[i]), 3), "se": round(float(se_path[i]), 3)}
              for i, t in enumerate(range(-ES.PRE, ES.POST + 1))]
 
-    return {
+    result = {
         "event_class": etype, "n": n, "gate": gate,
         "direction": direction,
         "abs_car20": {
@@ -306,6 +314,8 @@ def quant_read(conn, ret, etype):
                             "not isolated here. Most large oil moves have no single news cause."),
         },
     }
+    _QR_CACHE[etype] = result
+    return result
 
 
 def cross_asset_read(conn, etype):

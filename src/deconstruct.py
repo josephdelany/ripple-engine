@@ -296,6 +296,10 @@ def deconstruct(arg):
     dq = per_class.get(dominant, {}).get("quant") if dominant else None
     alignment = market_alignment(dq, mn) if dominant else None
     conn.close()
+    # The subject to pulse for live unrest/agitation coverage (most-cited country/chokepoint).
+    from collections import Counter as _C
+    ef = _C(e for e in all_ents if e.startswith(("country.", "chokepoint.")))
+    pulse_query = ef.most_common(1)[0][0].split(".")[-1].replace("_", " ").title() if ef else None
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
     return {
         "input": (arg or "")[:200], "was_url": was_url, "url": url,
@@ -306,6 +310,7 @@ def deconstruct(arg):
         "dominant_class": dominant,
         "historical_record": record,
         "market_alignment": alignment,
+        "pulse_query": pulse_query,
         "market_now": mn, "public_sentiment": sentiment,
         "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
         "discipline": ("Every claim is answered by measured history + live market data, never by a "

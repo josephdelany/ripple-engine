@@ -599,6 +599,7 @@ function renderRead(d, src){
     if(ps.conflict_media) h+=`<div class="row"><span class="k">conflict media</span><span>${ps.conflict_media.map(a=>`${esc(a.situation)} ${esc(a.band)}`).join(" · ")}</span></div>`;
     h+=`<div class="disc" style="margin-top:10px">${esc(ps.note||"")}</div></div>`;
   }
+  if(d.pulse_query){ h+=`<div class="rd-mood" style="margin-top:14px"><h4>Live agitation pulse — ${esc(d.pulse_query)}</h4><div id="rdPulse" class="disc">checking the global press for protest / unrest coverage…</div></div>`; }
   h+=`<div class="rd-cta">${claims.length?`<button class="primary" id="rdCentral">Full quant brief on the central event →</button>`:""}
       <button class="ghost" onclick="window.print()">Print / PDF</button></div>`;
   h+=`<div class="rd-foot">${esc(d.discipline||"")} · latency ${d.latency_ms}ms</div></div>`;
@@ -606,7 +607,14 @@ function renderRead(d, src){
   // apostrophe-safe wiring (never interpolate claim text into an inline handler)
   $("brief").querySelectorAll("[data-claim-idx]").forEach(b=>b.addEventListener("click",()=>analyzeClaim(claims[+b.dataset.claimIdx].text)));
   const cen=$("rdCentral"); if(cen&&claims[0]) cen.addEventListener("click",()=>analyzeClaim(claims[0].text));
+  if(d.pulse_query) drawPulse(d.pulse_query);
 }
+async function drawPulse(q){ try{ const p=await getJSON("/wb_pulse?q="+encodeURIComponent(q)); const el=$("rdPulse"); if(!el) return;
+  if(!p.ok){ el.innerHTML=`<span class="faint">live pulse unavailable right now (${esc(p.error||"")})</span>`; return; }
+  el.innerHTML=`<b class="num">${p.n_articles}</b> protest/unrest articles on ${esc(q)} across <b class="num">${p.n_domains}</b> outlets · <b class="num">${p.n_countries}</b> countries (last ${esc(p.timespan)})`
+    +(p.top_countries&&p.top_countries.length?` · <span class="faint">${p.top_countries.map(c=>esc(c[0])).join(" ")}</span>`:"")
+    +`<br><span class="faint">${esc(p.note||"")}</span>`;
+}catch(e){ const el=$("rdPulse"); if(el) el.innerHTML='<span class="faint">live pulse unavailable</span>'; } }
 
 /* ---------------- welcome (the calm front door) ---------------- */
 function renderWelcome(){ showDesk(); $("chips").innerHTML=""; $("dateline").textContent="";

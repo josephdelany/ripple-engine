@@ -2099,6 +2099,27 @@ def wb_news_search(q: str = "", timespan: str = "1week", max: int = 150):
     return gdelt_search.search(q, timespan=timespan, maxrecords=max)
 
 
+@app.get("/wb_pulse")
+def wb_pulse(q: str = "", timespan: str = "3days"):
+    """Live UNREST/AGITATION pulse for a subject: how much the global press is covering protest /
+    unrest / strike activity around it right now (GDELT) — the 'unsettled anguish', measured.
+    Best-effort, keyless, $0; degrades to ok=false if GDELT is unreachable/throttling."""
+    import gdelt_search
+    q = (q or "").strip()
+    if not q:
+        return {"ok": False, "error": "empty"}
+    r = gdelt_search.search(f'("{q}") (protest OR demonstration OR rally OR unrest OR strike OR '
+                            f'clashes OR riot)', timespan=timespan, maxrecords=120)
+    if not r.get("ok"):
+        return r
+    c = r["coverage"]
+    return {"ok": True, "subject": q, "timespan": timespan, "n_articles": c["n_articles"],
+            "n_domains": c["n_domains"], "n_countries": c["n_countries"],
+            "top_countries": c["top_countries"][:5],
+            "note": "GDELT protest/unrest coverage of the subject over the window — attention and "
+                    "agitation as data, not verified events."}
+
+
 @app.get("/wb_db_tables")
 def wb_db_tables():
     """The engine database map: every table + row count + columns (read-only)."""
