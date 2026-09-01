@@ -51,6 +51,13 @@
  .legend{display:flex;gap:16px;font:11px var(--mono);margin:6px 2px}
  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
  .spin{color:var(--faint);padding:40px;text-align:center;font:12px var(--mono)}
+ .lens{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:18px;background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+ @media(max-width:860px){.lens{grid-template-columns:1fr}}
+ .lens h4{margin:0 0 8px;font:600 11px var(--mono);letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+ .lens h4 .wblink{float:right;color:var(--accent);text-decoration:none;font-weight:400}
+ .liverow{border-top:1px solid var(--line);padding:8px 0} .liverow:first-of-type{border-top:0}
+ .liverow .hr{font:12px var(--mono);margin-top:3px;color:var(--ink)}
+ .liverow a{color:var(--accent);text-decoration:none}
 </style></head><body>
 
 <div class="mast">
@@ -70,6 +77,7 @@
     <div class="ranges" id="ranges"></div>
     <div class="legend" id="legend"></div>
     <div class="chartbox"><div id="chart" class="spin">…</div><div id="tip"></div></div>
+    <div id="ripples"></div>
     <div id="table"></div>
     <div class="prov" id="prov"></div>
     <div class="foot">Every point is a real stored observation from <code>oil.db</code> with its as-of date; long daily
@@ -80,6 +88,7 @@
 
 <script>
 const $=s=>document.querySelector(s), api=async p=>(await fetch(p)).json();
+const esc=s=>(s==null?'':String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])));
 let CAT=null, PRIM=null, CMP=null, RANGE='5Y', cmpMode=false;
 const RANGES={'1M':30,'3M':91,'6M':182,'1Y':365,'5Y':1825,'MAX':null};
 
@@ -113,7 +122,30 @@ function meta(id){ for(const g of CAT.groups) for(const it of g.items) if(it.id=
 async function pick(id){
   if(cmpMode && PRIM && id!==PRIM.id){ CMP=await api('/term_series?id='+encodeURIComponent(id)); cmpMode=false; }
   else { PRIM=await api('/term_series?id='+encodeURIComponent(id)); CMP=null; }
-  markSel(); renderHead(); renderRanges(); render();
+  markSel(); renderHead(); renderRanges(); render(); renderRipples();
+}
+
+async function renderRipples(){
+  let d; try{ d=await api('/term_ripples?id='+encodeURIComponent(PRIM.id)); }catch(e){ $('#ripples').innerHTML=''; return; }
+  if(!d || d.error){ $('#ripples').innerHTML=''; return; }
+  const sgnc=v=>v>0?'up':(v<0?'down':'flat'), sg=v=>v>0?'+':'';
+  const rows=(d.reactions_by_type||[]).map(b=>`<tr><td>${esc(b.type.replace(/_/g,' '))}</td><td>${b.n}</td>
+     <td class="${sgnc(b.avg20)}">${sg(b.avg20)}${b.avg20}%</td><td class="faint">[${b.lo}..${b.hi}]</td>
+     <td class="faint" style="text-align:left">${esc(b.read)}</td></tr>`).join('');
+  const live=(d.live_situations||[]).map(s=>{ const hr=s.historic_reaction;
+    return `<div class="liverow"><div><b>${esc((s.kind||'unmapped').replace(/_/g,' '))}</b>
+      · <span class="faint">${esc(s.situation_id.replace('situation.',''))}</span> · <span class="faint">${s.signals} signals</span>
+      ${s.source_url?` <a href="${esc(s.source_url)}" target="_blank">↗</a>`:''}</div>
+      <div class="faint" style="font-size:12px">${esc((s.headline||'').replace('[GDELT]','').trim())}</div>
+      ${hr?`<div class="hr">→ historically moves ${esc(d.name)} <span class="${sgnc(hr.avg20)}">${sg(hr.avg20)}${hr.avg20}%</span> /20d
+          <span class="faint">(n=${hr.n}, range [${hr.range[0]}..${hr.range[1]}] — ${esc(hr.read)})</span></div>`
+        :`<div class="hr faint">→ this shock-class has no measured reaction on this product</div>`}</div>`; }).join('');
+  $('#ripples').innerHTML=`<div class="lens">
+    <div><h4>What moves ${esc(d.name)} — measured across 296 events</h4>
+      <table><thead><tr><th style="text-align:left">event class</th><th>n</th><th>avg 20d</th><th>range</th><th style="text-align:left">read</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="foot" style="margin:8px 0 0;border:0;padding:0">${esc(d.note)}</div></div>
+    <div><h4>Live now — in conversation <a class="wblink" href="/workbench" title="full brief on the desk">open desk ↗</a></h4>
+      ${live||'<div class="faint">no live situations logged</div>'}</div></div>`;
 }
 function markSel(){ $('#side').querySelectorAll('.it').forEach(el=>{
   el.classList.toggle('sel', PRIM&&el.dataset.id===PRIM.id);

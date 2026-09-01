@@ -174,6 +174,63 @@ def series(sid, frm=None, to=None, max_points=1600):
             "points": [[r[0], r[1]] for r in pts]}
 
 
+def ripples(series_id):
+    """The RIPPLE LENS: end the terminal's isolation. For one product, return (a) the
+    MEASURED historic reaction to each event type (from edges×events — history ripple-aligned
+    to this product), and (b) the LIVE situations now (situation_log), each linked to what
+    that shock-type has historically done to THIS product. Real data only; the gap between a
+    near-zero mean and a wide range is the 'priced risk, not realized disruption' takeaway."""
+    conn = connect(read_only=True)
+    cur = conn.cursor()
+    meta = _meta(cur, series_id)
+    if not meta:
+        conn.close()
+        return JSONResponse({"error": f"unknown series {series_id}"}, status_code=404)
+    # (a) measured reaction by event type
+    q = """SELECT ev.type, COUNT(*) n, ROUND(AVG(e.car20),2) avg20, ROUND(AVG(e.car5),2) avg5,
+                  ROUND(MIN(e.car20),1) lo, ROUND(MAX(e.car20),1) hi
+           FROM edges e JOIN events ev ON ev.event_id=e.event_id
+           WHERE e.target_series=? AND e.units='%'
+           GROUP BY ev.type ORDER BY ABS(AVG(e.car20)) DESC"""
+    by_type = []
+    for r in cur.execute(q, (series_id,)):
+        # dispersion vs mean -> honest label
+        spread = (r[5] - r[4]) if (r[5] is not None and r[4] is not None) else 0
+        noisy = abs(r[2] or 0) * 4 < (spread or 0)   # mean small vs range => risk-priced, not directional
+        by_type.append({"type": r[0], "n": r[1], "avg20": r[2], "avg5": r[3],
+                        "lo": r[4], "hi": r[5],
+                        "read": "priced as risk, not realized disruption" if noisy
+                                else ("directional" )})
+    tmap = {b["type"]: b for b in by_type}
+    # (b) live situations (recent, grouped), linked to this product's historic reaction
+    live = []
+    try:
+        rows = cur.execute(
+            """SELECT situation_id, MAX(ts) ts, COUNT(*) signals,
+                      (SELECT kind FROM situation_log s2 WHERE s2.situation_id=s1.situation_id
+                       ORDER BY ts DESC LIMIT 1) kind,
+                      (SELECT headline FROM situation_log s3 WHERE s3.situation_id=s1.situation_id
+                       ORDER BY ts DESC LIMIT 1) headline,
+                      (SELECT source_url FROM situation_log s4 WHERE s4.situation_id=s1.situation_id
+                       ORDER BY ts DESC LIMIT 1) src
+               FROM situation_log s1 GROUP BY situation_id ORDER BY ts DESC LIMIT 8""").fetchall()
+        for r in rows:
+            react = tmap.get(r[3])
+            live.append({"situation_id": r[0], "last_ts": r[1], "signals": r[2],
+                        "kind": r[3], "headline": r[4], "source_url": r[5],
+                        "historic_reaction": ({"avg20": react["avg20"], "n": react["n"],
+                                               "range": [react["lo"], react["hi"]],
+                                               "read": react["read"]} if react else None)})
+    except Exception:
+        pass
+    conn.close()
+    return {"id": series_id, "name": meta[0], "unit": meta[1],
+            "reactions_by_type": by_type, "live_situations": live,
+            "note": "Measured 20-day cumulative reaction of this product to each event class "
+                    "across the 296-event corpus. A small mean with a wide range means the "
+                    "market priced risk, not a realized supply loss — the flow usually did not stop."}
+
+
 def register_terminal(app):
     @app.get("/terminal", response_class=HTMLResponse)
     def _terminal_page():
@@ -188,3 +245,7 @@ def register_terminal(app):
     @app.get("/term_series")
     def _term_series(id: str, frm: str = None, to: str = None):
         return series(id, frm, to)
+
+    @app.get("/term_ripples")
+    def _term_ripples(id: str):
+        return ripples(id)
