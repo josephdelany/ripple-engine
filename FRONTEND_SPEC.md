@@ -81,7 +81,7 @@ No chart that doesn't change a decision. Decorative sparklines are cut. The set:
 
 ## Interaction & feel
 - Instant: click an article → brief in <1s; search is live-as-you-type.
-- Keyboard: `j`/`k` move through the feed, `Enter` opens, `/` focuses search, `⌘P` prints.
+- Keyboard: `/` focuses news search, `Enter` reads the command box or opens a focused article, `⌘P` prints.
 - States: skeletons while loading; honest empty/error; never a broken half-screen.
 - Print/PDF: a clean, ink-on-paper research note for presenting.
 - Local, $0, keyless, deterministic, no fabrication — on every screen.

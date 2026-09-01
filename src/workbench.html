@@ -58,8 +58,12 @@
 
   /* 3-column grid */
   .wrap{ display:grid; grid-template-columns:300px minmax(0,1fr) 330px; min-height:calc(100vh - 100px); }
-  @media (max-width:1200px){ .wrap{ grid-template-columns:270px minmax(0,1fr); } aside.notes{ display:none; } }
-  @media (max-width:860px){ .wrap{ grid-template-columns:1fr; } aside.sources{ display:none; } }
+  /* Narrow: never hide a column (that would delete scan/publish) -- reflow so all stay reachable. */
+  @media (max-width:1200px){ .wrap{ grid-template-columns:270px minmax(0,1fr); }
+    aside.notes{ grid-column:1 / -1; border-left:0; border-top:1px solid var(--line2); } }
+  @media (max-width:860px){ .wrap{ grid-template-columns:1fr; }
+    main{ order:-1; } aside.sources{ border-right:0; border-top:1px solid var(--line2); }
+    .list{ max-height:320px; } }
   aside.sources{ border-right:1px solid var(--line); background:var(--bg0); padding:16px 14px; overflow:hidden; }
   main{ padding:22px 26px 90px; min-width:0; }
   .brief{ max-width:860px; }
@@ -212,7 +216,7 @@
     <div class="disc" id="exportPath" style="margin-top:6px"></div>
 
     <div class="corpus">
-      <h4>Corpus <span class="meta">296 coded events</span></h4>
+      <h4>Corpus <span class="meta">the coded event shelf</span></h4>
       <input id="hq" type="text" placeholder="search history — hormuz, opec_decision, 2019…">
       <div class="results" id="hres"></div>
       <div id="eventDetail"></div>
@@ -282,25 +286,30 @@ function carCurve(curve,{w=440,h=200}={}){
 }
 
 // The lift view: this class's typical move marked on the distribution of ORDINARY 20-day moves.
+// Outliers past the axis are marked "+N beyond", never silently clamped onto the wall (that would
+// hide the very evidence the chart exists to show). Median labels clamp to the viewport edges.
 function magBaseline(dist,{w=440,h=176}={}){
   if(!dist||!dist.bins||!dist.bins.length) return `<div class="sub">no distribution</div>`;
   const pl=10,pr=10,pt=18,pb=34, W=w-pl-pr, H=h-pt-pb;
+  const fin=v=>typeof v==="number"&&isFinite(v);
   const xmax=dist.axis_max||Math.max(...dist.bins.map(b=>b.x1),1);
   const nmax=Math.max(...dist.bins.map(b=>b.n),1);
-  const X=v=>pl+Math.min(v,xmax)/xmax*W, Y=n=>pt+H-n/nmax*H;
+  const X=v=>pl+Math.min(Math.max(v,0),xmax)/xmax*W, Y=n=>pt+H-n/nmax*H;
+  // label with anchor clamped to the walls so long labels never overflow
+  const lab=(x,txt,col,y,big)=>{ const a=x>w-74?"end":x<74?"start":"middle", lx=x>w-74?(w-pr):x<74?pl:x;
+    return `<text x="${lx.toFixed(1)}" y="${y}" fill="${col}" font-size="${big?10:9}" text-anchor="${a}" font-family="var(--mono)">${esc(txt)}</text>`; };
   let bars=""; dist.bins.forEach(b=>{ const x0=X(b.x0),x1=X(b.x1); bars+=`<rect x="${x0.toFixed(1)}" y="${Y(b.n).toFixed(1)}" width="${Math.max(x1-x0-1,0.6).toFixed(1)}" height="${(pt+H-Y(b.n)).toFixed(1)}" fill="var(--dim)" opacity="0.30"/>`; });
-  const iqr=dist.class_iqr||[]; const band=(iqr.length===2)?`<rect x="${X(iqr[0]).toFixed(1)}" y="${pt}" width="${Math.max(X(iqr[1])-X(iqr[0]),1).toFixed(1)}" height="${H}" fill="var(--accent)" opacity="0.10"/>`:"";
-  const om=X(dist.ordinary_median), cm=X(dist.class_median);
-  let rug=""; (dist.class_values||[]).forEach(v=>{ rug+=`<line x1="${X(v).toFixed(1)}" y1="${pt+H+2}" x2="${X(v).toFixed(1)}" y2="${pt+H+7}" stroke="var(--accent)" stroke-width="1" opacity="0.55"/>`; });
+  const iqr=dist.class_iqr||[]; const band=(iqr.length===2&&fin(iqr[0])&&fin(iqr[1]))?`<rect x="${X(Math.min(iqr[0],iqr[1])).toFixed(1)}" y="${pt}" width="${Math.max(Math.abs(X(iqr[1])-X(iqr[0])),1).toFixed(1)}" height="${H}" fill="var(--accent)" opacity="0.10"/>`:"";
+  let mid="", om=dist.ordinary_median, cm=dist.class_median;
+  if(fin(om)) mid+=`<line x1="${X(om).toFixed(1)}" y1="${pt}" x2="${X(om).toFixed(1)}" y2="${pt+H}" stroke="var(--faint)" stroke-width="1" stroke-dasharray="3 3"/>`+lab(X(om),`ordinary ${f1(om)}%`,"var(--faint)",h-16);
+  if(fin(cm)) mid+=`<line x1="${X(cm).toFixed(1)}" y1="${pt-3}" x2="${X(cm).toFixed(1)}" y2="${pt+H}" stroke="var(--accent)" stroke-width="1.75"/>`+lab(X(cm),`this class ${f1(cm)}%`,"var(--accent)",pt-5,true);
+  const vals=dist.class_values||[], inr=vals.filter(v=>v<=xmax), over=vals.length-inr.length;
+  let rug=""; inr.forEach(v=>{ rug+=`<line x1="${X(v).toFixed(1)}" y1="${pt+H+2}" x2="${X(v).toFixed(1)}" y2="${pt+H+7}" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>`; });
+  const axisR=over>0?`↑ ${over} beyond axis`:`${Math.round(xmax)}%+ |20-day move|`;
   return `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">
-    ${band}${bars}
-    <line x1="${om.toFixed(1)}" y1="${pt}" x2="${om.toFixed(1)}" y2="${pt+H}" stroke="var(--faint)" stroke-width="1" stroke-dasharray="3 3"/>
-    <line x1="${cm.toFixed(1)}" y1="${pt-3}" x2="${cm.toFixed(1)}" y2="${pt+H}" stroke="var(--accent)" stroke-width="1.75"/>
-    <text x="${cm.toFixed(1)}" y="${pt-5}" fill="var(--accent)" font-size="10" text-anchor="middle" font-family="var(--mono)">this class ${f1(dist.class_median)}%</text>
-    ${rug}
+    ${band}${bars}${mid}${rug}
     <text x="${pl}" y="${h-4}" fill="var(--faint)" font-size="9" font-family="var(--mono)">0%</text>
-    <text x="${w-pr}" y="${h-4}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="var(--mono)">${Math.round(xmax)}%+ |20-day move|</text>
-    <text x="${om.toFixed(1)}" y="${h-16}" fill="var(--faint)" font-size="9" text-anchor="middle" font-family="var(--mono)">ordinary ${f1(dist.ordinary_median)}%</text>
+    <text x="${w-pr}" y="${h-4}" fill="var(--accent)" font-size="9" text-anchor="end" font-family="var(--mono)">${axisR}</text>
   </svg>`;
 }
 
@@ -368,8 +377,8 @@ async function openArticle(headline,url,source){
 async function extractFor(url,source){ try{ const e=await getJSON("/wb_extract?url="+encodeURIComponent(url));
   return {source:source||"", url, excerpt:e.ok?e.excerpt:null, note:e.ok?e.note:null}; }catch(_){ return {source:source||"",url,excerpt:null}; } }
 
-function md(t){ return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
-  .replace(/(^|[\s(])(-\d+(?:\.\d+)?%)/g,'$1<span class="neg">$2</span>')
+function md(t){ return esc(t||"").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+  .replace(/(^|[\s(])([-−]\d+(?:\.\d+)?%)/g,'$1<span class="neg">$2</span>')
   .replace(/(^|[\s(])(\+\d+(?:\.\d+)?%)/g,'$1<span class="pos">$2</span>'); }
 function glossary(){ return `<details class="glossary"><summary>How to read this</summary><dl>
   <dt>CAR</dt><dd>cumulative abnormal return — the market move beyond oil's normal drift, over N trading days.</dd>
@@ -504,7 +513,7 @@ function scheduleSave(){ $("saveState").textContent="editing…"; clearTimeout(s
   saveT=setTimeout(async()=>{ try{ await postJSON("/wb_note",{text:$("notes").value}); $("saveState").textContent="saved "+new Date().toLocaleTimeString(); }catch(e){ $("saveState").textContent="save failed"; } },700); }
 function insertBrief(){ if(!CURRENT){ $("saveState").textContent="load a brief first"; return; }
   const b=CURRENT, qr=b.quant_read; let blk=`\n> **Ripple Engine brief — ${(b.story||{}).event_class||"unclassified"}**  (${(b.as_of||"")})\n`;
-  blk+=`> ${b.bottom_line.replace(/\*\*/g,"**")}\n`;
+  blk+=`> ${(b.bottom_line||"").replace(/\*\*/g,"**")}\n`;
   if(qr){ const a=qr.abs_car20; blk+=`> Measured: median 20-day move ${f1(a.median_pct)}% (typical ${f1(a.iqr_pct[0])}–${f1(a.iqr_pct[1])}%, 90% CI [${f1(a.ci90_median_pct[0])}, ${f1(a.ci90_median_pct[1])}], n=${qr.n}); ordinary-month median ${f1(qr.baseline.ordinary_median_pct)}%.\n`; }
   if(b.decision_read) blk+=`> ${b.decision_read}\n`;
   if((b.story||{}).url) blk+=`> Source: ${b.story.url}\n`;
@@ -521,14 +530,16 @@ let hT=null; function schedHist(){ clearTimeout(hT); hT=setTimeout(hist,250); }
 async function hist(){ try{ const q=$("hq").value.trim(); const rows=await getJSON("/wb_history?q="+encodeURIComponent(q)+"&limit=40"); const el=$("hres");
   el.innerHTML=rows.length?rows.map(r=>`<div class="r" tabindex="0" role="button" data-id="${esc(r.event_id)}"><span class="rd">${esc(r.date)}</span><span class="tag">${esc(r.type)}</span><span>${esc(r.title)}</span></div>`).join(""):'<div class="empty">no matches</div>';
   }catch(e){ $("hres").innerHTML='<div class="empty">search unavailable</div>'; } }
-async function openEv(id){ const e=await getJSON("/wb_event?id="+encodeURIComponent(id)); const box=$("eventDetail"); box.style.display="block";
+async function openEv(id){ const box=$("eventDetail"); box.style.display="block";
+  let e; try{ e=await getJSON("/wb_event?id="+encodeURIComponent(id)); }catch(_){ box.innerHTML='<div class="empty">event unavailable</div>'; return; }
   if(e.error){ box.innerHTML=`<div class="empty">${esc(e.error)}</div>`; return; }
   cited.add(e.event_id); const c=e.cars_pct||{};
   box.innerHTML=`<div style="font-weight:600">${esc(e.title)}</div>
     <div class="sub" style="margin:4px 0"><span class="tag">${esc(e.type)}</span> <span class="faint num">${esc(e.date)} · sev ${e.severity??"?"} · ${esc(e.confidence||"?")}</span></div>
     ${e.description?`<div class="dim" style="font-size:var(--t-sm);margin:6px 0">${esc(e.description)}</div>`:""}
     <div class="num" style="font-size:var(--t-sm)">CAR +1 ${f1(c["CAR+1"])}% · +5 ${f1(c["CAR+5"])}% · +10 ${f1(c["CAR+10"])}% · +20 ${f1(c["CAR+20"])}%</div>
-    <div style="font-size:var(--t-cap);margin-top:6px"><a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a></div>`; }
+    <div style="font-size:var(--t-cap);margin-top:6px"><a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a></div>`;
+  box.scrollIntoView({behavior:"smooth",block:"nearest"}); }
 
 /* ---------------- wire up ---------------- */
 $("q").addEventListener("keydown",e=>{ if(e.key==="Enter") analyze(); });
