@@ -26,8 +26,11 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from _db import connect
 from pathlib import Path
 
+import shock_tracer
+
 ROOT = Path(__file__).resolve().parent.parent
 TERMINAL_HTML = ROOT / "src" / "terminal.html"
+TRACE_HTML = ROOT / "src" / "trace.html"
 
 # Curated catalog: series_id -> (group, display label). Only those actually present in
 # oil.db (with observations) are shown; anything missing is silently skipped (no fake rows).
@@ -249,3 +252,17 @@ def register_terminal(app):
     @app.get("/term_ripples")
     def _term_ripples(id: str):
         return ripples(id)
+
+    @app.get("/trace_view", response_class=HTMLResponse)
+    def _trace_view():
+        if not TRACE_HTML.exists():
+            return HTMLResponse("<h1>trace.html missing</h1>", status_code=500)
+        return HTMLResponse(TRACE_HTML.read_text())
+
+    @app.get("/trace_entities")
+    def _trace_entities():
+        return shock_tracer.list_anchors()
+
+    @app.get("/trace")
+    def _trace(entity: str = None, series: str = None, situation: str = None):
+        return shock_tracer.trace(entity=entity, series=series, situation=situation)
