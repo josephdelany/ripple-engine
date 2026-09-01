@@ -564,6 +564,14 @@ function renderRead(d, src){
       h+=`</div>`;
     });
   }
+  // The historical record — every comparable event on file, with its measured move.
+  const hr=d.historical_record;
+  if(hr && hr.events && hr.events.length){
+    h+=`<div class="rd-section">The historical record — every ${esc(hr.event_class)} event on file (${hr.n_total})</div>`;
+    h+=`<table class="grid" style="margin-top:6px"><tr><th>date</th><th>event</th><th class="n">20-day move</th><th class="n">match</th><th>src</th></tr>`
+      +hr.events.map(e=>`<tr><td class="n">${esc(e.date)}</td><td>${esc(e.title)}</td><td class="n">${e.abs_car20_pct!=null?f1(e.abs_car20_pct)+"%":"n/a"}</td><td class="n ${e.shared_entities?"":"faint"}">${e.shared_entities||""}</td><td>${e.source_url?`<a href="${esc(e.source_url)}" target="_blank" rel="noopener">↗</a>`:""}</td></tr>`).join("")
+      +`</table><div class="disc" style="margin-top:6px">${esc(hr.note||"")}</div>`;
+  }
   // Public mood ONLY when the article has a measurable class (else global signals would overclaim).
   const ps=d.public_sentiment||{};
   if(d.dominant_class && Object.keys(ps).filter(k=>k!=="note").length){

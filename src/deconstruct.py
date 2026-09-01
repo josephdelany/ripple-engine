@@ -202,6 +202,30 @@ def public_sentiment(conn, ents, etype):
     return out
 
 
+def historical_record(conn, ret, etype, ents, limit=14):
+    """'What history says' -- the FULL measured record for the dominant class: every coded corpus
+    event of that class with its measured 20-day Brent move + source, entity-matched first. The
+    actual past, with numbers -- not an encyclopedia (the engine is market history, honestly)."""
+    if not etype:
+        return None
+    entset = set(ents)
+    rows = conn.execute("SELECT event_id, event_date, title, source_url FROM events WHERE type=? "
+                        "ORDER BY event_date DESC", (etype,)).fetchall()
+    out = []
+    for eid, d, title, url in rows:
+        eents = {r[0] for r in conn.execute(
+            "SELECT entity_id FROM event_entities WHERE event_id=?", (eid,))}
+        c = ES.car_for_event(ret, d)
+        move = round(abs(float(c[ES.PRE + 20])) * 100, 1) if c is not None else None
+        out.append({"date": d, "title": (title or "")[:80], "source_url": url,
+                    "abs_car20_pct": move, "shared_entities": len(entset & eents)})
+    out.sort(key=lambda r: (r["shared_entities"], r["abs_car20_pct"] or 0), reverse=True)
+    return {"event_class": etype, "n_total": len(out), "events": out[:limit],
+            "note": (f"Every one of the {len(out)} coded {etype} events in the corpus, with its "
+                     "measured 20-day Brent move. Entity-matched events first. Real, sourced events "
+                     "— the engine's history is measured market outcomes, not a geopolitical encyclopedia.")}
+
+
 def deconstruct(arg):
     """Deconstruct an article (URL or text) into claims, each answered by the quant engine."""
     import time
@@ -236,6 +260,7 @@ def deconstruct(arg):
     # geopolitical/market class -- otherwise showing "geopolitical risk 93rd pct" on an unrelated
     # article overclaims (an unrelated signal presented as if about the input).
     sentiment = public_sentiment(conn, all_ents, dominant) if dominant else {}
+    record = historical_record(conn, ret, dominant, all_ents) if dominant else None
     conn.close()
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
     return {
@@ -245,6 +270,7 @@ def deconstruct(arg):
         "n_claims": len(cs), "claims": cs,
         "event_classes": sorted(per_class.keys()),
         "dominant_class": dominant,
+        "historical_record": record,
         "market_now": mn, "public_sentiment": sentiment,
         "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
         "discipline": ("Every claim is answered by measured history + live market data, never by a "
