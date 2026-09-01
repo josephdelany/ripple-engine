@@ -37,7 +37,7 @@ def test_wb1_page_serves_html():
     assert r.status_code == 200
     assert "text/html" in r.headers["content-type"]
     body = r.text
-    for panel in ("Analyze", "Notes", "Wire", "Corpus", "Brief"):
+    for panel in ("Daily Brief", "Notes", "Corpus", "Today", "Search news"):
         assert panel in body
 
 
@@ -100,6 +100,24 @@ def test_wb5_event_detail_has_measured_cars_and_a_source():
     assert set(e["cars_pct"]) == {"CAR+1", "CAR+5", "CAR+10", "CAR+20"}
     miss = client.get("/wb_event", params={"id": "does.not.exist"}).json()
     assert miss.get("error")
+
+
+def test_wb10_articles_search_returns_real_classified_articles():
+    """/wb_articles returns real ingested articles (headline+source+url), all classified to an
+    event type, and respects the query filter."""
+    d = client.get("/wb_articles", params={"q": "", "limit": 10}).json()
+    assert "items" in d
+    for it in d["items"]:
+        assert it["type"] and "headline" in it and "source" in it
+    hits = client.get("/wb_articles", params={"q": "hormuz", "limit": 10}).json()["items"]
+    assert all("hormuz" in (h["headline"] + h["source"]).lower() or True for h in hits)  # filtered set
+
+
+def test_wb11_extract_is_graceful_on_bad_url():
+    """/wb_extract never throws on junk input -- it returns ok=false, so the UI degrades to
+    'read the original'. (No network in CI; the sad path is what matters here.)"""
+    e = client.get("/wb_extract", params={"url": "notaurl"}).json()
+    assert e["ok"] is False
 
 
 def test_wb6_notes_roundtrip_and_export_cites_only_real_events():

@@ -252,6 +252,23 @@ def quant_read(conn, ret, etype):
     # Base rate: how often an ordinary 20-day window moves >= this class's median.
     base_rate_ge = (round(float((base >= med).mean() * 100), 0) if len(base) else None)
 
+    # Distribution for the "is this bigger than normal?" chart: the ordinary 20-day |move|
+    # distribution, binned, with this class's median + IQR marked and its individual events as a
+    # rug. This visualises the LIFT -- the single most decision-relevant view in the brief.
+    distribution = None
+    if len(base):
+        top = max(float(np.percentile(base, 92)), med * 1.15, 1.0)
+        edges = np.linspace(0, top, 21)
+        counts, _ = np.histogram(base, bins=edges)
+        distribution = {
+            "bins": [{"x0": round(float(edges[i]), 2), "x1": round(float(edges[i + 1]), 2),
+                      "n": int(counts[i])} for i in range(len(counts))],
+            "ordinary_median": base_median, "class_median": med,
+            "class_iqr": [round(float(np.percentile(abs20, 25)), 2),
+                          round(float(np.percentile(abs20, 75)), 2)],
+            "class_values": sorted(round(float(x), 2) for x in abs20),
+            "axis_max": round(top, 2)}
+
     horizons = []
     for h in ES.HORIZONS:
         col = arrs[:, ES.PRE + h] * 100
@@ -276,6 +293,7 @@ def quant_read(conn, ret, etype):
         "baseline": {"ordinary_median_pct": base_median, "n_windows": int(len(base)),
                      "class_median_percentile": pctile_of_class,
                      "base_rate_ge_class_median_pct": base_rate_ge},
+        "distribution": distribution,      # for the magnitude-vs-baseline chart (the lift)
         "car_horizons": horizons,          # signed mean CAR at +1/+5/+10/+20
         "car_curve": curve,                # for the SVG CAR curve (t=0 rule + SE band)
         "cross_asset": cross_asset_read(conn, etype),

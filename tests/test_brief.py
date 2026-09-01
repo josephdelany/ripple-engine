@@ -111,6 +111,15 @@ def test_br15_decision_read_present_and_hedged():
     assert "for a decision-maker" in dr and "watch" in dr
 
 
+def test_br18_distribution_present_for_lift_chart():
+    """The quant read carries the baseline distribution the 'is this bigger than normal?' chart
+    needs: binned ordinary moves + this class's median and ordinary median."""
+    dist = _brief()["quant_read"]["distribution"]
+    assert dist and dist["bins"]
+    assert dist["class_median"] is not None and dist["ordinary_median"] is not None
+    assert dist["class_values"] and dist["axis_max"] > 0
+
+
 def test_br16_opec_does_not_borrow_conflict_corroboration():
     """An OPEC/sanctions story must never inherit a conflict theatre's multi-modal corroboration,
     even if a shared country is a member of that situation."""

@@ -1983,6 +1983,111 @@ def wb_today(limit: int = 40):
     return {**out, "items": out["items"][:limit]}
 
 
+@app.get("/wb_articles")
+def wb_articles(q: str = "", limit: int = 40):
+    """SOURCES search: real ingested articles (the watcher feed) matching q (words / entity / date
+    / source), oil-relevant (classifiable) only, newest first, each with a LIGHT one-line read.
+    q empty -> the freshest items. Real articles only; the full read comes from /wb_brief."""
+    import csv as _csv
+    import triage as _T
+    p = DATA / "alert_queue.csv"
+    if not p.exists():
+        return {"q": q, "n": 0, "items": [], "note": "no watcher feed yet -- run src/watcher.py"}
+    rows = list(_csv.DictReader(open(p, newline="", encoding="utf-8")))
+    ql = (q or "").strip().lower()
+    rates = _T.base_rate_by_type()
+    out = []
+    for r in reversed(rows):                                # newest first
+        head = r.get("headline") or ""
+        if head.startswith("[GDELT]"):                      # machine pings are not articles
+            continue
+        etype = _T.classify_type(head)
+        if not etype:
+            continue
+        if ql:
+            hay = " ".join((head, r.get("source", ""), r.get("matched_entities", ""),
+                            r.get("timestamp_utc", ""))).lower()
+            if ql not in hay:
+                continue
+        out.append({"headline": head[:180], "source": r.get("source", ""), "url": r.get("url", ""),
+                    "when": (r.get("timestamp_utc") or "")[:16], "type": etype,
+                    "expected_magnitude_pct": round(rates.get(etype, 0.0), 1)})
+        if len(out) >= limit:
+            break
+    return {"q": q, "n": len(out), "items": out}
+
+
+_BOILERPLATE = ("subscribe", "advertise", "cookie", "sign in", "log in", "newsletter",
+                "all rights reserved", "terms of", "privacy policy", "follow us", "share this",
+                "read more", "related articles", "most read", "facebook twitter", "rig count")
+
+
+def _is_prose(t):
+    """True for a real article paragraph, False for nav/menu/social runs. Prose has sentence
+    punctuation and is mostly lower-case words; nav runs are short Title-Case token lists."""
+    if len(t) < 60 or " " not in t:
+        return False
+    low = t.lower()
+    if any(b in low for b in _BOILERPLATE):
+        return False
+    words = t.split()
+    if len(words) < 10 or not any(p in t for p in ".?!"):
+        return False
+    cap = sum(1 for w in words if w[:1].isupper())
+    return cap / len(words) <= 0.5                          # nav/menus are mostly Title Case
+
+
+@app.get("/wb_extract")
+def wb_extract(url: str):
+    """SOURCE EXTRACT: fetch a real article (keyless) and return an EXTRACTIVE excerpt -- the
+    lede plus PARAGRAPHS mentioning the oil-relevant entities the engine matched. Verbatim from
+    the source, NEVER a generated paraphrase (the tool does not fabricate). Pulls real article
+    prose from <article>/<p> and drops nav/boilerplate. Best-effort: on failure returns ok=false
+    and the link so the UI degrades to 'read the original'."""
+    import re as _re
+    import html as _html
+    import triage as _T
+    if not url or not url.startswith(("http://", "https://")):
+        return {"ok": False, "reason": "no url", "url": url}
+    try:
+        import requests
+        html = requests.get(url, timeout=15,
+                            headers={"User-Agent": "ripple-engine research (contact: local)"}).text
+    except Exception:
+        return {"ok": False, "reason": "could not fetch the page", "url": url}
+    # Prefer the <article> block; strip non-prose containers; pull real paragraphs.
+    m = _re.search(r"<article[^>]*>(.*?)</article>", html, _re.S | _re.I)
+    scope = m.group(1) if m else html
+    scope = _re.sub(r"<(script|style|nav|aside|footer|header|form|figure)[^>]*>.*?</\1>",
+                    " ", scope, flags=_re.S | _re.I)
+    clean = []
+    for p in _re.findall(r"<p[^>]*>(.*?)</p>", scope, _re.S | _re.I):
+        t = _re.sub(r"\s+", " ", _html.unescape(_re.sub(r"<[^>]+>", " ", p))).strip()
+        if _is_prose(t):
+            clean.append(t)
+    if not clean:                                          # fallback: crude strip -> sentences
+        try:
+            text, _wu = _T._text_from(url)
+            clean = [s.strip() for s in _re.split(r"(?<=[.!?])\s+", text) if _is_prose(s.strip())][:6]
+        except Exception:
+            clean = []
+    if not clean:
+        return {"ok": False, "reason": "could not read the article text", "url": url}
+    conn = sqlite3.connect(DB)
+    ents, _etype = _T.extract(conn, " ".join(clean[:20]))
+    conn.close()
+    needles = {e.split(".", 1)[-1].replace("_", " ") for e in ents if len(e) > 4}
+    picked = clean[:2]                                     # the lede
+    for t in clean[2:]:
+        if any(n in t.lower() for n in needles) and t not in picked:
+            picked.append(t)
+        if len(picked) >= 4:
+            break
+    return {"ok": True, "url": url, "excerpt": " ".join(picked)[:1000], "n_paragraphs": len(picked),
+            "note": "Verbatim excerpt from the source (lede + entity-relevant paragraphs) — not a "
+                    "generated summary."}
+
+
 class _AnalyzeIn(BaseModel):
     text: str
 

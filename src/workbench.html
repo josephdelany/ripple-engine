@@ -1,111 +1,102 @@
 <!DOCTYPE html>
 <!--
-  workbench.html -- THE RIPPLE ENGINE INTELLIGENCE DESK.
-  Single, self-contained, local analyst terminal. No framework, vanilla JS, charts drawn
-  as inline SVG (no libraries -> fully local, $0, keyless). It DISPLAYS what the engine
-  produces; it never computes analysis in the browser.
+  workbench.html -- THE DESK (see FRONTEND_SPEC.md). A single, self-contained, local analyst
+  terminal. No framework, vanilla JS, charts drawn as inline SVG (no libraries -> fully local,
+  $0, keyless). It DISPLAYS what the engine produces; it never computes analysis in the browser
+  and never fabricates: article "summaries" are VERBATIM extracts of the real source, with a
+  link to the page; the analysis is the deterministic engine read.
 
-  Design system (Tufte data-ink + Bloomberg restraint): tokenised type scale (no half-
-  pixels), 8px spacing rhythm, luminance-layered surfaces, two-font discipline (sans prose
-  / mono numbers), tabular figures, semantic colour double-encoded (sign + hue), direct
-  labels not legends, print/PDF tokens redefined for ink-on-paper.
-
-  Panels: THE BRIEF (hero) · THE WIRE (today) · NOTES (write + export) · CORPUS (search).
+  Three columns: SOURCES (Today / Search real articles) · THE BRIEF (the story + the read) ·
+  NOTES & DRAFT (write + export). Charts are significant only: the ripple (CAR curve), the
+  is-this-bigger-than-normal lift view, and the cross-asset reaction.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ripple Engine — Intelligence Desk</title>
+<title>Ripple Engine — The Desk</title>
 <style>
   :root{
-    /* surfaces (luminance-layered; separation by tone, not borders) */
     --bg0:#0B0E14; --bg1:#141924; --bg2:#1C222E; --bg3:#232b39;
     --line:rgba(255,255,255,0.06); --line2:rgba(255,255,255,0.11);
-    /* ink (faint lightened to clear WCAG AA on bg0) */
     --ink:#D6DBE3; --ink2:#aeb6c2; --dim:#8A93A2; --faint:#7d8593; --ink-hi:#ffffff; --ink-max:#eef1f6;
-    /* semantic — direction is always double-encoded with a sign too */
     --pos:#2FB49B; --neg:#E5604D; --accent:#F5A623; --info:#5B8FD1; --warn:#D9A441;
     --pos-line:#26463b; --neg-line:#552c24; --warn-line:#54471f;
     --primary-bg:#183454; --primary-line:#2f6598; --primary-ink:#dbe9fb;
-    /* type scale — 6 steps, no half-pixels */
     --t-mega:30px; --t-h:19px; --t-body:13px; --t-sm:12px; --t-cap:11px; --t-micro:10px;
-    /* spacing — 8px base */
     --sp1:8px; --sp2:16px; --sp3:24px;
     --mono:"IBM Plex Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Helvetica Neue",sans-serif;
   }
   *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; }
-  body{ margin:0; background:var(--bg0); color:var(--ink);
-    font:var(--t-body)/1.55 var(--sans); font-variant-numeric:tabular-nums slashed-zero; }
+  body{ margin:0; background:var(--bg0); color:var(--ink); font:var(--t-body)/1.55 var(--sans);
+    font-variant-numeric:tabular-nums slashed-zero; }
   a{ color:var(--info); text-decoration:none; } a:hover{ text-decoration:underline; }
   .num{ font-family:var(--mono); font-variant-numeric:tabular-nums slashed-zero; }
-  .pos{ color:var(--pos); } .neg{ color:var(--neg); } .dim{ color:var(--dim); } .faint{ color:var(--faint); }
+  .pos{ color:var(--pos); } .neg{ color:var(--neg); } .dim{ color:var(--dim); } .faint{ color:var(--faint); } .accent{ color:var(--accent); }
   h1,h2,h3,h4{ margin:0; font-weight:600; }
-  button:focus-visible, input:focus-visible, textarea:focus-visible, .item:focus-visible, .r:focus-visible{
-    outline:2px solid var(--info); outline-offset:1px; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, .item:focus-visible, .r:focus-visible{ outline:2px solid var(--info); outline-offset:1px; }
 
-  /* Masthead */
-  .mast{ display:flex; align-items:center; gap:14px; height:56px; padding:0 26px;
-    background:var(--bg1); border-bottom:1px solid var(--line2); }
+  .mast{ display:flex; align-items:center; gap:14px; height:56px; padding:0 22px; background:var(--bg1); border-bottom:1px solid var(--line2); }
   .brand{ display:flex; align-items:center; gap:12px; }
-  .brand .mark{ font:700 13px/1 var(--mono); letter-spacing:1px; color:var(--bg0);
-    background:var(--accent); padding:5px 6px; border-radius:2px; }
+  .brand .mark{ font:700 13px/1 var(--mono); letter-spacing:1px; color:var(--bg0); background:var(--accent); padding:5px 6px; border-radius:2px; }
   .brand .word{ font:600 13px/1 var(--sans); letter-spacing:1.4px; color:var(--ink); }
-  .brand .deck{ font:var(--t-cap)/1 var(--mono); letter-spacing:.4px; color:var(--dim);
-    padding-left:12px; border-left:1px solid var(--line2); }
+  .brand .deck{ font:var(--t-cap)/1 var(--mono); letter-spacing:.4px; color:var(--dim); padding-left:12px; border-left:1px solid var(--line2); }
   .dateline{ font:var(--t-cap)/1.3 var(--mono); color:var(--dim); }
   .chips{ margin-left:auto; display:flex; gap:8px; align-items:center; }
-  .chip{ font:var(--t-cap)/1 var(--mono); letter-spacing:.3px; padding:4px 9px; border-radius:2px;
-    border:1px solid var(--line2); color:var(--ink2); white-space:nowrap; }
+  .chip{ font:var(--t-cap)/1 var(--mono); letter-spacing:.3px; padding:4px 9px; border-radius:2px; border:1px solid var(--line2); color:var(--ink2); white-space:nowrap; }
   .chip b{ color:var(--ink); font-weight:600; }
-  .chip.on{ border-color:var(--warn-line); color:var(--warn); }
-  .chip.off{ border-color:var(--pos-line); color:var(--pos); }
-  .chip.hot{ border-color:var(--neg-line); color:var(--neg); }
+  .chip.on{ border-color:var(--warn-line); color:var(--warn); } .chip.off{ border-color:var(--pos-line); color:var(--pos); } .chip.hot{ border-color:var(--neg-line); color:var(--neg); }
 
-  /* Command bar */
-  .cmd{ display:flex; gap:10px; align-items:center; padding:12px 26px; border-bottom:1px solid var(--line);
-    background:var(--bg0); position:sticky; top:0; z-index:20; }
-  .cmd input{ flex:1; background:var(--bg1); color:var(--ink); border:1px solid var(--line2);
-    border-radius:3px; padding:9px 12px; font:var(--t-body) var(--sans);
-    transition:border-color .12s ease; }
+  .cmd{ display:flex; gap:10px; align-items:center; padding:11px 22px; border-bottom:1px solid var(--line); background:var(--bg0); }
+  .cmd input{ flex:1; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px; padding:9px 12px; font:var(--t-body) var(--sans); transition:border-color .12s ease; }
   .cmd input:focus{ outline:none; border-color:var(--info); }
-  button{ background:var(--bg2); color:var(--ink); border:1px solid var(--line2); border-radius:3px;
-    padding:8px 14px; font:var(--t-sm) var(--sans); cursor:pointer; white-space:nowrap;
-    transition:border-color .12s ease, color .12s ease, background .12s ease; }
-  button:hover{ border-color:var(--info); color:var(--ink-hi); }
-  button:active{ transform:translateY(0.5px); }
+  button{ background:var(--bg2); color:var(--ink); border:1px solid var(--line2); border-radius:3px; padding:8px 14px; font:var(--t-sm) var(--sans); cursor:pointer; white-space:nowrap; transition:border-color .12s ease, color .12s ease, background .12s ease; }
+  button:hover{ border-color:var(--info); color:var(--ink-hi); } button:active{ transform:translateY(0.5px); }
   button.primary{ background:var(--primary-bg); border-color:var(--primary-line); color:var(--primary-ink); }
   button.ghost{ background:transparent; }
 
-  /* Layout */
-  .wrap{ display:grid; grid-template-columns:minmax(0,1fr) 340px; }
-  @media (max-width:1080px){ .wrap{ grid-template-columns:1fr; } }
-  main{ padding:22px 26px 90px; }
+  /* 3-column grid */
+  .wrap{ display:grid; grid-template-columns:300px minmax(0,1fr) 330px; min-height:calc(100vh - 100px); }
+  @media (max-width:1200px){ .wrap{ grid-template-columns:270px minmax(0,1fr); } aside.notes{ display:none; } }
+  @media (max-width:860px){ .wrap{ grid-template-columns:1fr; } aside.sources{ display:none; } }
+  aside.sources{ border-right:1px solid var(--line); background:var(--bg0); padding:16px 14px; overflow:hidden; }
+  main{ padding:22px 26px 90px; min-width:0; }
   .brief{ max-width:860px; }
-  aside{ border-left:1px solid var(--line); padding:22px 18px 90px; background:var(--bg0); }
+  aside.notes{ border-left:1px solid var(--line); background:var(--bg0); padding:22px 16px 90px; }
   .prose{ max-width:68ch; }
+
+  /* Sources */
+  .tabs{ display:flex; gap:6px; margin-bottom:12px; }
+  .tabs button{ flex:1; padding:6px 8px; font-size:var(--t-cap); }
+  .tabs button.sel{ background:var(--bg3); border-color:var(--info); color:var(--ink-hi); }
+  .srch input{ width:100%; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px; padding:8px 10px; font:var(--t-sm) var(--sans); margin-bottom:10px; }
+  .srch input:focus{ outline:none; border-color:var(--info); }
+  .list{ overflow-y:auto; max-height:calc(100vh - 210px); }
+  .item{ padding:9px 8px; margin:0 -8px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .12s ease; }
+  .item:hover{ background:var(--bg1); } .item.active{ background:var(--bg2); }
+  .item .hl{ font-size:var(--t-sm); color:var(--ink); line-height:1.4; }
+  .item .sub{ font:var(--t-micro) var(--mono); color:var(--faint); margin-top:4px; display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
+  .tag{ font:var(--t-micro) var(--mono); padding:1px 5px; border:1px solid var(--line2); border-radius:2px; color:var(--dim); }
+  .fl-supported{ color:var(--pos); border-color:var(--pos-line); } .fl-not{ color:var(--warn); border-color:var(--warn-line); } .fl-thin{ color:var(--faint); }
 
   /* Brief */
   .kicker{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); }
-  .bluf{ font:500 var(--t-h)/1.42 var(--sans); margin:8px 0 4px; color:var(--ink-max); max-width:68ch; }
+  .story{ border:1px solid var(--line2); border-left:2px solid var(--info); border-radius:2px; padding:14px 16px; margin:8px 0 4px; background:var(--bg1); }
+  .story .h{ font:600 15px/1.4 var(--sans); color:var(--ink-max); max-width:68ch; }
+  .story .meta{ font:var(--t-cap) var(--mono); color:var(--faint); margin-top:6px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .story .excerpt{ margin-top:10px; font-size:var(--t-sm); line-height:1.6; color:var(--ink2); max-width:70ch; border-top:1px solid var(--line); padding-top:10px; }
+  .story .excerpt .lbl{ font:var(--t-micro) var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:4px; }
+  .bluf{ font:500 var(--t-h)/1.42 var(--sans); margin:16px 0 4px; color:var(--ink-max); max-width:68ch; }
   .bluf b{ color:var(--ink-hi); font-weight:700; } .bluf .neg{ color:var(--neg); } .bluf .pos{ color:var(--pos); }
-  .storyline{ color:var(--dim); font-size:var(--t-body); margin:8px 0 2px; max-width:68ch; }
-  .storyline .src{ font:var(--t-cap) var(--mono); color:var(--faint); }
-  .badges{ display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 2px; }
+  .badges{ display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 2px; }
   .badge{ font:var(--t-cap)/1 var(--mono); padding:4px 9px; border-radius:2px; border:1px solid var(--line2); color:var(--ink2); }
-  .badge.warn{ border-color:var(--warn-line); color:var(--warn); }
-  .badge.neg{ border-color:var(--neg-line); color:var(--neg); }
   .badge.faint{ color:var(--faint); }
-  .decision{ margin-top:16px; padding:12px 14px; background:var(--bg1); border:1px solid var(--line2);
-    border-left:2px solid var(--accent); border-radius:2px; font-size:var(--t-body); color:var(--ink); max-width:68ch; }
+  .decision{ margin-top:16px; padding:12px 14px; background:var(--bg1); border:1px solid var(--line2); border-left:2px solid var(--accent); border-radius:2px; font-size:var(--t-body); color:var(--ink); max-width:68ch; }
   .decision b{ color:var(--accent); font:var(--t-micro) var(--mono); letter-spacing:1.5px; text-transform:uppercase; }
 
   section.blk{ border-top:1px solid var(--line); margin-top:var(--sp3); padding-top:var(--sp2); }
-  section.blk.gap{ border-top:1px dashed var(--line2); }
-  section.blk > h3{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2px; text-transform:uppercase;
-    color:var(--faint); margin-bottom:var(--sp2); }
+  section.blk > h3{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin-bottom:var(--sp2); }
   section.blk > h3 .ctx{ color:var(--faint); text-transform:none; letter-spacing:.3px; }
   .lead-metric{ display:flex; gap:26px; align-items:flex-end; flex-wrap:wrap; }
   .lead-metric .big{ font:var(--t-mega)/1 var(--mono); color:var(--ink-hi); font-variant-numeric:tabular-nums slashed-zero; }
@@ -113,14 +104,15 @@
   .ci{ font:var(--t-cap) var(--mono); color:var(--dim); }
   .charts{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px; margin-top:var(--sp2); }
   @media (max-width:760px){ .charts{ grid-template-columns:1fr; } }
-  .chart .cap{ font:var(--t-micro) var(--mono); color:var(--faint); margin-bottom:4px; letter-spacing:.5px; }
-  .chart .sub{ font:var(--t-micro) var(--mono); color:var(--faint); margin-top:4px; line-height:1.4; }
+  .chart{ min-width:0; } .chart .cap{ font:var(--t-micro) var(--mono); color:var(--ink2); margin-bottom:4px; letter-spacing:.5px; }
+  .chart .q{ color:var(--accent); } .chart .sub{ font:var(--t-micro) var(--mono); color:var(--faint); margin-top:4px; line-height:1.4; }
 
   table.grid{ width:100%; border-collapse:collapse; font-size:var(--t-sm); }
   table.grid th, table.grid td{ text-align:left; padding:6px 12px 6px 0; border-bottom:1px solid var(--line); vertical-align:top; }
   table.grid td:last-child, table.grid th:last-child{ padding-right:4px; }
   table.grid th{ font:var(--t-micro) var(--mono); letter-spacing:.5px; text-transform:uppercase; color:var(--faint); font-weight:500; }
   table.grid td.n, table.grid th.n{ text-align:right; font-family:var(--mono); }
+  tr.click{ cursor:pointer; } tr.click:hover td{ background:var(--bg1); }
   .kv{ display:grid; grid-template-columns:auto 1fr; gap:8px 16px; font-size:var(--t-sm); }
   .kv .k{ color:var(--faint); font:var(--t-micro) var(--mono); letter-spacing:.3px; text-transform:uppercase; padding-top:2px; }
   .verdict{ padding:10px 12px; background:var(--bg1); border:1px solid var(--line); border-left:2px solid var(--info); border-radius:2px; font-size:var(--t-sm); max-width:68ch; }
@@ -131,109 +123,97 @@
   ul.watch li{ padding:8px 0 8px 18px; border-bottom:1px solid var(--line); position:relative; font-size:var(--t-sm); color:var(--ink2); }
   ul.watch li:before{ content:"›"; position:absolute; left:2px; color:var(--accent); font-family:var(--mono); }
   .disc{ font-size:var(--t-cap); color:var(--faint); line-height:1.5; }
-  details.receipts{ margin-top:var(--sp2); }
-  details.receipts summary{ font:var(--t-micro) var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); cursor:pointer; }
+  details.receipts{ margin-top:var(--sp2); } details.receipts summary{ font:var(--t-micro) var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); cursor:pointer; }
   details.receipts li{ font:var(--t-cap) var(--mono); color:var(--dim); }
   .footer-note{ border-top:1px solid var(--line2); margin-top:var(--sp2); padding-top:10px; font:var(--t-cap) var(--mono); color:var(--faint); line-height:1.5; }
-  .glossary{ margin-top:var(--sp1); }
-  .glossary summary{ font:var(--t-micro) var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); cursor:pointer; }
+  .glossary{ margin-top:var(--sp1); } .glossary summary{ font:var(--t-micro) var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); cursor:pointer; }
   .glossary dl{ display:grid; grid-template-columns:auto 1fr; gap:4px 14px; margin:8px 0 0; font-size:var(--t-cap); }
   .glossary dt{ color:var(--ink2); font-family:var(--mono); } .glossary dd{ margin:0; color:var(--dim); }
 
-  /* States */
-  .skel{ height:14px; background:var(--bg1); border-radius:2px; margin:10px 0; }
+  /* Notes */
+  aside.notes h4{ font:var(--t-micro) var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  aside.notes .meta{ font:var(--t-micro) var(--mono); color:var(--faint); font-weight:400; }
+  textarea{ width:100%; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px; padding:10px; font:var(--t-sm) var(--mono); resize:vertical; transition:border-color .12s ease; }
+  textarea:focus{ outline:none; border-color:var(--info); } #notes{ min-height:260px; }
+  .savestate{ font:var(--t-micro) var(--mono); color:var(--faint); }
+  .rail-actions{ display:flex; gap:7px; margin-top:8px; flex-wrap:wrap; } .rail-actions button{ padding:6px 10px; font-size:var(--t-cap); }
+  .corpus{ border-top:1px solid var(--line2); margin-top:24px; padding-top:14px; }
+  .corpus input{ width:100%; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px; padding:8px 10px; font:var(--t-sm) var(--sans); }
+  .corpus input:focus{ outline:none; border-color:var(--info); }
+  .results{ max-height:240px; overflow:auto; margin-top:10px; }
+  .results .r{ display:flex; gap:10px; align-items:baseline; padding:6px 8px; margin:0 -8px; border-bottom:1px solid var(--line); cursor:pointer; font-size:var(--t-sm); transition:background .12s ease; }
+  .results .r:hover{ background:var(--bg1); } .results .rd{ font:var(--t-micro) var(--mono); color:var(--faint); white-space:nowrap; }
+  #eventDetail{ display:none; margin-top:12px; padding:12px; background:var(--bg1); border:1px solid var(--line); border-radius:3px; }
+
+  .spin{ color:var(--faint); font:var(--t-cap) var(--mono); padding:14px 0; }
+  .skel{ height:14px; background:var(--bg1); border-radius:2px; margin:10px 0; animation:pulse 1.3s ease-in-out infinite; }
   .skel.w-lead{ height:22px; width:82%; } .skel.w-2{ width:64%; } .skel.w-3{ width:72%; }
   @keyframes pulse{ 0%,100%{ opacity:.55; } 50%{ opacity:.9; } }
-  .skel{ animation:pulse 1.3s ease-in-out infinite; }
   @media (prefers-reduced-motion:reduce){ .skel{ animation:none; } }
-  .errbox{ border:1px solid var(--neg-line); border-left:2px solid var(--neg); border-radius:2px;
-    padding:14px 16px; background:var(--bg1); max-width:68ch; }
+  .errbox{ border:1px solid var(--neg-line); border-left:2px solid var(--neg); border-radius:2px; padding:14px 16px; background:var(--bg1); max-width:68ch; }
   .errbox .k{ font:var(--t-micro) var(--mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--neg); }
-  .empty{ color:var(--faint); padding:24px 0; text-align:center; font-size:var(--t-sm); }
-
-  /* Right rail */
-  aside h4{ font:var(--t-micro) var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint);
-    margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-  aside .meta{ font:var(--t-micro) var(--mono); color:var(--faint); font-weight:400; }
-  .wire{ max-height:340px; overflow-y:auto; margin-bottom:var(--sp3); }
-  .wire .item{ padding:8px; margin:0 -8px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .12s ease; }
-  .wire .item:hover{ background:var(--bg1); }
-  .wire .hl{ font-size:var(--t-sm); color:var(--ink); line-height:1.4; }
-  .wire .sub{ font:var(--t-micro) var(--mono); color:var(--faint); margin-top:4px; display:flex; gap:7px; align-items:center; }
-  .tag{ font:var(--t-micro) var(--mono); padding:1px 5px; border:1px solid var(--line2); border-radius:2px; color:var(--dim); }
-  .fl-supported{ color:var(--pos); border-color:var(--pos-line); } .fl-not{ color:var(--warn); border-color:var(--warn-line); } .fl-thin{ color:var(--faint); }
-  textarea{ width:100%; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px;
-    padding:10px; font:var(--t-sm) var(--mono); resize:vertical; transition:border-color .12s ease; }
-  textarea:focus{ outline:none; border-color:var(--info); }
-  #notes{ min-height:220px; }
-  .savestate{ font:var(--t-micro) var(--mono); color:var(--faint); }
-  .rail-actions{ display:flex; gap:7px; margin-top:8px; flex-wrap:wrap; }
-  .rail-actions button{ padding:6px 10px; font-size:var(--t-cap); }
-
-  .corpus{ border-top:1px solid var(--line2); margin-top:8px; }
-  .corpus input{ width:100%; background:var(--bg1); color:var(--ink); border:1px solid var(--line2); border-radius:3px;
-    padding:9px 12px; font:var(--t-body) var(--sans); transition:border-color .12s ease; }
-  .corpus input:focus{ outline:none; border-color:var(--info); }
-  .results{ max-height:260px; overflow:auto; margin-top:10px; }
-  .results .r{ display:flex; gap:10px; align-items:baseline; padding:6px 8px; margin:0 -8px; border-bottom:1px solid var(--line); cursor:pointer; font-size:var(--t-sm); transition:background .12s ease; }
-  .results .r:hover{ background:var(--bg1); }
-  .results .rd{ font:var(--t-micro) var(--mono); color:var(--faint); white-space:nowrap; }
-  #eventDetail{ display:none; margin-top:12px; padding:12px; background:var(--bg1); border:1px solid var(--line); border-radius:3px; }
-  .spin{ color:var(--faint); font:var(--t-cap) var(--mono); padding:14px 0; }
+  .empty{ color:var(--faint); padding:20px 0; text-align:center; font-size:var(--t-sm); }
   svg{ display:block; max-width:100%; height:auto; }
-  #brentSpark{ display:inline-block; width:132px; height:30px; vertical-align:middle; }
+  #brentSpark{ display:inline-block; width:120px; height:28px; vertical-align:middle; }
 
-  /* Print / PDF — redefine tokens so inline SVG fills follow ink-on-paper too */
   @media print{
-    :root{ color-scheme:light;
-      --bg0:#fff; --bg1:#fff; --bg2:#f6f6f6; --bg3:#eee;
-      --line:#dcdcdc; --line2:#bcbcbc; --ink:#111; --ink2:#222; --dim:#444; --faint:#666;
-      --ink-hi:#000; --ink-max:#000;
+    :root{ color-scheme:light; --bg0:#fff; --bg1:#fff; --bg2:#f6f6f6; --bg3:#eee;
+      --line:#dcdcdc; --line2:#bcbcbc; --ink:#111; --ink2:#222; --dim:#444; --faint:#666; --ink-hi:#000; --ink-max:#000;
       --pos:#0A7D34; --neg:#B3261E; --info:#1a4a7a; --accent:#7a5200; --warn:#7a5200; }
     body{ background:#fff; color:#111; font-size:11pt; }
     .cmd, aside, .no-print, details.receipts summary, .glossary summary{ display:none !important; }
     .wrap{ display:block; } main{ padding:0; } .brief{ max-width:100%; }
     details.receipts > ul, .glossary dl{ display:block !important; }
-    section.blk, .chart, table.grid, .verdict, .lead-metric, .decision, ul.watch li{ break-inside:avoid; }
-    h3,h4{ break-after:avoid; } p,li{ orphans:3; widows:3; }
-    a{ color:#000; text-decoration:none; }
+    section.blk, .chart, table.grid, .verdict, .lead-metric, .decision, .story, ul.watch li{ break-inside:avoid; }
+    h3,h4{ break-after:avoid; } p,li{ orphans:3; widows:3; } a{ color:#000; text-decoration:none; }
     @page{ size:A4; margin:16mm 15mm 18mm; @bottom-right{ content:"Page " counter(page) " of " counter(pages); } }
   }
 </style>
 </head>
 <body>
 <header class="mast">
-  <div class="brand"><span class="mark">RE</span><span class="word">RIPPLE ENGINE</span>
-    <span class="deck">Intelligence Desk</span></div>
+  <div class="brand"><span class="mark">RE</span><span class="word">RIPPLE ENGINE</span><span class="deck">The Desk</span></div>
   <div class="dateline" id="dateline">loading…</div>
   <div class="chips" id="chips"></div>
 </header>
 
 <div class="cmd no-print">
-  <input id="q" type="text" placeholder="Analyze a story — paste a headline, paragraph, or URL, then press Enter…">
-  <button class="primary" onclick="analyze()">Analyze</button>
+  <input id="q" type="text" placeholder="Paste any headline, paragraph, or article URL — then press Enter to read it…">
+  <button class="primary" onclick="analyze()">Read it</button>
   <button onclick="loadDaily()">Daily Brief</button>
   <button class="ghost" onclick="window.print()">Print / PDF</button>
 </div>
 
 <div class="wrap">
-  <main><div class="brief" id="brief"></div></main>
-  <aside class="no-print">
-    <h4>The Wire <span class="meta" id="wireMeta"></span>
-      <span style="flex:1"></span><button class="ghost" style="padding:2px 7px;font-size:10px" onclick="loadToday(true)">↻</button></h4>
-    <div class="wire" id="wire"><div class="spin">loading…</div></div>
+  <!-- SOURCES -->
+  <aside class="sources no-print">
+    <div class="tabs">
+      <button id="tabToday" class="sel" onclick="showTab('today')">Today</button>
+      <button id="tabSearch" onclick="showTab('search')">Search news</button>
+    </div>
+    <div id="paneSearch" style="display:none" class="srch">
+      <input id="asq" type="text" placeholder="search real articles — hormuz, opec, sanctions, iran…">
+    </div>
+    <div class="meta" id="srcMeta" style="font:var(--t-micro) var(--mono);color:var(--faint);margin-bottom:8px"></div>
+    <div class="list" id="srcList"><div class="spin">loading…</div></div>
+  </aside>
 
-    <h4>Notes <span style="flex:1"></span><span class="savestate" id="saveState"></span></h4>
-    <textarea id="notes" placeholder="Your analysis, beside the numbers. ‘Insert brief’ drops the current brief's key figures in as a sourced, quotable block."></textarea>
+  <!-- THE BRIEF -->
+  <main><div class="brief" id="brief"></div></main>
+
+  <!-- NOTES & DRAFT -->
+  <aside class="notes no-print">
+    <h4>Notes &amp; Draft <span style="flex:1"></span><span class="savestate" id="saveState"></span></h4>
+    <textarea id="notes" placeholder="Your analysis, beside the numbers. ‘Insert brief’ drops the current brief's key figures in as a sourced, quotable block; ‘export draft’ writes a Substack-ready markdown file."></textarea>
     <div class="rail-actions">
       <button onclick="insertBrief()">↳ insert brief</button>
       <button class="primary" onclick="exportDraft()">export draft →</button>
     </div>
     <div class="disc" id="exportPath" style="margin-top:6px"></div>
 
-    <h4 style="margin-top:24px">Corpus <span class="meta">reference shelf</span></h4>
     <div class="corpus">
-      <input id="hq" type="text" placeholder="search 296 coded events — hormuz, opec_decision, 2019…">
+      <h4>Corpus <span class="meta">296 coded events</span></h4>
+      <input id="hq" type="text" placeholder="search history — hormuz, opec_decision, 2019…">
       <div class="results" id="hres"></div>
       <div id="eventDetail"></div>
     </div>
@@ -245,24 +225,24 @@
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const sgn=v=>v==null?"":(v>=0?"+":"");
-const mnum=(v,d=1)=>v==null?"":(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(d);  // typographic minus, no +0.0
+const mnum=(v,d=1)=>v==null?"":(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(d);
 const f1=v=>v==null?"n/a":Number(v).toFixed(1);
 const f2=v=>v==null?"n/a":Number(v).toFixed(2);
 const cls=v=>v==null?"":v>=0?"pos":"neg";
 const arrow=v=>v==null?"":v>=0?"▲":"▼";
 function ord(n){ if(n==null) return ""; n=Math.round(n); const s=["th","st","nd","rd"],v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+const isURL=s=>/^https?:\/\//i.test((s||"").trim());
 async function getJSON(u){ const r=await fetch(u); if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); }
 async function postJSON(u,b){ const r=await fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}); if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); }
 
-let CURRENT=null;
-const cited=new Set();
+let CURRENT=null; const cited=new Set();
 
 /* ---------------- inline SVG charts (no library) ---------------- */
 function niceTicks(min,max,n){ const span=(max-min)||1, step0=span/(n||4), mag=Math.pow(10,Math.floor(Math.log10(step0)));
   const norm=step0/mag, step=(norm<1.5?1:norm<3?2:norm<7?5:10)*mag, out=[];
   for(let v=Math.ceil(min/step)*step; v<=max+1e-9; v+=step) out.push(+v.toFixed(4)); return out; }
 
-function sparkline(vals,{w=132,h=30,color="var(--info)"}={}){
+function sparkline(vals,{w=120,h=28,color="var(--info)"}={}){
   const v=(vals||[]).filter(x=>x!=null); if(v.length<2) return "";
   const mn=Math.min(...v),mx=Math.max(...v),pad=3,W=w-2*pad,H=h-2*pad,rng=(mx-mn)||1;
   const X=i=>pad+i/(v.length-1)*W, Y=x=>pad+H-(x-mn)/rng*H;
@@ -301,6 +281,29 @@ function carCurve(curve,{w=440,h=200}={}){
   </svg>`;
 }
 
+// The lift view: this class's typical move marked on the distribution of ORDINARY 20-day moves.
+function magBaseline(dist,{w=440,h=176}={}){
+  if(!dist||!dist.bins||!dist.bins.length) return `<div class="sub">no distribution</div>`;
+  const pl=10,pr=10,pt=18,pb=34, W=w-pl-pr, H=h-pt-pb;
+  const xmax=dist.axis_max||Math.max(...dist.bins.map(b=>b.x1),1);
+  const nmax=Math.max(...dist.bins.map(b=>b.n),1);
+  const X=v=>pl+Math.min(v,xmax)/xmax*W, Y=n=>pt+H-n/nmax*H;
+  let bars=""; dist.bins.forEach(b=>{ const x0=X(b.x0),x1=X(b.x1); bars+=`<rect x="${x0.toFixed(1)}" y="${Y(b.n).toFixed(1)}" width="${Math.max(x1-x0-1,0.6).toFixed(1)}" height="${(pt+H-Y(b.n)).toFixed(1)}" fill="var(--dim)" opacity="0.30"/>`; });
+  const iqr=dist.class_iqr||[]; const band=(iqr.length===2)?`<rect x="${X(iqr[0]).toFixed(1)}" y="${pt}" width="${Math.max(X(iqr[1])-X(iqr[0]),1).toFixed(1)}" height="${H}" fill="var(--accent)" opacity="0.10"/>`:"";
+  const om=X(dist.ordinary_median), cm=X(dist.class_median);
+  let rug=""; (dist.class_values||[]).forEach(v=>{ rug+=`<line x1="${X(v).toFixed(1)}" y1="${pt+H+2}" x2="${X(v).toFixed(1)}" y2="${pt+H+7}" stroke="var(--accent)" stroke-width="1" opacity="0.55"/>`; });
+  return `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">
+    ${band}${bars}
+    <line x1="${om.toFixed(1)}" y1="${pt}" x2="${om.toFixed(1)}" y2="${pt+H}" stroke="var(--faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="${cm.toFixed(1)}" y1="${pt-3}" x2="${cm.toFixed(1)}" y2="${pt+H}" stroke="var(--accent)" stroke-width="1.75"/>
+    <text x="${cm.toFixed(1)}" y="${pt-5}" fill="var(--accent)" font-size="10" text-anchor="middle" font-family="var(--mono)">this class ${f1(dist.class_median)}%</text>
+    ${rug}
+    <text x="${pl}" y="${h-4}" fill="var(--faint)" font-size="9" font-family="var(--mono)">0%</text>
+    <text x="${w-pr}" y="${h-4}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="var(--mono)">${Math.round(xmax)}%+ |20-day move|</text>
+    <text x="${om.toFixed(1)}" y="${h-16}" fill="var(--faint)" font-size="9" text-anchor="middle" font-family="var(--mono)">ordinary ${f1(dist.ordinary_median)}%</text>
+  </svg>`;
+}
+
 function divergingBars(items,{w=440,rowH=24}={}){
   items=(items||[]).filter(it=>it&&it.car20!=null);
   if(!items.length) return `<div class="sub">no cross-asset data</div>`;
@@ -309,12 +312,11 @@ function divergingBars(items,{w=440,rowH=24}={}){
   let html="";
   for(const unit of Object.keys(groups)){
     const g=groups[unit], mx=Math.max(...g.map(it=>Math.abs(it.car20)),0.0001), h=g.length*rowH+18;
-    html+=`<div class="sub">reaction in ${unit==="%"?"price assets — CAR %, +20 days":"yields — bps, +20 days"} (bars scaled to ${mx.toFixed(1)}${unit==="%"?"%":" bps"} max)</div>`;
+    html+=`<div class="sub">reaction in ${unit==="%"?"price assets — CAR %, +20 days":"yields — bps, +20 days"} (scaled to ${mx.toFixed(1)}${unit==="%"?"%":" bps"} max)</div>`;
     html+=`<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMinYMid meet">`;
     html+=`<line x1="${cx}" y1="4" x2="${cx}" y2="${g.length*rowH+4}" stroke="var(--line2)" stroke-width="1"/>`;
     html+=`<text x="${cx}" y="${g.length*rowH+15}" fill="var(--faint)" font-size="9" text-anchor="middle" font-family="var(--mono)">0</text>`;
-    g.forEach((it,i)=>{ const y=6+i*rowH, len=Math.abs(it.car20)/mx*(barW/2-10), pos=it.car20>=0,
-      x=pos?cx:cx-len, col=pos?"var(--pos)":"var(--neg)";
+    g.forEach((it,i)=>{ const y=6+i*rowH, len=Math.abs(it.car20)/mx*(barW/2-10), pos=it.car20>=0, x=pos?cx:cx-len, col=pos?"var(--pos)":"var(--neg)";
       html+=`<text x="0" y="${y+(rowH-8)/2}" dominant-baseline="central" fill="var(--ink2)" font-size="11" font-family="var(--sans)">${esc(trunc(it.label))}</text>`;
       html+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(len,0.5).toFixed(1)}" height="${rowH-8}" fill="${col}"/>`;
       html+=`<text x="${w}" y="${y+(rowH-8)/2}" dominant-baseline="central" fill="${col}" font-size="11" text-anchor="end" font-family="var(--mono)">${mnum(it.car20,1)}${unit==="%"?"%":""}</text>`;
@@ -328,13 +330,11 @@ function divergingBars(items,{w=440,rowH=24}={}){
 function setChips(b){
   const mn=b.market_now||{}, pv=b.priced_vs_view||{}, amp=b.amplifier||{};
   const gpr=mn.gpr||{}, gap=(pv.gap||{}), bp=mn.brent||{};
-  const gd=(b.generated_at||"").slice(0,10);
-  let stale="";
+  const gd=(b.generated_at||"").slice(0,10); let stale="";
   if(b.as_of && gd && b.as_of < gd){ const dd=Math.round((new Date(gd)-new Date(b.as_of))/86400000);
-    stale=` · <span style="color:var(--warn)">⚠ market panel ${dd} day${dd===1?"":"s"} stale</span>`; }
-  $("dateline").innerHTML = "DATA AS OF "+esc(b.as_of||"—")+(bp.level!=null?"   ·   BRENT "+esc(bp.level)+" ("+mnum(bp.chg5d,1)+"% 5d)":"")+stale;
-  const chips=[];
-  const ampc=amp.state==="ON"?"on":amp.state==="OFF"?"off":"";
+    stale=` · <span style="color:var(--warn)">⚠ panel ${dd}d stale</span>`; }
+  $("dateline").innerHTML="DATA AS OF "+esc(b.as_of||"—")+(bp.level!=null?"   ·   BRENT "+esc(bp.level)+" ("+mnum(bp.chg5d,1)+"% 5d)":"")+stale;
+  const chips=[]; const ampc=amp.state==="ON"?"on":amp.state==="OFF"?"off":"";
   chips.push(`<span class="chip ${ampc}">STRESS <b>${amp.state==="ON"?"ELEVATED":amp.state==="OFF"?"CALM":"?"}</b></span>`);
   if(gpr.percentile!=null) chips.push(`<span class="chip ${gpr.percentile>=80?"hot":""}">GEO-RISK <b>${ord(gpr.percentile)}</b> pct</span>`);
   if(gap.direction){ const gc=gap.direction==="over_priced_fear"?"on":gap.direction==="under_priced_risk"?"hot":"";
@@ -342,91 +342,101 @@ function setChips(b){
   $("chips").innerHTML=chips.join("");
 }
 
-/* ---------------- the brief ---------------- */
-function skeleton(){ return `<div class="skel w-lead"></div><div class="skel w-3"></div><div class="skel w-2"></div>
-  <div style="height:24px"></div><div class="skel w-3"></div><div class="skel"></div><div class="skel w-2"></div>`; }
-function errorBox(msg){ return `<div class="errbox"><div class="k">Unavailable</div>
-  <div style="margin-top:6px">The desk couldn't load this. ${esc(msg)}</div>
-  <div class="rail-actions"><button onclick="loadDaily()">Retry</button></div></div>`; }
+/* ---------------- open / analyze ---------------- */
+function skeleton(){ return `<div class="skel w-lead"></div><div class="skel w-3"></div><div class="skel w-2"></div><div style="height:24px"></div><div class="skel w-3"></div><div class="skel"></div><div class="skel w-2"></div>`; }
+function errorBox(msg){ return `<div class="errbox"><div class="k">Unavailable</div><div style="margin-top:6px">${esc(msg)}</div><div class="rail-actions"><button onclick="loadDaily()">Daily brief</button></div></div>`; }
 
 async function loadDaily(){ $("brief").innerHTML=skeleton();
-  try{ renderBrief(await getJSON("/wb_daily_brief")); }
-  catch(e){ $("brief").innerHTML=errorBox("Is the backend running? (python3 src/backend.py)"); } }
+  try{ const b=await getJSON("/wb_daily_brief"); let src=null;
+    if(b.story && b.story.url){ src=await extractFor(b.story.url, b.story.source); }
+    renderBrief(b, src); }
+  catch(e){ $("brief").innerHTML=errorBox("Couldn't load the daily brief. Is the backend running? (python3 src/backend.py)"); } }
+
 async function analyze(){ const t=$("q").value.trim(); if(!t) return; $("brief").innerHTML=skeleton();
-  try{ renderBrief(await postJSON("/wb_brief",{text:t})); }
-  catch(e){ $("brief").innerHTML=errorBox("The analyze request failed."); } }
-async function briefFor(text){ $("q").value=text; window.scrollTo({top:0,behavior:"smooth"}); await analyze(); }
+  try{ const b=await postJSON("/wb_brief",{text:t}); let src=null;
+    if(isURL(t)) src=await extractFor(t, "");
+    renderBrief(b, src); }
+  catch(e){ $("brief").innerHTML=errorBox("The read request failed."); } }
+
+async function openArticle(headline,url,source){
+  $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
+  try{ const [b,src]=await Promise.all([ postJSON("/wb_brief",{text:headline,source:source||"",url:url||""}),
+        url?extractFor(url,source):Promise.resolve(null) ]);
+    renderBrief(b, src||{source,url,excerpt:null}); }
+  catch(e){ $("brief").innerHTML=errorBox("Couldn't open that article."); }
+}
+async function extractFor(url,source){ try{ const e=await getJSON("/wb_extract?url="+encodeURIComponent(url));
+  return {source:source||"", url, excerpt:e.ok?e.excerpt:null, note:e.ok?e.note:null}; }catch(_){ return {source:source||"",url,excerpt:null}; } }
 
 function md(t){ return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
   .replace(/(^|[\s(])(-\d+(?:\.\d+)?%)/g,'$1<span class="neg">$2</span>')
   .replace(/(^|[\s(])(\+\d+(?:\.\d+)?%)/g,'$1<span class="pos">$2</span>'); }
-
 function glossary(){ return `<details class="glossary"><summary>How to read this</summary><dl>
   <dt>CAR</dt><dd>cumulative abnormal return — the market move beyond oil's normal drift, over N trading days.</dd>
-  <dt>percentile</dt><dd>where a value sits within its own history (50th = median, 90th = higher than 90% of the past).</dd>
-  <dt>OVX</dt><dd>the options market's priced oil-volatility. GPR = a news-based geopolitical-risk index.</dd>
+  <dt>percentile</dt><dd>where a value sits in its own history (50th = median, 90th = higher than 90% of the past).</dd>
+  <dt>OVX / GPR</dt><dd>OVX = the options market's priced oil-volatility; GPR = a news-based geopolitical-risk index.</dd>
   <dt>90% CI</dt><dd>a bootstrap confidence interval — the plausible range for the estimate given a small sample.</dd>
-  <dt>bps</dt><dd>basis points; 100 bps = 1 percentage point (used for bond yields).</dd>
-  </dl></details>`; }
+  <dt>bps</dt><dd>basis points; 100 bps = 1 percentage point (bond yields).</dd></dl></details>`; }
 
-function renderBrief(b){
+function renderBrief(b, src){
   if(!b){ $("brief").innerHTML=errorBox("Empty response."); return; }
-  // The API returns HTTP 200 with {error,note} on empty input / no daily story — show the error
-  // box, never a wordless half-rendered brief.
   if(b.error){ $("brief").innerHTML=errorBox(b.note||b.error); return; }
-  CURRENT=b; setChips(b);
-  (b.precedent||[]).forEach(a=>cited.add(a.event_id));
+  CURRENT=b; setChips(b); (b.precedent||[]).forEach(a=>cited.add(a.event_id));
   const s=b.story||{}, qr=b.quant_read, mn=b.market_now||{}, pv=b.priced_vs_view||{}, cf=b.confidence||{};
-  const classified=!!qr;
+  const classified=!!qr; src=src||{};
+  const srcName=src.source||s.source||"", srcUrl=src.url||s.url||"";
 
   let h="";
   h+=`<div class="kicker">${b.daily_pick?"Daily Brief · "+esc(b.daily_pick.day):"Analytical Brief"} · generated ${esc((b.generated_at||"").slice(0,16).replace("T"," "))} UTC</div>`;
+  // THE STORY (source + excerpt + link)
+  h+=`<div class="story"><div class="h">${esc(s.input||"")}</div>
+      <div class="meta">${srcName?`<span>${esc(srcName)}</span>`:""}${s.date&&s.date!=="not specified"?`<span>${esc(s.date)}</span>`:""}
+        ${srcUrl?`<a href="${esc(srcUrl)}" target="_blank" rel="noopener">read the original ↗</a>`:""}
+        <span class="tag">${esc(s.event_class||"unclassified")}</span></div>`;
+  if(src.excerpt) h+=`<div class="excerpt"><span class="lbl">From the source — verbatim excerpt</span>${esc(src.excerpt)}</div>`;
+  else if(srcUrl) h+=`<div class="excerpt"><span class="lbl">From the source</span><span class="faint">Couldn't fetch the article body here — open “read the original ↗”. (The engine read below stands on the headline + the corpus.)</span></div>`;
+  h+=`</div>`;
+
   h+=`<div class="bluf">${md(b.bottom_line)}</div>`;
-  h+=`<div class="storyline">${esc(s.input||"")} ${s.source?`· <span class="src">${esc(s.source)}${s.url?` <a href="${esc(s.url)}" target="_blank" rel="noopener">↗</a>`:""}</span>`:""}
-      ${s.date&&s.date!=="not specified"?`· <span class="src">${esc(s.date)}</span>`:""}</div>`;
-  h+=`<div class="badges">
-      <span class="badge${classified?"":" faint"}">${esc(s.event_class||"unclassified")}</span>
+  h+=`<div class="badges"><span class="badge${classified?"":" faint"}">${esc(s.event_class||"unclassified")}</span>
       <span class="badge faint">${(s.entities||[]).length} entities</span>
       <span class="badge">confidence: ${esc(cf.tier||"?")}</span></div>`;
   if(classified && (s.classification_evidence||[]).length)
     h+=`<div class="disc" style="margin-top:6px">classified <b>${esc(s.event_class)}</b> on the term(s): ${(s.classification_evidence).map(esc).join(", ")} — deterministic vocab match, challengeable.</div>`;
-
-  // Decision read
   if(b.decision_read) h+=`<div class="decision"><b>Decision read</b><br>${esc(b.decision_read.replace(/^For a decision-maker:\s*/i,""))}</div>`;
 
   if(classified){
     const a=qr.abs_car20, bl=qr.baseline, d=qr.direction;
     h+=`<section class="blk"><h3>The Quant Read <span class="ctx">— how Brent has behaved around this class (n=${qr.n}, sample: ${esc(qr.gate)})</span></h3>`;
-    h+=`<div class="lead-metric">
-        <div><div class="big">${sgn(a.median_pct)}${f1(a.median_pct)}%</div>
+    h+=`<div class="lead-metric"><div><div class="big">${sgn(a.median_pct)}${f1(a.median_pct)}%</div>
           <div class="ci">median 20-day move · typical band ${f1(a.iqr_pct[0])}–${f1(a.iqr_pct[1])}% · 90% CI [${f1(a.ci90_median_pct[0])}, ${f1(a.ci90_median_pct[1])}]</div></div>
-        <div class="lbl">Direction split ${d.up_pct}% up / ${d.down_pct}% down — this is size, not a directional call.
+        <div class="lbl">Direction split ${d.up_pct}% up / ${d.down_pct}% down — size, not a directional call.
           An ordinary month moves a median ${f1(bl.ordinary_median_pct)}%; this class sits at the <b>${ord(bl.class_median_percentile)}</b> percentile of everyday moves.
           ${a.max_event?`Max ${f1(a.max_event.abs_car20_pct)}% = “${esc(a.max_event.title)}” (${esc((a.max_event.date||"").slice(0,7))}), an outlier.`:""}</div></div>`;
     h+=`<div class="charts">
-        <div class="chart"><div class="cap">Cumulative abnormal return, mean ±1 SE — days around the event</div>${carCurve(qr.car_curve)}
-          <div class="sub">Brent, constant-mean event study (MacKinlay 1997). The band is dispersion, not confidence in a forecast.</div></div>
-        <div class="chart"><div class="cap">Cross-asset reaction, class mean (+20 days)</div>${divergingBars(qr.cross_asset)}
-          <div class="sub">Descriptive event study over the corpus; % and bps on separate scales.</div></div></div>`;
+        <div class="chart"><div class="cap">The ripple — <span class="q">how did oil actually move?</span></div>${carCurve(qr.car_curve)}
+          <div class="sub">Cumulative abnormal return in Brent, mean ±1 SE, days around the event. Constant-mean event study (MacKinlay 1997).</div></div>
+        <div class="chart"><div class="cap">Is this bigger than normal? — <span class="q">does it matter, or is it churn?</span></div>${magBaseline(qr.distribution)}
+          <div class="sub">This class's median move (amber) vs the distribution of ordinary 20-day moves (grey). Ticks = every comparable event.</div></div>
+        <div class="chart"><div class="cap">Where else it hits — <span class="q">what else moves?</span></div>${divergingBars(qr.cross_asset)}
+          <div class="sub">Same shock, measured across assets. % and bps on separate scales.</div></div>
+       </div>`;
     h+=`<table class="grid" style="margin-top:16px"><tr><th>horizon</th>`+qr.car_horizons.map(x=>`<th class="n">+${x.h}d</th>`).join("")+`</tr>`;
     h+=`<tr><td class="dim">mean move</td>`+qr.car_horizons.map(x=>`<td class="n ${cls(x.mean_pct)}">${arrow(x.mean_pct)} ${f1(x.mean_pct)}%</td>`).join("")+`</tr>`;
-    h+=`<tr><td class="faint">90% CI</td>`+qr.car_horizons.map(x=>`<td class="n faint" style="font-size:var(--t-micro)">[${f1(x.ci90[0])}, ${f1(x.ci90[1])}]</td>`).join("")+`</tr></table>`;
-    h+=`</section>`;
+    h+=`<tr><td class="faint">90% CI</td>`+qr.car_horizons.map(x=>`<td class="n faint" style="font-size:var(--t-micro)">[${f1(x.ci90[0])}, ${f1(x.ci90[1])}]</td>`).join("")+`</tr></table></section>`;
   }
 
-  // Precedent
   if((b.precedent||[]).length){
-    h+=`<section class="blk"><h3>Verified Precedent <span class="ctx">— nearest real corpus events</span></h3><table class="grid">
+    h+=`<section class="blk"><h3>Verified Precedent <span class="ctx">— nearest real corpus events (click to inspect)</span></h3><table class="grid">
         <tr><th>date</th><th>event</th><th class="n">20-day move</th><th class="n">shared</th><th>src</th></tr>`;
-    b.precedent.forEach(a=>{ h+=`<tr>
+    b.precedent.forEach(a=>{ h+=`<tr class="click" data-ev="${esc(a.event_id)}">
       <td class="n">${esc(a.date)}</td><td>${esc((a.title||"").slice(0,54))} <span class="faint">${esc(a.type)}</span></td>
       <td class="n">${a.abs_car20_pct!=null?f1(a.abs_car20_pct)+"%":"n/a"}</td>
       <td class="n ${a.shared_entities?"":"faint"}">${a.shared_entities}</td>
-      <td>${a.source_url?`<a href="${esc(a.source_url)}" target="_blank" rel="noopener">↗</a>`:""}</td></tr>`; });
+      <td>${a.source_url?`<a href="${esc(a.source_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗</a>`:""}</td></tr>`; });
     h+=`</table><div class="disc" style="margin-top:6px">“shared” = entities in common with the story. 0 = a type-only match (weaker precedent).</div></section>`;
   }
 
-  // Market state — labelled context-only when the story didn't classify
   const bp=mn.brent||{}, ov=mn.priced_oil_vol||{}, gp=mn.gpr||{};
   h+=`<section class="blk"><h3>Market State Now ${classified?"<span class='ctx'>— what a shock would land in</span>":"<span class='ctx'>— context only, not a read on this story</span>"}</h3>
       <div class="kv">
@@ -436,17 +446,12 @@ function renderBrief(b){
         ${(mn.chokepoints_flagged||[]).length?`<span class="k">Chokepoints</span><span>${mn.chokepoints_flagged.map(c=>`${esc(c.chokepoint)} <span class="neg">${esc(c.flag)}</span>`).join(" · ")}</span>`:""}
       </div></section>`;
 
-  // Priced vs view — ONLY for classified stories; always labelled market-wide standing read
   if(classified){
-    const gap=(pv.gap||{}), tr=(pv.transmission||{});
-    const vcls=gap.direction==="over_priced_fear"?"warn":gap.direction==="under_priced_risk"?"neg":"";
+    const gap=(pv.gap||{}), tr=(pv.transmission||{}); const vcls=gap.direction==="over_priced_fear"?"warn":gap.direction==="under_priced_risk"?"neg":"";
     h+=`<section class="blk"><h3>Priced vs Our View <span class="ctx">— today's market-wide standing read, not derived from this story</span></h3>`;
     if(tr.verdict) h+=`<div class="verdict ${vcls}">${esc(tr.verdict)}</div>`;
-    h+=`<div class="kv" style="margin-top:10px">
-        <span class="k">Engine–market gap</span><span><b>${esc((gap.direction||"—").replace(/_/g," "))}</b> — engine call “${esc(gap.engine_call||"?")}” vs oil vol priced at the ${ord(gap.ovx_percentile)} percentile</span>`;
-    if(pv.track_record){ const t=pv.track_record;
-      h+=`<span class="k">Track record</span><span class="num">${t.n_scored} gaps scored · skill vs base ${sgn(t.skill_vs_base)}${f2(t.skill_vs_base)} · Brier ${f2(t.brier)} vs ${f2(t.base_rate_brier)}</span>
-          <span class="k"></span><span class="disc">${esc(t.caveat)}</span>`; }
+    h+=`<div class="kv" style="margin-top:10px"><span class="k">Engine–market gap</span><span><b>${esc((gap.direction||"—").replace(/_/g," "))}</b> — engine call “${esc(gap.engine_call||"?")}” vs oil vol priced at the ${ord(gap.ovx_percentile)} percentile</span>`;
+    if(pv.track_record){ const t=pv.track_record; h+=`<span class="k">Track record</span><span class="num">${t.n_scored} gaps scored · skill vs base ${sgn(t.skill_vs_base)}${f2(t.skill_vs_base)} · Brier ${f2(t.brier)} vs ${f2(t.base_rate_brier)}</span><span class="k"></span><span class="disc">${esc(t.caveat)}</span>`; }
     h+=`</div>`;
     if((pv.prediction_markets||[]).length){
       h+=`<table class="grid" style="margin-top:12px"><tr><th>what prediction markets price (context only)</th><th class="n">implied</th></tr>`;
@@ -455,79 +460,66 @@ function renderBrief(b){
     }
     h+=`</section>`;
   }
-
-  // Synthesis (classified only)
   if(b.synthesis) h+=`<section class="blk"><h3>Synthesis</h3><div class="synthesis">${md(b.synthesis)}</div></section>`;
+  if((b.what_would_change||[]).length) h+=`<section class="blk"><h3>What Would Change This View <span class="ctx">— observable</span></h3><ul class="watch">`+b.what_would_change.map(x=>`<li>${esc(x)}</li>`).join("")+`</ul></section>`;
 
-  // What would change (classified only)
-  if((b.what_would_change||[]).length)
-    h+=`<section class="blk"><h3>What Would Change This View <span class="ctx">— observable</span></h3><ul class="watch">`+
-       b.what_would_change.map(x=>`<li>${esc(x)}</li>`).join("")+`</ul></section>`;
-
-  // Receipts + glossary + footer
   h+=`<details class="receipts"><summary>Receipts & method (${(b.receipts||[]).length})</summary><ul class="watch" style="margin-top:8px">`+
-     (b.receipts||[]).map(x=>`<li>${esc(x)}</li>`).join("")+
-     (qr?`<li>${esc(qr.disclosures.selection)}</li><li>${esc(qr.disclosures.clustering)}</li><li>${esc(qr.disclosures.confounders)}</li>`:"")+
-     `</ul></details>`;
+     (b.receipts||[]).map(x=>`<li>${esc(x)}</li>`).join("")+(qr?`<li>${esc(qr.disclosures.selection)}</li><li>${esc(qr.disclosures.clustering)}</li><li>${esc(qr.disclosures.confounders)}</li>`:"")+`</ul></details>`;
   h+=glossary();
   h+=`<div class="footer-note">CONFIDENCE ${esc(cf.tier||"?")} — ${esc(cf.why||"")}<br>${esc(b.discipline||"")} · latency ${b.latency_ms}ms</div>`;
 
   $("brief").innerHTML=h;
   drawBrentSpark();
+  $("brief").querySelectorAll("tr.click").forEach(tr=>tr.addEventListener("click",()=>openEv(tr.dataset.ev)));
 }
+async function drawBrentSpark(){ try{ const d=await getJSON("/wb_series?series=fred.DCOILBRENTEU&days=120");
+  const el=$("brentSpark"); if(el&&d.values&&d.values.length) el.innerHTML=sparkline(d.values,{color:"var(--info)"}); }catch(e){} }
 
-async function drawBrentSpark(){
-  try{ const d=await getJSON("/wb_series?series=fred.DCOILBRENTEU&days=120");
-    const el=$("brentSpark"); if(el&&d.values&&d.values.length) el.innerHTML=sparkline(d.values,{color:"var(--info)"}); }catch(e){}
+/* ---------------- sources (today + search) ---------------- */
+let curTab="today";
+function showTab(t){ curTab=t; $("tabToday").classList.toggle("sel",t==="today"); $("tabSearch").classList.toggle("sel",t==="search");
+  $("paneSearch").style.display=t==="search"?"block":"none";
+  if(t==="today") loadToday(); else { $("asq").focus(); searchArticles(); } }
+function renderArticles(items, meta){
+  $("srcMeta").textContent=meta||"";
+  $("srcList").innerHTML=items.length?items.map(it=>{ const fc=it.flag==="supported"?"fl-supported":it.flag==="thin data"?"fl-thin":"fl-not";
+    return `<div class="item" tabindex="0" role="button" data-hl="${esc(it.headline)}" data-url="${esc(it.url||"")}" data-src="${esc(it.source||"")}">
+      <div class="hl">${esc(it.headline)}</div>
+      <div class="sub"><span class="tag">${esc(it.type)}</span>${it.flag?`<span class="tag ${fc}">${esc(it.flag)}</span>`:""}
+        ${(it.base_rate||it.expected_magnitude_pct!=null)?`<span class="num">${f1(it.base_rate?it.base_rate.mean_abs_car20_pct:it.expected_magnitude_pct)}%</span>`:""}<span class="faint">${esc(it.source||"")}</span></div></div>`;
+  }).join(""):'<div class="empty">No articles.</div>';
 }
-
-/* ---------------- the wire ---------------- */
-async function loadToday(force){ const el=$("wire"); if(force) el.innerHTML='<div class="spin">refreshing…</div>';
-  try{ const d=await getJSON("/wb_today?limit=30");
-    $("wireMeta").textContent=d.day?`${d.day} · ${d.n_classified} classified`:"";
-    const items=d.items||[];
-    if(!items.length){ el.innerHTML='<div class="empty">No classified headlines for the latest day.</div>'; return; }
-    el.innerHTML=items.map(it=>{ const fc=it.flag==="supported"?"fl-supported":it.flag==="thin data"?"fl-thin":"fl-not";
-      return `<div class="item" tabindex="0" role="button" data-hl="${esc(it.headline)}">
-        <div class="hl">${esc(it.headline)}</div>
-        <div class="sub"><span class="tag">${esc(it.type)}</span><span class="tag ${fc}">${esc(it.flag)}</span>
-          ${it.base_rate?`<span class="num">${f1(it.base_rate.mean_abs_car20_pct)}%</span>`:""}<span class="faint">${esc(it.source)}</span></div></div>`;
-    }).join("");
-  }catch(e){ el.innerHTML=`<div class="empty">wire unavailable</div>`; } }
+async function loadToday(){ $("srcList").innerHTML='<div class="spin">loading…</div>';
+  try{ const d=await getJSON("/wb_today?limit=30"); renderArticles(d.items||[], d.day?`${d.day} · ${d.n_classified} classified`:""); }
+  catch(e){ $("srcList").innerHTML='<div class="empty">feed unavailable</div>'; } }
+let asT=null; function schedArticles(){ clearTimeout(asT); asT=setTimeout(searchArticles,250); }
+async function searchArticles(){ const q=$("asq").value.trim(); $("srcList").innerHTML='<div class="spin">searching…</div>';
+  try{ const d=await getJSON("/wb_articles?q="+encodeURIComponent(q)+"&limit=40"); renderArticles(d.items||[], `${d.n} article(s)${q?` for “${q}”`:""}`); }
+  catch(e){ $("srcList").innerHTML='<div class="empty">search unavailable</div>'; } }
 
 /* ---------------- notes ---------------- */
 let saveT=null;
 async function loadNote(){ try{ const d=await getJSON("/wb_note"); $("notes").value=d.text||""; }catch(e){} }
 function scheduleSave(){ $("saveState").textContent="editing…"; clearTimeout(saveT);
   saveT=setTimeout(async()=>{ try{ await postJSON("/wb_note",{text:$("notes").value}); $("saveState").textContent="saved "+new Date().toLocaleTimeString(); }catch(e){ $("saveState").textContent="save failed"; } },700); }
-function insertBrief(){
-  if(!CURRENT){ $("saveState").textContent="load a brief first"; return; }
-  const b=CURRENT, qr=b.quant_read;
-  let blk=`\n> **Ripple Engine brief — ${(b.story||{}).event_class||"unclassified"}**  (${(b.as_of||"")})\n`;
+function insertBrief(){ if(!CURRENT){ $("saveState").textContent="load a brief first"; return; }
+  const b=CURRENT, qr=b.quant_read; let blk=`\n> **Ripple Engine brief — ${(b.story||{}).event_class||"unclassified"}**  (${(b.as_of||"")})\n`;
   blk+=`> ${b.bottom_line.replace(/\*\*/g,"**")}\n`;
-  if(qr){ const a=qr.abs_car20;
-    blk+=`> Measured: median 20-day move ${f1(a.median_pct)}% (typical ${f1(a.iqr_pct[0])}–${f1(a.iqr_pct[1])}%, 90% CI [${f1(a.ci90_median_pct[0])}, ${f1(a.ci90_median_pct[1])}], n=${qr.n}); ordinary-month median ${f1(qr.baseline.ordinary_median_pct)}%.\n`; }
+  if(qr){ const a=qr.abs_car20; blk+=`> Measured: median 20-day move ${f1(a.median_pct)}% (typical ${f1(a.iqr_pct[0])}–${f1(a.iqr_pct[1])}%, 90% CI [${f1(a.ci90_median_pct[0])}, ${f1(a.ci90_median_pct[1])}], n=${qr.n}); ordinary-month median ${f1(qr.baseline.ordinary_median_pct)}%.\n`; }
   if(b.decision_read) blk+=`> ${b.decision_read}\n`;
+  if((b.story||{}).url) blk+=`> Source: ${b.story.url}\n`;
   blk+=`> _Expected magnitude, not a probability. Association, not cause. Real corpus events only._\n`;
-  const ta=$("notes"), p=ta.selectionStart||ta.value.length;
-  ta.value=ta.value.slice(0,p)+blk+ta.value.slice(p);
-  (b.precedent||[]).forEach(a=>cited.add(a.event_id)); scheduleSave();
-}
-async function exportDraft(){
-  try{ await postJSON("/wb_note",{text:$("notes").value});
-    const d=await postJSON("/wb_export",{text:$("notes").value,events:Array.from(cited)});
-    if(d.ok) $("exportPath").innerHTML=`exported → <span class="num">${esc(d.file)}</span> (${cited.size} sources)`;
-  }catch(e){ $("exportPath").textContent="export failed"; }
-}
+  const ta=$("notes"), p=ta.selectionStart||ta.value.length; ta.value=ta.value.slice(0,p)+blk+ta.value.slice(p);
+  (b.precedent||[]).forEach(a=>cited.add(a.event_id)); scheduleSave(); }
+async function exportDraft(){ try{ await postJSON("/wb_note",{text:$("notes").value});
+  const d=await postJSON("/wb_export",{text:$("notes").value,events:Array.from(cited)});
+  if(d.ok) $("exportPath").innerHTML=`exported → <span class="num">${esc(d.file)}</span> (${cited.size} sources)`;
+  }catch(e){ $("exportPath").textContent="export failed"; } }
 
-/* ---------------- corpus ---------------- */
-let hT=null;
-function schedHist(){ clearTimeout(hT); hT=setTimeout(hist,250); }
-async function hist(){ try{ const q=$("hq").value.trim();
-    const rows=await getJSON("/wb_history?q="+encodeURIComponent(q)+"&limit=40"); const el=$("hres");
-    el.innerHTML=rows.length?rows.map(r=>`<div class="r" tabindex="0" role="button" data-id="${esc(r.event_id)}">
-      <span class="rd">${esc(r.date)}</span><span class="tag">${esc(r.type)}</span><span>${esc(r.title)}</span></div>`).join("")
-      :'<div class="empty">no matching corpus events</div>';
+/* ---------------- corpus (history) ---------------- */
+let hT=null; function schedHist(){ clearTimeout(hT); hT=setTimeout(hist,250); }
+async function hist(){ try{ const q=$("hq").value.trim(); const rows=await getJSON("/wb_history?q="+encodeURIComponent(q)+"&limit=40"); const el=$("hres");
+  el.innerHTML=rows.length?rows.map(r=>`<div class="r" tabindex="0" role="button" data-id="${esc(r.event_id)}"><span class="rd">${esc(r.date)}</span><span class="tag">${esc(r.type)}</span><span>${esc(r.title)}</span></div>`).join(""):'<div class="empty">no matches</div>';
   }catch(e){ $("hres").innerHTML='<div class="empty">search unavailable</div>'; } }
 async function openEv(id){ const e=await getJSON("/wb_event?id="+encodeURIComponent(id)); const box=$("eventDetail"); box.style.display="block";
   if(e.error){ box.innerHTML=`<div class="empty">${esc(e.error)}</div>`; return; }
@@ -536,17 +528,18 @@ async function openEv(id){ const e=await getJSON("/wb_event?id="+encodeURICompon
     <div class="sub" style="margin:4px 0"><span class="tag">${esc(e.type)}</span> <span class="faint num">${esc(e.date)} · sev ${e.severity??"?"} · ${esc(e.confidence||"?")}</span></div>
     ${e.description?`<div class="dim" style="font-size:var(--t-sm);margin:6px 0">${esc(e.description)}</div>`:""}
     <div class="num" style="font-size:var(--t-sm)">CAR +1 ${f1(c["CAR+1"])}% · +5 ${f1(c["CAR+5"])}% · +10 ${f1(c["CAR+10"])}% · +20 ${f1(c["CAR+20"])}%</div>
-    <div style="font-size:var(--t-cap);margin-top:6px"><a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a></div>`;
-}
+    <div style="font-size:var(--t-cap);margin-top:6px"><a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a></div>`; }
 
-/* ---------------- wire up (event delegation — no inline handlers, apostrophe-safe) ---------------- */
+/* ---------------- wire up ---------------- */
 $("q").addEventListener("keydown",e=>{ if(e.key==="Enter") analyze(); });
+$("asq").addEventListener("input",schedArticles);
 $("notes").addEventListener("input",scheduleSave);
 $("hq").addEventListener("input",schedHist);
-$("wire").addEventListener("click",e=>{ const it=e.target.closest(".item"); if(it) briefFor(it.dataset.hl); });
-$("wire").addEventListener("keydown",e=>{ if(e.key==="Enter"){ const it=e.target.closest(".item"); if(it) briefFor(it.dataset.hl); } });
+$("srcList").addEventListener("click",e=>{ const it=e.target.closest(".item"); if(it) openArticle(it.dataset.hl,it.dataset.url,it.dataset.src); });
+$("srcList").addEventListener("keydown",e=>{ if(e.key==="Enter"){ const it=e.target.closest(".item"); if(it) openArticle(it.dataset.hl,it.dataset.url,it.dataset.src); } });
 $("hres").addEventListener("click",e=>{ const r=e.target.closest(".r"); if(r) openEv(r.dataset.id); });
 $("hres").addEventListener("keydown",e=>{ if(e.key==="Enter"){ const r=e.target.closest(".r"); if(r) openEv(r.dataset.id); } });
+document.addEventListener("keydown",e=>{ if(e.key==="/" && document.activeElement.tagName!=="INPUT" && document.activeElement.tagName!=="TEXTAREA"){ e.preventDefault(); showTab("search"); } });
 loadDaily(); loadToday(); loadNote(); hist();
 </script>
 </body>
