@@ -115,6 +115,55 @@ def _crit_exposure(country_slug):
     return sorted(out, key=lambda d: -(d["share_pct"] or 0))
 
 
+def _flow_vs_price(cur, dom_type):
+    """Does trade actually stop, or does the market just price risk? Measured two ways:
+    (1) PRICE PERSISTENCE (deep history) — a durable supply cut shows a consistent, persistent
+    SIGNED CAR; a risk premium shows a signed median ~0 with large two-sided dispersion.
+    (2) LIVE FLOW — recent AIS tanker transits vs their own baseline (2026-only, noisy; labelled).
+    No fabrication: price from edges, transits from observations; the historical-flow gap
+    (PortWatch starts 2026) is stated, not filled."""
+    import statistics as st
+    rows = cur.execute(
+        """SELECT e.car5, e.car20 FROM edges e JOIN events ev ON ev.event_id=e.event_id
+           WHERE ev.type=? AND e.target_series='fred.DCOILBRENTEU' AND e.units='%'
+           AND e.car5 IS NOT NULL AND e.car20 IS NOT NULL""", (dom_type,)).fetchall()
+    price = None
+    if rows:
+        c5 = [r[0] for r in rows]; c20 = [r[1] for r in rows]
+        price = {
+            "type": dom_type, "n": len(rows),
+            "signed_median_car20": round(st.median(c20), 1),
+            "median_abs_car5": round(st.median([abs(x) for x in c5]), 1),
+            "median_abs_car20": round(st.median([abs(x) for x in c20]), 1),
+            "share_small_pct": round(100 * sum(1 for v in c20 if abs(v) < 5) / len(c20)),
+        }
+    transits = []
+    for cp in ("hormuz", "bab_el_mandeb", "suez", "cape_of_good_hope"):
+        vals = [r[0] for r in cur.execute(
+            "SELECT value FROM observations WHERE series_id=? ORDER BY obs_date",
+            (f"portwatch.{cp}.n_tanker",))]
+        if len(vals) >= 14:
+            base = st.mean(vals); recent = st.mean(vals[-7:])
+            transits.append({"chokepoint": cp, "recent7d": round(recent, 1),
+                             "baseline": round(base, 1),
+                             "pct_vs_norm": round((recent / base - 1) * 100) if base else None})
+    read = None
+    if price:
+        durable = abs(price["signed_median_car20"]) >= 5
+        read = (f"{dom_type.replace('_',' ')} events show a SIGNED median Brent move of "
+                f"{price['signed_median_car20']:+.1f}% at 20 days on n={price['n']} — "
+                + ("a persistent directional move (looks like a real, durable supply effect)."
+                   if durable else
+                   "≈0 despite a typical MAGNITUDE of "
+                   f"{price['median_abs_car20']:.0f}%. That is the signature of a priced RISK "
+                   "premium resolving in both directions, not a durable supply cut: if the flow "
+                   "were truly and lastingly severed, the signed move would persist positive. "
+                   "Live transits (right panel) say whether the physical flow is moving now."))
+    return {"price_persistence": price, "live_transits": transits, "read": read,
+            "caveat": "Price is deep history (edges); live transits are AIS-derived and begin "
+                      "2026 (no historical flow around older events — a stated gap, not filled)."}
+
+
 def list_anchors():
     """Traceable anchors: entities that appear in the corpus, grouped by type, with how
     many events involve them (so the picker leads with the ones that actually rippled)."""
@@ -207,6 +256,10 @@ def trace(entity=None, series=None, situation=None):
 
     state_ctx = state_context(cur, events) if events else {"available": False}
 
+    from collections import Counter
+    dom_type = Counter(e["type"] for e in events).most_common(1)[0][0] if events else None
+    flow = _flow_vs_price(cur, dom_type) if dom_type else None
+
     anchor_live = None
     s = _series_for_entity(cur, entity_id)
     if s:
@@ -217,6 +270,7 @@ def trace(entity=None, series=None, situation=None):
     return {
         "anchor": ent, "anchor_live": anchor_live,
         "state_context": state_ctx,
+        "flow_vs_price": flow,
         "n_events_involving": len(events),
         "events_involving": events[:20],
         "measured_reactions": reactions,

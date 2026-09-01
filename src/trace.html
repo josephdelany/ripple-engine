@@ -44,6 +44,9 @@
  .statebox{background:var(--bg1);border:1px solid var(--gold);border-radius:8px;padding:12px 14px;margin:14px 0}
  .statebox .tn{display:flex;gap:22px;align-items:center;font:13px var(--mono);margin:6px 0}
  .statebox .read{font-size:13px;line-height:1.5;color:var(--ink);margin-top:6px}
+ .fvp{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;background:var(--bg1);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+ @media(max-width:900px){.fvp{grid-template-columns:1fr}}
+ .fvp .read{font-size:13px;line-height:1.5} .fvp .tr{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:5px 0;font:12px var(--mono)}
 </style></head><body>
 <div class="mast">
   <div class="logo"><b>◆ RIPPLE</b> SHOCK-TRACER</div>
@@ -94,12 +97,21 @@ async function go(entity){
     <div class="read">${esc(sc.read)}</div>
     <div class="faint" style="font-size:10px;margin-top:4px">${esc(sc.context_note)}</div></div>`:'';
   const R=d.measured_reactions||[]; const mx=Math.max(1,...R.map(r=>Math.abs(r.avg20||0)));
-  const bars=R.map(r=>{ const v=r.avg20||0, w=Math.abs(v)/mx*50, l=r.live;
+  const TOP=R.slice(0,12);
+  const bars=TOP.map(r=>{ const v=r.avg20||0, w=Math.abs(v)/mx*50, l=r.live;
     return `<div class="rrow"><div class="nm">${esc(r.name)}</div>
       <div class="bar"><div class="mid"></div>
         <div class="fill ${v>=0?'':'x'}" style="${v>=0?`left:50%;width:${w}%;background:var(--up)`:`right:50%;width:${w}%;background:var(--down)`}"></div></div>
       <div class="meta"><span class="${sgn(v)}">${v>0?'+':''}${v}%</span> · n=${r.n} · [${r.lo}..${r.hi}]<br>
         <span class="chip">${esc(r.read)}</span>${l?` <span class="live">live ${(+l.value).toFixed(2)}</span>`:''}</div></div>`;}).join('');
+  const fp=d.flow_vs_price;
+  const fpHtml=(fp&&fp.price_persistence)?`<div class="lbl">Flow vs Price — did trade actually stop?</div>
+    <div class="fvp"><div><div class="read">${esc(fp.read)}</div>
+      <div class="faint" style="font-size:10px;margin-top:6px">${esc(fp.caveat)}</div></div>
+      <div><div class="faint" style="font:10px var(--mono);margin-bottom:5px">LIVE TANKER TRANSITS · 7d vs 2026 baseline</div>
+      ${(fp.live_transits||[]).map(t=>`<div class="tr"><span>${esc(t.chokepoint.replace(/_/g,' '))}</span>
+        <span class="${t.pct_vs_norm<0?'down':'up'}">${t.pct_vs_norm>0?'+':''}${t.pct_vs_norm}%</span>
+        <span class="faint">${t.recent7d} vs ${t.baseline}</span></div>`).join('')}</div></div>`:'';
   const exp=(d.physical_exposure||[]).map(e=>`<span class="chip">${esc(e.commodity)} · ${esc(e.stage||'')} · ${e.share_pct}% <span class="faint">(${esc(e.source||'')})</span></span>`).join(' ');
   const flow=(d.chokepoint_flow||[]).map(f=>`<div class="card">${esc(f.name)} — <span class="live">${f.live?(+f.live.value).toFixed(2):'—'}</span> ${esc(f.unit||'')} <span class="faint">as of ${f.live?f.live.obs_date:'—'}</span></div>`).join('');
   const evs=(d.events_involving||[]).map(e=>`<tr><td>${esc(e.date)}</td><td>${esc(e.type)}</td><td>${esc(e.title)}</td><td class="faint">${esc(e.role)}</td><td>${e.source_url?`<a href="${esc(e.source_url)}" target="_blank">↗</a>`:''}</td></tr>`).join('');
@@ -108,8 +120,9 @@ async function go(entity){
     <h2>${esc(a.name)} <span class="chip">${esc(a.type)}</span></h2>
     <div class="sub">${d.n_events_involving} corpus events involve this entity${live?` · anchor live ${(+live.value).toFixed(2)} (${esc(d.anchor_live.name)}, as of ${live.obs_date})`:''}</div>
     ${scHtml}
-    <div class="lbl">The ripple — what this entity's real events actually moved (measured, 20-day CAR)</div>
+    <div class="lbl">The ripple — what this entity's real events actually moved (measured, 20-day CAR) <span class="faint" style="font-weight:400;text-transform:none">— top ${Math.min(12,R.length)} of ${R.length} by magnitude</span></div>
     ${R.length?bars:'<div class="faint">no measured reactions on record</div>'}
+    ${fpHtml}
     ${exp?`<div class="lbl">Physical exposure — strategic commodities it is supply-critical for (sourced)</div><div>${exp}</div>`:''}
     ${flow?`<div class="lbl">Chokepoint flow — did trade actually move</div>${flow}`:''}
     <div class="lbl">Validated transmission — how a shock propagates under stress</div>${trans}
