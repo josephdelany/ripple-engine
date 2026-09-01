@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!--
+  terminal.html — RIPPLE TERMINAL: track oil & petro products over time, on real data.
+  Self-contained, vanilla JS, inline-SVG charts (no framework, no CDN → local/$0/offline).
+  It DISPLAYS real observations from oil.db via /term_catalog and /term_series; it never
+  fabricates or interpolates a point. Interactive: pick a product, change the range, hover
+  for exact values, overlay a second product to compare.
+-->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripple Terminal — Oil & Petro Products</title>
+<style>
+ :root{--bg0:#0B0E14;--bg1:#141924;--bg2:#1C222E;--bg3:#232b39;--line:rgba(255,255,255,.08);
+   --ink:#e7ebf3;--faint:#8b94a7;--dim:#5b6577;--up:#4ec9a6;--down:#e0655f;--accent:#6ea8fe;--gold:#e2b04a;
+   --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Segoe UI,Roboto,sans-serif}
+ *{box-sizing:border-box} html,body{margin:0;height:100%}
+ body{background:var(--bg0);color:var(--ink);font:14px/1.5 var(--sans);overflow:hidden}
+ .mast{display:flex;align-items:center;gap:16px;padding:10px 18px;background:var(--bg1);border-bottom:1px solid var(--line)}
+ .mast .logo{font:600 15px var(--mono);letter-spacing:.06em;color:var(--ink)}
+ .mast .logo b{color:var(--accent)} .mast .asof{font:11px var(--mono);color:var(--faint)}
+ .mast nav{margin-left:auto;display:flex;gap:6px}
+ .mast nav a{font:11px var(--mono);color:var(--faint);text-decoration:none;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
+ .mast nav a.here{color:var(--accent);border-color:var(--accent)} .mast nav a:hover{color:var(--ink)}
+ .wrap{display:grid;grid-template-columns:290px 1fr;height:calc(100% - 47px)}
+ .side{background:var(--bg1);border-right:1px solid var(--line);overflow-y:auto;padding:8px}
+ .grp{font:600 10px var(--mono);letter-spacing:.1em;color:var(--dim);text-transform:uppercase;margin:12px 8px 4px}
+ .it{display:flex;align-items:baseline;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+ .it:hover{background:var(--bg2)} .it.sel{background:var(--bg2);border-color:var(--accent)}
+ .it.cmp{border-color:var(--gold)}
+ .it .nm{flex:1;font-size:13px;color:var(--ink)} .it .vl{font:12px var(--mono);color:var(--faint)}
+ .it .ch{font:11px var(--mono);min-width:52px;text-align:right}
+ .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--faint)}
+ .stale{color:var(--gold);font:10px var(--mono)}
+ main{overflow-y:auto;padding:16px 22px}
+ .head{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:6px}
+ .head .ttl{font:600 20px var(--sans)} .head .unit{color:var(--faint);font-size:13px}
+ .head .big{font:600 30px var(--mono)} .head .chips{display:flex;gap:14px;align-items:baseline}
+ .chip b{font:600 14px var(--mono)} .chip span{font:10px var(--mono);color:var(--dim);display:block}
+ .src{margin-left:auto;font:11px var(--mono);color:var(--faint);text-align:right}
+ .src a{color:var(--accent);text-decoration:none}
+ .ranges{display:flex;gap:6px;margin:12px 0}
+ .ranges button,.cmpbtn{font:11px var(--mono);color:var(--faint);background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 12px;cursor:pointer}
+ .ranges button.sel{color:var(--bg0);background:var(--accent);border-color:var(--accent)}
+ .cmpbtn.on{color:var(--gold);border-color:var(--gold)}
+ .chartbox{position:relative;background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:6px}
+ #tip{position:absolute;pointer-events:none;background:#000d;border:1px solid var(--line);border-radius:6px;padding:6px 9px;font:11px var(--mono);color:var(--ink);display:none;white-space:nowrap;z-index:5}
+ table{width:100%;border-collapse:collapse;font:12px var(--mono);margin-top:8px}
+ th,td{text-align:right;padding:4px 10px;border-bottom:1px solid var(--line)} th{color:var(--dim);font-weight:600;text-align:right}
+ th:first-child,td:first-child{text-align:left}
+ .prov{font:11px var(--mono);color:var(--faint);margin-top:10px;line-height:1.7}
+ .foot{color:var(--dim);font:11px var(--mono);margin:18px 0 40px;border-top:1px solid var(--line);padding-top:10px}
+ .legend{display:flex;gap:16px;font:11px var(--mono);margin:6px 2px}
+ .legend .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+ .spin{color:var(--faint);padding:40px;text-align:center;font:12px var(--mono)}
+</style></head><body>
+
+<div class="mast">
+  <div class="logo"><b>◆ RIPPLE</b> TERMINAL — oil &amp; petro products</div>
+  <div class="asof" id="asof"></div>
+  <nav>
+    <a class="here" href="/terminal">Terminal</a>
+    <a href="/workbench">Workbench</a>
+    <a href="/engine_read" target="_blank">Engine read</a>
+  </nav>
+</div>
+
+<div class="wrap">
+  <aside class="side" id="side"><div class="spin">loading catalog…</div></aside>
+  <main>
+    <div class="head" id="head"><div class="spin">select a product…</div></div>
+    <div class="ranges" id="ranges"></div>
+    <div class="legend" id="legend"></div>
+    <div class="chartbox"><div id="chart" class="spin">…</div><div id="tip"></div></div>
+    <div id="table"></div>
+    <div class="prov" id="prov"></div>
+    <div class="foot">Every point is a real stored observation from <code>oil.db</code> with its as-of date; long daily
+      series are evenly down-sampled for drawing (flagged), never smoothed or interpolated. A value we don't have is
+      absent, not guessed. Local · $0 · keyless. This is data, not investment advice.</div>
+  </main>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), api=async p=>(await fetch(p)).json();
+let CAT=null, PRIM=null, CMP=null, RANGE='5Y', cmpMode=false;
+const RANGES={'1M':30,'3M':91,'6M':182,'1Y':365,'5Y':1825,'MAX':null};
+
+function fmt(v,unit){ if(v==null) return '—';
+  const a=Math.abs(v); let s;
+  if(a>=1000) s=v.toLocaleString(undefined,{maximumFractionDigits:0});
+  else if(a>=100) s=v.toFixed(1); else if(a>=1) s=v.toFixed(2); else s=v.toFixed(3);
+  return s; }
+function chg(v){ if(v==null) return '<span class="flat">—</span>';
+  const c=v>0?'up':(v<0?'down':'flat'), a=v>0?'▲':(v<0?'▼':'·');
+  return `<span class="${c}">${a} ${Math.abs(v).toFixed(1)}%</span>`; }
+function frmDate(r){ if(!r) return null; const d=new Date(); d.setDate(d.getDate()-r);
+  return d.toISOString().slice(0,10); }
+
+async function loadCatalog(){
+  CAT=await api('/term_catalog'); $('#asof').textContent='data as of '+CAT.as_of;
+  let h='';
+  for(const g of CAT.groups){ h+=`<div class="grp">${g.group}</div>`;
+    for(const it of g.items){
+      h+=`<div class="it" data-id="${it.id}" title="${it.engine_name||''}">
+        <span class="nm">${it.name}${it.stale?` <span class="stale">·stale</span>`:''}</span>
+        <span class="vl">${fmt(it.latest,it.unit)}</span>
+        <span class="ch">${chg(it.chg1)}</span></div>`; } }
+  $('#side').innerHTML=h;
+  $('#side').querySelectorAll('.it').forEach(el=>el.onclick=()=>pick(el.dataset.id));
+  pick('fred.DCOILBRENTEU'); // open on Brent
+}
+
+function meta(id){ for(const g of CAT.groups) for(const it of g.items) if(it.id===id) return it; return {}; }
+
+async function pick(id){
+  if(cmpMode && PRIM && id!==PRIM.id){ CMP=await api('/term_series?id='+encodeURIComponent(id)); cmpMode=false; }
+  else { PRIM=await api('/term_series?id='+encodeURIComponent(id)); CMP=null; }
+  markSel(); renderHead(); renderRanges(); render();
+}
+function markSel(){ $('#side').querySelectorAll('.it').forEach(el=>{
+  el.classList.toggle('sel', PRIM&&el.dataset.id===PRIM.id);
+  el.classList.toggle('cmp', CMP&&el.dataset.id===CMP.id); }); }
+
+function renderHead(){
+  const m=meta(PRIM.id);
+  $('#head').innerHTML=`<div><div class="ttl">${PRIM.name}</div><div class="unit">${PRIM.unit||''} · ${PRIM.frequency||''}</div></div>
+    <div class="big">${fmt(m.latest,PRIM.unit)}</div>
+    <div class="chips">
+      <div class="chip"><b>${chg(m.chg1)}</b><span>1 period</span></div>
+      <div class="chip"><b>${chg(m.chg5)}</b><span>5 period</span></div>
+      <div class="chip"><b>${chg(m.chg1y)}</b><span>~1 year</span></div>
+    </div>
+    <div class="src">${PRIM.source||''}${PRIM.source_url?` · <a href="${PRIM.source_url}" target="_blank">source ↗</a>`:''}<br>as of ${PRIM.as_of||m.end}${m.stale?` <span class="stale">(delayed)</span>`:''}</div>`;
+}
+function renderRanges(){
+  let h=''; for(const k of Object.keys(RANGES)) h+=`<button class="${k===RANGE?'sel':''}" data-r="${k}">${k}</button>`;
+  h+=`<button class="cmpbtn ${cmpMode?'on':''}" id="cmpb">${cmpMode?'pick a product to compare…':'＋ compare'}</button>`;
+  if(CMP) h+=`<button class="cmpbtn" id="clrcmp">✕ clear compare</button>`;
+  $('#ranges').innerHTML=h;
+  $('#ranges').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{RANGE=b.dataset.r;renderRanges();render();});
+  $('#cmpb').onclick=()=>{cmpMode=!cmpMode;renderRanges();};
+  if(CMP) $('#clrcmp').onclick=()=>{CMP=null;markSel();renderRanges();render();};
+}
+
+function windowPts(s){ const f=frmDate(RANGES[RANGE]);
+  return f? s.points.filter(p=>p[0]>=f) : s.points.slice(); }
+
+function render(){
+  const W=920,H=420,padL=64,padR=(CMP?64:18),padT=14,padB=34;
+  let a=windowPts(PRIM), b=CMP?windowPts(CMP):null;
+  if(a.length<2){ $('#chart').innerHTML='<div class="spin">not enough points in range</div>'; return; }
+  const indexed = CMP && CMP.unit!==PRIM.unit;
+  const norm=(pts)=> indexed? (()=>{const base=pts[0][1]||1;return pts.map(p=>[p[0],p[1]/base*100]);})() : pts;
+  let A=norm(a), B=b?norm(b):null;
+  const xs=A.map(p=>+new Date(p[0])), allY=A.map(p=>p[1]).concat(B?B.map(p=>p[1]):[]);
+  const xmin=Math.min(...xs), xmax=Math.max(...xs);
+  let ymin=Math.min(...allY), ymax=Math.max(...allY); const pad=(ymax-ymin)*0.08||1; ymin-=pad; ymax+=pad;
+  const X=t=>padL+(W-padL-padR)*((t-xmin)/((xmax-xmin)||1));
+  const Y=v=>padT+(H-padT-padB)*(1-((v-ymin)/((ymax-ymin)||1)));
+  const path=pts=>pts.map((p,i)=>(i?'L':'M')+X(+new Date(p[0])).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' ');
+  // y gridlines/labels
+  let grid=''; for(let i=0;i<=4;i++){ const v=ymin+(ymax-ymin)*i/4, y=Y(v);
+    grid+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--line)"/>
+           <text x="${padL-8}" y="${(y+3).toFixed(1)}" fill="var(--faint)" font-size="10" text-anchor="end" font-family="var(--mono)">${indexed?v.toFixed(0):fmt(v)}</text>`; }
+  // x labels
+  let xlab=''; const span=xmax-xmin, DAY=864e5;
+  for(let i=0;i<=5;i++){ const t=xmin+span*i/5, d=new Date(t);
+    const lab= span>800*DAY? d.getFullYear() : (span>90*DAY? d.toLocaleString('en',{month:'short',year:'2-digit'}) : d.toLocaleString('en',{month:'short',day:'numeric'}));
+    xlab+=`<text x="${X(t).toFixed(1)}" y="${H-12}" fill="var(--faint)" font-size="10" text-anchor="middle" font-family="var(--mono)">${lab}</text>`; }
+  // min/max markers on primary
+  const yv=A.map(p=>p[1]); const iMax=yv.indexOf(Math.max(...yv)), iMin=yv.indexOf(Math.min(...yv));
+  const mark=(i,col)=>`<circle cx="${X(+new Date(A[i][0])).toFixed(1)}" cy="${Y(A[i][1]).toFixed(1)}" r="3" fill="${col}"/>`;
+  const svg=`<svg id="svg" viewBox="0 0 ${W} ${H}" width="100%" style="display:block" preserveAspectRatio="none" font-family="var(--mono)">
+    ${grid}${xlab}
+    ${B?`<path d="${path(B)}" fill="none" stroke="var(--gold)" stroke-width="1.4" opacity=".9"/>`:''}
+    <path d="${path(A)}" fill="none" stroke="var(--accent)" stroke-width="1.7"/>
+    ${mark(iMax,'var(--up)')}${mark(iMin,'var(--down)')}
+    <line id="cx" x1="0" y1="${padT}" x2="0" y2="${H-padB}" stroke="var(--ink)" stroke-dasharray="3 3" opacity="0" pointer-events="none"/>
+    <circle id="cdotA" r="3.5" fill="var(--accent)" opacity="0" pointer-events="none"/>
+    ${B?`<circle id="cdotB" r="3.5" fill="var(--gold)" opacity="0" pointer-events="none"/>`:''}
+    <rect id="hit" x="${padL}" y="${padT}" width="${W-padL-padR}" height="${H-padT-padB}" fill="transparent"/>
+  </svg>`;
+  $('#chart').innerHTML=svg;
+  // legend
+  $('#legend').innerHTML=`<span><span class="sw" style="background:var(--accent)"></span>${PRIM.name}${indexed?' (indexed=100)':''}</span>`
+    + (CMP?`<span><span class="sw" style="background:var(--gold)"></span>${CMP.name}${indexed?' (indexed=100)':''}</span>`:'')
+    + `<span style="color:var(--dim)">${A.length} pts${PRIM.downsampled?` · downsampled from ${PRIM.n_full}`:''}</span>`;
+  renderTable(a); renderProv();
+  // interactivity: crosshair + tooltip
+  const svgEl=$('#svg'), hit=$('#hit'), cx=$('#cx'), dA=$('#cdotA'), dB=CMP?$('#cdotB'):null, tip=$('#tip');
+  const box=()=>svgEl.getBoundingClientRect();
+  hit.addEventListener('mousemove',e=>{
+    const bb=box(), px=(e.clientX-bb.left)/bb.width*W;
+    const t=xmin+((px-padL)/((W-padL-padR)||1))*(xmax-xmin);
+    let i=0,best=1e18; A.forEach((p,k)=>{const d=Math.abs(+new Date(p[0])-t); if(d<best){best=d;i=k;}});
+    const xa=X(+new Date(A[i][0]));
+    cx.setAttribute('x1',xa);cx.setAttribute('x2',xa);cx.setAttribute('opacity','.5');
+    dA.setAttribute('cx',xa);dA.setAttribute('cy',Y(A[i][1]));dA.setAttribute('opacity','1');
+    let bi=null; if(B){ let bb2=0,bd=1e18; B.forEach((p,k)=>{const d=Math.abs(+new Date(p[0])-(+new Date(A[i][0]))); if(d<bd){bd=d;bb2=k;}}); bi=bb2;
+      dB.setAttribute('cx',X(+new Date(B[bi][0])));dB.setAttribute('cy',Y(B[bi][1]));dB.setAttribute('opacity','1'); }
+    tip.style.display='block';
+    tip.style.left=Math.min(e.clientX-box().left+14, box().width-160)+'px';
+    tip.style.top=(e.clientY-box().top+10)+'px';
+    tip.innerHTML=`<b>${a[i][0]}</b><br><span style="color:var(--accent)">${PRIM.name}: ${fmt(a[i][1],PRIM.unit)} ${PRIM.unit||''}</span>`
+      + (B?`<br><span style="color:var(--gold)">${CMP.name}: ${fmt(CMP && windowPts(CMP)[bi]?windowPts(CMP)[bi][1]:null,CMP.unit)} ${CMP.unit||''}</span>`:'');
+  });
+  hit.addEventListener('mouseleave',()=>{cx.setAttribute('opacity','0');dA.setAttribute('opacity','0');if(dB)dB.setAttribute('opacity','0');tip.style.display='none';});
+}
+
+function renderTable(a){ const rows=a.slice(-12).reverse();
+  let h=`<table><thead><tr><th>date</th><th>${PRIM.name} (${PRIM.unit||''})</th><th>Δ</th></tr></thead><tbody>`;
+  for(let i=0;i<rows.length;i++){ const v=rows[i][1], prev=rows[i+1]?rows[i+1][1]:null;
+    const d=prev!=null?((v/prev-1)*100):null;
+    h+=`<tr><td>${rows[i][0]}</td><td>${fmt(v,PRIM.unit)}</td><td>${d==null?'—':`<span class="${d>0?'up':(d<0?'down':'flat')}">${d>0?'+':''}${d.toFixed(2)}%</span>`}</td></tr>`; }
+  $('#table').innerHTML=h+'</tbody></table>';
+}
+function renderProv(){ const m=meta(PRIM.id);
+  $('#prov').innerHTML=`series <code>${PRIM.id}</code> · engine name “${PRIM.name}” · ${m.n} observations ${m.start} → ${m.end}
+    · source ${PRIM.source||'—'} ${PRIM.source_url?`(<a href="${PRIM.source_url}" target="_blank" style="color:var(--accent)">↗</a>)`:''}
+    · as of ${PRIM.as_of||m.end}${m.stale?` — stale (${m.age_days}d old for a ${PRIM.frequency} series)`:''}.`;
+}
+loadCatalog().catch(e=>$('#side').innerHTML='<div class="spin">backend not reachable — is :5050 running?</div>');
+</script>
+</body></html>

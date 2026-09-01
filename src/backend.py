@@ -108,6 +108,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Oil & Petro Products TERMINAL (/terminal + /term_catalog + /term_series). Isolated in
+# terminal_api.py; read-only over oil.db; adds routes without touching existing endpoints.
+from terminal_api import register_terminal
+register_terminal(app)
+
 WIDGETS = {
     "state_of_system": {
         "name": "State of the System",
