@@ -47,8 +47,10 @@ TYPE_RULES = [
     ("infrastructure_attack", r"\b(strikes?|struck|attacks?|attacked|drones?|missiles?|sabotag\w*|"
                               r"explosion\w*|refiner(y|ies)|oil ?fields?|terminals?|facilit(y|ies)|"
                               r"set (on )?fire)\b"),
+    # NB: bare "barrels per day"/"mb/d" was dropped -- it over-fired on sanctions/export claims
+    # ("cut oil exports by 1m barrels per day"). OPEC needs OPEC/production/quota context.
     ("opec_decision",         r"\b(opec\+?|quotas?|production (cut|hike|target)s?|output (cut|target)s?|"
-                              r"barrels? per day|mb/?d|voluntary cuts?)\b"),
+                              r"voluntary cuts?)\b"),
     ("sanctions",             r"\b(sanctions?|sanction(ed|ing)|embargo\w*|price caps?|export bans?|"
                               r"blacklist\w*|designat\w*|waivers?)\b"),
     ("conflict_escalation",   r"\b(invad\w*|invasions?|wars?|warfare|coups?|mutin\w*|offensives?|"

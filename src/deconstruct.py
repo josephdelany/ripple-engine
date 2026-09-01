@@ -1,0 +1,282 @@
+"""
+deconstruct.py -- ARTICLE DECONSTRUCTION. Break an article into its claims and answer
+each one with the QUANT ENGINE, not an opinion.
+
+The quant engine rules. This module pulls the discrete claims an article makes, tags
+each (entities, event class, quantified figures, fact-vs-opinion), and binds every claim
+that maps to a measurable event class to the engine's MEASURED evidence: the historical
+base-rate market move for that class, the nearest verified precedents, and the live market
+state. The verdict on each claim is rendered by the NUMBERS -- what history and the market
+actually say -- never by a generated opinion. No LLM, no fabrication, $0.
+
+For a NEWS article: here is each claim, and here is what history + the market say about an
+event of this class. For an OP-ED: the same, deliberately replacing the writer's synthesis
+with the data behind (or against) each assertion -- "eliminate the opinion, look at the data."
+
+Reuses: src/brief.py (the quant reads), src/triage.py (deterministic entity/event extraction),
+src/event_study.py (CAR math). Extraction is a real-paragraph scrape (nav/boilerplate filtered).
+"""
+
+import html as _html
+import re
+import sqlite3
+from pathlib import Path
+
+import triage as T
+import event_study as ES
+import brief as BR
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "data" / "oil.db"
+
+# --- claim/opinion detection (deterministic, transparent) ---------------------------------
+OPINION = re.compile(r"\b(i believe|i think|in my view|we must|we should|it is clear that|"
+                     r"make no mistake|frankly|the truth is|arguably|one might argue|"
+                     r"i argue|i suspect|should have|ought to|op-?ed|opinion|commentary)\b", re.I)
+FIRST_PERSON = re.compile(r"\b(I|we|our|my|us)\b")
+FIGURE = re.compile(r"(\$\s?\d[\d,.]*\s?(?:billion|million|trillion|bn|bbl|barrels?|bpd|%)?"
+                    r"|\b\d[\d,.]*\s?(?:%|percent|billion|million|trillion|barrels?|bpd|"
+                    r"basis points|bps|mb/?d)\b)", re.I)
+ASSERT = re.compile(r"\b(will|would|could|plans?|announce\w*|impos\w*|threat\w*|cut|halt|ban|"
+                    r"sanction\w*|target\w*|collapse|crater|surge|spike|escalat\w*|strike\w*|"
+                    r"seiz\w*|block\w*|retaliat\w*)\b", re.I)
+_BOILER = ("subscribe", "advertise", "cookie", "sign in", "newsletter", "all rights reserved",
+           "read more", "follow us", "share this", "watch cbs", "getty images")
+
+
+def _sentences(text):
+    parts = re.split(r"(?<=[.!?])\s+(?=[\"'A-Z0-9])", text or "")
+    return [s.strip() for s in parts if 28 <= len(s.strip()) <= 400]
+
+
+def article_type(text):
+    """Fact (reportage) vs opinion (op-ed), by transparent markers. An op-ed is not taken on
+    the writer's authority -- it is evaluated against the data, claim by claim."""
+    words = max(len((text or "").split()), 1)
+    op = len(OPINION.findall(text or ""))
+    fp = len(FIRST_PERSON.findall(text or ""))
+    density = (op * 4 + fp) / (words / 1000.0)
+    is_op = op >= 3 or density > 12
+    return {"type": "opinion" if is_op else "fact",
+            "opinion_markers": op, "first_person": fp, "density_per_1k": round(density, 1),
+            "note": ("Reads as an op-ed. The engine evaluates each assertion against measured "
+                     "data rather than accepting the writer's synthesis." if is_op else
+                     "Reads as reportage. Each claim is still bound to the measured evidence below.")}
+
+
+def extract_body(arg):
+    """(text, url, was_url). If arg is a URL, fetch the real article and pull prose paragraphs
+    (nav/boilerplate filtered). Falls back to the raw arg as text."""
+    a = (arg or "").strip()
+    if not re.match(r"^https?://", a):
+        return a, None, False
+    try:
+        import requests
+        raw = requests.get(a, timeout=15,
+                           headers={"User-Agent": "Mozilla/5.0 (ripple-engine research)"}).text
+    except Exception:
+        return a, a, True
+    m = re.search(r"<article[^>]*>(.*?)</article>", raw, re.S | re.I)
+    scope = m.group(1) if m else raw
+    scope = re.sub(r"<(script|style|nav|aside|footer|header|form|figure)[^>]*>.*?</\1>",
+                   " ", scope, flags=re.S | re.I)
+    paras = []
+    for p in re.findall(r"<p[^>]*>(.*?)</p>", scope, re.S | re.I):
+        t = re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", " ", p))).strip()
+        if len(t) >= 50 and any(ch in t for ch in ".?!") and not any(b in t.lower() for b in _BOILER):
+            paras.append(t)
+    body = " ".join(paras)
+    if len(body) < 120:                                  # fall back to a headline-only read
+        title = re.search(r"<title[^>]*>(.*?)</title>", raw, re.S | re.I)
+        body = re.sub(r"\s+", " ", _html.unescape(title.group(1))).strip() if title else a
+    return body[:8000], a, True
+
+
+def _figures(s):
+    return list(dict.fromkeys(m if isinstance(m, str) else m[0] for m in FIGURE.findall(s)))[:5]
+
+
+def claims(conn, text, k=9):
+    """The article's salient claims: sentences that name an entity, an event, a figure, or an
+    assertive verb. Real sentences, verbatim -- extractive, no paraphrase."""
+    out, seen = [], set()
+    for s in _sentences(text):
+        key = s.lower()[:80]
+        if key in seen:
+            continue
+        ents, etype = T.extract(conn, s)
+        figs = _figures(s)
+        if not (etype or ents or figs or ASSERT.search(s)):
+            continue
+        seen.add(key)
+        out.append({"text": s, "entities": ents, "event_class": etype, "figures": figs,
+                    "assertive": bool(ASSERT.search(s))})
+    # rank the most evidence-bearing claims first
+    out.sort(key=lambda c: (bool(c["event_class"]), len(c["entities"]), len(c["figures"]),
+                            c["assertive"]), reverse=True)
+    return out[:k]
+
+
+def _evidence(et, qr, prec):
+    """Compact measured evidence for a claim's event class, lifted from the quant engine."""
+    if not et or not qr:
+        return None
+    a = qr["abs_car20"]; base = qr["baseline"]; d = qr["direction"]
+    top = (prec or [None])[0]
+    return {
+        "event_class": et, "n": qr["n"], "gate": qr["gate"],
+        "median_move_pct": a["median_pct"], "iqr_pct": a["iqr_pct"],
+        "ci90_pct": a["ci90_median_pct"], "ordinary_median_pct": base["ordinary_median_pct"],
+        "class_percentile": base["class_median_percentile"],
+        "direction_up_pct": d["up_pct"],
+        "cross_asset": qr["cross_asset"][:5],
+        "nearest_precedent": (None if not top else {
+            "date": top["date"], "title": top["title"], "abs_car20_pct": top["abs_car20_pct"],
+            "source_url": top["source_url"], "shared_entities": top["shared_entities"]}),
+    }
+
+
+def _verdict(et, qr):
+    """The engine's one-line answer to a claim -- rendered by the numbers, not an opinion."""
+    if not et:
+        return {"stance": "no measured class", "text": "This claim does not map to an event class "
+                "the engine measures — no market read."}
+    if not qr:
+        return {"stance": "insufficient", "text": f"'{et}' has no measured precedent in the corpus."}
+    p = (qr["baseline"] or {}).get("class_median_percentile")
+    med = qr["abs_car20"]["median_pct"]
+    if p is None:
+        return {"stance": "measured", "text": f"History (n={qr['n']}): median 20-day oil move {med}%."}
+    if p < 60:
+        return {"stance": "not_distinguishable",
+                "text": (f"History (n={qr['n']} {et} events): a median {med}% 20-day oil move — only the "
+                         f"{BR._ordinal(p)} percentile of ordinary moves, i.e. not clearly distinguishable "
+                         f"from everyday volatility. The market impact of this claim's event class is, on "
+                         f"the record, ordinary.")}
+    return {"stance": "material",
+            "text": (f"History (n={qr['n']} {et} events): a median {med}% 20-day oil move — the "
+                     f"{BR._ordinal(p)} percentile of ordinary moves, meaningfully larger than everyday "
+                     f"volatility. Size, not direction (≈{qr['direction']['up_pct']}% up).")}
+
+
+def public_sentiment(conn, ents, etype):
+    """The measured public-mood layer (the 'quantified anguish'): coverage tone, geopolitical-risk
+    percentile, attention spikes, conflict-media intensity -- all REAL signals the engine already
+    tracks. Sentiment as data, not vibes."""
+    out = {}
+    gpr = BR._load_json("gpr_signal.json").get("gpr") or {}
+    if gpr.get("percentile") is not None:
+        out["geopolitical_risk"] = {"percentile": gpr["percentile"], "band": gpr.get("band"),
+                                    "posture": gpr.get("posture")}
+    tone = BR._load_json("gdelt_tone.json")
+    tones = tone.get("topics") or tone.get("summary") or []
+    if isinstance(tones, list) and tones:
+        out["coverage_tone"] = [{"topic": t.get("topic"), "tone": t.get("tone"), "mood": t.get("mood")}
+                                for t in tones][:6]
+    att = [p for p in BR._load_json("wiki_attention.json").get("pages", [])
+           if p.get("flag") in ("spike", "elevated")]
+    if att:
+        out["attention_spikes"] = [{"page": p.get("page"), "x_median": p.get("pct_of_median"),
+                                    "flag": p.get("flag")} for p in att[:5]]
+    ci = [s for s in BR._load_json("conflict_intensity.json").get("situations", [])
+          if s.get("band") in ("surge", "elevated")]
+    if ci:
+        out["conflict_media"] = [{"situation": s.get("situation"), "band": s.get("band"),
+                                  "tone": s.get("tone")} for s in ci[:5]]
+    out["note"] = ("Measured public-mood signals (news tone, geopolitical-risk index, attention, "
+                   "conflict-media volume) — sentiment as data, context to the cold measurement.")
+    return out
+
+
+def deconstruct(arg):
+    """Deconstruct an article (URL or text) into claims, each answered by the quant engine."""
+    import time
+    t0 = time.perf_counter()
+    text, url, was_url = extract_body(arg)
+    conn = sqlite3.connect(DB)
+    ret = ES.load_returns(conn)
+    at = article_type(text)
+    cs = claims(conn, text)
+    all_ents = [e for c in cs for e in c["entities"]]
+    # compute the quant read ONCE per distinct event class (the engine rules; reuse it)
+    per_class = {}
+    for c in cs:
+        et = c["event_class"]
+        if et and et not in per_class:
+            per_class[et] = {"quant": BR.quant_read(conn, ret, et),
+                             "precedent": BR.precedent(conn, ret, all_ents, et, k=4)}
+    for c in cs:
+        et = c["event_class"]
+        pc = per_class.get(et, {})
+        c["evidence"] = _evidence(et, pc.get("quant"), pc.get("precedent"))
+        c["verdict"] = _verdict(et, pc.get("quant"))
+    # Dominant class = the class the article's claims MOST refer to (salience), tie-broken by
+    # sample size. More robust than a priority-ordered full-text classify (which would pick a
+    # chokepoint mentioned once in a retaliation clause over the article's actual sanctions topic).
+    from collections import Counter as _Counter
+    freq = _Counter(c["event_class"] for c in cs if c["event_class"])
+    dominant = (max(freq, key=lambda e: (freq[e], per_class[e]["quant"]["n"]
+                    if per_class.get(e, {}).get("quant") else 0)) if freq else None)
+    mn = BR.market_now(conn)
+    sentiment = public_sentiment(conn, all_ents, dominant)
+    conn.close()
+    n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
+    return {
+        "input": (arg or "")[:200], "was_url": was_url, "url": url,
+        "article_type": at,
+        "headline_read": _headline_read(at, cs, per_class, dominant, n_material),
+        "n_claims": len(cs), "claims": cs,
+        "event_classes": sorted(per_class.keys()),
+        "dominant_class": dominant,
+        "market_now": mn, "public_sentiment": sentiment,
+        "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
+        "discipline": ("Every claim is answered by measured history + live market data, never by a "
+                       "generated opinion. Expected magnitude, not a probability. Real corpus events only."),
+    }
+
+
+def _headline_read(at, cs, per_class, dominant, n_material):
+    """The one honest sentence at the top: what the DATA says about this article's central claim."""
+    if not dominant or not per_class.get(dominant, {}).get("quant"):
+        return ("No claim in this article maps to an event class the engine measures — the data offers "
+                "no market read on it.")
+    qr = per_class[dominant]["quant"]; p = (qr["baseline"] or {}).get("class_median_percentile")
+    med = qr["abs_car20"]["median_pct"]
+    kind = "opinion piece" if at["type"] == "opinion" else "report"
+    if p is not None and p < 60:
+        return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of "
+                f"that class moved oil a median {med}% over 20 days — the {BR._ordinal(p)} percentile of "
+                f"ordinary moves, i.e. **not distinguishable from everyday volatility**. The data does not "
+                f"support treating this as a large market event, whatever the framing.")
+    return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of that "
+            f"class moved oil a median {med}% over 20 days — the {BR._ordinal(p)} percentile of ordinary "
+            f"moves, **materially larger than everyday volatility** (size, not direction). "
+            f"{n_material} of {len(cs)} claims map to a measurably material class.")
+
+
+# --- CLI ----------------------------------------------------------------------------------
+def main():
+    import sys
+    import json
+    if len(sys.argv) < 2:
+        print('usage: python3 src/deconstruct.py "<text>" | <url> [--json]')
+        return
+    d = deconstruct(" ".join(a for a in sys.argv[1:] if not a.startswith("--")))
+    if "--json" in sys.argv:
+        print(json.dumps(d, indent=2, default=str))
+        return
+    print("=" * 78)
+    print(f"ARTICLE DECONSTRUCTION  [{d['article_type']['type'].upper()}]  latency {d['latency_ms']}ms")
+    print("=" * 78)
+    print("READ:", d["headline_read"])
+    print(f"\n{d['n_claims']} claims · classes: {', '.join(d['event_classes']) or 'none'}\n")
+    for i, c in enumerate(d["claims"], 1):
+        print(f"[{i}] {c['text'][:100]}")
+        print(f"     class={c['event_class'] or '—'} entities={', '.join(c['entities']) or 'none'} "
+              f"figures={c['figures'] or '—'}")
+        print(f"     VERDICT: {c['verdict']['text']}")
+        print()
+
+
+if __name__ == "__main__":
+    main()

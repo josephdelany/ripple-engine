@@ -2164,6 +2164,22 @@ def wb_brief(body: _BriefIn):
     return b
 
 
+@app.post("/wb_deconstruct")
+def wb_deconstruct(body: _BriefIn):
+    """ARTICLE DECONSTRUCTION (src/deconstruct.py): break an article (URL or text) into its
+    claims and answer EACH with the quant engine's measured evidence — historical base-rate
+    market move, verified precedent, live state — plus the measured public-sentiment layer.
+    Verdict by the numbers, never a generated opinion. The quant engine rules."""
+    from datetime import datetime, timezone
+    import deconstruct as _D
+    text = (body.text or "").strip()
+    if not text:
+        return {"error": "empty input -- paste an article URL or its text"}
+    d = _D.deconstruct(text)
+    d["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return d
+
+
 @app.get("/wb_daily_brief")
 def wb_daily_brief():
     """The DAILY BRIEF: a full analytical brief on today's auto-selected top real story

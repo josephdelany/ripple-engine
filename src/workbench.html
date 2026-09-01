@@ -161,6 +161,36 @@
   svg{ display:block; max-width:100%; height:auto; }
   #brentSpark{ display:inline-block; width:120px; height:28px; vertical-align:middle; }
 
+  /* The Read — a calm, spacious, editorial presentation of the deconstruction. */
+  .rd{ max-width:680px; margin:0 auto; padding:6px 0 70px; }
+  .rd-kicker{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2.4px; text-transform:uppercase; color:var(--faint); }
+  .rd-type{ display:inline-block; margin-left:8px; padding:2px 8px; border:1px solid var(--line2); border-radius:20px; color:var(--ink2); letter-spacing:.5px; }
+  .rd-head{ font:400 27px/1.46 ui-serif,"New York",Georgia,serif; color:var(--ink-max); letter-spacing:-0.2px; margin:16px 0 6px; }
+  .rd-head b{ font-weight:700; color:var(--ink-hi); }
+  .rd-head .neg{ color:var(--neg); } .rd-head .pos{ color:var(--pos); }
+  .rd-src{ font:var(--t-cap) var(--mono); color:var(--faint); margin-bottom:8px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .rd-lead{ font-size:14px; line-height:1.6; color:var(--dim); max-width:64ch; margin-bottom:8px; }
+  .rd-section{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin:38px 0 4px; }
+  .rd-claim{ padding:24px 0; border-bottom:1px solid var(--line); }
+  .rd-quote{ font:400 17px/1.62 ui-serif,"New York",Georgia,serif; color:var(--ink-max); margin:0; }
+  .rd-quote:before{ content:"“"; color:var(--faint); } .rd-quote:after{ content:"”"; color:var(--faint); }
+  .rd-verdict{ display:flex; gap:11px; margin-top:14px; font-size:13.5px; line-height:1.6; color:var(--ink2); align-items:flex-start; }
+  .rd-verdict .dot{ flex:0 0 auto; width:9px; height:9px; border-radius:50%; margin-top:6px; background:var(--faint); }
+  .rd-verdict.material .dot{ background:var(--accent); } .rd-verdict.material{ color:var(--ink); }
+  .rd-verdict.not_distinguishable .dot{ background:var(--pos); }
+  .rd-verdict.insufficient .dot, .rd-verdict.no_measured_class .dot{ background:var(--faint); }
+  .rd-tags{ margin-top:10px; display:flex; gap:7px; flex-wrap:wrap; }
+  .rd-ev{ margin-top:12px; }
+  .rd-ev summary{ font:var(--t-cap) var(--mono); color:var(--info); cursor:pointer; letter-spacing:.3px; }
+  .rd-ev .body{ margin-top:10px; padding:12px 14px; background:var(--bg1); border:1px solid var(--line); border-radius:6px; font-size:12.5px; }
+  .rd-mood{ margin-top:40px; padding:18px 20px; background:var(--bg1); border-radius:8px; }
+  .rd-mood h4{ font:var(--t-micro) var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--faint); margin-bottom:12px; }
+  .rd-mood .row{ display:flex; gap:12px; align-items:baseline; padding:6px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  .rd-mood .row:last-child{ border-bottom:0; }
+  .rd-mood .k{ flex:0 0 130px; color:var(--faint); font:var(--t-cap) var(--mono); }
+  .rd-cta{ display:flex; gap:10px; margin:32px 0 0; flex-wrap:wrap; }
+  .rd-foot{ margin-top:26px; font:var(--t-cap) var(--mono); color:var(--faint); line-height:1.6; }
+
   @media print{
     :root{ color-scheme:light; --bg0:#fff; --bg1:#fff; --bg2:#f6f6f6; --bg3:#eee;
       --line:#dcdcdc; --line2:#bcbcbc; --ink:#111; --ink2:#222; --dim:#444; --faint:#666; --ink-hi:#000; --ink-max:#000;
@@ -184,7 +214,7 @@
 
 <div class="cmd no-print">
   <input id="q" type="text" placeholder="Paste any headline, paragraph, or article URL — then press Enter to read it…">
-  <button class="primary" onclick="analyze()">Read it</button>
+  <button class="primary" onclick="readArticle($('q').value)">Read it</button>
   <button onclick="loadDaily()">Daily Brief</button>
   <button id="navDb" onclick="showView('db')">Database</button>
   <button class="ghost" onclick="window.print()">Print / PDF</button>
@@ -371,11 +401,9 @@ async function analyze(){ const t=$("q").value.trim(); if(!t) return; showDesk()
   catch(e){ $("brief").innerHTML=errorBox("The read request failed."); } }
 
 async function openArticle(headline,url,source){
-  showDesk(); $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
-  try{ const [b,src]=await Promise.all([ postJSON("/wb_brief",{text:headline,source:source||"",url:url||""}),
-        url?extractFor(url,source):Promise.resolve(null) ]);
-    renderBrief(b, src||{source,url,excerpt:null}); }
-  catch(e){ $("brief").innerHTML=errorBox("Couldn't open that article."); }
+  // Opening an article = READING it (the deconstruction). Deconstruct the URL when we have one
+  // (fetches the full body -> all claims); else the headline.
+  readArticle(url || headline, {source: source || "", url: url || ""});
 }
 async function extractFor(url,source){ try{ const e=await getJSON("/wb_extract?url="+encodeURIComponent(url));
   return {source:source||"", url, excerpt:e.ok?e.excerpt:null, note:e.ok?e.note:null}; }catch(_){ return {source:source||"",url,excerpt:null}; } }
@@ -487,6 +515,58 @@ function renderBrief(b, src){
 async function drawBrentSpark(){ try{ const d=await getJSON("/wb_series?series=fred.DCOILBRENTEU&days=120");
   const el=$("brentSpark"); if(el&&d.values&&d.values.length) el.innerHTML=sparkline(d.values,{color:"var(--info)"}); }catch(e){} }
 
+/* ---------------- THE READ (article deconstruction — the flagship) ---------------- */
+let CURRENT_READ=null;
+function setChipsFromMarket(mn,ps){ mn=mn||{}; const bp=mn.brent||{}, gpr=mn.gpr||{};
+  $("dateline").innerHTML="DATA AS OF "+esc(mn.as_of||"—")+(bp.level!=null?"   ·   BRENT "+esc(bp.level)+" ("+mnum(bp.chg5d,1)+"% 5d)":"");
+  const chips=[]; if(gpr.percentile!=null) chips.push(`<span class="chip ${gpr.percentile>=80?"hot":""}">GEO-RISK <b>${ord(gpr.percentile)}</b> pct</span>`);
+  $("chips").innerHTML=chips.join(""); }
+async function readArticle(text, src){ text=(text||"").trim(); if(!text) return; showDesk(); $("brief").innerHTML=skeleton(); window.scrollTo({top:0,behavior:"smooth"});
+  try{ const d=await postJSON("/wb_deconstruct",{text});
+    let extra=src||{}; if(isURL(text)){ extra=await extractFor(text,(src&&src.source)||""); }
+    renderRead(d, extra);
+  }catch(e){ $("brief").innerHTML=errorBox("Couldn't read that article."); } }
+function analyzeClaim(t){ $("q").value=t; analyze(); }
+function renderRead(d, src){
+  if(!d || d.error){ $("brief").innerHTML=errorBox((d&&(d.note||d.error))||"no read"); return; }
+  CURRENT_READ=d; setChipsFromMarket(d.market_now, d.public_sentiment); src=src||{};
+  const at=d.article_type||{}, srcUrl=src.url||d.url||"", srcName=src.source||"";
+  let h=`<div class="rd">`;
+  h+=`<div class="rd-kicker">The data read<span class="rd-type">${at.type==="opinion"?"Op-ed":"Report"}</span></div>`;
+  h+=`<h1 class="rd-head">${md(d.headline_read)}</h1>`;
+  h+=`<div class="rd-src">${srcName?esc(srcName)+" · ":""}${srcUrl?`<a href="${esc(srcUrl)}" target="_blank" rel="noopener">read the original ↗</a> · `:""}<span>${d.n_claims} claims examined</span></div>`;
+  if(at.note) h+=`<div class="rd-lead">${esc(at.note)}</div>`;
+  h+=`<div class="rd-section">Claim by claim — what the data says</div>`;
+  (d.claims||[]).forEach(c=>{ const v=c.verdict||{}, st=(v.stance||"").replace(/[^a-z_]/g,"");
+    h+=`<div class="rd-claim"><p class="rd-quote">${esc(c.text)}</p>`;
+    h+=`<div class="rd-verdict ${st}"><span class="dot"></span><span>${esc(v.text||"")}</span></div>`;
+    const tags=[]; if(c.event_class) tags.push(c.event_class); (c.entities||[]).slice(0,3).forEach(e=>tags.push(String(e).split(".").pop())); (c.figures||[]).forEach(f=>tags.push(f));
+    if(tags.length) h+=`<div class="rd-tags">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+    const ev=c.evidence;
+    if(ev){ const pr=ev.nearest_precedent;
+      h+=`<details class="rd-ev"><summary>the measured evidence →</summary><div class="body"><div class="kv">
+        <span class="k">base rate</span><span>median 20-day move ${f1(ev.median_move_pct)}% · typical ${f1(ev.iqr_pct[0])}–${f1(ev.iqr_pct[1])}% · n=${ev.n} · ${ord(ev.class_percentile)} pct of ordinary moves</span>`
+        +(pr?`<span class="k">nearest precedent</span><span>${esc(pr.date)} — ${esc((pr.title||"").slice(0,60))} ${pr.abs_car20_pct!=null?"("+f1(pr.abs_car20_pct)+"%)":""} ${pr.source_url?`<a href="${esc(pr.source_url)}" target="_blank" rel="noopener">↗</a>`:""}</span>`:"")
+        +(ev.cross_asset&&ev.cross_asset.length?`<span class="k">cross-asset</span><span>${ev.cross_asset.map(a=>`${esc(a.label)} ${mnum(a.car20,1)}${a.unit==="%"?"%":"bps"}`).join(" · ")}</span>`:"")
+        +`</div><div class="rd-cta"><button onclick='analyzeClaim(${JSON.stringify(c.text)})'>full quant read →</button></div></div></details>`;
+    }
+    h+=`</div>`;
+  });
+  const ps=d.public_sentiment||{};
+  if(Object.keys(ps).filter(k=>k!=="note").length){
+    h+=`<div class="rd-mood"><h4>Public mood — sentiment as data</h4>`;
+    const g=ps.geopolitical_risk; if(g) h+=`<div class="row"><span class="k">geopolitical risk</span><span>${ord(g.percentile)} percentile — ${esc(g.band||"")} <span class="faint">${esc(g.posture||"")}</span></span></div>`;
+    if(ps.coverage_tone) h+=`<div class="row"><span class="k">coverage tone</span><span>${ps.coverage_tone.map(t=>`${esc(t.topic)} <span class="${(t.tone||0)<0?"neg":"pos"}">${esc(t.mood||"")}</span>`).join(" · ")}</span></div>`;
+    if(ps.attention_spikes) h+=`<div class="row"><span class="k">attention</span><span>${ps.attention_spikes.map(a=>`${esc(a.page)} ${a.x_median}×`).join(" · ")}</span></div>`;
+    if(ps.conflict_media) h+=`<div class="row"><span class="k">conflict media</span><span>${ps.conflict_media.map(a=>`${esc(a.situation)} ${esc(a.band)}`).join(" · ")}</span></div>`;
+    h+=`<div class="disc" style="margin-top:10px">${esc(ps.note||"")}</div></div>`;
+  }
+  h+=`<div class="rd-cta">${(d.claims&&d.claims.length)?`<button class="primary" onclick='analyzeClaim(${JSON.stringify(d.claims[0].text)})'>Full quant brief on the central event →</button>`:""}
+      <button class="ghost" onclick="window.print()">Print / PDF</button></div>`;
+  h+=`<div class="rd-foot">${esc(d.discipline||"")} · latency ${d.latency_ms}ms</div></div>`;
+  $("brief").innerHTML=h;
+}
+
 /* ---------------- sources (today + search) ---------------- */
 let curTab="today";
 function showTab(t){ curTab=t; $("tabToday").classList.toggle("sel",t==="today"); $("tabSearch").classList.toggle("sel",t==="search");
@@ -597,7 +677,7 @@ async function openEv(id){ const box=$("eventDetail"); box.style.display="block"
   box.scrollIntoView({behavior:"smooth",block:"nearest"}); }
 
 /* ---------------- wire up ---------------- */
-$("q").addEventListener("keydown",e=>{ if(e.key==="Enter") analyze(); });
+$("q").addEventListener("keydown",e=>{ if(e.key==="Enter") readArticle($("q").value); });
 $("asq").addEventListener("input",schedNews);
 $("notes").addEventListener("input",scheduleSave);
 $("hq").addEventListener("input",schedHist);
