@@ -165,6 +165,8 @@
   .rd{ max-width:680px; margin:0 auto; padding:6px 0 70px; }
   .rd-kicker{ font:var(--t-micro)/1.4 var(--mono); letter-spacing:2.4px; text-transform:uppercase; color:var(--faint); }
   .rd-type{ display:inline-block; margin-left:8px; padding:2px 8px; border:1px solid var(--line2); border-radius:20px; color:var(--ink2); letter-spacing:.5px; }
+  .rd-type.op{ border-color:var(--warn-line); color:var(--warn); }
+  .rd-oped{ margin:14px 0 4px; padding:12px 14px; background:var(--bg1); border:1px solid var(--warn-line); border-left:3px solid var(--warn); border-radius:8px; font-size:14px; line-height:1.6; color:var(--ink2); max-width:66ch; }
   .rd-head{ font:400 27px/1.46 ui-serif,"New York",Georgia,serif; color:var(--ink-max); letter-spacing:-0.2px; margin:16px 0 6px; }
   .rd-head b{ font-weight:700; color:var(--ink-hi); }
   .rd-head .neg{ color:var(--neg); } .rd-head .pos{ color:var(--pos); }
@@ -547,10 +549,11 @@ function renderRead(d, src){
   CURRENT_READ=d; setChipsFromMarket(d.market_now, d.public_sentiment); src=src||{};
   const at=d.article_type||{}, srcUrl=src.url||d.url||"", srcName=src.source||"";
   let h=`<div class="rd">`;
-  h+=`<div class="rd-kicker">The data read<span class="rd-type">${at.type==="opinion"?"Op-ed":"Report"}</span></div>`;
+  h+=`<div class="rd-kicker">The data read<span class="rd-type ${at.type==="opinion"?"op":""}">${at.type==="opinion"?"Op-ed":"Report"}</span></div>`;
   h+=`<h1 class="rd-head">${md(d.headline_read)}</h1>`;
   h+=`<div class="rd-src">${srcName?esc(srcName)+" · ":""}${srcUrl?`<a href="${esc(srcUrl)}" target="_blank" rel="noopener">read the original ↗</a> · `:""}<span>${d.n_claims} claims examined</span></div>`;
-  if(at.note) h+=`<div class="rd-lead">${esc(at.note)}</div>`;
+  if(at.type==="opinion") h+=`<div class="rd-oped"><b>This is opinion.</b> The engine sets the writer's assertions against the measured record — it answers only the factual claims inside, and lets the numbers, not the argument, render each verdict.</div>`;
+  else if(at.note) h+=`<div class="rd-lead">${esc(at.note)}</div>`;
   const claims=d.claims||[];
   if(!claims.length){
     h+=`<div class="rd-lead" style="margin-top:24px">No claim in this article maps to an event class the engine measures, so there is nothing to bind to the record. Paste an oil/markets/geopolitics story to see the data read it.</div>`;

@@ -2335,6 +2335,27 @@ def workbench_page():
     return HTMLResponse(WORKBENCH_HTML.read_text())
 
 
+@app.on_event("startup")
+def _warm_quant_cache():
+    """Warm the per-class quant reads in a background thread at startup, so the FIRST article a
+    user reads is already instant (the bootstrap has run). Best-effort; never blocks serving."""
+    import threading
+
+    def _go():
+        try:
+            import brief
+            from event_study import load_returns
+            conn = sqlite3.connect(DB)
+            ret = load_returns(conn)
+            for (t,) in conn.execute("SELECT DISTINCT type FROM events"):
+                brief.quant_read(conn, ret, t)
+            conn.close()
+        except Exception:
+            pass                                   # warming is an optimisation, never a hard dep
+
+    threading.Thread(target=_go, daemon=True).start()
+
+
 if __name__ == "__main__":
     print(f"Ripple Engine backend -> http://127.0.0.1:{PORT}")
     print("In OpenBB Workspace: Apps -> Connect backend -> "
