@@ -356,3 +356,9 @@ def register_terminal(app):
         if not QUESTION_HTML.exists():
             return HTMLResponse("<h1>question.html missing</h1>", status_code=500)
         return HTMLResponse(QUESTION_HTML.read_text())
+
+    @app.get("/desk.css")
+    def _desk_css():
+        from fastapi.responses import Response
+        css = ROOT / "src" / "desk.css"
+        return Response(css.read_text() if css.exists() else "", media_type="text/css")

@@ -8,18 +8,10 @@
 -->
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ripple Engine — Shock Tracer</title>
+<link rel="stylesheet" href="/desk.css">
 <style>
- :root{--bg0:#0B0E14;--bg1:#141924;--bg2:#1C222E;--line:rgba(255,255,255,.08);--ink:#e7ebf3;
-  --faint:#8b94a7;--dim:#5b6577;--up:#4ec9a6;--down:#e0655f;--accent:#6ea8fe;--gold:#e2b04a;
-  --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Segoe UI,Roboto,sans-serif}
- *{box-sizing:border-box} html,body{margin:0;height:100%}
- body{background:var(--bg0);color:var(--ink);font:14px/1.5 var(--sans);overflow:hidden}
- .mast{display:flex;align-items:center;gap:16px;padding:10px 18px;background:var(--bg1);border-bottom:1px solid var(--line)}
- .mast .logo{font:600 15px var(--mono);letter-spacing:.06em} .mast .logo b{color:var(--accent)}
- .mast nav{margin-left:auto;display:flex;gap:6px}
- .mast nav a{font:11px var(--mono);color:var(--faint);text-decoration:none;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
- .mast nav a.here{color:var(--accent);border-color:var(--accent)} .mast nav a:hover{color:var(--ink)}
- .wrap{display:grid;grid-template-columns:280px 1fr;height:calc(100% - 47px)}
+ html,body{height:100%} body{overflow:hidden}
+ .wrap{display:grid;grid-template-columns:280px 1fr;height:calc(100% - 54px)}
  .side{background:var(--bg1);border-right:1px solid var(--line);overflow-y:auto;padding:8px}
  .side input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:7px 9px;font:12px var(--mono);margin-bottom:8px}
  .grp{font:600 10px var(--mono);letter-spacing:.1em;color:var(--dim);text-transform:uppercase;margin:12px 8px 4px}
@@ -49,8 +41,8 @@
  .fvp .read{font-size:13px;line-height:1.5} .fvp .tr{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:5px 0;font:12px var(--mono)}
 </style></head><body>
 <div class="mast">
-  <div class="logo"><b>◆ RIPPLE</b> SHOCK-TRACER</div>
-  <nav><a href="/terminal">Terminal</a><a class="here" href="/trace_view">Trace</a>
+  <div class="brand"><b>◆ Ripple</b> · Shock-Tracer</div>
+  <nav class="seg"><a href="/terminal">Terminal</a><a class="on" href="/trace_view">Trace</a>
     <a href="/backtest_view">Back-test</a><a href="/question_view">Question</a><a href="/workbench">Workbench</a></nav>
 </div>
 <div class="wrap">
