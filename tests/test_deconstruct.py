@@ -34,9 +34,36 @@ def test_dc2_dominant_is_the_topic_not_a_side_mention():
 
 
 def test_dc3_verdict_stances_are_measured_labels():
-    allowed = {"material", "in_line", "insufficient", "no_class"}
+    allowed = {"material", "in_line", "insufficient", "no_class", "negated"}
     for c in D.deconstruct(BESSENT)["claims"]:
         assert c["verdict"]["stance"] in allowed
+
+
+def test_dc9_negated_events_get_no_read_not_the_opposite():
+    """The credibility fix: an event the article says did NOT happen must not fire a confident
+    verdict as if it did."""
+    for text in ("Iran denied it would close the Strait of Hormuz; flows remain normal.",
+                 "OPEC decided not to cut production and left quotas unchanged.",
+                 "No sanctions were imposed; talks to lift the embargo continue."):
+        c = D.deconstruct(text)["claims"][0]
+        assert c["negated"] is True
+        assert c["verdict"]["stance"] == "negated"
+        assert "not" in c["verdict"]["text"].lower() and "non-event" in c["verdict"]["text"].lower()
+
+
+def test_dc10_easing_is_flagged_not_identical_to_escalation():
+    """'Sanctions lifted' must not read the same as 'sanctions imposed'."""
+    ease = D.deconstruct("The US lifted all sanctions on Venezuela oil.")["claims"][0]
+    assert ease["polarity"] == "easing"
+    assert "easing" in ease["verdict"]["text"].lower()
+
+
+def test_dc11_material_verdict_surfaces_its_base_rate_and_dates_the_tail():
+    """Every 'material' verdict ships the base rate (X% of ordinary months) and dates the outlier."""
+    for c in D.deconstruct("OPEC+ agrees a surprise production cut of 2 million barrels per day.")["claims"]:
+        v = c["verdict"]
+        if v["stance"] == "material":
+            assert "% of the time" in v["text"] and "worst case" in v["text"]
 
 
 def test_dc7_no_verdict_calls_a_fat_tailed_class_ordinary_without_the_tail():

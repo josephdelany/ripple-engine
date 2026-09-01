@@ -259,6 +259,9 @@ def quant_read(conn, ret, etype):
                        if len(base) else None)              # class median at Pth pct of ordinary moves
     # Base rate: how often an ordinary 20-day window moves >= this class's median.
     base_rate_ge = (round(float((base >= med).mean() * 100), 0) if len(base) else None)
+    # Bootstrap CI for the baseline median too, so "materially larger" is a valid CI-to-CI test
+    # (comparing an interval to a bare point estimate is not).
+    base_ci = bootstrap_ci(base, stat="median") if len(base) else [None, None]
 
     # Distribution for the "is this bigger than normal?" chart: the ordinary 20-day |move|
     # distribution, binned, with this class's median + IQR marked and its individual events as a
@@ -298,7 +301,8 @@ def quant_read(conn, ret, etype):
             "ci90_mean_pct": bootstrap_ci(abs20, stat="mean"),
             "max_event": max_event,
         },
-        "baseline": {"ordinary_median_pct": base_median, "n_windows": int(len(base)),
+        "baseline": {"ordinary_median_pct": base_median, "ordinary_median_ci90": base_ci,
+                     "n_windows": int(len(base)),
                      "class_median_percentile": pctile_of_class,
                      "base_rate_ge_class_median_pct": base_rate_ge},
         "distribution": distribution,      # for the magnitude-vs-baseline chart (the lift)

@@ -37,6 +37,29 @@ FIRST_PERSON = re.compile(r"\b(I|we|our|my)\b")            # NB: not "us"/"US" (
 HYPO = re.compile(r"\b(could|would|may|might|if|possibly|potentially|threaten\w*|were to|risk of)\b", re.I)
 CONCRETE = re.compile(r"\b(announced?|impos\w*|reimpos\w*|signed?|struck|seiz\w*|closed?|halt\w*|"
                       r"bann\w*|launch\w*|cut|raised?|declared?)\b", re.I)
+# Negation — the single most damaging blind spot: "Iran did NOT close Hormuz", "NO sanctions
+# imposed", "denied any plan". A negated event is a non-event; the engine must give no read.
+NEG = re.compile(r"\b(no|not|never|without|denied|denies|deny|unfounded|avoided|refrain\w*|"
+                 r"declined?|ruled? out|ruling out|unchanged|scrapp\w*|abandon\w*|call(ed)? off|"
+                 r"no longer|fail\w* to|zero)\b", re.I)
+# Polarity — an EASING/reversal ("sanctions LIFTED", "ceasefire", "reopened") is the opposite of
+# an escalation and must not read the same. The class base rate is directionless (size); easing
+# historically points the other way.
+RELIEF = re.compile(r"\b(lift\w*|eas\w*|remov\w*|waiv\w*|rollback|roll back|suspend\w*|restore\w*|"
+                    r"de-?escalat\w*|reopen\w*|resum\w*|unfreez\w*|normaliz\w*|ceasefire|truce|"
+                    r"deal reached|agreement)\b", re.I)
+
+
+def _negated(s):
+    """True if an event trigger in the sentence is negated (a negation token shortly before it,
+    or a 'no/without <event-noun>' construction). Conservative: over-flagging to no-read is safer
+    than asserting the opposite of the article."""
+    low = s.lower()
+    if re.search(r"\b(no|not|without|denied|deny|denies|zero|ruled out)\s+\w{0,14}?\s*"
+                 r"(sanction|strike|attack|blockade|closure|closing|cut|war|conflict|disrupt)", low):
+        return True
+    trigs = [m.start() for m in ASSERT.finditer(low)] + [m.start() for m in CONCRETE.finditer(low)]
+    return any(0 <= t - m.end() <= 45 for m in NEG.finditer(low) for t in trigs)
 FIGURE = re.compile(r"(\$\s?\d[\d,.]*\s?(?:billion|million|trillion|bn|bbl|barrels?|bpd|%)?"
                     r"|\b\d[\d,.]*\s?(?:%|percent|billion|million|trillion|barrels?|bpd|"
                     r"basis points|bps|mb/?d)\b)", re.I)
@@ -116,9 +139,12 @@ def claims(conn, text, k=9):
         # A hypothetical clause ("Iran could close Hormuz") is a possibility, not an event -- the
         # base rate is for events that occurred, so we answer it as "if it occurs".
         hypo = bool(HYPO.search(s)) and not bool(CONCRETE.search(s))
+        neg = _negated(s)
+        pol = "easing" if (RELIEF.search(s) and not neg) else "escalation"
         out.append({"text": s, "entities": ents, "event_class": etype, "figures": figs,
                     "assertive": bool(ASSERT.search(s)),
-                    "modality": "hypothetical" if hypo else "asserted"})
+                    "modality": "hypothetical" if hypo else "asserted",
+                    "negated": neg, "polarity": pol})
     # rank the most evidence-bearing claims first
     out.sort(key=lambda c: (bool(c["event_class"]), len(c["entities"]), len(c["figures"]),
                             c["assertive"]), reverse=True)
@@ -144,33 +170,46 @@ def _evidence(et, qr, prec):
     }
 
 
-def _verdict(et, qr, hypothetical=False):
-    """The engine's one-line answer to a claim, rendered by the numbers. 'Materially larger' is
-    claimed ONLY when the class median's 90% CI clears the everyday baseline (not a knife-edge
-    percentile); the heavy TAIL is always cited (a fat-tailed class whose typical move is ordinary
-    can still have a huge worst case -- never say 'ordinary' next to a 51% precedent); small samples
-    are flagged; a hypothetical clause is answered as 'if it occurs', not as an event."""
+def _verdict(et, qr, hypothetical=False, negated=False, polarity="escalation"):
+    """The engine's one-line answer to a claim, rendered by the numbers. Honesty gates:
+    NEGATED events (article says it didn't happen / is reversed) get no read; EASING/reversal is
+    flagged (the directionless base rate points the other way); 'materially larger' needs the class
+    median 90% CI to clear the BASELINE's 90% CI (a valid CI-to-CI test); the base rate is always
+    surfaced ('an ordinary month moves this much X% of the time'); the fat tail is dated; small
+    samples flagged; a hypothetical clause is answered 'if it occurs'."""
     if not et:
         return {"stance": "no_class", "text": "This claim doesn't map to an event class the engine "
                 "measures — no market read."}
+    if negated:
+        return {"stance": "negated", "text": (f"The article reports this {et.replace('_', ' ')} did NOT "
+                "happen (or is being reversed). The engine gives no market read on a non-event — a "
+                "measured base rate applies to events that occurred.")}
     if not qr:
         return {"stance": "insufficient", "text": f"'{et}' has no measured precedent in the corpus."}
     a = qr["abs_car20"]; base = qr["baseline"]
-    p = base.get("class_median_percentile"); med = a["median_pct"]
-    om = base.get("ordinary_median_pct"); ci_lo = (a.get("ci90_median_pct") or [None])[0]
-    rng_hi = a["range_pct"][1]; n = qr["n"]; gate = qr["gate"]
+    p = base.get("class_median_percentile"); med = a["median_pct"]; om = base.get("ordinary_median_pct")
+    ci_lo = (a.get("ci90_median_pct") or [None])[0]; base_ci = base.get("ordinary_median_ci90") or [None, None]
+    rng_hi = a["range_pct"][1]; n = qr["n"]; gate = qr["gate"]; brate = base.get("base_rate_ge_class_median_pct")
+    mx = a.get("max_event") or {}
     small = f" Small sample (n={n}) — treat as indicative." if gate != "full" else ""
     iff = "If it occurs, " if hypothetical else ""
-    tail = f" The class is fat-tailed: the worst case on record moved {rng_hi}%."
+    ease = ("This is an EASING/reversal — the base rate below is directionless (size only), and an "
+            "easing has historically pointed the opposite way to an escalation. " if polarity == "easing" else "")
+    tail = (f" The class is fat-tailed: the worst case, “{mx.get('title', '')[:52]}” ({(mx.get('date') or '')[:7]}), "
+            f"moved {rng_hi}%." if mx.get("title") else f" Fat-tailed; worst case {rng_hi}%.")
+    baserate = (f" An ordinary month moves at least this much about {int(brate)}% of the time."
+                if brate is not None else "")
     pc = f"the {BR._ordinal(p)} percentile of ordinary moves" if p is not None else "of uncertain rank"
-    if om is not None and ci_lo is not None and ci_lo > om:
+    material = (ci_lo is not None and base_ci[1] is not None and ci_lo > base_ci[1])
+    if material:
         return {"stance": "material",
-                "text": (f"{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc}, and "
-                         f"its 90% CI clears the everyday baseline (~{om}%), so **materially larger than "
-                         f"normal**.{tail}{small}")}
+                "text": (f"{ease}{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc}, "
+                         f"and its 90% CI clears the everyday baseline's, so **materially larger than normal**."
+                         f"{baserate}{tail}{small}")}
     return {"stance": "in_line",
-            "text": (f"{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc} (everyday "
-                     f"median ~{om}%), so the TYPICAL move is in line with normal oil volatility.{tail}{small}")}
+            "text": (f"{ease}{iff}history (n={n} {et} events) shows a median {med}% 20-day oil move — {pc} "
+                     f"(everyday median ~{om}%), so the TYPICAL move is in line with normal oil volatility."
+                     f"{baserate}{tail}{small}")}
 
 
 def public_sentiment(conn, ents, etype):
@@ -279,12 +318,13 @@ def deconstruct(arg):
         et = c["event_class"]
         pc = per_class.get(et, {})
         c["evidence"] = _evidence(et, pc.get("quant"), pc.get("precedent"))
-        c["verdict"] = _verdict(et, pc.get("quant"), hypothetical=(c.get("modality") == "hypothetical"))
+        c["verdict"] = _verdict(et, pc.get("quant"), hypothetical=(c.get("modality") == "hypothetical"),
+                                negated=c.get("negated", False), polarity=c.get("polarity", "escalation"))
     # Dominant class = the class the article's claims MOST refer to (salience), tie-broken by
     # sample size. More robust than a priority-ordered full-text classify (which would pick a
     # chokepoint mentioned once in a retaliation clause over the article's actual sanctions topic).
     from collections import Counter as _Counter
-    freq = _Counter(c["event_class"] for c in cs if c["event_class"])
+    freq = _Counter(c["event_class"] for c in cs if c["event_class"] and not c.get("negated"))
     dominant = (max(freq, key=lambda e: (freq[e], per_class[e]["quant"]["n"]
                     if per_class.get(e, {}).get("quant") else 0)) if freq else None)
     mn = BR.market_now(conn)
@@ -298,6 +338,8 @@ def deconstruct(arg):
     conn.close()
     # The subject to pulse for live unrest/agitation coverage (most-cited country/chokepoint).
     from collections import Counter as _C
+    # exclude negated claims from the subject pick too
+    all_ents = [e for c in cs if not c.get("negated") for e in c["entities"]] or all_ents
     ef = _C(e for e in all_ents if e.startswith(("country.", "chokepoint.")))
     pulse_query = ef.most_common(1)[0][0].split(".")[-1].replace("_", " ").title() if ef else None
     n_material = sum(1 for c in cs if (c["verdict"] or {}).get("stance") == "material")
@@ -328,10 +370,11 @@ def _headline_read(at, cs, per_class, dominant, n_material):
     qr = per_class[dominant]["quant"]; a = qr["abs_car20"]; base = qr["baseline"]
     p = base.get("class_median_percentile"); med = a["median_pct"]
     om = base.get("ordinary_median_pct"); ci_lo = (a.get("ci90_median_pct") or [None])[0]
+    base_ci = base.get("ordinary_median_ci90") or [None, None]
     rng_hi = a["range_pct"][1]
     kind = "opinion piece" if at["type"] == "opinion" else "report"
     tail = f" — but the class is fat-tailed, with a worst case of {rng_hi}% on record"
-    if om is not None and ci_lo is not None and ci_lo > om:
+    if ci_lo is not None and base_ci[1] is not None and ci_lo > base_ci[1]:
         return (f"This {kind} centres on **{dominant}**. On the measured record (n={qr['n']}), events of that "
                 f"class moved oil a median **{med}%** over 20 days — the {BR._ordinal(p)} percentile of "
                 f"ordinary moves, **materially larger than everyday volatility**{tail}. Size, not direction.")

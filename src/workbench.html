@@ -186,7 +186,8 @@
   .rd-verdict .dot{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; margin-top:7px; background:var(--info); }
   .rd-verdict.material .dot{ background:var(--accent); }
   .rd-verdict.in_line .dot{ background:var(--info); }
-  .rd-verdict.insufficient .dot, .rd-verdict.no_class .dot{ background:var(--faint); }
+  .rd-verdict.insufficient .dot, .rd-verdict.no_class .dot, .rd-verdict.negated .dot{ background:var(--faint); }
+  .rd-verdict.negated{ color:var(--dim); }
   .rd-legend{ font:var(--t-cap) var(--mono); color:var(--dim); margin:2px 0 4px; display:flex; gap:16px; flex-wrap:wrap; }
   .rd-legend .lg{ display:inline-flex; gap:6px; align-items:center; }
   .rd-legend .d{ width:8px; height:8px; border-radius:50%; }
