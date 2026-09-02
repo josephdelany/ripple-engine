@@ -208,16 +208,17 @@ def register(app):
         s = _json(DATA / "walk_forward" / "summary.json")
         if not s:
             raise HTTPException(404, "no walk summary; run python3 src/walk.py")
+        # Brief A-1 (2026-09-02): pass the published summary through WHOLE -- no key whitelist, so the endpoint can never
+        # drift from summary.json again (the earlier list read `leakage` / `rps_vs`, which the file never had). The only
+        # thing dropped is each tier task's per-item table (`items_vs_climatology`), which is large; /api/walk/read has it.
         tiers = {}
         for t, d in (s.get("tiers") or {}).items():
-            tiers[t] = {k: d.get(k) for k in ("tier", "n_reads", "n_scored_burn_in", "horizon", "unit", "permits_validation")}
+            td = dict(d)
             for task in ("G", "P", "M"):
-                if task in d and isinstance(d[task], dict):
-                    x = d[task]
-                    tiers[t][task] = {k: x.get(k) for k in ("score", "engine_vs", "spa", "learning_curve", "per_class", "murphy_engine",
-                                                             "diagnostic_fair", "log_score_vs_climatology", "rps_vs", "deal", "precision", "recall", "base")}
-        return {k: s.get(k) for k in ("protocol", "run_id", "generated_at", "registered", "menu", "verdict", "placebo", "permutation",
-                                      "leakage", "regime_blocks", "spec_curve", "data_state", "big_moves_knew")} | {"tiers": tiers}
+                if isinstance(td.get(task), dict) and "items_vs_climatology" in td[task]:
+                    td[task] = {k: v for k, v in td[task].items() if k != "items_vs_climatology"}
+            tiers[t] = td
+        return {k: v for k, v in s.items() if k != "tiers"} | {"tiers": tiers}
 
     @app.get("/api/walk/list")
     def api_walk_list():

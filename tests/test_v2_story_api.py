@@ -81,6 +81,14 @@ def test_walk_and_engine_endpoints():
     c = TestClient(backend.app)
     s = c.get("/api/walk/summary")
     assert s.status_code == 200 and "tiers" in s.json() and "verdict" in s.json()
+    # Brief A-1: the endpoint carries the published summary whole (no stale whitelist); per-item tables dropped
+    sj = s.json()
+    for k in ("leakage_test", "fdr", "seal_check", "placebo", "permutation", "regime_blocks", "spec_curve", "run_id", "limits", "data_state"):
+        assert k in sj, k
+    assert "rps" in sj["tiers"]["daily"]["G"] and "spa" in sj["tiers"]["daily"]["G"]
+    assert "frozen" in sj["tiers"]["daily"]["M"] and "engine" in sj["tiers"]["daily"]["M"]
+    assert "items_vs_climatology" not in sj["tiers"]["daily"]["G"]
+    assert sj["run_id"] == json.loads((ROOT / "data" / "walk_forward" / "summary.json").read_text())["run_id"]
     lst = c.get("/api/walk/list").json()
     assert lst and all("event_id" in r and "sealed_at" in r for r in lst)
     eid = next(r["event_id"] for r in lst if r["burn_in_ok"])
