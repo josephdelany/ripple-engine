@@ -134,11 +134,28 @@ public domain (quoted above), acknowledgment requested.
   confirmed: `Strait of Hormuz`, `Bab el-Mandeb Strait`, `Suez Canal`, `Malacca Strait`,
   `Panama Canal`, `Bosporus Strait`, `Cape of Good Hope`. Hormuz earliest 2019-01-01,
   latest 2026-08-30.
-- Licence: the ArcGIS item (id 3da2b9ca97684916b75c4013f95d18ab, owner
-  IMF-portwatch_imf_dataviz) points `licenseInfo` at imf.org/external/terms.htm, which
-  returned **HTTP 403** (Cloudflare challenge) — terms text NOT read. Citation embedded
-  in the item: "Sources: UN Global Platform; IMF PortWatch (portwatch.imf.org)."
-  → **refresh-only, never committed.**
+- Licence — **READ, and the series are now seeded** (Joe's Ruling 3, 2026-09-02). The ArcGIS
+  item (id 3da2b9ca97684916b75c4013f95d18ab, owner IMF-portwatch_imf_dataviz) points
+  `licenseInfo` at **imf.org/external/terms.htm**, "Copyright and Usage", effective
+  **2020-01-02**, final section (special terms for statistical Data). Verbatim:
+
+  > "Users may download, extract, copy, create derivative works, publish, distribute, and sell
+  > Data obtained from IMF Sites, including for commercial purposes"
+
+  subject to attribution **"Source: International Monetary Fund"**, no alteration of the data's
+  integrity, and disclosure that the data is freely available if it is resold.
+  **Provenance of this quote, stated plainly:** it was read from the source and verified by Joe
+  via Cowork on 2026-09-02. This session could not retrieve that page itself — `requests`
+  returned HTTP 403 (Cloudflare challenge) and the fetch tool returned an empty body on two
+  further attempts. The quote is first-hand to the ruling and second-hand to this session; the
+  loader did not verify it.
+- **The one limit.** Section VIII covers Data the IMF owns; PortWatch's upstream inputs are
+  third-party AIS. So only the **published daily aggregates** are committed — the transit counts
+  and capacity figures the API serves — and no vessel-level upstream data is fetched or stored.
+- Attribution carried in each series' notes and required on any surface:
+  **"Sources: UN Global Platform; IMF PortWatch (portwatch.imf.org)."**
+  → **seeded 2026-09-02**: 21 series (7 chokepoints × n_tanker, n_total, capacity_tanker),
+  2,799 rows each, so a fresh clone reproduces them offline.
 - Loaded today (full history, 7 chokepoints × n_tanker, n_total, capacity_tanker):
   `portwatch.<slug>.<field>`, 2019-01-01 → 2026-08-30, 2,799 rows each (the four
   pre-existing slugs were backfilled from 132 rows; malacca/panama/bosporus are new).
@@ -164,9 +181,28 @@ public domain (quoted above), acknowledgment requested.
   NGL, OTHERCRUDE, TOTCRUDE; flows INDPROD, REFINOBS, CLOSTLV, TOTIMPSB, TOTEXPSB, …;
   118 reporters in 2002, 96 in the partial 2026 file). Update "on or around the 20th
   of each month"; last refresh 2026-08-20 (June 2026 data).
-- No licence or terms page was found on the site (only "freely available" and a
-  copyright footer). → **GAP on licence; not loaded.** If Joe rules the "freely
-  available" statement sufficient, the per-year CSV loader is straightforward.
+- Licence: **no licence or terms page exists on the site** — only "freely available" and a
+  `© Copyright JODI 2026` footer. **Joe's Ruling 2 (2026-09-02): option (a) — load it, but read
+  "freely available" as ACCESS, not RIGHTS.** The per-year CSVs are loaded **refresh-only**:
+  pulled live into the local DB, **never seeded, never committed, never redistributed**, cited
+  as *JODI-Oil* with the retrieval date carried in each observation's `retrieved_at`.
+- **A trap in the file that would have poisoned the data, found before loading.** JODI reports
+  every (country, product, flow, month) in **five unit rows** — CONVBBL, KBBL, KBD, KL, KTONS —
+  filling the ones a reporter does not submit with `-` or `x`. **CONVBBL is not a volume.** It
+  is the country's barrels-per-tonne conversion factor × 1000. Verified on Saudi crude
+  production 2026-01: KBBL/KTONS = 313100/42755.7012 = **7.323**, exactly CONVBBL/1000 = 7.323,
+  and KBD × 31 = 10100 × 31 = 313100 = KBBL. CONVBBL is populated for **all 96 reporters** while
+  real volumes exist for only 56, so a loader taking "whichever unit is populated" would record
+  **Russia's crude production as 7356** and Iraq's as 7430. The loader therefore **pins the unit
+  per measure** (KBD for flows, KBBL for stock levels), refuses CONVBBL by raising, and drops
+  `-`/`x` rather than zero-filling. A reporter publishing no volume yields an empty series and
+  is reported as empty.
+- Loaded (`src/ripple_fetch.py`, kind `jodi`): 22 countries × 5 measures — crude production
+  (CRUDEOIL/INDPROD/KBD), refinery intake (CRUDEOIL/REFINOBS/KBD), closing crude stocks
+  (CRUDEOIL/CLOSTLV/KBBL), crude exports (CRUDEOIL/TOTEXPSB/KBD), total product demand
+  (TOTPRODS/TOTDEMO/KBD), from the annual CSVs 2002 → present.
+- **None of these is a node in the sealed RIPPLE_REGISTRATION.md Table N**, and none was used in
+  the computed study. They are loaded for later work; using one needs a dated amendment first.
 
 ### OPEC MOMR — VERIFIED access, restrictive terms, NOT LOADED
 - opec.org/monthly-oil-market-report.html (opened in a browser; plain HTTP is a
@@ -257,11 +293,11 @@ control for every equity-proxy regression.
 | Baltic tanker freight (BDTI/BCTI) | licensed, not free | none at $0; equity proxies labelled as such |
 | Pre-2019 chokepoint transits | no free daily source | none; annual EIA factsheets only |
 | Suez monthly transits | annual PDFs 2008–2025 parseable; widget broken | stitched PDF loader (later brief) |
-| JODI-Oil | format verified; no licence page found | Joe rules on "freely available"; then per-year CSV loader |
+| JODI-Oil | ~~gap~~ **RULED 2026-09-02 (a)**: loaded refresh-only, never redistributed | closed; a licence page would allow seeding |
 | OPEC MOMR secondary-sources production | access verified; terms forbid redistribution; table not located | not loaded; Känzig dates + events table stand in |
 | Broad USD before 2006 | DTWEXB/TWEXBMTH discontinued 2019, different method | none; dollar control starts 2006 |
 | HY OAS before 2023 | FRED window cut to 3 years (ICE licence) | yf.hyg 2007→ as labelled proxy |
-| IMF PortWatch terms text | imf.org/external/terms.htm → 403 | read the terms in a browser; until then refresh-only |
+| IMF PortWatch terms text | ~~gap~~ **READ 2026-09-02** (Joe/Cowork; this session still gets 403): redistribution permitted with attribution → seeded | closed; daily aggregates only, AIS inputs third-party |
 | TTF unit | Yahoo states currency EUR, not the unit | treat as EUR/MWh by contract convention, labelled inferred |
 
 ## 10. What was opened today (receipt list)
