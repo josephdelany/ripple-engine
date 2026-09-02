@@ -11,8 +11,17 @@ result is published as computed, nulls included.
 
 ## What it is
 
-- **The spine.** 313 coded geopolitical and policy shocks, 1973–2026 (two-source
-  rule, human-gated codebook), a monthly price spine back to 1946, 598 series and
+- **The spine.** 313 coded geopolitical and policy shocks, 1973–2026, human-gated
+  under a codebook with per-field provenance ("sourced or unknown"). **The spine is
+  the project's weakest layer and is under repair:** each event carries one primary
+  source URL, not the two the codebook's admission rule requires (0 of 313 have two
+  independent sources recorded), event descriptions average one sentence, and the
+  coverage is badly skewed — 8 events in the 1970s, 11 in the 1980s, 16 in the
+  1990s, against 150 in the 2020s. The engine's analog pool before 1990 is
+  therefore thin by construction, which is visible in the 1990 demo. Repair is
+  registered and in progress (`data/candidates/`, `DOSSIER_RULE.md`): dossiers with
+  two verified sources per event, admitted only by the author.
+  Also: a monthly price spine back to 1946, 598 series and
   467k observations, and ~8,000 measured price-transmission edges across crude,
   products, gas, LNG and fertilizer. A world-state panel (280k rows, 17 open
   academic and government datasets — COW, ATOP, ICB, UCDP, Polity, V-Dem, SIPRI,

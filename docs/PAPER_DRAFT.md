@@ -95,13 +95,35 @@ independently coded escalation outcomes under a sealed walk-forward protocol.
 
 ## 3. Data
 
-**Event spine.** 313 events, 1973-10-06 to 2026-06-17, coded under a human-gated
-codebook with a two-source rule: sanctions 57, policy responses 57, conflict
-escalations 55, OPEC decisions 52, infrastructure attacks 48, chokepoint
-disruptions 27, demand shocks 17 (`data/oil.db`, table `events`). 187 are
-geopolitical in the sense used for the escalation target. Nothing enters the table
-without human approval; the pre-1987 record is thin and is the subject of an open
-admission process (§11).
+**Event spine.** 313 events, 1973-10-06 to 2026-06-17, human-gated under a
+codebook: sanctions 57, policy responses 57, conflict escalations 55, OPEC
+decisions 52, infrastructure attacks 48, chokepoint disruptions 27, demand shocks
+17 (`data/oil.db`, table `events`). 187 are geopolitical in the sense used for the
+escalation target.
+
+**This layer is the study's principal weakness, and we state its condition
+precisely rather than in summary.** (i) *Provenance.* Each event carries a single
+primary `source_url`; **0 of 313 record two independent sources**, so the
+codebook's two-source admission rule is a standard for future admissions, not a
+property of the present corpus. Per-field provenance is recorded in `sr_json`
+under a sourced-or-unknown rule, but a substantial share of those field sources
+are null or self-referential (`corpus:density`, `corpus:observed`), i.e. derived
+from the corpus rather than from an external record. (ii) *Depth.* Event
+descriptions have a median length of 148 characters — a sentence, not a case
+narrative; some carry draft coding notes in the text. (iii) *Coverage.* The
+distribution is heavily recent: 8 events in the 1970s, 11 in the 1980s, 16 in the
+1990s, 43 in the 2000s, 85 in the 2010s, 150 in the 2020s. The "1973–2026 spine"
+is in practice a dense 2010–2026 record with a thin historical tail, which is why
+the 1990 read in Appendix B draws on seven precedents and the monthly tier cannot
+be scored at all. (iv) *Selection.* Events were chosen by humans with hindsight;
+the Big Moves census (§4) is the check on this and finds 35% of the largest Brent
+moves have no corpus event at all.
+
+Repair is registered and under way (`data/candidates/REGISTRATION.md`,
+`DOSSIER_RULE.md`): 624 pre-1987 candidates drawn mechanically from ICB, COW MID,
+COW War and UCDP are being turned into dossiers carrying two verified sources
+each, with admission by the author alone. Until that lands, every result in this
+paper should be read as conditional on a corpus whose historical arm is thin.
 
 **Prices.** A daily spine from FRED (Brent from 1987-05-20, WTI from 1986-01-02,
 products, cracks, gas), a monthly WTI spine from 1946 (FRED `WTISPLC`), and ~598
