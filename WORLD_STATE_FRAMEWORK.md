@@ -158,3 +158,31 @@ All named panels are free for research use; GSDB is by email request; NYT
 Article Search needs a free key (never committed); EI Statistical Review is a
 public good; COW/ATOP/ICB/Polity/SIPRI/UCDP are open academic datasets with
 citation requirements — cited in `WORLD_STATE_CODEBOOK.md`.
+
+---
+
+## Amendment A (2026-09-02, registered before the code) — `knowable_at` on every situation field
+WALK_FORWARD_PROTOCOL.md §1 states the limitation: the situation-record fields (`events.sr_*`, coded by
+`situation_record.py` under SITUATION_CODEBOOK_V2.md) are taken as coded, not vintage-filtered, so a read
+at date t may use a field whose evidence did not exist at t. This amendment closes it for the join.
+1. **Every situation field carries `knowable_at`**, the date its evidence became knowable, taken in this
+   order from the record's own per-field `sources` map: (a) the source's publication date when the cited
+   URL carries one in its path (`/YYYY/MM/DD/` or `/YYYY-MM-DD` — read from the URL, never fetched or
+   guessed); (b) for fields sourced `corpus:observed` (the retired outcome branches) the day the window
+   closed, `event_date + 30 / + 90`; (c) for fields sourced from the corpus itself (`corpus:dyad`,
+   `corpus:density`, `corpus:entities`) or from an undated URL, the **coding date** (`events.added_at`,
+   the record's coding run); (d) `unknown` when the source is null. The field's `sources` entry is kept
+   beside it as the receipt.
+2. **The join drops a situation field with `knowable_at > t`** (t = the event date for the corpus
+   join; the read date for a live read) and one with `knowable_at = unknown`; both are counted per
+   event in `situation_state`'s coverage report as `sr_dropped_after_t` and `sr_unknown`, published as
+   computed. Nothing in `events` changes; the columns stay; only the vintage-aware join filters.
+3. **Consequence, stated now:** because every current record was coded on 2026-09-02 from sources that
+   are mostly undated URLs or the corpus itself, rule (c) dates almost every situation field to the coding
+   run, so almost every situation field vanishes at t for every corpus event. That is the honest reading
+   of §1, not a bug. The remedy is a per-field contemporaneous source with its own date (rule (a)),
+   which is Joe's coding work on the borderline queue, not a code change. Session B receives the count
+   of vanishing fields so the next walk can say what the engine saw at t.
+4. The walk's similarity fields are session B's (`src/engine`); this amendment binds `situation_state`
+   (session A) and what it publishes; the engine may switch to reading situation fields from
+   `situation_state` at its own registration.
