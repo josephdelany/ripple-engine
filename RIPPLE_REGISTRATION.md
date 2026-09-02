@@ -438,3 +438,21 @@ covers 2019 → only. Equity proxies are confounded by everything else in the eq
 market beyond the S&P control. The gas regime split leaves few events per class in
 the pre-shale window for Henry Hub (1997–2009). None of these is fixed by more code;
 they are stated so the results are read at their true weight.
+
+## Amendment A — 2026-09-02, before any computation (disclosed)
+Two defects found on re-reading the sealed text, fixed here rather than edited in place:
+1. §2.4 says same-class events "within 20 trading days form one cluster" and in the
+   same sentence cites `robustness.assign_clusters` "CLUSTER_DAYS as registered
+   there". That constant is **35 calendar days**. The code value governs: clusters are
+   formed by the chain rule over 35 calendar days, per class (and over the pooled set
+   for the pooled shocks). The overlapping version stays a diagnostic.
+2. E-1, E-5 and E-6 speak of "tightening classes" as one shock. Defined: the pooled
+   shock **tightening** = chokepoint_disruption ∪ infrastructure_attack ∪
+   conflict_escalation (the three classes with an unambiguous "+" in Table M),
+   de-overlapped over their union. The pooled shock **all** = every day-precision
+   event, de-overlapped over the whole corpus. Both are estimated for every node beside
+   the per-class IRFs. Controls that require VIX (from 1990-01-02) or GPR (from
+   1985-01-01) restrict every daily regression to dates where they exist; the effective
+   daily sample therefore starts 1990-01-09 (five trading days of VIX for the control),
+   which is stated here so it is not read as a choice made after seeing results.
+No number had been computed when this was written.
