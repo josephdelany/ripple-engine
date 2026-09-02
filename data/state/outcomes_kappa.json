@@ -1,0 +1,167 @@
+{
+ "registration": "OUTCOME_MAPPING.md (2026-09-02)",
+ "generated_at": "2026-09-02T15:46:40+00:00",
+ "n_geopolitical_events": 187,
+ "sources": {
+  "icb": {
+   "kappa": -0.0013,
+   "n": 43,
+   "agreement_pct": 14.0,
+   "confusion_ours_x_theirs": {
+    "CONTAINED": {
+     "CONTAINED": 0,
+     "LIMITED_RETALIATION": 6,
+     "WIDENING": 21,
+     "RESOLUTION_BY_DEAL": 2
+    },
+    "LIMITED_RETALIATION": {
+     "CONTAINED": 0,
+     "LIMITED_RETALIATION": 4,
+     "WIDENING": 3,
+     "RESOLUTION_BY_DEAL": 1
+    },
+    "WIDENING": {
+     "CONTAINED": 2,
+     "LIMITED_RETALIATION": 0,
+     "WIDENING": 2,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "RESOLUTION_BY_DEAL": {
+     "CONTAINED": 0,
+     "LIMITED_RETALIATION": 1,
+     "WIDENING": 1,
+     "RESOLUTION_BY_DEAL": 0
+    }
+   },
+   "theirs_distribution": {
+    "WIDENING": 27,
+    "RESOLUTION_BY_DEAL": 3,
+    "LIMITED_RETALIATION": 11,
+    "CONTAINED": 2
+   }
+  },
+  "mid": {
+   "kappa": -0.2342,
+   "n": 15,
+   "agreement_pct": 13.3,
+   "confusion_ours_x_theirs": {
+    "CONTAINED": {
+     "CONTAINED": 0,
+     "LIMITED_RETALIATION": 9,
+     "WIDENING": 0,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "LIMITED_RETALIATION": {
+     "CONTAINED": 1,
+     "LIMITED_RETALIATION": 2,
+     "WIDENING": 1,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "WIDENING": {
+     "CONTAINED": 1,
+     "LIMITED_RETALIATION": 0,
+     "WIDENING": 0,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "RESOLUTION_BY_DEAL": {
+     "CONTAINED": 0,
+     "LIMITED_RETALIATION": 1,
+     "WIDENING": 0,
+     "RESOLUTION_BY_DEAL": 0
+    }
+   },
+   "theirs_distribution": {
+    "LIMITED_RETALIATION": 12,
+    "WIDENING": 1,
+    "CONTAINED": 2
+   }
+  },
+  "ucdp": {
+   "kappa": 0.104,
+   "n": 184,
+   "agreement_pct": 43.5,
+   "confusion_ours_x_theirs": {
+    "CONTAINED": {
+     "CONTAINED": 58,
+     "LIMITED_RETALIATION": 43,
+     "WIDENING": 14,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "LIMITED_RETALIATION": {
+     "CONTAINED": 10,
+     "LIMITED_RETALIATION": 18,
+     "WIDENING": 8,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "WIDENING": {
+     "CONTAINED": 6,
+     "LIMITED_RETALIATION": 18,
+     "WIDENING": 4,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "RESOLUTION_BY_DEAL": {
+     "CONTAINED": 3,
+     "LIMITED_RETALIATION": 2,
+     "WIDENING": 0,
+     "RESOLUTION_BY_DEAL": 0
+    }
+   },
+   "theirs_distribution": {
+    "WIDENING": 26,
+    "CONTAINED": 77,
+    "LIMITED_RETALIATION": 81
+   }
+  },
+  "precedence": {
+   "kappa": 0.0606,
+   "n": 184,
+   "agreement_pct": 38.0,
+   "confusion_ours_x_theirs": {
+    "CONTAINED": {
+     "CONTAINED": 48,
+     "LIMITED_RETALIATION": 34,
+     "WIDENING": 31,
+     "RESOLUTION_BY_DEAL": 2
+    },
+    "LIMITED_RETALIATION": {
+     "CONTAINED": 10,
+     "LIMITED_RETALIATION": 16,
+     "WIDENING": 9,
+     "RESOLUTION_BY_DEAL": 1
+    },
+    "WIDENING": {
+     "CONTAINED": 7,
+     "LIMITED_RETALIATION": 15,
+     "WIDENING": 6,
+     "RESOLUTION_BY_DEAL": 0
+    },
+    "RESOLUTION_BY_DEAL": {
+     "CONTAINED": 3,
+     "LIMITED_RETALIATION": 1,
+     "WIDENING": 1,
+     "RESOLUTION_BY_DEAL": 0
+    }
+   },
+   "theirs_distribution": {
+    "WIDENING": 47,
+    "RESOLUTION_BY_DEAL": 3,
+    "LIMITED_RETALIATION": 66,
+    "CONTAINED": 68
+   }
+  }
+ },
+ "no_independent_outcome": 0,
+ "ours_unknown": 3,
+ "decision_rule": {
+  "threshold": 0.6,
+  "kappa_precedence": 0.0606,
+  "would_replace_branches": true,
+  "status": "awaiting Joe's audit (data/audits/outcome_audit_60.csv); no branch changed"
+ },
+ "audit": {
+  "file": "data/audits/outcome_audit_60.csv",
+  "rows": 60,
+  "disagreements_total": 114,
+  "seed": 20260902
+ }
+}
