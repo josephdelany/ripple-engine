@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software or its record, please cite it as below."
+type: software
+title: "Ripple Engine: a pre-registered, historically-conditioned engine for reading geopolitical shocks in the oil economy, with a sealed walk-forward test"
+authors:
+  - family-names: Delany
+    given-names: Joseph
+    email: joseph.delany21@gmail.com
+    affiliation: "Colby College"
+version: "2.5"
+date-released: "2026-09-02"
+repository-code: "https://github.com/josephdelany/ripple-engine"
+license: MIT
+keywords:
+  - oil markets
+  - geopolitical risk
+  - analog forecasting
+  - walk-forward validation
+  - pre-registration
+  - proper scoring rules
+abstract: >-
+  A corpus of 313 dated geopolitical and policy shocks (1973–2026), a world-state
+  panel from seventeen open datasets joined under a vintage rule, a market-defined
+  census of the largest oil-price moves, a state-conditioned analog engine reading
+  each event as a frequency distribution over independently coded escalation
+  outcomes (IES-90) and 20-day price paths, and a pre-registered walk-forward test
+  with sealed reads, strictly proper scores, four baselines, and data-snooping,
+  placebo, permutation, regime and specification-curve controls. The engine has no
+  skill beyond the base rate on either target (run walk_20260902T182828Z); the
+  null is published as computed.
+references:
+  - type: report
+    title: "Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy"
+    authors:
+      - family-names: Delany
+        given-names: Joseph
+    year: 2026
+    notes: "docs/PAPER_DRAFT.md in this repository"
