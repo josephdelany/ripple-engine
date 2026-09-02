@@ -197,9 +197,15 @@ def open_seen():
     return conn
 
 
-def is_new(seen, url):
-    """True and marks it if this url hasn't been seen before."""
-    h = hashlib.sha1(url.encode("utf-8", "replace")).hexdigest()
+def _norm_title(title):
+    return re.sub(r"[^a-z0-9]+", " ", (title or "").lower()).strip()
+
+
+def is_new(seen, url, title=""):
+    """True and marks it if this url + normalised title hasn't been seen before (Brief A-10: dedupe by URL+title;
+    an item with no title keys on the URL alone, as before)."""
+    key = url + ("\n" + _norm_title(title) if title else "")
+    h = hashlib.sha1(key.encode("utf-8", "replace")).hexdigest()
     if seen.execute("SELECT 1 FROM seen WHERE story_hash=?", (h,)).fetchone():
         return False
     seen.execute("INSERT INTO seen VALUES (?,?)",
@@ -263,6 +269,52 @@ def run_gdelt(seen, keywords, net_codes, now):
     return alerts
 
 
+# --------------------------------------------------------------- GDELT DOC 2.0 (Brief A-10)
+GDELT_DOC = "https://api.gdeltproject.org/api/v2/doc/doc"
+GDELT_DOC_TERMS = ["strait of hormuz", "opec", "oil sanctions", "red sea shipping", "oil tanker", "refinery strike", "pipeline attack"]
+GDELT_DOC_SPACING_S = 5.0                       # the API's own limit: one request every 5 seconds (data/feeds/REGISTER.md)
+
+
+def parse_gdelt_doc(obj, term, now):
+    """Pure: a DOC 2.0 artlist reply -> item dicts (url, title, source domain, seen date). Nothing invented."""
+    out = []
+    for a in (obj or {}).get("articles", []) or []:
+        url, title = (a.get("url") or "").strip(), (a.get("title") or "").strip()
+        if not url.startswith("http") or not title:
+            continue
+        out.append({"url": url, "title": title, "domain": a.get("domain") or "", "seendate": a.get("seendate") or "", "term": term, "timestamp_utc": now})
+    return out
+
+
+def run_gdelt_doc(seen, keywords, entity_terms, now, terms=None, get=None, sleep=None):
+    """One artlist query per registered term, 5 s apart; net-matching new items become alerts."""
+    import time as _t
+    get = get or (lambda term: requests.get(GDELT_DOC, params={"query": term, "mode": "artlist", "format": "json", "maxrecords": 50, "timespan": "60min"},
+                                            headers=UA, timeout=40))
+    sleep = sleep or _t.sleep
+    alerts = []
+    for i, term in enumerate(terms or GDELT_DOC_TERMS):
+        if i:
+            sleep(GDELT_DOC_SPACING_S)
+        try:
+            r = get(term)
+            if r.status_code == 429:
+                print("  gdelt_doc rate-limited (429) -- stopping this cycle."); break
+            obj = r.json() if r.ok else None
+        except (requests.RequestException, ValueError) as e:
+            print(f"  gdelt_doc '{term}' failed ({type(e).__name__}) -- skipped."); continue
+        for it in parse_gdelt_doc(obj, term, now):
+            kw, ents = net_match_text(it["title"], keywords, entity_terms)
+            if not kw and not ents:
+                continue
+            if not is_new(seen, it["url"], it["title"]):
+                continue
+            alerts.append({"timestamp_utc": now, "source": f"gdelt_doc:{it['domain'] or 'article'}", "headline": it["title"], "url": it["url"],
+                           "matched_entities": ";".join(ents), "matched_keywords": ";".join(kw), "heuristic_type": heuristic_type(kw, ents),
+                           "amp_context": "", "status": "new"})
+    return alerts
+
+
 # --------------------------------------------------------------- RSS
 
 def run_rss(seen, keywords, entity_terms, now):
@@ -287,7 +339,7 @@ def run_rss(seen, keywords, entity_terms, now):
             kw, ents = net_match_text(text, keywords, entity_terms)
             if not kw and not ents:
                 continue
-            if not is_new(seen, link):
+            if not is_new(seen, link, title):
                 continue
             alerts.append({
                 "timestamp_utc": now, "source": f"rss:{name}", "headline": title,
@@ -352,10 +404,11 @@ def main():
 
     gdelt = run_gdelt(seen, keywords, net_codes, now)
     rss = run_rss(seen, keywords, entity_terms, now)
+    doc = run_gdelt_doc(seen, keywords, entity_terms, now)          # Brief A-10: GDELT DOC 2.0 articles (data/feeds/REGISTER.md)
     seen.commit()
     seen.close()
 
-    alerts = gdelt + rss
+    alerts = gdelt + rss + doc
     for a in alerts:                                 # stamp the read line onto each card
         a["amp_context"] = ctx
     append_alerts(alerts)
