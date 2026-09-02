@@ -54,6 +54,8 @@ def pytest_collection_modifyitems(config, items):
                             "runs locally via src/acceptance.py, and the daily refresh proves the engine runs.")
     n = 0
     for item in items:
+        if "/tests/state/" in str(item.fspath).replace("\\", "/"):
+            continue                 # PATH Step 2/3 loader tests use fixtures + a scratch DB: DB-free by construction
         if Path(str(item.fspath)).name not in DB_FREE_FILES:
             item.add_marker(skip); n += 1
     if n:

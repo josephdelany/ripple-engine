@@ -70,3 +70,9 @@ data/notes/
 
 # Reader cache: model proposals keyed by content hash (derived; a story is re-read if absent)
 data/reader/
+
+# World-state panel caches (PATH Step 2): free downloads are rebuilt by the loaders; local/ holds
+# licence-restricted files (Polity/CSP, SIPRI, GSDB, NYT, EI 2026) that are never committed.
+data/state/raw/
+data/state/local/*
+!data/state/local/README.md

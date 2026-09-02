@@ -107,3 +107,24 @@ stub committed) · gap (no free source; field is "unknown" and counted).*
 Coverage is the dataset's, as stated in the register. What is actually loaded,
 per block per decade, is printed by `python3 src/state/status.py` and never
 recited here.
+
+## Amendment 1 — 2026-09-02, after the first smoke load and before the first loader commit (disclosed)
+WS-R1 as written made every historical value invisible: a panel released in 2022–2026
+carries observations from 1946→, and `vintage = release date` means the engine at
+2001-09-11 sees nothing — the opposite of what WORLD_STATE_FRAMEWORK §7 expects
+("CINC 2000, Polity 2000, SIPRI 2000 ... with vintages ≤ that day"). Seen in the
+first run and rejected as a definition error. Replaced by two dates on every row:
+- **`vintage`** = the date the value became *knowable* under the dataset's own
+  publication convention, stated per loader: a daily market print on its date; a
+  monthly index on the first day of the following month; an annual value on
+  1 January of the following year; an event-resolution value (crisis outcome,
+  leader change, dispute) on the day after the event ends. Never null.
+- **`release`** = the dataset release actually parsed (its HTTP Last-Modified or
+  documented version date). Never null. Recorded so a revision can be traced.
+- **`retrospective`** = 1 when the series is a later *construction* rather than a
+  contemporaneous record (EIA's 2022 surplus-capacity reconstruction, GPR/GPRH
+  indexes built from archives, IGREA). The value is still dated knowable at period
+  end, but the walk (WALK_FORWARD_PROTOCOL) must report results with and without
+  retrospective fields; a retrospective field alone can never make a read
+  VALIDATED.
+The engine at t reads `vintage ≤ t` (unchanged). WS-R2..R5 unchanged.
