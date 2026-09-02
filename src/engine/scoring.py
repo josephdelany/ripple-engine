@@ -5,7 +5,11 @@ A proper score cannot be gamed: the best expected score comes only from reportin
 probabilities (Gneiting & Raftery 2007). Every function here is pure numpy and is checked
 against a closed-form value in tests/test_walk.py.
 
-  brier(probs, realized)          multi-category Brier: sum_b (p_b - 1[b = realized])^2, in [0, 2]
+  brier(probs, realized)          multi-category Brier over the IES-90 levels: sum_l (p_l - 1[l = realized])^2, in [0, 2]
+  rps(probs, realized)            ranked probability score over the ORDINAL levels (Epstein 1969; Murphy 1971):
+                                  sum_{k=0}^{K-2} (F_k - O_k)^2 with F, O the cumulative forecast / outcome; in
+                                  [0, K-1 = 3]; strictly proper; a miss by two levels costs more than a miss by one
+  brier_binary(p, y)              the DEAL flag: (p - y)^2
   log_score(probs, realized)      -ln p_realized after the registered floor (read.LOG_FLOOR)
   crps(values, y, weights)        CRPS of a (weighted) empirical distribution:
                                   E|X - y| - 1/2 E|X - X'|   (Gneiting & Raftery eq. 21)
@@ -27,12 +31,13 @@ scores beside the registered ones so the size of that bias is visible; it does n
                                   (uniform weights: Ferro's m/(m-1) correction; one atom: |x-y|)
   brier_fair(labels, realized, w) sum_b [(p_b - 1[b])^2 - c * p_b (1-p_b)],  c = sum w^2 / (1 - sum w^2)
                                   (uniform weights: Ferro's p(1-p)/(m-1) correction; one atom: Brier)
+  rps_fair(labels, realized, w)   the same correction on each cumulative term: sum_k [(F_k - O_k)^2 - c F_k (1-F_k)]
 """
 from __future__ import annotations
 
 import numpy as np
 
-BRANCHES = ("CONTAINED", "LIMITED_RETALIATION", "WIDENING", "RESOLUTION_BY_DEAL")
+LEVELS = ("0", "1", "2", "3")          # IES-90 ordinal levels (OUTCOME_MAPPING.md Amendment 1); order matters for rps
 LOG_FLOOR = 0.01
 
 
@@ -46,17 +51,30 @@ def _w(values, weights):
     return v, w
 
 
-def brier(probs: dict, realized: str, branches=BRANCHES) -> float:
+def brier(probs: dict, realized: str, branches=LEVELS) -> float:
     return float(sum((float(probs.get(b, 0.0)) - (1.0 if b == realized else 0.0)) ** 2 for b in branches))
 
 
-def floor_probs(probs: dict, floor=LOG_FLOOR, branches=BRANCHES) -> dict:
+def brier_binary(p, y) -> float:
+    return float((float(p) - float(y)) ** 2)
+
+
+def rps(probs: dict, realized: str, levels=LEVELS) -> float:
+    """Ranked probability score over ordered categories: sum over the K-1 cumulative thresholds of the
+    squared difference between cumulative forecast and cumulative outcome (Epstein 1969)."""
+    p = np.array([float(probs.get(l, 0.0)) for l in levels])
+    o = np.array([1.0 if l == realized else 0.0 for l in levels])
+    F, O = np.cumsum(p)[:-1], np.cumsum(o)[:-1]
+    return float(np.sum((F - O) ** 2))
+
+
+def floor_probs(probs: dict, floor=LOG_FLOOR, branches=LEVELS) -> dict:
     f = {b: max(float(probs.get(b, 0.0)), floor) for b in branches}
     z = sum(f.values())
     return {b: f[b] / z for b in branches}
 
 
-def log_score(probs: dict, realized: str, floor=LOG_FLOOR, branches=BRANCHES) -> float:
+def log_score(probs: dict, realized: str, floor=LOG_FLOOR, branches=LEVELS) -> float:
     return float(-np.log(floor_probs(probs, floor, branches)[realized]))
 
 
@@ -89,7 +107,7 @@ def crps_fair(values, y, weights=None) -> float:
     return float(np.sum(w * np.abs(v - y)) - 0.5 * term2 / (1.0 - sw2))
 
 
-def brier_fair(labels, realized: str, weights=None, branches=BRANCHES) -> float:
+def brier_fair(labels, realized: str, weights=None, branches=LEVELS) -> float:
     """Size-corrected multi-category Brier (diagnostic; see the module docstring). labels: one branch
     label per atom (analog); weights optional. Returns the registered Brier when only one atom."""
     labels = list(labels)
@@ -103,6 +121,23 @@ def brier_fair(labels, realized: str, weights=None, branches=BRANCHES) -> float:
         return brier(p, realized, branches)
     c = sw2 / (1.0 - sw2)
     return float(sum((p[b] - (1.0 if b == realized else 0.0)) ** 2 - c * p[b] * (1.0 - p[b]) for b in branches))
+
+
+def rps_fair(labels, realized: str, weights=None, levels=LEVELS) -> float:
+    """Size-corrected RPS (diagnostic): each cumulative term is a binary Brier on F_k, corrected as brier_fair."""
+    labels = list(labels)
+    if not labels:
+        raise ValueError("rps_fair needs at least one atom")
+    w = np.full(len(labels), 1.0 / len(labels)) if weights is None else np.asarray(weights, float)
+    w = w / w.sum()
+    p = {l: float(np.sum(w * np.array([1.0 if x == l else 0.0 for x in labels]))) for l in levels}
+    sw2 = float(np.sum(w * w))
+    if len(labels) < 2 or sw2 >= 1.0 - 1e-12:
+        return rps(p, realized, levels)
+    c = sw2 / (1.0 - sw2)
+    F = np.cumsum([p[l] for l in levels])[:-1]
+    O = np.cumsum([1.0 if l == realized else 0.0 for l in levels])[:-1]
+    return float(np.sum((F - O) ** 2 - c * F * (1.0 - F)))
 
 
 def weighted_quantile(values, tau, weights=None) -> float:
@@ -180,7 +215,7 @@ def skill(s_engine, s_ref):
     return float(1.0 - s_engine / s_ref)
 
 
-def mixture_g(dists, weights, branches=BRANCHES):
+def mixture_g(dists, weights, branches=LEVELS):
     """Weighted average of branch-rate dicts (items with no distribution are dropped, weights renormalized)."""
     pairs = [(d, w) for d, w in zip(dists, weights) if d]
     if not pairs:

@@ -9,6 +9,13 @@ specification curve, simulation power, and the leakage test (a run with the filt
 differ). Everything is published as computed; VALIDATED is decided by §7 of the protocol including
 the Step 4 audit flag, which is false until data/audits/outcome_audit.json records a pass.
 
+G target (OUTCOME_MAPPING.md Amendment 1 + 1.1, 2026-09-02): the IES-90 escalation level reached in (d, d+90]
+(ordinal 0 none / 1 threat or display / 2 use of force / 3 war) from independent dated sources, plus the DEAL
+flag; event_outcomes source='ies90'. Scored with the multi-category Brier (registered, §3; drives the gates and
+Hedge), the log score (§3) and the ranked probability score over the ordinal levels (Joe, 2026-09-02); DEAL with
+the binary Brier. sr_outcome_90 is retired: never a target, a feature, or analog evidence. A geopolitical event
+with no covering source (no_independent_outcome) is read and P-scored but never G-scored and never G evidence.
+
 Outputs (data/walk_forward/): reads.jsonl (sealed, append-only), scores.jsonl, weights.jsonl,
 summary.json, big_moves_knew.json, figures/*.png.
 
@@ -39,12 +46,16 @@ from engine import inference as INF     # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 WF = ROOT / "data" / "walk_forward"
 AUDIT = ROOT / "data" / "audits" / "outcome_audit.json"
-BRANCHES = SC.BRANCHES
+LEVELS = SC.LEVELS
+LEVEL_MEANING = R.LEVEL_MEANING
 GEO = set(R.GEO_TYPES)
 TIER_ORDER = ("monthly", "daily")
 
 REGISTERED = {
     "protocol": "WALK_FORWARD_PROTOCOL.md (2026-09-02)",
+    "g_target": "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md Amendment 1+1.1; event_outcomes source='ies90'); sr_outcome_90 retired",
+    "g_scores": {"gate_and_hedge": "brier (multi-category, §3)", "also": ["log (§3)", "rps (ranked probability score over the ordinal levels; Joe 2026-09-02)"],
+                 "deal": "binary brier"},
     "burn_in": 8,                # class needs >= 8 prior members with closed outcomes to be scored (§2)
     "k_max": 12,                 # analogs kept per item so the spec curve can slice k without re-reading
     "cluster_days": 35,          # reads within 35 days are one cluster (§6): sets the bootstrap block + HAC lag
@@ -151,26 +162,29 @@ class Walk:
                            with_differencing=False, break_filtration=self.broken)
                 n_pool = max(n_pool, r["filtration"]["n_pool"])
                 if r["no_adequate_precedent"]:
-                    items.append({"id": m["id"], "k": m["k"], "no_precedent": True, "ranked": [], "G": None, "P": None, "M": None})
+                    items.append({"id": m["id"], "k": m["k"], "no_precedent": True, "ranked": [], "G": None, "D": None, "P": None, "M": None})
                     continue
                 top = r["analogs"][: m["k"]]
                 g = R.g_distribution(top) if e["type"] in GEO else None
                 pdist = R.p_distribution(self.c, top, tier)
                 mm = R.m_read(self.c, top, tier)
-                g_atoms = [(a["event_id"], a["outcome"]) for a in top if a.get("g_closed") and a.get("outcome") in BRANCHES] if g else []
+                g_atoms = [(a["event_id"], a["outcome"], a.get("deal")) for a in top if a.get("g_closed") and a.get("outcome") in LEVELS] if g else []
                 items.append({"id": m["id"], "k": m["k"], "no_precedent": False,
                               "ranked": [[a["event_id"], a["similarity"], bool(a["g_closed"]), bool(a["p_closed"])] for a in r["analogs"]],
                               "G": (g["rates"] if g and g["n"] else None), "G_n": (g["n"] if g else 0),
-                              "G_ids": [i for i, _ in g_atoms], "G_labels": [l for _, l in g_atoms],
+                              "G_ids": [i for i, _, _ in g_atoms], "G_labels": [l for _, l, _ in g_atoms], "G_deals": [d for _, _, d in g_atoms],
+                              "D": (g["deal"]["rate"] if g else None), "D_n": (g["deal"]["n"] if g else 0),
                               "P": (pdist["values"] if pdist["n"] else None), "P_ids": pdist.get("analog_ids", []),
                               "M": mm["call"]})
             pool = self.c.pool(self.c.vector(e["event_id"]) | {"tier": tier}, t, break_filtration=self.broken)
             g_pool = [c for c in pool if c["g_closed"]]
             p_pool = [c for c in pool if c["p_closed"]]
-            clim_G = None
+            clim_G = clim_D = None
             if e["type"] in GEO and g_pool:
                 outs = [c["outcome"] for c in g_pool]
-                clim_G = {b: outs.count(b) / len(outs) for b in BRANCHES}
+                clim_G = {b: outs.count(b) / len(outs) for b in LEVELS}
+                deals = [c["deal"] for c in g_pool if c.get("deal") in (0, 1)]
+                clim_D = {"rate": sum(deals) / len(deals), "n": len(deals)} if deals else None
             clim_P = [round(self.c.outcome(c["event_id"], H, tier)["chg_pct"], 3) for c in p_pool] or None
             burn_in_ok = len(p_pool if e["type"] not in GEO else g_pool) >= self.p["burn_in"]
             # engine (Hedge mixture) and frozen (uniform mixture)
@@ -181,7 +195,7 @@ class Walk:
                    "burn_in_ok": bool(burn_in_ok), "filtration_broken": self.broken,
                    "weights": {"G": [round(float(x), 6) for x in w["G"]], "P": [round(float(x), 6) for x in w["P"]]},
                    "items": items, "engine": eng, "frozen": frozen,
-                   "baselines": {"climatology": {"G": clim_G, "G_labels": [c["outcome"] for c in g_pool] if clim_G else [], "P": clim_P},
+                   "baselines": {"climatology": {"G": clim_G, "G_labels": [c["outcome"] for c in g_pool] if clim_G else [], "D": clim_D, "P": clim_P},
                                  "persistence": {"P": [0.0]},
                                  "random_analogs": {"k": self.menu[0]["k"], "draws": self.p["random_draws"],
                                                     "seed": int(hashlib.sha256(e["event_id"].encode()).hexdigest()[:8], 16),
@@ -198,7 +212,7 @@ class Walk:
             sf.write(json.dumps(sc, ensure_ascii=False, default=str) + "\n"); sf.flush()
             self.scores.append(sc)
             # (4) queue the items' losses for Hedge, keyed by the date the outcome became knowable
-            if outcome["branch"] and e["type"] in GEO and sc["items_loss"]["G"] is not None:
+            if outcome["level"] and e["type"] in GEO and sc["items_loss"]["G"] is not None:
                 pending.append((outcome["g_closed_on"], "G", sc["items_loss"]["G"]))
             if outcome["chg_pct"] is not None and sc["items_loss"]["P"] is not None:
                 pending.append((outcome["closed_on"], "P", sc["items_loss"]["P"]))
@@ -211,11 +225,13 @@ class Walk:
         g_ids, g_labels, g_ws = SC.mixture_atoms([it.get("G_ids") or [] for it in items], [it.get("G_labels") or [] for it in items], wG)
         vals, ws, ids = SC.mixture_p([it["P"] for it in items], wP, [it.get("P_ids") or [] for it in items])
         mcalls = [(it["M"], w) for it, w in zip(items, wP) if it["M"]]
+        dpairs = [(it["D"], w) for it, w in zip(items, wG) if it.get("D") is not None and w > 0]
+        D = (sum(d * w for d, w in dpairs) / sum(w for _, w in dpairs)) if dpairs and sum(w for _, w in dpairs) > 0 else None
         M = None
         if mcalls:
             z = sum(w for _, w in mcalls)
             M = "MATERIAL" if z > 0 and sum(w for m, w in mcalls if m == "MATERIAL") / z >= 0.5 else "NOT_MATERIAL"
-        out = {"G": ({b: round(v, 5) for b, v in G.items()} if G else None), "M": M,
+        out = {"G": ({b: round(v, 5) for b, v in G.items()} if G else None), "D": (round(D, 5) if D is not None else None), "M": M,
                "G_atoms": ({"ids": g_ids, "labels": g_labels, "weights": [round(x, 6) for x in g_ws]} if G else None),
                "P": ({"values": [round(v, 3) for v in vals], "weights": [round(x, 6) for x in ws], "ids": ids,
                       "p10": round(SC.weighted_quantile(vals, 0.10, ws), 2), "p50": round(SC.weighted_quantile(vals, 0.50, ws), 2),
@@ -224,8 +240,10 @@ class Walk:
 
     def _outcome(self, e, tier, H):
         o = self.c.outcome(e["event_id"], H, tier)
-        br = e.get("sr_outcome_90") if (e["type"] in GEO and e.get("sr_outcome_90") in BRANCHES) else None
-        return {"branch": br, "chg_pct": (None if o is None else o["chg_pct"]), "closed_on": (None if o is None else o["closed_on"]),
+        lab = self.c.ies90.get(e["event_id"]) if e["type"] in GEO else None       # IES-90: absent -> no_independent_outcome, never guessed
+        return {"level": (lab["level"] if lab else None), "level_meaning": (LEVEL_MEANING[lab["level"]] if lab else None),
+                "deal": (lab["deal"] if lab else None), "no_independent_outcome": bool(e["type"] in GEO and not lab),
+                "chg_pct": (None if o is None else o["chg_pct"]), "closed_on": (None if o is None else o["closed_on"]),
                 "g_closed_on": str((pd.Timestamp(e["event_date"]) + pd.Timedelta(days=R.G_HORIZON_DAYS)).date()),
                 "in_big_move": self.c.in_big_move(e["event_id"]), "looked_up_at": _now()}
 
@@ -234,17 +252,20 @@ class Walk:
                 "pin90": SC.pinball(vals, y, 0.90, ws), "pit": SC.pit(vals, y, ws), "sign_ok": SC.sign_correct(vals, y, ws),
                 "crps_fair": SC.crps_fair(vals, y, ws), "n_atoms": len(vals)}
 
-    def _score_g(self, probs, br, labels=None, weights=None):
-        out = {"brier": SC.brier(probs, br), "log": SC.log_score(probs, br)}
+    def _score_g(self, probs, lv, labels=None, weights=None):
+        out = {"brier": SC.brier(probs, lv), "log": SC.log_score(probs, lv), "rps": SC.rps(probs, lv)}
         if labels:
-            out["brier_fair"] = SC.brier_fair(labels, br, weights); out["n_atoms"] = len(labels)
+            out["brier_fair"] = SC.brier_fair(labels, lv, weights); out["rps_fair"] = SC.rps_fair(labels, lv, weights); out["n_atoms"] = len(labels)
         return out
 
+    def _score_d(self, rate, deal):
+        return None if rate is None else {"brier": SC.brier_binary(rate, deal)}
+
     def _score(self, rec, outcome):
-        br, y, tier = outcome["branch"], outcome["chg_pct"], rec["tier"]
+        br, y, tier = outcome["level"], outcome["chg_pct"], rec["tier"]
         clim = rec["baselines"]["climatology"]
         f = {}
-        # G
+        # G (IES-90 level) and D (DEAL flag, scored only when the realized flag is known)
         if br:
             for name in ("engine", "frozen"):
                 src, at = rec[name]["G"], rec[name].get("G_atoms")
@@ -252,7 +273,15 @@ class Walk:
             f.setdefault("climatology", {})["G"] = self._score_g(clim["G"], br, clim.get("G_labels")) if clim["G"] else None
             for it in rec["items"]:
                 f.setdefault(it["id"], {})["G"] = self._score_g(it["G"], br, it.get("G_labels")) if it["G"] else None
-            f.setdefault("random_analogs", {})["G"] = self._random_g(rec, br)
+            rg = self._random_g(rec, br, outcome["deal"])
+            f.setdefault("random_analogs", {})["G"] = rg.get("G") if rg else None
+            if outcome["deal"] in (0, 1):
+                for name in ("engine", "frozen"):
+                    f.setdefault(name, {})["D"] = self._score_d(rec[name].get("D"), outcome["deal"])
+                f.setdefault("climatology", {})["D"] = self._score_d((clim.get("D") or {}).get("rate"), outcome["deal"])
+                for it in rec["items"]:
+                    f.setdefault(it["id"], {})["D"] = self._score_d(it.get("D"), outcome["deal"])
+                f.setdefault("random_analogs", {})["D"] = rg.get("D") if rg else None
         # P
         if y is not None:
             for name, src in (("engine", rec["engine"]["P"]), ("frozen", rec["frozen"]["P"])):
@@ -277,19 +306,23 @@ class Walk:
                 "read_hash": rec["hash"], "sealed_at": rec["sealed_at"], "scored_at": _now(), "burn_in_ok": rec["burn_in_ok"],
                 "outcome": outcome, "scores": f, "materiality": m, "items_loss": items_loss}
 
-    def _random_g(self, rec, br):
+    def _random_g(self, rec, br, deal=None):
         b = rec["baselines"]["random_analogs"]
         ids = b["g_pool_ids"]
         if len(ids) < 1:
             return None
         rng = np.random.default_rng(b["seed"])
-        vals = []
+        vals, dvals = [], []
         for _ in range(b["draws"]):
             pick = rng.choice(len(ids), size=min(b["k"], len(ids)), replace=False)
-            outs = [self.c.by_id[ids[i]]["sr_outcome_90"] for i in pick]
-            probs = {x: outs.count(x) / len(outs) for x in BRANCHES}
+            outs = [self.c.ies90[ids[i]]["level"] for i in pick]
+            probs = {x: outs.count(x) / len(outs) for x in LEVELS}
             vals.append(self._score_g(probs, br, outs))
-        return {k: float(np.mean([v[k] for v in vals])) for k in vals[0]}
+            deals = [self.c.ies90[ids[i]]["deal"] for i in pick if self.c.ies90[ids[i]]["deal"] in (0, 1)]
+            if deal in (0, 1) and deals:
+                dvals.append(SC.brier_binary(sum(deals) / len(deals), deal))
+        return {"G": {k: float(np.mean([v[k] for v in vals])) for k in vals[0]},
+                "D": ({"brier": float(np.mean(dvals))} if dvals else None)}
 
     def _random_p(self, rec, y, tier):
         b = rec["baselines"]["random_analogs"]
@@ -375,12 +408,12 @@ def _learning_curve(scores, task, key):
 def _reliability(scores, forecaster, bins, n_boot, mean_block):
     """Per-branch Murphy decomposition and reliability diagram with stationary-bootstrap bands."""
     out = {}
-    rows = [(s["scores"][forecaster]["G"], s["outcome"]["branch"], s) for s in scores
-            if s["outcome"]["branch"] and (s["scores"].get(forecaster) or {}).get("G")]
+    rows = [(s["scores"][forecaster]["G"], s["outcome"]["level"], s) for s in scores
+            if s["outcome"]["level"] and (s["scores"].get(forecaster) or {}).get("G")]
     if not rows:
         return out
     reads = [r[2] for r in rows]
-    for b in BRANCHES:
+    for b in LEVELS:
         src = "engine" if forecaster == "engine" else forecaster
         probs = np.array([float(((r[2]["_probs"] if "_probs" in r[2] else {}).get(src) or {}).get(b, np.nan)) for r in rows])
         outs = np.array([1.0 if r[1] == b else 0.0 for r in rows])
@@ -478,6 +511,20 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
         if task == "G":
             rows = _paired(sc, task, "log", "engine", "climatology")
             blk["log_score_vs_climatology"] = _skill_block(rows, task, "log", "engine", "climatology", mb, min(n_boot, 500), max(lag, 0))
+            # the ranked probability score over the ordinal IES-90 levels (Joe, 2026-09-02): same comparisons, distance-aware
+            blk["rps"] = {"score": "rps", "engine_vs": {ref: _skill_block(_paired(sc, task, "rps", "engine", ref), task, "rps", "engine", ref, mb, min(n_boot, 500), max(lag, 0))
+                                                        for ref in refs},
+                          "items_vs_climatology": {iid: _skill_block(_paired(sc, task, "rps", iid, "climatology"), task, "rps", iid, "climatology", mb, min(n_boot, 300), max(lag, 0))
+                                                   for iid in item_ids},
+                          "learning_curve": _learning_curve(sc, task, "rps")}
+            blk["diagnostic_fair"]["rps_engine_vs_climatology"] = _skill_block(_paired(sc, task, "rps_fair", "engine", "climatology"), task, "rps_fair", "engine", "climatology", mb, min(n_boot, 500), max(lag, 0))
+            # the DEAL flag (binary Brier), scored only where the realized flag is known
+            drows = _paired(sc, "D", "brier", "engine", "climatology")
+            blk["deal"] = {"score": "binary brier", "n_scored": len(drows),
+                           "engine_vs": {ref: _skill_block(_paired(sc, "D", "brier", "engine", ref), "D", "brier", "engine", ref, mb, min(n_boot, 500), max(lag, 0))
+                                         for ref in ("climatology", "frozen", "random_analogs")},
+                           "base_rate": (round(float(np.mean([s["outcome"]["deal"] for s in sc if s["outcome"]["deal"] in (0, 1)])), 4)
+                                         if any(s["outcome"]["deal"] in (0, 1) for s in sc) else None)}
             blk["murphy_engine"] = _reliability(sc, "engine", p["reliability_bins"], n_boot, mb)
             blk["murphy_climatology"] = _reliability(sc, "climatology", p["reliability_bins"], n_boot, mb)
         else:
@@ -528,7 +575,7 @@ def permutation_test(reads, scores, p, n_perm=None, seed=19900802):
     skill vs climatology is recomputed from the SEALED analog ids (retrieval is label-free), Hedge
     weights replayed from the permuted losses with the same closed-by-t rule. Joint over tiers."""
     n_perm = n_perm or p["n_perm"]
-    geo = [(r, s) for r, s in zip(reads, scores) if r["type"] in GEO and s["outcome"]["branch"] and s["burn_in_ok"]]
+    geo = [(r, s) for r, s in zip(reads, scores) if r["type"] in GEO and s["outcome"]["level"] and s["burn_in_ok"]]
     if len(geo) < 10:
         return {"note": f"only {len(geo)} scored geopolitical reads; permutation not run"}
     ids = sorted({r["event_id"] for r, _ in geo} | {a[0] for r, _ in geo for it in r["items"] for a in it["ranked"]}
@@ -541,13 +588,13 @@ def permutation_test(reads, scores, p, n_perm=None, seed=19900802):
     # labels for every id we touch: from the scored reads' outcomes or from the corpus rows carried in reads
     lab = np.full(len(ids), -1)
     for r, s in geo:
-        lab[pos[r["event_id"]]] = BRANCHES.index(s["outcome"]["branch"])
+        lab[pos[r["event_id"]]] = LEVELS.index(s["outcome"]["level"])
     # analog labels come from the corpus: the reads carry each analog's id; fetch its label via the scores of that id
     # (every analog with g_closed was itself a corpus event with a branch label)
-    known = {s["event_id"]: s["outcome"]["branch"] for s in scores if s["outcome"]["branch"]}
+    known = {s["event_id"]: s["outcome"]["level"] for s in scores if s["outcome"]["level"]}
     for e, i in pos.items():
         if lab[i] < 0 and e in known:
-            lab[i] = BRANCHES.index(known[e])
+            lab[i] = LEVELS.index(known[e])
     class_of = {r["event_id"]: r["type"] for r, _ in geo}
     for s in scores:
         class_of.setdefault(s["event_id"], s["type"])
@@ -695,7 +742,7 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
         n_pool = r["n_pool_g"] if r["type"] in GEO else r["n_pool_p"]
         if n_pool < burn:
             continue
-        br, y = s["outcome"]["branch"], None
+        br, y = s["outcome"]["level"], None
         oc = corpus.outcome(r["event_id"], H, tier) if r["event_id"] in corpus.by_id else None
         y = oc["chg_pct"] if oc else None
         # per-item forecasts at k and H from the sealed ranked ids
@@ -703,8 +750,8 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
         for it in r["items"]:
             g_ids = [a[0] for a in it["ranked"] if a[2]][:k]
             p_ids = [a[0] for a in it["ranked"] if a[3]][:k]
-            outs = [corpus.by_id[i]["sr_outcome_90"] for i in g_ids if i in corpus.by_id]
-            gI.append({b: outs.count(b) / len(outs) for b in BRANCHES} if outs else None)
+            outs = [corpus.ies90[i]["level"] for i in g_ids if i in corpus.ies90]
+            gI.append({b: outs.count(b) / len(outs) for b in LEVELS} if outs else None)
             vals = [corpus.outcome(i, H, tier)["chg_pct"] for i in p_ids if corpus.outcome(i, H, tier)]
             pI.append(vals or None)
         cg, cp = r["baselines"]["climatology"]["G"], None
@@ -853,7 +900,7 @@ def big_moves_knew(corpus, reads, scores):
                                "engine_p50": (r["engine"]["P"] or {}).get("p50"), "engine_p10": (r["engine"]["P"] or {}).get("p10"),
                                "engine_p90": (r["engine"]["P"] or {}).get("p90"), "M": r["engine"]["M"],
                                "G_top": (max(r["engine"]["G"], key=r["engine"]["G"].get) if r["engine"]["G"] else None),
-                               "realized_chg_pct": s["outcome"]["chg_pct"], "realized_branch": s["outcome"]["branch"]}
+                               "realized_chg_pct": s["outcome"]["chg_pct"], "realized_level": s["outcome"]["level"], "realized_deal": s["outcome"]["deal"]}
                               for r, s in inside]})
     return out
 
@@ -867,13 +914,20 @@ def data_state(corpus):
     n = len(corpus.events)
     geo = [e for e in corpus.events if e["type"] in GEO]
     coded = sum(1 for e in corpus.events if any(not S.is_unknown(e.get(c)) for c in S.SR_MAP.values()))
-    labelled = sum(1 for e in geo if e.get("sr_outcome_90") in BRANCHES)
-    out = {"n_events": n, "n_geo": len(geo), "n_with_any_situation_field": coded, "n_geo_with_branch_label": labelled,
-           "share_geo_labelled": round(labelled / len(geo), 3) if geo else None,
+    labelled = [e for e in geo if e["event_id"] in corpus.ies90]
+    with_deal = sum(1 for e in labelled if corpus.ies90[e["event_id"]]["deal"] in (0, 1))
+    lv = [corpus.ies90[e["event_id"]]["level"] for e in labelled]
+    out = {"n_events": n, "n_geo": len(geo), "n_with_any_situation_field": coded,
+           "g_target": "IES-90 (event_outcomes source='ies90'); sr_outcome_90 retired 2026-09-02",
+           "n_geo_with_ies90_level": len(labelled), "n_geo_no_independent_outcome": len(geo) - len(labelled),
+           "share_geo_labelled": round(len(labelled) / len(geo), 3) if geo else None,
+           "ies90_level_counts": {l: lv.count(l) for l in LEVELS}, "n_geo_with_deal_flag": with_deal,
            "panel_events_with_rows": len(corpus.panel), "codebook_fields": len(corpus.schema_extra)}
-    if geo and labelled < 0.5 * len(geo):
-        out["warning"] = ("situation record largely absent: G is not scorable and similarity runs on the market block only. "
-                          "Re-run src/situation_record.py (writes the events table; Joe's call) and then src/walk.py.")
+    if geo and coded < 0.5 * n:
+        out["warning_situation"] = ("situation record largely absent: similarity runs on the market block only. "
+                                    "Re-run src/situation_record.py (writes the events table; Joe's call) and then src/walk.py.")
+    if geo and len(labelled) < 0.5 * len(geo):
+        out["warning_labels"] = "IES-90 levels largely absent: G is not scorable. Run python3 src/state/ies90.py (session A) and then src/walk.py."
     return out
 
 
@@ -954,7 +1008,7 @@ def figures(summary, out_dir):
         blk = (summary["tiers"].get(tier) or {}).get("G", {}).get("murphy_engine") or {}
         if blk:
             fig, axes = plt.subplots(1, 4, figsize=(14, 3.5))
-            for ax, b in zip(axes, BRANCHES):
+            for ax, b in zip(axes, LEVELS):
                 m = blk.get(b)
                 ax.plot([0, 1], [0, 1], "k--", lw=0.5)
                 if m:
@@ -963,7 +1017,7 @@ def figures(summary, out_dir):
                     for d in m["diagram"]:
                         if d.get("band95"):
                             ax.plot([d["forecast_mean"]] * 2, d["band95"], color="gray", lw=1)
-                    ax.set_title(f"{b}\nrel {m['reliability']:.3f} res {m['resolution']:.3f} n={m['n']}", fontsize=8)
+                    ax.set_title(f"level {b}: {LEVEL_MEANING[b]}\nrel {m['reliability']:.3f} res {m['resolution']:.3f} n={m['n']}", fontsize=8)
                 ax.set_xlim(0, 1); ax.set_ylim(0, 1)
             fig.suptitle(f"Reliability -- engine, {tier} tier (bars: stationary-bootstrap 95% band)")
             fig.tight_layout(); fig.savefig(fd / f"reliability_{tier}.png", dpi=120); plt.close(fig); made.append(f"reliability_{tier}.png")
@@ -1006,7 +1060,7 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
         if any(r["tier"] == tier for r in w.reads):
             summary["tiers"][tier] = summarize_tier(w.reads, w.scores, p, tier)
     # G jointly across tiers (the geopolitical branch model only)
-    geo = [s for s in w.scores if s["burn_in_ok"] and s["outcome"]["branch"]]
+    geo = [s for s in w.scores if s["burn_in_ok"] and s["outcome"]["level"]]
     if geo:
         mb = _mean_block([s["date"] for s in geo], p["cluster_days"])
         summary["G_joint_across_tiers"] = _skill_block(_paired(geo, "G", "brier", "engine", "climatology"), "G", "brier", "engine", "climatology",
@@ -1028,7 +1082,13 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
     summary["leakage_test"] = leakage_test(w, b)
     summary["big_moves_knew"] = big_moves_knew(corpus, w.reads, w.scores)
     summary["verdict"] = verdict(summary, p)
-    summary["limits"] = ["outcome labels corpus-derived until the Step 4 audit passes (audit flag in verdict)",
+    summary["limits"] = ["G target is IES-90 (OUTCOME_MAPPING.md Amendment 1+1.1): independent dated sources; 27 geopolitical events without a covering "
+                         "source are unscorable on G (no_independent_outcome) and are never G evidence; the 30-event IES-90 audit is the §7 label audit "
+                         "-- audit flag false until data/audits/outcome_audit.json records a pass",
+                         "sr_outcome_90 / sr_outcome_30 retired 2026-09-02: not a target, not a feature, not analog evidence",
+                         "IES-90 GED levels are location-based (deaths in the country, not between the actors): stated in every such row's detail",
+                         "the gates use the registered multi-category Brier; the ranked probability score over the ordinal levels is published in "
+                         "every tier's G.rps block and is not (yet) registered as a gate",
                          "situation fields not vintage-stamped: sr_* fields taken as coded (protocol §1 LIMITATION); state-panel fields, when present, are vintage-filtered",
                          "monthly tier n is small: describes, does not validate (§9)",
                          "flow side of P is a price proxy until 2026 (§9)",
@@ -1063,6 +1123,13 @@ def _print(summary):
             spa = t[task].get("spa", {})
             if "p_spa" in spa:
                 print(f"  {task} SPA p={spa['p_spa']:.3f} (RC p={spa['p_rc']:.3f}), best={spa['best_model']}")
+            if task == "G":
+                for ref, r in t[task].get("rps", {}).get("engine_vs", {}).items():
+                    if r.get("skill") is not None:
+                        print(f"  G (RPS) engine vs {ref:<15} skill {r['skill']:+.4f}  CI {r['ci95'][0]:+.3f}..{r['ci95'][1]:+.3f}  DM/HLN p={r['dm_p']:.3f}  n={r['n']}")
+                d = t[task].get("deal", {}); dr = d.get("engine_vs", {}).get("climatology", {})
+                if dr.get("skill") is not None:
+                    print(f"  DEAL (binary Brier) engine vs climatology skill {dr['skill']:+.4f}  CI {dr['ci95'][0]:+.3f}..{dr['ci95'][1]:+.3f}  n={dr['n']}  base rate {d.get('base_rate')}")
             fr = t[task].get("diagnostic_fair", {}).get("engine_vs_climatology", {})
             if fr.get("skill") is not None:
                 print(f"  {task} [diagnostic, not registered] size-corrected engine vs climatology skill {fr['skill']:+.4f}  CI {fr['ci95'][0]:+.3f}..{fr['ci95'][1]:+.3f}  DM/HLN p={fr['dm_p']:.3f}")

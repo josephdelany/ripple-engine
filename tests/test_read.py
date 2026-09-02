@@ -18,25 +18,28 @@ DB = os.path.join(ROOT, "data", "oil.db")
 # ----------------------------------------------------------------------------- synthetic corpus
 
 def _synthetic(n=30, seed=3):
-    """30 conflict_escalation events 2001-2015, a synthetic Brent series, two market fields, edges."""
+    """30 conflict_escalation events 2001-2015, a synthetic Brent series, two market fields, edges, and IES-90
+    labels that FOLLOW THE ACTOR by construction (country.c -> level 0; country.a -> 3 or 1): a P-null (Brent is
+    a seeded random walk) but not a G-null. The DEAL flag is null for every fifth event, 1 only at level 1."""
     rng = np.random.default_rng(seed)
     idx = pd.bdate_range("1999-01-01", "2017-12-31")
     brent = pd.Series(50 * np.exp(np.cumsum(rng.normal(0, 0.01, len(idx)))), index=idx)
     vix = pd.Series(rng.normal(50, 10, len(idx)), index=idx)
-    events, edges = [], {}
+    events, edges, ies90 = [], {}, {}
     dates = pd.date_range("2001-01-15", "2015-12-15", periods=n)
     for i, d in enumerate(dates):
         eid = f"ev{i:02d}"
         events.append({"event_id": eid, "event_date": str(d.date()), "type": "conflict_escalation", "title": eid,
                        "sr_actor": "country.a" if i % 2 else "country.c", "sr_target": "country.b",
                        "sr_conflict_scope": "isolated", "sr_tempo": "nth", "sr_prior_dyad": "none",
-                       "sr_asset_role": "unknown", "sr_actor_propensity": None,
-                       "sr_outcome_90": ["CONTAINED", "WIDENING", "CONTAINED", "LIMITED_RETALIATION"][i % 4]})
+                       "sr_asset_role": "unknown", "sr_actor_propensity": None})
+        level = "0" if i % 2 == 0 else ("3" if i % 4 == 1 else "1")
+        ies90[eid] = {"level": level, "deal": (None if i % 5 == 0 else (1 if level == "1" else 0))}
         edges[(eid, "fred.DCOILBRENTEU")] = float(rng.normal(0, 8))
         edges[(eid, "yf.sp500")] = float(rng.normal(0, 3))
     info = S.InfoSet({"vix_pct": vix})
     big = {"daily": {"windows": [("2008-09-01", "2008-12-31"), ("2014-10-01", "2015-01-31")], "base_pct": 18.3}}
-    return R.Corpus(events, info, {"daily": brent}, edges=edges, big_moves=big)
+    return R.Corpus(events, info, {"daily": brent}, edges=edges, big_moves=big, ies90=ies90)
 
 
 def test_step7_branch_counts_sum_to_n_synthetic():

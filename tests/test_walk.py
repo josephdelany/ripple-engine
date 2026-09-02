@@ -4,8 +4,9 @@ forms; Hedge regret <= bound; DM/HLN textbook case; the leakage assertion; place
 data. Plus: Hedge learns only from outcomes closed by t; the size-corrected (fair) diagnostics reproduce
 their closed forms and their derived bias; a positive control for the label permutation. All DB-free
 (synthetic corpus). The synthetic corpus is a P-NULL (Brent is a seeded random walk unrelated to any
-field) but NOT a G-null: its labels follow the actor field by construction, so a G-null is made by
-shuffling them (seeded) where a null is needed."""
+field) but NOT a G-null: its IES-90 levels follow the actor field by construction, so a G-null is made by
+shuffling them (seeded) where a null is needed. G is the IES-90 level (0-3, ordinal) + DEAL flag
+(OUTCOME_MAPPING.md Amendment 1); sr_outcome_90 is retired and never appears here."""
 import json
 import math
 import os
@@ -68,11 +69,16 @@ def test_step8_sealing_hash_precedes_outcome_lookup_and_tampering_detected(tmp_p
 # ----------------------------------------------------------------------------- proper scores
 
 def test_step8_proper_scores_match_closed_forms():
-    p = {"CONTAINED": 0.7, "LIMITED_RETALIATION": 0.2, "WIDENING": 0.1, "RESOLUTION_BY_DEAL": 0.0}
-    assert abs(SC.brier(p, "CONTAINED") - 0.14) < 1e-12                       # .09 + .04 + .01 + 0
-    assert abs(SC.brier(p, "WIDENING") - (0.49 + 0.04 + 0.81)) < 1e-12
+    p = {"0": 0.7, "1": 0.2, "2": 0.1, "3": 0.0}                                # forecast over the IES-90 levels
+    assert abs(SC.brier(p, "0") - 0.14) < 1e-12                               # .09 + .04 + .01 + 0
+    assert abs(SC.brier(p, "2") - (0.49 + 0.04 + 0.81)) < 1e-12
     fl = SC.floor_probs(p, 0.01)                                              # zero -> 0.01, renormalized
-    assert abs(SC.log_score(p, "CONTAINED") - (-math.log(0.7 / 1.01))) < 1e-12 and abs(sum(fl.values()) - 1) < 1e-12
+    assert abs(SC.log_score(p, "0") - (-math.log(0.7 / 1.01))) < 1e-12 and abs(sum(fl.values()) - 1) < 1e-12
+    # ranked probability score (ordinal): cumulative F = (.7, .9, 1.0); realized 0 -> O = (1,1,1): .09+.01+0 = .10;
+    # realized 3 -> O = (0,0,0): .49+.81+1 = 2.30 -- a miss by three levels costs more than Brier's flat 1.34+
+    assert abs(SC.rps(p, "0") - 0.10) < 1e-12 and abs(SC.rps(p, "3") - 2.30) < 1e-12
+    assert SC.rps({"1": 1.0}, "1") == 0.0 and SC.rps({"0": 1.0}, "3") == 3.0 and SC.rps({"0": 1.0}, "1") == 1.0
+    assert SC.brier_binary(0.25, 1) == 0.5625 and SC.brier_binary(0.25, 0) == 0.0625
     assert SC.crps([0.0, 2.0], 1.0) == 0.5                                    # E|X-y| = 1, E|X-X'| = 1
     assert SC.crps([3.0], 1.0) == 2.0                                         # point mass: |y - mu|
     assert abs(SC.crps([0.0, 2.0], 1.0) - SC.crps([0.0, 0.0, 2.0, 2.0], 1.0)) < 1e-12   # duplicated atoms
@@ -97,10 +103,13 @@ def test_step8_proper_scores_match_closed_forms():
     assert abs(SC.crps_fair([0.0, 0.0, 2.0, 2.0], 1.0) - 1 / 3) < 1e-12        # m=4: 1 - 0.5 * 1 * 4/3
     assert SC.crps_fair([3.0], 1.0) == 2.0                                     # one atom: nothing to correct
     assert abs(SC.crps_fair([0.0, 2.0], 1.0, [0.5, 0.5]) - SC.crps_fair([0.0, 2.0], 1.0)) < 1e-12
-    cccw = ["CONTAINED"] * 3 + ["WIDENING"]                                    # p = (.75, .25); c = (1/4)/(3/4) = 1/3; sum p(1-p) = .375
-    assert abs(SC.brier_fair(cccw, "CONTAINED") - (0.125 - 0.125)) < 1e-12
-    assert abs(SC.brier_fair(cccw, "WIDENING") - (0.5625 + 0.5625 - 0.125)) < 1e-12
-    assert SC.brier_fair(["WIDENING"], "CONTAINED") == SC.brier({"WIDENING": 1.0}, "CONTAINED") == 2.0
+    l0002 = ["0"] * 3 + ["2"]                                                  # p = (.75, 0, .25, 0); c = (1/4)/(3/4) = 1/3; sum p(1-p) = .375
+    assert abs(SC.brier_fair(l0002, "0") - (0.125 - 0.125)) < 1e-12
+    assert abs(SC.brier_fair(l0002, "2") - (0.5625 + 0.5625 - 0.125)) < 1e-12
+    assert SC.brier_fair(["2"], "0") == SC.brier({"2": 1.0}, "0") == 2.0
+    # rps_fair on 0,0,0,3 realized 0: F = (.75,.75,.75), RPS = 3 * .0625 = .1875; correction (1/3) * 3 * .1875 = .1875 -> 0
+    assert abs(SC.rps({"0": 0.75, "3": 0.25}, "0") - 0.1875) < 1e-12 and abs(SC.rps_fair(["0", "0", "0", "3"], "0")) < 1e-12
+    assert SC.rps_fair(["3"], "0") == SC.rps({"3": 1.0}, "0") == 3.0
     # merging duplicate analogs by id leaves the registered CRPS unchanged and changes only the effective sample size
     v, w, ids = SC.mixture_p([[1.0, 2.0], [2.0, 3.0]], [0.5, 0.5], [["a", "b"], ["b", "c"]])
     assert (v, w, ids) == ([1.0, 2.0, 3.0], [0.25, 0.5, 0.25], ["a", "b", "c"])
@@ -123,7 +132,7 @@ def test_step8_registered_skill_vs_climatology_is_biased_by_sample_size_and_fair
     bias_pred = 2 * sd / math.sqrt(math.pi) / (2 * k)                          # E|X-X'| = 2 sd / sqrt(pi) for a normal
     assert abs((np.mean(std) - np.mean(pop)) - bias_pred) < 0.25 * bias_pred   # the registered bias, as derived
     assert abs(np.mean(fair) - np.mean(pop)) < 0.1 * bias_pred                 # the corrected score is unbiased
-    p_true = np.array([0.5, 0.3, 0.2, 0.0]); B = list(SC.BRANCHES); sb, fb, pb = [], [], []
+    p_true = np.array([0.5, 0.3, 0.2, 0.0]); B = list(SC.LEVELS); sb, fb, pb = [], [], []
     for _ in range(n):
         lab = [B[i] for i in rng.choice(4, k, p=p_true)]; y = B[rng.choice(4, p=p_true)]
         sb.append(SC.brier({b: lab.count(b) / k for b in B}, y)); fb.append(SC.brier_fair(lab, y)); pb.append(SC.brier(dict(zip(B, p_true)), y))
@@ -212,9 +221,8 @@ def test_step8_placebo_skill_is_zero_within_ci_on_synthetic_null_data(tmp_path):
     # (seeded) within the class, because _synthetic's labels follow the actor field by construction.
     c = _synthetic(n=60, seed=11)
     rng = np.random.default_rng(11)
-    labs = [e["sr_outcome_90"] for e in c.events]
-    for e, l in zip(c.events, rng.permutation(labs)):
-        e["sr_outcome_90"] = l
+    keys = list(c.ies90); labs = [c.ies90[k] for k in keys]
+    c.ies90 = {k: labs[i] for k, i in zip(keys, rng.permutation(len(keys)))}   # level + deal shuffled together
     w = W.Walk(c, MENU, out_dir=tmp_path, params=FAST, quiet=True).run_reads()
     p = dict(W.REGISTERED) | FAST
     tier = W.summarize_tier(w.reads, w.scores, p, "daily", n_boot=200, n_spa=100)
@@ -226,6 +234,9 @@ def test_step8_placebo_skill_is_zero_within_ci_on_synthetic_null_data(tmp_path):
         assert fair["ci95"][0] <= 0 <= fair["ci95"][1], (task, fair)
         reg = blk["engine_vs"]["climatology"]                                 # the registered skill sits BELOW the corrected one: the bias, in the derived direction
         assert reg["skill"] < fair["skill"], (task, reg, fair)
+    rr = tier["G"]["rps"]["engine_vs"]["random_analogs"]                       # RPS over the ordinal levels: null too
+    assert rr["n"] >= 20 and rr["ci95"][0] <= 0 <= rr["ci95"][1], rr
+    assert tier["G"]["deal"]["n_scored"] >= 10 and tier["G"]["deal"]["base_rate"] is not None
     pl = W.placebo(c, MENU, w.reads, w.scores, p, reps=2)
     assert pl["n"] >= 10 and pl["null_holds"] is True and pl["vs_random_analogs"]["covers_zero"]
     assert pl["fair_vs_climatology"]["covers_zero"]

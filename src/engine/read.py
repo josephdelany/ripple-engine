@@ -3,7 +3,9 @@ read.py -- PATH Step 7 / BUILD_V3 S5: the read.
 
 Stand at date t on a development and say what history's nearest states did next -- as frequencies
 with their n, never as an invented probability:
-  G  the four escalation branches at +90 days (geopolitical classes only): counts / n over the analogs
+  G  the IES-90 escalation level reached in (d, d+90] (0 none / 1 threat or display / 2 use of force / 3 war;
+     OUTCOME_MAPPING.md Amendment 1+1.1, from independent dated sources, event_outcomes source='ies90') and the
+     DEAL flag, geopolitical classes only: counts / n over the analogs. sr_outcome_90 is retired (never used).
   P  the price outcome at the tier's horizon (+20 trading days on Brent; +3 months on WTI monthly):
      the EMPIRICAL distribution of the analogs' realized % changes (every value kept, so CRPS/PIT/
      pinball can be scored on it), with quantiles and n
@@ -44,7 +46,8 @@ WF = DATA / "walk_forward"
 FAR_FUTURE = "2200-01-01"     # inside numpy's datetime64[ns] range (2262); 2999 overflowed to index 0
 
 GEO_TYPES = S.GEO_TYPES
-BRANCHES = S.BRANCHES
+LEVELS = S.LEVELS
+LEVEL_MEANING = S.LEVEL_MEANING
 G_HORIZON_DAYS = 90
 TIERS = {
     "daily": {"series": "fred.DCOILBRENTEU", "horizon": 20, "unit": "trading days", "big_moves": "brent",
@@ -75,9 +78,11 @@ class Corpus:
     prices: {tier: pd.Series} the tier's spine series.
     edges:  {(event_id, series_id): car20_pct}.
     big_moves: {tier: {"windows": [(start, end)], "base_pct": everyday base rate %}}.
-    panel:  optional {event_id: [situation_state rows]} (the Step 3 seam); schema_extra from the codebook."""
+    panel:  optional {event_id: [situation_state rows]} (the Step 3 seam); schema_extra from the codebook.
+    ies90:  {event_id: {"level": "0".."3", "deal": 0/1/None}} -- the G target (Amendment 1); an event absent
+            here has no independent outcome and is neither scored on G nor used as G evidence."""
 
-    def __init__(self, events, info, prices, edges=None, big_moves=None, panel=None, schema_extra=None):
+    def __init__(self, events, info, prices, edges=None, big_moves=None, panel=None, schema_extra=None, ies90=None):
         self.events = sorted(events, key=lambda e: (e["event_date"], e["event_id"]))
         self.by_id = {e["event_id"]: e for e in self.events}
         self.info = info
@@ -86,6 +91,7 @@ class Corpus:
         self.big_moves = big_moves or {}
         self.panel = panel or {}
         self.schema_extra = schema_extra or {}
+        self.ies90 = ies90 or {}
         self.daily_start = self.prices["daily"].index[0] if "daily" in self.prices else pd.Timestamp(FAR_FUTURE)
         self._vec = {}
         self._out = {}
@@ -99,8 +105,11 @@ class Corpus:
         """The state of the world at that event's own date (cached)."""
         if event_id not in self._vec:
             e = self.by_id[event_id]
-            self._vec[event_id] = S.state_vector(e, info=self.info, panel_rows=self.panel.get(event_id),
-                                                 schema_extra=self.schema_extra)
+            v = S.state_vector(e, info=self.info, panel_rows=self.panel.get(event_id), schema_extra=self.schema_extra)
+            lab = self.ies90.get(event_id)
+            v["outcome"] = lab["level"] if lab else None          # the IES-90 level: label only, never a similarity field
+            v["deal"] = lab["deal"] if lab else None
+            self._vec[event_id] = v
         return self._vec[event_id]
 
     # ---- outcomes (looked up by the walk only AFTER sealing; the read never calls these on the target)
@@ -169,11 +178,11 @@ class Corpus:
             if break_filtration:
                 out.append(self.vector(e["event_id"]) | {"tier": e["tier"],
                                                           "p_closed": e["tier"] == ttier and self.outcome(e["event_id"], horizon) is not None,
-                                                          "g_closed": e["type"] in GEO_TYPES and e.get("sr_outcome_90") in BRANCHES})
+                                                          "g_closed": e["type"] in GEO_TYPES and e["event_id"] in self.ies90})
                 continue
             if not (e["event_date"] < str(pd.Timestamp(as_of).date())):
                 continue
-            g_ok = e["type"] in GEO_TYPES and self.g_closed_by(e["event_id"], as_of) and e.get("sr_outcome_90") in BRANCHES
+            g_ok = e["type"] in GEO_TYPES and self.g_closed_by(e["event_id"], as_of) and e["event_id"] in self.ies90
             p_ok = e["tier"] == ttier and self.closed_by(e["event_id"], as_of, horizon)
             if not (g_ok or p_ok):
                 continue
@@ -210,6 +219,23 @@ def _panel_rows(conn):
         return {}
 
 
+def _ies90(conn):
+    """OUTCOME_MAPPING.md Amendment 1: the IES-90 level (0-3) and DEAL flag per geopolitical event, from
+    event_outcomes rows with source='ies90' (written by src/state/ies90.py; session A). An event with
+    no_independent_outcome has no level and is absent here -- never guessed. Absent table -> {}."""
+    try:
+        if not conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='event_outcomes'").fetchone():
+            return {}
+        out = {}
+        for eid, f, v in conn.execute("SELECT event_id, field, value FROM event_outcomes WHERE source='ies90' AND field IN ('level', 'deal')"):
+            d = out.setdefault(eid, {"level": None, "deal": None})
+            if v is not None:
+                d[f] = str(int(v)) if f == "level" else int(v)
+        return {e: d for e, d in out.items() if d["level"] in LEVELS}
+    except Exception:
+        return {}
+
+
 def corpus_from_db(conn):
     events = S.load_events(conn)
     extra = {}
@@ -222,7 +248,7 @@ def corpus_from_db(conn):
     edges = {(r[0], r[1]): float(r[2]) for r in conn.execute(
         "SELECT event_id, target_series, car20 FROM edges WHERE units='%' AND car20 IS NOT NULL")}
     return Corpus(events, info, prices, edges=edges, big_moves={t: _big_moves(t) for t in TIERS},
-                  panel=_panel_rows(conn), schema_extra=S.codebook_schema())
+                  panel=_panel_rows(conn), schema_extra=S.codebook_schema(), ies90=_ies90(conn))
 
 
 Corpus.from_db = staticmethod(corpus_from_db)
@@ -238,17 +264,23 @@ def _quantiles(vals):
 
 
 def g_distribution(analogs):
-    outs = [a["outcome"] for a in analogs if a.get("g_closed") and a.get("outcome") in BRANCHES]
+    """Frequencies over the analogs' IES-90 levels (ordinal 0-3) and, separately, the DEAL rate over the analogs
+    whose DEAL flag is known (null when neither ICB nor MID covered the analog's window)."""
+    closed = [a for a in analogs if a.get("g_closed") and a.get("outcome") in LEVELS]
+    outs = [a["outcome"] for a in closed]
+    deals = [a["deal"] for a in closed if a.get("deal") in (0, 1)]
     n = len(outs)
-    counts = {b: outs.count(b) for b in BRANCHES}
+    counts = {b: outs.count(b) for b in LEVELS}
+    deal = {"n": len(deals), "rate": (round(sum(deals) / len(deals), 4) if deals else None)}
     if n == 0:
-        return {"n": 0, "counts": counts, "rates": None, "probs_for_log_score": None}
-    rates = {b: counts[b] / n for b in BRANCHES}
-    floored = {b: max(rates[b], LOG_FLOOR) for b in BRANCHES}
+        return {"n": 0, "counts": counts, "rates": None, "probs_for_log_score": None, "deal": deal, "levels": LEVEL_MEANING}
+    rates = {b: counts[b] / n for b in LEVELS}
+    floored = {b: max(rates[b], LOG_FLOOR) for b in LEVELS}
     z = sum(floored.values())
-    return {"n": n, "counts": counts, "rates": {b: round(rates[b], 4) for b in BRANCHES},
-            "probs_for_log_score": {b: round(floored[b] / z, 4) for b in BRANCHES},
-            "log_floor": LOG_FLOOR, "basis": "frequency over the analogs' +90d branch labels (corpus-derived; audit pending)"}
+    return {"n": n, "counts": counts, "rates": {b: round(rates[b], 4) for b in LEVELS},
+            "probs_for_log_score": {b: round(floored[b] / z, 4) for b in LEVELS}, "deal": deal, "levels": LEVEL_MEANING,
+            "log_floor": LOG_FLOOR,
+            "basis": "frequency over the analogs' IES-90 levels in (d, d+90] (OUTCOME_MAPPING.md Amendment 1+1.1: independent dated sources; 30-event audit pending)"}
 
 
 def p_distribution(corpus, analogs, tier, horizon=None):
@@ -289,8 +321,9 @@ def m_read(corpus, analogs, tier):
 
 
 def propagation(corpus, subset, tier):
-    """Per branch (geo) or ALL: at each hop of the value chain, the measured CAR20 of the conditioned
-    subset's members that resolved to that branch. Every hop carries its n."""
+    """Per IES-90 level (geo; keyed by the level string, meaning in LEVEL_MEANING) or ALL: at each hop of the
+    value chain, the measured CAR20 of the conditioned subset's members that reached that level. Every hop
+    carries its n."""
     def hops(ids):
         out = []
         for hop_tier, sid, label in CHAIN:
@@ -305,10 +338,10 @@ def propagation(corpus, subset, tier):
         return out
     ids_all = [a["event_id"] for a in subset if a.get("tier") == "daily"]      # edges exist on the daily tier only
     out = {"ALL": {"contributing_n": len(ids_all), "hops": hops(ids_all)}}
-    for b in BRANCHES:
+    for b in LEVELS:
         ids = [a["event_id"] for a in subset if a.get("tier") == "daily" and a.get("outcome") == b]
         if ids:
-            out[b] = {"contributing_n": len(ids), "hops": hops(ids)}
+            out[b] = {"level": LEVEL_MEANING[b], "contributing_n": len(ids), "hops": hops(ids)}
     out["caveat"] = "PRICE side measured from edges (1987+, daily tier); historical FLOW per branch is a stated gap"
     return out
 
@@ -375,7 +408,7 @@ def read(corpus, target, as_of=None, weighting=None, k=None, break_filtration=Fa
     out = envelope | {
         "no_adequate_precedent": False,
         "analogs": [{k_: v for k_, v in a.items() if k_ != "blocks"} | {"blocks": {b: {"distance": c["distance"], "n_fields": c["n_fields"], "share_of_distance": c.get("share_of_distance", 0.0)} for b, c in a["blocks"].items()}} for a in analogs],
-        "G": g_distribution(analogs) if tgt["type"] in GEO_TYPES else {"applicable": False, "note": "escalation branches apply to geopolitical classes only"},
+        "G": g_distribution(analogs) if tgt["type"] in GEO_TYPES else {"applicable": False, "note": "the IES-90 escalation level applies to geopolitical classes only"},
         "P": p, "F": f_read(p), "M": m_read(corpus, analogs, tier),
         "block_contributions": {b: round(float(np.mean([a["blocks"][b]["share_of_distance"] for a in analogs if b in a["blocks"]] or [0.0])), 4)
                                 for b in sorted({b for a in analogs for b in a["blocks"]})},

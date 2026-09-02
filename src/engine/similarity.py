@@ -44,7 +44,11 @@ MENU_PATH = DATA / "walk_forward" / "menu.json"
 CODEBOOK_PATH = ROOT / "WORLD_STATE_CODEBOOK.md"
 
 GEO_TYPES = ("conflict_escalation", "infrastructure_attack", "chokepoint_disruption", "sanctions")
-BRANCHES = ("CONTAINED", "LIMITED_RETALIATION", "WIDENING", "RESOLUTION_BY_DEAL")
+# The G target (OUTCOME_MAPPING.md Amendment 1, 2026-09-02): the IES-90 ordinal level reached in (d, d+90] from
+# independent DATED sources, plus a DEAL flag. sr_outcome_90 is RETIRED as an outcome: never a target, a feature or
+# analog evidence. Levels are strings so a sealed read round-trips through JSON unchanged.
+LEVELS = ("0", "1", "2", "3")
+LEVEL_MEANING = {"0": "none", "1": "threat or display of force", "2": "use of force", "3": "war"}
 # the six framework blocks (WORLD_STATE_FRAMEWORK §3) plus "situation" = the coded sr_* fields we have today
 BLOCKS = ("situation", "market", "physical", "actors", "dyads", "system", "narrative")
 UNKNOWN = (None, "unknown", "")
@@ -248,7 +252,7 @@ def state_vector(event, as_of=None, info: InfoSet | None = None, panel_rows=None
         apply_panel(fields, panel_rows, as_of, schema_extra)
     known = [f for f, v in fields.items() if not is_unknown(v)]
     return {"event_id": event.get("event_id"), "date": str(as_of.date()), "type": event.get("type"),
-            "title": event.get("title", ""), "outcome": event.get("sr_outcome_90"),
+            "title": event.get("title", ""), "outcome": None, "deal": None,     # IES-90 label: attached by read.Corpus.vector
             "fields": fields, "n_known": len(known),
             "unknown": sorted(f for f in fields if f not in known)}
 
@@ -336,7 +340,7 @@ def retrieve(target, candidates, info=None, t=None, weighting=None, k=None, sche
         if not detail["comparable"] or detail["n_compared"] < MIN_COMPARED:
             continue                                        # too little measurable in common: not a precedent
         ranked.append({"event_id": c["event_id"], "date": c["date"], "type": c["type"], "title": c.get("title", ""),
-                       "outcome": c.get("outcome"), "similarity": round(s, 4), "blocks": detail["blocks"],
+                       "outcome": c.get("outcome"), "deal": c.get("deal"), "similarity": round(s, 4), "blocks": detail["blocks"],
                        "n_compared": detail["n_compared"], "n_unknown": detail["n_unknown"]})
     ranked.sort(key=lambda r: (-r["similarity"], r["date"]))
     out = {"threshold": thr, "k": k, "n_pool": len(ranked),

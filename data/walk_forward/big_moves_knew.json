@@ -30,9 +30,10 @@
     "engine_p10": -4.87,
     "engine_p90": 11.03,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": 23.59550561797752,
-    "realized_branch": "LIMITED_RETALIATION"
+    "realized_level": "3",
+    "realized_deal": 0
    },
    {
     "event_id": "iraq_un_661_embargo_1990",
@@ -42,9 +43,10 @@
     "engine_p10": null,
     "engine_p90": null,
     "M": null,
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 11.913489736070382,
-    "realized_branch": "CONTAINED"
+    "realized_level": "3",
+    "realized_deal": 0
    }
   ]
  },
@@ -63,9 +65,10 @@
     "engine_p10": -4.87,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "LIMITED_RETALIATION",
+    "G_top": "3",
     "realized_chg_pct": -2.8436018957346043,
-    "realized_branch": "WIDENING"
+    "realized_level": "3",
+    "realized_deal": 0
    },
    {
     "event_id": "kuwait_oil_fires_1991",
@@ -75,9 +78,10 @@
     "engine_p10": null,
     "engine_p90": null,
     "M": null,
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": 6.460674157303359,
-    "realized_branch": "CONTAINED"
+    "realized_level": "3",
+    "realized_deal": 0
    }
   ]
  },
@@ -120,9 +124,10 @@
     "engine_p10": -4.87,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "LIMITED_RETALIATION",
+    "G_top": "3",
     "realized_chg_pct": -0.551977920883151,
-    "realized_branch": "CONTAINED"
+    "realized_level": "2",
+    "realized_deal": 0
    }
   ]
  },
@@ -141,9 +146,10 @@
     "engine_p10": -4.87,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "LIMITED_RETALIATION",
+    "G_top": "3",
     "realized_chg_pct": -0.551977920883151,
-    "realized_branch": "CONTAINED"
+    "realized_level": "2",
+    "realized_deal": 0
    }
   ]
  },
@@ -164,7 +170,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": 19.428152492668605,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -193,7 +200,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -6.975806451612909,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -228,9 +236,10 @@
     "engine_p10": -4.87,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -29.08653846153847,
-    "realized_branch": "CONTAINED"
+    "realized_level": "3",
+    "realized_deal": 0
    }
   ]
  },
@@ -265,9 +274,10 @@
     "engine_p10": -29.09,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -9.42857142857143,
-    "realized_branch": "LIMITED_RETALIATION"
+    "realized_level": "3",
+    "realized_deal": 0
    },
    {
     "event_id": "nigeria_warri_shutin_2003",
@@ -277,9 +287,10 @@
     "engine_p10": -29.09,
     "engine_p90": 11.03,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -2.9389600602863553,
-    "realized_branch": null
+    "realized_level": "0",
+    "realized_deal": 0
    }
   ]
  },
@@ -306,9 +317,10 @@
     "engine_p10": -9.0,
     "engine_p90": -7.56,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -14.180437695399739,
-    "realized_branch": "CONTAINED"
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -337,7 +349,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -18.55210819411297,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -358,7 +371,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -25.854383358098076,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -379,7 +393,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": 8.429179139751053,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -400,7 +415,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -10.494571773220752,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -429,7 +445,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -19.515927110863817,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "libya_essider_clashes_2014",
@@ -439,9 +456,10 @@
     "engine_p10": -29.09,
     "engine_p90": 10.32,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -24.995907677197582,
-    "realized_branch": "CONTAINED"
+    "realized_level": "2",
+    "realized_deal": 0
    },
    {
     "event_id": "libya_ports_clashes_2014",
@@ -451,9 +469,10 @@
     "engine_p10": -14.18,
     "engine_p90": 6.34,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -24.995907677197582,
-    "realized_branch": "CONTAINED"
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -472,9 +491,10 @@
     "engine_p10": -4.42,
     "engine_p90": 11.45,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": -17.25524475524476,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": 0
    },
    {
     "event_id": "china_yuan_deval_2015",
@@ -486,7 +506,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": 1.5001056412423441,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -507,7 +528,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -14.189189189189177,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "us_export_ban_lift_2015",
@@ -519,7 +541,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -25.571273122959738,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "iran_implementation_day_2016",
@@ -529,9 +552,10 @@
     "engine_p10": -17.25,
     "engine_p90": 11.45,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": 13.633040935672526,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": 0
    }
   ]
  },
@@ -550,9 +574,10 @@
     "engine_p10": -17.25,
     "engine_p90": 11.45,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": 13.633040935672526,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": 0
    },
    {
     "event_id": "nda_bonny_2016",
@@ -562,9 +587,10 @@
     "engine_p10": -10.83,
     "engine_p90": 4.41,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 30.330634278002712,
-    "realized_branch": "LIMITED_RETALIATION"
+    "realized_level": "3",
+    "realized_deal": 0
    },
    {
     "event_id": "nigeria_nda_forcados_2016",
@@ -574,9 +600,10 @@
     "engine_p10": -10.83,
     "engine_p90": 13.29,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 20.585397233837256,
-    "realized_branch": "CONTAINED"
+    "realized_level": "3",
+    "realized_deal": 0
    }
   ]
  },
@@ -613,7 +640,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 14.619395203336794,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -634,7 +662,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -17.050258337247527,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "iran_oil_snapback_2018",
@@ -644,9 +673,10 @@
     "engine_p10": -17.25,
     "engine_p90": 13.63,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": -17.2124380847551,
-    "realized_branch": "CONTAINED"
+    "realized_level": "1",
+    "realized_deal": 0
    },
    {
     "event_id": "katanga_cobalt_halt_2018",
@@ -658,7 +688,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -13.335220838052098,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "uschina_truce_2018",
@@ -670,7 +701,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -5.102210403855745,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_cut_dec_2018",
@@ -682,7 +714,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -4.002592772646252,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "libya_sharara_2018",
@@ -692,9 +725,10 @@
     "engine_p10": -29.09,
     "engine_p90": 10.32,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": -2.471388289931997,
-    "realized_branch": "CONTAINED"
+    "realized_level": "2",
+    "realized_deal": 0
    }
   ]
  },
@@ -713,9 +747,10 @@
     "engine_p10": -17.21,
     "engine_p90": 13.63,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": -51.229293809938966,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": 0
    },
    {
     "event_id": "arg_soy_tax_2020",
@@ -727,7 +762,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -71.13382182799846,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_talks_collapse_2020",
@@ -739,7 +775,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -46.644736842105274,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "covid_pandemic_declared_2020",
@@ -751,7 +788,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -26.792452830188683,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "trump_spr_fill_2020",
@@ -763,7 +801,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -32.58914728682171,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "india_spr_fill_2020",
@@ -775,7 +814,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -64.30528375733854,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "kaz_wheat_ban_2020",
@@ -787,7 +827,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -42.02105263157895,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "vnm_rice_suspend_2020",
@@ -799,7 +840,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -38.05620608899298,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_record_cut_2020",
@@ -811,7 +853,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 28.288868445262196,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "antamina_covid_2020",
@@ -823,7 +866,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 28.288868445262196,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "neg_wti_2020",
@@ -835,7 +879,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 90.43778801843321,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -856,7 +901,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 90.43778801843321,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_extend_june_2020",
@@ -868,7 +914,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 7.740796772566827,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -887,9 +934,10 @@
     "engine_p10": -14.99,
     "engine_p90": 14.43,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 12.46666666666667,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": 1
    },
    {
     "event_id": "rus_wheat_tax_2020",
@@ -901,7 +949,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 10.443604535508255,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "arg_corn_halt_2020",
@@ -913,7 +962,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 8.139534883720923,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "hankuk_chemi_seizure_2021",
@@ -923,9 +973,10 @@
     "engine_p10": -14.18,
     "engine_p90": 2.75,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": 12.01111772880683,
-    "realized_branch": "CONTAINED"
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -946,7 +997,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 18.423096841015017,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "kazakhstan_unrest_2022",
@@ -956,9 +1008,10 @@
     "engine_p10": -10.57,
     "engine_p90": 7.61,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 13.43672456575684,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": null
    },
    {
     "event_id": "uae_abudhabi_attack_2022",
@@ -968,9 +1021,10 @@
     "engine_p10": -14.05,
     "engine_p90": 12.47,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": 15.759508084718753,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": null
    },
    {
     "event_id": "antofagasta_drought_2022",
@@ -982,7 +1036,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 6.161559888579382,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "russia_invades_ukraine_2022",
@@ -992,9 +1047,10 @@
     "engine_p10": -29.09,
     "engine_p90": 9.48,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": 22.401026754862265,
-    "realized_branch": "CONTAINED"
+    "realized_level": "3",
+    "realized_deal": null
    },
    {
     "event_id": "iea_60mb_release_2022",
@@ -1006,7 +1062,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 1.6767330749120957,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_2022_03_02",
@@ -1018,7 +1075,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -2.816546157726585,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "hun_grain_ban_2022",
@@ -1030,7 +1088,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -14.314548683998062,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -1051,7 +1110,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 10.58680132335017,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "idn_palm_lift_2022",
@@ -1063,7 +1123,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": 5.2994170641229355,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_accelerate_hike_2022",
@@ -1075,7 +1136,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -5.147994907702113,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "sanc_2022_06_03",
@@ -1085,9 +1147,10 @@
     "engine_p10": -2.98,
     "engine_p90": 14.57,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": -5.147994907702113,
-    "realized_branch": "CONTAINED"
+    "realized_level": "0",
+    "realized_deal": null
    }
   ]
  },
@@ -1106,9 +1169,10 @@
     "engine_p10": -7.94,
     "engine_p90": 10.41,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "2",
     "realized_chg_pct": -7.953454894433776,
-    "realized_branch": "LIMITED_RETALIATION"
+    "realized_level": "0",
+    "realized_deal": null
    }
   ]
  },
@@ -1129,7 +1193,8 @@
     "M": "MATERIAL",
     "G_top": null,
     "realized_chg_pct": -20.3183641775592,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "opec_2025_04_03",
@@ -1141,7 +1206,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": -14.019851116625325,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "chn_re_magnets_2025",
@@ -1151,9 +1217,10 @@
     "engine_p10": -51.23,
     "engine_p90": 14.36,
     "M": "MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "0",
     "realized_chg_pct": -11.775892334698646,
-    "realized_branch": "RESOLUTION_BY_DEAL"
+    "realized_level": "0",
+    "realized_deal": null
    }
   ]
  },
@@ -1172,9 +1239,10 @@
     "engine_p10": -16.37,
     "engine_p90": 7.15,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "3",
     "realized_chg_pct": 57.79388917659245,
-    "realized_branch": "LIMITED_RETALIATION"
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "hormuz_closure_2026",
@@ -1184,9 +1252,10 @@
     "engine_p10": -7.71,
     "engine_p90": 12.01,
     "M": "NOT_MATERIAL",
-    "G_top": "CONTAINED",
+    "G_top": "1",
     "realized_chg_pct": 46.59146640510055,
-    "realized_branch": "CONTAINED"
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -1207,7 +1276,8 @@
     "M": "NOT_MATERIAL",
     "G_top": null,
     "realized_chg_pct": 3.4233785634258718,
-    "realized_branch": null
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  }
