@@ -42,8 +42,13 @@ publications are in the public domain", eia.gov/about/copyrights_reuse.php, open
 | fred.DHHNGSP | DHHNGSP | Henry Hub natural gas spot | USD/mmbtu | 1997-01-07 | 2026-09-01 | 7,446 | existing |
 
 Cracks are derived in `derive_signals.py` (`derived.diesel_crack`, `derived.gasoline_crack`,
-1986-06-02 →, mechanism-gated). No new crack is derived here; the jet crack and the NYH
-gasoline crack, if wanted, are registered in RIPPLE_REGISTRATION.md as derived nodes.
+1986-06-02 →, mechanism-gated). No new crack is derived here. **Correction (appended
+2026-09-02, same day):** an earlier version of this line said a jet crack and an NYH gasoline
+crack "are registered in RIPPLE_REGISTRATION.md as derived nodes". They are not — Table N
+carries only the two existing cracks above, and no jet or NYH crack was registered or computed.
+The pointer did not resolve; it is withdrawn rather than honoured after the fact, since adding
+a node to a sealed registration after seeing results is exactly what the seal forbids. If those
+cracks are wanted they need a dated amendment before any run that uses them.
 Publication: FRED daily petroleum spots post with a lag of ~1–3 business days (the DB
 had 08-25 as latest on 09-02 before today's refresh; today's endpoint shows 09-01).
 
