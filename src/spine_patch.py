@@ -86,7 +86,8 @@ def clean(cell: str) -> str:
 
 # Phrases that mean "this dossier deliberately proposes NO change to this field".
 NO_CHANGE_RE = re.compile(
-    r"\b(unchanged|not proposed|no change|leave null|leave as null|leaving null|"
+    r"\b(unchanged|not proposed|no change|not changed|does not propose|do not propose|"
+    r"only flags?|flagged only|leave null|leave as null|leaving null|keep\b|retain\b|"
     r"propose leaving null|cannot be (?:set|established)|none proposed)\b", re.I)
 
 # Where a cell is "value -- reasoning", the value is what precedes the first dash-like
@@ -136,7 +137,10 @@ def coerce(field: str, raw: str):
         w = head.strip("`").split()[0].strip("`").lower() if head else ""
         return (w, tail, True) if w in VALID_PRECISION else (head, tail, False)
     if field == "event_date":
-        m = re.search(r"\d{4}-\d{2}-\d{2}", head)
+        # The date must LEAD the cell. A date mentioned inside prose ("[S2] dates the
+        # start to 1991-01-16, but this dossier does not propose a change") is discussion,
+        # not a proposal, and must never be lifted out of it.
+        m = re.match(r"^\d{4}-\d{2}-\d{2}", head)
         return (m.group(0), tail, True) if m else (head, tail, False)
     if field == "source_url":
         m = re.search(r"https?://[^\s)\]<>\"\'|]+", raw)
@@ -145,10 +149,15 @@ def coerce(field: str, raw: str):
         w = head.split()[0].lower().strip("`\"'") if head else ""
         return (w, tail, True) if w in {"high", "medium", "low"} else (head, tail, False)
     if field in ("description", "title"):
-        q = re.search(r"[\"\u201c](.{40,})[\"\u201d]", raw, re.S)
+        # A quoted replacement must OPEN the cell. A quotation buried in commentary is
+        # discussion about the field, not the proposed value.
+        q = re.match(r"\s*[\"\u201c](.{40,}?)[\"\u201d]", clean(MARKER_RE.sub("", raw)), re.S)
         if q:
             return q.group(1).strip(), None, True
-        return (head, tail, True) if len(head) >= 40 else (head, tail, False)
+        # No leading quotation: this cell is commentary about the field ("Drop the DRAFT
+        # language...", "The $20M split is not supported..."), not a replacement value.
+        # Flag it for Joe rather than writing an argument into the description column.
+        return (head, tail, False)
     return head, tail, False
 
 

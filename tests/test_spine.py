@@ -277,6 +277,36 @@ def test_spine_patch_treats_unchanged_and_leave_null_as_no_change():
     assert P.coerce("surprise", "Not proposed. No day-before source found.")[2] is None
 
 
+def test_spine_patch_never_lifts_a_date_out_of_prose_that_declines_to_propose_it():
+    """Regression: a dossier wrote 'not changed here, but flagged: [S2] dates the start
+    to 1991-01-16'. The parser proposed 1991-01-16. It must not."""
+    cell = ("not changed here, but flagged: [S2] dates the physical start of well "
+            "destruction to 1991-01-16, seven days before the February 22 date")
+    assert P.coerce("event_date", cell)[2] is None      # recognised as 'no change'
+    # and even without the no-change phrase, a date buried in prose is not a proposal
+    assert P.coerce("event_date", "[S2] dates the start to 1991-01-16 which is earlier")[2] is False
+    assert P.coerce("event_date", "1991-01-16 -- the day the fires began")[0] == "1991-01-16"
+
+
+def test_spine_patch_only_takes_a_quoted_description_that_opens_the_cell():
+    buried = ('strip the "DRAFT coding" language once Joe reviews this dossier; '
+              'substantively the current description is accurate enough to keep')
+    # "...accurate enough to keep" is a no-change (None). The invariant that matters is
+    # that commentary is NEVER returned as a value to write (ok is never True).
+    assert P.coerce("description", buried)[2] is not True
+    # commentary carrying no no-change phrase is flagged for Joe instead
+    commentary = ('the $20M/$40M split in the current description is not supported by the '
+                  'retrieved text of the Act and should be re-examined')
+    assert P.coerce("description", commentary)[2] is False
+    leading = '"Iraqi forces invaded Kuwait on 2 August 1990, putting Kuwaiti and Iraqi crude at risk."'
+    assert P.coerce("description", leading)[0].startswith("Iraqi forces invaded")
+
+
+def test_spine_patch_treats_keep_and_retain_as_no_change():
+    assert P.coerce("severity", "keep -- the evidence supports the existing code")[2] is None
+    assert P.coerce("surprise", "supported")[2] is False   # not a value; flagged for Joe
+
+
 def test_spine_patch_rejects_an_out_of_range_severity():
     assert P.coerce("severity", "9 -- off the codebook scale")[2] is False
     assert P.coerce("confidence", "extremely high")[2] is False

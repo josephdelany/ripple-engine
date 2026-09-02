@@ -1,6 +1,6 @@
 {
  "batch": "pre1990_a",
- "built_at": "2026-09-02T20:51:32+00:00",
+ "built_at": "2026-09-02T23:10:46+00:00",
  "built_by": "session E (src/spine_patch.py)",
  "registration": "SPINE_REGISTRATION.md",
  "note": "Proposals only. Nothing enters `events` without Joe (charter Sec 2 rule 3). This file was produced read-only; applying it is Joe's step, and the applier appends what it did to data/spine/PATCH_LOG.md.",
