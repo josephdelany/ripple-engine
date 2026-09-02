@@ -130,3 +130,34 @@ the cage enforces, fixed here before the first run:
 Nothing already in the ledger is edited; claims logged under the regex layer
 keep `registration: CLAIM_LEDGER_REGISTRATION.md` and predate this amendment
 by timestamp.
+
+## Amendment 4 — 2026-09-02, before the Challenge loop is built (registered first, computed after)
+The Story page gains a **Challenge** panel under the branches: the analyst conditions
+the situation record and the engine re-reads the escalation layer under those
+conditions. Rules fixed before the first run:
+1. **Conditions are coded fields only:** actor, target, conflict_scope, tempo,
+   alliance, diplomatic, target_capacity. A value must belong to the coded vocabulary
+   (SITUATION_CODEBOOK_V2.md enums, plus the ids actually coded in the corpus for
+   actor/target). Any other value is refused, the refusal is logged, nothing runs.
+   Free text is logged verbatim and is never parsed into a condition.
+2. **Same engine, same thresholds.** The conditioned read is `escalation.read` on the
+   story's own situation record with the chosen fields overridden — identical
+   similarity, uniform weights, RETRIEVE_MIN 0.40, COND_SIM 0.50, COND_MIN_N 8. A
+   challenge cannot tune any of them.
+3. **Two first-class states.** No analog at or above RETRIEVE_MIN → **NO PRECEDENT**
+   (no counts, no rates). Conditioned subset below 8 → **THIN**: the subset's own
+   counts are shown with n and are not a call; branch rates fall back to the parent
+   class as they do on the page.
+4. **Price side from the same subset.** Brent +20 trading days for exactly the subset's
+   event ids (via `ledger.class_outcomes`, filtered), point-in-time for corpus
+   events: n, median, IQR, share up, dated tails. The comparison row sets this beside
+   the unconditioned read. Frequencies with n; never a probability.
+5. **Field coverage is shown.** For every conditioned field the panel states how many
+   corpus records carry a coded value (today: alliance, diplomatic and
+   target_capacity are coded in 0 of 187 geopolitical records, so a condition on them
+   cannot change the subset; the panel says `field_uncoded` rather than pretending).
+6. **Append-only log.** Every challenge — including refused ones — is appended to
+   `data/ledger/challenges.jsonl` with story id, knowable date, conditions and free
+   text verbatim, the resulting state, n and counts. Nothing is edited after writing.
+7. The paste box moves under a "Read something the feeds missed" label on the Feed;
+   the Feed is the front door.
