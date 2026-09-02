@@ -42,6 +42,7 @@ from engine import read as R            # noqa: E402
 from engine import scoring as SC        # noqa: E402
 from engine import learning as LN       # noqa: E402
 from engine import inference as INF     # noqa: E402
+from engine import persistence as PS    # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WF = ROOT / "data" / "walk_forward"
@@ -57,6 +58,7 @@ REGISTERED = {
                 "the label registration the run saw is recorded in data_state.ies90_registration); sr_outcome_90 retired",
     "g_scores": {"gate_and_hedge": "brier (multi-category, §3)", "also": ["log (§3)", "rps (ranked probability score over the ordinal levels; Joe 2026-09-02)"],
                  "deal": "binary brier"},
+    "g_baselines": ["climatology", "frozen", "random_analogs", "persistence"],   # §4 + Amendment B (G-persistence: the dyad's IES level over [t-90, t-1], 0.9/0.1 smoothed; fallback climatology, counted)
     "burn_in": 8,                # class needs >= 8 prior members with closed outcomes to be scored (§2)
     "k_max": 12,                 # analogs kept per item so the spec curve can slice k without re-reading
     "cluster_days": 35,          # reads within 35 days are one cluster (§6): sets the bootstrap block + HAC lag
@@ -187,6 +189,15 @@ class Walk:
                 deals = [c["deal"] for c in g_pool if c.get("deal") in (0, 1)]
                 clim_D = {"rate": sum(deals) / len(deals), "n": len(deals)} if deals else None
             clim_P = [round(self.c.outcome(c["event_id"], H, tier)["chg_pct"], 3) for c in p_pool] or None
+            # Amendment B: G-persistence -- the dyad's level over [t-90, t-1] (engine.persistence), else climatology, counted
+            pers = self.c.persistence.get(e["event_id"]) if e["type"] in GEO else None
+            if e["type"] in GEO:
+                known = bool(pers and pers.get("level_pre") in LEVELS)
+                pers_blk = {"P": [0.0], "G": (PS.smooth(pers["level_pre"]) if known else clim_G), "fallback": (not known),
+                            "level_pre": (pers or {}).get("level_pre"), "covering_pre": (pers or {}).get("covering_pre", []),
+                            "window_pre": (pers or {}).get("window_pre"), "basis_pre": (pers or {}).get("basis_pre")}
+            else:
+                pers_blk = {"P": [0.0], "G": None, "fallback": None}
             burn_in_ok = len(p_pool if e["type"] not in GEO else g_pool) >= self.p["burn_in"]
             # engine (Hedge mixture) and frozen (uniform mixture)
             eng = self._mix(items, w["G"], w["P"], tier)
@@ -197,7 +208,7 @@ class Walk:
                    "weights": {"G": [round(float(x), 6) for x in w["G"]], "P": [round(float(x), 6) for x in w["P"]]},
                    "items": items, "engine": eng, "frozen": frozen,
                    "baselines": {"climatology": {"G": clim_G, "G_labels": [c["outcome"] for c in g_pool] if clim_G else [], "D": clim_D, "P": clim_P},
-                                 "persistence": {"P": [0.0]},
+                                 "persistence": pers_blk,
                                  "random_analogs": {"k": self.menu[0]["k"], "draws": self.p["random_draws"],
                                                     "seed": int(hashlib.sha256(e["event_id"].encode()).hexdigest()[:8], 16),
                                                     "g_pool_ids": [c["event_id"] for c in g_pool], "p_pool_ids": [c["event_id"] for c in p_pool]}},
@@ -272,6 +283,8 @@ class Walk:
                 src, at = rec[name]["G"], rec[name].get("G_atoms")
                 f.setdefault(name, {})["G"] = self._score_g(src, br, at["labels"], at["weights"]) if src and at else (self._score_g(src, br) if src else None)
             f.setdefault("climatology", {})["G"] = self._score_g(clim["G"], br, clim.get("G_labels")) if clim["G"] else None
+            pg = (rec["baselines"].get("persistence") or {}).get("G")
+            f.setdefault("persistence", {})["G"] = self._score_g(pg, br) if pg else None
             for it in rec["items"]:
                 f.setdefault(it["id"], {})["G"] = self._score_g(it["G"], br, it.get("G_labels")) if it["G"] else None
             rg = self._random_g(rec, br, outcome["deal"])
@@ -471,6 +484,19 @@ def _materiality(scores, forecaster):
             "base_rate": round((tp + fn) / n, 3) if n else None}
 
 
+def _spa_block(sc, task, key, base_name, names, n_spa, mb):
+    """White's RC / Hansen's SPA: does the best of `names` beat `base_name` on this score?"""
+    base = _series(sc, task, base_name, key)
+    cols = [_series(sc, task, name, key) for name in names]
+    keep = [i for i in range(len(sc)) if base[i] is not None and all(c[i] is not None for c in cols)]
+    if len(keep) < 10:
+        return {"note": f"only {len(keep)} complete rows; SPA needs >= 10", "benchmark": base_name}
+    d = np.array([[base[i] - c[i] for c in cols] for i in keep])
+    spa = INF.spa(d, n_boot=n_spa, mean_block=mb)
+    spa["best_model"] = names[spa["best_model"]]; spa["models"] = names; spa["benchmark"] = base_name
+    return spa
+
+
 def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
     n_boot = n_boot or p["n_boot"]; n_spa = n_spa or p["n_spa_boot"]
     sc = [s for s in scores if s["tier"] == tier and s["burn_in_ok"]]
@@ -485,7 +511,7 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
     lag = int(round(mb)) - 1
     out["dependence"] = {"cluster_days": p["cluster_days"], "mean_block": round(mb, 2), "hac_lag": max(lag, 0)}
     fam_p, fam_labels = [], []
-    for task, key, refs in (("G", "brier", ("climatology", "frozen", "random_analogs")),
+    for task, key, refs in (("G", "brier", ("climatology", "frozen", "random_analogs", "persistence")),
                             ("P", "crps", ("climatology", "persistence", "random_analogs", "frozen"))):
         blk = {"score": key, "engine_vs": {}, "per_class": {}, "items_vs_climatology": {}}
         for ref in refs:
@@ -536,20 +562,13 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
             blk["sign_accuracy_engine"] = {"n": len(sg), "rate": round(float(np.mean(sg)), 3) if sg else None}
             blk["pit_engine"] = _pit_hist(sc, "engine", p["pit_bins"])
             blk["pit_climatology"] = _pit_hist(sc, "climatology", p["pit_bins"])
-        # Reality Check / SPA over the family {items, engine, frozen} vs climatology
-        cols, names = [], []
-        base = _series(sc, task, "climatology", key)
-        for name in item_ids + ["engine", "frozen"]:
-            v = _series(sc, task, name, key)
-            cols.append(v); names.append(name)
-        keep = [i for i in range(len(sc)) if base[i] is not None and all(c[i] is not None for c in cols)]
-        if len(keep) >= 10:
-            d = np.array([[base[i] - c[i] for c in cols] for i in keep])
-            spa = INF.spa(d, n_boot=n_spa, mean_block=mb)
-            spa["best_model"] = names[spa["best_model"]]; spa["models"] = names
-            blk["spa"] = spa
-        else:
-            blk["spa"] = {"note": f"only {len(keep)} complete rows; SPA needs >= 10"}
+        # Reality Check / SPA over the family {items, engine, frozen} vs climatology (§6); vs persistence beside it (Amendment B.4)
+        blk["spa"] = _spa_block(sc, task, key, "climatology", item_ids + ["engine", "frozen"], n_spa, mb)
+        if task == "G":
+            blk["spa_vs_persistence"] = _spa_block(sc, task, key, "persistence", item_ids + ["engine", "frozen"], n_spa, mb)
+            rd = [r for r in reads if r["tier"] == tier and r["burn_in_ok"] and r["type"] in GEO]
+            blk["n_persistence_fallback"] = sum(1 for r in rd if (r["baselines"].get("persistence") or {}).get("fallback") is True)
+            blk["n_persistence_known"] = sum(1 for r in rd if (r["baselines"].get("persistence") or {}).get("fallback") is False)
         blk["learning_curve"] = _learning_curve(sc, task, key)
         out[task] = blk
     out["M"] = {"engine": _materiality(sc, "engine"), "frozen": _materiality(sc, "frozen"),

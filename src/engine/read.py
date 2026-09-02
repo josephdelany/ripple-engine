@@ -80,9 +80,11 @@ class Corpus:
     big_moves: {tier: {"windows": [(start, end)], "base_pct": everyday base rate %}}.
     panel:  optional {event_id: [situation_state rows]} (the Step 3 seam); schema_extra from the codebook.
     ies90:  {event_id: {"level": "0".."3", "deal": 0/1/None}} -- the G target (Amendment 1); an event absent
-            here has no independent outcome and is neither scored on G nor used as G evidence."""
+            here has no independent outcome and is neither scored on G nor used as G evidence.
+    persistence: {event_id: {"level_pre", "covering_pre", ...}} -- protocol Amendment B: the dyad's IES level
+            over the 90 days before the event (engine.persistence); absent -> the walk falls back to climatology."""
 
-    def __init__(self, events, info, prices, edges=None, big_moves=None, panel=None, schema_extra=None, ies90=None):
+    def __init__(self, events, info, prices, edges=None, big_moves=None, panel=None, schema_extra=None, ies90=None, persistence=None):
         self.events = sorted(events, key=lambda e: (e["event_date"], e["event_id"]))
         self.by_id = {e["event_id"]: e for e in self.events}
         self.info = info
@@ -92,6 +94,7 @@ class Corpus:
         self.panel = panel or {}
         self.schema_extra = schema_extra or {}
         self.ies90 = ies90 or {}
+        self.persistence = persistence or {}
         self.daily_start = self.prices["daily"].index[0] if "daily" in self.prices else pd.Timestamp(FAR_FUTURE)
         self._vec = {}
         self._out = {}
@@ -236,6 +239,17 @@ def _ies90(conn):
         return {}
 
 
+def _persistence(conn):
+    """Amendment B: per geopolitical event, the IES level over the 90 days before it (engine.persistence).
+    Session A's state modules absent or failing -> {} (every read falls back to climatology, counted)."""
+    try:
+        from engine import persistence as PS
+        return PS.precompute(conn, GEO_TYPES)
+    except Exception as ex:                       # stated in the summary via n_persistence_fallback, never silent
+        print(f"[read] persistence baseline unavailable: {ex}", file=sys.stderr)
+        return {}
+
+
 def corpus_from_db(conn):
     events = S.load_events(conn)
     extra = {}
@@ -248,7 +262,7 @@ def corpus_from_db(conn):
     edges = {(r[0], r[1]): float(r[2]) for r in conn.execute(
         "SELECT event_id, target_series, car20 FROM edges WHERE units='%' AND car20 IS NOT NULL")}
     return Corpus(events, info, prices, edges=edges, big_moves={t: _big_moves(t) for t in TIERS},
-                  panel=_panel_rows(conn), schema_extra=S.codebook_schema(), ies90=_ies90(conn))
+                  panel=_panel_rows(conn), schema_extra=S.codebook_schema(), ies90=_ies90(conn), persistence=_persistence(conn))
 
 
 Corpus.from_db = staticmethod(corpus_from_db)
