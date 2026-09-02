@@ -210,22 +210,50 @@ def test_spine_patch_parses_a_table_of_proposed_changes():
     block = (
         "| field | current | proposed | source |\n"
         "|---|---|---|---|\n"
-        "| description | old text | a new sourced narrative | [S1] |\n"
+        "| description | old text | \"a new sourced narrative long enough to be real prose\" | [S1] |\n"
         "| severity | NULL | 5 | [S2] |\n"
         "| date_precision | day | month | [S1] |\n"
     )
     rows = P.parse_changes(block)
     got = {r["field"]: r for r in rows}
-    assert got["severity"]["proposed"] == 5          # numeric coercion
     assert got["severity"]["dossier_current"] is None  # NULL -> None
-    assert got["date_precision"]["proposed"] == "month"
     assert got["description"]["source"] == "[S1]"
+    assert P.coerce("severity", got["severity"]["raw_proposed"])[:2] == (5, None)
+    assert P.coerce("date_precision", got["date_precision"]["raw_proposed"])[0] == "month"
 
 
 def test_spine_patch_parses_the_bullet_form_too():
-    rows = P.parse_changes("- severity: NULL -> 4 [S1]\n- title: old -> new [S2]\n")
-    got = {r["field"]: r["proposed"] for r in rows}
-    assert got == {"severity": 4, "title": "new"}
+    rows = P.parse_changes("- severity: NULL -> 4 [S1]\n- date_precision: day -> month [S2]\n")
+    got = {r["field"]: P.coerce(r["field"], r["raw_proposed"])[0] for r in rows}
+    assert got == {"severity": 4, "date_precision": "month"}
+
+
+def test_spine_patch_extracts_a_value_from_a_cell_that_also_carries_reasoning():
+    """The dossiers write '5 -- because X'. The column must get 5, not the sentence."""
+    val, why, ok = P.coerce("severity", "5 \u2014 \"Systemic; a top producer\" because Saudi output fell")
+    assert (val, ok) is not None and val == 5 and ok is True
+    assert why and "Systemic" in why
+
+
+def test_spine_patch_reads_the_proposed_n_phrasing_the_dossiers_use():
+    assert P.coerce("severity", "Proposed 4 -- major producer affected")[0] == 4
+    assert P.coerce("surprise", "Propose 2 because it was telegraphed")[0] == 2
+
+
+def test_spine_patch_marks_a_proposal_it_cannot_reduce_as_needing_joe():
+    val, why, ok = P.coerce("severity", "Not a number, just an argument about the scale")
+    assert ok is False          # kept in the patch, flagged, never silently written
+
+
+def test_spine_patch_treats_unchanged_and_leave_null_as_no_change():
+    assert P.coerce("date_precision", "day (unchanged)")[2] is None
+    assert P.coerce("severity", "Propose leaving NULL. Reasoning: no source")[2] is None
+    assert P.coerce("surprise", "Not proposed. No day-before source found.")[2] is None
+
+
+def test_spine_patch_rejects_an_out_of_range_severity():
+    assert P.coerce("severity", "9 -- off the codebook scale")[2] is False
+    assert P.coerce("confidence", "extremely high")[2] is False
 
 
 def test_spine_patch_never_proposes_a_field_outside_the_allowed_set():

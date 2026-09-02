@@ -48,8 +48,13 @@ MARKER_RE = re.compile(r"\[S(\d+)\]")
 # A source line starts with S<n> in any of the shapes an author might write:
 # "| S1 |", "- **S1**", "### S1", "S1."
 SOURCE_LINE_RE = re.compile(r"(?:^|\|)\s*(?:[-*#>\s]*\*{0,2})S(\d+)\b", re.MULTILINE)
-# An ISO-8601 stamp, which is how retrieved_at appears inside a table row.
-ISO_TS_RE = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}")
+# An ISO-8601 stamp, which is how retrieved_at appears inside a table row. A bare DATE
+# counts: a researcher who fetched a page today but did not log the minute should record
+# the date and say so, not invent a time. Requiring a time would reward a fabricated one,
+# which is the exact failure this whole process exists to prevent. The evidence that
+# matters -- the URL and the verbatim quote -- is checked separately and is unaffected.
+ISO_TS_RE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2})?")
+ISO_TIME_RE = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}")
 
 
 def domain_of(url: str) -> str:
@@ -111,6 +116,8 @@ def parse_sources(block: str) -> list[dict]:
         quote = bool(re.search(r"[\"“>].{25,}", chunk, re.S))
         out.append({
             "n": num, "role": role, "urls": urls,
+            "date_only_retrieved_at": bool(
+                ISO_TS_RE.search(chunk) and not ISO_TIME_RE.search(chunk)),
             "domains": sorted({domain_of(u) for u in urls if domain_of(u)}),
             "has_retrieved_at": has_retrieved, "has_quote": quote,
             "chars": len(chunk),
@@ -146,6 +153,9 @@ def check_one(path: Path) -> dict:
             problems.append(f"S{s['n']} has no retrieved_at")
         if not s["has_quote"]:
             problems.append(f"S{s['n']} has no verbatim quote")
+    date_only = [s_["n"] for s_ in sources if s_.get("date_only_retrieved_at")]
+    if date_only:
+        notes.append(f"retrieved_at is a date without a time for: {date_only}")
     bad = [d for d in domains if "wikipedia" in d]
     if bad:
         problems.append(f"cites wikipedia: {bad}")
