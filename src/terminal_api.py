@@ -75,6 +75,25 @@ CATALOG = [
     ("Credit context", [
         ("fred.BAMLH0A0HYM2", "US high-yield spread"),
     ]),
+    ("Chokepoint flows (AIS transits)", [
+        ("portwatch.hormuz.n_tanker", "Hormuz tanker transits"),
+        ("portwatch.bab_el_mandeb.n_tanker", "Bab-el-Mandeb transits"),
+        ("portwatch.suez.n_tanker", "Suez transits"),
+        ("portwatch.cape_of_good_hope.n_tanker", "Cape of Good Hope transits"),
+    ]),
+    ("Cross-asset context", [
+        ("yf.sp500", "S&P 500"), ("yf.gold", "Gold"), ("yf.copper", "Copper"),
+        ("yf.silver", "Silver"), ("yf.palladium", "Palladium"),
+        ("yf.platinum", "Platinum"), ("yf.wheat", "Wheat"),
+        ("fred.DGS5", "5Y Treasury yield"), ("fred.DGS10", "10Y Treasury yield"),
+    ]),
+    ("Regime & stress signals", [
+        ("derived.conflict_intensity_pct", "Conflict intensity %ile"),
+        ("derived.curve_2s10s", "2s10s curve"),
+        ("derived.credit_stress", "Credit stress"),
+        ("derived.usd_z", "USD (z-score)"),
+        ("derived.brent_wti_spread_z", "Brent–WTI spread (z)"),
+    ]),
 ]
 
 _STALE_DAYS = {"daily": 8, "weekly": 16, "monthly": 45}
