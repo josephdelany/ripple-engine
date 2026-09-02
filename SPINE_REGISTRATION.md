@@ -94,8 +94,15 @@ quote in the source table is copied from the fetched text, never reconstructed.
    under `data/spine/patches/<batch>.json`, one row per field change carrying the
    event_id, field, current value, proposed value, and the source marker. The script
    reads the database read-only and **never writes to it**.
-3. Joe reviews the dossier and the patch, and applies it himself with the admit line.
-   The code never runs that line and refuses without it.
+3. Joe reviews the dossier and the patch, and applies it himself with the admit line:
+   `python3 src/spine_apply.py --batch <name> --approved-by joe` (add `--dry-run` to see
+   the change and write nothing). `src/spine_apply.py` is the only file in this toolchain
+   that writes to the database; it refuses without `--approved-by joe`, refuses any row
+   flagged `needs_joe`, refuses a column outside the patch whitelist, refuses a row whose
+   live value has moved since the patch was built, refuses a value that fails its column's
+   own range, and refuses to write an encyclopaedia URL. It gzips a backup of `oil.db`
+   first, runs the whole batch in one transaction, and records the audit scoreboard before
+   and after. The code never runs that line itself.
 4. Every applied patch is appended to `data/spine/PATCH_LOG.md`: what changed, when,
    under which source, approved by whom.
 

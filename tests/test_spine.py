@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 import spine_audit as A        # noqa: E402
 import spine_check as C        # noqa: E402
 import spine_patch as P        # noqa: E402
+import spine_apply as AP      # noqa: E402
 
 
 # --------------------------------------------------------------------------- audit
@@ -331,3 +332,43 @@ def test_spine_audit_module_never_opens_the_database_for_writing():
     assert "mode=ro" in src
     for forbidden in ("INSERT", "UPDATE ", "DELETE", "commit()"):
         assert forbidden not in src, f"spine_audit.py must not contain {forbidden}"
+
+
+# --------------------------------------------------------------------------- apply
+
+def test_spine_apply_validates_against_the_codebook_ranges():
+    assert AP.validate("severity", 5) == 5
+    assert AP.validate("date_precision", "month") == "month"
+    assert AP.validate("confidence", "high") == "high"
+    assert AP.validate("event_date", "1988-08-08") == "1988-08-08"
+    for bad in [("severity", 9), ("severity", "5"), ("surprise", 0),
+                ("date_precision", "daily"), ("confidence", "very high"),
+                ("event_date", "8 August 1988"), ("type", "price_collapse"),
+                ("source_url", "ftp://x"), ("title", "  ")]:
+        with pytest.raises(AP.Refused):
+            AP.validate(*bad)
+
+
+def test_spine_apply_refuses_to_write_an_encyclopaedia_url():
+    """The whole point of the repair: a patch may never put Wikipedia back."""
+    with pytest.raises(AP.Refused):
+        AP.validate("source_url", "https://en.wikipedia.org/wiki/1998_world_oil_market_chronology")
+    assert AP.validate("source_url", "https://history.state.gov/d1").startswith("https://")
+
+
+def test_spine_apply_refuses_a_field_outside_the_whitelist():
+    for f in ("sr_actor", "event_id", "sr_json"):
+        assert f not in AP.PATCHABLE
+        with pytest.raises(AP.Refused):
+            AP.validate(f, "x")
+
+
+def test_spine_apply_is_the_only_session_e_module_that_writes():
+    """spine_patch and spine_audit must stay read-only; the writer is one small file."""
+    for name in ("spine_patch", "spine_audit", "spine_check"):
+        src = (ROOT / "src" / f"{name}.py").read_text(encoding="utf-8")
+        assert "UPDATE " not in src and "INSERT" not in src, f"{name}.py must not write"
+    writer = (ROOT / "src" / "spine_apply.py").read_text(encoding="utf-8")
+    assert "UPDATE events SET" in writer
+    # and it must gate on Joe
+    assert 'approved_by != "joe"' in writer
