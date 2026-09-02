@@ -267,7 +267,7 @@ def run(conn, write=True):
         labels[r.event_id] = {"ours": r.sr_outcome_90, **per, "precedence": prec, "type": r.type, "date": str(r.event_date.date()),
                               "title": r.title, "url": r.source_url}
     if write:
-        conn.execute("DELETE FROM event_outcomes")
+        conn.execute("DELETE FROM event_outcomes WHERE source IN ('icb', 'mid', 'ucdp', 'precedence')")   # ies90 rows (Amendment 1) are owned by ies90.py
         conn.executemany("INSERT OR REPLACE INTO event_outcomes VALUES (?,?,?,?,?,?,?)", rows)
         conn.commit()
     return rows, labels
