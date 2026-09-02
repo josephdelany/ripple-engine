@@ -41,7 +41,7 @@ from engine import similarity as S                               # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
 WF = DATA / "walk_forward"
-FAR_FUTURE = "2999-12-31"
+FAR_FUTURE = "2200-01-01"     # inside numpy's datetime64[ns] range (2262); 2999 overflowed to index 0
 
 GEO_TYPES = S.GEO_TYPES
 BRANCHES = S.BRANCHES
@@ -167,8 +167,9 @@ class Corpus:
             if e["type"] != target["type"] or e["event_id"] == target.get("event_id"):
                 continue
             if break_filtration:
-                out.append(self.vector(e["event_id"]) | {"tier": e["tier"], "p_closed": self.outcome(e["event_id"], horizon) is not None,
-                                                          "g_closed": e["type"] in GEO_TYPES})
+                out.append(self.vector(e["event_id"]) | {"tier": e["tier"],
+                                                          "p_closed": e["tier"] == ttier and self.outcome(e["event_id"], horizon) is not None,
+                                                          "g_closed": e["type"] in GEO_TYPES and e.get("sr_outcome_90") in BRANCHES})
                 continue
             if not (e["event_date"] < str(pd.Timestamp(as_of).date())):
                 continue
