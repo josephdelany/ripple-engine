@@ -1,7 +1,7 @@
 {
  "protocol": "WALK_FORWARD_PROTOCOL.md (2026-09-02)",
- "run_id": "walk_20260902T180821Z",
- "generated_at": "2026-09-02T18:09:07.780075+00:00",
+ "run_id": "walk_20260902T181720Z",
+ "generated_at": "2026-09-02T18:18:05.814818+00:00",
  "registered": {
   "g_target": "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md Amendment 1+1.1; event_outcomes source='ies90'); sr_outcome_90 retired",
   "g_scores": {
@@ -10898,7 +10898,7 @@
  },
  "seal_check": {
   "ok": true,
-  "n_records": 939,
+  "n_records": 1252,
   "first_bad_line": null
  },
  "figures": [
