@@ -85,3 +85,39 @@ record) or carries **two or more content terms** from the record's own name. Whe
 row, and any record whose parties are all unmapped — no search is made, the status is `none_found`, and the reason is
 recorded verbatim: *"a GPR spike names no party; no query can name a state, so no second source can be sought (§5.2)"*.
 Such a row stays on the sheet for Joe, who may name the event himself; it is never admissible from a keyword.
+
+## 6. Source repair for events already in the corpus (registered 2026-09-02, before the code)
+Priority E: 72 events already feeding the engine rest on a weak source. They are repaired to the §2–§3 dossier
+standard **before** any of the 473 post-1987 candidates is worked. Nothing is admitted or edited: a repair dossier is
+evidence put in front of Joe, who decides. The three cohorts, by the query that defines each (run 2026-09-02):
+| cohort | query | n | decades |
+|---|---|---|---|
+| encyclopaedia-only | `source_url` matches wikipedia/britannica | 31 | 1990s 4, 2000s 11, 2010s 5, 2020s 11 |
+| bare EIA root | `source_url` is exactly `https://www.eia.gov` | 9 | 1970s 3, 1980s 6 |
+| draft scaffolding | `description` contains "DRAFT coding" | 32 | 1980s 1, 1990s 6, 2000s 4, 2010s 11, 2020s 10 |
+The three are disjoint; 72 events in all. *(The brief said 49 for the third cohort; the marker in the text yields 32.
+The query is stated here so the difference is checkable, and a different definition of "scaffolding" supersedes this
+one on Joe's word.)*
+
+### 6.1 Routes, primary documents first — what each can and cannot answer
+| route | reachable by script on 2026-09-02 | covers | what it yields |
+|---|---|---|---|
+| **FRUS** (history.state.gov) | yes, HTML search + dated document pages | 1945 to the early 1990s | a **document with its own date** |
+| **UK National Archives Discovery** (`/API/search/records`, JSON, keyless, date-bounded) | yes | all eras, subject to release | a **file-level record** with covering dates, not a document date |
+| **GDELT DOC 2.0** | yes, one request per 10 s (§5.1) | 2017 onward | a dated article |
+| **CIA CREST** (cia.gov/readingroom) | **no** — every search form redirects to the landing page; results need JavaScript | 1940s–1990s | — |
+| **UN Security Council / UN Digital Library** | **no** — HTTP 403 to scripts; the digital library serves a JS challenge | all | — |
+| **OPEC archive** | **no** — HTTP 403 (Cloudflare) | 1960 onward | — |
+| **US NARA catalog** | **no** — the API path returns the JavaScript app shell | all | — |
+
+### 6.2 The three outcomes, and what each is allowed to mean
+- **closed** — a primary document whose **own date** falls in [d − 3 d, d + 30 d] and whose title names the event or one
+  of its registered parties. Only FRUS and GDELT yield this. The dossier records URL, title and document date.
+- **partial** — an archival **file** whose covering dates contain the event date and whose title names the subject or a
+  party (UK TNA). This is a pointer to primary material, not a record of the event; it is never counted as closed, and
+  the dossier says which file and which covering dates.
+- **blocked-by-declassification** — no route that could answer is reachable: the event's era is served only by CREST,
+  the UN or OPEC archives (all closed to scripts), or the era's national files are not yet released. This is a statement
+  about **access**, never about whether a source exists, and the dossier says so in those words.
+A route that refuses or errors is `undetermined` and never written as an absence (§5.1). A query that can name nobody
+is not run (§5.2).
