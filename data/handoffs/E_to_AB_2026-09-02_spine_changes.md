@@ -37,8 +37,10 @@ entity rows are corpus data and the mapping is A's.
 `country.syria` (a named co-actor in the 1973 war), `country.algeria` (named in the 1974
 embargo lift), `institution.oapec` (the actual actor in the 1973 embargo — OAPEC is a
 distinct body from OPEC, and `institution.opec` is not a substitute), and `institution.un`
-(needed for the 1988 ceasefire). Correction to an earlier report: **`country.libya` does
-exist** — the reviewer checked the table directly.
+(needed for the 1988 ceasefire). **`country.mexico`** is a fifth, added after the 1990s
+pass: Mexico is a central sourced party to the March 1998 production agreement and has no
+entity row. Correction to an earlier report: **`country.libya` does exist** — the reviewer
+checked the table directly.
 
 **Two class challenges affect IES-90 indirectly**, because class decides which events are
 "geopolitical" for G-scoring: `iran_oilworkers_strike_1978` is filed as
