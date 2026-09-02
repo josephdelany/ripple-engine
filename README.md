@@ -55,9 +55,14 @@ result is published as computed, nulls included.
 
 ## What it found
 
-**On the record (Big Moves, Brent, 43 episodes 1987–2026):** 35% of the market's
-largest moves have no identifiable event in the corpus; the market's extreme
-preceded the catalyst in a third of the rest; demand shocks and OPEC decisions sit
+**On the record (Big Moves, Brent, 43 episodes 1987–2026):** 15 of 43 (35%) of the
+market's largest moves have no identifiable event in the corpus. Of the 28 that do,
+**20 (71%) have at least one event that was already knowable more than 20 trading
+days before the move began, and in 14 (50%) every attributed event was** — the
+market's extreme routinely precedes the catalyst, more often than an earlier
+version of this sentence said ("a third", which was the pooled Brent+WTI+crack
+figure, 33 of 89, quoted under a Brent-only heading; corrected 2026-09-02 after
+`docs/red_team_2.md` finding 2). Demand shocks and OPEC decisions sit
 inside big moves more often than any random day, while infrastructure attacks,
 sanctions and chokepoint disruptions sit inside them *less* often on crude — and
 2–3× more often on the diesel crack. Geopolitics moves products more than crude.
@@ -68,8 +73,15 @@ independent escalation labels, the state-conditioned engine has **no skill
 beyond the base rate** for escalation (Brier skill −0.01, 95% CI −0.08 … +0.06;
 SPA p 0.79) or for price (CRPS skill −0.03 vs climatology). It beats persistence
 (+0.16, p < 0.001) and is not reliably better than random analogs (+0.06 and
-+0.04, neither significant). The VIX-matched placebo is null (−0.02, CI covers
-zero); the specification curve is negative in 83% of 162 registered settings
++0.04, neither significant). **The placebo condition is unresolved, not passed:**
+against the size-matched random-analog reference the VIX-matched placebo is −0.02
+(CI covers zero), but that reference is defined in an amendment Joe has not
+ratified; against climatology — the reference every other skill number here uses,
+and the one the registered protocol §6 implies — it is −0.081 (CI −0.112 …
+−0.048), which is not zero. Until the amendment is ratified or withdrawn, no
+verdict may lean on "the placebo is null" (`docs/red_team_2.md` finding 1;
+corrected 2026-09-02). The specification curve is negative in 83% of 162 registered
+settings
 (median −0.02); dropping 2008, 2020 or 2026 changes nothing; learning adds
 nothing over a frozen engine. A label-permutation test rejects "the engine is
 noise" (p 0.008) while the skill test says "not better than the base rate" —

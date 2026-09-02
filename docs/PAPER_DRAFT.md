@@ -32,7 +32,9 @@ hypothesis that the engine's analog selection is noise (*p* = 0.008): the Murphy
 decomposition shows resolution on the *no-escalation* class and over-confidence
 on the *force* and *war* classes, so what structure exists is destroyed by
 miscalibration. Separately, a market-defined census of the largest Brent moves
-since 1987 finds that 35% have no identifiable event in the corpus, and that
+since 1987 finds that 35% have no identifiable event in the corpus, that in half of
+the attributed episodes every attributed event was knowable more than 20 trading
+days before the move began, and that
 geopolitical classes are *under*-represented inside big crude moves and
 *over*-represented inside big diesel-crack moves. Two earlier positive headlines
 (volatility-stress amplification; escalation skill +0.12 against self-coded
@@ -155,12 +157,22 @@ an event whose date precedes onset by more than 20 days is marked ANTICIPATED
 
 Results (`data/big_moves/*.json`):
 
-| Asset | Episodes | No identified event | Everyday base rate |
-|---|---|---|---|
-| Brent, daily, 1987– | 43 | 15 (35%) | 18.3% |
-| WTI, daily, 1986– | 46 | 14 (30%) | 18.6% |
-| Diesel crack, daily, 1986– | 36 | 7 (19%) | 16.8% |
-| WTI, monthly, 1946– | 18 | 1 | 14.7% |
+| Asset | Episodes | No identified event | Attributed | …all events anticipated | …any event anticipated | Everyday base rate |
+|---|---|---|---|---|---|---|
+| Brent, daily, 1987– | 43 | 15 (35%) | 28 | 14 (50%) | 20 (71%) | 18.3% |
+| WTI, daily, 1986– | 46 | 14 (30%) | 32 | 12 (38%) | 18 (56%) | 18.6% |
+| Diesel crack, daily, 1986– | 36 | 7 (19%) | 29 | 7 (24%) | 23 (79%) | 16.8% |
+| WTI, monthly, 1946– | 18 | 1 | — | — | — | 14.7% |
+
+"Anticipated" is the registered flag for an attributed event whose date precedes
+the move's onset by more than 20 trading days — i.e. the news was already public
+when the market finally moved. Read with the first column, the picture is
+uncomfortable for any event-driven reading of this market: on Brent, 15 of 43
+largest moves have no event we can name, and in 14 of the 28 that do, every event
+we can name was old news. Only 14 of 43 Brent episodes (33%) are moves where a
+corpus event was both present and fresh; on WTI 20 of 46 (43%), on the diesel
+crack 22 of 36 (61%). The product margin is the most event-driven series we
+measure, and crude the least.
 
 The everyday base rate is the share of days that fall inside any big-move window;
 *P(big move | event class)* is compared to it as a ratio. On **Brent**, demand
@@ -287,11 +299,23 @@ turns positive.
 [−0.041, −0.007], max +0.015, share positive 16.7%. The null is not a choice of
 settings.
 
-**Placebo.** VIX-matched pseudo-events (411 reads, 5 replicates): engine vs
-size-matched random analogs −0.024, CI [−0.053, +0.007], covers zero — the placebo
-is null, as required. Against climatology the placebo skill is −0.081 (CI does not
-cover zero), which is the sample-size bias of a *k*-atom distribution discussed in
-§11, not a signal; the size-corrected placebo is −0.008 (CI covers zero).
+**Placebo — unresolved, and we do not claim it as passed.** VIX-matched
+pseudo-events (411 reads, 5 replicates). Against the size-matched random-analog
+reference the placebo skill is −0.024, CI [−0.053, +0.007], covering zero; against
+climatology it is −0.081, CI [−0.112, −0.048], not covering zero; the Ferro
+size-corrected version is −0.008, covering zero. Which of these is *the* placebo
+test is not settled: the registered protocol §6 requires placebo skill
+indistinguishable from zero without naming a reference, and every other skill
+number in this paper uses climatology; the size-matched reference is defined only
+in a proposed amendment that the author has not ratified, and part of that
+amendment's text describes code written before it. We therefore record the placebo
+condition as **UNRESOLVED** and let no conclusion rest on it. Our reading of the
+three numbers is that the climatology-referenced result reflects the finite-*k*
+score bias of §11 (the size-corrected version covers zero) rather than a signal in
+matched non-events — but that is an argument, not a registered test, and it is the
+author's call to ratify, amend or withdraw. Raised in `docs/red_team_2.md`
+finding 1; this paragraph replaces a prior version that read "the placebo is null,
+as required".
 
 **Label permutation.** With labels shuffled within class and Hedge replayed under
 the closed-by-*t* rule, the null distribution of skill has mean −0.061, SD 0.025,
