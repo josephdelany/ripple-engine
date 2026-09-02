@@ -151,3 +151,76 @@ Newbold (1997) *Int. J. Forecasting*; White (2000) *Econometrica*; Hansen (2005)
 *Prediction, Learning, and Games*; Benjamini & Hochberg (1995) *JRSS-B*;
 Tetlock & Gardner (2015) *Superforecasting*; Green & Armstrong (2007) *Int. J.
 Forecasting*.
+
+## Amendment B (2026-09-02) — G-persistence, the fourth G baseline (§4)
+*Registered before the code (Brief B-1). §4 lists persistence for P only, so the G tier carried three
+baselines and PATH §3 D4 read PARTIAL. Dated and appended; §0–§9 unchanged. Session B.*
+
+- **B.1 Definition.** For a read of event e at `as_of` = t, the G-persistence forecast is a point mass
+  on the IES level the event's **primary dyad** had reached over the 90 days ending the day before t,
+  W⁻ = [t−90, t−1]: the same sources and rules as the label (OUTCOME_MAPPING.md Amendment 1, 1.1 and
+  2 — dyadic precedence, littoral map as location), evaluated on W⁻ instead of (d, d+90]. Concretely
+  `ies90.score_event(t − 91 days, A, P, L, sources)` with A, P, L derived exactly as for the label. Only
+  records dated ≤ t−1 enter; a crisis, dispute or war still ongoing at t contributes by its dated
+  onset only (the A1.1 rules applied to W⁻). Each source is held in its single published vintage — no
+  vintages exist for these datasets — stated here as the same limitation the labels carry.
+- **B.2 Smoothing.** Probability 0.9 on L⁻ and 0.1 spread equally over its adjacent levels (L⁻ ± 1
+  within 0..3); a boundary level (0 or 3) has one neighbour, which takes the whole 0.1.
+- **B.3 Fallback.** A level is knowable only when ≥ 1 source covers W⁻ under the coverage rule. When
+  none does, the persistence forecast for that read is the climatology forecast, and the read is
+  counted: `n_persistence_fallback` per tier is published beside the block.
+- **B.4 Publication.** `tiers.*.G.engine_vs.persistence` (Brier; log and RPS beside it) with the
+  stationary-bootstrap interval and the DM/HLN test like the other baselines, and an SPA block with
+  persistence as the benchmark (`G.spa_vs_persistence`) beside the registered climatology-benchmark
+  SPA. The persistence forecast is sealed in every read (`baselines.persistence.G`, with `level_pre`,
+  `covering_pre` and `fallback`). It enters the FDR family. With this, G carries four baselines and D4
+  is judged on the published file.
+- **B.5 Test.** `tests/test_walk_baselines.py`: on a synthetic corpus the persistence level for a read
+  at t never uses a record dated ≥ t (a record injected at t or later leaves the forecast unchanged;
+  one injected inside W⁻ changes it); the smoothing sums to 1; the fallback is counted.
+
+## Amendment C (2026-09-02) — M13, the engine with walk-forward recalibration (§5 menu, 13th item)
+*Registered before the code (Brief B-2). Motivation from the published run `walk_20260902T182828Z`
+(daily tier, 150 scored G reads): the label permutation rejects noise (p = 0.008) while the Brier
+skill vs climatology is null (−0.007). Murphy's decomposition says why: on level 0 the engine's
+resolution is 0.0376 against climatology's 0.0004 (it separates cases), but on levels 2 and 3 its
+reliability is 0.0420 and 0.0351 (climatology 0.0198 / 0.0224) — overconfident on force and war: in
+the 0.4–1.0 forecast bins for level 2 the observed frequency is 0.32 / 0.00 / 0.00 (n 25 / 1 / 3) and
+for level 3 it is 0.25 / 0.36 / 0.25 (n 36 / 14 / 4). Resolution the engine has; calibration it has
+not. M13 tests whether calibration learned strictly from the past recovers the skill. Dated and
+appended; the menu grows to 13 (the ≤ 12 cap of §5 is amended to ≤ 13 by this item and no other).*
+
+- **C.1 Base forecast.** The frozen mixture: equal weights over M01–M12 at the same read (the
+  registered §4 baseline 4). M13 is a function of the twelve items' reads at t and of past closed
+  outcomes only. The frozen baseline itself stays the uniform mixture over M01–M12.
+- **C.2 Recalibration.** Per IES level l, a monotone map g_l: [0,1] → [0,1] applied to the frozen
+  mixture's probability of l, then the four mapped probabilities renormalized to sum 1. The map is
+  fitted, expanding, on the frozen mixture's own earlier reads in the same tier whose branch window
+  had **closed by t** — the walk's closed-by-t rule (`g_closed_on ≤ as_of`), which in the sequential
+  walk is exactly the set of reads whose outcome was looked up before this read was sealed; the
+  sealed `looked_up_at` and `sealed_at` stamps are asserted to satisfy this. Let n be the number of
+  such reads. n < 40: identity (M13 = the frozen mixture). n ≥ 40: for level l, isotonic regression
+  (pool-adjacent-violators on (p, 1[level = l]), evaluated by linear interpolation between block
+  centres, clamped to [0,1]) when the level has ≥ 40 positive cases among the n reads; otherwise
+  Platt scaling (σ(a·logit(p) + b), maximum likelihood by Newton's method, p clipped to [0.01, 0.99]).
+- **C.3 P and M.** M13's price distribution and materiality call are the frozen mixture's, unchanged.
+  Its Hedge losses are computed like any item's; Hedge runs over thirteen items.
+- **C.4 Replays.** The specification curve and the label permutation refit the recalibrator
+  sequentially from the replayed (respectively permuted) closed outcomes under the same rule, so M13's
+  permutation p-value and its spec-curve rows are as computed, never copied.
+- **C.5 Publication.** M13 is scored like any item (`items_vs_climatology.M13_recalibrated`, DM/HLN,
+  the SPA family, regime blocks, permutation) and additionally reported as a forecaster in the
+  reliability figures `figures/reliability_G_<level>.png` (engine, climatology, M13; the 95 % bands
+  of `murphy_*.diagram`). §7 alone decides its status; nothing in this amendment changes §7.
+- **C.6 Test.** The leakage test is extended: the recalibrator never sees a score whose
+  `g_closed_on` > `as_of` or whose `looked_up_at` ≥ the read's `sealed_at`; a recalibrator fitted with
+  that rule broken must produce a different M13 forecast on at least one read (asserted).
+
+## Amendment D (2026-09-02) — the sealed-run archive (§2, §8)
+*Registered before the code (Brief B-4). `reads.jsonl` grows by ~5 MB per run.* The three sealed logs
+in the tree (`reads.jsonl`, `scores.jsonl`, `weights.jsonl`) hold the current run only. When a run
+completes, every earlier run's rows are moved — never edited, never dropped — to
+`data/walk_forward/runs/<run_id>/{reads,scores,weights}.jsonl.gz` (git-ignored, kept on disk; each
+archive still verifies by `walk.verify_file`). `summary.json.data_state.archived_runs` lists the
+archived run_ids with their record counts and seal checks. "Append-only" (§2) holds within each run's
+file; the leakage test and the seal check are computed on the run in the tree.
