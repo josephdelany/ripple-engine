@@ -35,6 +35,7 @@ DB_FREE_FILES = {
     "test_walk.py",                  # PATH Step 8: synthetic corpus only
     "test_walk_baselines.py",        # Amendment B: synthetic corpus + a synthetic MID table
     "test_walk_recalibration.py",    # Amendment C: synthetic corpus only
+    "test_candidates_pre1987.py",    # Brief B-3: reads the committed candidate sheet only
 }
 
 
