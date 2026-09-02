@@ -1,6 +1,6 @@
 # RIPPLE SUMMARY — computed once, as registered
 
-*2026-09-02T19:53:38+00:00. Registration RIPPLE_REGISTRATION.md (sealed cbf4fdc; Amendments A, B). Numbers below are read from data/ripple/*.json written by src/ripple_lp.py in this run. Vocabulary: node×shock verdicts are TRANSMITTING / NULL / INSUFFICIENT; the nine expectations are CONSISTENT / INCONSISTENT / INDETERMINATE. Nothing was re-run or re-labelled after reading.*
+*2026-09-02T20:33:01+00:00. Registration RIPPLE_REGISTRATION.md (sealed cbf4fdc; Amendments A, B). Numbers below are read from data/ripple/*.json written by src/ripple_lp.py in this run. Vocabulary: node×shock verdicts are TRANSMITTING / NULL / INSUFFICIENT; the nine expectations are CONSISTENT / INCONSISTENT / INDETERMINATE. Nothing was re-run or re-labelled after reading.*
 
 ## Tally (primary spec, headline horizon, verdict-bearing shocks)
 | verdict | count |

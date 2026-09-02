@@ -834,13 +834,13 @@ def main():
             "seed": SEED, "n_placebo": N_PLACEBO, "daily_T": int(len(Fd["idx"])),
             "shock_counts_daily_deoverlapped": {k: int(len(v)) if not isinstance(v, np.ndarray) else int(v.sum()) for k, v in sets_daily.items()},
             "runtime_s": None}
+    meta["runtime_s"] = round((datetime.now(timezone.utc) - t0).total_seconds(), 1)   # stamped BEFORE the writes
     (OUT / "irf.json").write_text(json.dumps({"meta": meta, "rows": all_rows}, indent=1))
     (OUT / "regimes.json").write_text(json.dumps({"meta": meta, "henry_hub_daily": rows_gas, "gas_monthly": rows_gas_m}, indent=1))
     (OUT / "retraction_six.json").write_text(json.dumps({"meta": meta, "rows": rows_six, "status": retraction}, indent=1))
     (OUT / "passthrough.json").write_text(json.dumps({"meta": meta, **pt}, indent=1))
     (OUT / "external_checks.json").write_text(json.dumps({"meta": meta, **ext}, indent=1))
     (OUT / "exogeneity.json").write_text(json.dumps({"meta": meta, **exo}, indent=1))
-    meta["runtime_s"] = round((datetime.now(timezone.utc) - t0).total_seconds(), 1)
     summary = summarize(all_rows, rows_gas, rows_gas_m, pt, ext, exo, retraction, tallies, meta)
     (OUT / "SUMMARY.md").write_text(summary)
     print(summary)
