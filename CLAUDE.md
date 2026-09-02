@@ -1,5 +1,7 @@
 # CLAUDE.md — Ripple Engine working rules
 
+> **Every turn, read SESSION_CHARTER.md first, then PATH.md.** They override any memory of the task.
+
 You are working inside a research engine with a pre-registered analysis. These rules are non-negotiable.
 
 ## What this repo is
