@@ -1,0 +1,14 @@
+{
+  "n_events": 296,
+  "n_geo": 173,
+  "n_borderline": 233,
+  "branch_dist_90d_geo": {
+    "CONTAINED": 106,
+    "LIMITED_RETALIATION": 33,
+    "WIDENING": 27,
+    "unknown": 3,
+    "RESOLUTION_BY_DEAL": 4
+  },
+  "actors_with_propensity": 11,
+  "pct_geo_outcome_coded": 98.3
+}
