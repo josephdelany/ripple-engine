@@ -69,6 +69,29 @@ Events: `iraq_invades_kuwait_1990`, `iraq_un_661_embargo_1990`,
   the 1991-02-22 date the only contemporaneous source confirms publicly. No retrieved source
   establishes an earlier *public* date, so the dossier declines to move it.
 
+### `1990s_b` — nine records, 1995–1999
+
+Built 2026-09-02. **19 proposed field changes, 2 `needs_joe`, 33 left unchanged.**
+
+Events: `iran_eo12959_embargo_1995`, `thai_baht_float_1997`, `korea_imf_bailout_1997`,
+`opec_jakarta_quota_increase_1997`, `opec_cut_march_1998`, `opec_cut_june_1998`,
+`russia_default_ltcm_1998`, `operation_desert_fox_1998`, `opec_cut_1999`.
+
+- Two more **encyclopaedia citations replaced**: `opec_cut_march_1998` moves to an Oxford
+  University research-archive item and `russia_default_ltcm_1998` to the BIS Quarterly
+  Review of November 1998. With `kuwait_oil_fires_1991` in `1990s_a`, three of the four
+  pre-2000 encyclopaedia-only records are now sourced to a real document.
+- **`opec_cut_june_1998` could not be replaced.** The dossier records every route tried and
+  the row is flagged `needs_joe` rather than proposing a value. This is Amendment 2 of the
+  registration meeting a specific record: OPEC decisions are not sourceable by free routes.
+- **A date is challenged and not changed.** `korea_imf_bailout_1997` is dated 1997-11-21,
+  and the contemporaneous BIS account places Korea's formal turn to the IMF in December. No
+  retrieved source confirms 21 November, so the dossier flags the conflict, drops
+  `confidence` from `high` to `medium`, and leaves the date for Joe.
+- `thai_baht_float_1997` proposes `surprise` 4 → 2, because the BIS review describes weeks
+  of visible pressure before the float; the source the record previously cited turns out to
+  be a retrospective written about twenty-five years later, not a contemporaneous document.
+
 ---
 
 ## Applied
