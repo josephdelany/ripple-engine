@@ -246,7 +246,7 @@
   ],
   "n_episodes": 37,
   "source_artifact": "cross_chain.json",
-  "source_commit": "e196bc5",
+  "source_commit": "dee33fd",
   "db_commit": "uncommitted (rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json",
   "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md.",

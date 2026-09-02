@@ -10,11 +10,17 @@ Each validated claim below has a machine pack at `data/evidence/<claim_id>.json`
 | `edge.hy_credit_stress` | SUGGESTIVE | 1.4854% | 49 | `data/evidence/edge.hy_credit_stress.json` |
 | `edge.palladium_supply` | SUGGESTIVE | 5.2181% | 75 | `data/evidence/edge.palladium_supply.json` |
 | `hyp.H1` | SUGGESTIVE | 5.5615pp | 87 | `data/evidence/hyp.H1.json` |
-| `node.5y_breakeven` | SUGGESTIVE | 16.7429bps | 64 | `data/evidence/node.5y_breakeven.json` |
-| `node.brent_oil` | SUGGESTIVE | 5.5615% | 87 | `data/evidence/node.brent_oil.json` |
-| `node.heating_oil` | SUGGESTIVE | 5.5688% | 87 | `data/evidence/node.heating_oil.json` |
-| `node.palladium` | SUGGESTIVE | 5.2181% | 75 | `data/evidence/node.palladium.json` |
-| `node.platinum` | SUGGESTIVE | 7.2205% | 79 | `data/evidence/node.platinum.json` |
-| `node.s&p_500` | SUGGESTIVE | 2.1192% | 87 | `data/evidence/node.s&p_500.json` |
 
-*12 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*
+## Retracted 2026-09-02 (Joe's Ruling 1) — no claim card is emitted for these
+
+| node | amplification as computed | 95% CI | status |
+|---|---|---|---|
+| 5Y breakeven | 16.2471 | [4.4695, 31.0222] | `retracted_h1_retest` — retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; docs/red_team_1.md |
+| Brent oil | 6.0412 | [1.557, 10.087] | `retracted_h1_retest` — retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; docs/red_team_1.md |
+| Heating oil | 5.0303 | [1.5269, 9.2301] | `retracted_h1_retest` — retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; docs/red_team_1.md |
+| Platinum | 7.4251 | [1.9576, 14.6469] | `retracted_h1_retest` — retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; docs/red_team_1.md |
+| S&P 500 | 1.8944 | [0.3419, 3.4484] | `retracted_h1_retest` — retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; docs/red_team_1.md |
+
+The numbers stay in `data/cross_asset_conditioned.json` and on the `propagation_edges` row; what is withdrawn is the claim, per `EDGE_PORTFOLIO.md` (amendment 2026-09-02).
+
+*6 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*

@@ -110,11 +110,55 @@ def build_all():
                             "survives_bonferroni": h1.get("survives_bonferroni_5pct")},
                            "validation_claims.json", eps, "stress transmits shocks harder"))
 
+    retracted_packs = RETRACTED_RECORD                     # Joe's Ruling 1: claims not emitted, recorded instead
+    retracted_packs.clear()
     # validated cross-asset ripple nodes (map cells key by label -> resolve to series via ASSETS)
     from cross_asset import ASSETS
     label2series = {a["label"]: a["series"] for a in ASSETS}
+    from propagation_graph import RETRACTED_EDGE_IDS, RETRACTED_POINTER      # Joe's Ruling 1, 2026-09-02
+    retracted_labels = {e.split(".", 1)[1] for e in RETRACTED_EDGE_IDS}
     for c in _rj("cross_asset_conditioned.json").get("map", []):
+        if c["label"] == "Palladium":
+            # Joe's Ruling 1: palladium does NOT generalize here (CI covers zero) and so emits no claim, but
+            # session C's re-test retained it. Record that as computed, with the reasons it is not a finding, so
+            # the stale card on disk cannot keep asserting a claim.
+            (EVID / "node.palladium.json").write_text(json.dumps({
+                "claim_id": "node.palladium", "tier": "NOT_A_FINDING",
+                "statement": "Palladium's re-test result, recorded as computed. This is NOT a finding and is not "
+                             "to be surfaced on any page, in any export, or in the paper.",
+                "quantity": {"value": c.get("amp"), "unit": c.get("unit", ""), "metric": "|CAR+20| amplification (this sample)"},
+                "statistics": {"n_episodes": c.get("n_episodes"), "ci95": c.get("ci95"), "generalizes": False,
+                               "re_test": "-5.807% [-10.663, -0.951] n=22, placebo pct 0.0, verdict TRANSMITTING "
+                                          "(data/ripple/retraction_six.json, RIPPLE_REGISTRATION.md Amendment B)"},
+                "not_a_finding": {"ruling": "data/gates/ripple_2026-09-02.md Ruling 1 (Joe, 2026-09-02)",
+                                  "reasons": ["its propagation_edges row was already null and does not gain status here",
+                                              "palladium is not on the oil chain",
+                                              "one survivor of six at this base rate is what noise looks like (~26% chance of >=1 at a 5% threshold under a complete null)",
+                                              "the re-test's sign (-5.81%) is opposite to this sample's (+5.14%)"]},
+                "n_episodes": c.get("n_episodes")}, indent=2, default=str))
+            continue
         if not c.get("generalizes"):
+            continue
+        if c["label"] in retracted_labels:
+            # EDGE_PORTFOLIO.md amendment 2026-09-02: this node's amplification edge was retracted. No CLAIM card
+            # is emitted; a RETRACTION card is written to the same path so no stale claim can be served by
+            # get_pack()/the MCP tool. The computed numbers stay here and on the propagation_edges row.
+            cid = f"node.{c['label'].lower().replace(' ', '_')}"
+            retracted_packs.append({"claim_id": cid, "label": c["label"], "amp": c.get("amp"),
+                                    "ci95": c.get("ci95"), "note": RETRACTED_POINTER})
+            (EVID / f"{cid}.json").write_text(json.dumps({
+                "claim_id": cid, "tier": "RETRACTED", "statement":
+                    f"RETRACTED 2026-09-02 (Joe's Ruling 1). This card previously claimed that a shock ripples "
+                    f"harder into {c['label']} when VIX stress is elevated. Session C's registered re-test "
+                    f"(all-event shock on VIX >= median days, h=20, vs the VIX-and-GPR-matched placebo) returns "
+                    f"NULL: the band covers zero. The claim is withdrawn; the numbers below are kept as computed.",
+                "quantity": {"value": c.get("amp"), "unit": c.get("unit", ""), "metric": "|CAR+20| amplification (as computed, superseded)"},
+                "statistics": {"n_episodes": c.get("n_episodes"), "ci95": c.get("ci95"), "perm_p": c.get("perm_p")},
+                "retraction": {"ruling": "data/gates/ripple_2026-09-02.md Ruling 1 (Joe, 2026-09-02)",
+                               "amendment": "EDGE_PORTFOLIO.md amendment 2026-09-02",
+                               "re_test": "data/ripple/retraction_six.json", "red_team": "docs/red_team_1.md",
+                               "edge_status": "retracted_h1_retest"},
+                "n_episodes": c.get("n_episodes")}, indent=2, default=str))
             continue
         eps = _episodes(conn, "derived.vix_pct", label2series.get(c["label"], ""), 20)
         packs.append(_pack(f"node.{c['label'].lower().replace(' ', '_')}", "validated",
@@ -196,11 +240,14 @@ def build_all():
     for p in packs:
         p["corpus"] = corpus_marker
         (EVID / f"{p['claim_id']}.json").write_text(json.dumps(p, indent=2, default=str))
-    _write_index(packs)
+    _write_index(packs, RETRACTED_RECORD)
     return packs
 
 
-def _write_index(packs):
+RETRACTED_RECORD = []                                      # filled by build_all: nodes whose claim card is withheld
+
+
+def _write_index(packs, retracted=()):
     L = ["# EVIDENCE — every claim, one hop from its receipt", "",
          "Each validated claim below has a machine pack at `data/evidence/<claim_id>.json` with its exact "
          "underlying episodes (event ids + dates + source URLs), CI, method, and commit hashes. "
@@ -213,6 +260,16 @@ def _write_index(packs):
         L.append(f"| `{p['claim_id']}` | {tiers.BADGE.get(p['tier'], p['tier'])} | "
                  f"{q.get('value')}{q.get('unit', '')} | {p['n_episodes']} | "
                  f"`data/evidence/{p['claim_id']}.json` |")
+    if retracted:
+        L += ["", "## Retracted 2026-09-02 (Joe's Ruling 1) — no claim card is emitted for these",
+              "", "| node | amplification as computed | 95% CI | status |", "|---|---|---|---|"]
+        for r in sorted(retracted, key=lambda z: z["label"]):
+            ci = r.get("ci95") or [None, None]
+            L.append(f"| {r['label']} | {r.get('amp')} | "
+                     f"{('[%s, %s]' % (ci[0], ci[1])) if ci and ci[0] is not None else 'n/a'} | "
+                     f"`retracted_h1_retest` — {r['note']} |")
+        L += ["", "The numbers stay in `data/cross_asset_conditioned.json` and on the `propagation_edges` row; "
+              "what is withdrawn is the claim, per `EDGE_PORTFOLIO.md` (amendment 2026-09-02)."]
     L += ["", f"*{len(packs)} claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from "
           "zero, then the producer script regenerates the artifact.*"]
     INDEX.write_text("\n".join(L))

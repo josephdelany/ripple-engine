@@ -40,6 +40,7 @@ DB_FREE_FILES = {
     "test_walk_archive.py",          # Amendment D: synthetic corpus, temp dirs
     "test_walk_filtration_audit.py", # Amendments F.1, G, H: synthetic corpus, monkeypatched leaks
     "test_walk_determinism.py",      # Amendment I: two synthetic runs
+    "test_ruling1_retraction.py",    # Joe's Ruling 1: rows + committed artifacts; the DB branch self-guards
 }
 
 

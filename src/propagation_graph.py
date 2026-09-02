@@ -150,6 +150,40 @@ def amplification_edges():
     return edges
 
 
+# EDGE_PORTFOLIO.md amendment 2026-09-02 (Joe's Ruling 1, data/gates/ripple_2026-09-02.md): these five
+# stress->node edges were 'validated' and are RETRACTED -- session C's registered re-test (the all-event shock
+# on VIX >= median days, h=20, vs the VIX-and-GPR-matched placebo) returns NULL for every one, three with the
+# opposite sign. The gate lives here, in the code that WRITES the table, so a refresh cannot silently undo the
+# ruling; lifting it needs a dated amendment in EDGE_PORTFOLIO.md, not a re-run.
+RETRACTED_EDGE_IDS = {"amp.Brent oil", "amp.Heating oil", "amp.5Y breakeven", "amp.S&P 500", "amp.Platinum"}
+RETRACTED_STATUS = "retracted_h1_retest"
+RETRACTED_POINTER = ("retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json; "
+                     "docs/red_team_1.md")
+
+
+# The re-test's sixth node. Its row was ALREADY null and does not gain status here; the result is recorded on
+# the row as computed, with the three reasons it is not a finding, so a refresh cannot drop the annotation.
+PALLADIUM_NOTE = ("[re-test 2026-09-02 (data/ripple/retraction_six.json): -5.807% [-10.663, -0.951] n=22, "
+                  "placebo pct 0.0, TRANSMITTING -- recorded as computed, NOT a finding: this row was never "
+                  "validated, palladium is not on the oil chain, one survivor of six at this base rate is what "
+                  "noise looks like (~26% chance of >=1 at a 5% threshold under a complete null), and the "
+                  "re-test's sign is opposite to this row's (+5.144). Not to be surfaced anywhere.]")
+
+
+def apply_ruling1(rows):
+    """Joe's Ruling 1 (EDGE_PORTFOLIO.md amendment 2026-09-02) forced onto the rows, whatever this run computed:
+    the five retracted edge_ids carry the retracted status, and the palladium row carries the re-test note. The
+    strength and CI columns keep the values as computed -- the retraction is a status, not an erasure."""
+    out = []
+    for r in rows:
+        if r[0] in RETRACTED_EDGE_IDS:
+            r = r[:9] + (RETRACTED_STATUS, f"{r[10]} [{RETRACTED_POINTER}]")
+        elif r[0] == "amp.Palladium":
+            r = r[:10] + (f"{r[10]} {PALLADIUM_NOTE}",)
+        out.append(r)
+    return out
+
+
 def build(conn):
     conn.execute("""CREATE TABLE IF NOT EXISTS propagation_edges (
         edge_id TEXT PRIMARY KEY, kind TEXT, from_node TEXT, to_node TEXT, lag TEXT,
@@ -187,6 +221,7 @@ def build(conn):
                      f"{e['lag_days']}d", e["lead_corr"], None, None, e["perm_p"],
                      e["status_pre_fdr"], e["mechanism"]))
     # idempotent for OUR kinds only -- supply_chain.py shares this table with kind='supplychain'.
+    rows = apply_ruling1(rows)                           # Joe's Ruling 1 (EDGE_PORTFOLIO.md amendment 2026-09-02)
     conn.execute("DELETE FROM propagation_edges WHERE kind IN ('stress->node','event->node','node->node')")
     conn.executemany("INSERT OR REPLACE INTO propagation_edges VALUES (?,?,?,?,?,?,?,?,?,?,?)", rows)
     conn.commit()
@@ -197,7 +232,8 @@ def build(conn):
                 "(the validated backbone), (2) event-type->node directional ripple (mostly null at "
                 "this N -- reported, not hidden), (3) crude->node lead-lag (co-move vs lead vs trap).",
         "n_edges": len(rows),
-        "backbone_validated": [e for e in amp if e["status"] == "validated"],
+        "backbone_validated": [e for e in amp if e["status"] == "validated" and f"amp.{e['to']}" not in RETRACTED_EDGE_IDS],
+        "backbone_retracted_2026_09_02": [e["to"] for e in amp if f"amp.{e['to']}" in RETRACTED_EDGE_IDS],
         "amplification": amp,
         "event_to_node_strongest": sorted(e2n, key=lambda e: -abs(e["strength"]))[:8],
         "event_to_node_n_ci_excludes_zero": sum(1 for e in e2n if e["excludes_zero"]),
@@ -229,7 +265,7 @@ def main():
     for e in r["node_to_node"]:
         print(f"      Brent -> {e['to']:<14} [{e['status_pre_fdr']:<9}] contemp {e['contemp_corr']:+.2f} "
               f"lead {e['lead_corr']:+.2f}@{e['lag_days']}d")
-    print("\n  Honest: the graph's claims are the VALIDATED backbone; directional event->node is a null")
+    print("\n  Honest: the backbone is EMPTY since 2026-09-02 -- its five edges were retracted by Joe's Ruling 1; directional event->node is a null")
     print("  layer at this N; co-movements are flagged TRAPS (don't trade the lead). Everstream draws")
     print("  the map with no confidence; this draws only what survives and flags what doesn't.")
 
