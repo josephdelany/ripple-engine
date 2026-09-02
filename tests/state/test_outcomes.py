@@ -31,12 +31,14 @@ def test_o1_mapping_is_total_and_deterministic():
 
 
 def test_o2_kappa_matches_hand_value():
-    # 10 items, two raters: agree on 7; marginals -> pe = (0.5*0.6 + 0.3*0.2 + 0.2*0.2) = 0.40; po = 0.7; kappa = 0.5
+    # 10 items, two raters: pairs (C,C)x4 (C,W)x1 (W,W)x2 (W,C)x1 (L,L)x2 -> po = 8/10 = 0.8;
+    # marginals both C .5 / W .3 / L .2 -> pe = .25 + .09 + .04 = 0.38; kappa = (0.8 - 0.38) / 0.62 = 0.6774 (arithmetic executed, not recalled)
     a = ["CONTAINED"] * 5 + ["WIDENING"] * 3 + ["LIMITED_RETALIATION"] * 2
     b = ["CONTAINED"] * 4 + ["WIDENING"] + ["WIDENING"] * 2 + ["CONTAINED"] + ["LIMITED_RETALIATION"] * 2
     k, n, conf = O.cohen_kappa(a, b)
-    assert n == 10 and conf["CONTAINED"]["CONTAINED"] == 4 and conf["WIDENING"]["CONTAINED"] == 1
-    assert k == 0.5
+    assert n == 10 and conf["CONTAINED"]["CONTAINED"] == 4 and conf["CONTAINED"]["WIDENING"] == 1 and conf["WIDENING"]["CONTAINED"] == 1
+    po, pe = 8 / 10, 0.5 * 0.5 + 0.3 * 0.3 + 0.2 * 0.2
+    assert k == round((po - pe) / (1 - pe), 4) == 0.6774
     assert O.cohen_kappa(["CONTAINED"] * 3, ["CONTAINED"] * 3)[0] is None           # pe = 1: undefined, not 1.0
     assert O.cohen_kappa([], [])[1] == 0
 
