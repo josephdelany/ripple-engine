@@ -93,3 +93,6 @@ tools/config.json
 # jsdom for the app render check (tests/test_app_render.py): npm install --prefix tools jsdom
 tools/node_modules/
 tools/package*.json
+data/candidates/dossiers/_cache/
+# Amendment D: prior sealed runs, gzipped, kept on disk
+data/walk_forward/runs/

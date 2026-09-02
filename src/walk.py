@@ -100,16 +100,55 @@ def verify_seal(record):
     return hashlib.sha256(_canon(body).encode()).hexdigest() == record.get("hash")
 
 
+def _open_text(path):
+    import gzip
+    path = Path(path)
+    return gzip.open(path, "rt", encoding="utf-8") if path.suffix == ".gz" else open(path, encoding="utf-8")
+
+
 def verify_file(path):
-    """Every line re-hashes to its own seal. Returns (ok, n_checked, first_bad_line)."""
+    """Every line re-hashes to its own seal (plain or .gz). Returns (ok, n_checked, first_bad_line)."""
     n = 0
-    for i, line in enumerate(open(path, encoding="utf-8")):
+    for i, line in enumerate(_open_text(path)):
         if not line.strip():
             continue
         n += 1
         if not verify_seal(json.loads(line)):
             return False, n, i + 1
     return True, n, None
+
+
+def archive_prior_runs(out_dir, keep_run_id):
+    """Amendment D: every run other than `keep_run_id` is MOVED -- never edited, never dropped -- from the three
+    sealed logs in the tree to runs/<run_id>/<name>.jsonl.gz (append mode, so a run archived in pieces keeps every
+    row). Returns the manifest {run_id: {reads.jsonl: n, ..., reads_seal_ok, reads_records_in_archive}}."""
+    import gzip
+    out_dir = Path(out_dir)
+    manifest = {}
+    for name in ("reads.jsonl", "scores.jsonl", "weights.jsonl"):
+        f = out_dir / name
+        if not f.exists():
+            continue
+        keep, others = [], defaultdict(list)
+        for line in open(f, encoding="utf-8"):
+            if not line.strip():
+                continue
+            rid = json.loads(line).get("run_id")
+            (keep if rid == keep_run_id else others[rid]).append(line if line.endswith("\n") else line + "\n")
+        for rid, lines in others.items():
+            d = out_dir / "runs" / str(rid)
+            d.mkdir(parents=True, exist_ok=True)
+            with gzip.open(d / (name + ".gz"), "at", encoding="utf-8") as g:
+                g.writelines(lines)
+            manifest.setdefault(rid, {})[name] = len(lines)
+        if others:
+            f.write_text("".join(keep), encoding="utf-8")
+    for rid, m in manifest.items():
+        gz = out_dir / "runs" / str(rid) / "reads.jsonl.gz"
+        if gz.exists():
+            ok, n, bad = verify_file(gz)
+            m["reads_seal_ok"], m["reads_records_in_archive"], m["first_bad_line"] = ok, n, bad
+    return manifest
 
 
 # ============================================================================ the walk
@@ -1227,7 +1266,10 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
                          "this summary.json replaces the PRE_REGISTRATION_V2 src/walk_forward.py summary at the same path; the ledger, story and "
                          "terminal readers of the old 'windows' shape show an empty engine board until PATH Step 9 rewires them"]
     summary["data_state"] = data_state(corpus)
+    summary["data_state"]["archived_runs"] = archive_prior_runs(out_dir, w.run_id)        # Amendment D: prior runs -> runs/<run_id>/*.jsonl.gz
+    summary["data_state"]["archive_dir"] = "data/walk_forward/runs/<run_id>/ (git-ignored; each archive re-verifies by walk.verify_file)"
     summary["seal_check"] = dict(zip(("ok", "n_records", "first_bad_line"), verify_file(out_dir / "reads.jsonl")))
+    summary["seal_check"]["run_in_tree"] = w.run_id
     if with_figures:
         summary["figures"] = figures(summary, out_dir)
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
