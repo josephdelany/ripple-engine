@@ -54,3 +54,13 @@ from onset; lag > 20 days is displayed as ANTICIPATED (the market moved
 first) — an F5 finding shown, not smoothed. This is a definitional choice made
 after seeing two runs; it is descriptive, not a tested hypothesis, and the
 Big Moves table must say so.
+
+## Amendment 3 — 2026-09-02, the monthly tier (registered before computing)
+Daily Brent begins 1987-05. To let the record stand at 1973, 1979 and 1985, a
+MONTHLY tier is added on FRED WTISPLC (spliced WTI spot, 1946-01 →, keyless),
+loaded by `src/fetch_wti_monthly.py`. Same rule, monthly units: episodes = top
+5% of trailing 3-month and 12-month log changes over the series' own history;
+cluster window 365 days; same-sign merge within 180 days; onset = the extreme
+within [end − W months, end]; attribution = corpus events knowable within
+[onset − 31 days, end], lag from onset, ANTICIPATED if lag > 60 days. Every
+monthly number is labelled "monthly resolution"; the two tiers are never pooled.

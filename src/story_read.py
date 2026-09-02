@@ -32,7 +32,9 @@ import propagate as P             # noqa: E402
 import reader as R                # noqa: E402  the caged reader (Amendment 3) -- replaces deconstruct/triage here
 
 BRENT = "fred.DCOILBRENTEU"
-HORIZON = 20
+MONTHLY = "fred.WTISPLC"          # 1946+ monthly spine (BIG_MOVES_REGISTRATION.md Amendment 3)
+HORIZON = 20                      # trading days, daily tier
+HORIZON_M = 3                     # months, monthly tier
 GEO = set(ES.GEO_TYPES)
 
 
@@ -61,20 +63,27 @@ def priced(conn, etype, knowable, exclude_event=None):
     every class event's +0..+20 trading-day % path -> median, IQR, min/max per day, dated tails."""
     s = _price(conn)
     k = pd.Timestamp(knowable)
+    resolution, H, sid = "daily", HORIZON, BRENT
+    if k < s.index[0]:                                  # before daily Brent: stand on the monthly spine
+        sm = _price(conn, MONTHLY)
+        if not sm.empty and k >= sm.index[0]:
+            s, resolution, H, sid = sm, "monthly", HORIZON_M, MONTHLY
     pos = s.index.searchsorted(k)
-    out = {"series": BRENT, "knowable": str(k.date()), "horizon_td": HORIZON}
+    out = {"series": sid, "knowable": str(k.date()), "horizon_td": H, "resolution": resolution,
+           "horizon_label": f"+{H} {'trading days' if resolution == 'daily' else 'months'}"}
+    HORIZON_ = H
     if pos >= len(s):
         pos = len(s) - 1                              # live story after the last print: price as of the last observation
         out["price_note"] = f"price series ends {s.index[-1].date()}; path starts at the next refresh"
     if pos < len(s):
         p0 = float(s.iloc[pos])
-        path = s.iloc[pos:pos + HORIZON + 1]
+        path = s.iloc[pos:pos + HORIZON_ + 1]
         out["price_at_knowable"] = round(p0, 2)
         out["price_now"] = round(float(s.iloc[-1]), 2)
         out["as_of"] = str(s.index[-1].date())
         out["path_pct"] = [round(float(v / p0 - 1) * 100, 2) for v in path]
         out["days_elapsed"] = len(path) - 1
-        out["complete"] = len(path) == HORIZON + 1
+        out["complete"] = len(path) == HORIZON_ + 1
     else:
         out.update(price_at_knowable=None, path_pct=[], days_elapsed=0, complete=False)
     paths, tails = [], []
@@ -82,9 +91,9 @@ def priced(conn, etype, knowable, exclude_event=None):
         if eid == exclude_event:
             continue
         p = s.index.searchsorted(pd.Timestamp(d))
-        if p >= len(s) or p + HORIZON >= len(s) or pd.Timestamp(d) >= k:
+        if p >= len(s) or p + HORIZON_ >= len(s) or pd.Timestamp(d) >= k:
             continue                                  # point-in-time: only analogs knowable before k
-        q0 = float(s.iloc[p]); arr = (s.iloc[p:p + HORIZON + 1].to_numpy() / q0 - 1) * 100
+        q0 = float(s.iloc[p]); arr = (s.iloc[p:p + HORIZON_ + 1].to_numpy() / q0 - 1) * 100
         paths.append(arr); tails.append((eid, d, title, float(arr[-1])))
     if paths:
         A = np.vstack(paths)
@@ -202,8 +211,12 @@ def read(arg=None, event_id=None, knowable=None, log=True):
         claims = []
         for t in cs:                                              # already typed + caged by the reader
             t["event_class"] = t.get("event_class") or etype
+            if pr.get("resolution") == "monthly" and t.get("series") in (None, BRENT):
+                t["series"] = MONTHLY                                    # stand on the monthly spine, say so
             v = L.verdict_for(conn, t, price_at_knowable=p0, as_of=str(k.date()) if eid else None,
                               escalation_read=br if br.get("applicable") else None)
+            if pr.get("resolution") == "monthly" and v.get("basis"):
+                v["basis"] += " — monthly resolution"
             t["verdict"] = v
             claims.append(t)
         prop = P.propagate(conn, event_type=etype) if etype else {}
@@ -229,6 +242,13 @@ def read(arg=None, event_id=None, knowable=None, log=True):
         }
         if log and not eid:
             story["ledger_ids"] = L.log_claims(story_id, source, k.date(), claims, price_at_knowable=p0, url=url)
+        if not eid:
+            # persist the live story's context so the Challenge loop can rebuild its target later (Amendment 4)
+            sd = DATA / "reader" / "stories"
+            sd.mkdir(parents=True, exist_ok=True)
+            (sd / f"{story_id.replace(':', '_')}.json").write_text(json.dumps(
+                {"story_id": story_id, "title": title, "event_class": etype, "entities": ents, "knowable": str(k.date()),
+                 "url": url, "read_at": story["read_at"]}, ensure_ascii=False))
         return story
     finally:
         conn.close()

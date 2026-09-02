@@ -3,6 +3,8 @@
  "label": "Brent",
  "series": "fred.DCOILBRENTEU",
  "kind": "price",
+ "tier": "daily",
+ "unit": "trading days",
  "first": "1987-05-20",
  "last": "2026-08-25",
  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -10,12 +12,12 @@
  "no_identified_event": 15,
  "everyday_base_rate_pct": 18.3,
  "p_class_given_big": {
-  "conflict_escalation": [
-   10,
-   43
-  ],
   "sanctions": [
    9,
+   43
+  ],
+  "conflict_escalation": [
+   10,
    43
   ],
   "infrastructure_attack": [

@@ -122,7 +122,7 @@ def class_outcomes(conn, event_class, sid="fred.DCOILBRENTEU", horizon=PRICE_HOR
     trading day on/after the event date to +horizon trading days. Point-in-time if as_of."""
     s = _price(conn, sid)
     if len(s) > 10 and (s.index[-1] - s.index[0]).days / len(s) > 3:
-        horizon = 1                       # monthly series: one observation (~1 month), stated on the card
+        horizon = 3                       # monthly series: three observations (~one quarter), stated on the card
     q = "SELECT event_id, event_date, title FROM events WHERE type=?"
     args = [event_class]
     if as_of:
@@ -137,6 +137,11 @@ def class_outcomes(conn, event_class, sid="fred.DCOILBRENTEU", horizon=PRICE_HOR
         out.append({"event_id": eid, "date": d, "title": title, "chg_pct": round((p1 / p0 - 1) * 100, 2),
                     "max_pct": round(float(path.max()), 2), "min_pct": round(float(path.min()), 2)})
     return out
+
+
+def _is_daily(conn, sid):
+    s = _price(conn, sid)
+    return not (len(s) > 10 and (s.index[-1] - s.index[0]).days / len(s) > 3)
 
 
 def _cut(r, n):
@@ -187,7 +192,7 @@ def verdict_for(conn, claim, price_at_knowable=None, as_of=None, escalation_read
         return {"verdict": "UNCHECKABLE", "r": None, "n": n, "k": None, "basis": claim.get("why")}
     r = k / n
     return {"verdict": _cut(r, n), "r": round(r, 3), "n": n, "k": k,
-            "basis": f"{ec} events, {sid.split('.')[-1]} at +{PRICE_HORIZON_TD} trading days" + (" (price proxy for flow)" if kind == "flow" else ""),
+            "basis": f"{ec} events, {sid.split('.')[-1]} at +{PRICE_HORIZON_TD} trading days" if len(outs) and _is_daily(conn, sid) else f"{ec} events, {sid.split('.')[-1]} at +3 months",
             "bar": _bar_price(outs)}
 
 

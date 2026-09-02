@@ -4,6 +4,8 @@
   "label": "Brent",
   "series": "fred.DCOILBRENTEU",
   "kind": "price",
+  "tier": "daily",
+  "unit": "trading days",
   "first": "1987-05-20",
   "last": "2026-08-25",
   "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -11,12 +13,12 @@
   "no_identified_event": 15,
   "everyday_base_rate_pct": 18.3,
   "p_class_given_big": {
-   "conflict_escalation": [
-    10,
-    43
-   ],
    "sanctions": [
     9,
+    43
+   ],
+   "conflict_escalation": [
+    10,
     43
    ],
    "infrastructure_attack": [
@@ -76,6 +78,8 @@
   "label": "WTI",
   "series": "fred.DCOILWTICO",
   "kind": "price",
+  "tier": "daily",
+  "unit": "trading days",
   "first": "1986-01-02",
   "last": "2026-08-25",
   "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -91,12 +95,12 @@
     5,
     46
    ],
-   "conflict_escalation": [
-    12,
-    46
-   ],
    "sanctions": [
     6,
+    46
+   ],
+   "conflict_escalation": [
+    12,
     46
    ],
    "demand_shock": [
@@ -148,6 +152,8 @@
   "label": "Diesel crack",
   "series": "derived.diesel_crack",
   "kind": "spread",
+  "tier": "daily",
+  "unit": "trading days",
   "first": "1986-06-02",
   "last": "2026-08-03",
   "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -175,12 +181,12 @@
     6,
     36
    ],
-   "sanctions": [
-    13,
-    36
-   ],
    "chokepoint_disruption": [
     11,
+    36
+   ],
+   "sanctions": [
+    13,
     36
    ]
   },
@@ -212,6 +218,80 @@
    "sanctions": [
     19,
     55
+   ]
+  }
+ },
+ "wti_monthly": {
+  "asset": "wti_monthly",
+  "label": "WTI monthly (1946\u2013)",
+  "series": "fred.WTISPLC",
+  "kind": "price",
+  "tier": "monthly",
+  "unit": "months",
+  "first": "1946-01-01",
+  "last": "2026-07-01",
+  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 3, monthly resolution)",
+  "n_episodes": 18,
+  "no_identified_event": 1,
+  "everyday_base_rate_pct": 14.7,
+  "p_class_given_big": {
+   "sanctions": [
+    8,
+    18
+   ],
+   "conflict_escalation": [
+    11,
+    18
+   ],
+   "policy_response": [
+    7,
+    18
+   ],
+   "opec_decision": [
+    9,
+    18
+   ],
+   "infrastructure_attack": [
+    5,
+    18
+   ],
+   "demand_shock": [
+    5,
+    18
+   ],
+   "chokepoint_disruption": [
+    5,
+    18
+   ]
+  },
+  "p_big_given_class": {
+   "chokepoint_disruption": [
+    9,
+    27
+   ],
+   "conflict_escalation": [
+    12,
+    55
+   ],
+   "demand_shock": [
+    5,
+    17
+   ],
+   "infrastructure_attack": [
+    12,
+    48
+   ],
+   "opec_decision": [
+    12,
+    52
+   ],
+   "policy_response": [
+    20,
+    57
+   ],
+   "sanctions": [
+    13,
+    57
    ]
   }
  }

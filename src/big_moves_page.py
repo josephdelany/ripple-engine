@@ -8,8 +8,9 @@ registered pipeline produced. Every number on the page traces to those files.
 import json, pathlib, datetime as dt
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-ASSETS = ["brent", "wti", "diesel_crack"]
-data = {a: json.load(open(ROOT / "data" / "big_moves" / f"{a}.json")) for a in ASSETS}
+ASSETS = ["brent", "wti", "diesel_crack", "wti_monthly"]
+data = {a: json.load(open(ROOT / "data" / "big_moves" / f"{a}.json")) for a in ASSETS
+        if (ROOT / "data" / "big_moves" / f"{a}.json").exists()}
 TYPE_LABEL = {"policy_response": "Policy response", "demand_shock": "Demand shock", "opec_decision": "OPEC decision",
               "conflict_escalation": "Conflict escalation", "chokepoint_disruption": "Chokepoint disruption",
               "sanctions": "Sanctions", "infrastructure_attack": "Infrastructure attack"}
@@ -48,9 +49,11 @@ const LABEL={json.dumps(TYPE_LABEL)};
 const tabs=document.getElementById('tabs'),view=document.getElementById('view');
 Object.keys(D).forEach((a,i)=>{{const b=document.createElement('button');b.textContent=D[a].label;b.className=i?'':'on';b.onclick=()=>{{[...tabs.children].forEach(x=>x.className='');b.className='on';render(a)}};tabs.appendChild(b)}});
 function fmt(e,kind){{return kind==='price'?`${{e.sign}}${{Math.abs(e.change).toFixed(0)}}%`:`${{e.sign}}$${{Math.abs(e.change).toFixed(1)}}`}}
+function tierNote(d){{return d.tier==='monthly'?`<div class="note">Monthly resolution (BIG_MOVES_REGISTRATION.md Amendment 3): episodes are top-5% 3- and 12-month changes in FRED's spliced monthly WTI, 1946 →. Attribution window onset − 31 days .. end; "anticipated" = more than 60 days after onset. Never pooled with the daily tier.</div>`:''}}
 function render(a){{const d=D[a];const eps=d.episodes;const kind=d.kind;
- const yrs=[];for(let y=1986;y<=2026;y+=4)yrs.push(y);
- const X=y=>30+(y-1986)*(1160/41);
+ const y0=+d.first.slice(0,4), y1=+d.last.slice(0,4)+1, step=(y1-y0)>50?10:4;
+ const yrs=[];for(let y=Math.ceil(y0/step)*step;y<=y1;y+=step)yrs.push(y);
+ const X=y=>30+(y-y0)*(1160/(y1-y0));
  let svg=`<svg viewBox="0 0 1200 220" width="100%"><line x1="30" y1="120" x2="1190" y2="120" stroke="#3a424c"/>`;
  yrs.forEach(y=>svg+=`<text x="${{X(y)}}" y="212" font-size="10.5" fill="#6f6d67" text-anchor="middle">${{y}}</text><line x1="${{X(y)}}" y1="120" x2="${{X(y)}}" y2="126" stroke="#3a424c"/>`);
  const mx=Math.max(...eps.map(e=>Math.abs(e.change)));
@@ -60,7 +63,7 @@ function render(a){{const d=D[a];const eps=d.episodes;const kind=d.kind;
   if(Math.abs(e.change)>0.45*mx) svg+=`<text x="${{X(y)}}" y="${{up?114-hh:134+hh}}" font-size="10" fill="#a9a69f" text-anchor="middle">${{e.onset.slice(0,4)}} ${{fmt(e,kind)}}</text>`;}});
  svg+='</svg>';
  const base=d.everyday_base_rate_pct;
- const stats=`<div class="stats"><div class="card"><div class="l">Episodes, ${{d.first.slice(0,4)}}–${{d.last.slice(0,4)}}</div><div class="v">${{d.n_episodes}}</div></div>
+ const stats=`<div class="stats"><div class="card"><div class="l">Episodes, ${{d.first.slice(0,4)}}–${{d.last.slice(0,4)}}${{d.tier==='monthly'?' · monthly':''}}</div><div class="v">${{d.n_episodes}}</div></div>
  <div class="card"><div class="l">No identified event in corpus</div><div class="v">${{d.no_identified_event}} <span class="dim" style="font-size:14px">(${{Math.round(100*d.no_identified_event/d.n_episodes)}}%)</span></div></div>
  <div class="card"><div class="l">Market moved before the catalyst</div><div class="v">${{eps.filter(e=>e.events.length&&e.events.every(v=>v.anticipated)).length}} <span class="dim" style="font-size:14px">episodes</span></div></div>
  <div class="card"><div class="l">Everyday base rate (any day inside a big-move window)</div><div class="v">${{base==null?'—':base+'%'}}</div></div></div>`;
@@ -69,7 +72,7 @@ function render(a){{const d=D[a];const eps=d.episodes;const kind=d.kind;
  const pc=Object.entries(d.p_class_given_big).sort((x,y)=>y[1][0]-x[1][0]);
  const pct=`<table><tr><th>Event class</th><th>Big moves with one</th><th>Share</th></tr>`+pc.map(([t,[k,n]])=>`<tr><td>${{LABEL[t]||t}}</td><td class="mono">${{k}} of ${{n}}</td><td class="mono">${{(100*k/n).toFixed(0)}}%</td></tr>`).join('')+`<tr><td class="noev">No identified event</td><td class="mono">${{d.no_identified_event}} of ${{d.n_episodes}}</td><td class="mono">${{(100*d.no_identified_event/d.n_episodes).toFixed(0)}}%</td></tr></table>`;
  const rows=eps.slice().reverse().map(e=>`<tr><td class="mono">${{e.onset}} → ${{e.end}}<div class="dim">${{e.days}}d</div></td><td class="mono ${{e.sign==='+'?'up':'dn'}}">${{fmt(e,kind)}}<div class="dim">${{kind==='price'?'$'+e.from_+' → $'+e.to:e.from_+' → '+e.to}}</div></td><td>${{e.events.length?e.events.map(v=>`<div>${{v.title}} <span class="dim mono">${{v.date}}</span>${{v.anticipated?`<span class="ant">anticipated ${{v.lag_days}}d</span>`:`<span class="dim mono" style="font-size:11px;margin-left:4px">${{v.lag_days>=0?'+':''}}${{v.lag_days}}d</span>`}}</div>`).join(''):'<span class="noev">No identified event — corpus gap or non-event move</span>'}}</td></tr>`).join('');
- view.innerHTML=`<div class="card">${{svg}}<div class="legend"><span><i style="background:#e0653a"></i>up, attributed</span><span><i style="background:#3fbf95"></i>down, attributed</span><span><i style="background:#6f6d67"></i>no identified event</span><span class="dim">hover a bar for its events</span></div></div>
+ view.innerHTML=`${{tierNote(d)}}<div class="card">${{svg}}<div class="legend"><span><i style="background:#e0653a"></i>up, attributed</span><span><i style="background:#3fbf95"></i>down, attributed</span><span><i style="background:#6f6d67"></i>no identified event</span><span class="dim">hover a bar for its events</span></div></div>
  <h2>${{d.label}} — ${{d.series}}</h2>${{stats}}
  <div class="two" style="margin-top:16px"><div><h2>Which kinds of things sit inside big moves — P(big move | class)</h2>${{pbt}}<p class="dim" style="font-size:12px">Reading: a class whose bar clears the everyday marker is more often found inside a big move than any random day is. This is the materiality gate's input.</p></div>
  <div><h2>What has ever changed this market — P(class | big move)</h2>${{pct}}</div></div>

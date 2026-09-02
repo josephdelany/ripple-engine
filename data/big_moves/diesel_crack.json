@@ -3,6 +3,8 @@
  "label": "Diesel crack",
  "series": "derived.diesel_crack",
  "kind": "spread",
+ "tier": "daily",
+ "unit": "trading days",
  "first": "1986-06-02",
  "last": "2026-08-03",
  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -30,12 +32,12 @@
    6,
    36
   ],
-  "sanctions": [
-   13,
-   36
-  ],
   "chokepoint_disruption": [
    11,
+   36
+  ],
+  "sanctions": [
+   13,
    36
   ]
  },

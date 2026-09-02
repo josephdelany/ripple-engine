@@ -3,6 +3,8 @@
  "label": "WTI",
  "series": "fred.DCOILWTICO",
  "kind": "price",
+ "tier": "daily",
+ "unit": "trading days",
  "first": "1986-01-02",
  "last": "2026-08-25",
  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
@@ -18,12 +20,12 @@
    5,
    46
   ],
-  "conflict_escalation": [
-   12,
-   46
-  ],
   "sanctions": [
    6,
+   46
+  ],
+  "conflict_escalation": [
+   12,
    46
   ],
   "demand_shock": [
