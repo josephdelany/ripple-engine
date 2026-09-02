@@ -53,18 +53,23 @@ inside big moves more often than any random day, while infrastructure attacks,
 sanctions and chokepoint disruptions sit inside them *less* often on crude — and
 2–3× more often on the diesel crack. Geopolitics moves products more than crude.
 
-**On prediction (the walk, daily tier, 241 scored reads):** with independent
-escalation labels, the state-conditioned engine has **no skill beyond the base
-rate** for escalation (RPS skill +0.02, 95% CI −0.09 … +0.11) or for price
-(CRPS skill −0.03 vs climatology); it beats persistence (+0.16, p < 0.001) and
-is borderline against random analogs; the placebo is null; the specification
-curve is negative across every registered setting; learning adds nothing over a
-frozen engine; the filtration is binding. **Verdict as computed: SUGGESTIVE /
-null on both targets.** An earlier run that showed escalation skill of +0.12
-(p < 0.001) was scored against our own corpus-derived labels; it did not survive
-independent labels, exactly as the first headline result (H1, volatility
-clustering) did not survive a matched placebo. Both downgrades are in the
-record.
+**On prediction (the walk, daily tier, ~250 scored reads; numbers from
+`data/walk_forward/summary.json`, run 182828Z after Amendment 2):** with
+independent escalation labels, the state-conditioned engine has **no skill
+beyond the base rate** for escalation (Brier skill −0.01, 95% CI −0.08 … +0.06;
+SPA p 0.79) or for price (CRPS skill −0.03 vs climatology). It beats persistence
+(+0.16, p < 0.001) and is not reliably better than random analogs (+0.06 and
++0.04, neither significant). The VIX-matched placebo is null (−0.02, CI covers
+zero); the specification curve is negative in 83% of 162 registered settings
+(median −0.02); dropping 2008, 2020 or 2026 changes nothing; learning adds
+nothing over a frozen engine. A label-permutation test rejects "the engine is
+noise" (p 0.008) while the skill test says "not better than the base rate" —
+the engine finds structure in the labels but not enough to forecast with.
+**Verdict as computed: SUGGESTIVE / null on both targets.** An earlier run that
+showed escalation skill of +0.12 (p < 0.001) was scored against our own
+corpus-derived labels; it did not survive independent labels, exactly as the
+first headline result (H1, volatility clustering) did not survive a matched
+placebo. Both downgrades are in the record.
 
 ## The integrity record
 
