@@ -311,3 +311,67 @@ simulations 19900802, random-analog draws from SHA-256 of the event id; the seed
 the tree. Two consecutive runs on the same inputs must produce the same digest; `tests/test_walk_determinism.py`
 asserts it on the synthetic corpus, and `python3 src/walk.py --digest` prints the digest of the run in
 the tree so `make reproduce` can compare a clone's run to the committed one by digest.
+
+## Amendment J (2026-09-02) — the v3 register: what changes when the pre-1987 corpus is admitted
+*Registered prospectively, on Joe's instruction (Brief 3, B-11). **Nothing here is computed and nothing here
+re-judges any v2 run.** Session B. The three items take effect together, on the first run whose
+`data_state.corpus_version` is `v3` — the first run after Joe admits a batch from
+`data/candidates/pre1987_candidates.csv` (PATH Step 5). Every v2 run keeps §3 as its gate (Amendment E.1).*
+
+### J.1 The gate — already registered in Amendment E, restated here as the v3 index
+Amendment E (2026-09-02) registers the Ferro size-corrected Brier, RPS and CRPS as the PRIMARY scores from
+the first v3 run: they drive the Hedge losses, the FDR family, the SPA family and §7. The registered §3
+scores are published beside them in every block, always. E.1 is unchanged: no v2 run is re-judged.
+
+### J.2 The materiality threshold, made point-in-time
+The read-time materiality call (`read.m_read`, and the `in_big_move` flag on every analog) uses the
+registered full-history top-5 % threshold of `BIG_MOVES_REGISTRATION`. A read at t therefore uses a
+threshold informed by moves after t. Session D named this (`docs/red_team_2/D2_leakage_hunt.md` finding 2/7);
+session B measured it rather than assuming: recomputing `big_moves.episodes_for` on history truncated at each
+`as_of`, the threshold moves between 0.165 (1996) and 0.229 (1992) against the full-sample 0.212, and **2 of
+the 41 registered episodes with ≥ 500 prior observations would not clear the threshold computed from history
+before their own onset** (`data/handoffs/B_response_to_D.md`).
+
+From the first v3 run: the M call at read time uses the top-5 % threshold of the asset's **own history
+strictly before `as_of`**, with a minimum of 500 prior observations; below that the read returns
+`M = None` with reason `no_threshold_at_t`, never a call from a full-sample number. The Big Moves *label*
+used for scoring M stays the registered full-history one (it is an outcome, not an input, and the walk's
+filtration governs inputs); both are published, and the filtration audit (F.1) gains a `materiality_threshold`
+check that the threshold used by a read was derived only from observations dated before `as_of`.
+
+### J.3 A new estimand: the CHANGE in escalation level, not the level
+**Why.** In the published run `walk_20260902T210135Z`, G-persistence — a point mass on the dyad's IES-90
+level over [t−90, t−1], 0.9/0.1 smoothed (Amendment B) — beats the engine on the registered Brier by
+**0.480 to 0.769** (skill −0.600, DM p 0.002) and on RPS by 0.380 to 0.681 (skill −0.791). Escalation levels
+persist; the engine's state vector contains no field for the dyad's own current level, so it forecasts the
+level from scratch while persistence starts from the answer. **Any model that does not start from
+persistence starts behind.** This amendment registers the estimand that tests whether the analog machinery
+adds anything *on top of* persistence, which is the question the level target cannot answer.
+
+**The target.** For a geopolitical read at t with pre-window level L⁻ (Amendment B.1, the persistence level;
+`no_independent_outcome` at either end excludes the read, counted) and realized IES-90 level L over
+(d, d+90], the target is **ΔIES = L − L⁻**, an ordered categorical on {−3, −2, −1, 0, +1, +2, +3}.
+
+**The forecast.** For each retrieved analog a, its own change Δ_a = L_a − L⁻_a, computed by exactly the same
+rule at the analog's own date. The engine's Δ forecast is the frequency distribution of Δ_a over the analogs
+(the menu mixture as today, Hedge over the same items). The implied level forecast is that distribution
+shifted by the target's L⁻ and clipped into 0..3, with the clipped mass accumulating at the boundary; both
+the Δ forecast and the implied level forecast are sealed in the read.
+
+**The scores.** Multi-category Brier and RPS over the seven ordered Δ categories (RPS's distance-awareness is
+the point: a Δ miss of one level must cost less than a miss of three), plus the size-corrected forms of
+both (E.2). The implied level forecast is *also* scored on the v2 level scores, so the two estimands are
+comparable on one axis.
+
+**The baselines** (§4, as adapted): (1) Δ-climatology, the unconditional Δ distribution of the class's prior
+closed reads; (2) **no-change**, a point mass on Δ = 0 — which is exactly G-persistence expressed in this
+estimand, and is the baseline to beat; (3) random analogs, k drawn at random from the class; (4) the frozen
+menu mixture.
+
+**The gate.** §7 unchanged in form, with the size-corrected scores primary (E.2) and the **no-change**
+baseline added to the conditions: a Δ result is VALIDATED only if it also beats no-change with DM p < 0.05
+after HLN. Beating Δ-climatology while losing to no-change is published as what it is — the engine
+rediscovering persistence.
+
+**Not computed here.** No Δ is computed, no code is written by this amendment, and no v2 number changes. The
+first v3 run publishes the Δ blocks beside the level blocks, as computed, whatever they say.
