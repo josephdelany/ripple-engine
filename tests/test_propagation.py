@@ -26,8 +26,19 @@ def test_p1_graph_layers_and_backbone():
         assert e["status"] == "validated"
         lo, hi = e["ci"]
         assert lo is not None and (lo > 0 or hi < 0)
-    # oil is in the validated backbone (H1) -- the anchor
-    assert any(e["to"] == "Brent oil" for e in r["backbone_validated"])
+    # Joe's Ruling 1 (2026-09-02, EDGE_PORTFOLIO.md amendment): the five stress->node edges that made up the
+    # backbone -- Brent among them -- were RETRACTED after session C's registered re-test returned NULL for
+    # every one. The anchor assertion is therefore inverted: Brent must NOT be in the validated backbone, must
+    # be named in the retracted list, and must carry the retracted status in the table it was just written to.
+    import propagation_graph as PG
+    assert r["backbone_validated"] == []
+    assert set(r["backbone_retracted_2026_09_02"]) == {e.split(".", 1)[1] for e in PG.RETRACTED_EDGE_IDS}
+    assert "Brent oil" in r["backbone_retracted_2026_09_02"]
+    conn2 = sqlite3.connect(DB)
+    statuses = dict(conn2.execute("SELECT edge_id, status FROM propagation_edges WHERE kind='stress->node'"))
+    conn2.close()
+    for e in PG.RETRACTED_EDGE_IDS:
+        assert statuses[e] == PG.RETRACTED_STATUS, e
 
 
 def test_p2_node_edges_classified_and_traps_honest():
