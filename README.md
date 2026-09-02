@@ -67,25 +67,41 @@ inside big moves more often than any random day, while infrastructure attacks,
 sanctions and chokepoint disruptions sit inside them *less* often on crude — and
 2–3× more often on the diesel crack. Geopolitics moves products more than crude.
 
-**On prediction (the walk, daily tier, ~250 scored reads; numbers from
-`data/walk_forward/summary.json`, run 182828Z after Amendment 2):** with
-independent escalation labels, the state-conditioned engine has **no skill
-beyond the base rate** for escalation (Brier skill −0.01, 95% CI −0.08 … +0.06;
-SPA p 0.79) or for price (CRPS skill −0.03 vs climatology). It beats persistence
-(+0.16, p < 0.001) and is not reliably better than random analogs (+0.06 and
-+0.04, neither significant). **The placebo condition is unresolved, not passed:**
+**On prediction (the walk, daily tier, 253 scored price reads and 150 labelled
+escalation reads; numbers from `data/walk_forward/summary.json`, run 193022Z with
+the fourth baseline and recalibration):** with independent escalation labels, the
+state-conditioned engine has **no skill beyond the base rate** for escalation
+(Brier skill −0.005, 95% CI −0.083 … +0.067; SPA p 0.74 over 15 models) or for
+price (CRPS skill −0.030, CI −0.064 … +0.006). Two results from this run are worse
+than that, and both survive multiple-comparison control:
+
+- **A dumb rule beats it on escalation.** "The dyad's escalation level over the
+  last 90 days will persist" scores Brier **0.481** against the engine's **0.705**
+  — skill −0.467, DM p 0.002. Escalation is strongly autocorrelated and the engine
+  throws that away by averaging over analogs.
+- **Recalibration made it worse, not better.** We predicted in writing that the
+  engine's miscalibration was hiding real resolution, and registered M13
+  (walk-forward isotonic) to test it. M13's Brier skill is **−0.590** (CI −0.834 …
+  −0.357, p < 0.001) and its reliability terms rose rather than fell. **The
+  hypothesis is falsified and published as such.**
+
+It does beat persistence on price (+0.162, p < 0.001) and is not reliably better
+than random analogs (+0.064 on escalation, +0.033 on price; neither significant).
+**The placebo condition is unresolved, not passed:**
 against the size-matched random-analog reference the VIX-matched placebo is −0.02
 (CI covers zero), but that reference is defined in an amendment Joe has not
 ratified; against climatology — the reference every other skill number here uses,
-and the one the registered protocol §6 implies — it is −0.081 (CI −0.112 …
-−0.048), which is not zero. Until the amendment is ratified or withdrawn, no
+and the one the registered protocol §6 implies — it is −0.075 (CI −0.106 …
+−0.043), which is not zero. Until the amendment is ratified or withdrawn, no
 verdict may lean on "the placebo is null" (`docs/red_team_2.md` finding 1;
-corrected 2026-09-02). The specification curve is negative in 83% of 162 registered
-settings
-(median −0.02); dropping 2008, 2020 or 2026 changes nothing; learning adds
-nothing over a frozen engine. A label-permutation test rejects "the engine is
-noise" (p 0.008) while the skill test says "not better than the base rate" —
-the engine finds structure in the labels but not enough to forecast with.
+corrected 2026-09-02). The specification curve is negative in 78% of 162 registered
+settings (median −0.017); dropping 2008, 2020 or 2026 changes nothing; learning
+adds nothing over a frozen engine. A label-permutation test rejects "the engine is
+noise" (p 0.002) while the skill test says "not better than the base rate" — the
+engine finds structure in the labels but not enough to forecast with. **Power is
+now measured, not asserted:** at n = 150 the walk can detect an escalation skill of
++0.12 with 96% power but only +0.043 with 41%, so "no skill" here means "no skill
+larger than roughly a tenth", not "exactly zero".
 **Verdict as computed: SUGGESTIVE / null on both targets.** An earlier run that
 showed escalation skill of +0.12 (p < 0.001) was scored against our own
 corpus-derived labels; it did not survive independent labels, exactly as the
