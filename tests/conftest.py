@@ -31,6 +31,7 @@ DB_FREE_FILES = {
     "test_sowhat.py", "test_status.py", "test_two_source.py", "test_ucdp.py", "test_validate.py",
     "test_kappa.py", "test_gdelt_search.py",
     "test_similarity.py",            # PATH Step 6: synthetic vectors + series only
+    "test_read.py",                  # PATH Step 7: synthetic corpus; its one DB test carries its own skipif
 }
 
 
