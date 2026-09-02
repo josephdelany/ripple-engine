@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-09-02T18:31:12+00:00",
+ "generated_at": "2026-09-02T18:54:48+00:00",
  "fast": false,
  "items": [
   {
    "id": "D1",
    "name": "D1 pytest green incl. every named test",
-   "status": "PARTIAL",
+   "status": "PASS",
    "evidence": "tests/",
-   "note": "318 passed, 6 skipped, 4 warnings in 298.47s (0:04:58); PATH-named tests absent: ['tests/test_demo_911.py']"
+   "note": "322 passed, 6 skipped, 4 warnings in 304.16s (0:05:04)"
   },
   {
    "id": "D2",
@@ -28,14 +28,14 @@
    "name": "D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",
    "status": "PARTIAL",
    "evidence": "data/walk_forward/summary.json",
-   "note": "run walk_20260902T181720Z; present: ['both tiers', 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: [\"four baselines (daily G has 3: ['climatology', 'frozen', 'random_analogs'])\"]"
+   "note": "run walk_20260902T182828Z; present: ['both tiers', 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: [\"four baselines (daily G has 3: ['climatology', 'frozen', 'random_analogs'])\"]"
   },
   {
    "id": "D5",
    "name": "D5 9/11, 1990, 2026 demos from sealed inputs on /walk",
-   "status": "PARTIAL",
+   "status": "PASS",
    "evidence": "data/walk_forward/reads.jsonl",
-   "note": "sealed reads {'september_11_attacks_2001': 5, 'iraq_invades_kuwait_1990': 5, 'hormuz_closure_2026': 5}; walk read route=True; tests/test_demo_911.py present=False (PATH Step 10 is Cowork + Joe)"
+   "note": "sealed reads {'september_11_attacks_2001': 5, 'iraq_invades_kuwait_1990': 5, 'hormuz_closure_2026': 5}; /api/walk/read route; tests/test_demo_911.py"
   },
   {
    "id": "D6",
@@ -49,12 +49,12 @@
    "name": "D7 tag v3.0; paper; one week in the Ledger",
    "status": "FAIL",
    "evidence": "git tag / data/ledger/claims.jsonl",
-   "note": "tag v3.0=False (tags: ['v2.0']); paper drafted=False; ledger use on 1 distinct days (needs 7)"
+   "note": "tag v3.0=False (tags: ['v2.0', 'v2.5']); paper drafted=False; ledger use on 1 distinct days (needs 7)"
   }
  ],
  "counts": {
-  "PASS": 2,
-  "PARTIAL": 4,
+  "PASS": 4,
+  "PARTIAL": 2,
   "FAIL": 1
  }
 }
