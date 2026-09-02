@@ -30,6 +30,7 @@ DB_FREE_FILES = {
     "test_enrichment.py", "test_evaluate.py", "test_living_engine.py", "test_restore.py",
     "test_sowhat.py", "test_status.py", "test_two_source.py", "test_ucdp.py", "test_validate.py",
     "test_kappa.py", "test_gdelt_search.py",
+    "test_similarity.py",            # PATH Step 6: synthetic vectors + series only
 }
 
 
