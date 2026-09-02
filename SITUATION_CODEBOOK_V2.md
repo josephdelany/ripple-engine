@@ -62,3 +62,10 @@ P's separate, measured object.
 Any price/flow reaction (that is Layer P, measured from series, never coded here); any
 probability of occurrence; any field derived from the outcome. Keeping these out is what makes
 the record a clean, point-in-time input the walk-forward can trust.
+
+## Amendment (2026-09-02, red-team finding B4, before the code change) — AUTO_ADMIT is a recommendation, never a decision
+Master rule 3 says nothing enters canon un-gated. `src/admit_events.py` wrote `joe_decision = "approve"` for the
+AUTO_ADMIT tier, indistinguishable downstream from Joe's own approval (docs/red_team_2.md B4; executed: no row was
+ever auto-admitted). From this amendment the AUTO_ADMIT tier writes `rec_reason = "AUTO-ADMIT recommended …"` and the
+provisional severity/surprise bands, and leaves `joe_decision` empty: the five gates rank and recommend; only Joe's
+hand in the review sheet admits. The admission log records recommendations, labelled as such.

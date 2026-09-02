@@ -161,3 +161,26 @@ conditions. Rules fixed before the first run:
    text verbatim, the resulting state, n and counts. Nothing is edited after writing.
 7. The paste box moves under a "Read something the feeds missed" label on the Feed;
    the Feed is the front door.
+
+## Amendment 5 — 2026-09-02, before the code (Brief A-13): "what the market already knew" — display fields, never scored
+The Story page's section 1 shows, AS OF THE KNOWABLE DATE and with vintage ≤ knowable, four priced-in inputs. They
+are display fields: they enter no claim verdict, no gate, no walk score, no Hedge weight.
+| field | series (held now) | rule at knowable k | before the series starts |
+|---|---|---|---|
+| curve front spread (M1−M4, $/bbl) | `state_panel` `curve_m1_m4_spread` (EIA NYMEX RCLC1..RCLC4, daily, ends 2024-04-05) | last value with vintage ≤ k | `unknown` |
+| 1–3 curve slope | not held (session C's NYMEX loader; handoff `data/handoffs/C_to_A_*.md` absent on 2026-09-02) | `unknown` until the loader lands | `unknown` |
+| OVX percentile (2007→) | `fred.OVXCLS` | percentile of the last print dated ≤ k − 3 d (FRED lag) among all prints ≤ that date | `unknown` |
+| managed-money net length percentile (COT) | `cftc.mm_net_wti` (2006→) | percentile of the last report dated ≤ k − 3 d (CFTC Friday release) among all reports ≤ that date | `unknown` |
+Each value carries `as_of`, `vintage`, `n`, and the series id. When session C's OVX / COT / curve loaders land, the
+same fields read from those loaders' rows; the rule does not change.
+
+## Amendment 6 — 2026-09-02, before the code (Brief A-15, red-team finding B7): the reader states a date and a confidence
+Finding B7 (docs/red_team_2.md): the reader emits no event date and no confidence, so every headline date downstream
+is the capture timestamp. Amended, before the cage changes:
+1. The reader's schema gains `event_date` (ISO `YYYY-MM-DD`, or `null` when the text states no date — never the capture
+   date, never today) and `confidence` (`high` / `medium` / `low`) for the class call, on both the story and the headline
+   paths. Both are extracted, never inferred from outside the text; the regex fallback always returns `event_date: null`,
+   `confidence: "fallback"`.
+2. Downstream, a `null` event_date keeps the existing capture-timestamp behaviour but the item says `date_basis:
+   capture`; a stated date is shown with `date_basis: text`. Nothing in the gate, the ledger verdicts or the walk reads
+   `confidence`; it is display and evaluation only (src/reader_eval.py scores date exactness where a date is returned).

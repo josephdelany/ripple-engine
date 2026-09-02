@@ -41,3 +41,22 @@ If no second source is found the dossier says **"second source: none found — n
 Never fabricates a citation, a date, an actor or a class outside the rules above; never writes to
 `events`, `data/events.csv` or the situation records without `--approved-by joe`; never runs `admit.py`
 itself. Every dossier carries `built_by: session A` and the build timestamp.
+
+## 5. Post-1987 completeness (Brief A-12, registered 2026-09-02 before the sheet is computed)
+Candidates, 1987-01-01..2026-12-31, from the sources session A already holds (read only), each a dated record with
+at least one actor / party in B's registered state set (§1), and **not within 3 days of any corpus event date**:
+| source | record | date used | actors |
+|---|---|---|---|
+| ICB v16 | one row per crisis | `trigdate` | crisis actors (`icb2v16.cracid`) |
+| Dyadic MID 4.03 | one row per dispute with `hihost` ≥ 4 (use of force / war) | earliest dyad start | every state in the dispute's dyads |
+| UCDP Dyadic v26.1 | one row per dyad at its onset (`start_date2`, the first year the dyad reached 25 deaths) | `start_date2` | `gwno_a`, `gwno_b` (state parties) |
+| GPR daily (Caldara–Iacoviello, `gpr.GPRD` in `observations`) | one row per day above the 99th percentile of the 1987+ series (337.84 on 2026-09-02, n 14,489), consecutive days collapsed to the first | the day | none named (a global index) — listed for Joe, dossier built only when the FRUS/GDELT search names a registered state |
+Output `data/candidates/post1987_candidates.csv` (`event_date, source, source_id, source_detail, actors, nearest_corpus_event, days_to_corpus`),
+counts by decade and source in `post1987_candidates_summary.json`.
+**Second source for this era**, in this order, every citation opened and dated by the code: (a) FRUS as §3 (volumes run
+into the early 1990s; the search decides); (b) **GDELT DOC 2.0** article search (`api.gdeltproject.org/api/v2/doc/doc`,
+`startdatetime`/`enddatetime` = the window, one request per 5 s; coverage begins 2017-01-01 per the API) — an
+article whose `seendate` lies in [d − 3 d, d + 30 d] and whose title names the crisis or a party; URL, title, domain
+and seendate recorded. Where neither route answers (in practice 1993–2016) the dossier says "second source: none
+found — not admissible". Dossier ids: `icb_<crisno>_<slug>`, `mid_<disno>_<slug>`, `ucdp_<dyad_id>_<slug>`,
+`gpr_<YYYYMMDD>`.
