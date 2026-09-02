@@ -26,13 +26,18 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from _db import connect
 from pathlib import Path
 
+import json
+
 import shock_tracer
+import escalation
+import propagate
 
 ROOT = Path(__file__).resolve().parent.parent
 TERMINAL_HTML = ROOT / "src" / "terminal.html"
 TRACE_HTML = ROOT / "src" / "trace.html"
 BACKTEST_HTML = ROOT / "src" / "backtest.html"
 QUESTION_HTML = ROOT / "src" / "question.html"
+SITUATION_HTML = ROOT / "src" / "situation.html"
 
 # Curated catalog: series_id -> (group, display label). Only those actually present in
 # oil.db (with observations) are shown; anything missing is silently skipped (no fake rows).
@@ -327,6 +332,41 @@ def backtest():
     }
 
 
+def situation_read(event_id):
+    """B4: compose the Read for one event — Layer G (escalation) + Layer P per branch
+    (propagate) + the Situation Record + a live-market overlay + track-record placeholder
+    (filled by B5). Pure composition of existing engines; recomputes nothing."""
+    conn = connect(read_only=True)
+    cur = conn.cursor()
+    cols = [c[1] for c in cur.execute("PRAGMA table_info(events)")]
+    row = cur.execute("SELECT * FROM events WHERE event_id=?", (event_id,)).fetchone()
+    if not row:
+        conn.close()
+        return JSONResponse({"error": f"unknown event {event_id}"}, status_code=404)
+    e = dict(zip(cols, row))
+    g = escalation.read_event(conn, event_id)
+    layer_p = {}
+    if not g.get("no_adequate_precedent"):
+        for b, rate in (g.get("branch_rates", {}).get("rates") or {}).items():
+            if rate:
+                layer_p[b] = propagate.propagate(conn, branch=b)
+    br = cur.execute("SELECT obs_date, value FROM observations WHERE series_id='fred.DCOILBRENTEU' "
+                     "ORDER BY obs_date DESC LIMIT 6").fetchall()
+    ovx = cur.execute("SELECT value FROM observations WHERE series_id='derived.ovx_pct' "
+                      "ORDER BY obs_date DESC LIMIT 1").fetchone()
+    conn.close()
+    overlay = {"brent": br[0][1] if br else None, "as_of": br[0][0] if br else None,
+               "brent_5d_pct": round((br[0][1] / br[5][1] - 1) * 100, 1) if len(br) >= 6 else None,
+               "ovx_pct": round(ovx[0], 1) if ovx else None}
+    return {
+        "event": {"id": e["event_id"], "title": e.get("title"), "date": e["event_date"],
+                  "type": e["type"], "actor": e.get("sr_actor"), "target": e.get("sr_target")},
+        "record": json.loads(e["sr_json"]) if e.get("sr_json") else None,
+        "layer_g": g, "layer_p": layer_p, "live_overlay": overlay,
+        "track_record": {"status": "pending B5 walk-forward"},
+    }
+
+
 def register_terminal(app):
     @app.get("/terminal", response_class=HTMLResponse)
     def _terminal_page():
@@ -381,3 +421,23 @@ def register_terminal(app):
         from fastapi.responses import Response
         css = ROOT / "src" / "desk.css"
         return Response(css.read_text() if css.exists() else "", media_type="text/css")
+
+    @app.get("/situation_view", response_class=HTMLResponse)
+    def _situation_view():
+        if not SITUATION_HTML.exists():
+            return HTMLResponse("<h1>situation.html missing</h1>", status_code=500)
+        return HTMLResponse(SITUATION_HTML.read_text())
+
+    @app.get("/situation")
+    def _situation(event: str):
+        return situation_read(event)
+
+    @app.get("/situation_events")
+    def _situation_events():
+        conn = connect(read_only=True)
+        rows = conn.execute(
+            "SELECT event_id, event_date, type, title FROM events "
+            "WHERE type IN ('conflict_escalation','infrastructure_attack','chokepoint_disruption','sanctions') "
+            "AND sr_outcome_90 IS NOT NULL ORDER BY event_date DESC").fetchall()
+        conn.close()
+        return [{"event_id": r[0], "date": r[1], "type": r[2], "title": r[3]} for r in rows]

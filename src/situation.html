@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- situation.html — THE READ (B4). One event's full situation card: scenario tree (Layer G
+     branch base rates with n) x propagation per branch (Layer P) + differencing table +
+     analog set + situation record + live overlay + track-record stamp. Composes /situation.
+     Historical frequencies only; NO ADEQUATE PRECEDENT is a first-class output. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripple Engine — The Read</title>
+<link rel="stylesheet" href="/desk.css">
+<style>
+ .wrap{display:grid;grid-template-columns:300px 1fr;height:calc(100% - 54px)}
+ html,body{height:100%} body{overflow:hidden}
+ .side{background:var(--bg1);border-right:1px solid var(--line);overflow-y:auto;padding:8px}
+ .side input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 9px;font:12px var(--mono);margin-bottom:8px}
+ .it{padding:7px 9px;border-radius:8px;cursor:pointer;border:1px solid transparent;font-size:13px}
+ .it:hover{background:var(--bg2)} .it.sel{background:var(--bg2);border-color:var(--accent)}
+ .it .d{font:10px var(--mono);color:var(--faint)}
+ main{overflow-y:auto;padding:20px 26px}
+ .tree{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+ .branch{background:var(--bg1);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+ .branch .h{font:600 13px var(--sans);display:flex;justify-content:space-between;align-items:baseline}
+ .branch .rate{font:700 20px var(--mono)} .branch .n{font:10px var(--mono);color:var(--faint)}
+ .branch .p{font:12px var(--mono);color:var(--faint);margin-top:8px;border-top:1px solid var(--line2);padding-top:8px}
+ .bar{height:6px;border-radius:4px;background:var(--bg3);margin:6px 0;overflow:hidden}
+ .bar>i{display:block;height:100%;background:var(--accent)}
+ .noprec{background:rgba(255,159,10,.12);border:1px solid var(--gold);border-radius:12px;padding:14px 16px;color:var(--gold);font:600 15px var(--sans)}
+ .ld{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ .ld .col h4{margin:0 0 6px} .ld .r{font:12px var(--mono);padding:3px 0;border-bottom:1px solid var(--line2)}
+ .ld .diff{color:var(--gold)} .ld .like{color:var(--up)}
+ .analog{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:13px}
+ .analog a{font-family:var(--mono)}
+ .rec .chip{margin:2px}
+ .stamp{font:11px var(--mono);color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:8px 10px;display:inline-block}
+ .spin{color:var(--faint);padding:48px;text-align:center;font:12px var(--mono)}
+</style></head><body>
+<div class="mast">
+  <div class="brand"><b>◆ Ripple</b> · The Read</div>
+  <nav class="seg"><a href="/terminal">Terminal</a><a href="/trace_view">Trace</a>
+    <a class="on" href="/situation_view">The Read</a><a href="/backtest_view">Back-test</a>
+    <a href="/question_view">Question</a><a href="/workbench">Workbench</a></nav>
+</div>
+<div class="wrap">
+  <aside class="side"><input id="q" placeholder="filter events…"><div id="list"><div class="spin">loading…</div></div></aside>
+  <main id="main"><div class="spin">pick a situation on the left.</div></main>
+</div>
+<script>
+const $=s=>document.querySelector(s), api=async p=>(await fetch(p)).json();
+const esc=s=>(s==null?'':String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])));
+const BR=["CONTAINED","LIMITED_RETALIATION","WIDENING","RESOLUTION_BY_DEAL"];
+let EV=[];
+async function load(){ EV=await api('/situation_events'); paint();
+  $('#q').oninput=paint;
+  const pe=new URLSearchParams(location.search).get('event'); if(pe) go(pe);
+}
+function paint(){ const f=($('#q').value||'').toLowerCase();
+  $('#list').innerHTML=EV.filter(e=>(e.title||'').toLowerCase().includes(f)||e.type.includes(f))
+    .slice(0,120).map(e=>`<div class="it" data-id="${esc(e.event_id)}"><div>${esc((e.title||e.event_id).slice(0,46))}</div><div class="d">${esc(e.date)} · ${esc(e.type)}</div></div>`).join('');
+  $('#list').querySelectorAll('.it').forEach(el=>el.onclick=()=>{$('#list').querySelectorAll('.it').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');go(el.dataset.id);});
+}
+function pct(x){return x==null?'—':(Math.round(x*100)+'%');}
+async function go(id){
+  $('#main').innerHTML='<div class="spin">composing the read…</div>';
+  const d=await api('/situation?event='+encodeURIComponent(id));
+  if(d.error){$('#main').innerHTML='<div class="spin">'+esc(d.error)+'</div>';return;}
+  const g=d.layer_g, ev=d.event, ov=d.live_overlay;
+  let head=`<h1 style="font-size:22px">${esc(ev.title||ev.id)}</h1>
+    <div class="faint mono" style="margin:4px 0 14px">${esc(ev.date)} · ${esc(ev.type)} · ${esc((ev.actor||'?').replace('country.',''))} → ${esc((ev.target||'?').replace('country.','').replace('chokepoint.',''))}</div>`;
+  if(g.no_adequate_precedent){
+    $('#main').innerHTML=head+`<div class="noprec">NO ADEQUATE PRECEDENT — max analog similarity ${g.max_similarity} &lt; ${g.threshold}. The engine declines a conditioned read; history does not rhyme closely enough here.</div>`;
+    return;
+  }
+  const rates=g.branch_rates.rates, n=g.branch_rates.n, thin=g.branch_rates.thin, basis=g.branch_rates.basis;
+  // scenario tree x propagation
+  const tree=BR.map(b=>{ const r=rates[b]; if(r==null) return '';
+    const P=d.layer_p[b]; const crude=P&&P.hops&&P.hops.find(h=>h.series_id==='fred.DCOILBRENTEU');
+    return `<div class="branch"><div class="h"><span>${esc(b.replace(/_/g,' '))}</span><span class="rate">${pct(r)}</span></div>
+      <div class="bar"><i style="width:${Math.round(r*100)}%"></i></div>
+      ${crude?`<div class="p">if it goes here → Brent signed <b class="${crude.signed_median_pct>=0?'up':'down'}">${crude.signed_median_pct>0?'+':''}${crude.signed_median_pct}%</b>/20d (n=${crude.n})<br>${P.realized_disruption_fraction_pct}% showed a material sustained move; ${crude.no_lasting_move_pct}% none</div>`:'<div class="p faint">no measured propagation</div>'}</div>`;
+  }).join('');
+  // differencing table (top analog)
+  const top=g.analogs[0]; let ld='';
+  if(top){ const L=top.ld.likenesses, D=top.ld.differences;
+    ld=`<div class="ld"><div class="col"><h4 class="up">Likenesses — vs ${esc(top.title.slice(0,40))}</h4>
+      ${L.map(x=>`<div class="r like">✓ ${esc(x.field)}: ${esc(x.now)}</div>`).join('')||'<div class="faint">—</div>'}</div>
+      <div class="col"><h4 style="color:var(--gold)">Differences (then → now)</h4>
+      ${D.map(x=>`<div class="r diff">✗ ${esc(x.field)}: ${esc(x.then)} → ${esc(x.now)} <span class="faint">(${esc(x.evidence)})</span></div>`).join('')||'<div class="faint">—</div>'}</div></div>`;
+  }
+  const analogs=g.analogs.map(a=>`<div class="analog"><span><a href="/situation_view?event=${encodeURIComponent(a.event_id)}">${esc((a.title||a.event_id).slice(0,52))}</a> <span class="faint">${esc(a.date)}</span></span><span class="mono">sim ${a.similarity} · ${esc(a.outcome_90)}</span></div>`).join('');
+  const rec=d.record?d.record.geopolitical:null;
+  const chips=rec?Object.entries(rec).filter(([k,v])=>v!=null&&v!=='unknown').map(([k,v])=>`<span class="chip">${esc(k.replace(/_/g,' '))}: <b>${esc(v)}</b></span>`).join(''):'';
+  $('#main').innerHTML=head
+    +`<div class="lbl">Scenario tree — Layer G branch base rates × Layer P propagation ${thin?`<span class="badge warn">thin: ${esc(basis)}</span>`:`<span class="faint">(conditioned, n=${n})</span>`}</div>
+      <div class="tree">${tree}</div>
+      <div class="lbl">Differencing — then vs now (likenesses as prominent as differences)</div>${ld}
+      <div class="lbl">Situation record (geopolitical, sourced-or-unknown)</div><div class="rec">${chips||'<span class="faint">unknown</span>'}</div>
+      <div class="lbl">Verified analog set</div>${analogs}
+      <div class="lbl">Live overlay</div><div class="mono faint">Brent ${ov.brent!=null?ov.brent:'—'} (${ov.brent_5d_pct>0?'+':''}${ov.brent_5d_pct}% 5d) · OVX ${ov.ovx_pct}th pct · as of ${esc(ov.as_of)}</div>
+      <div class="lbl">Track record</div><div class="stamp">walk-forward score for this class — ${esc(d.track_record.status)}</div>`;
+}
+load().catch(e=>$('#list').innerHTML='<div class="spin">backend not reachable</div>');
+</script>
+</body></html>
