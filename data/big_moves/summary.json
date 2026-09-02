@@ -1,0 +1,218 @@
+{
+ "brent": {
+  "asset": "brent",
+  "label": "Brent",
+  "series": "fred.DCOILBRENTEU",
+  "kind": "price",
+  "first": "1987-05-20",
+  "last": "2026-08-25",
+  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
+  "n_episodes": 43,
+  "no_identified_event": 15,
+  "everyday_base_rate_pct": 18.3,
+  "p_class_given_big": {
+   "conflict_escalation": [
+    10,
+    43
+   ],
+   "sanctions": [
+    9,
+    43
+   ],
+   "infrastructure_attack": [
+    4,
+    43
+   ],
+   "opec_decision": [
+    14,
+    43
+   ],
+   "chokepoint_disruption": [
+    4,
+    43
+   ],
+   "policy_response": [
+    8,
+    43
+   ],
+   "demand_shock": [
+    5,
+    43
+   ]
+  },
+  "p_big_given_class": {
+   "chokepoint_disruption": [
+    4,
+    26
+   ],
+   "conflict_escalation": [
+    11,
+    50
+   ],
+   "demand_shock": [
+    5,
+    17
+   ],
+   "infrastructure_attack": [
+    5,
+    44
+   ],
+   "opec_decision": [
+    15,
+    51
+   ],
+   "policy_response": [
+    19,
+    56
+   ],
+   "sanctions": [
+    8,
+    55
+   ]
+  }
+ },
+ "wti": {
+  "asset": "wti",
+  "label": "WTI",
+  "series": "fred.DCOILWTICO",
+  "kind": "price",
+  "first": "1986-01-02",
+  "last": "2026-08-25",
+  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
+  "n_episodes": 46,
+  "no_identified_event": 14,
+  "everyday_base_rate_pct": 18.6,
+  "p_class_given_big": {
+   "opec_decision": [
+    16,
+    46
+   ],
+   "infrastructure_attack": [
+    5,
+    46
+   ],
+   "conflict_escalation": [
+    12,
+    46
+   ],
+   "sanctions": [
+    6,
+    46
+   ],
+   "demand_shock": [
+    5,
+    46
+   ],
+   "chokepoint_disruption": [
+    4,
+    46
+   ],
+   "policy_response": [
+    8,
+    46
+   ]
+  },
+  "p_big_given_class": {
+   "chokepoint_disruption": [
+    4,
+    26
+   ],
+   "conflict_escalation": [
+    13,
+    50
+   ],
+   "demand_shock": [
+    5,
+    17
+   ],
+   "infrastructure_attack": [
+    6,
+    45
+   ],
+   "opec_decision": [
+    15,
+    51
+   ],
+   "policy_response": [
+    20,
+    56
+   ],
+   "sanctions": [
+    6,
+    55
+   ]
+  }
+ },
+ "diesel_crack": {
+  "asset": "diesel_crack",
+  "label": "Diesel crack",
+  "series": "derived.diesel_crack",
+  "kind": "spread",
+  "first": "1986-06-02",
+  "last": "2026-08-03",
+  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
+  "n_episodes": 36,
+  "no_identified_event": 7,
+  "everyday_base_rate_pct": 16.8,
+  "p_class_given_big": {
+   "opec_decision": [
+    13,
+    36
+   ],
+   "conflict_escalation": [
+    16,
+    36
+   ],
+   "policy_response": [
+    14,
+    36
+   ],
+   "infrastructure_attack": [
+    8,
+    36
+   ],
+   "demand_shock": [
+    6,
+    36
+   ],
+   "sanctions": [
+    13,
+    36
+   ],
+   "chokepoint_disruption": [
+    11,
+    36
+   ]
+  },
+  "p_big_given_class": {
+   "chokepoint_disruption": [
+    10,
+    26
+   ],
+   "conflict_escalation": [
+    22,
+    50
+   ],
+   "demand_shock": [
+    5,
+    17
+   ],
+   "infrastructure_attack": [
+    15,
+    45
+   ],
+   "opec_decision": [
+    12,
+    51
+   ],
+   "policy_response": [
+    22,
+    56
+   ],
+   "sanctions": [
+    19,
+    55
+   ]
+  }
+ }
+}

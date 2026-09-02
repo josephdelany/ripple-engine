@@ -1,0 +1,74 @@
+"""The Story object and the v2 endpoints, on real corpus events (point-in-time) and a pasted story."""
+import json
+import sys
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+import ledger as L                 # noqa: E402
+import story_read as SR            # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _scratch_ledger(tmp_path, monkeypatch):
+    """Never let tests write to the real ledger."""
+    monkeypatch.setattr(L, "LEDGER_DIR", tmp_path)
+    monkeypatch.setattr(L, "CLAIMS", tmp_path / "claims.jsonl")
+    monkeypatch.setattr(L, "RESOLUTIONS", tmp_path / "resolutions.jsonl")
+
+
+def test_abqaiq_is_read_point_in_time():
+    s = SR.read(event_id="abqaiq_attack_2019", log=False)
+    assert s["event_class"] == "infrastructure_attack" and s["knowable"] == "2019-09-14"
+    pr = s["priced"]
+    assert pr["fan"] and pr["fan"]["n"] > 5 and pr["complete"]
+    assert pr["price_at_knowable"] and len(pr["path_pct"]) == 21
+    # every analog knowable before the event; the event itself excluded
+    assert pr["tails"]["high"]["date"] < "2019-09-14" and pr["tails"]["low"]["date"] < "2019-09-14"
+    assert pr["tails"]["high"]["event_id"] != "abqaiq_attack_2019"
+    br = s["branches"]
+    assert br["applicable"] and all(a["date"] < "2019-09-14" for a in br["analogs"])
+    assert s["significance"]["significance"] in ("MATERIAL", "IN_LINE", "NOISE")
+    assert s["propagation"]["hops"] and all("n" in h for h in s["propagation"]["hops"])
+    assert "corpus-derived" in s["trust"]["walk_forward"]["label"]
+
+
+def test_pasted_story_types_and_scores_claims_and_logs_them():
+    s = SR.read(arg="Analysts say the strike on Kharg Island could send Brent past $110 a barrel within weeks. "
+                    "Iran will retaliate against Gulf shipping, and fertilizer prices will spike.", log=True)
+    kinds = {c["kind"] for c in s["claims"]}
+    assert {"level", "escalation", "direction"} <= kinds
+    for c in s["claims"]:
+        v = c["verdict"]
+        assert v["verdict"] in ("SUPPORTED", "MIXED", "UNSUPPORTED", "THIN", "NO PRECEDENT", "UNCHECKABLE")
+        if v.get("r") is not None:
+            assert 0 <= v["r"] <= 1 and v["n"] >= 1
+    assert s["ledger_ids"] and len(L._rows(L.CLAIMS)) == len([c for c in s["claims"]])
+
+
+def test_off_topic_text_is_noise_without_fabrication():
+    s = SR.read(arg="The local library extended its weekend opening hours.", log=False)
+    assert s["event_class"] in (None, "")
+    assert s["significance"]["significance"] == "NOISE"
+    assert s["priced"].get("fan") is None
+    assert not s["propagation"]
+
+
+def test_v2_endpoints():
+    sys.path.insert(0, str(ROOT / "src"))
+    from fastapi.testclient import TestClient
+    import backend
+    c = TestClient(backend.app)
+    for u in ("/api/market_state", "/api/feed", "/api/big_moves?asset=brent", "/api/ledger", "/api/events?q=hormuz", "/app", "/big_moves"):
+        r = c.get(u)
+        assert r.status_code == 200, u
+    bm = c.get("/api/big_moves?asset=brent").json()
+    assert bm["n_episodes"] > 20 and "p_big_given_class" in bm and bm["registration"].startswith("BIG_MOVES_REGISTRATION")
+    st = c.get("/api/story?id=hormuz_closure_2026").json()
+    assert st["event_class"] == "chokepoint_disruption" and st["knowable"] == "2026-03-04"
+    assert c.get("/api/story?id=not_a_real_event").status_code == 404
+    assert c.post("/api/story", json={"text": ""}).status_code == 400
+    led = c.get("/api/ledger").json()
+    assert led["record_vs_narrative"]["status"] in ("seeding", "live") and "engine" in led

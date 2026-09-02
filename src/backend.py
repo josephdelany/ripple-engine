@@ -113,6 +113,11 @@ app.add_middleware(
 from terminal_api import register_terminal
 register_terminal(app)
 
+# v2 front door (NORTH_STAR.md): /app (Feed, Story, Big moves, Ledger) + /api/* behind it.
+# Isolated in api_v2.py; thin over feed_build / story_read / big_moves / ledger.
+from api_v2 import register as register_v2
+register_v2(app)
+
 WIDGETS = {
     "state_of_system": {
         "name": "State of the System",

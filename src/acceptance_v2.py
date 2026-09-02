@@ -94,12 +94,40 @@ def run():
     out.append(("A8 deep history", "PARTIAL" if pre90 < 60 else "PASS",
                 f"{pre90} sourced 1970-1989 events (target >=60); extractor/two-source path open"))
 
+    # A9 claim ledger: registered rules, append-only log + resolver exist, verdict cut-offs unit-tested,
+    # corpus-article pilot NOT yet run (PARTIAL until it is)
+    reg = (ROOT / "CLAIM_LEDGER_REGISTRATION.md").exists()
+    led = (ROOT / "src" / "ledger.py").exists() and (ROOT / "tests" / "test_v2_gate_ledger.py").exists()
+    claims_p = ROOT / "data" / "ledger" / "claims.jsonl"
+    n_claims = sum(1 for l in open(claims_p) if l.strip()) if claims_p.exists() else 0
+    out.append(("A9 claim ledger", "PARTIAL" if (reg and led) else "FAIL",
+                f"registration={reg}; ledger+tests={led}; {n_claims} claims logged; resolver from data; "
+                f"corpus-article pilot not yet run (record-vs-narrative board seeding)"))
+
+    # A10 materiality + feed: gate derived from big-move rates (not severity), NOISE shelved, ranked
+    fp = ROOT / "data" / "feed.json"
+    fd = json.loads(fp.read_text()) if fp.exists() else {}
+    a10 = bool(fd.get("counts")) and "noise" in fd and "material" in fd and "CLAIM_LEDGER_REGISTRATION" in (fd.get("gate") or "")
+    out.append(("A10 materiality + feed", _u(a10),
+                f"feed {fd.get('day')}: {fd.get('counts')}; gate={fd.get('gate')}"))
+
+    # A11 big moves: registered thresholds, per-asset episodes with attribution or NO IDENTIFIED EVENT,
+    # two-way rates published, gate demonstrably derived from them, page on the surface
+    bmr = (ROOT / "BIG_MOVES_REGISTRATION.md").exists()
+    sp = ROOT / "data" / "big_moves" / "summary.json"
+    sm = json.loads(sp.read_text()) if sp.exists() else {}
+    a11 = bmr and all(k in (sm.get("brent") or {}) for k in ("p_big_given_class", "p_class_given_big", "everyday_base_rate_pct")) \
+        and (ROOT / "src" / "big_moves.html").exists()
+    out.append(("A11 big moves", _u(a11),
+                f"registration={bmr}; assets={list(sm)}; brent episodes={(sm.get('brent') or {}).get('n_episodes')}, "
+                f"no identified event={(sm.get('brent') or {}).get('no_identified_event')}; page=src/big_moves.html"))
+
     conn.close()
-    print("=== RIPPLE ENGINE v2 — acceptance A1-A8 ===")
+    print("=== RIPPLE ENGINE v2 — acceptance A1-A11 ===")
     for name, status, ev in out:
         print(f"[{status:^7}] {name}\n           {ev}")
     npass = sum(1 for _, s, _ in out if s == "PASS")
-    print(f"\n{npass}/8 PASS, {sum(1 for _,s,_ in out if s=='PARTIAL')} PARTIAL, "
+    print(f"\n{npass}/{len(out)} PASS, {sum(1 for _,s,_ in out if s=='PARTIAL')} PARTIAL, "
           f"{sum(1 for _,s,_ in out if s=='FAIL')} FAIL")
     return out
 

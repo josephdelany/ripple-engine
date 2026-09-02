@@ -39,6 +39,10 @@ STEPS = [
     ("coverage",  ["src/coverage.py"],  False),   # per-domain coverage + dead-feed check -> coverage_report.json
     ("status",    ["src/status.py"],    False),   # one GREEN/AMBER/RED verdict -> engine_status.json
     ("digest",    ["src/digest.py"],    False),
+    ("big_moves", ["src/big_moves.py"], False),    # v2: market-defined significance (registered thresholds)
+    ("big_moves_page", ["src/big_moves_page.py"], False),
+    ("feed",      ["src/feed_build.py"], False),   # v2: market state + the gated, ranked Feed
+    ("ledger",    ["src/ledger.py", "resolve"], False),   # v2: resolve claims past horizon, from data
 ]
 LAST_RUN = ROOT / "data" / "last_run.json"
 

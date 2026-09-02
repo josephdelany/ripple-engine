@@ -1,0 +1,2096 @@
+{
+ "day": "2026-08-31",
+ "generated_at": "2026-09-02T03:57:12+00:00",
+ "material": [
+  {
+   "headline": "India\u2019s PM Modi urges end to Ukraine war in talks with Russia\u2019s Putin",
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/31/indias-pm-modi-urges-end-to-ukraine-war-in-talks-with-russias-putin?traffic_source=rss",
+   "source": "rss:aljazeera",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.india",
+    "country.russia",
+    "country.ukraine"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Oil Tankers Make Fortunes During War as Sinokor Dominates",
+   "url": "https://gcaptain.com/oil-tankers-make-fortunes-during-war-as-sinokor-dominates/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "supplychain.tankers"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Iran Weakened but Defiant After 6 Months of War",
+   "url": "https://oilprice.com/Geopolitics/Middle-East/Iran-Weakened-but-Defiant-After-6-Months-of-War.html",
+   "source": "rss:oilprice",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Lebanon: Civilian risks grow as military activity continues, UN says",
+   "url": "https://news.un.org/feed/view/en/story/2026/08/1168215",
+   "source": "rss:un_news",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.lebanon"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "War on Iran: US bombs Iran",
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/31/war-on-iran-us-bombs-iran?traffic_source=rss",
+   "source": "rss:aljazeera",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "How the US-Canada trade war is being felt on both sides of the border",
+   "url": "https://www.bbc.co.uk/news/articles/c4g4r4lxx25o?at_medium=RSS&at_campaign=rss",
+   "source": "rss:bbc_world",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.canada"
+   ],
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "$5.3 million a new record for Panama Canal transit",
+   "url": "https://www.freightwaves.com/news/5-3-million-a-new-record-for-panama-canal-transit",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.panama"
+   ],
+   "significance": "MATERIAL",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Panama Canal Loosens Neopanamax Booking Rules as Capacity Tightens",
+   "url": "https://gcaptain.com/panama-canal-loosens-neopanamax-booking-rules-as-capacity-tightens/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.panama"
+   ],
+   "significance": "MATERIAL",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Vessels Crossing Strait Of Hormuz Drop To 5 Per Day",
+   "url": "https://gcaptain.com/vessels-crossing-strait-of-hormuz-drop-to-5-per-day/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.hormuz"
+   ],
+   "significance": "MATERIAL",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "WHO reports more than 3,200 attacks on Ukraine\u2019s healthcare system since full-scale invasion",
+   "url": "https://news.un.org/feed/view/en/story/2026/08/1168226",
+   "source": "rss:un_news",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.ukraine",
+    "institution.who"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "New US \u2018pinpoint\u2019 missile raises civilian risk concerns after deadly Iran strikes",
+   "url": "https://www.timesofisrael.com/new-us-pinpoint-missile-raises-civilian-risk-concerns-after-deadly-iran-strikes/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "US and Iran Exchange Attacks for First Time in About a Month",
+   "url": "https://gcaptain.com/us-and-iran-exchange-attacks-for-first-time-in-about-a-month/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Iran Dismisses Trump Claim of Kharg Attack as Hostilities Return",
+   "url": "https://oilprice.com/Latest-Energy-News/World-News/Iran-Dismisses-Trump-Claim-of-Kharg-Attack-as-Hostilities-Return.html",
+   "source": "rss:oilprice",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Dangote refinery drives increase in petroleum shipments from Nigeria",
+   "url": "https://www.eia.gov/todayinenergy/detail.php?id=68004",
+   "source": "rss:eia_energy",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.nigeria"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "US and Iran trade strikes for first time in weeks",
+   "url": "https://www.bbc.co.uk/news/articles/cx2z72x5z1po?at_medium=RSS&at_campaign=rss",
+   "source": "rss:bbc_world",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iran"
+   ],
+   "significance": "MATERIAL",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  }
+ ],
+ "in_line": [
+  {
+   "headline": "Trump vows response to Iranian strike on US troops in Jordan as tensions ratchet up",
+   "url": "https://www.timesofisrael.com/trump-vows-response-to-iranian-strike-on-us-troops-in-jordan-as-tensions-ratchet-up/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "FedEx to invest $150M for air cargo terminal in Delhi",
+   "url": "https://www.freightwaves.com/news/fedex-to-invest-150m-for-air-cargo-terminal-in-delhi",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Averitt expands logistics network with Jackson, Mississippi, facility",
+   "url": "https://www.freightwaves.com/news/averitt-expands-logistics-network-with-jackson-mississippi-facility",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Motive Restricted Highway\u2019s Data Access Over a Payment Demand",
+   "url": "https://www.freightwaves.com/news/motive-restricted-highways-data-access-over-a-payment-demand",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": "demand_shock",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "demand shock sits inside a big Diesel crack move 29.4% of the time (5 of 17) vs 16.8% for any random day \u2014 1.8\u00d7 the everyday rate.",
+   "ratio": 1.75,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 17,
+     "rate_pct": 29.4,
+     "base_pct": 18.3,
+     "ratio": 1.61,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 5,
+     "n": 17,
+     "rate_pct": 29.4,
+     "base_pct": 16.8,
+     "ratio": 1.75,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Port of Los Angeles locks in ONE terminal for 30 more years",
+   "url": "https://www.freightwaves.com/news/port-of-los-angeles-locks-in-one-terminal-for-30-more-years",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Eight petroleum liquids pipeline projects have been completed since the start of 2025",
+   "url": "https://www.eia.gov/todayinenergy/detail.php?id=68024",
+   "source": "rss:eia_energy",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "As wars spread, the global food system unravels",
+   "url": "https://news.un.org/feed/view/en/story/2026/08/1168201",
+   "source": "rss:un_news",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Western Balkans truck drivers threaten EU border blockade",
+   "url": "https://www.aljazeera.com/economy/2026/8/31/western-balkans-truck-drivers-threaten-eu-border-blockade?traffic_source=rss",
+   "source": "rss:aljazeera",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Deadly strike on Kyiv warehouse prompts evacuations",
+   "url": "https://www.bbc.co.uk/news/videos/cy8z979y9e4o?at_medium=RSS&at_campaign=rss",
+   "source": "rss:bbc_world",
+   "when": "2026-08-31T20:25",
+   "event_class": "infrastructure_attack",
+   "entities": [],
+   "significance": "IN_LINE",
+   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
+   "ratio": 1.98,
+   "rates": {
+    "brent": {
+     "k": 5,
+     "n": 44,
+     "rate_pct": 11.4,
+     "base_pct": 18.3,
+     "ratio": 0.62,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 15,
+     "n": 45,
+     "rate_pct": 33.3,
+     "base_pct": 16.8,
+     "ratio": 1.98,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side",
+    "no_entity"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": null,
+   "headline_verdict": null
+  }
+ ],
+ "noise": [
+  {
+   "headline": "From \u2018Yentl\u2019 to Netflix: 50 years into her career, actress Tovah Feldshuh gets a close-up",
+   "url": "https://www.timesofisrael.com/from-yentl-to-netflix-50-years-into-her-career-actress-tovah-feldshuh-gets-a-close-up/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Haredi anti-draft protesters block roads at IDF induction center for second day",
+   "url": "https://www.timesofisrael.com/haredi-anti-draft-protesters-block-roads-at-idf-induction-center-for-second-day/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Spanish PM accuses Israel, Russia of spreading disinformation on Ceuta migrant crisis",
+   "url": "https://www.timesofisrael.com/spanish-pm-accuses-israel-russia-of-spreading-disinformation-around-ceuta-migrant-crisis/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.israel",
+    "country.russia"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Rep. Randy Fine blasts \u2018rise of Islam\u2019 and Muslim politicians at Jewish GOP confab",
+   "url": "https://www.timesofisrael.com/rep-randy-fine-blasts-rise-of-islam-and-muslim-politicians-at-jewish-gop-confab/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Second Israeli confirmed missing as death toll continues to climb in Nepal floods",
+   "url": "https://www.timesofisrael.com/second-israeli-confirmed-missing-as-death-toll-continues-to-climb-in-nepal-floods/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Police investigate after man filmed asleep at the wheel of Tesla",
+   "url": "https://www.timesofisrael.com/police-investigate-after-man-filmed-asleep-at-the-wheel-of-tesla/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Palestinian banking crisis averted, as Israeli bank delays plan to halt collaboration",
+   "url": "https://www.timesofisrael.com/palestinian-banking-crisis-averted-as-israeli-bank-delays-plan-to-halt-collaboration/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Met Museum cancels planned John Galliano exhibit after backlash over antisemitism",
+   "url": "https://www.timesofisrael.com/met-museum-cancels-planned-john-galliano-exhibit-after-backlash-over-antisemitism/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Vance to privately address Republican Jewish Coalition amid tensions on Israel",
+   "url": "https://www.timesofisrael.com/vance-to-privately-address-republican-jewish-coalition-amid-tensions-on-israel/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.israel"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Nobel Prize-winning Israeli chemist Ada Yonath dies at 87",
+   "url": "https://www.timesofisrael.com/nobel-prize-winning-israeli-chemist-ada-yonath-dies-at-87/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Bar Kalifa tapped as top IDF West Bank officer, weeks after Katz announced move on TV",
+   "url": "https://www.timesofisrael.com/bar-kalifa-tapped-as-top-idf-west-bank-officer-weeks-after-katz-announced-move-on-tv/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Jewish former MK Yoav Segalovitz announces unprecedented run with Arab Ra\u2019am party",
+   "url": "https://www.timesofisrael.com/jewish-former-mk-yoav-segalovitz-announces-unprecedented-run-with-arab-raam-party/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Reefer Rejections Stay Hot as Intermodal Wins 33%",
+   "url": "https://www.freightwaves.com/news/reefer-rejections-stay-hot-as-intermodal-wins-33",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
+   "url": "https://www.freightwaves.com/news/autonomous-trucks-are-here-einrides-27-revenue-jump",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Diesel Prices: It\u2019s a Refining Crisis, Not Crude",
+   "url": "https://www.freightwaves.com/news/diesel-prices-its-a-refining-crisis-not-crude",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "commodity.diesel"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "DeepFabric lands Kenco as It scales supply chain agents",
+   "url": "https://www.freightwaves.com/news/deepfabric-kenco-supply-chain-agents",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Arrive Logistics plans 1,000 hires after Mubadala majority investment",
+   "url": "https://www.freightwaves.com/news/arrive-logistics-plans-1000-hires-after-mubadala-majority-investment",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Gofo parcel network quickly mushrooms in 2026",
+   "url": "https://www.freightwaves.com/news/gofo-parcel-network-quickly-mushrooms-in-2026",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "UPDATE: DP World shutting down SeaRates digital freight platform",
+   "url": "https://www.freightwaves.com/news/dp-world-reportedly-shutting-down-searates-digital-freight-platform",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Freight bankruptcies pile up as carriers, logistics firms seek court protection",
+   "url": "https://www.freightwaves.com/news/freight-bankruptcies-pile-up-as-carriers-logistics-firms-seek-court-protection",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "AMD lands Kodiak, a first in autonomous truck compute",
+   "url": "https://www.freightwaves.com/news/amd-kodiak-autonomous-truck-compute",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "\u201cThis May Not Be the Right Time to Jump Into the Small Carrier Market.\u201d Two Top Transportation Attorneys on Whether the Small Carrier Has a Future.",
+   "url": "https://www.freightwaves.com/news/this-may-not-be-the-right-time-to-jump-into-the-small-carrier-market-two-top-transportation-attorneys-on-whether-the-small-carrier-has-a-future",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Union Pacific, Norfolk Southern defend rail merger application as STB review advances",
+   "url": "https://www.freightwaves.com/news/union-pacific-norfolk-southern-defend-rail-merger-application-as-stb-review-advances",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "700 pounds of meth hidden in cucumber load leads to 15-year prison sentences",
+   "url": "https://www.freightwaves.com/news/700-pounds-of-meth-hidden-in-cucumber-load-leads-to-15-year-prison-sentences",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Drewry index edges lower on decline in trans-Pacific rates",
+   "url": "https://www.freightwaves.com/news/drewry-index-edges-lower-on-decline-in-trans-pacific-rates",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "macro.rates"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Cargo Theft Changed: Fewer Loads, Higher-Dollar Targets",
+   "url": "https://www.freightwaves.com/news/cargo-theft-changed-fewer-loads-higher-dollar-targets",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Tender Rejections at 13.5%: Is Freight Bottoming?",
+   "url": "https://www.freightwaves.com/news/tender-rejections-at-13-5-is-freight-bottoming",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Cab Clutter Can Cost Fleets Millions",
+   "url": "https://www.freightwaves.com/news/cab-clutter-can-cost-fleets-millions",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "$100M Acquisition: How Descartes & Tai Boost Broker Efficiency",
+   "url": "https://www.freightwaves.com/news/100m-acquisition-how-descartes-tai-boost-broker-efficiency",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "FMCSA tests giving truckers power to pause 14-hour clock",
+   "url": "https://www.freightwaves.com/news/fmcsa-tests-giving-truckers-power-to-pause-14-hour-clock",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "FMCSA, New York ready to rumble over non-domiciled CDL rules",
+   "url": "https://www.freightwaves.com/news/fmcsa-new-york-ready-to-rumble-over-non-domiciled-cdl-rules",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Chemical shipments percolate in latest rail data",
+   "url": "https://www.freightwaves.com/news/chemical-shipments-percolate-in-latest-rail-data",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Reported cargo theft rises 5% in Q2 as Southern California remains a hot spot",
+   "url": "https://www.freightwaves.com/news/reported-cargo-theft-rises-5-in-q2-as-southern-california-remains-a-hot-spot",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Arizona police recover $400K in stolen cargo during stops 20 minutes apart",
+   "url": "https://www.freightwaves.com/news/arizona-police-recover-400k-in-stolen-cargo-during-stops-20-minutes-apart",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "BLS: more transportation/warehousing workers than believed",
+   "url": "https://www.freightwaves.com/news/bls-more-transportation-warehousing-workers-than-believed",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "China gains as geopolitics redraws new global container port rankings",
+   "url": "https://www.freightwaves.com/news/china-gains-as-geopolitics-redraws-new-global-container-port-rankings",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.china",
+    "macro.geopolitics"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Bot Auto commits to U.S.-based remote assistance operators",
+   "url": "https://www.freightwaves.com/news/bot-auto-remote-assistance-operators",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Trump administration moves to unwind Obama-era truck engine efficiency rules",
+   "url": "https://www.freightwaves.com/news/trump-administration-moves-to-unwind-obama-era-truck-engine-efficiency-rules",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Motive and Highway Restore ELD Data Access After Integration Dispute",
+   "url": "https://www.freightwaves.com/news/motive-and-highway-restore-eld-data-access-after-integration-dispute",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Canada Post to launch weekend parcel delivery by year\u2019s end",
+   "url": "https://www.freightwaves.com/news/canada-post-to-launch-weekend-parcel-delivery-by-years-end",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.canada"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Broker Transparency Proposal Clears FMCSA and Heads to the White House",
+   "url": "https://www.freightwaves.com/news/broker-transparency-proposal-clears-fmcsa-and-heads-to-the-white-house",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Supply driven trucking market cycle explained in the data",
+   "url": "https://www.freightwaves.com/news/supply-driven-trucking-market-cycle-explained-in-the-data",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Borderlands Mexico: Nuevo Le\u00f3n governor pitches border boom as Texas-Mexico freight surges",
+   "url": "https://www.freightwaves.com/news/borderlands-mexico-nuevo-leon-governor-pitches-border-boom-as-texas-mexico-freight-surges",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "2 key trucking groups in filing raise alarm on Penske decision fallout",
+   "url": "https://www.freightwaves.com/news/2-key-trucking-groups-in-filing-raise-alarm-on-penske-decision-fallout",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Teamsters suit tests California\u2019s driverless truck rules",
+   "url": "https://www.freightwaves.com/news/california-driverless-truck-rules",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Vance, EPA chief call for investigation into Biden administration response to East Palestine derailment",
+   "url": "https://www.freightwaves.com/news/vance-epa-chief-call-for-investigation-into-biden-administration-response-to-east-palestine-derailment",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Peak Season Is Coming \u2013 But Where Is The Freight Surge?",
+   "url": "https://www.freightwaves.com/news/peak-season-is-coming-but-where-is-the-freight-surge",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Inside The Railroad Security Operation Taking On Cargo Theft",
+   "url": "https://www.freightwaves.com/news/inside-the-railroad-security-operation-taking-on-cargo-theft",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "$647K Nike cargo recovered near Chicago after fraudulent Memphis pickup",
+   "url": "https://www.freightwaves.com/news/647k-nike-cargo-recovered-near-chicago-after-fraudulent-memphis-pickup",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Autonomous Deliveries Could Go Mainstream By 2030",
+   "url": "https://www.freightwaves.com/news/autonomous-deliveries-could-go-mainstream-by-2030",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "DOT shuts down 110 truck driving schools in CDL fraud crackdown",
+   "url": "https://www.freightwaves.com/news/dot-shuts-down-110-truck-driving-schools-in-cdl-fraud-crackdown",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Rail Freight Forecast: Coal Volumes Set for SHOCKING Q4 Uptick?",
+   "url": "https://www.freightwaves.com/news/rail-freight-forecast-coal-volumes-set-for-shocking-q4-uptick",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Freight Brokers: Why Your Carrier Vetting Process MUST Change Now",
+   "url": "https://www.freightwaves.com/news/freight-brokers-why-your-carrier-vetting-process-must-change-now",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "US-Mexico Border Freight Surges 1000% at Laredo Bridge | Nearshoring Impact",
+   "url": "https://www.freightwaves.com/news/us-mexico-border-freight-surges-1000-at-laredo-bridge-nearshoring-impact",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "supplychain.freight"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Out of its depth: Why 52 feet could equal millions of dollars for this U.S. port",
+   "url": "https://www.freightwaves.com/news/out-of-its-depth-why-52-feet-could-equal-millions-of-dollars-for-this-u-s-port",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "California police investigate $70K beer cargo theft after fraudulent pickups",
+   "url": "https://www.freightwaves.com/news/california-police-investigate-70k-beer-cargo-theft-after-fraudulent-pickups",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "North America must \u2018join forces\u2019 to compete as global trade fragments, expert says",
+   "url": "https://www.freightwaves.com/news/north-america-must-join-forces-to-compete-as-global-trade-fragments-expert-says",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "US Carrier Visit to Thailand\u2019s Pattaya Lifts Hope and Sex-Tourism Risk",
+   "url": "https://gcaptain.com/us-carrier-visit-to-thailands-pattaya-lifts-hope-and-sex-tourism-risk/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.thailand"
+   ],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Cheniere Ships 5,000th LNG Cargo as Corpus Christi Expansion Wraps Up",
+   "url": "https://gcaptain.com/cheniere-ships-5000th-lng-cargo-as-corpus-christi-expansion-wraps-up/",
+   "source": "rss:gcaptain",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Boliden to acquire 64.7% stake in Nexa Resources from Votorantim",
+   "url": "https://www.mining-technology.com/news/boliden-to-acquire-stake-in-nexa-resources/",
+   "source": "rss:mining_tech",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  }
+ ],
+ "counts": {
+  "day_total": 134,
+  "gdelt_hidden": 11,
+  "material": 15,
+  "in_line": 9,
+  "noise": 99
+ },
+ "gate": "CLAIM_LEDGER_REGISTRATION.md \u00a71 (+ Amendments 1-2)",
+ "note": "ranked by gate ratio, then headline-vs-record gap"
+}

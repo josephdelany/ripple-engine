@@ -44,14 +44,19 @@ for s in "${STEPS[@]}"; do
   if python3 src/$s >/dev/null 2>&1; then echo "   ok  $s"; else echo "   WARN  $s (skipped)"; fi
 done
 python3 src/digest.py >/dev/null 2>&1 && echo "   ok  digest.py"
+# v2 front door (NORTH_STAR.md): market-defined significance, the gated Feed, the claim ledger
+for s in big_moves.py big_moves_page.py feed_build.py; do
+  if python3 src/$s >/dev/null 2>&1; then echo "   ok  $s"; else echo "   WARN  $s (skipped)"; fi
+done
+python3 src/ledger.py resolve >/dev/null 2>&1 && echo "   ok  ledger resolve"
 
 if [ "$1" = "--build" ]; then
   echo "==> build complete (no server). data/digest.html + data/*.json refreshed."
   exit 0
 fi
 
-echo "==> opening the daily read…"
-open data/digest.html 2>/dev/null || echo "   (open data/digest.html in your browser)"
+echo "==> the front door is http://127.0.0.1:5050/app  (Feed · Story · Big moves · Ledger)"
+( sleep 3; open "http://127.0.0.1:5050/app" 2>/dev/null ) &
 
-echo "==> starting the cockpit at http://127.0.0.1:5050  (connect it in OpenBB Workspace; Ctrl+C to stop)"
+echo "==> starting the cockpit at http://127.0.0.1:5050  (Ctrl+C to stop)"
 exec python3 src/backend.py

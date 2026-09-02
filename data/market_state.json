@@ -1,0 +1,230 @@
+{
+ "generated_at": "2026-09-02T03:57:11+00:00",
+ "assets": [
+  {
+   "asset": "Brent",
+   "series": "fred.DCOILBRENTEU",
+   "unit": "$/bbl",
+   "value": 88.24,
+   "as_of": "2026-08-25",
+   "pct_of_history": 84,
+   "chg20_pct": 3.2,
+   "vol20_pct": 94,
+   "rhymes": [
+    {
+     "month": "2009-02",
+     "pct": 81,
+     "chg20": 3.0
+    },
+    {
+     "month": "2009-03",
+     "pct": 82,
+     "chg20": 8.0
+    },
+    {
+     "month": "2000-04",
+     "pct": 92,
+     "chg20": 0.1
+    }
+   ],
+   "history_from": "1987-05-20"
+  },
+  {
+   "asset": "WTI",
+   "series": "fred.DCOILWTICO",
+   "unit": "$/bbl",
+   "value": 83.9,
+   "as_of": "2026-08-25",
+   "pct_of_history": 85,
+   "chg20_pct": 3.7,
+   "vol20_pct": 83,
+   "rhymes": [
+    {
+     "month": "2009-04",
+     "pct": 84,
+     "chg20": 3.9
+    },
+    {
+     "month": "1996-11",
+     "pct": 93,
+     "chg20": 1.9
+    },
+    {
+     "month": "2012-06",
+     "pct": 91,
+     "chg20": 2.2
+    }
+   ],
+   "history_from": "1986-01-02"
+  },
+  {
+   "asset": "Diesel crack",
+   "series": "derived.diesel_crack",
+   "unit": "$/bbl",
+   "value": 76.3,
+   "as_of": "2026-08-03",
+   "pct_of_history": 99,
+   "chg20_pct": 17.3,
+   "vol20_pct": 36,
+   "rhymes": [
+    {
+     "month": "2000-12",
+     "pct": 99,
+     "chg20": 18.5
+    },
+    {
+     "month": "2005-02",
+     "pct": 98,
+     "chg20": 22.0
+    },
+    {
+     "month": "2006-11",
+     "pct": 96,
+     "chg20": 18.6
+    }
+   ],
+   "history_from": "1986-06-02"
+  },
+  {
+   "asset": "Gasoline crack",
+   "series": "derived.gasoline_crack",
+   "unit": "$/bbl",
+   "value": 60.12,
+   "as_of": "2026-08-25",
+   "pct_of_history": 100,
+   "chg20_pct": -5.4,
+   "vol20_pct": 10,
+   "rhymes": [
+    {
+     "month": "2006-06",
+     "pct": 99,
+     "chg20": -5.1
+    },
+    {
+     "month": "2004-05",
+     "pct": 99,
+     "chg20": -6.9
+    },
+    {
+     "month": "2022-06",
+     "pct": 100,
+     "chg20": -7.2
+    }
+   ],
+   "history_from": "1986-06-02"
+  },
+  {
+   "asset": "Henry Hub",
+   "series": "fred.DHHNGSP",
+   "unit": "$/MMBtu",
+   "value": 2.7,
+   "as_of": "2026-08-25",
+   "pct_of_history": 28,
+   "chg20_pct": 1.9,
+   "vol20_pct": 51,
+   "rhymes": [
+    {
+     "month": "2016-10",
+     "pct": 28,
+     "chg20": 0.4
+    },
+    {
+     "month": "2017-10",
+     "pct": 27,
+     "chg20": 4.0
+    },
+    {
+     "month": "2013-01",
+     "pct": 34,
+     "chg20": 0.9
+    }
+   ],
+   "history_from": "1997-01-07"
+  },
+  {
+   "asset": "TTF",
+   "series": "yf.ttf",
+   "unit": "\u20ac/MWh",
+   "value": 70.27,
+   "as_of": "2026-08-31",
+   "pct_of_history": 86,
+   "chg20_pct": 21.6,
+   "vol20_pct": 54,
+   "rhymes": [
+    {
+     "month": "2021-04",
+     "pct": 89,
+     "chg20": 21.5
+    },
+    {
+     "month": "2023-09",
+     "pct": 71,
+     "chg20": 19.5
+    },
+    {
+     "month": "2021-03",
+     "pct": 67,
+     "chg20": 22.4
+    }
+   ],
+   "history_from": "2017-10-23"
+  },
+  {
+   "asset": "JKM LNG",
+   "series": "yf.jkm",
+   "unit": "$/MMBtu",
+   "value": 23.17,
+   "as_of": "2026-08-28",
+   "pct_of_history": 89,
+   "chg20_pct": 8.0,
+   "vol20_pct": 16,
+   "rhymes": [
+    {
+     "month": "2023-09",
+     "pct": 80,
+     "chg20": 10.8
+    },
+    {
+     "month": "2017-11",
+     "pct": 84,
+     "chg20": 8.7
+    },
+    {
+     "month": "2024-06",
+     "pct": 74,
+     "chg20": 5.6
+    }
+   ],
+   "history_from": "2014-07-29"
+  },
+  {
+   "asset": "Propane",
+   "series": "fred.DPROPANEMBTX",
+   "unit": "$/gal",
+   "value": 0.69,
+   "as_of": "2026-08-25",
+   "pct_of_history": 51,
+   "chg20_pct": 3.6,
+   "vol20_pct": 81,
+   "rhymes": [
+    {
+     "month": "2017-05",
+     "pct": 54,
+     "chg20": 5.7
+    },
+    {
+     "month": "2023-12",
+     "pct": 54,
+     "chg20": 5.9
+    },
+    {
+     "month": "2016-11",
+     "pct": 51,
+     "chg20": 1.2
+    }
+   ],
+   "history_from": "1992-07-09"
+  }
+ ],
+ "note": "percentile of the asset's own full history; 'rhymes' = nearest month-end state on (level pct, 20d change, vol pct), descriptive only"
+}

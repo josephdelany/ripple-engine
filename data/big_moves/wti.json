@@ -1,0 +1,1399 @@
+{
+ "asset": "wti",
+ "label": "WTI",
+ "series": "fred.DCOILWTICO",
+ "kind": "price",
+ "first": "1986-01-02",
+ "last": "2026-08-25",
+ "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
+ "n_episodes": 46,
+ "no_identified_event": 14,
+ "everyday_base_rate_pct": 18.6,
+ "p_class_given_big": {
+  "opec_decision": [
+   16,
+   46
+  ],
+  "infrastructure_attack": [
+   5,
+   46
+  ],
+  "conflict_escalation": [
+   12,
+   46
+  ],
+  "sanctions": [
+   6,
+   46
+  ],
+  "demand_shock": [
+   5,
+   46
+  ],
+  "chokepoint_disruption": [
+   4,
+   46
+  ],
+  "policy_response": [
+   8,
+   46
+  ]
+ },
+ "p_big_given_class": {
+  "chokepoint_disruption": [
+   4,
+   26
+  ],
+  "conflict_escalation": [
+   13,
+   50
+  ],
+  "demand_shock": [
+   5,
+   17
+  ],
+  "infrastructure_attack": [
+   6,
+   45
+  ],
+  "opec_decision": [
+   15,
+   51
+  ],
+  "policy_response": [
+   20,
+   56
+  ],
+  "sanctions": [
+   6,
+   55
+  ]
+ },
+ "episodes": [
+  {
+   "window": 60,
+   "onset": "1986-01-06",
+   "end": "1986-03-31",
+   "change": -61.4,
+   "sign": "-",
+   "from_": 26.53,
+   "to": 10.25,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 84,
+   "events": [
+    {
+     "id": "opec_price_collapse_1986",
+     "date": "1986-01-01",
+     "type": "opec_decision",
+     "title": "Saudi abandons swing-producer role; 1986 price collapse",
+     "lag_days": -5,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "1986-04-21",
+   "end": "1986-05-19",
+   "change": 37.3,
+   "sign": "+",
+   "from_": 12.48,
+   "to": 17.13,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "1986-07-25",
+   "end": "1986-08-22",
+   "change": 42.9,
+   "sign": "+",
+   "from_": 10.83,
+   "to": 15.48,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": [
+    {
+     "id": "iraq_kharg_1986",
+     "date": "1986-08-12",
+     "type": "infrastructure_attack",
+     "title": "Iraqi raids on Iran's Sirri Island oil terminal",
+     "lag_days": 18,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "1986-12-09",
+   "end": "1987-01-09",
+   "change": 25.8,
+   "sign": "+",
+   "from_": 14.93,
+   "to": 18.78,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 31,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "1987-11-23",
+   "end": "1987-12-21",
+   "change": -21.7,
+   "sign": "-",
+   "from_": 19.31,
+   "to": 15.12,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 60,
+   "onset": "1988-10-24",
+   "end": "1989-01-18",
+   "change": 48.4,
+   "sign": "+",
+   "from_": 12.94,
+   "to": 19.2,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": []
+  },
+  {
+   "window": 60,
+   "onset": "1990-07-06",
+   "end": "1990-09-27",
+   "change": 141.2,
+   "sign": "+",
+   "from_": 16.49,
+   "to": 39.77,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 83,
+   "events": [
+    {
+     "id": "iraq_invades_kuwait_1990",
+     "date": "1990-08-02",
+     "type": "conflict_escalation",
+     "title": "Iraq invades Kuwait",
+     "lag_days": 27,
+     "anticipated": true
+    },
+    {
+     "id": "iraq_un_661_embargo_1990",
+     "date": "1990-08-06",
+     "type": "sanctions",
+     "title": "UN Resolution 661 oil embargo on Iraq",
+     "lag_days": 31,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "1990-11-28",
+   "end": "1991-02-22",
+   "change": -47.6,
+   "sign": "-",
+   "from_": 33.28,
+   "to": 17.43,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": [
+    {
+     "id": "desert_storm_air_campaign_1991",
+     "date": "1991-01-17",
+     "type": "conflict_escalation",
+     "title": "Operation Desert Storm air campaign begins",
+     "lag_days": 50,
+     "anticipated": true
+    },
+    {
+     "id": "kuwait_oil_fires_1991",
+     "date": "1991-02-22",
+     "type": "infrastructure_attack",
+     "title": "Retreating Iraqi forces torch Kuwaiti oil wells",
+     "lag_days": 86,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "1996-03-13",
+   "end": "1996-04-11",
+   "change": 22.7,
+   "sign": "+",
+   "from_": 20.49,
+   "to": 25.15,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "1998-03-26",
+   "end": "1998-04-24",
+   "change": -21.8,
+   "sign": "-",
+   "from_": 16.92,
+   "to": 13.23,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": [
+    {
+     "id": "opec_cut_march_1998",
+     "date": "1998-03-30",
+     "type": "opec_decision",
+     "title": "OPEC agrees first 1998 production cut in Vienna",
+     "lag_days": 4,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "1998-09-30",
+   "end": "1998-12-21",
+   "change": -32.9,
+   "sign": "-",
+   "from_": 16.19,
+   "to": 10.86,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 82,
+   "events": [
+    {
+     "id": "operation_desert_fox_1998",
+     "date": "1998-12-16",
+     "type": "conflict_escalation",
+     "title": "Operation Desert Fox airstrikes on Iraq",
+     "lag_days": 77,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "1999-02-16",
+   "end": "1999-05-05",
+   "change": 66.0,
+   "sign": "+",
+   "from_": 11.38,
+   "to": 18.89,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 78,
+   "events": [
+    {
+     "id": "opec_cut_1999",
+     "date": "1999-03-23",
+     "type": "opec_decision",
+     "title": "OPEC ratifies 1.7 mb/d production cut",
+     "lag_days": 35,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "1999-10-28",
+   "end": "1999-11-26",
+   "change": 26.1,
+   "sign": "+",
+   "from_": 21.59,
+   "to": 27.22,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2000-03-13",
+   "end": "2000-04-10",
+   "change": -25.5,
+   "sign": "-",
+   "from_": 32.11,
+   "to": 23.91,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": [
+    {
+     "id": "opec_hike_march_2000",
+     "date": "2000-03-28",
+     "type": "opec_decision",
+     "title": "OPEC raises quotas 1.452 million bpd",
+     "lag_days": 15,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2000-06-23",
+   "end": "2000-07-25",
+   "change": -19.8,
+   "sign": "-",
+   "from_": 34.76,
+   "to": 27.89,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 32,
+   "events": [
+    {
+     "id": "opec_hike_june_2000",
+     "date": "2000-06-21",
+     "type": "opec_decision",
+     "title": "OPEC lifts quotas 708000 bpd in Vienna",
+     "lag_days": -2,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2000-11-27",
+   "end": "2000-12-21",
+   "change": -28.1,
+   "sign": "-",
+   "from_": 36.24,
+   "to": 26.06,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 24,
+   "events": []
+  },
+  {
+   "window": 60,
+   "onset": "2001-09-14",
+   "end": "2001-12-11",
+   "change": -39.0,
+   "sign": "-",
+   "from_": 29.59,
+   "to": 18.04,
+   "threshold": 0.205,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 88,
+   "events": [
+    {
+     "id": "september_11_attacks_2001",
+     "date": "2001-09-11",
+     "type": "conflict_escalation",
+     "title": "September 11 terrorist attacks",
+     "lag_days": -3,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2002-02-25",
+   "end": "2002-03-25",
+   "change": 26.9,
+   "sign": "+",
+   "from_": 20.24,
+   "to": 25.69,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2003-02-26",
+   "end": "2003-03-21",
+   "change": -28.4,
+   "sign": "-",
+   "from_": 37.96,
+   "to": 27.18,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 23,
+   "events": [
+    {
+     "id": "iraq_war_begins_2003",
+     "date": "2003-03-20",
+     "type": "conflict_escalation",
+     "title": "US-led invasion of Iraq begins",
+     "lag_days": 22,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2004-09-10",
+   "end": "2004-10-08",
+   "change": 24.6,
+   "sign": "+",
+   "from_": 42.84,
+   "to": 53.4,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2005-05-20",
+   "end": "2005-06-20",
+   "change": 25.3,
+   "sign": "+",
+   "from_": 47.25,
+   "to": 59.19,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 31,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2006-12-20",
+   "end": "2007-01-22",
+   "change": -19.0,
+   "sign": "-",
+   "from_": 63.08,
+   "to": 51.11,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 33,
+   "events": [
+    {
+     "id": "opec_cut_abuja_dec_2006",
+     "date": "2006-12-14",
+     "type": "opec_decision",
+     "title": "OPEC cuts 500000 bpd at Abuja",
+     "lag_days": -6,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2008-09-22",
+   "end": "2008-12-22",
+   "change": -70.9,
+   "sign": "-",
+   "from_": 106.77,
+   "to": 31.1,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 91,
+   "events": [
+    {
+     "id": "lehman_collapse_2008",
+     "date": "2008-09-15",
+     "type": "demand_shock",
+     "title": "Lehman Brothers collapses",
+     "lag_days": -7,
+     "anticipated": false
+    },
+    {
+     "id": "opec_emergency_cut_2008",
+     "date": "2008-10-24",
+     "type": "opec_decision",
+     "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+     "lag_days": 32,
+     "anticipated": true
+    },
+    {
+     "id": "opec_record_cut_oran_2008",
+     "date": "2008-12-17",
+     "type": "opec_decision",
+     "title": "OPEC announces record 2.2 million bpd cut at Oran",
+     "lag_days": 86,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2008-11-28",
+   "end": "2008-12-23",
+   "change": -45.2,
+   "sign": "-",
+   "from_": 55.21,
+   "to": 30.28,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 25,
+   "events": [
+    {
+     "id": "opec_record_cut_oran_2008",
+     "date": "2008-12-17",
+     "type": "opec_decision",
+     "title": "OPEC announces record 2.2 million bpd cut at Oran",
+     "lag_days": 19,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2008-12-23",
+   "end": "2009-03-23",
+   "change": 75.2,
+   "sign": "+",
+   "from_": 30.28,
+   "to": 53.05,
+   "threshold": 0.38,
+   "windows": [
+    60
+   ],
+   "days": 90,
+   "events": [
+    {
+     "id": "opec_record_cut_oran_2008",
+     "date": "2008-12-17",
+     "type": "opec_decision",
+     "title": "OPEC announces record 2.2 million bpd cut at Oran",
+     "lag_days": -6,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2009-02-23",
+   "end": "2009-03-23",
+   "change": 40.9,
+   "sign": "+",
+   "from_": 37.66,
+   "to": 53.05,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2009-05-15",
+   "end": "2009-06-11",
+   "change": 28.6,
+   "sign": "+",
+   "from_": 56.52,
+   "to": 72.69,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 27,
+   "events": [
+    {
+     "id": "opec_2009_05_28",
+     "date": "2009-05-28",
+     "type": "opec_decision",
+     "title": "OPEC keeps production quotas unchanged in Vienna",
+     "lag_days": 13,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2009-09-24",
+   "end": "2009-10-22",
+   "change": 22.9,
+   "sign": "+",
+   "from_": 65.74,
+   "to": 80.82,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 28,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2010-05-03",
+   "end": "2010-05-25",
+   "change": -24.8,
+   "sign": "-",
+   "from_": 86.19,
+   "to": 64.78,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 22,
+   "events": []
+  },
+  {
+   "window": 20,
+   "onset": "2011-07-26",
+   "end": "2011-08-09",
+   "change": -20.4,
+   "sign": "-",
+   "from_": 99.61,
+   "to": 79.32,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 14,
+   "events": [
+    {
+     "id": "escondida_strike_2011",
+     "date": "2011-07-21",
+     "type": "conflict_escalation",
+     "title": "BHP Escondida strike 2011",
+     "lag_days": -5,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2012-05-03",
+   "end": "2012-06-01",
+   "change": -18.9,
+   "sign": "-",
+   "from_": 102.56,
+   "to": 83.17,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": []
+  },
+  {
+   "window": 60,
+   "onset": "2014-10-30",
+   "end": "2015-01-28",
+   "change": -45.6,
+   "sign": "-",
+   "from_": 81.06,
+   "to": 44.08,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 90,
+   "events": [
+    {
+     "id": "opec_declines_cut_2014",
+     "date": "2014-11-27",
+     "type": "opec_decision",
+     "title": "OPEC declines to cut production",
+     "lag_days": 28,
+     "anticipated": true
+    },
+    {
+     "id": "libya_ports_clashes_2014",
+     "date": "2014-12-14",
+     "type": "chokepoint_disruption",
+     "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+     "lag_days": 45,
+     "anticipated": true
+    },
+    {
+     "id": "libya_essider_clashes_2014",
+     "date": "2014-12-13",
+     "type": "conflict_escalation",
+     "title": "Clashes shut Libya Es Sider and Ras Lanuf ports",
+     "lag_days": 44,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2015-03-17",
+   "end": "2015-04-15",
+   "change": 29.6,
+   "sign": "+",
+   "from_": 43.39,
+   "to": 56.25,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": [
+    {
+     "id": "saudi_intervention_yemen_2015",
+     "date": "2015-03-26",
+     "type": "conflict_escalation",
+     "title": "Saudi-led intervention in Yemen (Operation Decisive Storm)",
+     "lag_days": 9,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2015-06-10",
+   "end": "2015-08-26",
+   "change": -37.3,
+   "sign": "-",
+   "from_": 61.36,
+   "to": 38.5,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 77,
+   "events": [
+    {
+     "id": "iran_jcpoa_agreed_2015",
+     "date": "2015-07-14",
+     "type": "sanctions",
+     "title": "JCPOA nuclear deal reached; path to lifting Iran oil sanctions",
+     "lag_days": 34,
+     "anticipated": true
+    },
+    {
+     "id": "china_yuan_deval_2015",
+     "date": "2015-08-11",
+     "type": "demand_shock",
+     "title": "China yuan devaluation raises demand fears",
+     "lag_days": 62,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2015-11-03",
+   "end": "2016-01-20",
+   "change": -44.3,
+   "sign": "-",
+   "from_": 47.88,
+   "to": 26.68,
+   "threshold": 0.38,
+   "windows": [
+    60
+   ],
+   "days": 78,
+   "events": [
+    {
+     "id": "iran_implementation_day_2016",
+     "date": "2016-01-16",
+     "type": "sanctions",
+     "title": "Implementation Day: Iran oil sanctions lifted",
+     "lag_days": 74,
+     "anticipated": true
+    },
+    {
+     "id": "opec_2015_12_04",
+     "date": "2015-12-04",
+     "type": "opec_decision",
+     "title": "OPEC drops output ceiling and fails to agree a limit",
+     "lag_days": 31,
+     "anticipated": true
+    },
+    {
+     "id": "us_export_ban_lift_2015",
+     "date": "2015-12-18",
+     "type": "policy_response",
+     "title": "US lifts 40-year crude oil export ban",
+     "lag_days": 45,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2016-02-11",
+   "end": "2016-05-09",
+   "change": 65.9,
+   "sign": "+",
+   "from_": 26.19,
+   "to": 43.45,
+   "threshold": 0.205,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 88,
+   "events": [
+    {
+     "id": "nigeria_nda_forcados_2016",
+     "date": "2016-02-14",
+     "type": "infrastructure_attack",
+     "title": "Niger Delta Avengers bomb Trans Forcados subsea pipeline",
+     "lag_days": 3,
+     "anticipated": false
+    },
+    {
+     "id": "nda_bonny_2016",
+     "date": "2016-02-10",
+     "type": "infrastructure_attack",
+     "title": "Niger Delta Avengers hit Bonny Soku gas line",
+     "lag_days": -1,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2018-10-03",
+   "end": "2018-12-28",
+   "change": -40.9,
+   "sign": "-",
+   "from_": 76.4,
+   "to": 45.15,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": [
+    {
+     "id": "opec_cut_dec_2018",
+     "date": "2018-12-07",
+     "type": "opec_decision",
+     "title": "OPEC+ agrees 1.2 million bpd cut in Vienna",
+     "lag_days": 65,
+     "anticipated": true
+    },
+    {
+     "id": "iran_oil_snapback_2018",
+     "date": "2018-11-05",
+     "type": "sanctions",
+     "title": "US reimposes Iran oil sanctions with waivers",
+     "lag_days": 33,
+     "anticipated": true
+    },
+    {
+     "id": "imf_weo_growth_scare_2018",
+     "date": "2018-10-09",
+     "type": "demand_shock",
+     "title": "IMF cuts global growth on trade war",
+     "lag_days": 6,
+     "anticipated": false
+    },
+    {
+     "id": "uschina_truce_2018",
+     "date": "2018-12-01",
+     "type": "policy_response",
+     "title": "US and China agree 90-day trade truce at G20",
+     "lag_days": 59,
+     "anticipated": true
+    },
+    {
+     "id": "libya_sharara_2018",
+     "date": "2018-12-08",
+     "type": "conflict_escalation",
+     "title": "Armed group shuts Libya El Sharara field",
+     "lag_days": 66,
+     "anticipated": true
+    },
+    {
+     "id": "katanga_cobalt_halt_2018",
+     "date": "2018-11-06",
+     "type": "policy_response",
+     "title": "Glencore Katanga halts cobalt sales over uranium",
+     "lag_days": 34,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2020-01-23",
+   "end": "2020-04-21",
+   "change": -83.9,
+   "sign": "-",
+   "from_": 55.51,
+   "to": 8.91,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 89,
+   "events": [
+    {
+     "id": "opec_talks_collapse_2020",
+     "date": "2020-03-06",
+     "type": "opec_decision",
+     "title": "OPEC+ talks collapse and price war begins",
+     "lag_days": 43,
+     "anticipated": true
+    },
+    {
+     "id": "covid_pandemic_declared_2020",
+     "date": "2020-03-11",
+     "type": "demand_shock",
+     "title": "WHO declares COVID-19 a pandemic",
+     "lag_days": 48,
+     "anticipated": true
+    },
+    {
+     "id": "opec_record_cut_2020",
+     "date": "2020-04-12",
+     "type": "opec_decision",
+     "title": "OPEC+ agrees record production cut",
+     "lag_days": 80,
+     "anticipated": true
+    },
+    {
+     "id": "libya_haftar_blockade_2020",
+     "date": "2020-01-18",
+     "type": "chokepoint_disruption",
+     "title": "Pro-Haftar forces blockade Libya's oil export terminals",
+     "lag_days": -5,
+     "anticipated": false
+    },
+    {
+     "id": "rosneft_trading_venez_2020",
+     "date": "2020-02-18",
+     "type": "sanctions",
+     "title": "US sanctions Rosneft Trading over Venezuela oil",
+     "lag_days": 26,
+     "anticipated": true
+    },
+    {
+     "id": "trump_spr_fill_2020",
+     "date": "2020-03-13",
+     "type": "policy_response",
+     "title": "Trump orders SPR filled to the top",
+     "lag_days": 50,
+     "anticipated": true
+    },
+    {
+     "id": "india_spr_fill_2020",
+     "date": "2020-03-20",
+     "type": "policy_response",
+     "title": "India tops up strategic reserve at low prices",
+     "lag_days": 57,
+     "anticipated": true
+    },
+    {
+     "id": "neg_wti_2020",
+     "date": "2020-04-20",
+     "type": "demand_shock",
+     "title": "WTI front-month settles negative at minus 37 dollars",
+     "lag_days": 88,
+     "anticipated": true
+    },
+    {
+     "id": "antamina_covid_2020",
+     "date": "2020-04-13",
+     "type": "policy_response",
+     "title": "Antamina COVID shutdown 2020",
+     "lag_days": 81,
+     "anticipated": true
+    },
+    {
+     "id": "vnm_rice_suspend_2020",
+     "date": "2020-03-25",
+     "type": "policy_response",
+     "title": "Vietnam suspends new rice export contracts",
+     "lag_days": 62,
+     "anticipated": true
+    },
+    {
+     "id": "kaz_wheat_ban_2020",
+     "date": "2020-03-22",
+     "type": "policy_response",
+     "title": "Kazakhstan bans wheat flour and staple exports",
+     "lag_days": 59,
+     "anticipated": true
+    },
+    {
+     "id": "arg_soy_tax_2020",
+     "date": "2020-03-04",
+     "type": "policy_response",
+     "title": "Argentina raises soybean export tax to 33pct",
+     "lag_days": 41,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2020-04-21",
+   "end": "2020-07-16",
+   "change": 357.2,
+   "sign": "+",
+   "from_": 8.91,
+   "to": 40.74,
+   "threshold": 0.205,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": [
+    {
+     "id": "opec_extend_june_2020",
+     "date": "2020-06-06",
+     "type": "opec_decision",
+     "title": "OPEC+ extends record cuts through July",
+     "lag_days": 46,
+     "anticipated": true
+    },
+    {
+     "id": "neg_wti_2020",
+     "date": "2020-04-20",
+     "type": "demand_shock",
+     "title": "WTI front-month settles negative at minus 37 dollars",
+     "lag_days": -1,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2020-10-30",
+   "end": "2021-02-05",
+   "change": 53.6,
+   "sign": "+",
+   "from_": 36.97,
+   "to": 56.8,
+   "threshold": 0.205,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 98,
+   "events": [
+    {
+     "id": "saudi_jeddah_depot_2020",
+     "date": "2020-11-23",
+     "type": "infrastructure_attack",
+     "title": "Houthi cruise missile hits Aramco North Jeddah fuel depot",
+     "lag_days": 24,
+     "anticipated": true
+    },
+    {
+     "id": "hankuk_chemi_seizure_2021",
+     "date": "2021-01-04",
+     "type": "chokepoint_disruption",
+     "title": "Iran seizes South Korean tanker Hankuk Chemi in the Strait of Hormuz",
+     "lag_days": 66,
+     "anticipated": true
+    },
+    {
+     "id": "rus_wheat_tax_2020",
+     "date": "2020-12-14",
+     "type": "policy_response",
+     "title": "Russia announces wheat export tax and grain quota",
+     "lag_days": 45,
+     "anticipated": true
+    },
+    {
+     "id": "rus_wheat_floattax_2021",
+     "date": "2021-02-04",
+     "type": "policy_response",
+     "title": "Russia confirms floating wheat export tax",
+     "lag_days": 97,
+     "anticipated": true
+    },
+    {
+     "id": "arg_corn_halt_2020",
+     "date": "2020-12-30",
+     "type": "policy_response",
+     "title": "Argentina suspends corn exports",
+     "lag_days": 61,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2021-11-09",
+   "end": "2021-12-01",
+   "change": -22.2,
+   "sign": "-",
+   "from_": 84.12,
+   "to": 65.44,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 22,
+   "events": [
+    {
+     "id": "spr_release_2021",
+     "date": "2021-11-23",
+     "type": "policy_response",
+     "title": "US-led six-nation coordinated SPR release (50M bbl)",
+     "lag_days": 14,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2021-12-20",
+   "end": "2022-03-08",
+   "change": 80.0,
+   "sign": "+",
+   "from_": 68.69,
+   "to": 123.64,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 78,
+   "events": [
+    {
+     "id": "russia_invades_ukraine_2022",
+     "date": "2022-02-24",
+     "type": "conflict_escalation",
+     "title": "Russia launches full-scale invasion of Ukraine",
+     "lag_days": 66,
+     "anticipated": true
+    },
+    {
+     "id": "uae_abudhabi_attack_2022",
+     "date": "2022-01-17",
+     "type": "infrastructure_attack",
+     "title": "Houthi drone-missile attack hits ADNOC Musaffah fuel facility",
+     "lag_days": 28,
+     "anticipated": true
+    },
+    {
+     "id": "iea_60mb_release_2022",
+     "date": "2022-03-01",
+     "type": "policy_response",
+     "title": "IEA coordinated 60M-barrel emergency release",
+     "lag_days": 71,
+     "anticipated": true
+    },
+    {
+     "id": "opec_2022_03_02",
+     "date": "2022-03-02",
+     "type": "opec_decision",
+     "title": "OPEC+ sticks to 400000 bpd hike despite Ukraine war",
+     "lag_days": 72,
+     "anticipated": true
+    },
+    {
+     "id": "kazakhstan_unrest_2022",
+     "date": "2022-01-05",
+     "type": "conflict_escalation",
+     "title": "Kazakhstan unrest disrupts Tengiz oil output",
+     "lag_days": 16,
+     "anticipated": false
+    },
+    {
+     "id": "antofagasta_drought_2022",
+     "date": "2022-01-20",
+     "type": "policy_response",
+     "title": "Antofagasta drought output cut 2022",
+     "lag_days": 31,
+     "anticipated": true
+    },
+    {
+     "id": "rus_grain_quota_2022",
+     "date": "2021-12-31",
+     "type": "policy_response",
+     "title": "Russia sets 2022 grain export quota",
+     "lag_days": 11,
+     "anticipated": false
+    },
+    {
+     "id": "hun_grain_ban_2022",
+     "date": "2022-03-04",
+     "type": "policy_response",
+     "title": "Hungary bans all grain exports",
+     "lag_days": 74,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2022-06-13",
+   "end": "2022-09-07",
+   "change": -31.8,
+   "sign": "-",
+   "from_": 120.92,
+   "to": 82.5,
+   "threshold": 0.205,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": [
+    {
+     "id": "tw_pelosi_drills_2022",
+     "date": "2022-08-04",
+     "type": "conflict_escalation",
+     "title": "China live-fire drills encircle Taiwan after Pelosi visit",
+     "lag_days": 52,
+     "anticipated": true
+    },
+    {
+     "id": "grain_deal_signed_2022",
+     "date": "2022-07-22",
+     "type": "policy_response",
+     "title": "Black Sea Grain Initiative signed reopening Ukraine exports",
+     "lag_days": 39,
+     "anticipated": true
+    },
+    {
+     "id": "amplats_loadshed_2022",
+     "date": "2022-06-28",
+     "type": "policy_response",
+     "title": "Amplats warns Stage-6 load-shedding to cut PGM output",
+     "lag_days": 15,
+     "anticipated": false
+    }
+   ]
+  },
+  {
+   "window": 20,
+   "onset": "2022-11-07",
+   "end": "2022-12-06",
+   "change": -19.2,
+   "sign": "-",
+   "from_": 91.8,
+   "to": 74.21,
+   "threshold": 0.205,
+   "windows": [
+    20
+   ],
+   "days": 29,
+   "events": [
+    {
+     "id": "eu_embargo_price_cap_2022",
+     "date": "2022-12-05",
+     "type": "sanctions",
+     "title": "EU seaborne embargo and G7 price cap take effect",
+     "lag_days": 28,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2026-01-07",
+   "end": "2026-04-06",
+   "change": 103.6,
+   "sign": "+",
+   "from_": 56.01,
+   "to": 114.01,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 89,
+   "events": [
+    {
+     "id": "iran_israel_us_strike_2026",
+     "date": "2026-02-28",
+     "type": "conflict_escalation",
+     "title": "US and Israel strike Iran (Feb 2026 escalation)",
+     "lag_days": 52,
+     "anticipated": true
+    },
+    {
+     "id": "hormuz_closure_2026",
+     "date": "2026-03-04",
+     "type": "chokepoint_disruption",
+     "title": "Iran declares the Strait of Hormuz closed",
+     "lag_days": 56,
+     "anticipated": true
+    }
+   ]
+  },
+  {
+   "window": 60,
+   "onset": "2026-04-07",
+   "end": "2026-07-02",
+   "change": -39.1,
+   "sign": "-",
+   "from_": 114.58,
+   "to": 69.73,
+   "threshold": 0.38,
+   "windows": [
+    20,
+    60
+   ],
+   "days": 86,
+   "events": [
+    {
+     "id": "us_iran_hormuz_mou_2026",
+     "date": "2026-06-17",
+     "type": "policy_response",
+     "title": "US-Iran MOU reopens the Strait of Hormuz",
+     "lag_days": 71,
+     "anticipated": true
+    }
+   ]
+  }
+ ]
+}

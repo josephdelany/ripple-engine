@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ripple Engine</title>
+<style>
+:root{--bg:#0f1114;--s1:#161a1f;--s2:#1d2228;--line:#2a3038;--line2:#3a424c;--t:#e8e6e1;--t2:#a9a69f;--t3:#6f6d67;
+--hot:#e0653a;--hotbg:#3a2018;--cool:#3fbf95;--coolbg:#12302a;--warn:#e0a33a;--warnbg:#3a2c12;--mono:ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Inter,Segoe UI,Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 var(--sans)}
+a{color:inherit}
+.top{display:flex;align-items:center;gap:20px;padding:10px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+.brand{font-weight:600;letter-spacing:.2px}.brand small{color:var(--t3);font-weight:400;margin-left:8px}
+.nav{display:flex;gap:4px}.nav button{background:none;border:0;color:var(--t2);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit}
+.nav button.on{color:var(--t);background:var(--s2)}
+.read{margin-left:auto;display:flex;gap:6px}.read input{width:380px;background:var(--s1);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit}
+.read button,.btn{background:var(--s2);border:1px solid var(--line2);color:var(--t);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit}
+.asof{font:12px var(--mono);color:var(--t3)}
+main{max-width:1180px;margin:0 auto;padding:18px 22px 60px}
+.screen{display:none}.screen.on{display:block}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}h2{font-size:12px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 10px}
+.muted{color:var(--t2)}.dim{color:var(--t3)}.mono{font-family:var(--mono);font-size:12.5px}
+.chip{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:5px;letter-spacing:.2px;white-space:nowrap}
+.c-MATERIAL{background:var(--hotbg);color:var(--hot)}.c-IN_LINE{background:var(--s2);color:var(--t2)}.c-NOISE{background:var(--s1);color:var(--t3);border:1px solid var(--line)}
+.c-SUPPORTED{background:var(--coolbg);color:var(--cool)}.c-MIXED{background:var(--warnbg);color:var(--warn)}.c-UNSUPPORTED{background:var(--hotbg);color:var(--hot)}.c-THIN,.c-UNCHECKABLE,.c-NOPRECEDENT,.c-PENDING{background:var(--s2);color:var(--t3)}
+.c-flag{background:var(--warnbg);color:var(--warn)}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.grid{display:grid;gap:12px}
+.rb{display:flex;height:9px;border-radius:3px;overflow:hidden;background:var(--s2)}.rb i{display:block;height:100%}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.strip .card{padding:10px 12px}.strip .v{font-size:18px;font-weight:500}.strip .pct{height:5px;background:var(--s2);border-radius:3px;position:relative;margin:8px 0 4px}
+.strip .pct b{position:absolute;top:-3px;width:3px;height:11px;background:var(--hot);border-radius:2px}
+.story-row{display:grid;grid-template-columns:100px minmax(0,1fr) 170px 90px;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.story-row:hover{background:var(--s1)}.story-row .h{font-size:15px}.story-row .cls{font-size:12px;color:var(--t2)}
+.sec{border-top:1px solid var(--line);padding:16px 0}
+.claims{display:grid;grid-template-columns:minmax(0,1fr) 120px 170px 44px 110px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.claims.head{color:var(--t3);font-size:12px;border-bottom:1px solid var(--line2)}
+.q{font-family:var(--serif);font-size:15px}
+.branches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.branches .card .n{font-size:24px;font-weight:500}.branches .card .l{font-size:12px;color:var(--t2)}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--t3);font-weight:500;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line2)}td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.ev-m{color:var(--cool);font-family:var(--mono);font-size:12px}.ev-j{color:var(--warn);font-family:var(--mono);font-size:12px}
+.chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}.hop{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:150px}
+.hop .a{font-weight:500}.hop .m{font-family:var(--mono);font-size:12px;color:var(--t2)}.arrow{align-self:center;color:var(--t3)}
+.two{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+textarea{width:100%;min-height:120px;background:var(--s2);border:1px solid var(--line);color:var(--t);border-radius:8px;padding:10px;font:inherit;resize:vertical}
+details summary{cursor:pointer;color:var(--t2);padding:10px 0}
+.bars{display:flex;align-items:flex-end;gap:6px;height:120px;border-bottom:1px solid var(--line2)}
+.bars div{flex:1;background:var(--cool);position:relative}.bars div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--t3)}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:4px 12px;font-size:13px}.kv dt{color:var(--t3)}.kv dd{margin:0}
+.note{font-size:12.5px;color:var(--t2);border-left:2px solid var(--line2);padding:4px 12px;margin:10px 0}
+.err{color:var(--hot);font-family:var(--mono);font-size:12.5px;padding:10px 0}
+iframe{width:100%;height:1600px;border:0;background:var(--bg)}
+.search{display:flex;gap:6px;margin:8px 0}.search input{flex:1;background:var(--s1);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit}
+.hit{padding:6px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}.hit:hover{background:var(--s1)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand">Ripple Engine <small>the record, read live</small></div>
+  <div class="nav">
+    <button data-s="feed" class="on">Feed</button><button data-s="story">Story</button><button data-s="big">Big moves</button><button data-s="ledger">Ledger</button>
+  </div>
+  <div class="read"><input id="readin" placeholder="Paste a headline, paragraph, or URL — read it against the record"><button id="readbtn">Read</button></div>
+  <span class="asof" id="asof"></span>
+</div>
+<main>
+
+<section class="screen on" id="s-feed">
+  <h2>Market state — each asset against its own history</h2>
+  <div class="strip" id="strip"><span class="dim">loading…</span></div>
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px"><h2 style="margin:0">Material today — through the market-defined gate, ranked</h2><span class="dim mono" id="feedcount"></span></div>
+  <div id="feed"></div>
+  <details><summary id="inlinesum">In line</summary><div id="inline"></div></details>
+  <details><summary id="noisesum">Noise shelf</summary><div id="noise"></div></details>
+  <div class="note" id="feednote"></div>
+  <h2 style="margin-top:22px">Open a corpus event</h2>
+  <div class="search"><input id="evq" placeholder="Search 300+ coded events — Abqaiq, Hormuz, OPEC 2014, Kharg…"><button class="btn" id="evbtn">Search</button></div>
+  <div id="evhits"></div>
+</section>
+
+<section class="screen" id="s-story"><div id="story"><p class="dim">Open a story from the Feed, search a corpus event, or paste text above.</p></div></section>
+
+<section class="screen" id="s-big"><iframe id="bigframe" title="Big moves"></iframe></section>
+
+<section class="screen" id="s-ledger">
+  <h1>Ledger</h1>
+  <p class="muted" style="margin:0 0 16px">Three scoreboards. Nothing here is edited by hand; claims resolve from data at their horizon.</p>
+  <div id="ledger"><span class="dim">loading…</span></div>
+</section>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=(v,d=1)=>v==null?'—':(+v).toFixed(d);
+const pct=(v,d=1)=>v==null?'—':((+v>0?'+':'')+(+v).toFixed(d)+'%');
+const SIG={MATERIAL:'Material',IN_LINE:'In line',NOISE:'Noise'};
+const FLAG={LOUD_QUIET:'Loud / quiet',QUIET_LOUD:'Quiet / loud',product_side:'product side',endogenous:'endogenous',thin:'thin',no_entity:'no tracked entity',no_record:'no record'};
+function chip(v,extra){const k=String(v||'').replace(/\s+/g,'');return `<span class="chip c-${esc(k)} ${extra||''}">${esc(v)}</span>`;}
+function vchip(v){const label={NOPRECEDENT:'No precedent'}[String(v).replace(/\s+/g,'')]||v;return `<span class="chip c-${esc(String(v).replace(/\s+/g,''))}">${esc(label.charAt(0)+label.slice(1).toLowerCase())}</span>`;}
+function rb(bar){ if(!bar||!bar.n) return '<span class="dim mono">—</span>';
+  if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--hot)"></i></div>`;}
+  const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--cool)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--hot)"></i></div>`;}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('on',x.id==='s-'+s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));window.scrollTo(0,0);
+  if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger();}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+async function api(u,opt){const r=await fetch(u,opt);if(!r.ok){throw new Error(u+' → '+r.status+' '+(await r.text()).slice(0,200));}return r.json();}
+
+/* ---------------- FEED ---------------- */
+async function loadFeed(){
+  try{const ms=await api('/api/market_state');
+    $('#strip').innerHTML=(ms.assets||[]).map(m=>`<div class="card"><div class="dim" style="font-size:12px">${esc(m.asset)} <span class="mono">${esc(m.as_of)}</span></div><div class="v">${num(m.value,2)} <span class="dim" style="font-size:12px">${esc(m.unit)}</span></div><div class="pct"><b style="left:${m.pct_of_history}%"></b></div><div class="dim" style="font-size:11.5px">${m.pct_of_history}th pct since ${esc((m.history_from||'').slice(0,4))} · 20d ${pct(m.chg20_pct)} · vol ${m.vol20_pct}th pct</div><div class="dim" style="font-size:11.5px">rhymes ${(m.rhymes||[]).map(r=>r.month).join(' · ')||'—'}</div></div>`).join('')||'<span class="dim">no market state yet — run src/feed_build.py</span>';
+    $('#asof').textContent='data as of '+((ms.assets||[])[0]||{}).as_of||'';
+  }catch(e){$('#strip').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
+  try{const f=await api('/api/feed');
+    const row=(s,sig)=>`<div class="story-row" data-text="${esc(s.headline)}" data-url="${esc(s.url||'')}"><div>${chip(SIG[s.significance]||s.significance)}${(s.flags||[]).concat(s.gate_flags||[]).map(x=>`<div style="margin-top:4px">${chip(FLAG[x]||x,'c-flag')}</div>`).join('')}</div><div><div class="h">${esc(s.headline)}</div><div class="cls">${esc((s.event_class||'no class').replace(/_/g,' '))} · ${esc(s.source)} · <span class="mono">${esc(s.when)}</span>${s.entities&&s.entities.length?' · '+esc(s.entities.slice(0,3).join(', ')):''}</div></div><div>${s.rates&&s.rates.brent?`<div class="dim" style="font-size:11.5px">crude ${s.rates.brent.ratio}× · products ${s.rates.diesel_crack?s.rates.diesel_crack.ratio:'—'}×</div>`:''}${s.headline_verdict?`<div style="margin-top:3px">${vchip(s.headline_verdict)}</div>`:''}</div><div><button class="btn" style="font-size:12px">Read</button></div></div>`;
+    $('#feed').innerHTML=(f.material||[]).map(s=>row(s)).join('')||'<p class="dim">Nothing material cleared the gate today.</p>';
+    $('#inline').innerHTML=(f.in_line||[]).map(s=>row(s)).join('');
+    $('#noise').innerHTML=(f.noise||[]).map(s=>row(s)).join('');
+    const c=f.counts||{};$('#feedcount').textContent=`${f.day||''} · ${c.material||0} material · ${c.in_line||0} in line · ${c.noise||0} noise · ${c.gdelt_hidden||0} GDELT pings hidden`;
+    $('#inlinesum').textContent=`In line — ${c.in_line||0} items (about the everyday rate, or material class without a tracked entity)`;
+    $('#noisesum').textContent=`Noise shelf — ${c.noise||0} items, visible, unranked`;
+    $('#feednote').textContent='Gate: '+(f.gate||'')+'. '+(f.note||'')+' The gate is class-level; a story is read in full only on its Story page.';
+    document.querySelectorAll('.story-row').forEach(r=>r.onclick=()=>readText(r.dataset.url||r.dataset.text));
+  }catch(e){$('#feed').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
+}
+$('#evbtn').onclick=async()=>{const q=$('#evq').value.trim();const hits=await api('/api/events?q='+encodeURIComponent(q));
+  $('#evhits').innerHTML=hits.map(h=>`<div class="hit" data-id="${esc(h.event_id)}"><span class="mono dim">${esc(h.date)}</span> · ${esc(h.title)} <span class="dim">· ${esc(h.type.replace(/_/g,' '))}</span></div>`).join('')||'<p class="dim">no matches</p>';
+  document.querySelectorAll('.hit').forEach(h=>h.onclick=()=>readEvent(h.dataset.id));};
+$('#evq').addEventListener('keydown',e=>{if(e.key==='Enter')$('#evbtn').click();});
+
+/* ---------------- STORY ---------------- */
+async function readText(t){$('#story').innerHTML='<p class="dim">reading against the record…</p>';show('story');
+  try{const body=/^https?:\/\//.test(t)?{url:t}:{text:t};renderStory(await api('/api/story',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}));}
+  catch(e){$('#story').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+async function readEvent(id){$('#story').innerHTML='<p class="dim">reading point-in-time…</p>';show('story');
+  try{renderStory(await api('/api/story?id='+encodeURIComponent(id)));}catch(e){$('#story').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+$('#readbtn').onclick=()=>{const v=$('#readin').value.trim();if(v)readText(v);};
+$('#readin').addEventListener('keydown',e=>{if(e.key==='Enter')$('#readbtn').click();});
+
+function fanSvg(pr){const w=640,h=210,x0=50,x1=600;const fan=pr.fan;if(!fan)return '<p class="dim">no analog paths with price history for this class</p>';
+  const all=[...fan.min,...fan.max,...(pr.path_pct||[])];const lo=Math.min(-2,...all),hi=Math.max(2,...all);const y=v=>20+(hi-v)/(hi-lo)*(h-60);const x=i=>x0+i*(x1-x0)/20;
+  const poly=(a,b)=>a.map((v,i)=>`${x(i)},${y(v)}`).join(' ')+' '+b.map((v,i)=>`${x(i)},${y(v)}`).reverse().join(' ');
+  const line=a=>a.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' ');
+  let s=`<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="price path vs analog fan">`;
+  s+=`<polygon points="${poly(fan.p25,fan.p75)}" fill="#12302a"/>`;
+  s+=`<path d="${line(fan.min)}" stroke="#6f6d67" stroke-dasharray="3 4" fill="none"/><path d="${line(fan.max)}" stroke="#6f6d67" stroke-dasharray="3 4" fill="none"/>`;
+  s+=`<path d="${line(fan.median)}" stroke="#3fbf95" stroke-width="1.5" fill="none"/>`;
+  s+=`<line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="#2a3038"/>`;
+  if(pr.path_pct&&pr.path_pct.length>1)s+=`<path d="${line(pr.path_pct)}" stroke="#e0653a" stroke-width="2.5" fill="none"/>`;
+  if(pr.path_pct&&pr.path_pct.length){const i=pr.path_pct.length-1;s+=`<circle cx="${x(i)}" cy="${y(pr.path_pct[i])}" r="3.5" fill="#e0653a"/><text x="${Math.min(x(i)+6,x1-70)}" y="${y(pr.path_pct[i])-8}" font-size="11" fill="#e0653a">now ${pct(pr.path_pct[i])}</text>`;}
+  if(pr.tails){s+=`<text x="${x1+4}" y="${y(fan.max[20])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.high.date.slice(0,4))} ${pct(pr.tails.high.chg_pct,0)}</text><text x="${x1+4}" y="${y(fan.min[20])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.low.date.slice(0,4))} ${pct(pr.tails.low.chg_pct,0)}</text>`;}
+  s+=`<text x="${x1-150}" y="${y(fan.median[20])+14}" font-size="10.5" fill="#3fbf95">analog median ${pct(fan.median[20])} · IQR band · n=${fan.n}</text>`;
+  s+=`<text x="${x0}" y="${h-8}" font-size="10" fill="#6f6d67">day 0 · knowable ${esc(pr.knowable)}</text><text x="${x1-24}" y="${h-8}" font-size="10" fill="#6f6d67">+20d</text></svg>`;return s;}
+
+function renderStory(s){
+  const sig=s.significance||{};const r=sig.rates||{};  const side=a=>r[a]?`${r[a].label}: ${r[a].rate_pct}% of ${r[a].n} vs everyday ${r[a].base_pct}% (${r[a].ratio}×)`:'';
+  const br=s.branches||{};const rates=br.branch_rates||{};const counts=rates.counts||{};const n=rates.n||0;
+  const B=[['CONTAINED','Contained'],['LIMITED_RETALIATION','Limited retaliation'],['WIDENING','Widening'],['RESOLUTION_BY_DEAL','Deal']];
+  const pr=s.priced||{};const fl=s.flow||{};const tr=s.trust||{};const wf=tr.walk_forward||{};
+  const analog=(br.analogs||[])[0];const ld=analog?analog.ld:null;
+  $('#story').innerHTML=`
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">${chip(SIG[sig.significance]||sig.significance||'—')}${(sig.flags||[]).map(x=>chip(FLAG[x]||x,'c-flag')).join('')}<span class="mono dim">knowable ${esc(s.knowable)} · ${esc(s.source||'')}${s.url?` · <a href="${esc(s.url)}" target="_blank">source</a>`:''}</span></div>
+  <h1>${esc(s.title||'')}</h1>
+  <p class="muted" style="margin:0 0 6px">Class: ${esc((s.event_class||'none').replace(/_/g,' '))}${s.entities&&s.entities.length?' · '+esc(s.entities.join(', ')):''}</p>
+  <p class="dim" style="font-size:12.5px;margin:0 0 4px">${esc(sig.why||'')}</p>
+  <p class="dim" style="font-size:12px;margin:0 0 14px">${esc(side('brent'))}${r.brent&&r.diesel_crack?' · ':''}${esc(side('diesel_crack'))}${sig.attention&&sig.attention.score!=null?` · attention ${num(sig.attention.score,0)}th pct (GPR${(sig.attention.evidence||{}).wiki_spikes&&(sig.attention.evidence||{}).wiki_spikes.length?', pageview spike':''})`:''}</p>
+
+  <div class="sec"><h2>1 · Is it priced? Brent since knowable vs the analog set (point-in-time)</h2>
+    <div class="two"><div class="card">${fanSvg(pr)}${pr.price_note?`<div class="dim" style="font-size:12px">${esc(pr.price_note)}</div>`:''}
+      <div class="dim" style="font-size:12px;margin-top:6px">Brent ${num(pr.price_at_knowable,2)} at knowable${pr.days_elapsed?` · after ${pr.days_elapsed} trading days ${pct((pr.path_pct||[]).slice(-1)[0])} vs analog median ${pct(pr.fan?pr.fan.median[pr.days_elapsed]:null)} (${pr.now_vs_median_pct!=null?(pr.now_vs_median_pct>0?'running hot by ':'running cool by ')+num(Math.abs(pr.now_vs_median_pct))+' pts':''}) · ${pr.share_up_at_day!=null?Math.round(pr.share_up_at_day*100)+'% of analogs were up at this point':''}`:''}</div></div>
+      <div class="card"><h2>Flow side</h2><dl class="kv">
+        ${(fl.chokepoints||[]).map(c=>`<dt>${esc(c.chokepoint)}</dt><dd class="mono">${esc(c.flag)} · ${c.pct_of_median!=null?Math.round(c.pct_of_median*100)+'% of median':''} <span class="dim">${esc(c.latest_date||'')}</span></dd>`).join('')}
+        <dt>Realized disruption, this class</dt><dd class="mono">${fl.realized_disruption_fraction_pct!=null?fl.realized_disruption_fraction_pct+'% of '+fl.contributing_n:'—'}</dd></dl>
+        <p class="dim" style="font-size:12px;margin:8px 0 0">${esc(fl.reading||'')}</p><p class="dim" style="font-size:11.5px;margin:4px 0 0">${esc(fl.caveat||'')}</p></div></div></div>
+
+  <div class="sec"><h2>2 · Is the story right? Claims verbatim, each read against its reference class</h2>
+    <div class="claims head"><span>Claim</span><span>Verdict</span><span>Record bar (down · flat · up)</span><span>n</span><span>Resolves</span></div>
+    ${(s.claims||[]).map(c=>{const v=c.verdict||{};return `<div class="claims"><span class="q">“${esc(c.text)}”${c.modality==='hypothetical'?' <span class="dim mono" style="font-size:11px">if it occurs</span>':''}<div class="dim" style="font-size:11.5px;font-family:var(--sans)">${esc(c.kind)}${c.implied_move_pct!=null?` · implies ${pct(c.implied_move_pct)} from knowable`:''} · ${esc(v.basis||c.why||'')}</div></span><span>${vchip(v.verdict||'—')}${v.r!=null?`<div class="dim mono" style="font-size:11px;margin-top:3px">${v.k} of ${v.n} = ${Math.round(v.r*100)}%</div>`:''}</span>${rb(v.bar)}<span class="mono dim">${v.n??'—'}</span><span class="mono dim">${c.checkable?('+'+c.horizon_days+' '+(c.horizon_unit==='trading'?'td':'d')):'—'}</span></div>`;}).join('')||'<p class="dim">no claims extracted</p>'}
+    <p class="dim" style="font-size:12px;margin:8px 0 0">Verdicts are about the record, not truth: SUPPORTED ≥60%, UNSUPPORTED ≤40%, THIN below n=8 (CLAIM_LEDGER_REGISTRATION.md §3). Checkable claims are logged now and resolve from data at their horizon. Uncheckable claims stay visible so rhetoric sits beside evidence.</p></div>
+
+  <div class="sec"><h2>3 · What's the tail? Escalation branches at +90 days</h2>
+    ${br.applicable?(br.no_adequate_precedent?`<p class="muted">No adequate precedent — max similarity ${br.max_similarity} below ${br.threshold}. Branch rates withheld.</p>`:`
+    <div class="branches">${B.map(([k,l])=>`<div class="card"><div class="l">${l}</div><div class="n">${counts[k]||0} <span class="dim" style="font-size:13px">of ${n}</span></div><div class="dim" style="font-size:12px">${n?Math.round(100*(counts[k]||0)/n):0}%</div></div>`).join('')}</div>
+    <p class="dim" style="font-size:12px;margin:10px 0 12px">${esc(rates.basis||'')}${rates.thin?' · thin conditioning, parent class shown':''} · ${esc(br.basis_note||'')} · ${esc(br.outcome_label||'')}</p>
+    <h2>Then vs now — top analogs</h2>
+    <table><tr><th>Analog</th><th>Similarity</th><th>Outcome +90d</th><th>Likenesses</th><th>Differences</th></tr>${(br.analogs||[]).slice(0,5).map(a=>`<tr><td><span class="mono dim">${esc(a.date)}</span> ${esc(a.title)}</td><td class="mono">${a.similarity}</td><td class="mono">${esc((a.outcome_90||'unknown').replace(/_/g,' ').toLowerCase())}</td><td class="ev-m">${(a.ld&&a.ld.likenesses||[]).map(x=>x.field).join(', ')||'—'}</td><td class="ev-j">${(a.ld&&a.ld.differences||[]).map(x=>`${x.field}: ${x.then} → ${x.now}`).join('; ')||'—'}</td></tr>`).join('')}</table>
+    <p class="dim" style="font-size:11.5px;margin-top:6px">Fields shown are the coded situation record; "unknown" fields are not counted in similarity. Which difference shifts which branch is measured by the walk-forward, not asserted here.</p>`):`<p class="muted">${esc(br.note||'')}</p>`}</div>
+
+  <div class="sec"><h2>4 · Where does it travel? Measured pass-through per hop, this class</h2>
+    <div class="chain">${(s.propagation&&s.propagation.hops||[]).map((h,i)=>`${i?'<span class="arrow">→</span>':''}<div class="hop"><div class="a">${esc(h.label)}</div><div class="m">signed median ${pct(h.signed_median_pct)} · n=${h.n}</div><div class="dim" style="font-size:11px">material move ${h.material_move_pct}% · no lasting move ${h.no_lasting_move_pct}% · range ${h.lo}…${h.hi}</div></div>`).join('')||'<p class="dim">no measured edges for this class</p>'}</div>
+    <p class="dim" style="font-size:11.5px;margin-top:8px">${esc(s.propagation&&s.propagation.caveat||'')}</p></div>
+
+  <div class="sec two"><div><h2>5 · How much to trust this</h2><dl class="kv">
+      ${(wf.rows||[]).map(w=>`<dt>Walk-forward ${esc(w.window)}</dt><dd class="mono">G Brier ${w.G_brier} vs base ${w.G_base} (skill ${w.G_skill}) · P skill ${w.P_skill} · n=${w.n}</dd>`).join('')}
+      <dt>Verdict as computed</dt><dd>${esc((wf.verdict||{}).G_conditioning||'—')}; P: ${esc((wf.verdict||{}).P_conditioning||'—')}</dd>
+      <dt>Label</dt><dd class="dim">${esc(wf.label||'')}</dd>
+      <dt>Retrieval</dt><dd class="mono">${(tr.retrieval||{}).conditioned_n??'—'} conditioned · ${esc((tr.retrieval||{}).basis||'')}</dd>
+      <dt>Data freshness</dt><dd class="mono">${esc((tr.freshness||{}).status||'—')} · ${esc((tr.freshness||{}).as_of||'')}</dd></dl>
+      <h2 style="margin-top:14px">This source on the ledger</h2>${(s.sources_board||[]).length?`<table><tr><th>Source</th><th>Claim type</th><th>Resolved true</th><th>n</th></tr>${s.sources_board.map(b=>`<tr><td>${esc(b.source)}</td><td>${esc(b.kind)}</td><td class="mono">${Math.round(b.true_rate*100)}%</td><td class="mono">${b.n}</td></tr>`).join('')}</table>`:`<p class="dim" style="font-size:12.5px">No resolved claims from ${esc(s.source||'this source')} yet — the ledger is young and says so.</p>`}</div>
+    <div><h2>Your read</h2><textarea id="notes" placeholder="Write beside the numbers."></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="insert">Insert receipts</button><button class="btn" id="export">Export draft</button></div></div></div>`;
+  $('#insert').onclick=()=>{const t=$('#notes');const lines=[`[${s.knowable}] ${s.title} — ${SIG[sig.significance]||''}: ${sig.why||''}`];(s.claims||[]).forEach(c=>{const v=c.verdict||{};if(v.r!=null)lines.push(`• “${c.text}” — ${v.verdict} (${v.k} of ${v.n}; ${v.basis||''})`);});if(n)lines.push(`• Branches +90d (n=${n}): ${B.map(([k,l])=>l+' '+(counts[k]||0)).join(', ')} — ${rates.basis||''}`);t.value+=(t.value?'\n\n':'')+lines.join('\n');};
+  $('#export').onclick=()=>{const blob=new Blob([$('#notes').value],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`read_${(s.knowable||'').replace(/-/g,'')}_${(s.event_class||'story')}.md`;a.click();};
+}
+
+/* ---------------- LEDGER ---------------- */
+async function loadLedger(){try{const l=await api('/api/ledger');const e=l.engine||{};const rvn=l.record_vs_narrative||{};const c=l.counts||{};
+  $('#ledger').innerHTML=`<div class="grid" style="grid-template-columns:1fr 1fr">
+    <div class="card"><h2>Engine vs base rate — walk-forward, two windows</h2><table><tr><th>Window</th><th>Test</th><th>n</th><th>G Brier</th><th>base</th><th>skill</th><th>P skill</th></tr>${(e.rows||[]).map(w=>`<tr><td>${esc(w.window)}</td><td class="mono dim">${(w.test_window||[]).join(' → ')}</td><td class="mono">${w.n}</td><td class="mono">${w.G_brier_conditioned}</td><td class="mono dim">${w.G_brier_baseline}</td><td class="mono">${w.G_skill}</td><td class="mono">${w.P_skill}</td></tr>`).join('')}</table>
+      <p class="dim" style="font-size:12px;margin:8px 0 0">${esc((e.verdict||{}).G_conditioning||'')}; P: ${esc((e.verdict||{}).P_conditioning||'')}. Protocol ${esc(e.protocol||'')}.</p><p class="dim" style="font-size:12px;margin:4px 0 0">${esc(e.label||'')}</p></div>
+    <div class="card"><h2>Record vs narrative — resolved claims</h2>
+      <div class="branches" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div class="l">Resolved</div><div class="n">${rvn.resolved||0}</div></div><div class="card"><div class="l">Record right</div><div class="n">${rvn.record_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div><div class="card"><div class="l">Narrative right</div><div class="n">${rvn.narrative_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div></div>
+      <p class="dim" style="font-size:12px;margin:10px 0 0">Status: <b>${esc(rvn.status||'')}</b>. ${c.claims_logged||0} claims logged · ${c.checkable||0} checkable · ${c.pending||0} pending resolution. Nothing is hand-resolved; the board turns live at n=8.</p></div></div>
+    <div class="card" style="margin-top:12px"><h2>Sources — resolved-true rate by outlet and claim type</h2>${(l.sources||[]).length?`<table><tr><th>Source</th><th>Claim type</th><th>Resolved true</th><th>n</th></tr>${l.sources.map(b=>`<tr><td>${esc(b.source)}</td><td>${esc(b.kind)}</td><td class="mono">${Math.round(b.true_rate*100)}%</td><td class="mono">${b.n}</td></tr>`).join('')}</table>`:'<p class="dim">No resolved claims yet. Sources accrue as horizons pass.</p>'}</div>
+    <div class="card" style="margin-top:12px"><h2>Recent claims read (newest first)</h2>${(l.recent||[]).length?`<table><tr><th>Logged</th><th>Source</th><th>Claim</th><th>Kind</th><th>Verdict</th><th>r</th><th>Resolution</th></tr>${l.recent.map(r=>`<tr><td class="mono dim">${esc((r.logged_at||'').slice(0,10))}</td><td>${esc(r.source||'')}</td><td class="q" style="font-size:13.5px">${esc(r.text)}</td><td class="dim">${esc(r.kind)}</td><td>${r.verdict?vchip(r.verdict):'—'}</td><td class="mono">${r.r!=null?Math.round(r.r*100)+'%':'—'}</td><td class="mono">${r.resolution?(r.resolution.claim_true?'claim true':'claim false')+(r.resolution.record_true==null?'':r.resolution.record_true?' · record right':' · record wrong'):(r.checkable?'pending':'—')}</td></tr>`).join('')}</table>`:'<p class="dim">Nothing logged yet. Every story read from the Feed or pasted above logs its checkable claims here.</p>'}
+      <div style="margin-top:10px"><button class="btn" id="resolve">Resolve claims past horizon</button> <span class="dim" style="font-size:12px">${esc(l.note||'')}</span></div></div>`;
+  $('#resolve').onclick=async()=>{const r=await api('/api/ledger/resolve',{method:'POST'});alert(r.newly_resolved+' newly resolved');loadLedger();};
+  }catch(e){$('#ledger').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+
+loadFeed();
+</script>
+</body>
+</html>

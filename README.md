@@ -14,6 +14,41 @@ fabrication), not evidence that any finding is correct**.
 Flagship build for the News-to-Markets project. Single-user tool, held to a bar a
 quant could inspect.
 
+## v2 front door — the record, read live (NORTH_STAR.md)
+
+`./go` now opens **http://127.0.0.1:5050/app**: four screens for a desk that has to
+navigate *significant* developments in the oil and petro-products economy.
+
+- **Feed** — each asset against its own history (percentile, 20-day change, vol, the
+  months it rhymes with), then today's stories through a **market-defined
+  materiality gate**: a class is MATERIAL only if it sits inside the market's big
+  moves more often than a random day does. Noise is shelved, visible, unranked.
+- **Story** — any pasted headline, paragraph, URL, or corpus event, read in the
+  desk's order: is it priced (Brent since knowable vs the analog fan, flow side) →
+  is the story right (claims verbatim, each with a measured verdict) → the tail
+  (escalation branches, then-vs-now) → where it travels (per-hop pass-through) →
+  how much to trust it (walk-forward stamp, retrieval, freshness, this source's
+  record). Corpus events are read point-in-time: only analogs knowable then.
+- **Big moves** — every time Brent, WTI and the diesel crack actually changed since
+  1987, and what was knowable while they did. Thresholds registered before
+  computing (`BIG_MOVES_REGISTRATION.md`, two dated amendments disclosed).
+- **Ledger** — engine vs base rate (walk-forward, as computed, labelled
+  corpus-derived), record vs narrative (seeding), sources (accrues as claims
+  resolve). Append-only; nothing hand-resolved (`CLAIM_LEDGER_REGISTRATION.md`).
+
+Modules: `src/big_moves.py`, `src/materiality.py`, `src/ledger.py`,
+`src/story_read.py`, `src/feed_build.py`, `src/api_v2.py`, `src/app.html`.
+Acceptance: `python3 src/acceptance_v2.py` (A1–A11). The workbench remains at
+`/workbench` as a legacy view.
+
+Two findings from the first Big Moves run, published as computed: on crude,
+infrastructure attacks, sanctions and chokepoint disruptions sit inside big moves
+*less* often than a random day (0.6–0.8× the everyday rate) while demand shocks and
+OPEC decisions sit above it; on the diesel crack every geopolitical class is above
+it (1.8–2.6×) — geopolitics moves products more than crude. And the market's
+extreme usually precedes the catalyst: 14 of 43 Brent episodes are entirely
+"anticipated" (every attributed event more than 20 days after onset).
+
 ## The headline finding
 
 **No conditioning effect survives standardized, regime-robust testing; the raw
