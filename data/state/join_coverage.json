@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-09-02T15:46:15+00:00",
+ "generated_at": "2026-09-02T19:22:26+00:00",
  "n_events": 313,
  "events_with_a_row": 313,
  "fields_registered": 70,
  "eras": {
   "1946-86": {
    "n_events": 14,
-   "median_fields_per_event": 38.0,
-   "median_distinct_fields": 23.0,
-   "min_fields": 19,
-   "events_ge_25_fields": 5,
+   "median_fields_per_event": 40.0,
+   "median_distinct_fields": 25.0,
+   "min_fields": 20,
+   "events_ge_25_fields": 9,
    "events_ge_12_fields": 14,
    "blocks": {
     "PHYSICAL": {
@@ -25,9 +25,12 @@
      "share_of_events": 1.0,
      "fields_seen": [
       "curve_m1_m4_spread",
-      "kilian_igrea"
+      "diesel_crack",
+      "kilian_igrea",
+      "wti_daily",
+      "wti_monthly"
      ],
-     "rows": 17
+     "rows": 33
     },
     "ACTORS": {
      "events_with_field": 14,
@@ -53,6 +56,7 @@
      "fields_seen": [
       "atop_any_obligation",
       "atop_defense_pact",
+      "diplomatic_representation",
       "icb_crisis_count",
       "icb_last_outcome_form",
       "icb_last_tension",
@@ -62,7 +66,7 @@
       "mid_max_hostlev_10y",
       "unga_ideal_point_distance"
      ],
-     "rows": 62
+     "rows": 70
     },
     "SYSTEM": {
      "events_with_field": 14,
@@ -74,10 +78,11 @@
       "gpr_threats_monthly",
       "gprh_monthly",
       "mepv_regional_war",
+      "opec_decision_dated",
       "ucdp_active_conflicts",
       "ucdp_intensity_max"
      ],
-     "rows": 112
+     "rows": 114
     },
     "NARRATIVE": {
      "events_with_field": 14,
@@ -91,29 +96,39 @@
   },
   "1987->": {
    "n_events": 299,
-   "median_fields_per_event": 27.0,
-   "median_distinct_fields": 24.0,
-   "min_fields": 12,
-   "events_ge_25_fields": 94,
-   "events_ge_12_fields": 239,
+   "median_fields_per_event": 35.0,
+   "median_distinct_fields": 32.0,
+   "min_fields": 18,
+   "events_ge_25_fields": 213,
+   "events_ge_12_fields": 299,
    "blocks": {
     "PHYSICAL": {
      "events_with_field": 299,
      "share_of_events": 1.0,
      "fields_seen": [
       "spare_capacity_opec",
-      "surplus_capacity_world"
+      "surplus_capacity_world",
+      "us_crude_stocks_xspr",
+      "us_refinery_utilization",
+      "us_spr_stock"
      ],
-     "rows": 712
+     "rows": 829
     },
     "MARKET": {
      "events_with_field": 299,
      "share_of_events": 1.0,
      "fields_seen": [
+      "brent_daily",
+      "cot_managed_money_net",
       "curve_m1_m4_spread",
-      "kilian_igrea"
+      "diesel_crack",
+      "kilian_igrea",
+      "ovx",
+      "vix",
+      "wti_daily",
+      "wti_monthly"
      ],
-     "rows": 598
+     "rows": 2584
     },
     "ACTORS": {
      "events_with_field": 213,
@@ -139,6 +154,7 @@
      "fields_seen": [
       "atop_any_obligation",
       "atop_defense_pact",
+      "diplomatic_representation",
       "icb_crisis_count",
       "icb_last_outcome_form",
       "icb_last_tension",
@@ -148,7 +164,7 @@
       "mid_max_hostlev_10y",
       "unga_ideal_point_distance"
      ],
-     "rows": 344
+     "rows": 381
     },
     "SYSTEM": {
      "events_with_field": 299,
@@ -160,11 +176,12 @@
       "gpr_threats_monthly",
       "gprh_monthly",
       "mepv_regional_war",
+      "opec_decision_dated",
       "ucdp_active_conflicts",
       "ucdp_battle_deaths",
       "ucdp_intensity_max"
      ],
-     "rows": 3243
+     "rows": 3542
     },
     "NARRATIVE": {
      "events_with_field": 299,
@@ -177,9 +194,22 @@
    }
   }
  },
+ "situation_fields_amendment_A": {
+  "events": 313,
+  "kept": 60,
+  "dropped_after_t": 726,
+  "unknown": 0,
+  "events_with_no_situation_field_at_t": 262,
+  "knowable_at_rules": {
+   "c:coding_date(undated url)": 297,
+   "c:coding_date(corpus-derived)": 413,
+   "a:url_date": 76
+  },
+  "note": "sr_* fields with knowable_at > event_date are dropped from the join and counted here (WORLD_STATE_FRAMEWORK.md Amendment A)"
+ },
  "acceptance_S2": {
   "rule": "every event >= 25 non-unknown fields for 1987+ and >= 12 for 1946-86 (framework \u00a77)",
-  "1987->": "94 of 299",
+  "1987->": "213 of 299",
   "1946-86": "14 of 14"
  }
 }

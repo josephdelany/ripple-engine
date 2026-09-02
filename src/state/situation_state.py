@@ -17,6 +17,7 @@ Run:  python3 src/state/situation_state.py            join every corpus event, w
       python3 src/state/situation_state.py 2001-09-11 country.usa country.saudi_arabia   stand at a date
 """
 import json
+import re
 import sqlite3
 import sys
 from collections import defaultdict
@@ -125,10 +126,84 @@ def state_at(conn, t, entities=(), dyads=()):
     return out
 
 
+# ----------------------------------------------------------------------------- situation fields with knowable_at (framework Amendment A)
+
+SR_FIELDS = {"actor": ("geopolitical", "actor"), "target": ("geopolitical", "target"), "conflict_scope": ("geopolitical", "conflict_scope"),
+             "tempo": ("geopolitical", "tempo"), "alliance": ("geopolitical", "alliance_engagement"), "diplomatic": ("geopolitical", "diplomatic_state"),
+             "target_capacity": ("geopolitical", "target_response_capacity"), "asset_role": ("physical", "asset_role")}
+_URL_DATE = re.compile(r"/((?:19|20)\d{2})/(\d{2})/(\d{2})/|((?:19|20)\d{2})-(\d{2})-(\d{2})")
+
+
+def knowable_at(source, event_date, added_at):
+    """Amendment A rule 1: (a) a date in the cited URL's path; (b) corpus:observed -> window close; (c) corpus-derived or an
+    undated URL -> the coding date; (d) null -> 'unknown'. Never fetched, never guessed."""
+    if source in (None, "", "null"):
+        return "unknown", "d:null"
+    s = str(source)
+    if s.startswith("http"):
+        m = _URL_DATE.search(s)
+        if m:
+            y, mo, d = (m.group(1), m.group(2), m.group(3)) if m.group(1) else (m.group(4), m.group(5), m.group(6))
+            try:
+                return pd.Timestamp(f"{y}-{mo}-{d}").date().isoformat(), "a:url_date"
+            except ValueError:
+                pass
+        return (added_at or "")[:10] or "unknown", "c:coding_date(undated url)"
+    if s.startswith("corpus:observed"):
+        return (pd.Timestamp(event_date) + pd.Timedelta(days=90)).date().isoformat(), "b:window_close"
+    if s.startswith("corpus:"):
+        return (added_at or "")[:10] or "unknown", "c:coding_date(corpus-derived)"
+    return (added_at or "")[:10] or "unknown", "c:coding_date(other)"
+
+
+def situation_fields(conn, event_id):
+    """The record's situation fields as rows with knowable_at (vintage). Retired outcome branches are not situation fields."""
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(events)")}
+    if not {"sr_json", "added_at"} <= cols:                 # a scratch/older events table without situation records
+        return []
+    row = conn.execute("SELECT event_date, added_at, sr_json FROM events WHERE event_id=?", (event_id,)).fetchone()
+    if not row or not row[2]:
+        return []
+    edate, added, sj = row
+    try:
+        rec = json.loads(sj)
+    except ValueError:
+        return []
+    srcs = rec.get("sources") or {}
+    out = []
+    for name, (block, key) in SR_FIELDS.items():
+        val = (rec.get(block) or {}).get(key)
+        if val in (None, "", "unknown"):
+            continue
+        ka, rule = knowable_at(srcs.get(name), edate, added)
+        out.append({"field": f"sr_{name}", "value_text": str(val), "obs_date": edate[:10], "knowable_at": ka, "rule": rule,
+                    "source": f"situation record ({srcs.get(name) or 'null'}); knowable_at {rule}", "release": (added or edate)[:10]})
+    return out
+
+
+def situation_rows_at(conn, event_id, t):
+    """Amendment A rule 2: the situation rows the join keeps at t, plus the counts of what it drops."""
+    rows, dropped, unknown = [], 0, 0
+    for f in situation_fields(conn, event_id):
+        if f["knowable_at"] == "unknown":
+            unknown += 1
+            continue
+        if f["knowable_at"] > str(t)[:10]:
+            dropped += 1
+            continue
+        rows.append(f)
+    return rows, dropped, unknown
+
+
 # ----------------------------------------------------------------------------- the join
+
+KNOWABLE = []          # per-event counts of situation fields kept / dropped at t (filled by join; published by coverage)
+KNOWABLE_OUT = P.DATA / "state" / "situation_knowable.json"
+
 
 def join(conn, event_ids=None, replace=True):
     ensure_schema(conn)
+    KNOWABLE.clear()
     q = "SELECT event_id, event_date FROM events"
     events = conn.execute(q).fetchall() if not event_ids else [r for r in conn.execute(q).fetchall() if r[0] in set(event_ids)]
     ts = P.now()
@@ -140,6 +215,11 @@ def join(conn, event_ids=None, replace=True):
             for f, v in fields.items():
                 rows.append((eid, ent, f, v.get("obs_date"), v.get("value"), v.get("value_text"), v["vintage"],
                              v.get("release") or v["vintage"], 1 if v.get("retrospective") else 0, v["source"], ts))
+        kept, dropped, unknown = situation_rows_at(conn, eid, edate)          # framework Amendment A
+        for f in kept:
+            rows.append((eid, "situation", f["field"], f["obs_date"], None, f["value_text"], f["knowable_at"], f["release"],
+                         1 if f["knowable_at"] > edate[:10] else 0, f["source"], ts))
+        KNOWABLE.append({"event_id": eid, "event_date": edate, "kept": len(kept), "dropped_after_t": dropped, "unknown": unknown})
     if replace:
         conn.execute("DELETE FROM situation_state" + ("" if not event_ids else f" WHERE event_id IN ({','.join('?' * len(event_ids))})"),
                      () if not event_ids else tuple(event_ids))
@@ -172,6 +252,17 @@ def coverage(conn):
                             "median_distinct_fields": float(g["n_distinct"].median()), "min_fields": int(g["n_fields"].min()),
                             "events_ge_25_fields": int((g["n_distinct"] >= 25).sum()), "events_ge_12_fields": int((g["n_distinct"] >= 12).sum()),
                             "blocks": blocks}
+    # framework Amendment A: what the join kept and dropped of the situation fields at t
+    if KNOWABLE:
+        tot = {"events": len(KNOWABLE), "kept": sum(k["kept"] for k in KNOWABLE), "dropped_after_t": sum(k["dropped_after_t"] for k in KNOWABLE),
+               "unknown": sum(k["unknown"] for k in KNOWABLE), "events_with_no_situation_field_at_t": sum(1 for k in KNOWABLE if k["kept"] == 0)}
+        rules = {}
+        for eid, in conn.execute("SELECT event_id FROM events"):
+            for f in situation_fields(conn, eid):
+                rules[f["rule"]] = rules.get(f["rule"], 0) + 1
+        out["situation_fields_amendment_A"] = {**tot, "knowable_at_rules": rules,
+                                               "note": "sr_* fields with knowable_at > event_date are dropped from the join and counted here (WORLD_STATE_FRAMEWORK.md Amendment A)"}
+        KNOWABLE_OUT.write_text(json.dumps({"generated_at": P.now(), **tot, "knowable_at_rules": rules, "per_event": KNOWABLE}, indent=1))
     out["acceptance_S2"] = {"rule": "every event >= 25 non-unknown fields for 1987+ and >= 12 for 1946-86 (framework §7)",
                             "1987->": f"{out['eras'].get('1987->', {}).get('events_ge_25_fields', 0)} of {out['eras'].get('1987->', {}).get('n_events', 0)}",
                             "1946-86": f"{out['eras'].get('1946-86', {}).get('events_ge_12_fields', 0)} of {out['eras'].get('1946-86', {}).get('n_events', 0)}"}
