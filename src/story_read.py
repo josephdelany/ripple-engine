@@ -90,6 +90,8 @@ def priced(conn, etype, knowable, exclude_event=None):
     for eid, d, title in conn.execute("SELECT event_id, event_date, title FROM events WHERE type=?", (etype,)):
         if eid == exclude_event:
             continue
+        if pd.Timestamp(d) < s.index[0]:
+            continue                                  # predates the price series: no path exists
         p = s.index.searchsorted(pd.Timestamp(d))
         if p >= len(s) or p + HORIZON_ >= len(s) or pd.Timestamp(d) >= k:
             continue                                  # point-in-time: only analogs knowable before k

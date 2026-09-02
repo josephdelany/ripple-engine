@@ -112,7 +112,8 @@ def read(conn, target, k=5, as_of=None, pool=None):
         return {"no_adequate_precedent": True,
                 "max_similarity": round(scored[0]["similarity"], 3) if scored else 0.0,
                 "threshold": RETRIEVE_MIN, "analogs": []}
-    conditioned = [x["rec"] for x in scored if x["similarity"] >= COND_SIM]
+    cond_scored = [x for x in scored if x["similarity"] >= COND_SIM]
+    conditioned = [x["rec"] for x in cond_scored]
     if len(conditioned) >= COND_MIN_N:
         br = branch_rates(conditioned); br["basis"] = "conditioned"; br["thin"] = False
     else:
@@ -130,6 +131,12 @@ def read(conn, target, k=5, as_of=None, pool=None):
                      "ld": likeness_difference(target, x["rec"])} for x in topk],
         "branch_rates": br,
         "conditioned_n": len(conditioned),
+        # the conditioned subset itself (every member at/above COND_SIM), so a caller -- the
+        # Challenge loop -- can show its counts and join its price-side outcomes by event id
+        "subset": [{"event_id": x["rec"]["event_id"], "date": x["rec"]["date"], "title": x["rec"]["title"],
+                    "type": x["rec"]["type"], "similarity": x["similarity"], "outcome_90": x["rec"]["outcome"]}
+                   for x in cond_scored],
+        "subset_counts": branch_rates(conditioned),
     }
 
 

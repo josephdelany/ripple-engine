@@ -129,6 +129,8 @@ def class_outcomes(conn, event_class, sid="fred.DCOILBRENTEU", horizon=PRICE_HOR
         q += " AND event_date < ?"; args.append(str(as_of))
     out = []
     for eid, d, title in conn.execute(q, args):
+        if pd.Timestamp(d) < s.index[0]:
+            continue                      # event predates the series: no outcome exists (never the series' first window)
         pos = s.index.searchsorted(pd.Timestamp(d))
         if pos + horizon >= len(s) or pos >= len(s):
             continue

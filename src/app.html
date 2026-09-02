@@ -61,8 +61,7 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
   <div class="nav">
     <button data-s="feed" class="on">Feed</button><button data-s="story">Story</button><button data-s="big">Big moves</button><button data-s="ledger">Ledger</button>
   </div>
-  <div class="read"><input id="readin" placeholder="Paste a headline, paragraph, or URL — read it against the record"><button id="readbtn">Read</button></div>
-  <span class="asof" id="asof"></span>
+  <span class="asof" id="asof" style="margin-left:auto"></span>
 </div>
 <main>
 
@@ -77,9 +76,12 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
   <h2 style="margin-top:22px">Open a corpus event</h2>
   <div class="search"><input id="evq" placeholder="Search 300+ coded events — Abqaiq, Hormuz, OPEC 2014, Kharg…"><button class="btn" id="evbtn">Search</button></div>
   <div id="evhits"></div>
+  <h2 style="margin-top:22px">Read something the feeds missed</h2>
+  <div class="search"><input id="readin" placeholder="Paste a headline, paragraph, or URL — it is read against the record like any Feed story"><button class="btn" id="readbtn">Read</button></div>
+  <p class="dim" style="font-size:12px;margin:2px 0 0">The Feed is the front door; this is the side door for a story the watcher did not carry. Its checkable claims are logged to the Ledger the same way.</p>
 </section>
 
-<section class="screen" id="s-story"><div id="story"><p class="dim">Open a story from the Feed, search a corpus event, or paste text above.</p></div></section>
+<section class="screen" id="s-story"><div id="story"><p class="dim">Open a story from the Feed, search a corpus event, or use “Read something the feeds missed” on the Feed.</p></div></section>
 
 <section class="screen" id="s-big"><iframe id="bigframe" title="Big moves"></iframe></section>
 
@@ -140,7 +142,7 @@ $('#readbtn').onclick=()=>{const v=$('#readin').value.trim();if(v)readText(v);};
 $('#readin').addEventListener('keydown',e=>{if(e.key==='Enter')$('#readbtn').click();});
 
 function fanSvg(pr){const w=640,h=210,x0=50,x1=600;const fan=pr.fan;if(!fan)return '<p class="dim">no analog paths with price history for this class</p>';
-  const all=[...fan.min,...fan.max,...(pr.path_pct||[])];const lo=Math.min(-2,...all),hi=Math.max(2,...all);const y=v=>20+(hi-v)/(hi-lo)*(h-60);const x=i=>x0+i*(x1-x0)/20;
+  const all=[...fan.min,...fan.max,...(pr.path_pct||[])];const lo=Math.min(-2,...all),hi=Math.max(2,...all);const y=v=>20+(hi-v)/(hi-lo)*(h-60);const H=(fan.median.length-1)||20;const x=i=>x0+i*(x1-x0)/H;
   const poly=(a,b)=>a.map((v,i)=>`${x(i)},${y(v)}`).join(' ')+' '+b.map((v,i)=>`${x(i)},${y(v)}`).reverse().join(' ');
   const line=a=>a.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' ');
   let s=`<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="price path vs analog fan">`;
@@ -150,9 +152,9 @@ function fanSvg(pr){const w=640,h=210,x0=50,x1=600;const fan=pr.fan;if(!fan)retu
   s+=`<line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="#2a3038"/>`;
   if(pr.path_pct&&pr.path_pct.length>1)s+=`<path d="${line(pr.path_pct)}" stroke="#e0653a" stroke-width="2.5" fill="none"/>`;
   if(pr.path_pct&&pr.path_pct.length){const i=pr.path_pct.length-1;s+=`<circle cx="${x(i)}" cy="${y(pr.path_pct[i])}" r="3.5" fill="#e0653a"/><text x="${Math.min(x(i)+6,x1-70)}" y="${y(pr.path_pct[i])-8}" font-size="11" fill="#e0653a">now ${pct(pr.path_pct[i])}</text>`;}
-  if(pr.tails){s+=`<text x="${x1+4}" y="${y(fan.max[20])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.high.date.slice(0,4))} ${pct(pr.tails.high.chg_pct,0)}</text><text x="${x1+4}" y="${y(fan.min[20])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.low.date.slice(0,4))} ${pct(pr.tails.low.chg_pct,0)}</text>`;}
-  s+=`<text x="${x1-150}" y="${y(fan.median[20])+14}" font-size="10.5" fill="#3fbf95">analog median ${pct(fan.median[20])} · IQR band · n=${fan.n}</text>`;
-  s+=`<text x="${x0}" y="${h-8}" font-size="10" fill="#6f6d67">day 0 · knowable ${esc(pr.knowable)}</text><text x="${x1-24}" y="${h-8}" font-size="10" fill="#6f6d67">+20d</text></svg>`;return s;}
+  if(pr.tails){s+=`<text x="${x1+4}" y="${y(fan.max[H])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.high.date.slice(0,4))} ${pct(pr.tails.high.chg_pct,0)}</text><text x="${x1+4}" y="${y(fan.min[H])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.low.date.slice(0,4))} ${pct(pr.tails.low.chg_pct,0)}</text>`;}
+  s+=`<text x="${x1-150}" y="${y(fan.median[H])+14}" font-size="10.5" fill="#3fbf95">analog median ${pct(fan.median[H])} · IQR band · n=${fan.n}</text>`;
+  s+=`<text x="${x0}" y="${h-8}" font-size="10" fill="#6f6d67">day 0 · knowable ${esc(pr.knowable)}</text><text x="${x1-24}" y="${h-8}" font-size="10" fill="#6f6d67">${pr.resolution==='monthly'?'+3m':'+20d'}</text></svg>`;return s;}
 
 function renderStory(s){
   const sig=s.significance||{};const r=sig.rates||{};  const side=a=>r[a]?`${r[a].label}: ${r[a].rate_pct}% of ${r[a].n} vs everyday ${r[a].base_pct}% (${r[a].ratio}×)`:'';
@@ -167,9 +169,9 @@ function renderStory(s){
   <p class="dim" style="font-size:12.5px;margin:0 0 4px">${esc(sig.why||'')}</p>
   <p class="dim" style="font-size:12px;margin:0 0 14px">${esc(side('brent'))}${r.brent&&r.diesel_crack?' · ':''}${esc(side('diesel_crack'))}${sig.attention&&sig.attention.score!=null?` · attention ${num(sig.attention.score,0)}th pct (GPR${(sig.attention.evidence||{}).wiki_spikes&&(sig.attention.evidence||{}).wiki_spikes.length?', pageview spike':''})`:''}</p>
 
-  <div class="sec"><h2>1 · Is it priced? Brent since knowable vs the analog set (point-in-time)</h2>
+  <div class="sec"><h2>1 · Is it priced? ${pr.resolution==='monthly'?'WTI (monthly spine, 1946–) since knowable vs the analog set — monthly resolution':'Brent since knowable vs the analog set'} (point-in-time)</h2>
     <div class="two"><div class="card">${fanSvg(pr)}${pr.price_note?`<div class="dim" style="font-size:12px">${esc(pr.price_note)}</div>`:''}
-      <div class="dim" style="font-size:12px;margin-top:6px">Brent ${num(pr.price_at_knowable,2)} at knowable${pr.days_elapsed?` · after ${pr.days_elapsed} trading days ${pct((pr.path_pct||[]).slice(-1)[0])} vs analog median ${pct(pr.fan?pr.fan.median[pr.days_elapsed]:null)} (${pr.now_vs_median_pct!=null?(pr.now_vs_median_pct>0?'running hot by ':'running cool by ')+num(Math.abs(pr.now_vs_median_pct))+' pts':''}) · ${pr.share_up_at_day!=null?Math.round(pr.share_up_at_day*100)+'% of analogs were up at this point':''}`:''}</div></div>
+      <div class="dim" style="font-size:12px;margin-top:6px">${pr.resolution==='monthly'?'WTI (monthly)':'Brent'} ${num(pr.price_at_knowable,2)} at knowable${pr.days_elapsed?` · after ${pr.days_elapsed} trading days ${pct((pr.path_pct||[]).slice(-1)[0])} vs analog median ${pct(pr.fan?pr.fan.median[pr.days_elapsed]:null)} (${pr.now_vs_median_pct!=null?(pr.now_vs_median_pct>0?'running hot by ':'running cool by ')+num(Math.abs(pr.now_vs_median_pct))+' pts':''}) · ${pr.share_up_at_day!=null?Math.round(pr.share_up_at_day*100)+'% of analogs were up at this point':''}`:''}</div></div>
       <div class="card"><h2>Flow side</h2><dl class="kv">
         ${(fl.chokepoints||[]).map(c=>`<dt>${esc(c.chokepoint)}</dt><dd class="mono">${esc(c.flag)} · ${c.pct_of_median!=null?Math.round(c.pct_of_median*100)+'% of median':''} <span class="dim">${esc(c.latest_date||'')}</span></dd>`).join('')}
         <dt>Realized disruption, this class</dt><dd class="mono">${fl.realized_disruption_fraction_pct!=null?fl.realized_disruption_fraction_pct+'% of '+fl.contributing_n:'—'}</dd></dl>
@@ -186,7 +188,12 @@ function renderStory(s){
     <p class="dim" style="font-size:12px;margin:10px 0 12px">${esc(rates.basis||'')}${rates.thin?' · thin conditioning, parent class shown':''} · ${esc(br.basis_note||'')} · ${esc(br.outcome_label||'')}</p>
     <h2>Then vs now — top analogs</h2>
     <table><tr><th>Analog</th><th>Similarity</th><th>Outcome +90d</th><th>Likenesses</th><th>Differences</th></tr>${(br.analogs||[]).slice(0,5).map(a=>`<tr><td><span class="mono dim">${esc(a.date)}</span> ${esc(a.title)}</td><td class="mono">${a.similarity}</td><td class="mono">${esc((a.outcome_90||'unknown').replace(/_/g,' ').toLowerCase())}</td><td class="ev-m">${(a.ld&&a.ld.likenesses||[]).map(x=>x.field).join(', ')||'—'}</td><td class="ev-j">${(a.ld&&a.ld.differences||[]).map(x=>`${x.field}: ${x.then} → ${x.now}`).join('; ')||'—'}</td></tr>`).join('')}</table>
-    <p class="dim" style="font-size:11.5px;margin-top:6px">Fields shown are the coded situation record; "unknown" fields are not counted in similarity. Which difference shifts which branch is measured by the walk-forward, not asserted here.</p>`):`<p class="muted">${esc(br.note||'')}</p>`}</div>
+    <p class="dim" style="font-size:11.5px;margin-top:6px">Fields shown are the coded situation record; "unknown" fields are not counted in similarity. Which difference shifts which branch is measured by the walk-forward, not asserted here.</p>
+    <div class="card" style="margin-top:14px" id="challenge"><h2>Challenge — condition the record and re-read the branches</h2>
+      <p class="dim" style="font-size:12.5px;margin:0 0 10px">Set what you believe the situation is (actor, target, scope, tempo, alliance, diplomacy, capacity) from the coded vocabulary. The same engine re-reads Layer G under those conditions — same similarity, same thresholds — and shows the conditioned subset, its +90d branches, its Brent +20d record, and the comparison with the unconditioned read. Free text is logged verbatim. Every challenge goes to the Ledger.</p>
+      <div id="chfields" class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:8px"><span class="dim">loading vocabulary…</span></div>
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center"><input id="chnote" style="flex:1;background:var(--s2);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit" placeholder="Why — your reasoning, logged verbatim (optional)"><button class="btn" id="chrun">Challenge</button></div>
+      <div id="chout" style="margin-top:12px"></div></div>`):`<p class="muted">${esc(br.note||'')}</p>`}</div>
 
   <div class="sec"><h2>4 · Where does it travel? Measured pass-through per hop, this class</h2>
     <div class="chain">${(s.propagation&&s.propagation.hops||[]).map((h,i)=>`${i?'<span class="arrow">→</span>':''}<div class="hop"><div class="a">${esc(h.label)}</div><div class="m">signed median ${pct(h.signed_median_pct)} · n=${h.n}</div><div class="dim" style="font-size:11px">material move ${h.material_move_pct}% · no lasting move ${h.no_lasting_move_pct}% · range ${h.lo}…${h.hi}</div></div>`).join('')||'<p class="dim">no measured edges for this class</p>'}</div>
@@ -201,8 +208,45 @@ function renderStory(s){
       <h2 style="margin-top:14px">This source on the ledger</h2>${(s.sources_board||[]).length?`<table><tr><th>Source</th><th>Claim type</th><th>Resolved true</th><th>n</th></tr>${s.sources_board.map(b=>`<tr><td>${esc(b.source)}</td><td>${esc(b.kind)}</td><td class="mono">${Math.round(b.true_rate*100)}%</td><td class="mono">${b.n}</td></tr>`).join('')}</table>`:`<p class="dim" style="font-size:12.5px">No resolved claims from ${esc(s.source||'this source')} yet — the ledger is young and says so.</p>`}</div>
     <div><h2>Your read</h2><textarea id="notes" placeholder="Write beside the numbers."></textarea>
       <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="insert">Insert receipts</button><button class="btn" id="export">Export draft</button></div></div></div>`;
+  if(br.applicable&&!br.no_adequate_precedent)setupChallenge(s);
   $('#insert').onclick=()=>{const t=$('#notes');const lines=[`[${s.knowable}] ${s.title} — ${SIG[sig.significance]||''}: ${sig.why||''}`];(s.claims||[]).forEach(c=>{const v=c.verdict||{};if(v.r!=null)lines.push(`• “${c.text}” — ${v.verdict} (${v.k} of ${v.n}; ${v.basis||''})`);});if(n)lines.push(`• Branches +90d (n=${n}): ${B.map(([k,l])=>l+' '+(counts[k]||0)).join(', ')} — ${rates.basis||''}`);t.value+=(t.value?'\n\n':'')+lines.join('\n');};
   $('#export').onclick=()=>{const blob=new Blob([$('#notes').value],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`read_${(s.knowable||'').replace(/-/g,'')}_${(s.event_class||'story')}.md`;a.click();};
+}
+
+
+/* ---------------- CHALLENGE (Amendment 4) ---------------- */
+let CHVOCAB=null;
+async function setupChallenge(s){
+  try{CHVOCAB=CHVOCAB||await api('/api/challenge/vocab');}catch(e){$('#chfields').innerHTML=`<div class="err">${esc(e.message)}</div>`;return;}
+  const tgt=(s.branches&&s.branches.target)||{};
+  $('#chfields').innerHTML=CHVOCAB.fields_order.map(f=>{const v=CHVOCAB.fields[f]||{};const cov=v.coverage||0;
+    return `<label class="dim" style="font-size:11.5px">${esc(f.replace(/_/g,' '))} <span class="mono">${cov} of ${v.of} coded</span><br><select data-f="${esc(f)}" style="width:100%;background:var(--s2);border:1px solid var(--line);color:var(--t);padding:5px 6px;border-radius:6px;font:inherit${cov?'':';opacity:.55'}"><option value="">— leave as coded —</option>${(v.allowed||[]).map(a=>`<option value="${esc(a)}">${esc(a)}${v.coded&&v.coded[a]?` (${v.coded[a]})`:''}</option>`).join('')}</select></label>`;}).join('');
+  $('#chrun').onclick=async()=>{const conditions={};document.querySelectorAll('#chfields select').forEach(el=>{if(el.value)conditions[el.dataset.f]=el.value;});
+    const note=$('#chnote').value.trim();$('#chout').innerHTML='<p class="dim">re-reading under your conditions…</p>';
+    try{const r=await api('/api/challenge',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({story_id:s.story_id,conditions,note})});renderChallenge(r);}
+    catch(e){$('#chout').innerHTML=`<div class="err">${esc(e.message)}</div>`;}};
+}
+function renderChallenge(r){
+  const B=[['CONTAINED','Contained'],['LIMITED_RETALIATION','Limited retaliation'],['WIDENING','Widening'],['RESOLUTION_BY_DEAL','Deal']];
+  const sub=r.subset||{};const cnt=sub.counts||{};const n=sub.n||0;const p=r.price||{};const cmp=r.comparison||{};const u=cmp.unconditioned||{};const c=cmp.conditioned||{};const d=cmp.delta||{};
+  const cond=Object.entries(r.conditions_applied||{}).map(([k,v])=>`${k.replace(/_/g,' ')} = ${v}`).join(' · ');
+  const flags=(r.flags||[]).map(f=>chip(f.startsWith('field_uncoded')?'uncoded field: '+f.split(':')[1]:f,'c-flag')).join(' ');
+  const state=r.status==='NO PRECEDENT'?'<span class="chip c-NOPRECEDENT">No precedent</span>':r.status==='THIN'?'<span class="chip c-THIN">Thin</span>':'<span class="chip c-SUPPORTED">Conditioned</span>';
+  const row=(l,a,b,dd)=>`<tr><td>${l}</td><td class="mono">${a}</td><td class="mono">${b}</td><td class="mono dim">${dd}</td></tr>`;
+  const pctc=v=>v==null?'—':Math.round(v*100)+'%';
+  $('#chout').innerHTML=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">${state} <span class="muted">${esc(cond)||'no change'}</span> ${flags} <span class="dim mono" style="font-size:11.5px">logged ${esc(r.challenge_id)}</span></div>
+    ${r.status==='NO PRECEDENT'?`<p class="muted">No analog at or above similarity ${sub.threshold} under these conditions (max ${sub.max_similarity}). Branch rates and the price side are withheld — that is the answer, not a gap in the page.</p>`:`
+    <div class="branches">${B.map(([k,l])=>`<div class="card"><div class="l">${l}</div><div class="n">${cnt[k]||0} <span class="dim" style="font-size:13px">of ${n}</span></div><div class="dim" style="font-size:12px">${n?Math.round(100*(cnt[k]||0)/n):0}%</div></div>`).join('')}</div>
+    <p class="dim" style="font-size:12px;margin:8px 0 10px">${r.status==='THIN'?`Thin: ${n} analogs at/above similarity ${(r.thresholds||{}).COND_SIM} — below the registered minimum of ${(r.thresholds||{}).COND_MIN_N}. Counts shown, not a call; the page's branch rates fall back to ${esc((r.branch_rates||{}).basis||'the parent class')}.`:`Conditioned subset n=${n}, basis ${esc((r.branch_rates||{}).basis||'')}.`} ${esc(r.outcome_label||'')}</p>
+    <table><tr><th></th><th>Unconditioned</th><th>Conditioned</th><th>Δ</th></tr>
+      ${row('Analogs (n)',u.n??'—',c.n??'—',d.n!=null?(d.n>0?'+':'')+d.n:'—')}
+      ${row('Escalated at +90d (limited + widening)',pctc(u.escalated_share),pctc(c.escalated_share),d.escalated_share!=null?(d.escalated_share>0?'+':'')+Math.round(d.escalated_share*100)+' pts':'—')}
+      ${row('Brent +20d, median',pct(u.price_median_pct),pct(c.price_median_pct),d.price_median_pct!=null?(d.price_median_pct>0?'+':'')+num(d.price_median_pct)+' pts':'—')}
+      ${row('Brent +20d, share up',pctc(u.price_share_up),pctc(c.price_share_up),'')}
+      ${row('With price history (n)',u.price_n??'—',c.price_n??'—','')}</table>
+    ${p.n?`<div style="margin-top:8px">${rb(p.bar)}<div class="dim" style="font-size:11.5px;margin-top:4px">Brent +20 trading days for this subset: median ${pct(p.median_pct)}, IQR ${pct(p.p25_pct)}…${pct(p.p75_pct)}, ${Math.round(p.share_up*100)}% up, ${Math.round(p.share_ge10*100)}% moved ≥10% · tails ${esc(p.tails.low.date.slice(0,4))} ${pct(p.tails.low.chg_pct,0)} (${esc(p.tails.low.title.slice(0,40))}) … ${esc(p.tails.high.date.slice(0,4))} ${pct(p.tails.high.chg_pct,0)} (${esc(p.tails.high.title.slice(0,40))})</div></div>`:'<p class="dim" style="font-size:12px">No price history for this subset.</p>'}
+    <details style="margin-top:8px"><summary>The conditioned subset — ${n} analogs</summary><table><tr><th>Date</th><th>Event</th><th>Class</th><th>Similarity</th><th>Outcome +90d</th></tr>${(sub.analogs||[]).map(a=>`<tr><td class="mono dim">${esc(a.date)}</td><td>${esc(a.title)}</td><td class="dim">${esc((a.type||'').replace(/_/g,' '))}</td><td class="mono">${a.similarity}</td><td class="mono">${esc((a.outcome_90||'unknown').replace(/_/g,' ').toLowerCase())}</td></tr>`).join('')}</table></details>`}
+    <p class="dim" style="font-size:11.5px;margin-top:8px">Frequencies with n, never a probability. Same engine and thresholds as the page (${esc(r.registration||'')}); appended to data/ledger/challenges.jsonl point-in-time, verbatim.</p>`;
 }
 
 /* ---------------- LEDGER ---------------- */

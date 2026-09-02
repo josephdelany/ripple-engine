@@ -40,6 +40,12 @@ class StoryIn(BaseModel):
     knowable: str | None = None
 
 
+class ChallengeIn(BaseModel):
+    story_id: str
+    conditions: dict[str, str] | None = None
+    note: str | None = None
+
+
 def _json(p, default=None):
     try:
         return json.load(open(p))
@@ -129,6 +135,35 @@ def register(app):
             "ORDER BY e.event_date DESC LIMIT ?", (like, like, like, like, like, limit)).fetchall()
         conn.close()
         return [{"event_id": r[0], "date": r[1], "type": r[2], "title": r[3]} for r in rows]
+
+    @app.get("/api/challenge/vocab")
+    def api_challenge_vocab():
+        import challenge as C
+        conn = sqlite3.connect(DB)
+        try:
+            return {**C.vocab(conn), "fields_order": list(C.FIELDS), "registration": C.REGISTRATION}
+        finally:
+            conn.close()
+
+    @app.post("/api/challenge")
+    def api_challenge(body: ChallengeIn):
+        """Re-read Layer G under the analyst's conditions (Amendment 4). Every challenge is logged,
+        refused ones included; a refusal returns 400 with the reasons and the vocabulary."""
+        import challenge as C
+        conn = sqlite3.connect(DB)
+        try:
+            r = C.run(conn, body.story_id, body.conditions or {}, note=body.note or "")
+        finally:
+            conn.close()
+        if r.get("status") == "REFUSED":
+            raise HTTPException(400, {"errors": r["errors"], "challenge_id": r["challenge_id"], "vocab": r.get("vocab", {}).get("fields")})
+        return r
+
+    @app.get("/api/challenges")
+    def api_challenges(story_id: str = "", limit: int = 40):
+        import challenge as C
+        rs = [r for r in C.rows() if not story_id or r.get("story_id") == story_id]
+        return rs[-limit:][::-1]
 
     @app.post("/api/rebuild")
     def api_rebuild():
