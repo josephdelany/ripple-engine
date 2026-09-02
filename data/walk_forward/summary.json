@@ -8,12 +8,12 @@
       ],
       "n_scored": 33,
       "n_p_scored": 33,
-      "G_brier_conditioned": 0.3656,
-      "G_brier_baseline": 0.4072,
-      "G_skill": 0.0416,
-      "P_mae_conditioned": 6.696,
+      "G_brier_conditioned": 0.3855,
+      "G_brier_baseline": 0.4285,
+      "G_skill": 0.043,
+      "P_mae_conditioned": 6.678,
       "P_mae_baseline": 6.8,
-      "P_skill": 0.104
+      "P_skill": 0.122
     },
     "W2": {
       "test_window": [
@@ -22,12 +22,12 @@
       ],
       "n_scored": 90,
       "n_p_scored": 89,
-      "G_brier_conditioned": 0.5657,
-      "G_brier_baseline": 0.7391,
-      "G_skill": 0.1734,
-      "P_mae_conditioned": 6.689,
+      "G_brier_conditioned": 0.5325,
+      "G_brier_baseline": 0.6751,
+      "G_skill": 0.1426,
+      "P_mae_conditioned": 6.67,
       "P_mae_baseline": 6.651,
-      "P_skill": -0.039
+      "P_skill": -0.019
     }
   },
   "verdict": {
