@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-09-02T19:53:30+00:00",
- "fast": false,
+ "generated_at": "2026-09-02T20:43:06+00:00",
+ "fast": true,
  "items": [
   {
    "id": "D1",
    "name": "D1 pytest green incl. every named test",
-   "status": "PASS",
+   "status": "PARTIAL",
    "evidence": "tests/",
-   "note": "354 passed, 13 skipped, 4 warnings in 544.75s (0:09:04)"
+   "note": "pytest not run (--fast); run without --fast for the real D1"
   },
   {
    "id": "D2",
@@ -33,16 +33,16 @@
   {
    "id": "D4",
    "name": "D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",
-   "status": "PARTIAL",
+   "status": "PASS",
    "evidence": "data/walk_forward/summary.json",
-   "note": "run walk_20260902T182828Z; present: ['both tiers', 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: [\"four baselines (daily G has 3: ['climatology', 'frozen', 'random_analogs'])\"]"
+   "note": "run walk_20260902T193022Z (file generated 2026-09-02T19:34:07, written 2026-09-02T19:53:59+00:00); present: ['both tiers', \"four baselines (daily G has 4: ['climatology', 'frozen', 'random_analogs', 'persistence'])\", 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: []"
   },
   {
    "id": "D5",
    "name": "D5 9/11, 1990, 2026 demos from sealed inputs on /walk",
    "status": "PASS",
    "evidence": "data/walk_forward/reads.jsonl",
-   "note": "sealed reads {'september_11_attacks_2001': 7, 'iraq_invades_kuwait_1990': 7, 'hormuz_closure_2026': 7}; /api/walk/read route; tests/test_demo_911.py"
+   "note": "sealed reads {'september_11_attacks_2001': 3, 'iraq_invades_kuwait_1990': 3, 'hormuz_closure_2026': 3}; /api/walk/read route; tests/test_demo_911.py"
   },
   {
    "id": "D6",
@@ -61,20 +61,29 @@
   {
    "id": "D7",
    "name": "D7 tag v3.0; paper; one week in the Ledger",
-   "status": "FAIL",
+   "status": "PARTIAL",
    "evidence": "git tag / data/ledger/claims.jsonl",
-   "note": "tag v3.0=False (tags: ['v2.0', 'v2.5']); paper drafted=False; ledger use on 1 distinct days (needs 7)"
+   "note": "tag v3.0=False (tags: ['v2.0', 'v2.5']); paper drafted=True (docs/PAPER_DRAFT.md); ledger use on 1 distinct days (needs 7)"
   }
  ],
  "counts": {
   "PASS": 5,
-  "PARTIAL": 2,
-  "FAIL": 2
+  "PARTIAL": 3,
+  "FAIL": 1
  },
  "pre1987_admitted": {
   "admitted_total": 0,
   "admitted_by_decade": {},
   "dossiers_built": 181,
   "dossiers_admissible": 97
- }
+ },
+ "walk_summary_at_start": {
+  "run_id": "walk_20260902T193022Z",
+  "written": "2026-09-02T19:53:59+00:00"
+ },
+ "walk_summary_at_end": {
+  "run_id": "walk_20260902T193022Z",
+  "written": "2026-09-02T19:53:59+00:00"
+ },
+ "walk_summary_changed_during_run": false
 }

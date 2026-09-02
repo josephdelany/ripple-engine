@@ -144,6 +144,19 @@ def run():
 # ----------------------------------------------------------------------------- PATH.md §3: D1-D7
 
 DOD_OUT = ROOT / "data" / "acceptance_dod.json"
+WALK_SUMMARY = ROOT / "data" / "walk_forward" / "summary.json"
+
+
+def _walk_stamp():
+    """(run_id, mtime) of the published walk summary right now. The walk is session B's and is rewritten while it runs,
+    so a --dod that straddles a walk can read the previous run; path_dod compares this before and after and says so."""
+    if not WALK_SUMMARY.exists():
+        return None, None
+    try:
+        rid = json.loads(WALK_SUMMARY.read_text()).get("run_id")
+    except ValueError:
+        rid = None
+    return rid, datetime.fromtimestamp(WALK_SUMMARY.stat().st_mtime, timezone.utc).isoformat(timespec="seconds")
 V2_SURFACES = ["src/api_v2.py", "src/app.html", "src/walk.py", "src/story_read.py", "src/feed_build.py", "src/big_moves_page.py"]
 DEMO_EVENTS = ("september_11_attacks_2001", "iraq_invades_kuwait_1990", "hormuz_closure_2026")
 
@@ -218,7 +231,9 @@ def _d4():
     chk("power", "power" in daily or "power" in s)
     chk("leakage test asserted", bool((s.get("leakage_test") or {}).get("asserted")))
     status = "PASS" if not miss else ("PARTIAL" if len(miss) <= 2 else "FAIL")
-    return status, "data/walk_forward/summary.json", f"run {s.get('run_id')}; present: {have}; missing: {miss}"
+    stamp = _walk_stamp()
+    return status, "data/walk_forward/summary.json", (f"run {s.get('run_id')} (file generated {str(s.get('generated_at'))[:19]}, written {stamp[1]}); "
+                                                     f"present: {have}; missing: {miss}")
 
 
 def _d5():
@@ -261,7 +276,9 @@ def _d6():
 def _d7():
     tags = subprocess.run(["git", "tag", "-l"], cwd=ROOT, capture_output=True, text=True).stdout.split()
     tag = "v3.0" in tags
-    paper = any(_exists(x) for x in ("PAPER.md", "docs/PAPER.md", "docs/paper.md", "paper/paper.md"))
+    # 2026-09-02: this read False while docs/PAPER_DRAFT.md existed -- a fixed name list, not a missing paper. Glob instead.
+    hits = sorted(str(q.relative_to(ROOT)) for pat in ("PAPER*.md", "docs/PAPER*.md", "docs/paper*.md", "paper/*.md") for q in ROOT.glob(pat))
+    paper = bool(hits)
     claims = ROOT / "data" / "ledger" / "claims.jsonl"
     days = set()
     if claims.exists():
@@ -271,7 +288,9 @@ def _d7():
                 days.add(m.group(1))
     week = len(days) >= 7
     status = "PASS" if (tag and paper and week) else ("PARTIAL" if (paper or week) else "FAIL")
-    return status, "git tag / data/ledger/claims.jsonl", f"tag v3.0={tag} (tags: {[t for t in tags if t.startswith('v')]}); paper drafted={paper}; ledger use on {len(days)} distinct days (needs 7)"
+    return status, "git tag / data/ledger/claims.jsonl", (f"tag v3.0={tag} (tags: {[t for t in tags if t.startswith('v')]}); "
+                                                          f"paper drafted={paper}{' (' + ', '.join(hits) + ')' if hits else ''}; "
+                                                          f"ledger use on {len(days)} distinct days (needs 7)")
 
 
 def _d3a():
@@ -312,6 +331,7 @@ def pre1987_admitted():
 
 def path_dod(fast=False):
     """PATH.md §3 D1-D7 (+ D3a, D6a; Brief A-11) -> list of (id, status, evidence_path, note); written to data/acceptance_dod.json."""
+    before = _walk_stamp()
     out = [("D1 pytest green incl. every named test",) + _d1(fast),
            ("D2 status.py >=12 loaders + coverage by block",) + _d2(),
            ("D3 kappa published; rule applied; audit file",) + _d3(),
@@ -322,15 +342,22 @@ def path_dod(fast=False):
            ("D6a reader accuracy measured on the gold set (model mode)",) + _d6a(),
            ("D7 tag v3.0; paper; one week in the Ledger",) + _d7()]
     pre = pre1987_admitted()
+    after = _walk_stamp()
+    straddled = before != after
     print("=== PATH.md §3 -- definition of done D1-D7 ===")
     for name, status, path, note in out:
         print(f"[{status:^7}] {name}\n           evidence: {path}\n           {note}")
     c = {k: sum(1 for _, s_, _, _ in out if s_ == k) for k in ("PASS", "PARTIAL", "FAIL")}
     print(f"\n{c['PASS']}/{len(out)} PASS, {c['PARTIAL']} PARTIAL, {c['FAIL']} FAIL -- the product is finished only when every item PASSES (SESSION_CHARTER.md §5)")
     print(f"pre-1987 admitted through dossiers: {pre['admitted_total']} {pre['admitted_by_decade']} (dossiers built {pre['dossiers_built']}, admissible {pre['dossiers_admissible']}; admission is Joe's line)")
+    if straddled:
+        print(f"WARNING: data/walk_forward/summary.json changed during this run ({before[0]} -> {after[0]}); D4 above read the earlier file. Re-run --dod.")
     DOD_OUT.write_text(json.dumps({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "fast": fast,
                                    "items": [{"id": n.split()[0], "name": n, "status": s_, "evidence": p, "note": t} for n, s_, p, t in out],
-                                   "counts": c, "pre1987_admitted": pre}, indent=1))
+                                   "counts": c, "pre1987_admitted": pre,
+                                   "walk_summary_at_start": {"run_id": before[0], "written": before[1]},
+                                   "walk_summary_at_end": {"run_id": after[0], "written": after[1]},
+                                   "walk_summary_changed_during_run": straddled}, indent=1))
     return out
 
 
