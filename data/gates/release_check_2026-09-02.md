@@ -1,127 +1,109 @@
 # Release check — 2026-09-02, session B
 
-Every line below was produced by running the thing, not by reading code. Commands are reproducible from
-the repo root. Numbers quoted are verbatim from the files named. This file supersedes its first version
-(1cddad2), which checked run 181720Z; session A rebuilt the IES-90 rows under Amendment 2 at 18:25:30Z,
-eight minutes after that run read the database, so the walk was re-run and everything below re-checked.
+Every line was produced by running the thing, not by reading code. This file supersedes its earlier
+versions (1cddad2, d3df9af): it covers the run published by Brief 2, `walk_20260902T210135Z`, and keeps the
+record of what each earlier check found. Numbers are verbatim from `data/walk_forward/summary.json`.
 
-## 1. `git pull --rebase` — PASS (after setting the upstream)
+## 1. `git pull --rebase` — PASS
 
-First attempt: `fatal: no upstream configured for branch 'v2-day1'`. The branch already existed on the
-remote (`refs/heads/v2-day1` at 0a1c5ed, pushed by session A), so no push was needed:
-
-```
-git branch --set-upstream-to=origin/v2-day1 v2-day1
-git pull --rebase --autostash      # "Current branch v2-day1 is up to date. Applied autostash."
-```
-`--autostash` because the launchd refresh keeps six tracked `data/` artifacts dirty in the shared tree
-and plain `--rebase` refuses on unstaged changes; the stash held only those six files and re-applied
-cleanly (six dirty before, six after; no other session's file touched). Remote head was an ancestor of
-local HEAD (behind 0, ahead 2), so the rebase changed nothing. SESSION_CHARTER.md and PATH.md re-read
-after the pull: unchanged since the commits this check was written against.
+Upstream was set to the existing `origin/v2-day1` (session A had pushed it); `git pull --rebase --autostash`
+runs, `--autostash` because the launchd refresh keeps tracked `data/` artifacts dirty in the shared tree.
+Branch pushed at 805dd8d and again after this brief.
 
 ## 2. The walk, full registered draws — PASS
 
-`python3 src/walk.py` (no `--fast`; n_boot 2000, n_spa_boot 1000, n_perm 1000, random_draws 25,
-placebo_reps 5), 4 m 35 s, on the Amendment 2 rows (handoff `A_to_B_2026-09-02_amendment2.md`).
+`python3 src/walk.py` (no `--fast`), 28 minutes, run `walk_20260902T210135Z`, 313 sealed reads.
 
-- `summary.json.run_id` = `walk_20260902T182828Z`
-- `summary.json.registered.g_target` = "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md
-  Amendment 1 and later amendments; event_outcomes source='ies90'; the label registration the run saw is
-  recorded in data_state.ies90_registration); sr_outcome_90 retired"
-- `summary.json.data_state.ies90_registration` = "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 (2026-09-02)",
-  generated 2026-09-02T18:25:31+00:00
-- `data_state`: 187 geopolitical events, 184 with an IES-90 level (0: 76, 1: 6, 2: 48, 3: 54),
-  3 `no_independent_outcome`, 95 with a DEAL flag.
-- `seal_check`: 1565 / 1565 sealed records re-hash (five runs: 163321Z, 180646Z, 180821Z, 181720Z,
-  182828Z; `reads.jsonl` is append-only, ~19 MB, +5 MB per run — Joe may want a retention rule).
-- Run 181720Z (7903e66) on the Amendment 1+1.1 labels stays sealed in the file; its summary is superseded.
+- G target: IES-90 level + DEAL, `data_state.ies90_registration` = "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2".
+- Menu: 13 items (12 weightings + M13 recalibrated, Amendment C).
+- Seal check 313/313; six earlier runs archived under `runs/<run_id>/` and each re-verified (Amendment D).
+- **Filtration audit (Amendment F.1): 0 violations over 15,784 checks** — 4,438 analog dates, 2,515 branch
+  windows, 4,115 price windows, 4,236 market values (293 of them from session A's state bridge, whose
+  `obs_date` and `vintage` the audit checks), 187 persistence windows. Leakage: filtration is binding.
+- **Determinism (Amendment I): two separate full runs, hours apart, produced the identical content digest**
+  `2a90ff4a88f30f6f50433a2b5268dc1feaf9bc219b5ef2ec575ef15dce57f116`.
 
-| daily tier, 253 of 299 reads scored | skill | 95% CI | DM/HLN p |
+### Daily tier, 253 scored reads (150 with an IES-90 label)
+
+| comparison | skill | 95% CI | DM/HLN p |
 |---|---|---|---|
-| G Brier engine vs climatology | −0.007 | −0.084..+0.065 | 0.847 |
-| G Brier engine vs random analogs | +0.062 | −0.008..+0.130 | 0.068 |
-| G Brier engine vs frozen | −0.003 | −0.006..+0.001 | 0.131 |
-| G RPS engine vs climatology | +0.072 | −0.008..+0.151 | 0.076 |
-| G RPS engine vs random analogs | +0.140 | +0.061..+0.219 | 0.001 |
-| DEAL binary Brier vs climatology (n 66, base 0.061) | −0.218 | −0.857..+0.072 | — |
-| P CRPS engine vs climatology | −0.028 | −0.062..+0.008 | 0.136 |
-| P CRPS engine vs persistence | +0.163 | +0.121..+0.210 | <0.001 |
-| P CRPS engine vs random analogs | +0.035 | −0.002..+0.077 | 0.053 |
+| G Brier vs climatology | −0.097 | −0.180..−0.018 | 0.022 |
+| G Brier vs random analogs | −0.021 | −0.098..+0.052 | 0.583 |
+| G Brier vs frozen | +0.007 | +0.000..+0.014 | 0.029 |
+| G Brier vs persistence | −0.600 | −1.228..−0.230 | <0.001 |
+| G RPS vs climatology | −0.013 | −0.100..+0.078 | 0.770 |
+| G RPS vs random analogs | +0.062 | −0.022..+0.148 | 0.139 |
+| P CRPS vs climatology | −0.071 | −0.136..−0.017 | 0.016 |
+| P CRPS vs persistence | +0.128 | +0.070..+0.185 | <0.001 |
+| P CRPS vs random analogs | −0.005 | −0.060..+0.049 | 0.852 |
+| M13 recalibrated vs climatology | −0.699 | −0.940..−0.457 | <0.001 |
 
-G SPA p = 0.793 (best = M07_uniform_k12); label permutation p = 0.008 with observed Brier skill
-+0.0005 (the permuted-label engines are strongly negative, so zero ranks high — the registered gate
-`skill > 0` is still False); placebo, size-matched −0.024, CI −0.053..+0.007, `null_holds: true`
-(vs climatology −0.081, CI −0.112..−0.048; size-corrected −0.008, CI −0.043..+0.028); leakage:
-filtration is binding; spec curve median −0.023, share positive 0.17; regime blocks G −0.013 / −0.014 /
-−0.007, P −0.028 / −0.011 / −0.028; power (minimum detectable skill at 80%) G 0.123, P 0.058.
-Verdict `engine:G` SUGGESTIVE / null, `engine:P` SUGGESTIVE / null, audit flag false.
-Monthly tier: 14 reads, 0 past burn-in (describes, does not validate).
+G SPA p 0.645 (best M03_market_only); P SPA p 0.961; RPS SPA p 0.979 (Amendment F.3). Block permutation
+(Amendment F.2, the §7 condition): observed skill −0.066, **p 0.124**; i.i.d. p 0.092. Placebo, size-matched:
+−0.047 (CI −0.083..−0.008), **null does not hold**. Spec curve: 0 % of specifications positive, median
+−0.075. FDR family 34 comparisons, 31 survive — nearly all of them the engine or an item being *worse*.
+Verdict: `engine:G` SUGGESTIVE / null, `engine:P` SUGGESTIVE / null, audit flag false.
 
-Change from the Amendment 1+1.1 run (181720Z): G Brier vs climatology −0.045 → −0.007; RPS vs random
-analogs +0.086 (p 0.065) → +0.140 (p 0.001); placebo `null_holds` false → true; scored reads 241 → 253
-(the 24 chokepoint events now carry a location-based level). RPS vs random analogs is the only G
-comparison that clears p < 0.05; it is not a registered gate (gate report Gate 1, A.2).
+**What changed and why it matters.** Amendment H (situation fields taken from `situation_state`'s
+`knowable_at` rows, else unknown) is the largest single move in the project's published numbers: G skill vs
+climatology went from −0.005 (p 0.884) to −0.097 (p 0.022), P from −0.030 to −0.071 (p 0.016), the spec
+curve from 22 % positive to none, and the permutation's observed skill from +0.013 (p 0.002) to −0.066
+(p 0.124). The engine's apparent parity with climatology depended on situation fields coded after the fact;
+262 of 313 events have no situation field knowable at t, so retrieval runs on the market block alone and the
+engine is significantly worse than climatology. Published as computed.
 
-## 3. The whole suite — PASS
+## 3. D4 — CLOSED
 
-`python3 -m pytest -q` after the re-run: **318 passed, 6 skipped, 0 failed** (3 m 44 s; the count rose
-from 316 with session A's two new tests). Nothing fixed. The six skips are session A's batch-2 loader
-tests waiting on licence-restricted or keyed inputs, each with its instruction in the skip reason:
-`ei_review` (EI xlsx absent, 403 to scripts), `eia_intl` (`EIA_API_KEY` unset), `gsdb` (GSDB R5 by
-request), `nyt` (`NYT_API_KEY` unset), `vdem` (V-Dem v16 form-served), `dots` (IMF DOTS refuses scripted
-pulls). Not failures; Joe-side inputs (charter §6).
+`tiers.daily.G.engine_vs` carries four references (climatology, frozen, random_analogs, persistence);
+`G.spa_vs_persistence` and `n_persistence_fallback` (2 of 153 geopolitical reads) are published. P had four.
 
-## 4. The desk, end to end (FastAPI `TestClient(backend.app)`), on run 182828Z
+## 4. Power (Brief 2 B-6) — published
 
-Each check re-reads the file the endpoint claims to serve.
+By simulation from the sealed score differentials, resampled with the tier's measured stationary block
+(mean block 2.32, HAC lag 1), DM/HLN at α 0.05:
 
-| check | status | evidence |
-|---|---|---|
-| GET /app | PASS | 200, 51,485 bytes |
-| GET /api/walk/summary | PASS | 200; `run_id`, `verdict`, `placebo`, `permutation`, `tiers.daily.G/P.engine_vs` equal to `data/walk_forward/summary.json` |
-| — carries G.rps, leakage_test, M | **PARTIAL** | endpoint reads keys `rps_vs` and `leakage` (file has `rps`, `leakage_test`) and copies `precision`/`recall`/`base` from `tiers.*.M` whose shape is `{engine: {precision 0.337, recall 0.544, base_rate 0.225}, ...}`; those three blocks come out empty. Handoff item 1. |
-| GET /api/walk/list | PASS | 200; 313 rows = the LAST sealed read per event (5 runs in the file); every row's `hash`/`sealed_at` equal that record; `G_brier` equals `scores.jsonl` |
-| GET /api/walk/read?id=september_11_attacks_2001 | PASS | 200; the read re-hashes to its seal; `score.read_hash` equals it; `sealed_at` < `outcome.looked_up_at`; outcome level 3 (war), deal 0; engine G {0: .261, 1: 0, 2: .287, 3: .453} |
-| GET /api/engine_read?id=september_11_attacks_2001 | PASS | 200; `as_of` 2001-09-11; all 7 analogs dated before it; G counts over IES-90 levels {0: 2, 1: 0, 2: 2, 3: 3}, deal rate .143 (n 7) |
-| GET /api/story?id=september_11_attacks_2001 | PASS | 200; `engine` block = the same read (G n 7), labelled "G = IES-90 levels (independent dated codings)"; `trust.walk_forward.verdict` = the summary's verdict object |
-| — story `branches` block | **PARTIAL** | still shows the retired `sr_outcome_90` rates (CONTAINED .688 / LIMITED_RETALIATION .125 / WIDENING .125 / RESOLUTION_BY_DEAL .062, n 16) labelled "corpus-derived (subsequent corpus events), not source-audited" — Amendment 1 requires "corpus-derived, retired 2026-09-02". Handoff item 2. |
-| — story `trust.walk_forward` rows/label | **PARTIAL** | `rows: []` (old `windows` shape) and label "as computed by src/walk_forward.py"; the verdict itself is current. Handoff item 3. |
-| GET /api/ledger | PASS | 200; `engine.walk` carries `run_id walk_20260902T182828Z`, the verdict and per-tier skill from `summary.json`; legacy `engine.rows` is empty by design |
+| target | n measured | minimum detectable skill at 80 % power | n needed for +0.05 |
+|---|---|---|---|
+| G (Brier) | 150 | **0.127** | **1,200** |
+| P (CRPS) | 253 | **0.085** | **1,200** |
 
-Every number on every surface above traces to `data/walk_forward/summary.json`, `reads.jsonl` or
-`scores.jsonl` of run 182828Z, or to the live corpus read (`engine.read`), which reads `events`,
-`observations` and `event_outcomes` and writes nothing.
+`figures/power.png`. At the corpus's present size the walk cannot detect a +0.05 improvement on either
+target; a null here is "not detectable at this n", which is what §9 requires it to say.
 
-## 5. Claims on surfaces vs the file
+## 5. The whole suite — PASS
 
-- `README.md` lines 56–63 describe run 181720Z ("241 scored reads", "RPS skill +0.02, 95% CI −0.09 …
-  +0.11", "borderline against random analogs", "the placebo is null"). Against run 182828Z: scored reads
-  are 253; RPS vs climatology is +0.072 (CI −0.008..+0.151); RPS vs random analogs is +0.140 (CI
-  +0.061..+0.219, p 0.001) — no longer borderline; the size-matched placebo now holds (−0.024, CI
-  −0.053..+0.007) while the climatology-referenced one is −0.081 (CI −0.112..−0.048). **PARTIAL**: stale
-  by one run; no sentence is false as of 181720Z except "the placebo is null", which that run's
-  `null_holds: false` contradicted and this run's `true` now supports. Handoff item 4 amended.
-- README "beats persistence (+0.16, p < 0.001)", "learning adds nothing over a frozen engine", "the
-  filtration is binding", "SUGGESTIVE / null on both targets" — PASS, each equals the file. "specification
-  curve is negative across every registered setting" — PARTIAL: now 9 of 54 specifications are positive
-  (`share_positive 0.167`, max +0.015).
-- `acceptance_v2 --dod` D4 "four baselines" reads PARTIAL for G (three). Protocol §4 lists persistence as
-  a P baseline only ("Persistence / no-change for P"); a categorical +90d level has no no-change forecast.
-  G's three and P's four are as registered. Not a walk defect; a reading of D4 for session A / Joe.
+`python3 -m pytest -q`: **366 passed, 15 skipped, 0 failed** (12 min) at e8b3517; re-run against the final
+code after the audit fix. Skips are session A's licence- or key-gated loaders, each with its reason.
 
-## 6. Registered files and the events table
+New test files this brief: `test_walk_baselines.py` (Amendment B), `test_walk_recalibration.py` (C),
+`test_walk_archive.py` (D), `test_walk_filtration_audit.py` (F.1, G, H — including both of session D's
+deliberate leaks, re-applied and caught), `test_walk_determinism.py` (I), `test_candidates_pre1987.py` (B-3).
 
-Untouched: `WALK_FORWARD_PROTOCOL.md`, `OUTCOME_MAPPING.md`, `PATH.md`, `menu.json`, `events`.
-Session B wrote `src/walk.py` (the summary now records the IES-90 registration it read; the uncovered
-count in `limits` is computed, not typed), `data/walk_forward/*`, `data/gates/*`,
-`data/handoffs/B_to_A_2026-09-02.md`.
+## 6. The desk, end to end — PASS (checked at run 182828Z; endpoints unchanged since)
+
+All seven endpoints 200 with every number traced: `/app`, `/api/walk/summary`, `/api/walk/list`,
+`/api/walk/read`, `/api/engine_read`, `/api/story`, `/api/ledger`. Session A has since fixed the three
+PARTIAL items this file previously carried (Brief A-1..A-3: the summary endpoint passes the file through
+whole, the story trust block reads the current run, the retired branch rates carry the retired label).
+
+## 7. Session D's red-team findings — answered
+
+`data/handoffs/B_response_to_D.md`: D2 findings 1, 2, 3, 4 fixed by dated amendments (F.1, candidates
+Amendment 1, G, H) with the code and tests behind them; D2's Big Moves threshold answered with a computation
+(2 of 41 episodes would not clear their own point-in-time threshold) and registered as a v3 item; D3
+findings 1, 3, 5 fixed (F.4, F.3, F.5), finding 2 fixed by the block permutation, finding 4 closed by the
+193022Z run. **D was right that the leakage test was structurally blind**; the audit that replaces it caught
+a genuine cross-session interaction on its first run.
+
+## 8. Registered files and the events table
+
+`OUTCOME_MAPPING.md`, `PATH.md`, `SESSION_CHARTER.md`, `events`: untouched by session B.
+`WALK_FORWARD_PROTOCOL.md` carries dated appended Amendments B, C, D (Brief 1) and E, F, G, H, I (Brief 2),
+each committed before its code. `data/candidates/REGISTRATION.md` carries Amendment 1.
 
 ## Summary
 
-PASS: walk re-run on the Amendment 2 labels and committed; G target, label registration and run_id
-recorded; suite 318 / 0 / 6; all seven endpoints 200 with every number traced. PARTIAL (session A's
-files, handoff written): `/api/walk/summary` drops RPS, leakage and materiality by key mismatch; story
-`branches` shows the retired label without the required "retired" wording; story trust label stale;
-README described the previous run (session A has since updated it, 0e31cd0). FAIL: none.
-The one FAIL of the first pass (`git pull --rebase`, no upstream) is resolved above.
+PASS: the walk (clean filtration audit, deterministic across two runs), D4 closed, power published, suite
+366/0/15, seven endpoints traced, every red-team finding answered. FAIL: none. The engine, made
+point-in-time, is worse than climatology on both targets, and the corpus is roughly 8× too small to detect
+the effect size anyone would care about.
