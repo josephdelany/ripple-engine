@@ -11,9 +11,17 @@ this file wins.*
   (`admit_events.py`, extractor runs), PATH Steps 1–5, 9, 11.
 - **Session B** owns: `src/engine/**`, `src/walk.py`, `data/walk_forward/**`,
   PATH Steps 6–8, the walk figures.
-- Neither edits the other's files. If you need a change there, write it as a
+- **Session E** (the history spine) owns: `EVENTS_CODEBOOK.md`,
+  `data/events*.csv`, `data/dossiers/**`, `data/spine/**`, `src/spine_audit.py`,
+  `SPINE_REGISTRATION.md`, `docs/spine/**`; `src/dossier.py` is **shared with A**
+  and changed only after a handoff note. Session E does not touch `src/engine/**`,
+  `src/walk.py`, `src/state/**`, `src/api_v2.py`, `src/app.html` or `src/ripple_*`.
+  It brings event *records* (description, sources, entities, class) up to the
+  SPINE_REGISTRATION standard; it never writes to the `events` table itself —
+  every change is a patch file Joe admits, per §2 rule 3.
+- No session edits another's files. If you need a change there, write it as a
   request in `data/handoffs/<from>_to_<to>_<date>.md` and continue with what
-  you can do. Both may add tests under `tests/` with a unique basename.
+  you can do. All may add tests under `tests/` with a unique basename.
 - Shared tree, one branch (`v2-day1`): `git pull --rebase` before every commit;
   commit small; never force-push; never `git stash` the other session's work.
 
