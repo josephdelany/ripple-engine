@@ -53,7 +53,8 @@ TIER_ORDER = ("monthly", "daily")
 
 REGISTERED = {
     "protocol": "WALK_FORWARD_PROTOCOL.md (2026-09-02)",
-    "g_target": "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md Amendment 1+1.1; event_outcomes source='ies90'); sr_outcome_90 retired",
+    "g_target": "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md Amendment 1 and later amendments; event_outcomes source='ies90'; "
+                "the label registration the run saw is recorded in data_state.ies90_registration); sr_outcome_90 retired",
     "g_scores": {"gate_and_hedge": "brier (multi-category, §3)", "also": ["log (§3)", "rps (ranked probability score over the ordinal levels; Joe 2026-09-02)"],
                  "deal": "binary brier"},
     "burn_in": 8,                # class needs >= 8 prior members with closed outcomes to be scored (§2)
@@ -917,8 +918,13 @@ def data_state(corpus):
     labelled = [e for e in geo if e["event_id"] in corpus.ies90]
     with_deal = sum(1 for e in labelled if corpus.ies90[e["event_id"]]["deal"] in (0, 1))
     lv = [corpus.ies90[e["event_id"]]["level"] for e in labelled]
+    try:                                   # which OUTCOME_MAPPING amendment produced the rows this run read (session A's file)
+        dist = json.load(open(ROOT / "data" / "state" / "ies90_distribution.json"))
+        reg = {"registration": dist.get("registration"), "generated_at": dist.get("generated_at")}
+    except Exception:
+        reg = {"registration": None, "note": "data/state/ies90_distribution.json absent"}
     out = {"n_events": n, "n_geo": len(geo), "n_with_any_situation_field": coded,
-           "g_target": "IES-90 (event_outcomes source='ies90'); sr_outcome_90 retired 2026-09-02",
+           "g_target": "IES-90 (event_outcomes source='ies90'); sr_outcome_90 retired 2026-09-02", "ies90_registration": reg,
            "n_geo_with_ies90_level": len(labelled), "n_geo_no_independent_outcome": len(geo) - len(labelled),
            "share_geo_labelled": round(len(labelled) / len(geo), 3) if geo else None,
            "ies90_level_counts": {l: lv.count(l) for l in LEVELS}, "n_geo_with_deal_flag": with_deal,
@@ -1082,7 +1088,8 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
     summary["leakage_test"] = leakage_test(w, b)
     summary["big_moves_knew"] = big_moves_knew(corpus, w.reads, w.scores)
     summary["verdict"] = verdict(summary, p)
-    summary["limits"] = ["G target is IES-90 (OUTCOME_MAPPING.md Amendment 1+1.1): independent dated sources; 27 geopolitical events without a covering "
+    summary["limits"] = [f"G target is IES-90 (OUTCOME_MAPPING.md Amendment 1 and later; registration in data_state): independent dated sources; "
+                         f"{sum(1 for e in corpus.events if e['type'] in GEO and e['event_id'] not in corpus.ies90)} geopolitical events without a covering "
                          "source are unscorable on G (no_independent_outcome) and are never G evidence; the 30-event IES-90 audit is the §7 label audit "
                          "-- audit flag false until data/audits/outcome_audit.json records a pass",
                          "sr_outcome_90 / sr_outcome_30 retired 2026-09-02: not a target, not a feature, not analog evidence",

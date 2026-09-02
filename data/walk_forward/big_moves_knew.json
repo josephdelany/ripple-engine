@@ -30,7 +30,7 @@
     "engine_p10": -4.87,
     "engine_p90": 11.03,
     "M": "NOT_MATERIAL",
-    "G_top": "3",
+    "G_top": "0",
     "realized_chg_pct": 23.59550561797752,
     "realized_level": "3",
     "realized_deal": 0
@@ -319,7 +319,7 @@
     "M": "NOT_MATERIAL",
     "G_top": "3",
     "realized_chg_pct": -14.180437695399739,
-    "realized_level": null,
+    "realized_level": "0",
     "realized_deal": null
    }
   ]
@@ -456,7 +456,7 @@
     "engine_p10": -29.09,
     "engine_p90": 10.32,
     "M": "MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": -24.995907677197582,
     "realized_level": "2",
     "realized_deal": 0
@@ -471,7 +471,7 @@
     "M": "NOT_MATERIAL",
     "G_top": "3",
     "realized_chg_pct": -24.995907677197582,
-    "realized_level": null,
+    "realized_level": "2",
     "realized_deal": null
    }
   ]
@@ -673,7 +673,7 @@
     "engine_p10": -17.25,
     "engine_p90": 13.63,
     "M": "MATERIAL",
-    "G_top": "2",
+    "G_top": "0",
     "realized_chg_pct": -17.2124380847551,
     "realized_level": "1",
     "realized_deal": 0
@@ -747,7 +747,7 @@
     "engine_p10": -17.21,
     "engine_p90": 13.63,
     "M": "MATERIAL",
-    "G_top": "2",
+    "G_top": "0",
     "realized_chg_pct": -51.229293809938966,
     "realized_level": "0",
     "realized_deal": 0
@@ -975,7 +975,7 @@
     "M": "NOT_MATERIAL",
     "G_top": "3",
     "realized_chg_pct": 12.01111772880683,
-    "realized_level": null,
+    "realized_level": "0",
     "realized_deal": null
    }
   ]
@@ -1047,7 +1047,7 @@
     "engine_p10": -29.09,
     "engine_p90": 9.48,
     "M": "MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": 22.401026754862265,
     "realized_level": "3",
     "realized_deal": null
@@ -1239,7 +1239,7 @@
     "engine_p10": -16.37,
     "engine_p90": 7.15,
     "M": "NOT_MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": 57.79388917659245,
     "realized_level": null,
     "realized_deal": null
@@ -1252,7 +1252,7 @@
     "engine_p10": -7.71,
     "engine_p90": 12.01,
     "M": "NOT_MATERIAL",
-    "G_top": "1",
+    "G_top": "0",
     "realized_chg_pct": 46.59146640510055,
     "realized_level": null,
     "realized_deal": null
