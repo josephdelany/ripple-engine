@@ -314,11 +314,29 @@ def scoreboards(conn=None):
     except Exception:
         pass
     engine = []
-    for w, d in (wf.get("windows") or {}).items():
+    for w, d in (wf.get("windows") or {}).items():                      # legacy two-window summary (pre-protocol)
         engine.append({"window": w, "test_window": d.get("test_window"), "n": d.get("n_scored"),
                        "G_brier_conditioned": d.get("G_brier_conditioned"), "G_brier_baseline": d.get("G_brier_baseline"),
                        "G_skill": d.get("G_skill"), "P_mae_conditioned": d.get("P_mae_conditioned"),
                        "P_mae_baseline": d.get("P_mae_baseline"), "P_skill": d.get("P_skill")})
+    walk = None
+    if wf.get("tiers"):                                                  # WALK_FORWARD_PROTOCOL summary (src/walk.py)
+        walk = {"run_id": wf.get("run_id"), "generated_at": wf.get("generated_at"), "protocol": wf.get("protocol"),
+                "verdict": {k: (wf.get("verdict") or {}).get(k) for k in ("G_conditioning", "P_conditioning", "audit_passed")},
+                "tiers": {}}
+        for t, d in wf["tiers"].items():
+            row = {"n_reads": d.get("n_reads"), "n_scored": d.get("n_scored_burn_in"), "permits_validation": d.get("permits_validation")}
+            for task in ("G", "P"):
+                ev = (d.get(task) or {}).get("engine_vs") or {}
+                row[task] = {ref: {k: v.get(k) for k in ("n", "skill", "ci95", "dm_p")} for ref, v in ev.items() if isinstance(v, dict)}
+                row[task]["score"] = (d.get(task) or {}).get("score")
+                sp = (d.get(task) or {}).get("spa") or {}
+                row[task]["spa_p"] = sp.get("p_spa")
+            walk["tiers"][t] = row
+        walk["permutation_p"] = (wf.get("permutation") or {}).get("p_value")
+        walk["placebo_null_holds"] = (wf.get("placebo") or {}).get("null_holds")
+        walk["leakage"] = wf.get("leakage")
+        walk["registered"] = {k: (wf.get("registered") or {}).get(k) for k in ("n_boot", "n_perm", "n_spa_boot", "burn_in", "k_max")}
     called = [r for r in res if r.get("record_true") is not None]
     rvn = {"resolved": len(res), "with_record_call": len(called),
            "record_right": sum(1 for r in called if r["record_true"]),
@@ -335,9 +353,10 @@ def scoreboards(conn=None):
     for b in sources:
         b["true_rate"] = round(b["true"] / b["n"], 2)
     pending = [c for c in checkable if c["claim_id"] not in {r["claim_id"] for r in res}]
-    return {"engine": {"rows": engine, "verdict": (wf.get("verdict") or {}), "protocol": wf.get("protocol"),
-                       "label": "outcomes are corpus-derived (situation records observe subsequent corpus events); "
-                                "not yet audited against fresh sources"},
+    return {"engine": {"rows": engine, "walk": walk, "verdict": (wf.get("verdict") or {}), "protocol": wf.get("protocol"),
+                       "label": ("G target = IES-90 (independent dated codings; OUTCOME_MAPPING.md); 30-event audit pending"
+                                 if walk else "outcomes are corpus-derived (situation records observe subsequent corpus events); "
+                                              "not yet audited against fresh sources")},
             "record_vs_narrative": rvn,
             "sources": sources,
             "counts": {"claims_logged": len(claims), "checkable": len(checkable), "resolved": len(res), "pending": len(pending)},

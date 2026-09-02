@@ -152,6 +152,41 @@ def branches(conn, etype, event_id=None, entities=None, as_of=None):
     return r
 
 
+# ----------------------------------------------------------------------------- 3b. the state-vector engine (PATH Step 7)
+
+_ENGINE = {}
+
+
+def _engine_block(event_id, knowable):
+    """engine.read for a corpus event, point-in-time; slimmed for the page. Never raises."""
+    try:
+        import engine.read as R
+        import engine.similarity as S
+        from _db import connect
+        m = DB.stat().st_mtime
+        if _ENGINE.get("mtime") != m:
+            _ENGINE["corpus"] = R.Corpus.from_db(connect(read_only=True)); _ENGINE["mtime"] = m
+        c = _ENGINE["corpus"]
+        if event_id not in c.by_id:
+            return {"available": False, "note": "event not in the engine corpus"}
+        w = S.load_menu()["items"][0]
+        r = R.read(c, c.by_id[event_id], as_of=str(pd.Timestamp(knowable).date()), weighting=w)
+        keep = ("event_id", "date", "as_of", "tier", "k", "threshold", "max_similarity", "conditioned_n", "state", "no_adequate_precedent",
+                "G", "P", "F", "M", "block_contributions", "note")
+        out = {k_: r.get(k_) for k_ in keep}
+        out["analogs"] = [{k_: a.get(k_) for k_ in ("event_id", "date", "title", "type", "similarity", "outcome", "deal", "n_compared", "n_unknown")}
+                          for a in (r.get("analogs") or [])]
+        out["differencing"] = (r.get("differencing") or [])[:3]
+        prop = r.get("propagation") or {}
+        out["propagation"] = {k_: v for k_, v in prop.items() if k_ in ("ALL", "caveat")}
+        out["available"] = True
+        out["weighting"] = w["id"]
+        out["label"] = "state-vector similarity over the coded situation record + market state, point-in-time; G = IES-90 levels (independent dated codings)"
+        return out
+    except Exception as e:                                                # the page must render even if the engine cannot
+        return {"available": False, "note": f"engine unavailable: {e.__class__.__name__}"}
+
+
 # ----------------------------------------------------------------------------- 5. trust
 
 def trust(conn, etype, br):
@@ -239,6 +274,8 @@ def read(arg=None, event_id=None, knowable=None, log=True):
                             "realized_disruption_fraction_pct": prop.get("realized_disruption_fraction_pct"),
                             "caveat": prop.get("caveat")} if prop else {},
             "trust": trust(conn, etype, br),
+            "engine": _engine_block(eid, k) if eid else {"available": False,
+                                                          "note": "live stories are read on class + entities; the state-vector engine needs a coded situation record (PATH Step 9)"},
             "sources_board": [b for b in L.scoreboards(conn)["sources"] if b["source"] == source],
             "registrations": ["CLAIM_LEDGER_REGISTRATION.md", "BIG_MOVES_REGISTRATION.md", "PRE_REGISTRATION_V2.md"],
         }

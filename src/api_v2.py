@@ -46,6 +46,30 @@ class ChallengeIn(BaseModel):
     note: str | None = None
 
 
+_CORPUS = {"mtime": None, "obj": None}
+
+
+def _corpus():
+    """The engine corpus (state vectors, prices, edges, IES-90), loaded once per DB mtime (~1 s)."""
+    import engine.read as R
+    from _db import connect
+    m = DB.stat().st_mtime if DB.exists() else None
+    if _CORPUS["obj"] is None or _CORPUS["mtime"] != m:
+        _CORPUS["obj"] = R.Corpus.from_db(connect(read_only=True)); _CORPUS["mtime"] = m
+    return _CORPUS["obj"]
+
+
+def _walk_rows(name):
+    p = DATA / "walk_forward" / name
+    if not p.exists():
+        return {}
+    out = {}
+    for line in open(p, encoding="utf-8"):
+        if line.strip():
+            r = json.loads(line); out[r["event_id"]] = r
+    return out
+
+
 def _json(p, default=None):
     try:
         return json.load(open(p))
@@ -164,6 +188,63 @@ def register(app):
         import challenge as C
         rs = [r for r in C.rows() if not story_id or r.get("story_id") == story_id]
         return rs[-limit:][::-1]
+
+    @app.get("/api/engine_read")
+    def api_engine_read(id: str, as_of: str | None = None, weighting: str | None = None):
+        """The state-vector read for a corpus event, point-in-time (engine.read; PATH Step 7)."""
+        import engine.read as R
+        import engine.similarity as S
+        c = _corpus()
+        if id not in c.by_id:
+            raise HTTPException(404, f"unknown event {id}")
+        menu = S.load_menu()["items"]
+        w = next((m for m in menu if m["id"] == weighting), menu[0])
+        r = R.read(c, c.by_id[id], as_of=as_of, weighting=w)
+        r["weighting_note"] = f"menu item {w['id']} (registered menu; the walk's Hedge weights are in data/walk_forward/weights.jsonl)"
+        return r
+
+    @app.get("/api/walk/summary")
+    def api_walk_summary():
+        s = _json(DATA / "walk_forward" / "summary.json")
+        if not s:
+            raise HTTPException(404, "no walk summary; run python3 src/walk.py")
+        tiers = {}
+        for t, d in (s.get("tiers") or {}).items():
+            tiers[t] = {k: d.get(k) for k in ("tier", "n_reads", "n_scored_burn_in", "horizon", "unit", "permits_validation")}
+            for task in ("G", "P", "M"):
+                if task in d and isinstance(d[task], dict):
+                    x = d[task]
+                    tiers[t][task] = {k: x.get(k) for k in ("score", "engine_vs", "spa", "learning_curve", "per_class", "murphy_engine",
+                                                             "diagnostic_fair", "log_score_vs_climatology", "rps_vs", "deal", "precision", "recall", "base")}
+        return {k: s.get(k) for k in ("protocol", "run_id", "generated_at", "registered", "menu", "verdict", "placebo", "permutation",
+                                      "leakage", "regime_blocks", "spec_curve", "data_state", "big_moves_knew")} | {"tiers": tiers}
+
+    @app.get("/api/walk/list")
+    def api_walk_list():
+        reads, scores = _walk_rows("reads.jsonl"), _walk_rows("scores.jsonl")
+        out = []
+        for eid, r in reads.items():
+            sc = scores.get(eid) or {}
+            e = (sc.get("scores") or {}).get("engine") or {}; cl = (sc.get("scores") or {}).get("climatology") or {}
+            out.append({"event_id": eid, "date": r.get("date"), "type": r.get("type"), "tier": r.get("tier"),
+                        "burn_in_ok": r.get("burn_in_ok"), "n_pool": r.get("n_pool"),
+                        "outcome": sc.get("outcome"), "G_brier": (e.get("G") or {}).get("brier"), "G_clim": (cl.get("G") or {}).get("brier"),
+                        "P_crps": (e.get("P") or {}).get("crps"), "P_clim": (cl.get("P") or {}).get("crps"),
+                        "sealed_at": r.get("sealed_at"), "hash": r.get("hash")})
+        out.sort(key=lambda x: x["date"] or "")
+        return out
+
+    @app.get("/api/walk/read")
+    def api_walk_read(id: str):
+        """One sealed read + its score + the outcome, exactly as the walk wrote them."""
+        r = _walk_rows("reads.jsonl").get(id)
+        if not r:
+            raise HTTPException(404, f"no sealed read for {id}")
+        sc = _walk_rows("scores.jsonl").get(id) or {}
+        c = _corpus()
+        ev = c.by_id.get(id) or {}
+        return {"read": r, "score": sc, "event": {k: ev.get(k) for k in ("event_id", "event_date", "type", "title", "source_url")},
+                "titles": {a: (c.by_id.get(a) or {}).get("title") for a in ((r.get("engine") or {}).get("G_atoms") or {}).get("ids", [])}}
 
     @app.post("/api/rebuild")
     def api_rebuild():

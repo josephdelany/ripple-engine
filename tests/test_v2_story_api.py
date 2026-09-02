@@ -72,3 +72,23 @@ def test_v2_endpoints():
     assert c.post("/api/story", json={"text": ""}).status_code == 400
     led = c.get("/api/ledger").json()
     assert led["record_vs_narrative"]["status"] in ("seeding", "live") and "engine" in led
+
+
+def test_walk_and_engine_endpoints():
+    sys.path.insert(0, str(ROOT / "src"))
+    from fastapi.testclient import TestClient
+    import backend
+    c = TestClient(backend.app)
+    s = c.get("/api/walk/summary")
+    assert s.status_code == 200 and "tiers" in s.json() and "verdict" in s.json()
+    lst = c.get("/api/walk/list").json()
+    assert lst and all("event_id" in r and "sealed_at" in r for r in lst)
+    eid = next(r["event_id"] for r in lst if r["burn_in_ok"])
+    r = c.get(f"/api/walk/read?id={eid}").json()
+    assert r["read"]["hash"] and r["read"]["sealed_at"] and "score" in r
+    assert r["read"]["sealed_at"] <= (r["score"].get("outcome") or {}).get("looked_up_at", "9999")   # sealed before the outcome was looked up
+    e = c.get("/api/engine_read?id=september_11_attacks_2001").json()
+    assert e["as_of"] == "2001-09-11" and all(a["date"] < "2001-09-11" for a in e["analogs"])        # point-in-time
+    st = c.get("/api/story?id=september_11_attacks_2001").json()
+    assert st["engine"]["available"] and st["engine"]["G"]["n"] > 0
+    assert c.get("/api/walk/read?id=not_a_real_event").status_code == 404

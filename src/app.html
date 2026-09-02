@@ -59,7 +59,7 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 <div class="top">
   <div class="brand">Ripple Engine <small>the record, read live</small></div>
   <div class="nav">
-    <button data-s="feed" class="on">Feed</button><button data-s="story">Story</button><button data-s="big">Big moves</button><button data-s="ledger">Ledger</button>
+    <button data-s="feed" class="on">Feed</button><button data-s="story">Story</button><button data-s="big">Big moves</button><button data-s="ledger">Ledger</button><button data-s="walk">Walk</button>
   </div>
   <span class="asof" id="asof" style="margin-left:auto"></span>
 </div>
@@ -85,6 +85,12 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 
 <section class="screen" id="s-big"><iframe id="bigframe" title="Big moves"></iframe></section>
 
+<section class="screen" id="s-walk">
+  <h1>The walk</h1>
+  <p class="muted" style="margin:0 0 14px">The engine forecasting the past in sequence, sealed before each outcome, scored with proper rules against four baselines, under WALK_FORWARD_PROTOCOL.md. Published as computed.</p>
+  <div id="walk"><span class="dim">loading…</span></div>
+</section>
+
 <section class="screen" id="s-ledger">
   <h1>Ledger</h1>
   <p class="muted" style="margin:0 0 16px">Three scoreboards. Nothing here is edited by hand; claims resolve from data at their horizon.</p>
@@ -105,7 +111,7 @@ function rb(bar){ if(!bar||!bar.n) return '<span class="dim mono">—</span>';
   if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--hot)"></i></div>`;}
   const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--cool)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--hot)"></i></div>`;}
 function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('on',x.id==='s-'+s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));window.scrollTo(0,0);
-  if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger();}
+  if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger(); if(s==='walk')loadWalk();}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
 async function api(u,opt){const r=await fetch(u,opt);if(!r.ok){throw new Error(u+' → '+r.status+' '+(await r.text()).slice(0,200));}return r.json();}
 
@@ -195,6 +201,8 @@ function renderStory(s){
       <div style="display:flex;gap:8px;margin-top:8px;align-items:center"><input id="chnote" style="flex:1;background:var(--s2);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit" placeholder="Why — your reasoning, logged verbatim (optional)"><button class="btn" id="chrun">Challenge</button></div>
       <div id="chout" style="margin-top:12px"></div></div>`):`<p class="muted">${esc(br.note||'')}</p>`}</div>
 
+  ${engineSection(s.engine)}
+
   <div class="sec"><h2>4 · Where does it travel? Measured pass-through per hop, this class</h2>
     <div class="chain">${(s.propagation&&s.propagation.hops||[]).map((h,i)=>`${i?'<span class="arrow">→</span>':''}<div class="hop"><div class="a">${esc(h.label)}</div><div class="m">signed median ${pct(h.signed_median_pct)} · n=${h.n}</div><div class="dim" style="font-size:11px">material move ${h.material_move_pct}% · no lasting move ${h.no_lasting_move_pct}% · range ${h.lo}…${h.hi}</div></div>`).join('')||'<p class="dim">no measured edges for this class</p>'}</div>
     <p class="dim" style="font-size:11.5px;margin-top:8px">${esc(s.propagation&&s.propagation.caveat||'')}</p></div>
@@ -249,10 +257,89 @@ function renderChallenge(r){
     <p class="dim" style="font-size:11.5px;margin-top:8px">Frequencies with n, never a probability. Same engine and thresholds as the page (${esc(r.registration||'')}); appended to data/ledger/challenges.jsonl point-in-time, verbatim.</p>`;
 }
 
+/* ---------------- ENGINE (state-vector read) ---------------- */
+const LVL={'0':'none','1':'threat / display','2':'use of force','3':'war'};
+function engineSection(e){ if(!e) return '';
+  if(!e.available) return `<div class="sec"><h2>3b · The engine on the state</h2><p class="dim">${esc(e.note||'')}</p></div>`;
+  if(e.no_adequate_precedent) return `<div class="sec"><h2>3b · The engine on the state</h2><p class="muted">No adequate precedent — max similarity ${e.max_similarity} below ${e.threshold}. No numbers.</p></div>`;
+  const G=e.G||{}; const P=e.P||{}; const bc=e.block_contributions||{}; const st=e.state||{};
+  const gcards=G.rates?Object.keys(LVL).map(k=>`<div class="card"><div class="l">${LVL[k]}</div><div class="n">${(G.counts||{})[k]||0} <span class="dim" style="font-size:13px">of ${G.n}</span></div><div class="dim" style="font-size:12px">${Math.round(100*(G.rates[k]||0))}%</div></div>`).join(''):`<p class="dim">${esc((G&&G.note)||'escalation levels apply to geopolitical classes only')}</p>`;
+  const diff=(e.differencing||[])[0];
+  return `<div class="sec"><h2>3b · The engine on the state — similarity over the coded record + market state, point-in-time</h2>
+    <p class="dim" style="font-size:12px;margin:0 0 10px">${esc(e.label||'')} · weighting ${esc(e.weighting||'')} · k=${e.k} · threshold ${e.threshold} · max similarity ${e.max_similarity} · ${e.conditioned_n} above threshold · ${st.n_known} state fields known, ${(st.unknown||[]).length} unknown${(st.unknown||[]).length?' ('+esc((st.unknown||[]).join(', '))+')':''} · blocks: ${Object.entries(bc).map(([b,v])=>b+' '+Math.round(v*100)+'%').join(', ')}</p>
+    <table><tr><th>Analog</th><th>Similarity</th><th>IES-90 at +90d</th><th>Deal</th><th>Compared / unknown</th></tr>${(e.analogs||[]).map(a=>`<tr><td><span class="mono dim">${esc(a.date)}</span> ${esc(a.title)}</td><td class="mono">${a.similarity}</td><td>${esc(LVL[a.outcome]||a.outcome||'—')}</td><td class="mono">${a.deal==null?'—':a.deal}</td><td class="mono dim">${a.n_compared} / ${a.n_unknown}</td></tr>`).join('')}</table>
+    <h2 style="margin-top:12px">Escalation at +90 days — IES-90 frequencies over the analogs</h2>
+    <div class="branches">${gcards}</div>
+    <p class="dim" style="font-size:12px;margin:8px 0 0">${esc((G&&G.basis)||'')}${G.deal?` · deal within window: ${Math.round(100*G.deal.rate)}% of ${G.deal.n}`:''}</p>
+    ${P&&P.n?`<h2 style="margin-top:12px">Price at +${P.horizon} ${esc(P.unit)} — ${esc(P.series)}</h2><dl class="kv"><dt>p10 / p50 / p90</dt><dd class="mono">${pct(P.p10)} / ${pct(P.p50)} / ${pct(P.p90)}</dd><dt>range</dt><dd class="mono">${pct(P.min)} … ${pct(P.max)} · n=${P.n}</dd><dt>share up · |move|≥10%</dt><dd class="mono">${Math.round(P.share_up*100)}% · ${Math.round(P.share_abs_ge_10*100)}%</dd><dt>materiality</dt><dd class="mono">${e.M?e.M.call+' · '+e.M.rate_pct+'% vs '+e.M.base_pct+'% ('+e.M.ratio+'×)':'—'}</dd></dl>`:''}
+    ${diff?`<h2 style="margin-top:12px">Then vs now — ${esc(diff.date)} (similarity ${diff.similarity})</h2><table><tr><th>Field</th><th>Block</th><th>Now</th><th>Distance</th><th>Evidence</th></tr>${(diff.likenesses||[]).slice(0,6).map(x=>`<tr><td>${esc(x.field)}</td><td class="dim">${esc(x.block)}</td><td class="mono">${esc(String(x.now))}</td><td class="ev-m">same</td><td class="dim">likeness</td></tr>`).join('')}${(diff.differences||[]).slice(0,8).map(x=>`<tr><td>${esc(x.field)}</td><td class="dim">${esc(x.block)}</td><td class="mono">${esc(typeof x.now==='number'?x.now.toFixed(2):String(x.now))}</td><td class="mono">${x.distance}</td><td class="ev-j">${esc(x.evidence||'')}</td></tr>`).join('')}</table>`:''}
+  </div>`;}
+
+/* ---------------- WALK ---------------- */
+function sk(v){return v==null?'—':(v>0?'+':'')+(+v).toFixed(3);}
+function ci(c){return c&&c.length===2?`[${(+c[0]).toFixed(3)}, ${(+c[1]).toFixed(3)}]`:'—';}
+function pv(p){return p==null?'—':(+p<0.001?'<0.001':(+p).toFixed(3));}
+function curveSvg(lc){ if(!lc||!lc.length) return '';
+  const w=900,h=180,x0=40,x1=880; const vals=lc.map(r=>r.skill_engine_vs_clim); const lo=Math.min(-0.1,...vals),hi=Math.max(0.1,...vals);
+  const x=i=>x0+i*(x1-x0)/Math.max(1,lc.length-1), y=v=>15+(hi-v)/(hi-lo)*(h-45);
+  let s=`<svg viewBox="0 0 ${w} ${h}" width="100%"><line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="#3a424c"/>`;
+  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_engine_vs_clim)).join(' ')}" stroke="#e0653a" stroke-width="2" fill="none"/>`;
+  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_frozen_vs_clim)).join(' ')}" stroke="#6f6d67" stroke-width="1" stroke-dasharray="3 3" fill="none"/>`;
+  [0,Math.floor(lc.length/2),lc.length-1].forEach(i=>{s+=`<text x="${x(i)}" y="${h-4}" font-size="10" fill="#6f6d67" text-anchor="middle">${esc(lc[i].date)}</text>`;});
+  s+=`<text x="${x0}" y="12" font-size="10" fill="#a9a69f">cumulative skill vs climatology (engine solid, frozen dashed) · +${hi.toFixed(2)} top, ${lo.toFixed(2)} bottom</text></svg>`; return s;}
+async function loadWalk(){ try{
+  const s=await api('/api/walk/summary'); const d=(s.tiers||{}).daily||{}; const G=d.G||{}, P=d.P||{}; const gv=G.engine_vs||{}, pv_=P.engine_vs||{};
+  const v=s.verdict||{}; const perm=s.permutation||{}; const pl=s.placebo||{}; const rb=s.regime_blocks||{};
+  const row=(label,x)=>`<tr><td>${label}</td><td class="mono">${x?x.n:'—'}</td><td class="mono">${sk(x&&x.skill)}</td><td class="mono dim">${ci(x&&x.ci95)}</td><td class="mono">${pv(x&&x.dm_p)}</td></tr>`;
+  const regime=Object.entries(rb).map(([k,r])=>{const g=((r.daily||{}).G)||{};const p=((r.daily||{}).P)||{};return `<tr><td>${esc(k.replace('drop_','drop '))}</td><td class="mono">${sk(g.skill)}</td><td class="mono">${pv(g.dm_p)}</td><td class="mono">${sk(p.skill)}</td><td class="mono">${pv(p.dm_p)}</td></tr>`;}).join('');
+  const lc=G.learning_curve||[];
+  const bmk=(s.big_moves_knew||[]).filter(b=>b.n_reads).slice(0,12);
+  $('#walk').innerHTML=`
+   <div class="branches" style="grid-template-columns:repeat(4,1fr)">
+     <div class="card"><div class="l">Verdict · escalation (G)</div><div class="n" style="font-size:16px">${esc(v.G_conditioning||'—')}</div></div>
+     <div class="card"><div class="l">Verdict · price (P)</div><div class="n" style="font-size:16px">${esc(v.P_conditioning||'—')}</div></div>
+     <div class="card"><div class="l">Sealed reads · scored</div><div class="n">${d.n_reads||0} <span class="dim" style="font-size:13px">/ ${d.n_scored_burn_in||0}</span></div></div>
+     <div class="card"><div class="l">Leakage test</div><div class="n" style="font-size:16px">${s.leakage?esc(typeof s.leakage==='string'?s.leakage:(s.leakage.binding?'filtration binding':JSON.stringify(s.leakage).slice(0,40))):'—'}</div></div>
+   </div>
+   <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:12px">
+     <div class="card"><h2>Escalation (G) — ${esc(G.score||'')} skill, daily tier</h2><table><tr><th>vs</th><th>n</th><th>skill</th><th>95% CI</th><th>DM/HLN p</th></tr>${row('climatology',gv.climatology)}${row('random analogs',gv.random_analogs)}${row('frozen engine',gv.frozen)}</table>
+       <p class="dim" style="font-size:12px;margin:8px 0 0">SPA p ${pv((G.spa||{}).p_spa)} (best ${esc((G.spa||{}).best_model||'—')}) · permutation p ${pv(perm.p_value)} (n=${perm.n_perm||'—'}) · target IES-90, independent dated codings</p></div>
+     <div class="card"><h2>Price (P) — ${esc(P.score||'')} skill, daily tier</h2><table><tr><th>vs</th><th>n</th><th>skill</th><th>95% CI</th><th>DM/HLN p</th></tr>${row('climatology',pv_.climatology)}${row('persistence',pv_.persistence)}${row('random analogs',pv_.random_analogs)}${row('frozen engine',pv_.frozen)}</table>
+       <p class="dim" style="font-size:12px;margin:8px 0 0">SPA p ${pv((P.spa||{}).p_spa)} · placebo (VIX-matched pseudo-events) null holds: <b>${pl.null_holds==null?'—':pl.null_holds}</b> (skill ${sk(pl.skill)}, CI ${ci(pl.ci95)})</p></div>
+   </div>
+   <div class="card" style="margin-top:12px"><h2>Learning curve — did the engine get better through time?</h2>${curveSvg(lc)}<p class="dim" style="font-size:12px;margin:6px 0 0">Hedge over the registered menu (${(s.menu||[]).length} weightings); the frozen line is the uniform prior. If the two lines sit together, learning added nothing.</p></div>
+   <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:12px">
+     <div class="card"><h2>Regime blocks left out</h2><table><tr><th>block</th><th>G skill</th><th>p</th><th>P skill</th><th>p</th></tr>${regime}</table></div>
+     <div class="card"><h2>Registered</h2><dl class="kv"><dt>protocol</dt><dd class="mono">${esc(s.protocol||'')}</dd><dt>run</dt><dd class="mono">${esc(s.run_id||'')}</dd><dt>burn-in / k / cluster</dt><dd class="mono">${(s.registered||{}).burn_in} / ${(s.registered||{}).k_max} / ${(s.registered||{}).cluster_days}d</dd><dt>draws</dt><dd class="mono">boot ${(s.registered||{}).n_boot} · perm ${(s.registered||{}).n_perm} · SPA ${(s.registered||{}).n_spa_boot}</dd><dt>spec curve</dt><dd class="mono">${s.spec_curve?`median ${sk(s.spec_curve.median)} · share positive ${Math.round((s.spec_curve.share_positive||0)*100)}%`:'—'}</dd><dt>audit</dt><dd>${v.audit_passed?'label audit recorded':'30-event label audit pending (Joe)'}</dd></dl></div>
+   </div>
+   <div class="card" style="margin-top:12px"><h2>What the engine knew at each Big Move</h2>${bmk.length?`<table><tr><th>window</th><th>reads</th><th>events read inside the move</th></tr>${bmk.map(b=>`<tr><td class="mono">${esc(b.window.join(' → '))}</td><td class="mono">${b.n_reads}</td><td class="dim">${esc((b.reads||[]).map(r=>r.event_id||r).join(', ')).slice(0,160)}</td></tr>`).join('')}</table>`:'<p class="dim">—</p>'}</div>
+   <div class="card" style="margin-top:12px"><h2>Stand at a date — open a sealed read</h2><div class="search"><select id="wk-pick" style="flex:1"></select><button class="btn" id="wk-open">Open</button></div><div id="wk-read"></div></div>`;
+  const list=await api('/api/walk/list'); const sel=$('#wk-pick');
+  sel.innerHTML=list.filter(r=>r.burn_in_ok).map(r=>`<option value="${esc(r.event_id)}">${esc(r.date)} · ${esc(r.event_id)} · ${esc((r.type||'').replace(/_/g,' '))}</option>`).join('');
+  const pref=['september_11_attacks_2001','iraq_invades_kuwait_1990','hormuz_closure_2026'].find(x=>list.some(r=>r.event_id===x)); if(pref) sel.value=pref;
+  $('#wk-open').onclick=()=>openWalkRead(sel.value); if(pref) openWalkRead(pref);
+ }catch(e){$('#walk').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+async function openWalkRead(id){ const box=$('#wk-read'); box.innerHTML='<p class="dim">opening the sealed read…</p>';
+  try{const w=await api('/api/walk/read?id='+encodeURIComponent(id)); const r=w.read, sc=w.score||{}, ev=w.event||{}; const eng=r.engine||{}; const at=eng.G_atoms||{}; const out=sc.outcome||{}; const S_=sc.scores||{};
+   const gl=Object.entries(eng.G||{}); const realizedG=out.ies90_level??out.level??out.branch;
+   box.innerHTML=`<h1 style="font-size:18px">${esc(ev.title||id)}</h1><p class="dim mono">read as of ${esc(r.as_of)} · tier ${esc(r.tier)} · horizon +${r.horizon} ${esc(r.unit)} · pool ${r.n_pool} · sealed ${esc(r.sealed_at)} · hash ${esc((r.hash||'').slice(0,16))}…</p>
+    <div class="two"><div><h2>The read (sealed before the outcome)</h2>
+      ${gl.length?`<table><tr><th>Escalation at +90d</th><th>engine probability</th></tr>${gl.map(([k,p])=>`<tr><td>${esc(LVL[k]||k.replace(/_/g,' ').toLowerCase())}</td><td class="mono">${Math.round(p*100)}%</td></tr>`).join('')}</table>`:'<p class="dim">no escalation read (non-geopolitical class or no precedent)</p>'}
+      ${(eng.P&&eng.P.values)?`<p class="dim" style="font-size:12.5px;margin-top:8px">Price atoms (+${r.horizon} ${esc(r.unit)}): ${eng.P.values.map(v=>pct(v)).join(' · ')}</p>`:''}
+      ${at.ids?`<h2 style="margin-top:10px">Analogs it stood on</h2><table><tr><th>event</th><th>IES-90</th><th>weight</th></tr>${at.ids.map((a,i)=>`<tr><td>${esc(w.titles[a]||a)}</td><td>${esc(LVL[at.labels[i]]||at.labels[i])}</td><td class="mono">${(at.weights[i]||0).toFixed(3)}</td></tr>`).join('')}</table>`:''}
+    </div><div><h2>What happened, and the score</h2><dl class="kv">
+      <dt>realized escalation</dt><dd>${esc(LVL[realizedG]||String(realizedG||'—'))}${out.deal?' · deal':''}</dd>
+      <dt>realized price</dt><dd class="mono">${pct(out.chg_pct)} by ${esc(out.closed_on||'')}${out.in_big_move?' · inside a Big Move':''}</dd>
+      <dt>G Brier engine / climatology</dt><dd class="mono">${((S_.engine||{}).G||{}).brier?.toFixed(3)??'—'} / ${((S_.climatology||{}).G||{}).brier?.toFixed(3)??'—'}</dd>
+      <dt>P CRPS engine / climatology</dt><dd class="mono">${((S_.engine||{}).P||{}).crps?.toFixed(2)??'—'} / ${((S_.climatology||{}).P||{}).crps?.toFixed(2)??'—'}</dd>
+      <dt>materiality call</dt><dd>${esc(eng.M||'—')}</dd></dl>
+      <p class="dim" style="font-size:12px;margin-top:8px">Lower is better. The outcome was looked up ${esc(out.looked_up_at||'')} — after the seal.</p></div></div>`;
+  }catch(e){box.innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+
 /* ---------------- LEDGER ---------------- */
 async function loadLedger(){try{const l=await api('/api/ledger');const e=l.engine||{};const rvn=l.record_vs_narrative||{};const c=l.counts||{};
   $('#ledger').innerHTML=`<div class="grid" style="grid-template-columns:1fr 1fr">
-    <div class="card"><h2>Engine vs base rate — walk-forward, two windows</h2><table><tr><th>Window</th><th>Test</th><th>n</th><th>G Brier</th><th>base</th><th>skill</th><th>P skill</th></tr>${(e.rows||[]).map(w=>`<tr><td>${esc(w.window)}</td><td class="mono dim">${(w.test_window||[]).join(' → ')}</td><td class="mono">${w.n}</td><td class="mono">${w.G_brier_conditioned}</td><td class="mono dim">${w.G_brier_baseline}</td><td class="mono">${w.G_skill}</td><td class="mono">${w.P_skill}</td></tr>`).join('')}</table>
+    <div class="card"><h2>Engine vs base rate — the walk</h2>${e.walk?(()=>{const t=(e.walk.tiers||{}).daily||{};const g=t.G||{},p=t.P||{};return `<table><tr><th>task</th><th>vs climatology</th><th>CI</th><th>DM p</th><th>SPA p</th></tr><tr><td>escalation (G, ${esc(g.score||'')})</td><td class="mono">${sk((g.climatology||{}).skill)}</td><td class="mono dim">${ci((g.climatology||{}).ci95)}</td><td class="mono">${pv((g.climatology||{}).dm_p)}</td><td class="mono">${pv(g.spa_p)}</td></tr><tr><td>price (P, ${esc(p.score||'')})</td><td class="mono">${sk((p.climatology||{}).skill)}</td><td class="mono dim">${ci((p.climatology||{}).ci95)}</td><td class="mono">${pv((p.climatology||{}).dm_p)}</td><td class="mono">${pv(p.spa_p)}</td></tr></table><p class="dim" style="font-size:12px;margin:8px 0 0">${esc((e.walk.verdict||{}).G_conditioning||'')} · ${esc((e.walk.verdict||{}).P_conditioning||'')} · permutation p ${pv(e.walk.permutation_p)} · placebo null ${e.walk.placebo_null_holds}</p>`;})():''}<table><tr><th>Window</th><th>Test</th><th>n</th><th>G Brier</th><th>base</th><th>skill</th><th>P skill</th></tr>${(e.rows||[]).map(w=>`<tr><td>${esc(w.window)}</td><td class="mono dim">${(w.test_window||[]).join(' → ')}</td><td class="mono">${w.n}</td><td class="mono">${w.G_brier_conditioned}</td><td class="mono dim">${w.G_brier_baseline}</td><td class="mono">${w.G_skill}</td><td class="mono">${w.P_skill}</td></tr>`).join('')}</table>
       <p class="dim" style="font-size:12px;margin:8px 0 0">${esc((e.verdict||{}).G_conditioning||'')}; P: ${esc((e.verdict||{}).P_conditioning||'')}. Protocol ${esc(e.protocol||'')}.</p><p class="dim" style="font-size:12px;margin:4px 0 0">${esc(e.label||'')}</p></div>
     <div class="card"><h2>Record vs narrative — resolved claims</h2>
       <div class="branches" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div class="l">Resolved</div><div class="n">${rvn.resolved||0}</div></div><div class="card"><div class="l">Record right</div><div class="n">${rvn.record_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div><div class="card"><div class="l">Narrative right</div><div class="n">${rvn.narrative_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div></div>
