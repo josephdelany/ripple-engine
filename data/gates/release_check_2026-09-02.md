@@ -72,8 +72,8 @@ target; a null here is "not detectable at this n", which is what §9 requires it
 
 ## 5. The whole suite — PASS
 
-`python3 -m pytest -q`: **366 passed, 15 skipped, 0 failed** (12 min) at e8b3517; re-run against the final
-code after the audit fix. Skips are session A's licence- or key-gated loaders, each with its reason.
+`python3 -m pytest -q` against the final code (7dadd25): **392 passed, 15 skipped, 0 failed** (7 min).
+(366 passed at e8b3517 before the audit fix and session A's newer tests landed.) Skips are session A's licence- or key-gated loaders, each with its reason.
 
 New test files this brief: `test_walk_baselines.py` (Amendment B), `test_walk_recalibration.py` (C),
 `test_walk_archive.py` (D), `test_walk_filtration_audit.py` (F.1, G, H — including both of session D's
