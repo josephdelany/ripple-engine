@@ -63,9 +63,12 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
   </div>
   <span class="asof" id="asof" style="margin-left:auto"></span>
 </div>
+<div class="mono dim" id="recordbar" style="padding:4px 14px;border-bottom:1px solid var(--line);font-size:11.5px">record: loading…</div>
 <main>
 
 <section class="screen on" id="s-feed">
+  <div class="two" style="margin-bottom:10px"><div><h2>Loud / quiet — attention high, record says everyday</h2><div id="loudquiet" class="dim">loading…</div></div>
+    <div><h2>Quiet / loud — record says material, attention low</h2><div id="quietloud" class="dim">loading…</div></div></div>
   <h2>Market state — each asset against its own history</h2>
   <div class="strip" id="strip"><span class="dim">loading…</span></div>
   <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px"><h2 style="margin:0">Material today — through the market-defined gate, ranked</h2><span class="dim mono" id="feedcount"></span></div>
@@ -121,7 +124,13 @@ async function loadFeed(){
     $('#strip').innerHTML=(ms.assets||[]).map(m=>`<div class="card"><div class="dim" style="font-size:12px">${esc(m.asset)} <span class="mono">${esc(m.as_of)}</span></div><div class="v">${num(m.value,2)} <span class="dim" style="font-size:12px">${esc(m.unit)}</span></div><div class="pct"><b style="left:${m.pct_of_history}%"></b></div><div class="dim" style="font-size:11.5px">${m.pct_of_history}th pct since ${esc((m.history_from||'').slice(0,4))} · 20d ${pct(m.chg20_pct)} · vol ${m.vol20_pct}th pct</div><div class="dim" style="font-size:11.5px">rhymes ${(m.rhymes||[]).map(r=>r.month).join(' · ')||'—'}</div></div>`).join('')||'<span class="dim">no market state yet — run src/feed_build.py</span>';
     $('#asof').textContent='data as of '+((ms.assets||[])[0]||{}).as_of||'';
   }catch(e){$('#strip').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
-  try{const f=await api('/api/feed');
+  try{const f=await api('/api/feed'); renderFeed(f);
+  }catch(e){$('#feed').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
+}
+function renderRecordBar(r){ const st=r.statuses||{}; const au=r.audit||{};
+  $('#recordbar').textContent=`record: ${r.n_events??'—'} events (${r.n_geopolitical??'—'} geopolitical, ${r.n_ies90_labels??'—'} IES-90 labels) · ${r.n_reads??'—'} sealed reads · engine:G — ${st['engine:G']||'—'} · engine:P — ${st['engine:P']||'—'} · run ${r.run_id||'—'} · label audit ${au.status||'pending'}${au.n_rows?` ${au.n_done||0}/${au.n_rows}`:''}${au.kappa!=null?` κ ${num(au.kappa,3)}`:''}`;}
+async function loadRecord(){try{renderRecordBar(await api('/api/record'));}catch(e){$('#recordbar').textContent='record: unavailable ('+e.message+')';}}
+function renderFeed(f){
     const row=(s,sig)=>`<div class="story-row" data-text="${esc(s.headline)}" data-url="${esc(s.url||'')}"><div>${chip(SIG[s.significance]||s.significance)}${(s.flags||[]).concat(s.gate_flags||[]).map(x=>`<div style="margin-top:4px">${chip(FLAG[x]||x,'c-flag')}</div>`).join('')}</div><div><div class="h">${esc(s.headline)}</div><div class="cls">${esc((s.event_class||'no class').replace(/_/g,' '))} · ${esc(s.source)} · <span class="mono">${esc(s.when)}</span>${s.entities&&s.entities.length?' · '+esc(s.entities.slice(0,3).join(', ')):''}</div></div><div>${s.rates&&s.rates.brent?`<div class="dim" style="font-size:11.5px">crude ${s.rates.brent.ratio}× · products ${s.rates.diesel_crack?s.rates.diesel_crack.ratio:'—'}×</div>`:''}${s.headline_verdict?`<div style="margin-top:3px">${vchip(s.headline_verdict)}</div>`:''}</div><div><button class="btn" style="font-size:12px">Read</button></div></div>`;
     $('#feed').innerHTML=(f.material||[]).map(s=>row(s)).join('')||'<p class="dim">Nothing material cleared the gate today.</p>';
     $('#inline').innerHTML=(f.in_line||[]).map(s=>row(s)).join('');
@@ -130,8 +139,12 @@ async function loadFeed(){
     $('#inlinesum').textContent=`In line — ${c.in_line||0} items (about the everyday rate, or material class without a tracked entity)`;
     $('#noisesum').textContent=`Noise shelf — ${c.noise||0} items, visible, unranked`;
     $('#feednote').textContent='Gate: '+(f.gate||'')+'. '+(f.note||'')+' The gate is class-level; a story is read in full only on its Story page.';
-    document.querySelectorAll('.story-row').forEach(r=>r.onclick=()=>readText(r.dataset.url||r.dataset.text));
-  }catch(e){$('#feed').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
+    const all=(f.material||[]).concat(f.in_line||[],f.noise||[]);
+    const lq=all.filter(s=>(s.flags||[]).includes('LOUD_QUIET')), ql=all.filter(s=>(s.flags||[]).includes('QUIET_LOUD'));
+    const bs=(items,empty)=>items.length?items.map(s=>`<div class="hit blind" data-text="${esc(s.headline)}" data-url="${esc(s.url||'')}">${chip(SIG[s.significance]||s.significance)} ${esc(s.headline)} <span class="mono dim">attention p${num(s.attention,0)} · ${esc(s.event_class||'no class')}</span></div>`).join(''):`<p class="dim">${empty}</p>`;
+    $('#loudquiet').innerHTML=bs(lq,'none today: nothing loud that the record calls everyday (materiality.attention, LOUD ≥ p80)');
+    $('#quietloud').innerHTML=bs(ql,'none today: nothing material that attention is missing (QUIET ≤ p40)');
+    document.querySelectorAll('.story-row,.hit.blind').forEach(r=>r.onclick=()=>readText(r.dataset.url||r.dataset.text));
 }
 $('#evbtn').onclick=async()=>{const q=$('#evq').value.trim();const hits=await api('/api/events?q='+encodeURIComponent(q));
   $('#evhits').innerHTML=hits.map(h=>`<div class="hit" data-id="${esc(h.event_id)}"><span class="mono dim">${esc(h.date)}</span> · ${esc(h.title)} <span class="dim">· ${esc(h.type.replace(/_/g,' '))}</span></div>`).join('')||'<p class="dim">no matches</p>';
@@ -166,7 +179,8 @@ function renderStory(s){
   const sig=s.significance||{};const r=sig.rates||{};  const side=a=>r[a]?`${r[a].label}: ${r[a].rate_pct}% of ${r[a].n} vs everyday ${r[a].base_pct}% (${r[a].ratio}×)`:'';
   const br=s.branches||{};const rates=br.branch_rates||{};const counts=rates.counts||{};const n=rates.n||0;
   const B=[['CONTAINED','Contained'],['LIMITED_RETALIATION','Limited retaliation'],['WIDENING','Widening'],['RESOLUTION_BY_DEAL','Deal']];
-  const pr=s.priced||{};const fl=s.flow||{};const tr=s.trust||{};const wf=tr.walk_forward||{};
+  const pr=s.priced||{};const fl=s.flow||{};const tr=s.trust||{};const wf=tr.walk_forward||{};const pin=s.priced_in||{};
+  const pinRow=(label,x)=>`<dt>${label}</dt><dd class="mono">${x&&x.status==='ok'?`${num(x.value,2)}${x.percentile!=null?` · p${num(x.percentile,0)}`:''}${x.unit?' '+esc(x.unit):''} · as of ${esc(x.as_of)} (vintage ${esc(x.vintage)}${x.n?`, n=${x.n}`:''})`:`unknown <span class="dim">${esc((x||{}).note||'')}</span>`}</dd>`;
   const analog=(br.analogs||[])[0];const ld=analog?analog.ld:null;
   $('#story').innerHTML=`
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">${chip(SIG[sig.significance]||sig.significance||'—')}${(sig.flags||[]).map(x=>chip(FLAG[x]||x,'c-flag')).join('')}<span class="mono dim">knowable ${esc(s.knowable)} · ${esc(s.source||'')}${s.url?` · <a href="${esc(s.url)}" target="_blank">source</a>`:''}</span></div>
@@ -176,6 +190,8 @@ function renderStory(s){
   <p class="dim" style="font-size:12px;margin:0 0 14px">${esc(side('brent'))}${r.brent&&r.diesel_crack?' · ':''}${esc(side('diesel_crack'))}${sig.attention&&sig.attention.score!=null?` · attention ${num(sig.attention.score,0)}th pct (GPR${(sig.attention.evidence||{}).wiki_spikes&&(sig.attention.evidence||{}).wiki_spikes.length?', pageview spike':''})`:''}</p>
 
   <div class="sec"><h2>1 · Is it priced? ${pr.resolution==='monthly'?'WTI (monthly spine, 1946–) since knowable vs the analog set — monthly resolution':'Brent since knowable vs the analog set'} (point-in-time)</h2>
+    <dl class="kv" style="margin:6px 0 10px"><dt class="dim" style="grid-column:1/-1">What the market already knew at the knowable date — display only, never scored (Amendment 5)</dt>
+      ${pinRow('Curve front spread M1−M4',pin.curve_front_spread_m1_m4)}${pinRow('Curve slope 1–3',pin.curve_slope_1_3)}${pinRow('OVX percentile (2007→)',pin.ovx_percentile)}${pinRow('Managed-money net length percentile (COT)',pin.cot_managed_money_net_percentile)}</dl>
     <div class="two"><div class="card">${fanSvg(pr)}${pr.price_note?`<div class="dim" style="font-size:12px">${esc(pr.price_note)}</div>`:''}
       <div class="dim" style="font-size:12px;margin-top:6px">${pr.resolution==='monthly'?'WTI (monthly)':'Brent'} ${num(pr.price_at_knowable,2)} at knowable${pr.days_elapsed?` · after ${pr.days_elapsed} trading days ${pct((pr.path_pct||[]).slice(-1)[0])} vs analog median ${pct(pr.fan?pr.fan.median[pr.days_elapsed]:null)} (${pr.now_vs_median_pct!=null?(pr.now_vs_median_pct>0?'running hot by ':'running cool by ')+num(Math.abs(pr.now_vs_median_pct))+' pts':''}) · ${pr.share_up_at_day!=null?Math.round(pr.share_up_at_day*100)+'% of analogs were up at this point':''}`:''}</div></div>
       <div class="card"><h2>Flow side</h2><dl class="kv">
@@ -298,7 +314,7 @@ async function loadWalk(){ try{
   $('#walk').innerHTML=`
    <p class="mono dim" style="margin:0 0 8px">label audit: ${esc(au.status||'pending')}${au.n_rows?` · ${au.n_done||0} of ${au.n_rows} done`:''}${au.kappa!=null?` · κ ${num(au.kappa,3)} (threshold ${au.threshold})`:''}${au.passed?' · passed':''} — recorded by ${esc(au.auditor||'nobody yet')} with src/audit_ies90.py</p>
    <div class="branches" style="grid-template-columns:repeat(4,1fr)">
-     <div class="card"><div class="l">Verdict · escalation (G)</div><div class="n" style="font-size:16px">${esc(v.G_conditioning||'—')}</div></div>
+     <div class="card"><div class="l">Verdict · escalation (G)</div><div class="n" style="font-size:16px">${esc(((v.rules||{})['engine:G']||{}).status||v.G_conditioning||'—')}</div><div class="dim mono" style="font-size:11px">SPA p ${pv((G.spa||{}).p_spa)} (best ${esc((G.spa||{}).best_model||'—')}) · DM p ${pv((gv.climatology||{}).dm_p)}</div></div>
      <div class="card"><div class="l">Verdict · price (P)</div><div class="n" style="font-size:16px">${esc(v.P_conditioning||'—')}</div></div>
      <div class="card"><div class="l">Sealed reads · scored</div><div class="n">${d.n_reads||0} <span class="dim" style="font-size:13px">/ ${d.n_scored_burn_in||0}</span></div></div>
      <div class="card"><div class="l">Leakage test</div><div class="n" style="font-size:16px">${s.leakage?esc(typeof s.leakage==='string'?s.leakage:(s.leakage.binding?'filtration binding':JSON.stringify(s.leakage).slice(0,40))):'—'}</div></div>
@@ -352,7 +368,7 @@ async function loadLedger(){try{const l=await api('/api/ledger');const e=l.engin
   $('#resolve').onclick=async()=>{const r=await api('/api/ledger/resolve',{method:'POST'});alert(r.newly_resolved+' newly resolved');loadLedger();};
   }catch(e){$('#ledger').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 
-loadFeed();
+loadFeed(); loadRecord();
 if(location.hash&&location.hash.length>1)show(location.hash.slice(1));   /* /app#walk opens the walk screen */
 </script>
 </body>

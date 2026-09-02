@@ -156,6 +156,40 @@ def branches(conn, etype, event_id=None, entities=None, as_of=None):
     return r
 
 
+# ----------------------------------------------------------------------------- 1b. what the market already knew (CLAIM_LEDGER_REGISTRATION Amendment 5)
+
+def _pct_at(conn, sid, k, lag_days):
+    """Percentile of the last print dated <= k - lag among all prints <= that date; unknown before the series starts."""
+    s = _price(conn, sid)
+    if s.empty:
+        return {"value": None, "status": "unknown", "note": f"{sid} not held"}
+    cut = pd.Timestamp(k) - pd.Timedelta(days=lag_days)
+    h = s[s.index <= cut]
+    if h.empty:
+        return {"value": None, "status": "unknown", "note": f"{sid} starts {s.index[0].date()}", "series": sid}
+    v = float(h.iloc[-1])
+    return {"value": round(v, 2), "percentile": round(float((h < v).mean() * 100), 1), "as_of": str(h.index[-1].date()),
+            "vintage": str((h.index[-1] + pd.Timedelta(days=lag_days)).date()), "n": int(len(h)), "series": sid, "status": "ok"}
+
+
+def priced_in(conn, knowable):
+    """Display fields only (Amendment 5): never scored, never gated."""
+    k = pd.Timestamp(knowable)
+    out = {"label": "what the market already knew at the knowable date (display fields, CLAIM_LEDGER_REGISTRATION.md Amendment 5; not scored)",
+           "knowable": str(k.date())}
+    row = conn.execute("SELECT obs_date, value, vintage FROM state_panel WHERE field='curve_m1_m4_spread' AND entity_id='world' AND vintage<=? ORDER BY obs_date DESC LIMIT 1",
+                       (str(k.date()),)).fetchone()
+    if row and (k - pd.Timestamp(row[0])).days > 30:
+        out["curve_front_spread_m1_m4"] = {"value": None, "status": "unknown", "note": f"last NYMEX curve print {row[0]} is more than 30 days before the knowable date (series ends 2024-04-05; session C's loader not landed)"}
+    else:
+        out["curve_front_spread_m1_m4"] = ({"value": round(row[1], 2), "as_of": row[0], "vintage": row[2], "unit": "USD/bbl", "series": "state_panel curve_m1_m4_spread", "status": "ok"}
+                                           if row else {"value": None, "status": "unknown", "note": "no NYMEX curve print with vintage <= knowable (series 1983-04..2024-04)"})
+    out["curve_slope_1_3"] = {"value": None, "status": "unknown", "note": "contracts 1-3 not held; session C's NYMEX loader (handoff C_to_A) not landed"}
+    out["ovx_percentile"] = _pct_at(conn, "fred.OVXCLS", k, 3)
+    out["cot_managed_money_net_percentile"] = _pct_at(conn, "cftc.mm_net_wti", k, 3)
+    return out
+
+
 # ----------------------------------------------------------------------------- 3b. the state-vector engine (PATH Step 7)
 
 _ENGINE = {}
@@ -287,6 +321,7 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             "reader": rr["reader"], "rejected": rr["rejected"],
             "significance": {**gate, "attention": att, "flags": flags},
             "priced": pr,
+            "priced_in": priced_in(conn, k),
             "flow": flow_side(conn, etype) if etype else {},
             "claims": claims,
             "n_checkable": sum(1 for c in claims if c["checkable"]),
