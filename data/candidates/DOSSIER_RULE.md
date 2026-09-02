@@ -121,3 +121,44 @@ one on Joe's word.)*
   about **access**, never about whether a source exists, and the dossier says so in those words.
 A route that refuses or errors is `undetermined` and never written as an absence (§5.1). A query that can name nobody
 is not run (§5.2).
+
+### §6.3 (2026-09-02, registered before the code, after session A's post-2000 pass) — a news article is not a primary document
+§6.2 listed GDELT DOC 2.0 as yielding a document that can **close** a repair. That is wrong as written: GDELT indexes
+**press articles**, which are contemporaneous secondary reporting, not primary documents. Priority E asks for primary
+documents first. The first post-2000 pass therefore reported 5 "closed" where it should have reported 5 contemporaneous
+press reports, and one of those five was an aggregator **listing page** ("… : Latest News, Photos, Videos on …"), which
+is not a report of anything. Corrected:
+1. `closed` splits in two, and the dossier and index always say which:
+   - **closed-primary** — a government or archival document with its own date: FRUS, the Federal Register. This is what
+     Priority E asks for.
+   - **closed-contemporaneous** — a dated press report naming the event (GDELT). Better than an encyclopaedia, since it
+     is dated and contemporaneous; **not** a primary document, and never counted as one in any report.
+2. A press hit whose title is an **aggregator or listing page** is rejected, not accepted: titles matching
+   `latest news`, `photos , videos`, `news , photos`, `live updates`, `topics?/`, or ending in `: latest news` name no
+   event and are treated as `none_found` with the rejected title recorded.
+3. Any report of this work quotes the two counts separately. Collapsing them into one "closed" number is the same
+   overstatement §5.2 corrected for keyword matches.
+
+### §6.4 (2026-09-02, registered before the code) — naming a party is not naming the event
+Two of the six press matches in session A's post-2000 pass named a party but reported something else: an opinion piece
+("Are Saudi Arabia and the UAE No Longer U.S. Partners?", 2022-04-16) offered for a Houthi attack on Jeddah, and a
+story on nuclear talks (2025-07-21) offered for a June 2025 strike. Both passed because the query terms include the
+event's **parties**, and a party name appears in almost any article about that country. This is §5.2 recurring at a
+finer grain. Corrected: a press hit must contain **at least one content term of the event's own title** — a term that
+survives the stopword list and is not merely a party name — in addition to falling inside the window. An event whose
+title yields no such term cannot be closed from the press at all, and says so. Rejected titles are recorded with the
+reason, so the near-misses stay visible to Joe rather than disappearing.
+
+### §6.5 (2026-09-02, registered before the code) — press matching is a suggestion, not a closure
+§6.3 and §6.4 each tightened the press match and each was defeated by the next run: a party name matched any article
+about that country, then a content term matched any article containing a generic word ("attack", "strike"). Four
+attempts is enough evidence: **keyword overlap between an event title and an article title cannot identify a specific
+event**, and no further tightening of it will be attempted. Corrected:
+1. A GDELT hit is no longer an outcome that closes anything. Its outcome is **`press_candidate`**: a dated article,
+   inside the window, that mentions the event's words — offered to Joe as *a place to look*, with the matched terms
+   printed so he can dismiss it in one glance. It is never counted as a repair.
+2. Only **closed-primary** (FRUS, Federal Register: a government document with its own date) repairs an event.
+3. Every report of this work states `closed-primary` separately from `press_candidate`, and never adds them.
+The consequence, stated plainly: for events outside US federal policy and outside FRUS's era, this toolchain can
+currently offer Joe a place to look and nothing more. That is a limit of the reachable routes (`ROUTE_TABLE.md` §4),
+not of the historical record.

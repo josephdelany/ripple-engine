@@ -1,0 +1,45 @@
+{
+ "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
+ "built_at": "2026-09-02T23:19:15+00:00",
+ "n": 3,
+ "cohorts": {
+  "encyclopaedia": 3
+ },
+ "outcomes": {
+  "none_found": 3
+ },
+ "by_decade": {
+  "1990s": {
+   "none_found": 3
+  }
+ },
+ "unreachable_routes": [
+  "CIA CREST (cia.gov/readingroom): every search form redirects to the landing page; results need JavaScript",
+  "UN Security Council / UN Digital Library: HTTP 403 to scripts; the digital library serves a JS challenge",
+  "OPEC archive (opec.org): HTTP 403 (Cloudflare)",
+  "US NARA catalog: the API path returns the JavaScript app shell"
+ ],
+ "repairs": [
+  {
+   "event_id": "kuwait_oil_fires_1991",
+   "event_date": "1991-02-22",
+   "cohort": "encyclopaedia",
+   "outcome": "none_found",
+   "proposed": null
+  },
+  {
+   "event_id": "opec_cut_march_1998",
+   "event_date": "1998-03-30",
+   "cohort": "encyclopaedia",
+   "outcome": "none_found",
+   "proposed": null
+  },
+  {
+   "event_id": "opec_cut_june_1998",
+   "event_date": "1998-06-24",
+   "cohort": "encyclopaedia",
+   "outcome": "none_found",
+   "proposed": null
+  }
+ ]
+}
