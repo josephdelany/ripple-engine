@@ -174,3 +174,33 @@ It is not attribution: a level from GED is violence in the location, from ICB a 
 country was in. It is not a change score. It is not available after 2025-12-31, or between
 2015 and 2021 from anything but ICB and GED, or after 2021 from anything but GED. Those
 gaps are published, not filled.
+
+### Amendment 1.1 (2026-09-02, before the IES-90 code is committed) — dated war, not episode peak
+A first run of the A1.2 rules on the corpus showed the "war ongoing at d" clauses re-importing
+the whole-episode defect: ICB codes the Gulf crisis `viol` = 4 from 1990-08-02, but the war
+began 1991-01-17; Dyadic MID's `hihost` = 5 likewise dates the dispute, not the war. A
+crisis or dispute that merely *starts* in W has the same problem — `viol`/`hihost` is its
+later peak. Three rules change; nothing else in A1.2 does.
+1. **COW War v4 is loaded** (keyless; `data/state/raw/cow_war/`): Inter-State War v4.0
+   (1816–2007-12-31) and Intra-State War v4.1 (1816–2014-12-31), each with dated spells
+   (`Start*1..End*1`, and `*2` when present; unknown month/day −9 → 1; an end coded as
+   ongoing → the period end). A war spell overlapping W gives **level 3**: inter-state when
+   the participants contain both members of a pair in P on opposite sides (`Side`), or when
+   P is empty any participant in A; intra-state when a state party (`CcodeA`/`CcodeB`) ∈ L.
+   The A1.2 shortcut "COW war dates = Dyadic MID `war` = 1 rows" is withdrawn.
+2. **ICB** asserts a level only where it can date it: a crisis **wholly inside W**
+   (`trigdate` ≥ d+1 and `termdate` ≤ d+90) → `viol` 1→1, 2→2, 3→2, 4→3; a crisis
+   **triggered in W that ends after W** → level 1 (the onset — a perceived threat — is
+   dated; `viol` is recorded as the undated peak); a crisis **ongoing at d** → no level (the
+   record is kept as detail). The DEAL rule is unchanged (`termdate` ∈ W and `forout` ∈ {1, 2}).
+3. **Dyadic MID** the same way: a dispute wholly inside W → `hihost` 2→1, 3→1, 4→2, 5→3; a
+   dispute starting in W and ending after → level 1 (a MID begins with a militarized action,
+   at least a threat); ongoing at d → no level. Rows are de-duplicated to one per
+   (dispute, dyad) — the file carries both directions and one row per dispute-year — taking
+   the max `hihost` and the last year's `settlmnt`/end. The DEAL rule is unchanged.
+Coverage now: MIDI 1993–2014, COW war 1816–2007 (inter) / 1816–2014 (intra), ICB 1918–2021,
+MID 1816–2014, GED 1989–2025. Tie order for `level_source`: MIDI, war, ICB, MID, GED.
+The first run also showed **24 of 27 uncovered events carry no `country.*` entity at all**
+(chokepoint- or facility-only codings: Bab el-Mandeb, Hormuz, Suez, pipelines). They stay
+`no_independent_outcome`; a chokepoint → littoral-state map is a candidate Amendment 2, not
+made here.
