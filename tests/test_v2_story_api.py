@@ -32,7 +32,13 @@ def test_abqaiq_is_read_point_in_time():
     assert br["applicable"] and all(a["date"] < "2019-09-14" for a in br["analogs"])
     assert s["significance"]["significance"] in ("MATERIAL", "IN_LINE", "NOISE")
     assert s["propagation"]["hops"] and all("n" in h for h in s["propagation"]["hops"])
-    assert "corpus-derived" in s["trust"]["walk_forward"]["label"]
+    # Brief A-2: trust rows come from the walk summary on IES-90 labels; the corpus-derived branch rates carry the retired label
+    wf = s["trust"]["walk_forward"]
+    assert "IES-90" in wf["label"] and "protocol §7" in wf["label"] and wf["run_id"] and wf["run_id"] in wf["label"]
+    assert {r["metric"] for r in wf["rows"]} >= {"G Brier skill vs climatology", "P CRPS skill vs climatology", "Permutation p (G skill vs label shuffles)"}
+    assert wf["statuses"]["engine:G"] and wf["statuses"]["engine:P"] and "VALIDATED" not in json.dumps(wf["statuses"])
+    assert "retired" in br["outcome_label"] and "sr_outcome_90" in br["outcome_label"]
+    assert br["ies90"]["n"] > 0 and br["ies90"]["rates"] and "IES-90" in br["ies90"]["label"]
 
 
 def test_pasted_story_types_and_scores_claims_and_logs_them():

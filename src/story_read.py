@@ -147,7 +147,11 @@ def branches(conn, etype, event_id=None, entities=None, as_of=None):
         r = ES.read(conn, target, as_of=as_of)
         basis_note = "live story: situation fields not yet coded -> conditioned on class" + (" + target" if target["target"] != "unknown" else "") + " only"
     r["basis_note"] = basis_note
-    r["outcome_label"] = "outcomes at +90d are corpus-derived (subsequent corpus events), not source-audited"
+    # Brief A-2 (2026-09-02): sr_outcome_90 is RETIRED (OUTCOME_MAPPING.md Amendment 1). The corpus-derived branch rates
+    # stay on the page only under the retired label; the live read is the IES-90 distribution from the engine block
+    # (story["engine"]["G"], added by read() below once the engine block exists).
+    r["outcome_label"] = "retired: sr_outcome_90, κ≈0 vs ICB/MID/UCDP (OUTCOME_MAPPING.md Amendment 1, 2026-09-02) — corpus-derived, not an outcome"
+    r["retired"] = True
     r["applicable"] = True
     return r
 
@@ -189,16 +193,33 @@ def _engine_block(event_id, knowable):
 
 # ----------------------------------------------------------------------------- 5. trust
 
+def _wf_rows(wf):
+    """Brief A-2: the trust rows, every value straight from data/walk_forward/summary.json (tiers.daily + top level)."""
+    d = (wf.get("tiers") or {}).get("daily") or {}
+    g = ((d.get("G") or {}).get("engine_vs") or {}).get("climatology") or {}
+    p = ((d.get("P") or {}).get("engine_vs") or {}).get("climatology") or {}
+    spa = (d.get("G") or {}).get("spa") or {}
+    pl = (wf.get("placebo") or {}).get("vs_random_analogs") or {}
+    perm = wf.get("permutation") or {}
+    rules = (wf.get("verdict") or {}).get("rules") or {}
+    rows = [
+        {"metric": "G Brier skill vs climatology", "value": g.get("skill"), "ci95": g.get("ci95"), "dm_p": g.get("dm_p"), "n": g.get("n"), "path": "tiers.daily.G.engine_vs.climatology"},
+        {"metric": "G SPA p (best of the menu vs climatology)", "value": spa.get("p_spa"), "best_model": spa.get("best_model"), "n": spa.get("T"), "path": "tiers.daily.G.spa"},
+        {"metric": "P CRPS skill vs climatology", "value": p.get("skill"), "ci95": p.get("ci95"), "dm_p": p.get("dm_p"), "n": p.get("n"), "path": "tiers.daily.P.engine_vs.climatology"},
+        {"metric": "Placebo skill (size-matched, vs random analogs)", "value": pl.get("skill"), "ci95": pl.get("ci95"), "covers_zero": pl.get("covers_zero"), "path": "placebo.vs_random_analogs"},
+        {"metric": "Permutation p (G skill vs label shuffles)", "value": perm.get("p_value"), "n": perm.get("n_reads"), "path": "permutation.p_value"},
+    ]
+    return rows, {"engine:G": (rules.get("engine:G") or {}).get("status"), "engine:P": (rules.get("engine:P") or {}).get("status")}
+
+
 def trust(conn, etype, br):
     wf = _load("walk_forward/summary.json")
     st = _load("engine_status.json")
-    rows = []
-    for w, d in (wf.get("windows") or {}).items():
-        rows.append({"window": w, "test": d.get("test_window"), "n": d.get("n_scored"),
-                     "G_brier": d.get("G_brier_conditioned"), "G_base": d.get("G_brier_baseline"), "G_skill": d.get("G_skill"),
-                     "P_skill": d.get("P_skill")})
-    return {"walk_forward": {"rows": rows, "verdict": wf.get("verdict"), "protocol": wf.get("protocol"),
-                             "label": "as computed by src/walk_forward.py; outcome labels corpus-derived, not source-audited"},
+    rows, statuses = _wf_rows(wf)
+    run_id = wf.get("run_id")
+    return {"walk_forward": {"rows": rows, "statuses": statuses, "run_id": run_id, "verdict": wf.get("verdict"), "protocol": wf.get("protocol"),
+                             "n_scored_daily": ((wf.get("tiers") or {}).get("daily") or {}).get("n_scored_burn_in"),
+                             "label": f"IES-90 (ICB/MID/War/UCDP), run {run_id}, protocol §7"},
             "retrieval": {"conditioned_n": (br or {}).get("conditioned_n"), "basis": ((br or {}).get("branch_rates") or {}).get("basis"),
                           "no_adequate_precedent": (br or {}).get("no_adequate_precedent")},
             "freshness": {"status": st.get("status") or st.get("light"), "as_of": st.get("as_of") or st.get("generated_at")}}
@@ -279,6 +300,16 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             "sources_board": [b for b in L.scoreboards(conn)["sources"] if b["source"] == source],
             "registrations": ["CLAIM_LEDGER_REGISTRATION.md", "BIG_MOVES_REGISTRATION.md", "PRE_REGISTRATION_V2.md"],
         }
+        # Brief A-2: the live escalation read is the IES-90 distribution among the engine's analogs (independent dated
+        # codings), shown beside the retired corpus-derived rates, with n. Absent when the engine block is unavailable.
+        eg = (story.get("engine") or {}).get("G") if isinstance(story.get("engine"), dict) else None
+        if isinstance(story.get("branches"), dict) and story["branches"].get("applicable"):
+            if isinstance(eg, dict) and eg.get("n"):
+                story["branches"]["ies90"] = {"n": eg.get("n"), "counts": eg.get("counts"), "rates": eg.get("rates"), "levels": eg.get("levels"),
+                                              "deal": eg.get("deal"), "source": "event_outcomes source='ies90' (OUTCOME_MAPPING.md Amendments 1-2)",
+                                              "label": f"IES-90 level frequencies among the engine's analogs, n={eg.get('n')} (live read; independent dated codings)"}
+            else:
+                story["branches"]["ies90"] = {"n": 0, "label": "IES-90 read unavailable: " + str((story.get("engine") or {}).get("note") or "engine block absent")}
         if log and not eid:
             story["ledger_ids"] = L.log_claims(story_id, source, k.date(), claims, price_at_knowable=p0, url=url)
         if not eid:
