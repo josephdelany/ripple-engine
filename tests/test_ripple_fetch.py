@@ -98,3 +98,27 @@ def test_r3b_load_into_is_append_only_and_stamps_as_of():
         assert conn.execute("SELECT entity_id FROM series").fetchone()[0] == "physical.us_stocks"
     finally:
         conn.close(); os.remove(path)
+
+
+def test_c5_cftc_disagg_parser_tracks_contract_code_not_name():
+    """The WTI contract was renamed (CRUDE OIL, LIGHT SWEET -> WTI-PHYSICAL) but code 067651 is stable;
+    the fixture is the real 2026 file filtered to codes 067651 and 06765T."""
+    raw = (FIX / "fut_disagg_txt_2026_wti_brent_rows.zip").read_bytes()
+    df = R.parse_cftc_zip(raw, "disagg")
+    assert set(df["code"]) == {"067651", "06765T"}
+    assert "WTI-PHYSICAL - NEW YORK MERCANTILE EXCHANGE" in set(df["Market_and_Exchange_Names"].str.strip())
+    s = R.cftc_series([df], "067651", "M_Money_Positions_Long_All")
+    assert s.iloc[0]["date"] == "2026-01-06" and s["date"].is_monotonic_increasing
+    assert (s["value"] > 0).all() and len(s) == 34
+    b = R.cftc_series([df], "06765T", "Open_Interest_All")
+    assert len(b) == 34                                            # the NYMEX Brent proxy, weekly
+
+
+def test_c5_cftc_legacy_parser_first_wti_report_1986_01_15():
+    raw = (FIX / "deacot1986_wti_rows.zip").read_bytes()
+    df = R.parse_cftc_zip(raw, "legacy")
+    s = R.cftc_series([df], "067651", "Noncommercial Positions-Long (All)")
+    assert s.iloc[0].tolist() == ["1986-01-15", 2560]
+    oi = R.cftc_series([df], "067651", "Open Interest (All)")
+    assert oi.iloc[0].tolist() == ["1986-01-15", 74334]
+    assert R.cftc_series([df], "000000", "Open Interest (All)").empty     # unknown code -> empty, not zeros

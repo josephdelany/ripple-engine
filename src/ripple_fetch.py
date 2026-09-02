@@ -68,6 +68,10 @@ KANZIG_URL = ("https://raw.githubusercontent.com/dkaenzig/oilsupplynews/master/"
               "oilSupplyNewsShocks_2025M12.xlsx")
 BH_SUPPLY_URL = "https://drive.google.com/uc?export=download&id=1OsA8btgm2rmDucUFngiLkwv4uywTDmya"
 BH_DEMAND_URL = "https://drive.google.com/uc?export=download&id=1neFXLrIvGwggebQRwjmtrWK-dfQZ9NH8"
+CFTC_BASE = "https://www.cftc.gov/files/dea/history/"
+CFTC_DISAGG_BUNDLE = "fut_disagg_txt_hist_2006_2016.zip"      # verified 2026-09-02 (the name without _hist_ 404s)
+CFTC_LEGACY_BUNDLE = "deacot1986_2016.zip"
+CFTC_WTI, CFTC_BRENT_NYMEX = "067651", "06765T"                 # stable contract codes; names change over time
 
 # ----------------------------------------------------------------------------------------------
 # The registry. Every entry names the RIPPLE_SOURCES.md line it comes from (the `src` key), the
@@ -178,6 +182,45 @@ SPECS = {
     "yf.eq_mos": dict(kind="yf", key="MOS", entity="equity.fertilizer", name="EQUITY PROXY fertilizer: Mosaic (MOS)"),
     "yf.eq_lng": dict(kind="yf", key="LNG", entity="equity.lng", name="EQUITY PROXY LNG: Cheniere (LNG)"),
 }
+# --- C-5 priced-in inputs: CFTC Commitments of Traders (public domain; acknowledgement requested).
+#     Disaggregated futures-only 2006-06-13 -> (WTI code 067651; the NYMEX Brent Last Day 06765T is a
+#     PROXY -- ICE Futures Europe Brent does not appear in the CFTC files, RIPPLE_SOURCES.md #11);
+#     Legacy futures-only 1986-01-15 -> (WTI only). Weekly, Tuesday-dated, released Friday 15:30 ET.
+_DISAGG_FIELDS = {
+    "mm_long": ("M_Money_Positions_Long_All", "managed money long"),
+    "mm_short": ("M_Money_Positions_Short_All", "managed money short"),
+    "mm_spread": ("M_Money_Positions_Spread_All", "managed money spreading"),
+    "pm_long": ("Prod_Merc_Positions_Long_All", "producer/merchant long"),
+    "pm_short": ("Prod_Merc_Positions_Short_All", "producer/merchant short"),
+    "swap_long": ("Swap_Positions_Long_All", "swap dealer long"),
+    "swap_short": ("Swap__Positions_Short_All", "swap dealer short"),   # CFTC's own double underscore
+    "oi": ("Open_Interest_All", "open interest"),
+}
+_LEGACY_FIELDS = {
+    "noncomm_long": ("Noncommercial Positions-Long (All)", "non-commercial long"),
+    "noncomm_short": ("Noncommercial Positions-Short (All)", "non-commercial short"),
+    "noncomm_spread": ("Noncommercial Positions-Spreading (All)", "non-commercial spreading"),
+    "comm_long": ("Commercial Positions-Long (All)", "commercial long"),
+    "comm_short": ("Commercial Positions-Short (All)", "commercial short"),
+    "oi": ("Open Interest (All)", "open interest"),
+}
+for _f, (_col, _lab) in _DISAGG_FIELDS.items():
+    SPECS[f"cftc.wti_{_f}"] = dict(kind="cftc_disagg", key=(CFTC_WTI, _col), entity="commodity.wti",
+        name=f"COT disaggregated futures-only, NYMEX WTI (067651): {_lab}", unit="contracts", freq="weekly",
+        source="CFTC", url="https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+        licence="CFTC public domain (cftc.gov/webpolicy)", seed=True, src="RIPPLE_SOURCES.md #11 priced-in")
+    SPECS[f"cftc.brent_nymex_{_f}"] = dict(kind="cftc_disagg", key=(CFTC_BRENT_NYMEX, _col), entity="commodity.brent_nymex_lastday",
+        name=f"COT disaggregated futures-only, PROXY NYMEX Brent Last Day (06765T, not ICE Europe Brent): {_lab}",
+        unit="contracts", freq="weekly", source="CFTC",
+        url="https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+        licence="CFTC public domain (cftc.gov/webpolicy)", seed=True, src="RIPPLE_SOURCES.md #11 priced-in")
+for _f, (_col, _lab) in _LEGACY_FIELDS.items():
+    SPECS[f"cftc.wti_legacy_{_f}"] = dict(kind="cftc_legacy", key=(CFTC_WTI, _col), entity="commodity.wti",
+        name=f"COT legacy futures-only, NYMEX WTI (067651): {_lab}", unit="contracts", freq="weekly",
+        source="CFTC", url="https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+        licence="CFTC public domain (cftc.gov/webpolicy)", seed=True, src="RIPPLE_SOURCES.md #11 priced-in")
+ENTITIES.append(("commodity.brent_nymex_lastday", "commodity", "NYMEX Brent Last Day (06765T)",
+                 "CFTC COT proxy for Brent positioning; NOT the ICE Futures Europe Brent contract"))
 # STNG (product tankers) already exists as yf.tankers; not duplicated.
 
 # fill the repetitive fields for the Pink Sheet and yfinance entries
@@ -317,6 +360,58 @@ def parse_portwatch_features(features):
     return out
 
 
+def parse_cftc_zip(raw, family):
+    """One CFTC historical zip -> DataFrame (all rows, str dtype) with normalised columns `code`,
+    `date` (ISO). family: 'disagg' or 'legacy'. Handles the three date-column variants seen in the
+    files (Report_Date_as_YYYY-MM-DD, Report_Date_as_MM_DD_YYYY, As of Date in Form YYYY-MM-DD)."""
+    import zipfile
+    z = zipfile.ZipFile(io.BytesIO(raw))
+    name = next(n for n in z.namelist() if n.lower().endswith(".txt"))
+    df = pd.read_csv(io.BytesIO(z.read(name)), dtype=str, low_memory=False)
+    df.columns = [c.strip() for c in df.columns]
+    if family == "disagg":
+        code_col = "CFTC_Contract_Market_Code"
+        if "Report_Date_as_YYYY-MM-DD" in df.columns:
+            date = pd.to_datetime(df["Report_Date_as_YYYY-MM-DD"], errors="coerce")
+        elif "Report_Date_as_MM_DD_YYYY" in df.columns:
+            date = pd.to_datetime(df["Report_Date_as_MM_DD_YYYY"], format="%m/%d/%Y", errors="coerce")
+        else:
+            date = pd.to_datetime(df["As_of_Date_In_Form_YYMMDD"], format="%y%m%d", errors="coerce")
+    else:
+        code_col = "CFTC Contract Market Code"
+        date = pd.to_datetime(df["As of Date in Form YYYY-MM-DD"], errors="coerce")
+    df["code"] = df[code_col].astype(str).str.strip()
+    df["date"] = date.dt.date.astype(str)
+    return df[df["date"] != "NaT"]
+
+
+def cftc_series(frames, code, col):
+    """Weekly DataFrame[date,value] for one contract code and one column across several files."""
+    parts = []
+    for df in frames:
+        sub = df[df["code"] == code]
+        if col in sub.columns and len(sub):
+            parts.append(pd.DataFrame({"date": sub["date"].values,
+                                       "value": pd.to_numeric(sub[col].str.replace(",", ""), errors="coerce").values}))
+    if not parts:
+        return pd.DataFrame(columns=["date", "value"])
+    out = pd.concat(parts).dropna().drop_duplicates("date", keep="last").sort_values("date")
+    return out.reset_index(drop=True)
+
+
+def fetch_cftc_frames(family):
+    """Download the bundle + yearly zips for a family; return list of parsed frames."""
+    year_now = datetime.now(timezone.utc).year
+    if family == "disagg":
+        names = [CFTC_DISAGG_BUNDLE] + [f"fut_disagg_txt_{y}.zip" for y in range(2017, year_now + 1)]
+    else:
+        names = [CFTC_LEGACY_BUNDLE] + [f"deacot{y}.zip" for y in range(2017, year_now + 1)]
+    frames = []
+    for n in names:
+        frames.append(parse_cftc_zip(_get_bytes(CFTC_BASE + n, timeout=120), family))
+    return frames
+
+
 # ----------------------------------------------------------------------------------------------
 # Live fetchers (grouped by download so one file feeds several series)
 # ----------------------------------------------------------------------------------------------
@@ -428,6 +523,23 @@ def fetch_live(only=None):
                 errors[sid] = f"{type(res).__name__}: {res}"
             else:
                 got[sid] = (res[fld], "")
+
+    for family, kind in (("disagg", "cftc_disagg"), ("legacy", "cftc_legacy")):
+        if kind in kinds:
+            try:
+                frames = fetch_cftc_frames(family)
+                for sid, s in want.items():
+                    if s["kind"] == kind:
+                        code, col = s["key"]
+                        df = cftc_series(frames, code, col)
+                        if df.empty:
+                            errors[sid] = f"no rows for code {code} column {col}"
+                        else:
+                            got[sid] = (df, f"{len(frames)} CFTC files")
+            except Exception as e:
+                for sid, s in want.items():
+                    if s["kind"] == kind:
+                        errors[sid] = f"{type(e).__name__}: {e}"
 
     for sid, s in want.items():
         if s["kind"] == "yf":

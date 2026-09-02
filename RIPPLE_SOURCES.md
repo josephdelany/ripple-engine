@@ -274,3 +274,50 @@ sites.google.com/site/cjsbaumeister/datasets (+ two xlsx); matteoiacoviello.com/
 (+ daily xls). Files downloaded: the five EIA workbooks, the Pink Sheet, the Känzig
 workbook, both Baumeister workbooks, the GPR daily workbook, JODI world_ext.zip and
 four annual CSVs, the MOMR appendix, the Suez 2025 PDF, six FRED CSVs.
+
+## 11. Priced-in inputs (Session C, C-5) — verified 2026-09-02 19:48–19:56 UTC
+
+### CFTC Commitments of Traders — VERIFIED (index page opened; five zips downloaded and parsed), seeded
+- Index: cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm.
+  Files actually downloaded and parsed: `fut_disagg_txt_2026.zip` (9,217 rows, 2026-01-06 →
+  2026-08-25), `fut_disagg_txt_2010.zip`, `fut_disagg_txt_hist_2006_2016.zip` (70,199 rows,
+  2006-06-13 → 2016-12-27; **the name without `_hist_` 404s**), `deacot1986_2016.zip`
+  (146,677 rows, 1986-01-15 → 2016-12-27), `deacot2026.zip`. 191 columns (disaggregated),
+  128 (legacy); category columns as used by the loader are named in `src/ripple_fetch.py`
+  (`Swap__Positions_Short_All` carries CFTC's own double underscore).
+- Contract keys: **WTI = code 067651** — its name changed from "CRUDE OIL, LIGHT SWEET - NEW
+  YORK MERCANTILE EXCHANGE" (2006–2016 files) to "WTI-PHYSICAL - NEW YORK MERCANTILE EXCHANGE"
+  (2026 file); the loader joins on the code, never the name. **ICE Futures Europe Brent does
+  not appear in the CFTC files under any name** (every Brent-named contract is NYMEX or ICE
+  Futures Energy Div). The nearest continuous series is **code 06765T, "BRENT (CRUDE OIL) LAST
+  DAY - NEW YORK MERCANTILE EXCHANGE", 2011-10-18 →**, a cash-settled NYMEX look-alike; loaded
+  and labelled **PROXY**, and the ICE Brent COT is a **GAP**.
+- Definitions (DisaggregatedExplanatoryNotes, opened): Producer/Merchant/Processor/User,
+  Swap Dealer, Managed Money ("a registered commodity trading advisor (CTA); a registered
+  commodity pool operator (CPO); or an unregistered fund identified by CFTC"), Other
+  Reportables. Release (ReleaseSchedule page): "released at 3:30 p.m. Eastern time… usually
+  released on Friday. The release usually includes data from the previous Tuesday."
+  → knowability lag: Tuesday positions are knowable from Friday 15:30 ET (+3 days).
+- Licence (cftc.gov/webpolicy, opened): "Government information at the CFTC website is in
+  the public domain… it is requested that in any subsequent use the CFTC be given
+  appropriate acknowledgement." → seeded.
+- Loader run 2026-09-02 19:56 UTC: 22 series ok, 0 failed, 11 files (bundle + 2017–2026):
+
+| series_id (weekly, Tuesday-dated, contracts) | first | last | rows |
+|---|---|---|---|
+| cftc.wti_{mm_long, mm_short, mm_spread, pm_long, pm_short, swap_long, swap_short, oi} | 2006-06-13 | 2026-08-25 | 1,055 each |
+| cftc.brent_nymex_{same eight} — PROXY (06765T), not ICE Europe Brent | 2011-10-18 | 2026-08-25 | 765 each |
+| cftc.wti_legacy_{noncomm_long, noncomm_short, noncomm_spread, comm_long, comm_short, oi} | 1986-01-15 | 2026-08-25 | 1,930 each |
+| cftc.mm_net_wti (existing, fetch_cot.py; = mm_long − mm_short) | 2006-06-13 | 2026-08-25 | 1,055 |
+
+### FRED OVXCLS — VERIFIED (CSV endpoint + series page opened); existing series
+- Cboe Crude Oil ETF Volatility Index, daily close; endpoint 5,039 rows 2007-05-10 →
+  2026-09-01; in DB as `fred.OVXCLS` (4,861 rows, same range; the difference is FRED's "."
+  rows). Page note: "Copyright, 2016, Chicago Board Options Exchange, Inc. Reprinted with
+  permission." → used as loaded; not re-seeded (already served by the existing loader).
+
+### NYMEX curve RCLC1–4 — already in the state panel (Session A)
+- `state_panel` field `curve_m1_m4_spread`, source "EIA NYMEX futures contracts 1-4 (RCLC1..
+  RCLC4 daily, ends 2024-04-05)", 1985-01-02 → 2024-04-05, 9,857 rows (WORLD_STATE_SOURCES
+  §3 already records the page and the 2024-04-05 end). Not reloaded here. 2024-04 → is a
+  GAP for the curve unless a labelled CME/yfinance continuous feed is added (never spliced).

@@ -1,4 +1,224 @@
 {
+ "cftc.brent_nymex_mm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "32005a054dd5d234217f1606e62ba285b888c0b70aee90f5a2b308ce1f20c287",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_mm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "25ae0a64c9818d8bce532f39aa2c3d884e7e9ee90a84290b6ee1ea576083de10",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_mm_spread": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "5e08b371b8f1aa8ec46f32756fda0423e5a12f4e96ec661cf6b9e31942560ba9",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_oi": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "18cef319f8d3413b7bffc9d36ad08b54470cf1371e1d63a55cbacde89a668a2c",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_pm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "5ed33b64d98ec8c37c1ad1942a461aad5a4410c62c832b296c3e3a301843d818",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_pm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "ed73c34318212d3e2e06038645828ee73fa27426e5b0845c8845ce450c269fde",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_swap_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "95947dbddade1205db415bf4edd81ca112e1d8c8a6596e82e30229894ba56659",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.brent_nymex_swap_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 765,
+  "first": "2011-10-18",
+  "last": "2026-08-25",
+  "sha256": "6b429365d12700010cc7df75ea5109d4b49d9a5b88546a24354f7861e8162a28",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_comm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "c352f0540a77b8831b112dd88b755c7448b0c96115a83f7ad741318ae9170fe0",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_comm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "44fe37bdcda8e3c6de5fea11385d51ef00f71513f71a494041cce9c7a016f617",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_noncomm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "35f0c4bcfc0a68a288504b820ff69629c90b0c424298d8b4565f4ca68f1d53be",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_noncomm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "7b0f920db95103179ee5ce47dde242fb30382fcf0cec4d50f46a56dda549b01e",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_noncomm_spread": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "e1bb54aa07d0b3878897f377c3482f736e59197138de16457a33e5ee547f7b7b",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_legacy_oi": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1930,
+  "first": "1986-01-15",
+  "last": "2026-08-25",
+  "sha256": "4828230bf95310a1d1a3fe4e3f3dc197643cee5c69c6ba0d9eb0aaa28f9ac3f8",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_mm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "63951931032b4ac798b3ec93bc2793400c31c510f5bd5eed6ef9930cae598ce1",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_mm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "47af53f8d0c78a4e875dd3bc70f36314471690a4de978569b45becb24a7ce071",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_mm_spread": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "3037ee1b1f9afbed67cd967405b7f21bbea9d36f0607e246ce470b9985f5488e",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_oi": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "1fff3942db105e1ff89d449f30a9adce1a5afc7cceb5fe42a57338419eda1988",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_pm_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "af2911591b64a014e9ce133d7d039b27a47602e0c3efd98296ac0b88904369d7",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_pm_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "52a7c4977dd2e11e68182c4ad5345adddbb7ccf4d294a28b3dcf9a98bdc1fb99",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_swap_long": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "6be26709e2cdef29ad6ae54847cbf2d068de3ac862f2183c3bafdd903cbf8035",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
+ "cftc.wti_swap_short": {
+  "source_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm",
+  "licence": "CFTC public domain (cftc.gov/webpolicy)",
+  "retrieved_at": "2026-09-02T19:56:05+00:00",
+  "rows": 1055,
+  "first": "2006-06-13",
+  "last": "2026-08-25",
+  "sha256": "846aeb4f78261be12baf5713b380478526312d6ebb70993d35ea8691d713cd74",
+  "registered_in": "RIPPLE_SOURCES.md #11 priced-in"
+ },
  "eia.crude_imports": {
   "source_url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCRIMUS2&f=W",
   "licence": "EIA public domain",
