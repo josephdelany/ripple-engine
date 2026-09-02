@@ -104,6 +104,6 @@ each committed before its code. `data/candidates/REGISTRATION.md` carries Amendm
 ## Summary
 
 PASS: the walk (clean filtration audit, deterministic across two runs), D4 closed, power published, suite
-366/0/15, seven endpoints traced, every red-team finding answered. FAIL: none. The engine, made
+392/0/15, seven endpoints traced, every red-team finding answered. FAIL: none. The engine, made
 point-in-time, is worse than climatology on both targets, and the corpus is roughly 8× too small to detect
 the effect size anyone would care about.
