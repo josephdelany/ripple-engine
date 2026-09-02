@@ -1,6 +1,6 @@
 {
  "registration": "data/candidates/REGISTRATION.md (2026-09-02)",
- "generated_at": "2026-09-02T19:26:55.900168+00:00",
+ "generated_at": "2026-09-02T19:47:11.095119+00:00",
  "n_rows": 624,
  "by_decade": {
   "1940s": 41,
@@ -50,5 +50,9 @@
  "inside_big_move": 53,
  "episodes_1946_1986": 5,
  "episodes_with_a_candidate": 4,
- "note": "Joe's admission sheet (PATH Step 5). Nothing here enters events. Each source's own record; duplicates across sources by design."
+ "files": {
+  "admission_sheet_blind": "pre1987_candidates.csv",
+  "outcome_join_after_admission": "pre1987_candidates_outcomes.csv"
+ },
+ "note": "Joe's admission sheet (PATH Step 5). Nothing here enters events. Each source's own record; duplicates across sources by design. The sheet is blind (REGISTRATION.md Amendment 1)."
 }

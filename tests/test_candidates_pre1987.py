@@ -9,27 +9,32 @@ import os
 HERE = os.path.dirname(__file__)
 ROOT = os.path.join(HERE, "..")
 CSV = os.path.join(ROOT, "data", "candidates", "pre1987_candidates.csv")
+OUTC = os.path.join(ROOT, "data", "candidates", "pre1987_candidates_outcomes.csv")
 SUMMARY = os.path.join(ROOT, "data", "candidates", "pre1987_candidates_summary.json")
 SRC = os.path.join(ROOT, "src", "engine", "pre1987_candidates.py")
 
 
 def test_b3_candidate_sheet_obeys_its_registration():
     rows = list(csv.DictReader(open(CSV, encoding="utf-8")))
-    assert rows and list(rows[0]) == ["event_date", "actors", "source", "source_id", "source_detail", "inside_big_move", "episode_id",
-                                       "monthly_move_pct", "wti_chg_3m_pct", "suggested_title"]
+    assert rows and list(rows[0]) == ["event_date", "actors", "source", "source_id", "source_detail", "suggested_title"]   # BLIND (Amendment 1)
     for r in rows:
         assert "1946-01-01" <= r["event_date"] <= "1986-12-31"
         assert r["source"] in ("ICB v16", "COW War v4.0 inter-state", "COW War v4.1 intra-state", "Dyadic MID 4.03")
         assert r["actors"] and r["source_id"] and r["suggested_title"] == ""
-        assert r["inside_big_move"] in ("True", "False")
-        assert (r["episode_id"] != "") == (r["inside_big_move"] == "True") == (r["monthly_move_pct"] != "")
         if r["source"] == "Dyadic MID 4.03":
             assert "hihost 4" in r["source_detail"] or "hihost 5" in r["source_detail"]
     assert rows == sorted(rows, key=lambda r: (r["event_date"], r["source"], r["source_id"]))
-    assert len({(r["source"], r["source_id"]) for r in rows}) == len(rows)                 # one row per source record
+    keys = [(r["source"], r["source_id"]) for r in rows]
+    assert len(set(keys)) == len(rows)                                                     # one row per source record
+    outc = list(csv.DictReader(open(OUTC, encoding="utf-8")))
+    assert list(outc[0]) == ["source", "source_id", "event_date", "inside_big_move", "episode_id", "monthly_move_pct", "wti_chg_3m_pct"]
+    assert [(r["source"], r["source_id"]) for r in outc] == keys                             # the join covers the sheet exactly, same order
+    for r in outc:
+        assert r["inside_big_move"] in ("True", "False")
+        assert (r["episode_id"] != "") == (r["inside_big_move"] == "True") == (r["monthly_move_pct"] != "")
     s = json.load(open(SUMMARY))
     assert s["n_rows"] == len(rows) and sum(s["by_decade"].values()) == len(rows) and sum(s["by_source"].values()) == len(rows)
-    assert s["inside_big_move"] == sum(1 for r in rows if r["inside_big_move"] == "True")
+    assert s["inside_big_move"] == sum(1 for r in outc if r["inside_big_move"] == "True")
     src = open(SRC, encoding="utf-8").read()
     import re
     assert not re.search(r"INSERT INTO|UPDATE \w+ SET|DELETE FROM|executemany|\.commit\(", src)      # the generator writes no table

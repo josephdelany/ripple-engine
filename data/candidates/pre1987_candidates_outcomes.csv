@@ -1,0 +1,625 @@
+source,source_id,event_date,inside_big_move,episode_id,monthly_move_pct,wti_chg_3m_pct
+COW War v4.1 intra-state,WarNum 725,1946-03-15,False,,,8.55
+Dyadic MID 4.03,disno 1792,1946-04-01,False,,,0.0
+ICB v16,crisno 110,1946-06-28,False,,,19.69
+ICB v16,crisno 111,1946-08-07,False,,,0.0
+Dyadic MID 4.03,disno 3193,1946-08-09,False,,,0.0
+Dyadic MID 4.03,disno 3192,1946-10-05,False,,,6.58
+ICB v16,crisno 113,1947-02-10,False,,,15.43
+ICB v16,crisno 114,1947-02-21,False,,,15.43
+COW War v4.1 intra-state,WarNum 726,1947-02-28,False,,,15.43
+Dyadic MID 4.03,disno 3265,1947-05-12,False,,,0.0
+ICB v16,crisno 115,1947-07-03,False,,,0.0
+ICB v16,crisno 116,1947-07-21,False,,,0.0
+ICB v16,crisno 118,1947-08-17,False,,,10.7
+Dyadic MID 4.03,disno 1238,1947-09-26,True,wti_1947-10-01,37.4,10.7
+ICB v16,crisno 119,1947-10-24,True,wti_1947-10-01,37.4,37.43
+COW War v4.0 inter-state,WarNum 147,1947-10-26,True,wti_1947-10-01,37.4,37.43
+ICB v16,crisno 120,1947-11-28,True,wti_1947-10-01,37.4,24.15
+Dyadic MID 4.03,disno 2840,1948-01-17,False,,,0.0
+ICB v16,crisno 121,1948-02-13,False,,,0.0
+COW War v4.1 intra-state,WarNum 728,1948-02-17,False,,,0.0
+Dyadic MID 4.03,disno 26,1948-03-21,False,,,0.0
+COW War v4.1 intra-state,WarNum 731,1948-04-09,False,,,0.0
+Dyadic MID 4.03,disno 1793,1948-05-14,False,,,0.0
+COW War v4.0 inter-state,WarNum 148,1948-05-15,False,,,0.0
+Dyadic MID 4.03,disno 1042,1948-06-01,False,,,0.0
+ICB v16,crisno 123,1948-06-07,False,,,0.0
+Dyadic MID 4.03,disno 2020,1948-07-21,False,,,0.0
+ICB v16,crisno 124,1948-08-21,False,,,0.0
+ICB v16,crisno 125,1948-09-23,False,,,0.0
+ICB v16,crisno 127,1948-12-19,False,,,0.0
+ICB v16,crisno 128,1948-12-25,False,,,0.0
+Dyadic MID 4.03,disno 3229,1949-01-07,False,,,0.0
+Dyadic MID 4.03,disno 2625,1949-04-14,False,,,0.0
+Dyadic MID 4.03,disno 1603,1949-05-19,False,,,0.0
+Dyadic MID 4.03,disno 604,1949-07-01,False,,,0.0
+Dyadic MID 4.03,disno 1286,1949-08-13,False,,,0.0
+Dyadic MID 4.03,disno 633,1949-10-01,False,,,0.0
+Dyadic MID 4.03,disno 634,1949-10-01,False,,,0.0
+Dyadic MID 4.03,disno 2006,1949-10-02,False,,,0.0
+Dyadic MID 4.03,disno 2007,1949-10-18,False,,,0.0
+Dyadic MID 4.03,disno 3386,1949-12-23,False,,,0.0
+Dyadic MID 4.03,disno 3411,1950-02-16,False,,,0.0
+Dyadic MID 4.03,disno 1308,1950-02-23,False,,,0.0
+Dyadic MID 4.03,disno 1006,1950-04-20,False,,,0.0
+Dyadic MID 4.03,disno 3196,1950-05-03,False,,,0.0
+COW War v4.1 intra-state,WarNum 733,1950-05-28,False,,,0.0
+Dyadic MID 4.03,disno 2008,1950-06-05,False,,,0.0
+COW War v4.0 inter-state,WarNum 151,1950-06-24,False,,,0.0
+ICB v16,crisno 132,1950-06-25,False,,,0.0
+Dyadic MID 4.03,disno 3400,1950-07-12,False,,,0.0
+Dyadic MID 4.03,disno 2009,1950-08-17,False,,,0.0
+Dyadic MID 4.03,disno 51,1950-09-28,False,,,0.0
+ICB v16,crisno 133,1950-09-28,False,,,0.0
+Dyadic MID 4.03,disno 3427,1950-10-09,False,,,0.0
+Dyadic MID 4.03,disno 3370,1950-11-06,False,,,0.0
+Dyadic MID 4.03,disno 2010,1950-11-23,False,,,0.0
+ICB v16,crisno 134,1951-02-12,False,,,0.0
+Dyadic MID 4.03,disno 2991,1951-02-13,False,,,0.0
+Dyadic MID 4.03,disno 2052,1951-02-16,False,,,0.0
+Dyadic MID 4.03,disno 1079,1951-03-13,False,,,0.0
+Dyadic MID 4.03,disno 2992,1951-03-18,False,,,0.0
+ICB v16,crisno 135,1951-07-07,False,,,0.0
+ICB v16,crisno 136,1951-07-28,False,,,0.0
+Dyadic MID 4.03,disno 3199,1951-08-02,False,,,0.0
+Dyadic MID 4.03,disno 1155,1951-08-11,False,,,0.0
+Dyadic MID 4.03,disno 3372,1951-09-19,False,,,0.0
+Dyadic MID 4.03,disno 7,1951-10-13,False,,,0.0
+Dyadic MID 4.03,disno 3413,1951-12-16,False,,,0.0
+Dyadic MID 4.03,disno 3401,1951-12-28,False,,,0.0
+Dyadic MID 4.03,disno 3414,1952-01-09,False,,,0.0
+Dyadic MID 4.03,disno 1703,1952-06-28,False,,,0.0
+Dyadic MID 4.03,disno 1097,1952-07-01,False,,,0.0
+Dyadic MID 4.03,disno 1702,1952-08-01,False,,,0.0
+Dyadic MID 4.03,disno 2989,1952-09-25,False,,,0.0
+Dyadic MID 4.03,disno 2626,1952-10-04,False,,,0.0
+Dyadic MID 4.03,disno 3374,1952-12-24,False,,,0.0
+Dyadic MID 4.03,disno 3373,1953-01-24,False,,,0.0
+Dyadic MID 4.03,disno 3417,1953-02-01,False,,,0.0
+Dyadic MID 4.03,disno 1344,1953-02-03,False,,,0.0
+Dyadic MID 4.03,disno 50,1953-02-11,False,,,0.0
+Dyadic MID 4.03,disno 3428,1953-02-22,False,,,0.0
+Dyadic MID 4.03,disno 208,1953-03-12,False,,,9.73
+ICB v16,crisno 139,1953-03-24,False,,,9.73
+ICB v16,crisno 140,1953-04-16,False,,,9.73
+Dyadic MID 4.03,disno 2988,1953-05-24,False,,,9.73
+ICB v16,crisno 141,1953-06-17,False,,,0.0
+Dyadic MID 4.03,disno 2036,1953-06-24,False,,,0.0
+Dyadic MID 4.03,disno 2984,1953-09-09,False,,,0.0
+COW War v4.1 intra-state,WarNum 738,1953-09-20,False,,,0.0
+ICB v16,crisno 142,1953-10-08,False,,,0.0
+ICB v16,crisno 143,1953-10-14,False,,,0.0
+Dyadic MID 4.03,disno 3207,1953-10-17,False,,,0.0
+ICB v16,crisno 144,1953-12-12,False,,,0.0
+Dyadic MID 4.03,disno 3208,1953-12-14,False,,,0.0
+Dyadic MID 4.03,disno 1156,1954-01-24,False,,,0.0
+Dyadic MID 4.03,disno 3403,1954-02-28,False,,,0.0
+ICB v16,crisno 145,1954-03-13,False,,,0.0
+Dyadic MID 4.03,disno 3404,1954-04-06,False,,,0.0
+Dyadic MID 4.03,disno 1448,1954-05-02,False,,,0.0
+Dyadic MID 4.03,disno 2033,1954-07-23,False,,,0.0
+Dyadic MID 4.03,disno 2034,1954-07-23,False,,,0.0
+Dyadic MID 4.03,disno 1345,1954-07-28,False,,,0.0
+Dyadic MID 4.03,disno 3415,1954-08-15,False,,,0.0
+Dyadic MID 4.03,disno 2987,1954-08-24,False,,,0.0
+ICB v16,crisno 146,1954-08-28,False,,,0.0
+COW War v4.0 inter-state,WarNum 153,1954-09-03,False,,,0.0
+Dyadic MID 4.03,disno 2037,1955-01-19,False,,,0.0
+Dyadic MID 4.03,disno 3243,1955-01-28,False,,,0.0
+Dyadic MID 4.03,disno 3211,1955-02-01,False,,,0.0
+ICB v16,crisno 148,1955-02-24,False,,,0.0
+ICB v16,crisno 149,1955-02-28,False,,,0.0
+Dyadic MID 4.03,disno 2847,1955-03-24,False,,,0.0
+Dyadic MID 4.03,disno 3242,1955-03-28,False,,,0.0
+Dyadic MID 4.03,disno 3418,1955-03-28,False,,,0.0
+Dyadic MID 4.03,disno 1300,1955-05-07,False,,,0.0
+Dyadic MID 4.03,disno 2032,1955-05-11,False,,,0.0
+COW War v4.1 intra-state,WarNum 740,1955-06-15,False,,,0.0
+Dyadic MID 4.03,disno 1346,1955-08-03,False,,,0.0
+Dyadic MID 4.03,disno 1098,1955-08-04,False,,,0.0
+Dyadic MID 4.03,disno 3416,1955-08-04,False,,,0.0
+Dyadic MID 4.03,disno 200,1955-09-01,False,,,0.0
+Dyadic MID 4.03,disno 3405,1955-10-14,False,,,0.0
+Dyadic MID 4.03,disno 3154,1955-11-03,False,,,0.0
+Dyadic MID 4.03,disno 3213,1955-12-25,False,,,0.0
+Dyadic MID 4.03,disno 3225,1956-01-28,False,,,0.0
+Dyadic MID 4.03,disno 1301,1956-02-17,False,,,0.0
+COW War v4.1 intra-state,WarNum 741,1956-03-01,False,,,0.0
+Dyadic MID 4.03,disno 2627,1956-03-18,False,,,0.0
+Dyadic MID 4.03,disno 259,1956-06-03,False,,,0.0
+Dyadic MID 4.03,disno 2986,1956-07-22,False,,,0.0
+ICB v16,crisno 152,1956-07-26,False,,,0.0
+Dyadic MID 4.03,disno 605,1956-07-28,False,,,0.0
+Dyadic MID 4.03,disno 53,1956-08-22,False,,,0.0
+ICB v16,crisno 153,1956-09-13,False,,,0.0
+ICB v16,crisno 154,1956-10-15,False,,,0.0
+Dyadic MID 4.03,disno 606,1956-10-20,False,,,0.0
+ICB v16,crisno 155,1956-10-23,False,,,0.0
+COW War v4.0 inter-state,WarNum 155,1956-10-28,False,,,0.0
+COW War v4.0 inter-state,WarNum 156,1956-11-04,False,,,8.87
+COW War v4.1 intra-state,WarNum 742,1956-12-15,False,,,8.87
+Dyadic MID 4.03,disno 3230,1957-01-01,False,,,8.87
+Dyadic MID 4.03,disno 1013,1957-01-12,False,,,8.87
+Dyadic MID 4.03,disno 3375,1957-04-03,False,,,0.0
+ICB v16,crisno 157,1957-04-04,False,,,0.0
+Dyadic MID 4.03,disno 607,1957-04-13,False,,,0.0
+Dyadic MID 4.03,disno 2049,1957-06-12,False,,,0.0
+ICB v16,crisno 159,1957-08-18,False,,,0.0
+COW War v4.0 inter-state,WarNum 158,1957-11-21,False,,,0.0
+Dyadic MID 4.03,disno 1347,1958-01-01,False,,,0.0
+Dyadic MID 4.03,disno 1091,1958-02-01,False,,,0.0
+ICB v16,crisno 162,1958-02-01,False,,,0.0
+ICB v16,crisno 164,1958-02-21,False,,,0.0
+Dyadic MID 4.03,disno 3151,1958-03-05,False,,,0.0
+Dyadic MID 4.03,disno 3152,1958-03-05,False,,,0.0
+Dyadic MID 4.03,disno 1302,1958-03-11,False,,,0.0
+Dyadic MID 4.03,disno 1099,1958-04-01,False,,,0.0
+Dyadic MID 4.03,disno 2853,1958-05-07,False,,,0.0
+ICB v16,crisno 165,1958-05-08,False,,,0.0
+COW War v4.1 intra-state,WarNum 743,1958-05-09,False,,,0.0
+Dyadic MID 4.03,disno 2852,1958-06-04,False,,,0.0
+Dyadic MID 4.03,disno 2215,1958-06-27,False,,,0.0
+Dyadic MID 4.03,disno 1707,1958-07-02,False,,,0.0
+ICB v16,crisno 166,1958-07-17,False,,,0.0
+Dyadic MID 4.03,disno 173,1958-07-22,False,,,0.0
+COW War v4.0 inter-state,WarNum 159,1958-08-23,False,,,-2.28
+Dyadic MID 4.03,disno 3420,1958-09-14,False,,,-2.28
+Dyadic MID 4.03,disno 2216,1958-11-07,False,,,0.0
+Dyadic MID 4.03,disno 608,1958-11-07,False,,,0.0
+Dyadic MID 4.03,disno 3419,1958-11-10,False,,,0.0
+ICB v16,crisno 168,1958-11-27,False,,,0.0
+ICB v16,crisno 169,1958-12-28,False,,,-1.0
+Dyadic MID 4.03,disno 2861,1959-01-27,False,,,-1.0
+Dyadic MID 4.03,disno 2863,1959-02-28,False,,,-1.0
+COW War v4.1 intra-state,WarNum 747,1959-03-06,False,,,0.0
+Dyadic MID 4.03,disno 2998,1959-03-10,False,,,0.0
+Dyadic MID 4.03,disno 2859,1959-03-20,False,,,0.0
+Dyadic MID 4.03,disno 2869,1959-04-10,False,,,0.0
+Dyadic MID 4.03,disno 3150,1959-04-23,False,,,0.0
+ICB v16,crisno 170,1959-04-25,False,,,0.0
+Dyadic MID 4.03,disno 1708,1959-05-21,False,,,0.0
+Dyadic MID 4.03,disno 3421,1959-05-24,False,,,0.0
+Dyadic MID 4.03,disno 2996,1959-06-07,False,,,0.0
+Dyadic MID 4.03,disno 203,1959-06-23,False,,,0.0
+Dyadic MID 4.03,disno 3231,1959-08-15,False,,,0.0
+ICB v16,crisno 171,1959-08-25,False,,,0.0
+Dyadic MID 4.03,disno 1138,1959-09-22,False,,,0.0
+Dyadic MID 4.03,disno 3430,1959-10-07,False,,,0.0
+ICB v16,crisno 172,1959-11-28,False,,,0.0
+Dyadic MID 4.03,disno 2999,1959-12-15,False,,,0.0
+Dyadic MID 4.03,disno 1709,1959-12-28,False,,,0.0
+COW War v4.1 intra-state,WarNum 748,1960-01-01,False,,,0.0
+Dyadic MID 4.03,disno 1710,1960-01-10,False,,,0.0
+ICB v16,crisno 173,1960-02-15,False,,,0.0
+Dyadic MID 4.03,disno 253,1960-05-01,False,,,0.0
+ICB v16,crisno 175,1960-06-24,False,,,0.0
+Dyadic MID 4.03,disno 3422,1960-07-06,False,,,0.0
+Dyadic MID 4.03,disno 2873,1960-07-16,False,,,0.0
+Dyadic MID 4.03,disno 3162,1960-09-26,False,,,0.0
+ICB v16,crisno 179,1960-12-26,False,,,0.0
+Dyadic MID 4.03,disno 1363,1961-01-01,False,,,0.0
+Dyadic MID 4.03,disno 1799,1961-01-01,False,,,0.0
+Dyadic MID 4.03,disno 3406,1961-02-12,False,,,0.0
+ICB v16,crisno 180,1961-03-09,False,,,0.0
+ICB v16,crisno 181,1961-04-15,False,,,0.0
+Dyadic MID 4.03,disno 2882,1961-06-11,False,,,0.0
+ICB v16,crisno 183,1961-06-19,False,,,0.0
+Dyadic MID 4.03,disno 122,1961-06-25,False,,,0.0
+ICB v16,crisno 184,1961-07-17,False,,,0.0
+Dyadic MID 4.03,disno 27,1961-07-25,False,,,0.0
+ICB v16,crisno 185,1961-08-28,False,,,0.0
+COW War v4.1 intra-state,WarNum 752,1961-09-11,False,,,0.0
+ICB v16,crisno 186,1961-09-18,False,,,0.0
+ICB v16,crisno 187,1961-09-26,False,,,0.0
+Dyadic MID 4.03,disno 3434,1961-09-27,False,,,0.0
+ICB v16,crisno 188,1961-09-28,False,,,0.0
+Dyadic MID 4.03,disno 199,1961-11-02,False,,,0.0
+Dyadic MID 4.03,disno 172,1962-01-07,False,,,0.0
+Dyadic MID 4.03,disno 61,1962-01-28,False,,,0.0
+Dyadic MID 4.03,disno 1353,1962-02-24,False,,,0.0
+Dyadic MID 4.03,disno 3165,1962-03-28,False,,,0.0
+ICB v16,crisno 192,1962-04-22,False,,,0.0
+Dyadic MID 4.03,disno 1466,1962-05-01,False,,,0.0
+ICB v16,crisno 193,1962-05-06,False,,,0.0
+Dyadic MID 4.03,disno 1018,1962-06-14,False,,,0.0
+Dyadic MID 4.03,disno 2888,1962-06-21,False,,,0.0
+Dyadic MID 4.03,disno 1123,1962-07-09,False,,,0.0
+COW War v4.1 intra-state,WarNum 753,1962-07-28,False,,,0.0
+Dyadic MID 4.03,disno 3163,1962-08-17,False,,,0.0
+ICB v16,crisno 194,1962-09-08,False,,,0.0
+Dyadic MID 4.03,disno 1310,1962-09-18,False,,,0.0
+ICB v16,crisno 195,1962-09-26,False,,,0.0
+Dyadic MID 4.03,disno 1108,1962-10-01,False,,,0.0
+ICB v16,crisno 196,1962-10-16,False,,,0.0
+COW War v4.0 inter-state,WarNum 160,1962-10-20,False,,,0.0
+Dyadic MID 4.03,disno 610,1962-10-22,False,,,0.0
+Dyadic MID 4.03,disno 3244,1962-10-28,False,,,0.0
+COW War v4.1 intra-state,WarNum 755,1962-11-15,False,,,0.0
+Dyadic MID 4.03,disno 2157,1963-01-28,False,,,0.0
+Dyadic MID 4.03,disno 2892,1963-02-06,False,,,0.0
+ICB v16,crisno 197,1963-02-11,False,,,0.0
+Dyadic MID 4.03,disno 1070,1963-02-13,False,,,0.0
+COW War v4.1 intra-state,WarNum 756,1963-03-19,False,,,0.0
+Dyadic MID 4.03,disno 2218,1963-04-02,False,,,0.0
+Dyadic MID 4.03,disno 1803,1963-05-28,False,,,0.0
+COW War v4.1 intra-state,WarNum 757,1963-06-01,False,,,0.0
+Dyadic MID 4.03,disno 1317,1963-07-01,False,,,0.0
+Dyadic MID 4.03,disno 3377,1963-07-23,False,,,0.0
+Dyadic MID 4.03,disno 3166,1963-08-19,False,,,0.0
+Dyadic MID 4.03,disno 1019,1963-08-25,False,,,0.0
+ICB v16,crisno 199,1963-10-01,False,,,0.0
+ICB v16,crisno 200,1963-11-01,False,,,0.0
+Dyadic MID 4.03,disno 2894,1963-11-17,False,,,0.0
+Dyadic MID 4.03,disno 2897,1963-11-21,False,,,0.0
+ICB v16,crisno 202,1963-11-28,False,,,0.0
+ICB v16,crisno 203,1963-12-11,False,,,0.0
+ICB v16,crisno 206,1964-01-09,False,,,0.0
+ICB v16,crisno 207,1964-01-19,False,,,0.0
+Dyadic MID 4.03,disno 2220,1964-01-28,False,,,0.0
+ICB v16,crisno 208,1964-02-07,False,,,0.0
+Dyadic MID 4.03,disno 92,1964-02-18,False,,,0.0
+Dyadic MID 4.03,disno 611,1964-02-23,False,,,0.0
+Dyadic MID 4.03,disno 623,1964-04-07,False,,,-1.68
+Dyadic MID 4.03,disno 3378,1964-04-22,False,,,-1.68
+ICB v16,crisno 209,1964-05-28,False,,,-1.68
+Dyadic MID 4.03,disno 2901,1964-07-17,False,,,0.0
+Dyadic MID 4.03,disno 2080,1964-07-25,False,,,0.0
+ICB v16,crisno 210,1964-07-28,False,,,0.0
+Dyadic MID 4.03,disno 1312,1964-08-01,False,,,0.0
+ICB v16,crisno 211,1964-08-04,False,,,0.0
+ICB v16,crisno 212,1964-12-03,False,,,0.0
+Dyadic MID 4.03,disno 2906,1964-12-19,False,,,0.0
+Dyadic MID 4.03,disno 2631,1965-01-01,False,,,0.0
+Dyadic MID 4.03,disno 2914,1965-01-11,False,,,0.0
+COW War v4.0 inter-state,WarNum 163,1965-02-07,False,,,0.0
+ICB v16,crisno 213,1965-02-07,False,,,0.0
+COW War v4.1 intra-state,WarNum 765,1965-04-03,False,,,0.0
+Dyadic MID 4.03,disno 2360,1965-04-06,False,,,0.0
+ICB v16,crisno 214,1965-04-08,False,,,0.0
+Dyadic MID 4.03,disno 2929,1965-04-09,False,,,0.0
+ICB v16,crisno 215,1965-04-24,False,,,0.0
+COW War v4.1 intra-state,WarNum 766,1965-04-25,False,,,0.0
+Dyadic MID 4.03,disno 3168,1965-05-27,False,,,0.0
+COW War v4.1 intra-state,WarNum 767,1965-07-26,False,,,0.0
+Dyadic MID 4.03,disno 3169,1965-07-28,False,,,0.0
+COW War v4.0 inter-state,WarNum 166,1965-08-05,False,,,0.0
+ICB v16,crisno 216,1965-08-05,False,,,0.0
+Dyadic MID 4.03,disno 1017,1965-10-28,False,,,0.0
+Dyadic MID 4.03,disno 1608,1965-11-06,False,,,0.0
+Dyadic MID 4.03,disno 2106,1965-12-18,False,,,0.0
+Dyadic MID 4.03,disno 1216,1965-12-28,False,,,0.0
+Dyadic MID 4.03,disno 2920,1966-01-22,False,,,0.0
+Dyadic MID 4.03,disno 3379,1966-02-18,False,,,0.0
+Dyadic MID 4.03,disno 3171,1966-02-24,False,,,0.0
+Dyadic MID 4.03,disno 2919,1966-03-14,False,,,0.0
+Dyadic MID 4.03,disno 2918,1966-04-25,False,,,0.0
+Dyadic MID 4.03,disno 1109,1966-05-01,False,,,0.0
+Dyadic MID 4.03,disno 2107,1966-05-23,False,,,0.0
+Dyadic MID 4.03,disno 2921,1966-07-15,False,,,1.71
+Dyadic MID 4.03,disno 3412,1966-09-17,False,,,0.0
+COW War v4.1 intra-state,WarNum 770,1966-10-01,False,,,0.0
+Dyadic MID 4.03,disno 343,1966-10-02,False,,,0.0
+ICB v16,crisno 219,1966-10-14,False,,,0.0
+Dyadic MID 4.03,disno 2891,1966-10-17,False,,,0.0
+COW War v4.1 intra-state,WarNum 771,1966-11-01,False,,,1.01
+ICB v16,crisno 220,1966-11-12,False,,,1.01
+Dyadic MID 4.03,disno 1035,1966-12-16,False,,,1.01
+Dyadic MID 4.03,disno 2155,1966-12-28,False,,,1.01
+Dyadic MID 4.03,disno 1805,1967-01-09,False,,,1.01
+Dyadic MID 4.03,disno 2934,1967-03-02,False,,,0.0
+Dyadic MID 4.03,disno 2933,1967-04-28,False,,,0.0
+Dyadic MID 4.03,disno 2930,1967-05-10,False,,,2.33
+ICB v16,crisno 222,1967-05-17,False,,,2.33
+Dyadic MID 4.03,disno 1715,1967-05-18,False,,,2.33
+COW War v4.0 inter-state,WarNum 169,1967-06-05,False,,,2.33
+Dyadic MID 4.03,disno 3446,1967-06-15,False,,,2.33
+Dyadic MID 4.03,disno 1480,1967-06-26,False,,,2.33
+COW War v4.1 intra-state,WarNum 775,1967-07-06,False,,,2.33
+Dyadic MID 4.03,disno 1067,1967-07-15,False,,,2.33
+Dyadic MID 4.03,disno 2097,1967-07-17,False,,,2.33
+Dyadic MID 4.03,disno 2710,1967-08-10,False,,,0.0
+Dyadic MID 4.03,disno 1609,1967-08-18,False,,,0.0
+COW War v4.1 intra-state,WarNum 776,1967-09-05,False,,,0.0
+Dyadic MID 4.03,disno 2935,1967-09-08,False,,,0.0
+Dyadic MID 4.03,disno 1343,1967-10-09,False,,,0.0
+ICB v16,crisno 223,1967-11-15,False,,,0.0
+COW War v4.0 inter-state,WarNum 170,1968-01-13,False,,,0.0
+ICB v16,crisno 224,1968-01-21,False,,,0.0
+ICB v16,crisno 225,1968-01-28,False,,,0.0
+ICB v16,crisno 226,1968-03-18,False,,,0.0
+ICB v16,crisno 227,1968-04-09,False,,,0.0
+Dyadic MID 4.03,disno 2923,1968-05-04,False,,,0.0
+Dyadic MID 4.03,disno 1051,1968-05-12,False,,,0.0
+Dyadic MID 4.03,disno 2922,1968-06-17,False,,,0.0
+Dyadic MID 4.03,disno 2927,1968-06-22,False,,,0.0
+Dyadic MID 4.03,disno 2926,1968-06-28,False,,,0.0
+Dyadic MID 4.03,disno 1069,1968-07-23,False,,,0.0
+Dyadic MID 4.03,disno 3447,1968-09-03,False,,,0.0
+Dyadic MID 4.03,disno 2925,1968-09-28,False,,,0.0
+ICB v16,crisno 229,1968-12-28,False,,,5.86
+Dyadic MID 4.03,disno 352,1969-01-01,False,,,9.12
+COW War v4.1 intra-state,WarNum 777,1969-01-03,False,,,9.12
+Dyadic MID 4.03,disno 350,1969-02-14,False,,,9.12
+ICB v16,crisno 230,1969-02-22,False,,,9.12
+Dyadic MID 4.03,disno 2633,1969-03-01,False,,,3.08
+Dyadic MID 4.03,disno 349,1969-03-02,False,,,3.08
+ICB v16,crisno 231,1969-03-02,False,,,3.08
+COW War v4.0 inter-state,WarNum 172,1969-03-06,False,,,3.08
+ICB v16,crisno 232,1969-03-08,False,,,3.08
+Dyadic MID 4.03,disno 1136,1969-04-06,False,,,0.0
+ICB v16,crisno 233,1969-04-15,False,,,0.0
+ICB v16,crisno 234,1969-04-15,False,,,0.0
+Dyadic MID 4.03,disno 3173,1969-05-01,False,,,0.0
+Dyadic MID 4.03,disno 2937,1969-08-09,False,,,0.0
+Dyadic MID 4.03,disno 2634,1969-08-12,False,,,0.0
+Dyadic MID 4.03,disno 2108,1969-09-14,False,,,0.0
+Dyadic MID 4.03,disno 2936,1969-09-19,False,,,0.0
+ICB v16,crisno 236,1969-10-22,False,,,0.0
+Dyadic MID 4.03,disno 2373,1969-11-05,False,,,0.0
+Dyadic MID 4.03,disno 2635,1969-12-20,False,,,0.0
+Dyadic MID 4.03,disno 2109,1970-01-20,False,,,0.0
+COW War v4.1 intra-state,WarNum 778,1970-02-01,False,,,0.0
+ICB v16,crisno 237,1970-03-13,False,,,0.0
+COW War v4.0 inter-state,WarNum 176,1970-03-23,False,,,0.0
+Dyadic MID 4.03,disno 1039,1970-06-11,False,,,-1.19
+Dyadic MID 4.03,disno 3387,1970-08-08,False,,,0.0
+Dyadic MID 4.03,disno 1068,1970-08-15,False,,,0.0
+COW War v4.1 intra-state,WarNum 780,1970-09-13,False,,,7.55
+ICB v16,crisno 238,1970-09-15,False,,,7.55
+ICB v16,crisno 239,1970-09-16,False,,,7.55
+Dyadic MID 4.03,disno 2221,1970-10-21,False,,,7.55
+Dyadic MID 4.03,disno 1158,1971-01-11,False,,,0.0
+ICB v16,crisno 242,1971-03-25,False,,,0.0
+Dyadic MID 4.03,disno 1447,1971-04-07,False,,,0.0
+Dyadic MID 4.03,disno 2110,1971-04-14,False,,,0.0
+ICB v16,crisno 243,1971-05-24,False,,,0.0
+COW War v4.1 intra-state,WarNum 785,1971-07-03,False,,,0.0
+Dyadic MID 4.03,disno 1081,1971-07-20,False,,,0.0
+Dyadic MID 4.03,disno 1046,1971-10-18,False,,,0.0
+Dyadic MID 4.03,disno 1135,1971-11-28,False,,,0.0
+COW War v4.0 inter-state,WarNum 178,1971-12-03,False,,,0.0
+Dyadic MID 4.03,disno 2949,1972-01-17,False,,,0.0
+ICB v16,crisno 246,1972-03-28,False,,,0.0
+Dyadic MID 4.03,disno 2638,1972-05-05,False,,,0.0
+Dyadic MID 4.03,disno 2948,1972-08-22,False,,,0.0
+Dyadic MID 4.03,disno 2138,1972-09-20,False,,,0.0
+ICB v16,crisno 248,1972-09-26,False,,,0.0
+ICB v16,crisno 249,1972-10-23,False,,,0.0
+Dyadic MID 4.03,disno 602,1972-11-12,False,,,0.0
+Dyadic MID 4.03,disno 1612,1972-12-21,True,wti_1973-01-01,184.0,0.0
+Dyadic MID 4.03,disno 2112,1973-01-02,True,wti_1973-01-01,184.0,0.0
+Dyadic MID 4.03,disno 1200,1973-02-10,True,wti_1973-01-01,184.0,0.0
+Dyadic MID 4.03,disno 1043,1973-02-21,True,wti_1973-01-01,184.0,0.0
+ICB v16,crisno 251,1973-02-21,True,wti_1973-01-01,184.0,0.0
+ICB v16,crisno 252,1973-03-20,True,wti_1973-01-01,184.0,0.0
+Dyadic MID 4.03,disno 2950,1973-03-21,True,wti_1973-01-01,184.0,0.0
+ICB v16,crisno 253,1973-04-10,True,wti_1973-01-01,184.0,0.0
+ICB v16,crisno 254,1973-05-14,True,wti_1973-01-01,184.0,21.07
+COW War v4.1 intra-state,WarNum 795,1973-10-01,True,wti_1973-01-01,184.0,134.57
+ICB v16,crisno 255,1973-10-05,True,wti_1973-01-01,184.0,134.57
+COW War v4.0 inter-state,WarNum 181,1973-10-06,True,wti_1973-01-01,184.0,134.57
+Dyadic MID 4.03,disno 3380,1973-10-25,True,wti_1973-01-01,184.0,134.57
+Dyadic MID 4.03,disno 3437,1973-11-07,True,wti_1973-01-01,184.0,134.57
+ICB v16,crisno 256,1973-11-18,True,wti_1973-01-01,184.0,134.57
+Dyadic MID 4.03,disno 364,1974-03-14,False,,,0.0
+COW War v4.1 intra-state,WarNum 797,1974-03-18,False,,,0.0
+Dyadic MID 4.03,disno 1061,1974-04-12,False,,,0.0
+Dyadic MID 4.03,disno 3438,1974-06-08,False,,,0.0
+ICB v16,crisno 257,1974-07-15,False,,,10.39
+COW War v4.0 inter-state,WarNum 184,1974-07-20,False,,,10.39
+Dyadic MID 4.03,disno 2713,1974-12-01,False,,,0.0
+COW War v4.1 intra-state,WarNum 798,1975-01-28,False,,,0.0
+COW War v4.1 intra-state,WarNum 800,1975-02-01,False,,,0.0
+Dyadic MID 4.03,disno 1613,1975-03-07,False,,,0.0
+COW War v4.1 intra-state,WarNum 801,1975-04-13,False,,,0.0
+ICB v16,crisno 259,1975-05-12,False,,,0.0
+ICB v16,crisno 260,1975-07-12,False,,,0.0
+Dyadic MID 4.03,disno 3175,1975-08-04,False,,,0.0
+ICB v16,crisno 261,1975-10-16,False,,,0.0
+Dyadic MID 4.03,disno 358,1975-10-20,False,,,0.0
+COW War v4.0 inter-state,WarNum 186,1975-10-23,False,,,0.0
+ICB v16,crisno 262,1975-11-01,False,,,7.8
+Dyadic MID 4.03,disno 1441,1975-11-11,False,,,7.8
+ICB v16,crisno 263,1975-11-23,False,,,7.8
+Dyadic MID 4.03,disno 3439,1975-11-26,False,,,7.8
+ICB v16,crisno 264,1975-11-28,False,,,7.8
+COW War v4.1 intra-state,WarNum 802,1976-01-01,False,,,9.05
+ICB v16,crisno 265,1976-01-18,False,,,9.05
+Dyadic MID 4.03,disno 363,1976-02-04,False,,,1.16
+COW War v4.1 intra-state,WarNum 804,1976-02-13,False,,,1.16
+Dyadic MID 4.03,disno 3179,1976-04-05,False,,,0.0
+Dyadic MID 4.03,disno 2961,1976-04-12,False,,,0.0
+ICB v16,crisno 269,1976-06-09,False,,,14.22
+ICB v16,crisno 270,1976-06-27,False,,,14.22
+COW War v4.1 intra-state,WarNum 805,1976-07-01,False,,,14.22
+COW War v4.1 intra-state,WarNum 806,1976-07-18,False,,,14.22
+Dyadic MID 4.03,disno 2956,1976-08-01,False,,,14.22
+ICB v16,crisno 272,1976-08-06,False,,,14.22
+ICB v16,crisno 274,1976-08-17,False,,,14.22
+Dyadic MID 4.03,disno 2335,1976-08-28,False,,,14.22
+Dyadic MID 4.03,disno 365,1976-09-06,False,,,0.0
+ICB v16,crisno 275,1976-11-21,False,,,0.0
+Dyadic MID 4.03,disno 2150,1977-03-08,False,,,0.0
+ICB v16,crisno 277,1977-03-08,False,,,0.0
+Dyadic MID 4.03,disno 2222,1977-04-09,False,,,0.0
+Dyadic MID 4.03,disno 2120,1977-06-21,False,,,6.83
+ICB v16,crisno 279,1977-06-25,False,,,6.83
+Dyadic MID 4.03,disno 2714,1977-07-04,False,,,6.83
+Dyadic MID 4.03,disno 3126,1977-07-12,False,,,6.83
+ICB v16,crisno 281,1977-07-14,False,,,6.83
+ICB v16,crisno 282,1977-07-22,False,,,6.83
+COW War v4.0 inter-state,WarNum 187,1977-07-23,False,,,6.83
+Dyadic MID 4.03,disno 3994,1977-09-20,False,,,0.0
+Dyadic MID 4.03,disno 3122,1977-09-21,False,,,0.0
+ICB v16,crisno 285,1977-10-25,False,,,0.0
+Dyadic MID 4.03,disno 2963,1977-11-12,False,,,0.0
+ICB v16,crisno 287,1977-12-05,False,,,0.0
+ICB v16,crisno 288,1978-01-22,False,,,0.0
+COW War v4.1 intra-state,WarNum 807,1978-02-01,False,,,0.0
+COW War v4.1 intra-state,WarNum 808,1978-03-10,False,,,0.0
+Dyadic MID 4.03,disno 2715,1978-03-11,False,,,0.0
+ICB v16,crisno 289,1978-03-14,False,,,0.0
+Dyadic MID 4.03,disno 3631,1978-04-15,False,,,0.0
+ICB v16,crisno 290,1978-04-15,False,,,0.0
+Dyadic MID 4.03,disno 3007,1978-04-18,False,,,0.0
+COW War v4.1 intra-state,WarNum 811,1978-05-01,False,,,0.0
+ICB v16,crisno 291,1978-05-03,False,,,0.0
+ICB v16,crisno 292,1978-05-11,False,,,0.0
+Dyadic MID 4.03,disno 2602,1978-06-21,False,,,0.0
+Dyadic MID 4.03,disno 3440,1978-07-01,False,,,0.0
+COW War v4.1 intra-state,WarNum 812,1978-09-01,False,,,0.0
+COW War v4.1 intra-state,WarNum 813,1978-09-03,False,,,0.0
+ICB v16,crisno 295,1978-10-16,False,,,0.0
+COW War v4.0 inter-state,WarNum 190,1978-10-28,False,,,0.0
+ICB v16,crisno 296,1978-10-28,False,,,0.0
+ICB v16,crisno 297,1978-11-07,False,,,6.73
+ICB v16,crisno 298,1978-12-25,False,,,6.73
+Dyadic MID 4.03,disno 2716,1979-01-27,False,,,6.73
+COW War v4.1 intra-state,WarNum 816,1979-02-12,False,,,14.2
+ICB v16,crisno 300,1979-02-12,False,,,14.2
+COW War v4.0 inter-state,WarNum 193,1979-02-17,False,,,14.2
+ICB v16,crisno 301,1979-02-24,False,,,14.2
+Dyadic MID 4.03,disno 2113,1979-02-27,False,,,14.2
+ICB v16,crisno 302,1979-03-06,True,wti_1979-04-01,149.2,20.5
+Dyadic MID 4.03,disno 3025,1979-03-18,True,wti_1979-04-01,149.2,20.5
+Dyadic MID 4.03,disno 2053,1979-03-26,True,wti_1979-04-01,149.2,20.5
+ICB v16,crisno 303,1979-03-28,True,wti_1979-04-01,149.2,20.5
+ICB v16,crisno 304,1979-04-12,True,wti_1979-04-01,149.2,37.22
+ICB v16,crisno 305,1979-06-01,True,wti_1979-04-01,149.2,49.21
+Dyadic MID 4.03,disno 3441,1979-06-27,True,wti_1979-04-01,149.2,49.21
+Dyadic MID 4.03,disno 2224,1979-08-09,True,wti_1979-04-01,149.2,16.98
+Dyadic MID 4.03,disno 2968,1979-08-28,True,wti_1979-04-01,149.2,16.98
+Dyadic MID 4.03,disno 2115,1979-10-24,True,wti_1979-04-01,149.2,12.07
+ICB v16,crisno 308,1979-10-28,True,wti_1979-04-01,149.2,12.07
+Dyadic MID 4.03,disno 3020,1979-11-04,True,wti_1979-04-01,149.2,19.35
+ICB v16,crisno 309,1979-11-04,True,wti_1979-04-01,149.2,19.35
+Dyadic MID 4.03,disno 2967,1979-11-14,True,wti_1979-04-01,149.2,19.35
+ICB v16,crisno 310,1979-12-12,True,wti_1979-04-01,149.2,16.92
+ICB v16,crisno 311,1980-01-27,True,wti_1979-04-01,149.2,21.54
+Dyadic MID 4.03,disno 2152,1980-02-03,True,wti_1979-04-01,149.2,6.76
+COW War v4.1 intra-state,WarNum 820,1980-03-22,True,wti_1979-04-01,149.2,3.95
+ICB v16,crisno 313,1980-06-07,False,,,-8.86
+ICB v16,crisno 314,1980-06-11,False,,,-8.86
+ICB v16,crisno 315,1980-08-14,False,,,-5.26
+Dyadic MID 4.03,disno 3448,1980-08-24,False,,,-5.26
+Dyadic MID 4.03,disno 2083,1980-09-07,False,,,2.78
+ICB v16,crisno 317,1980-09-17,False,,,2.78
+COW War v4.0 inter-state,WarNum 199,1980-09-22,False,,,2.78
+Dyadic MID 4.03,disno 2717,1980-10-05,False,,,5.56
+Dyadic MID 4.03,disno 3105,1980-10-25,False,,,5.56
+Dyadic MID 4.03,disno 3108,1980-11-13,False,,,5.56
+ICB v16,crisno 319,1980-11-25,False,,,5.56
+ICB v16,crisno 320,1980-12-05,False,,,2.7
+COW War v4.1 intra-state,WarNum 823,1980-12-18,False,,,2.7
+ICB v16,crisno 324,1981-01-01,False,,,0.0
+ICB v16,crisno 321,1981-01-06,False,,,0.0
+ICB v16,crisno 322,1981-01-22,False,,,0.0
+Dyadic MID 4.03,disno 2119,1981-01-23,False,,,0.0
+ICB v16,crisno 325,1981-04-04,False,,,-5.26
+Dyadic MID 4.03,disno 2084,1981-04-25,False,,,-5.26
+ICB v16,crisno 327,1981-04-28,False,,,-5.26
+Dyadic MID 4.03,disno 3102,1981-05-05,False,,,-5.26
+Dyadic MID 4.03,disno 2228,1981-05-12,False,,,-5.26
+ICB v16,crisno 328,1981-05-15,False,,,-5.26
+Dyadic MID 4.03,disno 2639,1981-07-07,False,,,-2.78
+ICB v16,crisno 330,1981-08-12,False,,,0.0
+Dyadic MID 4.03,disno 3099,1981-08-18,False,,,0.0
+ICB v16,crisno 331,1981-08-23,False,,,0.0
+Dyadic MID 4.03,disno 3098,1981-09-10,False,,,-2.78
+Dyadic MID 4.03,disno 3097,1981-09-21,False,,,-2.78
+Dyadic MID 4.03,disno 3095,1981-10-01,False,,,-3.29
+ICB v16,crisno 333,1981-10-28,False,,,-3.29
+COW War v4.1 intra-state,WarNum 825,1981-11-01,False,,,-12.33
+ICB v16,crisno 334,1981-12-13,False,,,-18.63
+Dyadic MID 4.03,disno 3612,1982-01-15,False,,,-1.18
+COW War v4.1 intra-state,WarNum 826,1982-01-23,False,,,-1.18
+Dyadic MID 4.03,disno 3106,1982-02-22,False,,,13.85
+Dyadic MID 4.03,disno 3630,1982-03-01,False,,,23.14
+Dyadic MID 4.03,disno 2975,1982-03-08,False,,,23.14
+ICB v16,crisno 335,1982-03-22,False,,,23.14
+COW War v4.0 inter-state,WarNum 202,1982-03-25,False,,,23.14
+ICB v16,crisno 336,1982-03-28,False,,,23.14
+Dyadic MID 4.03,disno 3995,1982-04-11,False,,,2.12
+COW War v4.0 inter-state,WarNum 205,1982-04-21,False,,,2.12
+Dyadic MID 4.03,disno 2974,1982-04-24,False,,,2.12
+ICB v16,crisno 337,1982-06-05,False,,,1.6
+Dyadic MID 4.03,disno 2229,1982-06-23,False,,,1.6
+ICB v16,crisno 338,1982-06-28,False,,,1.6
+Dyadic MID 4.03,disno 2323,1982-07-13,False,,,4.45
+Dyadic MID 4.03,disno 3442,1982-10-04,False,,,-12.58
+ICB v16,crisno 340,1983-02-11,False,,,3.63
+Dyadic MID 4.03,disno 3071,1983-02-26,False,,,3.63
+Dyadic MID 4.03,disno 3614,1983-04-10,False,,,3.43
+Dyadic MID 4.03,disno 3068,1983-04-16,False,,,3.43
+COW War v4.1 intra-state,WarNum 833,1983-04-18,False,,,3.43
+ICB v16,crisno 341,1983-04-18,False,,,3.43
+Dyadic MID 4.03,disno 3067,1983-04-27,False,,,3.43
+Dyadic MID 4.03,disno 2590,1983-04-28,False,,,3.43
+ICB v16,crisno 342,1983-06-24,False,,,0.35
+Dyadic MID 4.03,disno 3634,1983-07-03,False,,,-3.95
+COW War v4.1 intra-state,WarNum 835,1983-07-25,False,,,-3.95
+Dyadic MID 4.03,disno 3385,1983-08-16,False,,,-6.49
+Dyadic MID 4.03,disno 3063,1983-09-01,False,,,-6.01
+Dyadic MID 4.03,disno 3062,1983-09-03,False,,,-6.01
+Dyadic MID 4.03,disno 2054,1983-09-18,False,,,-6.01
+ICB v16,crisno 343,1983-10-19,False,,,-2.37
+Dyadic MID 4.03,disno 2641,1983-10-20,False,,,-2.37
+ICB v16,crisno 344,1983-11-02,False,,,1.02
+ICB v16,crisno 347,1983-12-06,False,,,5.2
+Dyadic MID 4.03,disno 3054,1983-12-28,False,,,5.2
+Dyadic MID 4.03,disno 3639,1984-01-14,False,,,3.13
+Dyadic MID 4.03,disno 2118,1984-01-15,False,,,3.13
+ICB v16,crisno 348,1984-02-21,False,,,1.24
+Dyadic MID 4.03,disno 3051,1984-03-08,False,,,-2.58
+Dyadic MID 4.03,disno 3052,1984-03-08,False,,,-2.58
+ICB v16,crisno 350,1984-03-16,False,,,-2.58
+ICB v16,crisno 352,1984-04-02,False,,,-6.09
+Dyadic MID 4.03,disno 3048,1984-04-26,False,,,-6.09
+Dyadic MID 4.03,disno 3617,1984-05-09,False,,,-4.16
+COW War v4.1 intra-state,WarNum 837,1984-06-01,False,,,-2.19
+Dyadic MID 4.03,disno 3045,1984-06-03,False,,,-2.19
+Dyadic MID 4.03,disno 2642,1984-06-25,False,,,-2.19
+Dyadic MID 4.03,disno 3042,1984-07-10,False,,,0.05
+COW War v4.1 intra-state,WarNum 838,1984-08-14,False,,,-3.94
+Dyadic MID 4.03,disno 3041,1984-08-22,False,,,-3.94
+Dyadic MID 4.03,disno 2230,1984-09-12,False,,,-13.24
+Dyadic MID 4.03,disno 2087,1984-10-19,False,,,-10.86
+ICB v16,crisno 354,1984-11-06,False,,,-2.94
+COW War v4.1 intra-state,WarNum 840,1985-01-01,False,,,12.34
+Dyadic MID 4.03,disno 3622,1985-01-09,False,,,12.34
+Dyadic MID 4.03,disno 2643,1985-01-17,False,,,12.34
+Dyadic MID 4.03,disno 3029,1985-02-19,False,,,1.29
+Dyadic MID 4.03,disno 2554,1985-02-20,False,,,1.29
+Dyadic MID 4.03,disno 2553,1985-02-21,False,,,1.29
+Dyadic MID 4.03,disno 2551,1985-03-19,False,,,-3.88
+Dyadic MID 4.03,disno 2550,1985-03-22,False,,,-3.88
+Dyadic MID 4.03,disno 2232,1985-03-24,False,,,-3.88
+Dyadic MID 4.03,disno 3443,1985-06-13,False,,,4.22
+Dyadic MID 4.03,disno 2545,1985-07-10,False,,,8.08
+ICB v16,crisno 357,1985-11-19,True,wti_1985-11-01,-62.4,-49.88
+ICB v16,crisno 358,1985-11-23,True,wti_1985-11-01,-62.4,-49.88
+Dyadic MID 4.03,disno 2102,1985-12-01,True,wti_1985-11-01,-62.4,-53.66
+COW War v4.1 intra-state,WarNum 842,1986-01-13,True,wti_1985-11-01,-62.4,-44.01
+Dyadic MID 4.03,disno 2578,1986-01-13,True,wti_1985-11-01,-62.4,-44.01
+Dyadic MID 4.03,disno 3636,1986-01-13,True,wti_1985-11-01,-62.4,-44.01
+Dyadic MID 4.03,disno 2591,1986-02-04,True,wti_1985-11-01,-62.4,0.01
+ICB v16,crisno 361,1986-02-09,True,wti_1985-11-01,-62.4,0.01
+ICB v16,crisno 362,1986-02-10,True,wti_1985-11-01,-62.4,0.01
+Dyadic MID 4.03,disno 3635,1986-02-15,True,wti_1985-11-01,-62.4,0.01
+Dyadic MID 4.03,disno 2575,1986-03-02,True,wti_1985-11-01,-62.4,6.74
+ICB v16,crisno 363,1986-03-24,True,wti_1985-11-01,-62.4,6.74
+Dyadic MID 4.03,disno 2574,1986-04-06,True,wti_1985-11-01,-62.4,-9.9
+Dyadic MID 4.03,disno 2572,1986-04-26,True,wti_1985-11-01,-62.4,-9.9
+ICB v16,crisno 364,1986-04-26,True,wti_1985-11-01,-62.4,-9.9
+Dyadic MID 4.03,disno 2579,1986-05-28,True,wti_1985-11-01,-62.4,-2.28
+Dyadic MID 4.03,disno 2718,1986-07-12,False,,,28.31
+Dyadic MID 4.03,disno 2565,1986-08-26,False,,,0.76
+Dyadic MID 4.03,disno 2588,1986-09-03,False,,,7.8
+Dyadic MID 4.03,disno 2596,1986-09-23,False,,,7.8
+Dyadic MID 4.03,disno 3628,1986-10-01,False,,,25.61
+Dyadic MID 4.03,disno 2644,1986-10-14,False,,,25.61
+Dyadic MID 4.03,disno 2594,1986-10-22,False,,,25.61
+Dyadic MID 4.03,disno 2315,1986-10-26,False,,,25.61
+COW War v4.0 inter-state,WarNum 207,1986-11-15,False,,,16.56
+ICB v16,crisno 370,1986-12-12,False,,,13.87

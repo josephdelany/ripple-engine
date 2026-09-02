@@ -4,7 +4,9 @@ data/candidates/REGISTRATION.md (registered before this code). Every ICB crisis,
 hihost >= 4 dated 1946-01 .. 1986-12 with at least one actor in the registered producer / transit / consumer state
 set, joined to the monthly WTI Big Moves episodes and to the +3 m WTI change. READS session A's raw files and
 loaders (src/state/icb.py, outcomes.py); WRITES data/candidates/pre1987_candidates.csv and
-pre1987_candidates_summary.json. NOTHING enters the events table. suggested_title is blank by design.
+pre1987_candidates_summary.json. REGISTRATION.md Amendment 1: the admission sheet is BLIND (no outcome column);
+the Big Moves / WTI join goes to pre1987_candidates_outcomes.csv, keyed by (source, source_id), for use after admission.
+NOTHING enters the events table. suggested_title is blank by design.
 
 Run:  python3 src/engine/pre1987_candidates.py
 """
@@ -160,17 +162,22 @@ def main():
         r["wti_chg_3m_pct"] = round(float((wti.iloc[pos + HORIZON_M] / wti.iloc[pos] - 1) * 100), 2) if pos + HORIZON_M < len(wti) else ""
         r["suggested_title"] = ""
     rows.sort(key=lambda r: (r["event_date"], r["source"], r["source_id"]))
-    cols = ["event_date", "actors", "source", "source_id", "source_detail", "inside_big_move", "episode_id", "monthly_move_pct", "wti_chg_3m_pct", "suggested_title"]
+    # REGISTRATION.md Amendment 1: the admission sheet is BLIND; the outcome join is a separate file keyed by (source, source_id)
+    blind = ["event_date", "actors", "source", "source_id", "source_detail", "suggested_title"]
+    joined = ["source", "source_id", "event_date", "inside_big_move", "episode_id", "monthly_move_pct", "wti_chg_3m_pct"]
     OUT.mkdir(parents=True, exist_ok=True)
     with open(OUT / "pre1987_candidates.csv", "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=blind, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
+    with open(OUT / "pre1987_candidates_outcomes.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=joined, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
     dec = Counter(r["event_date"][:3] + "0s" for r in rows)
     summary = {"registration": "data/candidates/REGISTRATION.md (2026-09-02)", "generated_at": pd.Timestamp.utcnow().isoformat(),
                "n_rows": len(rows), "by_decade": dict(sorted(dec.items())), "by_source": dict(Counter(r["source"] for r in rows)),
                "by_decade_and_source": {k: dict(Counter(r["source"] for r in rows if r["event_date"][:3] + "0s" == k)) for k in sorted(dec)},
                "inside_big_move": sum(1 for r in rows if r["inside_big_move"]), "episodes_1946_1986": sum(1 for e in eps if e["onset"] <= "1986-12-31"),
                "episodes_with_a_candidate": len({r["episode_id"] for r in rows if r["episode_id"]}),
-               "note": "Joe's admission sheet (PATH Step 5). Nothing here enters events. Each source's own record; duplicates across sources by design."}
+               "files": {"admission_sheet_blind": "pre1987_candidates.csv", "outcome_join_after_admission": "pre1987_candidates_outcomes.csv"},
+               "note": "Joe's admission sheet (PATH Step 5). Nothing here enters events. Each source's own record; duplicates across sources by design. The sheet is blind (REGISTRATION.md Amendment 1)."}
     json.dump(summary, open(OUT / "pre1987_candidates_summary.json", "w"), indent=1)
     print(json.dumps(summary, indent=1))
 
