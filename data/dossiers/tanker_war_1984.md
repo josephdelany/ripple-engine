@@ -1,0 +1,56 @@
+# Iraq's first Exocet/Super Étendard tanker strike (two ships southwest of Kharg)     tanker_war_1984 · 1984-03-27 · day · chokepoint_disruption (contested — see Class)
+
+## Sources
+
+| # | Role | Publisher | Title | Doc. date | URL | Retrieved at (UTC) | Verbatim quote relied on |
+|---|------|-----------|-------|-----------|-----|---------------------|---------------------------|
+| S1 | secondary (scholarly monograph) | Center for Strategic and International Studies (Anthony H. Cordesman and Abraham R. Wagner) | *The Lessons of Modern War, Volume II: The Iran-Iraq War*, Chapter VII, "Phase Four: Stalemate and War of Attrition ... : April 1984 to 1986," §7.1 "The Air War and 'Tanker War'" | May 1990 | https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/9005lessonsiraniraqii-chap07.pdf | 2026-09-02T20:52Z (session) | "Iraq seems to have use its regular fighters to hit seven ships in the Gulf between 25 February and 1 March. On March 27, 1984, Iraq finally launched the first of a long series of Super Etendard and Exocet strikes, and hit two small Indian and Turkish tankers southwest of Kharg. The next day, Iraq formally announced that it had used an Exocet missile to hit a Greek vessel."; "In late February, ... Iraqi aircraft struck at Kharg Island on February 27, and Iraq then again threatened that it would blockade Iranian oil exports and strike at any ship near Kharg."; "Iran was trying to increase production to try to recoup some of the costs of the fighting, and was exporting from Kharg Island at the exceptionally high rate of three million BPD." |
+| S2 | secondary (contemporaneous scholarly chronicle) | Middle East Research and Information Project (MERIP), *Middle East Report* | "Chronicle of the Gulf War" | July 1984 | https://www.merip.org/1984/07/chronicle-of-the-gulf-war/ | 2026-09-02T20:24Z (session) | "two small tankers southwest of Kharg" (description of the March 27 Etendard-Exocet strike); "the exceptional rate of 3 million b/d" (Iranian export rate from Kharg at the time) |
+
+S1 and S2 are on different registrable domains (csis-website-prod.s3.amazonaws.com vs. merip.org) and corroborate each other on the same facts (date, location, two tankers, the 3 million b/d export context). Both are secondary: S1 is a scholarly CSIS monograph based on the authors' interviews and prior reporting; S2 is a chronicle compiled and published within four months of the event by an academic Middle East policy journal, drawing on wire reporting the dossier author did not independently retrieve. **No primary source was located or retrieved this session** despite the attempts logged below — this dossier is single-tier-sourced and marked partial on clause (a).
+
+## Retrieval attempts that failed or were unusable (logged per SPINE_REGISTRATION.md §4/§5)
+
+- FRUS 1981–1988, Volume XX (*Iran; Iraq, April 1980–January 1985*) — checked directly; status "Being Cleared," **not yet published**, no documents accessible. This corrects the task's working assumption that the 1981–1988 FRUS volumes are available; they are not, for the Iran/Iraq series specifically.
+- FRUS 1981–1988, Volume XXI (*Iran; Iraq, 1985–1988*) — same result, "Being Cleared," not published.
+- CIA FOIA Electronic Reading Room — a search-engine hit surfaced what looked like a specific document node, but fetching it (as with a direct search on the site) returns only the Reading Room homepage, not the document. Confirmed unusable, consistent with SPINE_REGISTRATION.md §4.
+- The American Presidency Project — searched for a Reagan statement addressing this specific incident (a minor, no-U.S.-casualty attack on two small third-country tankers); none found. Reagan's dated Gulf-conflict statements retrieved this session are all from 1987–1988 (Stark, Bridgeton, Vincennes), not 1984.
+- washingtonpost.com/archive/... (two different April/May 1984 Gulf-shipping articles) — HTTP 403 both times.
+- upi.com/Archives/... (a May 1984 wire piece) — HTTP 403.
+- web.archive.org — fetch tool reports it cannot retrieve from this host at all.
+
+## Narrative
+
+By late February 1984 Iraq had threatened to blockade Iranian oil exports and strike any ship near Kharg Island, and had already hit seven ships in the Gulf with conventional fighters between 25 February and 1 March [S1]. On 27 March 1984 Iraq escalated to a new weapon: French-supplied Super Etendard aircraft firing Exocet anti-ship missiles struck two small tankers, reported as Indian and Turkish flagged, southwest of Kharg Island [S1][S2]; Iraq announced the next day that an Exocet had also hit a Greek vessel [S1]. This was the first operational use of the Etendard-Exocet combination in the war, opening what both sources describe as a long campaign against Gulf shipping [S1][S2]. The physical stake at that moment was narrow, two small tankers rather than a loss of export capacity, but the strategic stake was larger: Iran was then exporting from Kharg at "the exceptional rate of 3 million b/d" [S2], and missile-armed aircraft gave Iraq a credible tool against that flow [S1]. Known on the day: two small tankers hit southwest of Kharg by a new Iraqi weapon system, after weeks of explicit Iraqi threats [S1]. Not knowable that day: that this opened a campaign running into 1988 [S1]. S1 itself dates the sustained "escalation of the war in the Gulf" to April 1984 onward, weeks after 27 March.
+
+## Knowable at
+
+1984-03-27, day precision. Reason: this is the date both S1 and S2 independently give for the first Etendard-Exocet strike. Neither source gives a clock time or names the first wire report, so no finer-than-day precision is claimed. The event is discrete and well-attested at day precision; the *campaign* it began ("the Tanker War") is not a single dated event and should not itself carry day precision — see Class, below.
+
+## Entities
+
+- `country.iraq` — actor — the attacking party per S1 and S2. Matches the existing `event_entities` row.
+- `chokepoint.hormuz` — currently coded as `target` in `event_entities`. No source retrieved this session supports this: the attack was on two tankers "southwest of Kharg," inside the Gulf and well north of the Strait of Hormuz itself, and neither S1 nor S2 mentions Hormuz. This dossier flags `chokepoint.hormuz:target` as unsupported by retrieved sources and recommends removing it or replacing it with a Kharg Island / Gulf-shipping entity if one exists in the register (none was found under that name this session — a gap, not invented here).
+- Iran (not currently coded) — the two tankers struck, and the exporter whose Kharg throughput is the physical stake described in S1/S2, is Iran; `country.iran` (as `affected_market` or `target`) is arguably missing from `event_entities` but is not proposed as a firm change without further review, since the ships hit were third-country (Indian, Turkish, Greek) flagged, not Iranian-flagged, per S1.
+
+## Class
+
+Proposed class: `chokepoint_disruption`, as currently coded, but the fit is imperfect and the challenge is recorded rather than silently resolved. Codebook clause: "`chokepoint_disruption` | Transit through a strait/canal/pipeline is threatened or blocked." The March 27 strike was on open-Gulf shipping near Kharg, not a strait, canal, or pipeline chokepoint in the narrow sense the codebook's own example (Hormuz) implies — no source retrieved this session shows the Strait of Hormuz itself was threatened or blocked on March 27, 1984. `infrastructure_attack` ("Direct strike on production, refining, or export infrastructure") is arguably a closer fit if the target is understood as tankers loading Iranian export crude, but the strike hit the *ships*, not the Kharg terminal itself (which Iraq did not strike until later, per S1). This dossier recommends Joe review whether `chokepoint_disruption` should be read broadly enough to cover attacks on shipping generally, or whether a `tanker_attack`/shipping-specific sub-class is warranted; absent a codebook change, `chokepoint_disruption` is left in place as the closer of the two imperfect options.
+
+## Not known at the time
+
+On March 27, 1984, it was not known that this strike would open a sustained, multi-year "Tanker War" running to 1988, nor that Iraq would go on to hit nearly 200 ships by the war's later years [S1]. S1's own account, written in 1990 with the benefit of hindsight, notes the strike's timing "may have had something to do with" contemporaneous Iranian oil-contract negotiations with Japanese traders — a causal claim the authors themselves flag as speculative ("may have had something to do with"), not something knowable as fact on March 27 itself.
+
+## Proposed field changes
+
+| Field | Current | Proposed | Source |
+|---|---|---|---|
+| `title`/`description` | "Tanker War: attacks on Gulf shipping escalate" | "Iraq's first use of Exocet-armed Super Étendard aircraft against Gulf shipping, hitting two small tankers southwest of Kharg Island; Iraq had threatened a blockade of Iranian oil exports since late February." | [S1][S2] |
+| `entities: chokepoint.hormuz:target` | present | remove — not supported by any source retrieved this session; the strike was near Kharg Island, not the Strait of Hormuz | [S1][S2] |
+| `severity` | NULL | 2 — "localized, small volumes, easily substituted." Reasoning: the physical loss on March 27 itself was two small third-country tankers, one only lightly damaged per S1's account of the follow-on pattern; no source retrieved this session shows a barrel figure lost that day. A higher severity could be argued if scored on the *precedent* set (a new, harder-to-defend-against weapon), but the codebook directs coding by expected disruption of the event itself, not by later escalation. | [S1] |
+| `surprise` | NULL | 2 — "widely expected; extensive warning or visible build-up." Reasoning: S1 documents that Iraq had explicitly threatened to blockade Iranian oil exports and strike ships near Kharg since February 27, and had already hit seven ships in the preceding month — the general threat of intensified Iraqi shipping attacks was visible and stated in advance, even if the specific weapon system (Exocet) was new. | [S1] |
+| `date_precision` | day | day (unchanged) for this specific first-use event; flag that if this record is meant to represent the "Tanker War" as a multi-year campaign rather than this specific strike, day precision would not be defensible and a coarser precision or a campaign-level (non-`events`) record would be more honest | [S1] |
+
+## Status
+
+partial — fails clause (a): no primary source was located or retrieved this session despite documented attempts across five separate routes (FRUS 1981-88 Vols. XX and XXI both unpublished; CIA reading room unusable; no relevant American Presidency Project statement found; washingtonpost.com and upi.com both returned HTTP 403 on every attempt). The dossier rests on two independent-domain secondary/scholarly sources (S1, S2) that corroborate each other closely. Narrative (b), knowable_at (c), and not-known-at-the-time (f) are met on the secondary record available. Entities (d) and class (e) both surface unresolved problems with the current coding, recorded above rather than silently changed.

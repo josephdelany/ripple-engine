@@ -146,3 +146,43 @@ challenges.
 **≥ 2 independent source domains, at least one primary** and a narrative ≥ 700
 characters — both zero at registration. The audit's own table is the scoreboard; no
 other claim of progress is made.
+
+---
+
+## Amendment 1 (2026-09-02) — three route corrections, from the pre-1990 batch
+
+*Dated and appended, never edited. §4's table records routes as tested; running the
+1970–1989 batch tested more of them, and three entries need correcting. Nothing else in
+this registration changes.*
+
+- **A.1 UN Peacekeeping is usable, and the UN Digital Library still is not.**
+  `https://peacekeeping.un.org/sites/default/files/past/…` serves official mission
+  histories and was verified by the reviewer on the UNIIMOG background page, which states
+  "On 8 August, when he announced the agreement of both Iran and Iraq to a ceasefire with
+  effect from 0300 GMT on 20 August", "The ceasefire came into effect at 0300 GMT on
+  20 August 1988", and "In its resolution 619 (1988) of 9 August, the Security Council
+  approved the Secretary-General's report and decided to establish UNIIMOG immediately for
+  a period of six months." §4's row for the UN said only that `digitallibrary.un.org`
+  returns 403, which is still true and is a different host. UN mission histories are
+  **primary** for the facts of a UN operation and its dates.
+
+- **A.2 FRUS is not available for the Reagan-era Gulf events.** §4 says FRUS runs "1945 →
+  early 1990s", which is true of the series but not of the volumes this batch needed:
+  FRUS 1981–1988 Volumes XX and XXI (Iran, Iraq) are marked **"Being Cleared"** and are not
+  published, and FRUS 1969–1976 Volume X (Iran, January 1977 – November 1979) is likewise
+  unpublished. Checked, not assumed. The consequence is recorded rather than worked
+  around: the 1984–1988 dossiers rest on scholarly secondary sources and contemporaneous
+  press, and say so in their status lines. FRUS 1981–1988 Volume I is published and did
+  yield a primary document for the 1987 reflagging.
+
+- **A.3 A press wire archive is usable where it serves the article text.**
+  `https://www.upi.com/Archives/…` returned dated wire copy for July 1987 and August 1988
+  and is cited with role `press`. Under §1(a) press is a legitimate second source and
+  never the only one; every dossier using it also carries a non-press source.
+
+**Standing note on scholarly monographs.** Where no primary document exists for an event,
+a dossier may rest on a scholarly secondary source, and its status is then `partial —
+fails (a)`, because clause (a) requires a primary. This batch has several such records and
+they are not rounded up. The rule is unchanged; this note only makes the consequence
+explicit, since a reader may otherwise read a well-sourced partial as a failure of effort
+rather than of the archive.
