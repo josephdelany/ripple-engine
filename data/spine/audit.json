@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-02T20:54:40+00:00",
+ "generated_at": "2026-09-02T20:55:39+00:00",
  "db": "data/oil.db",
  "n_events": 313,
  "overall": {
@@ -11,6 +11,9 @@
   "one_domain": 313,
   "zero_domains": 0,
   "generic_root_url": 9,
+  "tertiary_source_url": 31,
+  "any_tertiary_domain": 31,
+  "zero_citable_domains": 31,
   "desc_len_median": 148,
   "desc_len_min": 53,
   "desc_len_max": 269,
@@ -37,6 +40,9 @@
    "one_domain": 8,
    "zero_domains": 0,
    "generic_root_url": 3,
+   "tertiary_source_url": 0,
+   "any_tertiary_domain": 0,
+   "zero_citable_domains": 0,
    "desc_len_median": 85,
    "desc_len_min": 59,
    "desc_len_max": 102,
@@ -62,6 +68,9 @@
    "one_domain": 11,
    "zero_domains": 0,
    "generic_root_url": 6,
+   "tertiary_source_url": 0,
+   "any_tertiary_domain": 0,
+   "zero_citable_domains": 0,
    "desc_len_median": 94,
    "desc_len_min": 63,
    "desc_len_max": 269,
@@ -87,6 +96,9 @@
    "one_domain": 16,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 4,
+   "any_tertiary_domain": 4,
+   "zero_citable_domains": 4,
    "desc_len_median": 175,
    "desc_len_min": 76,
    "desc_len_max": 211,
@@ -112,6 +124,9 @@
    "one_domain": 43,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 11,
+   "any_tertiary_domain": 11,
+   "zero_citable_domains": 11,
    "desc_len_median": 150,
    "desc_len_min": 65,
    "desc_len_max": 225,
@@ -137,6 +152,9 @@
    "one_domain": 85,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 5,
+   "any_tertiary_domain": 5,
+   "zero_citable_domains": 5,
    "desc_len_median": 148,
    "desc_len_min": 53,
    "desc_len_max": 250,
@@ -162,6 +180,9 @@
    "one_domain": 150,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 11,
+   "any_tertiary_domain": 11,
+   "zero_citable_domains": 11,
    "desc_len_median": 149,
    "desc_len_min": 64,
    "desc_len_max": 221,
@@ -189,6 +210,9 @@
    "one_domain": 27,
    "zero_domains": 0,
    "generic_root_url": 2,
+   "tertiary_source_url": 4,
+   "any_tertiary_domain": 4,
+   "zero_citable_domains": 4,
    "desc_len_median": 150,
    "desc_len_min": 88,
    "desc_len_max": 269,
@@ -214,6 +238,9 @@
    "one_domain": 55,
    "zero_domains": 0,
    "generic_root_url": 2,
+   "tertiary_source_url": 8,
+   "any_tertiary_domain": 8,
+   "zero_citable_domains": 8,
    "desc_len_median": 142,
    "desc_len_min": 59,
    "desc_len_max": 246,
@@ -239,6 +266,9 @@
    "one_domain": 17,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 1,
+   "any_tertiary_domain": 1,
+   "zero_citable_domains": 1,
    "desc_len_median": 147,
    "desc_len_min": 65,
    "desc_len_max": 179,
@@ -264,6 +294,9 @@
    "one_domain": 48,
    "zero_domains": 0,
    "generic_root_url": 2,
+   "tertiary_source_url": 5,
+   "any_tertiary_domain": 5,
+   "zero_citable_domains": 5,
    "desc_len_median": 151,
    "desc_len_min": 76,
    "desc_len_max": 229,
@@ -289,6 +322,9 @@
    "one_domain": 52,
    "zero_domains": 0,
    "generic_root_url": 0,
+   "tertiary_source_url": 12,
+   "any_tertiary_domain": 12,
+   "zero_citable_domains": 12,
    "desc_len_median": 146,
    "desc_len_min": 64,
    "desc_len_max": 221,
@@ -314,6 +350,9 @@
    "one_domain": 57,
    "zero_domains": 0,
    "generic_root_url": 2,
+   "tertiary_source_url": 0,
+   "any_tertiary_domain": 0,
+   "zero_citable_domains": 0,
    "desc_len_median": 140,
    "desc_len_min": 82,
    "desc_len_max": 199,
@@ -339,6 +378,9 @@
    "one_domain": 57,
    "zero_domains": 0,
    "generic_root_url": 1,
+   "tertiary_source_url": 1,
+   "any_tertiary_domain": 1,
+   "zero_citable_domains": 1,
    "desc_len_median": 157,
    "desc_len_min": 53,
    "desc_len_max": 250,
@@ -850,7 +892,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "oapec_embargo_1973",
@@ -867,7 +911,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "embargo_lifted_1974",
@@ -884,7 +930,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "abqaiq_arabian_1977",
@@ -901,7 +949,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_oilworkers_strike_1978",
@@ -918,7 +968,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "shah_leaves_iran_1979",
@@ -935,7 +987,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_revolution_1979",
@@ -952,7 +1006,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_hostage_crisis_1979",
@@ -969,7 +1025,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "carter_doctrine_1980",
@@ -986,7 +1044,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_iraq_war_1980",
@@ -1003,7 +1063,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "tanker_war_1984",
@@ -1020,7 +1082,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kharg_strikes_1985",
@@ -1037,7 +1101,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_price_collapse_1986",
@@ -1054,7 +1120,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_kharg_1986",
@@ -1071,7 +1139,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "earnest_will_1987",
@@ -1088,7 +1158,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "bridgeton_mine_strike_1987",
@@ -1105,7 +1177,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "praying_mantis_1988",
@@ -1122,7 +1196,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_air_655_1988",
@@ -1139,7 +1215,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_iraq_ceasefire_1988",
@@ -1156,7 +1234,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_invades_kuwait_1990",
@@ -1173,7 +1253,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_un_661_embargo_1990",
@@ -1190,7 +1272,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "desert_storm_air_campaign_1991",
@@ -1207,7 +1291,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 5,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kuwait_oil_fires_1991",
@@ -1224,7 +1310,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "iraq_un_986_ofp_1995",
@@ -1241,7 +1329,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_eo12959_embargo_1995",
@@ -1258,7 +1348,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ilsa_sanctions_1996",
@@ -1275,7 +1367,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_ofp_exports_begin_1996",
@@ -1292,7 +1386,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "thai_baht_float_1997",
@@ -1309,7 +1405,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "korea_imf_bailout_1997",
@@ -1326,7 +1424,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_jakarta_quota_increase_1997",
@@ -1343,7 +1443,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_march_1998",
@@ -1360,7 +1462,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "opec_cut_june_1998",
@@ -1377,7 +1481,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "russia_default_ltcm_1998",
@@ -1394,7 +1500,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "operation_desert_fox_1998",
@@ -1411,7 +1519,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_1999",
@@ -1428,7 +1538,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_hike_march_2000",
@@ -1445,7 +1557,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "opec_hike_june_2000",
@@ -1462,7 +1576,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "opec_hike_sept_2000",
@@ -1479,7 +1595,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "clinton_spr_swap_2000",
@@ -1496,7 +1614,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_jan_2001",
@@ -1513,7 +1633,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "us_recession_2001_onset",
@@ -1530,7 +1652,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_march_2001",
@@ -1547,7 +1671,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "opec_cut_july_2001",
@@ -1564,7 +1690,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "september_11_attacks_2001",
@@ -1581,7 +1709,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_cairo_dec_2001",
@@ -1598,7 +1728,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_oil_export_ban_2002",
@@ -1615,7 +1747,9 @@
    "sr_slots_corpus": 1,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_hike_jan_2003",
@@ -1632,7 +1766,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "iraq_war_begins_2003",
@@ -1649,7 +1785,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_warri_shutin_2003",
@@ -1666,7 +1804,9 @@
    "sr_slots_corpus": 1,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_emergency_april_2003",
@@ -1683,7 +1823,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "iraq_sanctions_lifted_2003",
@@ -1700,7 +1842,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_sept_2003",
@@ -1717,7 +1861,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "libya_sanctions_lifted_2004",
@@ -1734,7 +1880,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_hike_beirut_june_2004",
@@ -1751,7 +1899,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "iraq_pipeline_north_2004",
@@ -1768,7 +1918,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_pipeline_south_2004",
@@ -1785,7 +1937,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "suez_tropic_brilliance_2004",
@@ -1802,7 +1956,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_dec_2004",
@@ -1819,7 +1975,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "yukos_yugansk_auction_2004",
@@ -1836,7 +1994,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iea_release_katrina_2005",
@@ -1853,7 +2013,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2005_12_12",
@@ -1870,7 +2032,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_mend_ea_2006",
@@ -1887,7 +2051,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_mend_forcados_2006",
@@ -1904,7 +2070,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_abqaiq_foiled_2006",
@@ -1921,7 +2089,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "israel_hezbollah_war_2006",
@@ -1938,7 +2108,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_abuja_dec_2006",
@@ -1955,7 +2127,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2007_09_11",
@@ -1972,7 +2146,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sa_power_crisis_2008",
@@ -1989,7 +2165,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "turkey_pkk_incursion_2008",
@@ -2006,7 +2184,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "bush_spr_halt_2008",
@@ -2023,7 +2203,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_mend_bonga_2008",
@@ -2040,7 +2222,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "btc_pipeline_blast_2008",
@@ -2057,7 +2241,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_georgia_war_2008",
@@ -2074,7 +2260,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "lehman_collapse_2008",
@@ -2091,7 +2279,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_emergency_cut_2008",
@@ -2108,7 +2298,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_record_cut_oran_2008",
@@ -2125,7 +2317,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2009_05_28",
@@ -2142,7 +2336,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "mend_amnesty_2009",
@@ -2159,7 +2355,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_cisada_2010",
@@ -2176,7 +2374,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "rus_grain_ban_2010",
@@ -2193,7 +2393,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "egypt_revolution_2011",
@@ -2210,7 +2412,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_civil_war_2011",
@@ -2227,7 +2431,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "fukushima_2011",
@@ -2244,7 +2450,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_no_deal_june_2011",
@@ -2261,7 +2469,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iea_release_libya_2011",
@@ -2278,7 +2488,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "escondida_strike_2011",
@@ -2295,7 +2507,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2011_11_21",
@@ -2312,7 +2526,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2011_12_14",
@@ -2329,7 +2545,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "hormuz_iran_threat_2011",
@@ -2346,7 +2564,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "ndaa_cbi_sanctions_2011",
@@ -2363,7 +2583,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "eu_iran_oil_embargo_2012",
@@ -2380,7 +2602,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "swift_cutoff_iran_2012",
@@ -2397,7 +2621,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sudan_heglig_war_2012",
@@ -2414,7 +2640,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2012_06_05",
@@ -2431,7 +2659,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "marikana_strike_2012",
@@ -2448,7 +2678,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2013_05_31",
@@ -2465,7 +2697,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "egypt_coup_suez_2013",
@@ -2482,7 +2716,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "libya_jathran_blockade_2013",
@@ -2499,7 +2735,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2013_11_24",
@@ -2516,7 +2754,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2013_12_04",
@@ -2533,7 +2773,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "indonesia_ore_ban_2014",
@@ -2550,7 +2792,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sa_platinum_strike_2014",
@@ -2567,7 +2811,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kirkuk_ceyhan_isis_2014",
@@ -2584,7 +2830,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "mosul_isis_offensive_2014",
@@ -2601,7 +2849,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_sectoral_sanctions_2014",
@@ -2618,7 +2868,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_oiltech_ban_2014",
@@ -2635,7 +2887,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_declines_cut_2014",
@@ -2652,7 +2906,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_essider_clashes_2014",
@@ -2669,7 +2925,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_ports_clashes_2014",
@@ -2686,7 +2944,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_intervention_yemen_2015",
@@ -2703,7 +2963,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_jcpoa_agreed_2015",
@@ -2720,7 +2982,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "china_yuan_deval_2015",
@@ -2737,7 +3001,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2015_12_04",
@@ -2754,7 +3020,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_export_ban_lift_2015",
@@ -2771,7 +3039,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_implementation_day_2016",
@@ -2788,7 +3058,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nda_bonny_2016",
@@ -2805,7 +3077,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_nda_forcados_2016",
@@ -2822,7 +3096,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "nigeria_nda_escravos_2016",
@@ -2839,7 +3115,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_algiers_accord_2016",
@@ -2856,7 +3134,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_agrees_cut_2016",
@@ -2873,7 +3153,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "philippines_nickel_2017",
@@ -2890,7 +3172,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "escondida_strike_2017",
@@ -2907,7 +3191,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_extend_may_2017",
@@ -2924,7 +3210,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "qatar_gulf_blockade_2017",
@@ -2941,7 +3229,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_financial_sanctions_2017",
@@ -2958,7 +3248,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kirkuk_seizure_2017",
@@ -2975,7 +3267,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kaz_uranium_cut_2017",
@@ -2992,7 +3286,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_steel_alu_tariffs_2018",
@@ -3009,7 +3305,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "drc_mining_code_2018",
@@ -3026,7 +3324,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "bab_el_mandeb_houthi_tanker_2018",
@@ -3043,7 +3343,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_sanctions_reimposed_2018",
@@ -3060,7 +3362,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_oil_crescent_2018",
@@ -3077,7 +3381,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_hike_june_2018",
@@ -3094,7 +3400,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "uschina_tariff1_2018",
@@ -3111,7 +3419,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_suspends_bab_el_mandeb_2018",
@@ -3128,7 +3438,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_metals_windown_2018",
@@ -3145,7 +3457,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "imf_weo_growth_scare_2018",
@@ -3162,7 +3476,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_oil_snapback_2018",
@@ -3179,7 +3495,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "katanga_cobalt_halt_2018",
@@ -3196,7 +3514,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "uschina_truce_2018",
@@ -3213,7 +3533,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_cut_dec_2018",
@@ -3230,7 +3552,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_sharara_2018",
@@ -3247,7 +3571,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_sanctions_2019",
@@ -3264,7 +3590,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "lasbambas_blockade_2019",
@@ -3281,7 +3609,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_blackout_2019",
@@ -3298,7 +3628,9 @@
    "sr_slots_corpus": 2,
    "sr_slots_null": 8,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "sanc_2019_04_08",
@@ -3315,7 +3647,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "druzhba_contamination_2019",
@@ -3332,7 +3666,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_ends_iran_waivers_2019",
@@ -3349,7 +3685,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "fujairah_tanker_sabotage_2019",
@@ -3366,7 +3704,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_ew_pipeline_2019",
@@ -3383,7 +3723,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_pgpic_sanctions_2019",
@@ -3400,7 +3742,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "gulf_of_oman_tanker_attacks_2019",
@@ -3417,7 +3761,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "grace1_seizure_2019",
@@ -3434,7 +3780,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "stena_impero_seizure_2019",
@@ -3451,7 +3799,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_asset_freeze_2019",
@@ -3468,7 +3818,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "mutanda_shutdown_2019",
@@ -3485,7 +3837,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_shaybah_2019",
@@ -3502,7 +3856,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_retal_2019",
@@ -3519,7 +3875,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "indonesia_nickel_ban_2019",
@@ -3536,7 +3894,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "abqaiq_attack_2019",
@@ -3553,7 +3913,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ecuador_leaves_opec_2019",
@@ -3570,7 +3932,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_deeper_cut_dec_2019",
@@ -3587,7 +3951,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iraq_nasiriya_2019",
@@ -3604,7 +3970,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "soleimani_strike_2020",
@@ -3621,7 +3989,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "uschina_phase1_2020",
@@ -3638,7 +4008,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_haftar_blockade_2020",
@@ -3655,7 +4027,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rosneft_trading_venez_2020",
@@ -3672,7 +4046,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "arg_soy_tax_2020",
@@ -3689,7 +4065,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_talks_collapse_2020",
@@ -3706,7 +4084,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 4,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "covid_pandemic_declared_2020",
@@ -3723,7 +4103,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "trump_spr_fill_2020",
@@ -3740,7 +4122,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "india_spr_fill_2020",
@@ -3757,7 +4141,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kaz_wheat_ban_2020",
@@ -3774,7 +4160,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "vnm_rice_suspend_2020",
@@ -3791,7 +4179,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_record_cut_2020",
@@ -3808,7 +4198,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "antamina_covid_2020",
@@ -3825,7 +4217,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "neg_wti_2020",
@@ -3842,7 +4236,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 10,
    "n_entities": 1,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_extend_june_2020",
@@ -3859,7 +4255,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "libya_haftar_lift_2020",
@@ -3876,7 +4274,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_jeddah_depot_2020",
@@ -3893,7 +4293,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_wheat_tax_2020",
@@ -3910,7 +4312,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "arg_corn_halt_2020",
@@ -3927,7 +4331,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "hankuk_chemi_seizure_2021",
@@ -3944,7 +4350,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_wheat_floattax_2021",
@@ -3961,7 +4369,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ras_tanura_attack_2021",
@@ -3978,7 +4388,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "suez_ever_given_2021",
@@ -3995,7 +4407,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "colonial_pipeline_shutdown_2021",
@@ -4012,7 +4426,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2021_07_01",
@@ -4029,7 +4445,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_uae_deadlock_july_2021",
@@ -4046,7 +4464,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "mercer_street_2021",
@@ -4063,7 +4483,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "guinea_bauxite_coup_2021",
@@ -4080,7 +4502,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "china_first_spr_release_2021",
@@ -4097,7 +4521,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "lasbambas_halt_2021",
@@ -4114,7 +4540,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "spr_release_2021",
@@ -4131,7 +4559,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_grain_quota_2022",
@@ -4148,7 +4578,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kazakhstan_unrest_2022",
@@ -4165,7 +4597,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "uae_abudhabi_attack_2022",
@@ -4182,7 +4616,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "antofagasta_drought_2022",
@@ -4199,7 +4635,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_invades_ukraine_2022",
@@ -4216,7 +4654,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iea_60mb_release_2022",
@@ -4233,7 +4673,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2022_03_02",
@@ -4250,7 +4692,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "hun_grain_ban_2022",
@@ -4267,7 +4711,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "srb_grain_ban_2022",
@@ -4284,7 +4730,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "cuajone_shutdown_2022",
@@ -4301,7 +4749,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "cpc_novorossiysk_storm_2022",
@@ -4318,7 +4768,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_jeddah_f1_2022",
@@ -4335,7 +4787,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "shanghai_lockdown_2022",
@@ -4352,7 +4806,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "spr_release_2022",
@@ -4369,7 +4825,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iea_120mb_release_2022",
@@ -4386,7 +4844,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "peru_lasbambas_2022",
@@ -4403,7 +4863,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "indonesia_palm_ban_2022",
@@ -4420,7 +4882,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ind_wheat_ban_2022",
@@ -4437,7 +4901,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "idn_palm_lift_2022",
@@ -4454,7 +4920,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_accelerate_hike_2022",
@@ -4471,7 +4939,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2022_06_03",
@@ -4488,7 +4958,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "amplats_loadshed_2022",
@@ -4505,7 +4977,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "grain_deal_signed_2022",
@@ -4522,7 +4996,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "tw_pelosi_drills_2022",
@@ -4539,7 +5015,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ind_rice_broken_2022",
@@ -4556,7 +5034,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nord_stream_sabotage_2022",
@@ -4573,7 +5053,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_plus_cut_2022",
@@ -4590,7 +5072,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 4,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2022_10_06",
@@ -4607,7 +5091,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_chips_2022",
@@ -4624,7 +5110,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "eu_embargo_price_cap_2022",
@@ -4641,7 +5129,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_spr_refill_2022",
@@ -4658,7 +5148,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "products_price_cap_2023",
@@ -4675,7 +5167,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "svb_banking_stress_2023",
@@ -4692,7 +5186,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kurdistan_ceyhan_halt_2023",
@@ -4709,7 +5205,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_surprise_cut_2023",
@@ -4726,7 +5224,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chile_lithium_nat_2023",
@@ -4743,7 +5243,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "nigeria_fuel_subsidy_removed_2023",
@@ -4760,7 +5262,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "saudi_voluntary_cut_june_2023",
@@ -4777,7 +5281,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_gage_2023",
@@ -4794,7 +5300,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "grain_deal_collapse_2023",
@@ -4811,7 +5319,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ukr_odesa_strike_2023",
@@ -4828,7 +5338,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ind_rice_nonbasmati_2023",
@@ -4845,7 +5357,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "niger_uranium_coup_2023",
@@ -4862,7 +5376,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "ukr_izmail_strike_2023",
@@ -4879,7 +5395,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "gabon_coup_2023",
@@ -4896,7 +5414,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "eu_cbam_2023",
@@ -4913,7 +5433,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "israel_hamas_war_2023",
@@ -4930,7 +5452,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_gl44_relief_2023",
@@ -4947,7 +5471,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_graphite_2023",
@@ -4964,7 +5490,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_pricecap_enforce_2023",
@@ -4981,7 +5509,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_galaxy_leader_2023",
@@ -4998,7 +5528,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "panama_copper_close_2023",
@@ -5015,7 +5547,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_voluntary_cuts_nov_2023",
@@ -5032,7 +5566,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "red_sea_attacks_2023",
@@ -5049,7 +5585,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_maersk_diversions_2023",
@@ -5066,7 +5604,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_re_tech_2023",
@@ -5083,7 +5623,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_us_uk_strikes_2024",
@@ -5100,7 +5642,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_ustluga_strike_2024",
@@ -5117,7 +5661,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_tuapse_strike_2024a",
@@ -5134,7 +5680,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_marlin_luanda_2024",
@@ -5151,7 +5699,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_volgograd_strike_2024",
@@ -5168,7 +5718,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_rubymar_2024",
@@ -5185,7 +5737,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2024_02_23",
@@ -5202,7 +5756,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_refineries_strikes_2024",
@@ -5219,7 +5775,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_slavyansk_strike_2024",
@@ -5236,7 +5794,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_damascus_consulate_2024",
@@ -5253,7 +5813,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "russia_metals_ban_2024",
@@ -5270,7 +5832,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_strikes_israel_apr_2024",
@@ -5287,7 +5851,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "venezuela_gl44_revoked_2024",
@@ -5304,7 +5870,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_301_green_2024",
@@ -5321,7 +5889,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_novorossiysk_depots_2024",
@@ -5338,7 +5908,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_unwind_plan_2024",
@@ -5355,7 +5927,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_mv_tutor_2024",
@@ -5372,7 +5946,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "me_chios_lion_2024",
@@ -5389,7 +5965,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_tuapse_strike_2024b",
@@ -5406,7 +5984,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_haniyeh_2024",
@@ -5423,7 +6003,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "escondida_strike_2024",
@@ -5440,7 +6022,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_antimony_2024",
@@ -5457,7 +6041,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_sounion_2024",
@@ -5474,7 +6060,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "kaz_uranium_acid_2024",
@@ -5491,7 +6079,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "china_stimulus_2024",
@@ -5508,7 +6098,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_nasrallah_2024",
@@ -5525,7 +6117,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "iran_strikes_israel_oct_2024",
@@ -5542,7 +6136,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "sanc_2024_10_11",
@@ -5559,7 +6155,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "myanmar_re_seizure_2024",
@@ -5576,7 +6174,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_days_of_repentance_2024",
@@ -5593,7 +6193,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "us_election_2024",
@@ -5610,7 +6212,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_ban_us_2024",
@@ -5627,7 +6231,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_delay_hike_2024",
@@ -5644,7 +6250,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_novoshakhtinsk_strike_2024",
@@ -5661,7 +6269,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "russia_shadow_fleet_sanctions_2025",
@@ -5678,7 +6288,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_ryazan_strike_2025a",
@@ -5695,7 +6307,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_volgograd_strike_2025",
@@ -5712,7 +6326,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_tariffs_camexcn_2025",
@@ -5729,7 +6345,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_5minerals_2025",
@@ -5746,7 +6364,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_iran_maxpressure_2025",
@@ -5763,7 +6383,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "cpc_kropotkinskaya_drone_2025",
@@ -5780,7 +6402,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "drc_cobalt_ban_2025",
@@ -5797,7 +6421,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_chevron_venez_2025",
@@ -5814,7 +6440,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_novokuibyshevsk_strike_2025",
@@ -5831,7 +6459,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_rough_rider_2025",
@@ -5848,7 +6478,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "us_venez_sectariff_2025",
@@ -5865,7 +6497,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_liberation_tariffs_2025",
@@ -5882,7 +6516,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 8,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_2025_04_03",
@@ -5899,7 +6535,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "chn_re_magnets_2025",
@@ -5916,7 +6554,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "opec_hike_may_2025",
@@ -5933,7 +6573,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 2,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "uschina_geneva_truce_2025",
@@ -5950,7 +6592,9 @@
    "sr_slots_corpus": 0,
    "sr_slots_null": 9,
    "n_entities": 3,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "israel_iran_war_2025",
@@ -5967,7 +6611,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "me_midnight_hammer_2025",
@@ -5984,7 +6630,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "redsea_houthi_resume_2025",
@@ -6001,7 +6649,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": true,
+   "n_citable_domains": 0
   },
   {
    "event_id": "us_russia_sectariff_2025",
@@ -6018,7 +6668,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 3,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "codelco_elteniente_2025",
@@ -6035,7 +6687,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_saratov_strike_2025a",
@@ -6052,7 +6706,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_druzhba_strike_2025a",
@@ -6069,7 +6725,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_ryazan_strike_2025b",
@@ -6086,7 +6744,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 5,
    "n_entities": 2,
-   "ies90": "level"
+   "ies90": "level",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "rus_novorossiysk_terminal_2025",
@@ -6103,7 +6763,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 4,
    "n_entities": 2,
-   "ies90": "no_independent_outcome"
+   "ies90": "no_independent_outcome",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "iran_israel_us_strike_2026",
@@ -6120,7 +6782,9 @@
    "sr_slots_corpus": 4,
    "sr_slots_null": 4,
    "n_entities": 4,
-   "ies90": "no_independent_outcome"
+   "ies90": "no_independent_outcome",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "hormuz_closure_2026",
@@ -6137,7 +6801,9 @@
    "sr_slots_corpus": 5,
    "sr_slots_null": 3,
    "n_entities": 4,
-   "ies90": "no_independent_outcome"
+   "ies90": "no_independent_outcome",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   },
   {
    "event_id": "us_iran_hormuz_mou_2026",
@@ -6154,7 +6820,9 @@
    "sr_slots_corpus": 1,
    "sr_slots_null": 7,
    "n_entities": 4,
-   "ies90": "uncovered"
+   "ies90": "uncovered",
+   "source_url_tertiary": false,
+   "n_citable_domains": 1
   }
  ]
 }

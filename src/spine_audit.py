@@ -62,6 +62,12 @@ PLACEHOLDER_MARKERS = ("deep-history tier", "draft coding", "placeholder", "todo
 # be sourced" while citing nothing a reader can check, so they are counted separately.
 GENERIC_URL_SUFFIXES = ("eia.gov", "www.eia.gov", "opec.org", "www.opec.org")
 
+# Encyclopaedia domains. The codebook requires "a primary or major-wire source"; an
+# encyclopaedia is a tertiary summary of sources it does not itself constitute, so it is
+# counted separately rather than as a source. SPINE_REGISTRATION Sec 1a: it may orient a
+# search and is never cited.
+TERTIARY_DOMAINS = ("wikipedia.org", "wikiwand.com", "britannica.com")
+
 
 def domain_of(url: str | None) -> str | None:
     """Registrable-ish domain of a URL, or None if this is not a URL.
@@ -153,6 +159,7 @@ def load_events(conn: sqlite3.Connection) -> list[dict]:
         if d0:
             domains.add(d0)
         r["source_url_generic_root"] = is_generic_root(r["source_url"])
+        r["source_url_tertiary"] = bool(d0 and any(t in d0 for t in TERTIARY_DOMAINS))
 
         slots = Counter()
         try:
@@ -174,6 +181,10 @@ def load_events(conn: sqlite3.Connection) -> list[dict]:
         r["sr_slots_null"] = slots["null"]
         r["domains"] = sorted(domains)
         r["n_source_domains"] = len(domains)
+        r["n_tertiary_domains"] = sum(
+            1 for dd in domains if any(t in dd for t in TERTIARY_DOMAINS))
+        # domains that actually count as sources under the codebook
+        r["n_citable_domains"] = r["n_source_domains"] - r["n_tertiary_domains"]
     return rows
 
 
@@ -194,6 +205,9 @@ def group_stats(rows: list[dict]) -> dict:
         "one_domain": sum(r["n_source_domains"] == 1 for r in rows),
         "zero_domains": sum(r["n_source_domains"] == 0 for r in rows),
         "generic_root_url": sum(r["source_url_generic_root"] for r in rows),
+        "tertiary_source_url": sum(r["source_url_tertiary"] for r in rows),
+        "any_tertiary_domain": sum(r["n_tertiary_domains"] > 0 for r in rows),
+        "zero_citable_domains": sum(r["n_citable_domains"] == 0 for r in rows),
         "desc_len_median": int(statistics.median([r["desc_len"] for r in rows])) if n else 0,
         "desc_len_min": min([r["desc_len"] for r in rows]) if n else 0,
         "desc_len_max": max([r["desc_len"] for r in rows]) if n else 0,
@@ -252,17 +266,17 @@ def build_report(rows: list[dict]) -> tuple[str, dict]:
                 "event_id", "event_date", "decade", "type", "desc_len", "placeholder",
                 "placeholder_marker", "n_source_domains", "source_url_generic_root",
                 "sr_slots_total", "sr_slots_external", "sr_slots_corpus", "sr_slots_null",
-                "n_entities", "ies90")}
+                "n_entities", "ies90", "source_url_tertiary", "n_citable_domains")}
             for r in rows
         ],
     }
 
-    dec_head = ["decade", "n", "placeholder", "≥2 domains", "generic-root url",
+    dec_head = ["decade", "n", "placeholder", "≥2 domains", "encyclopaedia url", "generic-root url",
                 "desc median", "desc ≥700", "sr ext %", "sr corpus %", "sr null %",
                 "entities median", "IES-90 level", "uncovered"]
     dec_rows = [[d, s["n"], f'{s["placeholder"]} ({s["placeholder_pct"]}%)',
                  f'{s["two_or_more_domains"]} ({s["two_or_more_domains_pct"]}%)',
-                 s["generic_root_url"], s["desc_len_median"], s["desc_ge_700"],
+                 s["tertiary_source_url"], s["generic_root_url"], s["desc_len_median"], s["desc_ge_700"],
                  s["sr_external_pct"], s["sr_corpus_pct"], s["sr_null_pct"],
                  s["entities_median"], s["ies90_level"], s["ies90_uncovered"]]
                 for d, s in by_decade.items()]
@@ -300,7 +314,10 @@ sources (external URL / corpus-derived / null), whether the description still ca
 drafting scaffolding, the entity count, and whether an independent IES-90 level exists.
 A "domain" strips a leading `www.`, so `eia.gov` and `www.eia.gov` are one source — the
 conservative reading of the two-source rule. A `corpus:` source is self-referential: it
-is derived from this corpus and so cannot corroborate it.
+is derived from this corpus and so cannot corroborate it. An **encyclopaedia** domain
+(wikipedia and similar) is counted separately and excluded from "citable domains": the
+codebook requires "a primary or major-wire source", and an encyclopaedia is a tertiary
+summary of sources it does not itself constitute.
 
 ## Overall ({n} events)
 
@@ -312,6 +329,9 @@ is derived from this corpus and so cannot corroborate it.
 | with exactly 1 source domain | {overall['one_domain']} |
 | with 0 source domains | {overall['zero_domains']} |
 | whose `source_url` is a bare site root, not a document | {overall['generic_root_url']} |
+| whose `source_url` is an encyclopaedia (wikipedia and similar) | {overall['tertiary_source_url']} |
+| citing an encyclopaedia anywhere (incl. `sr_json`) | {overall['any_tertiary_domain']} |
+| with **no citable domain at all** once encyclopaedias are set aside | {overall['zero_citable_domains']} |
 | description length, median / min / max (chars) | {overall['desc_len_median']} / {overall['desc_len_min']} / {overall['desc_len_max']} |
 | descriptions ≥ 700 chars (roughly a 120-word narrative) | {overall['desc_ge_700']} |
 | `sr_json` field-source slots | {overall['sr_slots_total']} |
@@ -382,6 +402,9 @@ def main() -> None:
     print(f"  drafting scaffolding : {o['placeholder']} ({o['placeholder_pct']}%)")
     print(f"  >=2 source domains   : {o['two_or_more_domains']} ({o['two_or_more_domains_pct']}%)")
     print(f"  bare site-root urls  : {o['generic_root_url']}")
+    print(f"  encyclopaedia urls   : {o['tertiary_source_url']} "
+          f"(any encyclopaedia citation: {o['any_tertiary_domain']}; "
+          f"no citable domain at all: {o['zero_citable_domains']})")
     print(f"  description median   : {o['desc_len_median']} chars")
     print(f"  sr sources ext/corp/null: {o['sr_external_pct']}% / {o['sr_corpus_pct']}% / {o['sr_null_pct']}%")
     print(f"  IES-90 level/none/uncovered: {o['ies90_level']} / {o['ies90_none']} / {o['ies90_uncovered']}")

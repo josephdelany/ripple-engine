@@ -1,6 +1,6 @@
 # Spine audit — the honest baseline
 
-*Generated 2026-09-02T20:54:40+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
+*Generated 2026-09-02T20:55:39+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
 Session E, step E-1: published before any record is rewritten, so the repair can be
 scored against a number rather than an impression. Every figure below is computed;
 none is asserted. Re-run the script to regenerate this file.*
@@ -13,7 +13,10 @@ sources (external URL / corpus-derived / null), whether the description still ca
 drafting scaffolding, the entity count, and whether an independent IES-90 level exists.
 A "domain" strips a leading `www.`, so `eia.gov` and `www.eia.gov` are one source — the
 conservative reading of the two-source rule. A `corpus:` source is self-referential: it
-is derived from this corpus and so cannot corroborate it.
+is derived from this corpus and so cannot corroborate it. An **encyclopaedia** domain
+(wikipedia and similar) is counted separately and excluded from "citable domains": the
+codebook requires "a primary or major-wire source", and an encyclopaedia is a tertiary
+summary of sources it does not itself constitute.
 
 ## Overall (313 events)
 
@@ -25,6 +28,9 @@ is derived from this corpus and so cannot corroborate it.
 | with exactly 1 source domain | 313 |
 | with 0 source domains | 0 |
 | whose `source_url` is a bare site root, not a document | 9 |
+| whose `source_url` is an encyclopaedia (wikipedia and similar) | 31 |
+| citing an encyclopaedia anywhere (incl. `sr_json`) | 31 |
+| with **no citable domain at all** once encyclopaedias are set aside | 31 |
 | description length, median / min / max (chars) | 148 / 53 / 269 |
 | descriptions ≥ 700 chars (roughly a 120-word narrative) | 0 |
 | `sr_json` field-source slots | 3130 |
@@ -41,14 +47,14 @@ is derived from this corpus and so cannot corroborate it.
 
 ## By decade
 
-| decade | n | placeholder | ≥2 domains | generic-root url | desc median | desc ≥700 | sr ext % | sr corpus % | sr null % | entities median | IES-90 level | uncovered |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1970s | 8 | 8 (100.0%) | 0 (0.0%) | 3 | 85 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
-| 1980s | 11 | 10 (90.9%) | 0 (0.0%) | 6 | 94 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
-| 1990s | 16 | 6 (37.5%) | 0 (0.0%) | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
-| 2000s | 43 | 4 (9.3%) | 0 (0.0%) | 0 | 150 | 0 | 10.5 | 14.7 | 74.9 | 2 | 17 | 26 |
-| 2010s | 85 | 11 (12.9%) | 0 (0.0%) | 0 | 148 | 0 | 11.4 | 27.2 | 61.4 | 2 | 55 | 30 |
-| 2020s | 150 | 10 (6.7%) | 0 (0.0%) | 0 | 149 | 0 | 11.4 | 25.6 | 63.0 | 2 | 87 | 60 |
+| decade | n | placeholder | ≥2 domains | encyclopaedia url | generic-root url | desc median | desc ≥700 | sr ext % | sr corpus % | sr null % | entities median | IES-90 level | uncovered |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1970s | 8 | 8 (100.0%) | 0 (0.0%) | 0 | 3 | 85 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
+| 1980s | 11 | 10 (90.9%) | 0 (0.0%) | 0 | 6 | 94 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
+| 1990s | 16 | 6 (37.5%) | 0 (0.0%) | 4 | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
+| 2000s | 43 | 4 (9.3%) | 0 (0.0%) | 11 | 0 | 150 | 0 | 10.5 | 14.7 | 74.9 | 2 | 17 | 26 |
+| 2010s | 85 | 11 (12.9%) | 0 (0.0%) | 5 | 0 | 148 | 0 | 11.4 | 27.2 | 61.4 | 2 | 55 | 30 |
+| 2020s | 150 | 10 (6.7%) | 0 (0.0%) | 11 | 0 | 149 | 0 | 11.4 | 25.6 | 63.0 | 2 | 87 | 60 |
 
 ## By class
 

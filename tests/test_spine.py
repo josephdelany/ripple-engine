@@ -47,6 +47,32 @@ def test_spine_audit_classifies_corpus_sources_as_self_referential_not_external(
     assert A.classify_source_slot("Joe said so") == "null"
 
 
+def test_spine_audit_does_not_count_an_encyclopaedia_as_a_citable_source(tmp_path):
+    """The codebook requires a primary or major-wire source; an encyclopaedia is neither."""
+    db = tmp_path / "w.db"
+    conn = sqlite3.connect(db)
+    conn.executescript(
+        "CREATE TABLE events (event_id TEXT PRIMARY KEY, event_date TEXT, "
+        " date_precision TEXT, type TEXT, title TEXT, description TEXT, severity INT,"
+        " confidence TEXT, source_url TEXT, sr_json TEXT);"
+        "CREATE TABLE event_entities (event_id TEXT, entity_id TEXT, role TEXT);"
+        "CREATE TABLE event_outcomes (event_id TEXT, source TEXT, field TEXT, value REAL);"
+    )
+    conn.execute(
+        "INSERT INTO events VALUES ('w','1998-03-30','day','opec_decision','T','d',3,"
+        "'medium','https://en.wikipedia.org/wiki/1998_world_oil_market_chronology',NULL)")
+    conn.commit(); conn.close()
+    ro = sqlite3.connect(f"file:{db}?mode=ro", uri=True); ro.row_factory = sqlite3.Row
+    rows = A.load_events(ro); ro.close()
+    r = rows[0]
+    assert r["source_url_tertiary"] is True
+    assert r["n_source_domains"] == 1        # it is a domain
+    assert r["n_citable_domains"] == 0       # but not a citable one
+    _, payload = A.build_report(rows)
+    assert payload["overall"]["tertiary_source_url"] == 1
+    assert payload["overall"]["zero_citable_domains"] == 1
+
+
 def test_spine_audit_counts_placeholders_and_domains_on_a_synthetic_corpus(tmp_path):
     db = tmp_path / "t.db"
     conn = sqlite3.connect(db)
