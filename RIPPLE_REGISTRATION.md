@@ -456,3 +456,30 @@ Two defects found on re-reading the sealed text, fixed here rather than edited i
    daily sample therefore starts 1990-01-09 (five trading days of VIX for the control),
    which is stated here so it is not read as a choice made after seeing results.
 No number had been computed when this was written.
+
+## Amendment B — 2026-09-02, before any computation (disclosed): verdict vocabulary, the retraction check, three added nodes, output file names
+Session C's brief (received after the seal) asks for counts of *transmitting / null /
+insufficient* and for the retraction status of the six `propagation_edges` rows
+currently labelled `validated` ("geopolitical shock (VIX-stress regime)" → Brent oil,
+Heating oil, 5Y breakeven, Palladium, S&P 500, Platinum; lag 20d). Registered now,
+before running:
+1. **Verdict per (node, shock) at the headline horizon:** TRANSMITTING = the 95% EHW
+   band excludes zero AND the real β lies outside the central 95% of the VIX+GPR-
+   matched pseudo distribution (§2.5) AND the Newey–West band agrees on zero-coverage
+   (else FRAGILE, which counts as null for the tally); NULL = n ≥ 15 and not
+   transmitting; INSUFFICIENT = n < 15 de-overlapped events in the node's sample.
+   These three words are the only verdict vocabulary; §5's CONSISTENT/INCONSISTENT/
+   INDETERMINATE remains the vocabulary for the nine expectations.
+2. **Retraction check of the six:** shock = `all` (every day-precision event,
+   de-overlapped), restricted to events whose `derived.vix_pct` at t−1 is ≥ the
+   in-sample median (the "VIX-stress regime" the edges claim), node = the six, h = 20.
+   RETAINED if TRANSMITTING; RETRACTED if NULL; INSUFFICIENT otherwise. The
+   `propagation_edges` table is not edited by this brief; the status is reported in
+   `data/ripple/SUMMARY.md` for Session A/B to act on.
+3. **Nodes added** for that check only: `yf.palladium`, `yf.platinum`, `yf.sp500`
+   (daily, log; S&P without an S&P control, obviously). They are not in the chain.
+4. **File names:** the §2.6 output is `data/ripple/passthrough.json` (the brief's
+   name), contents exactly as registered under "asymmetry.json"; the summary file is
+   `data/ripple/SUMMARY.md` and is mirrored to `RIPPLE_SUMMARY.md` at the repo root for
+   the "who moved first" section the brief adds (C-6, descriptive, no test).
+No number had been computed when this was written.
