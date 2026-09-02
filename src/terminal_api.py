@@ -294,6 +294,7 @@ def backtest():
     }
     return {
         "as_of": an.get("as_of"),
+        "walk_forward_v2": rj("walk_forward/summary.json"),
         "panels": [
             {"id": "holdout", "title": "Temporal hold-out — the validated edge (H1)",
              "verdict": "HOLDS" if hold.get("holds_out_of_sample") else "FAILS",
@@ -363,8 +364,21 @@ def situation_read(event_id):
                   "type": e["type"], "actor": e.get("sr_actor"), "target": e.get("sr_target")},
         "record": json.loads(e["sr_json"]) if e.get("sr_json") else None,
         "layer_g": g, "layer_p": layer_p, "live_overlay": overlay,
-        "track_record": {"status": "pending B5 walk-forward"},
+        "track_record": _track_record(),
     }
+
+
+def _track_record():
+    """The walk-forward stamp every card carries (spec §4.4)."""
+    p = ROOT / "data" / "walk_forward" / "summary.json"
+    try:
+        wf = json.loads(p.read_text())
+        w = wf["windows"]
+        return {"status": wf["verdict"]["G_conditioning"],
+                "G_skill": {k: w[k]["G_skill"] for k in w},
+                "detail": "escalation-branch forecast, walk-forward vs base rate, two windows"}
+    except Exception:
+        return {"status": "walk-forward not yet run"}
 
 
 def register_terminal(app):

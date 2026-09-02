@@ -1,0 +1,38 @@
+{
+  "protocol": "PRE_REGISTRATION_V2.md",
+  "windows": {
+    "W1": {
+      "test_window": [
+        "2015-01-01",
+        "2020-01-01"
+      ],
+      "n_scored": 33,
+      "n_p_scored": 33,
+      "G_brier_conditioned": 0.3656,
+      "G_brier_baseline": 0.4072,
+      "G_skill": 0.0416,
+      "P_mae_conditioned": 6.696,
+      "P_mae_baseline": 6.8,
+      "P_skill": 0.104
+    },
+    "W2": {
+      "test_window": [
+        "2020-01-01",
+        "2027-01-01"
+      ],
+      "n_scored": 90,
+      "n_p_scored": 89,
+      "G_brier_conditioned": 0.5657,
+      "G_brier_baseline": 0.7391,
+      "G_skill": 0.1734,
+      "P_mae_conditioned": 6.689,
+      "P_mae_baseline": 6.651,
+      "P_skill": -0.039
+    }
+  },
+  "verdict": {
+    "G_conditioning": "VALIDATED (beats base rate OOS in both windows)",
+    "P_conditioning": "SUGGESTIVE / null",
+    "note": "Lower Brier / lower MAE is better; skill = baseline - conditioned (>0 means conditioning helps). Published as computed; nulls stay nulls."
+  }
+}

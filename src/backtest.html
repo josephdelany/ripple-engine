@@ -28,9 +28,20 @@ const esc=s=>(s==null?'':String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;',
     <h3>${esc(p.title)} <span class="badge ${p.good?'good':'bad'}">${esc(p.verdict)}</span></h3>
     <div class="detail">${esc(p.detail||'')}</div>
     ${p.spec?`<div class="spec">${esc(p.spec)}</div>`:''}</div>`).join('');
+  const wf=d.walk_forward_v2; let wfHtml='';
+  if(wf&&wf.windows){ const v=wf.verdict||{};
+    const gGood=(v.G_conditioning||'').startsWith('VALIDATED');
+    const wc=Object.entries(wf.windows).map(([nm,w])=>`<div class="card">
+      <h3>${nm} · test ${esc(w.test_window[0])}→${esc(w.test_window[1])} <span class="badge ${(w.G_skill||0)>0?'good':'bad'}">G-skill ${w.G_skill>0?'+':''}${w.G_skill}</span></h3>
+      <div class="detail">Escalation Brier <b>${w.G_brier_conditioned}</b> conditioned vs <b>${w.G_brier_baseline}</b> baseline (n=${w.n_scored}). Magnitude MAE ${w.P_mae_conditioned} vs ${w.P_mae_baseline} (P-skill ${w.P_skill}).</div></div>`).join('');
+    wfHtml=`<div class="lbl" style="color:var(--accent);margin-top:6px">Walk-forward v2 — the registered self-test (point-in-time, two windows)</div>
+      <div class="card" style="border-color:var(--accent)"><h3>Escalation conditioning: <span class="badge ${gGood?'good':'bad'}">${esc(v.G_conditioning||'')}</span></h3>
+      <div class="detail">Magnitude conditioning: ${esc(v.P_conditioning||'')}. ${esc(v.note||'')}</div></div>${wc}`;
+  }
   document.getElementById('wrap').innerHTML=`
     <h1>Back-test against reality</h1>
     <div class="sub">Walk the modern-history corpus point-in-time · predict · score vs what actually happened · keep only what survives out-of-sample${d.as_of?` · as of ${esc(d.as_of)}`:''}</div>
+    ${wfHtml}
     ${cards}
     <div class="note">${esc(d.honest_note)}</div>`;
 })();
