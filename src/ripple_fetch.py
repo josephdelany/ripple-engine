@@ -72,8 +72,11 @@ CFTC_BASE = "https://www.cftc.gov/files/dea/history/"
 CFTC_DISAGG_BUNDLE = "fut_disagg_txt_hist_2006_2016.zip"      # verified 2026-09-02 (the name without _hist_ 404s)
 CFTC_LEGACY_BUNDLE = "deacot1986_2016.zip"
 CFTC_WTI, CFTC_BRENT_NYMEX = "067651", "06765T"                 # stable contract codes; names change over time
-JODI_URL = ("https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/"
-            "{cls}/{year}.csv")
+JODI_BASE = "https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/"
+# Closed years are "<cls>/<year>.csv"; the CURRENT year is "<cls>/<cls>year<year>.csv" (verified
+# 2026-09-02: primary/2026.csv is 404 while primary/primaryyear2026.csv is 200). Both are tried,
+# so the in-progress year is not silently lost.
+JODI_URL_FORMS = ("{base}{cls}/{year}.csv", "{base}{cls}/{cls}year{year}.csv")
 JODI_FIRST_YEAR = 2002
 # JODI reports every (country, product, flow, month) in FIVE unit rows. CONVBBL is NOT a volume:
 # it is the country's barrels-per-tonne conversion factor x1000 (verified 2026-09-02: Saudi crude
@@ -592,10 +595,15 @@ def fetch_live(only=None):
         acc = {sid: [] for sid, _ in jodi_specs}
         for cls in sorted({sp["key"][0] for _, sp in jodi_specs}):
             for year in range(JODI_FIRST_YEAR, year_now + 1):
-                try:
-                    raw = _get_bytes(JODI_URL.format(cls=cls, year=year), timeout=180)
-                except Exception as e:
-                    print(f"  ! JODI {cls} {year}: {type(e).__name__}: {e}")
+                raw, last = None, None
+                for form in JODI_URL_FORMS:
+                    try:
+                        raw = _get_bytes(form.format(base=JODI_BASE, cls=cls, year=year), timeout=180)
+                        break
+                    except Exception as e:                    # 404 on one form -> try the other
+                        last = e
+                if raw is None:
+                    print(f"  ! JODI {cls} {year}: {type(last).__name__}: {last}")
                     continue
                 for sid, sp in jodi_specs:
                     c, prod, flow, unit, country = sp["key"]
