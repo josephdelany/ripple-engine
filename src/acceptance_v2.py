@@ -274,23 +274,63 @@ def _d7():
     return status, "git tag / data/ledger/claims.jsonl", f"tag v3.0={tag} (tags: {[t for t in tags if t.startswith('v')]}); paper drafted={paper}; ledger use on {len(days)} distinct days (needs 7)"
 
 
+def _d3a():
+    """Brief A-11: the label audit file is present and recorded by Joe (auditor 'joe'), with kappa and pass as computed."""
+    p = ROOT / "data" / "audits" / "outcome_audit.json"
+    if not p.exists():
+        return "FAIL", "data/audits/outcome_audit.json", "absent -- Joe records it with python3 src/audit_ies90.py (never the code)"
+    j = json.loads(p.read_text())
+    ok = j.get("auditor") == "joe" and j.get("n_done") == j.get("n_rows") and j.get("n_rows")
+    st = "PASS" if (ok and j.get("passed")) else ("PARTIAL" if j.get("auditor") == "joe" else "FAIL")
+    return st, "data/audits/outcome_audit.json", f"auditor {j.get('auditor')}; {j.get('n_done')}/{j.get('n_rows')} rows; kappa {j.get('kappa')}; passed {j.get('passed')} (threshold {j.get('threshold')})"
+
+
+def _d6a():
+    """Brief A-11: the reader evaluation is present and run in model mode against the (unaudited) gold set."""
+    p = ROOT / "data" / "reader_eval" / "score.json"
+    if not p.exists():
+        return "FAIL", "data/reader_eval/score.json", "absent -- run python3 src/reader_eval.py"
+    j = json.loads(p.read_text())
+    modes = j.get("reader_modes") or {}
+    model_run = modes.get("llm", 0) > 0 and modes.get("regex_fallback", 0) == 0
+    st = "PASS" if (model_run and j.get("class_accuracy", 0) >= j.get("threshold_class", 0.8)) else "PARTIAL"
+    return st, "data/reader_eval/score.json", f"class accuracy {j.get('class_accuracy')} (threshold {j.get('threshold_class')}), entity F1 {j.get('entity_f1')}, modes {modes}; gold: {j.get('gold_status')}"
+
+
+def pre1987_admitted():
+    """Brief A-11: pre-1987 events admitted through dossiers (description carries the dossier path), by decade."""
+    conn = connect(read_only=True)
+    rows = conn.execute("SELECT event_date FROM events WHERE event_date < '1987-01-01' AND description LIKE '%dossier data/candidates/dossiers/%'").fetchall()
+    conn.close()
+    by = {}
+    for (d,) in rows:
+        by[d[:3] + "0s"] = by.get(d[:3] + "0s", 0) + 1
+    idx = ROOT / "data" / "candidates" / "dossiers_index.json"
+    built = json.loads(idx.read_text()) if idx.exists() else {}
+    return {"admitted_total": len(rows), "admitted_by_decade": dict(sorted(by.items())), "dossiers_built": built.get("n"), "dossiers_admissible": built.get("admissible")}
+
+
 def path_dod(fast=False):
-    """PATH.md §3 D1-D7 -> list of (id, status, evidence_path, note); also written to data/acceptance_dod.json."""
+    """PATH.md §3 D1-D7 (+ D3a, D6a; Brief A-11) -> list of (id, status, evidence_path, note); written to data/acceptance_dod.json."""
     out = [("D1 pytest green incl. every named test",) + _d1(fast),
            ("D2 status.py >=12 loaders + coverage by block",) + _d2(),
            ("D3 kappa published; rule applied; audit file",) + _d3(),
+           ("D3a label audit recorded by Joe (auditor joe, all rows, kappa)",) + _d3a(),
            ("D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",) + _d4(),
            ("D5 9/11, 1990, 2026 demos from sealed inputs on /walk",) + _d5(),
            ("D6 VALIDATED only via protocol §7",) + _d6(),
+           ("D6a reader accuracy measured on the gold set (model mode)",) + _d6a(),
            ("D7 tag v3.0; paper; one week in the Ledger",) + _d7()]
+    pre = pre1987_admitted()
     print("=== PATH.md §3 -- definition of done D1-D7 ===")
     for name, status, path, note in out:
         print(f"[{status:^7}] {name}\n           evidence: {path}\n           {note}")
     c = {k: sum(1 for _, s_, _, _ in out if s_ == k) for k in ("PASS", "PARTIAL", "FAIL")}
-    print(f"\n{c['PASS']}/7 PASS, {c['PARTIAL']} PARTIAL, {c['FAIL']} FAIL -- the product is finished only when all seven PASS (SESSION_CHARTER.md §5)")
+    print(f"\n{c['PASS']}/{len(out)} PASS, {c['PARTIAL']} PARTIAL, {c['FAIL']} FAIL -- the product is finished only when every item PASSES (SESSION_CHARTER.md §5)")
+    print(f"pre-1987 admitted through dossiers: {pre['admitted_total']} {pre['admitted_by_decade']} (dossiers built {pre['dossiers_built']}, admissible {pre['dossiers_admissible']}; admission is Joe's line)")
     DOD_OUT.write_text(json.dumps({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "fast": fast,
                                    "items": [{"id": n.split()[0], "name": n, "status": s_, "evidence": p, "note": t} for n, s_, p, t in out],
-                                   "counts": c}, indent=1))
+                                   "counts": c, "pre1987_admitted": pre}, indent=1))
     return out
 
 
