@@ -31,7 +31,7 @@
 
     <!-- Every hour, relative timer -> catches up once on wake instead of bursting. -->
     <key>StartInterval</key>
-    <integer>3600</integer>
+    <integer>900</integer>
 
     <!-- Fire on load/login/wake too, so a freshly-woken laptop pulls news immediately. -->
     <key>RunAtLoad</key>
