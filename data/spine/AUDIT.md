@@ -1,6 +1,6 @@
 # Spine audit — the honest baseline
 
-*Generated 2026-09-02T23:32:38+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
+*Generated 2026-09-02T23:43:46+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
 Session E, step E-1: published before any record is rewritten, so the repair can be
 scored against a number rather than an impression. Every figure below is computed;
 none is asserted. Re-run the script to regenerate this file.*
@@ -23,15 +23,15 @@ summary of sources it does not itself constitute.
 | measure | value |
 |---|---|
 | events | 313 |
-| carrying drafting scaffolding | 49 (15.7%) |
-| with ≥ 2 distinct source domains | 0 (0.0%) |
-| with exactly 1 source domain | 313 |
+| carrying drafting scaffolding | 44 (14.1%) |
+| with ≥ 2 distinct source domains | 9 (2.9%) |
+| with exactly 1 source domain | 304 |
 | with 0 source domains | 0 |
-| whose `source_url` is a bare site root, not a document | 9 |
+| whose `source_url` is a bare site root, not a document | 6 |
 | whose `source_url` is an encyclopaedia (wikipedia and similar) | 31 |
 | citing an encyclopaedia anywhere (incl. `sr_json`) | 31 |
 | with **no citable domain at all** once encyclopaedias are set aside | 31 |
-| description length, median / min / max (chars) | 148 / 53 / 269 |
+| description length, median / min / max (chars) | 149 / 53 / 396 |
 | descriptions ≥ 700 chars (roughly a 120-word narrative) | 0 |
 | `sr_json` field-source slots | 3130 |
 | — external URL | 11.9% |
@@ -43,14 +43,14 @@ summary of sources it does not itself constitute.
 | IES-90 level present | 184 |
 | flagged `no_independent_outcome` | 3 |
 | neither (uncovered) | 126 |
-| `severity` null | 17 |
+| `severity` null | 12 |
 
 ## By decade
 
 | decade | n | placeholder | ≥2 domains | encyclopaedia url | generic-root url | desc median | desc ≥700 | sr ext % | sr corpus % | sr null % | entities median | IES-90 level | uncovered |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1970s | 8 | 8 (100.0%) | 0 (0.0%) | 0 | 3 | 85 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
-| 1980s | 11 | 10 (90.9%) | 0 (0.0%) | 0 | 6 | 94 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
+| 1970s | 8 | 5 (62.5%) | 7 (87.5%) | 0 | 1 | 100 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
+| 1980s | 11 | 8 (72.7%) | 2 (18.2%) | 0 | 5 | 98 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
 | 1990s | 16 | 6 (37.5%) | 0 (0.0%) | 4 | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
 | 2000s | 43 | 4 (9.3%) | 0 (0.0%) | 11 | 0 | 150 | 0 | 10.5 | 14.7 | 74.9 | 2 | 17 | 26 |
 | 2010s | 85 | 11 (12.9%) | 0 (0.0%) | 5 | 0 | 148 | 0 | 11.4 | 27.2 | 61.4 | 2 | 55 | 30 |
@@ -61,27 +61,22 @@ summary of sources it does not itself constitute.
 | class | n | placeholder | ≥2 domains | desc median | sr ext % | sr corpus % | sr null % | sr majority-null | IES-90 level | uncovered |
 |---|---|---|---|---|---|---|---|---|---|---|
 | chokepoint_disruption | 27 | 5 (18.5%) | 0 (0.0%) | 150 | 12.2 | 48.9 | 38.9 | 1 | 25 | 0 |
-| conflict_escalation | 55 | 15 (27.3%) | 0 (0.0%) | 142 | 13.6 | 40.7 | 45.6 | 1 | 54 | 0 |
+| conflict_escalation | 55 | 13 (23.6%) | 5 (9.1%) | 145 | 13.6 | 40.7 | 45.6 | 1 | 54 | 0 |
 | demand_shock | 17 | 1 (5.9%) | 0 (0.0%) | 147 | 11.8 | 0.0 | 88.2 | 17 | 0 | 17 |
-| infrastructure_attack | 48 | 7 (14.6%) | 0 (0.0%) | 151 | 11.5 | 41.5 | 47.1 | 0 | 48 | 0 |
+| infrastructure_attack | 48 | 7 (14.6%) | 1 (2.1%) | 151 | 11.5 | 41.5 | 47.1 | 0 | 48 | 0 |
 | opec_decision | 52 | 4 (7.7%) | 0 (0.0%) | 146 | 10.2 | 0.0 | 89.8 | 52 | 0 | 52 |
-| policy_response | 57 | 6 (10.5%) | 0 (0.0%) | 140 | 11.1 | 0.2 | 88.8 | 57 | 0 | 57 |
-| sanctions | 57 | 11 (19.3%) | 0 (0.0%) | 157 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
+| policy_response | 57 | 5 (8.8%) | 1 (1.8%) | 140 | 11.1 | 0.2 | 88.8 | 57 | 0 | 57 |
+| sanctions | 57 | 9 (15.8%) | 2 (3.5%) | 159 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
 
-## Every event still carrying drafting scaffolding (49)
+## Every event still carrying drafting scaffolding (44)
 
 | event_id | date | class | marker | desc len | domains | entities | IES-90 |
 |---|---|---|---|---|---|---|---|
-| yom_kippur_war_1973 | 1973-10-06 | conflict_escalation | deep-history tier | 88 | 1 | 2 | level |
-| oapec_embargo_1973 | 1973-10-17 | sanctions | deep-history tier | 85 | 1 | 2 | level |
-| embargo_lifted_1974 | 1974-03-18 | sanctions | deep-history tier | 66 | 1 | 2 | level |
 | abqaiq_arabian_1977 | 1977-05-11 | infrastructure_attack | deep-history tier | 99 | 1 | 2 | level |
-| iran_oilworkers_strike_1978 | 1978-10-31 | infrastructure_attack | deep-history tier | 102 | 1 | 2 | level |
-| shah_leaves_iran_1979 | 1979-01-16 | conflict_escalation | deep-history tier | 59 | 1 | 2 | level |
-| iran_revolution_1979 | 1979-02-11 | conflict_escalation | deep-history tier | 72 | 1 | 2 | level |
-| iran_hostage_crisis_1979 | 1979-11-04 | conflict_escalation | deep-history tier | 85 | 1 | 2 | level |
-| carter_doctrine_1980 | 1980-01-23 | policy_response | deep-history tier | 96 | 1 | 2 | uncovered |
-| iran_iraq_war_1980 | 1980-09-22 | conflict_escalation | deep-history tier | 63 | 1 | 2 | level |
+| iran_oilworkers_strike_1978 | 1978-10-31 | infrastructure_attack | deep-history tier | 102 | 2 | 2 | level |
+| shah_leaves_iran_1979 | 1979-01-16 | conflict_escalation | deep-history tier | 59 | 2 | 2 | level |
+| iran_revolution_1979 | 1979-02-11 | conflict_escalation | deep-history tier | 72 | 2 | 2 | level |
+| iran_hostage_crisis_1979 | 1979-11-04 | conflict_escalation | deep-history tier | 85 | 2 | 2 | level |
 | tanker_war_1984 | 1984-03-27 | chokepoint_disruption | deep-history tier | 88 | 1 | 2 | level |
 | kharg_strikes_1985 | 1985-08-15 | infrastructure_attack | deep-history tier | 107 | 1 | 2 | level |
 | opec_price_collapse_1986 | 1986-01-01 | opec_decision | deep-history tier | 98 | 1 | 2 | uncovered |
@@ -134,6 +129,8 @@ summary of sources it does not itself constitute.
 | globalsecurity.org | 10 |
 | nber.org | 9 |
 | opec.org | 8 |
+| history.state.gov | 7 |
+| presidency.ucsb.edu | 6 |
 | mining.com | 6 |
 | cnn.com | 6 |
 | spglobal.com | 6 |
@@ -141,11 +138,9 @@ summary of sources it does not itself constitute.
 | energy.gov | 5 |
 | iea.org | 5 |
 | npr.org | 5 |
-| presidency.ucsb.edu | 4 |
 | congress.gov | 4 |
 | washingtonpost.com | 4 |
 | money.cnn.com | 4 |
-| ogj.com | 4 |
 
 ## How to read this
 

@@ -127,3 +127,46 @@ records in the 2000s are OPEC decisions; `sanctions` is the largest class in the
 notably the Russian oil price cap — have no class in the closed set at all.
 
 — Session E
+
+---
+
+## Added 2026-09-02 after applying `pre1990_a`: the month-precision question, answered from the code
+
+E's earlier note asked B what the walk does with a month-precision event on the daily tier.
+**Answered by reading the code rather than waiting**, and the answer removes the concern:
+
+- `Corpus.tier_of` (`src/engine/read.py:133`) is
+  `return "daily" if pd.Timestamp(date) >= self.daily_start else "monthly"`. Tier is decided
+  by the date alone.
+- `self.daily_start` (`read.py:98`) is the first index of the daily price series, not a
+  constant. Executed: `fred.DCOILBRENTEU` runs 1987-05-20 → 2026-08-25.
+- **`date_precision` appears zero times in `src/walk.py` and `src/engine/`** (grep). The
+  engine never reads the field.
+
+So the ten records in `pre1990_a` (1973–1980) were already on the monthly tier and stay
+there; changing `day` → `month` changed no tier assignment, no analog pool and no score.
+
+**And no date moved at all.** There is no `event_date` row anywhere in `pre1990_a` — only
+the `date_precision` label changed, on `iran_oilworkers_strike_1978` and
+`iran_revolution_1979`. Their dates are still 1978-10-31 and 1979-02-11.
+
+### A registrable v3 item for B, not something to fix now
+
+The corpus carries a precision field the walk ignores, so **a month-precision event is
+currently treated by the filtration as though its date were exact**. For
+`iran_revolution_1979` the engine will treat 1979-02-11 as the knowable instant when the
+evidence only supports "February 1979". The honest fix is to widen the filtration window to
+the stated precision, which is a protocol change and B's to register. Flagged, not built.
+
+### A measurement caveat on E's own scoreboard
+
+`SPINE_REGISTRATION.md` §7 counts events with "a narrative ≥ 700 characters", and after
+applying `pre1990_a` that count is **still 0**. That is correct and should not be explained
+away: the 120–250 word narratives live in the dossiers, and what a patch writes into
+`events.description` is a one-paragraph summary (the ten patched records now run 59–396
+characters, median about 184). If the intention was for the corpus row itself to carry the
+narrative, that is a further patch and a bigger `description` column of prose; if it was for
+the dossier to hold it, §7's measure is counting the wrong artifact. E is not redefining the
+measure to make it pass. Recorded for Joe.
+
+— Session E

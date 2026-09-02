@@ -96,8 +96,69 @@ Events: `iran_eo12959_embargo_1995`, `thai_baht_float_1997`, `korea_imf_bailout_
 
 ## Applied
 
-*(nothing yet — no patch has been applied; the `events` table is unchanged by Session E)*
+*The first batch was applied on 2026-09-02. Entries are appended below by
+`src/spine_apply.py`; the prose note for that batch is here.*
+
+**Note on `pre1990_a`, applied 2026-09-02.** Before applying, the month-precision question
+was answered from the code rather than assumed: `date_precision` appears zero times in
+`src/walk.py` and `src/engine/`, and `Corpus.tier_of` keys on the date alone against the
+first day of the daily price series (1987-05-20), so all ten records were already monthly
+tier and the two precision changes moved no tier, no analog pool and no score. No
+`event_date` row existed in the batch at all — only the precision label changed.
+`descriptions ≥ 700 chars` stayed at 0, which is correct: the narratives live in the
+dossiers and the patch writes a one-paragraph summary into `events.description`.
 
 When Joe applies a batch, append a row here recording: the batch, the date, who approved it,
 which rows were applied and which were declined, and the `src/spine_audit.py` numbers before
 and after. The audit is the scoreboard; a patch that does not move it did not do anything.
+
+### APPLIED `pre1990_a` — 2026-09-02T23:43:46+00:00, approved by joe
+
+29 field changes across 9 events; 1 rows skipped. Backup: `data/backups/oil_20260902_234317_pre_spine_apply.db.gz`.
+
+| field change | from | to |
+|---|---|---|
+| `yom_kippur_war_1973`.description | Yom Kippur War begins (Egypt/Syria vs Israel) [deep-history  | Egypt and Syria attacked Israel on October 6, 1973, opening fronts across the Su |
+| `yom_kippur_war_1973`.source_url | https://www.nber.org/papers/w16790 | https://history.state.gov/historicaldocuments/frus1969-76v25/d121 |
+| `yom_kippur_war_1973`.severity | None | 3 |
+| `yom_kippur_war_1973`.surprise | None | 5 |
+| `oapec_embargo_1973`.description | OAPEC oil embargo on states backing Israel [deep-history tie | Arab OPEC members announced a production cut of at least 5%/month tied to Israel |
+| `oapec_embargo_1973`.source_url | https://www.nber.org/papers/w16790 | https://history.state.gov/historicaldocuments/frus1969-76v36/d223 |
+| `oapec_embargo_1973`.severity | None | 5 |
+| `oapec_embargo_1973`.surprise | None | 3 |
+| `oapec_embargo_1973`.confidence | medium | high |
+| `embargo_lifted_1974`.description | Arab oil embargo lifted [deep-history tier 1970-1989; events | Arab oil ministers announced March 18, 1974 that they would lift the embargo on  |
+| `embargo_lifted_1974`.source_url | https://www.eia.gov | https://history.state.gov/historicaldocuments/frus1969-76v36/d342 |
+| `embargo_lifted_1974`.surprise | None | 2 |
+| `iran_oilworkers_strike_1978`.date_precision | day | month |
+| `iran_oilworkers_strike_1978`.source_url | https://www.nber.org/papers/w16790 | https://history.state.gov/historicaldocuments/frus1969-76v37/d168 |
+| `iran_oilworkers_strike_1978`.severity | None | 4 |
+| `shah_leaves_iran_1979`.source_url | https://www.nber.org/papers/w16790 | https://www.presidency.ucsb.edu/documents/the-presidents-news-conference-979 |
+| `shah_leaves_iran_1979`.confidence | medium | high |
+| `iran_revolution_1979`.date_precision | day | month |
+| `iran_revolution_1979`.source_url | https://www.nber.org/papers/w16790 | https://history.state.gov/historicaldocuments/frus1969-76v37/d189 |
+| `iran_revolution_1979`.confidence | medium | low |
+| `iran_hostage_crisis_1979`.source_url | https://www.eia.gov | https://history.state.gov/historicaldocuments/frus1977-80v11p1/d1 |
+| `iran_hostage_crisis_1979`.confidence | medium | high |
+| `carter_doctrine_1980`.source_url | https://www.eia.gov | https://www.presidency.ucsb.edu/documents/the-state-the-union-address-delivered- |
+| `carter_doctrine_1980`.description | Carter Doctrine: US will use force to defend Gulf oil [deep- | In his January 23, 1980 State of the Union address, President Carter declared th |
+| `carter_doctrine_1980`.severity | None | 1 |
+| `carter_doctrine_1980`.surprise | None | 2 |
+| `iran_iraq_war_1980`.source_url | https://www.nber.org/papers/w16790 | https://history.state.gov/historicaldocuments/frus1977-80v18/d93 |
+| `iran_iraq_war_1980`.description | Iran-Iraq War begins [deep-history tier 1970-1989; events-on | On September 22, 1980, Iraq launched ground and air attacks on Iranian territory |
+| `iran_iraq_war_1980`.severity | None | 5 |
+
+Skipped:
+
+- `iran_oilworkers_strike_1978`.type — needs_joe: the builder could not reduce it to a clean value
+
+Scoreboard before → after:
+
+| measure | before | after |
+|---|---|---|
+| events with ≥2 source domains | 0 | 9 |
+| encyclopaedia-only source_url | 31 | 31 |
+| bare site-root source_url | 9 | 6 |
+| drafting scaffolding | 49 | 44 |
+| descriptions ≥700 chars | 0 | 0 |
+
