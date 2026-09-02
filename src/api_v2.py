@@ -220,6 +220,12 @@ def register(app):
             tiers[t] = td
         return {k: v for k, v in s.items() if k != "tiers"} | {"tiers": tiers}
 
+    @app.get("/api/walk/audit")
+    def api_walk_audit():
+        """The IES-90 label audit as recorded by Joe (data/audits/outcome_audit.json, written only by src/audit_ies90.py). Read-only."""
+        import audit_ies90 as AU
+        return AU.status()
+
     @app.get("/api/walk/list")
     def api_walk_list():
         reads, scores = _walk_rows("reads.jsonl"), _walk_rows("scores.jsonl")

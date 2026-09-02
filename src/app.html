@@ -289,13 +289,14 @@ function curveSvg(lc){ if(!lc||!lc.length) return '';
   [0,Math.floor(lc.length/2),lc.length-1].forEach(i=>{s+=`<text x="${x(i)}" y="${h-4}" font-size="10" fill="#6f6d67" text-anchor="middle">${esc(lc[i].date)}</text>`;});
   s+=`<text x="${x0}" y="12" font-size="10" fill="#a9a69f">cumulative skill vs climatology (engine solid, frozen dashed) · +${hi.toFixed(2)} top, ${lo.toFixed(2)} bottom</text></svg>`; return s;}
 async function loadWalk(){ try{
-  const s=await api('/api/walk/summary'); const d=(s.tiers||{}).daily||{}; const G=d.G||{}, P=d.P||{}; const gv=G.engine_vs||{}, pv_=P.engine_vs||{};
+  const s=await api('/api/walk/summary'); const au=await api('/api/walk/audit').catch(()=>({status:'pending'})); const d=(s.tiers||{}).daily||{}; const G=d.G||{}, P=d.P||{}; const gv=G.engine_vs||{}, pv_=P.engine_vs||{};
   const v=s.verdict||{}; const perm=s.permutation||{}; const pl=s.placebo||{}; const rb=s.regime_blocks||{};
   const row=(label,x)=>`<tr><td>${label}</td><td class="mono">${x?x.n:'—'}</td><td class="mono">${sk(x&&x.skill)}</td><td class="mono dim">${ci(x&&x.ci95)}</td><td class="mono">${pv(x&&x.dm_p)}</td></tr>`;
   const regime=Object.entries(rb).map(([k,r])=>{const g=((r.daily||{}).G)||{};const p=((r.daily||{}).P)||{};return `<tr><td>${esc(k.replace('drop_','drop '))}</td><td class="mono">${sk(g.skill)}</td><td class="mono">${pv(g.dm_p)}</td><td class="mono">${sk(p.skill)}</td><td class="mono">${pv(p.dm_p)}</td></tr>`;}).join('');
   const lc=G.learning_curve||[];
   const bmk=(s.big_moves_knew||[]).filter(b=>b.n_reads).slice(0,12);
   $('#walk').innerHTML=`
+   <p class="mono dim" style="margin:0 0 8px">label audit: ${esc(au.status||'pending')}${au.n_rows?` · ${au.n_done||0} of ${au.n_rows} done`:''}${au.kappa!=null?` · κ ${num(au.kappa,3)} (threshold ${au.threshold})`:''}${au.passed?' · passed':''} — recorded by ${esc(au.auditor||'nobody yet')} with src/audit_ies90.py</p>
    <div class="branches" style="grid-template-columns:repeat(4,1fr)">
      <div class="card"><div class="l">Verdict · escalation (G)</div><div class="n" style="font-size:16px">${esc(v.G_conditioning||'—')}</div></div>
      <div class="card"><div class="l">Verdict · price (P)</div><div class="n" style="font-size:16px">${esc(v.P_conditioning||'—')}</div></div>
