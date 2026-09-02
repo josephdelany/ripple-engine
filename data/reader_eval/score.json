@@ -1,0 +1,90 @@
+{
+ "n": 100,
+ "class_accuracy": 0.84,
+ "class_correct": 84,
+ "per_class": {
+  "conflict_escalation": {
+   "n": 17,
+   "correct": 11
+  },
+  "sanctions": {
+   "n": 22,
+   "correct": 22
+  },
+  "demand_shock": {
+   "n": 3,
+   "correct": 3
+  },
+  "opec_decision": {
+   "n": 18,
+   "correct": 18
+  },
+  "policy_response": {
+   "n": 22,
+   "correct": 13
+  },
+  "infrastructure_attack": {
+   "n": 15,
+   "correct": 14
+  },
+  "chokepoint_disruption": {
+   "n": 3,
+   "correct": 3
+  }
+ },
+ "entity_precision": 0.9066,
+ "entity_recall": 0.9649,
+ "entity_f1": 0.9348,
+ "entity_tp_fp_fn": [
+  165,
+  17,
+  6
+ ],
+ "date_exactness": {
+  "n_with_a_reader_date": 0,
+  "exact": 0,
+  "note": "read_headlines emits no date from a bare headline; exactness is scored only where the reader returned one"
+ },
+ "reader_modes": {
+  "llm": 100
+ },
+ "top_confusions": [
+  {
+   "gold": "policy_response",
+   "read": "none",
+   "n": 8
+  },
+  {
+   "gold": "conflict_escalation",
+   "read": "none",
+   "n": 3
+  },
+  {
+   "gold": "conflict_escalation",
+   "read": "infrastructure_attack",
+   "n": 2
+  },
+  {
+   "gold": "conflict_escalation",
+   "read": "chokepoint_disruption",
+   "n": 1
+  },
+  {
+   "gold": "policy_response",
+   "read": "conflict_escalation",
+   "n": 1
+  },
+  {
+   "gold": "infrastructure_attack",
+   "read": "chokepoint_disruption",
+   "n": 1
+  }
+ ],
+ "generated_at": "2026-09-02T19:34:52+00:00",
+ "gold": "data/reader_eval/gold_100.jsonl",
+ "gold_status": "coded by session A, unaudited by Joe",
+ "reader_env": "auto",
+ "model": "sonnet",
+ "label": "reader accuracy (unaudited gold)",
+ "threshold_class": 0.8
+}

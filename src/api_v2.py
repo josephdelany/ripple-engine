@@ -136,7 +136,10 @@ def register(app):
                                                      "asset", "direction", "level", "horizon_days", "horizon_unit", "checkable",
                                                      "verdict", "r", "n", "modality")},
                            "resolution": res.get(r["claim_id"])})
-        return {**boards, "recent": recent}
+        rp = DATA / "reader_eval" / "score.json"                 # Brief A-9: the desk measures its own reading
+        reval = _json(rp) or {"label": "reader accuracy (unaudited gold)", "note": "not run: python3 src/reader_eval.py"}
+        return {**boards, "recent": recent, "reader_eval": {k: reval.get(k) for k in ("label", "class_accuracy", "class_correct", "n", "entity_f1", "reader_modes",
+                                                                                    "model", "gold_status", "generated_at", "threshold_class", "note")}}
 
     @app.post("/api/ledger/resolve")
     def api_ledger_resolve():
