@@ -84,3 +84,49 @@ MATERIAL *and* the headline matches at least one entity the engine tracks
 (country, chokepoint, commodity, company); otherwise it is shown IN LINE with
 the flag `no_entity`. Ranking: gate ratio, then number of matched entities,
 then headline-vs-record gap, then recency.
+
+## Amendment 3 — 2026-09-02, before the reading layer is rebuilt (registered first, computed after)
+The regex reading layer (`triage.classify_type`, `deconstruct.claims`) is replaced
+on the v2 surfaces (Story, Feed) by a **caged LLM reader** (`src/reader.py`), on the
+same pattern as `extract_events.py` / `apply_situation_agent.py`: the model
+proposes, deterministic Python decides what is allowed in, nothing partial is
+repaired. The model is Claude via the local `claude` CLI on Joe's subscription
+(keyless, $0 marginal); it runs with no tools and a fixed output schema. Rules
+the cage enforces, fixed here before the first run:
+1. **Event class** ∈ the seven registered types or `null`. Anything else → `null`
+   (NOISE), with the rejection recorded on the read.
+2. **Entities** must be `entity_id`s in the `entities` table, each with one role
+   from {actor, target, asset, chokepoint, location, affected_market, mention}.
+   Unknown names are kept as `unmapped` text; they carry no id and never count.
+3. **Claims are verbatim.** A claim's quote must be a substring of the article
+   text (whitespace- and quote-mark-normalised). A quote that is not in the text
+   is a fabrication and the claim is dropped, with the reason recorded. Kind ∈
+   {direction, level, flow, escalation, policy, uncheckable} per §2; asset ∈
+   {brent, diesel_crack, gas, fertilizer, freight} or `null`; a level's number
+   must appear in the quote; horizons are assigned by the cage from §2 (+20
+   trading days for price claims, +90 calendar days for escalation and policy),
+   never by the model, unless the quote itself states a horizon. A direction or
+   level claim with no asset, or an escalation claim with no actor/target entity
+   in the story, is downgraded to UNCHECKABLE — the cage never upgrades.
+4. **Titles are extracted, not generated.** For a URL the title is the page's
+   own (og:title, h1, or <title>, minus the site suffix); for pasted text it is
+   the first sentence. The model proposes no title.
+5. **Entity-aware gate (replaces Amendment 2's headline-keyword rule).** A story
+   is shown MATERIAL only if the class gate says MATERIAL *and* the reader found
+   at least one **tracked petro entity in an actor, target, asset or chokepoint
+   role**. Tracked petro entity = an `entities` row of type country, chokepoint
+   or supplychain; a petro commodity (brent, wti, crude_oil, diesel, gasoline,
+   gasoline_spot, natgas, eu_gas, lng_asia, propane, fertilizer, petchem); or one
+   of institution.{opec, iea, us_doe, isprl, china_reserve_bureau}. Otherwise the
+   story is shown IN LINE with the flag `no_entity`. A location-only or
+   mention-only entity does not qualify. Thresholds in §1 are unchanged.
+6. **Fallback is labelled.** If the CLI is unavailable (logged out, timeout,
+   malformed output) the read falls back to the regex layer and every surface
+   carries `reader: regex_fallback`; a fallback read is never presented as a
+   model read. Model reads are cached by content hash so a story is read once.
+7. **The Feed reads headlines only** (batched, ≤40 per call); the full article is
+   read on its Story page. Ranking stays: gate ratio, then number of qualifying
+   entities, then headline-vs-record gap, then recency.
+Nothing already in the ledger is edited; claims logged under the regex layer
+keep `registration: CLAIM_LEDGER_REGISTRATION.md` and predate this amendment
+by timestamp.
