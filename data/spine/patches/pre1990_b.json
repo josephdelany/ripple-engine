@@ -32,7 +32,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/tanker_war_1984.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was located or retrieved this session despite documented attempts across five separate routes (FRUS 1981-88 Vols. XX and XXI both unpublished; CIA reading room unusable; no relevant American Presidency Project statement found; washingtonpost.com and upi.com both returned HTTP 403 on every attempt). The dossier rests on two independent-domain secondary/scholarly sources (S1, S2) that corroborate each other closely. Narrative (b), knowable_at (c), and not-known-at-the-time (f) are met on the secondary record available. Entities (d) and class (e) both surface unresolved problems with the current coding, recorded above rather than silently changed.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "tanker_war_1984",
@@ -44,7 +46,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/tanker_war_1984.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was located or retrieved this session despite documented attempts across five separate routes (FRUS 1981-88 Vols. XX and XXI both unpublished; CIA reading room unusable; no relevant American Presidency Project statement found; washingtonpost.com and upi.com both returned HTTP 403 on every attempt). The dossier rests on two independent-domain secondary/scholarly sources (S1, S2) that corroborate each other closely. Narrative (b), knowable_at (c), and not-known-at-the-time (f) are met on the secondary record available. Entities (d) and class (e) both surface unresolved problems with the current coding, recorded above rather than silently changed.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "kharg_strikes_1985",
@@ -68,7 +72,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/kharg_strikes_1985.md",
    "dossier_status": "partial \u2014 fails clause (a) outright: only one source, on one domain, was retrieved this session, despite seven distinct additional-route attempts (FRUS x2, CIA reading room, UPI, Bentley digital newspapers, globalsecurity.org, CSMonitor site search, American Presidency Project) all failing or returning nothing usable. The narrative (b) and class (e) are supportable from the single source available; knowable_at (c) is explicitly left contested due to an unresolved one-day date discrepancy between the source and the current database value; entities (d) are supported. Severity is proposed with reasoning; surprise is left an honest, documented NULL.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "kharg_strikes_1985",
@@ -80,7 +86,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/kharg_strikes_1985.md",
    "dossier_status": "partial \u2014 fails clause (a) outright: only one source, on one domain, was retrieved this session, despite seven distinct additional-route attempts (FRUS x2, CIA reading room, UPI, Bentley digital newspapers, globalsecurity.org, CSMonitor site search, American Presidency Project) all failing or returning nothing usable. The narrative (b) and class (e) are supportable from the single source available; knowable_at (c) is explicitly left contested due to an unresolved one-day date discrepancy between the source and the current database value; entities (d) are supported. Severity is proposed with reasoning; surprise is left an honest, documented NULL.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "kharg_strikes_1985",
@@ -128,7 +136,9 @@
    "source": "[S1] [S2] [S3] [S4]",
    "dossier": "data/dossiers/opec_price_collapse_1986.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was retrieved (opec.org is confirmed unusable; no contemporaneous 1985 press wire was successfully fetched despite attempts). It further fails clause (c) (`knowable_at`): this dossier could not resolve a single defensible day, or even a single defensible month, from the sources retrieved this session \u2014 S1 points to September 1985, S3/S4 point to December 1985, and the dossier presents both rather than picking one without support. Narrative (b) and class (e) are supported by the secondary record. Entities (d) has two proposed corrections. This is exactly the kind of case SPINE_REGISTRATION.md \u00a73 anticipates: \"Where the audit shows a value is wrong but no source establishes the right one, the patch proposes `unknown`\" \u2014 applied here to the day-level date, with month as the most granular honest fallback, and even that flagged as contested between two candidate months.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "opec_price_collapse_1986",
@@ -140,7 +150,9 @@
    "source": "[S1] [S2]",
    "dossier": "data/dossiers/opec_price_collapse_1986.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was retrieved (opec.org is confirmed unusable; no contemporaneous 1985 press wire was successfully fetched despite attempts). It further fails clause (c) (`knowable_at`): this dossier could not resolve a single defensible day, or even a single defensible month, from the sources retrieved this session \u2014 S1 points to September 1985, S3/S4 point to December 1985, and the dossier presents both rather than picking one without support. Narrative (b) and class (e) are supported by the secondary record. Entities (d) has two proposed corrections. This is exactly the kind of case SPINE_REGISTRATION.md \u00a73 anticipates: \"Where the audit shows a value is wrong but no source establishes the right one, the patch proposes `unknown`\" \u2014 applied here to the day-level date, with month as the most granular honest fallback, and even that flagged as contested between two candidate months.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_kharg_1986",
@@ -152,7 +164,9 @@
    "source": "[S1] [S2]",
    "dossier": "data/dossiers/iraq_kharg_1986.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was located or retrieved this session (UPI's contemporaneous August 12, 1986 wire item was found by search but returned HTTP 403 on every fetch attempt; FRUS volumes for this period are unpublished; CIA reading room unusable). Two independent-domain secondary/press sources (S1, S2) are present and corroborate the underlying fact pattern. Narrative (b), knowable_at (c), entities (d), and class (e) are well supported. The `event_id`/title mismatch is a separate data-quality issue flagged for Joe, not a sourcing failure.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_kharg_1986",
@@ -164,7 +178,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iraq_kharg_1986.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was located or retrieved this session (UPI's contemporaneous August 12, 1986 wire item was found by search but returned HTTP 403 on every fetch attempt; FRUS volumes for this period are unpublished; CIA reading room unusable). Two independent-domain secondary/press sources (S1, S2) are present and corroborate the underlying fact pattern. Narrative (b), knowable_at (c), entities (d), and class (e) are well supported. The `event_id`/title mismatch is a separate data-quality issue flagged for Joe, not a sourcing failure.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_kharg_1986",
@@ -176,7 +192,9 @@
    "source": "[S1] [S2]",
    "dossier": "data/dossiers/iraq_kharg_1986.md",
    "dossier_status": "partial \u2014 fails clause (a): no primary source was located or retrieved this session (UPI's contemporaneous August 12, 1986 wire item was found by search but returned HTTP 403 on every fetch attempt; FRUS volumes for this period are unpublished; CIA reading room unusable). Two independent-domain secondary/press sources (S1, S2) are present and corroborate the underlying fact pattern. Narrative (b), knowable_at (c), entities (d), and class (e) are well supported. The `event_id`/title mismatch is a separate data-quality issue flagged for Joe, not a sourcing failure.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "earnest_will_1987",
@@ -188,7 +206,9 @@
    "source": "[S1] [S2]",
    "dossier": "data/dossiers/earnest_will_1987.md",
    "dossier_status": "partial \u2014 fails clause (a) in substance: the only primary source retrieved (S1) is not dated to the event or the surrounding week, and no War Powers Resolution letter, Federal Register item, or FRUS document covering the July 21\u201324, 1987 window could be located this session despite a direct search of the FRUS volume's full table of contents. Clause (c) is also weakened by the conflated reflagging-vs-convoy-departure dates. Clauses (b), (d), (e), and (f) are addressed with the caveats stated above.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "bridgeton_mine_strike_1987",
@@ -212,7 +232,9 @@
    "source": "[S2]",
    "dossier": "data/dossiers/praying_mantis_1988.md",
    "dossier_status": "complete \u2014 two independent-domain sources retrieved, one primary (S1) and one scholarly secondary built on a primary legal judgment (S2); narrative, knowable_at, entities, class, and \"not known at the time\" clauses are all supported by retrieved, quoted material. The unresolved platform-naming/date discrepancy between S1 and S2 is disclosed above rather than silently resolved, and the source_url correction is flagged for Joe's patch review.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "praying_mantis_1988",
@@ -236,7 +258,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iran_air_655_1988.md",
    "dossier_status": "complete on sourcing (clause a: two independent-domain primary sources, S1 and S2) and on clauses (b), (c), (d), and (f). **Flagged as weak on clause (e)'s underlying inclusion criterion**: this dossier does not fail the class-assignment mechanically, but it records \u2014 as instructed \u2014 that inclusion criterion 3 (a statable oil-relevance mechanism) is weak for this event, resting on an indirect risk-premium channel that no retrieved source substantiates with evidence of an actual market or shipping effect.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iran_iraq_ceasefire_1988",
@@ -248,7 +272,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iran_iraq_ceasefire_1988.md",
    "dossier_status": "partial \u2014 fails clause (e): the coded class (`policy_response`) is not supported by the codebook's own definition, and no better-fitting class exists in the closed set, so this is an unresolved codebook gap rather than a sourcing failure. Clause (a) is met (two independent domains, one primary \u2014 S1). Clauses (b), (c), (d), and (f) are addressed above, with (c) flagging a specific, sourced tension between the announcement date (Aug 8) and the effective date (Aug 20) that bears directly on the codebook's own date rule.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-02T23:59:04+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iran_iraq_ceasefire_1988",
@@ -262,5 +288,7 @@
    "dossier_status": "partial \u2014 fails clause (e): the coded class (`policy_response`) is not supported by the codebook's own definition, and no better-fitting class exists in the closed set, so this is an unresolved codebook gap rather than a sourcing failure. Clause (a) is met (two independent domains, one primary \u2014 S1). Clauses (b), (c), (d), and (f) are addressed above, with (c) flagging a specific, sourced tension between the announcement date (Aug 8) and the effective date (Aug 20) that bears directly on the codebook's own date rule.",
    "applied": false
   }
- ]
+ ],
+ "applied_at": "2026-09-02T23:59:04+00:00",
+ "applied_by": "joe"
 }

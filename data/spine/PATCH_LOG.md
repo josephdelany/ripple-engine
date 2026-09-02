@@ -162,3 +162,43 @@ Scoreboard before → after:
 | drafting scaffolding | 49 | 44 |
 | descriptions ≥700 chars | 0 | 0 |
 
+### APPLIED `pre1990_b` — 2026-09-02T23:59:04+00:00, approved by joe
+
+13 field changes across 8 events; 7 rows skipped. Backup: `data/backups/oil_20260902_235832_pre_spine_apply.db.gz`.
+
+| field change | from | to |
+|---|---|---|
+| `tanker_war_1984`.severity | None | 2 |
+| `tanker_war_1984`.surprise | None | 2 |
+| `kharg_strikes_1985`.description | Iraq intensifies air strikes on Iran's Kharg Island oil term | Iraq opened a new, more serious phase of air raids on Kharg Island's export term |
+| `kharg_strikes_1985`.severity | None | 3 |
+| `opec_price_collapse_1986`.description | Saudi abandons swing-producer role; 1986 price collapse [dee | Saudi Arabia abandoned its role as OPEC's swing producer after cutting its own o |
+| `opec_price_collapse_1986`.severity | None | 5 |
+| `iraq_kharg_1986`.description | Iraqi raids on Iran's Sirri Island oil terminal [deep-histor | On August 12, 1986, Iraqi aircraft struck Iran's Sirri Island oil export termina |
+| `iraq_kharg_1986`.severity | None | 4 |
+| `iraq_kharg_1986`.surprise | None | 4 |
+| `earnest_will_1987`.source_url | https://www.eia.gov | https://www.upi.com/Archives/1987/07/22/The-three-US-Navy-warships-guarding-the- |
+| `praying_mantis_1988`.source_url | https://www.asil.org/insights/volume/8/issue/25/world-court- | https://asil.org/insights/volume-8-issue-25-2/ |
+| `iran_air_655_1988`.source_url | https://www.eia.gov | https://www.presidency.ucsb.edu/documents/statement-the-destruction-iranian-jetl |
+| `iran_iraq_ceasefire_1988`.source_url | https://www.eia.gov | https://peacekeeping.un.org/sites/default/files/past/uniimogbackgr.html |
+
+Skipped:
+
+- `kharg_strikes_1985`.event_date — needs_joe: the builder could not reduce it to a clean value
+- `kharg_strikes_1985`.date_precision — needs_joe: the builder could not reduce it to a clean value
+- `opec_price_collapse_1986`.event_date — needs_joe: the builder could not reduce it to a clean value
+- `opec_price_collapse_1986`.date_precision — needs_joe: the builder could not reduce it to a clean value
+- `bridgeton_mine_strike_1987`.surprise — needs_joe: the builder could not reduce it to a clean value
+- `praying_mantis_1988`.surprise — needs_joe: the builder could not reduce it to a clean value
+- `iran_iraq_ceasefire_1988`.type — needs_joe: the builder could not reduce it to a clean value
+
+Scoreboard before → after:
+
+| measure | before | after |
+|---|---|---|
+| events with ≥2 source domains | 9 | 12 |
+| encyclopaedia-only source_url | 31 | 31 |
+| bare site-root source_url | 6 | 3 |
+| drafting scaffolding | 44 | 41 |
+| descriptions ≥700 chars | 0 | 0 |
+
