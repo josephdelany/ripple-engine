@@ -229,6 +229,8 @@ STORY_SCHEMA = {
     "type": "object", "additionalProperties": False,
     "properties": {
         "event_class": {"type": ["string", "null"]},
+        "event_date": {"type": ["string", "null"]},
+        "confidence": {"type": ["string", "null"]},
         "entities": {"type": "array", "items": {"type": "object", "additionalProperties": False,
                                                 "properties": {"id": {"type": "string"}, "role": {"type": "string"}},
                                                 "required": ["id", "role"]}},
@@ -242,16 +244,17 @@ STORY_SCHEMA = {
                                                              "modality": {"type": "string"}},
                                               "required": ["quote", "kind", "asset", "direction", "level", "horizon_days", "modality"]}},
     },
-    "required": ["event_class", "entities", "unmapped", "claims"],
+    "required": ["event_class", "event_date", "confidence", "entities", "unmapped", "claims"],
 }
 BATCH_SCHEMA = {
     "type": "object", "additionalProperties": False,
     "properties": {"items": {"type": "array", "items": {
         "type": "object", "additionalProperties": False,
         "properties": {"i": {"type": "integer"}, "event_class": {"type": ["string", "null"]},
+                       "event_date": {"type": ["string", "null"]}, "confidence": {"type": ["string", "null"]},
                        "entities": STORY_SCHEMA["properties"]["entities"],
                        "claim": {"anyOf": [STORY_SCHEMA["properties"]["claims"]["items"], {"type": "null"}]}},
-        "required": ["i", "event_class", "entities", "claim"]}}},
+        "required": ["i", "event_class", "event_date", "confidence", "entities", "claim"]}}},
     "required": ["items"],
 }
 
@@ -264,6 +267,8 @@ def system_prompt(voc):
 EVENT CLASS -- the story's dominant development, a cause not a price move. Exactly one of:
 {types}
 Use null when the story is not a discrete development of one of these kinds (price recaps, earnings, commentary, unrelated news). Never invent a class.
+EVENT_DATE -- the date the development happened, ISO YYYY-MM-DD, ONLY if the text states it (a dateline, "on 14 May", "Tuesday" with a stated week); otherwise null. Never today's date, never a guess.
+CONFIDENCE -- your confidence in the event class: high | medium | low. (Amendment 6: extracted, never scored.)
 
 ENTITIES -- only ids from this closed list, each with one role: actor (did it), target (it was done to), asset (the physical asset or commodity at stake), chokepoint (the strait/canal/pipeline at stake), location, affected_market, mention (named but not central). List a name that is central but not in the list under "unmapped" as plain text.
 Closed list: {ents}
@@ -419,6 +424,15 @@ def cage_claim(c, text, has_actor):
     return out, None
 
 
+_ISO = re.compile(r"^(19|20)\d{2}-\d{2}-\d{2}$")
+
+
+def _iso_or_none(v):
+    """Amendment 6: a stated ISO date or None -- never the capture date."""
+    v = (v or "").strip()[:10]
+    return v if _ISO.match(v) else None
+
+
 def cage(proposal, text, voc, class_hint=None):
     """Validate a whole proposal. Returns the caged read (never partial repair; rejects listed)."""
     rejected = []
@@ -452,8 +466,9 @@ def cage(proposal, text, voc, class_hint=None):
         claims.append(out)
         if len(claims) >= MAX_CLAIMS:
             break
-    return {"event_class": class_hint or ec, "model_class": model_class, "entities": entities, "unmapped": unmapped,
-            "claims": claims, "rejected": rejected}
+    conf = p.get("confidence") if p.get("confidence") in ("high", "medium", "low", "fallback") else None
+    return {"event_class": class_hint or ec, "model_class": model_class, "event_date": _iso_or_none(p.get("event_date")), "confidence": conf,
+            "entities": entities, "unmapped": unmapped, "claims": claims, "rejected": rejected}
 
 
 def to_ledger_claim(c, event_class, entity_ids):
@@ -555,8 +570,8 @@ def read_headlines(heads, proposals=None, conn=None, use_cache=True, model=None)
                 if it is None:
                     results[i] = ("regex_fallback", None, {"error": meta.get("error") or "headline missing from batch reply", "model": meta.get("model")})
                 else:
-                    prop = {"event_class": it.get("event_class"), "entities": it.get("entities") or [], "unmapped": [],
-                            "claims": [it["claim"]] if it.get("claim") else []}
+                    prop = {"event_class": it.get("event_class"), "event_date": _iso_or_none(it.get("event_date")), "confidence": it.get("confidence") or None,
+                            "entities": it.get("entities") or [], "unmapped": [], "claims": [it["claim"]] if it.get("claim") else []}
                     _cache_put(_cache_key("headline", heads[i], model), prop, meta)
                     results[i] = ("llm", prop, {"cached": False, "model": meta.get("model"), "secs": meta.get("secs")})
         out = []
@@ -567,7 +582,7 @@ def read_headlines(heads, proposals=None, conn=None, use_cache=True, model=None)
                 etype = T.classify_type(h)
                 ents, _ = T.extract(conn, h)
                 t = L.type_claim(h, etype)
-                r = {"event_class": etype, "model_class": None, "unmapped": [], "rejected": [],
+                r = {"event_class": etype, "event_date": None, "confidence": "fallback", "model_class": None, "unmapped": [], "rejected": [],
                      "entities": [{"id": e, "name": voc.get(e, e), "type": e.split(".", 1)[0], "role": "mention"} for e in ents],
                      "claims": [t] if t["kind"] != "uncheckable" else []}
                 mode = "regex_fallback"

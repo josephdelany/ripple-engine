@@ -88,10 +88,10 @@ def run():
         if tier == "AUTO_ADMIT":
             r["severity"] = str(SEV_BAND.get(r.get("type"), 2))     # deterministic provisional band
             r["surprise"] = str(SURPRISE_DEFAULT)
-            r["joe_decision"] = "approve"
+            # SITUATION_CODEBOOK_V2.md Amendment 2026-09-02 (B4): the code recommends; joe_decision stays empty until Joe writes it.
             r["rec_reason"] = (r.get("rec_reason", "") +
-                               f" | AUTO-ADMIT p={receipt['p']:.2f} n_indep={receipt['n_independent']} "
-                               f"(provisional sev={r['severity']} -- Joe can refine)").strip(" |")
+                               f" | AUTO-ADMIT recommended p={receipt['p']:.2f} n_indep={receipt['n_independent']} "
+                               f"(provisional sev={r['severity']} -- Joe decides; the code never approves)").strip(" |")
             admitted.append({"event_id": r.get("event_id"), "source_url": r.get("source_url"),
                              "p": receipt["p"], "n_independent": receipt["n_independent"],
                              "provisional_severity": r["severity"], "admitted_at": now})
@@ -110,7 +110,7 @@ def run():
             if first:
                 w.writeheader()
             w.writerows(admitted)
-    return {"auto_admitted": len(admitted),
+    return {"auto_admitted": 0, "auto_recommended": len(admitted),
             "pending_review": sum(1 for r in rows if r.get("candidate_source") == "llm_extract"
                                   and not (r.get("joe_decision") or "").strip())}
 
