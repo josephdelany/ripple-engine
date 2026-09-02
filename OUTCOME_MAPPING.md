@@ -204,3 +204,60 @@ The first run also showed **24 of 27 uncovered events carry no `country.*` entit
 (chokepoint- or facility-only codings: Bab el-Mandeb, Hormuz, Suez, pipelines). They stay
 `no_independent_outcome`; a chokepoint → littoral-state map is a candidate Amendment 2, not
 made here.
+
+---
+
+## Amendment 2 (2026-09-02, registered before the rebuild) — dyadic precedence, littoral map as location, rule-fired column
+*Applies to IES-90 (Amendment 1 + 1.1). Nothing in `events` changes. Field names the walk
+reads (`level`, `deal`, `no_independent_outcome`) are unchanged.*
+
+### A2.1 Dyadic precedence
+A source record is **dyadic** when it was matched through a pair in P: a MIDI incident with both
+members on opposite sides, a COW inter-state war with both members on opposite sides, a Dyadic MID
+row whose dyad ∈ P, an ICB crisis with ≥ 2 members of the pair among its actors. A record is
+**location** when it was matched through a single country or a location set: GED (always), COW
+intra-state (always), and any MIDI / MID / COW inter-state / ICB record matched because P was
+empty (single-country events) or through one member only.
+- If **any dyadic-capable source covers W and P is non-empty**, `ies90_level` = max over the
+  *dyadic* records; `basis = 'dyadic'`. Location records are still stored (`level_location`)
+  and shown in the audit, but do not set the level. A dyadic-covered event with no dyadic record
+  in W is level 0 on the dyadic basis, whatever the location sources say.
+- Otherwise (P empty, or no dyadic-capable source covers W) `ies90_level` = max over the
+  location records; `basis = 'location'`. Every location-basis level says so on every surface.
+- `covering` is split into `covering_dyadic` and `covering_location`. `no_independent_outcome`
+  is unchanged: no source of either kind covers W.
+Why: a location source answers "was there violence in the country", not "did this dyad
+escalate"; under Amendment 1 a 2024 sanctions event on Russia read as war from GED deaths in
+Ukraine. Dyadic evidence, where it exists, is the question being asked.
+
+### A2.2 Littoral map — location only
+A chokepoint or facility entity on the event adds its littoral or host states to **L only**
+(never to A or P), so GED and COW intra-state can cover events coded without a country. The map
+is fixed here and checked by a test; states not in `countries.py` are named but not mapped:
+| entity | L gains | not mapped (no `country.*` id) |
+|---|---|---|
+| `chokepoint.hormuz` | iran, uae, omn | — |
+| `chokepoint.bab_el_mandeb` | yemen | Djibouti, Eritrea |
+| `chokepoint.suez`, `chokepoint.suez_canal` | egypt | — |
+| `chokepoint.gibraltar_strait` | gbr | Spain, Morocco |
+| `chokepoint.malacca` | indonesia | Malaysia, Singapore |
+| `chokepoint.taiwan_strait` | taiwan, china | — |
+| `chokepoint.libya_es_sider` | libya | — |
+| `chokepoint.kirkuk_ceyhan_pipeline` | iraq, turkey | — |
+| `chokepoint.druzhba_pipeline` | russia, ukraine, hungary | Belarus, Poland, Slovakia, Czechia |
+| `chokepoint.cpc_novorossiysk` | russia, kazakhstan | — |
+A level reached only through the littoral map is location-basis by construction and its detail
+names the entity that supplied L.
+
+### A2.3 Rule-fired column
+Every `ies90` level row carries `rule_fired` (value_text): the identifier of the registered rule
+that set the level — `MIDI.pair.overlap`, `MIDI.single.overlap`, `WAR.inter.pair`,
+`WAR.inter.single`, `WAR.intra.location`, `ICB.pair.wholly`, `ICB.pair.onset`, `ICB.single.wholly`,
+`ICB.single.onset`, `MID.pair.wholly`, `MID.pair.onset`, `MID.single.wholly`, `MID.single.onset`,
+`GED.location.ge250`, `GED.location.ge25`, `NONE.covered` (a covering source, nothing in W) —
+with ties listed in the A1.1 order. The audit sheet gets the same column on every source row,
+plus `basis`. `UNCOVERED` is written on `no_independent_outcome` rows.
+Outputs: `event_outcomes` source='ies90' fields `basis`, `rule_fired`, `level_location`,
+`covering_dyadic`, `covering_location` (alongside the Amendment 1 fields);
+`data/state/ies90_distribution.json` adds level × basis and rule_fired counts;
+`data/audits/ies90_audit_30.csv` is regenerated with `basis` and `rule_fired` columns.
