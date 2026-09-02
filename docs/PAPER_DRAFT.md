@@ -592,7 +592,7 @@ Voeten UNGA ideal points; World Bank WDI; Archigos; FRED. Verified register:
 | G vs persistence −0.467 [−1.031, −0.133] p 0.002; means 0.705 / 0.481; 2 fallbacks | `tiers.daily.G.engine_vs.persistence`, `n_persistence_fallback` |
 | M13 Brier −0.590 [−0.834, −0.357] p < 0.001; RPS −0.190; P −0.031 | `tiers.daily.G.items_vs_climatology.M13_recalibrated`, `.rps.items_vs_climatology`, `tiers.daily.P.items_vs_climatology` |
 | M13 reliability 0.103 / 0.270 / 0.072 / 0.034 vs engine 0.002 / 0.001 / 0.042 / 0.034 | `tiers.daily.G.murphy_M13`, `.murphy_engine` |
-| Power: G mds +0.123 @96%, +0.058 @69%, +0.043 @41%; P +0.058 @89% | `power.G`, `power.P` |
+| Power: G mds +0.123 @96%, +0.058 @69%, +0.043 @41%; P +0.058 @89% | `tiers.daily.power.G`, `.power.P` |
 | G log −0.035 | `tiers.daily.G.log_score_vs_climatology` |
 | G vs frozen −0.002; vs random +0.064 p 0.063 | `tiers.daily.G.engine_vs.{frozen,random_analogs}` |
 | SPA: 15 models, M07, p_RC 0.91, p_SPA 0.74 | `tiers.daily.G.spa` |
