@@ -1,0 +1,130 @@
+{
+ "claims": [
+  {
+   "quote": "Ships hauling cargoes from Saudi Arabia to China were pulling in a record $656,000 a day on Friday, more than ten times the rate a year earlier, according to Baltic Exchange data.",
+   "kind": "level",
+   "asset": "freight",
+   "direction": "up",
+   "level": 656000,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "The cost of hiring a ship to sail from Oman to China is currently about $220,000 a day, compared with $131,000 a month ago.",
+   "kind": "level",
+   "asset": "freight",
+   "direction": "up",
+   "level": 220000,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "TotalEnergies SE Chief Executive Officer Patrick Pouyanne said earlier this week that it costs about $20 million to move barrels through Hormuz.",
+   "kind": "level",
+   "asset": "freight",
+   "direction": null,
+   "level": 20000000,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "Two tanker market participants said that amount had risen further throughout the week.",
+   "kind": "direction",
+   "asset": "freight",
+   "direction": "up",
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "The number of visible commodity vessels transiting the Strait of Hormuz dropped to five per day over the weekend",
+   "kind": "flow",
+   "asset": null,
+   "direction": "disrupt",
+   "level": 5,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "Attacks on Saudi tankers by Yemen’s Houthis have seen the kingdom redirect some exports north, through the Mediterranean, and thousands of miles around Africa.",
+   "kind": "flow",
+   "asset": null,
+   "direction": "disrupt",
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "That generally adds about 30 days to a journey to Asia.",
+   "kind": "flow",
+   "asset": null,
+   "direction": "disrupt",
+   "level": 30,
+   "horizon_days": 30,
+   "modality": "asserted"
+  },
+  {
+   "quote": "The U.S. launched new air strikes on Iranian targets on Tuesday, quashing hopes that an exchange of fire last weekend might...",
+   "kind": "escalation",
+   "asset": null,
+   "direction": "escalate",
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "Mine clearance in the Strait of Hormuz is “not sufficient on its own” to bring commercial shipping back to normal, INTERTANKO warned",
+   "kind": "uncheckable",
+   "asset": null,
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  }
+ ],
+ "entities": [
+  {
+   "id": "chokepoint.hormuz",
+   "role": "chokepoint"
+  },
+  {
+   "id": "country.iran",
+   "role": "actor"
+  },
+  {
+   "id": "country.saudi_arabia",
+   "role": "target"
+  },
+  {
+   "id": "country.yemen",
+   "role": "actor"
+  },
+  {
+   "id": "country.usa",
+   "role": "actor"
+  },
+  {
+   "id": "country.china",
+   "role": "affected_market"
+  },
+  {
+   "id": "commodity.crude_oil",
+   "role": "asset"
+  },
+  {
+   "id": "supplychain.tankers",
+   "role": "asset"
+  },
+  {
+   "id": "situation.israel_iran_war_2025",
+   "role": "mention"
+  }
+ ],
+ "event_class": "chokepoint_disruption",
+ "unmapped": [
+  "Sinokor Group",
+  "Frontline Management AS",
+  "TotalEnergies SE",
+  "INTERTANKO"
+ ]
+}

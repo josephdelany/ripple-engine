@@ -25,11 +25,11 @@ DATA = ROOT / "data"
 DB = DATA / "oil.db"
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import deconstruct as DC          # noqa: E402
 import escalation as ES           # noqa: E402
 import ledger as L                # noqa: E402
 import materiality as M           # noqa: E402
 import propagate as P             # noqa: E402
+import reader as R                # noqa: E402  the caged reader (Amendment 3) -- replaces deconstruct/triage here
 
 BRENT = "fred.DCOILBRENTEU"
 HORIZON = 20
@@ -172,34 +172,36 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             text = f"{title}. {desc or ''}"
             ents = [r[0] for r in conn.execute("SELECT entity_id FROM event_entities WHERE event_id=?", (eid,))]
             knowable = edate
-            cs = DC.claims(conn, text)
+            # the coded class is the corpus's, never the model's; the reader only supplies typed claims
+            rr = R.read_story(text, class_hint=etype, conn=conn)
             source = _domain(url); was_url = False; scope = None; article_type = "corpus event"
             story_id = f"event:{eid}"
+            entity_ok = True                                  # an admitted corpus event passed the human gate
         else:
-            d = DC.deconstruct(arg)
-            if d.get("scope") in ("off_topic",):
-                etype = None
-            else:
-                etype = d.get("dominant_class")
-            cs = d.get("claims") or []
-            ents = sorted({e for c in cs for e in c.get("entities", [])})
-            url = d.get("url"); title = (arg or "")[:160]; desc = None
-            source = _domain(url) or "pasted"; was_url = d.get("was_url"); scope = d.get("scope"); article_type = d.get("article_type")
+            rr = R.read_story(arg, conn=conn)
+            etype = rr["event_class"]
+            ents = [e["id"] for e in rr["entities"]]
+            url = rr["url"]; title = rr["title"]; desc = None
+            source = _domain(url) or "pasted"; was_url = rr["was_url"]; scope = None if etype else "off_topic"
+            article_type = "live story"
             knowable = knowable or date.today().isoformat()
             story_id = "live:" + L._cid(source or "pasted", (arg or "")[:400])
             eid = None
+            entity_ok = bool(rr["qualifying_entities"])
+        cs = rr["claims"]
         k = pd.Timestamp(knowable)
         gate = M.gate(etype)
+        if gate["significance"] == "MATERIAL" and not entity_ok:       # Amendment 3 rule 5: entity-aware gate
+            gate = {**gate, "significance": "IN_LINE", "flags": list(gate.get("flags") or []) + ["no_entity"],
+                    "why": gate["why"] + " Shown IN LINE: no tracked petro entity in an actor/target/asset/chokepoint role."}
         att = M.attention(ents)
         flags = M.flags_for(gate["significance"], att.get("score"))
         pr = priced(conn, etype, k, exclude_event=eid) if etype else {"fan": None, "knowable": str(k.date())}
         br = branches(conn, etype, event_id=eid, entities=ents, as_of=str(k.date()) if eid else None) if etype else {"applicable": False, "note": "no event class"}
         p0 = pr.get("price_at_knowable")
         claims = []
-        for c in cs:
-          for clause in L.split_clauses(c["text"]):
-            t = L.type_claim(clause, c.get("event_class") or etype, c.get("entities"), c.get("modality", "asserted"))
-            t["sentence"] = c["text"]
+        for t in cs:                                              # already typed + caged by the reader
+            t["event_class"] = t.get("event_class") or etype
             v = L.verdict_for(conn, t, price_at_knowable=p0, as_of=str(k.date()) if eid else None,
                               escalation_read=br if br.get("applicable") else None)
             t["verdict"] = v
@@ -210,6 +212,8 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             "article_type": article_type, "scope": scope, "was_url": was_url,
             "knowable": str(k.date()), "read_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "event_class": etype, "entities": ents,
+            "roles": rr["entities"], "unmapped": rr["unmapped"], "qualifying_entities": rr["qualifying_entities"],
+            "reader": rr["reader"], "rejected": rr["rejected"],
             "significance": {**gate, "attention": att, "flags": flags},
             "priced": pr,
             "flow": flow_side(conn, etype) if etype else {},

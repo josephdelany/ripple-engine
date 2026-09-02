@@ -38,6 +38,18 @@ navigate *significant* developments in the oil and petro-products economy.
 
 Modules: `src/big_moves.py`, `src/materiality.py`, `src/ledger.py`,
 `src/story_read.py`, `src/feed_build.py`, `src/api_v2.py`, `src/app.html`.
+
+**The reader** (`src/reader.py`, `CLAIM_LEDGER_REGISTRATION.md` Amendment 3): the Story
+and Feed read stories with a *caged* LLM extractor instead of keyword regexes. Claude
+runs through the local `claude` CLI on Joe's subscription (no API key, no tools, fixed
+JSON schema) and only *proposes* a class, entities with roles, and verbatim claims;
+deterministic Python decides what is allowed in — a quote not in the text is a
+fabrication and is dropped with the reason shown, a level not stated in the quote is
+dropped, horizons come from the registration, titles come from the page. MATERIAL now
+needs a tracked petro entity in an actor/target/asset/chokepoint role, not a keyword.
+If the CLI is unavailable the read falls back to the regex layer and says
+`regex_fallback` on every surface. Contract: `ops/reader_agent.md`; tests replay
+recorded model outputs on three saved articles (`tests/test_reader.py`).
 Acceptance: `python3 src/acceptance_v2.py` (A1–A11). The workbench remains at
 `/workbench` as a legacy view.
 

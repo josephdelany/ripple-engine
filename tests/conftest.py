@@ -9,6 +9,7 @@
    DB exists) via `python3 src/acceptance.py`, and the daily workflow's own `refresh.py` + `heartbeat.py`
    prove the engine actually rebuilds and runs end-to-end. Nothing is faked; the skip is logged.
 """
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -18,6 +19,9 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 DB = ROOT / "data" / "oil.db"
+# 3. The caged reader (src/reader.py) must never call the claude CLI from the test suite: model output is
+#    replayed from recorded fixtures (tests/fixtures/reader); everything else takes the labelled regex fallback.
+os.environ.setdefault("RIPPLE_READER", "off")
 
 # Test files that run WITHOUT a built oil.db (pure logic / committed-artifact reads). Verified: these
 # pass on a fresh checkout with no database. They are the deterministic CI gate.

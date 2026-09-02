@@ -67,3 +67,6 @@ data/vintages/
 # Workbench notes: Joe's private analysis drafts + exports (local writing pane).
 # Personal, never source -- the tool writes them; they never belong in the repo.
 data/notes/
+
+# Reader cache: model proposals keyed by content hash (derived; a story is re-read if absent)
+data/reader/

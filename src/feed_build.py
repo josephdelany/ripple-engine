@@ -28,7 +28,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ledger as L          # noqa: E402
 import materiality as M     # noqa: E402
-import triage as T          # noqa: E402
+import reader as R          # noqa: E402  the caged reader (Amendment 3): headlines batched, cached, fallback labelled
 
 ASSETS = [
     ("Brent", "fred.DCOILBRENTEU", "$/bbl"), ("WTI", "fred.DCOILWTICO", "$/bbl"),
@@ -79,10 +79,9 @@ def market_state(conn):
             "note": "percentile of the asset's own full history; 'rhymes' = nearest month-end state on (level pct, 20d change, vol pct), descriptive only"}
 
 
-def _headline_gap(conn, head, etype):
-    """If the headline itself makes a direction claim, the gap between it and the record."""
-    t = L.type_claim(head, etype)
-    if t["kind"] not in ("direction", "level", "flow", "escalation") or not t["checkable"]:
+def _headline_gap(conn, t):
+    """If the headline itself makes a checkable claim (typed by the reader), the gap between it and the record."""
+    if not t or t["kind"] not in ("direction", "level", "flow", "escalation") or not t["checkable"]:
         return None, None
     try:
         v = L.verdict_for(conn, t)
@@ -105,6 +104,7 @@ def build_feed(conn, limit=60):
     material, in_line, noise = [], [], []
     n_gdelt = 0
     seen = set()
+    items = []
     for r in todays:
         head = (r.get("headline") or "").strip()
         if not head or head in seen:
@@ -113,27 +113,36 @@ def build_feed(conn, limit=60):
         if head.startswith("[GDELT]"):
             n_gdelt += 1
             continue
-        etype = T.classify_type(head)
-        ents, _ = T.extract(conn, head)
+        items.append((head, r))
+    reads = R.read_headlines([h for h, _ in items], conn=conn)          # one caged read per headline
+    modes = {}
+    for (head, r), rd in zip(items, reads):
+        etype = rd["event_class"]
+        ents = [e["id"] for e in rd["entities"]]
         g = M.gate(etype)
         att = M.attention(ents)
         flags = M.flags_for(g["significance"], att.get("score"))
-        gap, hv = _headline_gap(conn, head, etype) if etype else (None, None)
+        gap, hv = _headline_gap(conn, rd["claims"][0] if rd["claims"] else None) if etype else (None, None)
         sig = g["significance"]
         gflags = list(g.get("flags") or [])
-        if sig == "MATERIAL" and not ents:
-            sig = "IN_LINE"; gflags.append("no_entity")          # Amendment 2: material needs a tracked entity
+        if sig == "MATERIAL" and not rd["qualifying_entities"]:
+            sig = "IN_LINE"; gflags.append("no_entity")          # Amendment 3 rule 5: a tracked petro entity in a gate role
+        mode = rd["reader"]["mode"]
+        modes[mode] = modes.get(mode, 0) + 1
         item = {"headline": head[:200], "url": r.get("url"), "source": r.get("source"), "when": (r.get("timestamp_utc") or "")[:16],
-                "event_class": etype, "entities": ents, "significance": sig, "why": g.get("why"),
+                "event_class": etype, "entities": ents, "roles": [{"id": e["id"], "role": e["role"]} for e in rd["entities"]],
+                "qualifying_entities": rd["qualifying_entities"], "reader": mode,
+                "significance": sig, "why": g.get("why"),
                 "ratio": g.get("ratio"), "rates": g.get("rates"), "gate_flags": gflags, "attention": att.get("score"),
                 "flags": flags, "headline_gap": gap, "headline_verdict": hv}
         {"MATERIAL": material, "IN_LINE": in_line, "NOISE": noise}[sig].append(item)
-    material.sort(key=lambda i: (-(i["ratio"] or 0), -len(i["entities"]), -(i["headline_gap"] or 0), i["when"]))
+    material.sort(key=lambda i: (-(i["ratio"] or 0), -len(i["qualifying_entities"]), -(i["headline_gap"] or 0), i["when"]))
     return {"day": day, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "material": material[:limit], "in_line": in_line[:limit], "noise": noise[:limit],
             "counts": {"day_total": len(todays), "gdelt_hidden": n_gdelt, "material": len(material), "in_line": len(in_line),
-                       "noise": len(noise)},
-            "gate": "CLAIM_LEDGER_REGISTRATION.md §1 (+ Amendments 1-2)", "note": "ranked by gate ratio, then headline-vs-record gap"}
+                       "noise": len(noise), "reader": modes},
+            "gate": "CLAIM_LEDGER_REGISTRATION.md §1 (+ Amendments 1-3)",
+            "note": "ranked by gate ratio, then qualifying entities, then headline-vs-record gap; headlines read by the caged reader (regex_fallback labelled)"}
 
 
 def run():

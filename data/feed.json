@@ -1,18 +1,32 @@
 {
  "day": "2026-08-31",
- "generated_at": "2026-09-02T03:57:12+00:00",
+ "generated_at": "2026-09-02T05:03:57+00:00",
  "material": [
   {
-   "headline": "India\u2019s PM Modi urges end to Ukraine war in talks with Russia\u2019s Putin",
-   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/31/indias-pm-modi-urges-end-to-ukraine-war-in-talks-with-russias-putin?traffic_source=rss",
-   "source": "rss:aljazeera",
+   "headline": "Trump vows response to Iranian strike on US troops in Jordan as tensions ratchet up",
+   "url": "https://www.timesofisrael.com/trump-vows-response-to-iranian-strike-on-us-troops-in-jordan-as-tensions-ratchet-up/",
+   "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": "conflict_escalation",
    "entities": [
-    "country.india",
-    "country.russia",
-    "country.ukraine"
+    "country.iran",
+    "country.usa"
    ],
+   "roles": [
+    {
+     "id": "country.iran",
+     "role": "actor"
+    },
+    {
+     "id": "country.usa",
+     "role": "target"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
    "ratio": 2.62,
@@ -39,18 +53,211 @@
    ],
    "attention": 93.1,
    "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
+   "headline_gap": 1,
+   "headline_verdict": "THIN"
   },
   {
-   "headline": "Oil Tankers Make Fortunes During War as Sinokor Dominates",
-   "url": "https://gcaptain.com/oil-tankers-make-fortunes-during-war-as-sinokor-dominates/",
+   "headline": "US and Iran Exchange Attacks for First Time in About a Month",
+   "url": "https://gcaptain.com/us-and-iran-exchange-attacks-for-first-time-in-about-a-month/",
    "source": "rss:gcaptain",
    "when": "2026-08-31T20:25",
    "event_class": "conflict_escalation",
    "entities": [
-    "supplychain.tankers"
+    "country.usa",
+    "country.iran",
+    "situation.israel_iran_war_2025"
    ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "country.iran",
+     "role": "actor"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": 1,
+   "headline_verdict": "THIN"
+  },
+  {
+   "headline": "War on Iran: US bombs Iran",
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/31/war-on-iran-us-bombs-iran?traffic_source=rss",
+   "source": "rss:aljazeera",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.usa",
+    "country.iran",
+    "situation.israel_iran_war_2025"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "country.iran",
+     "role": "target"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": 1,
+   "headline_verdict": "THIN"
+  },
+  {
+   "headline": "US and Iran trade strikes for first time in weeks",
+   "url": "https://www.bbc.co.uk/news/articles/cx2z72x5z1po?at_medium=RSS&at_campaign=rss",
+   "source": "rss:bbc_world",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.usa",
+    "country.iran"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "country.iran",
+     "role": "actor"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
+   "significance": "MATERIAL",
+   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
+   "ratio": 2.62,
+   "rates": {
+    "brent": {
+     "k": 11,
+     "n": 50,
+     "rate_pct": 22.0,
+     "base_pct": 18.3,
+     "ratio": 1.2,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 22,
+     "n": 50,
+     "rate_pct": 44.0,
+     "base_pct": 16.8,
+     "ratio": 2.62,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": 1,
+   "headline_verdict": "THIN"
+  },
+  {
+   "headline": "Vance says Trump \u2018sending a message\u2019 to Iran with AI-generated video",
+   "url": "https://www.aljazeera.com/economy/2026/8/31/vance-says-trump-sending-a-message-to-iran-with-ai-generated-video?traffic_source=rss",
+   "source": "rss:aljazeera",
+   "when": "2026-08-31T20:25",
+   "event_class": "conflict_escalation",
+   "entities": [
+    "country.iran",
+    "country.usa",
+    "situation.israel_iran_war_2025"
+   ],
+   "roles": [
+    {
+     "id": "country.iran",
+     "role": "target"
+    },
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
    "ratio": 2.62,
@@ -87,8 +294,23 @@
    "when": "2026-08-31T20:25",
    "event_class": "conflict_escalation",
    "entities": [
+    "country.iran",
+    "situation.israel_iran_war_2025"
+   ],
+   "roles": [
+    {
+     "id": "country.iran",
+     "role": "target"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
     "country.iran"
    ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
    "ratio": 2.62,
@@ -107,196 +329,6 @@
      "rate_pct": 44.0,
      "base_pct": 16.8,
      "ratio": 2.62,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Lebanon: Civilian risks grow as military activity continues, UN says",
-   "url": "https://news.un.org/feed/view/en/story/2026/08/1168215",
-   "source": "rss:un_news",
-   "when": "2026-08-31T20:25",
-   "event_class": "conflict_escalation",
-   "entities": [
-    "country.lebanon"
-   ],
-   "significance": "MATERIAL",
-   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
-   "ratio": 2.62,
-   "rates": {
-    "brent": {
-     "k": 11,
-     "n": 50,
-     "rate_pct": 22.0,
-     "base_pct": 18.3,
-     "ratio": 1.2,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 22,
-     "n": 50,
-     "rate_pct": 44.0,
-     "base_pct": 16.8,
-     "ratio": 2.62,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "War on Iran: US bombs Iran",
-   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/31/war-on-iran-us-bombs-iran?traffic_source=rss",
-   "source": "rss:aljazeera",
-   "when": "2026-08-31T20:25",
-   "event_class": "conflict_escalation",
-   "entities": [
-    "country.iran"
-   ],
-   "significance": "MATERIAL",
-   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
-   "ratio": 2.62,
-   "rates": {
-    "brent": {
-     "k": 11,
-     "n": 50,
-     "rate_pct": 22.0,
-     "base_pct": 18.3,
-     "ratio": 1.2,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 22,
-     "n": 50,
-     "rate_pct": 44.0,
-     "base_pct": 16.8,
-     "ratio": 2.62,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "How the US-Canada trade war is being felt on both sides of the border",
-   "url": "https://www.bbc.co.uk/news/articles/c4g4r4lxx25o?at_medium=RSS&at_campaign=rss",
-   "source": "rss:bbc_world",
-   "when": "2026-08-31T20:25",
-   "event_class": "conflict_escalation",
-   "entities": [
-    "country.canada"
-   ],
-   "significance": "MATERIAL",
-   "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
-   "ratio": 2.62,
-   "rates": {
-    "brent": {
-     "k": 11,
-     "n": 50,
-     "rate_pct": 22.0,
-     "base_pct": 18.3,
-     "ratio": 1.2,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 22,
-     "n": 50,
-     "rate_pct": 44.0,
-     "base_pct": 16.8,
-     "ratio": 2.62,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "$5.3 million a new record for Panama Canal transit",
-   "url": "https://www.freightwaves.com/news/5-3-million-a-new-record-for-panama-canal-transit",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": "chokepoint_disruption",
-   "entities": [
-    "country.panama"
-   ],
-   "significance": "MATERIAL",
-   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
-   "ratio": 2.29,
-   "rates": {
-    "brent": {
-     "k": 4,
-     "n": 26,
-     "rate_pct": 15.4,
-     "base_pct": 18.3,
-     "ratio": 0.84,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 10,
-     "n": 26,
-     "rate_pct": 38.5,
-     "base_pct": 16.8,
-     "ratio": 2.29,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Panama Canal Loosens Neopanamax Booking Rules as Capacity Tightens",
-   "url": "https://gcaptain.com/panama-canal-loosens-neopanamax-booking-rules-as-capacity-tightens/",
-   "source": "rss:gcaptain",
-   "when": "2026-08-31T20:25",
-   "event_class": "chokepoint_disruption",
-   "entities": [
-    "country.panama"
-   ],
-   "significance": "MATERIAL",
-   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
-   "ratio": 2.29,
-   "rates": {
-    "brent": {
-     "k": 4,
-     "n": 26,
-     "rate_pct": 15.4,
-     "base_pct": 18.3,
-     "ratio": 0.84,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 10,
-     "n": 26,
-     "rate_pct": 38.5,
-     "base_pct": 16.8,
-     "ratio": 2.29,
      "label": "Diesel crack"
     }
    },
@@ -315,8 +347,77 @@
    "when": "2026-08-31T20:25",
    "event_class": "chokepoint_disruption",
    "entities": [
-    "chokepoint.hormuz"
+    "chokepoint.hormuz",
+    "commodity.crude_oil"
    ],
+   "roles": [
+    {
+     "id": "chokepoint.hormuz",
+     "role": "chokepoint"
+    },
+    {
+     "id": "commodity.crude_oil",
+     "role": "asset"
+    }
+   ],
+   "qualifying_entities": [
+    "chokepoint.hormuz",
+    "commodity.crude_oil"
+   ],
+   "reader": "llm",
+   "significance": "MATERIAL",
+   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
+   "ratio": 2.29,
+   "rates": {
+    "brent": {
+     "k": 4,
+     "n": 26,
+     "rate_pct": 15.4,
+     "base_pct": 18.3,
+     "ratio": 0.84,
+     "label": "Brent"
+    },
+    "diesel_crack": {
+     "k": 10,
+     "n": 26,
+     "rate_pct": 38.5,
+     "base_pct": 16.8,
+     "ratio": 2.29,
+     "label": "Diesel crack"
+    }
+   },
+   "gate_flags": [
+    "product_side"
+   ],
+   "attention": 93.1,
+   "flags": [],
+   "headline_gap": 0.78,
+   "headline_verdict": "UNSUPPORTED"
+  },
+  {
+   "headline": "Red Sea nations step up maritime cooperation as regional threats grow",
+   "url": "https://news.un.org/feed/view/en/story/2026/08/1168211",
+   "source": "rss:un_news",
+   "when": "2026-08-31T20:25",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.bab_el_mandeb",
+    "country.yemen"
+   ],
+   "roles": [
+    {
+     "id": "chokepoint.bab_el_mandeb",
+     "role": "chokepoint"
+    },
+    {
+     "id": "country.yemen",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [
+    "chokepoint.bab_el_mandeb"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
    "ratio": 2.29,
@@ -347,33 +448,54 @@
    "headline_verdict": null
   },
   {
-   "headline": "WHO reports more than 3,200 attacks on Ukraine\u2019s healthcare system since full-scale invasion",
-   "url": "https://news.un.org/feed/view/en/story/2026/08/1168226",
-   "source": "rss:un_news",
+   "headline": "Russian Oil Is No Longer India\u2019s Easy Bargain",
+   "url": "https://oilprice.com/Energy/Crude-Oil/Russian-Oil-Is-No-Longer-Indias-Easy-Bargain.html",
+   "source": "rss:oilprice",
    "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
+   "event_class": "sanctions",
    "entities": [
-    "country.ukraine",
-    "institution.who"
+    "country.russia",
+    "country.india",
+    "commodity.crude_oil"
    ],
+   "roles": [
+    {
+     "id": "country.russia",
+     "role": "actor"
+    },
+    {
+     "id": "country.india",
+     "role": "target"
+    },
+    {
+     "id": "commodity.crude_oil",
+     "role": "asset"
+    }
+   ],
+   "qualifying_entities": [
+    "commodity.crude_oil",
+    "country.india",
+    "country.russia"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
+   "why": "sanctions sits inside a big Diesel crack move 34.5% of the time (19 of 55) vs 16.8% for any random day \u2014 2.1\u00d7 the everyday rate.",
+   "ratio": 2.06,
    "rates": {
     "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
+     "k": 8,
+     "n": 55,
+     "rate_pct": 14.5,
      "base_pct": 18.3,
-     "ratio": 0.62,
+     "ratio": 0.79,
      "label": "Brent"
     },
     "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
+     "k": 19,
+     "n": 55,
+     "rate_pct": 34.5,
      "base_pct": 16.8,
-     "ratio": 1.98,
+     "ratio": 2.06,
      "label": "Diesel crack"
     }
    },
@@ -386,32 +508,54 @@
    "headline_verdict": null
   },
   {
-   "headline": "New US \u2018pinpoint\u2019 missile raises civilian risk concerns after deadly Iran strikes",
-   "url": "https://www.timesofisrael.com/new-us-pinpoint-missile-raises-civilian-risk-concerns-after-deadly-iran-strikes/",
-   "source": "rss:timesofisrael",
+   "headline": "Trump\u2019s \u201cHistoric Deal\u201d With Venezuela Isn\u2019t Fooling Oil Traders",
+   "url": "https://oilprice.com/Energy/Crude-Oil/Trumps-Historic-Deal-With-Venezuela-Isnt-Fooling-Oil-Traders.html",
+   "source": "rss:oilprice",
    "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
+   "event_class": "sanctions",
    "entities": [
-    "country.iran"
+    "country.venezuela",
+    "country.usa",
+    "commodity.crude_oil"
    ],
+   "roles": [
+    {
+     "id": "country.venezuela",
+     "role": "target"
+    },
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "commodity.crude_oil",
+     "role": "asset"
+    }
+   ],
+   "qualifying_entities": [
+    "commodity.crude_oil",
+    "country.usa",
+    "country.venezuela"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
+   "why": "sanctions sits inside a big Diesel crack move 34.5% of the time (19 of 55) vs 16.8% for any random day \u2014 2.1\u00d7 the everyday rate.",
+   "ratio": 2.06,
    "rates": {
     "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
+     "k": 8,
+     "n": 55,
+     "rate_pct": 14.5,
      "base_pct": 18.3,
-     "ratio": 0.62,
+     "ratio": 0.79,
      "label": "Brent"
     },
     "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
+     "k": 19,
+     "n": 55,
+     "rate_pct": 34.5,
      "base_pct": 16.8,
-     "ratio": 1.98,
+     "ratio": 2.06,
      "label": "Diesel crack"
     }
    },
@@ -424,32 +568,48 @@
    "headline_verdict": null
   },
   {
-   "headline": "US and Iran Exchange Attacks for First Time in About a Month",
-   "url": "https://gcaptain.com/us-and-iran-exchange-attacks-for-first-time-in-about-a-month/",
-   "source": "rss:gcaptain",
+   "headline": "Iran could face economic collapse in months, US Treasury\u2019s Bessent warns",
+   "url": "https://www.aljazeera.com/economy/2026/8/31/iran-could-face-economic-collapse-in-months-us-treasurys-bessent-warns?traffic_source=rss",
+   "source": "rss:aljazeera",
    "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
+   "event_class": "sanctions",
    "entities": [
-    "country.iran"
+    "country.iran",
+    "country.usa"
    ],
+   "roles": [
+    {
+     "id": "country.iran",
+     "role": "target"
+    },
+    {
+     "id": "country.usa",
+     "role": "actor"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
+   "why": "sanctions sits inside a big Diesel crack move 34.5% of the time (19 of 55) vs 16.8% for any random day \u2014 2.1\u00d7 the everyday rate.",
+   "ratio": 2.06,
    "rates": {
     "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
+     "k": 8,
+     "n": 55,
+     "rate_pct": 14.5,
      "base_pct": 18.3,
-     "ratio": 0.62,
+     "ratio": 0.79,
      "label": "Brent"
     },
     "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
+     "k": 19,
+     "n": 55,
+     "rate_pct": 34.5,
      "base_pct": 16.8,
-     "ratio": 1.98,
+     "ratio": 2.06,
      "label": "Diesel crack"
     }
    },
@@ -468,8 +628,29 @@
    "when": "2026-08-31T20:25",
    "event_class": "infrastructure_attack",
    "entities": [
-    "country.iran"
+    "country.iran",
+    "country.usa",
+    "situation.israel_iran_war_2025"
    ],
+   "roles": [
+    {
+     "id": "country.iran",
+     "role": "target"
+    },
+    {
+     "id": "country.usa",
+     "role": "actor"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
+    "country.iran",
+    "country.usa"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
    "ratio": 1.98,
@@ -500,52 +681,29 @@
    "headline_verdict": null
   },
   {
-   "headline": "Dangote refinery drives increase in petroleum shipments from Nigeria",
-   "url": "https://www.eia.gov/todayinenergy/detail.php?id=68004",
-   "source": "rss:eia_energy",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [
-    "country.nigeria"
-   ],
-   "significance": "MATERIAL",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "US and Iran trade strikes for first time in weeks",
-   "url": "https://www.bbc.co.uk/news/articles/cx2z72x5z1po?at_medium=RSS&at_campaign=rss",
+   "headline": "Deadly strike on Kyiv warehouse prompts evacuations",
+   "url": "https://www.bbc.co.uk/news/videos/cy8z979y9e4o?at_medium=RSS&at_campaign=rss",
    "source": "rss:bbc_world",
    "when": "2026-08-31T20:25",
    "event_class": "infrastructure_attack",
    "entities": [
-    "country.iran"
+    "country.ukraine",
+    "situation.russia_ukraine_war"
    ],
+   "roles": [
+    {
+     "id": "country.ukraine",
+     "role": "target"
+    },
+    {
+     "id": "situation.russia_ukraine_war",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [
+    "country.ukraine"
+   ],
+   "reader": "llm",
    "significance": "MATERIAL",
    "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
    "ratio": 1.98,
@@ -578,196 +736,22 @@
  ],
  "in_line": [
   {
-   "headline": "Trump vows response to Iranian strike on US troops in Jordan as tensions ratchet up",
-   "url": "https://www.timesofisrael.com/trump-vows-response-to-iranian-strike-on-us-troops-in-jordan-as-tensions-ratchet-up/",
-   "source": "rss:timesofisrael",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "FedEx to invest $150M for air cargo terminal in Delhi",
-   "url": "https://www.freightwaves.com/news/fedex-to-invest-150m-for-air-cargo-terminal-in-delhi",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Averitt expands logistics network with Jackson, Mississippi, facility",
-   "url": "https://www.freightwaves.com/news/averitt-expands-logistics-network-with-jackson-mississippi-facility",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Motive Restricted Highway\u2019s Data Access Over a Payment Demand",
-   "url": "https://www.freightwaves.com/news/motive-restricted-highways-data-access-over-a-payment-demand",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": "demand_shock",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "demand shock sits inside a big Diesel crack move 29.4% of the time (5 of 17) vs 16.8% for any random day \u2014 1.8\u00d7 the everyday rate.",
-   "ratio": 1.75,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 17,
-     "rate_pct": 29.4,
-     "base_pct": 18.3,
-     "ratio": 1.61,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 5,
-     "n": 17,
-     "rate_pct": 29.4,
-     "base_pct": 16.8,
-     "ratio": 1.75,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Port of Los Angeles locks in ONE terminal for 30 more years",
-   "url": "https://www.freightwaves.com/news/port-of-los-angeles-locks-in-one-terminal-for-30-more-years",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Eight petroleum liquids pipeline projects have been completed since the start of 2025",
-   "url": "https://www.eia.gov/todayinenergy/detail.php?id=68024",
-   "source": "rss:eia_energy",
+   "headline": "Panama Canal Loosens Neopanamax Booking Rules as Capacity Tightens",
+   "url": "https://gcaptain.com/panama-canal-loosens-neopanamax-booking-rules-as-capacity-tightens/",
+   "source": "rss:gcaptain",
    "when": "2026-08-31T20:25",
    "event_class": "chokepoint_disruption",
-   "entities": [],
+   "entities": [
+    "country.panama"
+   ],
+   "roles": [
+    {
+     "id": "country.panama",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "IN_LINE",
    "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
    "ratio": 2.29,
@@ -799,12 +783,27 @@
    "headline_verdict": null
   },
   {
-   "headline": "As wars spread, the global food system unravels",
-   "url": "https://news.un.org/feed/view/en/story/2026/08/1168201",
+   "headline": "Lebanon: Civilian risks grow as military activity continues, UN says",
+   "url": "https://news.un.org/feed/view/en/story/2026/08/1168215",
    "source": "rss:un_news",
    "when": "2026-08-31T20:25",
    "event_class": "conflict_escalation",
-   "entities": [],
+   "entities": [
+    "country.lebanon",
+    "situation.israel_lebanon_hezbollah"
+   ],
+   "roles": [
+    {
+     "id": "country.lebanon",
+     "role": "location"
+    },
+    {
+     "id": "situation.israel_lebanon_hezbollah",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "IN_LINE",
    "why": "conflict escalation sits inside a big Diesel crack move 44.0% of the time (22 of 50) vs 16.8% for any random day \u2014 2.6\u00d7 the everyday rate.",
    "ratio": 2.62,
@@ -834,80 +833,6 @@
    "flags": [],
    "headline_gap": null,
    "headline_verdict": null
-  },
-  {
-   "headline": "Western Balkans truck drivers threaten EU border blockade",
-   "url": "https://www.aljazeera.com/economy/2026/8/31/western-balkans-truck-drivers-threaten-eu-border-blockade?traffic_source=rss",
-   "source": "rss:aljazeera",
-   "when": "2026-08-31T20:25",
-   "event_class": "chokepoint_disruption",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "chokepoint disruption sits inside a big Diesel crack move 38.5% of the time (10 of 26) vs 16.8% for any random day \u2014 2.3\u00d7 the everyday rate.",
-   "ratio": 2.29,
-   "rates": {
-    "brent": {
-     "k": 4,
-     "n": 26,
-     "rate_pct": 15.4,
-     "base_pct": 18.3,
-     "ratio": 0.84,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 10,
-     "n": 26,
-     "rate_pct": 38.5,
-     "base_pct": 16.8,
-     "ratio": 2.29,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Deadly strike on Kyiv warehouse prompts evacuations",
-   "url": "https://www.bbc.co.uk/news/videos/cy8z979y9e4o?at_medium=RSS&at_campaign=rss",
-   "source": "rss:bbc_world",
-   "when": "2026-08-31T20:25",
-   "event_class": "infrastructure_attack",
-   "entities": [],
-   "significance": "IN_LINE",
-   "why": "infrastructure attack sits inside a big Diesel crack move 33.3% of the time (15 of 45) vs 16.8% for any random day \u2014 2.0\u00d7 the everyday rate.",
-   "ratio": 1.98,
-   "rates": {
-    "brent": {
-     "k": 5,
-     "n": 44,
-     "rate_pct": 11.4,
-     "base_pct": 18.3,
-     "ratio": 0.62,
-     "label": "Brent"
-    },
-    "diesel_crack": {
-     "k": 15,
-     "n": 45,
-     "rate_pct": 33.3,
-     "base_pct": 16.8,
-     "ratio": 1.98,
-     "label": "Diesel crack"
-    }
-   },
-   "gate_flags": [
-    "product_side",
-    "no_entity"
-   ],
-   "attention": 93.1,
-   "flags": [],
-   "headline_gap": null,
-   "headline_verdict": null
   }
  ],
  "noise": [
@@ -918,6 +843,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -936,7 +864,17 @@
    "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.israel"
+   ],
+   "roles": [
+    {
+     "id": "country.israel",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -959,6 +897,18 @@
     "country.israel",
     "country.russia"
    ],
+   "roles": [
+    {
+     "id": "country.israel",
+     "role": "mention"
+    },
+    {
+     "id": "country.russia",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -978,6 +928,48 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "New US \u2018pinpoint\u2019 missile raises civilian risk concerns after deadly Iran strikes",
+   "url": "https://www.timesofisrael.com/new-us-pinpoint-missile-raises-civilian-risk-concerns-after-deadly-iran-strikes/",
+   "source": "rss:timesofisrael",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.usa",
+    "country.iran",
+    "situation.israel_iran_war_2025"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "mention"
+    },
+    {
+     "id": "country.iran",
+     "role": "mention"
+    },
+    {
+     "id": "situation.israel_iran_war_2025",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -996,7 +988,17 @@
    "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.israel"
+   ],
+   "roles": [
+    {
+     "id": "country.israel",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1016,6 +1018,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1034,7 +1039,17 @@
    "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.israel"
+   ],
+   "roles": [
+    {
+     "id": "country.israel",
+     "role": "mention"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1054,6 +1069,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1072,9 +1090,10 @@
    "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "country.israel"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1094,6 +1113,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1112,7 +1134,17 @@
    "source": "rss:timesofisrael",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.israel"
+   ],
+   "roles": [
+    {
+     "id": "country.israel",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1132,6 +1164,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1151,6 +1186,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1170,6 +1208,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1188,9 +1229,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "commodity.diesel"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1210,6 +1252,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1229,6 +1274,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1248,6 +1296,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1266,9 +1317,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1287,9 +1339,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1309,6 +1362,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1328,6 +1384,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1347,6 +1406,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1366,6 +1428,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1384,9 +1449,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "macro.rates"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1406,6 +1472,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1424,9 +1493,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1446,6 +1516,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1465,6 +1538,31 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "FedEx to invest $150M for air cargo terminal in Delhi",
+   "url": "https://www.freightwaves.com/news/fedex-to-invest-150m-for-air-cargo-terminal-in-delhi",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1484,6 +1582,31 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Averitt expands logistics network with Jackson, Mississippi, facility",
+   "url": "https://www.freightwaves.com/news/averitt-expands-logistics-network-with-jackson-mississippi-facility",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1503,6 +1626,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1522,6 +1648,31 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Motive Restricted Highway\u2019s Data Access Over a Payment Demand",
+   "url": "https://www.freightwaves.com/news/motive-restricted-highways-data-access-over-a-payment-demand",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1541,6 +1692,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1560,6 +1714,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1579,6 +1736,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1598,9 +1758,18 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [
-    "country.china",
-    "macro.geopolitics"
+    "country.china"
    ],
+   "roles": [
+    {
+     "id": "country.china",
+     "role": "actor"
+    }
+   ],
+   "qualifying_entities": [
+    "country.china"
+   ],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1620,6 +1789,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1638,7 +1810,41 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "actor"
+    }
+   ],
+   "qualifying_entities": [
+    "country.usa"
+   ],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "Port of Los Angeles locks in ONE terminal for 30 more years",
+   "url": "https://www.freightwaves.com/news/port-of-los-angeles-locks-in-one-terminal-for-30-more-years",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1658,6 +1864,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1679,6 +1888,14 @@
    "entities": [
     "country.canada"
    ],
+   "roles": [
+    {
+     "id": "country.canada",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1697,7 +1914,17 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1717,6 +1944,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1736,8 +1966,16 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [
-    "supplychain.freight"
+    "country.usa"
    ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1757,6 +1995,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1775,7 +2016,17 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1794,7 +2045,17 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1813,9 +2074,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1835,6 +2097,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1853,7 +2118,17 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1873,6 +2148,9 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1891,7 +2169,46 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [],
+   "entities": [
+    "country.usa"
+   ],
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
+   "significance": "NOISE",
+   "why": "maps to no event class the record measures",
+   "ratio": null,
+   "rates": {},
+   "gate_flags": [],
+   "attention": 93.1,
+   "flags": [
+    "LOUD_QUIET"
+   ],
+   "headline_gap": null,
+   "headline_verdict": null
+  },
+  {
+   "headline": "$5.3 million a new record for Panama Canal transit",
+   "url": "https://www.freightwaves.com/news/5-3-million-a-new-record-for-panama-canal-transit",
+   "source": "rss:freightwaves",
+   "when": "2026-08-31T20:25",
+   "event_class": null,
+   "entities": [
+    "country.panama"
+   ],
+   "roles": [
+    {
+     "id": "country.panama",
+     "role": "location"
+    }
+   ],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1910,9 +2227,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1931,9 +2249,10 @@
    "source": "rss:freightwaves",
    "when": "2026-08-31T20:25",
    "event_class": null,
-   "entities": [
-    "supplychain.freight"
-   ],
+   "entities": [],
+   "roles": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -1953,124 +2272,16 @@
    "when": "2026-08-31T20:25",
    "event_class": null,
    "entities": [
-    "supplychain.freight"
+    "country.usa"
    ],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
+   "roles": [
+    {
+     "id": "country.usa",
+     "role": "location"
+    }
    ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Out of its depth: Why 52 feet could equal millions of dollars for this U.S. port",
-   "url": "https://www.freightwaves.com/news/out-of-its-depth-why-52-feet-could-equal-millions-of-dollars-for-this-u-s-port",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
-   ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "California police investigate $70K beer cargo theft after fraudulent pickups",
-   "url": "https://www.freightwaves.com/news/california-police-investigate-70k-beer-cargo-theft-after-fraudulent-pickups",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
-   ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "North America must \u2018join forces\u2019 to compete as global trade fragments, expert says",
-   "url": "https://www.freightwaves.com/news/north-america-must-join-forces-to-compete-as-global-trade-fragments-expert-says",
-   "source": "rss:freightwaves",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
-   ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "US Carrier Visit to Thailand\u2019s Pattaya Lifts Hope and Sex-Tourism Risk",
-   "url": "https://gcaptain.com/us-carrier-visit-to-thailands-pattaya-lifts-hope-and-sex-tourism-risk/",
-   "source": "rss:gcaptain",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [
-    "country.thailand"
-   ],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
-   ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Cheniere Ships 5,000th LNG Cargo as Corpus Christi Expansion Wraps Up",
-   "url": "https://gcaptain.com/cheniere-ships-5000th-lng-cargo-as-corpus-christi-expansion-wraps-up/",
-   "source": "rss:gcaptain",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [],
-   "significance": "NOISE",
-   "why": "maps to no event class the record measures",
-   "ratio": null,
-   "rates": {},
-   "gate_flags": [],
-   "attention": 93.1,
-   "flags": [
-    "LOUD_QUIET"
-   ],
-   "headline_gap": null,
-   "headline_verdict": null
-  },
-  {
-   "headline": "Boliden to acquire 64.7% stake in Nexa Resources from Votorantim",
-   "url": "https://www.mining-technology.com/news/boliden-to-acquire-stake-in-nexa-resources/",
-   "source": "rss:mining_tech",
-   "when": "2026-08-31T20:25",
-   "event_class": null,
-   "entities": [],
+   "qualifying_entities": [],
+   "reader": "llm",
    "significance": "NOISE",
    "why": "maps to no event class the record measures",
    "ratio": null,
@@ -2087,10 +2298,13 @@
  "counts": {
   "day_total": 134,
   "gdelt_hidden": 11,
-  "material": 15,
-  "in_line": 9,
-  "noise": 99
+  "material": 13,
+  "in_line": 2,
+  "noise": 108,
+  "reader": {
+   "llm": 123
+  }
  },
- "gate": "CLAIM_LEDGER_REGISTRATION.md \u00a71 (+ Amendments 1-2)",
- "note": "ranked by gate ratio, then headline-vs-record gap"
+ "gate": "CLAIM_LEDGER_REGISTRATION.md \u00a71 (+ Amendments 1-3)",
+ "note": "ranked by gate ratio, then qualifying entities, then headline-vs-record gap; headlines read by the caged reader (regex_fallback labelled)"
 }

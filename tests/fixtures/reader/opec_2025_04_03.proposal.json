@@ -1,0 +1,88 @@
+{
+ "claims": [
+  {
+   "quote": "to start a gradual and flexible return of the 2.2 million barrels per day voluntary adjustments starting from 1 April 2025",
+   "kind": "policy",
+   "asset": "brent",
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "the eight participating countries will implement a production adjustment of 411 thousand barrels per day, equivalent to three monthly increments, in May 2025",
+   "kind": "policy",
+   "asset": "brent",
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "The gradual increases may be paused or reversed subject to evolving market conditions.",
+   "kind": "policy",
+   "asset": "brent",
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "hypothetical"
+  },
+  {
+   "quote": "They also confirmed their intention to fully compensate any overproduced volume since January 2024 and to submit updated front-loaded compensation plans to the OPEC Secretariat by 15 April 2025",
+   "kind": "policy",
+   "asset": "brent",
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  },
+  {
+   "quote": "The eight countries will meet on the 5th of May to decide on June production levels.",
+   "kind": "policy",
+   "asset": "brent",
+   "direction": null,
+   "level": null,
+   "horizon_days": null,
+   "modality": "asserted"
+  }
+ ],
+ "entities": [
+  {
+   "id": "country.saudi_arabia",
+   "role": "actor"
+  },
+  {
+   "id": "country.russia",
+   "role": "actor"
+  },
+  {
+   "id": "country.iraq",
+   "role": "actor"
+  },
+  {
+   "id": "country.uae",
+   "role": "actor"
+  },
+  {
+   "id": "country.kuwait",
+   "role": "actor"
+  },
+  {
+   "id": "country.kazakhstan",
+   "role": "actor"
+  },
+  {
+   "id": "institution.opec",
+   "role": "mention"
+  },
+  {
+   "id": "commodity.crude_oil",
+   "role": "asset"
+  }
+ ],
+ "event_class": "opec_decision",
+ "unmapped": [
+  "Algeria",
+  "Oman"
+ ]
+}
