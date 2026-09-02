@@ -223,6 +223,27 @@ def register(app):
             tiers[t] = td
         return {k: v for k, v in s.items() if k != "tiers"} | {"tiers": tiers}
 
+    @app.get("/api/record")
+    def api_record():
+        """NORTH_STAR §7 Record bar (Brief A-14): n events, n sealed reads, the §7 verdict statuses verbatim, last run_id, audit status."""
+        import audit_ies90 as AU
+        conn = sqlite3.connect(DB)
+        try:
+            n_events = conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
+            n_geo = conn.execute("SELECT COUNT(*) FROM events WHERE type IN ('conflict_escalation','infrastructure_attack','chokepoint_disruption','sanctions')").fetchone()[0]
+            n_ies = conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source='ies90' AND field='level'").fetchone()[0]
+        finally:
+            conn.close()
+        s = _json(DATA / "walk_forward" / "summary.json") or {}
+        reads = _walk_rows("reads.jsonl")
+        rules = (s.get("verdict") or {}).get("rules") or {}
+        au = AU.status()
+        return {"n_events": n_events, "n_geopolitical": n_geo, "n_ies90_labels": n_ies, "n_reads": len(reads),
+                "run_id": s.get("run_id"), "generated_at": s.get("generated_at"),
+                "statuses": {"engine:G": (rules.get("engine:G") or {}).get("status"), "engine:P": (rules.get("engine:P") or {}).get("status")},
+                "audit": {"status": au.get("status"), "n_done": au.get("n_done"), "n_rows": au.get("n_rows"), "kappa": au.get("kappa"), "passed": au.get("passed")},
+                "label": "the record: corpus, sealed reads, protocol §7 statuses verbatim, label audit"}
+
     @app.get("/api/walk/audit")
     def api_walk_audit():
         """The IES-90 label audit as recorded by Joe (data/audits/outcome_audit.json, written only by src/audit_ies90.py). Read-only."""
