@@ -186,3 +186,37 @@ fails (a)`, because clause (a) requires a primary. This batch has several such r
 they are not rounded up. The rule is unchanged; this note only makes the consequence
 explicit, since a reader may otherwise read a well-sourced partial as a failure of effort
 rather than of the archive.
+
+---
+
+## Amendment 2 (2026-09-02) — OPEC decisions cannot be sourced by any free route tested
+
+*Dated and appended. §4 recorded `opec.org` as HTTP 402. Working the 1990s and 2000s tiers
+showed the problem is wider than one host, and the consequence is structural rather than a
+matter of effort, so it is registered rather than left in a session report.*
+
+`opec_decision` is the second-largest class in the corpus (52 records) and the most heavily
+represented in the encyclopaedia-sourced set the audit found. Routes tested by the reviewer
+on the registration date, each requested directly:
+
+| route | result |
+|---|---|
+| `opec.org` press room and conference resolutions | HTTP 402 |
+| `oxfordenergy.org` (Oxford Institute for Energy Studies) | HTTP 403 |
+| `crsreports.congress.gov` (Congressional Research Service PDFs) | HTTP 403 |
+| `apnews.com` | refused by the fetch client |
+| `eia.gov/finance/markets/crudeoil/supply-opec.php` | reachable, but describes how OPEC sets targets in general and names no meeting, decision or quota change with a date |
+| `upi.com/Archives` | worked for 1987 and 1988 wire copy in one run and returned 403 in another; treat as intermittent |
+
+Some OPEC decisions **are** sourceable, and the pre-1990 and 1990s dossiers show how: through
+a document that reports the decision in passing (the Oxford Energy Forum piece used for the
+1985 shift, an NYU archival finding aid, an institutional review). That is opportunistic, not
+a route, and it will not scale to fifty records.
+
+**What this registers.** A dossier for an OPEC decision that cannot reach two independent
+citable domains is `partial — fails (a)`, and that is the expected outcome for this class
+rather than a sign of a poor search. No dossier may substitute an encyclopaedia, and none may
+assert a quota figure or a meeting date that was not retrieved. If the corpus is to carry
+sourced OPEC decisions at scale, that requires an archive this project does not currently
+have access to — a subscription news archive or OPEC's own paid materials — and that is a
+decision about money and licensing, which is Joe's, not a research task.
