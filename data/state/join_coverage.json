@@ -1,0 +1,185 @@
+{
+ "generated_at": "2026-09-02T15:39:07+00:00",
+ "n_events": 313,
+ "events_with_a_row": 313,
+ "fields_registered": 70,
+ "eras": {
+  "1946-86": {
+   "n_events": 14,
+   "median_fields_per_event": 38.0,
+   "median_distinct_fields": 23.0,
+   "min_fields": 19,
+   "events_ge_25_fields": 5,
+   "events_ge_12_fields": 14,
+   "blocks": {
+    "PHYSICAL": {
+     "events_with_field": 14,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "surplus_capacity_world"
+     ],
+     "rows": 28
+    },
+    "MARKET": {
+     "events_with_field": 14,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "curve_m1_m4_spread",
+      "kilian_igrea"
+     ],
+     "rows": 17
+    },
+    "ACTORS": {
+     "events_with_field": 14,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "cinc",
+      "coup_last_5y",
+      "leader_change_last_365d",
+      "leader_tenure_days",
+      "milex_cow",
+      "milex_gdp_share_sipri",
+      "milex_sipri",
+      "milper_cow",
+      "oil_rents_gdp",
+      "polity2",
+      "polity_durable"
+     ],
+     "rows": 241
+    },
+    "DYADS": {
+     "events_with_field": 8,
+     "share_of_events": 0.571,
+     "fields_seen": [
+      "atop_any_obligation",
+      "atop_defense_pact",
+      "icb_crisis_count",
+      "icb_last_outcome_form",
+      "icb_last_tension",
+      "icb_last_violence",
+      "mid_count_10y",
+      "mid_last_date",
+      "mid_max_hostlev_10y",
+      "unga_ideal_point_distance"
+     ],
+     "rows": 62
+    },
+    "SYSTEM": {
+     "events_with_field": 14,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "gpr_acts_monthly",
+      "gpr_country_monthly",
+      "gpr_monthly",
+      "gpr_threats_monthly",
+      "gprh_monthly",
+      "mepv_regional_war",
+      "ucdp_active_conflicts",
+      "ucdp_intensity_max"
+     ],
+     "rows": 112
+    },
+    "NARRATIVE": {
+     "events_with_field": 14,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "gprh_newspaper_share"
+     ],
+     "rows": 14
+    }
+   }
+  },
+  "1987->": {
+   "n_events": 299,
+   "median_fields_per_event": 27.0,
+   "median_distinct_fields": 24.0,
+   "min_fields": 12,
+   "events_ge_25_fields": 94,
+   "events_ge_12_fields": 239,
+   "blocks": {
+    "PHYSICAL": {
+     "events_with_field": 299,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "spare_capacity_opec",
+      "surplus_capacity_world"
+     ],
+     "rows": 712
+    },
+    "MARKET": {
+     "events_with_field": 299,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "curve_m1_m4_spread",
+      "kilian_igrea"
+     ],
+     "rows": 598
+    },
+    "ACTORS": {
+     "events_with_field": 213,
+     "share_of_events": 0.712,
+     "fields_seen": [
+      "cinc",
+      "coup_last_5y",
+      "leader_change_last_365d",
+      "leader_tenure_days",
+      "milex_cow",
+      "milex_gdp_share_sipri",
+      "milex_sipri",
+      "milper_cow",
+      "oil_rents_gdp",
+      "polity2",
+      "polity_durable"
+     ],
+     "rows": 2894
+    },
+    "DYADS": {
+     "events_with_field": 34,
+     "share_of_events": 0.114,
+     "fields_seen": [
+      "atop_any_obligation",
+      "atop_defense_pact",
+      "icb_crisis_count",
+      "icb_last_outcome_form",
+      "icb_last_tension",
+      "icb_last_violence",
+      "mid_count_10y",
+      "mid_last_date",
+      "mid_max_hostlev_10y",
+      "unga_ideal_point_distance"
+     ],
+     "rows": 344
+    },
+    "SYSTEM": {
+     "events_with_field": 299,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "gpr_acts_monthly",
+      "gpr_country_monthly",
+      "gpr_monthly",
+      "gpr_threats_monthly",
+      "gprh_monthly",
+      "mepv_regional_war",
+      "ucdp_active_conflicts",
+      "ucdp_battle_deaths",
+      "ucdp_intensity_max"
+     ],
+     "rows": 3243
+    },
+    "NARRATIVE": {
+     "events_with_field": 299,
+     "share_of_events": 1.0,
+     "fields_seen": [
+      "gprh_newspaper_share"
+     ],
+     "rows": 299
+    }
+   }
+  }
+ },
+ "acceptance_S2": {
+  "rule": "every event >= 25 non-unknown fields for 1987+ and >= 12 for 1946-86 (framework \u00a77)",
+  "1987->": "94 of 299",
+  "1946-86": "14 of 14"
+ }
+}
