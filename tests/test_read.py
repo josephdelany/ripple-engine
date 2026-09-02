@@ -25,7 +25,7 @@ def _synthetic(n=30, seed=3):
     idx = pd.bdate_range("1999-01-01", "2017-12-31")
     brent = pd.Series(50 * np.exp(np.cumsum(rng.normal(0, 0.01, len(idx)))), index=idx)
     vix = pd.Series(rng.normal(50, 10, len(idx)), index=idx)
-    events, edges, ies90 = [], {}, {}
+    events, edges, ies90, panel = [], {}, {}, {}
     dates = pd.date_range("2001-01-15", "2015-12-15", periods=n)
     for i, d in enumerate(dates):
         eid = f"ev{i:02d}"
@@ -35,11 +35,16 @@ def _synthetic(n=30, seed=3):
                        "sr_asset_role": "unknown", "sr_actor_propensity": None})
         level = "0" if i % 2 == 0 else ("3" if i % 4 == 1 else "1")
         ies90[eid] = {"level": level, "deal": (None if i % 5 == 0 else (1 if level == "1" else 0))}
+        # Amendment H: the situation fields are taken from knowable_at rows (vintage <= as_of); here every coded field is
+        # knowable on the event date, so the synthetic corpus keeps its situation block (labels follow the actor)
+        d_ = str(d.date())
+        panel[eid] = [{"field": "sr_actor", "value": events[-1]["sr_actor"], "vintage": d_}, {"field": "sr_target", "value": "country.b", "vintage": d_},
+                      {"field": "sr_conflict_scope", "value": "isolated", "vintage": d_}, {"field": "sr_tempo", "value": "nth", "vintage": d_}]
         edges[(eid, "fred.DCOILBRENTEU")] = float(rng.normal(0, 8))
         edges[(eid, "yf.sp500")] = float(rng.normal(0, 3))
     info = S.InfoSet({"vix_pct": vix})
     big = {"daily": {"windows": [("2008-09-01", "2008-12-31"), ("2014-10-01", "2015-01-31")], "base_pct": 18.3}}
-    return R.Corpus(events, info, {"daily": brent}, edges=edges, big_moves=big, ies90=ies90)
+    return R.Corpus(events, info, {"daily": brent}, edges=edges, big_moves=big, ies90=ies90, panel=panel)
 
 
 def test_step7_branch_counts_sum_to_n_synthetic():

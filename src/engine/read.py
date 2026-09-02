@@ -101,6 +101,34 @@ class Corpus:
         for e in self.events:
             e["tier"] = self.tier_of(e["event_date"])
 
+    # Amendment H (2026-09-02): the coded situation fields come from situation_state's knowable_at rows (session A's
+    # WORLD_STATE_FRAMEWORK.md Amendment A: entity 'situation', vintage = knowable_at); a field with no row knowable at
+    # as_of is unknown. H.1 (same day, correction): prior_dyad and propensity are derived by situation_record.py from
+    # DATED prior corpus events, so they are knowable at t by construction and stay as coded; the rule applies to the
+    # five source-coded fields below.
+    KNOWABLE_FIELDS = ("actor", "target", "conflict_scope", "tempo", "asset_role")
+
+    def _apply_knowable(self, v, event_id, as_of):
+        rows = self.panel.get(event_id) or []
+        as_of = pd.Timestamp(as_of)
+        blanked = []
+        for f in self.KNOWABLE_FIELDS:
+            col = S.SR_MAP[f]
+            known = [r for r in rows if r.get("field") == col and not S.is_unknown(r.get("value"))
+                     and r.get("vintage") and pd.Timestamp(r["vintage"]) <= as_of]
+            if known:
+                v["fields"][f] = known[-1]["value"]
+            else:
+                if v["fields"].get(f) is not None:
+                    blanked.append(f)
+                v["fields"][f] = None
+        knowns = [f for f, x in v["fields"].items() if not S.is_unknown(x)]
+        v["n_known"] = len(knowns)
+        v["unknown"] = sorted(f for f in v["fields"] if f not in knowns)
+        v["situation_blanked"] = blanked                       # coded but not knowable at as_of (published share)
+        v["situation_known_at_t"] = [f for f in self.KNOWABLE_FIELDS if v["fields"].get(f) is not None]
+        return v
+
     def tier_of(self, date):
         return "daily" if pd.Timestamp(date) >= self.daily_start else "monthly"
 
@@ -109,6 +137,7 @@ class Corpus:
         if event_id not in self._vec:
             e = self.by_id[event_id]
             v = S.state_vector(e, info=self.info, panel_rows=self.panel.get(event_id), schema_extra=self.schema_extra)
+            self._apply_knowable(v, event_id, e["event_date"])
             lab = self.ies90.get(event_id)
             v["outcome"] = lab["level"] if lab else None          # the IES-90 level: label only, never a similarity field
             v["deal"] = lab["deal"] if lab else None
@@ -215,8 +244,8 @@ def _panel_rows(conn):
         if not has:
             return {}
         rows = {}
-        for eid, f, v, vin, src in conn.execute("SELECT event_id, field, value, vintage, source FROM situation_state"):
-            rows.setdefault(eid, []).append({"field": f, "value": v, "vintage": vin, "source": src})
+        for eid, f, v, vt, vin, src in conn.execute("SELECT event_id, field, value, value_text, vintage, source FROM situation_state"):
+            rows.setdefault(eid, []).append({"field": f, "value": (v if v is not None else vt), "vintage": vin, "source": src})   # text fields live in value_text
         return rows
     except Exception:
         return {}

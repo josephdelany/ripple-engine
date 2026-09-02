@@ -101,6 +101,17 @@ def is_unknown(v):
 
 # ============================================================================ the information set
 
+# WALK_FORWARD_PROTOCOL.md Amendment G (2026-09-02): release lags applied in the engine, in calendar days. An
+# observation dated d is visible at t only if d + lag < t. cot_pct: CFTC COT positions as of Tuesday, released
+# Friday (3); inv_sigma: EIA WPSR week ending Friday, released the following Wednesday (5). Holidays not modelled.
+RELEASE_LAGS = {"cot_pct": 3, "inv_sigma": 5}
+
+
+def _cutoff(field, t):
+    """The exclusive upper bound on observation dates visible at t: t - lag(field)."""
+    return np.datetime64(pd.Timestamp(t) - pd.Timedelta(days=RELEASE_LAGS.get(field, 0)))
+
+
 class InfoSet:
     """Everything dated, so that any statistic can be asked 'as of t' and use only data before t.
 
@@ -140,15 +151,27 @@ class InfoSet:
         if field not in self._s:
             return None
         idx, v, _, _ = self._s[field]
-        i = np.searchsorted(idx, np.datetime64(pd.Timestamp(t))) - 1   # last index with date < t
+        i = np.searchsorted(idx, _cutoff(field, t)) - 1   # last index with date < t - lag (Amendment G)
         return float(v[i]) if i >= 0 else None
+
+    def independent_value_before(self, field, t):
+        """The same question answered by a boolean mask instead of searchsorted -- the filtration audit's
+        independent path (Amendment F.1). Returns (value, obs_date) or (None, None)."""
+        if field not in self._s:
+            return None, None
+        idx, v, _, _ = self._s[field]
+        ok = idx < _cutoff(field, t)
+        if not ok.any():
+            return None, None
+        j = int(np.flatnonzero(ok)[-1])
+        return float(v[j]), str(pd.Timestamp(idx[j]).date())
 
     def stats(self, field, t):
         """(mean, sd, n) over observations dated strictly before t. None if n < MIN_STD_N or sd == 0."""
         if field not in self._s:
             return None
         idx, v, c1, c2 = self._s[field]
-        n = int(np.searchsorted(idx, np.datetime64(pd.Timestamp(t))))   # count of dates < t
+        n = int(np.searchsorted(idx, _cutoff(field, t)))   # count of dates < t
         if n < MIN_STD_N:
             return None
         mean = c1[n - 1] / n
@@ -212,8 +235,8 @@ def apply_panel(fields, rows, as_of, schema_extra=None):
             f, v, vin = r.get("field"), r.get("value"), r.get("vintage")
         else:
             f, v, vin = r[0], r[1], r[2] if len(r) > 2 else None
-        if f is None or is_unknown(v):
-            continue
+        if f is None or is_unknown(v) or str(f).startswith("sr_"):
+            continue                                        # sr_* rows are the situation record (Amendment H): read.Corpus.vector applies them
         if vin is not None and pd.Timestamp(vin) > as_of:
             continue                                        # not knowable at as_of
         added[f] = v

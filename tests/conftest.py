@@ -38,6 +38,8 @@ DB_FREE_FILES = {
     "test_walk_recalibration.py",    # Amendment C: synthetic corpus only
     "test_candidates_pre1987.py",    # Brief B-3: reads the committed candidate sheet only
     "test_walk_archive.py",          # Amendment D: synthetic corpus, temp dirs
+    "test_walk_filtration_audit.py", # Amendments F.1, G, H: synthetic corpus, monkeypatched leaks
+    "test_walk_determinism.py",      # Amendment I: two synthetic runs
 }
 
 

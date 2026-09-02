@@ -219,3 +219,41 @@ def power_mds(sd, n, lag=0, alpha=0.05, target=0.80, n_sims=400, seed=19900802, 
         if pw >= target:
             return {"n": n, "sd": float(sd), "mds": float(delta), "power_at_mds": pw, "curve": out, "n_sims": n_sims}
     return {"n": n, "sd": float(sd), "mds": None, "curve": out, "note": "not reached on the grid", "n_sims": n_sims}
+
+
+# ---------------------------------------------------------------- power under the measured block dependence (Brief 2, B-6)
+
+def power_block(d, mean_block, lag, ref_mean, n_list, skill_grid=(0.01, 0.02, 0.03, 0.05, 0.075, 0.10, 0.15, 0.20, 0.30),
+                n_scan=(150, 200, 300, 400, 600, 800, 1200, 1600, 2400, 3200, 4800), target_skill=0.05,
+                n_sims=400, alpha=0.05, power_target=0.80, seed=19900802):
+    """Minimum detectable SKILL at `power_target` for a DM/HLN test, by simulation from the SEALED score
+    differential series d = loss_engine - loss_reference: the series is centred (the null), resampled by the
+    stationary block bootstrap with the tier's measured mean block, shifted by -skill * ref_mean, and tested
+    with the tier's HAC lag. Also the n at which skill `target_skill` is detected with `power_target` power."""
+    d = np.asarray(d, float); dc = d - d.mean()
+    rng = np.random.default_rng(seed)
+    def power(n, skill, sims):
+        rej = 0
+        for _ in range(sims):
+            x = dc[stationary_bootstrap(len(dc), mean_block, rng, size=n)] - skill * ref_mean
+            r = dm_test(x, np.zeros(n), h=1, lag=lag)
+            rej += bool(r.get("ok") and r["p_value"] < alpha and r["mean_diff"] < 0)
+        return rej / sims
+    out = {"method": "stationary block bootstrap of the centred sealed differential series, shifted by -skill * ref_mean; DM/HLN with the tier's HAC lag",
+           "mean_block": float(mean_block), "hac_lag": int(lag), "ref_mean": float(ref_mean), "n_series": int(len(d)), "n_sims": n_sims,
+           "alpha": alpha, "power_target": power_target, "by_n": {}}
+    for n in n_list:
+        curve = [(float(sk), power(int(n), sk, n_sims)) for sk in skill_grid]
+        mds = None
+        for (s0, p0), (s1, p1) in zip(curve, curve[1:]):
+            if p0 < power_target <= p1:
+                mds = s0 + (power_target - p0) * (s1 - s0) / (p1 - p0); break
+        if mds is None and curve and curve[0][1] >= power_target:
+            mds = curve[0][0]
+        out["by_n"][str(int(n))] = {"curve": curve, "mds_skill": (round(float(mds), 4) if mds is not None else None),
+                                    "note": None if mds is not None else "not reached on the grid"}
+    scan = [(int(n), power(int(n), target_skill, max(n_sims // 2, 100))) for n in sorted(set(int(x) for x in n_scan) | set(int(x) for x in n_list))]
+    n_req = next((n for n, pw in scan if pw >= power_target), None)
+    out["n_required_for_skill"] = {"skill": target_skill, "n": n_req, "scan": scan,
+                                   "note": None if n_req is not None else f"not reached by n = {scan[-1][0]}"}
+    return out

@@ -61,6 +61,11 @@ REGISTERED = {
                  "deal": "binary brier"},
     "g_baselines": ["climatology", "frozen", "random_analogs", "persistence"],   # §4 + Amendment B (G-persistence: the dyad's IES level over [t-90, t-1], 0.9/0.1 smoothed; fallback climatology, counted)
     "menu_cap": "12 weightings + the recalibrated item M13 (Amendment C)",
+    "seeds": {"bootstrap_and_spa": 19900802, "permutation": 19900802, "placebo": 19900802, "reliability_bands": 7, "power": 19900802,
+              "random_analogs": "int(sha256(event_id)[:8], 16) (+1 for P)"},                       # Amendment I
+    "release_lags_days": dict(S.RELEASE_LAGS),                                                    # Amendment G
+    "permutation_rule": "block permutation over the registered 35-day clusters decides §7 (Amendment F.2); the §6 i.i.d. within-class permutation is published beside it",
+    "situation_fields": "actor/target/conflict_scope/tempo/asset_role from situation_state knowable_at rows with vintage <= as_of, else unknown (Amendment H); prior_dyad/propensity corpus-derived from dated prior events (H.1)",
     "burn_in": 8,                # class needs >= 8 prior members with closed outcomes to be scored (§2)
     "k_max": 12,                 # analogs kept per item so the spec curve can slice k without re-reading
     "cluster_days": 35,          # reads within 35 days are one cluster (§6): sets the bootstrap block + HAC lag
@@ -88,8 +93,32 @@ def _canon(obj):
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False, default=str)
 
 
+CONTENT_EXCLUDE = ("hash", "sealed_at", "run_id", "content_hash")          # Amendment I: wall-clock and run identity
+
+
+def content_view(record):
+    """The record without its wall-clock stamps and run identity: what two runs on the same inputs must reproduce."""
+    import copy
+    v = copy.deepcopy({k: x for k, x in record.items() if k not in CONTENT_EXCLUDE})
+    for it in v.get("items", []):
+        if isinstance(it.get("recal"), dict):
+            it["recal"].pop("fit_max_looked_up_at", None)
+    return v
+
+
+def content_hash(record):
+    return hashlib.sha256(_canon(content_view(record)).encode()).hexdigest()
+
+
+def content_digest(reads):
+    """SHA-256 over the ordered content hashes of a run's reads (Amendment I)."""
+    return hashlib.sha256("\n".join(r.get("content_hash") or content_hash(r) for r in reads).encode()).hexdigest()
+
+
 def seal(record):
-    """Content hash over the whole record (sealed_at included) -- any later change is detectable."""
+    """Content hash over the whole record (sealed_at included) -- any later change is detectable.
+    content_hash (Amendment I) excludes the wall-clock stamps and the run id so two runs can be compared."""
+    record["content_hash"] = content_hash(record)
     record["sealed_at"] = _now()
     record["hash"] = hashlib.sha256(_canon({k: v for k, v in record.items() if k != "hash"}).encode()).hexdigest()
     return record
@@ -263,7 +292,10 @@ class Walk:
                                  "random_analogs": {"k": self.menu[0]["k"], "draws": self.p["random_draws"],
                                                     "seed": int(hashlib.sha256(e["event_id"].encode()).hexdigest()[:8], 16),
                                                     "g_pool_ids": [c["event_id"] for c in g_pool], "p_pool_ids": [c["event_id"] for c in p_pool]}},
-                   "state_unknown": self.c.vector(e["event_id"])["unknown"]}
+                   "state_unknown": self.c.vector(e["event_id"])["unknown"],
+                   "state_market": {f: v_ for f, v_ in self.c.vector(e["event_id"])["fields"].items() if f in S.MARKET_SERIES or f in S.MOMENTUM},
+                   "situation_known_at_t": self.c.vector(e["event_id"]).get("situation_known_at_t", []),
+                   "situation_blanked": self.c.vector(e["event_id"]).get("situation_blanked", [])}
             seal(rec)
             rf.write(json.dumps(rec, ensure_ascii=False, default=str) + "\n"); rf.flush()
             self.reads.append(rec)
@@ -348,7 +380,7 @@ class Walk:
                 f.setdefault(name, {})["G"] = self._score_g(src, br, at["labels"], at["weights"]) if src and at else (self._score_g(src, br) if src else None)
             f.setdefault("climatology", {})["G"] = self._score_g(clim["G"], br, clim.get("G_labels")) if clim["G"] else None
             pg = (rec["baselines"].get("persistence") or {}).get("G")
-            f.setdefault("persistence", {})["G"] = self._score_g(pg, br) if pg else None
+            f.setdefault("persistence", {})["G"] = (self._score_g(pg, br) | {"brier_fair": SC.brier(pg, br), "rps_fair": SC.rps(pg, br), "n_atoms": 1}) if pg else None
             for it in rec["items"]:
                 f.setdefault(it["id"], {})["G"] = self._score_g(it["G"], br, it.get("G_labels")) if it["G"] else None
             rg = self._random_g(rec, br, outcome["deal"])
@@ -597,6 +629,7 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
         blk["diagnostic_fair"] = {"score": fk, "registered": False,
                                   "engine_vs_climatology": _skill_block(_paired(sc, task, fk, "engine", "climatology"), task, fk, "engine", "climatology", mb, min(n_boot, 500), max(lag, 0)),
                                   "frozen_vs_climatology": _skill_block(_paired(sc, task, fk, "frozen", "climatology"), task, fk, "frozen", "climatology", mb, min(n_boot, 500), max(lag, 0)),
+                                  "engine_vs_persistence": _skill_block(_paired(sc, task, fk, "engine", "persistence"), task, fk, "engine", "persistence", mb, min(n_boot, 500), max(lag, 0)),   # Amendment F.4
                                   "note": "size-corrected (Ferro 2014) scores published beside the registered ones; gates use the registered scores only"}
         # secondary scores
         if task == "G":
@@ -607,7 +640,8 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
                                                         for ref in refs},
                           "items_vs_climatology": {iid: _skill_block(_paired(sc, task, "rps", iid, "climatology"), task, "rps", iid, "climatology", mb, min(n_boot, 300), max(lag, 0))
                                                    for iid in item_ids},
-                          "learning_curve": _learning_curve(sc, task, "rps")}
+                          "learning_curve": _learning_curve(sc, task, "rps"),
+                          "spa": _spa_block(sc, task, "rps", "climatology", item_ids + ["engine", "frozen"], n_spa, mb)}   # Amendment F.3
             blk["diagnostic_fair"]["rps_engine_vs_climatology"] = _skill_block(_paired(sc, task, "rps_fair", "engine", "climatology"), task, "rps_fair", "engine", "climatology", mb, min(n_boot, 500), max(lag, 0))
             # the DEAL flag (binary Brier), scored only where the realized flag is known
             drows = _paired(sc, "D", "brier", "engine", "climatology")
@@ -754,17 +788,41 @@ def permutation_test(reads, scores, p, n_perm=None, seed=19900802):
     obs, ob_e, ob_c = skill_for(lab)
     rng = np.random.default_rng(seed)
     null = []
-    for _ in range(n_perm):
+    for _ in range(n_perm):                                              # §6: i.i.d. within class (registered)
         lp = lab.copy()
         for cls_, idxs in groups.items():
             idxs = np.array(idxs)
             lp[idxs] = lab[idxs][rng.permutation(len(idxs))]
         null.append(skill_for(lp)[0])
     null = np.array(null)
+    # Amendment F.2: block permutation -- the registered 35-day clusters (same tier, gap <= cluster_days) are permuted as units
+    clusters, cur = [], [0]
+    for i in range(1, T):
+        gap = (pd.Timestamp(str(dates[i])) - pd.Timestamp(str(dates[i - 1]))).days
+        if tiers[i] == tiers[i - 1] and gap <= p["cluster_days"]:
+            cur.append(i)
+        else:
+            clusters.append(cur); cur = [i]
+    clusters.append(cur)
+    rng_b = np.random.default_rng(seed + 1)
+    null_b = []
+    for _ in range(n_perm):
+        order = rng_b.permutation(len(clusters))
+        seq = [i for k_ in order for i in clusters[k_]]
+        lp = lab.copy()
+        for pos_i, src_i in enumerate(seq):
+            lp[tgt[pos_i]] = lab[tgt[src_i]]
+        null_b.append(skill_for(lp)[0])
+    null_b = np.array(null_b)
+    iid = {"p_value": INF.permutation_p(obs, null), "null_mean": float(null.mean()), "null_sd": float(null.std()), "null_p95": float(np.percentile(null, 95)),
+           "rule": "§6 registered: labels shuffled i.i.d. within class"}
+    block = {"p_value": INF.permutation_p(obs, null_b), "null_mean": float(null_b.mean()), "null_sd": float(null_b.std()), "null_p95": float(np.percentile(null_b, 95)),
+             "n_clusters": len(clusters), "mean_cluster_size": round(T / len(clusters), 2),
+             "rule": f"Amendment F.2: intact {p['cluster_days']}-day clusters permuted as units (class stratification dropped)"}
     return {"n_reads": T, "n_perm": n_perm, "observed_skill": float(obs), "engine_brier": float(ob_e), "climatology_brier": float(ob_c),
-            "null_mean": float(null.mean()), "null_sd": float(null.std()), "null_p95": float(np.percentile(null, 95)),
-            "p_value": INF.permutation_p(obs, null),
-            "note": "recomputed from sealed analog ids with labels shuffled within class; Hedge replayed with the closed-by-t rule"}
+            "p_value": block["p_value"], "decides": "block (Amendment F.2)", "block": block, "iid": iid,
+            "null_mean": block["null_mean"], "null_sd": block["null_sd"], "null_p95": block["null_p95"],
+            "note": "recomputed from sealed analog ids; Hedge and M13 replayed with the closed-by-t rule; p_value is the block-permutation p, the i.i.d. p is beside it"}
 
 
 def regime_blocks(reads, scores, p, n_boot=300):
@@ -944,7 +1002,9 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
             if not pool_dates:
                 continue
             pd_ = pool_dates[int(rng.integers(0, len(pool_dates)))]
-            pseudo = {k_: v for k_, v in e.items() if k_.startswith("sr_") or k_ in ("type", "title")}
+            vec_e = corpus.vector(e["event_id"])                        # Amendment H: the situation fields as knowable at the real event's date
+            pseudo = {k_: v for k_, v in e.items() if k_ in ("type", "title")}
+            pseudo |= {col: (vec_e["fields"].get(f) if vec_e["fields"].get(f) is not None else "unknown") for f, col in S.SR_MAP.items()}
             pseudo |= {"event_id": f"placebo:{e['event_id']}:{rep}", "event_date": str(pd_.date())}
             vals_items, ids_items = [], []
             for m in base:
@@ -988,7 +1048,7 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
             "note": "frozen (uniform) mixture; situation fields copied from the matched real event; P only (no branch outcome exists at a non-event date)"}
 
 
-def leakage_test(sealed: Walk, broken: Walk, recal_broken: Walk = None):
+def leakage_test(sealed: Walk, broken: Walk, recal_broken: Walk = None, audit=None):
     """§1: the walk with the filtration broken must differ from the sealed run, or the result is void.
     Amendment C.6: a recalibrator fitted with the closed-by-t rule broken must change M13 on >= 1 read."""
     hs = {r["hash"] for r in sealed.reads}; hb = {r["hash"] for r in broken.reads}
@@ -1016,8 +1076,65 @@ def leakage_test(sealed: Walk, broken: Walk, recal_broken: Walk = None):
         out["recalibration_rule"] = {"n_reads_with_different_M13": n_diff, "base_items_identical": same_base,
                                      "n_broken_reads_that_used_an_unclosed_outcome": n_pending, "asserted": r_ok}
         ok = ok and r_ok
-    out |= {"asserted": ok, "verdict": "filtration is binding" if ok else "VOID: a broken rule changed nothing"}
+    if audit is not None:                                                    # Amendment F.1
+        out["filtration_audit_clean"] = bool(audit.get("clean"))
+        ok = ok and bool(audit.get("clean"))
+    out |= {"asserted": ok, "verdict": "filtration is binding" if ok else ("VOID: the filtration audit found a violation" if audit is not None and not audit.get("clean") else "VOID: a broken rule changed nothing")}
     return out
+
+
+def filtration_audit(corpus, reads):
+    """Amendment F.1: inside the sealed run, by an independent path (raw dates and a mask-based lookup, never the
+    functions that built the read): every analog dated before as_of; every g_closed analog's window closed (date + 90
+    <= as_of); every p_closed analog's closing price observation dated <= as_of; every market value in the read's state
+    equal to the last observation dated < as_of - lag; the persistence window ending before as_of."""
+    counts = defaultdict(int); n_checks = defaultdict(int); first = None
+    def viol(kind, r, detail):
+        nonlocal first
+        counts[kind] += 1
+        if first is None:
+            first = {"kind": kind, "event_id": r["event_id"], "as_of": r["as_of"], "detail": detail}
+    for r in reads:
+        as_of = r["as_of"]; tier = r["tier"]; H = r["horizon"]
+        s = corpus.prices.get(tier)
+        seen = set()
+        for it in r["items"]:
+            for a in it.get("ranked", []):
+                aid, g_cl, p_cl = a[0], bool(a[2]), bool(a[3])
+                if aid in seen:
+                    continue
+                seen.add(aid)
+                e = corpus.by_id.get(aid)
+                if e is None:
+                    viol("analog_unknown", r, aid); continue
+                n_checks["analog_date"] += 1
+                if not (e["event_date"] < as_of):
+                    viol("analog_date", r, f"{aid} dated {e['event_date']}")
+                if g_cl:
+                    n_checks["g_window"] += 1
+                    if str((pd.Timestamp(e["event_date"]) + pd.Timedelta(days=R.G_HORIZON_DAYS)).date()) > as_of:
+                        viol("g_window", r, f"{aid} +90d window open at {as_of}")
+                if p_cl and s is not None:
+                    n_checks["p_window"] += 1
+                    pos = int(s.index.searchsorted(pd.Timestamp(e["event_date"])))
+                    if pos + H >= len(s) or str(s.index[pos + H].date()) > as_of:
+                        viol("p_window", r, f"{aid} +{H} price window open at {as_of}")
+        for f, val in (r.get("state_market") or {}).items():
+            if val is None:
+                continue
+            n_checks["market_value"] += 1
+            iv, d = corpus.info.independent_value_before(f, as_of)
+            if iv is None or abs(float(val) - iv) > 1e-9:
+                viol("market_value", r, f"{f}: read used {val}, last value dated < as_of - lag is {iv} ({d})")
+        pw = (r["baselines"].get("persistence") or {}).get("window_pre")
+        if pw:
+            n_checks["persistence_window"] += 1
+            if not (pw[1] < as_of):
+                viol("persistence_window", r, f"window {pw} not before {as_of}")
+    n_viol = int(sum(counts.values()))
+    return {"n_reads": len(reads), "checks": dict(n_checks), "violations": dict(counts), "n_violations": n_viol, "first_violation": first,
+            "release_lags_days": dict(S.RELEASE_LAGS), "clean": n_viol == 0,
+            "note": "Amendment F.1: independent recomputation inside the sealed run; one violation voids the run (leakage_test.asserted false)"}
 
 
 def big_moves_knew(corpus, reads, scores):
@@ -1062,12 +1179,30 @@ def data_state(corpus):
            "share_geo_labelled": round(len(labelled) / len(geo), 3) if geo else None,
            "ies90_level_counts": {l: lv.count(l) for l in LEVELS}, "n_geo_with_deal_flag": with_deal,
            "panel_events_with_rows": len(corpus.panel), "codebook_fields": len(corpus.schema_extra)}
+    vecs = [corpus.vector(e["event_id"]) for e in corpus.events]
+    out["situation_knowable"] = {"rule": "Amendment H: actor/target/conflict_scope/tempo/asset_role from situation_state knowable_at rows (vintage <= as_of)",
+                                 "n_events_with_a_situation_field_at_t": sum(1 for v in vecs if v.get("situation_known_at_t")),
+                                 "n_events_with_none": sum(1 for v in vecs if not v.get("situation_known_at_t")),
+                                 "fields_blanked": sum(len(v.get("situation_blanked", [])) for v in vecs),
+                                 "fields_known_at_t": sum(len(v.get("situation_known_at_t", [])) for v in vecs)}
     if geo and coded < 0.5 * n:
         out["warning_situation"] = ("situation record largely absent: similarity runs on the market block only. "
                                     "Re-run src/situation_record.py (writes the events table; Joe's call) and then src/walk.py.")
     if geo and len(labelled) < 0.5 * len(geo):
         out["warning_labels"] = "IES-90 levels largely absent: G is not scorable. Run python3 src/state/ies90.py (session A) and then src/walk.py."
     return out
+
+
+def _knowable_limit():
+    """WORLD_STATE_FRAMEWORK.md Amendment A (session A, 2026-09-02): the situation fields now carry knowable_at; the
+    walk still reads events.sr_* as coded (protocol §1 LIMITATION). Quote session A's counts as computed, never restate them."""
+    try:
+        d = json.load(open(ROOT / "data" / "state" / "situation_knowable.json"))
+        return (f"situation fields are read as coded (protocol §1 LIMITATION); by WORLD_STATE_FRAMEWORK.md Amendment A "
+                f"(data/state/situation_knowable.json, {d.get('generated_at')}) only the fields whose source carries its own date are knowable at t: "
+                f"{json.dumps({k: v for k, v in d.items() if isinstance(v, (int, float, str)) and k != 'generated_at'})[:600]}")
+    except Exception:
+        return "situation fields are read as coded (protocol §1 LIMITATION); data/state/situation_knowable.json absent -- the knowable-at count is not available to this run"
 
 
 def audit_flag():
@@ -1108,7 +1243,13 @@ def verdict(summary, p):
         status = "VALIDATED" if (checks and all(checks)) else "SUGGESTIVE"
         if any(("skill>0" in k_) and v is False for k_, v in conds.items() if k_.split(":")[-1] == "skill>0"):
             status = "SUGGESTIVE / null"
-        return {"status": status, "conditions": conds}
+        detail = []
+        for t in permit:                                                     # Amendment F.5: no status without its p-values
+            blk = summary["tiers"][t][task]
+            row = blk["engine_vs"]["climatology"] if name == "engine" else blk["items_vs_climatology"].get(name, {})
+            spa = blk.get("spa", {})
+            detail.append(f"{t}: skill {row.get('skill'):+.4f}, DM p {row.get('dm_p'):.3f}, family SPA p {spa.get('p_spa'):.3f}" if row.get("skill") is not None and row.get("dm_p") is not None and spa.get("p_spa") is not None else f"{t}: no scored comparison")
+        return {"status": status + " (" + "; ".join(detail) + ")" if detail else status, "status_code": status, "conditions": conds}
     for task in ("G", "P"):
         out["rules"][f"engine:{task}"] = one("engine", task)
         for t in permit:
@@ -1116,7 +1257,7 @@ def verdict(summary, p):
                 out["rules"][f"{iid}:{task}"] = one(iid, task)
     for task in ("G", "P"):
         r = out["rules"].get(f"engine:{task}", {})
-        out[f"{task}_conditioning"] = f"{r.get('status', 'SUGGESTIVE')} (protocol §7; audit passed: {flag})"
+        out[f"{task}_conditioning"] = f"{r.get('status_code', 'SUGGESTIVE')} (protocol §7; audit passed: {flag})"
     out["note"] = ("VALIDATED requires: skill > 0 vs climatology in both tiers where data permit, DM p < 0.05 after HLN, "
                    "SPA, all three regime blocks, placebo null, label-permutation p < 0.05 (G), and the Step 4 label audit. "
                    "Everything else is SUGGESTIVE; nulls are published as nulls.")
@@ -1186,6 +1327,22 @@ def figures(summary, out_dir):
             ax.axhline(pit["expected_per_bin"], color="k", lw=0.8)
             ax.set_title(f"PIT histogram -- engine, {tier} (n={pit['n']}, chi2={pit['chi2']:.1f})", fontsize=9)
             fig.tight_layout(); fig.savefig(fd / f"pit_{tier}.png", dpi=120); plt.close(fig); made.append(f"pit_{tier}.png")
+    pw = summary.get("power") or {}
+    if any(isinstance(v, dict) and v.get("by_n") for v in pw.values()):
+        fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+        for task, col in (("G", "C0"), ("P", "C1")):
+            blk = pw.get(task) or {}
+            for n, b in (blk.get("by_n") or {}).items():
+                xs = [c[0] for c in b["curve"]]; ys = [c[1] for c in b["curve"]]
+                axes[0].plot(xs, ys, "o-", color=col, label=f"{task} ({blk.get('score')}), n={n}: MDS {b.get('mds_skill')}")
+            sc_ = (blk.get("n_required_for_skill") or {}).get("scan") or []
+            if sc_:
+                axes[1].plot([c[0] for c in sc_], [c[1] for c in sc_], "o-", color=col, label=f"{task}: skill +{blk['n_required_for_skill']['skill']} -> n {blk['n_required_for_skill'].get('n')}")
+        for ax in axes:
+            ax.axhline(0.8, color="k", lw=0.6, ls="--"); ax.set_ylim(0, 1.02); ax.legend(fontsize=7)
+        axes[0].set_xlabel("skill vs climatology"); axes[0].set_ylabel("power (DM/HLN, alpha .05)"); axes[0].set_title("Power at the measured n (stationary block bootstrap of the sealed differentials)", fontsize=8)
+        axes[1].set_xlabel("n scored reads"); axes[1].set_xscale("log"); axes[1].set_title("n required to detect +0.05 skill at 80% power", fontsize=8)
+        fig.tight_layout(); fig.savefig(fd / "power.png", dpi=120); plt.close(fig); made.append("power.png")
     sc = summary.get("spec_curve", {}).get("rows") or []
     if sc:
         fig, ax = plt.subplots(figsize=(10, 3.5))
@@ -1238,7 +1395,19 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
     import tempfile
     b = Walk(corpus, menu, out_dir=tempfile.mkdtemp(prefix="walk_leakage_"), params=p, break_filtration=True, quiet=True).run_reads()
     b2 = Walk(corpus, menu, out_dir=tempfile.mkdtemp(prefix="walk_recal_leak_"), params=p, break_recal=True, quiet=True).run_reads() if w.recal else None
-    summary["leakage_test"] = leakage_test(w, b, b2)
+    summary["filtration_audit"] = filtration_audit(corpus, w.reads)
+    summary["leakage_test"] = leakage_test(w, b, b2, summary["filtration_audit"])
+    # Brief 2 B-6: power under the measured block dependence, from the sealed differential series (engine - climatology)
+    summary["power"] = {}
+    dt = summary["tiers"].get("daily")
+    if dt:
+        sc_d = [s_ for s_ in w.scores if s_["tier"] == "daily" and s_["burn_in_ok"]]
+        for task, key in (("G", "brier"), ("P", "crps")):
+            rows = _paired(sc_d, task, key, "engine", "climatology")
+            if len(rows) >= 10:
+                d = np.array([r_[1] - r_[2] for r_ in rows]); ref_mean = float(np.mean([r_[2] for r_ in rows]))
+                summary["power"][task] = INF.power_block(d, dt["dependence"]["mean_block"], dt["dependence"]["hac_lag"], ref_mean, n_list=[len(rows)],
+                                                         n_sims=(100 if fast else 400)) | {"score": key, "n_measured": len(rows), "tier": "daily"}
     summary["big_moves_knew"] = big_moves_knew(corpus, w.reads, w.scores)
     summary["verdict"] = verdict(summary, p)
     summary["limits"] = [f"G target is IES-90 (OUTCOME_MAPPING.md Amendment 1 and later; registration in data_state): independent dated sources; "
@@ -1263,6 +1432,7 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
                          "M13 (Amendment C) carries no analog atoms, so the size-corrected diagnostic of the engine mixture is computed from the twelve "
                          "weighting items' atoms only (M13's share is left out of that diagnostic, never of the registered scores)",
                          "G-persistence (Amendment B) is evaluated on each source's single published vintage, as the labels are",
+                         _knowable_limit(),
                          "this summary.json replaces the PRE_REGISTRATION_V2 src/walk_forward.py summary at the same path; the ledger, story and "
                          "terminal readers of the old 'windows' shape show an empty engine board until PATH Step 9 rewires them"]
     summary["data_state"] = data_state(corpus)
@@ -1270,6 +1440,8 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
     summary["data_state"]["archive_dir"] = "data/walk_forward/runs/<run_id>/ (git-ignored; each archive re-verifies by walk.verify_file)"
     summary["seal_check"] = dict(zip(("ok", "n_records", "first_bad_line"), verify_file(out_dir / "reads.jsonl")))
     summary["seal_check"]["run_in_tree"] = w.run_id
+    summary["determinism"] = {"content_digest": content_digest(w.reads), "n_reads": len(w.reads), "seeds": p["seeds"],
+                              "rule": "Amendment I: SHA-256 over the ordered content hashes (records without hash/sealed_at/run_id/fit_max_looked_up_at); two runs on the same inputs must agree; python3 src/walk.py --digest prints the digest of the run in the tree"}
     if with_figures:
         summary["figures"] = figures(summary, out_dir)
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
@@ -1307,7 +1479,12 @@ def _print(summary):
             if fr.get("skill") is not None:
                 print(f"  {task} [diagnostic, not registered] size-corrected engine vs climatology skill {fr['skill']:+.4f}  CI {fr['ci95'][0]:+.3f}..{fr['ci95'][1]:+.3f}  DM/HLN p={fr['dm_p']:.3f}")
         m = t["M"]["engine"]; print(f"  M engine precision {m['precision']} recall {m['recall']} n={m['n']} base {m['base_rate']}")
-    pm = summary["permutation"]; print(f"\npermutation (G): skill {pm.get('observed_skill')} p={pm.get('p_value')}")
+    pm = summary["permutation"]; print(f"\npermutation (G): skill {pm.get('observed_skill')} block p={pm.get('p_value')} (iid p={(pm.get('iid') or {}).get('p_value')})")
+    fa = summary.get("filtration_audit") or {}; print(f"filtration audit: {fa.get('n_violations')} violations over {sum((fa.get('checks') or {}).values())} checks -> {'clean' if fa.get('clean') else 'VOID'}")
+    for task, blk in (summary.get("power") or {}).items():
+        for n, b in (blk.get("by_n") or {}).items():
+            print(f"power {task}: minimum detectable skill at 80% for n={n}: {b.get('mds_skill')}; n required for +0.05: {(blk.get('n_required_for_skill') or {}).get('n')}")
+    print(f"content digest: {(summary.get('determinism') or {}).get('content_digest')}")
     pl = summary["placebo"]
     print(f"placebo (P) vs random analogs (size-matched): skill {pl.get('skill')} CI {pl.get('ci95')} null_holds={pl.get('null_holds')}")
     for k_ in ("vs_climatology", "fair_vs_climatology"):
@@ -1325,6 +1502,11 @@ def _print(summary):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--fast", action="store_true")
+    ap.add_argument("--digest", action="store_true", help="print the content digest of the run in data/walk_forward/reads.jsonl (Amendment I) and exit")
     a = ap.parse_args()
+    if a.digest:
+        rows = [json.loads(l) for l in open(WF / "reads.jsonl", encoding="utf-8") if l.strip()]
+        print(json.dumps({"run_ids": sorted({r_["run_id"] for r_ in rows}), "n_reads": len(rows), "content_digest": content_digest(rows)}))
+        sys.exit(0)
     s, _ = run(fast=a.fast)
     _print(s)
