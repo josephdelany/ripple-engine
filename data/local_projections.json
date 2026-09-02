@@ -1,7 +1,7 @@
 {
   "what": "Jord\u00e0-style local-projection IRF of ripple magnitude on VIX-stress state, per horizon, raw and standardized (vol-clustering defeater); + hierarchical pooling.",
   "sample": "clustered (de-overlapped)",
-  "n": 89,
+  "n": 91,
   "note": "Post-registration method lens; does not change the registered +5pp verdict.",
   "irf": [
     {

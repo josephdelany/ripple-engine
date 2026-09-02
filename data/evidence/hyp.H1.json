@@ -1,73 +1,22 @@
 {
   "claim_id": "hyp.H1",
   "tier": "SUGGESTIVE",
-  "tier_status": "DOWNGRADED from validated (red-team-1, R7 formal re-tier under the single bar). Headline is BMP-standardized SAR (R1); the SAR 95% CI INCLUDES ZERO on the full corpus and in EVERY regime-block cut (R3), and a VIX-matched non-event placebo reproduces the raw amplification (R2). Fails bar legs 2 and 3. Retained as SUGGESTIVE, not validated. Claim wording awaits Joe's sign-off. See docs/red_team_1.md, data/evidentiary_bar.json.",
   "statement": "Geopolitical shocks ripple harder into Brent oil when VIX stress is elevated.",
   "quantity": {
-    "value": 0.2524,
-    "unit": "sigmas (BMP-standardized SCAR)",
-    "metric": "|SCAR+20| high-minus-low amplification"
-  },
-  "secondary_unstandardized": {
     "value": 5.5615,
     "unit": "pp",
-    "metric": "|CAR+20| high-minus-low amplification -- UNSTANDARDIZED (subject to vol-clustering)",
-    "ci95": [0.9436, 9.6525],
-    "perm_p": 0.0054,
-    "note": "This is the original headline number. It reproduces exactly, but |CAR| is a volatility quantity split by a volatility index; see attack #1."
+    "metric": "|CAR+20| high-minus-low amplification"
   },
   "mechanism": "stress transmits shocks harder",
-  "method": "conditioned event study, BMP (1991) STANDARDIZED abnormal returns as the headline: each event's CAR divided by its own estimation-window sigma * sqrt(L) (removes vol-clustering). Clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; leave-one-cluster-out. Point-in-time (state read at t-1). Unstandardized |CAR| retained as a secondary line.",
+  "method": "conditioned constant-mean event study; clustered median split; cluster-bootstrap 95% CI; 10k-permutation p; family-wise FDR+Bonferroni where applicable; leave-one-cluster-out robustness. Point-in-time (state read at t-1).",
   "statistics": {
     "n_episodes": 87,
     "ci95": [
-      -0.2151,
-      0.651
+      0.9436,
+      9.6525
     ],
-    "perm_p": 0.1191,
-    "ci_excludes_zero": false,
-    "survives_fdr": false,
-    "survives_bonferroni": false
-  },
-  "red_team_1": {
-    "attack": 1,
-    "disposition": "CONCEDE",
-    "result": "H1 amplification collapses from 5.56pp (raw |CAR|, CI excludes zero) to 0.25 sigmas (SAR, CI [-0.215, 0.651] includes zero). The original headline was volatility clustering.",
-    "receipt": "data/h1_sar.json",
-    "r2_vix_matched_placebo": {
-      "attack": 2,
-      "result": "Vol-matched NON-EVENT dates reproduce the raw amplification: pseudo mean +3.04pp, 95% [-0.08, +6.43]; the real +5.56pp lies INSIDE the pseudo band (p=0.07). SAR pseudo +0.12sigma vs real +0.25sigma (p=0.20). The raw amplification is vol-clustering, not an event ripple.",
-      "receipt": "data/placebo_vixmatched.json"
-    },
-    "r3_regime_block": {
-      "attacks": [7, 8],
-      "result": "SAR headline CI includes zero in EVERY regime-block scenario (drop 2008 / 2020 / 2026 / all-three) and winsorized -- not robust. Raw |CAR| is significant ONLY with 2008 in: drop 2008 -> +3.66pp [-0.16, +8.49] (crosses zero); drop all three -> +3.41pp [-1.49, +6.48] (crosses zero). Winsorizing does not rescue it, so it is a 2008/GFC-regime effect, not a single outlier point.",
-      "receipt": "data/h1_regimeblock.json"
-    },
-    "r5_frozen_numbers": {
-      "attacks": [9, 10],
-      "headline_block": "H1 presented as three ranked numbers, raw |CAR| and BMP-SAR side by side. RAW survives (CI excludes zero) on the frozen and current corpora, but that is the vol-clustering artifact of attack #2; SAR (the correct metric) INCLUDES ZERO at EVERY tier.",
-      "tier1_registered_sample_n20": "+10.3pp (immutable, cited from registered_run_results.txt; never recomputed).",
-      "tier1_frozen_corpus_289": "raw +5.00pp [0.86, 8.95] (excludes zero); SAR +0.158sigma [-0.247, 0.523] (includes zero). Computed on EXACTLY the 289 events frozen at tag edge-battery-preregistered-20260730.",
-      "tier2_out_of_sample_2019plus": "frozen pre-2019 VIX threshold applied forward (attack #10 lookahead fix): raw +2.92pp [-12.34, 18.92] (includes zero, n=16); SAR +0.60sigma [-0.32, 1.62] (includes zero). The number SHRINKS and its CI blows through zero out-of-sample.",
-      "tier3_current_tracking_296": "raw +6.07pp [0.99, 9.87]; SAR +0.297sigma [-0.21, 0.67]. Labelled THIRD -- a growing-corpus tracking figure, not a registered result.",
-      "attack10_lookahead": "Freezing the split threshold point-in-time barely moves the raw number (median-split +6.07pp -> frozen-threshold +5.22pp [1.15, 9.31]); lookahead in the conditioner is not the driver. Reported point-in-time regardless.",
-      "receipt": "data/h1_frozen_threshold.json"
-    },
-    "r8_oos_caution_regime_misread": {
-      "attack": 12,
-      "finding": "The miss-audit (EVALUATION.md §5) shows the worst-scored resolved gaps are all 'regime_misread' — the engine saw turbulence (high VIX) and calm was realised — and they are the SAME high-VIX events that drive the in-sample raw amplification (OPEC-emergency-cut-2008, SA-power-2008, Iran-CISADA). In-sample amplification + out-of-sample anti-signal on the very same events is the signature of overfitting to volatility clustering.",
-      "so_what": "Cited here as a standing out-of-sample caution against reading the raw |CAR| amplification as predictive. Consistent with the SAR null (R1) and the placebo (R2).",
-      "receipt": "EVALUATION.md §5"
-    },
-    "which_versions_survive": "None. SAR (the correct metric) is null in every cut and at every corpus tier (frozen-289, OOS-2019+, current-296); raw |CAR| survives only when the 2008 crisis regime is included, and is reproduced by non-events (R2). H1 amplification is UNSUPPORTED as a general event ripple.",
-    "final_verdict_signed_off_20260815": "No conditioning effect survives standardized, regime-robust testing; the raw amplification result was volatility clustering, exposed by a matched placebo. Descriptive findings stand: conflict events average near-zero with large dispersion; SPR releases show the strongest measured effect; the 289-event two-source dataset and full adversarial review are published."
-  },
-  "r9_vix_percentile_and_splice": {
-    "attack": 18,
-    "percentile_window": "derived.vix_pct = VIXCLS.rolling(1260, min_periods=252).rank(pct=True)*100 (src/derive_signals.py:149-151) -- a TRAILING ~5-year rolling rank, not full-sample. Point-in-time: the percentile at date t uses only data up to t. No lookahead in the conditioner.",
-    "vxo_splice": "None exists and none is needed. fred.VIXCLS starts 1990-01-02; with the 252-obs minimum the first usable VIX state is ~Jan 1991, and H1's first episode is 1991-01-17 (desert_storm_air_campaign_1991). The single 1990 event (iraq_invades_kuwait_1990) carries VIX state n/a and is correctly excluded. No H1 event uses pre-1990 VIX, so a VIX/VXO splice would change nothing. CC2 uses no VIX conditioner.",
-    "receipt": "data/NUMBERS.md"
+    "survives_fdr": true,
+    "survives_bonferroni": true
   },
   "underlying_episodes": [
     {
@@ -946,8 +895,9 @@
   "source_commit": "e196bc5",
   "db_commit": "uncommitted (oil.db is gitignored; rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/edge_battery.py   # then read data/validation_claims.json",
+  "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md.",
   "corpus": {
-    "n_events": 296,
+    "n_events": 313,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
   }
 }

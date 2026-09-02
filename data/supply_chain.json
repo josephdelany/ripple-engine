@@ -126,11 +126,11 @@
       "producer_share": 21,
       "commodity": "crude_oil",
       "node": "fred.DCOILBRENTEU",
-      "n": 28,
-      "car": -3.0621,
+      "n": 30,
+      "car": -2.3385,
       "ci": [
-        -9.357,
-        3.423
+        -8.1511,
+        3.8828
       ],
       "unit": "%",
       "status": "null",

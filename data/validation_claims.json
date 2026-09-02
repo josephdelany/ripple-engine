@@ -1,9 +1,9 @@
 {
   "what": "Rigor lens on the pre-registered H1/H2/H3 conditioning claims",
   "discipline": "Applies the SAME registered +5pp clustered rule, and adds (a) a cluster-bootstrap 95% CI on each amplification and (b) BH-FDR + Bonferroni correction across the three hypotheses tested together.",
-  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 296 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H2'] -- reported honestly, not overwritten.",
+  "SAMPLE_NOTE": "The pre-registration was run once on 20 events (frozen: data/registered_sample_n20.csv, REGISTERED_SAMPLE.md). The corpus has since grown to 313 events (history to 1987). Per Joe's decision, this is an expanded re-test reported ALONGSIDE the frozen n=20 anchor (not a new pre-registration). Verdicts that changed vs the n=20 record: ['H2'] -- reported honestly, not overwritten.",
   "n_hypotheses": 3,
-  "current_sample_events": 296,
+  "current_sample_events": 313,
   "multiple_testing": {
     "fdr_q": 0.1,
     "n_survive_fdr": 1,
@@ -41,18 +41,18 @@
       "documented_amp_pp": 5.4,
       "current_verdict": "FAILS",
       "drifted": true,
-      "amp_pp": 1.4553,
-      "n_episodes": 89,
+      "amp_pp": 1.9929,
+      "n_episodes": 91,
       "ci95_pp": [
-        -3.4048,
-        5.8819
+        -3.2946,
+        5.8598
       ],
       "ci_excludes_zero": false,
-      "boot_share_predicted_dir": 0.702,
-      "perm_p_raw": 0.2653,
-      "fdr_qvalue": 0.3979,
+      "boot_share_predicted_dir": 0.708,
+      "perm_p_raw": 0.1843,
+      "fdr_qvalue": 0.2764,
       "survives_fdr_10pct": false,
-      "bonferroni_p": 0.7959,
+      "bonferroni_p": 0.5529,
       "survives_bonferroni_5pct": false,
       "statistically_validated": false
     },
@@ -80,5 +80,5 @@
       "statistically_validated": false
     }
   ],
-  "honest_note": "At N ~ 89 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
+  "honest_note": "At N ~ 91 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
 }

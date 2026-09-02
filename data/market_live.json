@@ -1,80 +1,80 @@
 {
-  "as_of": "2026-08-06",
-  "generated_at": "2026-08-06T12:40:41+00:00",
+  "as_of": "2026-09-02",
+  "generated_at": "2026-09-02T15:24:48+00:00",
   "stale": false,
   "source": "Yahoo (yfinance)",
   "assets": {
     "live.brent": {
       "name": "Brent crude",
       "unit": "USD/bbl",
-      "price": 80.6,
-      "chg1d": 1.45,
-      "chg5d": -9.47,
-      "as_of": "2026-08-06"
+      "price": 95.45,
+      "chg1d": 0.85,
+      "chg5d": 8.66,
+      "as_of": "2026-09-02"
     },
     "live.wti": {
       "name": "WTI crude",
       "unit": "USD/bbl",
-      "price": 76.24,
-      "chg1d": 1.36,
-      "chg5d": -8.79,
-      "as_of": "2026-08-06"
+      "price": 90.76,
+      "chg1d": 0.6,
+      "chg5d": 10.37,
+      "as_of": "2026-09-02"
     },
     "live.natgas": {
       "name": "Henry Hub natgas",
       "unit": "USD/MMBtu",
-      "price": 2.67,
-      "chg1d": -0.74,
-      "chg5d": -3.26,
-      "as_of": "2026-08-06"
+      "price": 2.97,
+      "chg1d": 2.31,
+      "chg5d": 4.54,
+      "as_of": "2026-09-02"
     },
     "live.gold": {
       "name": "Gold",
       "unit": "USD/oz",
-      "price": 4324.0,
-      "chg1d": 1.84,
-      "chg5d": 5.46,
-      "as_of": "2026-08-06"
+      "price": 4419.2,
+      "chg1d": 1.64,
+      "chg5d": -3.89,
+      "as_of": "2026-09-02"
     },
     "live.vix": {
       "name": "VIX",
       "unit": "index",
-      "price": 16.0,
-      "chg1d": 1.2,
-      "chg5d": -6.38,
-      "as_of": "2026-08-06"
+      "price": 15.49,
+      "chg1d": -5.2,
+      "chg5d": 0.26,
+      "as_of": "2026-09-02"
     },
     "live.us10y": {
       "name": "US 10Y yield",
       "unit": "percent",
-      "price": 4.64,
-      "chg1d": 0.56,
-      "chg5d": -0.43,
-      "as_of": "2026-08-06"
+      "price": 4.8,
+      "chg1d": 0.17,
+      "chg5d": 3.56,
+      "as_of": "2026-09-02"
     },
     "live.dxy": {
       "name": "US dollar index",
       "unit": "index",
-      "price": 99.75,
-      "chg1d": 0.06,
-      "chg5d": -0.26,
-      "as_of": "2026-08-06"
+      "price": 99.52,
+      "chg1d": -0.15,
+      "chg5d": 0.61,
+      "as_of": "2026-09-02"
     },
     "live.xle": {
       "name": "Energy equities (XLE)",
       "unit": "USD",
-      "price": 57.31,
-      "chg1d": -2.07,
-      "chg5d": -2.28,
-      "as_of": "2026-08-05"
+      "price": 64.77,
+      "chg1d": 0.0,
+      "chg5d": 3.75,
+      "as_of": "2026-09-02"
     },
     "live.sp500": {
       "name": "S&P 500",
       "unit": "index",
-      "price": 7723.55,
-      "chg1d": -0.17,
-      "chg5d": 5.57,
-      "as_of": "2026-08-05"
+      "price": 7676.35,
+      "chg1d": 0.59,
+      "chg5d": -0.01,
+      "as_of": "2026-09-02"
     }
   }
 }

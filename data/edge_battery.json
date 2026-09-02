@@ -387,15 +387,15 @@
     "note": "small-N, direction defined in-sample -> suggestive; grows into a real test as N rises"
   },
   "collinearity": {
-    "n_days": 4867,
-    "abs_max": 0.304,
+    "n_days": 4873,
+    "abs_max": 0.303,
     "pairwise": {
-      "vix_pct x curve_2s10s": -0.013,
-      "vix_pct x usd_z": -0.07,
-      "vix_pct x be_level": -0.208,
-      "curve_2s10s x usd_z": -0.229,
-      "curve_2s10s x be_level": -0.19,
-      "usd_z x be_level": -0.304
+      "vix_pct x curve_2s10s": -0.012,
+      "vix_pct x usd_z": -0.069,
+      "vix_pct x be_level": -0.207,
+      "curve_2s10s x usd_z": -0.228,
+      "curve_2s10s x be_level": -0.189,
+      "usd_z x be_level": -0.303
     }
   },
   "exclusions": {

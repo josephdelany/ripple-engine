@@ -1,11 +1,10 @@
 {
   "claim_id": "edge.CC2_supply_gasoline_crack",
   "tier": "SUGGESTIVE",
-  "tier_status": "DOWNGRADED from validated (red-team-1, R6). Survives dropping the two post-registration outliers alone (+1.83 [0.36, 3.31]) and month-of-year seasonal adjustment alone (+2.17 [0.35, 4.25]), but the two controls JOINTLY put the 95% CI across zero (+1.16 [-0.22, 2.56], perm p=0.06). A robust edge should survive both at once; CC2 does not, so it is SUGGESTIVE, not validated. See data/cc2_seasonal.json and docs/red_team_1.md.",
   "statement": "Physical supply-shock events widen the gasoline crack over +10 trading days.",
   "mechanism": "refined product tightens faster than crude",
   "quantity": {
-    "value": 2.9611,
+    "value": 2.9394,
     "unit": "$/bbl",
     "metric": "signed CAR+10 (crack change, $/bbl)"
   },
@@ -13,36 +12,20 @@
   "statistics": {
     "n": 37,
     "ci95": [
-      0.9943,
-      5.2136
+      0.9642,
+      5.2019
     ],
-    "perm_p_raw": 0.003,
+    "perm_p_raw": 0.0031,
     "survives_fdr": true,
     "survives_bonferroni": true,
     "predicted_direction": "+"
   },
-  "red_team_1_r6": {
-    "attacks": [13, 14],
-    "baseline_reproduces": "+2.9611 [0.9943, 5.2136], perm p=0.003, n=37 (ties to cross_chain.json).",
-    "outlier_drop": {
-      "ex_hormuz_2026": "+2.24 [0.61, 3.91] p=0.005 -- still excludes zero",
-      "ex_venezuela_2019": "+2.58 [0.71, 4.83] p=0.005 -- still excludes zero",
-      "ex_both": "+1.83 [0.36, 3.31] p=0.012 -- still excludes zero (barely)"
-    },
-    "seasonal_adjustment": {
-      "method": "month-of-year climatology: subtract each calendar month's mean daily crack change (full-sample) from that day's change; recompute CAR on the deseasonalised series. Documented in data/cc2_seasonal.json.",
-      "seasonal_only": "+2.17 [0.35, 4.25] p=0.017 -- still excludes zero",
-      "seasonal_and_ex_both_outliers": "+1.16 [-0.22, 2.56] p=0.060 -- INCLUDES ZERO"
-    },
-    "disposition": "DOWNGRADE to SUGGESTIVE. CC2 is robust to each attack alone but not to both jointly; the strictest defensible cut (deseasonalised AND both post-registration outliers dropped) has a CI spanning zero. Reported honestly.",
-    "receipt": "data/cc2_seasonal.json"
-  },
   "underlying_episodes": [
     {
-      "event_id": "bridgeton_mine_strike_1987",
-      "date": "1987-07-24",
-      "source_url": "https://www.usni.org/magazines/proceedings/1988/may/ss-bridgeton-first-convoy",
-      "car": 1.4529
+      "event_id": "earnest_will_1987",
+      "date": "1987-07-22",
+      "source_url": "https://www.eia.gov",
+      "car": 0.6508
     },
     {
       "event_id": "kuwait_oil_fires_1991",
@@ -266,8 +249,9 @@
   "source_commit": "e196bc5",
   "db_commit": "uncommitted (rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json",
+  "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md.",
   "corpus": {
-    "n_events": 296,
+    "n_events": 313,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
   }
 }

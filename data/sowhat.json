@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T13:56:30+00:00",
+  "generated_at": "2026-09-02T18:08:49+00:00",
   "regime": "OFF",
   "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.6%, Heating oil +5.6%, 5Y breakeven +16.7bps, Palladium +5.2%, S&P 500 +2.1%, Platinum +7.2%. Market-priced gap: over_priced_fear. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
   "validated_propagation": [
@@ -77,19 +77,19 @@
     },
     {
       "type": "conflict_escalation",
-      "n": 14,
-      "car1": 1.5,
-      "car5": 4.2,
-      "car10": 3.4,
-      "car20": 6.2
+      "n": 15,
+      "car1": 0.9,
+      "car5": 3.8,
+      "car10": 3.2,
+      "car20": 6.1
     },
     {
       "type": "policy_response",
-      "n": 13,
+      "n": 14,
       "car1": -0.5,
       "car5": -2.5,
-      "car10": -3.1,
-      "car20": -1.3
+      "car10": -3.5,
+      "car20": -2.2
     },
     {
       "type": "demand_shock",
@@ -118,8 +118,8 @@
   ],
   "priced_gap": {
     "gap_id": "gap.LIVE",
-    "as_of": "2026-08-15T13:18:22+00:00",
-    "anchor_date": "2026-08-04",
+    "as_of": "2026-09-02T14:29:49+00:00",
+    "anchor_date": "2026-08-28",
     "subject": "LIVE state (no dated shock -- standing read)",
     "engine_call": "calm",
     "engine_p": 0.4,
@@ -131,15 +131,15 @@
     "brier": null,
     "resolved_at": null,
     "source_url": "",
-    "notes": "Live: H1 OFF (VIX %ile 37); market OVX 56 (p90.8); gap=over_priced_fear."
+    "notes": "Live: H1 OFF (VIX %ile 18); market OVX 56 (p90.8); gap=over_priced_fear."
   },
   "active_situations": [
     {
       "situation": "israel_iran_war_2025",
-      "events": 193,
-      "multi_modal": 96,
+      "events": 528,
+      "multi_modal": 249,
       "max_modality_classes": 3,
-      "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
+      "top_event": "Iran war live: Tehran-Oman talks on Hormuz \u2018positive\u2019; ship hit in Red Sea",
       "top_tag": "corroborated",
       "confirmed_by": [
         "news",
@@ -147,18 +147,17 @@
         "priced"
       ],
       "receipts": [
-        "https://gcaptain.com/clarksons-posts-record-first-half-profit-as-hormuz-crisis-drives-shipping-boom/",
-        "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
-        "https://www.aljazeera.com/news/2026/7/29/iran-and-oman-swap-proposals-to-manage-strait-of-hormuz-what-we-know?traffic_source=rss",
-        "https://www.timesofisrael.com/us-treasury-secretary-says-deal-with-iran-to-reopen-hormuz-could-be-sealed-by-wednesday/"
+        "https://gcaptain.com/two-tankers-with-saudi-oil-exit-red-sea-over-weekend/",
+        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://www.aljazeera.com/news/liveblog/2026/8/5/iran-war-live-tehran-oman-talks-on-hormuz-positive-ship-hit-in-red-sea?traffic_source=rss"
       ]
     },
     {
       "situation": "israel_lebanon_hezbollah",
-      "events": 170,
-      "multi_modal": 82,
+      "events": 451,
+      "multi_modal": 214,
       "max_modality_classes": 3,
-      "top_event": "Iran and Oman swap proposals to manage Strait of Hormuz: What we know",
+      "top_event": "Iran war live: Tehran-Oman talks on Hormuz \u2018positive\u2019; ship hit in Red Sea",
       "top_tag": "corroborated",
       "confirmed_by": [
         "news",
@@ -166,47 +165,46 @@
         "priced"
       ],
       "receipts": [
-        "https://gcaptain.com/trump-says-u-s-controls-strait-of-hormuz-as-iran-denies-talks/",
-        "https://www.aljazeera.com/news/2026/7/28/iran-and-oman-exchange-proposals-to-manage-strait-of-hormuz?traffic_source=rss",
-        "https://www.aljazeera.com/news/2026/7/29/iran-and-oman-swap-proposals-to-manage-strait-of-hormuz-what-we-know?traffic_source=rss",
-        "https://www.timesofisrael.com/us-treasury-secretary-says-deal-with-iran-to-reopen-hormuz-could-be-sealed-by-wednesday/"
+        "http://www.austinglobe.com/news/279227943/iran-makes-new-hormuz-demands-as-missile-hits-emirati-ship",
+        "http://www.awn.com/animationworld/disarming-legacy-persepolis-author-and-director-marjane-satrapi",
+        "https://www.aljazeera.com/news/2026/7/28/houthis-want-to-copy-irans-hormuz-control-in-the-red-sea-yemeni-fm?traffic_source=rss",
+        "https://www.aljazeera.com/news/liveblog/2026/8/5/iran-war-live-tehran-oman-talks-on-hormuz-positive-ship-hit-in-red-sea?traffic_source=rss"
       ]
     },
     {
       "situation": "russia_ukraine_war",
-      "events": 54,
-      "multi_modal": 15,
-      "max_modality_classes": 3,
-      "top_event": "Greek LNG Ship Safely Clears Hormuz After Maritime Incident",
+      "events": 147,
+      "multi_modal": 24,
+      "max_modality_classes": 2,
+      "top_event": "[GDELT] UNITED ARAB EMIRATES / RUSSIAN: fight/clash signal",
       "top_tag": "corroborated",
       "confirmed_by": [
         "news",
-        "physical",
         "priced"
       ],
       "receipts": [
-        "https://abcnews.com/International/wireStory/nato-member-romania-shoots-stray-drones-ukraine-war-135145424",
-        "https://asia.nikkei.com/politics/ukraine-war/trump-zelenskyy-discuss-patriot-deal-and-reviving-talks-with-russia",
-        "https://oilprice.com/Energy/Energy-General/Russia-Is-Running-Out-of-Soldiers-Oil-and-Time.html",
-        "https://oilprice.com/Latest-Energy-News/World-News/Greek-LNG-Ship-Safely-Clears-Hormuz-After-Maritime-Incident.html"
+        "http://www.austinglobe.com/news/279242460/kiev-fighting-natos-war-until-the-last-ukrainian-us-journalist",
+        "http://www.batonrougepost.com/news/279242483/russian-retribution-islamic-nato-showdown-in-the-west-bank-the-german-spy-machine-rt-stories-that-shaped-the-week",
+        "http://www.bgnes.com/economy/serbia-s-nis-licence-extended-until-august-28",
+        "http://www.calcuttanews.net/news/279229200/100-us-tariffs-may-not-deter-india-from-buying-russian-oil-report"
       ]
     },
     {
       "situation": "china_taiwan_tension",
-      "events": 14,
-      "multi_modal": 2,
+      "events": 63,
+      "multi_modal": 4,
       "max_modality_classes": 2,
-      "top_event": "\u2018Significant Shrinking\u2019 in Crude Cushion In Coming Months \u2013 Vortexa",
-      "top_tag": "likely",
+      "top_event": "[GDELT] CHINESE / LIBERATION ARMY: fight/clash signal",
+      "top_tag": "corroborated",
       "confirmed_by": [
         "news",
         "priced"
       ],
       "receipts": [
+        "http://www.japanherald.com/news/279218635/how-japanese-militarism-opened-the-door-to-war-via-intelligence-first",
+        "http://www.japanherald.com/news/279240006/new-evidence-reaffirms-japan-germ-warfare-crimes-in-china",
         "https://gcaptain.com/significant-shrinking-in-crude-cushion-in-coming-month-vortexa/",
-        "https://www.eia.gov/todayinenergy/detail.php?id=67905",
-        "https://www.forbes.com/sites/petersuciu/2026/07/28/us-navys-forward-deployed-carrier-now-in-waters-claimed-by-beijing/",
-        "https://www.thenationalnews.com/news/us/2026/07/28/trump-confident-in-us-arms-stockpile-after-private-sector-commitments/"
+        "https://www.aljazeera.com/video/101-east/2026/8/15/is-china-seeking-to-copy-irans-strait-of-hormuz-blockade-around-taiwan?traffic_source=rss"
       ]
     }
   ],

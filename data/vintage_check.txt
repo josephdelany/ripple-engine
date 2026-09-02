@@ -1,18 +1,18 @@
 ============================================================================================
 VINTAGE CHECK -- does any headline number depend on REVISED history? (V-Q1)
-generated 2026-08-06T13:12:55+00:00
+generated 2026-09-02T15:26:06+00:00
 ============================================================================================
 
 1. CAN A REGISTRATION-TIME VINTAGE BE OBTAINED HERE?
    ALFRED probe: NOT honored -- the endpoint returns only the CURRENT vintage.
-     requested vintage 2020-06-15 -> response column 'INDPRO_20260806' (vintage 20260806)
+     requested vintage 2020-06-15 -> response column 'INDPRO_20260902' (vintage 20260902)
    -> a registration-time vintage CANNOT be pulled in this environment (simulated FRED
       mirror does not implement ALFRED vintages; real ALFRED does).
 
 2. DID THE DB RETAIN ANY PRIOR VINTAGES (bitemporal as_of)?
-   fred.DCOILBRENTEU    rows=  9947  obs_dates with >1 as_of: 0
-   fred.DCOILWTICO      rows= 10215  obs_dates with >1 as_of: 0
-   fred.VIXCLS          rows=  9244  obs_dates with >1 as_of: 0
+   fred.DCOILBRENTEU    rows=  9963  obs_dates with >1 as_of: 0
+   fred.DCOILWTICO      rows= 10231  obs_dates with >1 as_of: 0
+   fred.VIXCLS          rows=  9264  obs_dates with >1 as_of: 0
    -> as_of == obs_date on every row; NO prior vintage is stored to diff against.
 
 3. REVISION CLASS OF THE HEADLINE INPUTS (the decisive point):

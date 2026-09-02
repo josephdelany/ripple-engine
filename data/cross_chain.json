@@ -11,24 +11,24 @@
   "results": [
     {
       "ok": true,
-      "amp": 2.4066,
-      "signed_amp": 2.4066,
+      "amp": 2.3854,
+      "signed_amp": 2.3854,
       "ci": [
-        -0.4184,
-        5.8552
+        -0.4446,
+        5.8305
       ],
       "ci_excludes_zero_in_dir": false,
-      "perm_p": 0.0848,
+      "perm_p": 0.0867,
       "n": 37,
       "id": "CC1_supply_diesel_crack",
       "unit": "$/bbl",
       "predicted_sign": "+",
       "episodes": [
         {
-          "event_id": "bridgeton_mine_strike_1987",
-          "date": "1987-07-24",
-          "source_url": "https://www.usni.org/magazines/proceedings/1988/may/ss-bridgeton-first-convoy",
-          "car": 1.1449
+          "event_id": "earnest_will_1987",
+          "date": "1987-07-22",
+          "source_url": "https://www.eia.gov",
+          "car": 0.3596
         },
         {
           "event_id": "kuwait_oil_fires_1991",
@@ -248,30 +248,30 @@
         }
       ],
       "survives_fdr": false,
-      "fdr_q": 0.1328,
+      "fdr_q": 0.133,
       "survives_bonferroni": false,
       "validated": false
     },
     {
       "ok": true,
-      "amp": 2.9611,
-      "signed_amp": 2.9611,
+      "amp": 2.9394,
+      "signed_amp": 2.9394,
       "ci": [
-        0.9943,
-        5.2136
+        0.9642,
+        5.2019
       ],
       "ci_excludes_zero_in_dir": true,
-      "perm_p": 0.003,
+      "perm_p": 0.0031,
       "n": 37,
       "id": "CC2_supply_gasoline_crack",
       "unit": "$/bbl",
       "predicted_sign": "+",
       "episodes": [
         {
-          "event_id": "bridgeton_mine_strike_1987",
-          "date": "1987-07-24",
-          "source_url": "https://www.usni.org/magazines/proceedings/1988/may/ss-bridgeton-first-convoy",
-          "car": 1.4529
+          "event_id": "earnest_will_1987",
+          "date": "1987-07-22",
+          "source_url": "https://www.eia.gov",
+          "car": 0.6508
         },
         {
           "event_id": "kuwait_oil_fires_1991",
@@ -491,7 +491,7 @@
         }
       ],
       "survives_fdr": true,
-      "fdr_q": 0.0075,
+      "fdr_q": 0.0077,
       "survives_bonferroni": true,
       "validated": true
     },
@@ -735,38 +735,38 @@
     {
       "id": "CC4_fertilizer_wheat",
       "ok": true,
-      "amp": 0.1414,
-      "signed_amp": 0.1414,
+      "amp": 0.1393,
+      "signed_amp": 0.1393,
       "ci": [
-        -0.0641,
-        0.356
+        -0.0718,
+        0.3343
       ],
       "ci_excludes_zero_in_dir": false,
-      "perm_p": 0.1062,
-      "n": 311,
+      "perm_p": 0.1064,
+      "n": 312,
       "unit": "beta",
       "predicted_sign": "+",
       "survives_fdr": false,
-      "fdr_q": 0.1328,
+      "fdr_q": 0.133,
       "survives_bonferroni": false,
       "validated": false
     },
     {
       "id": "CC5_fertilizer_corn",
       "ok": true,
-      "amp": 0.3631,
-      "signed_amp": 0.3631,
+      "amp": 0.3617,
+      "signed_amp": 0.3617,
       "ci": [
-        0.1362,
-        0.5873
+        0.1415,
+        0.5885
       ],
       "ci_excludes_zero_in_dir": true,
-      "perm_p": 0.0002,
-      "n": 311,
+      "perm_p": 0.0001,
+      "n": 312,
       "unit": "beta",
       "predicted_sign": "+",
       "survives_fdr": true,
-      "fdr_q": 0.001,
+      "fdr_q": 0.0005,
       "survives_bonferroni": true,
       "validated": true
     }

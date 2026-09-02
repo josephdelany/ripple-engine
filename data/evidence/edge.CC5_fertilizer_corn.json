@@ -4,18 +4,18 @@
   "statement": "Fertilizer prices transmit to corn prices (monthly pass-through).",
   "mechanism": "fertilizer cost lifts crop prices",
   "quantity": {
-    "value": 0.3631,
+    "value": 0.3617,
     "unit": "beta",
     "metric": "monthly pass-through beta"
   },
   "method": "pre-registered cross-chain test (PRE_REGISTRATION.md amendment 2026-08-03): signed constant-mean event study (crack) or monthly pass-through regression (food); 95% bootstrap CI; sign-flip/permutation p; family-wise BH-FDR q=0.10 + Bonferroni; placebo-controlled (shuffled dates -> null). Directions fixed BEFORE results.",
   "statistics": {
-    "n": 311,
+    "n": 312,
     "ci95": [
-      0.1362,
-      0.5873
+      0.1415,
+      0.5885
     ],
-    "perm_p_raw": 0.0002,
+    "perm_p_raw": 0.0001,
     "survives_fdr": true,
     "survives_bonferroni": true,
     "predicted_direction": "+"
@@ -26,15 +26,9 @@
   "source_commit": "e196bc5",
   "db_commit": "uncommitted (rebuild via repro.sh)",
   "repro_command": "./repro.sh && python3 src/cross_chain.py   # then read data/cross_chain.json",
+  "tier_status": "Re-tiered SUGGESTIVE under the red-team-1 evidentiary bar (EVALUATION.md \u00a70). Not certified `validated`: requires a SAR-standardized, regime-block-robust (drop 2008/2020/2026/all) bootstrap CI excluding zero + permutation-FDR. Receipts: docs/red_team_1.md, data/evidentiary_bar.json, data/NUMBERS.md.",
   "corpus": {
-    "n_events": 296,
+    "n_events": 313,
     "note": "CURRENT post-sweep sample. The REGISTERED study is frozen separately (PRE_REGISTRATION.md, n=20 / N=289) and is never recomputed; these packs track the growing corpus, versioned by n_events."
-  },
-  "tier_status": "Re-tiered under red-team-1 R7. A monthly cost pass-through beta has no event-study abnormal return, so SAR-standardization (bar leg 1) does not apply; it cannot clear the SAR/regime-block legs by construction and is held SUGGESTIVE rather than validated under the one bar. Its own registered CI/FDR still hold, reported honestly.",
-  "red_team_1_r7": {
-    "kind": "monthly_passthrough",
-    "retier": "SUGGESTIVE (bar leg-1 N/A)",
-    "why": "Monthly cost pass-through beta has no event-study abnormal return, so SAR-standardisation (leg 1) does not apply. Held as SUGGESTIVE under the one bar rather than validated, since it cannot clear the SAR/regime-block legs by construction.",
-    "receipt": "data/cross_chain.json"
   }
 }
