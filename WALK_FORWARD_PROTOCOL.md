@@ -224,3 +224,90 @@ completes, every earlier run's rows are moved — never edited, never dropped �
 archive still verifies by `walk.verify_file`). `summary.json.data_state.archived_runs` lists the
 archived run_ids with their record counts and seal checks. "Append-only" (§2) holds within each run's
 file; the leakage test and the seal check are computed on the run in the tree.
+
+## Amendment E (2026-09-02) — protocol v3, prospective only: the size-corrected scores become the gate
+*Registered before any v3 run; Joe's decision (Brief 2, B-7), dated 2026-09-02. Session B records it.*
+- **E.1 Scope.** For every run on the v2 corpus (the 313 events as of 2026-09-02, and any run before
+  the pre-1987 corpus is admitted through Joe's sheet, PATH Step 5) §3's registered Brier (G), log score
+  and CRPS (P) remain the scores that drive §5's Hedge losses, the FDR family and the §7 gates. Nothing
+  about run `walk_20260902T182828Z` or its successors on this corpus is re-judged by this amendment.
+- **E.2 The v3 gate.** From the first run after the pre-1987 corpus is admitted (the run's
+  `data_state` will say so: `n_events` above the v2 count and `corpus_version: v3`), the **size-corrected
+  scores** — Ferro (2014) fair Brier, fair RPS (over the ordinal levels) and fair CRPS, in the weighted
+  form of Amendment A.5 with c = Σw²/(1−Σw²) — become the PRIMARY scores: they drive the Hedge losses,
+  the FDR family, the SPA family and the §7 conditions. The registered §3 scores are published beside
+  them in every block, always, and the placebo (A.4) keeps its size-matched reference.
+- **E.3 Reason.** The registered scores of a k-atom analog distribution exceed the population score by
+  E|X−X′|/(2k) (CRPS) and Σ_b p_b(1−p_b)/k (Brier; likewise each cumulative term of the RPS), so under the
+  null the engine reads as negative skill against a ~10k-atom climatology by sample size alone
+  (derived and reproduced by simulation in `tests/test_walk.py`; stated in every summary's `limits`).
+  A gate that a null engine cannot pass and a skilled small-k engine cannot pass either is not a gate.
+  Adopting the corrected scores prospectively, at the corpus change, keeps every v2 number as judged.
+- **E.4 Hedge losses under E.2.** The fair Brier and fair CRPS can be slightly negative for weighted
+  mixtures; Hedge losses are clamped to [0, 1] after scaling as today (stated).
+
+## Amendment F (2026-09-02) — the filtration audit, block permutation, and two missing corrections
+*Registered before the code (Brief 2, B-8), answering docs/red_team_2/D2_leakage_hunt.md finding 1 and
+D3_multiplicity.md findings 1, 3 and 5. Session B.*
+- **F.1 The leakage test was structurally blind** (D2 finding 1): comparing the sealed run with a
+  maximally broken run detects the presence of a large leak, never the absence of a small one inside
+  the sealed path. Two deliberate leaks (an unclosed-window analog admitted; a same-day market
+  observation visible to standardization) passed it. From this amendment every run carries a
+  **filtration audit** computed inside the sealed run by an independent code path (raw dates, never
+  the functions being audited): for every sealed read and every analog it carries, `event_date <
+  as_of`; for every analog flagged `g_closed`, `event_date + 90 days ≤ as_of`; for every analog flagged
+  `p_closed`, its price window's closing observation date ≤ `as_of`; for every market field of the
+  read's state vector, the date of the observation used `< as_of` (and `< as_of − lag` where Amendment
+  G applies). Counts and the first violation are published in `summary.json.filtration_audit`; a single
+  violation voids the run (`leakage_test.asserted` false). `tests/test_walk_filtration_audit.py`
+  re-applies D's two leaks by monkeypatching the sealed path and asserts the audit catches each.
+- **F.2 Block permutation** (D3 finding 2 / §5): the registered §6 label permutation shuffles labels
+  i.i.d. within class, ignoring §2's 35-day clustering; the label sequence is autocorrelated
+  (D3: lag-1 +0.17). Added beside it, and reported as `permutation.block`: the same statistic under
+  a permutation that shuffles **intact clusters** (reads within 35 days of the previous read form one
+  cluster; clusters are permuted as units within the tier, class stratification dropped), 1,000 draws.
+  Both p-values are published; §7's `permutation_p<0.05` condition uses the **block** p-value from
+  this amendment on, since it respects the registered dependence rule; the i.i.d. p stays beside it.
+- **F.3 RPS item family** (D3 finding 3): the SPA test is also run over the RPS item family
+  (`G.rps.spa`, benchmark climatology), so a post-hoc "best RPS item" is guarded as the Brier one is.
+- **F.4 Persistence, size-corrected** (D3 finding 1): `diagnostic_fair.engine_vs_persistence` is
+  published for P (and G), so "beats persistence" carries its size-corrected effect size beside it. A
+  point forecast has no within-forecast spread, so its fair CRPS equals its registered CRPS; the
+  engine's fair CRPS is lower than its registered one — the correction can only raise the engine's
+  measured advantage over persistence, never lower it.
+- **F.5 Item status wording** (D3 finding 5): every item's `verdict.rules` status carries its DM
+  p-value and the family SPA p-value in the string, so no item reads as "SUGGESTIVE" without them.
+
+## Amendment G (2026-09-02) — release lags applied in the engine for two market fields
+*Registered before the code (Brief 2, B-8; D2 finding 3). §1 promises "otherwise the release lag is
+applied"; the observations table carries `as_of = obs_date` for `derived.cot_pct` and
+`derived.inv_sigma`.* The engine's information set now applies a registered lag when reading these
+fields at t: `cot_pct` (CFTC Commitments of Traders: positions as of Tuesday, released Friday) **3
+calendar days**; `inv_sigma` (EIA Weekly Petroleum Status Report: week ending Friday, released the
+following Wednesday) **5 calendar days**. An observation dated d is visible at t only if d + lag < t;
+the standardization window obeys the same rule. Holidays that delay a release are not modelled
+(stated). `summary.json.registered.release_lags` records the map; the filtration audit (F.1) checks it.
+
+## Amendment H (2026-09-02) — the situation fields' knowable-at rule, implemented
+*Registered before the code (Brief 2, B-8; D2 finding 4; WORLD_STATE_FRAMEWORK.md Amendment A, session
+A).* §1's LIMITATION promised that a situation field whose source postdates t is set to "unknown" for
+that read. Session A now stamps every `sr_*` field with `knowable_at` in `situation_state` (entity
+`situation`, `vintage = knowable_at`). From this amendment the engine's situation block takes each of
+its seven fields (`actor`, `target`, `conflict_scope`, `tempo`, `prior_dyad`, `asset_role`,
+`propensity`) from those rows **with vintage ≤ as_of**, and sets a field with no such row to unknown —
+for the target and for every candidate alike. The share of fields blanked and the number of events
+with no situation field at t are published in `data_state` (session A's count at registration:
+262 of 313 events have none). A read whose target has no known situation field is retrieved on the
+market block alone, as the distance rule already provides. This will weaken the situation-weighted
+items; that is the point-in-time engine, published as computed.
+
+## Amendment I (2026-09-02) — determinism and the content digest
+*Registered before the code (Brief 2, B-9).* Every random draw in the walk is seeded from a registered
+seed: bootstrap and SPA 19900802, permutation 19900802, placebo 19900802, reliability bands 7, power
+simulations 19900802, random-analog draws from SHA-256 of the event id; the seeds are listed in
+`summary.json.registered.seeds`. Each sealed read carries `content_hash`: SHA-256 of the record with
+`hash`, `sealed_at`, `run_id` and `content_hash` removed (`tests/test_reproduce.py`'s convention), and
+`summary.json.determinism.content_digest` is the SHA-256 of the ordered content hashes of the run in
+the tree. Two consecutive runs on the same inputs must produce the same digest; `tests/test_walk_determinism.py`
+asserts it on the synthetic corpus, and `python3 src/walk.py --digest` prints the digest of the run in
+the tree so `make reproduce` can compare a clone's run to the committed one by digest.

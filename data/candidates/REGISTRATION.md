@@ -52,3 +52,14 @@ wti_chg_3m_pct, suggested_title` (blank), sorted by `event_date`. Output:
 Not a coding. Not a filter for "oil-relevant". Not an entry in any registered table. Duplicates across
 sources (the same war in ICB, COW and MID) are listed once per source, by design — Joe sees each
 source's own record and decides.
+
+## Amendment 1 (2026-09-02) — the admission sheet is blind; the outcome join is a separate file
+*Answering docs/red_team_2/D2_leakage_hunt.md finding 2 (selection on outcome by construction). Dated;
+the section "The join to the monthly Big Moves" above stays as the record of what was registered first.*
+- `data/candidates/pre1987_candidates.csv` — the sheet Joe admits from — carries **no outcome column**:
+  `event_date, actors, source, source_id, source_detail, suggested_title`.
+- `data/candidates/pre1987_candidates_outcomes.csv` — keyed by `source, source_id` — carries the join
+  (`inside_big_move, episode_id, monthly_move_pct, wti_chg_3m_pct`). It exists so the walk's
+  materiality and P outcomes for an admitted event are reproducible from the sheet, and it is to be
+  opened **after** admission decisions are recorded. The summary file counts both.
+- Nothing else changes: the same records, the same registered state set, the same date range.
