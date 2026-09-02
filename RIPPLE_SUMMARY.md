@@ -1,6 +1,6 @@
 # RIPPLE SUMMARY — computed once, as registered
 
-*2026-09-02T20:33:01+00:00. Registration RIPPLE_REGISTRATION.md (sealed cbf4fdc; Amendments A, B). Numbers below are read from data/ripple/*.json written by src/ripple_lp.py in this run. Vocabulary: node×shock verdicts are TRANSMITTING / NULL / INSUFFICIENT; the nine expectations are CONSISTENT / INCONSISTENT / INDETERMINATE. Nothing was re-run or re-labelled after reading.*
+*2026-09-02T23:32:21+00:00. Registration RIPPLE_REGISTRATION.md (sealed cbf4fdc; Amendments A, B). Numbers below are read from data/ripple/*.json written by src/ripple_lp.py in this run. Vocabulary: node×shock verdicts are TRANSMITTING / NULL / INSUFFICIENT; the nine expectations are CONSISTENT / INCONSISTENT / INDETERMINATE. Nothing was re-run or re-labelled after reading.*
 
 ## Tally (primary spec, headline horizon, verdict-bearing shocks)
 | verdict | count |
@@ -45,6 +45,8 @@ Base rate: 21/477 = 4.4% of cells transmit. Under the null every cell has a 5% c
 | Palladium (palladium) | -5.807% [95% -10.663, -0.951] n=22 | 22 | 0.0 | TRANSMITTING | **RETAINED** |
 | S&P 500 (sp500) | -0.760% [95% -2.769, +1.249] n=36 | 36 | 3.8 | NULL | **RETRACTED** |
 | Platinum (platinum) | -1.286% [95% -5.042, +2.469] n=25 | 25 | 4.2 | NULL | **RETRACTED** |
+
+**Palladium, stated as Joe's Ruling 1 requires.** The re-test result is published above as computed: -5.807% [95% -10.663, -0.951] n=22, placebo percentile 0.0, verdict TRANSMITTING. In the same breath: palladium is **not on the oil chain** — it is a macro cross-check node, and no mechanism in this study predicts a crude shock reaching it. And one survivor out of six re-tested edges is exactly what this base rate produces by chance: at a 5% band and a 5% placebo tail, one hit in six is consistent with noise. **This is not a finding and must not be surfaced as one.** It is published because the re-test was registered before it ran and every result of a registered test is published, including the awkward one.
 
 ## The nine expectations (§6)
 **E-1 (crude, h=5).**

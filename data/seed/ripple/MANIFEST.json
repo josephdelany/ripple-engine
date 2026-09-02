@@ -299,6 +299,216 @@
   "sha256": "b299e6715ac58abe46b9542e1f128a29341cd7e809c7a8c0058c1db1cc64c52b",
   "registered_in": "RIPPLE_SOURCES.md #7 external shocks"
  },
+ "portwatch.bab_el_mandeb.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "816e3fb775305e7cd915aab7d15f1717d60d3a1b62196e012d5f07baa72b1a17",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.bab_el_mandeb.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "de6b089130e1b655097fac9d1f550fa26ace298782d3d4fd0c18fc39a5b148fc",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.bab_el_mandeb.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "76e91e33c8326493b06d7f954a12ed5db7e7202d661f6b339a59ba9004d0e782",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.bosporus.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "2c6e185540878181e7f4cd9027273b0249253123037da54955971339f9abe8b1",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.bosporus.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "d1d980afb4c32a094c4f3a6ed515c565cdc4665eccd94aacfbb4bfde560831d2",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.bosporus.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "c803e769cce4c2763c506f426f3a05d7a1c15777e971a2c631721d46a3d6d7fb",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.cape_of_good_hope.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "c8eba90439d2abd88604d57aa2781f0ea9bbbdad8218fb48d1ada63fb578b713",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.cape_of_good_hope.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "bb74fb080b69d831d61dda07b3ac1e48578d4879b435c04623e10b438bad7ab2",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.cape_of_good_hope.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "72307a63e1fc5b3f92bbe60e5a2731f9e2a10b74002e3c9e79738d249ddc45e9",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.hormuz.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "f1c92a08c1030110501edd6170cc1b0132842d0d7a37688d5deda9f889d96db9",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.hormuz.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "3795aa7dc80220387b9a288640387ae6798c74f389c05a61484424d19c1016f7",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.hormuz.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "0b522459becce9dad386335dc304616c0218e2d995fefc54f5c619e41159d41d",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.malacca.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "8bba5f9e6cc9fa15ee71a3bb92b6efc171ac417c249a679d5d802af9280c7f45",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.malacca.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "aaefe325437c61706e249cc55d93bbbb4a3fecdc5fe0b58a38eb39735b3c4656",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.malacca.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "b03718636e300ea3068afd3b24400e76a9911a71de3504e1aa02b98c63ecbbff",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.panama.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "3e35bf1fe114c855d6da781ca8dcb47c21eeb866a8eaaf3a66189720cf5f351d",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.panama.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "d3509f0dc1c520b3dea54ded9ba1a6e19caad05dce40ced85bae80d8e74019d9",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.panama.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "ebaf16318340d9618fe79a45582246e56b1182691d1e5cbc7de6eca34cbcb4d6",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.suez.capacity_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "f02c09da9ff9abe75673572535337bfa2afa5e0d915cee8642963e08b0b84f64",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.suez.n_tanker": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "cf3f726307f0c57d0d2e1eeb2a531a99fd481cd7fe8366346ea30c136b10026a",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
+ "portwatch.suez.n_total": {
+  "source_url": "https://portwatch.imf.org/",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch.",
+  "retrieved_at": "2026-09-02T23:31:20+00:00",
+  "rows": 2799,
+  "first": "2019-01-01",
+  "last": "2026-08-30",
+  "sha256": "c09e81d9c60fa64e53a2c2de1ae785f118902d413f880f6f59e076957757905c",
+  "registered_in": "RIPPLE_SOURCES.md #5 physical flows"
+ },
  "wb.brent": {
   "source_url": "https://www.worldbank.org/en/research/commodity-markets",
   "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",

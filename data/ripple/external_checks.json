@@ -1,6 +1,6 @@
 {
  "meta": {
-  "when": "2026-09-02T20:33:01+00:00",
+  "when": "2026-09-02T23:32:21+00:00",
   "registration": "RIPPLE_REGISTRATION.md cbf4fdc + A, B",
   "seed": 19900802,
   "n_placebo": 500,
@@ -18,7 +18,7 @@
    "bigmove_up": 21,
    "bigmove_down": 22
   },
-  "runtime_s": 140.0
+  "runtime_s": 42.0
  },
  "note": "documented sanity checks, not gates [2.8]",
  "kanzig_daily_pc_on_brent": {

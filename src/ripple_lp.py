@@ -652,6 +652,17 @@ def summarize(rows, rows_gas, rows_gas_m, pt, ext, exo, retraction, tallies, met
     L.append("|---|---|---|---|---|---|")
     for name, rr in retraction.items():
         L.append(f"| {name} ({rr['node']}) | {rr['beta']} | {rr['n_events']} | {rr['placebo_pct']} | {rr['verdict']} | **{rr['status']}** |")
+    pal = retraction.get("Palladium", {})
+    L.append("")
+    L.append("**Palladium, stated as Joe's Ruling 1 requires.** The re-test result is published above "
+             f"as computed: {pal.get('beta', 'n/a')}, placebo percentile {pal.get('placebo_pct')}, "
+             f"verdict {pal.get('verdict')}. In the same breath: palladium is **not on the oil chain** — "
+             "it is a macro cross-check node, and no mechanism in this study predicts a crude shock "
+             "reaching it. And one survivor out of six re-tested edges is exactly what this base rate "
+             "produces by chance: at a 5% band and a 5% placebo tail, one hit in six is consistent with "
+             "noise. **This is not a finding and must not be surfaced as one.** It is published because "
+             "the re-test was registered before it ran and every result of a registered test is "
+             "published, including the awkward one.")
     L.append("")
     L.append("## The nine expectations (§6)")
     # E-1

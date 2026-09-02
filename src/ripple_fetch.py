@@ -72,6 +72,15 @@ CFTC_BASE = "https://www.cftc.gov/files/dea/history/"
 CFTC_DISAGG_BUNDLE = "fut_disagg_txt_hist_2006_2016.zip"      # verified 2026-09-02 (the name without _hist_ 404s)
 CFTC_LEGACY_BUNDLE = "deacot1986_2016.zip"
 CFTC_WTI, CFTC_BRENT_NYMEX = "067651", "06765T"                 # stable contract codes; names change over time
+JODI_URL = ("https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/"
+            "{cls}/{year}.csv")
+JODI_FIRST_YEAR = 2002
+# JODI reports every (country, product, flow, month) in FIVE unit rows. CONVBBL is NOT a volume:
+# it is the country's barrels-per-tonne conversion factor x1000 (verified 2026-09-02: Saudi crude
+# production 2026-01 has KBBL/KTONS = 7.323 exactly equal to CONVBBL/1000, and KBD x 31 = KBBL).
+# Reading "whichever unit is populated" would record Russia's crude production as 7356. So the
+# unit is PINNED per measure below and CONVBBL is never used. Missing is "-" or "x".
+JODI_MISSING = {"-", "x", ""}
 
 # ----------------------------------------------------------------------------------------------
 # The registry. Every entry names the RIPPLE_SOURCES.md line it comes from (the `src` key), the
@@ -221,6 +230,35 @@ for _f, (_col, _lab) in _LEGACY_FIELDS.items():
         licence="CFTC public domain (cftc.gov/webpolicy)", seed=True, src="RIPPLE_SOURCES.md #11 priced-in")
 ENTITIES.append(("commodity.brent_nymex_lastday", "commodity", "NYMEX Brent Last Day (06765T)",
                  "CFTC COT proxy for Brent positioning; NOT the ICE Futures Europe Brent contract"))
+# --- JODI-Oil (Joe's ruling 2026-09-02, option (a)): monthly country data, REFRESH-ONLY.
+#     No licence page exists on jodidata.org; "freely available" is read as ACCESS, not RIGHTS,
+#     so nothing is redistributed -- no seed, never committed. Cite as JODI-Oil with the
+#     retrieval date. None of these is a node in the sealed RIPPLE_REGISTRATION.md Table N;
+#     they are loaded for later work and were not used in the computed study.
+JODI_COUNTRIES = {
+    "SA": "Saudi Arabia", "US": "United States", "RU": "Russia", "CN": "China", "IN": "India",
+    "JP": "Japan", "IQ": "Iraq", "AE": "United Arab Emirates", "KW": "Kuwait", "NO": "Norway",
+    "CA": "Canada", "BR": "Brazil", "MX": "Mexico", "KR": "Korea", "DE": "Germany",
+    "GB": "United Kingdom", "NG": "Nigeria", "DZ": "Algeria", "QA": "Qatar", "KZ": "Kazakhstan",
+    "VE": "Venezuela", "IR": "Iran",
+}
+# measure -> (classification, ENERGY_PRODUCT, FLOW_BREAKDOWN, pinned UNIT_MEASURE, unit label, what)
+JODI_MEASURES = {
+    "crude_production": ("primary", "CRUDEOIL", "INDPROD", "KBD", "thousand bbl/day", "crude oil production"),
+    "refinery_intake": ("primary", "CRUDEOIL", "REFINOBS", "KBD", "thousand bbl/day", "refinery observed intake of crude"),
+    "crude_stocks": ("primary", "CRUDEOIL", "CLOSTLV", "KBBL", "thousand bbl", "closing crude stock level"),
+    "crude_exports": ("primary", "CRUDEOIL", "TOTEXPSB", "KBD", "thousand bbl/day", "total crude exports"),
+    "products_demand": ("secondary", "TOTPRODS", "TOTDEMO", "KBD", "thousand bbl/day", "total refined-product demand"),
+}
+for _cc, _cname in JODI_COUNTRIES.items():
+    _ent = f"country.{_cname.lower().replace(' ', '_')}"
+    ENTITIES.append((_ent, "country", _cname, "JODI-Oil reporter"))
+    for _mk, (_cls, _prod, _flow, _unit, _ulab, _what) in JODI_MEASURES.items():
+        SPECS[f"jodi.{_cc.lower()}.{_mk}"] = dict(kind="jodi", key=(_cls, _prod, _flow, _unit, _cc),
+            entity=_ent, name=f"JODI-Oil: {_cname} {_what}", unit=_ulab, freq="monthly",
+            source="JODI-Oil", url="https://www.jodidata.org/oil/database/data-downloads.aspx",
+            licence="no licence page on the site; 'freely available' read as access not rights -> never redistributed",
+            seed=False, src="RIPPLE_SOURCES.md #5 JODI-Oil")
 # STNG (product tankers) already exists as yf.tankers; not duplicated.
 
 # fill the repetitive fields for the Pink Sheet and yfinance entries
@@ -246,8 +284,13 @@ for _pname, _slug in PORTWATCH.items():
     for _f, _u in PORTWATCH_FIELDS.items():
         SPECS[f"portwatch.{_slug}.{_f}"] = dict(kind="portwatch", key=(_pname, _f), entity=f"chokepoint.{_slug}",
             name=f"{_pname} daily {_f}", unit=_u, freq="daily", source="IMF PortWatch",
-            url="https://portwatch.imf.org/", licence="IMF terms (imf.org/external/terms.htm; page returned 403 on 2026-09-02) -> not redistributed",
-            seed=False, src="RIPPLE_SOURCES.md #5 physical flows")
+            url="https://portwatch.imf.org/",
+            licence=("IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data "
+                     "(imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish "
+                     "and distribute Data from IMF Sites, with attribution 'Source: International Monetary Fund' "
+                     "and no alteration of integrity. Published daily aggregates only -- upstream AIS inputs "
+                     "are third-party. Attribution: Sources: UN Global Platform; IMF PortWatch."),
+            seed=True, src="RIPPLE_SOURCES.md #5 physical flows")
 
 
 # ----------------------------------------------------------------------------------------------
@@ -358,6 +401,25 @@ def parse_portwatch_features(features):
         df["value"] = pd.to_numeric(df["value"], errors="coerce")
         out[fld] = df.dropna().drop_duplicates("date").sort_values("date").reset_index(drop=True)
     return out
+
+
+def parse_jodi(raw, product, flow, unit, country):
+    """One JODI annual CSV -> DataFrame[date,value] for one country/product/flow at the PINNED
+    unit. Month 'YYYY-MM' -> first of month. CONVBBL is never accepted (it is a conversion
+    factor, not a volume); missing markers '-' and 'x' are dropped, never zero-filled."""
+    if unit == "CONVBBL":
+        raise ValueError("CONVBBL is a conversion factor, not a volume -- refusing to load it as data")
+    df = pd.read_csv(io.BytesIO(raw), dtype=str)
+    m = ((df["REF_AREA"] == country) & (df["ENERGY_PRODUCT"] == product)
+         & (df["FLOW_BREAKDOWN"] == flow) & (df["UNIT_MEASURE"] == unit))
+    sub = df[m]
+    if not len(sub):
+        return pd.DataFrame(columns=["date", "value"])
+    val = sub["OBS_VALUE"].astype(str).str.strip()
+    keep = ~val.isin(JODI_MISSING)
+    out = pd.DataFrame({"date": sub.loc[keep, "TIME_PERIOD"].astype(str) + "-01",
+                        "value": pd.to_numeric(val[keep], errors="coerce")})
+    return out.dropna().drop_duplicates("date").sort_values("date").reset_index(drop=True)
 
 
 def parse_cftc_zip(raw, family):
@@ -523,6 +585,34 @@ def fetch_live(only=None):
                 errors[sid] = f"{type(res).__name__}: {res}"
             else:
                 got[sid] = (res[fld], "")
+
+    if "jodi" in kinds:
+        year_now = datetime.now(timezone.utc).year
+        jodi_specs = [(sid, sp) for sid, sp in want.items() if sp["kind"] == "jodi"]
+        acc = {sid: [] for sid, _ in jodi_specs}
+        for cls in sorted({sp["key"][0] for _, sp in jodi_specs}):
+            for year in range(JODI_FIRST_YEAR, year_now + 1):
+                try:
+                    raw = _get_bytes(JODI_URL.format(cls=cls, year=year), timeout=180)
+                except Exception as e:
+                    print(f"  ! JODI {cls} {year}: {type(e).__name__}: {e}")
+                    continue
+                for sid, sp in jodi_specs:
+                    c, prod, flow, unit, country = sp["key"]
+                    if c != cls:
+                        continue
+                    try:
+                        part = parse_jodi(raw, prod, flow, unit, country)
+                        if len(part):
+                            acc[sid].append(part)
+                    except Exception as e:
+                        errors[sid] = f"{type(e).__name__}: {e}"
+        for sid, parts in acc.items():
+            if parts:
+                df = pd.concat(parts).drop_duplicates("date").sort_values("date").reset_index(drop=True)
+                got[sid] = (df, f"JODI annual CSVs {JODI_FIRST_YEAR}-{year_now}")
+            elif sid not in errors:
+                errors[sid] = "no rows at the pinned unit (this reporter does not publish this measure)"
 
     for family, kind in (("disagg", "cftc_disagg"), ("legacy", "cftc_legacy")):
         if kind in kinds:
