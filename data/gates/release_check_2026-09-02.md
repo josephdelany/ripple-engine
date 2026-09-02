@@ -5,14 +5,20 @@ the repo root. Numbers quoted are verbatim from the files named. This file super
 (1cddad2), which checked run 181720Z; session A rebuilt the IES-90 rows under Amendment 2 at 18:25:30Z,
 eight minutes after that run read the database, so the walk was re-run and everything below re-checked.
 
-## 1. `git pull --rebase` — FAIL (cannot run)
+## 1. `git pull --rebase` — PASS (after setting the upstream)
+
+First attempt: `fatal: no upstream configured for branch 'v2-day1'`. The branch already existed on the
+remote (`refs/heads/v2-day1` at 0a1c5ed, pushed by session A), so no push was needed:
 
 ```
-fatal: no upstream configured for branch 'v2-day1'
+git branch --set-upstream-to=origin/v2-day1 v2-day1
+git pull --rebase --autostash      # "Current branch v2-day1 is up to date. Applied autostash."
 ```
-`origin` has only `main`. Sessions A, B and Cowork commit to the same working tree, so there is nothing
-to pull; the charter's "pull before every commit" cannot be executed until `v2-day1` is pushed and
-tracked. Recorded, not worked around.
+`--autostash` because the launchd refresh keeps six tracked `data/` artifacts dirty in the shared tree
+and plain `--rebase` refuses on unstaged changes; the stash held only those six files and re-applied
+cleanly (six dirty before, six after; no other session's file touched). Remote head was an ancestor of
+local HEAD (behind 0, ahead 2), so the rebase changed nothing. SESSION_CHARTER.md and PATH.md re-read
+after the pull: unchanged since the commits this check was written against.
 
 ## 2. The walk, full registered draws — PASS
 
@@ -117,4 +123,5 @@ PASS: walk re-run on the Amendment 2 labels and committed; G target, label regis
 recorded; suite 318 / 0 / 6; all seven endpoints 200 with every number traced. PARTIAL (session A's
 files, handoff written): `/api/walk/summary` drops RPS, leakage and materiality by key mismatch; story
 `branches` shows the retired label without the required "retired" wording; story trust label stale;
-README describes the previous run. FAIL: `git pull --rebase` has no upstream.
+README described the previous run (session A has since updated it, 0e31cd0). FAIL: none.
+The one FAIL of the first pass (`git pull --rebase`, no upstream) is resolved above.
