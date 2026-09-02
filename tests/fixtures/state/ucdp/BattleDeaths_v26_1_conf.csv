@@ -1,0 +1,54 @@
+conflict_id,dyad_id,location_inc,side_a,side_a_id,side_a_2nd,side_b,side_b_id,side_b_2nd,incompatibility,territory_name,year,bd_best,bd_low,bd_high,type_of_conflict,battle_location,gwno_a,gwno_a_2nd,gwno_b,gwno_b_2nd,gwno_loc,gwno_battle,region,version
+209,411,Philippines,Government of Philippines,154,,CPP,169,,2,,1991,1514,1514,1933,3,Philippines,840,,,,840,840,3,26.1
+218,422,"India, Pakistan",Government of India,141,,Government of Pakistan,142,,1,Kashmir,1991,99,99,195,2,"India, Pakistan",750,,770,,"750, 770","750, 770",3,26.1
+221,428,Myanmar (Burma),Government of Myanmar (Burma),144,,KNU,180,,1,Karen,1991,552,497,672,3,Myanmar (Burma),775,,,,775,775,3,26.1
+222,434,Myanmar (Burma),Government of Myanmar (Burma),144,,ABSDF,185,,2,,1991,25,25,25,3,Myanmar (Burma),775,,,,775,775,3,26.1
+223,442,Myanmar (Burma),Government of Myanmar (Burma),144,,RSO,187,,1,Arakan,1991,25,25,25,3,Myanmar (Burma),775,,,,775,775,3,26.1
+227,451,India,Government of India,141,,PWG,193,,2,,1991,78,78,78,3,India,750,,,,750,750,3,26.1
+231,461,Myanmar (Burma),Government of Myanmar (Burma),144,,KIO,201,,1,Kachin,1991,25,25,25,3,Myanmar (Burma),775,,,,775,775,3,26.1
+233,469,Guatemala,Government of Guatemala,11,,URNG,732,,2,,1991,72,72,85,3,Guatemala,90,,,,90,90,5,26.1
+234,476,Israel,Government of Israel,121,,Fatah,207,,1,Palestine,1991,28,28,30,3,"Israel, Lebanon",666,,,,666,"666, 660",2,26.1
+259,521,Iraq,Government of Iraq,116,,SCIRI,231,,2,,1991,237,237,1261,3,Iraq,645,,,,645,645,2,26.1
+267,"558, 12104",Ethiopia,Government of Ethiopia,97,,"EPRDF, Forces of Harar garrison","414, 1215",,2,,1991,4518,4518,5568,3,Ethiopia,530,,,,530,530,4,26.1
+271,"564, 565",Iraq,Government of Iraq,116,,"KDP, PUK","260, 261",,1,Kurdistan,1991,1247,1247,2603,3,Iraq,645,,,,645,645,2,26.1
+275,571,Ethiopia,Government of Ethiopia,97,,EPLF,416,,1,Eritrea,1991,6907,6904,6907,3,Ethiopia,530,,,,530,530,4,26.1
+287,593,Burundi,Government of Burundi,93,,Palipehutu,430,,2,,1991,272,272,551,3,Burundi,516,,,,516,516,4,26.1
+288,"610, 611",Chad,Government of Chad,87,,"MDD, Military faction (forces of Maldoum Bada Abbas)","446, 449",,2,,1991,68,68,68,3,Chad,483,,,,483,483,4,26.1
+289,"623, 624",Colombia,Government of Colombia,17,,"ELN, FARC","743, 744",,2,,1991,725,725,754,3,Colombia,100,,,,100,100,5,26.1
+292,"631, 632",Peru,Government of Peru,21,,"MRTA, Sendero Luminoso","750, 751",,2,,1991,1138,1138,1139,3,Peru,135,,,,135,135,5,26.1
+300,"644, 646, 647",Cambodia (Kampuchea),Government of Cambodia (Kampuchea),148,,"FUNCINPEC, KPNLF, KR","270, 272, 273",,2,,1991,220,220,451,3,Cambodia (Kampuchea),811,,,,811,811,3,26.1
+309,663,Sudan,Government of Sudan,112,,SPLM/A,466,,2,,1991,1317,1317,4317,3,"Sudan, Uganda",625,,,,625,"625, 500",4,26.1
+314,"686, 688",Uganda,Government of Uganda,90,,"LRA, UPA","486, 488",,2,,1991,853,853,853,3,Uganda,500,,,,500,500,4,26.1
+315,692,United Kingdom,Government of United Kingdom,28,,PIRA,282,,1,Northern Ireland,1991,26,26,27,3,United Kingdom,200,,,,200,200,1,26.1
+316,697,El Salvador,Government of El Salvador,13,,FMLN,755,,2,,1991,88,88,93,3,El Salvador,92,,,,92,92,5,26.1
+322,705,Bangladesh,Government of Bangladesh,143,,PCJSS,285,,1,Chittagong Hill Tracts,1991,25,22,45,3,Bangladesh,771,,,,771,771,3,26.1
+327,714,Angola,Government of Angola,99,,UNITA,567,,2,,1991,491,491,647,3,Angola,540,,,,540,540,4,26.1
+332,722,Mozambique,Government of Mozambique,100,,Renamo,498,,2,,1991,1326,365,2359,3,Mozambique,541,,,,541,541,4,26.1
+333,"724, 726, 727, 732",Afghanistan,Government of Afghanistan,130,,"Hizb-i Islami-yi Afghanistan, Hizb-i Islami-yi Afghanistan - Khalis faction, Hizb-i Wahdat, Jam'iyyat-i Islami-yi Afghanistan","292, 294, 299, 300",,2,,1991,3302,3156,3802,3,Afghanistan,700,,,,700,700,3,26.1
+337,"744, 745, 746, 747",Somalia,Government of Somalia,95,,"SNM, SPM, USC/SNA, USC/SSA","500, 501, 502, 503",,2,,1991,8005,7230,9005,3,Somalia,520,,,,520,520,4,26.1
+338,753,Iran,Government of Iran,114,,MEK,308,,2,,1991,45,45,45,3,"Iran, Iraq",630,,,,630,"630, 645",2,26.1
+342,763,Spain,Government of Spain,35,,ETA,313,,1,Basque,1991,45,45,45,3,Spain,230,,,,230,230,1,26.1
+351,775,India,Government of India,141,,Sikh insurgents,319,,1,Punjab/Khalistan,1991,2673,2673,2739,3,India,750,,,,750,750,3,26.1
+352,776,Sri Lanka,Government of Sri Lanka,145,,LTTE,320,,1,Eelam,1991,6432,6432,6787,3,Sri Lanka,780,,,,780,780,3,26.1
+354,781,Turkey,Government of Turkey,115,,PKK,323,,1,Kurdistan,1991,370,370,375,3,"Iraq, Turkey",640,,,,640,"645, 640",2,26.1
+364,792,India,Government of India,141,,Kashmir insurgents,325,,1,Kashmir,1991,330,330,551,3,India,750,,,,750,750,3,26.1
+366,794,Indonesia,Government of Indonesia,155,,GAM,327,,1,Aceh,1991,58,57,133,3,Indonesia,850,,,,850,850,3,26.1
+371,799,"Iraq, Kuwait",Government of Iraq,116,,Government of Kuwait,125,"Government of Argentina, Government of Australia, Government of Bahrain, Government of Bangladesh, Government of Belgium, Government of Canada, Government of Czechoslovakia, Government of Denmark, Government of Egypt, Government of France, Government of Greece, Government of Honduras, Government of Italy, Government of Morocco, Government of Netherlands, Government of Niger, Government of Norway, Government of Oman, Government of Pakistan, Government of Portugal, Government of Qatar, Government of Saudi Arabia, Government of Senegal, Government of Sierra Leone, Government of Spain, Government of Syria, Government of Turkey, Government of United Arab Emirates, Government of United Kingdom, Government of United States of America",1,Kuwait,1991,21790,21747,26203,2,"Iraq, Kuwait, Philippines, Saudi Arabia",645,,690,"160, 900, 692, 771, 211, 20, 315, 390, 651, 220, 350, 91, 325, 600, 210, 436, 385, 698, 770, 235, 694, 670, 433, 451, 230, 652, 640, 696, 200, 2","645, 690","645, 690, 840, 670",2,26.1
+372,10054,Mali,Government of Mali,72,,FPLA,934,,1,Azawad,1991,59,3,138,3,Mali,432,,,,432,432,4,26.1
+374,804,Rwanda,Government of Rwanda,94,,FPR,527,,2,,1991,153,150,1977,3,Rwanda,517,,,,517,517,4,26.1
+376,807,Russia (Soviet Union),Government of Russia (Soviet Union),57,,Republic of Armenia,330,,1,Nagorno-Karabakh,1991,220,220,501,3,Russia (Soviet Union),365,,,,365,365,1,26.1
+379,810,Djibouti,Government of Djibouti,96,,FRUD,530,,2,,1991,60,60,240,3,Djibouti,522,,,,522,522,4,26.1
+380,812,Georgia,Government of Georgia,63,,National Guard and Mkhedrioni,332,,2,,1991,52,52,170,3,Georgia,372,,,,372,372,1,26.1
+381,815,Haiti,Government of Haiti,6,,Military faction (forces of Raoul Cédras),764,,2,,1991,160,55,359,3,Haiti,41,,,,41,41,5,26.1
+382,818,Sierra Leone,Government of Sierra Leone,80,"Government of Guinea, Government of Nigeria",RUF,532,,2,,1991,552,551,1263,4,Sierra Leone,451,"438, 475",,,451,451,4,26.1
+383,822,Turkey,Government of Turkey,115,,DHKP-C,334,,2,,1991,39,39,39,3,Turkey,640,,,,640,640,2,26.1
+384,824,Serbia (Yugoslavia),Government of Serbia (Yugoslavia),49,,Republic of Slovenia,336,,1,Slovenia,1991,64,64,64,3,Serbia (Yugoslavia),345,,,,345,345,1,26.1
+385,"825, 826",Serbia (Yugoslavia),Government of Serbia (Yugoslavia),49,,"Croatian irregulars, Republic of Croatia","337, 370",,1,Croatia,1991,2958,2885,4401,3,Serbia (Yugoslavia),345,,,,345,345,1,26.1
+386,827,Algeria,Government of Algeria,109,,Takfir wa'l Hijra,536,,2,,1991,34,34,34,3,Algeria,615,,,,615,615,4,26.1
+387,831,Angola,Government of Angola,99,,FLEC-R,540,,1,Cabinda,1991,25,6,41,3,Angola,540,,,,540,540,4,26.1
+388,833,Azerbaijan,Government of Azerbaijan,64,,Republic of Artsakh,338,Government of Armenia,1,Artsakh (Nagorno-Karabakh),1991,35,35,35,4,Azerbaijan,373,,,371,373,373,1,26.1
+413,869,Ethiopia,Government of Ethiopia,97,,OLF,551,,1,Oromiya,1991,700,700,1330,3,Ethiopia,530,,,,530,530,4,26.1
+426,891,Israel,Government of Israel,121,,Hezbollah,366,,1,Southern Lebanon,1991,28,28,31,3,Lebanon,666,,,,666,660,2,26.1
+430,895,Niger,Government of Niger,75,,FLAA,524,,2,,1991,40,40,150,3,Niger,436,,,,436,436,4,26.1
+11447,10006,Ethiopia,Government of Ethiopia,97,,IGLF,1115,,1,Hararghe,1991,100,100,100,3,Ethiopia,530,,,,530,530,4,26.1
+11475,11018,Myanmar (Burma),Government of Myanmar (Burma),144,,NSCN-K,224,,1,Nagaland,1991,150,150,150,3,Myanmar (Burma),775,,,,775,775,3,26.1
