@@ -1,14 +1,14 @@
 {
-  "n_events": 296,
-  "n_geo": 173,
-  "n_borderline": 233,
+  "n_events": 313,
+  "n_geo": 187,
+  "n_borderline": 247,
   "branch_dist_90d_geo": {
-    "CONTAINED": 106,
-    "LIMITED_RETALIATION": 33,
-    "WIDENING": 27,
-    "unknown": 3,
-    "RESOLUTION_BY_DEAL": 4
+    "CONTAINED": 115,
+    "LIMITED_RETALIATION": 36,
+    "WIDENING": 28,
+    "RESOLUTION_BY_DEAL": 5,
+    "unknown": 3
   },
-  "actors_with_propensity": 11,
-  "pct_geo_outcome_coded": 98.3
+  "actors_with_propensity": 12,
+  "pct_geo_outcome_coded": 98.4
 }

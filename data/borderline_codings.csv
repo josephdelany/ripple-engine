@@ -1,4 +1,7 @@
 event_id,date,type,confidence,outcome_90,title
+carter_doctrine_1980,1980-01-23,policy_response,0.0,unknown,Carter Doctrine: US will use force to defend Gulf oil
+opec_price_collapse_1986,1986-01-01,opec_decision,0.0,unknown,Saudi abandons swing-producer role; 1986 price collapse
+iran_iraq_ceasefire_1988,1988-08-20,policy_response,0.0,unknown,Iran-Iraq ceasefire (UN Resolution 598)
 thai_baht_float_1997,1997-07-02,demand_shock,0.0,unknown,Thailand floats the baht - Asian crisis begins
 korea_imf_bailout_1997,1997-11-21,demand_shock,0.0,unknown,South Korea requests IMF bailout
 opec_jakarta_quota_increase_1997,1997-12-01,opec_decision,0.0,unknown,OPEC Jakarta meeting raises production ceiling 10%
@@ -125,7 +128,15 @@ iraq_oil_export_ban_2002,2002-04-08,sanctions,0.15,unknown,Iraq suspends oil exp
 nigeria_warri_shutin_2003,2003-03-23,conflict_escalation,0.15,unknown,Nigeria Warri unrest forces Niger Delta oil shut-in
 us_iran_hormuz_mou_2026,2026-06-17,policy_response,0.175,unknown,US-Iran MOU reopens the Strait of Hormuz
 venezuela_blackout_2019,2019-03-07,chokepoint_disruption,0.3,unknown,Venezuela nationwide blackout halts oil exports
-praying_mantis_1988,1988-04-18,conflict_escalation,0.412,CONTAINED,US Navy Operation Praying Mantis strikes Iranian oil platforms
+yom_kippur_war_1973,1973-10-06,conflict_escalation,0.412,CONTAINED,Yom Kippur War begins (Egypt/Syria vs Israel)
+oapec_embargo_1973,1973-10-17,sanctions,0.412,CONTAINED,OAPEC oil embargo on states backing Israel
+embargo_lifted_1974,1974-03-18,sanctions,0.412,CONTAINED,Arab oil embargo lifted
+abqaiq_arabian_1977,1977-05-11,infrastructure_attack,0.412,CONTAINED,Fire at Saudi Abqaiq processing facility disrupts output
+iran_revolution_1979,1979-02-11,conflict_escalation,0.412,CONTAINED,Iranian Revolution culminates
+iran_hostage_crisis_1979,1979-11-04,conflict_escalation,0.412,CONTAINED,US embassy hostage crisis begins in Tehran
+iran_iraq_war_1980,1980-09-22,conflict_escalation,0.412,CONTAINED,Iran-Iraq War begins
+kharg_strikes_1985,1985-08-15,infrastructure_attack,0.412,CONTAINED,Iraq intensifies air strikes on Iran's Kharg Island oil terminal
+iraq_kharg_1986,1986-08-12,infrastructure_attack,0.412,CONTAINED,Iraqi raids on Iran's Sirri Island oil terminal
 iraq_un_661_embargo_1990,1990-08-06,sanctions,0.412,CONTAINED,UN Resolution 661 oil embargo on Iraq
 kuwait_oil_fires_1991,1991-02-22,infrastructure_attack,0.412,CONTAINED,Retreating Iraqi forces torch Kuwaiti oil wells
 iraq_un_986_ofp_1995,1995-04-14,sanctions,0.412,CONTAINED,UN Resolution 986 oil-for-food adopted
@@ -205,6 +216,9 @@ drc_cobalt_ban_2025,2025-02-22,sanctions,0.412,CONTAINED,DRC suspends all cobalt
 rus_novokuibyshevsk_strike_2025,2025-03-10,infrastructure_attack,0.412,CONTAINED,Ukrainian drone strike on Rosneft Novokuibyshevsk refinery
 israel_iran_war_2025,2025-06-13,conflict_escalation,0.412,CONTAINED,Israel-Iran war onset (Operation Rising Lion)
 codelco_elteniente_2025,2025-07-31,infrastructure_attack,0.412,CONTAINED,Codelco El Teniente collapse 2025
+iran_oilworkers_strike_1978,1978-10-31,infrastructure_attack,0.425,LIMITED_RETALIATION,Iranian oil-workers strike halts exports (Revolution onset)
+shah_leaves_iran_1979,1979-01-16,conflict_escalation,0.425,LIMITED_RETALIATION,Shah leaves Iran
+praying_mantis_1988,1988-04-18,conflict_escalation,0.425,LIMITED_RETALIATION,US Navy Operation Praying Mantis strikes Iranian oil platforms
 iraq_invades_kuwait_1990,1990-08-02,conflict_escalation,0.425,LIMITED_RETALIATION,Iraq invades Kuwait
 iraq_war_begins_2003,2003-03-20,conflict_escalation,0.425,LIMITED_RETALIATION,US-led invasion of Iraq begins
 iraq_pipeline_north_2004,2004-08-03,infrastructure_attack,0.425,LIMITED_RETALIATION,Insurgents bomb Kirkuk-Ceyhan pipeline halting northern Iraq exports

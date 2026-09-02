@@ -66,6 +66,27 @@ def check(row, i):
     return problems
 
 
+# The CSV carries the codebook columns only. The events table ALSO carries the situation-record columns
+# (sr_*, written by src/situation_record.py, B1) that the CSV knows nothing about. An INSERT OR REPLACE
+# would delete the whole row and re-insert it without them -- which is exactly what happened on the
+# 2026-09-02 refresh (every sr_* field blanked, re-coded afterwards). So: insert new events, and on an
+# existing event_id update ONLY the CSV columns, leaving sr_* and added_at untouched.
+UPSERT_SQL = (
+    "INSERT INTO events (event_id, event_date, date_precision, type, title, description, "
+    " severity, surprise, confidence, source_url, added_at) VALUES (?,?,?,?,?,?,?,?,?,?,?) "
+    "ON CONFLICT(event_id) DO UPDATE SET event_date=excluded.event_date, date_precision=excluded.date_precision, "
+    " type=excluded.type, title=excluded.title, description=excluded.description, severity=excluded.severity, "
+    " surprise=excluded.surprise, confidence=excluded.confidence, source_url=excluded.source_url"
+)
+
+
+def upsert_event(cur, row, now):
+    """Insert or update one CSV row without touching columns the CSV does not carry (sr_*, added_at)."""
+    cur.execute(UPSERT_SQL, (row["event_id"], row["event_date"], row["date_precision"], row["type"], row["title"],
+                             row["description"], int(row["severity"]), int(row["surprise"]), row["confidence"],
+                             row["source_url"], now))
+
+
 def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     conn = sqlite3.connect(DB)
@@ -89,18 +110,7 @@ def main():
         # NOTE: columns are named explicitly rather than positional. After a
         # migration adds a column, positional inserts silently break -- named
         # ones don't. This is the safer habit.
-        cur.execute(
-            "INSERT OR REPLACE INTO events "
-            "(event_id, event_date, date_precision, type, title, description, "
-            " severity, surprise, confidence, source_url, added_at) "
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-            (
-                row["event_id"], row["event_date"], row["date_precision"],
-                row["type"], row["title"], row["description"],
-                int(row["severity"]), int(row["surprise"]),
-                row["confidence"], row["source_url"], now,
-            ),
-        )
+        upsert_event(cur, row, now)
 
         # Link the event to its entities, creating any entity we haven't seen before.
         for pair in filter(None, (p.strip() for p in row["entities"].split(";"))):
