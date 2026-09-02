@@ -1124,8 +1124,20 @@ def filtration_audit(corpus, reads):
                 continue
             n_checks["market_value"] += 1
             iv, d = corpus.info.independent_value_before(f, as_of)
-            if iv is None or abs(float(val) - iv) > 1e-9:
-                viol("market_value", r, f"{f}: read used {val}, last value dated < as_of - lag is {iv} ({d})")
+            if iv is not None and abs(float(val) - iv) <= 1e-9:
+                continue
+            # a market field may also come from session A's state bridge (situation_state), which carries its own
+            # obs_date and vintage; that path is admissible only if BOTH are at or before as_of (checked here, not assumed)
+            pr = [x for x in (corpus.panel.get(r["event_id"]) or []) if x.get("field") == f and x.get("value") is not None
+                  and abs(float(x["value"]) - float(val)) <= 1e-9]
+            ok = [x for x in pr if (x.get("vintage") and str(x["vintage"]) <= as_of) and (x.get("obs_date") and str(x["obs_date"]) <= as_of)]
+            if ok:
+                n_checks["market_value_from_panel"] += 1
+                continue
+            if pr:
+                viol("market_value_panel_dates", r, f"{f}: panel row value {val} with obs_date {pr[0].get('obs_date')} / vintage {pr[0].get('vintage')} vs as_of {as_of}")
+            else:
+                viol("market_value", r, f"{f}: read used {val}, last value dated < as_of - lag is {iv} ({d}), and no panel row carries it")
         pw = (r["baselines"].get("persistence") or {}).get("window_pre")
         if pw:
             n_checks["persistence_window"] += 1

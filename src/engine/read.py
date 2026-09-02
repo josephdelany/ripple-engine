@@ -244,8 +244,8 @@ def _panel_rows(conn):
         if not has:
             return {}
         rows = {}
-        for eid, f, v, vt, vin, src in conn.execute("SELECT event_id, field, value, value_text, vintage, source FROM situation_state"):
-            rows.setdefault(eid, []).append({"field": f, "value": (v if v is not None else vt), "vintage": vin, "source": src})   # text fields live in value_text
+        for eid, f, v, vt, od, vin, src in conn.execute("SELECT event_id, field, value, value_text, obs_date, vintage, source FROM situation_state"):
+            rows.setdefault(eid, []).append({"field": f, "value": (v if v is not None else vt), "obs_date": od, "vintage": vin, "source": src})   # text fields live in value_text
         return rows
     except Exception:
         return {}
