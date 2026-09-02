@@ -43,6 +43,7 @@ from engine import scoring as SC        # noqa: E402
 from engine import learning as LN       # noqa: E402
 from engine import inference as INF     # noqa: E402
 from engine import persistence as PS    # noqa: E402
+from engine import recalibrate as RC    # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WF = ROOT / "data" / "walk_forward"
@@ -59,6 +60,7 @@ REGISTERED = {
     "g_scores": {"gate_and_hedge": "brier (multi-category, §3)", "also": ["log (§3)", "rps (ranked probability score over the ordinal levels; Joe 2026-09-02)"],
                  "deal": "binary brier"},
     "g_baselines": ["climatology", "frozen", "random_analogs", "persistence"],   # §4 + Amendment B (G-persistence: the dyad's IES level over [t-90, t-1], 0.9/0.1 smoothed; fallback climatology, counted)
+    "menu_cap": "12 weightings + the recalibrated item M13 (Amendment C)",
     "burn_in": 8,                # class needs >= 8 prior members with closed outcomes to be scored (§2)
     "k_max": 12,                 # analogs kept per item so the spec curve can slice k without re-reading
     "cluster_days": 35,          # reads within 35 days are one cluster (§6): sets the bootstrap block + HAC lag
@@ -113,16 +115,20 @@ def verify_file(path):
 # ============================================================================ the walk
 
 class Walk:
-    def __init__(self, corpus, menu, out_dir=WF, run_id=None, params=None, break_filtration=False, quiet=False):
+    def __init__(self, corpus, menu, out_dir=WF, run_id=None, params=None, break_filtration=False, quiet=False, break_recal=False):
         self.c = corpus
         self.menu = menu["items"]
+        self.base = [m for m in self.menu if m.get("kind") != "recalibrated"]                      # the retrieval weightings (M01-M12)
+        self.recal = next((m for m in self.menu if m.get("kind") == "recalibrated"), None)         # Amendment C: M13, last in the menu
+        assert self.recal is None or self.menu[-1] is self.recal, "the recalibrated item must be the last menu item"
         self.N = len(self.menu)
+        self.break_recal = break_recal                    # Amendment C.6: the recalibrator ignores close dates (leakage test only)
         self.out = Path(out_dir)
         self.out.mkdir(parents=True, exist_ok=True)
         self.p = dict(REGISTERED) | (params or {})
         self.broken = break_filtration
         self.quiet = quiet
-        self.run_id = run_id or f"walk_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}" + ("_BROKEN" if break_filtration else "")
+        self.run_id = run_id or f"walk_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}" + ("_BROKEN" if break_filtration else "") + ("_RECALBROKEN" if break_recal else "")
         self.reads, self.scores, self.weights_log = [], [], []
 
     def log(self, *a):
@@ -146,6 +152,7 @@ class Walk:
         H = R.TIERS[tier]["horizon"]
         hedge = {"G": LN.Hedge(self.N, self.p["eta"]), "P": LN.Hedge(self.N, self.p["eta"])}
         pending = []                                            # (close_date, task, losses)
+        hist = []                                               # Amendment C: (g_closed_on, looked_up_at, frozen G, realized level) of this tier's scored reads
         t0 = time.time()
         for i, e in enumerate(events):
             t = e["event_date"]
@@ -160,7 +167,7 @@ class Walk:
             w = {task: hedge[task].weights() for task in hedge}
             # (2) the twelve reads at t (pool identical across items; threshold/k/weights differ)
             items, n_pool = [], 0
-            for m in self.menu:
+            for m in self.base:
                 r = R.read(self.c, e, weighting=dict(m, k=self.p["k_max"]), with_propagation=False,
                            with_differencing=False, break_filtration=self.broken)
                 n_pool = max(n_pool, r["filtration"]["n_pool"])
@@ -200,8 +207,13 @@ class Walk:
                 pers_blk = {"P": [0.0], "G": None, "fallback": None}
             burn_in_ok = len(p_pool if e["type"] not in GEO else g_pool) >= self.p["burn_in"]
             # engine (Hedge mixture) and frozen (uniform mixture)
+            nb = len(self.base)
+            frozen = self._mix(items, np.full(nb, 1.0 / nb), np.full(nb, 1.0 / nb), tier)     # §4 baseline 4: uniform over M01-M12
+            if self.recal is not None:                                                        # Amendment C: M13 from the frozen mixture + closed outcomes
+                used = [h for h in hist if (self.break_recal or h[0] <= t)]
+                rc = RC.Recalibrator().fit([h[2] for h in used], [h[3] for h in used])
+                items.append(self._recal_item(rc, frozen, used))
             eng = self._mix(items, w["G"], w["P"], tier)
-            frozen = self._mix(items, np.full(self.N, 1.0 / self.N), np.full(self.N, 1.0 / self.N), tier)
             rec = {"run_id": self.run_id, "tier": tier, "event_id": e["event_id"], "date": t, "as_of": t, "type": e["type"],
                    "horizon": H, "unit": R.TIERS[tier]["unit"], "n_pool": len(pool), "n_pool_g": len(g_pool), "n_pool_p": len(p_pool),
                    "burn_in_ok": bool(burn_in_ok), "filtration_broken": self.broken,
@@ -228,14 +240,27 @@ class Walk:
                 pending.append((outcome["g_closed_on"], "G", sc["items_loss"]["G"]))
             if outcome["chg_pct"] is not None and sc["items_loss"]["P"] is not None:
                 pending.append((outcome["closed_on"], "P", sc["items_loss"]["P"]))
+            if self.recal is not None and outcome["level"] and rec["frozen"]["G"]:
+                hist.append((outcome["g_closed_on"], outcome["looked_up_at"], rec["frozen"]["G"], outcome["level"]))
             if (i + 1) % 50 == 0:
                 self.log(f"  {tier}: {i + 1}/{len(events)} reads ({time.time() - t0:.0f}s)")
         self.log(f"{tier}: {len(events)} reads sealed")
 
+    def _recal_item(self, rc, frozen, used):
+        """Amendment C: M13 = the frozen mixture's G through the recalibration map; P and M are the frozen mixture's."""
+        fp = frozen.get("P")
+        return {"id": self.recal["id"], "kind": "recalibrated", "k": None, "no_precedent": frozen["G"] is None and fp is None, "ranked": [],
+                "G": (rc.apply(frozen["G"]) if frozen["G"] else None), "G_n": 0, "G_ids": [], "G_labels": [], "G_deals": [],
+                "D": frozen.get("D"), "D_n": 0,
+                "P": (fp["values"] if fp else None), "P_w": (fp["weights"] if fp else None), "P_ids": (fp["ids"] if fp else []), "M": frozen.get("M"),
+                "recal": rc.state() | {"n_closed_used": len(used), "fit_max_closed_on": max((h[0] for h in used), default=None),
+                                       "fit_max_looked_up_at": max((h[1] for h in used), default=None),
+                                       "rule": "closed-by-t (g_closed_on <= as_of)" if not self.break_recal else "BROKEN: close dates ignored (leakage test)"}}
+
     def _mix(self, items, wG, wP, tier):
         G = SC.mixture_g([it["G"] for it in items], wG) if any(it["G"] for it in items) else None
         g_ids, g_labels, g_ws = SC.mixture_atoms([it.get("G_ids") or [] for it in items], [it.get("G_labels") or [] for it in items], wG)
-        vals, ws, ids = SC.mixture_p([it["P"] for it in items], wP, [it.get("P_ids") or [] for it in items])
+        vals, ws, ids = SC.mixture_p([it["P"] for it in items], wP, [it.get("P_ids") or [] for it in items], atom_weights=[it.get("P_w") for it in items])
         mcalls = [(it["M"], w) for it, w in zip(items, wP) if it["M"]]
         dpairs = [(it["D"], w) for it, w in zip(items, wG) if it.get("D") is not None and w > 0]
         D = (sum(d * w for d, w in dpairs) / sum(w for _, w in dpairs)) if dpairs and sum(w for _, w in dpairs) > 0 else None
@@ -303,7 +328,7 @@ class Walk:
             f.setdefault("climatology", {})["P"] = self._score_p(clim["P"], y) if clim["P"] else None
             f.setdefault("persistence", {})["P"] = self._score_p([0.0], y)
             for it in rec["items"]:
-                f.setdefault(it["id"], {})["P"] = self._score_p(it["P"], y) if it["P"] else None
+                f.setdefault(it["id"], {})["P"] = self._score_p(it["P"], y, it.get("P_w")) if it["P"] else None
             f.setdefault("random_analogs", {})["P"] = self._random_p(rec, y, tier)
         # M
         truth = outcome["in_big_move"]
@@ -554,6 +579,15 @@ def summarize_tier(reads, scores, p, tier, n_boot=None, n_spa=None):
                                          if any(s["outcome"]["deal"] in (0, 1) for s in sc) else None)}
             blk["murphy_engine"] = _reliability(sc, "engine", p["reliability_bins"], n_boot, mb)
             blk["murphy_climatology"] = _reliability(sc, "climatology", p["reliability_bins"], n_boot, mb)
+            rid = next((it["id"] for it in (reads[0]["items"] if reads else []) if it.get("kind") == "recalibrated"), None)
+            if rid:                                                                    # Amendment C.5
+                blk["murphy_M13"] = _reliability(sc, rid, p["reliability_bins"], n_boot, mb)
+                by_hash = {r["hash"]: r for r in reads}
+                states = [next(it["recal"] for it in by_hash[s_["read_hash"]]["items"] if it.get("kind") == "recalibrated") for s_ in sc if s_["read_hash"] in by_hash]
+                blk["recalibration"] = {"item": rid, "n_scored_reads": len(states),
+                                        "n_reads_recalibrated": sum(1 for st in states if any(v != "identity" for v in st["mode"].values())),
+                                        "first_active_n_fit": next((st["n_fit"] for st in states if any(v != "identity" for v in st["mode"].values())), None),
+                                        "final_mode": (states[-1]["mode"] if states else None), "final_n_fit": (states[-1]["n_fit"] if states else None)}
         else:
             for q in ("pin10", "pin50", "pin90"):
                 rows = _paired(sc, task, q, "engine", "climatology")
@@ -619,6 +653,7 @@ def permutation_test(reads, scores, p, n_perm=None, seed=19900802):
     for s in scores:
         class_of.setdefault(s["event_id"], s["type"])
     N = len(reads[0]["items"]); K = p["k_max"]
+    recal_idx = next((j for j, it in enumerate(reads[0]["items"]) if it.get("kind") == "recalibrated"), None)
     T = len(geo)
     A = np.full((T, N, K), -1)
     for t, (r, _) in enumerate(geo):
@@ -651,6 +686,18 @@ def permutation_test(reads, scores, p, n_perm=None, seed=19900802):
         cnt = Am.sum(axis=2)                                                 # T x N
         item_f = np.divide(F.sum(axis=2), np.maximum(cnt, 1)[..., None])     # T x N x 4
         has = cnt > 0
+        if recal_idx is not None:                                            # Amendment C.4: M13 refitted from the permuted closed outcomes
+            base_idx = [j for j in range(N) if j != recal_idx]
+            hb = has[:, base_idx]
+            fz = (item_f[:, base_idx, :] * hb[..., None]).sum(axis=1) / np.maximum(hb.sum(axis=1), 1)[:, None]
+            hz = hb.any(axis=1)
+            yt = labv[tgt]
+            m13 = fz.copy()
+            for t_ in range(T):
+                u = np.where(C[t_] & hz & (yt >= 0))[0]
+                if len(u) >= RC.MIN_N and hz[t_]:
+                    m13[t_] = RC.fit_apply_arrays(fz[u], yt[u], fz[t_])
+            item_f[:, recal_idx, :] = m13; has[:, recal_idx] = hz
         clim = pool.astype(float) @ onehot
         clim = clim / np.maximum(clim.sum(axis=1, keepdims=True), 1e-12)
         y = onehot[tgt]                                                      # T x 4
@@ -752,6 +799,7 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
     N = len(reads[0]["items"]) if reads else 0
     hedge = {"G": LN.Hedge(N, p["eta"]), "P": LN.Hedge(N, p["eta"])}
     pending = []
+    hist_r = []                                                   # Amendment C.4: (g_closed_on, frozen G, level) replayed
     G_rows, P_rows, dates = [], [], []
     for r, s in zip(reads, scores):
         t = r["date"]
@@ -766,14 +814,24 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
         oc = corpus.outcome(r["event_id"], H, tier) if r["event_id"] in corpus.by_id else None
         y = oc["chg_pct"] if oc else None
         # per-item forecasts at k and H from the sealed ranked ids
-        gI, pI = [], []
+        gI, pI, pW, fg = [], [], [], None
         for it in r["items"]:
+            if it.get("kind") == "recalibrated":
+                continue                                          # appended below from the replayed frozen mixture
             g_ids = [a[0] for a in it["ranked"] if a[2]][:k]
             p_ids = [a[0] for a in it["ranked"] if a[3]][:k]
             outs = [corpus.ies90[i]["level"] for i in g_ids if i in corpus.ies90]
             gI.append({b: outs.count(b) / len(outs) for b in LEVELS} if outs else None)
             vals = [corpus.outcome(i, H, tier)["chg_pct"] for i in p_ids if corpus.outcome(i, H, tier)]
-            pI.append(vals or None)
+            pI.append(vals or None); pW.append(None)
+        if any(it.get("kind") == "recalibrated" for it in r["items"]):
+            nb = len(gI); uni = np.full(nb, 1.0 / nb)
+            fg = SC.mixture_g(gI, uni)
+            used = [h for h in hist_r if h[0] <= t]
+            rc = RC.Recalibrator().fit([h[1] for h in used], [h[2] for h in used])
+            gI.append(rc.apply(fg) if fg else None)
+            fv, fw = SC.mixture_p(pI, uni)
+            pI.append(fv); pW.append(fw)
         cg, cp = r["baselines"]["climatology"]["G"], None
         p_pool = r["baselines"]["random_analogs"]["p_pool_ids"]
         cpv = [corpus.outcome(i, H, tier)["chg_pct"] for i in p_pool if corpus.outcome(i, H, tier)]
@@ -784,12 +842,14 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
             eb, cb = SC.brier(eng, br), SC.brier(cg, br)
             G_rows.append((eb, cb)); dates.append(t)
             pending.append((s["outcome"]["g_closed_on"], "G", [min((SC.brier(g, br) if g else cb) / p["g_scale"], 1.0) for g in gI]))
+            if fg is not None:
+                hist_r.append((s["outcome"]["g_closed_on"], fg, br))
         if y is not None and cp and any(pI):
             wP = hedge["P"].weights()
-            vals, ws = SC.mixture_p(pI, wP)
+            vals, ws = SC.mixture_p(pI, wP, atom_weights=pW)
             ec, cc = SC.crps(vals, y, ws), SC.crps(cp, y)
             P_rows.append((ec, cc))
-            pending.append((oc["closed_on"], "P", [min((SC.crps(v, y) if v else cc) / p["p_scale"], 1.0) for v in pI]))
+            pending.append((oc["closed_on"], "P", [min((SC.crps(v, y, aw) if v else cc) / p["p_scale"], 1.0) for v, aw in zip(pI, pW)]))
     out = {}
     for task, rows in (("G", G_rows), ("P", P_rows)):
         if len(rows) >= 3:
@@ -831,7 +891,8 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
     for d, dec in cand:
         by_dec[dec].append(d)
     rng = np.random.default_rng(seed)
-    uniform = np.full(len(menu["items"]), 1.0 / len(menu["items"]))
+    base = S.weighting_items(menu)
+    uniform = np.full(len(base), 1.0 / len(base))
     rows = []
     for rep in range(reps):
         for s in daily:
@@ -847,7 +908,7 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
             pseudo = {k_: v for k_, v in e.items() if k_.startswith("sr_") or k_ in ("type", "title")}
             pseudo |= {"event_id": f"placebo:{e['event_id']}:{rep}", "event_date": str(pd_.date())}
             vals_items, ids_items = [], []
-            for m in menu["items"]:
+            for m in base:
                 r = R.read(corpus, pseudo, weighting=m, with_propagation=False, with_differencing=False)
                 ok = not r["no_adequate_precedent"] and r["P"]["n"]
                 vals_items.append(r["P"]["values"] if ok else None); ids_items.append(r["P"]["analog_ids"] if ok else None)
@@ -888,8 +949,9 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
             "note": "frozen (uniform) mixture; situation fields copied from the matched real event; P only (no branch outcome exists at a non-event date)"}
 
 
-def leakage_test(sealed: Walk, broken: Walk):
-    """§1: the walk with the filtration broken must differ from the sealed run, or the result is void."""
+def leakage_test(sealed: Walk, broken: Walk, recal_broken: Walk = None):
+    """§1: the walk with the filtration broken must differ from the sealed run, or the result is void.
+    Amendment C.6: a recalibrator fitted with the closed-by-t rule broken must change M13 on >= 1 read."""
     hs = {r["hash"] for r in sealed.reads}; hb = {r["hash"] for r in broken.reads}
     def mean(scores, task, key):
         v = [x for x in _series([s for s in scores if s["burn_in_ok"]], task, "engine", key) if x is not None]
@@ -902,8 +964,21 @@ def leakage_test(sealed: Walk, broken: Walk):
     analog_diff = sum(1 for rs, rb in zip(sealed.reads, broken.reads)
                       if [it["ranked"] for it in rs["items"]] != [it["ranked"] for it in rb["items"]])
     ok = (hs != hb) and any(d["differs"] for d in diffs.values()) and analog_diff > 0
-    return {"reads_differ": hs != hb, "scores": diffs, "n_reads_with_different_analogs": analog_diff,
-            "asserted": ok, "verdict": "filtration is binding" if ok else "VOID: the filtration changed nothing"}
+    out = {"reads_differ": hs != hb, "scores": diffs, "n_reads_with_different_analogs": analog_diff}
+    if recal_broken is not None:
+        def m13(r):
+            return next((it["G"] for it in r["items"] if it.get("kind") == "recalibrated"), None)
+        n_diff = sum(1 for rs, rb in zip(sealed.reads, recal_broken.reads) if m13(rs) != m13(rb))
+        same_base = all([it["ranked"] for it in rs["items"] if it.get("kind") != "recalibrated"] ==
+                        [it["ranked"] for it in rb["items"] if it.get("kind") != "recalibrated"] for rs, rb in zip(sealed.reads, recal_broken.reads))
+        n_pending = sum(1 for r in recal_broken.reads for it in r["items"] if it.get("kind") == "recalibrated"
+                        and it["recal"]["fit_max_closed_on"] and it["recal"]["fit_max_closed_on"] > r["as_of"])
+        r_ok = n_diff > 0 and same_base
+        out["recalibration_rule"] = {"n_reads_with_different_M13": n_diff, "base_items_identical": same_base,
+                                     "n_broken_reads_that_used_an_unclosed_outcome": n_pending, "asserted": r_ok}
+        ok = ok and r_ok
+    out |= {"asserted": ok, "verdict": "filtration is binding" if ok else "VOID: a broken rule changed nothing"}
+    return out
 
 
 def big_moves_knew(corpus, reads, scores):
@@ -1046,6 +1121,25 @@ def figures(summary, out_dir):
                 ax.set_xlim(0, 1); ax.set_ylim(0, 1)
             fig.suptitle(f"Reliability -- engine, {tier} tier (bars: stationary-bootstrap 95% band)")
             fig.tight_layout(); fig.savefig(fd / f"reliability_{tier}.png", dpi=120); plt.close(fig); made.append(f"reliability_{tier}.png")
+        blkG = (summary["tiers"].get(tier) or {}).get("G", {})
+        if blkG.get("murphy_engine"):
+            for b in LEVELS:
+                series = [(name, (blkG.get(key) or {}).get(b)) for name, key in (("engine", "murphy_engine"), ("climatology", "murphy_climatology"), ("M13 recalibrated", "murphy_M13"))]
+                if not any(m for _, m in series):
+                    continue
+                fig, ax = plt.subplots(figsize=(5, 4))
+                ax.plot([0, 1], [0, 1], "k--", lw=0.5)
+                for off, (name, m) in zip((-0.01, 0.0, 0.01), series):
+                    if not m:
+                        continue
+                    xs = [d["forecast_mean"] + off for d in m["diagram"]]; ys = [d["observed_freq"] for d in m["diagram"]]
+                    ax.plot(xs, ys, "o-", ms=4, label=f"{name} (rel {m['reliability']:.3f}, res {m['resolution']:.3f})")
+                    for d, x in zip(m["diagram"], xs):
+                        if d.get("band95"):
+                            ax.plot([x, x], d["band95"], color="gray", lw=0.8, alpha=0.7)
+                ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.set_xlabel("forecast probability"); ax.set_ylabel("observed frequency")
+                ax.set_title(f"Reliability -- level {b} ({LEVEL_MEANING[b]}), {tier} tier; bars: stationary-bootstrap 95% band", fontsize=8); ax.legend(fontsize=7)
+                fig.tight_layout(); fig.savefig(fd / f"reliability_G_{b}.png", dpi=120); plt.close(fig); made.append(f"reliability_G_{b}.png")
         pit = (summary["tiers"].get(tier) or {}).get("P", {}).get("pit_engine")
         if pit:
             fig, ax = plt.subplots(figsize=(5, 3.5))
@@ -1104,7 +1198,8 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
         print(f"inference done, {time.time() - t0:.0f}s; leakage run...")
     import tempfile
     b = Walk(corpus, menu, out_dir=tempfile.mkdtemp(prefix="walk_leakage_"), params=p, break_filtration=True, quiet=True).run_reads()
-    summary["leakage_test"] = leakage_test(w, b)
+    b2 = Walk(corpus, menu, out_dir=tempfile.mkdtemp(prefix="walk_recal_leak_"), params=p, break_recal=True, quiet=True).run_reads() if w.recal else None
+    summary["leakage_test"] = leakage_test(w, b, b2)
     summary["big_moves_knew"] = big_moves_knew(corpus, w.reads, w.scores)
     summary["verdict"] = verdict(summary, p)
     summary["limits"] = [f"G target is IES-90 (OUTCOME_MAPPING.md Amendment 1 and later; registration in data_state): independent dated sources; "
@@ -1126,6 +1221,9 @@ def run(corpus=None, menu=None, out_dir=WF, params=None, fast=False, quiet=False
                          "the placebo null (§6) is judged against the size-matched random-analog reference (§4 baseline 3); the climatology-referenced "
                          "placebo skill and the size-corrected one are published beside it",
                          "Hedge losses use the registered scores, so within the menu the k=5 item is handicapped against k=12 by sample size alone",
+                         "M13 (Amendment C) carries no analog atoms, so the size-corrected diagnostic of the engine mixture is computed from the twelve "
+                         "weighting items' atoms only (M13's share is left out of that diagnostic, never of the registered scores)",
+                         "G-persistence (Amendment B) is evaluated on each source's single published vintage, as the labels are",
                          "this summary.json replaces the PRE_REGISTRATION_V2 src/walk_forward.py summary at the same path; the ledger, story and "
                          "terminal readers of the old 'windows' shape show an empty engine board until PATH Step 9 rewires them"]
     summary["data_state"] = data_state(corpus)
@@ -1156,6 +1254,13 @@ def _print(summary):
                 d = t[task].get("deal", {}); dr = d.get("engine_vs", {}).get("climatology", {})
                 if dr.get("skill") is not None:
                     print(f"  DEAL (binary Brier) engine vs climatology skill {dr['skill']:+.4f}  CI {dr['ci95'][0]:+.3f}..{dr['ci95'][1]:+.3f}  n={dr['n']}  base rate {d.get('base_rate')}")
+            if task == "G":
+                rc_ = t[task].get("recalibration") or {}
+                m13 = (t[task].get("items_vs_climatology") or {}).get(rc_.get("item") or "", {})
+                if m13.get("skill") is not None:
+                    print(f"  M13 recalibrated vs climatology  skill {m13['skill']:+.4f}  CI {m13['ci95'][0]:+.3f}..{m13['ci95'][1]:+.3f}  DM/HLN p={m13['dm_p']:.3f}  n={m13['n']}  "
+                          f"(recalibrated on {rc_.get('n_reads_recalibrated')} of {rc_.get('n_scored_reads')} reads; final mode {rc_.get('final_mode')})")
+                print(f"  G persistence fallback: {t[task].get('n_persistence_fallback')} of {t[task].get('n_persistence_fallback', 0) + t[task].get('n_persistence_known', 0)} geopolitical reads")
             fr = t[task].get("diagnostic_fair", {}).get("engine_vs_climatology", {})
             if fr.get("skill") is not None:
                 print(f"  {task} [diagnostic, not registered] size-corrected engine vs climatology skill {fr['skill']:+.4f}  CI {fr['ci95'][0]:+.3f}..{fr['ci95'][1]:+.3f}  DM/HLN p={fr['dm_p']:.3f}")

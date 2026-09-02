@@ -226,23 +226,31 @@ def mixture_g(dists, weights, branches=LEVELS):
     return {b: float(sum(w * float(d.get(b, 0.0)) for d, w in pairs) / z) for b in branches}
 
 
-def mixture_p(value_lists, weights, id_lists=None):
+def mixture_p(value_lists, weights, id_lists=None, atom_weights=None):
     """Weighted ensemble from several analog value lists: each list's atoms share its item weight.
     With id_lists, an analog that several items retrieved is ONE atom carrying the sum of its weights
     (the registered CRPS is unchanged by merging; the effective sample size in crps_fair is not).
+    atom_weights: optional per-item lists of atom weights (an item that is itself a weighted mixture, e.g. the
+    recalibrated item of Amendment C); None -> equal weights within the item.
     Returns (values, weights) or (values, weights, ids) when id_lists is given; (None, None) if empty."""
+    def _aw(vl, aw):
+        if aw is None or len(aw) != len(vl):
+            return [1.0 / len(vl)] * len(vl)
+        z = float(sum(aw))
+        return [a / z for a in aw] if z > 0 else [1.0 / len(vl)] * len(vl)
+    aws = atom_weights or [None] * len(value_lists)
     if id_lists is None:
         vals, ws = [], []
-        for vl, w in zip(value_lists, weights):
+        for vl, w, aw in zip(value_lists, weights, aws):
             if vl and w > 0:
-                vals.extend(vl); ws.extend([w / len(vl)] * len(vl))
+                vals.extend(vl); ws.extend([w * a for a in _aw(vl, aw)])
         return (vals, ws) if vals else (None, None)
     merged = {}
-    for vl, il, w in zip(value_lists, id_lists, weights):
+    for vl, il, w, aw in zip(value_lists, id_lists, weights, aws):
         if vl and w > 0:
-            for v, i in zip(vl, il):
+            for v, i, a in zip(vl, il, _aw(vl, aw)):
                 cur = merged.get(i)
-                merged[i] = (v, (cur[1] if cur else 0.0) + w / len(vl))
+                merged[i] = (v, (cur[1] if cur else 0.0) + w * a)
     if not merged:
         return None, None, None
     ids = list(merged)

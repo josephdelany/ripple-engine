@@ -34,6 +34,7 @@ DB_FREE_FILES = {
     "test_read.py",                  # PATH Step 7: synthetic corpus; its one DB test carries its own skipif
     "test_walk.py",                  # PATH Step 8: synthetic corpus only
     "test_walk_baselines.py",        # Amendment B: synthetic corpus + a synthetic MID table
+    "test_walk_recalibration.py",    # Amendment C: synthetic corpus only
 }
 
 

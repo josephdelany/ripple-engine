@@ -145,10 +145,14 @@ def test_step6_panel_seam_vintage_rule_and_codebook(tmp_path):
 def test_step6_menu_registered_and_capped():
     m = S.load_menu()
     ids = [i["id"] for i in m["items"]]
-    assert 1 <= len(ids) <= 12 and len(set(ids)) == len(ids)
-    for it in m["items"]:
+    wl = S.weighting_items(m)                                    # protocol §5: <= 12 weightings; Amendment C adds one recalibrated item, last
+    assert 1 <= len(wl) <= 12 and len(set(ids)) == len(ids) and len(m["items"]) - len(wl) <= 1
+    for it in wl:
         assert set(it["block_weights"]) >= set(S.BLOCKS)
         assert 0 <= it["retrieve_min"] <= 1 and it["k"] >= 1
+    for it in m["items"]:
+        if it.get("kind") == "recalibrated":
+            assert it is m["items"][-1] and "block_weights" not in it and it["id"] == "M13_recalibrated"
     assert m["items"][0]["id"].startswith("M01")               # item 0 is the uniform prior (frozen engine)
 
 

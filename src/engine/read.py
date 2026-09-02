@@ -390,6 +390,8 @@ def read(corpus, target, as_of=None, weighting=None, k=None, break_filtration=Fa
     """The read for `target` (an events-table dict, or a state-vector-shaped dict for a live story)
     as of `as_of` (default: the target's date). Returns G/P/F/M with n, propagation, differencing,
     and the analogs with per-block contributions -- or the no-precedent envelope with NO numbers."""
+    if (weighting or {}).get("kind") == "recalibrated":
+        raise ValueError(f"{weighting.get('id')} is the recalibrated engine (protocol Amendment C), not a retrieval weighting; pass one of similarity.weighting_items(menu)")
     if "fields" not in target:
         tgt = corpus.vector(target["event_id"]) if target.get("event_id") in corpus.by_id else \
             S.state_vector(target, info=corpus.info, schema_extra=corpus.schema_extra)

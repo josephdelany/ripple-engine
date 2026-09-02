@@ -319,8 +319,14 @@ def similarity(target, cand, info=None, t=None, block_weights=None, field_weight
 
 def load_menu(path=MENU_PATH):
     m = json.load(open(path))
-    assert len(m["items"]) <= 12, "protocol §5: the menu is capped at 12 weightings"
+    n_w = sum(1 for it in m["items"] if it.get("kind") != "recalibrated")
+    assert n_w <= 12, "protocol §5: the menu is capped at 12 weightings (Amendment C adds one recalibrated item, not a weighting)"
     return m
+
+
+def weighting_items(menu):
+    """The retrieval weightings only (M01-M12); the recalibrated item (Amendment C) is not a weighting."""
+    return [it for it in menu["items"] if it.get("kind") != "recalibrated"]
 
 
 def retrieve(target, candidates, info=None, t=None, weighting=None, k=None, schema_extra=None):
