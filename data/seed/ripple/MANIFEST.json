@@ -1,0 +1,182 @@
+{
+ "eia.crude_imports": {
+  "source_url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCRIMUS2&f=W",
+  "licence": "EIA public domain",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 1913,
+  "first": "1990-01-05",
+  "last": "2026-08-28",
+  "sha256": "13e0c35b4ce64b6be7feadeecdbf49d3b870c1bb0e81390a18c57a5a49459cd9",
+  "registered_in": "RIPPLE_SOURCES.md #3 EIA weekly"
+ },
+ "eia.distillate_stocks": {
+  "source_url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WDISTUS1&f=W",
+  "licence": "EIA public domain (eia.gov/about/copyrights_reuse.php)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 2292,
+  "first": "1982-08-20",
+  "last": "2026-08-28",
+  "sha256": "4451c68c61bd39b30d261ca0069cb1f0274c8035ddbb4f5d3059eb77902e6cab",
+  "registered_in": "RIPPLE_SOURCES.md #3 EIA weekly"
+ },
+ "eia.gasoline_stocks": {
+  "source_url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WGTSTUS1&f=W",
+  "licence": "EIA public domain",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 1913,
+  "first": "1990-01-05",
+  "last": "2026-08-28",
+  "sha256": "4c2aa70ba984f047d04e605794884f75a66eddd34024cbbb48f8c1941535388e",
+  "registered_in": "RIPPLE_SOURCES.md #3 EIA weekly"
+ },
+ "fred.DGASNYH": {
+  "source_url": "https://fred.stlouisfed.org/series/DGASNYH",
+  "licence": "EIA public domain; FRED: cite source and FRED",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 10112,
+  "first": "1986-06-02",
+  "last": "2026-09-01",
+  "sha256": "3a0707089d9ba4fc787420b151d9ab5ce22484cb07ae89934d0dfd308bfd472a",
+  "registered_in": "RIPPLE_SOURCES.md #2 crude & products"
+ },
+ "fred.DJFUELUSGULF": {
+  "source_url": "https://fred.stlouisfed.org/series/DJFUELUSGULF",
+  "licence": "EIA public domain; FRED: cite source and FRED",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 9145,
+  "first": "1990-04-02",
+  "last": "2026-09-01",
+  "sha256": "1d17f1ea5d2c8cef15ac1291b969078e5c65de82712e5b2252792e3e095b23d1",
+  "registered_in": "RIPPLE_SOURCES.md #2 crude & products"
+ },
+ "kanzig.news_shock_monthly": {
+  "source_url": "https://github.com/dkaenzig/oilsupplynews",
+  "licence": "CC BY 4.0 (repo README)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 612,
+  "first": "1975-01-01",
+  "last": "2025-12-01",
+  "sha256": "4affede3894fefc6cb830adddb8fbc46db1a42fbfa15bef79ff056fcc2fadb12",
+  "registered_in": "RIPPLE_SOURCES.md #7 external shocks"
+ },
+ "kanzig.surprise_daily_pc": {
+  "source_url": "https://github.com/dkaenzig/oilsupplynews",
+  "licence": "CC BY 4.0 (repo README)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 169,
+  "first": "1983-07-19",
+  "last": "2025-12-01",
+  "sha256": "d91ead1f9e159c93f34debeb0ccf6029f156e309c22d464e49fe866e9e7a3c84",
+  "registered_in": "RIPPLE_SOURCES.md #7 external shocks"
+ },
+ "kanzig.surprise_monthly": {
+  "source_url": "https://github.com/dkaenzig/oilsupplynews",
+  "licence": "CC BY 4.0 (repo README)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 612,
+  "first": "1975-01-01",
+  "last": "2025-12-01",
+  "sha256": "b299e6715ac58abe46b9542e1f128a29341cd7e809c7a8c0058c1db1cc64c52b",
+  "registered_in": "RIPPLE_SOURCES.md #7 external shocks"
+ },
+ "wb.brent": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "4519acafb60952f2b3b9ed3a9fb42c8972c8a62cc00f19173220020c92d7c50a",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.coal_aus": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 679,
+  "first": "1970-01-01",
+  "last": "2026-07-01",
+  "sha256": "0e0d6cda13d8becf34b57937f7a0ff9ba64785e3fb784b9bfa30d92773663200",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.crude_avg": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "72d54fe494986f831867879a5db26fd8fe416fe38383d212771029e78e70051e",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.dap": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 715,
+  "first": "1967-01-01",
+  "last": "2026-07-01",
+  "sha256": "b4b3da1b67d0a2d0afb851624da513d791380b5e0171868bbabd7ec0c7c5782f",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.lng_japan": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 595,
+  "first": "1977-01-01",
+  "last": "2026-07-01",
+  "sha256": "523c5da0ec7cb779fb488814a817bb00c4b444c9e83b5a27f936261f69d8b29e",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.ngas_eu": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "271815d1e6b59ac93da38a6cf315eba8786ee972bbaf19cc0ca4934682b6d7e0",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.ngas_us": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "d47b5f1d53e06a4f446f7359b631971417d828891902097e491d9d4dd4306b54",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.potash": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "14f696cd48cd9b3faf4e2d4ab83921aa6f69d38934f51d2223da1cc0b743dccb",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.tsp": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "ff77bbc2223b50565065e9b88adbf19d92b1304feec044a765cc46efbee81aac",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ },
+ "wb.urea": {
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "licence": "CC BY 4.0 (data.worldbank.org/summary-terms-of-use)",
+  "retrieved_at": "2026-09-02T19:34:20+00:00",
+  "rows": 799,
+  "first": "1960-01-01",
+  "last": "2026-07-01",
+  "sha256": "9366f4fe51fb17fa72644c191a33b3338a1ffbd7c781a744dd8fda33485abd96",
+  "registered_in": "RIPPLE_SOURCES.md #4 Pink Sheet"
+ }
+}
