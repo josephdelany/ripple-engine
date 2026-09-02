@@ -1,0 +1,72 @@
+# Dossier ucdp_17509_government_of_russia — Government of Russia
+
+```json
+{
+ "id": "ucdp_17509_government_of_russia",
+ "built_by": "session A",
+ "built_at": "2026-09-02T21:18:18+00:00",
+ "rule": "data/candidates/DOSSIER_RULE.md (2026-09-02)",
+ "primary": {
+  "dataset": "UCDP Dyadic v26.1 (Dyadic_v26_1.csv)",
+  "crisno": null,
+  "source": "ucdp",
+  "source_id": "17509",
+  "detail": "dyad 17509 Government of Russia (Soviet Union) vs RDK (Russia (Soviet Union)) onset 2023-09-26 intensity 1",
+  "url": "https://ucdp.uu.se/downloads/",
+  "trigdate": "2023-09-26",
+  "termdate": null,
+  "viol": null,
+  "forout": null
+ },
+ "event_date": "2023-09-26",
+ "date_precision": "day",
+ "proposed_class": "conflict_escalation",
+ "proposed_severity": 2,
+ "proposed_surprise": 3,
+ "proposed_confidence": "medium",
+ "entities": [
+  {
+   "entity": "country.russia",
+   "role": "unknown"
+  }
+ ],
+ "unmapped_ccodes": [],
+ "second_source": {
+  "found": false,
+  "status": "undetermined",
+  "route": "GDELT DOC 2.0",
+  "query": "Russia",
+  "search_url": "https://api.gdeltproject.org/api/v2/doc/doc",
+  "search_status": null,
+  "window": [
+   "2023-09-23",
+   "2023-10-26"
+  ],
+  "opened": [],
+  "retrieved_at": "2026-09-02T21:18:18+00:00",
+  "note": "ConnectTimeout",
+  "also_tried": []
+ },
+ "admissible": false,
+ "approved_by": null,
+ "approved_at": null
+}
+```
+
+## Primary record (source 1)
+UCDP Dyadic v26.1 (Dyadic_v26_1.csv) record 17509 **Government of Russia**: dyad 17509 Government of Russia (Soviet Union) vs RDK (Russia (Soviet Union)) onset 2023-09-26 intensity 1 trigdate 2023-09-26, termdate None, viol None, forout None. Page: https://ucdp.uu.se/downloads/
+
+## Actors (ICB actors mapped through countries.py; unmapped COW codes kept)
+- 365: country.russia (registered state set)
+
+## Proposed coding (provisional, rule §2 — Joe decides)
+- class: `conflict_escalation`; severity 2 (from viol None); surprise 3 (provisional); confidence medium
+- entities: country.russia:unknown
+
+## Second source (rule §3)
+- **second source: UNDETERMINED — the source refused or failed, not an absence.** GDELT DOC 2.0 returned HTTP None for `Russia` (https://api.gdeltproject.org/api/v2/doc/doc). This dossier is NOT admissible and is NOT evidence that no second source exists; re-run `python3 src/dossier.py --csv data/candidates/post1987_candidates.csv` when the limit clears (DOSSIER_RULE.md §5.1). ConnectTimeout
+
+## Admissible: **no**
+
+Joe: to admit, write the approval line and run
+`python3 src/admit.py --dossier ucdp_17509_government_of_russia --approved-by joe`. The code never runs it.

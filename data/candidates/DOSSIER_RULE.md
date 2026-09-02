@@ -60,3 +60,28 @@ article whose `seendate` lies in [d − 3 d, d + 30 d] and whose title names the
 and seendate recorded. Where neither route answers (in practice 1993–2016) the dossier says "second source: none
 found — not admissible". Dossier ids: `icb_<crisno>_<slug>`, `mid_<disno>_<slug>`, `ucdp_<dyad_id>_<slug>`,
 `gpr_<YYYYMMDD>`.
+
+### §5.1 (2026-09-02, registered before the code, after the first post-1987 pass) — "refused" is not "absent"
+The first post-1987 pass recorded `second source: none found — not admissible` on dossiers whose GDELT DOC request
+had been **refused** (HTTP 429) or timed out, because the builder spaced requests 0.4 s apart while §5(b) registers
+one per 5 s. That reads a fault of ours as a fact about the world, which §4 forbids. Corrected:
+1. A second-source record carries a **status**, not a boolean: `found` (a dated document inside the window),
+   `none_found` (the source answered, HTTP 200, and nothing in the reply fits the window), or **`undetermined`**
+   (the source refused, errored or timed out — HTTP 4xx/5xx or a transport error). `admissible` is true only for
+   `found`; `undetermined` is **not** an assertion that no second source exists, and the dossier says so in those
+   words, with the HTTP status and the retry instruction.
+2. A refused or failed fetch is never cached, so a re-run asks again.
+3. Requests to a host with a stated limit are spaced by that limit (`HOST_SPACING_S`); GDELT DOC is set to 10 s
+   after 5 s was still refused in practice on 2026-09-02, with one retry after 60 s on a 429.
+4. `dossiers_index*.json` counts `found` / `none_found` / `undetermined` separately; the same three counts are what
+   any report of this work must quote.
+
+### §5.2 (2026-09-02, registered before the code, after the second post-1987 pass) — a query that names nobody is not a search
+The second pass marked 8 GPR-spike dossiers admissible on a GDELT match to the single word `spike`: the candidate
+names no party (a GPR spike is a global index reading), so the query degenerated to one generic term and matched any
+article containing it. A keyword hit is not a second source for a specific event. Corrected: a second-source search
+runs only when a query can be formed that **names at least one registered state** (a mapped `country.*` party of the
+record) or carries **two or more content terms** from the record's own name. Where no such query exists — every GPR
+row, and any record whose parties are all unmapped — no search is made, the status is `none_found`, and the reason is
+recorded verbatim: *"a GPR spike names no party; no query can name a state, so no second source can be sought (§5.2)"*.
+Such a row stays on the sheet for Joe, who may name the event himself; it is never admissible from a keyword.

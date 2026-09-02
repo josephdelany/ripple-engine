@@ -31,6 +31,61 @@ def test_a12_candidate_sheet_excludes_corpus_neighbours_and_names_registered_sta
     assert summ["n"] == len(rows) and (ROOT / "data" / "candidates" / "DOSSIER_RULE.md").read_text().count("## 5.") == 1
 
 
+def test_a12_post1987_dossiers_record_their_route_and_never_read_a_refusal_as_an_absent_source(tmp_path):
+    """The bug this pins: GDELT DOC refuses a request made faster than one per 5 s. A refused or failed fetch must never
+    be cached, and must never be written into a dossier as 'second source: none found'."""
+    import dossier as D
+    assert D.HOST_SPACING_S["api.gdeltproject.org"] == 10.0                    # §5.1(3): 5 s was still refused in practice
+    calls = []
+
+    class R:
+        def __init__(self, code): self.status_code, self.ok, self.url, self.text = code, code == 200, "u", ("{}" if code == 200 else "")
+
+    def fake_get(url, params=None, headers=None, timeout=None):
+        calls.append(url); return R(429 if len(calls) <= 2 else 200)          # refused, refused again on the retry, then answered
+    import requests as rq
+    real_get, real_sleep, real_cache = rq.get, D.time.sleep, D.CACHE
+    slept = []
+    rq.get, D.time.sleep, D.CACHE = fake_get, slept.append, tmp_path / "cache"      # never touch the real cache
+    D._LAST_CALL.clear()
+    try:
+        rec1 = D._get("https://api.gdeltproject.org/api/v2/doc/doc", {"q": "pins-the-refusal-case"})
+        rec2 = D._get("https://api.gdeltproject.org/api/v2/doc/doc", {"q": "pins-the-refusal-case"})
+    finally:
+        rq.get, D.time.sleep, D.CACHE = real_get, real_sleep, real_cache
+    assert rec1["status"] == 429 and rec2["status"] == 200                     # the refusal was not cached: a later call re-asked
+    assert len(calls) == 3 and D.RETRY_AFTER_429_S in slept                    # one retry after 60 s inside the first call
+    assert max(slept) >= D.RETRY_AFTER_429_S and any(9.9 < x < 10.1 for x in slept)   # and the registered 10 s spacing between calls
+    idx = ROOT / "data" / "candidates" / "dossiers_index_post1987.json"
+    if not idx.exists():
+        pytest.skip("run python3 src/dossier.py --csv data/candidates/post1987_candidates.csv")
+    import admit as A
+    j = json.loads(idx.read_text())
+    assert j["n"] > 0
+    for d in j["dossiers"]:
+        front, text = A.read_front(ROOT / "data" / "candidates" / "dossiers" / f"{d['id']}.md")
+        ss = front["second_source"]
+        assert ss.get("route") in ("FRUS", "GDELT DOC 2.0", "none") and front["approved_by"] is None
+        assert ss.get("status") in ("found", "none_found", "undetermined")
+        if front["admissible"]:
+            assert ss["status"] == "found" and ss["url"].startswith("http") and ss["window"][0] <= ss["date"] <= ss["window"][1]
+        elif ss["status"] == "none_found":
+            assert "second source: none found — not admissible" in text
+            assert ss.get("search_status") in (200, None) or ss.get("route") == "none"   # "none found" only when the source answered
+        else:
+            assert "UNDETERMINED" in text and "not an absence" in text                   # a refusal says so, and is never read as an absence
+    counts = j.get("second_source_states") or {}
+    assert set(counts) <= {"found", "none_found", "undetermined"} and sum(counts.values()) == j["n"]
+    # §5.2: a search runs only when the query can name a registered state or carry two content terms of the record,
+    # so a GPR spike (which names no party) is never admissible on a keyword match.
+    assert D.searchable("Sino Vietnam Border", ["China"]) and D.searchable("Syria Chemical Weapons II", [])
+    assert not D.searchable("GPR spike 2026-03-19", []) and not D.searchable("GPR spike", [])
+    assert "spike" in D.STOPWORDS and D.query_terms("GPR spike 2026", []) == []
+    for d in j["dossiers"]:
+        if d["id"].startswith("gpr_"):
+            assert not d["admissible"] and d["second_source_status"] == "none_found", d["id"]
+
+
 def test_a13_priced_in_is_display_only_with_vintage_before_knowable():
     import story_read as SR
     conn = sqlite3.connect(ROOT / "data" / "oil.db")
