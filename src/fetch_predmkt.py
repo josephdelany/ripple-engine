@@ -30,6 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 OUT_JSON = ROOT / "data" / "predmkt.json"
 SEARCH = "https://gamma-api.polymarket.com/public-search"
+MARKETS = "https://gamma-api.polymarket.com/markets"
 UA = {"User-Agent": "ripple-engine/1.0 (research)"}
 
 # Discovery queries -- the oil / geopolitics surface the engine cares about.
@@ -124,13 +125,87 @@ def store(conn, records, now, today):
     conn.commit()
 
 
+# --- Reconcile: keep snapshotting every market we ALREADY track until it actually ends. ----------
+# Discovery is a volume-ranked keyword search capped at 20 per query, so a market we started
+# tracking silently drops out of the result set when newer/bigger markets crowd it -- and its
+# series then reads DEAD in heartbeat although the market is still open. (2026-09-02: six series
+# went DEAD this way, data/integrity_report.txt.) Each tracked-and-still-dated market that
+# discovery missed is looked up by slug: open -> snapshot; closed -> a dated 'closed' marker in
+# notes; gone from the API -> a dated 'delisted' marker. Both markers make heartbeat read CLOSED.
+_ENDS_RE = __import__("re").compile(r"ends\s+(\d{4}-\d{2}-\d{2})")
+_TERMINAL_RE = __import__("re").compile(r"(?:closed|delisted)\s+\d{4}-\d{2}-\d{2}")
+
+
+def tracked_open(conn, today):
+    """Tracked Polymarket series whose recorded end date is >= today and carry no terminal marker."""
+    rows = conn.execute("SELECT series_id, notes FROM series WHERE series_id LIKE 'predmkt.polymarket.%'").fetchall()
+    out = []
+    for sid, notes in rows:
+        m = _ENDS_RE.search(notes or "")
+        if not m or m.group(1) < today or _TERMINAL_RE.search(notes or ""):
+            continue
+        out.append((sid, sid.split("predmkt.polymarket.", 1)[1], notes))
+    return out
+
+
+def lookup_market(slug):
+    """GET /markets?slug=... -> the market dict, [] if the API no longer has it, or None on a
+    transport error (unknown -- leave the series alone this run)."""
+    try:
+        r = requests.get(MARKETS, params={"slug": slug}, headers=UA, timeout=20)
+        if not r.ok:
+            return None
+        d = r.json()
+    except (requests.RequestException, ValueError):
+        return None
+    if isinstance(d, list):
+        return d[0] if d else []
+    return d or []
+
+
+def reconcile_plan(tracked, discovered_slugs, lookup, today):
+    """Pure: decide what to do for each tracked-open market that discovery missed.
+    Returns (snapshots, marks) where snapshots are parsed records to store and marks are
+    (series_id, marker_text) pairs to append to the series notes."""
+    snapshots, marks = [], []
+    for sid, slug, notes in tracked:
+        if slug in discovered_slugs:
+            continue
+        m = lookup(slug)
+        if m is None:                       # transport error: unknown, try again tomorrow
+            continue
+        if m == []:                         # the API no longer returns this market
+            marks.append((sid, f"delisted {today}"))
+            continue
+        rec = parse_market(m, query="reconcile")
+        if rec is None:                     # returned but closed / inactive / unusable
+            marks.append((sid, f"closed {today}"))
+        else:
+            snapshots.append(rec)
+    return snapshots, marks
+
+
+def reconcile(conn, discovered, now, today, lookup=lookup_market):
+    tracked = tracked_open(conn, today)
+    snaps, marks = reconcile_plan(tracked, {r["slug"] for r in discovered}, lookup, today)
+    store(conn, snaps, now, today)
+    for sid, marker in marks:
+        conn.execute("UPDATE series SET notes = notes || '; ' || ? WHERE series_id = ?", (marker, sid))
+    conn.commit()
+    return snaps, marks
+
+
 def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     today = now[:10]
     records = discover()
     conn = sqlite3.connect(DB)
     store(conn, records, now, today)
+    snaps, marks = reconcile(conn, records, now, today)
     conn.close()
+    if snaps or marks:
+        print(f"  reconcile: {len(snaps)} tracked market(s) re-snapshotted, "
+              f"{len(marks)} marked " + ", ".join(f"{s.split('.')[-1][:40]}={m.split()[0]}" for s, m in marks))
     OUT_JSON.write_text(json.dumps(
         {"as_of": today, "generated_at": now, "source": "Polymarket (free)",
          "caveat": "Market-implied (risk-neutral) probabilities. DISPLAY/context "

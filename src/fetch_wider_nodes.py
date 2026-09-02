@@ -51,6 +51,15 @@ FRED_NODES = {
     "fred.DEXCHUS":      ("country.china",  "CNY per USD (China FX)",      "CNY/USD"),
     "fred.DEXUSEU":      ("macro.fx",       "USD per EUR",                 "USD/EUR"),
     "fred.DEXJPUS":      ("macro.fx",       "JPY per USD",                 "JPY/USD"),
+    # 2026-09-02: the HY spread was dropped from this list on 2026-07-30 (62b2bb4, replaced by yf.hyg
+    # for the battery) but propagate.py / terminal_api.py still read fred.BAMLH0A0HYM2 as the
+    # "US HY credit" cross node, so it went DEAD (last obs 07-28). Kept live here.
+    "fred.BAMLH0A0HYM2": ("macro.credit",   "ICE BofA US High Yield OAS",  "percent"),
+}
+# Series this fetcher used to write and no longer does. Their notes get a dated 'retired' marker so
+# heartbeat reads them CLOSED (a superseded series is not a broken feed). Rows are never deleted.
+RETIRED = {
+    "fred.SP500": "superseded by yf.sp500 (full history, 62b2bb4); retired 2026-07-30",
 }
 ENTITIES = [
     ("commodity.gold", "commodity", "Gold", "safe-haven metal"),
@@ -124,6 +133,10 @@ def main():
         conn.executemany("INSERT OR IGNORE INTO observations VALUES (?,?,?,?,?)",
                          [(sid, d, v, d, now) for d, v in zip(df["date"], df["value"])])
         print(f"  {sid:<16} {len(df):>6,} rows  {df['date'].min()} .. {df['date'].max()}")
+
+    for sid, note in RETIRED.items():
+        conn.execute("UPDATE series SET notes = ? WHERE series_id = ? AND (notes IS NULL OR notes != ?)",
+                     (note, sid, note))
 
     conn.commit()
     conn.close()

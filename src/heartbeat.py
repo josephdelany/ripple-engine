@@ -109,6 +109,23 @@ def override_for(series_id, overrides):
 
 
 _ENDS_RE = re.compile(r"ends\s+(\d{4}-\d{2}-\d{2})")
+# A dated terminal marker written by a fetcher: the source reported the contract closed, the source
+# no longer returns it at all (delisted), or the series was superseded (retired). From that date on
+# the series is terminal -- CLOSED, never a broken feed. (2026-09-02, data/integrity_report.txt)
+_TERMINAL_RE = re.compile(r"(?:closed|delisted|retired)\s+(\d{4}-\d{2}-\d{2})")
+
+
+def terminal_date(notes):
+    """Return the date of a 'closed/delisted/retired YYYY-MM-DD' marker in notes, else None."""
+    if not notes:
+        return None
+    m = _TERMINAL_RE.search(notes)
+    if not m:
+        return None
+    try:
+        return datetime.strptime(m.group(1), "%Y-%m-%d").date()
+    except ValueError:
+        return None
 
 
 def contract_end_date(notes):
@@ -200,6 +217,9 @@ def main():
         # leave it OK. The fresh-obs signal wins over the nominal end date.
         end_date = contract_end_date(notes)
         if status in ("STALE", "DEAD") and end_date is not None and end_date < today:
+            status, elapsed, cadence = "CLOSED", None, None
+        term = terminal_date(notes)
+        if status in ("STALE", "DEAD") and term is not None and term <= today:
             status, elapsed, cadence = "CLOSED", None, None
         reports.append({
             "series_id": sid,

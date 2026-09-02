@@ -1,29 +1,81 @@
-======================================================================
-INTEGRITY REPORT  --  2026-08-06T13:12:57+00:00
-======================================================================
-1. PRAGMA integrity_check: ok
+INTEGRITY REPORT -- engine status RED, 36 DEAD series          2026-09-02 (session A)
+=====================================================================================
+Read-only diagnosis first, then the fix, then the proof. Nothing in `events`, the situation
+records or any registered file was touched. Series rows were never deleted.
 
-2. Row counts (delta vs last run):
-   belief_state              3   +0
-   edges                 7,999   +90
-   entities                122   +0
-   event_entities          676   +12
-   events                  296   +3
-   forecasts                 4   +0
-   gaps                    248   +3
-   library                 295   +3
-   observations        464,173   +216
-   prices               20,162   +10
-   propagation_edges       232   +0
-   quiet_events              6   +0
-   reads                     1   +0
-   series                  417   +9
-   signals                   7   +0
-   situation_log           625   +0
+WHAT WAS DEAD, AND SINCE WHEN (heartbeat 2026-09-02T16:28Z, before any fix; committed
+engine_status.json of 2026-08-15 already said RED with 5 DEAD)
+-------------------------------------------------------------------------------------
+Cause 1 -- four fetchers were NEVER in refresh.STEPS (hand-run only; `git log -S` finds no
+commit that ever scheduled them). Their series stopped the day they were last run by hand:
+  yf.* x15 (gold copper silver wheat palladium sp500 hyg platinum corn soybean miners
+           copper_miners freight tankers)        last obs 2026-08-10   src/fetch_wider_nodes.py
+  fred.DEXCHUS DEXJPUS DEXUSEU (FX)             last obs 2026-08-07   src/fetch_wider_nodes.py
+  fred.DHOILNYH T5YIE T10YIE DFII10             last obs 2026-08-03/10 src/fetch_energy_nodes.py
+  fred.OVXCLS                                   last obs 2026-08-07   src/fetch_ovx.py
+  fred.WTISPLC (monthly)                        see cause 4           src/fetch_wti_monthly.py
+  derived.be_level credit_stress diesel_crack ovx_pct real_rate  -- derived from the above,
+           died with their inputs (last 2026-08-03..10)              src/derive_signals.py
+Cause 2 -- two orphaned FRED series. Commit 62b2bb4 (2026-07-30) replaced fred.SP500 and
+  fred.BAMLH0A0HYM2 with yf.sp500 / yf.hyg in the fetcher, but propagate.py and terminal_api.py
+  still read fred.BAMLH0A0HYM2 ("US HY credit" cross node) and nothing fetched it again:
+  fred.BAMLH0A0HYM2 last obs 2026-07-28, fred.SP500 last obs 2026-07-29 (last retrieved 07-30).
+Cause 3 -- six Polymarket series (predmkt.polymarket.*, end dates 2026-09-30 / 2026-12-31):
+  bab-el-mandeb-strait-effectively-closed-by-december-31, iran-charges-hormuz-fees-by-december-31,
+  iran-oman-hormuz-agreement-by-september-30, israel-and-saudi-arabia-normalize-relations-before-2027,
+  will-us-crude-oil-reserves-fall-to-375m-by-may-1, will-venezuelan-crude-oil-production-reach-1pt1m...
+  last obs 2026-08-06..15. Discovery is a volume-ranked keyword search capped at 20 per query;
+  once a tracked market drops out of that set it is never fetched again. Looked up by slug on
+  2026-09-02, the Gamma API returns an empty list for all of them: DELISTED at the source, not a
+  broken feed -- and there was no way to say so.
+Cause 4 -- a cadence mis-judgement, not missing data: fred.WTISPLC is MONTHLY (July 2026 posted,
+  August not yet published by FRED) but the `fred.*` override forced daily cadence -> 60/4 DEAD.
+  Likewise the three STALE rows (fred.DCOILBRENTEU, DCOILWTICO, DHHNGSP, last obs 2026-08-25)
+  are FRED's weekly re-publication of EIA spots; FRED's own CSV also ended 08-25 on 09-02.
+Cause 5 -- the launchd daily job has not run since 2026-08-06 09:13 (log mtime; last "Daily run"
+  line 2026-08-06). Refreshes since were by hand (08-15, 08-31, 09-02 -- refresh_log.csv). Today a
+  `launchctl kickstart gui/502/com.ripple.refresh` returned immediately with
+  `last exit code = 78: EX_CONFIG` and wrote nothing to data/launchd_refresh.log (mtime unchanged).
+  EX_CONFIG is launchd failing to set the job up -- consistent with macOS denying the agent access
+  to the log path / working directory under ~/Documents (the same TCC restriction that already
+  printed "getcwd: Operation not permitted" at the top of every successful run). A probe agent to
+  isolate the log path was blocked by the session's permission policy, so this is diagnosed, not
+  fixed. NOT FIXED BY THIS SESSION -- see "For Joe".
 
-3. Orphans:  event_entities -> events: 0   edges -> events: 0
-4. Duplicate observation (series_id, obs_date) keys: 0
+THE FIX (code; tests/test_integrity_fixes.py pins every item)
+-------------------------------------------------------------------------------------
+1. src/refresh.py: fetch_wider_nodes, fetch_energy_nodes, fetch_ovx, fetch_wti_monthly scheduled
+   right after fetch_series (before derive_signals).
+2. src/fetch_wider_nodes.py: fred.BAMLH0A0HYM2 back in FRED_NODES (propagate.py reads it);
+   fred.SP500 marked in its notes "superseded by yf.sp500; retired 2026-07-30" (RETIRED map, idempotent).
+3. src/fetch_predmkt.py: reconcile step -- every tracked market with a future end date that
+   discovery missed is looked up by slug: open -> snapshot; closed -> notes "closed YYYY-MM-DD";
+   gone -> notes "delisted YYYY-MM-DD"; transport error -> untouched. Run today: 3 markets
+   re-snapshotted, 8 marked (6 DEAD ones + 2 that would have died next).
+4. src/heartbeat.py: a dated closed/delisted/retired marker is terminal -> CLOSED (never trouble),
+   alongside the existing "ends YYYY-MM-DD" rule.
+5. data/series_cadence_overrides.json: fred.WTISPLC cadence 30 + 20d lag; fred.DCOILBRENTEU,
+   DCOILWTICO, DHHNGSP, DHOILNYH 7d publish lag (same EIA-via-FRED batch as DGASUSGULF already had).
 
-Backup: wrote data/backups/oil_20260806_131301.db.gz (keeping 7 of last 7).
-======================================================================
-STATUS: OK -- structure sound, no shrink, no orphans, no dup keys.
+PROOF (run in this order on 2026-09-02, all output kept in the session log)
+-------------------------------------------------------------------------------------
+fetch_wider_nodes: 15 yf.* + 3 FX + BAMLH0A0HYM2 -> latest obs 2026-09-02 / 08-28 / 09-01
+fetch_energy_nodes: DHOILNYH 08-25 (source lag), T5YIE/T10YIE 09-01, DFII10 08-31
+fetch_ovx: 2026-09-01.  fetch_wti_monthly: 967 rows to 2026-07-01 (August not yet published).
+fetch_predmkt: 169 markets snapshot; reconcile 3 re-snapshotted, 8 marked.
+derive_signals -> heartbeat: "341 OK, 0 STALE, 0 DEAD, 257 CLOSED"  [OK]
+status.py: ENGINE STATUS: GREEN -- "fresh, covered, last run OK, framework sound"
+tests: tests/test_integrity_fixes.py 6 passed; tests/test_status.py (acceptance, was failing on
+RED) now passes; full suite result recorded in the commit message.
+
+FOR JOE (cannot be done from this session)
+-------------------------------------------------------------------------------------
+The nightly job will NOT run until launchd can execute it. Two things to try, in order:
+  a) System Settings > Privacy & Security > Full Disk Access: add /bin/bash (or move the repo out of
+     ~/Documents). Then: launchctl kickstart -k gui/$(id -u)/com.ripple.refresh and check that
+     data/launchd_refresh.log gains a "Daily run" block and `launchctl print gui/$(id -u)/com.ripple.refresh`
+     shows last exit code 0 (not 78).
+  b) If (a) does not clear it: point StandardOutPath/StandardErrorPath in ops/com.ripple.refresh.plist
+     at ~/Library/Logs/ripple-engine/refresh.log, reinstall per ops/INSTALL.md, kickstart again.
+Until then the series die again ~4 business days after the last hand-run refresh.
+Also: com.ripple.watch and com.ripple.desk (ops/) are not installed at all -- only refresh is.

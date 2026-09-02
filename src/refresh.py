@@ -40,6 +40,14 @@ STEP_TIMEOUT = 900   # seconds; fetch_cot pulls ~20 zip archives, so be generous
 STEPS = [
     ("fetch_prices",   "src/fetch_prices.py",   "prices"),
     ("fetch_series",   "src/fetch_series.py",   "observations"),
+    # 2026-09-02 integrity fix (data/integrity_report.txt): these four fetchers were only ever run by
+    # hand, so their 25 series (yf.*, FX, OVX, breakevens, TIPS, heating oil, monthly WTI) went DEAD
+    # after 7-10 Aug and dragged five derived.* signals down with them. Scheduled here, right after
+    # the core FRED pull, so derive_signals (below) sees fresh inputs every run.
+    ("fetch_wider",    "src/fetch_wider_nodes.py",  "observations"),
+    ("fetch_energy",   "src/fetch_energy_nodes.py", "observations"),
+    ("fetch_ovx",      "src/fetch_ovx.py",          "observations"),
+    ("fetch_wti_m",    "src/fetch_wti_monthly.py",  "observations"),
     ("fetch_eia",      "src/fetch_eia.py",      "observations"),
     # Physical oil fundamentals (Cushing, refinery utilization, SPR) -- stats-safe.
     ("fetch_eia_fund", "src/fetch_eia_fundamentals.py", "observations"),
