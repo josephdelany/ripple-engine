@@ -68,45 +68,53 @@ sanctions and chokepoint disruptions sit inside them *less* often on crude — a
 2–3× more often on the diesel crack. Geopolitics moves products more than crude.
 
 **On prediction (the walk, daily tier, 253 scored price reads and 150 labelled
-escalation reads; numbers from `data/walk_forward/summary.json`, run 193022Z with
-the fourth baseline and recalibration):** with independent escalation labels, the
-state-conditioned engine has **no skill beyond the base rate** for escalation
-(Brier skill −0.005, 95% CI −0.083 … +0.067; SPA p 0.74 over 15 models) or for
-price (CRPS skill −0.030, CI −0.064 … +0.006). Two results from this run are worse
-than that, and both survive multiple-comparison control:
+escalation reads; numbers from `data/walk_forward/summary.json`, run 210135Z, the
+first run in which the vintage rule binds on the per-event situation fields):**
 
-- **A dumb rule beats it on escalation.** "The dyad's escalation level over the
-  last 90 days will persist" scores Brier **0.481** against the engine's **0.705**
-  — skill −0.467, DM p 0.002. Escalation is strongly autocorrelated and the engine
-  throws that away by averaging over analogs.
-- **Recalibration made it worse, not better.** We predicted in writing that the
-  engine's miscalibration was hiding real resolution, and registered M13
-  (walk-forward isotonic) to test it. M13's Brier skill is **−0.590** (CI −0.834 …
-  −0.357, p < 0.001) and its reliability terms rose rather than fell. **The
-  hypothesis is falsified and published as such.**
+**The engine is significantly *worse* than the base rate on both targets** —
+escalation Brier skill **−0.097** (95% CI −0.180 … −0.018, DM p 0.022), price CRPS
+**−0.071** (CI −0.136 … −0.017, p 0.016). Both survive multiple-comparison control.
 
-It does beat persistence on price (+0.162, p < 0.001) and is not reliably better
-than random analogs (+0.064 on escalation, +0.033 on price; neither significant).
-**The placebo condition is unresolved, not passed:**
-against the size-matched random-analog reference the VIX-matched placebo is −0.02
-(CI covers zero), but that reference is defined in an amendment Joe has not
-ratified; against climatology — the reference every other skill number here uses,
-and the one the registered protocol §6 implies — it is −0.075 (CI −0.106 …
-−0.043), which is not zero. Until the amendment is ratified or withdrawn, no
-verdict may lean on "the placebo is null" (`docs/red_team_2.md` finding 1;
-corrected 2026-09-02). The specification curve is negative in 78% of 162 registered
-settings (median −0.017); dropping 2008, 2020 or 2026 changes nothing; learning
-adds nothing over a frozen engine. A label-permutation test rejects "the engine is
-noise" (p 0.002) while the skill test says "not better than the base rate" — the
-engine finds structure in the labels but not enough to forecast with. **Power is
-now measured, not asserted:** at n = 150 the walk can detect an escalation skill of
-+0.12 with 96% power but only +0.043 with 41%, so "no skill" here means "no skill
-larger than roughly a tenth", not "exactly zero".
-**Verdict as computed: SUGGESTIVE / null on both targets.** An earlier run that
-showed escalation skill of +0.12 (p < 0.001) was scored against our own
-corpus-derived labels; it did not survive independent labels, exactly as the
-first headline result (H1, volatility clustering) did not survive a matched
-placebo. Both downgrades are in the record.
+The reason is the project's central finding. Earlier runs of the same code showed
+parity with climatology (−0.005, −0.030). Those runs took the per-event situation
+fields as *coded* rather than as *knowable*. Once the vintage rule is enforced on
+them too — registered as Amendment H before the code — **262 of 313 events turn out
+to have no situation field knowable on the day**, retrieval falls back to the
+market block alone, and the parity disappears. The state conditioning that gave the
+engine its edge was, to a first approximation, hindsight.
+
+Three consequences, all published as computed:
+
+- **A dumb rule beats it.** "The dyad's escalation level over the last 90 days will
+  persist" scores Brier **0.480** against the engine's **0.769** — skill −0.600,
+  p 0.0002. Escalation is autocorrelated; averaging over analogs from other dyads
+  destroys that. The engine's one surviving win is against persistence on *price*
+  (+0.129, p < 0.001).
+- **Recalibration is falsified.** We predicted in writing that miscalibration was
+  hiding real resolution and registered M13 (walk-forward isotonic) to test it.
+  Skill **−0.700** (p < 0.001), reliability terms *higher*. Published as falsified.
+- **The permutation test no longer rejects.** It gave p 0.002 before Amendment H;
+  now p 0.124. The structure it had detected lived in the retrospective codings.
+
+The specification curve is negative in **all 162** registered settings (0% positive,
+median −0.075); dropping 2008, 2020 or 2026 changes nothing; the frozen mixture beats
+the online one, so Hedge learning costs rather than helps; the placebo now fails
+under two of three references. A standing filtration audit ran 15,784 point-in-time
+checks with **0 violations**, and two independent full runs reproduce the same
+content digest.
+
+**Power, measured not asserted:** minimum detectable skill at 80% is 0.127
+(escalation) and 0.085 (price); detecting +0.05 would take ~1,200 scored reads
+against 150 today. So "worse than the base rate" is established; "no small positive
+edge exists" is not, and the corpus is roughly eight times too small to settle it.
+
+**Verdict as computed: SUGGESTIVE / null on both targets** — and the honest
+description is worse than the label: significantly worse than the base rate,
+point-in-time. Earlier positive headlines (H1 volatility-stress amplification;
+escalation skill +0.12 on self-coded labels) did not survive a matched placebo and
+independent labels respectively. Five of six "validated" propagation edges were
+retracted under a pre-registered re-test. Every downgrade is in the record, with the
+run that produced it.
 
 ## The integrity record
 
