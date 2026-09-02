@@ -1,0 +1,21 @@
+{
+  "registered": "2026-09-02",
+  "protocol": "WALK_FORWARD_PROTOCOL.md §5 (the learning loop): a finite, registered menu of candidate weightings, <= 12, written before the walk runs",
+  "rule": "Hedge (exponentially-weighted average forecaster) over these items; weights updated from cumulative PAST SEALED scores only. Item M01 with weights never updated is baseline 4 (the frozen engine).",
+  "field_weights": "uniform within a block (registered; not adjustable)",
+  "blocks": "situation = the coded sr_* fields on events (today); market = derived signals observed strictly before t; physical/actors/dyads/system/narrative = the state panel blocks (PATH Steps 2-3) -- a block with no known field drops out of the distance, so items that weight those blocks are identical to their base item until the panel lands (stated, not hidden).",
+  "items": [
+    {"id": "M01_uniform_k8",          "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M02_situation_only",      "block_weights": {"situation": 1, "market": 0, "physical": 0, "actors": 0, "dyads": 0, "system": 0, "narrative": 0}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M03_market_only",         "block_weights": {"situation": 0, "market": 1, "physical": 0, "actors": 0, "dyads": 0, "system": 0, "narrative": 0}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M04_situation_2x",        "block_weights": {"situation": 2, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M05_market_2x",           "block_weights": {"situation": 1, "market": 2, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M06_uniform_k5",          "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 5},
+    {"id": "M07_uniform_k12",         "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 12},
+    {"id": "M08_uniform_loose_030",   "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.30, "k": 8},
+    {"id": "M09_uniform_strict_050",  "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.50, "k": 8},
+    {"id": "M10_situation_2x_k12",    "block_weights": {"situation": 2, "market": 1, "physical": 1, "actors": 1, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 12},
+    {"id": "M11_physical_actors_2x",  "block_weights": {"situation": 1, "market": 1, "physical": 2, "actors": 2, "dyads": 1, "system": 1, "narrative": 1}, "retrieve_min": 0.40, "k": 8},
+    {"id": "M12_dyads_system_2x",     "block_weights": {"situation": 1, "market": 1, "physical": 1, "actors": 1, "dyads": 2, "system": 2, "narrative": 1}, "retrieve_min": 0.40, "k": 8}
+  ]
+}
