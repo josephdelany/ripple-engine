@@ -1,0 +1,60 @@
+{
+ "generated_at": "2026-09-02T18:31:12+00:00",
+ "fast": false,
+ "items": [
+  {
+   "id": "D1",
+   "name": "D1 pytest green incl. every named test",
+   "status": "PARTIAL",
+   "evidence": "tests/",
+   "note": "318 passed, 6 skipped, 4 warnings in 298.47s (0:04:58); PATH-named tests absent: ['tests/test_demo_911.py']"
+  },
+  {
+   "id": "D2",
+   "name": "D2 status.py >=12 loaders + coverage by block",
+   "status": "PASS",
+   "evidence": "data/state/status.json",
+   "note": "17 loaders (distinct sources behind 34 loaded fields, status 2026-09-02); coverage by block x decade present=True; fields loaded 34 / registered 70"
+  },
+  {
+   "id": "D3",
+   "name": "D3 kappa published; rule applied; audit file",
+   "status": "PARTIAL",
+   "evidence": "data/audits/ies90_audit_30.csv",
+   "note": "kappa published (data/state/outcomes_kappa.json); the kappa<0.6 replacement rule is superseded by OUTCOME_MAPPING.md Amendment 1 (labels retired, not replaced); 30-event IES-90 audit sheet present; Joe's audit NOT recorded (data/audits/outcome_audit.json absent)"
+  },
+  {
+   "id": "D4",
+   "name": "D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",
+   "status": "PARTIAL",
+   "evidence": "data/walk_forward/summary.json",
+   "note": "run walk_20260902T181720Z; present: ['both tiers', 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: [\"four baselines (daily G has 3: ['climatology', 'frozen', 'random_analogs'])\"]"
+  },
+  {
+   "id": "D5",
+   "name": "D5 9/11, 1990, 2026 demos from sealed inputs on /walk",
+   "status": "PARTIAL",
+   "evidence": "data/walk_forward/reads.jsonl",
+   "note": "sealed reads {'september_11_attacks_2001': 5, 'iraq_invades_kuwait_1990': 5, 'hormuz_closure_2026': 5}; walk read route=True; tests/test_demo_911.py present=False (PATH Step 10 is Cowork + Joe)"
+  },
+  {
+   "id": "D6",
+   "name": "D6 VALIDATED only via protocol \u00a77",
+   "status": "PASS",
+   "evidence": "data/walk_forward/summary.json",
+   "note": "protocol \u00a77 verdicts VALIDATED: none (all SUGGESTIVE / null); v2 surfaces printing VALIDATED without a \u00a77/verdict reference: none"
+  },
+  {
+   "id": "D7",
+   "name": "D7 tag v3.0; paper; one week in the Ledger",
+   "status": "FAIL",
+   "evidence": "git tag / data/ledger/claims.jsonl",
+   "note": "tag v3.0=False (tags: ['v2.0']); paper drafted=False; ledger use on 1 distinct days (needs 7)"
+  }
+ ],
+ "counts": {
+  "PASS": 2,
+  "PARTIAL": 4,
+  "FAIL": 1
+ }
+}

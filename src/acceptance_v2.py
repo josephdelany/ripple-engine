@@ -1,11 +1,20 @@
 """
-acceptance_v2.py -- B8: check the v2 acceptance criteria A1-A8 (spec §8) EXPLICITLY and
+acceptance_v2.py -- B8: check the v2 acceptance criteria A1-A11 (spec §8) EXPLICITLY and
 print each with a status and its evidence. Read-only; reproducible. PASS / PARTIAL / PENDING
 is reported honestly -- a PARTIAL is a documented gap, never dressed as a pass.
+
+2026-09-02 (session A): also PATH.md §3, the definition of done D1-D7, each printed as
+PASS / PARTIAL / FAIL with the evidence path. `python3 src/acceptance_v2.py --dod` runs only
+that block; `--fast` skips the nested pytest (D1 then reads PARTIAL, never PASS). The D1-D7
+result is written to data/acceptance_dod.json for STATE_OF_THE_ENGINE.md.
 """
 from __future__ import annotations
 
 import json
+import re
+import subprocess
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import escalation as E
@@ -132,5 +141,162 @@ def run():
     return out
 
 
+# ----------------------------------------------------------------------------- PATH.md §3: D1-D7
+
+DOD_OUT = ROOT / "data" / "acceptance_dod.json"
+V2_SURFACES = ["src/api_v2.py", "src/app.html", "src/walk.py", "src/story_read.py", "src/feed_build.py", "src/big_moves_page.py"]
+DEMO_EVENTS = ("september_11_attacks_2001", "iraq_invades_kuwait_1990", "hormuz_closure_2026")
+
+
+def _exists(rel):
+    return (ROOT / rel).exists()
+
+
+def _d1(fast):
+    if fast:
+        return "PARTIAL", "tests/", "pytest not run (--fast); run without --fast for the real D1"
+    proc = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "tests"], cwd=ROOT,
+                          capture_output=True, text=True, timeout=1800)
+    tail = [l for l in proc.stdout.splitlines() if re.search(r"\d+ (passed|failed|error)", l)]
+    summary = tail[-1].strip() if tail else (proc.stdout.strip().splitlines() or ["no output"])[-1]
+    ok = proc.returncode == 0 and "failed" not in summary and "error" not in summary
+    named = ["tests/test_codebook.py", "tests/state/test_vintage_rule.py", "tests/state/test_join_coverage.py", "tests/test_demo_911.py"]
+    missing = [t for t in named if not _exists(t)]
+    if ok and missing:
+        return "PARTIAL", "tests/", f"{summary}; PATH-named tests absent: {missing}"
+    return ("PASS" if ok else "FAIL"), "tests/", summary
+
+
+def _d2():
+    p = ROOT / "data" / "state" / "status.json"
+    if not p.exists():
+        return "FAIL", "data/state/status.json", "absent -- run python3 src/state/status.py"
+    st = json.loads(p.read_text())
+    fields = st.get("fields") or {}
+    # a loader = a distinct source string behind the loaded fields (status.py's `loaders` map is filled only during a load run)
+    sources = {str((v or {}).get("source", ""))[:40] for v in fields.values()} - {""}
+    n = max(len(st.get("loaders") or {}), len(sources))
+    blocks = st.get("blocks_by_decade") or {}
+    def _n(x):
+        return x if isinstance(x, int) else len(x or [])
+    status = "PASS" if (n >= 12 and blocks) else "PARTIAL"
+    return status, "data/state/status.json", f"{n} loaders (distinct sources behind {len(fields)} loaded fields, status {st.get('generated_at', '')[:10]}); coverage by block x decade present={bool(blocks)}; fields loaded {_n(st.get('fields_loaded'))} / registered {_n(st.get('fields_registered'))}"
+
+
+def _d3():
+    kappa = _exists("data/state/outcomes_kappa.json")
+    amend = "Amendment 1" in (ROOT / "OUTCOME_MAPPING.md").read_text() if _exists("OUTCOME_MAPPING.md") else False
+    audit_sheet = _exists("data/audits/ies90_audit_30.csv")
+    joe = _exists("data/audits/outcome_audit.json")
+    if kappa and amend and audit_sheet and joe:
+        return "PASS", "data/state/outcomes_kappa.json", "kappa published; rule superseded by Amendment 1 (sr_outcome_90 retired, IES-90 adopted); audit sheet present; Joe's audit recorded"
+    if kappa and amend and audit_sheet:
+        return "PARTIAL", "data/audits/ies90_audit_30.csv", "kappa published (data/state/outcomes_kappa.json); the kappa<0.6 replacement rule is superseded by OUTCOME_MAPPING.md Amendment 1 (labels retired, not replaced); 30-event IES-90 audit sheet present; Joe's audit NOT recorded (data/audits/outcome_audit.json absent)"
+    return "FAIL", "data/state/outcomes_kappa.json", f"kappa={kappa} amendment={amend} audit_sheet={audit_sheet}"
+
+
+def _d4():
+    p = ROOT / "data" / "walk_forward" / "summary.json"
+    if not p.exists():
+        return "FAIL", "data/walk_forward/summary.json", "absent"
+    s = json.loads(p.read_text())
+    tiers = s.get("tiers") or {}
+    have, miss = [], []
+    def chk(name, cond):
+        (have if cond else miss).append(name)
+    chk("both tiers", {"daily", "monthly"} <= set(tiers))
+    daily = tiers.get("daily") or {}
+    baselines = list(((daily.get("G") or {}).get("engine_vs") or {}).keys())
+    chk(f"four baselines (daily G has {len(baselines)}: {baselines})", len(baselines) >= 4)
+    ev = (daily.get("G") or {}).get("engine_vs") or {}
+    chk("DM p-values", any("dm_p" in (v or {}) for v in ev.values()))
+    chk("SPA p-value", any(k in daily for k in ("spa", "family_p")) or "spa" in s)
+    chk("placebo", bool(s.get("placebo")))
+    chk("permutation", bool(s.get("permutation")))
+    chk("regime blocks", bool(s.get("regime_blocks")))
+    chk("specification curve", bool(s.get("spec_curve")))
+    chk("power", "power" in daily or "power" in s)
+    chk("leakage test asserted", bool((s.get("leakage_test") or {}).get("asserted")))
+    status = "PASS" if not miss else ("PARTIAL" if len(miss) <= 2 else "FAIL")
+    return status, "data/walk_forward/summary.json", f"run {s.get('run_id')}; present: {have}; missing: {miss}"
+
+
+def _d5():
+    reads = ROOT / "data" / "walk_forward" / "reads.jsonl"
+    sealed = {e: 0 for e in DEMO_EVENTS}
+    if reads.exists():
+        for line in reads.open(encoding="utf-8"):
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            e = r.get("event_id") or (r.get("event") or {}).get("event_id")
+            if e in sealed:
+                sealed[e] += 1
+    api = (ROOT / "src" / "api_v2.py").read_text() if _exists("src/api_v2.py") else ""
+    route = "/api/walk/read" in api or "walk/read" in api
+    demo_test = _exists("tests/test_demo_911.py")
+    all_sealed = all(v > 0 for v in sealed.values())
+    if all_sealed and route and demo_test:
+        return "PASS", "data/walk_forward/reads.jsonl", f"sealed reads {sealed}; /api/walk/read route; tests/test_demo_911.py"
+    return ("PARTIAL" if (all_sealed and route) else "FAIL"), "data/walk_forward/reads.jsonl", f"sealed reads {sealed}; walk read route={route}; tests/test_demo_911.py present={demo_test} (PATH Step 10 is Cowork + Joe)"
+
+
+def _d6():
+    s = json.loads((ROOT / "data" / "walk_forward" / "summary.json").read_text()) if _exists("data/walk_forward/summary.json") else {}
+    rules = (s.get("verdict") or {}).get("rules") or {}
+    validated = [k for k, v in rules.items() if str((v or {}).get("status", "")).upper().startswith("VALIDATED")]
+    offenders = []
+    for rel in V2_SURFACES:
+        p = ROOT / rel
+        if not p.exists():
+            continue
+        txt = p.read_text(errors="replace")
+        if "VALIDATED" in txt and not re.search(r"§7|protocol|verdict", txt):
+            offenders.append(rel)
+    status = "PASS" if not offenders else "FAIL"
+    return status, "data/walk_forward/summary.json", f"protocol §7 verdicts VALIDATED: {validated or 'none (all SUGGESTIVE / null)'}; v2 surfaces printing VALIDATED without a §7/verdict reference: {offenders or 'none'}"
+
+
+def _d7():
+    tags = subprocess.run(["git", "tag", "-l"], cwd=ROOT, capture_output=True, text=True).stdout.split()
+    tag = "v3.0" in tags
+    paper = any(_exists(x) for x in ("PAPER.md", "docs/PAPER.md", "docs/paper.md", "paper/paper.md"))
+    claims = ROOT / "data" / "ledger" / "claims.jsonl"
+    days = set()
+    if claims.exists():
+        for line in claims.open(encoding="utf-8"):
+            m = re.search(r'"(?:day|date|as_of|logged_at)":\s*"(\d{4}-\d{2}-\d{2})', line)
+            if m:
+                days.add(m.group(1))
+    week = len(days) >= 7
+    status = "PASS" if (tag and paper and week) else ("PARTIAL" if (paper or week) else "FAIL")
+    return status, "git tag / data/ledger/claims.jsonl", f"tag v3.0={tag} (tags: {[t for t in tags if t.startswith('v')]}); paper drafted={paper}; ledger use on {len(days)} distinct days (needs 7)"
+
+
+def path_dod(fast=False):
+    """PATH.md §3 D1-D7 -> list of (id, status, evidence_path, note); also written to data/acceptance_dod.json."""
+    out = [("D1 pytest green incl. every named test",) + _d1(fast),
+           ("D2 status.py >=12 loaders + coverage by block",) + _d2(),
+           ("D3 kappa published; rule applied; audit file",) + _d3(),
+           ("D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",) + _d4(),
+           ("D5 9/11, 1990, 2026 demos from sealed inputs on /walk",) + _d5(),
+           ("D6 VALIDATED only via protocol §7",) + _d6(),
+           ("D7 tag v3.0; paper; one week in the Ledger",) + _d7()]
+    print("=== PATH.md §3 -- definition of done D1-D7 ===")
+    for name, status, path, note in out:
+        print(f"[{status:^7}] {name}\n           evidence: {path}\n           {note}")
+    c = {k: sum(1 for _, s_, _, _ in out if s_ == k) for k in ("PASS", "PARTIAL", "FAIL")}
+    print(f"\n{c['PASS']}/7 PASS, {c['PARTIAL']} PARTIAL, {c['FAIL']} FAIL -- the product is finished only when all seven PASS (SESSION_CHARTER.md §5)")
+    DOD_OUT.write_text(json.dumps({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "fast": fast,
+                                   "items": [{"id": n.split()[0], "name": n, "status": s_, "evidence": p, "note": t} for n, s_, p, t in out],
+                                   "counts": c}, indent=1))
+    return out
+
+
 if __name__ == "__main__":
-    run()
+    fast = "--fast" in sys.argv
+    if "--dod" not in sys.argv:
+        run()
+        print()
+    path_dod(fast=fast)

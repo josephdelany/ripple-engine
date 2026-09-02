@@ -13,7 +13,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | method | TEXT |  |  |
 | updated_at | TEXT |  |  |
 
-## `edges` — 7,909 rows
+## `edges` — 8,073 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -41,7 +41,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | name | TEXT | yes |  |
 | notes | TEXT |  |  |
 
-## `event_entities` — 664 rows
+## `event_entities` — 711 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -49,7 +49,19 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | entity_id | TEXT | yes | yes |
 | role | TEXT |  | yes |
 
-## `events` — 296 rows
+## `event_outcomes` — 3,626 rows
+
+| column | type | not null | pk |
+|---|---|---|---|
+| event_id | TEXT | yes | yes |
+| source | TEXT | yes | yes |
+| field | TEXT | yes | yes |
+| value | REAL |  |  |
+| value_text | TEXT |  |  |
+| detail | TEXT |  |  |
+| computed_at | TEXT | yes |  |
+
+## `events` — 313 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -64,8 +76,22 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | source_url | TEXT | yes |  |
 | added_at | TEXT |  |  |
 | surprise | INTEGER |  |  |
+| sr_actor | TEXT |  |  |
+| sr_target | TEXT |  |  |
+| sr_asset_role | TEXT |  |  |
+| sr_conflict_scope | TEXT |  |  |
+| sr_tempo | TEXT |  |  |
+| sr_alliance | TEXT |  |  |
+| sr_diplomatic | TEXT |  |  |
+| sr_target_capacity | TEXT |  |  |
+| sr_outcome_30 | TEXT |  |  |
+| sr_outcome_90 | TEXT |  |  |
+| sr_actor_propensity | REAL |  |  |
+| sr_prior_dyad | TEXT |  |  |
+| sr_confidence | REAL |  |  |
+| sr_json | TEXT |  |  |
 
-## `forecasts` — 4 rows
+## `forecasts` — 8 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -80,7 +106,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | outcome | INTEGER |  |  |
 | notes | TEXT |  |  |
 
-## `gaps` — 245 rows
+## `gaps` — 248 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -100,7 +126,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | source_url | TEXT |  |  |
 | notes | TEXT |  |  |
 
-## `library` — 292 rows
+## `library` — 297 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -109,7 +135,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | signature | TEXT |  |  |
 | mag_pp | REAL |  |  |
 
-## `observations` — 463,714 rows
+## `observations` — 467,436 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -119,7 +145,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | as_of | TEXT |  | yes |
 | retrieved_at | TEXT |  |  |
 
-## `prices` — 20,152 rows
+## `prices` — 20,194 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -179,7 +205,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | error | REAL |  |  |
 | notes | TEXT |  |  |
 
-## `series` — 384 rows
+## `series` — 598 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -207,7 +233,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | evidence | TEXT |  |  |
 | updated_at | TEXT |  |  |
 
-## `situation_log` — 553 rows
+## `situation_log` — 3,627 rows
 
 | column | type | not null | pk |
 |---|---|---|---|
@@ -224,6 +250,38 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | confidence | TEXT |  |  |
 | alert_url | TEXT |  |  |
 | promoted_event_id | TEXT |  |  |
+
+## `situation_state` — 8,564 rows
+
+| column | type | not null | pk |
+|---|---|---|---|
+| event_id | TEXT | yes | yes |
+| entity_id | TEXT | yes | yes |
+| field | TEXT | yes | yes |
+| obs_date | TEXT |  |  |
+| value | REAL |  |  |
+| value_text | TEXT |  |  |
+| vintage | TEXT | yes |  |
+| release | TEXT | yes |  |
+| retrospective | INTEGER | yes |  |
+| source | TEXT | yes |  |
+| joined_at | TEXT | yes |  |
+
+## `state_panel` — 280,208 rows
+
+| column | type | not null | pk |
+|---|---|---|---|
+| entity_id | TEXT | yes | yes |
+| field | TEXT | yes | yes |
+| obs_date | TEXT | yes | yes |
+| value | REAL |  |  |
+| value_text | TEXT |  |  |
+| unit | TEXT |  |  |
+| source | TEXT | yes |  |
+| vintage | TEXT | yes | yes |
+| release | TEXT | yes |  |
+| retrospective | INTEGER | yes |  |
+| retrieved_at | TEXT | yes |  |
 
 ## Series catalogue (`series_id` → unit, cadence, source)
 
@@ -272,6 +330,7 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | `fred.T10YIE` | percent | daily | FRED |
 | `fred.T5YIE` | percent | daily | FRED |
 | `fred.VIXCLS` | index | daily | FRED |
+| `fred.WTISPLC` | $/bbl | monthly | FRED |
 | `gdelt.tone.hormuz` | tone | daily | GDELT DOC |
 | `gdelt.tone.opec` | tone | daily | GDELT DOC |
 | `gpr.GPRD` | index | daily | Caldara & Iacoviello, Geopolitical Risk index (matteoiacoviello.com) |
@@ -331,4 +390,4 @@ _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` —
 | `yf.tankers` | USD | daily | Yahoo (yfinance) |
 | `yf.ttf` | EUR/MWh | daily | Yahoo (yfinance) |
 | `yf.wheat` | USc/bu | daily | Yahoo (yfinance) |
-| `predmkt.*` (282 live markets) | probability | daily | Polymarket |
+| `predmkt.*` (495 live markets) | probability | daily | Polymarket |

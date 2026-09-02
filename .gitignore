@@ -76,3 +76,17 @@ data/reader/
 data/state/raw/
 data/state/local/*
 !data/state/local/README.md
+
+# 2026-09-02 (session A): runtime + cache artefacts that must never be committed
+data/integrity_check.txt
+data/last_run.json
+data/oil.db-shm
+data/oil.db-wal
+data/state/health_alert_seen.txt
+# UCDP GED raw pull (CC BY, 40 MB, rebuilt by fetch_ucdp.py --refresh); extractor working files
+data/cache/
+data/extract/
+# keys and tokens live here (SESSION_CHARTER.md §6), never in the repo
+tools/config.json
+*.key
+*.token

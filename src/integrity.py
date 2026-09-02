@@ -31,7 +31,10 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 BACKUPS = ROOT / "data" / "backups"
 STATE = ROOT / "data" / "integrity_state.json"
-OUT = ROOT / "data" / "integrity_report.txt"
+# 2026-09-02: the daily structural check goes to integrity_check.txt (runtime, gitignored).
+# data/integrity_report.txt is the committed record of integrity FINDINGS (what was broken, since when,
+# what fixed it) and must not be overwritten by a run.
+OUT = ROOT / "data" / "integrity_check.txt"
 KEEP = 7                      # rotate: keep the 7 newest compressed backups
 
 
