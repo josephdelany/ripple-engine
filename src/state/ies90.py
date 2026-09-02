@@ -29,7 +29,7 @@ import panel as P  # noqa: E402
 import countries as C  # noqa: E402
 import outcomes as O  # noqa: E402
 
-REGISTRATION = "OUTCOME_MAPPING.md Amendment 1 + 1.1 (2026-09-02)"
+REGISTRATION = "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 (2026-09-02)"
 SEED = 20260902
 WINDOW = 90
 DIST_OUT = P.DATA / "state" / "ies90_distribution.json"
@@ -46,6 +46,20 @@ HOSTLEV_TO_LEVEL = {1: 0, 2: 1, 3: 1, 4: 2, 5: 3}            # MID hostility lev
 VIOL_TO_LEVEL = {1: 1, 2: 2, 3: 2, 4: 3}                     # ICB violence -> IES level
 GED_WAR, GED_FORCE = 250, 25                                 # deaths in 90 days: 1000*90/365 = 246.6 -> 250; UCDP floor 25
 LEVEL_MEANING = {0: "none", 1: "threat or display of force", 2: "use of force", 3: "war"}
+DYADIC_SOURCES = ("midi", "war", "icb", "mid")               # A2.1: can carry a pair-matched record
+# A2.2: chokepoint / facility entity -> littoral or host states, added to L ONLY (never A or P)
+LITTORAL = {
+    "chokepoint.hormuz": ("country.iran", "country.uae", "country.omn"),
+    "chokepoint.bab_el_mandeb": ("country.yemen",),                       # Djibouti, Eritrea unmapped
+    "chokepoint.suez": ("country.egypt",), "chokepoint.suez_canal": ("country.egypt",),
+    "chokepoint.gibraltar_strait": ("country.gbr",),                      # Spain, Morocco unmapped
+    "chokepoint.malacca": ("country.indonesia",),                         # Malaysia, Singapore unmapped
+    "chokepoint.taiwan_strait": ("country.taiwan", "country.china"),
+    "chokepoint.libya_es_sider": ("country.libya",),
+    "chokepoint.kirkuk_ceyhan_pipeline": ("country.iraq", "country.turkey"),
+    "chokepoint.druzhba_pipeline": ("country.russia", "country.ukraine", "country.hungary"),   # Belarus, Poland, Slovakia, Czechia unmapped
+    "chokepoint.cpc_novorossiysk": ("country.russia", "country.kazakhstan"),
+}
 # GED `country` string -> corpus entity, for every GED name that maps to countries.py (verified against the 126 names
 # in the 26.1 cache on 2026-09-02). Names absent here are reported in the distribution file, never dropped silently.
 GED_NAMES = {
@@ -226,7 +240,9 @@ def score_midi(d, A, pairs, inc, parts):
         if ok:
             hits.append(r)
     level = max((HOSTLEV_TO_LEVEL.get(int(r.hostlev), 0) for r in hits), default=0)
-    recs = [{"source": "midi", "record": f"incident {int(r.incidnum)} (dispute {int(r.dispnum)})",
+    basis = "dyadic" if pairs else "location"
+    recs = [{"source": "midi", "basis": basis, "rule": f"MIDI.{'pair' if pairs else 'single'}.overlap",
+             "record": f"incident {int(r.incidnum)} (dispute {int(r.dispnum)})",
              "dates": f"{r.start.date()}..{r.end.date()}", "code": f"hostlev {int(r.hostlev)} fatality {int(r.fatality)} action {int(r.action)}",
              "level": HOSTLEV_TO_LEVEL.get(int(r.hostlev), 0)} for r in hits]
     return level, recs
@@ -251,13 +267,15 @@ def score_war(d, A, pairs, L, war, cover_inter=True, cover_intra=True):
             if ok:
                 level = 3
                 sp = "; ".join(f"{st.date()}..{en.date()}" for st, en in ps[0]["spells"])
-                recs.append({"source": "war", "record": f"COW inter-state war {wn} {ps[0]['name']} ({', '.join(f'{e}:side{s_}' for e, s_ in sorted(side.items()))})",
+                recs.append({"source": "war", "basis": "dyadic" if pairs else "location", "rule": f"WAR.inter.{'pair' if pairs else 'single'}",
+                             "record": f"COW inter-state war {wn} {ps[0]['name']} ({', '.join(f'{e}:side{s_}' for e, s_ in sorted(side.items()))})",
                              "dates": sp, "code": "war spell overlaps W", "level": 3})
     if cover_intra:
         for p in war["intra"]:
             if p["ents"] & set(L) and any(st <= w1 and en >= w0 for st, en in p["spells"]):
                 level = 3
-                recs.append({"source": "war", "record": f"COW intra-state war {p['war']} {p['name']} (state party {','.join(sorted(p['ents']))})",
+                recs.append({"source": "war", "basis": "location", "rule": "WAR.intra.location",
+                             "record": f"COW intra-state war {p['war']} {p['name']} (state party {','.join(sorted(p['ents']))})",
                              "dates": "; ".join(f"{st.date()}..{en.date()}" for st, en in p["spells"]), "code": "war spell overlaps W (location)", "level": 3})
     return level, recs
 
@@ -274,43 +292,50 @@ def score_mid(d, A, pairs, mid):
     for r in sub.itertuples(index=False):
         h = int(r.hihost)
         e = r.end if pd.notna(r.end) else r.start
+        kind = "pair" if pairs else "single"
         if w0 <= r.start and e <= w1:
-            lv, how = HOSTLEV_TO_LEVEL.get(h, 0), "wholly inside W"
+            lv, how, rule = HOSTLEV_TO_LEVEL.get(h, 0), "wholly inside W", f"MID.{kind}.wholly"
         elif w0 <= r.start <= w1:
-            lv, how = 1, f"starts in W, ends after (onset dated -> 1; hihost {h} is the undated peak)"
+            lv, how, rule = 1, f"starts in W, ends after (onset dated -> 1; hihost {h} is the undated peak)", f"MID.{kind}.onset"
         else:
-            lv, how = None, "ongoing at d, force undated in W (no level)"
+            lv, how, rule = None, "ongoing at d, force undated in W (no level)", None
         fired = w0 <= e <= w1 and int(r.settlmnt or 0) == 1
         deal = deal or int(fired)
         if lv is not None:
             level = max(level, lv)
-        recs.append({"source": "mid", "record": f"dispute {int(r.disno)} {r.namea}-{r.nameb}" + (" [COW war]" if int(getattr(r, "war", 0) or 0) == 1 else ""),
+        recs.append({"source": "mid", "basis": "dyadic" if pairs else "location", "rule": rule,
+                     "record": f"dispute {int(r.disno)} {r.namea}-{r.nameb}" + (" [COW war]" if int(getattr(r, "war", 0) or 0) == 1 else ""),
                      "dates": f"{r.start.date()}..{e.date()}", "code": f"hihost {h} settlmnt {int(r.settlmnt) if pd.notna(r.settlmnt) else '?'} ({how})" + ("; negotiated end in W -> DEAL" if fired else ""),
                      "level": lv})
     return level, deal, recs
 
 
-def score_icb(d, A, sysd, members):
+def score_icb(d, A, sysd, members, pairs=None):
     w0, w1 = window(d)
     level, deal, recs = 0, 0, []
+    pairs = pairs or set()
     for c in sysd.itertuples(index=False):
-        if pd.isna(c.trigdate) or pd.isna(c.termdate) or not (A & members.get(int(c.crisno), set())):
+        mem = members.get(int(c.crisno), set())
+        if pd.isna(c.trigdate) or pd.isna(c.termdate) or not (A & mem):
             continue
         if not (c.trigdate <= w1 and c.termdate >= w0):
             continue
+        dy = any(set(p) <= mem for p in pairs)                       # A2.1: both members of a pair are crisis actors
+        kind = "pair" if dy else "single"
         viol = int(c.viol) if pd.notna(c.viol) else None
         if w0 <= c.trigdate and c.termdate <= w1 and viol:
-            lv, how = VIOL_TO_LEVEL.get(viol, 1), "wholly inside W"
+            lv, how, rule = VIOL_TO_LEVEL.get(viol, 1), "wholly inside W", f"ICB.{kind}.wholly"
         elif w0 <= c.trigdate <= w1:
-            lv, how = 1, f"triggered in W, ends after (onset dated -> 1; viol {viol} is the undated peak)"
+            lv, how, rule = 1, f"triggered in W, ends after (onset dated -> 1; viol {viol} is the undated peak)", f"ICB.{kind}.onset"
         else:
-            lv, how = None, "ongoing at d, violence undated in W (no level)"
+            lv, how, rule = None, "ongoing at d, violence undated in W (no level)", None
         forout = int(c.forout) if pd.notna(c.forout) else None
         fired = w0 <= c.termdate <= w1 and forout in (1, 2)
         deal = deal or int(fired)
         if lv is not None:
             level = max(level, lv)
-        recs.append({"source": "icb", "record": f"crisis {int(c.crisno)} {c.crisname}", "dates": f"{c.trigdate.date()}..{c.termdate.date()}",
+        recs.append({"source": "icb", "basis": "dyadic" if dy else "location", "rule": rule,
+                     "record": f"crisis {int(c.crisno)} {c.crisname}", "dates": f"{c.trigdate.date()}..{c.termdate.date()}",
                      "code": f"viol {viol} forout {forout} ({how})" + ("; agreement ends crisis in W -> DEAL" if fired else ""), "level": lv})
     return level, deal, recs
 
@@ -322,7 +347,8 @@ def score_ged(d, L, series):
     pre = ged_sum(series, L, d - pd.Timedelta(days=WINDOW - 1), d, "state")
     other = ged_sum(series, L, w0, w1, "other")
     lv = ged_level(d90)
-    recs = [{"source": "ged", "record": f"GED state-based deaths in {','.join(sorted(L))} (location, not dyad)",
+    rule = "GED.location.ge250" if lv == 3 else ("GED.location.ge25" if lv == 2 else "NONE.covered")   # < 25: a covering source, nothing in W
+    recs = [{"source": "ged", "basis": "location", "rule": rule, "record": f"GED state-based deaths in {','.join(sorted(L))} (location, not dyad)",
              "dates": f"{w0.date()}..{w1.date()}", "code": f"best {d90:.0f} in W (pre-window 90d {pre:.0f}; one-sided/non-state {other:.0f})",
              "level": lv}]
     return lv, d90, pre, other, recs
@@ -338,7 +364,7 @@ def score_event(d, A, pairs, L, src):
     if ci or cn:
         lv, recs = score_war(d, A, pairs, L, src["war"], ci, cn); out["levels"]["war"] = lv; out["recs"] += recs
     if A and covers("icb", d):
-        lv, dl, recs = score_icb(d, A, src["icb"], src["icb_members"]); out["levels"]["icb"] = lv; out["recs"] += recs
+        lv, dl, recs = score_icb(d, A, src["icb"], src["icb_members"], pairs); out["levels"]["icb"] = lv; out["recs"] += recs
         deal_seen = True; out["deal"] = max(out["deal"] or 0, dl)
     if A and covers("mid", d):
         lv, dl, recs = score_mid(d, A, pairs, src["mid"]); out["levels"]["mid"] = lv; out["recs"] += recs
@@ -350,11 +376,29 @@ def score_event(d, A, pairs, L, src):
         out["deal"] = None
     covering = [s for s in SOURCES if s in out["levels"]]
     out["covering"] = covering
-    if covering:
-        out["level"] = max(out["levels"][s] for s in covering)
-        out["level_source"] = [s for s in SOURCES if s in covering and out["levels"][s] == out["level"]]
+    # A2.1 dyadic precedence: a dyadic-capable source covering W with P non-empty decides; location evidence is kept beside it
+    dy_cov = [s for s in covering if s in DYADIC_SOURCES and pairs and (s != "war" or covers("war", d))]
+    loc_recs = [x for x in out["recs"] if x.get("basis") == "location" and x["level"] is not None]
+    dy_recs = [x for x in out["recs"] if x.get("basis") == "dyadic" and x["level"] is not None]
+    out["covering_dyadic"], out["covering_location"] = dy_cov, [s for s in covering if s not in dy_cov]
+    out["level_location"] = max((x["level"] for x in loc_recs), default=0) if out["covering_location"] else None
+    if dy_cov:
+        out["basis"] = "dyadic"
+        out["level"] = max((x["level"] for x in dy_recs), default=0)
+        setters = [x for x in dy_recs if x["level"] == out["level"]]
+    elif covering:
+        out["basis"] = "location"
+        out["level"] = max((x["level"] for x in loc_recs), default=0)
+        setters = [x for x in loc_recs if x["level"] == out["level"]]
     else:
-        out["level"], out["level_source"] = None, []
+        out["basis"], out["level"], setters = None, None, []
+    if out["level"] is None:
+        out["level_source"], out["rule_fired"] = [], ["UNCOVERED"]
+    elif out["level"] == 0 and not setters:
+        out["level_source"], out["rule_fired"] = list(dy_cov or covering), ["NONE.covered"]
+    else:
+        out["level_source"] = [s for s in SOURCES if any(x["source"] == s for x in setters)]
+        out["rule_fired"] = sorted({x["rule"] for x in setters}, key=lambda r: [i for i, s in enumerate(SOURCES) if r.lower().startswith(s[:3])] or [9])
     return out
 
 
@@ -374,6 +418,9 @@ def run(conn, src=None, write=True):
     O.ensure_schema(conn)
     src = src or load_sources()
     ev, ents, roles = O._corpus(conn)
+    ents_all = defaultdict(set)
+    for eid, en in conn.execute("SELECT event_id, entity_id FROM event_entities"):
+        ents_all[eid].add(en)
     prec = dict(conn.execute("SELECT event_id, date_precision FROM events"))
     ts = P.now()
     rows, results = [], {}
@@ -382,19 +429,30 @@ def run(conn, src=None, write=True):
             continue
         A, pairs = O._actors_and_pairs(r, ents, roles)
         rr = roles.get(r.event_id, {})
-        L = (set(rr.get("location", set())) | set(rr.get("target", set()))) or A
+        L = (set(rr.get("location", set())) | set(rr.get("target", set()))) or set(A)
+        lit = {e: LITTORAL[e] for e in ents_all.get(r.event_id, set()) if e in LITTORAL}     # A2.2: location only
+        for e, states in lit.items():
+            L |= set(states)
         res = score_event(r.event_date, A, pairs, L, src)
+        res["littoral"] = lit
         res.update({"type": r.type, "date": str(r.event_date.date()), "title": r.title, "url": r.source_url,
                     "ours": r.sr_outcome_90, "precision": prec.get(r.event_id) or "day", "A": sorted(A), "L": sorted(L)})
         results[r.event_id] = res
         detail = " | ".join(f"{x['source']}: {x['record']} {x['dates']} {x['code']}" for x in res["recs"]) or "no record in any covering source"
         if res["level"] is None:
             rows.append((r.event_id, "ies90", "no_independent_outcome", 1.0, None,
-                         "no source covers (d, d+90]" if A else "no mapped country on the event", ts))
+                         "no source covers (d, d+90]" if (A or res["L"]) else "no mapped country on the event", ts))
+            rows.append((r.event_id, "ies90", "rule_fired", None, "UNCOVERED", "Amendment 2", ts))
         else:
             rows.append((r.event_id, "ies90", "level", float(res["level"]), LEVEL_MEANING[res["level"]], detail, ts))
             rows.append((r.event_id, "ies90", "level_source", None, ",".join(res["level_source"]), detail, ts))
+            rows.append((r.event_id, "ies90", "basis", None, res["basis"], "Amendment 2: dyadic precedence" if res["basis"] == "dyadic" else "Amendment 2: no dyadic-capable source covers W" + (" (littoral map: " + ",".join(sorted(lit)) + ")" if lit else ""), ts))
+            rows.append((r.event_id, "ies90", "rule_fired", None, ",".join(res["rule_fired"]), "Amendment 2", ts))
+            if res["level_location"] is not None:
+                rows.append((r.event_id, "ies90", "level_location", float(res["level_location"]), None, "max over location-basis records (GED, COW intra-state, single-country matches)", ts))
         rows.append((r.event_id, "ies90", "covering", None, ",".join(res["covering"]) or None, f"date_precision {res['precision']}", ts))
+        rows.append((r.event_id, "ies90", "covering_dyadic", None, ",".join(res["covering_dyadic"]) or None, "Amendment 2", ts))
+        rows.append((r.event_id, "ies90", "covering_location", None, ",".join(res["covering_location"]) or None, "Amendment 2", ts))
         for s, lv in res["levels"].items():
             rows.append((r.event_id, "ies90", f"level_{s}", float(lv), None, " | ".join(f"{x['record']} {x['dates']} {x['code']}" for x in res["recs"] if x["source"] == s) or "none in W", ts))
         if res["deal"] is not None:
@@ -415,8 +473,13 @@ def _decade(date):
 def distribution(results, src):
     lvl = lambda v: "null" if v["level"] is None else str(v["level"])  # noqa: E731
     by_dec, by_cls, deal_dec, noind_dec = defaultdict(Counter), defaultdict(Counter), defaultdict(Counter), Counter()
-    cover = Counter(); cross = defaultdict(Counter)
+    cover = Counter(); cross = defaultdict(Counter); basis = defaultdict(Counter); rules = Counter(); lit = Counter()
     for v in results.values():
+        basis[str(v.get("basis"))][lvl(v)] += 1
+        for r in v.get("rule_fired", []):
+            rules[r] += 1
+        for e in (v.get("littoral") or {}):
+            lit[e] += 1
         by_dec[_decade(v["date"])][lvl(v)] += 1
         by_cls[v["type"]][lvl(v)] += 1
         if v["deal"] is not None:
@@ -433,6 +496,8 @@ def distribution(results, src):
             "deal_by_decade": {k: dict(v) for k, v in sorted(deal_dec.items())},
             "no_independent_outcome": {"total": sum(noind_dec.values()), "by_decade": dict(sorted(noind_dec.items()))},
             "coverage_events_by_source": dict(cover), "source_periods": COVER,
+            "amendment_2": {"level_by_basis": {k: dict(v) for k, v in sorted(basis.items())}, "rule_fired": dict(sorted(rules.items())),
+                            "littoral_events_by_entity": dict(lit), "littoral_map": {k: list(v) for k, v in LITTORAL.items()}},
             "cow_war": {"inter_participant_rows": len(src["war"]["inter"]), "intra_war_rows": len(src["war"]["intra"])},
             "ged": {"cache": str(GED_CACHE.relative_to(P.ROOT)), "n_events": src["ged_n"], "date_range": src["ged_range"],
                     "location_only": True, "unmapped_country_names": src["ged_unmapped"]},
@@ -465,8 +530,8 @@ def audit_pick(results, n=30, seed=SEED):
 
 
 AUDIT_COLS = ["row_type", "event_id", "event_date", "date_precision", "class", "title", "source_url", "ies90_level", "ies90_level_meaning",
-              "ies90_deal", "level_source", "covering_sources", "countries_A", "location_L", "src", "record", "record_dates", "code_and_rule",
-              "level_contributed", "joe_check", "joe_note"]
+              "ies90_deal", "basis", "rule_fired", "level_source", "covering_dyadic", "covering_location", "countries_A", "location_L", "littoral_from",
+              "src", "record_basis", "record_rule", "record", "record_dates", "code_and_rule", "level_contributed", "joe_check", "joe_note"]
 
 
 def write_audit(pick, path=AUDIT_OUT):
@@ -476,11 +541,13 @@ def write_audit(pick, path=AUDIT_OUT):
         w = csv.writer(f); w.writerow(AUDIT_COLS)
         for e, v in pick:
             head = [e, v["date"], v["precision"], v["type"], v["title"], v["url"], v["level"], LEVEL_MEANING[v["level"]],
-                    "" if v["deal"] is None else v["deal"], ",".join(v["level_source"]), ",".join(v["covering"]), ",".join(v["A"]), ",".join(v["L"])]
-            w.writerow(["event"] + head + ["", "", "", "", "", "", ""])
-            recs = v["recs"] or [{"source": ",".join(v["covering"]), "record": "no record in W", "dates": "", "code": "level 0 asserted from coverage", "level": 0}]
+                    "" if v["deal"] is None else v["deal"], v["basis"], ",".join(v["rule_fired"]), ",".join(v["level_source"]),
+                    ",".join(v["covering_dyadic"]), ",".join(v["covering_location"]), ",".join(v["A"]), ",".join(v["L"]),
+                    ";".join(f"{k}->{','.join(s)}" for k, s in sorted((v.get("littoral") or {}).items()))]
+            w.writerow(["event"] + head + [""] * 9)
+            recs = v["recs"] or [{"source": ",".join(v["covering"]), "basis": v["basis"], "rule": "NONE.covered", "record": "no record in W", "dates": "", "code": "level 0 asserted from coverage", "level": 0}]
             for x in recs:
-                w.writerow(["source"] + head + [x["source"], x["record"], x["dates"], x["code"], "" if x["level"] is None else x["level"], "", ""])
+                w.writerow(["source"] + head + [x["source"], x.get("basis", ""), x.get("rule") or "", x["record"], x["dates"], x["code"], "" if x["level"] is None else x["level"], "", ""])
                 n_src += 1
     return len(pick), n_src
 

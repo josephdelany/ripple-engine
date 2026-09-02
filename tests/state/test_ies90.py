@@ -1,4 +1,4 @@
-"""OUTCOME_MAPPING.md Amendment 1 + 1.1 tests: the IES-90 rules are total, dated and deterministic on synthetic
+"""OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 tests: the IES-90 rules are total, dated and deterministic on synthetic
 records; a level is never guessed when no source covers the window; the corpus run (event_outcomes source='ies90',
 data/state/ies90_distribution.json, data/audits/ies90_audit_30.csv) is internally consistent. The corpus-level tests
 run against oil.db after `python3 src/state/ies90.py` and skip, never fake, when it has not run."""
@@ -88,16 +88,51 @@ def test_i4_precedence_is_the_max_over_covering_sources_and_never_a_guess():
     A = {"country.iran", "country.iraq"}
     res = I.score_event("2000-01-15", A, {frozenset(A)}, A, F)
     assert res["level"] == 3 and res["covering"] == ["midi", "war", "icb", "mid", "ged"]
-    assert res["level_source"] == ["war", "ged"] and res["deal"] == 1
+    # A2.1: the pair-matched war sets the level; GED (location) is stored beside it, not a setter
+    assert res["basis"] == "dyadic" and res["level_source"] == ["war"] and res["rule_fired"] == ["WAR.inter.pair"]
+    assert res["level_location"] == 3 and res["covering_location"] == ["ged"] and res["deal"] == 1
     # no country at all -> nothing covers -> no level, no deal
     res = I.score_event("2000-01-15", set(), set(), set(), F)
     assert res["level"] is None and res["covering"] == [] and res["deal"] is None
     # 2026: beyond every source -> no level
     res = I.score_event("2026-02-28", A, {frozenset(A)}, A, F)
     assert res["level"] is None and res["covering"] == []
-    # a covering source with nothing in W asserts 0 (GED-only year, no deaths)
+    # a covering source with nothing in W asserts 0 (GED-only year, no deaths) -- location basis, NONE.covered
     res = I.score_event("2023-01-15", {"country.qatar"}, set(), {"country.qatar"}, F)
     assert res["level"] == 0 and res["covering"] == ["ged"] and res["deal"] is None
+    assert res["basis"] == "location" and res["rule_fired"] == ["NONE.covered"]
+
+
+def test_i8_amendment_2_dyadic_precedence_over_location_evidence():
+    """A2.1: dyadic sources cover W and record nothing for the pair -> level 0 on the dyadic basis even though
+    GED reports 290 state-based deaths in the location; the location level is kept beside it."""
+    F = _frames()
+    A = {"country.iran", "country.iraq"}
+    F2 = {**F, "war": {"inter": [], "intra": []}, "midi": F["midi"].iloc[0:0], "midip": {},
+          "mid": F["mid"].iloc[0:0], "icb": F["icb"].iloc[0:0]}
+    res = I.score_event("2000-01-15", A, {frozenset(A)}, {"country.iran"}, F2)
+    assert res["basis"] == "dyadic" and res["level"] == 0 and res["level_location"] == 3
+    assert res["rule_fired"] == ["NONE.covered"] and res["covering_dyadic"] == ["midi", "war", "icb", "mid"]
+    # the same event with P empty (single country) falls to the location basis and GED decides
+    res = I.score_event("2000-01-15", {"country.iran"}, set(), {"country.iran"}, F2)
+    assert res["basis"] == "location" and res["level"] == 3 and res["rule_fired"] == ["GED.location.ge250"]
+
+
+def test_i8b_amendment_2_littoral_map_is_location_only_and_maps_to_known_countries():
+    import countries as C
+    for ent, states in I.LITTORAL.items():
+        assert ent.startswith("chokepoint.") and states and all(s in C.ALL for s in states), ent
+    # registered rule ids only
+    ok = {"MIDI.pair.overlap", "MIDI.single.overlap", "WAR.inter.pair", "WAR.inter.single", "WAR.intra.location",
+          "ICB.pair.wholly", "ICB.pair.onset", "ICB.single.wholly", "ICB.single.onset", "MID.pair.wholly", "MID.pair.onset",
+          "MID.single.wholly", "MID.single.onset", "GED.location.ge250", "GED.location.ge25", "NONE.covered", "UNCOVERED"}
+    conn = _conn()
+    seen = {r for (v,) in conn.execute("SELECT value_text FROM event_outcomes WHERE source='ies90' AND field='rule_fired'") for r in v.split(",")}
+    assert seen <= ok, seen - ok
+    # every level row has a basis and a rule; location-basis rows carry the Amendment 2 note
+    n_lv = conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source='ies90' AND field='level'").fetchone()[0]
+    n_b = conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source='ies90' AND field='basis' AND value_text IN ('dyadic','location')").fetchone()[0]
+    assert n_lv == n_b
 
 
 # ----------------------------------------------------------------------------- corpus level (after the run)
@@ -121,11 +156,18 @@ def test_i5_corpus_every_geopolitical_event_has_one_level_or_is_uncovered():
     assert all(v in (0.0, 1.0, 2.0, 3.0) for v in lv.values())
     cov = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='covering'"))
     assert all(cov.get(e) for e in lv) and all(not cov.get(e) for e in un)        # level <=> a covering source
-    # level = max over the per-source levels stored beside it
+    # Amendment 2: location basis -> level == level_location; dyadic basis -> level <= max over the dyadic sources' levels
+    basis = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='basis'"))
+    loc = dict(conn.execute("SELECT event_id, value FROM event_outcomes WHERE source='ies90' AND field='level_location'"))
+    dyc = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='covering_dyadic'"))
     per = {}
-    for e, f, v in conn.execute("SELECT event_id, field, value FROM event_outcomes WHERE source='ies90' AND field LIKE 'level_%' AND field != 'level_source'"):
-        per.setdefault(e, []).append(v)
-    assert all(max(per[e]) == lv[e] for e in lv)
+    for e, f, v in conn.execute("SELECT event_id, field, value FROM event_outcomes WHERE source='ies90' AND field LIKE 'level_%' AND field NOT IN ('level_source', 'level_location')"):
+        per.setdefault(e, {})[f[6:]] = v
+    for e in lv:
+        if basis[e] == "location":
+            assert lv[e] == loc[e], (e, lv[e], loc[e])
+        else:
+            assert lv[e] <= max(per[e][s_] for s_ in dyc[e].split(",")), e
     # the other sources' rows (Step 4) are untouched by the ies90 run
     assert conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source IN ('icb','mid','ucdp','precedence')").fetchone()[0] > 0
 
@@ -146,6 +188,7 @@ def test_i7_audit_sheet_is_30_events_stratified_by_level_and_decade_with_source_
     rows = list(csv.DictReader(open(I.AUDIT_OUT, encoding="utf-8")))
     ev = [r for r in rows if r["row_type"] == "event"]
     assert len(ev) == 30 and all(r["ies90_level"] in ("0", "1", "2", "3") for r in ev)
+    assert all(r["basis"] in ("dyadic", "location") and r["rule_fired"] for r in ev)          # A2.3 columns
     assert all(r["joe_check"] == "" and r["joe_note"] == "" for r in rows)
     # every event row is followed by >= 1 source row for the same event
     for i, r in enumerate(rows):
