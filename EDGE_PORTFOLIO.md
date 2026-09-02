@@ -113,3 +113,58 @@ both at once; CC2 does not, so it is now **SUGGESTIVE**. Receipts:
 
 *Receipts: `data/edge_battery.json` · registration: `PRE_REGISTRATION.md` (tag
 `edge-battery-preregistered-20260730`) · method: `METHOD.md`, `src/validate.py`.*
+
+## Amendment (2026-09-02) — Joe's Ruling 1 applied: the five amplification edges are retracted
+*Registered before the code and before the table is touched. Session B, on Joe's authority
+(`data/gates/ripple_2026-09-02.md`, Ruling 1, option (a)). Session C ran the re-test, registered it in
+RIPPLE_REGISTRATION.md Amendment B BEFORE running it, and declined to edit a table that is not its file.
+Nothing above is deleted; this amendment is appended.*
+
+### What was retracted and why
+`propagation_edges` carried five rows with `status = 'validated'`, kind `stress->node`
+("geopolitical shock (VIX-stress regime)" → node, lag 20d). Session C's registered re-test — the
+all-event shock restricted to days when `derived.vix_pct` at t−1 is at or above its median, h = 20,
+against the VIX-and-GPR-matched placebo — returns NULL for every one of them:
+
+| edge (`edge_id`) | old strength, CI | re-test β at h=20 | n | placebo pct | verdict |
+|---|---|---|---|---|---|
+| `amp.Brent oil` | +6.041 [+1.557, +10.087] | +0.614 % [−4.116, +5.345] | 40 | 55.0 | NULL |
+| `amp.Heating oil` | +5.030 [+1.527, +9.230] | +2.008 % [−2.617, +6.633] | 35 | 87.8 | NULL |
+| `amp.5Y breakeven` | +16.247 [+4.470, +31.022] | −0.061 pp [−0.237, +0.116] | 20 | 2.2 | NULL |
+| `amp.S&P 500` | +1.894 [+0.342, +3.448] | −0.760 % [−2.769, +1.249] | 36 | 3.8 | NULL |
+| `amp.Platinum` | +7.425 [+1.958, +14.647] | −1.286 % [−5.042, +2.469] | 25 | 4.2 | NULL |
+
+Every re-test band covers zero by a wide margin, and three of the five have re-test point estimates of
+the **opposite sign** to the strength that earned them `validated`.
+
+### The rule, from this date
+1. Those five `edge_id`s carry `status = 'retracted_h1_retest'`. The strength and CI columns keep the
+   values as originally computed — the retraction is a status, not an erasure — and `mechanism` carries
+   the pointer: `retracted 2026-09-02 by Joe's Ruling 1; re-test data/ripple/retraction_six.json;
+   docs/red_team_1.md`.
+2. **`src/propagation_graph.py` may not re-validate them.** The retraction is encoded in the code that
+   writes the table (`RETRACTED_EDGE_IDS`), so a refresh cannot silently undo Joe's ruling. Lifting it
+   needs a dated amendment here, not a re-run.
+3. No surface calls them validated. `src/shock_tracer.py`'s transmission lane reads
+   `status = 'validated'` and therefore stops showing them by construction.
+
+### Palladium — recorded as computed, and not a finding
+The re-test's sixth node, palladium, is the one that survives: **−5.807 % [−10.663, −0.951], n = 22,
+placebo percentile 0.0, verdict TRANSMITTING**. It is recorded here and in
+`data/ripple/retraction_six.json` as computed. It is **not** promoted anywhere, for three reasons
+stated together, as Joe ruled:
+- its `propagation_edges` row (`amp.Palladium`, strength +5.144 [−0.251, +10.108]) was **already
+  `null`** before this amendment — it never held `validated` status, and it does not gain it now;
+- palladium **is not on the oil chain** — the mechanism this engine exists to measure does not run
+  through it;
+- **one survivor out of six at this base rate is what noise looks like.** With six tests at a 5 %
+  placebo threshold, the chance of at least one survivor under a complete null is about 26 %.
+- the re-test's sign (−5.81 %) is opposite to the original row's (+5.14): the two estimates do not
+  agree even in direction.
+It is not to be surfaced as a finding on any page, in any export, or in the paper.
+
+### EVALUATION.md
+`EVALUATION.md` §0 already downgraded the entire prior validated set to SUGGESTIVE under the SAR bar
+("under this bar the current validated set is empty"), so no claim there needs to be weakened further by
+this amendment; the re-read is recorded in `data/gates/ruling1_applied_2026-09-02.md`. The table had been
+lagging that document; this amendment makes the stored rows say what the published bar already said.
