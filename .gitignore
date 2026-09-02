@@ -90,3 +90,6 @@ data/extract/
 tools/config.json
 *.key
 *.token
+# jsdom for the app render check (tests/test_app_render.py): npm install --prefix tools jsdom
+tools/node_modules/
+tools/package*.json
