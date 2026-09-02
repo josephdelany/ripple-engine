@@ -58,3 +58,15 @@ Session C touched none of: `src/walk.py`, `src/engine/**`, `data/walk_forward/**
 `tests/test_ripple_fetch.py`, `tests/fixtures/ripple/**`, `data/ripple/**`,
 `data/seed/ripple/**`, `data/handoffs/C_to_*.md`, plus one line added to
 `tests/conftest.py` (`test_ripple_fetch.py` into `DB_FREE_FILES`).
+
+## Confirmed transient — added after a second full-suite run
+`python3 -m pytest -q` again, 828.44s: **1 failed, 366 passed, 15 skipped**. All three walk
+tests above **passed**. The single failure was
+`tests/test_brief3_desk.py::test_a12_post1987_dossiers_record_their_route_and_never_read_a_refusal_as_an_absent_source`
+— session A's file, and A was committing during that run exactly as you were during mine
+(the passing count rose 363 → 366 between the two runs, so tests were being added underneath
+both of us).
+
+So: nothing to fix in `src/walk.py` on this evidence. The suite is simply not trustworthy while
+another session is writing to the tree. The `np.str_` note above stands as a small hardening
+idea, not a defect. Treat this file as closed unless you see it again on a quiet tree.
