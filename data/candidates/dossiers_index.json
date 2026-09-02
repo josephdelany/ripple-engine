@@ -1,0 +1,1297 @@
+{
+ "rule": "data/candidates/DOSSIER_RULE.md (2026-09-02)",
+ "built_at": "2026-09-02T19:19:48+00:00",
+ "n": 181,
+ "admissible": 97,
+ "by_decade": {
+  "1940s": {
+   "dossiers": 15,
+   "admissible": 9
+  },
+  "1950s": {
+   "dossiers": 30,
+   "admissible": 16
+  },
+  "1960s": {
+   "dossiers": 47,
+   "admissible": 31
+  },
+  "1970s": {
+   "dossiers": 51,
+   "admissible": 31
+  },
+  "1980s": {
+   "dossiers": 38,
+   "admissible": 10
+  }
+ },
+ "dossiers": [
+  {
+   "id": "icb_110_communism_in_poland",
+   "event_date": "1946-06-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1946-07-26"
+  },
+  {
+   "id": "icb_111_turkish_straits",
+   "event_date": "1946-08-07",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1946-11-25"
+  },
+  {
+   "id": "icb_113_communism_in_hungary",
+   "event_date": "1947-02-10",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_114_truman_doctrine",
+   "event_date": "1947-02-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1947-04-02"
+  },
+  {
+   "id": "icb_115_marshall_plan",
+   "event_date": "1947-07-03",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1947-07-07"
+  },
+  {
+   "id": "icb_116_indonesia_indep_ii",
+   "event_date": "1947-07-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_118_junagadh",
+   "event_date": "1947-08-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1948-01-01"
+  },
+  {
+   "id": "icb_119_kashmir_i",
+   "event_date": "1947-10-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1947-12-29"
+  },
+  {
+   "id": "icb_120_pal_prt_israel_ind",
+   "event_date": "1947-11-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_121_communism_in_czech",
+   "event_date": "1948-02-13",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1948-01-28"
+  },
+  {
+   "id": "icb_123_berlin_blockade",
+   "event_date": "1948-06-07",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1949-06-01"
+  },
+  {
+   "id": "icb_124_hyderabad",
+   "event_date": "1948-08-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1948-09-13"
+  },
+  {
+   "id": "icb_125_china_civil_war",
+   "event_date": "1948-09-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_127_indonesia_indep_iii",
+   "event_date": "1948-12-19",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_128_sinai_incursion",
+   "event_date": "1948-12-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_132_korean_war_i",
+   "event_date": "1950-06-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1950-07-19"
+  },
+  {
+   "id": "icb_133_korean_war_ii",
+   "event_date": "1950-09-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1950-10-26"
+  },
+  {
+   "id": "icb_134_hula_drainage",
+   "event_date": "1951-02-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1951-03-05"
+  },
+  {
+   "id": "icb_135_punjab_war_scare_i",
+   "event_date": "1951-07-07",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_136_suez_canal",
+   "event_date": "1951-07-28",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1951-08-13"
+  },
+  {
+   "id": "icb_139_invasion_of_laos_i",
+   "event_date": "1953-03-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_140_korean_war_iii",
+   "event_date": "1953-04-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_141_e_german_uprising",
+   "event_date": "1953-06-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1953-06-18"
+  },
+  {
+   "id": "icb_142_trieste_ii",
+   "event_date": "1953-10-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1953-10-14"
+  },
+  {
+   "id": "icb_143_qibya",
+   "event_date": "1953-10-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1953-11-14"
+  },
+  {
+   "id": "icb_144_guatemala",
+   "event_date": "1953-12-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_145_dien_bien_phu",
+   "event_date": "1954-03-13",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1954-05-03"
+  },
+  {
+   "id": "icb_146_taiwan_strait_i",
+   "event_date": "1954-08-28",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1955-03-13"
+  },
+  {
+   "id": "icb_148_baghdad_pact",
+   "event_date": "1955-02-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1955-10-28"
+  },
+  {
+   "id": "icb_149_gaza_raid_czech_arms",
+   "event_date": "1955-02-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1955-10-11"
+  },
+  {
+   "id": "icb_152_suez_natn_war",
+   "event_date": "1956-07-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_153_qalqilya",
+   "event_date": "1956-09-13",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_154_poland_liberalization",
+   "event_date": "1956-10-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1956-09-21"
+  },
+  {
+   "id": "icb_155_hungarian_uprising",
+   "event_date": "1956-10-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1956-11-08"
+  },
+  {
+   "id": "icb_157_jordan_regime",
+   "event_date": "1957-04-04",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1957-03-08"
+  },
+  {
+   "id": "icb_159_syria_turkey_confrnt",
+   "event_date": "1957-08-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_162_formation_of_uar",
+   "event_date": "1958-02-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_164_abort_coup_indonesia",
+   "event_date": "1958-02-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_165_iraq_leb_upheaval",
+   "event_date": "1958-05-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_166_taiwan_strait_ii",
+   "event_date": "1958-07-17",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1958-08-07"
+  },
+  {
+   "id": "icb_168_berlin_deadline",
+   "event_date": "1958-11-27",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1958-12-11"
+  },
+  {
+   "id": "icb_169_mex_guat_fishing",
+   "event_date": "1958-12-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_170_cen_america_cuba_i",
+   "event_date": "1959-04-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_171_china_india_brd_i",
+   "event_date": "1959-08-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_172_shatt_al_arab_i",
+   "event_date": "1959-11-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_173_rottem",
+   "event_date": "1960-02-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_175_failed_ass_venezuela",
+   "event_date": "1960-06-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_179_ethiopia_somalia",
+   "event_date": "1960-12-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_180_pathet_lao_offensive",
+   "event_date": "1961-03-09",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-03-27"
+  },
+  {
+   "id": "icb_181_bay_of_pigs",
+   "event_date": "1961-04-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-04-26"
+  },
+  {
+   "id": "icb_183_kuwait_independence",
+   "event_date": "1961-06-19",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-06-30"
+  },
+  {
+   "id": "icb_184_bizerta",
+   "event_date": "1961-07-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_185_berlin_wall",
+   "event_date": "1961-08-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-08-13"
+  },
+  {
+   "id": "icb_186_viet_cong_attack",
+   "event_date": "1961-09-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-09-10"
+  },
+  {
+   "id": "icb_187_west_irian_ii",
+   "event_date": "1961-09-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1962-01-18"
+  },
+  {
+   "id": "icb_188_breakup_of_uar",
+   "event_date": "1961-09-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1961-10-05"
+  },
+  {
+   "id": "icb_192_taiwan_strait_iii",
+   "event_date": "1962-04-22",
+   "proposed_class": "chokepoint_disruption",
+   "admissible": true,
+   "second_source_date": "1962-06-20"
+  },
+  {
+   "id": "icb_193_nam_tha",
+   "event_date": "1962-05-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1962-05-09"
+  },
+  {
+   "id": "icb_194_china_india_bdr_ii",
+   "event_date": "1962-09-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_195_yemen_war_i",
+   "event_date": "1962-09-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1962-10-08"
+  },
+  {
+   "id": "icb_196_cuban_missiles",
+   "event_date": "1962-10-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1962-10-23"
+  },
+  {
+   "id": "icb_197_malaysia_federation",
+   "event_date": "1963-02-11",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1963-04-24"
+  },
+  {
+   "id": "icb_199_algeria_morocco_bdr",
+   "event_date": "1963-10-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_200_cuba_venezuela",
+   "event_date": "1963-11-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1963-12-04"
+  },
+  {
+   "id": "icb_202_cyprus_i",
+   "event_date": "1963-11-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1963-12-07"
+  },
+  {
+   "id": "icb_203_jordan_waters",
+   "event_date": "1963-12-11",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1963-12-09"
+  },
+  {
+   "id": "icb_206_panama_flag",
+   "event_date": "1964-01-09",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1964-01-11"
+  },
+  {
+   "id": "icb_207_e_africa_rebellions",
+   "event_date": "1964-01-19",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_208_ogaden_i",
+   "event_date": "1964-02-07",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1964-03-21"
+  },
+  {
+   "id": "icb_209_yemen_war_ii",
+   "event_date": "1964-05-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1964-08-24"
+  },
+  {
+   "id": "icb_210_gulf_of_tonkin",
+   "event_date": "1964-07-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1964-08-05"
+  },
+  {
+   "id": "icb_211_congo_ii",
+   "event_date": "1964-08-04",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1964-09-10"
+  },
+  {
+   "id": "icb_212_yemen_war_iii",
+   "event_date": "1964-12-03",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_213_pleiku",
+   "event_date": "1965-02-07",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1965-02-08"
+  },
+  {
+   "id": "icb_214_rann_of_kutch",
+   "event_date": "1965-04-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1965-04-27"
+  },
+  {
+   "id": "icb_215_dominican_interventn",
+   "event_date": "1965-04-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_216_kashmir_ii",
+   "event_date": "1965-08-05",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1965-09-09"
+  },
+  {
+   "id": "icb_219_yemen_war_iv",
+   "event_date": "1966-10-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_220_el_samu",
+   "event_date": "1966-11-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_222_six_day_war",
+   "event_date": "1967-05-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1967-06-05"
+  },
+  {
+   "id": "icb_223_cyprus_ii",
+   "event_date": "1967-11-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_224_pueblo",
+   "event_date": "1968-01-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1968-01-31"
+  },
+  {
+   "id": "icb_225_tet_offensive",
+   "event_date": "1968-01-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1968-04-08"
+  },
+  {
+   "id": "icb_226_karameh",
+   "event_date": "1968-03-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1968-03-29"
+  },
+  {
+   "id": "icb_227_prague_spring",
+   "event_date": "1968-04-09",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_229_beirut_airport",
+   "event_date": "1968-12-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1968-12-26"
+  },
+  {
+   "id": "icb_230_vietnam_spring_off",
+   "event_date": "1969-02-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1969-05-22"
+  },
+  {
+   "id": "icb_231_ussuri_river",
+   "event_date": "1969-03-02",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1969-08-14"
+  },
+  {
+   "id": "icb_232_war_of_attrition",
+   "event_date": "1969-03-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1969-09-25"
+  },
+  {
+   "id": "icb_233_ec_121_spy_plane",
+   "event_date": "1969-04-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_234_shatt_al_arab_ii",
+   "event_date": "1969-04-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_236_cairo_agreement_plo",
+   "event_date": "1969-10-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_237_invasion_of_cambodia",
+   "event_date": "1970-03-13",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1970-04-21"
+  },
+  {
+   "id": "icb_238_black_september",
+   "event_date": "1970-09-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1970-09-06"
+  },
+  {
+   "id": "icb_239_cienfuegos_sub_base",
+   "event_date": "1970-09-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1970-10-05"
+  },
+  {
+   "id": "icb_242_bangladesh",
+   "event_date": "1971-03-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1971-06-22"
+  },
+  {
+   "id": "icb_243_chad_libya_i",
+   "event_date": "1971-05-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1971-12-15"
+  },
+  {
+   "id": "icb_246_vietnam_ports_mining",
+   "event_date": "1972-03-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1972-05-08"
+  },
+  {
+   "id": "icb_248_north_south_yemen_i",
+   "event_date": "1972-09-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1972-11-07"
+  },
+  {
+   "id": "icb_249_christmas_bombing",
+   "event_date": "1972-10-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1972-12-23"
+  },
+  {
+   "id": "icb_251_libyan_plane",
+   "event_date": "1973-02-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1973-02-21"
+  },
+  {
+   "id": "icb_252_iraq_invasion_kuwait",
+   "event_date": "1973-03-20",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_253_israel_mobilization",
+   "event_date": "1973-04-10",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_254_cod_war_i",
+   "event_date": "1973-05-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1973-09-04"
+  },
+  {
+   "id": "icb_255_october_yom_kippur_war",
+   "event_date": "1973-10-05",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1973-10-06"
+  },
+  {
+   "id": "icb_256_oman_south_yemen",
+   "event_date": "1973-11-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-01-09"
+  },
+  {
+   "id": "icb_257_cyprus_iii",
+   "event_date": "1974-07-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1974-07-28"
+  },
+  {
+   "id": "icb_259_mayaguez",
+   "event_date": "1975-05-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-05-15"
+  },
+  {
+   "id": "icb_260_war_in_angola",
+   "event_date": "1975-07-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-11-03"
+  },
+  {
+   "id": "icb_261_moroccan_march",
+   "event_date": "1975-10-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-11-08"
+  },
+  {
+   "id": "icb_262_belize_i",
+   "event_date": "1975-11-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-10-15"
+  },
+  {
+   "id": "icb_263_cod_war_ii",
+   "event_date": "1975-11-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_264_east_timor_i",
+   "event_date": "1975-11-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1975-12-12"
+  },
+  {
+   "id": "icb_265_leb_civil_war",
+   "event_date": "1976-01-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_269_iraqi_threat",
+   "event_date": "1976-06-09",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_270_entebbe_raid",
+   "event_date": "1976-06-27",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1976-07-03"
+  },
+  {
+   "id": "icb_272_aegean_sea_i",
+   "event_date": "1976-08-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1976-10-06"
+  },
+  {
+   "id": "icb_274_poplar_tree",
+   "event_date": "1976-08-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_275_syria_mobilization",
+   "event_date": "1976-11-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_277_shaba_i",
+   "event_date": "1977-03-08",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1977-03-10"
+  },
+  {
+   "id": "icb_279_belize_ii",
+   "event_date": "1977-06-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1977-06-19"
+  },
+  {
+   "id": "icb_281_egypt_libya_clashes",
+   "event_date": "1977-07-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_282_ogaden_ii",
+   "event_date": "1977-07-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1977-10-27"
+  },
+  {
+   "id": "icb_285_french_hostages_maur",
+   "event_date": "1977-10-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_287_beagle_channel_i",
+   "event_date": "1977-12-05",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1978-02-14"
+  },
+  {
+   "id": "icb_288_chad_libya_ii",
+   "event_date": "1978-01-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_289_litani_operation",
+   "event_date": "1978-03-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1978-03-16"
+  },
+  {
+   "id": "icb_290_chad_libya_iii",
+   "event_date": "1978-04-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1978-06-08"
+  },
+  {
+   "id": "icb_291_cassinga_incident",
+   "event_date": "1978-05-03",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_292_shaba_ii",
+   "event_date": "1978-05-11",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1978-06-14"
+  },
+  {
+   "id": "icb_295_beagle_channel_ii",
+   "event_date": "1978-10-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_296_fall_of_amin",
+   "event_date": "1978-10-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_297_angola_invasion_scare",
+   "event_date": "1978-11-07",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_298_sino_vietnam_war",
+   "event_date": "1978-12-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_300_raids_on_zipra",
+   "event_date": "1979-02-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_301_north_south_yemen_ii",
+   "event_date": "1979-02-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1979-03-06"
+  },
+  {
+   "id": "icb_302_raids_on_swapo",
+   "event_date": "1979-03-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1979-03-19"
+  },
+  {
+   "id": "icb_303_afghanistan_invasion",
+   "event_date": "1979-03-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1980-01-18"
+  },
+  {
+   "id": "icb_304_chad_libya_iv",
+   "event_date": "1979-04-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_305_goulimime_tarfaya_rd",
+   "event_date": "1979-06-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_308_raid_on_angola",
+   "event_date": "1979-10-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_309_us_hostages_in_iran",
+   "event_date": "1979-11-04",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1979-12-08"
+  },
+  {
+   "id": "icb_310_colombia_nicaragua",
+   "event_date": "1979-12-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_311_raid_on_gafsa",
+   "event_date": "1980-01-27",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1980-01-28"
+  },
+  {
+   "id": "icb_313_operation_smokeshell",
+   "event_date": "1980-06-07",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_314_libya_threat_sadat",
+   "event_date": "1980-06-11",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_315_solidarity",
+   "event_date": "1980-08-14",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1982-01-04"
+  },
+  {
+   "id": "icb_317_onset_iran_iraq_war",
+   "event_date": "1980-09-17",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_319_jordan_syria_confrnt",
+   "event_date": "1980-11-25",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_320_e_africa_confront",
+   "event_date": "1980-12-05",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1980-12-22"
+  },
+  {
+   "id": "icb_324_iraq_nuclear_reactor",
+   "event_date": "1981-01-01",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_321_chad_libya_v",
+   "event_date": "1981-01-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_322_ecuador_peru_bdr_iii",
+   "event_date": "1981-01-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_325_essequibo_ii",
+   "event_date": "1981-04-04",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_327_al_biqa_missiles_i",
+   "event_date": "1981-04-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_328_cameroon_nigeria_i",
+   "event_date": "1981-05-15",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_330_gulf_of_syrte_i",
+   "event_date": "1981-08-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_331_operation_protea",
+   "event_date": "1981-08-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_333_u_137_incident",
+   "event_date": "1981-10-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_334_coup_attempt_in_bahrain",
+   "event_date": "1981-12-13",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_335_khorramshahr",
+   "event_date": "1982-03-22",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_336_falklands_malvinas",
+   "event_date": "1982-03-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1982-04-02"
+  },
+  {
+   "id": "icb_337_war_in_lebanon",
+   "event_date": "1982-06-05",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1982-06-24"
+  },
+  {
+   "id": "icb_338_ogaden_iii",
+   "event_date": "1982-06-28",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_340_libya_threat_sudan",
+   "event_date": "1983-02-11",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_341_chad_nigeria_clashes",
+   "event_date": "1983-04-18",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_342_chad_libya_vi",
+   "event_date": "1983-06-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1983-11-22"
+  },
+  {
+   "id": "icb_343_invasion_of_grenada",
+   "event_date": "1983-10-19",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1983-10-25"
+  },
+  {
+   "id": "icb_344_able_archer_83",
+   "event_date": "1983-11-02",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1983-11-10"
+  },
+  {
+   "id": "icb_347_operation_askari",
+   "event_date": "1983-12-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_348_basra_kharg_island",
+   "event_date": "1984-02-21",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_350_omdurman_bombing",
+   "event_date": "1984-03-16",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_352_sino_vietnam_clashes",
+   "event_date": "1984-04-02",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_354_nicaragua_mig_21s",
+   "event_date": "1984-11-06",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1984-11-07"
+  },
+  {
+   "id": "icb_357_al_biqa_missiles_ii",
+   "event_date": "1985-11-19",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_358_egypt_air_hijacking",
+   "event_date": "1985-11-23",
+   "proposed_class": "conflict_escalation",
+   "admissible": true,
+   "second_source_date": "1985-12-17"
+  },
+  {
+   "id": "icb_361_capture_of_al_faw",
+   "event_date": "1986-02-09",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_362_chad_libya_vii",
+   "event_date": "1986-02-10",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_363_gulf_of_syrte_ii",
+   "event_date": "1986-03-24",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_364_al_dibal_incident",
+   "event_date": "1986-04-26",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  },
+  {
+   "id": "icb_370_chad_libya_viii",
+   "event_date": "1986-12-12",
+   "proposed_class": "conflict_escalation",
+   "admissible": false,
+   "second_source_date": null
+  }
+ ]
+}
