@@ -70,3 +70,58 @@ This is the largest single sourcing defect in the corpus and it is not confined 
 historical tail.
 
 — Session E
+
+---
+
+## Added after the decade essays (E-5), 2026-09-02
+
+### For A (corpus tooling): a missing event the literature names
+
+The Venezuelan general strike of December 2002 – January 2003 is **not in the corpus**.
+Hamilton (NBER 16790, retrieved and read) records: "A general strike eliminated 2.1 mb/d of
+oil production from Venezuela in December of 2002 and January of 2003", and adds that
+"Kilian (2008) argued they should be included in the list of postwar oil shocks."
+
+Executed check against `events`: no record exists. The episode survives in our data only
+inside the *title* of another event, `opec_hike_jan_2003` — "OPEC raises quota 6.5% amid
+Venezuela strike". A 2.1 mb/d supply loss that a leading authority argues belongs on the
+list of postwar oil shocks is therefore visible in our corpus only as background to somebody
+else's meeting.
+
+This is a candidate for admission, not an admission: nothing enters `events` without Joe.
+Session E has not built a dossier for it because it is not an existing record and the
+session's scope is repairing records that exist. If Joe wants it, the same dossier standard
+applies and the sourcing looks tractable.
+
+Hamilton is careful not to overstate the case, which is worth quoting alongside it: "the
+affected supply was a much smaller share of the global market than many of the other events
+discussed here, and the disruptions had little apparent effect on global oil supplies."
+
+### For B (the walk): two structural notes from the essays
+
+**The largest price move of the 2000s has no event behind it, by the literature's own
+account.** Hamilton on 2007–08: "Unlike many other historical oil shocks, there was no
+dramatic geopolitical event associated with this." His explanation is field maturity and a
+residual supplier declining to be residual — North Sea production down more than 2 mb/d by
+end-2007, Cantarell down 1 mb/d between 2005 and 2008, Saudi production "850,000 barrels a
+day lower in 2007 than it had been in 2005". None of that is a dated event, so an
+event-keyed corpus cannot carry it. This is the same gap the Big Moves census measures from
+the other side when it finds 35% of large Brent moves have no corpus event. Worth stating
+plainly in the walk's limits section rather than leaving a reader to infer it.
+
+**Sanctions programmes and the 35-day cluster rule.** The 2010s hold 21 sanctions records,
+most of them designations, waivers and expiries inside long-running programmes against Iran,
+Russia and Venezuela. The protocol's registered clustering rule treats reads within 35 days
+as one cluster, which is the only thing preventing the engine from treating a tightening
+programme as a sequence of independent draws. Whether 35 days is right for a sanctions
+programme, as against a war or a hurricane, is a protocol question and yours. Session E
+raises it, does not answer it.
+
+### For Cowork: two sentences for the paper's data section
+
+Both are computed and quotable: the corpus's class mix inverts across decades (18 of 43
+records in the 2000s are OPEC decisions; `sanctions` is the largest class in the 2010s;
+`policy_response` is the largest in the 2020s at 36 of 150), and the 2020s instruments —
+notably the Russian oil price cap — have no class in the closed set at all.
+
+— Session E
