@@ -122,3 +122,35 @@ def test_c5_cftc_legacy_parser_first_wti_report_1986_01_15():
     oi = R.cftc_series([df], "067651", "Open Interest (All)")
     assert oi.iloc[0].tolist() == ["1986-01-15", 74334]
     assert R.cftc_series([df], "000000", "Open Interest (All)").empty     # unknown code -> empty, not zeros
+
+
+def test_ruling2_jodi_pins_the_unit_and_refuses_the_conversion_factor():
+    """JODI gives five unit rows per observation and CONVBBL is a barrels-per-tonne conversion
+    factor, not a volume. A loader that took 'whichever unit is populated' would record Russia's
+    crude production as 7356. The fixture is the real 2026 file for SA/US/RU with ALL five unit
+    rows kept, so this test fails if the pinning is ever removed."""
+    raw = (FIX / "jodi_primary_2026_sa_us_ru.csv").read_bytes()
+    sa = R.parse_jodi(raw, "CRUDEOIL", "INDPROD", "KBD", "SA")
+    assert sa.iloc[0].tolist() == ["2026-01-01", 10100.0]              # 10.1 mb/d, the real figure
+    us = R.parse_jodi(raw, "CRUDEOIL", "INDPROD", "KBD", "US")
+    assert us.iloc[0]["value"] == pytest.approx(13246.3871)
+    # Russia publishes only the conversion factor: the correct output is an empty series, not 7356
+    ru = R.parse_jodi(raw, "CRUDEOIL", "INDPROD", "KBD", "RU")
+    assert ru.empty
+    with pytest.raises(ValueError, match="conversion factor"):
+        R.parse_jodi(raw, "CRUDEOIL", "INDPROD", "CONVBBL", "RU")
+    # stock levels are KBBL and carry 'x' in the KBD row -- 'x' is dropped, never zero-filled
+    st = R.parse_jodi(raw, "CRUDEOIL", "CLOSTLV", "KBBL", "US")
+    assert st.iloc[0]["value"] == 676671.0
+    assert R.parse_jodi(raw, "CRUDEOIL", "CLOSTLV", "KBD", "US").empty
+
+
+def test_ruling2_and_3_seed_gating_matches_the_rulings():
+    """PortWatch is seeded (IMF terms permit redistribution); JODI never is (access, not rights)."""
+    assert all(s["seed"] for s in R.SPECS.values() if s["kind"] == "portwatch")
+    assert not any(s["seed"] for s in R.SPECS.values() if s["kind"] == "jodi")
+    for s in R.SPECS.values():
+        if s["kind"] == "portwatch":
+            assert "International Monetary Fund" in s["licence"] and "daily aggregates" in s["licence"]
+        if s["kind"] == "jodi":
+            assert "never redistributed" in s["licence"]
