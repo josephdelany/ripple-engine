@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-02T14:31:37+00:00",
+ "generated_at": "2026-09-03T01:48:04+00:00",
  "assets": [
   {
    "asset": "Brent",
@@ -61,26 +61,26 @@
    "asset": "Diesel crack",
    "series": "derived.diesel_crack",
    "unit": "$/bbl",
-   "value": 76.3,
-   "as_of": "2026-08-03",
-   "pct_of_history": 99,
-   "chg20_pct": 17.3,
-   "vol20_pct": 36,
+   "value": 87.84,
+   "as_of": "2026-08-25",
+   "pct_of_history": 100,
+   "chg20_pct": -1.7,
+   "vol20_pct": 23,
    "rhymes": [
     {
-     "month": "2000-12",
-     "pct": 99,
-     "chg20": 18.5
+     "month": "2025-11",
+     "pct": 94,
+     "chg20": -3.7
     },
     {
-     "month": "2005-02",
+     "month": "2005-06",
      "pct": 98,
-     "chg20": 22.0
+     "chg20": 0.6
     },
     {
-     "month": "2006-11",
-     "pct": 96,
-     "chg20": 18.6
+     "month": "2007-03",
+     "pct": 97,
+     "chg20": 1.4
     }
    ],
    "history_from": "1986-06-02"
@@ -145,26 +145,26 @@
    "asset": "TTF",
    "series": "yf.ttf",
    "unit": "\u20ac/MWh",
-   "value": 70.27,
-   "as_of": "2026-08-31",
+   "value": 73.36,
+   "as_of": "2026-09-02",
    "pct_of_history": 86,
-   "chg20_pct": 21.6,
-   "vol20_pct": 54,
+   "chg20_pct": 39.7,
+   "vol20_pct": 44,
    "rhymes": [
     {
-     "month": "2021-04",
-     "pct": 89,
-     "chg20": 21.5
+     "month": "2021-06",
+     "pct": 100,
+     "chg20": 34.6
     },
     {
-     "month": "2023-09",
-     "pct": 71,
-     "chg20": 19.5
+     "month": "2026-01",
+     "pct": 70,
+     "chg20": 39.5
     },
     {
-     "month": "2021-03",
-     "pct": 67,
-     "chg20": 22.4
+     "month": "2022-07",
+     "pct": 99,
+     "chg20": 32.1
     }
    ],
    "history_from": "2017-10-23"
@@ -173,26 +173,26 @@
    "asset": "JKM LNG",
    "series": "yf.jkm",
    "unit": "$/MMBtu",
-   "value": 23.17,
-   "as_of": "2026-08-28",
+   "value": 23.61,
+   "as_of": "2026-09-01",
    "pct_of_history": 89,
-   "chg20_pct": 8.0,
-   "vol20_pct": 16,
+   "chg20_pct": 11.5,
+   "vol20_pct": 28,
    "rhymes": [
-    {
-     "month": "2023-09",
-     "pct": 80,
-     "chg20": 10.8
-    },
     {
      "month": "2017-11",
      "pct": 84,
      "chg20": 8.7
     },
     {
-     "month": "2024-06",
-     "pct": 74,
-     "chg20": 5.6
+     "month": "2023-09",
+     "pct": 80,
+     "chg20": 10.8
+    },
+    {
+     "month": "2024-11",
+     "pct": 81,
+     "chg20": 9.6
     }
    ],
    "history_from": "2014-07-29"

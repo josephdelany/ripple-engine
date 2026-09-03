@@ -18,18 +18,18 @@
       "documented_amp_pp": 10.3,
       "current_verdict": "HOLDS",
       "drifted": false,
-      "amp_pp": 5.5615,
+      "amp_pp": 6.0412,
       "n_episodes": 87,
       "ci95_pp": [
-        0.9436,
-        9.6525
+        1.557,
+        10.087
       ],
       "ci_excludes_zero": true,
-      "boot_share_predicted_dir": 0.992,
-      "perm_p_raw": 0.0054,
-      "fdr_qvalue": 0.0162,
+      "boot_share_predicted_dir": 0.996,
+      "perm_p_raw": 0.0024,
+      "fdr_qvalue": 0.0072,
       "survives_fdr_10pct": true,
-      "bonferroni_p": 0.0162,
+      "bonferroni_p": 0.0072,
       "survives_bonferroni_5pct": true,
       "statistically_validated": true
     },

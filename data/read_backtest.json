@@ -4,17 +4,17 @@
   "min_prior": 20,
   "note": "Magnitude accountability (resolving track record), not a hypothesis re-test. |CAR+20| forecast from prior events only; H1 bucket set walk-forward.",
   "mae_uncond_pp": 9.061,
-  "mae_cond_pp": 8.248,
-  "mae_improvement_pp": 0.814,
+  "mae_cond_pp": 8.149,
+  "mae_improvement_pp": 0.913,
   "conditioning_helps": true,
   "by_regime": {
     "ON": {
-      "n": 26,
-      "mean_realized_pp": 15.93
+      "n": 25,
+      "mean_realized_pp": 16.61
     },
     "OFF": {
-      "n": 41,
-      "mean_realized_pp": 9.21
+      "n": 42,
+      "mean_realized_pp": 8.97
     }
   },
   "records": [
@@ -591,22 +591,22 @@
     {
       "event_id": "opec_2021_07_01",
       "date": "2021-07-01",
-      "h1_state": "ON",
+      "h1_state": "OFF",
       "realized_mag_pp": 7.01,
       "expected_uncond_pp": 12.01,
-      "expected_cond_pp": 14.29,
+      "expected_cond_pp": 9.67,
       "err_uncond": -5.0,
-      "err_cond": -7.28
+      "err_cond": -2.66
     },
     {
       "event_id": "guinea_bauxite_coup_2021",
       "date": "2021-09-05",
-      "h1_state": "ON",
+      "h1_state": "OFF",
       "realized_mag_pp": 13.65,
       "expected_uncond_pp": 11.95,
-      "expected_cond_pp": 14.23,
+      "expected_cond_pp": 9.6,
       "err_uncond": 1.7,
-      "err_cond": -0.59
+      "err_cond": 4.05
     },
     {
       "event_id": "spr_release_2021",
@@ -614,9 +614,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 16.89,
       "expected_uncond_pp": 11.97,
-      "expected_cond_pp": 14.22,
+      "expected_cond_pp": 14.28,
       "err_uncond": 4.92,
-      "err_cond": 2.67
+      "err_cond": 2.61
     },
     {
       "event_id": "rus_grain_quota_2022",
@@ -624,9 +624,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 22.95,
       "expected_uncond_pp": 12.03,
-      "expected_cond_pp": 14.61,
+      "expected_cond_pp": 14.36,
       "err_uncond": 10.93,
-      "err_cond": 8.35
+      "err_cond": 8.6
     },
     {
       "event_id": "eu_embargo_price_cap_2022",
@@ -634,9 +634,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 1.31,
       "expected_uncond_pp": 12.16,
-      "expected_cond_pp": 9.45,
+      "expected_cond_pp": 9.7,
       "err_uncond": -10.86,
-      "err_cond": -8.14
+      "err_cond": -8.39
     },
     {
       "event_id": "products_price_cap_2023",
@@ -644,9 +644,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 6.49,
       "expected_uncond_pp": 12.03,
-      "expected_cond_pp": 9.25,
+      "expected_cond_pp": 9.49,
       "err_uncond": -5.54,
-      "err_cond": -2.75
+      "err_cond": -3.0
     },
     {
       "event_id": "nigeria_fuel_subsidy_removed_2023",
@@ -654,9 +654,9 @@
       "h1_state": "OFF",
       "realized_mag_pp": 0.29,
       "expected_uncond_pp": 11.96,
-      "expected_cond_pp": 9.38,
+      "expected_cond_pp": 9.32,
       "err_uncond": -11.67,
-      "err_cond": -9.08
+      "err_cond": -9.03
     },
     {
       "event_id": "rus_novorossiysk_terminal_2025",
@@ -664,9 +664,9 @@
       "h1_state": "ON",
       "realized_mag_pp": 1.44,
       "expected_uncond_pp": 11.83,
-      "expected_cond_pp": 14.49,
+      "expected_cond_pp": 14.55,
       "err_uncond": -10.39,
-      "err_cond": -13.05
+      "err_cond": -13.11
     },
     {
       "event_id": "iran_israel_us_strike_2026",
@@ -674,20 +674,20 @@
       "h1_state": "ON",
       "realized_mag_pp": 50.67,
       "expected_uncond_pp": 11.7,
-      "expected_cond_pp": 14.19,
+      "expected_cond_pp": 14.24,
       "err_uncond": 38.97,
-      "err_cond": 36.48
+      "err_cond": 36.43
     },
     {
       "event_id": "us_iran_hormuz_mou_2026",
       "date": "2026-06-17",
-      "h1_state": "OFF",
+      "h1_state": "ON",
       "realized_mag_pp": 21.74,
       "expected_uncond_pp": 12.16,
-      "expected_cond_pp": 8.98,
+      "expected_cond_pp": 15.1,
       "err_uncond": 9.58,
-      "err_cond": 12.76
+      "err_cond": 6.64
     }
   ],
-  "live_amplification_pp": 6.72
+  "live_amplification_pp": 7.64
 }

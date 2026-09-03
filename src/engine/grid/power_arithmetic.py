@@ -73,6 +73,8 @@ DROP_RATIO = 0.10                                    # §2.7
 MARGINAL_RATIO = 0.33                                # §2.7
 DEFF_TIEBREAK = 1.5                                  # §2.2
 UNITS_PER_PARAMETER = 20                             # §2.9
+DEFF_FLOOR = 1.0                                     # a design effect below 1 is a finite-sample
+                                                     # artefact; n_eff may never exceed n_nominal
 
 
 # ================================================================ data
@@ -139,11 +141,15 @@ def deff_block(x, mean_block, lag, label):
     s = bootstrap_deff(x, mean_block)
     ratio = max(b, s) / max(min(b, s), 1e-9)
     used = max(b, s) if ratio > DEFF_TIEBREAK else s
+    floored = bool(used < DEFF_FLOOR)
+    used = max(used, DEFF_FLOOR)
     return {"series": label, "n": int(np.sum(~np.isnan(np.asarray(x, float)))),
             "deff_bartlett": round(b, 4), "deff_bootstrap_ratio": round(s, 4),
             "disagreement": round(ratio, 3), "tiebreak_fired": bool(ratio > DEFF_TIEBREAK),
-            "deff_used": round(float(used), 4),
-            "rule": "§2.2: both published; if they differ by more than 1.5x the LARGER is used everywhere"}
+            "deff_used": round(float(used), 4), "deff_floored_at_1": floored,
+            "rule": "§2.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. "
+                    "A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: "
+                    "n_eff may never exceed n_nominal, and the floor is recorded when it fires."}
 
 
 def rw_overlap_deff(spacing_td, h, lag):

@@ -8,8 +8,7 @@ Each validated claim below has a machine pack at `data/evidence/<claim_id>.json`
 | `edge.CC5_fertilizer_corn` | SUGGESTIVE | 0.3617beta | 0 | `data/evidence/edge.CC5_fertilizer_corn.json` |
 | `edge.copper_growth` | SUGGESTIVE | 3.8163% | 71 | `data/evidence/edge.copper_growth.json` |
 | `edge.hy_credit_stress` | SUGGESTIVE | 1.4854% | 49 | `data/evidence/edge.hy_credit_stress.json` |
-| `edge.palladium_supply` | SUGGESTIVE | 5.2181% | 75 | `data/evidence/edge.palladium_supply.json` |
-| `hyp.H1` | SUGGESTIVE | 5.5615pp | 87 | `data/evidence/hyp.H1.json` |
+| `hyp.H1` | SUGGESTIVE | 6.0412pp | 87 | `data/evidence/hyp.H1.json` |
 
 ## Retracted 2026-09-02 (Joe's Ruling 1) — no claim card is emitted for these
 
@@ -23,4 +22,4 @@ Each validated claim below has a machine pack at `data/evidence/<claim_id>.json`
 
 The numbers stay in `data/cross_asset_conditioned.json` and on the `propagation_edges` row; what is withdrawn is the claim, per `EDGE_PORTFOLIO.md` (amendment 2026-09-02).
 
-*6 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*
+*5 claims. Every number is reproducible: `./repro.sh` rebuilds `oil.db` from zero, then the producer script regenerates the artifact.*

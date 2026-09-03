@@ -142,8 +142,12 @@ def test_2_2_published_deff_used_obeys_the_tiebreak_everywhere():
             blocks.append(w["time"])
     for b in blocks:
         lo, hi = sorted((b["deff_bartlett"], b["deff_bootstrap_ratio"]))
-        assert b["deff_used"] == pytest.approx(hi if b["tiebreak_fired"] else b["deff_bootstrap_ratio"])
-        assert b["deff_used"] >= lo - 1e-9
+        pre = hi if b["tiebreak_fired"] else b["deff_bootstrap_ratio"]
+        # a measured design effect below 1 is a finite-sample artefact and is floored at 1, so that n_eff
+        # can never exceed n_nominal; the floor is recorded when it fires
+        assert b["deff_used"] == pytest.approx(max(pre, PA.DEFF_FLOOR), abs=1e-3)
+        assert b["deff_used"] >= PA.DEFF_FLOOR - 1e-9
+        assert b.get("deff_floored_at_1") is (pre < PA.DEFF_FLOOR)
 
 
 @published_only
@@ -207,3 +211,19 @@ def test_0_2_the_arithmetic_never_writes_to_the_event_triggered_tree():
     for bad in ('walk_forward" / "summary.json").write', "wf / \"summary.json\").write", ".jsonl\").open(\"w"):
         assert bad not in src
     assert str(PA.OUT).endswith("data/grid/power_arithmetic.json")
+
+
+@published_only
+def test_2_2_no_published_n_eff_exceeds_its_own_nominal_count():
+    """The defect the floor fixes: an unclamped design effect below 1 reported MORE effective observations
+    than there were cells. 1,784 from 1,440, in one case. Publishing that as information is indefensible."""
+    o = json.loads(PUBLISHED.read_text())
+    for kind in ("month_end", "week_end"):
+        j = o["price_panel"][kind]["joint"]
+        assert j["n_eff"] <= j["n_nominal"]
+        assert o["price_panel"][kind]["time"]["T_eff"] <= o["price_panel"][kind]["time"]["n"] + 1e-6
+        for w in o["escalation_panel"][kind].values():
+            assert w["n_eff"] <= w["n_nominal_cells"] + 1e-6
+        for m in o["multipliers"][kind].values():
+            if m.get("R") is not None:
+                assert m["R"] <= 1.0 + 1e-9, "a realisation ratio above 1 means n_eff beat n_nominal"

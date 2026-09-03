@@ -1,3 +1,14 @@
+# GATE — CLOSED 2026-09-03: Joe ruled **Option A**, the drop stands
+
+> **RULING, 2026-09-03: Option A.** The §2.7 DROP stands as registered. The grid study has a **price arm
+> only**; the escalation question stays on the event-triggered reads. B's Part IV, which had been registered
+> an hour earlier under a scope ruling that arrived before this gate file reached Joe, is **withdrawn before
+> any code ran under it** — see the banner on `GRID_STUDY_REGISTRATION.md` Part IV and the parked code at
+> `parked/grid_escalation_scorer/`. The two rulings are coherent: G's 1987–2014 sided-evidence panel remains
+> a **descriptive** object in its own registration, and **nothing scores a forecasting engine on it**.
+> B had already revised its own recommendation from B to A on session G's evidence, below; the ruling agrees.
+> The record below is left exactly as written.
+
 # GATE — the drop rule I registered drops the escalation panel. Joe rules; I do not amend it myself.
 
 *Session B, 2026-09-03. Blocking only the G arm of the grid study. The P arm is unblocked and proceeds

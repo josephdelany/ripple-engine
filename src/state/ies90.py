@@ -36,6 +36,7 @@ WINDOW = 90
 DIST_OUT = P.DATA / "state" / "ies90_distribution.json"
 A4_OUT = P.DATA / "state" / "ies90_amendment4_counts.json"     # A4.8: before/after, computed with write=False
 AUDIT_OUT = P.DATA / "audits" / "ies90_audit_30.csv"
+ANSWERED = P.DATA / "audits" / "outcome_audit.json"   # A4.1: Joe's in-progress label audit; read, never written
 CLASS_AUDIT = P.DATA / "spine" / "CLASS_AUDIT.md"      # session F's reading of all 187 geopolitical events
 GED_CACHE = P.DATA / "cache" / "ucdp_ged_26.1.json"
 MID5_ZIP = P.raw_path("cow_mid", "MID-5-Data-and-Supporting-Materials.zip")
@@ -714,9 +715,25 @@ def amendment4_counts(conn, results):
             "rows_changed": {"n": len(moved), "rows": moved}}
 
 
-def audit_pick(results, n=30, seed=SEED):
-    """30 events with a level, stratified by level x decade (largest remainder), seeded."""
-    pool = [(e, v) for e, v in results.items() if v["level"] is not None]
+def answered_events(path=ANSWERED):
+    """A4.1: the event_ids Joe has already answered in data/audits/outcome_audit.json, in the order he answered
+    them. Read-only; an absent or unreadable file means nothing is pinned. This module never writes that file."""
+    try:
+        j = json.loads(Path(path).read_text())
+    except Exception:
+        return ()
+    return tuple(dict.fromkeys(r["event_id"] for r in j.get("rows", []) if r.get("answered_at") and r.get("event_id")))
+
+
+def audit_pick(results, n=30, seed=SEED, pinned=None):
+    """30 events, stratified by level x decade (largest remainder), seeded.
+    A4.1: every event Joe has already answered is RETAINED first -- including one that Amendment 4 has since
+    removed from the pool, which keeps its answer visible with a blank level rather than vanishing -- and the
+    stratified draw fills the remaining seats from the rest. Without this, any target amendment reshuffles the
+    sheet under an audit in progress and the section 7 gate can never be completed."""
+    pinned = tuple(e for e in (answered_events() if pinned is None else pinned) if e in results)
+    n = max(n - len(pinned), 0)
+    pool = [(e, v) for e, v in results.items() if v["level"] is not None and e not in pinned]
     strata = defaultdict(list)
     for e, v in pool:
         strata[(v["level"], _decade(v["date"]))].append((e, v))
@@ -734,13 +751,21 @@ def audit_pick(results, n=30, seed=SEED):
         for k in sorted(strata, key=str):
             vs = sorted(strata[k], key=lambda x: x[0]); rng.shuffle(vs)
             pick += vs[:base[k]]
+    for e, v in pick:
+        v["pinned"] = 0
+    for e in pinned:                                    # A4.1: retained answered rows, marked so they are never confused
+        v = results[e]
+        v["pinned"] = 1
+        v["pinned_reason"] = ("answered before the sheet was redrawn" if v["level"] is not None else
+                              "answered_before_rebuild; no longer G-scorable (A4.1 clause 2) -- excluded from kappa")
+        pick.append((e, v))
     pick.sort(key=lambda x: (x[1]["date"], x[0]))
     return pick, total
 
 
 AUDIT_COLS = ["row_type", "event_id", "event_date", "date_precision", "class", "hostility", "g_scorable", "hostility_note", "title", "source_url",
               "ies90_level", "ies90_level_meaning", "ies90_deal", "basis", "rule_fired", "level_source", "covering_dyadic", "covering_location",
-              "countries_A", "location_L", "littoral_from", "src", "record_basis", "record_rule", "record", "record_dates", "code_and_rule",
+              "countries_A", "location_L", "littoral_from", "pinned", "pinned_reason", "src", "record_basis", "record_rule", "record", "record_dates", "code_and_rule",
               "level_contributed", "joe_check", "joe_note"]
 
 
@@ -755,10 +780,12 @@ def write_audit(pick, path=AUDIT_OUT, hostility=None):
         w = csv.writer(f); w.writerow(AUDIT_COLS)
         for e, v in pick:
             host, hnote = hostility.get(e, ("not_coded", "not in CLASS_AUDIT.md"))
-            head = [e, v["date"], v["precision"], v["type"], host, G_SCORABLE.get(host, "?"), hnote, v["title"], v["url"], v["level"], LEVEL_MEANING[v["level"]],
-                    "" if v["deal"] is None else v["deal"], v["basis"], ",".join(v["rule_fired"]), ",".join(v["level_source"]),
+            head = [e, v["date"], v["precision"], v["type"], host, G_SCORABLE.get(host, "?"), hnote, v["title"], v["url"],
+                    "" if v["level"] is None else v["level"], "" if v["level"] is None else LEVEL_MEANING[v["level"]],
+                    "" if v["deal"] is None else v["deal"], v["basis"] or "", ",".join(v["rule_fired"]), ",".join(v["level_source"]),
                     ",".join(v["covering_dyadic"]), ",".join(v["covering_location"]), ",".join(v["A"]), ",".join(v["L"]),
-                    ";".join(f"{k}->{','.join(s)}" for k, s in sorted((v.get("littoral") or {}).items()))]
+                    ";".join(f"{k}->{','.join(s)}" for k, s in sorted((v.get("littoral") or {}).items())),
+                    v.get("pinned", 0), v.get("pinned_reason", "")]
             w.writerow(["event"] + head + [""] * 9)
             recs = v["recs"] or [{"source": ",".join(v["covering"]), "basis": v["basis"], "rule": "NONE.covered", "record": "no record in W", "dates": "", "code": "level 0 asserted from coverage", "level": 0}]
             for x in recs:

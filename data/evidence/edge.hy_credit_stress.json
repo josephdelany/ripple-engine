@@ -16,7 +16,7 @@
       3.7388
     ],
     "perm_p": 0.025,
-    "fdr_q": 0.0698,
+    "fdr_q": 0.0788,
     "survives_fdr": true,
     "robustness": {
       "robust": true,

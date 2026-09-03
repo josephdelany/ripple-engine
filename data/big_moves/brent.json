@@ -12,12 +12,12 @@
  "no_identified_event": 15,
  "everyday_base_rate_pct": 18.3,
  "p_class_given_big": {
-  "sanctions": [
-   9,
-   43
-  ],
   "conflict_escalation": [
    10,
+   43
+  ],
+  "sanctions": [
+   9,
    43
   ],
   "infrastructure_attack": [

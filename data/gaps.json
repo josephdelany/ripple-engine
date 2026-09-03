@@ -1,42 +1,42 @@
 {
-  "generated_at": "2026-09-02T14:29:49+00:00",
+  "generated_at": "2026-09-03T01:46:36+00:00",
   "what": "The GAP ledger: engine's H1-conditioned turbulence view vs the market's implied vol (OVX), resolved and Brier-scored. Market-as-null; the scorecard IS the product.",
   "n_gaps": 248,
   "ledger": {
     "n_scored": 247,
     "turbulence_base_rate": 0.522,
-    "brier": 0.2466,
+    "brier": 0.245,
     "base_rate_brier": 0.2495,
-    "skill_vs_base": 0.0029,
+    "skill_vs_base": 0.0045,
     "by_h1_regime": {
       "turbulent(ON)": {
-        "n": 138,
-        "turbulence_rate": 0.58,
+        "n": 140,
+        "turbulence_rate": 0.586,
         "turbulence_rate_ci95": [
-          0.496,
-          0.659
+          0.503,
+          0.664
         ],
-        "brier": 0.2441
+        "brier": 0.2429
       },
       "calm(OFF)": {
-        "n": 109,
-        "turbulence_rate": 0.45,
+        "n": 107,
+        "turbulence_rate": 0.439,
         "turbulence_rate_ci95": [
-          0.359,
-          0.543
+          0.349,
+          0.534
         ],
-        "brier": 0.2499
+        "brier": 0.2479
       }
     },
     "by_gap_direction": {
       "under_priced_risk": {
-        "n": 14,
-        "turbulence_rate": 0.929,
+        "n": 15,
+        "turbulence_rate": 0.933,
         "turbulence_rate_ci95": [
-          0.685,
-          0.987
+          0.702,
+          0.988
         ],
-        "brier": 0.1743
+        "brier": 0.1733
       },
       "over_priced_fear": {
         "n": 19,
@@ -48,37 +48,37 @@
         "brier": 0.2021
       },
       "aligned": {
-        "n": 214,
-        "turbulence_rate": 0.523,
+        "n": 213,
+        "turbulence_rate": 0.521,
         "turbulence_rate_ci95": [
-          0.457,
-          0.589
+          0.454,
+          0.587
         ],
-        "brier": 0.2553
+        "brier": 0.2539
       }
     }
   },
   "live_gap": {
     "gap_id": "gap.LIVE",
-    "as_of": "2026-09-02T14:29:49+00:00",
-    "anchor_date": "2026-08-28",
+    "as_of": "2026-09-03T01:46:36+00:00",
+    "anchor_date": "2026-09-01",
     "subject": "LIVE state (no dated shock -- standing read)",
-    "engine_call": "calm",
-    "engine_p": 0.4,
-    "priced_ovx": 55.8,
-    "priced_ovx_pct": 90.8,
-    "gap_direction": "over_priced_fear",
+    "engine_call": "turbulent",
+    "engine_p": 0.6,
+    "priced_ovx": 49.13,
+    "priced_ovx_pct": 84.1,
+    "gap_direction": "aligned",
     "horizon_days": 20,
     "outcome": null,
     "brier": null,
     "resolved_at": null,
     "source_url": "",
-    "notes": "Live: H1 OFF (VIX %ile 18); market OVX 56 (p90.8); gap=over_priced_fear."
+    "notes": "Live: H1 ON (VIX %ile 48); market OVX 49 (p84.1); gap=aligned."
   },
   "recent_gaps": [
     {
       "gap_id": "gap.codelco_elteniente_2025",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2025-07-31",
       "subject": "Codelco El Teniente collapse 2025",
       "engine_call": "calm",
@@ -89,13 +89,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.mining-technology.com/news/codelco-el-teniente-copper-mine/",
-      "notes": "H1 amplifier OFF (VIX %ile 24 vs 43); market OVX 37 (p56.1); gap=aligned."
+      "notes": "H1 amplifier OFF (VIX %ile 31 vs 43); market OVX 37 (p56.1); gap=aligned."
     },
     {
       "gap_id": "gap.rus_saratov_strike_2025a",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2025-08-11",
       "subject": "Ukrainian drone strike halts Rosneft Saratov refinery",
       "engine_call": "calm",
@@ -106,13 +106,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/08/11/ukrainian-drone-strike-halts-operations-at-rosneft-refinery-in-saratov-a90168",
-      "notes": "H1 amplifier OFF (VIX %ile 22 vs 43); market OVX 31 (p33.4); gap=aligned."
+      "notes": "H1 amplifier OFF (VIX %ile 29 vs 43); market OVX 31 (p33.4); gap=aligned."
     },
     {
       "gap_id": "gap.rus_druzhba_strike_2025a",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2025-08-18",
       "subject": "Ukrainian strike halts Druzhba pipeline oil flow to Hungary and Slovakia",
       "engine_call": "calm",
@@ -123,13 +123,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.16,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://kyivindependent.com/druzhba-pipeline/",
-      "notes": "H1 amplifier OFF (VIX %ile 22 vs 43); market OVX 32 (p36.6); gap=aligned."
+      "notes": "H1 amplifier OFF (VIX %ile 29 vs 43); market OVX 32 (p36.6); gap=aligned."
     },
     {
       "gap_id": "gap.rus_ryazan_strike_2025b",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2025-09-05",
       "subject": "Ukrainian drone strike on Rosneft Ryazan refinery",
       "engine_call": "calm",
@@ -140,13 +140,13 @@
       "horizon_days": 20,
       "outcome": 1,
       "brier": 0.36,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/09/05/ukrainian-drones-strike-rosneft-refinery-in-ryazan-region-a90438",
-      "notes": "H1 amplifier OFF (VIX %ile 23 vs 43); market OVX 33 (p42.2); gap=aligned."
+      "notes": "H1 amplifier OFF (VIX %ile 31 vs 43); market OVX 33 (p42.2); gap=aligned."
     },
     {
       "gap_id": "gap.rus_novorossiysk_terminal_2025",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2025-11-14",
       "subject": "Ukrainian drone strike halts oil loadings at Novorossiysk Sheskharis terminal",
       "engine_call": "turbulent",
@@ -157,13 +157,13 @@
       "horizon_days": 20,
       "outcome": 0,
       "brier": 0.36,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.themoscowtimes.com/2025/11/14/major-ukrainian-drone-strike-halts-oil-deliveries-at-novorossiysk-terminal-a91122",
-      "notes": "H1 amplifier ON (VIX %ile 66 vs 43); market OVX 33 (p40.9); gap=aligned."
+      "notes": "H1 amplifier ON (VIX %ile 70 vs 43); market OVX 33 (p40.9); gap=aligned."
     },
     {
       "gap_id": "gap.iran_israel_us_strike_2026",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2026-02-28",
       "subject": "US and Israel strike Iran (Feb 2026 escalation)",
       "engine_call": "turbulent",
@@ -174,13 +174,13 @@
       "horizon_days": 20,
       "outcome": 1,
       "brier": 0.16,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://hormuzstraitmonitor.com/crisis-timeline/",
-      "notes": "H1 amplifier ON (VIX %ile 66 vs 43); market OVX 65 (p95.1); gap=aligned."
+      "notes": "H1 amplifier ON (VIX %ile 76 vs 43); market OVX 65 (p95.1); gap=aligned."
     },
     {
       "gap_id": "gap.hormuz_closure_2026",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2026-03-04",
       "subject": "Iran declares the Strait of Hormuz closed",
       "engine_call": "turbulent",
@@ -191,26 +191,26 @@
       "horizon_days": 20,
       "outcome": 1,
       "brier": 0.16,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.congress.gov/crs-product/R45281",
-      "notes": "H1 amplifier ON (VIX %ile 82 vs 43); market OVX 75 (p97.1); gap=aligned."
+      "notes": "H1 amplifier ON (VIX %ile 91 vs 43); market OVX 75 (p97.1); gap=aligned."
     },
     {
       "gap_id": "gap.us_iran_hormuz_mou_2026",
-      "as_of": "2026-09-02T14:29:49+00:00",
+      "as_of": "2026-09-03T01:46:36+00:00",
       "anchor_date": "2026-06-17",
       "subject": "US-Iran MOU reopens the Strait of Hormuz",
-      "engine_call": "calm",
-      "engine_p": 0.4,
+      "engine_call": "turbulent",
+      "engine_p": 0.6,
       "priced_ovx": 53.65,
       "priced_ovx_pct": 89.4,
-      "gap_direction": "over_priced_fear",
+      "gap_direction": "aligned",
       "horizon_days": 20,
       "outcome": 1,
-      "brier": 0.36,
-      "resolved_at": "2026-09-02T14:29:49+00:00",
+      "brier": 0.16,
+      "resolved_at": "2026-09-03T01:46:36+00:00",
       "source_url": "https://www.cnn.com/2026/06/17/middleeast/us-iran-war-mou-text-intl",
-      "notes": "H1 amplifier OFF (VIX %ile 35 vs 43); market OVX 54 (p89.4); gap=over_priced_fear."
+      "notes": "H1 amplifier ON (VIX %ile 47 vs 43); market OVX 54 (p89.4); gap=aligned."
     }
   ]
 }

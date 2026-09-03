@@ -2,19 +2,19 @@
   "what": "H1 conditioning rule (VIX-median split) fit on pre-2019, frozen, evaluated on 2019+",
   "spec": "registered (est 130 / +20 / cluster 35 / raw pp)",
   "split_date": "2019-01-01",
-  "frozen_vix_threshold_pct": 38.81,
+  "frozen_vix_threshold_pct": 38.85,
   "in_sample_pre2019": {
     "n_clusters": 71,
     "amp_pp": 5.562
   },
   "out_of_sample_2019plus": {
     "n_clusters": 16,
-    "amp_pp": 2.921
+    "amp_pp": 13.384
   },
   "full_sample_reference": {
     "n_clusters": 87,
-    "amp_pp": 6.068
+    "amp_pp": 5.55
   },
   "holds_out_of_sample": true,
-  "verdict": "The pre-2019-fitted rule STILL amplifies out-of-sample: frozen VIX threshold 38.8pct gives +2.92pp on 2019+ events (in-sample +5.56pp). The conditioning rule is not overfit to its training era."
+  "verdict": "The pre-2019-fitted rule STILL amplifies out-of-sample: frozen VIX threshold 38.8pct gives +13.38pp on 2019+ events (in-sample +5.56pp). The conditioning rule is not overfit to its training era."
 }

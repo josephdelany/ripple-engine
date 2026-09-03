@@ -168,24 +168,38 @@ def test_i5_corpus_every_geopolitical_event_has_one_level_or_is_uncovered():
     assert set(lv) | un == geo and not (set(lv) & un)
     assert all(v in (0.0, 1.0, 2.0, 3.0) for v in lv.values())
     cov = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='covering'"))
-    assert all(cov.get(e) for e in lv) and all(not cov.get(e) for e in un)        # level <=> a covering source
+    rule = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='rule_fired'"))
+    assert all(cov.get(e) for e in lv)                                            # a level always has a covering source
+    # A4.2 splits no_independent_outcome into TWO reasons, so "no level <=> no covering source" no longer holds:
+    # UNCOVERED is literally no covering source; UNDATED.continuation IS covered, by a source that could not date
+    # anything inside W. Asserting both directions separately is stricter than the equivalence it replaces.
+    unc = {e for e in un if rule.get(e) == "UNCOVERED"}
+    und = {e for e in un if rule.get(e) == "UNDATED.continuation"}
+    assert unc | und == un, sorted(un - unc - und)
+    assert all(not cov.get(e) for e in unc)                                       # uncovered: nothing covers W
+    assert all(cov.get(e) for e in und)                                           # undated: covered, but not datable in W
     # Amendment 2: location basis -> level == level_location; dyadic basis -> level <= max over the dyadic sources' levels
     basis = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='basis'"))
     loc = dict(conn.execute("SELECT event_id, value FROM event_outcomes WHERE source='ies90' AND field='level_location'"))
     dyc = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='covering_dyadic'"))
+    ls = dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field='level_source'"))
     per = {}
     for e, f, v in conn.execute("SELECT event_id, field, value FROM event_outcomes WHERE source='ies90' AND field LIKE 'level_%' AND field NOT IN ('level_source', 'level_location')"):
         per.setdefault(e, {})[f[6:]] = v
     for e in lv:
         if basis[e] == "location":
             assert lv[e] == loc[e], (e, lv[e], loc[e])
+        elif rule.get(e) == "NONE.covered":
+            # A2.1: a dyadic-capable source covers W and no DYADIC record matched the pair -> a dated zero.
+            # level_source here lists the covering sources, not setters (A2.3), so per-source levels may be null.
+            assert lv[e] == 0, (e, "NONE.covered must be level 0")
         else:
-            # A4.2: a per-source level is NULL when the source recorded something it could not date inside W.
-            # Such a source sets nothing, so it is excluded from the max -- and an event with a level must have
-            # at least one dyadic source that did date something.
-            dated = [per[e][s_] for s_ in dyc[e].split(",") if per[e].get(s_) is not None]
-            assert dated, (e, "level set on the dyadic basis with no dated dyadic source")
-            assert lv[e] <= max(dated), e
+            # A4.2: a per-source level is NULL when that source recorded only things it could not date inside W.
+            # The sources named in level_source are the SETTERS, so each must carry a dated level, and the
+            # event's level must be their max.
+            dated = [per[e][s_] for s_ in ls[e].split(",") if per[e].get(s_) is not None]
+            assert dated, (e, "level_source names no source with a dated level")
+            assert lv[e] == max(dated), (e, lv[e], dated)
     # the other sources' rows (Step 4) are untouched by the ies90 run
     assert conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source IN ('icb','mid','ucdp','precedence')").fetchone()[0] > 0
 

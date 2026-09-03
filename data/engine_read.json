@@ -1,6 +1,6 @@
 {
   "as_of": "2026-09-02",
-  "generated_at": "2026-09-02T15:25:08+00:00",
+  "generated_at": "2026-09-03T01:44:42+00:00",
   "clustered_event_n": 91,
   "hypotheses": {
     "H1": {
@@ -9,12 +9,12 @@
       "signal": "derived.vix_pct",
       "signal_name": "VIX percentile",
       "unit": "percentile",
-      "latest": 36.76,
+      "latest": 48.37,
       "as_of_reading": "2026-09-01",
-      "event_median": 50.25,
+      "event_median": 44.73,
       "direction": "high amplifies",
       "verdict": "HOLDS",
-      "amplifier": "OFF"
+      "amplifier": "ON"
     },
     "H2": {
       "hypothesis": "H2",
@@ -106,6 +106,6 @@
     "gpr_value": 201.3,
     "as_of": "2026-09-01"
   },
-  "read": "Inventories 1.9\u03c3 above seasonal norm (H2 amplifier OFF); VIX 37th pct (H1 OFF). A supply shock today lands on a physically well-supplied but psychologically calm market.",
+  "read": "Inventories 1.9\u03c3 above seasonal norm (H2 amplifier OFF); VIX 48th pct (H1 ON). A supply shock today lands on a physically well-supplied but psychologically stressed market.",
   "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast."
 }

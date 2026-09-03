@@ -2,10 +2,9 @@
   "what": "Pre-registered edge battery: a family of economically-distinct conditioned event-study hypotheses, family-wise corrected (BH-FDR q=0.10 AND Bonferroni alpha=0.05) across prior + new tests, every verdict reported. The mispricing edge is reported alongside as suggestive (small-N), never folded into the amplification FDR.",
   "pre_registration": "src/edge_battery.py docstring + HYPOTHESES (frozen before results; see git).",
   "family_size": 13,
-  "n_validated": 4,
+  "n_validated": 3,
   "validated": [
     "copper_growth",
-    "palladium_supply",
     "hy_credit_stress",
     "severity_dose_response"
   ],
@@ -28,18 +27,18 @@
       "testable": true,
       "unit": "%",
       "n": 71,
-      "amp": 1.6369,
+      "amp": 1.4973,
       "ci": [
-        -0.0259,
-        3.4268
+        -0.1886,
+        3.303
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.0307,
-      "boot_share": 0.972,
+      "perm_p": 0.0435,
+      "boot_share": 0.957,
       "prior": true,
-      "fdr_q": 0.0698,
+      "fdr_q": 0.0943,
       "survives_fdr": true,
-      "bonferroni_adj": 0.3991,
+      "bonferroni_adj": 0.5655,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -53,16 +52,16 @@
       "testable": true,
       "unit": "%",
       "n": 71,
-      "amp": 1.5468,
+      "amp": 1.176,
       "ci": [
-        -2.0688,
-        5.4385
+        -2.2987,
+        5.3461
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2145,
-      "boot_share": 0.805,
+      "perm_p": 0.2751,
+      "boot_share": 0.78,
       "prior": true,
-      "fdr_q": 0.3273,
+      "fdr_q": 0.3251,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -109,26 +108,20 @@
       "testable": true,
       "unit": "%",
       "n": 75,
-      "amp": 5.2181,
+      "amp": 5.1435,
       "ci": [
-        0.2974,
-        10.521
+        -0.251,
+        10.1076
       ],
-      "ci_excludes_zero": true,
-      "perm_p": 0.0221,
-      "boot_share": 0.981,
+      "ci_excludes_zero": false,
+      "perm_p": 0.0232,
+      "boot_share": 0.967,
       "prior": true,
-      "fdr_q": 0.0698,
+      "fdr_q": 0.0788,
       "survives_fdr": true,
-      "bonferroni_adj": 0.2873,
+      "bonferroni_adj": 0.3016,
       "survives_bonferroni": false,
-      "validated": true,
-      "robustness": {
-        "robust": true,
-        "min": 3.7776,
-        "max": 6.317,
-        "n_jackknife": 75
-      }
+      "validated": false
     },
     {
       "hypothesis": "silver_growth",
@@ -149,7 +142,7 @@
       "perm_p": 0.3388,
       "boot_share": 0.612,
       "prior": false,
-      "fdr_q": 0.367,
+      "fdr_q": 0.3388,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -174,7 +167,7 @@
       "perm_p": 0.2518,
       "boot_share": 0.773,
       "prior": false,
-      "fdr_q": 0.3273,
+      "fdr_q": 0.3251,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -190,18 +183,18 @@
       "testable": true,
       "unit": "%",
       "n": 54,
-      "amp": 2.0379,
+      "amp": 2.278,
       "ci": [
-        -0.375,
-        4.2184
+        -0.1066,
+        4.2317
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.0322,
-      "boot_share": 0.945,
+      "perm_p": 0.0176,
+      "boot_share": 0.967,
       "prior": false,
-      "fdr_q": 0.0698,
+      "fdr_q": 0.0788,
       "survives_fdr": true,
-      "bonferroni_adj": 0.4186,
+      "bonferroni_adj": 0.2288,
       "survives_bonferroni": false,
       "validated": false
     },
@@ -215,16 +208,16 @@
       "testable": true,
       "unit": "bps",
       "n": 63,
-      "amp": 4.7062,
+      "amp": 4.0738,
       "ci": [
-        -4.5353,
-        13.4712
+        -4.4394,
+        12.6236
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.1157,
-      "boot_share": 0.843,
+      "perm_p": 0.1485,
+      "boot_share": 0.833,
       "prior": false,
-      "fdr_q": 0.2149,
+      "fdr_q": 0.2563,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -240,16 +233,16 @@
       "testable": true,
       "unit": "%",
       "n": 63,
-      "amp": 0.0237,
+      "amp": 0.9931,
       "ci": [
-        -1.8607,
-        2.1114
+        -0.8347,
+        3.0832
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.4885,
-      "boot_share": 0.56,
+      "perm_p": 0.1577,
+      "boot_share": 0.859,
       "prior": false,
-      "fdr_q": 0.4885,
+      "fdr_q": 0.2563,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -274,7 +267,7 @@
       "perm_p": 0.025,
       "boot_share": 0.991,
       "prior": false,
-      "fdr_q": 0.0698,
+      "fdr_q": 0.0788,
       "survives_fdr": true,
       "bonferroni_adj": 0.325,
       "survives_bonferroni": false,
@@ -305,7 +298,7 @@
       "perm_p": 0.3149,
       "boot_share": 0.859,
       "prior": false,
-      "fdr_q": 0.367,
+      "fdr_q": 0.3388,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -331,7 +324,7 @@
         "chokepoint": 21,
         "sanctions": 40
       },
-      "fdr_q": 0.3273,
+      "fdr_q": 0.3251,
       "survives_fdr": false,
       "bonferroni_adj": 1.0,
       "survives_bonferroni": false,
@@ -357,7 +350,7 @@
         "high_sev": 76,
         "low_sev": 40
       },
-      "fdr_q": 0.0698,
+      "fdr_q": 0.0788,
       "survives_fdr": true,
       "bonferroni_adj": 0.3939,
       "survives_bonferroni": false,
@@ -375,27 +368,27 @@
     "class": "mispricing",
     "testable": true,
     "verdict": "suggestive",
-    "n": 14,
-    "turbulence_rate": 0.929,
+    "n": 15,
+    "turbulence_rate": 0.933,
     "wilson_ci": [
-      0.685,
-      0.987
+      0.702,
+      0.988
     ],
     "base_rate": 0.522,
     "lower_bound_beats_base": true,
-    "brier": 0.1743,
+    "brier": 0.1733,
     "note": "small-N, direction defined in-sample -> suggestive; grows into a real test as N rises"
   },
   "collinearity": {
-    "n_days": 4873,
-    "abs_max": 0.303,
+    "n_days": 4887,
+    "abs_max": 0.357,
     "pairwise": {
-      "vix_pct x curve_2s10s": -0.012,
-      "vix_pct x usd_z": -0.069,
-      "vix_pct x be_level": -0.207,
-      "curve_2s10s x usd_z": -0.228,
-      "curve_2s10s x be_level": -0.189,
-      "usd_z x be_level": -0.303
+      "vix_pct x curve_2s10s": 0.013,
+      "vix_pct x usd_z": -0.08,
+      "vix_pct x be_level": -0.213,
+      "curve_2s10s x usd_z": -0.182,
+      "curve_2s10s x be_level": -0.103,
+      "usd_z x be_level": -0.357
     }
   },
   "exclusions": {

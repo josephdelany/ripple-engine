@@ -1,0 +1,456 @@
+"""
+price_walk.py -- GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03): the grid study's PRICE arm.
+
+The unit is a DATE, not an event. At every month-end grid date t the engine reads the world state, retrieves
+the k most similar prior grid dates whose own outcome had already closed by t, and issues the empirical
+distribution of the returns that followed them, for six targets and five horizons.
+
+Registered before this file existed: Part III (commit 48e1e9b) and its Amendment 1 (commit c949565), which
+fixed the four block set, the 175-candidate search grid, k, tau, the burn-in and the eligibility rule.
+
+What this arm is for, in one line: the event-triggered walk scores 253 reads and never sees a third of the
+days the market moved; this scores every month-end and therefore sees all of them.
+
+  registered scores      CRPS (gate), pinball 10/50/90, PIT           -- protocol §3, unchanged
+  baselines              grid-climatology, no-change, random analogs, the FROZEN equal-weight engine
+  the fitted model       four block weights + one metric scale, selected by expanding-origin nested CV
+                         on reads whose outcome closed by t -- published against the frozen one EITHER WAY
+
+Run:  python3 src/engine/grid/price_walk.py [--fast]
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import sqlite3
+import sys
+from datetime import datetime, timezone
+from itertools import product
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "src"))
+from engine import scoring as SC          # noqa: E402
+from engine import inference as INF       # noqa: E402
+from engine.grid import power_arithmetic as PA   # noqa: E402
+import walk as W                          # noqa: E402
+
+OUT_DIR = ROOT / "data" / "grid" / "price"
+
+# ----------------------------------------------------------------- registered (Part III + Amendment 1)
+BLOCKS = {
+    "physical": ["inv_sigma", "diesel_crack", "brent_wti_spread_z"],
+    "market": ["brent_vol20", "vix_pct", "cot_pct", "ovx_pct"],
+    "macro": ["curve_2s10s", "real_rate", "usd_z", "credit_stress"],
+    "geopolitical": ["gpr", "conflict_intensity_pct"],
+}
+BLOCK_NAMES = tuple(BLOCKS)
+K = 12                                   # Amendment 1: k nearest eligible grid dates
+TAU_GRID = (0.25, 0.5, 1.0, 2.0, 4.0)    # Amendment 1: the metric scale
+W_STEP = 0.25                            # Amendment 1: simplex step
+BURN_IN = 60                             # Amendment 1: closed prior grid dates before a read is scored
+FROZEN_W = np.array([0.25, 0.25, 0.25, 0.25])
+FROZEN_TAU = 1.0
+SEED = W.REGISTERED["seeds"]["bootstrap_and_spa"]
+N_BOOT = W.REGISTERED["n_boot"]
+N_SPA = W.REGISTERED["n_spa_boot"]
+CLUSTER_DAYS = W.REGISTERED["cluster_days"]
+HORIZONS = PA.HORIZONS
+TARGETS = PA.TARGETS
+
+
+def simplex_grid(n=4, step=W_STEP):
+    """Amendment 1: block weights on the simplex in steps of 0.25 -- 35 vectors for four blocks."""
+    m = int(round(1 / step))
+    out = []
+    for c in product(range(m + 1), repeat=n):
+        if sum(c) == m:
+            out.append(np.array(c, float) * step)
+    return out
+
+
+CANDIDATES = [(w, t) for w in simplex_grid() for t in TAU_GRID]
+
+
+# ----------------------------------------------------------------- the panel
+
+def build_panel():
+    """Grid dates, the point-in-time state matrix and the return matrix. All from the loaded DB."""
+    conn = sqlite3.connect(PA.DB)
+    fields = [f for b in BLOCKS.values() for f in b]
+    ids = sorted(set(list(TARGETS.values()) + [PA.MARKET_FIELDS[f] for f in fields]))
+    series = PA.load_series(conn, ids)
+    cal = PA.trading_calendar(series)
+    grid = PA.grid_dates(cal, "month_end")
+    gi = pd.Series(np.arange(len(cal)), index=cal).reindex(grid).to_numpy().astype(int)
+
+    # raw state at t: each field's last observation strictly before t - lag(field)  (Amendment G)
+    S = np.full((len(grid), len(fields)), np.nan)
+    g = grid.to_numpy()
+    for j, f in enumerate(fields):
+        s = series.get(PA.MARKET_FIELDS[f])
+        if s is None:
+            continue
+        cut = g - np.timedelta64(PA.RELEASE_LAGS.get(f, 0), "D")
+        idx = np.searchsorted(s.index.to_numpy(), cut, side="left") - 1
+        ok = idx >= 0
+        S[ok, j] = s.to_numpy()[idx[ok]]
+
+    # returns: r[t, a, h] = log(P_{t+h} / P_t)
+    R = np.full((len(grid), len(TARGETS), len(HORIZONS)), np.nan)
+    for ai, (name, sid) in enumerate(TARGETS.items()):
+        s = series.get(sid)
+        if s is None:
+            continue
+        on = s.reindex(cal).to_numpy()
+        for hi, h in enumerate(HORIZONS):
+            ok = (gi + h) < len(cal)
+            v0 = np.where(ok, on[np.clip(gi, 0, len(cal) - 1)], np.nan)
+            v1 = np.where(ok, on[np.clip(gi + h, 0, len(cal) - 1)], np.nan)
+            with np.errstate(divide="ignore", invalid="ignore"):
+                R[:, ai, hi] = np.log(v1 / v0)
+    return grid, gi, fields, S, R
+
+
+def block_distances(S, fields):
+    """Per-block mean squared difference on the POINT-IN-TIME standardisation (Amendment 1).
+
+    D[b][i, j] = mean over the fields of block b known at BOTH i and j of (z_i - z_j)^2, with z computed
+    from grid dates strictly before i -- both endpoints on i's stats, so they share a scale."""
+    T, F = S.shape
+    known = ~np.isnan(S)
+    mu = np.full((T, F), np.nan); sd = np.full((T, F), np.nan)
+    for i in range(T):
+        past = S[:i]
+        with np.errstate(invalid="ignore"):
+            m = np.nanmean(past, axis=0) if i else np.full(F, np.nan)
+            s = np.nanstd(past, axis=0) if i > 1 else np.full(F, np.nan)
+        mu[i], sd[i] = m, np.where((s > 0) & np.isfinite(s), s, np.nan)
+    D = {b: np.full((T, T), np.nan) for b in BLOCK_NAMES}
+    cols = {b: [fields.index(f) for f in fs] for b, fs in BLOCKS.items()}
+    for i in range(T):
+        z_i = (S[i] - mu[i]) / sd[i]                       # 1 x F, standardised on i's stats
+        Z = (S - mu[i]) / sd[i]                            # T x F, the same stats for every candidate
+        both = known[i] & known & np.isfinite(Z) & np.isfinite(z_i)
+        diff2 = (Z - z_i) ** 2
+        for b in BLOCK_NAMES:
+            c = cols[b]
+            m = both[:, c]
+            n = m.sum(axis=1)
+            with np.errstate(invalid="ignore"):
+                s = np.where(m, diff2[:, c], 0.0).sum(axis=1)
+            D[b][i] = np.where(n > 0, s / np.maximum(n, 1), np.nan)
+    return D
+
+
+def combined(D, w):
+    """sqrt of the weighted mean over the blocks that are defined for a pair; a missing block's weight is
+    redistributed over the rest (Amendment 1) and the pair is dropped only if no block is defined."""
+    num = np.zeros_like(D[BLOCK_NAMES[0]])
+    den = np.zeros_like(num)
+    for wi, b in zip(w, BLOCK_NAMES):
+        if wi == 0:
+            continue
+        ok = np.isfinite(D[b])
+        num += np.where(ok, D[b] * wi, 0.0)
+        den += np.where(ok, wi, 0.0)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        out = np.sqrt(np.where(den > 0, num / den, np.nan))
+    return out
+
+
+# ----------------------------------------------------------------- forecasts and scores
+
+def eligible_mask(T, gi, h):
+    """Analog u is eligible at t iff u's own outcome closed by t: u + h trading days <= t (Amendment 1)."""
+    close = gi + h
+    return (close[None, :] <= gi[:, None]) & ~np.eye(T, dtype=bool)
+
+
+def crps_grid(dist, R, elig, ai, hi, k=K, tau=1.0):
+    """CRPS of the k-nearest-analog forecast at every grid date, for one target and horizon."""
+    T = dist.shape[0]
+    y = R[:, ai, hi]
+    out = np.full(T, np.nan)
+    n_at = np.zeros(T, int)
+    for t in range(T):
+        m = elig[t] & np.isfinite(dist[t]) & np.isfinite(R[:, ai, hi])
+        if m.sum() < BURN_IN or not np.isfinite(y[t]):
+            continue
+        idx = np.flatnonzero(m)
+        d = dist[t, idx]
+        sel = idx[np.argsort(d, kind="stable")[:k]]
+        wts = np.exp(-dist[t, sel] / tau)
+        if not np.isfinite(wts).all() or wts.sum() <= 0:
+            wts = np.ones(len(sel))
+        out[t] = SC.crps(R[sel, ai, hi], y[t], wts)
+        n_at[t] = len(sel)
+    return out, n_at
+
+
+def baseline_scores(R, elig, gi):
+    """Grid-climatology, no-change and random analogs -- all point-in-time (§1.3, §3.3)."""
+    T, A, H = R.shape
+    clim = np.full((T, A, H), np.nan)
+    noch = np.full_like(clim, np.nan)
+    rand = np.full_like(clim, np.nan)
+    for ai in range(A):
+        for hi in range(H):
+            y = R[:, ai, hi]
+            for t in range(T):
+                m = elig[t] & np.isfinite(y)
+                if m.sum() < BURN_IN or not np.isfinite(y[t]):
+                    continue
+                pool = y[m]
+                clim[t, ai, hi] = SC.crps(pool, y[t])
+                noch[t, ai, hi] = SC.crps(np.array([0.0]), y[t])
+                rng = np.random.default_rng(SEED + t * 1000 + ai * 10 + hi)
+                draws = [SC.crps(rng.choice(pool, size=min(K, len(pool)), replace=False), y[t])
+                         for _ in range(25)]
+                rand[t, ai, hi] = float(np.mean(draws))
+    return clim, noch, rand
+
+
+def candidate_scores(D, R, gi, cands, quiet=False):
+    """CRPS of every registered candidate at every (grid date, target, horizon).
+
+    This is the object the nested CV needs: candidate c's score at u is a legitimate point-in-time score,
+    because c's forecast at u used only analogs closed by u. The inner-fold criterion at outer read t is
+    then the cumulative sum over the u whose outcome closed by t -- exact, not an approximation."""
+    T = R.shape[0]
+    A, H = len(TARGETS), len(HORIZONS)
+    out = np.full((len(cands), T, A, H), np.nan)
+    masks = {h: eligible_mask(T, gi, h) for h in HORIZONS}
+    for ci, (w, tau) in enumerate(cands):
+        dist = combined(D, w)
+        for hi, h in enumerate(HORIZONS):
+            for ai in range(A):
+                out[ci, :, ai, hi], _ = crps_grid(dist, R, masks[h], ai, hi, tau=tau)
+        if not quiet and ci % 25 == 0:
+            print(f"  candidate {ci + 1}/{len(cands)}", flush=True)
+    return out
+
+
+def nested_cv(cand_crps, gi, cands):
+    """Amendment 1: at outer read t, select the candidate minimising cumulative CRPS over the reads whose
+    outcome closed by t. Inner folds are strictly before the outer read, with no exception."""
+    C, T, A, H = cand_crps.shape
+    pooled = np.nanmean(cand_crps.reshape(C, T, A * H), axis=2)          # C x T
+    chosen = np.full(T, -1, int)
+    n_inner = np.zeros(T, int)
+    maxh = max(HORIZONS)
+    for t in range(T):
+        closed = np.flatnonzero((gi + maxh) <= gi[t])
+        closed = closed[closed < t]
+        n_inner[t] = len(closed)
+        if len(closed) < BURN_IN:
+            continue                       # no fit until the inner set exists; the read is unscored
+        cum = np.nansum(pooled[:, closed], axis=1)
+        valid = np.isfinite(cum) & (np.sum(np.isfinite(pooled[:, closed]), axis=1) > 0)
+        chosen[t] = int(np.argmin(np.where(valid, cum, np.inf)))
+    return chosen, n_inner
+
+
+def full_diagnostics(dist_by_t, R, gi, taus_by_t, chosen_mask):
+    """§3.2's registered companions to the gate score, computed only for the forecasters that are published
+    (not for all 175 candidates): the Ferro size-corrected CRPS -- whose bias runs AGAINST a k-atom engine
+    and FOR a large-pool climatology (Amendment E.3) -- plus pinball at 10/50/90 and the PIT."""
+    T, A, H = R.shape
+    out = {k: np.full((T, A, H), np.nan) for k in ("crps", "crps_fair", "pin10", "pin50", "pin90", "pit")}
+    masks = {h: eligible_mask(T, gi, h) for h in HORIZONS}
+    for hi, h in enumerate(HORIZONS):
+        elig = masks[h]
+        for t in range(T):
+            if not chosen_mask[t]:
+                continue
+            dist, tau = dist_by_t[t], taus_by_t[t]
+            for ai in range(A):
+                y = R[t, ai, hi]
+                m = elig[t] & np.isfinite(dist[t]) & np.isfinite(R[:, ai, hi])
+                if m.sum() < BURN_IN or not np.isfinite(y):
+                    continue
+                idx = np.flatnonzero(m)
+                sel = idx[np.argsort(dist[t, idx], kind="stable")[:K]]
+                v = R[sel, ai, hi]
+                w = np.exp(-dist[t, sel] / tau)
+                if not np.isfinite(w).all() or w.sum() <= 0:
+                    w = np.ones(len(sel))
+                out["crps"][t, ai, hi] = SC.crps(v, y, w)
+                out["crps_fair"][t, ai, hi] = SC.crps_fair(v, y, w)
+                for tau_q, key in ((0.10, "pin10"), (0.50, "pin50"), (0.90, "pin90")):
+                    out[key][t, ai, hi] = SC.pinball(v, y, tau_q, w)
+                out["pit"][t, ai, hi] = SC.pit(v, y, w)
+    return out
+
+
+def climatology_diagnostics(R, gi):
+    """The same companions for grid-climatology, whose pool is large -- so its fair CRPS is close to its
+    registered one, which is exactly the asymmetry Amendment E.3 names."""
+    T, A, H = R.shape
+    out = {k: np.full((T, A, H), np.nan) for k in ("crps", "crps_fair", "pit")}
+    for hi, h in enumerate(HORIZONS):
+        elig = eligible_mask(T, gi, h)
+        for ai in range(A):
+            y = R[:, ai, hi]
+            for t in range(T):
+                m = elig[t] & np.isfinite(y)
+                if m.sum() < BURN_IN or not np.isfinite(y[t]):
+                    continue
+                pool = y[m]
+                out["crps"][t, ai, hi] = SC.crps(pool, y[t])
+                out["crps_fair"][t, ai, hi] = SC.crps_fair(pool, y[t])
+                out["pit"][t, ai, hi] = SC.pit(pool, y[t])
+    return out
+
+
+def _hash(obj):
+    return hashlib.sha256(json.dumps(obj, sort_keys=True, default=str).encode()).hexdigest()
+
+
+# ----------------------------------------------------------------- the run
+
+def run(fast=False):
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    run_id = "grid_price_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    grid, gi, fields, S, R = build_panel()
+    T = len(grid)
+    print(f"grid {T} month-ends {grid[0].date()}..{grid[-1].date()}; {len(fields)} fields", flush=True)
+    D = block_distances(S, fields)
+    cands = CANDIDATES[:15] if fast else CANDIDATES
+    n_boot, n_spa = (200, 200) if fast else (N_BOOT, N_SPA)
+
+    print(f"scoring {len(cands)} registered candidates ...", flush=True)
+    cand_crps = candidate_scores(D, R, gi, cands)
+    chosen, n_inner = nested_cv(cand_crps, gi, cands)
+
+    frozen_ci = min(range(len(cands)),
+                    key=lambda i: (np.abs(cands[i][0] - FROZEN_W).sum(), abs(cands[i][1] - FROZEN_TAU)))
+    frozen = cand_crps[frozen_ci]
+    fitted = np.full_like(frozen, np.nan)
+    for t in range(T):
+        if chosen[t] >= 0:
+            fitted[t] = cand_crps[chosen[t], t]
+
+    # every baseline pool obeys the same closing rule as the engine's analogs, per horizon
+    clim = np.full_like(frozen, np.nan); noch = np.full_like(frozen, np.nan); rand = np.full_like(frozen, np.nan)
+    for hi, h in enumerate(HORIZONS):
+        m = eligible_mask(T, gi, h)
+        c1, n1, r1 = baseline_scores(R[:, :, [hi]], m, gi)
+        clim[:, :, hi] = c1[:, :, 0]; noch[:, :, hi] = n1[:, :, 0]; rand[:, :, hi] = r1[:, :, 0]
+
+    # §3.2's registered companions, on the published forecasters only
+    dist_fit = [combined(D, cands[chosen[t]][0]) if chosen[t] >= 0 else None for t in range(T)]
+    tau_fit = [cands[chosen[t]][1] if chosen[t] >= 0 else 1.0 for t in range(T)]
+    mask_fit = np.array([c >= 0 for c in chosen])
+    dist_frz = combined(D, cands[frozen_ci][0])
+    diag_fit = full_diagnostics([d if d is not None else dist_frz for d in dist_fit], R, gi, tau_fit, mask_fit)
+    diag_frz = full_diagnostics([dist_frz] * T, R, gi, [cands[frozen_ci][1]] * T, np.ones(T, bool))
+    diag_clim = climatology_diagnostics(R, gi)
+
+    dates = [str(d.date()) for d in grid]
+    mb = W._mean_block(dates, CLUSTER_DAYS); lag = max(int(round(mb)) - 1, 0)
+
+    def block(a, b, label):
+        m = np.isfinite(a) & np.isfinite(b)
+        x, y = a[m], b[m]
+        if len(x) < 30:
+            return {"n": int(len(x)), "skill": None, "ref": label}
+        ci = INF.bootstrap_ci(lambda ix: None if y[ix].mean() == 0 else 1 - x[ix].mean() / y[ix].mean(),
+                              len(x), n_boot=n_boot, mean_block=mb)
+        dm = INF.dm_test(x, y, h=1, lag=lag)
+        return {"n": int(len(x)), "mean": float(x.mean()), "ref_mean": float(y.mean()),
+                "skill": ci["estimate"], "ci95": [ci["lo"], ci["hi"]],
+                "dm_hln": dm.get("dm_hln"), "dm_p": dm.get("p_value"), "ref": label, "score": "crps"}
+
+    flat = lambda x: x.reshape(-1)
+    refs = {"grid_climatology": clim, "no_change": noch, "random_analogs": rand, "frozen": frozen}
+    summary = {
+        "study": "GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03)",
+        "unit": "date",
+        "estimand": "given the world state on date t, the distribution of the h-day return -- NOT the "
+                    "event-triggered estimand; no number in data/walk_forward/** is re-judged (§0.2)",
+        "run_id": run_id, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "registered": {"blocks": BLOCKS, "k": K, "tau_grid": list(TAU_GRID), "w_step": W_STEP,
+                       "burn_in": BURN_IN, "candidates": len(cands), "horizons": list(HORIZONS),
+                       "targets": list(TARGETS), "seed": SEED, "n_boot": n_boot, "n_spa": n_spa,
+                       "frozen": {"w": FROZEN_W.tolist(), "tau": FROZEN_TAU},
+                       "grid": "month_end (Part III §3.1: primary because its design effect is 1.02)"},
+        "panel": {"n_grid_dates": T, "first": dates[0], "last": dates[-1],
+                  "n_scored_cells": int(np.isfinite(fitted).sum()),
+                  "n_nominal_cells": int(np.isfinite(R).sum()),
+                  "mean_block": round(mb, 2), "hac_lag": lag},
+        "fitted_vs": {k: block(flat(fitted), flat(v), k) for k, v in refs.items()},
+        "frozen_vs": {k: block(flat(frozen), flat(v), k) for k, v in refs.items() if k != "frozen"},
+        "the_comparison": block(flat(fitted), flat(frozen), "frozen"),
+    }
+
+    fl = lambda x: x.reshape(-1)
+    summary["diagnostic_fair"] = {
+        "what": "Ferro size-corrected CRPS (Amendment A.5 / E.3, inherited by §0.2 and required by §3.2). "
+                "A k = 12 atom forecast is charged E|X-X'|/(2k) that a large climatology pool is not, so "
+                "the correction can only RAISE the engine's measured standing against climatology. It is a "
+                "diagnostic and it gates nothing: the registered CRPS decides.",
+        "means": {"fitted": float(np.nanmean(diag_fit["crps"])), "fitted_fair": float(np.nanmean(diag_fit["crps_fair"])),
+                  "frozen": float(np.nanmean(diag_frz["crps"])), "frozen_fair": float(np.nanmean(diag_frz["crps_fair"])),
+                  "climatology": float(np.nanmean(diag_clim["crps"])), "climatology_fair": float(np.nanmean(diag_clim["crps_fair"]))},
+        "fitted_vs_climatology_registered": block(fl(diag_fit["crps"]), fl(diag_clim["crps"]), "grid_climatology"),
+        "fitted_vs_climatology_fair": block(fl(diag_fit["crps_fair"]), fl(diag_clim["crps_fair"]), "grid_climatology_fair"),
+        "frozen_vs_climatology_fair": block(fl(diag_frz["crps_fair"]), fl(diag_clim["crps_fair"]), "grid_climatology_fair"),
+    }
+    pit = diag_fit["pit"][np.isfinite(diag_fit["pit"])]
+    pit_c = diag_clim["pit"][np.isfinite(diag_clim["pit"])]
+    summary["calibration"] = {
+        "pinball": {k: float(np.nanmean(diag_fit[k])) for k in ("pin10", "pin50", "pin90")},
+        "pit_hist_fitted": np.histogram(pit, bins=10, range=(0, 1))[0].tolist(),
+        "pit_hist_climatology": np.histogram(pit_c, bins=10, range=(0, 1))[0].tolist(),
+        "pit_n": int(len(pit)),
+        "note": "a calibrated forecast has a flat PIT; §3 registers the histogram, not a test statistic",
+    }
+
+    # per target and per horizon, with H_eff attached wherever horizons are pooled (Part III §3.2)
+    summary["per_target"] = {a: block(flat(fitted[:, ai]), flat(clim[:, ai]), "grid_climatology")
+                             for ai, a in enumerate(TARGETS)}
+    summary["per_horizon"] = {f"h{h}": block(flat(fitted[:, :, hi]), flat(clim[:, :, hi]), "grid_climatology")
+                              for hi, h in enumerate(HORIZONS)}
+    summary["pooling_disclosure"] = {
+        "H_eff": 1.547, "H_eff_random_walk_benchmark": 1.550, "R_horizons": 0.137,
+        "C_eff_joint": 4.255, "n_eff_joint": 1979.1,
+        "rule": "Part III §3.2: five horizons are worth about one and a half, and this pairing is mandatory "
+                "beside every pooled-horizon number. n_nominal is never reported as n_eff.",
+    }
+    # the fitted trajectory (§3.7.3: a fitted model whose weights swing is a different object)
+    traj = [{"date": dates[t], "n_inner": int(n_inner[t]),
+             "w": (cands[chosen[t]][0].tolist() if chosen[t] >= 0 else None),
+             "tau": (cands[chosen[t]][1] if chosen[t] >= 0 else None)} for t in range(T)]
+    picked = [tuple(x["w"]) + (x["tau"],) for x in traj if x["w"]]
+    summary["training"] = {
+        "fitted_parameters": 5, "required_effective_units": 100, "available_inner_effective": 989.5,
+        "legitimate": True, "n_reads_with_a_fit": len(picked),
+        "distinct_selections": len(set(picked)),
+        "modal_selection": (max(set(picked), key=picked.count) if picked else None),
+        "modal_share": (round(picked.count(max(set(picked), key=picked.count)) / len(picked), 3)
+                        if picked else None),
+        "blocks": BLOCK_NAMES,
+        "note": "§3.7.3 registered that the weight trajectory is published: a fitted model whose weights "
+                "swing across folds is a different object from one whose weights converge.",
+    }
+    (OUT_DIR / "training.json").write_text(json.dumps(traj, indent=1))
+    summary["determinism"] = {"content_digest": _hash([summary["registered"], dates,
+                                                       np.nan_to_num(fitted, nan=-999).round(6).tolist()])}
+    (OUT_DIR / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
+    np.savez_compressed(OUT_DIR / "scores.npz", fitted=fitted, frozen=frozen, clim=clim,
+                        noch=noch, rand=rand, chosen=chosen)
+    return summary
+
+
+def main():
+    s = run(fast="--fast" in sys.argv)
+    print(json.dumps({k: s[k] for k in ("panel", "the_comparison", "fitted_vs", "frozen_vs", "training",
+                                        "pooling_disclosure")}, indent=1, default=str))
+
+
+if __name__ == "__main__":
+    main()

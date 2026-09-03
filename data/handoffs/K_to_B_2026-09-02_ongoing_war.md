@@ -140,3 +140,69 @@ If you score both, publish both.
 4. Amendment 4 is **orthogonal to Amendment 3** (F's hostility precondition). An event can
    be dropped by either. Keep the two exclusion counts separate and never merge them into
    one "excluded" figure.
+
+---
+
+# ADDENDUM, 2026-09-03 — the rebuild has landed; §0's hazard is closed, and here is what is stale
+
+Joe ruled tag-rebuild-re-run. `event_outcomes` source `ies90` is now on Amendment 4 and the
+pre-rebuild record is tagged **`record-pre-amendment-4`** (`5a2c58f` → `18561e2`). §0's
+incoherent window is **closed**: target and baseline are both post-amendment, and
+`data/state/ies90_distribution.json` now reads *"Amendment 1 + 1.1 + 2 + 4"*, so
+`data_state.ies90_registration` in your next run will record the right thing. The check in §0
+now agrees on both sides.
+
+**Level distribution as written:** 0 → 73, 1 → 9, 2 → 30, 3 → 20, `no_independent_outcome`
+→ 55 (52 undated + 3 uncovered). 132 events carry a level. Identical to the `write=False`
+projection, so the rebuild is deterministic. **1,198 `event_outcomes` rows touched**: 724
+added, 209 removed, 265 changed. Rows of other sources (`icb` 308, `mid` 75, `ucdp` 561,
+`precedence` 187) are untouched.
+
+## What is now stale for you, measured not guessed
+
+Against the sealed run `walk_20260903T003422Z` — 172 scored daily G reads carrying 11,385
+analog slots (Amendment L's own filters retain 150 reads / 10,885 slots; the direction is the
+same):
+
+| | |
+|---|---:|
+| scored events that now leave the G target entirely | **49 of 172 (28 %)** |
+| scored events keeping a level that changed | 6 |
+| scored events with an unchanged label | 117 |
+| scored events that now have **no knowable L⁻** → B.3 climatology fallback | **53** (the sealed run recorded `n_persistence_fallback` = **2**) |
+| analog slots whose analog leaves the G pool (`read.py:217`) | **2,661 (23.4 %)** |
+| analog slots whose analog keeps a level that changed | 618 (5.4 %) |
+| analog slots whose analog has **no knowable L⁻_a** → Amendment L.2 drops it | **2,379 (20.9 %)** |
+
+**Amendment L.2's structural fact will not survive the next run.** L.2 states, as a fact about
+the data, *"0 of the 10,885 analog slots carried by the 150 scored reads lack L⁻_a"*, and
+`delta_experiment.json` records `analogs.delta_dropped: 0`. On the rebuilt target that becomes
+roughly 21 % of slots. `n_analog_delta_dropped` stops being decorative and becomes a number
+that has to be published, and items will abstain more often.
+
+**`data/walk_forward/delta_experiment.json` does not name the target it was computed on.** It
+carries `derived_from_run: walk_20260903T003422Z` and the Amendment L citation, but no
+`ies90_registration`. It is therefore one hop from its provenance — that run's `summary.json`
+does record *"Amendment 1 + 1.1 + 2"* — and zero hops from being misread. Consider copying the
+registration string into the delta output when you next regenerate it; a file whose headline
+is "NO ADDITION" and whose target definition has since changed is exactly the number that
+looks fine.
+
+## Stale by design, and protected by the tag — do not regenerate to "fix" them
+
+`reads.jsonl`, `scores.jsonl`, `weights.jsonl`, `summary.json`, `per_event.json`,
+`delta_experiment.json`, `delta_experiment_reads.json`, `data/walk_forward/runs/**`,
+`docs/PAPER_DRAFT.md` §8–§11 and the gate reports in `data/gates/` were all computed against
+the pre-Amendment-4 target. **They stand as published** (A4.7). The next run is reported
+separately and never pooled with them.
+
+## Fresh, verified
+
+- `engine/read.py::_ies90` selects only `field IN ('level','deal')`, so Amendment 4's new
+  fields (`delta_level`, `delta_basis`, `deaths_ged_on_d`, `deaths_ged_delta`) do **not** leak
+  into the walk's target. `delta_level` reaches you only if you go and read it deliberately,
+  which is what A4.4 intends.
+- `engine/persistence.py::precompute` is live and now post-amendment: 129 of 187 events have a
+  knowable L⁻, 58 do not.
+- `src/grid_labels.py` / `data/grid/g/PROBE.json` (Session G) are **already on Amendment 4** —
+  its cells carry `L_ni: "undated"`, which only exists post-amendment. Not stale.

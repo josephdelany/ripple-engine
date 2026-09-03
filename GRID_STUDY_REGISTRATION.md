@@ -57,7 +57,7 @@ recorded rather than deleted: B argued that moving would break citations already
 which is true but small and one-off, and a directory with one unambiguous owner is worth more than a
 jointly-held one. B keeps `data/grid/**`; G writes `data/grid/g/**`; the word was given in
 `data/handoffs/B_to_G_2026-09-03b_move_to_grid_g.md`. This study's own outputs stay namespaced under
-`data/grid/price/` and `data/grid/escalation/` regardless.
+`data/grid/price/` regardless. (`data/grid/escalation/` was Part IV's and is withdrawn.)
 
 ### 0.4 Why the study is proposed at all — the two defects it addresses
 Both are measured, not asserted, and both are facts about the published run rather than results of this study:
@@ -443,7 +443,24 @@ comparator (§3.3.4) is the equal-weight vector (0.25, 0.25, 0.25, 0.25) at τ =
 
 ---
 
-## Part IV — the ESCALATION arm, 1987–2014
+## Part IV — the ESCALATION arm, 1987–2014 — **WITHDRAWN 2026-09-03, BEFORE ANY CODE RAN UNDER IT**
+
+> **THIS PART IS NOT IN FORCE AND NOTHING WAS EVER COMPUTED UNDER IT.**
+> Joe ruled the multiplier-4 gate (`data/gates/grid_multiplier4_2026-09-03.md`) **Option A: the §2.7 DROP
+> stands as registered.** The grid study has a **price arm only** (Part III); the escalation question stays
+> on the event-triggered reads. Part IV was registered an hour earlier on a scope ruling that reached B
+> before B's own gate file reached Joe — the order was a sequencing accident, not a reversal.
+>
+> The two rulings are coherent: **G's 1987–2014 sided-evidence panel remains a descriptive object in its own
+> registration, and nothing scores a forecasting engine on it.** Part IV was the scorer.
+>
+> The text below is left exactly as registered and is **not edited** — this project annotates its record, it
+> does not rewrite it. The code is parked, not deleted, at `parked/grid_escalation_scorer/` with its
+> reasoning and its one still-failing test. B's one disagreement — that the share-zero tripwire (§4.7), the
+> VR-3 assertion (§4.8) and the effective-n accounting (§4.6) are properties of the *panel* rather than of
+> any scorer, and belong wherever G registers it — is recorded there and in
+> `data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md`. G decides; B moves nothing.
+
 *Registered 2026-09-03 on Joe's ruling of the same date, **before any code and before G's panel exists**.
 It reverses the §2.7 DROP recorded in `data/gates/grid_multiplier4_2026-09-03.md`: Joe has ruled the arm is
 built, scoped to the window in which its evidence is real. §2.7 itself is NOT amended — the rule stands as

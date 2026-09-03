@@ -6,11 +6,11 @@
  "tier": "daily",
  "unit": "trading days",
  "first": "1986-06-02",
- "last": "2026-08-03",
+ "last": "2026-08-25",
  "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
  "n_episodes": 36,
  "no_identified_event": 7,
- "everyday_base_rate_pct": 16.8,
+ "everyday_base_rate_pct": 16.7,
  "p_class_given_big": {
   "opec_decision": [
    13,
@@ -32,12 +32,12 @@
    6,
    36
   ],
-  "sanctions": [
-   13,
-   36
-  ],
   "chokepoint_disruption": [
    11,
+   36
+  ],
+  "sanctions": [
+   13,
    36
   ]
  },
@@ -80,7 +80,7 @@
    "sign": "-",
    "from_": 26.6,
    "to": 2.85,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -96,7 +96,7 @@
    "sign": "+",
    "from_": 0.8,
    "to": 45.46,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -112,7 +112,7 @@
    "sign": "-",
    "from_": 45.46,
    "to": 4.85,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -136,7 +136,7 @@
    "sign": "-",
    "from_": 17.2,
    "to": 2.29,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -168,7 +168,7 @@
    "sign": "+",
    "from_": 8.37,
    "to": 21.93,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -183,7 +183,7 @@
    "sign": "+",
    "from_": 18.36,
    "to": 35.61,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -207,7 +207,7 @@
    "sign": "-",
    "from_": 26.99,
    "to": 3.31,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -264,7 +264,7 @@
    "sign": "+",
    "from_": 3.31,
    "to": 19.62,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -288,7 +288,7 @@
    "sign": "-",
    "from_": 26.83,
    "to": 4.19,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -304,7 +304,7 @@
    "sign": "+",
    "from_": 11.98,
    "to": 32.25,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -329,7 +329,7 @@
    "sign": "+",
    "from_": 23.96,
    "to": 40.1,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -369,7 +369,7 @@
    "sign": "-",
    "from_": 41.72,
    "to": 19.71,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -410,7 +410,7 @@
    "sign": "-",
    "from_": 41.46,
    "to": 21.02,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -426,7 +426,7 @@
    "sign": "+",
    "from_": 15.71,
    "to": 34.15,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -450,7 +450,7 @@
    "sign": "-",
    "from_": 39.16,
    "to": 20.24,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -475,7 +475,7 @@
    "sign": "+",
    "from_": 14.92,
    "to": 39.73,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -515,7 +515,7 @@
    "sign": "-",
    "from_": 39.73,
    "to": 17.7,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -531,7 +531,7 @@
    "sign": "-",
    "from_": 24.45,
    "to": 12.18,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -563,7 +563,7 @@
    "sign": "-",
    "from_": 73.86,
    "to": 7.94,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -596,7 +596,7 @@
    "sign": "+",
    "from_": 18.86,
    "to": 107.51,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -717,7 +717,7 @@
    "sign": "-",
    "from_": 102.31,
    "to": 34.83,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -798,7 +798,7 @@
    "sign": "+",
    "from_": 34.83,
    "to": 104.45,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -863,7 +863,7 @@
    "sign": "-",
    "from_": 95.2,
    "to": 33.13,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -904,7 +904,7 @@
    "sign": "-",
    "from_": 61.68,
    "to": 21.03,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -952,7 +952,7 @@
    "sign": "-",
    "from_": 36.0,
    "to": 17.73,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -992,7 +992,7 @@
    "sign": "+",
    "from_": 19.92,
    "to": 51.16,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -1073,7 +1073,7 @@
    "sign": "-",
    "from_": 49.39,
    "to": 33.24,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -1161,7 +1161,7 @@
    "sign": "+",
    "from_": 28.89,
    "to": 44.53,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -1201,7 +1201,7 @@
    "sign": "-",
    "from_": 43.66,
    "to": 18.81,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -1290,7 +1290,7 @@
    "sign": "-",
    "from_": 20.74,
    "to": -3.45,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -1362,7 +1362,7 @@
    "sign": "+",
    "from_": -1.04,
    "to": 27.62,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20,
     60
@@ -1443,7 +1443,7 @@
    "sign": "+",
    "from_": 19.46,
    "to": 29.66,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],
@@ -1483,7 +1483,7 @@
    "sign": "+",
    "from_": 26.99,
    "to": 47.48,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -1516,7 +1516,7 @@
    "sign": "+",
    "from_": 25.27,
    "to": 92.98,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     20,
     60
@@ -1549,7 +1549,7 @@
    "sign": "-",
    "from_": 92.98,
    "to": 50.61,
-   "threshold": 15.366,
+   "threshold": 15.698,
    "windows": [
     60
    ],
@@ -1564,7 +1564,7 @@
    "sign": "+",
    "from_": 46.7,
    "to": 84.21,
-   "threshold": 9.809,
+   "threshold": 9.843,
    "windows": [
     20
    ],

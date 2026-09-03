@@ -1,7 +1,7 @@
 {
  "registration": "GRID_STUDY_REGISTRATION.md Part II (2026-09-03), registered in commit 7afcb2c before this module existed",
  "what_this_is_not": "no forecast, no score, no skill is computed here; this is the pre-build arithmetic of how much each multiplier buys in units of power",
- "computed_at": "2026-09-03T04:00:56+00:00",
+ "computed_at": "2026-09-03T04:40:37+00:00",
  "registered": {
   "cluster_days": 35,
   "n_boot": 2000,
@@ -118,7 +118,8 @@
      "disagreement": 1.041,
      "tiebreak_fired": false,
      "deff_used": 1.0529,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "brent|h10": {
@@ -129,7 +130,8 @@
      "disagreement": 1.029,
      "tiebreak_fired": false,
      "deff_used": 1.0625,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "brent|h20": {
@@ -139,8 +141,9 @@
      "deff_bootstrap_ratio": 0.989,
      "disagreement": 1.094,
      "tiebreak_fired": false,
-     "deff_used": 0.989,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "brent|h40": {
@@ -151,7 +154,8 @@
      "disagreement": 1.085,
      "tiebreak_fired": false,
      "deff_used": 1.3395,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "brent|h60": {
@@ -162,7 +166,8 @@
      "disagreement": 1.022,
      "tiebreak_fired": false,
      "deff_used": 1.6029,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     },
     "wti|h5": {
@@ -172,8 +177,9 @@
      "deff_bootstrap_ratio": 0.9622,
      "disagreement": 1.153,
      "tiebreak_fired": false,
-     "deff_used": 0.9622,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "wti|h10": {
@@ -184,7 +190,8 @@
      "disagreement": 1.002,
      "tiebreak_fired": false,
      "deff_used": 1.1806,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "wti|h20": {
@@ -195,7 +202,8 @@
      "disagreement": 1.036,
      "tiebreak_fired": false,
      "deff_used": 1.1498,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "wti|h40": {
@@ -206,7 +214,8 @@
      "disagreement": 1.029,
      "tiebreak_fired": false,
      "deff_used": 1.4531,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "wti|h60": {
@@ -217,7 +226,8 @@
      "disagreement": 1.043,
      "tiebreak_fired": false,
      "deff_used": 1.7281,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     },
     "diesel_crack|h5": {
@@ -227,8 +237,9 @@
      "deff_bootstrap_ratio": 0.9905,
      "disagreement": 1.045,
      "tiebreak_fired": false,
-     "deff_used": 0.9905,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "diesel_crack|h10": {
@@ -238,8 +249,9 @@
      "deff_bootstrap_ratio": 0.9828,
      "disagreement": 1.046,
      "tiebreak_fired": false,
-     "deff_used": 0.9828,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "diesel_crack|h20": {
@@ -249,8 +261,9 @@
      "deff_bootstrap_ratio": 0.8308,
      "disagreement": 1.006,
      "tiebreak_fired": false,
-     "deff_used": 0.8308,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "diesel_crack|h40": {
@@ -261,7 +274,8 @@
      "disagreement": 1.074,
      "tiebreak_fired": false,
      "deff_used": 1.1187,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "diesel_crack|h60": {
@@ -272,7 +286,8 @@
      "disagreement": 1.084,
      "tiebreak_fired": false,
      "deff_used": 1.317,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     },
     "gasoline_crack|h5": {
@@ -282,8 +297,9 @@
      "deff_bootstrap_ratio": 0.964,
      "disagreement": 1.082,
      "tiebreak_fired": false,
-     "deff_used": 0.964,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "gasoline_crack|h10": {
@@ -293,8 +309,9 @@
      "deff_bootstrap_ratio": 0.8613,
      "disagreement": 1.052,
      "tiebreak_fired": false,
-     "deff_used": 0.8613,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "gasoline_crack|h20": {
@@ -304,8 +321,9 @@
      "deff_bootstrap_ratio": 0.6916,
      "disagreement": 1.164,
      "tiebreak_fired": false,
-     "deff_used": 0.6916,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "gasoline_crack|h40": {
@@ -316,7 +334,8 @@
      "disagreement": 1.102,
      "tiebreak_fired": false,
      "deff_used": 1.0034,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "gasoline_crack|h60": {
@@ -327,7 +346,8 @@
      "disagreement": 1.079,
      "tiebreak_fired": false,
      "deff_used": 1.2074,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     },
     "henry_hub|h5": {
@@ -338,7 +358,8 @@
      "disagreement": 1.019,
      "tiebreak_fired": false,
      "deff_used": 1.0413,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "henry_hub|h10": {
@@ -349,7 +370,8 @@
      "disagreement": 1.053,
      "tiebreak_fired": false,
      "deff_used": 1.0543,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "henry_hub|h20": {
@@ -359,8 +381,9 @@
      "deff_bootstrap_ratio": 0.8486,
      "disagreement": 1.069,
      "tiebreak_fired": false,
-     "deff_used": 0.8486,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "henry_hub|h40": {
@@ -371,7 +394,8 @@
      "disagreement": 1.002,
      "tiebreak_fired": false,
      "deff_used": 1.2301,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "henry_hub|h60": {
@@ -382,7 +406,8 @@
      "disagreement": 1.066,
      "tiebreak_fired": false,
      "deff_used": 1.5252,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     },
     "propane|h5": {
@@ -393,7 +418,8 @@
      "disagreement": 1.003,
      "tiebreak_fired": false,
      "deff_used": 1.1238,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "propane|h10": {
@@ -404,7 +430,8 @@
      "disagreement": 1.032,
      "tiebreak_fired": false,
      "deff_used": 1.0722,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "propane|h20": {
@@ -414,8 +441,9 @@
      "deff_bootstrap_ratio": 0.965,
      "disagreement": 1.003,
      "tiebreak_fired": false,
-     "deff_used": 0.965,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0
     },
     "propane|h40": {
@@ -426,7 +454,8 @@
      "disagreement": 1.038,
      "tiebreak_fired": false,
      "deff_used": 1.341,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.4665
     },
     "propane|h60": {
@@ -437,7 +466,8 @@
      "disagreement": 1.013,
      "tiebreak_fired": false,
      "deff_used": 1.641,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.6444
     }
    },
@@ -460,7 +490,8 @@
     "disagreement": 1.127,
     "tiebreak_fired": false,
     "deff_used": 1.0212,
-    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+    "deff_floored_at_1": false,
+    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
     "benchmark_random_walk_overlap_h20": 1.0,
     "T_eff": 465.14
    },
@@ -548,7 +579,8 @@
      "disagreement": 1.076,
      "tiebreak_fired": false,
      "deff_used": 1.071,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "brent|h10": {
@@ -559,7 +591,8 @@
      "disagreement": 1.038,
      "tiebreak_fired": false,
      "deff_used": 1.9958,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "brent|h20": {
@@ -570,7 +603,8 @@
      "disagreement": 1.056,
      "tiebreak_fired": false,
      "deff_used": 3.4493,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "brent|h40": {
@@ -581,7 +615,8 @@
      "disagreement": 1.086,
      "tiebreak_fired": false,
      "deff_used": 4.9733,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "brent|h60": {
@@ -592,7 +627,8 @@
      "disagreement": 1.26,
      "tiebreak_fired": false,
      "deff_used": 6.3703,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     },
     "wti|h5": {
@@ -602,8 +638,9 @@
      "deff_bootstrap_ratio": 0.9162,
      "disagreement": 1.029,
      "tiebreak_fired": false,
-     "deff_used": 0.9162,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "wti|h10": {
@@ -614,7 +651,8 @@
      "disagreement": 1.028,
      "tiebreak_fired": false,
      "deff_used": 1.8515,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "wti|h20": {
@@ -625,7 +663,8 @@
      "disagreement": 1.031,
      "tiebreak_fired": false,
      "deff_used": 3.3714,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "wti|h40": {
@@ -636,7 +675,8 @@
      "disagreement": 1.179,
      "tiebreak_fired": false,
      "deff_used": 5.3461,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "wti|h60": {
@@ -647,7 +687,8 @@
      "disagreement": 1.221,
      "tiebreak_fired": false,
      "deff_used": 6.1081,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     },
     "diesel_crack|h5": {
@@ -657,8 +698,9 @@
      "deff_bootstrap_ratio": 0.6388,
      "disagreement": 1.108,
      "tiebreak_fired": false,
-     "deff_used": 0.6388,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "diesel_crack|h10": {
@@ -669,7 +711,8 @@
      "disagreement": 1.115,
      "tiebreak_fired": false,
      "deff_used": 1.0722,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "diesel_crack|h20": {
@@ -680,7 +723,8 @@
      "disagreement": 1.125,
      "tiebreak_fired": false,
      "deff_used": 1.8972,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "diesel_crack|h40": {
@@ -691,7 +735,8 @@
      "disagreement": 1.008,
      "tiebreak_fired": false,
      "deff_used": 3.4354,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "diesel_crack|h60": {
@@ -702,7 +747,8 @@
      "disagreement": 1.138,
      "tiebreak_fired": false,
      "deff_used": 4.5841,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     },
     "gasoline_crack|h5": {
@@ -712,8 +758,9 @@
      "deff_bootstrap_ratio": 0.8849,
      "disagreement": 1.023,
      "tiebreak_fired": false,
-     "deff_used": 0.8849,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "gasoline_crack|h10": {
@@ -723,8 +770,9 @@
      "deff_bootstrap_ratio": 0.9281,
      "disagreement": 1.273,
      "tiebreak_fired": false,
-     "deff_used": 0.9281,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "gasoline_crack|h20": {
@@ -735,7 +783,8 @@
      "disagreement": 1.245,
      "tiebreak_fired": false,
      "deff_used": 1.6844,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "gasoline_crack|h40": {
@@ -746,7 +795,8 @@
      "disagreement": 1.074,
      "tiebreak_fired": false,
      "deff_used": 3.0391,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "gasoline_crack|h60": {
@@ -757,7 +807,8 @@
      "disagreement": 1.083,
      "tiebreak_fired": false,
      "deff_used": 4.2889,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     },
     "henry_hub|h5": {
@@ -767,8 +818,9 @@
      "deff_bootstrap_ratio": 0.4987,
      "disagreement": 1.079,
      "tiebreak_fired": false,
-     "deff_used": 0.4987,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "henry_hub|h10": {
@@ -778,8 +830,9 @@
      "deff_bootstrap_ratio": 0.9773,
      "disagreement": 1.12,
      "tiebreak_fired": false,
-     "deff_used": 0.9773,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "henry_hub|h20": {
@@ -790,7 +843,8 @@
      "disagreement": 1.076,
      "tiebreak_fired": false,
      "deff_used": 2.151,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "henry_hub|h40": {
@@ -801,7 +855,8 @@
      "disagreement": 1.014,
      "tiebreak_fired": false,
      "deff_used": 3.6467,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "henry_hub|h60": {
@@ -812,7 +867,8 @@
      "disagreement": 1.169,
      "tiebreak_fired": false,
      "deff_used": 4.8538,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     },
     "propane|h5": {
@@ -822,8 +878,9 @@
      "deff_bootstrap_ratio": 0.9196,
      "disagreement": 1.063,
      "tiebreak_fired": false,
-     "deff_used": 0.9196,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_used": 1.0,
+     "deff_floored_at_1": true,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.0304
     },
     "propane|h10": {
@@ -834,7 +891,8 @@
      "disagreement": 1.003,
      "tiebreak_fired": false,
      "deff_used": 1.8425,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 1.8729
     },
     "propane|h20": {
@@ -845,7 +903,8 @@
      "disagreement": 1.05,
      "tiebreak_fired": false,
      "deff_used": 2.9921,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 3.2123
     },
     "propane|h40": {
@@ -856,7 +915,8 @@
      "disagreement": 1.053,
      "tiebreak_fired": false,
      "deff_used": 4.6837,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 4.5683
     },
     "propane|h60": {
@@ -867,7 +927,8 @@
      "disagreement": 1.192,
      "tiebreak_fired": false,
      "deff_used": 5.9248,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "benchmark_random_walk_overlap": 5.0455
     }
    },
@@ -890,7 +951,8 @@
     "disagreement": 1.054,
     "tiebreak_fired": false,
     "deff_used": 3.1841,
-    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+    "deff_floored_at_1": false,
+    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
     "benchmark_random_walk_overlap_h20": 3.2123,
     "T_eff": 649.48
    },
@@ -934,7 +996,8 @@
      "disagreement": 1.389,
      "tiebreak_fired": false,
      "deff_used": 2.7007,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 123.3
     },
     "two_way_cluster": {
@@ -980,7 +1043,8 @@
      "disagreement": 1.455,
      "tiebreak_fired": false,
      "deff_used": 2.8462,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 146.51
     },
     "two_way_cluster": {
@@ -1026,7 +1090,8 @@
      "disagreement": 1.393,
      "tiebreak_fired": false,
      "deff_used": 2.7178,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 121.42
     },
     "two_way_cluster": {
@@ -1076,7 +1141,8 @@
      "disagreement": 1.744,
      "tiebreak_fired": true,
      "deff_used": 10.2116,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 141.8
     },
     "two_way_cluster": {
@@ -1122,7 +1188,8 @@
      "disagreement": 1.677,
      "tiebreak_fired": true,
      "deff_used": 9.8689,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 183.81
     },
     "two_way_cluster": {
@@ -1168,7 +1235,8 @@
      "disagreement": 1.843,
      "tiebreak_fired": true,
      "deff_used": 10.8293,
-     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "deff_floored_at_1": false,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
      "T_eff": 132.6
     },
     "two_way_cluster": {
@@ -1198,17 +1266,17 @@
   "month_end": {
    "1_grid": {
     "n_nominal": 476,
-    "n_eff": 480.3,
-    "R": 1.009,
+    "n_eff": 475.0,
+    "R": 0.9979,
     "vs_event_triggered_P_effective": 249.1,
-    "delta_n_eff_vs_event": 231.2,
-    "decision": "KEEP -- realisation ratio 1.009"
+    "delta_n_eff_vs_event": 225.9,
+    "decision": "KEEP -- realisation ratio 0.9979"
    },
    "2_targets": {
     "n_nominal_added_per_cell": 5,
     "n_eff_added_per_cell": 1.847,
     "R": 0.3694,
-    "delta_n_eff": 887.1,
+    "delta_n_eff": 877.3,
     "decision": "KEEP -- realisation ratio 0.3694"
    },
    "3_horizons": {
@@ -1216,7 +1284,7 @@
     "n_eff_added_per_cell": 0.547,
     "R": 0.1367,
     "random_walk_benchmark_H_eff": 1.55,
-    "delta_n_eff": 262.7,
+    "delta_n_eff": 259.8,
     "decision": "KEEP, REPORTED AS MARGINAL -- realisation ratio 0.1367"
    },
    "4_dyad_date": {
@@ -1336,7 +1404,8 @@
    "disagreement": 1.044,
    "tiebreak_fired": false,
    "deff_used": 1.0103,
-   "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+   "deff_floored_at_1": false,
+   "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
    "n_eff": 148.5,
    "reference_mean": 0.70106,
    "sd_diff": 0.34987,
@@ -1353,7 +1422,8 @@
    "disagreement": 1.047,
    "tiebreak_fired": false,
    "deff_used": 1.0156,
-   "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+   "deff_floored_at_1": false,
+   "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires.",
    "n_eff": 249.1,
    "reference_mean": 7.704,
    "sd_diff": 3.45438,

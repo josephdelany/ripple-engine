@@ -1,0 +1,474 @@
+{
+ "study": "GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03)",
+ "unit": "date",
+ "estimand": "given the world state on date t, the distribution of the h-day return -- NOT the event-triggered estimand; no number in data/walk_forward/** is re-judged (\u00a70.2)",
+ "run_id": "grid_price_20260903T042725Z",
+ "generated_at": "2026-09-03T04:30:31+00:00",
+ "registered": {
+  "blocks": {
+   "physical": [
+    "inv_sigma",
+    "diesel_crack",
+    "brent_wti_spread_z"
+   ],
+   "market": [
+    "brent_vol20",
+    "vix_pct",
+    "cot_pct",
+    "ovx_pct"
+   ],
+   "macro": [
+    "curve_2s10s",
+    "real_rate",
+    "usd_z",
+    "credit_stress"
+   ],
+   "geopolitical": [
+    "gpr",
+    "conflict_intensity_pct"
+   ]
+  },
+  "k": 12,
+  "tau_grid": [
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   4.0
+  ],
+  "w_step": 0.25,
+  "burn_in": 60,
+  "candidates": 175,
+  "horizons": [
+   5,
+   10,
+   20,
+   40,
+   60
+  ],
+  "targets": [
+   "brent",
+   "wti",
+   "diesel_crack",
+   "gasoline_crack",
+   "henry_hub",
+   "propane"
+  ],
+  "seed": 19900802,
+  "n_boot": 2000,
+  "n_spa": 1000,
+  "frozen": {
+   "w": [
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "tau": 1.0
+  },
+  "grid": "month_end (Part III \u00a73.1: primary because its design effect is 1.02)"
+ },
+ "panel": {
+  "n_grid_dates": 476,
+  "first": "1987-01-30",
+  "last": "2026-08-25",
+  "n_scored_cells": 10857,
+  "n_nominal_cells": 12691,
+  "mean_block": 2.0,
+  "hac_lag": 1
+ },
+ "fitted_vs": {
+  "grid_climatology": {
+   "n": 10857,
+   "mean": 0.1573418858122225,
+   "ref_mean": 0.14677651243919038,
+   "skill": -0.07198272528385208,
+   "ci95": [
+    -0.08108672140073625,
+    -0.063650664548914
+   ],
+   "dm_hln": 16.20360420992079,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "no_change": {
+   "n": 10857,
+   "mean": 0.1573418858122225,
+   "ref_mean": 0.19268944155315573,
+   "skill": 0.1834431376001584,
+   "ci95": [
+    0.1749496038228617,
+    0.191939518458038
+   ],
+   "dm_hln": -33.55522801902489,
+   "dm_p": 0.0,
+   "ref": "no_change",
+   "score": "crps"
+  },
+  "random_analogs": {
+   "n": 10857,
+   "mean": 0.1573418858122225,
+   "ref_mean": 0.15898600028997803,
+   "skill": 0.01034125315912593,
+   "ci95": [
+    0.0022003357880569954,
+    0.018366564453283923
+   ],
+   "dm_hln": -2.5626220991443813,
+   "dm_p": 0.010401868775695045,
+   "ref": "random_analogs",
+   "score": "crps"
+  },
+  "frozen": {
+   "n": 10857,
+   "mean": 0.1573418858122225,
+   "ref_mean": 0.15766289396338018,
+   "skill": 0.0020360412211654078,
+   "ci95": [
+    -0.006679830743623552,
+    0.010992813258644374
+   ],
+   "dm_hln": -0.46463582318691493,
+   "dm_p": 0.6422015921046946,
+   "ref": "frozen",
+   "score": "crps"
+  }
+ },
+ "frozen_vs": {
+  "grid_climatology": {
+   "n": 10873,
+   "mean": 0.15754932591725718,
+   "ref_mean": 0.14668796826580266,
+   "skill": -0.07404395725062773,
+   "ci95": [
+    -0.08276101219222885,
+    -0.06545693318419205
+   ],
+   "dm_hln": 17.23620684248392,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "no_change": {
+   "n": 10873,
+   "mean": 0.15754932591725718,
+   "ref_mean": 0.1925332352376615,
+   "skill": 0.1817032227044877,
+   "ci95": [
+    0.1733728687332286,
+    0.19053551463532012
+   ],
+   "dm_hln": -33.912702745954256,
+   "dm_p": 0.0,
+   "ref": "no_change",
+   "score": "crps"
+  },
+  "random_analogs": {
+   "n": 10873,
+   "mean": 0.15754932591725718,
+   "ref_mean": 0.15890311720659211,
+   "skill": 0.008519601837482238,
+   "ci95": [
+    0.0005764482668363537,
+    0.016437794546082345
+   ],
+   "dm_hln": -2.165007786794714,
+   "dm_p": 0.03040877325635405,
+   "ref": "random_analogs",
+   "score": "crps"
+  }
+ },
+ "the_comparison": {
+  "n": 10857,
+  "mean": 0.1573418858122225,
+  "ref_mean": 0.15766289396338018,
+  "skill": 0.0020360412211654078,
+  "ci95": [
+   -0.006679830743623552,
+   0.010992813258644374
+  ],
+  "dm_hln": -0.46463582318691493,
+  "dm_p": 0.6422015921046946,
+  "ref": "frozen",
+  "score": "crps"
+ },
+ "diagnostic_fair": {
+  "what": "Ferro size-corrected CRPS (Amendment A.5 / E.3, inherited by \u00a70.2 and required by \u00a73.2). A k = 12 atom forecast is charged E|X-X'|/(2k) that a large climatology pool is not, so the correction can only RAISE the engine's measured standing against climatology. It is a diagnostic and it gates nothing: the registered CRPS decides.",
+  "means": {
+   "fitted": 0.1573418858122225,
+   "fitted_fair": 0.14483523021270667,
+   "frozen": 0.15754932591725718,
+   "frozen_fair": 0.1455520779929564,
+   "climatology": 0.14668796826580263,
+   "climatology_fair": 0.1458643522672503
+  },
+  "fitted_vs_climatology_registered": {
+   "n": 10857,
+   "mean": 0.1573418858122225,
+   "ref_mean": 0.14677651243919038,
+   "skill": -0.07198272528385208,
+   "ci95": [
+    -0.08108672140073625,
+    -0.063650664548914
+   ],
+   "dm_hln": 16.20360420992079,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "fitted_vs_climatology_fair": {
+   "n": 10857,
+   "mean": 0.1448352302127067,
+   "ref_mean": 0.14595679687316632,
+   "skill": 0.007684237284504403,
+   "ci95": [
+    -0.0008498551927932745,
+    0.016332015787426747
+   ],
+   "dm_hln": -1.7719091386938506,
+   "dm_p": 0.07643768580394528,
+   "ref": "grid_climatology_fair",
+   "score": "crps"
+  },
+  "frozen_vs_climatology_fair": {
+   "n": 10873,
+   "mean": 0.1455520779929564,
+   "ref_mean": 0.14586435226725028,
+   "skill": 0.002140853947109167,
+   "ci95": [
+    -0.00611548606555684,
+    0.010631855245301795
+   ],
+   "dm_hln": -0.5088783495224638,
+   "dm_p": 0.6108478231412775,
+   "ref": "grid_climatology_fair",
+   "score": "crps"
+  }
+ },
+ "calibration": {
+  "pinball": {
+   "pin10": 0.05929909223467508,
+   "pin50": 0.10269145731047243,
+   "pin90": 0.05429577711104404
+  },
+  "pit_hist_fitted": [
+   1751,
+   778,
+   819,
+   842,
+   1192,
+   1334,
+   835,
+   814,
+   815,
+   1532
+  ],
+  "pit_hist_climatology": [
+   1178,
+   983,
+   1061,
+   1056,
+   1067,
+   1140,
+   1088,
+   1090,
+   1105,
+   1095
+  ],
+  "pit_n": 10857,
+  "note": "a calibrated forecast has a flat PIT; \u00a73 registers the histogram, not a test statistic"
+ },
+ "per_target": {
+  "brent": {
+   "n": 2000,
+   "mean": 0.06998213132746228,
+   "ref_mean": 0.06601640564913185,
+   "skill": -0.060071820623008865,
+   "ci95": [
+    -0.08242276490716414,
+    -0.03786894599770492
+   ],
+   "dm_hln": 6.05098928079336,
+   "dm_p": 1.714245634332201e-09,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "wti": {
+   "n": 1974,
+   "mean": 0.06515578918547121,
+   "ref_mean": 0.06187795492625753,
+   "skill": -0.052972569360445254,
+   "ci95": [
+    -0.0735682050456141,
+    -0.031114864518040637
+   ],
+   "dm_hln": 5.552102713084709,
+   "dm_p": 3.2041667097360005e-08,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "diesel_crack": {
+   "n": 1953,
+   "mean": 0.22327351479213198,
+   "ref_mean": 0.2079527647780996,
+   "skill": -0.0736741828384957,
+   "ci95": [
+    -0.09115404118823883,
+    -0.056653324561496375
+   ],
+   "dm_hln": 8.795544594338386,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "gasoline_crack": {
+   "n": 1925,
+   "mean": 0.37992542672084995,
+   "ref_mean": 0.351220543224475,
+   "skill": -0.08172894225617333,
+   "ci95": [
+    -0.09892699851017314,
+    -0.06530596876816971
+   ],
+   "dm_hln": 10.12884948728702,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "henry_hub": {
+   "n": 1383,
+   "mean": 0.10599731248622203,
+   "ref_mean": 0.09813849604067573,
+   "skill": -0.08007883514221614,
+   "ci95": [
+    -0.105568628437808,
+    -0.056178233026250544
+   ],
+   "dm_hln": 7.085262774657148,
+   "dm_p": 2.204680882300636e-12,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "propane": {
+   "n": 1622,
+   "mean": 0.07748160281204688,
+   "ref_mean": 0.07485565097817297,
+   "skill": -0.03508020836849868,
+   "ci95": [
+    -0.05932264212542711,
+    -0.012715103373180109
+   ],
+   "dm_hln": 3.2251073025670047,
+   "dm_p": 0.0012843436031715338,
+   "ref": "grid_climatology",
+   "score": "crps"
+  }
+ },
+ "per_horizon": {
+  "h5": {
+   "n": 2204,
+   "mean": 0.08961774908579893,
+   "ref_mean": 0.08571936210363972,
+   "skill": -0.045478488015879615,
+   "ci95": [
+    -0.06180384074623843,
+    -0.0306690139898372
+   ],
+   "dm_hln": 6.133015856242772,
+   "dm_p": 1.019133222257551e-09,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "h10": {
+   "n": 2187,
+   "mean": 0.1183049016644721,
+   "ref_mean": 0.11230179191848565,
+   "skill": -0.053455155464873005,
+   "ci95": [
+    -0.06804525955067754,
+    -0.03908451486207166
+   ],
+   "dm_hln": 7.3600059528414565,
+   "dm_p": 2.589040093425865e-13,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "h20": {
+   "n": 2163,
+   "mean": 0.15483345727853476,
+   "ref_mean": 0.1441396584127756,
+   "skill": -0.07419053842305567,
+   "ci95": [
+    -0.08929742535660239,
+    -0.05985328421829585
+   ],
+   "dm_hln": 10.013568365567398,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "h40": {
+   "n": 2131,
+   "mean": 0.1984176159682137,
+   "ref_mean": 0.18421411614489133,
+   "skill": -0.07710321076670779,
+   "ci95": [
+    -0.09353642210925538,
+    -0.05983211050543634
+   ],
+   "dm_hln": 8.655482267875971,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  },
+  "h60": {
+   "n": 2172,
+   "mean": 0.22756805138870365,
+   "ref_mean": 0.20934104046894242,
+   "skill": -0.08706850256849363,
+   "ci95": [
+    -0.1044880456940655,
+    -0.06927196410187793
+   ],
+   "dm_hln": 9.744752589148762,
+   "dm_p": 0.0,
+   "ref": "grid_climatology",
+   "score": "crps"
+  }
+ },
+ "pooling_disclosure": {
+  "H_eff": 1.547,
+  "H_eff_random_walk_benchmark": 1.55,
+  "R_horizons": 0.137,
+  "C_eff_joint": 4.255,
+  "n_eff_joint": 1979.1,
+  "rule": "Part III \u00a73.2: five horizons are worth about one and a half, and this pairing is mandatory beside every pooled-horizon number. n_nominal is never reported as n_eff."
+ },
+ "training": {
+  "fitted_parameters": 5,
+  "required_effective_units": 100,
+  "available_inner_effective": 989.5,
+  "legitimate": true,
+  "n_reads_with_a_fit": 414,
+  "distinct_selections": 15,
+  "modal_selection": [
+   0.25,
+   0.5,
+   0.0,
+   0.25,
+   4.0
+  ],
+  "modal_share": 0.249,
+  "blocks": [
+   "physical",
+   "market",
+   "macro",
+   "geopolitical"
+  ],
+  "note": "\u00a73.7.3 registered that the weight trajectory is published: a fitted model whose weights swing across folds is a different object from one whose weights converge."
+ },
+ "determinism": {
+  "content_digest": "40ce38396b6da3f9e67f878cf43cc0a9901b451e4d3ca752d1ddf379e167cd43"
+ }
+}

@@ -764,6 +764,18 @@ Named so that no one reads the fix as larger than it is.
 - **It does not touch the P target**, which does not presuppose an adversary and is unaffected.
 - **It does not re-score anything.** No score, skill, CI or p-value in this repository moves
   because of this text.
+- **It does not reach an undated record on the basis Amendment 2 did not choose**, and that
+  leaves a residual of the §A4.1(iii) shape. §A4.2 rule 2 is evaluated on the chosen basis, so
+  a dyadically-covered event whose *only* undated records are location-basis still falls to
+  rule 3 and is published as level 0. `iran_sanctions_reimposed_2018` is the case found while
+  testing: ICB covers, no Iran–USA crisis is recorded in W (a genuine dated zero on the dyadic
+  question), while the ICB records that did match Iran singly — the Houthi Rebellion and North
+  Korea Nuclear VII — are "ongoing at d" and set nothing. The level 0 is defensible under
+  A2.1 (the dyad did not escalate; an unrelated ongoing crisis elsewhere does not make that
+  question unanswerable), and `level_source` on such a row lists the covering sources rather
+  than setters, which is registered A2.3 behaviour and reads worse than it is. It is recorded
+  here as a residual and not fixed, because fixing it would mean letting location evidence
+  speak on a dyadic event — the thing Amendment 2 exists to prevent.
 
 ### A4.10 The counts, computed (appended 2026-09-02, after §A4.1–§A4.9 were committed)
 

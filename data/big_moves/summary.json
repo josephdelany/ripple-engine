@@ -13,12 +13,12 @@
   "no_identified_event": 15,
   "everyday_base_rate_pct": 18.3,
   "p_class_given_big": {
-   "sanctions": [
-    9,
-    43
-   ],
    "conflict_escalation": [
     10,
+    43
+   ],
+   "sanctions": [
+    9,
     43
    ],
    "infrastructure_attack": [
@@ -95,12 +95,12 @@
     5,
     46
    ],
-   "sanctions": [
-    6,
-    46
-   ],
    "conflict_escalation": [
     12,
+    46
+   ],
+   "sanctions": [
+    6,
     46
    ],
    "demand_shock": [
@@ -155,11 +155,11 @@
   "tier": "daily",
   "unit": "trading days",
   "first": "1986-06-02",
-  "last": "2026-08-03",
+  "last": "2026-08-25",
   "registration": "BIG_MOVES_REGISTRATION.md (Amendment 2)",
   "n_episodes": 36,
   "no_identified_event": 7,
-  "everyday_base_rate_pct": 16.8,
+  "everyday_base_rate_pct": 16.7,
   "p_class_given_big": {
    "opec_decision": [
     13,
@@ -181,12 +181,12 @@
     6,
     36
    ],
-   "sanctions": [
-    13,
-    36
-   ],
    "chokepoint_disruption": [
     11,
+    36
+   ],
+   "sanctions": [
+    13,
     36
    ]
   },
@@ -235,12 +235,12 @@
   "no_identified_event": 1,
   "everyday_base_rate_pct": 14.7,
   "p_class_given_big": {
-   "sanctions": [
-    8,
-    18
-   ],
    "conflict_escalation": [
     11,
+    18
+   ],
+   "sanctions": [
+    8,
     18
    ],
    "policy_response": [
@@ -251,11 +251,11 @@
     9,
     18
    ],
-   "infrastructure_attack": [
+   "demand_shock": [
     5,
     18
    ],
-   "demand_shock": [
+   "infrastructure_attack": [
     5,
     18
    ],

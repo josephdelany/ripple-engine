@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-09-02T20:43:06+00:00",
- "fast": true,
+ "generated_at": "2026-09-03T01:34:23+00:00",
+ "fast": false,
  "items": [
   {
    "id": "D1",
    "name": "D1 pytest green incl. every named test",
-   "status": "PARTIAL",
+   "status": "FAIL",
    "evidence": "tests/",
-   "note": "pytest not run (--fast); run without --fast for the real D1"
+   "note": "440 passed, 15 skipped, 1 xfailed, 4 warnings in 380.40s (0:06:20)"
   },
   {
    "id": "D2",
@@ -19,30 +19,30 @@
   {
    "id": "D3",
    "name": "D3 kappa published; rule applied; audit file",
-   "status": "PARTIAL",
-   "evidence": "data/audits/ies90_audit_30.csv",
-   "note": "kappa published (data/state/outcomes_kappa.json); the kappa<0.6 replacement rule is superseded by OUTCOME_MAPPING.md Amendment 1 (labels retired, not replaced); 30-event IES-90 audit sheet present; Joe's audit NOT recorded (data/audits/outcome_audit.json absent)"
+   "status": "PASS",
+   "evidence": "data/state/outcomes_kappa.json",
+   "note": "kappa published; rule superseded by Amendment 1 (sr_outcome_90 retired, IES-90 adopted); audit sheet present; Joe's audit recorded"
   },
   {
    "id": "D3a",
    "name": "D3a label audit recorded by Joe (auditor joe, all rows, kappa)",
-   "status": "FAIL",
+   "status": "PARTIAL",
    "evidence": "data/audits/outcome_audit.json",
-   "note": "absent -- Joe records it with python3 src/audit_ies90.py (never the code)"
+   "note": "auditor joe; 1/30 rows; kappa None; passed False (threshold 0.6)"
   },
   {
    "id": "D4",
    "name": "D4 walk summary: tiers, baselines, DM/SPA, placebo, permutation, regimes, spec curve, power, leakage",
    "status": "PASS",
    "evidence": "data/walk_forward/summary.json",
-   "note": "run walk_20260902T193022Z (file generated 2026-09-02T19:34:07, written 2026-09-02T19:53:59+00:00); present: ['both tiers', \"four baselines (daily G has 4: ['climatology', 'frozen', 'random_analogs', 'persistence'])\", 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: []"
+   "note": "run walk_20260903T003422Z (file generated 2026-09-03T00:35:33, written 2026-09-03T01:03:14+00:00); present: ['both tiers', \"four baselines (daily G has 4: ['climatology', 'frozen', 'random_analogs', 'persistence'])\", 'DM p-values', 'SPA p-value', 'placebo', 'permutation', 'regime blocks', 'specification curve', 'power', 'leakage test asserted']; missing: []"
   },
   {
    "id": "D5",
    "name": "D5 9/11, 1990, 2026 demos from sealed inputs on /walk",
    "status": "PASS",
    "evidence": "data/walk_forward/reads.jsonl",
-   "note": "sealed reads {'september_11_attacks_2001': 3, 'iraq_invades_kuwait_1990': 3, 'hormuz_closure_2026': 3}; /api/walk/read route; tests/test_demo_911.py"
+   "note": "sealed reads {'september_11_attacks_2001': 1, 'iraq_invades_kuwait_1990': 1, 'hormuz_closure_2026': 1}; /api/walk/read route; tests/test_demo_911.py"
   },
   {
    "id": "D6",
@@ -67,8 +67,8 @@
   }
  ],
  "counts": {
-  "PASS": 5,
-  "PARTIAL": 3,
+  "PASS": 6,
+  "PARTIAL": 2,
   "FAIL": 1
  },
  "pre1987_admitted": {
@@ -78,12 +78,12 @@
   "dossiers_admissible": 97
  },
  "walk_summary_at_start": {
-  "run_id": "walk_20260902T193022Z",
-  "written": "2026-09-02T19:53:59+00:00"
+  "run_id": "walk_20260903T003422Z",
+  "written": "2026-09-03T01:03:14+00:00"
  },
  "walk_summary_at_end": {
-  "run_id": "walk_20260902T193022Z",
-  "written": "2026-09-02T19:53:59+00:00"
+  "run_id": "walk_20260903T003422Z",
+  "written": "2026-09-03T01:03:14+00:00"
  },
  "walk_summary_changed_during_run": false
 }

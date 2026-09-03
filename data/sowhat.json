@@ -1,63 +1,8 @@
 {
-  "generated_at": "2026-09-02T18:08:49+00:00",
-  "regime": "OFF",
-  "so_what": "Regime is OFF (VIX-stress calm). If a shock lands, the VALIDATED propagation is into Brent oil +5.6%, Heating oil +5.6%, 5Y breakeven +16.7bps, Palladium +5.2%, S&P 500 +2.1%, Platinum +7.2%. Market-priced gap: over_priced_fear. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
-  "validated_propagation": [
-    {
-      "to": "Brent oil",
-      "strength": 5.5615,
-      "unit": "%",
-      "ci": [
-        0.9436,
-        9.6525
-      ]
-    },
-    {
-      "to": "Heating oil",
-      "strength": 5.5688,
-      "unit": "%",
-      "ci": [
-        1.4905,
-        9.3587
-      ]
-    },
-    {
-      "to": "5Y breakeven",
-      "strength": 16.7429,
-      "unit": "bps",
-      "ci": [
-        4.1071,
-        30.5914
-      ]
-    },
-    {
-      "to": "Palladium",
-      "strength": 5.2181,
-      "unit": "%",
-      "ci": [
-        0.2974,
-        10.521
-      ]
-    },
-    {
-      "to": "S&P 500",
-      "strength": 2.1192,
-      "unit": "%",
-      "ci": [
-        0.3418,
-        3.489
-      ]
-    },
-    {
-      "to": "Platinum",
-      "strength": 7.2205,
-      "unit": "%",
-      "ci": [
-        2.0387,
-        14.6252
-      ]
-    }
-  ],
+  "generated_at": "2026-09-03T04:34:54+00:00",
+  "regime": "ON",
+  "so_what": "Regime is ON (VIX-stress elevated). If a shock lands, the VALIDATED propagation is into nothing validated. Market-priced gap: aligned. Everything else (direction by event type, cross-node leads) is a null/trap -- not a claim.",
+  "validated_propagation": [],
   "base_rate_ripple_by_type": [
     {
       "type": "opec_decision",
@@ -118,20 +63,20 @@
   ],
   "priced_gap": {
     "gap_id": "gap.LIVE",
-    "as_of": "2026-09-02T14:29:49+00:00",
-    "anchor_date": "2026-08-28",
+    "as_of": "2026-09-03T01:46:36+00:00",
+    "anchor_date": "2026-09-01",
     "subject": "LIVE state (no dated shock -- standing read)",
-    "engine_call": "calm",
-    "engine_p": 0.4,
-    "priced_ovx": 55.8,
-    "priced_ovx_pct": 90.8,
-    "gap_direction": "over_priced_fear",
+    "engine_call": "turbulent",
+    "engine_p": 0.6,
+    "priced_ovx": 49.13,
+    "priced_ovx_pct": 84.1,
+    "gap_direction": "aligned",
     "horizon_days": 20,
     "outcome": null,
     "brier": null,
     "resolved_at": null,
     "source_url": "",
-    "notes": "Live: H1 OFF (VIX %ile 18); market OVX 56 (p90.8); gap=over_priced_fear."
+    "notes": "Live: H1 ON (VIX %ile 48); market OVX 49 (p84.1); gap=aligned."
   },
   "active_situations": [
     {

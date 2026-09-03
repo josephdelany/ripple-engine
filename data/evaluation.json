@@ -4,11 +4,11 @@
   },
   "placebo": {
     "ran": true,
-    "real_amp": 5.5615,
-    "placebo_mean": -0.0113,
+    "real_amp": 6.0412,
+    "placebo_mean": -0.0054,
     "placebo_ci95": [
-      -4.3937,
-      4.3591
+      -4.4851,
+      4.3229
     ],
     "null_as_expected": true,
     "note": "state labels shuffled on H1's episodes; amplification collapses to ~0 (CI spans 0). A non-null placebo would mean the framework finds signal in noise -- it does not."
@@ -16,40 +16,40 @@
   "surface_consistency": {
     "quantity": "H1 amplification (Brent, pp)",
     "values": {
-      "validation_claims": 5.5615,
-      "cross_asset_conditioned": 5.5615,
-      "sowhat": 5.5615
+      "validation_claims": 6.0412,
+      "cross_asset_conditioned": 6.0412,
+      "sowhat": null
     },
     "all_consistent": true
   },
   "calibration": {
     "ran": true,
     "n_scored": 247,
-    "brier": 0.2466,
+    "brier": 0.245,
     "base_rate_brier": 0.2495,
-    "skill_vs_base": 0.0029,
+    "skill_vs_base": 0.0045,
     "decomposition": {
-      "reliability": 0.0013,
-      "resolution": 0.0042,
+      "reliability": 0.0008,
+      "resolution": 0.0053,
       "uncertainty": 0.2495
     },
     "reliability_bins": [
       {
         "forecast_p": 0.4,
-        "n": 109,
-        "observed": 0.45,
+        "n": 107,
+        "observed": 0.439,
         "observed_ci95": [
-          0.359,
-          0.543
+          0.349,
+          0.534
         ]
       },
       {
         "forecast_p": 0.6,
-        "n": 138,
-        "observed": 0.58,
+        "n": 140,
+        "observed": 0.586,
         "observed_ci95": [
-          0.496,
-          0.659
+          0.503,
+          0.664
         ]
       }
     ],
@@ -62,8 +62,8 @@
         "n": 87,
         "robust_leave_one_out": true,
         "jackknife_amp_range": [
-          4.7323,
-          6.5494
+          5.2176,
+          6.3693
         ]
       },
       {
@@ -73,15 +73,6 @@
         "jackknife_amp_range": [
           3.2659,
           4.4243
-        ]
-      },
-      {
-        "claim": "palladium_supply",
-        "n": 75,
-        "robust_leave_one_out": true,
-        "jackknife_amp_range": [
-          3.7776,
-          6.317
         ]
       },
       {
@@ -154,18 +145,18 @@
   ],
   "temporal_holdout": {
     "holds_out_of_sample": true,
-    "oos_2019plus_amp_pp": 2.921,
+    "oos_2019plus_amp_pp": 13.384,
     "in_sample_pre2019_amp_pp": 5.562
   },
   "quarterly_calibration": {
     "n": 247,
     "span": "2007-09..2026-06",
-    "brier": 0.2466,
-    "skill_vs_base": 0.0029,
+    "brier": 0.245,
+    "skill_vs_base": 0.0045,
     "n_quarters": 67
   },
   "overall": {
     "framework_sound": true,
-    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0029; H1 holds out-of-sample (2.921pp on 2019+)"
+    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0045; H1 holds out-of-sample (13.384pp on 2019+)"
   }
 }

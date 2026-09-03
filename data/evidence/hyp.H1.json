@@ -3,7 +3,7 @@
   "tier": "SUGGESTIVE",
   "statement": "Geopolitical shocks ripple harder into Brent oil when VIX stress is elevated.",
   "quantity": {
-    "value": 5.5615,
+    "value": 6.0412,
     "unit": "pp",
     "metric": "|CAR+20| high-minus-low amplification"
   },
@@ -12,8 +12,8 @@
   "statistics": {
     "n_episodes": 87,
     "ci95": [
-      0.9436,
-      9.6525
+      1.557,
+      10.087
     ],
     "survives_fdr": true,
     "survives_bonferroni": true
@@ -37,7 +37,7 @@
         "state_t_minus_1": 32.699
       },
       "title": "Retreating Iraqi forces torch Kuwaiti oil wells",
-      "source_url": "https://en.wikipedia.org/wiki/Kuwaiti_oil_fires"
+      "source_url": "https://www.govinfo.gov/content/pkg/PPP-1991-book1/html/PPP-1991-book1-doc-pg165.htm"
     },
     {
       "event_id": "iraq_un_986_ofp_1995",
@@ -47,7 +47,7 @@
         "state_t_minus_1": 8.228
       },
       "title": "UN Resolution 986 oil-for-food adopted",
-      "source_url": "https://digitallibrary.un.org/record/176622"
+      "source_url": "https://ofac.treasury.gov/media/5406/download"
     },
     {
       "event_id": "ilsa_sanctions_1996",
@@ -67,7 +67,7 @@
         "state_t_minus_1": 94.631
       },
       "title": "Iraq oil-for-food exports begin",
-      "source_url": "https://www.un.org/depts/oip/background/oilexports.html"
+      "source_url": "https://press.un.org/en/1997/19971204.sc6452.html"
     },
     {
       "event_id": "thai_baht_float_1997",
@@ -77,7 +77,7 @@
         "state_t_minus_1": 97.645
       },
       "title": "Thailand floats the baht - Asian crisis begins",
-      "source_url": "https://www.bot.or.th/en/our-roles/special-measures/Tom-Yum-Kung-lesson.html"
+      "source_url": "https://www.bis.org/publ/r_qt9711.pdf"
     },
     {
       "event_id": "korea_imf_bailout_1997",
@@ -87,7 +87,7 @@
         "state_t_minus_1": 98.49
       },
       "title": "South Korea requests IMF bailout",
-      "source_url": "https://www.washingtonpost.com/archive/politics/1997/11/21/s-korea-changes-stance-begins-talks-for-imf-aid/5d029a3f-6d3b-4e8e-917b-9445f3de620d/"
+      "source_url": "https://www.bis.org/publ/r_qt9802.pdf"
     },
     {
       "event_id": "opec_cut_march_1998",
@@ -97,7 +97,7 @@
         "state_t_minus_1": 93.519
       },
       "title": "OPEC agrees first 1998 production cut in Vienna",
-      "source_url": "https://en.wikipedia.org/wiki/1998_world_oil_market_chronology"
+      "source_url": "https://ora.ox.ac.uk/objects/uuid:4e02651d-eab4-4af2-8f38-9bc41ae07f50/files/mabb1b7cb33bdb24c0c91c814cca05d5d"
     },
     {
       "event_id": "opec_cut_june_1998",
@@ -117,7 +117,7 @@
         "state_t_minus_1": 99.41
       },
       "title": "Russian sovereign default and LTCM crisis",
-      "source_url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis"
+      "source_url": "https://www.bis.org/publ/r_qt9811.pdf"
     },
     {
       "event_id": "operation_desert_fox_1998",

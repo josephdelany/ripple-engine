@@ -2,8 +2,7 @@
   "what": "Pre-declared, apt, FDR-corrected conditioning: each commodity vs its natural driver (not generic VIX-stress). Pre-registration is the module docstring.",
   "n_hypotheses": 4,
   "validated": [
-    "copper_growth",
-    "palladium_supply"
+    "copper_growth"
   ],
   "results": [
     {
@@ -13,14 +12,14 @@
       "sign": "high",
       "mechanism": "gold is a safe haven -> a shock ripples harder when VIX stress is elevated",
       "n": 71,
-      "amp": 1.6369,
+      "amp": 1.4973,
       "ci": [
-        -0.0259,
-        3.4268
+        -0.1886,
+        3.303
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.0307,
-      "fdr_q": 0.0409,
+      "perm_p": 0.0435,
+      "fdr_q": 0.058,
       "validated": false
     },
     {
@@ -30,14 +29,14 @@
       "sign": "high",
       "mechanism": "silver (precious+industrial) shares gold's stress channel",
       "n": 71,
-      "amp": 1.5468,
+      "amp": 1.176,
       "ci": [
-        -2.0688,
-        5.4385
+        -2.2987,
+        5.3461
       ],
       "ci_excludes_zero": false,
-      "perm_p": 0.2145,
-      "fdr_q": 0.2145,
+      "perm_p": 0.2751,
+      "fdr_q": 0.2751,
       "validated": false
     },
     {
@@ -64,15 +63,15 @@
       "sign": "high",
       "mechanism": "palladium is supply-concentrated (Russia/SA) -> stress channel",
       "n": 75,
-      "amp": 5.2181,
+      "amp": 5.1435,
       "ci": [
-        0.2974,
-        10.521
+        -0.251,
+        10.1076
       ],
-      "ci_excludes_zero": true,
-      "perm_p": 0.0221,
-      "fdr_q": 0.0409,
-      "validated": true
+      "ci_excludes_zero": false,
+      "perm_p": 0.0232,
+      "fdr_q": 0.0464,
+      "validated": false
     }
   ],
   "note": "wheat excluded on purpose (supply/weather-driven; no clean market-state proxy)."

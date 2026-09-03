@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-02T18:30:10+00:00",
-  "verdict": "GREEN",
+  "generated_at": "2026-09-03T04:34:54+00:00",
+  "verdict": "AMBER",
   "freshness": {
     "overall": "OK",
     "n_dead": 0,
@@ -8,7 +8,15 @@
     "dead_series": []
   },
   "coverage": {
-    "undercovered_domains": [],
+    "undercovered_domains": [
+      "commodities",
+      "macro",
+      "energy",
+      "me-risk",
+      "conflict",
+      "geopolitics",
+      "supply-chain"
+    ],
     "n_dead_feeds": 0
   },
   "review_queue": {
@@ -20,8 +28,8 @@
     "run_id": "2026-08-31T20:14:23+00:00"
   },
   "backups": {
-    "count": 7,
-    "newest": "oil_20260831_202523.db.gz",
+    "count": 11,
+    "newest": "oil_20260903_000145_pre_spine_apply.db.gz",
     "restore_tested": true
   },
   "evaluation": {
@@ -31,6 +39,6 @@
     "blocked_types": []
   },
   "reasons": [
-    "GREEN: fresh, covered, last run OK, framework sound"
+    "AMBER: undercovered domains ['commodities', 'macro', 'energy', 'me-risk', 'conflict', 'geopolitics', 'supply-chain']"
   ]
 }
