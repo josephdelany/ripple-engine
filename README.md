@@ -72,8 +72,8 @@ sanctions and chokepoint disruptions sit inside them *less* often on crude — a
 2–3× more often on the diesel crack. Geopolitics moves products more than crude.
 
 **On prediction (the walk, daily tier, 253 scored price reads and 150 labelled
-escalation reads; numbers from `data/walk_forward/summary.json`, run 210135Z, the
-first run in which the vintage rule binds on the per-event situation fields):**
+escalation reads; numbers from `data/walk_forward/summary.json`, run 003422Z, on the
+repaired corpus, with the vintage rule binding on the per-event situation fields):**
 
 **The engine is significantly *worse* than the base rate on both targets** —
 escalation Brier skill **−0.097** (95% CI −0.180 … −0.018, DM p 0.022), price CRPS
@@ -111,6 +111,20 @@ content digest.
 (escalation) and 0.085 (price); detecting +0.05 would take ~1,200 scored reads
 against 150 today. So "worse than the base rate" is established; "no small positive
 edge exists" is not, and the corpus is roughly eight times too small to settle it.
+
+**The propagation half says the same thing.** A registered, placebo-controlled local-
+projection study of the chain — crude → products → cracks → gas/LNG → fertilizer →
+freight → credit — finds **21 of 477 node×shock cells transmit, against 1–24 expected if
+nothing transmitted at all**, and **zero of 99** at the gas and fertilizer hops. Pass-
+through ratios are not identifiable because the denominator is null. The same estimator
+recovers Känzig's published oil-supply-news shock cleanly at every horizon, so this is
+not an instrument failure. Five of six previously "validated" amplification edges were
+retracted under a re-test registered before it ran. `docs/RIPPLE_FINDINGS.md`.
+
+**A negative control worth stating:** the corpus's sourcing was repaired between runs —
+66 field changes — and **not one forecast number moved**, because the repair touched only
+provenance columns the engine never reads. The results were not resting on the weak
+citations.
 
 **Verdict as computed: SUGGESTIVE / null on both targets** — and the honest
 description is worse than the label: significantly worse than the base rate,

@@ -1,7 +1,7 @@
 # Three sealed reads, walked through
 
 PATH Step 10. Each page below is written *from the sealed read and its score* in
-`data/walk_forward/{reads,scores}.jsonl`, run `walk_20260902T182828Z` — the run
+`data/walk_forward/{reads,scores}.jsonl`, run `walk_20260903T003422Z` — the run
 `summary.json` and `docs/PAPER_DRAFT.md` report. Nothing is reconstructed from
 memory; where a number appears, the field it came from is named. The reads were
 hashed and time-stamped before the outcome was looked up (`sealed_at` <
@@ -20,5 +20,10 @@ event. A lower Brier / CRPS is better. The point of the pages is not that the
 engine was right — on these three it mostly was not — but that you can see
 exactly what it knew, what it said, and how it was scored, with nothing edited
 after the fact.
+
+Every hash quoted on these pages stays resolvable: `/api/walk/read` falls back to the
+gzipped run archive when a run is no longer the live one, so a citation does not rot the
+next time the walk is re-run. The numbers on these three pages are unchanged across runs
+210135Z and 003422Z — the spine repair between them moved no forecast number.
 
 Open any read on the desk: `./go` → Walk → click the event.

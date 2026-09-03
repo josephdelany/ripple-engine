@@ -1,17 +1,25 @@
 # Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy
 
 **Joseph Delany** — Colby College, Department of History (Middle East focus)
-Draft v0.3, 2026-09-02. Numbers from run `walk_20260902T210135Z`
+Draft v1.0, 2026-09-03. Numbers from run `walk_20260903T003422Z`
 (`data/walk_forward/summary.json`) unless a file is named. Every number in this
 draft is traced in Appendix A to the file that produced it; none is typed from memory.
 
-This draft supersedes v0.2 (run 193022Z) and v0.1 (182828Z). The change is not
-cosmetic: Amendment H to the protocol enforced the vintage rule on the per-event
-situation fields, and the engine's headline moved from *parity with the base rate*
-to *significantly worse than the base rate*. Every superseded number is in git
-history and in `data/handoffs/B_run_delta.md`; none is deleted. Three runs, each
-stricter than the last, each published as computed — that sequence is the result,
-not an embarrassment on the way to one.
+This is the final version of the day's work. It supersedes v0.3 (run 210135Z), v0.2
+(193022Z) and v0.1 (182828Z); every superseded number survives in git history and in
+`data/handoffs/B_run_delta.md`, none is deleted. Four runs, each stricter than the
+last, each published as computed — that sequence is itself the result.
+
+The decisive change was Amendment H, which enforced the vintage rule on the per-event
+situation fields and moved the headline from *parity with the base rate* to
+*significantly worse than the base rate* (§8). The run reported here re-ran everything
+on a corpus whose sourcing had since been repaired — 66 field changes across nineteen
+pre-1990 records and the 1990s pass — and **not one forecast number moved**. The
+content digest is identical for the third independent run. That is a negative control
+worth stating: the results were never resting on the weak citations the repair fixed,
+because the repair touched only provenance columns the engine does not read (verified
+by diffing the live corpus against the sealed reads: zero date changes, zero type
+changes, zero label changes; `data/gates/negative_control_spine_2026-09-03.md`).
 
 ---
 
@@ -54,7 +62,12 @@ engine is noise" at *p* = 0.002 before the vintage amendment no longer rejects
 (*p* = 0.124): the structure it had detected was in the retrospective codings, not
 in the retrieval. The specification curve is negative in **all 162** registered
 settings. The engine's one surviving win is against persistence on price (+0.129,
-*p* < 0.001). Separately, a market-defined census of the largest Brent moves
+*p* < 0.001). A companion propagation study, registered and placebo-controlled, finds
+the same silence on the transmission side: across 477 node×shock cells only 21
+transmit, against 1–24 expected under no transmission at all, with **zero of 99** at
+the gas/LNG and fertilizer hops — while the same estimator recovers Känzig's (2021)
+published oil-supply-news shock cleanly at every horizon, so the nulls are not an
+instrument failure (§11). Separately, a market-defined census of the largest Brent moves
 since 1987 finds that 35% have no identifiable event in the corpus, that in half of
 the attributed episodes every attributed event was knowable more than 20 trading
 days before the move began, and that
@@ -313,7 +326,7 @@ of the software unless this rule produced it (acceptance check D6).
 
 Daily tier: 299 reads, 253 scored after burn-in (price), 150 with an escalation
 label. The monthly tier has 14 reads and 0 scored beyond burn-in; it describes and
-cannot validate (§11).
+cannot validate (§12).
 
 **The vintage amendment, and what it did.** This run is the first in which the
 per-event situation fields are filtered by their own `knowable_at` (Amendment H;
@@ -322,7 +335,8 @@ rule **262 of 313 events have no situation field knowable at *t*** — the codin
 exist, but nothing establishes an analyst could have held them on the day — so
 retrieval for those events runs on the market block alone. Everything below is
 after that filter. The same code on the same corpus, one run earlier, produced
-escalation skill −0.005 and price −0.030 (`data/handoffs/B_run_delta.md`). The
+escalation skill −0.005 and price −0.030 (`data/handoffs/B_run_delta.md`, run
+210135Z). The
 difference between those two runs is the difference between conditioning on the
 world as recorded and conditioning on the world as knowable.
 
@@ -462,7 +476,56 @@ That is a finding about historical data availability, not about the market. It i
 also the finding that the vintage rule was written to be able to catch, and the
 reason it was registered before any number was computed.
 
-## 11. Limitations
+## 11. The propagation study, in brief
+
+The engine's second claim is not about forecasting at all: that a shock arriving at
+crude *travels* — into refined products, cracks, gas and LNG, fertilizer, freight and
+credit. That claim was, until this version, supported only by a descriptive table of
+event-window reactions. It has now been tested properly and is reported in full in
+`docs/RIPPLE_FINDINGS.md`; the result belongs here because it bears on the same
+question.
+
+**Design,** registered at 15:42:38 with the estimator's first line committed at
+15:59:32 (`RIPPLE_REGISTRATION.md`): local projections (Jordà 2005) of each chain node
+on the corpus event dates as identified shocks, horizons 0–60 trading days, HAC and
+stationary-bootstrap bands, de-overlapped shocks under a 35-day chain rule, and a
+placebo of 500 draws matched on the volatility and geopolitical-risk state. A cell is
+TRANSMITTING only if its 95% band excludes zero, its coefficient falls outside the
+central 95% of the matched placebo, and the Newey–West band agrees.
+
+**Result. Across 477 node×shock cells, 21 transmit, 401 are null and 55 are
+insufficient — where between 1 and 24 cells would transmit if nothing transmitted
+anywhere.** The observed count sits inside its own null interval. The registered
+expectation, that some tightening class beats the matched placebo at Brent, fails.
+
+The shape is more informative than the tally. Transmitting cells sit at the two *ends*
+— crude itself (4 of 36) and the equity and macro nodes beside the chain (13 of 171) —
+and vanish along it: **zero of 99 cells transmit at the gas/LNG and fertilizer hops**,
+four and five steps down. Pass-through ratios cannot be computed at all, because the
+denominator is null: Brent's own response at the headline horizon covers zero, so every
+hop-to-hop ratio is a number divided by something indistinguishable from zero, and the
+delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock).
+
+**This is not the machinery failing to see an effect.** The same code, on Känzig's
+(2021) published daily oil-supply-news surprise over 128 OPEC announcement days,
+recovers his result cleanly — β on Brent of +0.85 at h = 0 rising to +2.37 at h = 20,
+every horizon excluding zero, with his sign, shape and persistence. The estimator finds
+an identified shock when one is there.
+
+**And five of six prior "validated" edges were retracted.** The stress-amplification
+edges inherited from the first version of this project (geopolitical shock under
+elevated VIX → node, +20 days) were re-tested under a re-test registered before it ran.
+Brent, heating oil, 5Y breakeven, S&P 500 and platinum all returned NULL with bands
+covering zero by wide margins; only palladium survived, which is not on the oil chain
+and is what one survivor in six looks like at this base rate. The retraction is in
+`data/ripple/retraction_six.json` and the five rows are flipped in the database.
+
+Taken with §8, the two halves of this project now say the same thing in different
+languages: conditioning on the historical record does not forecast escalation or price
+better than the base rate, and geopolitical shocks do not measurably propagate down the
+petroleum chain beyond crude itself at these horizons and sample sizes.
+
+## 12. Limitations
 
 1. **Sample size, and the size of the gap.** 150 labelled escalation reads and 253
    price reads. Simulation under the measured block dependence puts the minimum
@@ -475,31 +538,50 @@ reason it was registered before any number was computed.
    situation field knowable at *t* (§8). The design's premise — condition on the
    world as it stood — is only partly exercised by the data available to exercise it.
    This is the study's largest internal threat and its clearest finding at once.
-3. **Score bias against finite analog sets.** The registered Brier and CRPS charge a
+3. **The escalation target is asked of events to which it does not apply.** An
+   independent audit of all 187 events in the four geopolitical classes, coded under a
+   hostility rule registered before any count was taken (`data/spine/CLASS_AUDIT.md`;
+   `OUTCOME_MAPPING.md` Amendments 3, 3.1, 3.2), finds **33 (18%) are not G-scorable**:
+   20 non-hostile, 13 ambiguous. Among the scored reads the figure is **27 of 150
+   (18%)**. The failures are not marginal — an ICC arbitration award and a labour
+   strike carry *use of force* and *war* respectively, off location-matched deaths with
+   no adversary; eight Chilean and Peruvian mining strikes sit in `conflict_escalation`;
+   a DRC cobalt suspension carries level 3. Because climatology is estimated from this
+   distribution, the affected reads move the base rate the engine is scored *against*,
+   not merely its own score: the level-0 share falls from 42.0% to 36.8% excluding the
+   non-hostile reads and to 32.5% excluding the ambiguous as well. A diagnostic on the
+   G-scorable subset is published beside the registered figures; the registered figures
+   themselves are not re-scored, because the reads are sealed and the rule post-dates
+   them. Ambiguous rows are left ambiguous under the sourced-or-unknown rule rather
+   than adjudicated to tidy the table.
+4. **Score bias against finite analog sets.** The registered Brier and CRPS charge a
    *k*-atom distribution an extra Σ*p_b*(1−*p_b*)/*k* and E|X−X′|/(2*k*); Ferro's
    size-corrected scores are published beside every registered one (fair Brier skill
    +0.021, fair RPS +0.119). Gates use the registered scores unchanged; whether to
    register the corrected scores prospectively for v3 is the author's decision and
    is not made retroactively.
-4. **The corpus.** §3 documents it: one source per event, none with two independent
+5. **The corpus.** §3 documents it: one source per event, none with two independent
    ones, 31 records citing an encyclopaedia their own codebook would not admit, 49
    still carrying drafting scaffolding, and a historical arm of 8 / 11 / 16 events
    for the 1970s / 1980s / 1990s. An engine reasoning by analogy is bounded by the
    analogies available; in 1990 it had seven.
-5. **Labels.** IES-90's UCDP-GED component is location-based (deaths in the country,
+6. **Labels.** IES-90's UCDP-GED component is location-based (deaths in the country,
    not between the actors), stated on every affected row. The 30-event label audit
    is pending and is a §7 gate; no verdict can rise above SUGGESTIVE without it.
-6. **Big Moves look-ahead.** The top-5% threshold uses full history, and 2 of 41
+7. **Big Moves look-ahead.** The top-5% threshold uses full history, and 2 of 41
    episodes would not clear their own point-in-time threshold — registered for v3,
    not silently fixed.
-7. **The monthly tier.** 14 reads, 0 scored; it describes and cannot validate.
-8. **"Ripple".** The propagation layer has been rebuilt as registered local
-   projections with placebos (`RIPPLE_REGISTRATION.md`, `data/ripple/`), and five of
-   the six previously "validated" amplification edges were retracted under a
-   pre-registered re-test. Those results are not claimed in this paper, which is
-   about forecasting, and will be reported separately.
+8. **The monthly tier.** 14 reads, 0 scored; it describes and cannot validate.
+9. **The corpus's classes conflate acts with incidents.** Beyond the scoring
+   consequence in item 3, the codebook's `infrastructure_attack` and
+   `chokepoint_disruption` types mix hostile acts with accidents, and
+   `conflict_escalation` and `sanctions` mix state coercion with labour disputes and
+   producer price management. A `hostility` field now records this without renaming
+   classes — renaming after seeing results would rewrite every published per-class
+   number. The correct class placements are registered for v3, applied prospectively
+   only.
 
-## 12. What would change the verdict
+## 13. What would change the verdict
 
 VALIDATED requires all of: positive registered skill with DM and SPA *p* < 0.05 on
 both tiers where *n* ≥ 30; skill > 0 in all three regime blocks; a null placebo;
@@ -532,7 +614,7 @@ formalised, "find state-similar precedents and average their outcomes", is the w
 way to use it at these horizons. On the present evidence that is the finding we would
 defend.
 
-## 13. The integrity record
+## 14. The integrity record
 
 Pre-registration files with git timestamps (`BRIEF_SKELETON.md`,
 `PRE_REGISTRATION_V2.md`, `BIG_MOVES_REGISTRATION.md`,
@@ -630,7 +712,8 @@ Voeten UNGA ideal points; World Bank WDI; Archigos; FRED. Verified register:
 
 ## Appendix A — provenance of every number in this draft
 
-Run `walk_20260902T210135Z`. Paths are in `data/walk_forward/summary.json` unless
+Run `walk_20260903T003422Z` (numerically identical to 210135Z; see the negative
+control note at the head of this draft). Paths are in `data/walk_forward/summary.json` unless
 another file is named. Regenerate the whole run with `make reproduce`; two
 independent runs reproduce content digest `2a90ff4a…`.
 
