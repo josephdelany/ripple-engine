@@ -60,6 +60,7 @@ def _corpus():
 
 
 def _walk_rows(name):
+    """Live rows keyed by event_id (last row wins, as the walk writes them)."""
     p = DATA / "walk_forward" / name
     if not p.exists():
         return {}
@@ -68,6 +69,92 @@ def _walk_rows(name):
         if line.strip():
             r = json.loads(line); out[r["event_id"]] = r
     return out
+
+
+# --- sealed reads survive archiving -------------------------------------------------------------------
+# The walk archives every prior run into data/walk_forward/runs/<run_id>/*.jsonl.gz (protocol Amendment D),
+# so a hash this project has published stops resolving the moment the next run archives it. Every citation
+# in the paper would rot. These helpers look in the live files first and then in the archives, and the
+# response always names the run that served it. (2026-09-03: the three demo hashes from walk_20260902T182828Z
+# were unreachable through /api/walk/read while docs/demos/ quoted them.)
+RUNS_DIR = DATA / "walk_forward" / "runs"
+
+
+def _archived_runs():
+    """Archived run ids, newest first."""
+    if not RUNS_DIR.is_dir():
+        return []
+    return sorted((d.name for d in RUNS_DIR.iterdir() if d.is_dir()), reverse=True)
+
+
+def _iter_jsonl(path):
+    import gzip
+    op = gzip.open if str(path).endswith(".gz") else open
+    try:
+        with op(path, "rt", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    yield json.loads(line)
+    except (OSError, ValueError):
+        return
+
+
+_HEX = __import__("re").compile(r"^[0-9a-f]{8,64}$")
+
+
+def _find_in(path, ident):
+    """The row in `path` matching `ident`: an exact hash, a hash PREFIX (>= 8 hex chars -- the demo pages and the
+    paper cite 12), or an event_id. Last match wins, as the live files do. Raises on an ambiguous prefix rather than
+    guessing which read was meant."""
+    exact = prefix = by_event = None
+    seen = set()
+    is_prefix = bool(_HEX.match(ident or ""))
+    for r in _iter_jsonl(path):
+        h = r.get("hash") or ""
+        if h == ident:
+            exact = r
+        elif is_prefix and h.startswith(ident):
+            prefix = r
+            seen.add(h)
+        if r.get("event_id") == ident:
+            by_event = r
+    if exact is not None:
+        return exact
+    if prefix is not None:
+        if len(seen) > 1:
+            raise HTTPException(409, f"'{ident}' is an ambiguous hash prefix: it matches {len(seen)} reads ({sorted(seen)[:4]}). Use more characters.")
+        return prefix
+    return by_event
+
+
+def resolve_read(ident):
+    """A sealed read by hash OR event_id: live files first, then the archives, newest first.
+    Returns (read, score, served_from) or (None, None, None). served_from names the run and where it came from."""
+    live = DATA / "walk_forward"
+    r = _find_in(live / "reads.jsonl", ident)
+    if r is not None:
+        sc = None
+        for x in _iter_jsonl(live / "scores.jsonl"):
+            if x.get("read_hash") == r.get("hash") or (sc is None and x.get("event_id") == r.get("event_id")):
+                if x.get("read_hash") == r.get("hash"):
+                    sc = x
+                    break
+                sc = x
+        return r, (sc or {}), {"run_id": r.get("run_id"), "source": "live", "path": "data/walk_forward/reads.jsonl"}
+    for run in _archived_runs():
+        d = RUNS_DIR / run
+        r = _find_in(d / "reads.jsonl.gz", ident)
+        if r is None:
+            continue
+        sc = None
+        for x in _iter_jsonl(d / "scores.jsonl.gz"):
+            if x.get("read_hash") == r.get("hash"):
+                sc = x
+                break
+        return r, (sc or {}), {"run_id": r.get("run_id") or run, "source": "archived",
+                               "path": f"data/walk_forward/runs/{run}/reads.jsonl.gz",
+                               "note": "this run has been archived; the read is served from the archive so published hashes keep resolving"}
+    return None, None, None
 
 
 def _json(p, default=None):
@@ -251,8 +338,23 @@ def register(app):
         return AU.status()
 
     @app.get("/api/walk/list")
-    def api_walk_list():
-        reads, scores = _walk_rows("reads.jsonl"), _walk_rows("scores.jsonl")
+    def api_walk_list(run: str | None = None):
+        """The live run's reads by default; `?run=<run_id>` lists an archived run. Every row names the run it came
+        from, so a row cited from the desk can be found again after that run is archived."""
+        if run and run in _archived_runs():
+            d = RUNS_DIR / run
+            reads = {}
+            for x in _iter_jsonl(d / "reads.jsonl.gz"):
+                reads[x["event_id"]] = x
+            scores = {}
+            for x in _iter_jsonl(d / "scores.jsonl.gz"):
+                scores[x["event_id"]] = x
+            source = "archived"
+        elif run:
+            raise HTTPException(404, f"no archived run {run}; archived: {_archived_runs()}")
+        else:
+            reads, scores = _walk_rows("reads.jsonl"), _walk_rows("scores.jsonl")
+            source = "live"
         out = []
         for eid, r in reads.items():
             sc = scores.get(eid) or {}
@@ -261,20 +363,23 @@ def register(app):
                         "burn_in_ok": r.get("burn_in_ok"), "n_pool": r.get("n_pool"),
                         "outcome": sc.get("outcome"), "G_brier": (e.get("G") or {}).get("brier"), "G_clim": (cl.get("G") or {}).get("brier"),
                         "P_crps": (e.get("P") or {}).get("crps"), "P_clim": (cl.get("P") or {}).get("crps"),
-                        "sealed_at": r.get("sealed_at"), "hash": r.get("hash")})
+                        "sealed_at": r.get("sealed_at"), "hash": r.get("hash"),
+                        "run_id": r.get("run_id"), "source": source})
         out.sort(key=lambda x: x["date"] or "")
         return out
 
     @app.get("/api/walk/read")
     def api_walk_read(id: str):
-        """One sealed read + its score + the outcome, exactly as the walk wrote them."""
-        r = _walk_rows("reads.jsonl").get(id)
+        """One sealed read + its score + the outcome, exactly as the walk wrote them. `id` is an event_id OR a read
+        hash; the live files are searched first, then the archived runs, so a hash this project has published keeps
+        resolving after its run is archived. The reply names the run that served it."""
+        r, sc, served = resolve_read(id)
         if not r:
-            raise HTTPException(404, f"no sealed read for {id}")
-        sc = _walk_rows("scores.jsonl").get(id) or {}
+            raise HTTPException(404, f"no sealed read for {id} in the live files or any archived run")
         c = _corpus()
-        ev = c.by_id.get(id) or {}
-        return {"read": r, "score": sc, "event": {k: ev.get(k) for k in ("event_id", "event_date", "type", "title", "source_url")},
+        ev = c.by_id.get(r.get("event_id")) or {}
+        return {"read": r, "score": sc, "served_from": served,
+                "event": {k: ev.get(k) for k in ("event_id", "event_date", "type", "title", "source_url")},
                 "titles": {a: (c.by_id.get(a) or {}).get("title") for a in ((r.get("engine") or {}).get("G_atoms") or {}).get("ids", [])}}
 
     @app.post("/api/rebuild")
