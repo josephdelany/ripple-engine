@@ -29,6 +29,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -903,10 +904,230 @@ def addendum_md(s):
     return "\n".join(L)
 
 
+
+
+# ================================================================================================
+# Amendment 4 — the three checks B handed back when Part IV was withdrawn.
+# A4.1 the share-zero tripwire · A4.2 VR-3 as an assertion · A4.3 effective n beside nominal.
+# B's designs, adopted with attribution; B's functions are CALLED, never copied, so a later
+# correction to them reaches this panel too (as B's deff_block floor correction did).
+# ================================================================================================
+
+DEGENERATE_BAR = DEGENERATE_SHARE           # §5.1's 0.95, unchanged and never moved
+
+
+def share_zero_tripwire(df):
+    """A4.1. Share-zero per year and over the span, on dIES and on the level, full panel and the
+    opposed_side subset -- eight series -- against §5.1's 0.95 bar. A breach is reported; the slice
+    is never dropped and the bar is never moved."""
+    out, breaches = {}, []
+    strict = df[df.evidence_class == "opposed_side"]
+    for scope, d in (("full_panel", df), ("opposed_side", strict)):
+        for field in ("dIES", "L"):
+            v = d[d[field].notna()]
+            overall = (float((v[field] == 0).mean()) if len(v) else None)
+            per_year = {}
+            for y, g in v.groupby(v["date"].str[:4]):
+                s = float((g[field] == 0).mean())
+                per_year[y] = {"n": int(len(g)), "share_zero": round(s, 4),
+                               "breach": bool(s >= DEGENERATE_BAR)}
+                if s >= DEGENERATE_BAR:
+                    breaches.append({"scope": scope, "field": field, "year": y,
+                                     "share_zero": round(s, 4), "n": int(len(g))})
+            key = f"{scope}.{field}"
+            out[key] = {"n_defined": int(len(v)),
+                        "share_zero_overall": (round(overall, 4) if overall is not None else None),
+                        "breach_overall": bool(overall is not None and overall >= DEGENERATE_BAR),
+                        "per_year": per_year}
+            if overall is not None and overall >= DEGENERATE_BAR:
+                breaches.append({"scope": scope, "field": field, "year": "ALL",
+                                 "share_zero": round(overall, 4), "n": int(len(v))})
+    return {"bar": DEGENERATE_BAR, "rule": ("G4_REGISTRATION §5.1 (bar) + A4.1 (slices). A breach is "
+                                            "reported, the slice is never dropped, the bar is never moved."),
+            "n_breaches": len(breaches), "breaches": breaches, "series": out}
+
+
+def admission_audit(df, spells, lookback=ACT_LOOKBACK_DAYS):
+    """A4.2. VR-3 as an ASSERTION, on an independent path over the BUILT file: every cell's dyad must
+    be admitted at its date by at least one record whose spell ends STRICTLY BEFORE t. One violation
+    voids the panel (Amendment F.1's standing)."""
+    checked = viol = 0
+    first = None
+    for (t, dyad), _g in df.groupby(["date", "dyad"]):
+        a, b = dyad.split("|")
+        p = frozenset((a, b))
+        ts = pd.Timestamp(t)
+        lo, hi = ts - pd.Timedelta(days=lookback), ts - pd.Timedelta(days=1)
+        ok = any(st <= hi and en >= lo and en < ts for st, en, _s in spells.get(p, ()))
+        checked += 1
+        if not ok:
+            viol += 1
+            first = first or {"date": t, "dyad": dyad,
+                              "spells": [(str(st.date()), str(en.date()), s) for st, en, s in spells.get(p, ())][:4]}
+    return {"rule": ("A4.2: every admitted cell's admitting record ends strictly before t. "
+                     "One violation voids the panel (WALK_FORWARD_PROTOCOL Amendment F.1 standing)."),
+            "cells_checked": checked, "violations": viol, "first_violation": first,
+            "asserted": viol == 0}
+
+
+def effective_n(df):
+    """A4.3. n_eff beside n_nominal, from session B's power_arithmetic (called, not copied).
+    LIMIT, stated with its direction: DEFF belongs to the score-differential series and this panel
+    has no scores, so it is computed on the OUTCOME. A score differential carries the forecaster's
+    own error too, so its correlations should be no larger -- the outcome-based DEFF is an UPPER
+    bound and the n_eff published here is a FLOOR."""
+    sys.path.insert(0, str(ROOT / "src"))
+    from engine.grid import power_arithmetic as PA
+    out = {"limit": effective_n.__doc__.split("LIMIT, stated with its direction: ")[1].replace("\n    ", " "),
+           "source": "src/engine/grid/power_arithmetic.py (session B); functions called, never copied"}
+    # Reconciliation with session B's own escalation-panel DEFF, read from B's published file rather
+    # than recalled, because a reader seeing 1.5 here and 56-79 there will assume one of us is wrong.
+    pa = ROOT / "data" / "grid" / "power_arithmetic.json"
+    if pa.exists():
+        try:
+            b = json.loads(pa.read_text())["escalation_panel"]["month_end"]["mid_family_2014"]
+            out["reconciliation_with_B"] = {
+                "B_panel": {"n_dyads": b.get("n_dyads"), "n_dyads_with_any_variation": b.get("n_dyads_with_any_variation"),
+                            "n_nominal_cells": b.get("n_nominal_cells"), "share_level_0": b.get("share_level_0"),
+                            "D_eff": b.get("D_eff"), "informative_cells": b.get("informative_cells")},
+                "G_panel": {"n_dyads": None, "n_nominal_cells": None},          # filled below
+                "why_they_differ": (
+                    "They are different objects, not different answers. B's escalation panel is the FULL "
+                    "cross -- every register dyad at every grid date, no active rule -- so it carries dyads "
+                    "that are constant zero for the whole span, and a constant series is perfectly "
+                    "autocorrelated, which is what drives its DEFF up. B's own file records only "
+                    f"{b.get('n_dyads_with_any_variation')} of {b.get('n_dyads')} dyads with ANY variation. "
+                    "G's panel is the ACTIVE-SET panel (R-ACT + VR-3), which excludes those dyads by "
+                    "construction, so its DEFF is far lower and is the DEFF of the panel G actually built. "
+                    "Neither number transfers to the other panel."),
+                "shared_warning": (
+                    "B's warning applies to G's panel too, at a smaller share: a cell whose outcome both a "
+                    "forecaster and its climatology get right carries no power to DISCRIMINATE between them. "
+                    "G's panel is 90.3 % zeros against B's 96.8 %, so the informative count -- the non-zero "
+                    "cells -- is the number to read, not n_eff."),
+            }
+        except (KeyError, ValueError):
+            pass
+    for scope, d in (("full_panel", df), ("opposed_side", df[df.evidence_class == "opposed_side"])):
+        v = d[d["dIES"].notna()]
+        if len(v) < 10:
+            out[scope] = {"n_nominal": int(len(v)), "note": "too few cells"}
+            continue
+        piv = v.pivot_table(index="date", columns="dyad", values="dIES", aggfunc="first")
+        X = piv.to_numpy(dtype=float)
+        # B's two_way_cluster_deff takes `covered` as a ROW mask over grid dates (Z = X[covered] must
+        # stay 2-D); NaN cells -- a dyad not active at a date -- are handled inside it.
+        covered = np.ones(X.shape[0], dtype=bool)
+        tw = PA.two_way_cluster_deff(X, covered)
+        stacked = v.sort_values(["date", "dyad"])["dIES"].to_numpy(dtype=float)
+        blk = PA.deff_block(stacked, mean_block=3, lag=3, label=f"dIES stacked ({scope})")
+        n = int(len(v))
+        deff_tw = (tw or {}).get("deff_two_way")
+        rows = {"n_nominal": n,
+                "two_way_cluster": tw,
+                "block": blk,
+                "n_eff_two_way": (round(n / max(deff_tw, 1.0), 1) if deff_tw else None),
+                "n_eff_block": round(n / max(blk["deff_used"], 1.0), 1),
+                "n_nonzero_nominal": int((v["dIES"] != 0).sum())}
+        out[scope] = rows
+    if "reconciliation_with_B" in out:
+        v = out.get("full_panel") or {}
+        out["reconciliation_with_B"]["G_panel"] = {
+            "n_dyads": int(df.dyad.nunique()), "n_nominal_cells": int(len(df)),
+            "share_level_0": round(float((df.loc[df.L.notna(), "L"] == 0).mean()), 5),
+            "D_eff_two_way": (v.get("two_way_cluster") or {}).get("deff_two_way"),
+            "informative_cells": v.get("n_nonzero_nominal")}
+    return out
+
+
+def panel_checks():
+    """Run A4.1-A4.3 over the built panel and fold them into PANEL.json / PANEL.md."""
+    s = json.loads((PANEL_DIR / "PANEL.json").read_text())
+    df = pd.read_parquet(PANEL_DIR / "PANEL.parquet") if (PANEL_DIR / "PANEL.parquet").exists() \
+        else pd.read_csv(PANEL_DIR / "PANEL.csv.gz")
+    src = I.load_sources()
+    spells = dyadic_spells(src)
+    s["share_zero_tripwire"] = share_zero_tripwire(df)          # A4.1
+    s["admission_audit"] = admission_audit(df, spells)          # A4.2
+    s["effective_n"] = effective_n(df)                          # A4.3
+    s["amendment_4"] = ("A4.1-A4.3 are session B's designs, offered in "
+                        "data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution.")
+    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
+    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, s["icb_replication"]) + "\n\n" + addendum_md(s)
+                                        + "\n\n" + checks_md(s))
+    print(json.dumps({"admission_audit": {k: v for k, v in s["admission_audit"].items() if k != "first_violation"},
+                      "tripwire": {"n_breaches": s["share_zero_tripwire"]["n_breaches"],
+                                   "breaches": s["share_zero_tripwire"]["breaches"][:8]},
+                      "effective_n": {k: {kk: vv for kk, vv in v.items()
+                                          if kk in ("n_nominal", "n_eff_two_way", "n_eff_block", "n_nonzero_nominal")}
+                                      for k, v in s["effective_n"].items() if isinstance(v, dict) and "n_nominal" in v}},
+                     indent=1, default=str))
+    return s
+
+
+def checks_md(s):
+    L, a = [], None
+    a = L.append
+    tw, aa, en = s["share_zero_tripwire"], s["admission_audit"], s["effective_n"]
+    a("## 7. The three checks the panel owes (Amendment 4 — session B's designs, adopted)\n")
+    a(f"### 7.1 Share-zero tripwire — bar {tw['bar']}, never moved\n")
+    a("| series | n defined | share zero | breach? |")
+    a("|---|---|---|---|")
+    for k, v in tw["series"].items():
+        a(f"| `{k}` | {v['n_defined']:,} | **{v['share_zero_overall']}** | "
+          f"{'**YES**' if v['breach_overall'] else 'no'} |")
+    if tw["n_breaches"]:
+        a(f"\n**{tw['n_breaches']} breach(es) of the 0.95 bar, reported and not dropped:**\n")
+        a("| scope | field | year | n | share zero |")
+        a("|---|---|---|---|---|")
+        for b in tw["breaches"]:
+            a(f"| {b['scope']} | {b['field']} | **{b['year']}** | {b['n']:,} | **{b['share_zero']}** |")
+        a("\nThe slice stays in the panel and the bar stays at 0.95 (A4.1). A year that breaches is a "
+          "fact about that year, published as one.")
+    else:
+        a("\nNo slice breaches the bar.")
+    a(f"\n### 7.2 Admission audit — VR-3 asserted, not trusted\n")
+    a(f"- cells checked: **{aa['cells_checked']:,}** · violations: **{aa['violations']}** · "
+      f"`asserted`: **{aa['asserted']}**")
+    a(f"- {aa['rule']}")
+    if aa["first_violation"]:
+        a(f"- first violation: `{json.dumps(aa['first_violation'])}`")
+    a(f"\n### 7.3 Effective n beside nominal\n")
+    a("| scope | n nominal | non-zero | DEFF two-way (date × dyad) | n_eff two-way | DEFF block | n_eff block |")
+    a("|---|---|---|---|---|---|---|")
+    for scope in ("full_panel", "opposed_side"):
+        v = en.get(scope) or {}
+        if "n_nominal" not in v:
+            continue
+        tww = (v.get("two_way_cluster") or {}).get("deff_two_way")
+        blk = v.get("block") or {}
+        a(f"| `{scope}` | {v['n_nominal']:,} | {v['n_nonzero_nominal']:,} | {tww} | "
+          f"**{v['n_eff_two_way']}** | {blk.get('deff_used')}"
+          f"{' (floored)' if blk.get('deff_floored_at_1') else ''} | **{v['n_eff_block']}** |")
+    a(f"\n**Limit, with its direction:** {en['limit']}")
+    a(f"\nComputed by calling `{en['source']}`.")
+    r = en.get("reconciliation_with_B")
+    if r:
+        a("\n**Reconciling with session B's DEFF of ~56–79 on *its* escalation panel** — a reader seeing 1.5 "
+          "here and 56 there will assume one of us is wrong, so both are printed with their panels:\n")
+        a("| | dyads | dyads with any variation | cells | share level 0 | DEFF | informative cells |")
+        a("|---|---|---|---|---|---|---|")
+        b_, g_ = r["B_panel"], r["G_panel"]
+        a(f"| B, full cross | {b_['n_dyads']} | {b_['n_dyads_with_any_variation']} | {b_['n_nominal_cells']:,} | "
+          f"{b_['share_level_0']} | {b_['D_eff']} | {b_['informative_cells']:,} |")
+        a(f"| G, active set | {g_['n_dyads']} | {g_['n_dyads']} (all, by construction) | {g_['n_nominal_cells']:,} | "
+          f"{g_['share_level_0']} | {g_['D_eff_two_way']} | {g_['informative_cells']:,} |")
+        a(f"\n{r['why_they_differ']}\n")
+        a(f"**{r['shared_warning']}**")
+    return "\n".join(L)
+
+
 if __name__ == "__main__":
     if "--build" in sys.argv:
         build_main()
     elif "--addendum" in sys.argv:
         panel_addendum()
+    elif "--checks" in sys.argv:
+        panel_checks()
     else:
         main()

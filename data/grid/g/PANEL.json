@@ -478,5 +478,828 @@
    "icb_co_actor_never_opposed": 15
   },
   "reading": "It adds rows, not coverage: every dyad active in the window is active elsewhere too. It supplies its share of the panel's rows and a far smaller share of its non-zero cells, so nominal n and informative n diverge here more than anywhere else."
- }
+ },
+ "share_zero_tripwire": {
+  "bar": 0.95,
+  "rule": "G4_REGISTRATION \u00a75.1 (bar) + A4.1 (slices). A breach is reported, the slice is never dropped, the bar is never moved.",
+  "n_breaches": 21,
+  "breaches": [
+   {
+    "scope": "full_panel",
+    "field": "dIES",
+    "year": "1991",
+    "share_zero": 0.9733,
+    "n": 823
+   },
+   {
+    "scope": "full_panel",
+    "field": "dIES",
+    "year": "1992",
+    "share_zero": 0.9755,
+    "n": 1431
+   },
+   {
+    "scope": "full_panel",
+    "field": "dIES",
+    "year": "1993",
+    "share_zero": 0.9714,
+    "n": 1433
+   },
+   {
+    "scope": "full_panel",
+    "field": "dIES",
+    "year": "1995",
+    "share_zero": 0.9791,
+    "n": 1433
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1989",
+    "share_zero": 0.9733,
+    "n": 374
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1991",
+    "share_zero": 0.9826,
+    "n": 1151
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1992",
+    "share_zero": 0.9765,
+    "n": 1445
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1993",
+    "share_zero": 0.9708,
+    "n": 1439
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1994",
+    "share_zero": 0.953,
+    "n": 1448
+   },
+   {
+    "scope": "full_panel",
+    "field": "L",
+    "year": "1995",
+    "share_zero": 0.9655,
+    "n": 1449
+   },
+   {
+    "scope": "opposed_side",
+    "field": "dIES",
+    "year": "1991",
+    "share_zero": 0.9733,
+    "n": 823
+   },
+   {
+    "scope": "opposed_side",
+    "field": "dIES",
+    "year": "1992",
+    "share_zero": 0.9824,
+    "n": 1418
+   },
+   {
+    "scope": "opposed_side",
+    "field": "dIES",
+    "year": "1993",
+    "share_zero": 0.9734,
+    "n": 1430
+   },
+   {
+    "scope": "opposed_side",
+    "field": "dIES",
+    "year": "1994",
+    "share_zero": 0.9606,
+    "n": 1423
+   },
+   {
+    "scope": "opposed_side",
+    "field": "dIES",
+    "year": "1995",
+    "share_zero": 0.9811,
+    "n": 1430
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1989",
+    "share_zero": 0.981,
+    "n": 369
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1991",
+    "share_zero": 0.9903,
+    "n": 823
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1992",
+    "share_zero": 0.9838,
+    "n": 1418
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1993",
+    "share_zero": 0.9748,
+    "n": 1430
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1994",
+    "share_zero": 0.9628,
+    "n": 1423
+   },
+   {
+    "scope": "opposed_side",
+    "field": "L",
+    "year": "1995",
+    "share_zero": 0.9755,
+    "n": 1430
+   }
+  ],
+  "series": {
+   "full_panel.dIES": {
+    "n_defined": 14344,
+    "share_zero_overall": 0.9191,
+    "breach_overall": false,
+    "per_year": {
+     "1987": {
+      "n": 373,
+      "share_zero": 0.882,
+      "breach": false
+     },
+     "1988": {
+      "n": 391,
+      "share_zero": 0.9003,
+      "breach": false
+     },
+     "1989": {
+      "n": 369,
+      "share_zero": 0.9431,
+      "breach": false
+     },
+     "1990": {
+      "n": 325,
+      "share_zero": 0.8585,
+      "breach": false
+     },
+     "1991": {
+      "n": 823,
+      "share_zero": 0.9733,
+      "breach": true
+     },
+     "1992": {
+      "n": 1431,
+      "share_zero": 0.9755,
+      "breach": true
+     },
+     "1993": {
+      "n": 1433,
+      "share_zero": 0.9714,
+      "breach": true
+     },
+     "1994": {
+      "n": 1443,
+      "share_zero": 0.9473,
+      "breach": false
+     },
+     "1995": {
+      "n": 1433,
+      "share_zero": 0.9791,
+      "breach": true
+     },
+     "1996": {
+      "n": 626,
+      "share_zero": 0.9105,
+      "breach": false
+     },
+     "1997": {
+      "n": 339,
+      "share_zero": 0.8466,
+      "breach": false
+     },
+     "1998": {
+      "n": 295,
+      "share_zero": 0.9017,
+      "breach": false
+     },
+     "1999": {
+      "n": 311,
+      "share_zero": 0.8039,
+      "breach": false
+     },
+     "2000": {
+      "n": 290,
+      "share_zero": 0.8621,
+      "breach": false
+     },
+     "2001": {
+      "n": 281,
+      "share_zero": 0.8577,
+      "breach": false
+     },
+     "2002": {
+      "n": 279,
+      "share_zero": 0.8638,
+      "breach": false
+     },
+     "2003": {
+      "n": 349,
+      "share_zero": 0.8138,
+      "breach": false
+     },
+     "2004": {
+      "n": 370,
+      "share_zero": 0.9135,
+      "breach": false
+     },
+     "2005": {
+      "n": 404,
+      "share_zero": 0.8762,
+      "breach": false
+     },
+     "2006": {
+      "n": 343,
+      "share_zero": 0.9067,
+      "breach": false
+     },
+     "2007": {
+      "n": 337,
+      "share_zero": 0.9169,
+      "breach": false
+     },
+     "2008": {
+      "n": 253,
+      "share_zero": 0.8696,
+      "breach": false
+     },
+     "2009": {
+      "n": 214,
+      "share_zero": 0.8364,
+      "breach": false
+     },
+     "2010": {
+      "n": 196,
+      "share_zero": 0.9133,
+      "breach": false
+     },
+     "2011": {
+      "n": 222,
+      "share_zero": 0.7252,
+      "breach": false
+     },
+     "2012": {
+      "n": 426,
+      "share_zero": 0.885,
+      "breach": false
+     },
+     "2013": {
+      "n": 442,
+      "share_zero": 0.8869,
+      "breach": false
+     },
+     "2014": {
+      "n": 346,
+      "share_zero": 0.8902,
+      "breach": false
+     }
+    }
+   },
+   "full_panel.L": {
+    "n_defined": 14997,
+    "share_zero_overall": 0.9034,
+    "breach_overall": false,
+    "per_year": {
+     "1987": {
+      "n": 378,
+      "share_zero": 0.9312,
+      "breach": false
+     },
+     "1988": {
+      "n": 413,
+      "share_zero": 0.9346,
+      "breach": false
+     },
+     "1989": {
+      "n": 374,
+      "share_zero": 0.9733,
+      "breach": true
+     },
+     "1990": {
+      "n": 329,
+      "share_zero": 0.8511,
+      "breach": false
+     },
+     "1991": {
+      "n": 1151,
+      "share_zero": 0.9826,
+      "breach": true
+     },
+     "1992": {
+      "n": 1445,
+      "share_zero": 0.9765,
+      "breach": true
+     },
+     "1993": {
+      "n": 1439,
+      "share_zero": 0.9708,
+      "breach": true
+     },
+     "1994": {
+      "n": 1448,
+      "share_zero": 0.953,
+      "breach": true
+     },
+     "1995": {
+      "n": 1449,
+      "share_zero": 0.9655,
+      "breach": true
+     },
+     "1996": {
+      "n": 634,
+      "share_zero": 0.9038,
+      "breach": false
+     },
+     "1997": {
+      "n": 345,
+      "share_zero": 0.8087,
+      "breach": false
+     },
+     "1998": {
+      "n": 318,
+      "share_zero": 0.8208,
+      "breach": false
+     },
+     "1999": {
+      "n": 327,
+      "share_zero": 0.7645,
+      "breach": false
+     },
+     "2000": {
+      "n": 308,
+      "share_zero": 0.7273,
+      "breach": false
+     },
+     "2001": {
+      "n": 292,
+      "share_zero": 0.7705,
+      "breach": false
+     },
+     "2002": {
+      "n": 299,
+      "share_zero": 0.7358,
+      "breach": false
+     },
+     "2003": {
+      "n": 360,
+      "share_zero": 0.8611,
+      "breach": false
+     },
+     "2004": {
+      "n": 381,
+      "share_zero": 0.9081,
+      "breach": false
+     },
+     "2005": {
+      "n": 406,
+      "share_zero": 0.9039,
+      "breach": false
+     },
+     "2006": {
+      "n": 351,
+      "share_zero": 0.9088,
+      "breach": false
+     },
+     "2007": {
+      "n": 346,
+      "share_zero": 0.8757,
+      "breach": false
+     },
+     "2008": {
+      "n": 262,
+      "share_zero": 0.7977,
+      "breach": false
+     },
+     "2009": {
+      "n": 218,
+      "share_zero": 0.8257,
+      "breach": false
+     },
+     "2010": {
+      "n": 199,
+      "share_zero": 0.8643,
+      "breach": false
+     },
+     "2011": {
+      "n": 267,
+      "share_zero": 0.7378,
+      "breach": false
+     },
+     "2012": {
+      "n": 435,
+      "share_zero": 0.8069,
+      "breach": false
+     },
+     "2013": {
+      "n": 453,
+      "share_zero": 0.8234,
+      "breach": false
+     },
+     "2014": {
+      "n": 370,
+      "share_zero": 0.7811,
+      "breach": false
+     }
+    }
+   },
+   "opposed_side.dIES": {
+    "n_defined": 14232,
+    "share_zero_overall": 0.9256,
+    "breach_overall": false,
+    "per_year": {
+     "1987": {
+      "n": 371,
+      "share_zero": 0.8841,
+      "breach": false
+     },
+     "1988": {
+      "n": 391,
+      "share_zero": 0.9003,
+      "breach": false
+     },
+     "1989": {
+      "n": 369,
+      "share_zero": 0.9431,
+      "breach": false
+     },
+     "1990": {
+      "n": 300,
+      "share_zero": 0.9233,
+      "breach": false
+     },
+     "1991": {
+      "n": 823,
+      "share_zero": 0.9733,
+      "breach": true
+     },
+     "1992": {
+      "n": 1418,
+      "share_zero": 0.9824,
+      "breach": true
+     },
+     "1993": {
+      "n": 1430,
+      "share_zero": 0.9734,
+      "breach": true
+     },
+     "1994": {
+      "n": 1423,
+      "share_zero": 0.9606,
+      "breach": true
+     },
+     "1995": {
+      "n": 1430,
+      "share_zero": 0.9811,
+      "breach": true
+     },
+     "1996": {
+      "n": 620,
+      "share_zero": 0.9194,
+      "breach": false
+     },
+     "1997": {
+      "n": 338,
+      "share_zero": 0.8491,
+      "breach": false
+     },
+     "1998": {
+      "n": 285,
+      "share_zero": 0.9298,
+      "breach": false
+     },
+     "1999": {
+      "n": 310,
+      "share_zero": 0.8065,
+      "breach": false
+     },
+     "2000": {
+      "n": 290,
+      "share_zero": 0.8621,
+      "breach": false
+     },
+     "2001": {
+      "n": 278,
+      "share_zero": 0.8669,
+      "breach": false
+     },
+     "2002": {
+      "n": 270,
+      "share_zero": 0.8778,
+      "breach": false
+     },
+     "2003": {
+      "n": 349,
+      "share_zero": 0.8138,
+      "breach": false
+     },
+     "2004": {
+      "n": 370,
+      "share_zero": 0.9135,
+      "breach": false
+     },
+     "2005": {
+      "n": 395,
+      "share_zero": 0.8962,
+      "breach": false
+     },
+     "2006": {
+      "n": 339,
+      "share_zero": 0.9174,
+      "breach": false
+     },
+     "2007": {
+      "n": 337,
+      "share_zero": 0.9169,
+      "breach": false
+     },
+     "2008": {
+      "n": 253,
+      "share_zero": 0.8696,
+      "breach": false
+     },
+     "2009": {
+      "n": 214,
+      "share_zero": 0.8364,
+      "breach": false
+     },
+     "2010": {
+      "n": 194,
+      "share_zero": 0.9227,
+      "breach": false
+     },
+     "2011": {
+      "n": 221,
+      "share_zero": 0.7285,
+      "breach": false
+     },
+     "2012": {
+      "n": 426,
+      "share_zero": 0.885,
+      "breach": false
+     },
+     "2013": {
+      "n": 442,
+      "share_zero": 0.8869,
+      "breach": false
+     },
+     "2014": {
+      "n": 346,
+      "share_zero": 0.8902,
+      "breach": false
+     }
+    }
+   },
+   "opposed_side.L": {
+    "n_defined": 14232,
+    "share_zero_overall": 0.9188,
+    "breach_overall": false,
+    "per_year": {
+     "1987": {
+      "n": 371,
+      "share_zero": 0.9353,
+      "breach": false
+     },
+     "1988": {
+      "n": 391,
+      "share_zero": 0.9463,
+      "breach": false
+     },
+     "1989": {
+      "n": 369,
+      "share_zero": 0.981,
+      "breach": true
+     },
+     "1990": {
+      "n": 300,
+      "share_zero": 0.9233,
+      "breach": false
+     },
+     "1991": {
+      "n": 823,
+      "share_zero": 0.9903,
+      "breach": true
+     },
+     "1992": {
+      "n": 1418,
+      "share_zero": 0.9838,
+      "breach": true
+     },
+     "1993": {
+      "n": 1430,
+      "share_zero": 0.9748,
+      "breach": true
+     },
+     "1994": {
+      "n": 1423,
+      "share_zero": 0.9628,
+      "breach": true
+     },
+     "1995": {
+      "n": 1430,
+      "share_zero": 0.9755,
+      "breach": true
+     },
+     "1996": {
+      "n": 620,
+      "share_zero": 0.9161,
+      "breach": false
+     },
+     "1997": {
+      "n": 338,
+      "share_zero": 0.8254,
+      "breach": false
+     },
+     "1998": {
+      "n": 285,
+      "share_zero": 0.8947,
+      "breach": false
+     },
+     "1999": {
+      "n": 310,
+      "share_zero": 0.7774,
+      "breach": false
+     },
+     "2000": {
+      "n": 290,
+      "share_zero": 0.769,
+      "breach": false
+     },
+     "2001": {
+      "n": 278,
+      "share_zero": 0.8058,
+      "breach": false
+     },
+     "2002": {
+      "n": 270,
+      "share_zero": 0.8074,
+      "breach": false
+     },
+     "2003": {
+      "n": 349,
+      "share_zero": 0.8768,
+      "breach": false
+     },
+     "2004": {
+      "n": 370,
+      "share_zero": 0.9216,
+      "breach": false
+     },
+     "2005": {
+      "n": 395,
+      "share_zero": 0.9241,
+      "breach": false
+     },
+     "2006": {
+      "n": 339,
+      "share_zero": 0.9233,
+      "breach": false
+     },
+     "2007": {
+      "n": 337,
+      "share_zero": 0.8872,
+      "breach": false
+     },
+     "2008": {
+      "n": 253,
+      "share_zero": 0.8024,
+      "breach": false
+     },
+     "2009": {
+      "n": 214,
+      "share_zero": 0.8411,
+      "breach": false
+     },
+     "2010": {
+      "n": 194,
+      "share_zero": 0.8711,
+      "breach": false
+     },
+     "2011": {
+      "n": 221,
+      "share_zero": 0.7014,
+      "breach": false
+     },
+     "2012": {
+      "n": 426,
+      "share_zero": 0.8239,
+      "breach": false
+     },
+     "2013": {
+      "n": 442,
+      "share_zero": 0.8439,
+      "breach": false
+     },
+     "2014": {
+      "n": 346,
+      "share_zero": 0.8353,
+      "breach": false
+     }
+    }
+   }
+  }
+ },
+ "admission_audit": {
+  "rule": "A4.2: every admitted cell's admitting record ends strictly before t. One violation voids the panel (WALK_FORWARD_PROTOCOL Amendment F.1 standing).",
+  "cells_checked": 15740,
+  "violations": 0,
+  "first_violation": null,
+  "asserted": true
+ },
+ "effective_n": {
+  "limit": "DEFF belongs to the score-differential series and this panel\nhas no scores, so it is computed on the OUTCOME. A score differential carries the forecaster's\nown error too, so its correlations should be no larger -- the outcome-based DEFF is an UPPER\nbound and the n_eff published here is a FLOOR.",
+  "source": "src/engine/grid/power_arithmetic.py (session B); functions called, never copied",
+  "reconciliation_with_B": {
+   "B_panel": {
+    "n_dyads": 966,
+    "n_dyads_with_any_variation": 400,
+    "n_nominal_cells": 321678,
+    "share_level_0": 0.96754,
+    "D_eff": 56.417,
+    "informative_cells": 10442
+   },
+   "G_panel": {
+    "n_dyads": 156,
+    "n_nominal_cells": 15740,
+    "share_level_0": 0.90338,
+    "D_eff_two_way": 1.4738,
+    "informative_cells": 1160
+   },
+   "why_they_differ": "They are different objects, not different answers. B's escalation panel is the FULL cross -- every register dyad at every grid date, no active rule -- so it carries dyads that are constant zero for the whole span, and a constant series is perfectly autocorrelated, which is what drives its DEFF up. B's own file records only 400 of 966 dyads with ANY variation. G's panel is the ACTIVE-SET panel (R-ACT + VR-3), which excludes those dyads by construction, so its DEFF is far lower and is the DEFF of the panel G actually built. Neither number transfers to the other panel.",
+   "shared_warning": "B's warning applies to G's panel too, at a smaller share: a cell whose outcome both a forecaster and its climatology get right carries no power to DISCRIMINATE between them. G's panel is 90.3 % zeros against B's 96.8 %, so the informative count -- the non-zero cells -- is the number to read, not n_eff."
+  },
+  "full_panel": {
+   "n_nominal": 14344,
+   "two_way_cluster": {
+    "n_cells": 14344,
+    "var_iid": 1.2739040714945592e-05,
+    "var_two_way": 1.8774306084262706e-05,
+    "deff_two_way": 1.4738,
+    "rule": "Cameron-Gelbach-Miller two-way cluster on (date, dyad), relative to i.i.d."
+   },
+   "block": {
+    "series": "dIES stacked (full_panel)",
+    "n": 14344,
+    "deff_bartlett": 1.0556,
+    "deff_bootstrap_ratio": 1.0583,
+    "disagreement": 1.003,
+    "tiebreak_fired": false,
+    "deff_used": 1.0583,
+    "deff_floored_at_1": false,
+    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires."
+   },
+   "n_eff_two_way": 9732.7,
+   "n_eff_block": 13553.8,
+   "n_nonzero_nominal": 1160
+  },
+  "opposed_side": {
+   "n_nominal": 14232,
+   "two_way_cluster": {
+    "n_cells": 14232,
+    "var_iid": 1.2181683782292687e-05,
+    "var_two_way": 1.4356026831042064e-05,
+    "deff_two_way": 1.1785,
+    "rule": "Cameron-Gelbach-Miller two-way cluster on (date, dyad), relative to i.i.d."
+   },
+   "block": {
+    "series": "dIES stacked (opposed_side)",
+    "n": 14232,
+    "deff_bartlett": 1.0424,
+    "deff_bootstrap_ratio": 1.0473,
+    "disagreement": 1.005,
+    "tiebreak_fired": false,
+    "deff_used": 1.0473,
+    "deff_floored_at_1": false,
+    "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere. A measured design effect below 1 is a finite-sample artefact and is FLOORED at 1: n_eff may never exceed n_nominal, and the floor is recorded when it fires."
+   },
+   "n_eff_two_way": 12076.4,
+   "n_eff_block": 13589.2,
+   "n_nonzero_nominal": 1059
+  }
+ },
+ "amendment_4": "A4.1-A4.3 are session B's designs, offered in data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution."
 }

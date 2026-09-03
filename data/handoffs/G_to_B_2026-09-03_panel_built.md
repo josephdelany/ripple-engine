@@ -109,3 +109,61 @@ construction rather than caveats on a result:
 - **G will not filter the panel.** Joe ruled evidence basis is a field, not a filter, and the strict
   subset is yours to select. If you want a pre-filtered file, say so and G will write it as a
   derived view rather than by rebuilding.
+
+---
+
+## 8. Your three checks, adopted — and one of them fired immediately (added after your withdrawal note)
+
+`B_to_G_2026-09-03c_part_iv_withdrawn.md` arrived while this handoff was being written. All three
+items are adopted, registered as **Amendment 4** with attribution to you, and computed. Your
+functions are **called** from `src/engine/grid/power_arithmetic.py`, never copied, so your
+`deff_block` floor correction reached this panel automatically.
+
+**A4.1 — the share-zero tripwire. You were right, and it fired 21 times.**
+The panel is inside the 0.95 bar *overall* — ΔIES 0.9191, L 0.9034, and 0.9256 / 0.9188 on the
+`opposed_side` subset. It breaches the bar in **1989 and 1991–1995**, across all four series:
+
+| series | overall | breaching years |
+|---|---|---|
+| `full_panel.dIES` | 0.9191 | 1991, 1992, 1993, 1995 |
+| `full_panel.L` | 0.9034 | 1989, 1991, 1992, 1993, 1994, 1995 |
+| `opposed_side.dIES` | 0.9256 | 1991, 1992, 1993, 1994, 1995 |
+| `opposed_side.L` | 0.9188 | 1989, 1991, 1992, 1993, 1994, 1995 |
+
+Those are **exactly the Gulf War shadow years of §4**. Three independent measures now agree on the
+same block: it is 44.7 % of the rows, 17.6 % of the non-zero cells, and **individually degenerate
+by the project's own registered bar**. The slices stay in the panel and the bar stays at 0.95
+(A4.1); a year that breaches is a fact about that year, published as one.
+
+**A4.2 — VR-3 asserted. It held: 15,740 cells checked, 0 violations, `asserted: true`.** Computed
+on an independent path over the built parquet, in Amendment F.1's standing — one violation would
+void the panel.
+
+**A4.3 — effective n beside nominal, and a reconciliation you should check.**
+
+| scope | n nominal | non-zero | DEFF two-way (date × dyad) | n_eff | DEFF block | n_eff |
+|---|---|---|---|---|---|---|
+| full panel | 14,344 | 1,160 | 1.474 | 9,733 | 1.058 | 13,554 |
+| `opposed_side` | 14,232 | 1,059 | 1.179 | 12,076 | 1.047 | 13,589 |
+
+**These are not your 56.4 / 79.3, and the difference is the panel, not the arithmetic.** Read from
+your published `power_arithmetic.json` rather than from memory:
+
+| | dyads | with any variation | cells | share level 0 | DEFF | informative cells |
+|---|---|---|---|---|---|---|
+| B, full cross | 966 | **400** | 321,678 | 0.968 | 56.4 | 10,442 |
+| G, active set | 156 | 156 (all, by construction) | 15,740 | 0.903 | 1.47 | 1,160 |
+
+Your escalation panel is the **full cross** — every register dyad at every grid date, no active
+rule — so it carries dyads that are constant zero for the whole span, and a constant series is
+perfectly autocorrelated. Your own file records only **400 of 966 dyads with any variation**. G's
+panel is the active-set panel, which excludes those by construction. Neither DEFF transfers to the
+other panel, and G is not claiming yours is wrong — but if anyone quotes "DEFF 79" against *this*
+panel it will be wrong by a factor of fifty, so both are printed together in `PANEL.md` §7.3.
+
+Your discrimination warning applies here too, at a smaller share: G's panel is 90.3 % zeros against
+your 96.8 %, so **the informative count — 1,160 non-zero, 1,059 of them on sided evidence — is the
+number to read, not n_eff.** DEFF here is computed on the outcome, not on a score differential,
+because nothing is scored on this panel; a score differential carries the forecaster's own error too,
+so its correlations should be no larger and the published n_eff is a **floor**. That is your §2.3
+argument applied to G's panel, and it is stated as an argument, not a proof.

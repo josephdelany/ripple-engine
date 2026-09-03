@@ -87,3 +87,72 @@ This is the **activity** limb of the ICB co-actor defect, and it is distinct fro
 It adds rows, not coverage: every dyad active in the window is active elsewhere too. It supplies its share of the panel's rows and a far smaller share of its non-zero cells, so nominal n and informative n diverge here more than anywhere else. It adds **0** dyads that appear nowhere else.
 
 **For whoever scores this panel:** the block is not wrong — the dyad-dates are real and their labels are sided — but it is a low-information half of the sample created by a selection rule, and any estimate that weights cells equally weights it accordingly. It is left in the panel, flagged, and never removed by G (A3.3: evidence basis is a field, not a filter).
+
+## 7. The three checks the panel owes (Amendment 4 — session B's designs, adopted)
+
+### 7.1 Share-zero tripwire — bar 0.95, never moved
+
+| series | n defined | share zero | breach? |
+|---|---|---|---|
+| `full_panel.dIES` | 14,344 | **0.9191** | no |
+| `full_panel.L` | 14,997 | **0.9034** | no |
+| `opposed_side.dIES` | 14,232 | **0.9256** | no |
+| `opposed_side.L` | 14,232 | **0.9188** | no |
+
+**21 breach(es) of the 0.95 bar, reported and not dropped:**
+
+| scope | field | year | n | share zero |
+|---|---|---|---|---|
+| full_panel | dIES | **1991** | 823 | **0.9733** |
+| full_panel | dIES | **1992** | 1,431 | **0.9755** |
+| full_panel | dIES | **1993** | 1,433 | **0.9714** |
+| full_panel | dIES | **1995** | 1,433 | **0.9791** |
+| full_panel | L | **1989** | 374 | **0.9733** |
+| full_panel | L | **1991** | 1,151 | **0.9826** |
+| full_panel | L | **1992** | 1,445 | **0.9765** |
+| full_panel | L | **1993** | 1,439 | **0.9708** |
+| full_panel | L | **1994** | 1,448 | **0.953** |
+| full_panel | L | **1995** | 1,449 | **0.9655** |
+| opposed_side | dIES | **1991** | 823 | **0.9733** |
+| opposed_side | dIES | **1992** | 1,418 | **0.9824** |
+| opposed_side | dIES | **1993** | 1,430 | **0.9734** |
+| opposed_side | dIES | **1994** | 1,423 | **0.9606** |
+| opposed_side | dIES | **1995** | 1,430 | **0.9811** |
+| opposed_side | L | **1989** | 369 | **0.981** |
+| opposed_side | L | **1991** | 823 | **0.9903** |
+| opposed_side | L | **1992** | 1,418 | **0.9838** |
+| opposed_side | L | **1993** | 1,430 | **0.9748** |
+| opposed_side | L | **1994** | 1,423 | **0.9628** |
+| opposed_side | L | **1995** | 1,430 | **0.9755** |
+
+The slice stays in the panel and the bar stays at 0.95 (A4.1). A year that breaches is a fact about that year, published as one.
+
+### 7.2 Admission audit — VR-3 asserted, not trusted
+
+- cells checked: **15,740** · violations: **0** · `asserted`: **True**
+- A4.2: every admitted cell's admitting record ends strictly before t. One violation voids the panel (WALK_FORWARD_PROTOCOL Amendment F.1 standing).
+
+### 7.3 Effective n beside nominal
+
+| scope | n nominal | non-zero | DEFF two-way (date × dyad) | n_eff two-way | DEFF block | n_eff block |
+|---|---|---|---|---|---|---|
+| `full_panel` | 14,344 | 1,160 | 1.4738 | **9732.7** | 1.0583 | **13553.8** |
+| `opposed_side` | 14,232 | 1,059 | 1.1785 | **12076.4** | 1.0473 | **13589.2** |
+
+**Limit, with its direction:** DEFF belongs to the score-differential series and this panel
+has no scores, so it is computed on the OUTCOME. A score differential carries the forecaster's
+own error too, so its correlations should be no larger -- the outcome-based DEFF is an UPPER
+bound and the n_eff published here is a FLOOR.
+
+Computed by calling `src/engine/grid/power_arithmetic.py (session B); functions called, never copied`.
+
+**Reconciling with session B's DEFF of ~56–79 on *its* escalation panel** — a reader seeing 1.5 here and 56 there will assume one of us is wrong, so both are printed with their panels:
+
+| | dyads | dyads with any variation | cells | share level 0 | DEFF | informative cells |
+|---|---|---|---|---|---|---|
+| B, full cross | 966 | 400 | 321,678 | 0.96754 | 56.417 | 10,442 |
+| G, active set | 156 | 156 (all, by construction) | 15,740 | 0.90338 | 1.4738 | 1,160 |
+
+They are different objects, not different answers. B's escalation panel is the FULL cross -- every register dyad at every grid date, no active rule -- so it carries dyads that are constant zero for the whole span, and a constant series is perfectly autocorrelated, which is what drives its DEFF up. B's own file records only 400 of 966 dyads with ANY variation. G's panel is the ACTIVE-SET panel (R-ACT + VR-3), which excludes those dyads by construction, so its DEFF is far lower and is the DEFF of the panel G actually built. Neither number transfers to the other panel.
+
+**B's warning applies to G's panel too, at a smaller share: a cell whose outcome both a forecaster and its climatology get right carries no power to DISCRIMINATE between them. G's panel is 90.3 % zeros against B's 96.8 %, so the informative count -- the non-zero cells -- is the number to read, not n_eff.**

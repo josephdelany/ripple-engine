@@ -373,3 +373,103 @@ def test_A3_6_the_grid_scores_two_allies_as_level_3():
                        {frozenset(("country.gbr", "country.usa"))}, {"country.gbr", "country.usa"}, s)
     assert r["level"] == 3 and r["basis"] == "dyadic"
     assert any(x["rule"] == "ICB.pair.wholly" and "489" in x["record"] for x in r["recs"])
+
+
+# ================================================================================================
+# Amendment 4 — the three checks B handed back (share-zero tripwire, VR-3 assertion, effective n)
+# ================================================================================================
+
+def _fake_panel(n_zero, n_nonzero, year="1998", cls="opposed_side"):
+    rows = [{"date": f"{year}-06-30", "dyad": f"a|b{i}", "dIES": 0.0, "L": 0.0, "evidence_class": cls}
+            for i in range(n_zero)]
+    rows += [{"date": f"{year}-06-30", "dyad": f"c|d{i}", "dIES": 1.0, "L": 1.0, "evidence_class": cls}
+             for i in range(n_nonzero)]
+    return pd.DataFrame(rows)
+
+
+def test_A4_1_tripwire_fires_at_the_registered_bar_and_never_moves_it():
+    """A4.1: the bar is §5.1's 0.95 and is never moved; a breach is reported, never dropped."""
+    out = G.share_zero_tripwire(_fake_panel(96, 4))
+    assert out["bar"] == 0.95 == G.DEGENERATE_SHARE
+    assert out["n_breaches"] > 0
+    assert out["series"]["full_panel.dIES"]["breach_overall"] is True
+    assert out["series"]["full_panel.dIES"]["share_zero_overall"] == 0.96
+    # the breaching slice is still in the reported series, not removed
+    assert out["series"]["full_panel.dIES"]["per_year"]["1998"]["n"] == 100
+
+
+def test_A4_1_tripwire_is_silent_below_the_bar():
+    out = G.share_zero_tripwire(_fake_panel(90, 10))
+    assert out["n_breaches"] == 0
+    assert out["series"]["full_panel.dIES"]["breach_overall"] is False
+
+
+def test_A4_1_tripwire_reports_the_strict_subset_separately():
+    """Eight series: {full_panel, opposed_side} x {dIES, L}, each overall and per year."""
+    df = pd.concat([_fake_panel(96, 4, cls="opposed_side"), _fake_panel(1, 9, cls="ged_location")])
+    out = G.share_zero_tripwire(df)
+    assert set(out["series"]) == {"full_panel.dIES", "full_panel.L",
+                                  "opposed_side.dIES", "opposed_side.L"}
+    assert out["series"]["opposed_side.dIES"]["n_defined"] == 100      # the ged rows excluded
+    assert out["series"]["full_panel.dIES"]["n_defined"] == 110
+
+
+def test_A4_2_admission_audit_catches_a_cell_admitted_on_a_record_running_at_t():
+    """A4.2: applying VR-3 and checking it held are different things. One violation voids the panel."""
+    p = frozenset(("country.iran", "country.iraq"))
+    df = pd.DataFrame([{"date": "1998-06-30", "dyad": "country.iran|country.iraq"}])
+    ok = {p: [(pd.Timestamp("1997-01-01"), pd.Timestamp("1997-06-01"), "mid")]}
+    bad = {p: [(pd.Timestamp("1997-01-01"), pd.Timestamp("1999-06-01"), "mid")]}   # still running at t
+    assert G.admission_audit(df, ok)["asserted"] is True
+    a = G.admission_audit(df, bad)
+    assert a["asserted"] is False and a["violations"] == 1 and a["first_violation"]["dyad"].endswith("iraq")
+
+
+def test_A4_2_admission_audit_catches_a_dyad_with_no_admitting_record_at_all():
+    df = pd.DataFrame([{"date": "1998-06-30", "dyad": "country.iran|country.iraq"}])
+    assert G.admission_audit(df, {})["asserted"] is False
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A4_2_the_published_panel_passes_its_own_admission_audit():
+    s = json.loads(PANEL.read_text())
+    a = s["admission_audit"]
+    assert a["asserted"] is True and a["violations"] == 0
+    assert a["cells_checked"] == s["size"]["cells"]
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A4_3_effective_n_never_exceeds_nominal():
+    """B's same-day correction, taken: a DEFF below 1 is a finite-sample artefact and is floored,
+    so n_eff may never exceed n_nominal."""
+    s = json.loads(PANEL.read_text())
+    for scope in ("full_panel", "opposed_side"):
+        v = s["effective_n"][scope]
+        assert v["n_eff_two_way"] <= v["n_nominal"]
+        assert v["n_eff_block"] <= v["n_nominal"]
+        assert v["block"]["deff_used"] >= 1.0
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A4_3_the_reconciliation_with_Bs_deff_is_published_with_both_panels():
+    """A reader seeing DEFF 1.5 here and 56 in B's file must be given both panels, not one number."""
+    s = json.loads(PANEL.read_text())
+    r = s["effective_n"]["reconciliation_with_B"]
+    assert r["B_panel"]["n_dyads"] > r["G_panel"]["n_dyads"]
+    assert r["B_panel"]["n_nominal_cells"] > r["G_panel"]["n_nominal_cells"]
+    assert r["B_panel"]["n_dyads_with_any_variation"] < r["B_panel"]["n_dyads"]
+    assert "different objects" in r["why_they_differ"]
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A4_1_the_published_tripwire_reports_breaches_without_dropping_them():
+    """The panel is inside the bar overall and breaches it in the Gulf War shadow years. Both facts
+    must be published, and the breaching years must still be in the panel."""
+    s = json.loads(PANEL.read_text())
+    t = s["share_zero_tripwire"]
+    assert t["bar"] == 0.95
+    assert t["series"]["full_panel.dIES"]["breach_overall"] is False        # inside the bar overall
+    assert t["n_breaches"] > 0                                             # and breaching in slices
+    years = {b["year"] for b in t["breaches"]}
+    assert years & {"1991", "1992", "1993"}, years
+    assert s["by_year"]["1992"]["cells"] > 0                               # not dropped
