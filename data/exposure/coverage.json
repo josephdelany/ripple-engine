@@ -2,7 +2,7 @@
  "coverage": {
   "registration": "EXPOSURE_REGISTRATION.md §2 (2026-09-03, commit 22da52f)",
   "generated_by": "src/exposure_schema.py",
-  "n_events": 86,
+  "n_events": 174,
   "by_block": {
    "A": {
     "n": 13,
@@ -47,16 +47,16 @@
     "INVALID": 0
    },
    "G_accident": {
-    "n": 11,
-    "COMPLETE": 1,
-    "PARTIAL": 6,
+    "n": 99,
+    "COMPLETE": 81,
+    "PARTIAL": 14,
     "EMPTY": 4,
     "INVALID": 0
    }
   },
   "total": {
-   "COMPLETE": 6,
-   "PARTIAL": 51,
+   "COMPLETE": 86,
+   "PARTIAL": 59,
    "EMPTY": 25,
    "INVALID": 4
   },
@@ -74,7 +74,7 @@
    "blocks_excluded_by_own_declaration": [
     "G_accident"
    ],
-   "n_complete_including_excluded_blocks": 6,
+   "n_complete_including_excluded_blocks": 86,
    "gate_met": false,
    "consequence_if_not_met": "§5: Stage 1 is reported as DESCRIPTIVE ONLY and no verdict is issued -- registered in advance so it cannot be waived later"
   },
@@ -1972,6 +1972,2558 @@
     ],
     "filled_numeric": [],
     "provenance_kind": {}
+   },
+   {
+    "event_id": "valero_mckee_propane_fire_2007",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "tosco_avon_naphtha_fire_1999",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "citgo_corpus_christi_hf_2009",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "exxonmobil_baton_rouge_2016",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "valero_delaware_city_2005",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "giant_ciniza_explosions_2004",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "tesoro_martinez_acid_spill_2014",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "silver_eagle_woods_cross_2009",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "t13_saint_mary_s_refining_co_saint_mary_s_wv",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_cibro_refining_albany_ny",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_calumet_lubricants_co_lp_rouseville_pa",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_young_refining_corp_douglasville_ga",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_sunoco_inc_westville_nj",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_western_refining_yorktown_inc_yorktown_va",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_sunoco_inc_marcus_hook_pa",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_chevron_usa_inc_perth_amboy_nj",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_hess_corporation_port_reading_nj",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_axeon_specialty_products_llc_savannah_ga",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_axeon_specialty_products_llc_paulsboro_nj",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_philadelphia_energy_solutions_philadelphia_pa",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_intercoastal_energy_svcs_corp_troy_in",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_farmland_industries_philipsburg_ks",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_coastal_refining_mktg_wichita_ks",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_coastal_refining_mktg_augusta_ks",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_crystal_refining_carson_city_mi",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_marathon_indianapolis_in",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_indian_refining_lawrenceville_il",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_cyril_petrochemical_corp_cyril_ok",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_laketon_refining_laketon_in",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_total_petroleum_inc_arkansas_city_ks",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_tpi_petro_inc_alma_mi",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_premcor_refining_group_blue_island_il",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_premcor_refining_group_hartford_il",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_ventura_refining_transmission_llc_thomas_ok",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_continental_refining_company_llc_somerset_ky",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_eagle_refining_jackson_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_vulcan_refining_cordova_al",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_rattlesnake_refining_wickett_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_longview_refining_assoc_longview_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_thriftway_co_bloomfield_nm",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_el_paso_refining_el_paso_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_dubach_gas_dubach_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_amerada_hess_purvis_ms",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_barrett_refg_corp_vicksburg_ms",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_arcadia_refining_mktg_lisbon_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_canal_refg_co_chuch_point_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_gold_line_refining_ltd_jennings_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_petrolite_corp_kilgore_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_pride_refining_inc_abilene_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_shell_oil_co_odessa_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_berry_petroleum_co_stephens_ar",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_dow_haltermann_products_channelview_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_hunt_southland_refining_co_lumberton_ms",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_gulf_atlantic_operations_llc_mobile_al",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_western_refining_southwest_inc_bloomfield_nm",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_trigeant_ltd_corpus_christi_tx",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_pelican_refining_company_llc_lake_charles_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_shell_oil_products_us_saint_rose_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_western_refining_southwest_inc_gallup_nm",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_shell_oil_products_us_convent_la",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_amoco_oil_co_casper_wy",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_landmark_refining_fruita_co",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_pennzoil_producing_co_roosevelt_ut",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_antelope_refining_llc_douglas_wy",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_gibson_oil_refining_bakersfield_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_chevron_usa_inc_kenai_ak",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_anchor_refining_co_mckittrick_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_golden_west_santa_fe_springs_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_fletcher_oil_refining_carson_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_sunbelt_refining_coolidge_az",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_chemoil_refining_corp_long_beach_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_powerine_oil_co_santa_fe_springs_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_sunland_refining_corp_bakersfield_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_intermountain_refining_co_fredonia_az",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_pacific_refining_co_hercules_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_sound_refining_inc_tacoma_wa",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_chevron_usa_inc_richmond_beach_wa",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_foreland_refining_corp_tonopah_nv",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_tricor_refining_llc_bakersfield_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_paramount_petroleum_corporation_portland_or",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_tenby_inc_oxnard_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_flint_hills_resources_lp_north_pole_ak_126_535_5_500_05_14_a_alon_bakersfield_operating_inc_bakersfield_ca",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_arochem_international_ponce_pr",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_peerless_oil_chemical_ponce_pr",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_chevron_phillips_chem_guayama_pr",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_caribbean_petroleum_corp_san_juan_pr",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_shell_chem_yabucoa_inc_yabucoa_pr",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "t13_port_hamilton_refg_transp_lllp_kingshill_vi",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
    }
   ]
  }
