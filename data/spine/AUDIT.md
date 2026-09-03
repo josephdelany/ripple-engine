@@ -1,6 +1,6 @@
 # Spine audit — the honest baseline
 
-*Generated 2026-09-02T23:59:04+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
+*Generated 2026-09-03T00:01:26+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
 Session E, step E-1: published before any record is rewritten, so the repair can be
 scored against a number rather than an impression. Every figure below is computed;
 none is asserted. Re-run the script to regenerate this file.*
@@ -24,13 +24,13 @@ summary of sources it does not itself constitute.
 |---|---|
 | events | 313 |
 | carrying drafting scaffolding | 41 (13.1%) |
-| with ≥ 2 distinct source domains | 12 (3.8%) |
-| with exactly 1 source domain | 301 |
+| with ≥ 2 distinct source domains | 17 (5.4%) |
+| with exactly 1 source domain | 296 |
 | with 0 source domains | 0 |
 | whose `source_url` is a bare site root, not a document | 3 |
-| whose `source_url` is an encyclopaedia (wikipedia and similar) | 31 |
+| whose `source_url` is an encyclopaedia (wikipedia and similar) | 30 |
 | citing an encyclopaedia anywhere (incl. `sr_json`) | 31 |
-| with **no citable domain at all** once encyclopaedias are set aside | 31 |
+| with **no citable domain at all** once encyclopaedias are set aside | 30 |
 | description length, median / min / max (chars) | 150 / 53 / 487 |
 | descriptions ≥ 700 chars (roughly a 120-word narrative) | 0 |
 | `sr_json` field-source slots | 3130 |
@@ -51,7 +51,7 @@ summary of sources it does not itself constitute.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1970s | 8 | 5 (62.5%) | 7 (87.5%) | 0 | 1 | 100 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
 | 1980s | 11 | 5 (45.5%) | 5 (45.5%) | 0 | 2 | 265 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
-| 1990s | 16 | 6 (37.5%) | 0 (0.0%) | 4 | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
+| 1990s | 16 | 6 (37.5%) | 5 (31.2%) | 3 | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
 | 2000s | 43 | 4 (9.3%) | 0 (0.0%) | 11 | 0 | 150 | 0 | 10.5 | 14.7 | 74.9 | 2 | 17 | 26 |
 | 2010s | 85 | 11 (12.9%) | 0 (0.0%) | 5 | 0 | 148 | 0 | 11.4 | 27.2 | 61.4 | 2 | 55 | 30 |
 | 2020s | 150 | 10 (6.7%) | 0 (0.0%) | 11 | 0 | 149 | 0 | 11.4 | 25.6 | 63.0 | 2 | 87 | 60 |
@@ -61,12 +61,12 @@ summary of sources it does not itself constitute.
 | class | n | placeholder | ≥2 domains | desc median | sr ext % | sr corpus % | sr null % | sr majority-null | IES-90 level | uncovered |
 |---|---|---|---|---|---|---|---|---|---|---|
 | chokepoint_disruption | 27 | 5 (18.5%) | 1 (3.7%) | 150 | 12.2 | 48.9 | 38.9 | 1 | 25 | 0 |
-| conflict_escalation | 55 | 13 (23.6%) | 6 (10.9%) | 145 | 13.6 | 40.7 | 45.6 | 1 | 54 | 0 |
+| conflict_escalation | 55 | 13 (23.6%) | 7 (12.7%) | 145 | 13.6 | 40.7 | 45.6 | 1 | 54 | 0 |
 | demand_shock | 17 | 1 (5.9%) | 0 (0.0%) | 147 | 11.8 | 0.0 | 88.2 | 17 | 0 | 17 |
-| infrastructure_attack | 48 | 5 (10.4%) | 1 (2.1%) | 154 | 11.5 | 41.5 | 47.1 | 0 | 48 | 0 |
+| infrastructure_attack | 48 | 5 (10.4%) | 2 (4.2%) | 154 | 11.5 | 41.5 | 47.1 | 0 | 48 | 0 |
 | opec_decision | 52 | 3 (5.8%) | 0 (0.0%) | 149 | 10.2 | 0.0 | 89.8 | 52 | 0 | 52 |
 | policy_response | 57 | 5 (8.8%) | 2 (3.5%) | 140 | 11.1 | 0.2 | 88.8 | 57 | 0 | 57 |
-| sanctions | 57 | 9 (15.8%) | 2 (3.5%) | 159 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
+| sanctions | 57 | 9 (15.8%) | 5 (8.8%) | 159 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
 
 ## Every event still carrying drafting scaffolding (41)
 
@@ -125,9 +125,9 @@ summary of sources it does not itself constitute.
 | home.treasury.gov | 10 |
 | globalsecurity.org | 10 |
 | nber.org | 9 |
+| presidency.ucsb.edu | 9 |
 | opec.org | 8 |
 | history.state.gov | 7 |
-| presidency.ucsb.edu | 7 |
 | mining.com | 6 |
 | cnn.com | 6 |
 | spglobal.com | 6 |
@@ -135,9 +135,9 @@ summary of sources it does not itself constitute.
 | energy.gov | 5 |
 | iea.org | 5 |
 | npr.org | 5 |
+| govinfo.gov | 4 |
 | congress.gov | 4 |
 | washingtonpost.com | 4 |
-| money.cnn.com | 4 |
 
 ## How to read this
 

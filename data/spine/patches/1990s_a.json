@@ -52,7 +52,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iraq_invades_kuwait_1990.md",
    "dossier_status": "complete \u2014 clause (a) is met with margin (two independent primary-source domains: presidency.ucsb.edu and peacekeeping.un.org). Clauses (b) narrative (205 words, every claim tagged), (c) knowable_at, (d) entities (with the recurring `institution.un` gap reported, not invented), (e) class (conflict_escalation, clause quoted, no alternative defensible), and (f) not-known-at-the-time are all addressed above. No press source was obtained (unscr.com and two UPI URLs returned 403) and the Kuwaiti barrels-per-day figure for the severity assessment was not established \u2014 both are noted as open items above rather than treated as blocking clause (a), which does not require a press source when two independent primary sources are already present.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_invades_kuwait_1990",
@@ -76,7 +78,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iraq_un_661_embargo_1990.md",
    "dossier_status": "partial \u2014 fails (a) in spirit though not in letter: two independent domains are present with one primary source (S1), meeting the minimum, but no source retrieved this session is the United Nations' own text of Resolution 661 \u2014 every UN-hosted route tried (digitallibrary.un.org, docs.un.org, undocs.org) either 403'd or returned a JavaScript shell with no extractable text, and the two PDF sources found (sipri.org, iilj.org) could not be parsed without a PDF text-extraction tool unavailable this session. S1's quotation of the resolution's exact number and date from a primary U.S. executive order, and S2's quotation of its operative paragraphs from a secondary casebook, are the substitutes. Clause (b) narrative, (c) knowable_at, (e) class are met. Clause (d) has two reported entity gaps (`country.kuwait`, `institution.un`). Clause (f) is met but the barrel-per-day stake claimed in the existing `description` could not be verified or sourced this session.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "desert_storm_air_campaign_1991",
@@ -100,7 +104,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/kuwait_oil_fires_1991.md",
    "dossier_status": "partial \u2014 fails the spirit, though not the letter, of clause (a): two independent domains are present with one primary [S1] and one secondary [S2], meeting the stated minimum, but no contemporaneous press source could be retrieved this session (UPI Archives, a route SPINE_REGISTRATION.md records as working, returned HTTP 403 on every 1991 URL tried) and the only truly primary, contemporaneous source is a single document [S1]. Clauses (b) narrative, (c) knowable_at (with an explicitly flagged, unresolved date tension), (d) entities, (e) class, and (f) not-known-at-the-time are met.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "kuwait_oil_fires_1991",
@@ -112,7 +118,9 @@
    "source": "[S1] [S2] [S1] [S2]",
    "dossier": "data/dossiers/kuwait_oil_fires_1991.md",
    "dossier_status": "partial \u2014 fails the spirit, though not the letter, of clause (a): two independent domains are present with one primary [S1] and one secondary [S2], meeting the stated minimum, but no contemporaneous press source could be retrieved this session (UPI Archives, a route SPINE_REGISTRATION.md records as working, returned HTTP 403 on every 1991 URL tried) and the only truly primary, contemporaneous source is a single document [S1]. Clauses (b) narrative, (c) knowable_at (with an explicitly flagged, unresolved date tension), (d) entities, (e) class, and (f) not-known-at-the-time are met.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_un_986_ofp_1995",
@@ -124,7 +132,9 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iraq_un_986_ofp_1995.md",
    "dossier_status": "complete \u2014 clause (a): two independent domains beyond the primary (`un.org`, `everycrsreport.com`) plus the primary itself (`ofac.treasury.gov`, a contemporaneous document dated 14 April 1995) are all retrieved and quoted. Clause (b): narrative is 200 words, every claim carries an [Sn] marker. Clause (c): knowable_at is dated and reasoned from the resolution's own document date. Clause (d): both existing entities are addressed against the evidence, and two register gaps (`institution.un`, a Turkey entity) are reported rather than invented. Clause (e): class is supported with the codebook clause quoted, and the definitional stretch (\"lifted\" read to include a partial/conditional lift) is flagged rather than silently resolved. Clause (f): what was not known \u2014 principally, that Iraq would take thirteen more months to accept the terms \u2014 is stated with its source.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "ilsa_sanctions_1996",
@@ -148,7 +158,9 @@
    "source": "[S2] [S5] [S5] [S2] [S5]",
    "dossier": "data/dossiers/ilsa_sanctions_1996.md",
    "dossier_status": "partial \u2014 fails (a) in spirit though not in letter: five independent domains were retrieved and four are primary (S1-S4), comfortably clearing the two-source/one-primary minimum, so clause (a) is technically met. Marked partial because of an unresolved internal tension worth flagging rather than one specific failed clause: the current `description` field's $20M/$40M split is contradicted by the statute text itself (both S1 and S2 give a single $40M baseline threshold for Iran and Libya alike), so a data-quality correction is proposed above rather than a source gap. Clauses (b) narrative, (c) knowable_at, (d) entities, (e) class, and (f) not-known-at-the-time are all met from retrieved sources.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   },
   {
    "event_id": "iraq_ofp_exports_begin_1996",
@@ -160,7 +172,11 @@
    "source": "[S1]",
    "dossier": "data/dossiers/iraq_ofp_exports_begin_1996.md",
    "dossier_status": "complete \u2014 clause (a) is met: two independent domains (press.un.org, presidency.ucsb.edu), each carrying a primary source (S1, S2), plus a third independent domain (gao.gov, S3) as corroborating secondary. Clauses (b) narrative, (c) knowable_at, (d) entities (with one gap reported, not blocking), (e) class, and (f) not-known-at-the-time are all addressed above from retrieved sources only.",
-   "applied": false
+   "applied": true,
+   "applied_at": "2026-09-03T00:01:26+00:00",
+   "applied_by": "joe"
   }
- ]
+ ],
+ "applied_at": "2026-09-03T00:01:26+00:00",
+ "applied_by": "joe"
 }

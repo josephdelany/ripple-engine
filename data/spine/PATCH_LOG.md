@@ -206,3 +206,33 @@ Scoreboard before → after:
 | drafting scaffolding | 44 | 41 |
 | descriptions ≥700 chars | 0 | 0 |
 
+### APPLIED `1990s_a` — 2026-09-03T00:01:26+00:00, approved by joe
+
+7 field changes across 6 events; 3 rows skipped. Backup: `data/backups/oil_20260903_000028_pre_spine_apply.db.gz`.
+
+| field change | from | to |
+|---|---|---|
+| `iraq_invades_kuwait_1990`.source_url | https://digitallibrary.un.org/record/94220 | https://www.presidency.ucsb.edu/documents/remarks-and-exchange-with-reporters-th |
+| `iraq_un_661_embargo_1990`.source_url | https://unscr.com/en/resolutions/661/ | https://www.presidency.ucsb.edu/documents/executive-order-12724-blocking-iraqi-g |
+| `kuwait_oil_fires_1991`.source_url | https://en.wikipedia.org/wiki/Kuwaiti_oil_fires | https://www.govinfo.gov/content/pkg/PPP-1991-book1/html/PPP-1991-book1-doc-pg165 |
+| `kuwait_oil_fires_1991`.confidence | high | medium |
+| `iraq_un_986_ofp_1995`.source_url | https://digitallibrary.un.org/record/176622 | https://ofac.treasury.gov/media/5406/download |
+| `ilsa_sanctions_1996`.surprise | 2 | 1 |
+| `iraq_ofp_exports_begin_1996`.source_url | https://www.un.org/depts/oip/background/oilexports.html | https://press.un.org/en/1997/19971204.sc6452.html |
+
+Skipped:
+
+- `iraq_invades_kuwait_1990`.surprise — needs_joe: the builder could not reduce it to a clean value
+- `desert_storm_air_campaign_1991`.description — needs_joe: the builder could not reduce it to a clean value
+- `ilsa_sanctions_1996`.description — needs_joe: the builder could not reduce it to a clean value
+
+Scoreboard before → after:
+
+| measure | before | after |
+|---|---|---|
+| events with ≥2 source domains | 12 | 17 |
+| encyclopaedia-only source_url | 31 | 30 |
+| bare site-root source_url | 3 | 3 |
+| drafting scaffolding | 41 | 41 |
+| descriptions ≥700 chars | 0 | 0 |
+
