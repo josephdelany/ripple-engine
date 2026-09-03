@@ -442,3 +442,55 @@ print(g["std"].min(), g["std"].max(), g["mean"].std())  # 0.75, 1.00 within; 0.1
 
 Running it is the receipt; no output file is written, because writing one before Stage 0 would be
 the first computed artefact of a study this document exists to precede.
+
+## Amendment C-1 — 2026-09-03, AFTER computing §5's re-test: the verdict, and a correction to my own §5
+
+*Appended, never edited in place. §5 above stands as sealed; this records what running it produced,
+including that one of §5's own disclosures was overstated and is now resolved.*
+
+**1. `severity_dose_response` is RETRACTED.** Under the registered discipline the high-minus-low
+|CAR+20| difference is **+2.071 [−4.067, +8.209]**, permutation p **0.269** (published: +5.079
+[+1.003, +9.364], p 0.030), and the difference sits at the **95.8th percentile** of a VIX+GPR-matched
+placebo whose central 95% is [−2.306, +2.192] — *inside* the null the published test never built. The
+state mix of severe events accounts for the gap. Estimated instead as ordinary ripple cells, both
+severity arms are NULL and the *low*-severity arm has the larger absolute 20-day Brent response
+(−2.25 versus −1.39), which is the dose-response inverted at n's that cannot support reading it
+either. Full result: `docs/MAGNITUDE_SEVERITY_RETEST.md`, `data/magnitude/severity_retest.json`.
+`data/edge_battery.json` was **not edited**; a test asserts the module never writes to it.
+
+**2. A second defect in the published claim, found while replicating its n.**
+`edge_battery._oil_type_frame` clusters **within event type** — correct for the neighbouring
+chokepoint-versus-sanctions test, and inherited unchanged by a test whose grouping variable is
+**severity**. High-severity events: 106 raw → **92** clustered within type (the unit used) → **56**
+clustered within severity group (the unit required). Thirty-six overlapping same-severity episodes
+entered as independent observations. Same class as the unit-of-dependence defect corrected in the
+grid price arm at `a7fbae9`. Both defects inflate significance; correcting both removes the claim.
+
+**3. CORRECTION TO §5's SECOND DISCLOSURE — the INV-5 concern is latent, not live.** §5 reported that
+102 of 313 events sit on their class's `SEV_BAND` value and called it "an upper bound on how many are
+class-imputed". The bound was correctly labelled, and it is now resolved: **zero** of the live corpus
+is demonstrably class-imputed. `data/extract/admission_log.csv` does not exist, no current event
+carries an `AUTO-ADMIT` rec_reason, and all 32 current events found in `candidate_review.csv` are
+`joe_decision=approve`. The 102 overlap is what chance predicts — `SEV_BAND`'s values are 3 and 2, the
+modal severities of a 1–5 ordinal. **The mechanism in `src/admit_events.py` would create the INV-5
+violation if it ran; it has not run against this corpus.**
+
+The live issue is different and simpler, and it survives the correction: **`severity` carries no
+per-value source anywhere.** It is uniformly analyst judgement — not mixed, so not an INV-5 breach,
+but **inferred throughout**. Under §2.1 it is therefore admissible only as a labelled-inferred
+ordinal comparator and **never as M-Q**. That restriction is now registered, not merely implied.
+
+**4. §5's registered "report it twice" split is one-sided for this test and is recorded as such.**
+With provenance resolved, "hand-coded only" is *every* event, so the split ran on the strictest
+reading of the original concern — excluding the 102 on-band events. `SEV_BAND`'s values are {2, 3};
+severity 3 is in neither arm and severity 2 is in the **low** arm only, so the restriction removes
+**14 low-severity events and zero high-severity events**. The off-band estimate is duly larger
+(+4.223 [−0.162, +8.609], p 0.064) **because the filter can only strip the low arm**. Its band still
+covers zero. It is published for completeness and is **not** the cleaner number; a test asserts the
+one-sidedness so it cannot later be quoted as corroboration.
+
+**5. What this does not touch.** The other two claims `edge_battery.json` marks `validated`
+(`copper_growth`, `hy_credit_stress`) are state-conditioned amplification edges scored by the same
+gate. This re-test says nothing about either individually, but they share that gate's defect and the
+same treatment is available to whoever owns them. Stage 0 of §3 has **not** been run; nothing in this
+amendment starts it.
