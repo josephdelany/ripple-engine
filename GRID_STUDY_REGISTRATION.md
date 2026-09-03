@@ -253,15 +253,122 @@ and the registered seeds. Tests: `tests/test_grid_power.py`, each name carrying 
 
 ---
 
-## Part III — the study proper
+## Part III — the study proper: the PRICE arm
 
-**Not written.** Part III is registered only after Part II is computed and published, and it is registered
-with any multiplier the §2.7 drop rule removed actually removed. It will fix: the grid choice (§1.2), the
-retrieval and the state blocks, the scores, the baselines including grid-climatology (§1.3) and the frozen
-registered-weight engine, the nested walk-forward CV design for the fitted block weights and the learned
-similarity metric (inner folds strictly before each outer read, no exceptions), the comparison of the fitted
-model against the frozen one — **with the finding published either way, because "fitting does not beat fixed
-weights at this n" is a result about the design and not a failure to report** — and the promotion rule.
+*Registered 2026-09-03, **after** Part II was computed and published (`data/grid/power_arithmetic.json`,
+commit 7b51158) and **using** its numbers, with the multiplier the §2.7 drop rule removed actually removed.
+Registered before the study's code. The G arm is NOT registered here — see §3.0.*
+
+### 3.0 What survived §2.7, and what did not
+Applied mechanically to the computed arithmetic:
+
+| multiplier | n_nominal | n_eff | R_m | decision |
+|---|---|---|---|---|
+| 1 grid (month-end) | 476 | 480.3 | 1.009 | **KEEP** |
+| 1 grid (week-end) | 2,070 | 599.5 | 0.290 | **KEEP, MARGINAL** |
+| 2 targets | 5 added / cell | 1.847 added | 0.369 | **KEEP** |
+| 3 horizons | 4 added / cell | 0.547 added | 0.137 | **KEEP, MARGINAL** |
+| 4 dyad-date | 321,678 | 4,056 | 0.013 | **DROP** (R < 0.10) |
+
+**Multiplier 4 is dropped, so this Part registers the price arm only.** The rule that dropped it is defective
+in a way I can name — it punishes a large nominal denominator rather than a small return — but I found that
+out because it dropped a multiplier I expected to keep, so it is applied as registered and the ruling is
+Joe's: `data/gates/grid_multiplier4_2026-09-03.md`. If Joe rules to amend §2.7, the G arm is registered
+separately as **Part IV**, and nothing in Part III changes. Escalation is not silently folded back in.
+
+### 3.1 The grid: month-end is primary, week-end is the secondary specification
+**Decided on the §2.7 arithmetic and nothing else.** Week-end carries 4.35× the rows of month-end and 1.46×
+the effective n (2,895 vs 1,979); its own grid multiplier is labelled MARGINAL at R = 0.290 where month-end's
+is R = 1.009; and its stacked design effect is **3.18** where month-end's is **1.02**.
+
+Month-end is primary because at h = 20 its reads barely overlap, so every registered inference procedure —
+DM/HLN, the stationary block bootstrap, SPA — rests on a dependence correction of about 2 % rather than one
+of about 220 %. A design whose conclusions are hostage to the correction being right is worse than a slightly
+smaller design whose conclusions are not, and month-end already clears §2.9's power target (MDS **0.0293**
+against the +0.05 target). Week-end is run as a **registered specification-curve row**, never as the headline,
+and its R = 0.290 is printed beside every number it produces.
+
+### 3.2 What is fixed
+- **Targets (multiplier 2, KEEP).** All six: Brent, WTI, diesel crack, gasoline crack, Henry Hub, propane.
+  Per-target availability is published; Henry Hub (from 1997-01-07) and propane (from 1992-07-09) do not exist
+  for the first decade and their rows are absent, never imputed. Results are reported **per target** and, when
+  pooled, only with `C_eff` attached.
+- **Horizons (multiplier 3, KEEP-MARGINAL).** h ∈ {5, 10, 20, 40, 60} trading days. **R = 0.137 and
+  H_eff = 1.547 against the random-walk benchmark 1.550 are printed beside every pooled-horizon number, in
+  every surface, permanently.** Five horizons are worth about one and a half.
+- **The state block.** The engine's registered market block, read at t under §1's filtration, Amendment G's
+  release lags and Amendment H's knowable-at rule. Measured and stated in advance: only **215 of 476**
+  month-end dates carry all thirteen market fields, **237** carry ten and **429** carry eight. Every read
+  publishes the count of fields it actually had, and `n_fields_at_t` is a column in the sealed record, not a
+  footnote.
+- **Scores.** The protocol's §3, unchanged: CRPS as the gate for P, pinball at 10/50/90 and PIT beside it,
+  with the Ferro size-corrected forms published as diagnostics (Amendment A.5 / E.1).
+- **Inference.** §6 unchanged, with the *measured* mean block and HAC lag of the stacked grid series, the
+  registered 2,000 bootstrap / 1,000 SPA / 1,000 permutation draws and the registered seeds (Amendment I).
+  Every reported n carries its n_eff beside it (§2.1).
+
+### 3.3 The baselines
+1. **Grid-climatology**, re-estimated on the grid, point-in-time (§1.3). The honest bar, and the one the base
+   rate shift makes mandatory.
+2. **Persistence / no-change** for P.
+3. **Random analogs** — the same k drawn at random from the point-in-time pool: isolates similarity retrieval.
+4. **The frozen registered-weight engine** — the engine with today's registered constants, never fitted.
+   This is the baseline the fitted model must beat, and §3.4 exists to test exactly that.
+
+### 3.4 Training, and the condition under which it happens at all
+§2.9's condition is **met** on the computed arithmetic: 6 fitted parameters (5 block weights — physical,
+market, actors, dyads, system — plus 1 metric scale) require 120 effective units at the registered 20 per
+parameter, and each inner training set carries **989.5**. The fit is therefore legitimate at this n and runs.
+
+- **Nested walk-forward cross-validation.** Outer loop: the rolling-origin evaluation of §2, anchored and
+  expanding, nothing ever re-fitted on the test point. Inner loop: the block weights and the similarity metric
+  are selected on folds drawn **strictly before each outer read's `as_of`**, no exceptions, enforced in code
+  and asserted by the filtration audit (Amendment F.1) extended with a `training_fold` check that no inner
+  fold's outcome closed on or after the outer read's `as_of`.
+- **The fitted objects.** The five block weights (simplex-constrained) and one similarity-metric scale, fitted
+  to minimise the registered CRPS on the inner folds. The parameter count is fixed **here, at six**; adding a
+  parameter requires a dated amendment and re-checking §2.9's floor before the fit is re-run.
+- **The comparison that is the point.** The fitted model against the frozen registered-weight engine, on the
+  gate score, with the DM/HLN test, the block-bootstrap interval and the SPA family. **Published either way.**
+  If fitting does not beat fixed weights at this n, that is a finding about the design — it says the
+  registered constants were already at or near the achievable optimum, or that the state block does not carry
+  the information the weights were supposed to reweight — and it is reported as a result, in the same place
+  and the same weight as the alternative. It is not a failed experiment and it is not omitted.
+
+### 3.5 The selection repair is measured, not asserted
+The study exists because 15 of the 43 Big Moves episodes carry zero event-triggered reads (34.9 %). The grid
+arm publishes the same coverage number computed on the grid, beside the event-triggered one, so the repair is
+a measurement. Registered in advance: the grid's coverage is expected to be complete **by construction**, and
+therefore the number that matters is not the coverage but the **skill on the previously-unreached episodes
+reported separately** from skill on the rest. If the engine has skill only where a corpus event already
+existed, the grid will show it, and that is a publishable result about the engine rather than about the grid.
+
+### 3.6 Promotion
+§7 unchanged in form, against **grid-climatology** (§1.3) and additionally against the **frozen** engine
+(§3.3.4). §7's VALIDATED remains unavailable to anything in this project until the label audit passes. A grid
+result is never reported as though it validated an event-triggered claim, or the reverse (§0.2).
+
+### 3.7 Expected failure modes, registered before the build
+1. **The base rate does the work.** A grid is mostly quiet; a climatology fitted on it is sharp and hard to
+   beat, exactly as no-change was in Amendment L. Skill against grid-climatology will be *harder* to obtain
+   than skill against event-climatology, not easier, and a smaller number here is not a worse engine.
+2. **The state block is thinner than the grid.** Half the month-end grid lacks three or more market fields
+   (§3.2). Reads on thin dates are retrieved on fewer fields and will be worse; `n_fields_at_t` is sealed so
+   the effect can be measured rather than argued.
+3. **Fitting six parameters at 989 effective units is legitimate, not comfortable.** The floor is 20 units per
+   parameter; we have about 165. Expect the fitted weights to be unstable across outer folds, and register
+   now that the **weight trajectory across folds is published** — a fitted model whose weights swing is a
+   different object from one whose weights converge, and the reader is entitled to see which we have.
+4. **Five horizons are worth one and a half.** Any statement of the form "we evaluate at five horizons" that
+   is not accompanied by H_eff = 1.547 is misleading, and §3.2 makes the pairing mandatory.
+5. **The grid cannot reach past the data.** §1.4. Source selection is untouched, and the JODI blackout after
+   2018 conditions every physical-flow field on the states that chose to keep reporting.
+
+### 3.8 Outputs
+`data/grid/reads.jsonl`, `scores.jsonl`, `summary.json` under the sealing, archiving and content-digest rules
+of the protocol (§2, Amendments D and I), plus `data/grid/training.json` (the fold-by-fold weight trajectory
+of §3.4 and §3.7.3). Tests: `tests/test_grid_*.py`, each name carrying its clause id. Nothing is written to
+`data/walk_forward/**` (§0.2).
 
 ---
 
