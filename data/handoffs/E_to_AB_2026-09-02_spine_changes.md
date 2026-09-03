@@ -13,7 +13,7 @@ a label window:
 
 | event | now | proposed | why |
 |---|---|---|---|
-| `iran_iraq_ceasefire_1988` | 1988-08-20, day | **1988-08-08**, day | The UN's own UNIIMOG history: the Secretary-General "announced the agreement of both Iran and Iraq to a ceasefire with effect from 0300 GMT on 20 August" on 8 August. The codebook's date rule is the first day the market could have known. Verified by the reviewer against the UN page. |
+| `iran_iraq_ceasefire_1988` | 1988-08-20, day | **flagged, NOT proposed** — see correction below | The UN's own UNIIMOG history: the Secretary-General "announced the agreement of both Iran and Iraq to a ceasefire with effect from 0300 GMT on 20 August" on 8 August. The codebook's date rule is the first day the market could have known. Verified by the reviewer against the UN page. The dossier nevertheless writes "not changed here, but flagged", so no change was proposed and none was applied: the record still reads 1988-08-20. The decision is Joe's. |
 | `iran_oilworkers_strike_1978` | 1978-10-31, day | 1978-10, **month** | No retrieved source pins the day. |
 | `iran_revolution_1979` | 1979-02-11, day | 1979-02, **month** | Same. FRUS Volume X, which would settle it, is unpublished ("Being Cleared") — checked. |
 | `opec_price_collapse_1986` | 1986-01-01, day | **unresolved**, at least month | Two defensible anchors were found (Yamani at the Oxford Energy Seminar, September 1985; OPEC's 71st Conference, Vienna, 10–11 December 1985) and neither could be adjudicated from retrieved sources. Both fall in **1985**. Put to Joe rather than manufactured. |

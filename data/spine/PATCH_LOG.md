@@ -39,9 +39,13 @@ Events: `tanker_war_1984`, `kharg_strikes_1985`, `opec_price_collapse_1986`,
 `iraq_kharg_1986`, `earnest_will_1987`, `bridgeton_mine_strike_1987`,
 `praying_mantis_1988`, `iran_air_655_1988`, `iran_iraq_ceasefire_1988`.
 
-- `iran_iraq_ceasefire_1988` moves from **1988-08-20 to 1988-08-08**, the date the UN
-  records the ceasefire being announced, per the codebook's rule that an event is dated to
-  the first day the market could have known.
+- `iran_iraq_ceasefire_1988` **keeps 1988-08-20**. This line previously said the record
+  moved to 1988-08-08 and that was wrong: it was written against an earlier build of the
+  patch, before `src/spine_patch.py` was hardened. The dossier's cell reads "not changed
+  here, but flagged: 1988-08-08 ... is arguably the codebook-correct first day the market
+  could have known", which the hardened parser correctly reads as a no-change. The date
+  question is real and stays with Joe; the record's `source_url` did move, to the UN's
+  UNIIMOG mission history.
 - `opec_price_collapse_1986` loses `day` precision. Two defensible anchors were found and
   neither could be adjudicated; both fall in 1985.
 - `praying_mantis_1988` gets a working `source_url`; the one in the database no longer
