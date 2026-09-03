@@ -408,3 +408,58 @@ Two consequences, fixed here rather than left to whoever implements:
    silently keep them in the other two — a worse state than today, because the inconsistency
    would be invisible in the output. `src/engine/**` and `src/walk.py` are Session B's;
    the handoff carries this as a blocking condition with the outstanding count.
+
+### Amendment 3.2 (2026-09-02, registered before `conflict_escalation` and `sanctions` are coded) — H1 for the other two classes: four cases the original wording does not decide
+*A3.2's H1 was written from the two classes then audited, both of them about physical damage,
+and its examples are all kinetic. Reading the other two geopolitical classes turned up four
+kinds of event that H1's head clause and its example list answer differently. Deciding them
+inside the audit would be choosing a definition with the events in view, so they are decided
+here first. Nothing in `events` changes and no count has been computed under these rules.*
+
+**The head clause governs; the list illustrates.** H1 is *"a deliberate act, directed
+adversarially at a state, its people, its territory, its infrastructure, or at shipping"*.
+The examples after the dash — attack, bombing, sabotage, mining, blockade, seizure, threat or
+display of force — are the forms that arise in `infrastructure_attack` and
+`chokepoint_disruption`. **They are not a closed list, and H1 does not require violence.**
+The question the precondition asks is whether the event is an adversarial act between
+identified parties, because that is what makes "did this escalate in the next 90 days" a
+question with a subject. Four rules follow.
+
+**(a) Non-kinetic state coercion satisfies H1.** An embargo, a sanction, an export ban aimed
+at a named state, a secondary tariff, a trade blockade: a deliberate act directed
+adversarially at an identified state. `sanctions` is one of the four geopolitical types
+precisely because it is state-on-state coercion, and IES-90's question — did this dyad reach
+force in W — is well posed for it.
+
+**(b) Relief and settlement inside a live adversarial dyad satisfy H1, and are marked.**
+A sanction lifted, a waiver granted, a deal signed, an embargo ended. The *act* is
+de-escalatory, but the dyad is identified and adversarial, and both the level and the DEAL
+flag are defined for it. Excluding them would delete precisely the events the DEAL flag
+exists to measure, and would bias the corpus toward escalation by construction — a worse
+error than the one this amendment corrects. Such rows carry **`de_escalatory = 1`** so the
+direction of the act is never lost inside a `hostile` value.
+Consequently `hostile` on this field means **"an adversarial act, or a dated act inside an
+identified adversarial dyad"**. It does not mean violent, and no surface may render it as
+"violent". The four values stay exactly as Joe approved them.
+
+**(c) Domestic industrial and commercial action fails H1 → `non_hostile`.** A strike, a wage
+dispute, a community road blockade, a mine occupation, and a producer's own export
+restriction taken for domestic price, supply or industrial-policy reasons. The counterparty
+is an employer, a mine operator or a domestic market — not an adversary. This is the same
+tie-break 3 (`crime for private gain`) generalised: a coercive act with a commercial
+counterparty is not an act of foreign policy. Where such a restriction **names a state** it
+is (a), not (c).
+
+**(d) Seizure of power and armed uprising satisfy H1.** A coup, a revolution, an insurgency
+taking territory, a violently repressed national uprising: a deliberate act directed
+adversarially at a state, by a party the record identifies at least as a class (the army, a
+named movement, the security forces). A **political turning point inside** such a conflict
+that is not itself an act of force — a ruler leaving the country — is `ambiguous`, by the
+same logic as tie-break 2.
+
+**One consequence to state plainly.** Under (a) and (b), essentially the whole `sanctions`
+class stays G-scorable, and the precondition removes far less there than it does from the
+two classes audited first. That is the correct result and not a weakening: sanctions were
+never the events with no adversary. The events with no adversary are storms, groundings,
+accidents, strikes and price-management export bans — and they are scattered across three of
+the four geopolitical classes, which is the finding.
