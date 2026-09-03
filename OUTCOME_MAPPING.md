@@ -463,3 +463,33 @@ two classes audited first. That is the correct result and not a weakening: sanct
 never the events with no adversary. The events with no adversary are storms, groundings,
 accidents, strikes and price-management export bans — and they are scattered across three of
 the four geopolitical classes, which is the finding.
+
+### Amendment 3.3 (2026-09-02, ruled by Joe) — `ambiguous` is terminal, and the diagnostic publishes both ways
+*Closes the last gate this audit left open. Nothing in `events` changes and no count moves.*
+
+**1. `ambiguous` is a terminal value, not a pending decision.** Where the record does not
+settle whether an event was an adversarial act, `ambiguous` **is the answer** — the same
+status as an `unknown` state field or a `low` confidence, and governed by the same rule
+(SESSION_CHARTER §2.1, sourced-or-unknown). Adjudicating the thirteen anyway would supply a
+fact the evidence lacks, which is the failure mode this project's whole registration
+discipline exists to stop; it would also mean a target definition being settled by judgement
+after the results were in view.
+- **No session re-codes an `ambiguous` event to clear it**, and no surface, checklist, gate
+  report or handoff lists them as outstanding. `ambiguous` is not a Joe gate.
+- The **only** thing that moves an event out of `ambiguous` is **new evidence in the record**:
+  a source that settles the cause, or a Session E patch that unbundles a row holding two acts
+  (three of the thirteen are of that kind). The move is then a normal re-coding under the
+  registered rule, published with the evidence that caused it — never a decision to stop
+  having an awkward value.
+- `ambiguous` remains **not G-scorable** (§A3.3 unchanged): it returns
+  `no_independent_outcome` and is counted.
+
+**2. Every diagnostic of the G target publishes the level-0 share with and without the
+`ambiguous` events.** Because the value is terminal, whether to count those events can never
+be settled by evidence, so both bounds are reported as a matter of course — in
+`data/spine/CLASS_AUDIT.md` §6, in `data/walk_forward/summary.json` when B implements the
+precondition, and on any surface that reports a G outcome distribution. The registered rule
+excludes `ambiguous`, so the share **under Amendment 3** is the one that drops only
+`non_hostile`; the also-without-`ambiguous` figure is published beside it as the other bound,
+never instead of it. A single-figure report of this target is incomplete, and the audit's test
+asserts both figures are present.

@@ -57,10 +57,27 @@ nothing. No patch is proposed — that is your call and Joe's.
    functionally an `opec_decision`: a producer restricting its own output to move a price.
    `drc_cobalt_ban_2025` carries **IES-90 level 3, war**, the worst single case in the corpus.
 
-Items 7 and 8 are class placements, not record errors, and CLASS_AUDIT §7.3 says explicitly
-that the field already prevents the harm (neither group is G-scored under Amendment 3) and
-that moving them is a separate registration affecting `p_class_given_big` and the analogue
-retrieval. Nothing is moved.
+**Items 7 and 8 are RULED and closed — do not patch them.** Joe ruled on 2026-09-02 that
+both placements stay exactly as coded: the eight mining strikes stay `conflict_escalation`,
+the three export bans stay `sanctions`. They were identified after the walk had run and the
+per-class results were in view, so re-classing them would rewrite `p_class_given_big`, the
+analogue retrieval and every published per-class number with the old values already known —
+the move registration exists to prevent. The `hostility` field already removes the harm. The
+correct placement is registered as a **v3 codebook item, applied prospectively only**
+(`EVENTS_CODEBOOK.md` amendment 2026-09-02, "v3 placement"), binding only events admitted
+after v3; the eleven existing events are never revisited. A test fails if one is re-classed.
+
+**Items 1 and 2 are the same shape and are NOT ruled** — `codelco_elteniente_2025` (a copper
+mine in `infrastructure_attack`) and `iran_oilworkers_strike_1978` (a strike in the same
+class). No ruling has been asked for on those two, and this session does not propose one; the
+same reasoning would presumably apply, and the field already stops both being G-scored.
+
+**Items 3, 5 and 6 are live and are yours** — they are record errors rather than placements,
+and fixing them is exactly the thing that *can* move an event out of `ambiguous`: a patch that
+unbundles a row holding two acts (item 3), or that records whether a measure names a
+counterparty (item 5), changes the evidence and therefore the coding. Item 6 (two records that
+materially understate their own event) changes no coding but would let a coder working from
+the description reach the same answer the wider record gives.
 
 ## The codebook
 `EVENTS_CODEBOOK.md` now carries the `hostility` field (amendment 2026-09-02, approved by

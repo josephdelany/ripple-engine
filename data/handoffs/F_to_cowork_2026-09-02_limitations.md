@@ -64,6 +64,17 @@ will be reported separately and not pooled with this one.
 > moves the level-0 outcome share from 42.0% to 36.8%, which shifts the climatological
 > baseline as well as the engine's score.
 
+## How to describe the thirteen contested events
+Not as "unresolved", "pending review" or "awaiting adjudication" — they are none of those.
+`ambiguous` is a **terminal coding** under the project's sourced-or-unknown rule (ruled
+2026-09-02, `OUTCOME_MAPPING.md` Amendment 3.3): the record does not settle whether the event
+was an adversarial act, and deciding anyway would supply a fact the evidence lacks. The
+correct phrasing is that the audit **reports** thirteen events whose character the record does
+not determine, and **publishes the outcome share both with and without them** — 36.8% under
+the registered rule, 32.5% with the thirteen also out of the denominator — rather than
+choosing between the two. If the section has room for only one number it is **36.8%**, and it
+must be labelled as excluding the non-hostile events only.
+
 ## A note on how to cite this
 The audit is a **hand coding** — a reading of each record, like the codebook's severity and
 surprise scales — not an automated classification, and the paper should say so. It is

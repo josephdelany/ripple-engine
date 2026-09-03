@@ -305,8 +305,18 @@ fired: what the precondition would remove or keep, not a new computation. `—` 
 
 ## 4. The thirteen ambiguous, named as ambiguous
 Not "probably hostile" or "probably not" — events where the record does not settle it.
-Amendment 3 §A3.3 excludes them from G-scoring and lists them by name, so a later decision
-can move them either way without anything having been quietly assumed.
+Amendment 3 §A3.3 excludes them from G-scoring and lists them by name.
+
+> **`ambiguous` is a terminal state, not a pending decision.** Ruled by Joe, 2026-09-02, and
+> registered as `OUTCOME_MAPPING.md` Amendment 3.3. Under the sourced-or-unknown rule
+> (SESSION_CHARTER §2.1) the record does not settle these thirteen, and adjudicating them
+> anyway would supply a fact the evidence lacks — the same error as filling a `severity` to
+> avoid a blank. **They are not a to-do. No later session should "resolve", "clear", "close
+> out" or re-code them**, and none of them is a Joe gate. What can change one is *new
+> evidence in the record* — a source that settles the cause, or a Session E patch that
+> unbundles a row that holds two acts — never a judgement call made because the value is
+> inconvenient. Until then the answer to "was this a hostile act?" is: the record does not
+> say, and that is published as the answer.
 
 | event | date | class | the two readings |
 |---|---|---|---|
@@ -393,6 +403,16 @@ silently invalidate this section — it recomputes it.)
 | also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |
 | also excluding the 2 `hostile_unattributed` (the strictest reading) | 121 | 40 | **33.1%** |
 
+**Every diagnostic of this target publishes the level-0 share both with and without the
+`ambiguous` events, as the table above does** — required by Amendment 3.3 §2 and asserted by
+`tests/test_hostility.py::test_the_ambiguous_diagnostic_is_published_both_ways`. Because
+`ambiguous` is terminal, the choice of whether to count those thirteen can never be settled by
+evidence; publishing both figures is therefore not a courtesy but the only honest way to
+report the target, and it lets a reader who disagrees with any single ambiguous coding read
+off the other bound without a re-run. Neither figure is the headline: the registered rule
+excludes `ambiguous` from G-scoring, so **36.8% is the share under Amendment 3** and 32.5% is
+the bound that also drops them from the denominator.
+
 **Affected: 27 of the 150 reads (18.0%)** — 17 non-hostile, 10 ambiguous. By class:
 
 | class | scored G reads | non_hostile | ambiguous | affected |
@@ -452,7 +472,28 @@ surface reporting G from this run carries: *"scored before Amendment 3; includes
 non-hostile events for which the G target is undefined (27 counting ambiguous) —
 `data/spine/CLASS_AUDIT.md` §6."*
 
-## 7. The class split — approved as a field, and what the second pass adds
+## 7. The class split — approved as a field, and Joe's two closing rulings
+*Both gates this audit left open were ruled by Joe on 2026-09-02. Nothing in this section is
+outstanding; §7.0 records the rulings so that a later session reading §4 or §7.3 does not
+mistake a settled question for an open one.*
+
+### 7.0 The rulings, 2026-09-02
+**Ruling 1 — the thirteen `ambiguous` events stay ambiguous.** Ambiguous is a terminal state
+under the sourced-or-unknown rule, not a pending decision: the record does not settle them,
+and adjudicating anyway would supply a fact the evidence lacks. Registered as
+`OUTCOME_MAPPING.md` Amendment 3.3; stated in §4 above; the both-ways diagnostic it requires
+is in §6 and is tested.
+
+**Ruling 2 — both class placements stay exactly as coded.** The eight mining strikes and
+blockades stay in `conflict_escalation`; the three producer export bans stay in `sanctions`.
+Reason, in Joe's words: moving them *after seeing results* would rewrite `p_class_given_big`,
+the analogue retrieval and every published per-class number — which is precisely what
+registration exists to prevent. The `hostility` field already removes the harm (neither group
+is G-scored under Amendment 3). The correct placement is registered as a **v3 codebook item,
+applied prospectively only** — `EVENTS_CODEBOOK.md` amendment 2026-09-02 (v3 placement).
+Details in §7.3.
+
+### 7.1 The field itself
 Joe approved CLASS_AUDIT §7.5's recommendation on 2026-09-02: **a `hostility` field, not new
 `events.type` values.** It is registered in `EVENTS_CODEBOOK.md` (amendment 2026-09-02) with
 the four values, the coding rules and the tie-breaks, and in `OUTCOME_MAPPING.md` Amendments
@@ -463,7 +504,7 @@ per-class number for an effect a field achieves exactly, and a field can hold `a
 which a type cannot — a point the second pass made expensive to ignore, since 13 of 187
 events need that value.
 
-### 7.1 What the split would do to the Big Moves per-class rates
+### 7.2 What the split would do to the Big Moves per-class rates
 `p_big_given_class` = events of the class inside a big-move window (onset − 7 d daily, − 31 d
 monthly, to end) over events of the class inside the asset's coverage. Rules and episodes
 exactly as published (`BIG_MOVES_REGISTRATION.md` Amendment 2, `data/big_moves/*.json`); only
@@ -489,7 +530,7 @@ groundings move oil, and it is the row that most needs Joe's eye. **Every cell i
 single-digit-to-low-double-digit n and none of these differences is significant**; the case
 for the split rests on the classes meaning two different things, not on these rates.
 
-### 7.2 What the second pass adds to the class question
+### 7.3 What the second pass adds to the class question
 The oil assets above cannot see the second pass's main finding, because eight of the eleven
 new non-hostile events are metals events. The equivalent split for copper, platinum, nickel,
 cobalt and rare earths is **not computed here**: those series are not in
@@ -499,20 +540,40 @@ can say without computing anything is that the eight Chile/Peru mining strikes a
 producer export bans are the *reason* a metals Big Moves table would differ from the oil one,
 and that a `hostility` split is the field that would separate them.
 
-### 7.3 Two class placements that are Joe's call, not the field's
-The field records what an event *is*; it does not move an event to a better class. Two
-groups sit in a class that fits them on no axis, and the field marks but does not fix that:
-- **Eight mining strikes and community blockades in `conflict_escalation`.** They belong in
-  a labour-and-supply class, or in `demand_shock`'s supply-side twin, which does not exist.
-- **Three producer price-management export bans in `sanctions`** (`indonesia_nickel_ban_2019`,
-  `indonesia_palm_ban_2022`, `drc_cobalt_ban_2025`). Each is functionally an `opec_decision`
-  — a producer restricting its own output to move a price — and `opec_decision` is not
-  G-scored at all, which is the correct treatment for them.
-Moving either group is a codebook change and a Joe decision under SESSION_CHARTER §2 rule 3.
-Nothing is moved here, and the audit does not recommend a move over the field: the field
-already stops both groups being G-scored, which is the harm. The class placement affects
-`p_class_given_big` and the analogue retrieval, which is a separate question and a separate
-registration.
+### 7.4 The two class placements — ruled: they stay as coded
+Two groups sit in a class that fits them on no axis, and the `hostility` field marks that
+without fixing it:
+- **Eight mining strikes and community blockades in `conflict_escalation`** —
+  `escondida_strike_2011/2017/2024`, `sa_platinum_strike_2014`, `lasbambas_blockade_2019`,
+  `lasbambas_halt_2021`, `cuajone_shutdown_2022`, `peru_lasbambas_2022`. They belong in a
+  labour-and-supply class, which does not exist.
+- **Three producer price-management export bans in `sanctions`** — `indonesia_nickel_ban_2019`,
+  `indonesia_palm_ban_2022`, `drc_cobalt_ban_2025`. Each is functionally an `opec_decision`:
+  a producer restricting its own output to move a price. `opec_decision` is not G-scored at
+  all, which is the treatment these three should have had from the start.
+
+**Ruled 2026-09-02: neither group moves.** The reason is registration, not classification.
+These placements were identified *after* the walk was run and the per-class results were in
+view; re-classing them now would rewrite `p_class_given_big`, the analogue retrieval and every
+published per-class number, with the new values chosen by someone who had already seen the old
+ones. That is the exact move the pre-registration discipline exists to prevent, and it is not
+made less so by the fact that the new placement would be more accurate. The audit agrees with
+the ruling and would have recommended it: the **harm** — eleven events with no adversary being
+scored on an escalation target — is already removed by the `hostility` field, so what remains
+is a labelling improvement being weighed against a registration breach, and the trade is not
+close.
+
+**Registered for v3, prospective only** (`EVENTS_CODEBOOK.md` amendment 2026-09-02, "v3
+placement"): the correct placement rules are written down now, while the reasoning is fresh
+and before any result depends on them, and they bind **only events admitted after the v3
+codebook takes effect**. No existing event is re-classed by them, then or later. Two things
+follow that a future session must not get wrong:
+1. **A v3 corpus is not comparable to this one on a per-class basis.** Events admitted under
+   v3 placement rules and events already in the corpus will use the same class names for
+   different populations. Any per-class number that spans the boundary must say so, or must
+   be computed on one side of it.
+2. **The eleven events keep their classes forever**, including in v3. "Prospective only" means
+   the old rows are never revisited — not that they are revisited later when it is convenient.
 
 ## 8. Receipts
 - Coding rule: `OUTCOME_MAPPING.md` Amendment 3 §A3.3 (values, tie-breaks) and Amendment 3.2

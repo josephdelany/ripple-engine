@@ -27,13 +27,27 @@ At the previous handoff this table read **112 outstanding** (`conflict_escalatio
 condition itself stays in force for any *new* geopolitical class or any class re-scoped by a
 future codebook amendment.
 
-Two things are still open, and neither blocks you:
-- **13 `ambiguous` events await Joe's adjudication.** `ambiguous` is a defined value that
-  excludes from G-scoring, so the target is well defined without him; his ruling can only
-  move events into `hostile` (raising n), never out.
+**Nothing is outstanding.** Correcting the previous version of this file, which listed the
+13 `ambiguous` events as awaiting Joe:
+- **The 13 `ambiguous` events are RULED and closed** (2026-09-02, `OUTCOME_MAPPING.md`
+  Amendment 3.3). `ambiguous` is a **terminal value**, not a pending decision: the record does
+  not settle them and adjudicating anyway would supply a fact the evidence lacks. They stay
+  `ambiguous`, stay out of G-scoring, and **are not a to-do for you or anyone else** — do not
+  put them on a checklist, a gate report or a surface as outstanding. Only new evidence in the
+  record moves one (a source that settles a cause, or an E patch unbundling a row that holds
+  two acts), never a judgement call.
+  **What this obliges you to do when you implement:** publish the G level-0 share **with and
+  without** the `ambiguous` events, per Amendment 3.3 §2 — in `summary.json` and on any surface
+  reporting a G outcome distribution. The registered rule excludes them, so the headline share
+  is the one that drops only `non_hostile`; the other bound goes beside it, never instead of it.
 - **The other three types** (`opec_decision`, `demand_shock`, `policy_response`) carry no
   `hostility` and never will — they are already outside G-scoring, which is why the field is
-  null-and-not-applicable there. That is not an outstanding item.
+  null-and-not-applicable there. That is not an outstanding item either.
+- **The eleven misplaced events keep their classes** (ruling 2, same date): eight mining
+  strikes stay `conflict_escalation`, three producer export bans stay `sanctions`. Do not
+  re-class them, and do not expect a patch that does. The correct placement is a v3 codebook
+  item applied prospectively only; `tests/test_hostility.py::
+  test_the_eleven_misplaced_events_keep_their_classes` fails if anyone moves one.
 
 ## 2. What to implement (v3)
 `OUTCOME_MAPPING.md` Amendments 3, 3.1, 3.2 and `EVENTS_CODEBOOK.md` amendment 2026-09-02
@@ -123,5 +137,28 @@ a spurious change here. Sorting within a source (or a one-line note in A2.3 that
 within a source is unspecified) would settle it. `tests/test_hostility.py` now compares
 `rule_fired` as a set for this reason, so a real change still fails the test and a re-ordering
 does not.
+
+— Session F
+
+---
+
+## 6. A red test in your area, found by the full suite (not caused by this session)
+`tests/test_walk_read_archive.py::test_the_hashes_the_demo_pages_quote_are_the_ones_tested`
+fails, in isolation and in the full run:
+
+```
+AssertionError: docs/demos/ no longer quotes {'8b7277ff28fc', '5bc0293dd2d9', 'aed201938e98'}
+```
+
+`DEMO_HASHES` (three read hashes the test pins) are no longer among the hashes quoted in
+`docs/demos/`. The likely cause is the re-run: new run, new sealed reads, new hashes, and the
+demo pages still carry the previous set — the same boundary your own `95451c6` was about.
+
+Session F did not touch it and cannot fix it: `tests/test_walk_read_archive.py`, `src/walk.py`,
+`data/walk_forward/**` and `docs/demos/` are yours. Nothing in F's commits can reach a read
+hash — they touch `data/spine/CLASS_AUDIT.md`, `tests/test_hostility.py`, this handoff,
+`OUTCOME_MAPPING.md`, `EVENTS_CODEBOOK.md` and `SESSION_CHARTER.md` only. Flagging it because
+SESSION_CHARTER §2.7 makes a red test a stop, and this one is currently the only one in the
+suite (442 passed, 1 failed).
 
 — Session F

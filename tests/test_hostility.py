@@ -247,3 +247,56 @@ def test_the_audit_applies_nothing(rows):
     assert n == 0, ("a hostility field exists in event_outcomes: Amendment 3 has been "
                     "implemented, so CLASS_AUDIT section 6 must be re-stated against the new run "
                     "rather than describing the pre-amendment one")
+
+
+def test_ambiguous_is_recorded_as_terminal_not_as_a_to_do(rows):
+    """Joe's ruling of 2026-09-02, registered as OUTCOME_MAPPING Amendment 3.3: ambiguous is
+    a terminal value under the sourced-or-unknown rule. The risk this guards is a later
+    session reading thirteen awkward values as a backlog and 'resolving' them -- which would
+    settle a target definition by judgement, after the results are in view. The audit must
+    say so where a reader meets the thirteen, and the amendment must exist."""
+    mapping = MAPPING.read_text(encoding="utf-8")
+    assert "Amendment 3.3" in mapping, "the ruling is not registered in OUTCOME_MAPPING"
+    assert "terminal" in mapping and "not a pending decision" in mapping
+
+    text = AUDIT.read_text(encoding="utf-8")
+    sec4 = text[text.index("## 4."):text.index("## 5.")]
+    assert "terminal state" in sec4 and "not a to-do" in sec4.lower(), \
+        "section 4 must tell a reader meeting the thirteen that the value is terminal"
+    assert len([e for e, r in rows.items() if r["hostility"] == "ambiguous"]) == 13
+
+
+def test_the_ambiguous_diagnostic_is_published_both_ways():
+    """Amendment 3.3 section 2: because the value is terminal, whether to count the ambiguous
+    events can never be settled by evidence, so the level-0 share is published with AND
+    without them. A single-figure report of this target is incomplete."""
+    text = AUDIT.read_text(encoding="utf-8")
+    sec6 = text[text.index("## 6."):text.index("## 7.")]
+    assert "| excluding the 17 `non_hostile` (the Amendment 3 rule as registered) | 133 | 49 | **36.8%** |" in sec6, \
+        "the share under the registered rule (ambiguous still excluded from scoring) is missing"
+    assert "| also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |" in sec6, \
+        "the other bound (ambiguous also out of the denominator) is missing"
+    assert "| **as published** | 150 | 63 | **42.0%** |" in sec6
+    assert "both with and without" in sec6, "section 6 must state the both-ways requirement"
+
+
+def test_the_eleven_misplaced_events_keep_their_classes(events, rows):
+    """Joe's ruling 2: the placements stay as coded, and the correct placement is a v3
+    codebook item applied prospectively only. This test is the guard on 'prospectively only'
+    -- it fails the moment someone re-classes one of the eleven, which would rewrite
+    p_class_given_big and the analogue retrieval with the old numbers already in view."""
+    MINING = ("escondida_strike_2011", "escondida_strike_2017", "escondida_strike_2024",
+              "sa_platinum_strike_2014", "lasbambas_blockade_2019", "lasbambas_halt_2021",
+              "cuajone_shutdown_2022", "peru_lasbambas_2022")
+    BANS = ("indonesia_nickel_ban_2019", "indonesia_palm_ban_2022", "drc_cobalt_ban_2025")
+    for e in MINING:
+        assert events[e]["type"] == "conflict_escalation", f"{e} was re-classed"
+    for e in BANS:
+        assert events[e]["type"] == "sanctions", f"{e} was re-classed"
+    # all eleven are non_hostile, which is what actually removes the harm
+    for e in MINING + BANS:
+        assert rows[e]["hostility"] == "non_hostile", f"{e} is no longer non_hostile"
+    # and the prospective rule is registered in the codebook, not merely described in the audit
+    cb = (ROOT.parent / "EVENTS_CODEBOOK.md").read_text(encoding="utf-8")
+    assert "PROSPECTIVELY ONLY" in cb, "the v3 placement item is not registered"
+    assert "do not move, now or ever" in cb
