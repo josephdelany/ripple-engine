@@ -1,0 +1,1881 @@
+{
+ "coverage": {
+  "registration": "EXPOSURE_REGISTRATION.md §2 (2026-09-03, commit 22da52f)",
+  "generated_by": "src/exposure_schema.py",
+  "n_events": 80,
+  "by_block": {
+   "A": {
+    "n": 13,
+    "COMPLETE": 0,
+    "PARTIAL": 7,
+    "EMPTY": 6,
+    "INVALID": 0
+   },
+   "B": {
+    "n": 13,
+    "COMPLETE": 1,
+    "PARTIAL": 6,
+    "EMPTY": 3,
+    "INVALID": 3
+   },
+   "C": {
+    "n": 13,
+    "COMPLETE": 1,
+    "PARTIAL": 6,
+    "EMPTY": 6,
+    "INVALID": 0
+   },
+   "D": {
+    "n": 13,
+    "COMPLETE": 1,
+    "PARTIAL": 8,
+    "EMPTY": 3,
+    "INVALID": 1
+   },
+   "E": {
+    "n": 13,
+    "COMPLETE": 0,
+    "PARTIAL": 10,
+    "EMPTY": 3,
+    "INVALID": 0
+   },
+   "F": {
+    "n": 10,
+    "COMPLETE": 2,
+    "PARTIAL": 8,
+    "EMPTY": 0,
+    "INVALID": 0
+   },
+   "G_accident": {
+    "n": 5,
+    "COMPLETE": 0,
+    "PARTIAL": 2,
+    "EMPTY": 2,
+    "INVALID": 1
+   }
+  },
+  "total": {
+   "COMPLETE": 5,
+   "PARTIAL": 47,
+   "EMPTY": 23,
+   "INVALID": 5
+  },
+  "gate": {
+   "registered_minimum_complete": 30,
+   "n_complete": 5,
+   "blocks_counted": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "blocks_excluded_by_own_declaration": [
+    "G_accident"
+   ],
+   "n_complete_including_excluded_blocks": 5,
+   "gate_met": false,
+   "consequence_if_not_met": "§5: Stage 1 is reported as DESCRIPTIVE ONLY and no verdict is issued -- registered in advance so it cannot be waived later"
+  },
+  "hard_failures": {
+   "n": 5,
+   "rows": [
+    {
+     "block": "B",
+     "event_id": "saudi_abqaiq_foiled_2006",
+     "hard_failures": [
+      "capacity_nameplate_kbd comes from a source dated 2006-02-27, after the event (2006-02-24), but retrospective is not true -- §2 requires the flag be carried"
+     ]
+    },
+    {
+     "block": "B",
+     "event_id": "nigeria_mend_bonga_2008",
+     "hard_failures": [
+      "capacity_nameplate_kbd comes from a source dated 2008-06-20, after the event (2008-06-19), but retrospective is not true -- §2 requires the flag be carried"
+     ]
+    },
+    {
+     "block": "B",
+     "event_id": "kirkuk_ceyhan_isis_2014",
+     "hard_failures": [
+      "days_to_full_restore is 'ongoing' with no ongoing_stamp_date -- §2 permits 'ongoing' only with a stamp date"
+     ]
+    },
+    {
+     "block": "D",
+     "event_id": "colonial_pipeline_shutdown_2021",
+     "hard_failures": [
+      "capacity_nameplate_kbd comes from a source dated 2021-05-11, after the event (2021-05-07), but retrospective is not true -- §2 requires the flag be carried"
+     ]
+    },
+    {
+     "block": "G_accident",
+     "event_id": "pes_philadelphia_fire_2019",
+     "hard_failures": [
+      "capacity_nameplate_kbd comes from a source dated 2019-07-03, after the event (2019-06-21), but retrospective is not true -- §2 requires the flag be carried"
+     ]
+    }
+   ]
+  },
+  "declared_vs_computed_disagreements": {
+   "n": 4,
+   "rows": [
+    {
+     "block": "B",
+     "event_id": "saudi_abqaiq_foiled_2006",
+     "declared": "COMPLETE",
+     "computed": "INVALID"
+    },
+    {
+     "block": "B",
+     "event_id": "nigeria_mend_bonga_2008",
+     "declared": "PARTIAL",
+     "computed": "INVALID"
+    },
+    {
+     "block": "B",
+     "event_id": "kirkuk_ceyhan_isis_2014",
+     "declared": "COMPLETE",
+     "computed": "INVALID"
+    },
+    {
+     "block": "G_accident",
+     "event_id": "pes_philadelphia_fire_2019",
+     "declared": "COMPLETE",
+     "computed": "INVALID"
+    }
+   ]
+  }
+ },
+ "events": {
+  "A": [
+   {
+    "event_id": "abqaiq_arabian_1977",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "iran_oilworkers_strike_1978",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "tanker_war_1984",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "kharg_strikes_1985",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "iraq_kharg_1986",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "earnest_will_1987",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "bridgeton_mine_strike_1987",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "kuwait_oil_fires_1991",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "iraq_pipeline_north_2004",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "iraq_pipeline_south_2004",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "suez_tropic_brilliance_2004",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "nigeria_mend_ea_2006",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "nigeria_mend_forcados_2006",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   }
+  ],
+  "B": [
+   {
+    "event_id": "saudi_abqaiq_foiled_2006",
+    "computed_status": "INVALID",
+    "declared_status": "COMPLETE",
+    "hard_failures": [
+     "capacity_nameplate_kbd comes from a source dated 2006-02-27, after the event (2006-02-24), but retrospective is not true -- §2 requires the flag be carried"
+    ],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore",
+     "export_share_pct"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field",
+     "export_share_pct": "per_field"
+    }
+   },
+   {
+    "event_id": "nigeria_mend_bonga_2008",
+    "computed_status": "INVALID",
+    "declared_status": "PARTIAL",
+    "hard_failures": [
+     "capacity_nameplate_kbd comes from a source dated 2008-06-20, after the event (2008-06-19), but retrospective is not true -- §2 requires the flag be carried"
+    ],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd"
+    ],
+    "missing_required": [
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "btc_pipeline_blast_2008",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "hormuz_iran_threat_2011",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "libya_jathran_blockade_2013",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "kirkuk_ceyhan_isis_2014",
+    "computed_status": "INVALID",
+    "declared_status": "COMPLETE",
+    "hard_failures": [
+     "days_to_full_restore is 'ongoing' with no ongoing_stamp_date -- §2 permits 'ongoing' only with a stamp date"
+    ],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "libya_ports_clashes_2014",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "nda_bonny_2016",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "nigeria_nda_forcados_2016",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "days_to_partial_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "nigeria_nda_escravos_2016",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "bab_el_mandeb_houthi_tanker_2018",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "saudi_suspends_bab_el_mandeb_2018",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "venezuela_blackout_2019",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   }
+  ],
+  "C": [
+   {
+    "event_id": "druzhba_contamination_2019",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "event_flat"
+    }
+   },
+   {
+    "event_id": "fujairah_tanker_sabotage_2019",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "saudi_ew_pipeline_2019",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "gulf_of_oman_tanker_attacks_2019",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "grace1_seizure_2019",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "stena_impero_seizure_2019",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "saudi_shaybah_2019",
+    "computed_status": "COMPLETE",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [
+     "flat_provenance_covers_multiple_numerics: one event-level source triple is standing in for more than one numeric; §2 asks for provenance per filled numeric"
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "event_flat",
+     "capacity_affected_kbd": "event_flat",
+     "days_to_partial_restore": "event_flat",
+     "days_to_full_restore": "event_flat"
+    }
+   },
+   {
+    "event_id": "abqaiq_attack_2019",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [
+     "flat_provenance_covers_multiple_numerics: one event-level source triple is standing in for more than one numeric; §2 asks for provenance per filled numeric"
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore"
+    ],
+    "missing_required": [
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "event_flat",
+     "capacity_affected_kbd": "event_flat",
+     "days_to_partial_restore": "event_flat"
+    }
+   },
+   {
+    "event_id": "libya_haftar_blockade_2020",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "saudi_jeddah_depot_2020",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hankuk_chemi_seizure_2021",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "ras_tanura_attack_2021",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [
+     "flat_provenance_covers_multiple_numerics: one event-level source triple is standing in for more than one numeric; §2 asks for provenance per filled numeric"
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd"
+    ],
+    "filled_numeric": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_affected_kbd": "event_flat",
+     "days_to_partial_restore": "event_flat",
+     "days_to_full_restore": "event_flat"
+    }
+   },
+   {
+    "event_id": "suez_ever_given_2021",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   }
+  ],
+  "D": [
+   {
+    "event_id": "colonial_pipeline_shutdown_2021",
+    "computed_status": "INVALID",
+    "declared_status": null,
+    "hard_failures": [
+     "capacity_nameplate_kbd comes from a source dated 2021-05-11, after the event (2021-05-07), but retrospective is not true -- §2 requires the flag be carried"
+    ],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "mercer_street_2021",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "uae_abudhabi_attack_2022",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "cpc_novorossiysk_storm_2022",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "days_to_partial_restore"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "days_to_partial_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "days_to_partial_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "saudi_jeddah_f1_2022",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "nord_stream_sabotage_2022",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "kurdistan_ceyhan_halt_2023",
+    "computed_status": "COMPLETE",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "ukr_odesa_strike_2023",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "ukr_izmail_strike_2023",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "me_galaxy_leader_2023",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "red_sea_attacks_2023",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "days_to_partial_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "me_maersk_diversions_2023",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore"
+    ],
+    "filled_numeric": [
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "russia_ustluga_strike_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "per_field"
+    }
+   }
+  ],
+  "E": [
+   {
+    "event_id": "rus_tuapse_strike_2024a",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "event_flat"
+    }
+   },
+   {
+    "event_id": "me_marlin_luanda_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name"
+    ],
+    "missing_required": [
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_volgograd_strike_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "me_rubymar_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name"
+    ],
+    "missing_required": [
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "russia_refineries_strikes_2024",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_slavyansk_strike_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_novorossiysk_depots_2024",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "me_mv_tutor_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name"
+    ],
+    "missing_required": [
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "me_chios_lion_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name"
+    ],
+    "missing_required": [
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_tuapse_strike_2024b",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "me_sounion_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name"
+    ],
+    "missing_required": [
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_novoshakhtinsk_strike_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_ryazan_strike_2025a",
+    "computed_status": "EMPTY",
+    "declared_status": null,
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   }
+  ],
+  "F": [
+   {
+    "event_id": "rus_volgograd_strike_2025",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "cpc_kropotkinskaya_drone_2025",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "rus_novokuibyshevsk_strike_2025",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "redsea_houthi_resume_2025",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "codelco_elteniente_2025",
+    "computed_status": "PARTIAL",
+    "declared_status": "out_of_unit_scope",
+    "hard_failures": [],
+    "notes": [
+     "asset_type 'out_of_schema_enum' is outside the registered enum ['chokepoint', 'field', 'pipeline', 'processing', 'refinery', 'storage', 'terminal']"
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_saratov_strike_2025a",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "rus_druzhba_strike_2025a",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd"
+    ],
+    "filled_numeric": [
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "rus_ryazan_strike_2025b",
+    "computed_status": "PARTIAL",
+    "declared_status": "partial",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "rus_novorossiysk_terminal_2025",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "hormuz_closure_2026",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   }
+  ],
+  "G_accident": [
+   {
+    "event_id": "pes_philadelphia_fire_2019",
+    "computed_status": "INVALID",
+    "declared_status": "COMPLETE",
+    "hard_failures": [
+     "capacity_nameplate_kbd comes from a source dated 2019-07-03, after the event (2019-06-21), but retrospective is not true -- §2 requires the flag be carried"
+    ],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "toledo_bp_husky_fire_2022",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "superior_refinery_fire_2018",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "hurricane_harvey_gulf_2017",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_ida_gulf_2021",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   }
+  ]
+ }
+}
