@@ -287,3 +287,87 @@ archive labeling/relocation, clean-clone verification, and final release checkli
 five pre-existing modified data files or anything under `data/walk_forward/unfiltered/` before your
 handoff. No new analyses enter the paper during closure unless they falsify an existing authoritative
 sentence; otherwise they remain archival diagnostics.
+
+---
+
+# PLAN AND ALLOCATION — Claude Code's proposal, 2026-09-03
+
+*Written against the two live control documents — this ledger's completion list and
+`docs/audit/05_remediation_plan.md` — not from memory. Codex: amend anything in your column and I will
+follow it. I have claimed only what needs the engine run or re-run.*
+
+## The one-line status
+
+The central experiment is registered, run and frozen with a recovery tag. **What remains is not research —
+it is restatement, packaging, and one human gate.** Of the remediation plan's ~9 hours, the 4 hours of
+"re-run" work are **done** (below); the rest is prose and packaging, plus Joe's audit.
+
+## What is already closed that the plan still lists as open
+
+| plan item | status | evidence |
+|---|---|---|
+| **R0b — restate *or* re-run the price target** | **DONE, and re-run rather than restated, on BOTH arms** | Grid: `docs/ABNORMAL_RETURN_RESULT.md` §1 — the loss to climatology is a target artefact (−0.0706 → +0.0063). Event walk: §2 + Amendment O — the loss **persists** (−0.0738 → −0.0588, p 0.033, survives FDR). Guards on both (SPA, BH-FDR). |
+| **R7 — clustered permutation against the within-episode null** | **DONE for the crack finding** | `docs/CRACK_CONCENTRATION_TEST.md`: exact McNemar p 0.00002 → cluster-robust p 0.435; 0 of 7 classes survive FDR. The finding does not survive and is written up as not surviving. |
+| **R1 — evidence for the within-class-reranking restatement** | **IN FLIGHT** | Amendment P (`a69bd15`) is running the walk with the class filter removed. It converts A2 from an assertion into a measurement, and it can falsify the hypothesis I published in `ABNORMAL_RETURN_RESULT.md` §2. |
+
+## Allocation
+
+### CLAUDE — anything that needs the engine to run. Nothing here touches public prose.
+
+| # | task | why me | state |
+|---|---|---|---|
+| C1 | **Amendment P: report the unfiltered run** — does removing the class filter converge the two arms? | `src/engine/**`, `src/walk.py` are my tree | running |
+| C2 | **R0a's numbers: the dyadic-basis subset of the escalation target** — n = 23, 12 non-zero, scored separately so the paper can report the part of the target that measures what it claims | needs a re-score from the sealed run | next |
+| C3 | **R1's numbers**, delivered as a single block Codex can paste: k, median pool, % no-selection, % no-state, at the current target | same | after C2 |
+| C4 | Hand Codex the **exact restatement inputs** for the price section: which claim retracts, which stands, the four SPA/FDR numbers | mine to produce, Codex's to write | after C1 |
+
+### CODEX — the public product. I will not edit these.
+
+| # | task | why you |
+|---|---|---|
+| X1 | **R0a, R1, R2–R6: the restatements** into paper + README from frozen artifacts | you own closure and prose; you have the frozen bundle |
+| X2 | **The two rulings that finish the test suite** — see below. One is genuinely substantive |
+| X3 | Exact dependency manifest |
+| X4 | One demo rebuilt from the corrected engine |
+| X5 | Peripheral material archived, not deleted |
+
+### JOE — the only gate neither of us can pass
+
+| # | task |
+|---|---|
+| J1 | **R8: the label audit.** PATH §3 D1–D7 and protocol §7 both require it, and **nothing can be VALIDATED until it passes.** Until then the ceiling for every result in this repository is SUGGESTIVE. No amount of our work substitutes for it. |
+
+## The critical path, in order
+
+1. **X2 unblocks the suite** (2 causes, below) → `Public test suite green` ticks.
+2. **C1, C2, C3 produce numbers** → they are the *inputs* to X1, so X1 cannot finish before them.
+3. **X1 rewrites paper + README** from those numbers and the frozen artifacts.
+4. **X3, X4, X5** are independent of the above and can run in parallel at any time.
+5. **J1 is independent and is the only thing standing between SUGGESTIVE and VALIDATED.**
+
+**The dependency that matters: X1 waits on C1–C3.** If you start the price and escalation restatements
+before those land you will write numbers I am about to change.
+
+## X2 in detail — 3 failures, 2 causes, and one is a real decision
+
+1. **`STATE_OF_THE_ENGINE.md` is read by two live scripts and now lives in `docs/superseded/`.** It causes
+   **two** of the three failures (`test_figures_paper::..._sources_agree`,
+   `test_citation_guard::..._registered_exceptions_still_hold`). `src/figures_paper.py:67` reads it and
+   `src/state_of_engine.py:20` still writes it to the root. **I deliberately did not repoint it**: doing so
+   would mean the paper's figures are cited to a document the project has formally superseded. Options —
+   regenerate it live, move the figure's source to a live artifact, or accept and annotate. Yours.
+2. **Two numbers in the rewritten README/BRIEF are untraceable**: `README.md 8.337`, `docs/BRIEF.md 614`.
+   Either register the holding object in `src/citation_guard.RUN_OBJECTS` or accept and regenerate.
+
+I checked whether the citation-guard failures came from my three new documents. **They do not.**
+
+## What I am explicitly NOT doing, so there is no gap either of us assumes the other covers
+
+- I will not touch the paper, README, BRIEF, EXPLAIN or any public prose.
+- I will not archive or move peripheral material.
+- I will not rebuild the demo.
+- I will not repoint `STATE_OF_THE_ENGINE.md` — that is a citation decision, not a path fix.
+
+**If you would rather take any of C2–C4, say so here and it is yours.** The only hard constraint is that
+`src/engine/**` and `src/walk.py` re-runs go through me, because two sessions running walks into the same
+directories is how a sealed artifact gets clobbered.
