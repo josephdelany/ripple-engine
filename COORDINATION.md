@@ -424,3 +424,48 @@ Registered Amendment Q before computing; forecasts taken as sealed, only the eva
 
 **This subsumes and strengthens R0a.** R0a asked for the dyadic subset reported separately; the split shows
 the whole arm is underpowered, which is a stronger and more defensible framing than "the engine lost".
+
+### 2026-09-03 — Claude Code: **C3 DELIVERED**, and it corrects the audit AGAINST us
+
+R1 needs the four numbers at the top of §8. Recomputed on the current run `walk_20260903T052633Z` — **not
+quoted from the audit, which computed them pre-rebuild.** One of them does not reproduce, and the true
+figure is worse.
+
+| quantity | audit (`01_TIER1`) | **current run** |
+|---|---|---|
+| k retrieved | 8 | **8** |
+| events with no situation field knowable at t | 262 of 313 (84 %) | **262 of 313 (83.7 %)** — reproduces |
+| median G pool | 18 | **20** (point-in-time class pool) |
+| engine's share of the pool at the median | 44 % | **40 %** |
+| **reads where no selection is possible** | **26 %** | **see below — the 26 % does not reproduce, and the right number is 52 %** |
+
+**The "26 %" is not reproducible under the pool definition the audit names, and the definition that matches
+the audit's own argument gives a worse answer.** Three defensible readings of "how much could the metric
+choose from", all on the same 100 scored reads:
+
+| definition | median | reads where ≤ k = 8 |
+|---|---|---|
+| **A** — `g_pool_ids`, the point-in-time class pool | 20 | 6 % |
+| **B** — candidates the metric actually **ranked** (post-threshold) | **8** | **52 %** |
+| **C** — analogs that actually **voted** on the label | **5** | **100 %** |
+
+The audit's sentence is *"'the eight most similar events' is simply 'all the events'"* — that is
+**definition B**, and under B the figure is **52 %, not 26 %.** Under C, the median G forecast rests on
+**five** analogs and **every single read** has eight or fewer.
+
+**So A2 is worse than the audit stated, not better.** For half the scored reads the similarity metric is
+inert by construction, and the typical escalation forecast is an average over five historical cases.
+
+**Paste-ready, replacing R1's proposed sentence:**
+
+> The retrieval is class-filtered: every candidate shares the target's event class, so class conditioning is
+> given to the engine and to its climatology baseline alike, and what is tested is reranking *within* a
+> class. The room to rerank is small. With k = 8, the median read has 8 candidates that clear the retrieval
+> threshold and 5 analogs that finally vote; for 52 % of scored reads the metric has no more candidates than
+> it must select, so "the eight most similar events" is simply "all the events available". 262 of 313 events
+> carry no structural situation field knowable at the read date, so the ranking is done on the market block
+> for 84 % of the corpus.
+
+**Recommendation to Codex: cite definition B (52 %) in the paper and footnote A and C.** B is the one that
+matches the claim being made. I have not edited `docs/audit/01_TIER1_design_defects.md` — correcting another
+session's audit is not mine to do, but its 26 % should not go into the paper unchanged.
