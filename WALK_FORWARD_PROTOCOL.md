@@ -650,3 +650,80 @@ All four readings are publishable and none is preferred.
 `data/walk_forward/delta_experiment.json → diagnostic_pools`, carrying `registered_post_hoc: true`,
 `gates: nothing`, and the sentence that this control was motivated by L's own result. Test:
 `tests/test_delta_experiment.py::test_M2_*`.
+
+## Amendment N (2026-09-03) — the placebo interval, corrected: a source-event cluster bootstrap
+*Registered BEFORE the code and BEFORE the computation, on Joe's ruling of 2026-09-03. Session B. The
+expected result is stated below **in advance and in numbers**, so that it cannot be tuned afterwards. This
+amendment corrects an estimator; it changes no forecast, no score and no other block.*
+
+### N.1 The defect, and the fact that it runs in our favour
+`walk.py`'s placebo block computes its interval and its DM test on the **flat vector of 411 pseudo-reads**
+with `mean_block = 1.0, lag = 0` — an **i.i.d.** bootstrap. Those 411 rows are **82 scored daily source
+events × 5 registered reps**, and the 5 reps of one source event are matched on **the same VIX-percentile
+decile of the same event**, read with the same menu and the same k. They are a cluster, not five independent
+draws. The unit used is the pseudo-read; the unit is the **source event**.
+
+**Stated plainly because it matters to how this is read: the correction runs in the engine's favour.** The
+published block is `vs_random_analogs` skill **−0.0473**, CI **[−0.0828, −0.0082]**, dm_p **0.0195**,
+`null_holds: false` — that is, the placebo null currently **fails**, which is published evidence against the
+engine. Widening the interval can only move that toward `null_holds: true`. B declined to fix it unilaterally
+for exactly that reason and reported it as a table instead (`docs/INTERVAL_AUDIT_2026-09-03.md`); Joe's
+ruling is that a defect is a defect whichever way it cuts, and that declining to fix the ones that favour us
+is the same bias as fixing only the ones that hurt. **What makes the correction credible rather than
+convenient is that this registration precedes the computation.**
+
+### N.2 The corrected estimator
+- **Cluster bootstrap on the source event.** Resample the **82 source events** with replacement; all 5 reps
+  of a drawn event travel together. `n_clusters` is published beside the skill.
+- **DM/HLN on the per-source-event mean differential** — the 82 per-event means of
+  (engine − reference), ordered by the source event's date, at the tier's measured mean block and HAC lag,
+  rather than on the 411-row flat vector at `lag = 0`.
+- Applied identically to all three published comparisons: `vs_random_analogs`, `vs_climatology`,
+  `fair_vs_climatology`.
+
+### N.3 The expected result, registered in advance
+√(411 / 82) = **2.24**. If the reps within a source event were perfectly dependent the interval widens by
+that factor; if partly dependent, by less. Registered expectations, before the numbers exist:
+
+| quantity | published (i.i.d.) | **expected after correction** |
+|---|---|---|
+| `vs_random_analogs` skill | −0.0473 | **unchanged** (a point estimate does not move) |
+| `vs_random_analogs` CI | [−0.0828, −0.0082] | **≈ [−0.13, +0.04], covering zero** |
+| `vs_random_analogs` dm_p | 0.0195 | **≈ 0.19** |
+| **`null_holds`** | **false** | **true** |
+| `vs_climatology` dm_p | 8.97e-07 | **still < 0.01** (survives a 2.24× widening) |
+| `fair_vs_climatology` | covers zero already | **still covers zero** |
+
+**Published as computed, whichever way it comes out.** If the corrected interval does **not** cover zero,
+`null_holds` stays **false**, that is published as the result, and this amendment records that the expected
+flip did not occur. The direction is registered so that agreement with it is evidence and disagreement with
+it is also evidence.
+
+### N.4 Both estimators published, permanently
+The placebo block publishes **both**: `estimator: "source_event_cluster"` (primary, this amendment) and
+`estimator_iid_superseded` (the published i.i.d. numbers, retained as computed). A reader can see the size
+of the correction without re-running anything, and the decomposition of §N.6 is exact.
+
+### N.5 The per-read rows are sealed from this run on
+`data/walk_forward/placebo_rows.jsonl` — one row per pseudo-read with its `rep`, `event_id`, `pseudo_date`,
+`vix_decile` and its four scores. The reason this amendment needed a walk re-run at all is that the rows
+were never kept; from here an estimator change is a re-computation, not a re-run.
+
+### N.6 The decomposition, because this run carries two changes at once
+This run carries **both** the estimator change (N.2) **and** the rebuilt Amendment 4 target (the DB now
+holds 132 scored labels + 55 `no_independent_outcome`, against the sealed run's pre-amendment target). A
+single run confounds them. Registered decomposition, using N.4's dual publication so that no intermediate
+walk is needed:
+
+- **A** = i.i.d. estimator @ **old** target — the sealed run `walk_20260903T003422Z`, already published.
+- **B** = i.i.d. estimator @ **new** target — from this run, via `estimator_iid_superseded`.
+- **C** = cluster estimator @ **new** target — from this run, the primary block.
+- **Target delta = B − A. Estimator delta = C − B.** Both reported separately and neither reported alone.
+
+### N.7 What is inherited and what is recomputed, stated before the run
+A re-run recomputes the labels from the DB, so every quantity keyed on a label moves: the G target, the
+persistence pre-window level `L⁻` (`persistence.py` calls `ies90.score_event` live), the persistence
+fallback count, and the sealed analog-pool levels. **Nothing is inherited from the sealed run.** The Δ
+experiment of Amendments L and M is computed from a sealed run and must therefore be **re-run on the new
+sealed run before any of its numbers are quoted again**; until it is, its published numbers belong to
+`walk_20260903T003422Z` and to the pre-amendment target, and the Cowork handoff says so.
