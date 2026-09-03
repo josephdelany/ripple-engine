@@ -28,7 +28,7 @@ this file wins.*
   `events` table. Amendments are registered before anything is computed under them;
   implementation of an amendment is B's, in v3. `data/spine/CLASS_AUDIT.md` is
   carved out of Session E's `data/spine/**` by Joe's brief of 2026-09-02;
-  `data/handoffs/f_to_e_2026-09-02.md` records the carve-out.
+  `data/handoffs/F_to_E_2026-09-02_class_audit.md` records the carve-out.
 - No session edits another's files. If you need a change there, write it as a
   request in `data/handoffs/<from>_to_<to>_<date>.md` and continue with what
   you can do. All may add tests under `tests/` with a unique basename.
