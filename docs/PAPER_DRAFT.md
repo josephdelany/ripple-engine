@@ -375,6 +375,46 @@ covering source and are never escalation evidence. Level counts: 0 → 76, 1 →
 the source records; the protocol's verdict rule treats the audit as a gate, so no
 verdict can rise above SUGGESTIVE until it is recorded.
 
+### 5.1 A warning about actor-list datasets read dyadically
+
+A companion panel built for the sample-size study (§14.1) surfaced a labelling artefact that is
+general, not specific to this project, and we state it here because the construction that
+produces it is common.
+
+**A crisis dataset that records *which states were involved* cannot say *which were on opposite
+sides*.** Read dyadically, every crisis with *k* involved states yields up to *k(k−1)/2* pairs —
+including pairs that were allies in that crisis — and the resulting panel records
+**co-belligerents as adversaries**.
+
+The instance, named so it can be checked: **ICB v16 crisis 489, "Syria Chemical Weapons III",
+7–14 April 2018, crisis-level `viol = 4`.** Its actor file lists five actors with their own
+violence codes — USA (2), UK (2), France (2), Syria (**4**), Russia (1). Four of the five are in
+this project's oil-relevant register; four states make six pairs, and on a dyad-date grid **all
+six receive IES level 3, "war", on the dyadic basis**. Including `gbr | usa`: the United Kingdom
+and the United States, co-belligerents in the same strike, recorded as being at war with each
+other. All six of that year's level-3 dyads are pairwise combinations of one four-country
+episode — one crisis counted six times.
+
+The mechanism is one line. `ies90.py:score_icb` asks whether both members of a pair appear in
+the crisis's actor set — never whether they were opposed, because the actor list cannot answer
+that — and then assigns the **crisis-level** `viol`, discarding the per-actor codes, so Russia
+(actor `viol` 1) inherits the crisis maximum of 4.
+
+Three things follow, and the third is the one worth carrying away.
+
+1. **This is not an error in ICB**, which never claimed the actor list encodes sides.
+2. **It is not an error in this paper's event-triggered corpus** either: there the pair is built
+   from the event record's own coded `actor` and `target` roles, so it is adversarial *before*
+   ICB is consulted.
+3. **The defect appears only when the pair is supplied mechanically — which is exactly what a
+   grid does. The same dataset is safe in one design and wrong in the other.**
+
+A related artefact affects UCDP GED on the same construction: GED resolves a *location*, not a
+dyad, so a country's deaths replicate across every pair containing it. In one probe year all 21
+non-zero cells were Iran paired with Saudi Arabia, the UAE and the USA — one country's deaths,
+counted three times. Together these are why the companion panel is restricted to sources that
+record sides, and why that restriction, not our effort, is what ends it in 2014 (§14.1).
+
 ## 6. The engine
 
 The engine is deliberately simple. Each event at *t* has a state vector assembled
