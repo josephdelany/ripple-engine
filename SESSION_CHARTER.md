@@ -19,6 +19,16 @@ this file wins.*
   It brings event *records* (description, sources, entities, class) up to the
   SPINE_REGISTRATION standard; it never writes to the `events` table itself —
   every change is a patch file Joe admits, per §2 rule 3.
+- **Session F** (target definitions) owns: `OUTCOME_MAPPING.md` amendments
+  concerning the G target, `data/spine/CLASS_AUDIT.md`, `tests/test_hostility.py`.
+  It does **not** touch `src/engine/**`, `src/walk.py`, `data/walk_forward/**` (B),
+  `src/state/**`, `src/api_v2.py`, `src/app.html`, `src/story_read.py` (A),
+  `src/ripple_*` (C), `data/dossiers/**`, `data/spine/patches/**` (E). It reads
+  those trees and reports numbers; it never edits them and never writes to the
+  `events` table. Amendments are registered before anything is computed under them;
+  implementation of an amendment is B's, in v3. `data/spine/CLASS_AUDIT.md` is
+  carved out of Session E's `data/spine/**` by Joe's brief of 2026-09-02;
+  `data/handoffs/f_to_e_2026-09-02.md` records the carve-out.
 - No session edits another's files. If you need a change there, write it as a
   request in `data/handoffs/<from>_to_<to>_<date>.md` and continue with what
   you can do. All may add tests under `tests/` with a unique basename.

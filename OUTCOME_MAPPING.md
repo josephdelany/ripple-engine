@@ -261,3 +261,132 @@ Outputs: `event_outcomes` source='ies90' fields `basis`, `rule_fired`, `level_lo
 `covering_dyadic`, `covering_location` (alongside the Amendment 1 fields);
 `data/state/ies90_distribution.json` adds level × basis and rule_fired counts;
 `data/audits/ies90_audit_30.csv` is regenerated with `basis` and `rule_fired` columns.
+
+---
+
+## Amendment 3 (2026-09-02, registered before any count is computed under it) — the hostility precondition on the G target
+*Session F. Applies to IES-90 (Amendments 1, 1.1, 2). Nothing in `events` changes; no
+class is re-coded; no published run is altered. This amendment states a rule and the
+grounds for it. **Session B implements it in v3**, not here — the numbers in §A3.6 below
+were computed after this text was committed, and are reported as an impact estimate, not
+as a re-scored run.*
+
+### A3.1 The defect
+IES-90 asks a source what escalation was recorded in W = (d, d+90] near an event. It never
+asks whether the event was a **hostile act at all**. The four geopolitical classes
+(`conflict_escalation`, `infrastructure_attack`, `chokepoint_disruption`, `sanctions`) are
+assumed hostile by their names, and the assumption is false: `infrastructure_attack` and
+`chokepoint_disruption` are coded in EVENTS_CODEBOOK by *what was disrupted*, not by *who
+did it or whether anyone did*. A refinery fire, a grounded ship, a storm, a blackout, a
+pipeline contaminated to cover an oil theft, a strike, and a mine collapse are all in
+those two classes today.
+
+For such an event the G target is not merely noisy — it is **undefined**. There is no dyad,
+no actor, and no escalation of anything. What IES-90 returns is whatever violence the
+covering sources happened to record in the country during the following 90 days: a location
+reading of the neighbourhood, attached to an event that has no adversary. Two examples from
+the record: `iran_oilworkers_strike_1978` (an oil-workers' strike) is scored **level 3 —
+war**, from the Iranian Revolution's intra-state war spell overlapping W;
+`druzhba_contamination_2019` (contamination injected at a Samara collection point to cover
+the theft of on-spec crude) is scored **level 2 — use of force**, from GED deaths in Russia
+in that window. Neither number is about the event.
+
+This is the same failure Amendment 2 identified for the dyadic/location distinction, one
+level down: Amendment 2 fixed *which* record may set a level; this fixes *whether the event
+has a level to set*.
+
+### A3.2 The precondition (the rule)
+**An event is G-scorable only where the record shows a hostile act.** Formally, for an event
+in the geopolitical classes, IES-90 is computed only if both hold:
+
+- **(H1) Hostile act.** The event record (title, description, sources) shows a *deliberate
+  act, directed adversarially* at a state, its people, its territory, its infrastructure, or
+  at shipping — armed attack, bombing, sabotage of an adversary's asset, mining, armed
+  blockade, forcible seizure or interdiction of a vessel, or an explicit threat or display
+  of force.
+- **(H2) Identified party.** The record names the acting party at least to the level of an
+  actor *class* that a covering source could carry: a state, a named armed group or
+  movement, or a party the covering record itself names. A perpetrator that is *disputed
+  between named candidates* satisfies H2 (the act is hostile on every candidate account);
+  a perpetrator that is *simply unknown* does not.
+
+An event failing H1 returns **`no_independent_outcome`** and is excluded from G-scoring and
+counted — exactly as the three non-geopolitical classes (`opec_decision`, `demand_shock`,
+`policy_response`) already are, and by the same logic: the target is not defined for them.
+An event satisfying H1 but failing H2 is scored as now and carries
+`hostility = 'hostile_unattributed'` on every surface, so the alternative reading (excluding
+it too) can be read off the published counts without a re-run. **Failing the precondition is
+not a data-quality flag and never becomes one**: it is a statement that the G question does
+not apply to this event, not that the event is doubtful.
+
+### A3.3 Coding the precondition (deterministic, from the record only)
+Every event in the geopolitical classes carries a `hostility` value, assigned by reading the
+record — never by keyword, and never from the outcome:
+
+| value | rule | G-scorable |
+|---|---|---|
+| `hostile` | H1 and H2 hold | yes |
+| `hostile_unattributed` | H1 holds, H2 fails (deliberate hostile act, no party named anywhere in the record) | yes, flagged |
+| `non_hostile` | H1 fails: the cause the record gives is an accident, a natural hazard, a technical or industrial failure, a labour action, a commercial or legal action, or a crime committed for private gain rather than against an adversary | **no** — `no_independent_outcome` |
+| `ambiguous` | the record is genuinely contested between hostile and non-hostile, or the act is coercive but not adversarial (a defensive or precautionary state decision, a protective deployment) | **no** — `no_independent_outcome`, listed by name |
+
+Three tie-breaks, fixed here so they are not chosen later against a result:
+1. **A hostile act with a contested perpetrator is `hostile`, not `ambiguous`**, when every
+   candidate account is a hostile act (e.g. a bombing claimed by one party and attributed by
+   others to a second). It is `ambiguous` when one of the live accounts is an accident.
+2. **A defensive or precautionary response to someone else's hostile act is not itself a
+   hostile act.** The antecedent attack is the hostile event; a suspension of sailings, a
+   protective escort, or a shutdown ordered by the operator is not.
+3. **Crime for private gain is `non_hostile`** however deliberate, unless the record shows it
+   was directed at an adversary as an adversary.
+
+The coding is published in full, event by event with its evidence, in
+`data/spine/CLASS_AUDIT.md`, and is checked by `tests/test_hostility.py`. It is a *reading of
+the existing record*: no event's class, description, entities or sources change, and nothing
+enters the `events` table.
+
+### A3.4 Expected effect on n
+Applying the precondition **reduces n for G and never increases it.** In the two classes
+audited under this amendment (75 events), 9 are `non_hostile` and 5 are `ambiguous`, so at
+most 14 of 75 leave G-scoring; the equivalent audit of `conflict_escalation` and `sanctions`
+is not yet done and may remove a few more. (Those two counts come from the audit that
+*grounds* this amendment — the defect in §A3.1 was found by reading the records before the
+rule was written, and the rule was written to fit the defect, not the other way round. No
+**score** was computed under the rule before this text was committed; the walk numbers in
+§A3.6 came after.) The G walk's scored n falls by the number of
+those events that clear the walk's own filters (daily tier, burn-in, both engine and
+climatology scored); the measured figure is in §A3.6. n for P is **unaffected** — a price
+response to a storm or a grounding is a real price response, and the P target does not
+presuppose an adversary. Nothing else in IES-90 changes: no window, no source, no
+precedence rule, no level mapping.
+
+The loss is not a cost to be minimised. Every read removed was a read against a target that
+did not exist for that event, and a share of them were level 0 by construction — an event
+with no adversary is unlikely to have a dyadic record in W. Removing them therefore moves
+the base rate. Whether that makes the engine look better or worse against climatology is
+**not** a consideration in adopting the rule and must not become one; both figures are
+published in §A3.6 as computed.
+
+### A3.5 No retroactive application
+**This amendment cannot be applied to any published run retroactively.** The sealed reads in
+`data/walk_forward/reads.jsonl` were made against the target as it stood, and the scores in
+`scores.jsonl` and `summary.json` are the record of that. A run is not re-scored under a
+later target definition: doing so would break the seal (WALK_FORWARD_PROTOCOL §7) and would
+let a definition be chosen after its effect on the score is known — the exact move
+SESSION_CHARTER §2 rule 2 exists to prevent.
+
+Therefore:
+- The published run stands as published, with its n and its scores unchanged.
+- Every surface reporting G results from a pre-amendment run carries the note: *"scored
+  before Amendment 3; includes N non-hostile events for which the G target is undefined"*,
+  with N and the receipt path from §A3.6.
+- The precondition takes effect for **runs made after B implements it in v3**, and those
+  runs are reported separately from the pre-amendment run — never pooled with it, and never
+  presented as a correction to its numbers.
+- The paper's limitations section states the defect, the affected count, and the direction
+  of the effect on the level-0 share (§A3.6), rather than showing a corrected result.
+
+### A3.6 Impact on the published run — measured, reported, not applied
+Computed after this amendment was committed, over the 150 daily-tier scored G reads of run
+`walk_20260902T210135Z` (`data/walk_forward/summary.json`, `/tiers/daily/G`). Numbers are in
+`data/spine/CLASS_AUDIT.md` §5 with their receipt; they change nothing in the run.
