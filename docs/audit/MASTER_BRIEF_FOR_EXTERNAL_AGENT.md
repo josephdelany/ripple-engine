@@ -91,6 +91,43 @@ own positive findings.
 
 ---
 
+## 2b. THE RESEARCH QUESTION IS CURRENTLY MIS-STATED — here is the corrected version
+
+The abstract asks whether *"formalised historical analogy contains out-of-sample predictive
+information."* **That question is not well posed**, for three reasons: it offers a false disjunction
+(surface features and structure can both carry information), it depends on an unmeasurable term
+("the full state" — no operationalisation ever conditions on it), and it names no target.
+
+**The corrected question, which is also what the code actually tests:**
+
+> **Does conditioning on a multi-dimensional world state improve out-of-sample forecasts of a named
+> outcome, relative to conditioning on event class alone?**
+
+Falsifiable, names the comparison, names the target, no unmeasurable terms. And note
+`engine/read.py:208` filters candidates to the same class — **so the engine's real comparison
+already is state-vs-class.** The design tests the better question; the prose claims the vaguer one.
+
+**When you assess any result, assess it against the corrected question.**
+
+## 2c. WHAT A GOOD OUTCOME LOOKS LIKE — judge your recommendations against this
+
+In descending order of value:
+
+1. **A transferable test.** Not "analogy works" or "analogy fails," but: *here are the conditions
+   under which analogical forecasting can work; they are measurable in advance; here is each one
+   measured on a real corpus.* Currently drafted in paper §1.1 as three conditions — observability of
+   state at *t*, density of the reference pool, non-degeneracy of the target — but not presented as
+   the headline. **This is the most citable thing in the project.**
+2. **A clean decomposition of the null**, with a number on each cause, rather than three explanations
+   scattered across sections.
+3. **A measurement of what would fix it** — the physical layer is 5 COMPLETE of 80 (6%), with six
+   documented failure modes.
+4. **One or two market findings that survive correction.**
+
+**What is NOT available and should not be chased:** a conditional positive ("state conditioning helps
+when the pool is dense"). The sample is too thin and the state is absent for 84% of events. Do not
+recommend re-running to find one.
+
 ## 3. WHAT IS VERIFIED SOUND — do not re-derive unless you doubt it
 
 | file | verified |
