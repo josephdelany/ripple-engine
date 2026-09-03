@@ -1,0 +1,17 @@
+{
+  "source_database_sha256": "84041119e76371c48e07abbf62e4e60c7e1c995b33560430bad34f84318e1012",
+  "files": {
+    "events.csv": {
+      "rows": 313,
+      "sha256": "600dbb74c83f4c5df70bf39fcf62d3939ac42e2594a4ce3bc407efa3c8c5e428"
+    },
+    "market_observations.csv": {
+      "rows": 29458,
+      "sha256": "df22bfb380ddcd656386e1cdb0733ce285481df47d8835598b37e297275ca29a"
+    },
+    "situation_state.csv": {
+      "rows": 11089,
+      "sha256": "0da0cfb2cd6934afc68f38766e3f5063004e9e04a1d266f3bb031639f12c0c80"
+    }
+  }
+}

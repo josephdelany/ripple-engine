@@ -1,5 +1,6 @@
 import copy
 import sqlite3
+from pathlib import Path
 
 import numpy as np
 
@@ -74,3 +75,22 @@ def test_structural_distance_never_uses_event_class():
     assert r["distance"] == 0.0
     assert r["n_fields"] == 3
     assert all("type" not in x and "class" not in x for x in r["fields"])
+
+
+def test_bundle_reconstructs_only_the_registered_tables(tmp_path):
+    (tmp_path / "events.csv").write_text("event_id,event_date,type,title,date_precision\ne,2000-01-01,sanctions,E,day\n")
+    (tmp_path / "market_observations.csv").write_text("series_id,obs_date,value,as_of\ns,1999-01-01,1,1999-01-01\n")
+    (tmp_path / "situation_state.csv").write_text(
+        "event_id,entity_id,field,obs_date,value,value_text,vintage,release,retrospective,source,joined_at\n"
+        "e,world,x,1999-01-01,1,,1999-01-02,1999-01-03,0,z,z\n")
+    c = M.connect_bundle(Path(tmp_path))
+    assert c.execute("SELECT COUNT(*) FROM events").fetchone()[0] == 1
+    assert c.execute("SELECT COUNT(*) FROM observations").fetchone()[0] == 1
+    assert c.execute("SELECT COUNT(*) FROM situation_state").fetchone()[0] == 1
+
+
+def test_frozen_manifest_names_every_reproducible_scientific_output():
+    import json
+    manifest = json.loads((M.OUT / "manifest.json").read_text())
+    assert set(manifest["outputs"]) == {"reads.jsonl", "scores.jsonl", "summary.json"}
+    assert (M.OUT / "input" / "bundle_manifest.json").exists()

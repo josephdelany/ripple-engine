@@ -6,6 +6,7 @@ data/structural_surface and never changes the existing walk or grid ledgers.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import sqlite3
@@ -22,6 +23,7 @@ from engine import inference as INF
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "oil.db"
 OUT = ROOT / "data" / "structural_surface"
+BUNDLE = OUT / "input"
 REGISTRATION = ROOT / "registrations" / "STRUCTURAL_SURFACE_EXPERIMENT.md"
 CODEBOOK = ROOT / "docs" / "reference" / "WORLD_STATE_CODEBOOK.md"
 BRENT = "fred.DCOILBRENTEU"
@@ -98,6 +100,35 @@ def strict_panel_rows(conn):
       ORDER BY s.event_id,s.field,s.entity_id
     """
     return conn.execute(q).fetchall()
+
+
+def connect_bundle(bundle):
+    """Reconstruct only the three read-only tables used by the experiment from committed CSVs."""
+    conn = sqlite3.connect(":memory:")
+    conn.executescript("""
+      CREATE TABLE events(event_id TEXT,event_date TEXT,type TEXT,title TEXT,date_precision TEXT);
+      CREATE TABLE observations(series_id TEXT,obs_date TEXT,value REAL,as_of TEXT);
+      CREATE TABLE situation_state(event_id TEXT,entity_id TEXT,field TEXT,obs_date TEXT,value REAL,
+        value_text TEXT,vintage TEXT,release TEXT,retrospective INTEGER,source TEXT,joined_at TEXT);
+    """)
+    specs = {
+        "events.csv": ("events", ("event_id", "event_date", "type", "title", "date_precision")),
+        "market_observations.csv": ("observations", ("series_id", "obs_date", "value", "as_of")),
+        "situation_state.csv": ("situation_state", ("event_id", "entity_id", "field", "obs_date", "value",
+                                                       "value_text", "vintage", "release", "retrospective", "source", "joined_at")),
+    }
+    for name, (table, cols) in specs.items():
+        with (bundle / name).open(newline="", encoding="utf-8") as f:
+            rows = []
+            for r in csv.DictReader(f):
+                rows.append(tuple(None if r[c] == "" else r[c] for c in cols))
+        conn.executemany(f"INSERT INTO {table} VALUES ({','.join('?' for _ in cols)})", rows)
+    conn.executescript("""
+      CREATE INDEX idx_bundle_events ON events(event_date,event_id);
+      CREATE INDEX idx_bundle_obs ON observations(series_id,obs_date,as_of);
+      CREATE INDEX idx_bundle_state ON situation_state(event_id,field,entity_id);
+    """)
+    return conn
 
 
 def reduce_panel(rows, blocks=None):
@@ -265,8 +296,8 @@ def paired_block(a, b, dates, n_boot):
             "dm": dm, "mean_block": mean_block, "n_boot": n_boot}
 
 
-def run(db=DB, out_dir=OUT, n_boot=2000):
-    conn = sqlite3.connect(db)
+def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
+    conn = connect_bundle(Path(bundle)) if bundle else sqlite3.connect(db)
     try:
         events = [dict(zip(("event_id", "event_date", "type", "title", "date_precision"), r)) for r in conn.execute(
             "SELECT event_id,event_date,type,title,date_precision FROM events ORDER BY event_date,event_id")]
@@ -395,8 +426,15 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     except Exception:
         commit = None
+    if bundle:
+        bundle_path = Path(bundle).resolve()
+        input_files = {p.name: file_hash(p) for p in sorted(bundle_path.glob("*.csv"))}
+        source_input = {"bundle": {"path": str(bundle_path.relative_to(ROOT)), "files": input_files}}
+    else:
+        source_input = {"database": {"path": str(Path(db).relative_to(ROOT)) if Path(db).is_relative_to(ROOT) else str(db),
+                                      "sha256": file_hash(db)}}
     manifest = {"generated_at": datetime.now(timezone.utc).isoformat(), "implementation_commit": commit,
-                "inputs": {"database": {"path": str(Path(db).relative_to(ROOT)), "sha256": file_hash(db)},
+                "inputs": {**source_input,
                            "registration": {"path": str(REGISTRATION.relative_to(ROOT)), "sha256": file_hash(REGISTRATION)}},
                 "outputs": {name: file_hash(out_dir / name) for name in ("reads.jsonl", "scores.jsonl", "summary.json")}}
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
@@ -406,8 +444,11 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--fast", action="store_true", help="200 bootstrap draws; never publication output")
+    ap.add_argument("--db", type=Path, default=DB)
+    ap.add_argument("--bundle", type=Path)
+    ap.add_argument("--out", type=Path, default=OUT)
     args = ap.parse_args()
-    result = run(n_boot=200 if args.fast else 2000)
+    result = run(db=args.db, bundle=args.bundle, out_dir=args.out, n_boot=200 if args.fast else 2000)
     print(json.dumps(result, indent=2))
 
 

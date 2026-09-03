@@ -1,0 +1,314 @@
+event_id,event_date,type,title,date_precision
+yom_kippur_war_1973,1973-10-06,conflict_escalation,Yom Kippur War begins (Egypt/Syria vs Israel),day
+oapec_embargo_1973,1973-10-17,sanctions,OAPEC oil embargo on states backing Israel,day
+embargo_lifted_1974,1974-03-18,sanctions,Arab oil embargo lifted,day
+abqaiq_arabian_1977,1977-05-11,infrastructure_attack,Fire at Saudi Abqaiq processing facility disrupts output,day
+iran_oilworkers_strike_1978,1978-10-31,infrastructure_attack,Iranian oil-workers strike halts exports (Revolution onset),month
+shah_leaves_iran_1979,1979-01-16,conflict_escalation,Shah leaves Iran,day
+iran_revolution_1979,1979-02-11,conflict_escalation,Iranian Revolution culminates,month
+iran_hostage_crisis_1979,1979-11-04,conflict_escalation,US embassy hostage crisis begins in Tehran,day
+carter_doctrine_1980,1980-01-23,policy_response,Carter Doctrine: US will use force to defend Gulf oil,day
+iran_iraq_war_1980,1980-09-22,conflict_escalation,Iran-Iraq War begins,day
+tanker_war_1984,1984-03-27,chokepoint_disruption,Tanker War: attacks on Gulf shipping escalate,day
+kharg_strikes_1985,1985-08-15,infrastructure_attack,Iraq intensifies air strikes on Iran's Kharg Island oil terminal,day
+opec_price_collapse_1986,1986-01-01,opec_decision,Saudi abandons swing-producer role; 1986 price collapse,day
+iraq_kharg_1986,1986-08-12,infrastructure_attack,Iraqi raids on Iran's Sirri Island oil terminal,day
+earnest_will_1987,1987-07-22,chokepoint_disruption,US reflags Kuwaiti tankers (Operation Earnest Will),day
+bridgeton_mine_strike_1987,1987-07-24,chokepoint_disruption,Tanker Bridgeton strikes Iranian mine in first Earnest Will convoy,day
+praying_mantis_1988,1988-04-18,conflict_escalation,US Navy Operation Praying Mantis strikes Iranian oil platforms,day
+iran_air_655_1988,1988-07-03,conflict_escalation,USS Vincennes downs Iran Air 655,day
+iran_iraq_ceasefire_1988,1988-08-20,policy_response,Iran-Iraq ceasefire (UN Resolution 598),day
+iraq_invades_kuwait_1990,1990-08-02,conflict_escalation,Iraq invades Kuwait,day
+iraq_un_661_embargo_1990,1990-08-06,sanctions,UN Resolution 661 oil embargo on Iraq,day
+desert_storm_air_campaign_1991,1991-01-17,conflict_escalation,Operation Desert Storm air campaign begins,day
+kuwait_oil_fires_1991,1991-02-22,infrastructure_attack,Retreating Iraqi forces torch Kuwaiti oil wells,day
+iraq_un_986_ofp_1995,1995-04-14,sanctions,UN Resolution 986 oil-for-food adopted,day
+iran_eo12959_embargo_1995,1995-05-06,sanctions,US total trade embargo on Iran (EO 12959),day
+ilsa_sanctions_1996,1996-08-05,sanctions,US Iran and Libya Sanctions Act signed,day
+iraq_ofp_exports_begin_1996,1996-12-10,sanctions,Iraq oil-for-food exports begin,day
+thai_baht_float_1997,1997-07-02,demand_shock,Thailand floats the baht - Asian crisis begins,day
+korea_imf_bailout_1997,1997-11-21,demand_shock,South Korea requests IMF bailout,day
+opec_jakarta_quota_increase_1997,1997-12-01,opec_decision,OPEC Jakarta meeting raises production ceiling 10%,day
+opec_cut_march_1998,1998-03-30,opec_decision,OPEC agrees first 1998 production cut in Vienna,day
+opec_cut_june_1998,1998-06-24,opec_decision,OPEC deepens 1998 cuts at Amsterdam-era conference,day
+russia_default_ltcm_1998,1998-08-17,demand_shock,Russian sovereign default and LTCM crisis,day
+operation_desert_fox_1998,1998-12-16,conflict_escalation,Operation Desert Fox airstrikes on Iraq,day
+opec_cut_1999,1999-03-23,opec_decision,OPEC ratifies 1.7 mb/d production cut,day
+opec_hike_march_2000,2000-03-28,opec_decision,OPEC raises quotas 1.452 million bpd,day
+opec_hike_june_2000,2000-06-21,opec_decision,OPEC lifts quotas 708000 bpd in Vienna,day
+opec_hike_sept_2000,2000-09-10,opec_decision,OPEC boosts quotas 800000 bpd,day
+clinton_spr_swap_2000,2000-09-22,policy_response,Clinton orders 30M-barrel SPR swap release,day
+opec_cut_jan_2001,2001-01-17,opec_decision,OPEC cuts quotas 1.5 million bpd,day
+us_recession_2001_onset,2001-03-01,demand_shock,US 2001 recession onset (dot-com bust),month
+opec_cut_march_2001,2001-03-17,opec_decision,OPEC cuts output 1 million bpd effective April,day
+opec_cut_july_2001,2001-07-25,opec_decision,OPEC cuts 1 million bpd effective September,day
+september_11_attacks_2001,2001-09-11,conflict_escalation,September 11 terrorist attacks,day
+opec_cut_cairo_dec_2001,2001-12-28,opec_decision,OPEC agrees 1.5 million bpd cut in Cairo,day
+iraq_oil_export_ban_2002,2002-04-08,sanctions,Iraq suspends oil exports for 30 days,day
+opec_hike_jan_2003,2003-01-12,opec_decision,OPEC raises quota 6.5% amid Venezuela strike,day
+iraq_war_begins_2003,2003-03-20,conflict_escalation,US-led invasion of Iraq begins,day
+nigeria_warri_shutin_2003,2003-03-23,conflict_escalation,Nigeria Warri unrest forces Niger Delta oil shut-in,day
+opec_emergency_april_2003,2003-04-24,opec_decision,OPEC holds emergency Iraq-war meeting,day
+iraq_sanctions_lifted_2003,2003-05-22,sanctions,UN lifts Iraq sanctions (Resolution 1483),day
+opec_cut_sept_2003,2003-09-24,opec_decision,OPEC surprises with 900000 bpd cut,day
+libya_sanctions_lifted_2004,2004-04-23,sanctions,US lifts most Libya sanctions,day
+opec_hike_beirut_june_2004,2004-06-03,opec_decision,OPEC raises quotas 2 million bpd in Beirut,day
+iraq_pipeline_north_2004,2004-08-03,infrastructure_attack,Insurgents bomb Kirkuk-Ceyhan pipeline halting northern Iraq exports,day
+iraq_pipeline_south_2004,2004-08-27,infrastructure_attack,Saboteurs halt southern Iraq oil exports in late-August 2004,week
+suez_tropic_brilliance_2004,2004-11-08,chokepoint_disruption,Tanker Tropic Brilliance runs aground and blocks the Suez Canal,day
+opec_cut_dec_2004,2004-12-10,opec_decision,OPEC trims output 1 million bpd,day
+yukos_yugansk_auction_2004,2004-12-19,policy_response,Russian state auctions Yukos unit Yuganskneftegaz,day
+iea_release_katrina_2005,2005-09-02,policy_response,IEA coordinated 60M bbl release after Katrina,day
+opec_2005_12_12,2005-12-12,opec_decision,OPEC holds output ceiling at Kuwait meeting,day
+nigeria_mend_ea_2006,2006-01-11,infrastructure_attack,MEND attacks Shell Niger Delta oil facilities,day
+nigeria_mend_forcados_2006,2006-02-18,infrastructure_attack,MEND attacks Shell Forcados terminal cutting Nigeria exports,day
+saudi_abqaiq_foiled_2006,2006-02-24,infrastructure_attack,Al-Qaeda suicide car-bomb attack on Saudi Abqaiq foiled,day
+israel_hezbollah_war_2006,2006-07-12,conflict_escalation,Israel-Hezbollah (Second Lebanon) war begins,day
+opec_cut_abuja_dec_2006,2006-12-14,opec_decision,OPEC cuts 500000 bpd at Abuja,day
+opec_2007_09_11,2007-09-11,opec_decision,OPEC agrees 500000 bpd output increase effective November,day
+sa_power_crisis_2008,2008-01-25,policy_response,2008 South Africa power crisis mine shutdowns,day
+turkey_pkk_incursion_2008,2008-02-21,conflict_escalation,Turkish ground incursion into northern Iraq,day
+bush_spr_halt_2008,2008-05-19,policy_response,Bush signs halt to SPR deposits,day
+nigeria_mend_bonga_2008,2008-06-19,infrastructure_attack,MEND attacks Shell Bonga offshore FPSO,day
+btc_pipeline_blast_2008,2008-08-05,infrastructure_attack,Baku-Tbilisi-Ceyhan pipeline explosion in Turkey,day
+russia_georgia_war_2008,2008-08-08,conflict_escalation,Russia-Georgia war,day
+lehman_collapse_2008,2008-09-15,demand_shock,Lehman Brothers collapses,day
+opec_emergency_cut_2008,2008-10-24,opec_decision,OPEC emergency 1.5 mb/d cut in the financial crisis,day
+opec_record_cut_oran_2008,2008-12-17,opec_decision,OPEC announces record 2.2 million bpd cut at Oran,day
+opec_2009_05_28,2009-05-28,opec_decision,OPEC keeps production quotas unchanged in Vienna,day
+mend_amnesty_2009,2009-08-06,policy_response,Nigeria offers MEND militants amnesty,day
+iran_cisada_2010,2010-07-01,sanctions,Iran CISADA sanctions signed,day
+rus_grain_ban_2010,2010-08-05,policy_response,Russia announces temporary grain export ban,day
+egypt_revolution_2011,2011-01-25,conflict_escalation,Egyptian revolution erupts raising Suez transit risk,day
+libya_civil_war_2011,2011-02-17,conflict_escalation,Libyan civil war begins and production halts,day
+fukushima_2011,2011-03-11,demand_shock,Fukushima quake shifts Japan to oil-fired power,day
+opec_no_deal_june_2011,2011-06-08,opec_decision,OPEC fails to agree output increase in Vienna,day
+iea_release_libya_2011,2011-06-23,policy_response,IEA coordinated 60M bbl release (Libya disruption),day
+escondida_strike_2011,2011-07-21,conflict_escalation,BHP Escondida strike 2011,day
+sanc_2011_11_21,2011-11-21,sanctions,US signs EO 13590 targeting Iran energy sector,day
+opec_2011_12_14,2011-12-14,opec_decision,OPEC sets 30 million bpd production ceiling,day
+hormuz_iran_threat_2011,2011-12-27,chokepoint_disruption,Iran threatens to close the Strait of Hormuz,day
+ndaa_cbi_sanctions_2011,2011-12-31,sanctions,US NDAA sanctions on Central Bank of Iran,day
+eu_iran_oil_embargo_2012,2012-01-23,sanctions,EU embargo on Iranian oil,day
+swift_cutoff_iran_2012,2012-03-15,sanctions,SWIFT disconnects Iranian banks,day
+sudan_heglig_war_2012,2012-04-10,conflict_escalation,South Sudan seizes Sudan's Heglig oil field,day
+opec_2012_06_05,2012-06-05,opec_decision,OPEC rolls over 30 million bpd ceiling in Vienna,day
+marikana_strike_2012,2012-08-16,conflict_escalation,Marikana / Lonmin platinum strike,day
+opec_2013_05_31,2013-05-31,opec_decision,OPEC maintains 30 million bpd output ceiling,day
+egypt_coup_suez_2013,2013-07-03,conflict_escalation,Egyptian military ousts Morsi reviving Suez fears,day
+libya_jathran_blockade_2013,2013-08-01,chokepoint_disruption,Jathran's guards blockade Libya's eastern export terminals,month
+sanc_2013_11_24,2013-11-24,sanctions,JPOA interim deal pauses Iran oil sanctions,day
+opec_2013_12_04,2013-12-04,opec_decision,OPEC keeps 30 million bpd ceiling at 164th meeting,day
+indonesia_ore_ban_2014,2014-01-12,policy_response,Indonesia bans unprocessed ore exports 2014,day
+sa_platinum_strike_2014,2014-01-23,conflict_escalation,2014 AMCU five-month platinum strike,day
+kirkuk_ceyhan_isis_2014,2014-03-02,chokepoint_disruption,ISIS attacks sever the Kirkuk-Ceyhan pipeline,month
+mosul_isis_offensive_2014,2014-06-10,conflict_escalation,ISIS captures Mosul and advances in northern Iraq,day
+russia_sectoral_sanctions_2014,2014-07-16,sanctions,US sectoral sanctions on Russian energy (EO 13662),day
+russia_oiltech_ban_2014,2014-09-12,sanctions,US and EU ban Russian Arctic deepwater shale oil tech,day
+opec_declines_cut_2014,2014-11-27,opec_decision,OPEC declines to cut production,day
+libya_essider_clashes_2014,2014-12-13,conflict_escalation,Clashes shut Libya Es Sider and Ras Lanuf ports,day
+libya_ports_clashes_2014,2014-12-14,chokepoint_disruption,Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports,day
+saudi_intervention_yemen_2015,2015-03-26,conflict_escalation,Saudi-led intervention in Yemen (Operation Decisive Storm),day
+iran_jcpoa_agreed_2015,2015-07-14,sanctions,JCPOA nuclear deal reached; path to lifting Iran oil sanctions,day
+china_yuan_deval_2015,2015-08-11,demand_shock,China yuan devaluation raises demand fears,day
+opec_2015_12_04,2015-12-04,opec_decision,OPEC drops output ceiling and fails to agree a limit,day
+us_export_ban_lift_2015,2015-12-18,policy_response,US lifts 40-year crude oil export ban,day
+iran_implementation_day_2016,2016-01-16,sanctions,Implementation Day: Iran oil sanctions lifted,day
+nda_bonny_2016,2016-02-10,infrastructure_attack,Niger Delta Avengers hit Bonny Soku gas line,day
+nigeria_nda_forcados_2016,2016-02-14,infrastructure_attack,Niger Delta Avengers bomb Trans Forcados subsea pipeline,day
+nigeria_nda_escravos_2016,2016-05-25,infrastructure_attack,Niger Delta Avengers bomb Chevron Escravos facilities,day
+opec_algiers_accord_2016,2016-09-28,opec_decision,OPEC reaches Algiers accord to cut output,day
+opec_agrees_cut_2016,2016-11-30,opec_decision,OPEC agrees to cut production,day
+philippines_nickel_2017,2017-02-02,policy_response,Philippines orders 23 nickel-mine closures,day
+escondida_strike_2017,2017-02-09,conflict_escalation,BHP Escondida strike 2017,day
+opec_extend_may_2017,2017-05-25,opec_decision,OPEC extends cuts nine months in Vienna,day
+qatar_gulf_blockade_2017,2017-06-05,sanctions,Gulf states impose diplomatic and transport blockade on Qatar,day
+venezuela_financial_sanctions_2017,2017-08-25,sanctions,US financial sanctions on Venezuela (EO 13808),day
+kirkuk_seizure_2017,2017-10-16,conflict_escalation,Iraqi forces seize oil-rich Kirkuk from Kurds,day
+kaz_uranium_cut_2017,2017-12-04,policy_response,Kazatomprom 20pct three-year uranium cut,day
+us_steel_alu_tariffs_2018,2018-03-08,policy_response,US Section 232 steel and aluminium tariffs,day
+drc_mining_code_2018,2018-03-09,policy_response,DRC signs revised Mining Code raising royalties,day
+bab_el_mandeb_houthi_tanker_2018,2018-04-03,chokepoint_disruption,Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches,day
+iran_sanctions_reimposed_2018,2018-05-08,sanctions,US withdraws from JCPOA and reimposes Iran sanctions,day
+libya_oil_crescent_2018,2018-06-14,conflict_escalation,Armed offensive seizes Libya's Es Sider and Ras Lanuf oil ports,day
+opec_hike_june_2018,2018-06-22,opec_decision,OPEC+ agrees to raise output about 1 million bpd,day
+uschina_tariff1_2018,2018-07-06,policy_response,First US-China tariffs take effect,day
+saudi_suspends_bab_el_mandeb_2018,2018-07-25,chokepoint_disruption,Saudi Arabia suspends oil shipments through Bab el-Mandeb,day
+iran_metals_windown_2018,2018-08-06,sanctions,First Iran sanctions wind-down after JCPOA exit,day
+imf_weo_growth_scare_2018,2018-10-09,demand_shock,IMF cuts global growth on trade war,day
+iran_oil_snapback_2018,2018-11-05,sanctions,US reimposes Iran oil sanctions with waivers,day
+katanga_cobalt_halt_2018,2018-11-06,policy_response,Glencore Katanga halts cobalt sales over uranium,day
+uschina_truce_2018,2018-12-01,policy_response,US and China agree 90-day trade truce at G20,day
+opec_cut_dec_2018,2018-12-07,opec_decision,OPEC+ agrees 1.2 million bpd cut in Vienna,day
+libya_sharara_2018,2018-12-08,conflict_escalation,Armed group shuts Libya El Sharara field,day
+venezuela_sanctions_2019,2019-01-28,sanctions,US sanctions on PDVSA,day
+lasbambas_blockade_2019,2019-02-02,conflict_escalation,Las Bambas transport-corridor blockade 2019,day
+venezuela_blackout_2019,2019-03-07,chokepoint_disruption,Venezuela nationwide blackout halts oil exports,day
+sanc_2019_04_08,2019-04-08,sanctions,US designates Iran IRGC as a Foreign Terrorist Organization,day
+druzhba_contamination_2019,2019-04-20,chokepoint_disruption,Contaminated crude halts the Druzhba pipeline to Europe,day
+us_ends_iran_waivers_2019,2019-04-22,sanctions,US ends all Iran oil sanction waivers,day
+fujairah_tanker_sabotage_2019,2019-05-12,infrastructure_attack,Four tankers sabotaged off Fujairah near Hormuz,day
+saudi_ew_pipeline_2019,2019-05-14,infrastructure_attack,Houthi drones strike Saudi East-West crude pipeline,day
+iran_pgpic_sanctions_2019,2019-06-07,sanctions,US sanctions Iran's largest petrochemical group,day
+gulf_of_oman_tanker_attacks_2019,2019-06-13,infrastructure_attack,Gulf of Oman tanker attacks,day
+grace1_seizure_2019,2019-07-04,chokepoint_disruption,Royal Marines seize Iranian tanker Grace 1 off Gibraltar,day
+stena_impero_seizure_2019,2019-07-19,chokepoint_disruption,Iran seizes British tanker Stena Impero in Hormuz,day
+venezuela_asset_freeze_2019,2019-08-05,sanctions,US blocks all Venezuelan government property (EO 13884),day
+mutanda_shutdown_2019,2019-08-06,policy_response,Glencore mothballs Mutanda world's largest cobalt mine,day
+saudi_shaybah_2019,2019-08-17,infrastructure_attack,Houthi drones strike Saudi Shaybah oil and gas field,day
+chn_retal_2019,2019-08-23,policy_response,China retaliatory tariffs on 75bn US goods including crude oil,day
+indonesia_nickel_ban_2019,2019-09-02,sanctions,Indonesia nickel ore export ban brought forward to 2020,day
+abqaiq_attack_2019,2019-09-14,infrastructure_attack,Attack on Saudi Abqaiq and Khurais facilities,day
+ecuador_leaves_opec_2019,2019-10-01,opec_decision,Ecuador announces exit from OPEC (effective Jan 2020),day
+opec_deeper_cut_dec_2019,2019-12-06,opec_decision,OPEC+ agrees deeper 500kbd production cut,day
+iraq_nasiriya_2019,2019-12-28,conflict_escalation,Protesters shut Iraq Nasiriya oil field,day
+soleimani_strike_2020,2020-01-03,conflict_escalation,US strike kills Qassem Soleimani,day
+uschina_phase1_2020,2020-01-15,demand_shock,US and China sign Phase One trade deal,day
+libya_haftar_blockade_2020,2020-01-18,chokepoint_disruption,Pro-Haftar forces blockade Libya's oil export terminals,day
+rosneft_trading_venez_2020,2020-02-18,sanctions,US sanctions Rosneft Trading over Venezuela oil,day
+arg_soy_tax_2020,2020-03-04,policy_response,Argentina raises soybean export tax to 33pct,day
+opec_talks_collapse_2020,2020-03-06,opec_decision,OPEC+ talks collapse and price war begins,day
+covid_pandemic_declared_2020,2020-03-11,demand_shock,WHO declares COVID-19 a pandemic,day
+trump_spr_fill_2020,2020-03-13,policy_response,Trump orders SPR filled to the top,day
+india_spr_fill_2020,2020-03-20,policy_response,India tops up strategic reserve at low prices,day
+kaz_wheat_ban_2020,2020-03-22,policy_response,Kazakhstan bans wheat flour and staple exports,day
+vnm_rice_suspend_2020,2020-03-25,policy_response,Vietnam suspends new rice export contracts,day
+opec_record_cut_2020,2020-04-12,opec_decision,OPEC+ agrees record production cut,day
+antamina_covid_2020,2020-04-13,policy_response,Antamina COVID shutdown 2020,day
+neg_wti_2020,2020-04-20,demand_shock,WTI front-month settles negative at minus 37 dollars,day
+opec_extend_june_2020,2020-06-06,opec_decision,OPEC+ extends record cuts through July,day
+libya_haftar_lift_2020,2020-09-18,policy_response,Haftar conditionally lifts Libya oil blockade,day
+saudi_jeddah_depot_2020,2020-11-23,infrastructure_attack,Houthi cruise missile hits Aramco North Jeddah fuel depot,day
+rus_wheat_tax_2020,2020-12-14,policy_response,Russia announces wheat export tax and grain quota,day
+arg_corn_halt_2020,2020-12-30,policy_response,Argentina suspends corn exports,day
+hankuk_chemi_seizure_2021,2021-01-04,chokepoint_disruption,Iran seizes South Korean tanker Hankuk Chemi in the Strait of Hormuz,day
+rus_wheat_floattax_2021,2021-02-04,policy_response,Russia confirms floating wheat export tax,day
+ras_tanura_attack_2021,2021-03-07,infrastructure_attack,Houthi drone and missile attack on Ras Tanura,day
+suez_ever_given_2021,2021-03-23,chokepoint_disruption,Ever Given blocks the Suez Canal,day
+colonial_pipeline_shutdown_2021,2021-05-07,infrastructure_attack,Colonial Pipeline ransomware shutdown,day
+opec_2021_07_01,2021-07-01,opec_decision,OPEC+ talks collapse over UAE quota dispute,day
+opec_uae_deadlock_july_2021,2021-07-05,opec_decision,OPEC+ talks collapse over UAE baseline dispute,day
+mercer_street_2021,2021-07-29,chokepoint_disruption,Drone attack strikes tanker Mercer Street off Oman,day
+guinea_bauxite_coup_2021,2021-09-05,policy_response,Guinea bauxite coup shuts borders,day
+china_first_spr_release_2021,2021-09-09,policy_response,China announces first-ever state oil reserve release,day
+lasbambas_halt_2021,2021-09-27,conflict_escalation,Las Bambas blockade halt 2021,day
+spr_release_2021,2021-11-23,policy_response,US-led six-nation coordinated SPR release (50M bbl),day
+rus_grain_quota_2022,2021-12-31,policy_response,Russia sets 2022 grain export quota,day
+kazakhstan_unrest_2022,2022-01-05,conflict_escalation,Kazakhstan unrest disrupts Tengiz oil output,day
+uae_abudhabi_attack_2022,2022-01-17,infrastructure_attack,Houthi drone-missile attack hits ADNOC Musaffah fuel facility,day
+antofagasta_drought_2022,2022-01-20,policy_response,Antofagasta drought output cut 2022,day
+russia_invades_ukraine_2022,2022-02-24,conflict_escalation,Russia launches full-scale invasion of Ukraine,day
+iea_60mb_release_2022,2022-03-01,policy_response,IEA coordinated 60M-barrel emergency release,day
+opec_2022_03_02,2022-03-02,opec_decision,OPEC+ sticks to 400000 bpd hike despite Ukraine war,day
+hun_grain_ban_2022,2022-03-04,policy_response,Hungary bans all grain exports,day
+srb_grain_ban_2022,2022-03-11,policy_response,Serbia bans wheat corn and oil exports,day
+cuajone_shutdown_2022,2022-03-14,conflict_escalation,Southern Copper Cuajone shutdown 2022,day
+cpc_novorossiysk_storm_2022,2022-03-23,chokepoint_disruption,Storm damage halts Kazakh crude exports at the CPC Novorossiysk terminal,day
+saudi_jeddah_f1_2022,2022-03-25,infrastructure_attack,Houthi strike sets Aramco Jeddah oil depot ablaze during F1 weekend,day
+shanghai_lockdown_2022,2022-03-28,demand_shock,Shanghai COVID lockdown hits China oil demand,day
+spr_release_2022,2022-03-31,policy_response,US announces record 180M bbl SPR release,day
+iea_120mb_release_2022,2022-04-06,policy_response,IEA 120M-barrel second coordinated release,day
+peru_lasbambas_2022,2022-04-20,conflict_escalation,Las Bambas copper mine suspends operations amid protests,day
+indonesia_palm_ban_2022,2022-04-28,sanctions,Indonesia bans palm oil exports,day
+ind_wheat_ban_2022,2022-05-14,policy_response,India bans wheat exports,day
+idn_palm_lift_2022,2022-05-19,policy_response,Indonesia lifts palm oil export ban,day
+opec_accelerate_hike_2022,2022-06-02,opec_decision,OPEC+ accelerates output hike to 648kbd,day
+sanc_2022_06_03,2022-06-03,sanctions,EU adopts 6th package with Russian seaborne oil embargo,day
+amplats_loadshed_2022,2022-06-28,policy_response,Amplats warns Stage-6 load-shedding to cut PGM output,day
+grain_deal_signed_2022,2022-07-22,policy_response,Black Sea Grain Initiative signed reopening Ukraine exports,day
+tw_pelosi_drills_2022,2022-08-04,conflict_escalation,China live-fire drills encircle Taiwan after Pelosi visit,day
+ind_rice_broken_2022,2022-09-08,policy_response,India bans broken-rice exports and taxes other grades,day
+nord_stream_sabotage_2022,2022-09-26,infrastructure_attack,Nord Stream pipelines sabotaged,day
+opec_plus_cut_2022,2022-10-05,opec_decision,OPEC+ announces 2 mb/d production cut,day
+sanc_2022_10_06,2022-10-06,sanctions,EU 8th package lays basis for Russian oil price cap,day
+us_chips_2022,2022-10-07,sanctions,US sweeping export controls on advanced chips to China,day
+eu_embargo_price_cap_2022,2022-12-05,sanctions,EU seaborne embargo and G7 price cap take effect,day
+us_spr_refill_2022,2022-12-16,policy_response,DOE begins SPR refill with 3M-barrel buyback,day
+products_price_cap_2023,2023-02-05,sanctions,G7 price cap on Russian petroleum products takes effect,day
+svb_banking_stress_2023,2023-03-10,demand_shock,SVB collapse sparks banking-stress demand fears,day
+kurdistan_ceyhan_halt_2023,2023-03-25,chokepoint_disruption,Turkey halts Iraqi Kurdistan crude exports at Ceyhan,day
+opec_surprise_cut_2023,2023-04-02,opec_decision,OPEC+ announces surprise voluntary cuts,day
+chile_lithium_nat_2023,2023-04-20,policy_response,Chile announces plan to nationalize lithium,day
+nigeria_fuel_subsidy_removed_2023,2023-05-29,demand_shock,Nigeria ends fuel subsidy ('subsidy is gone'),day
+saudi_voluntary_cut_june_2023,2023-06-04,opec_decision,Saudi Arabia announces extra 1 million bpd voluntary cut,day
+chn_gage_2023,2023-07-03,sanctions,China export controls on gallium and germanium,day
+grain_deal_collapse_2023,2023-07-17,conflict_escalation,Russia terminates Black Sea grain deal,day
+ukr_odesa_strike_2023,2023-07-18,infrastructure_attack,Russia strikes Odesa/Chornomorsk grain ports,day
+ind_rice_nonbasmati_2023,2023-07-20,policy_response,India bans non-basmati white rice exports,day
+niger_uranium_coup_2023,2023-07-26,policy_response,Niger uranium coup blocks Orano exports,day
+ukr_izmail_strike_2023,2023-08-02,infrastructure_attack,Russian drones hit Izmail Danube grain port,day
+gabon_coup_2023,2023-08-30,conflict_escalation,Military coup in OPEC member Gabon,day
+eu_cbam_2023,2023-10-01,policy_response,EU Carbon Border Adjustment Mechanism takes effect,day
+israel_hamas_war_2023,2023-10-07,conflict_escalation,Hamas attack on Israel and onset of Gaza war,day
+venezuela_gl44_relief_2023,2023-10-18,sanctions,US eases Venezuela oil sanctions (General License 44),day
+chn_graphite_2023,2023-10-20,sanctions,China export controls on graphite,day
+russia_pricecap_enforce_2023,2023-11-16,sanctions,US sanctions Sovcomflot tankers over price-cap breach,day
+me_galaxy_leader_2023,2023-11-19,chokepoint_disruption,Houthis seize Galaxy Leader car carrier in Red Sea,day
+panama_copper_close_2023,2023-11-28,policy_response,Panama orders closure of Cobre Panama copper mine,day
+opec_voluntary_cuts_nov_2023,2023-11-30,opec_decision,OPEC+ agrees 2.2 million bpd voluntary cuts,day
+red_sea_attacks_2023,2023-12-01,chokepoint_disruption,Houthi attacks disrupt Red Sea shipping,month
+me_maersk_diversions_2023,2023-12-15,chokepoint_disruption,Houthi drone strike triggers Red Sea shipping diversions,day
+chn_re_tech_2023,2023-12-21,sanctions,China bans export of rare-earth processing and magnet technology,day
+me_us_uk_strikes_2024,2024-01-11,conflict_escalation,US and UK launch first airstrikes on Houthi targets in Yemen,day
+russia_ustluga_strike_2024,2024-01-21,infrastructure_attack,Ukraine drone strike ignites Novatek Ust-Luga Baltic export terminal,day
+rus_tuapse_strike_2024a,2024-01-25,infrastructure_attack,Ukrainian drone strike on Rosneft Tuapse refinery,day
+me_marlin_luanda_2024,2024-01-26,infrastructure_attack,Houthi missile sets tanker Marlin Luanda ablaze in Gulf of Aden,day
+rus_volgograd_strike_2024,2024-02-03,infrastructure_attack,Ukrainian drone strike on Lukoil Volgograd refinery,day
+me_rubymar_2024,2024-02-18,infrastructure_attack,"Houthi missile cripples Rubymar, the first ship sunk in the Red Sea crisis",day
+sanc_2024_02_23,2024-02-23,sanctions,US sanctions Russian state tanker group Sovcomflot,day
+russia_refineries_strikes_2024,2024-03-13,infrastructure_attack,Ukraine escalates drone strikes on Russian refineries,day
+rus_slavyansk_strike_2024,2024-03-17,infrastructure_attack,Ukrainian drone strike on Slavyansk-on-Kuban refinery,day
+me_damascus_consulate_2024,2024-04-01,conflict_escalation,Israel airstrike destroys Iran consulate in Damascus,day
+russia_metals_ban_2024,2024-04-12,sanctions,US and UK ban Russian aluminium copper nickel from exchanges,day
+iran_strikes_israel_apr_2024,2024-04-13,conflict_escalation,Iran's first direct missile and drone strike on Israel,day
+venezuela_gl44_revoked_2024,2024-04-17,sanctions,US reimposes Venezuela oil sanctions (GL 44 revoked),day
+us_301_green_2024,2024-05-14,policy_response,US Section 301 tariff hikes on Chinese EVs batteries solar minerals,day
+rus_novorossiysk_depots_2024,2024-05-17,infrastructure_attack,Ukrainian drone strike on Novorossiysk oil depots,week
+opec_unwind_plan_2024,2024-06-02,opec_decision,OPEC+ announces gradual unwind of voluntary cuts,day
+me_mv_tutor_2024,2024-06-12,infrastructure_attack,Houthi attack sinks bulk carrier MV Tutor in the Red Sea,day
+me_chios_lion_2024,2024-07-15,infrastructure_attack,Houthi drone boat hits tanker Chios Lion,day
+rus_tuapse_strike_2024b,2024-07-22,infrastructure_attack,Ukrainian drone strike sets Rosneft Tuapse refinery on fire,day
+me_haniyeh_2024,2024-07-31,conflict_escalation,Hamas leader Ismail Haniyeh assassinated in Tehran,day
+escondida_strike_2024,2024-08-13,conflict_escalation,BHP Escondida strike 2024,day
+chn_antimony_2024,2024-08-15,sanctions,China export controls on antimony,day
+me_sounion_2024,2024-08-21,infrastructure_attack,Houthis set crude tanker Sounion ablaze in the Red Sea,day
+kaz_uranium_acid_2024,2024-08-23,policy_response,Kazatomprom cuts 2025 uranium output on acid shortage,day
+china_stimulus_2024,2024-09-24,demand_shock,China unveils PBOC stimulus package,day
+me_nasrallah_2024,2024-09-27,conflict_escalation,Israeli airstrike kills Hezbollah leader Hassan Nasrallah,day
+iran_strikes_israel_oct_2024,2024-10-01,conflict_escalation,Iran's October ballistic-missile strike on Israel,day
+sanc_2024_10_11,2024-10-11,sanctions,US widens secondary sanctions on Iran petroleum sector,day
+myanmar_re_seizure_2024,2024-10-20,conflict_escalation,Kachin rebels seize Myanmar rare-earth mining hub,month
+me_days_of_repentance_2024,2024-10-26,conflict_escalation,Israel strikes Iranian military sites in Operation Days of Repentance,day
+us_election_2024,2024-11-06,policy_response,US 2024 presidential election (Trump win),day
+chn_ban_us_2024,2024-12-03,sanctions,China bans gallium germanium antimony exports to the US,day
+opec_delay_hike_2024,2024-12-05,opec_decision,OPEC+ delays output-hike revival to April 2025,day
+rus_novoshakhtinsk_strike_2024,2024-12-19,infrastructure_attack,Ukrainian strike sparks blaze at Novoshakhtinsk refinery,day
+russia_shadow_fleet_sanctions_2025,2025-01-10,sanctions,US sanctions Gazprom Neft Surgutneftegas and 183 shadow-fleet tankers,day
+rus_ryazan_strike_2025a,2025-01-24,infrastructure_attack,Ukrainian mass drone strike on Rosneft Ryazan refinery,day
+rus_volgograd_strike_2025,2025-01-31,infrastructure_attack,Ukrainian drone strike on Lukoil Volgograd refinery,day
+us_tariffs_camexcn_2025,2025-02-01,policy_response,US tariffs on Canada Mexico China with energy carve-out,day
+chn_5minerals_2025,2025-02-04,sanctions,China export controls on tungsten tellurium bismuth indium molybdenum,day
+us_iran_maxpressure_2025,2025-02-05,sanctions,US restores maximum-pressure campaign on Iran,day
+cpc_kropotkinskaya_drone_2025,2025-02-17,infrastructure_attack,Ukrainian drone strike on CPC Kropotkinskaya pumping station,day
+drc_cobalt_ban_2025,2025-02-22,sanctions,DRC suspends all cobalt exports,day
+us_chevron_venez_2025,2025-02-26,sanctions,US revokes Chevron Venezuela oil license,day
+rus_novokuibyshevsk_strike_2025,2025-03-10,infrastructure_attack,Ukrainian drone strike on Rosneft Novokuibyshevsk refinery,day
+me_rough_rider_2025,2025-03-15,conflict_escalation,US launches Operation Rough Rider air campaign against Yemen Houthis,day
+us_venez_sectariff_2025,2025-03-24,sanctions,US 25pct secondary tariff on buyers of Venezuelan oil,day
+us_liberation_tariffs_2025,2025-04-02,demand_shock,Trump Liberation Day reciprocal tariffs,day
+opec_2025_04_03,2025-04-03,opec_decision,Eight OPEC+ producers triple planned May output hike,day
+chn_re_magnets_2025,2025-04-04,sanctions,China export controls on seven rare earths and magnets,day
+opec_hike_may_2025,2025-05-03,opec_decision,OPEC+ second consecutive 411k bpd output hike for June,day
+uschina_geneva_truce_2025,2025-05-12,demand_shock,US-China Geneva tariff truce,day
+israel_iran_war_2025,2025-06-13,conflict_escalation,Israel-Iran war onset (Operation Rising Lion),day
+me_midnight_hammer_2025,2025-06-22,conflict_escalation,US strikes Iranian nuclear sites Fordow Natanz and Isfahan,day
+redsea_houthi_resume_2025,2025-07-06,chokepoint_disruption,Houthis resume Red Sea attacks sinking Magic Seas,day
+us_russia_sectariff_2025,2025-07-14,sanctions,Trump threatens 100pct secondary tariffs on Russian oil buyers,day
+codelco_elteniente_2025,2025-07-31,infrastructure_attack,Codelco El Teniente collapse 2025,day
+rus_saratov_strike_2025a,2025-08-11,infrastructure_attack,Ukrainian drone strike halts Rosneft Saratov refinery,day
+rus_druzhba_strike_2025a,2025-08-18,chokepoint_disruption,Ukrainian strike halts Druzhba pipeline oil flow to Hungary and Slovakia,day
+rus_ryazan_strike_2025b,2025-09-05,infrastructure_attack,Ukrainian drone strike on Rosneft Ryazan refinery,day
+rus_novorossiysk_terminal_2025,2025-11-14,chokepoint_disruption,Ukrainian drone strike halts oil loadings at Novorossiysk Sheskharis terminal,day
+iran_israel_us_strike_2026,2026-02-28,conflict_escalation,US and Israel strike Iran (Feb 2026 escalation),day
+hormuz_closure_2026,2026-03-04,chokepoint_disruption,Iran declares the Strait of Hormuz closed,day
+us_iran_hormuz_mou_2026,2026-06-17,policy_response,US-Iran MOU reopens the Strait of Hormuz,day

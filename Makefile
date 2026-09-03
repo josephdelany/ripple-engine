@@ -44,7 +44,12 @@ REPRO_DB ?=
 REPRO_FORCE ?= 0
 PY := python3
 
-.PHONY: reproduce
+.PHONY: reproduce reproduce-central
+
+# Authoritative public-product reproducer. This target is offline and uses only the committed,
+# transparent input bundle. It must reproduce the three frozen scientific artifacts byte-for-byte.
+reproduce-central:
+	$(PY) src/reproduce_structural_surface.py
 
 reproduce:
 	@set -euo pipefail; \
