@@ -40,6 +40,34 @@ That objection has a literature — Khong's *Analogies at War* (1992) on Munich 
 Vietnam decisions, May (1973), Jervis (1976) — all establishing that the reasoning happens and is
 done badly, none testing whether a disciplined version carries information.
 
+**What the instrument is FOR — the operational goal, in the author's own framing.** This matters
+for judging significance, because a finding only counts if it advances this.
+
+> Start early in history. Take an event and the **environment surrounding it** — the conflict, the
+> alliances and treaty obligations, the physical state of supply, the market state. Observe the
+> response across the **whole petroleum complex**, not crude alone: Brent and WTI, refined products,
+> cracks, gas and LNG, fertilizer, freight. Learn the conditional — *under conditions x, y, z, this
+> followed*. Move forward to the next event, read its environment, and say: *last time a, b and c
+> held, this happened — but the environment now differs in these ways, so the expectation shifts
+> thus*. Observe what actually happened. **Readjust the weights. Continue.** Repeat to the present,
+> so the instrument is trained by the whole record. Then at read time, combine it with live input:
+> **if Ras Tanura were struck today**, assess the physical damage, place it in context (this
+> conflict, these treaties, this alliance structure), consult what happened historically when
+> refining capacity was struck, weight by how central that facility is to production, and produce a
+> distribution over what follows.
+
+**Three things follow from that, and you should hold them while auditing.**
+
+1. **This is not a crude-price project.** The response of interest spans the complex. A result that
+   only concerns Brent flat price is worth less than one that says something about where in the
+   chain a shock lands.
+2. **The conditional is the point.** *"Under these conditions, this happens"* — not *"events of type
+   X move prices by Y on average."* Anything that collapses the environment into a class dummy has
+   abandoned the thesis.
+3. **The instrument must be able to read a live event.** `src/read_exposure.py` implements
+   `read(exposure) → distribution` and two worked reads exist at `data/exposure/reads/`. Whether that
+   path is sound matters as much as whether the historical scoring is.
+
 **What he built.** 313 dated geopolitical and oil-policy shocks, 1956–2026. A world-state panel from
 27 academic and government sources (Correlates of War, ICB, UCDP, ATOP, Polity, V-Dem, SIPRI,
 Archigos, UNGA ideal points, GPR, EIA, CFTC, World Bank, IMF, FRED, Energy Institute) — **352,295
@@ -263,7 +291,10 @@ right — whether it is the **right quantity**. Cite `file:line`. If a file is c
 clean file is a real result.
 
 **QUESTION 2 (Goal 1).** After auditing, tell me:
-- **Which single result here is the most significant defensible finding**, and why.
+- **Which single result here is the most significant defensible finding**, and why — judged
+  against the operational goal in §2, not against statistical significance alone. A *p* < 0.001
+  result about something nobody would act on is worth less than a borderline one that changes where
+  an analyst looks.
 - **What one additional analysis, using only data already in this repository**, would most raise the
   project's standing. Name the files.
 - **If your answer is "none of these are significant and the honest move is to present this as a
