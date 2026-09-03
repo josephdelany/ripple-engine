@@ -113,7 +113,9 @@ that verdict.
 ## 0. The findings, in the order they matter
 
 *A reader who stops here should still have the paper. Each finding names the section that
-computes it; none is stated more strongly here than there.*
+computes it; none is stated more strongly here than there. §1.1 states the three conditions a
+state-conditioned analog forecaster requires — observability, density, non-degeneracy — and the
+organising result is that **all three fail on this record, measurably**; §13.1 returns to them.*
 
 **1. Most of the apparent skill was hindsight, and that is measurable.** Enforcing a vintage
 rule on the per-event situation fields — admitting only what was demonstrably knowable on the
@@ -195,6 +197,52 @@ is the strictest applied to an analog-forecasting system in this domain: hashes
 before outcomes, four baselines, a leakage test that breaks the filtration to prove
 it binds, and a verdict rule that the authors cannot override (§7).
 
+### 1.1 When should analogical forecasting work? Three conditions
+
+The literature on analogical reasoning in foreign policy is descriptive: it establishes that
+decision-makers *do* reason from historical cases, and that they do so badly — selecting on
+surface resemblance rather than structural similarity (Khong 1992; May 1973; Jervis 1976). It
+does not say when the reasoning would be *sound*. Before testing a formalised version, we state
+what would have to be true for it to work, because a null result is only interpretable against
+those conditions.
+
+A state-conditioned analog forecaster requires three things, and each is separately measurable:
+
+> **C1 — Observability.** The state on which similarity is computed must be *knowable at the
+> forecast date*, not merely recorded for that date. A variable assembled later describes the
+> past without having been available to it.
+>
+> **C2 — Density.** The reference pool must be dense enough in the neighbourhood of the query
+> state that "similar prior cases" is a non-empty and non-arbitrary set. Similarity is a
+> statement about distance; with few cases the nearest neighbour is near only by comparison.
+>
+> **C3 — Non-degeneracy of the target.** The outcome must carry information not already in its
+> own recent history. If the target is dominated by its own autocorrelation, a persistence rule
+> attains most of the attainable skill and cross-case analogy has little left to add.
+
+These conditions are not equally famous but they are equally binding: **failure of any one is
+sufficient for the method to fail, and the failure is not a failure of the analogy.** C1 is a
+claim about archives, C2 about sample size, C3 about the target variable. None is about whether
+history rhymes.
+
+The organising result of this paper is that **all three conditions fail on this corpus, and we can
+say by how much:**
+
+| condition | measured | where |
+|---|---|---|
+| **C1** Observability | **262 of 313** events have no situation field knowable at *t*; 726 of 786 situation values were knowable only after the event they describe | §8 |
+| **C2** Density | median analog pool 8 in 1987–99 against 36 in 2020–26; every monthly-tier class sits below the burn-in of 8, so the historical arm scores nothing | §9, §14 |
+| **C3** Non-degeneracy | persistence beats the engine on Brier (−0.304); 73% of the change target is exactly zero; the level target was substantially "was a war already running?" until Amendment 4 | §8, §11 |
+
+This reframes what the paper reports. We do not conclude that historical analogy is
+uninformative. We conclude something narrower and more useful: **the conditions under which a
+state-conditioned analog forecaster could work are measurable, and on the historical record
+available for geopolitical shocks in the oil economy they are not met** — C1 by the nature of
+retrospective datasets, C2 by the sparsity of the pre-1990 record, C3 by the autocorrelation of
+conflict. Each is a statement about the *record*, not about the reasoning, and each suggests a
+different repair: contemporaneous sources for C1, more cases for C2, a change-based estimand for
+C3. We attempt all three (§11, §14.1) and report what each buys.
+
 ## 2. Related work
 
 Three literatures meet here. The **oil-shock literature** distinguishes supply,
@@ -215,9 +263,19 @@ control across a model family (White 2000; Hansen 2005), false-discovery control
 (Simonsohn, Simmons & Nelson 2020). The prequential principle (Dawid 1984) — score
 forecasts only against outcomes not yet seen — is the spine of the protocol.
 
-The structured-analogy tradition in forecasting (Green & Armstrong 2007) and the
-judgment literature (Tetlock & Gardner 2015) motivate the exercise: analysts use
-analogs; the question is whether a disciplined machine version has skill. We know
+The **analogical-reasoning literature in international relations** is where the question
+comes from. Khong (1992) shows that American decision-makers on Vietnam reasoned explicitly from
+Korea, Munich and Dien Bien Phu, and that analogies did specific work — defining the situation,
+assessing stakes, prescribing responses, predicting the chances of success — while being selected
+on surface resemblance rather than structural similarity. May (1973) makes the complementary
+argument that policymakers use history constantly and unsystematically, and Jervis (1976) locates
+analogical inference among the perceptual biases that distort threat assessment. These are
+*descriptive* findings: they establish that the reasoning happens and that it is done badly. They
+do not test whether a disciplined version carries information, which is the gap this paper
+addresses, and they are the reason §1.1 states the conditions under which it could. The
+structured-analogy tradition in forecasting (Green & Armstrong 2007) and the judgment literature
+(Tetlock & Gardner 2015) supply the operational form: analysts use analogs; the question is
+whether a disciplined machine version has skill. We know
 of no prior work that tests analog reads of geopolitical shocks against
 independently coded escalation outcomes under a sealed walk-forward protocol.
 
@@ -939,6 +997,44 @@ either.
    number. The correct class placements are registered for v3, applied prospectively
    only.
 
+### 13.1 The three conditions, revisited
+
+§1.1 stated what would have to be true for a state-conditioned analog forecaster to work. The
+limitations above are not a list of separate problems; they are those three conditions failing,
+and it is worth restating them as such because it determines what the null does and does not
+license.
+
+**C1, observability, fails structurally and is not repairable within this design.** 262 of 313
+events carry no situation field knowable at *t*. This is a property of how political-science
+datasets are built — Polity, V-Dem, ICB and the rest are coded retrospectively, which is correct
+for describing the past and disqualifying for conditioning a point-in-time forecast. G-3's
+derivation of `knowable_at` from dossier document dates recovered 60 kept values to 83; it also
+established that `conflict_scope` can *never* be knowable at *t*. **A forecaster of this design
+needs a contemporaneous state record, and for most of this period one does not exist.**
+
+**C2, density, fails and the failure is now measured shut in both directions.** Backward: six
+pre-1974 records built to the full sourcing standard buy **zero** scored reads, because burn-in
+is per class at 8 and every monthly class is below it — and the four most consequential are
+unscoreable on both branches, since `opec_decision` is absent from the similarity class set and
+pre-1973 monthly WTI carries 16 distinct values across 324 months. Forward: a date-grid panel
+reaches n_eff 1,979 for price but its escalation arm cannot pass 2014, because only MID, MIDI and
+COW War record which *side* a state was on. **Both routes are closed by properties of the record
+rather than by effort.**
+
+**C3, non-degeneracy, fails partially — and repairing it is the one place the analogy got a fair
+test.** Persistence beats the engine on Brier; 73% of the change target is exactly zero; and until
+Amendment 4 the level target was substantially "was a war already running?", with 34 of 54
+level-3 labels sitting on conflicts with prior battle deaths. Amendment L re-anchored the estimand
+on the *change* and gave the analogy its fairest hearing — and the verdict was NO ADDITION, with
+the pooling rather than the similarity doing what little work there was.
+
+**What this licenses, and what it does not.** It licenses the claim that *this design cannot be
+fairly evaluated on this record*, with three named and quantified reasons. It does not license the
+claim that historical analogy is uninformative, and we do not make it. The useful residue is the
+conditions themselves: they are checkable in advance, and any future attempt at analogical
+forecasting in this domain can be assessed against them before it is built rather than after it
+has produced a number.
+
 ## 14. What would change the verdict
 
 VALIDATED requires all of: positive registered skill with DM and SPA *p* < 0.05 on
@@ -1084,6 +1180,15 @@ definition-of-done with evidence paths.
 ---
 
 ## References
+
+Khong, Y. F. (1992). *Analogies at War: Korea, Munich, Dien Bien Phu, and the Vietnam Decisions
+of 1965.* Princeton University Press.
+
+May, E. R. (1973). *"Lessons" of the Past: The Use and Misuse of History in American Foreign
+Policy.* Oxford University Press.
+
+Jervis, R. (1976). *Perception and Misperception in International Politics.* Princeton University
+Press.
 
 Baumeister, C., & Hamilton, J. D. (2019). Structural interpretation of vector
 autoregressions with incomplete identification: Revisiting the role of oil supply
