@@ -161,8 +161,8 @@ outperform simple baselines for escalation* — on a corpus whose historical arm
 whose state vector is mostly unavailable at read time. §14 states what would change the
 verdict, and §13 states what is measured shut.
 
-**Three of this project's own positive findings have been retracted and published as
-retractions** (§10, §12). That is the record working, not a defect in it.
+**Four of this project's own positive findings have been retracted and published as
+retractions** (§10, §12, §12.2). That is the record working, not a defect in it.
 
 ---
 
@@ -828,6 +828,45 @@ Taken with §8, the two halves of this project now say the same thing in differe
 languages: conditioning on the historical record does not forecast escalation or price
 better than the base rate, and geopolitical shocks do not measurably propagate down the
 petroleum chain beyond crude itself at these horizons and sample sizes.
+
+### 12.2 A fourth retraction, and a defect that recurred three times
+
+`edge_battery.json` carried `severity_dose_response` as **validated**: that high-severity events
+(4–5) ripple harder into oil than low-severity ones (1–2), amplification **+5.079 [+1.003,
++9.364]**, *n* = 116, permutation *p* = 0.030, surviving FDR. It was re-tested under a
+registration whose verdict words were fixed in advance, and it does **not** survive:
+amplification **+2.071 [−4.067, +8.209]**, permutation *p* = 0.269, with the observed gap sitting
+at the 95.8th percentile of a VIX-and-GPR-matched placebo whose central 95% is [−2.306, +2.192]
+— *inside* the null the published test never built. Re-estimated as ordinary ripple cells, both
+arms are null and the **low**-severity arm carries the larger absolute response (−2.248 against
+−1.391): the dose–response points the wrong way, at sample sizes that cannot support reading it
+either way. **Status: RETRACTED.**
+
+Two defects inflated it, and the second is the one worth recording. The first is the gate this
+paper has already conceded (§12): it compares events to other events and never to a non-event
+day, so severe events occurring in volatile periods pass it with nothing transmitting. The
+second is a **unit-of-dependence** error — `_oil_type_frame` clusters *within event type*, which
+is correct for the neighbouring chokepoint-versus-sanctions comparison and was inherited
+unchanged by a test whose grouping variable is *severity*. The high arm goes 106 raw → 92
+clustered within type (the unit used) → **56** clustered within severity group (the unit
+required): **36 overlapping same-severity episodes counted as independent.**
+
+That is the third appearance of the same defect in this project within a single day. It also
+produced the grid study's overstated interval (§14.1, corrected: *p* 0.010 → 0.052) and the
+placebo block's, where 411 pseudo-reads were bootstrapped as independent when they are 82 source
+events × 5 matched reps (§9, corrected under Amendment N). The three instances share a shape
+worth stating plainly, because it is not carelessness and it is not rare: **a resampling unit
+that is correct for one comparison is inherited by a neighbouring comparison whose grouping
+variable is different, and nothing in a green test suite notices.** Every instance inflated
+precision; none moved a point estimate; and each was found by the session that had published it,
+looking at its own result. An interval audit across the project
+(`docs/INTERVAL_AUDIT_2026-09-03.md`) found the remaining estimators correct, because the
+event-study modules de-overlap into clusters before bootstrapping and the walk uses its own
+measured block length.
+
+Two related claims in the same file, `copper_growth` and `hy_credit_stress`, are marked validated
+by the same gate and share the defect. They are reported, not re-tested; we make no claim about
+either.
 
 ## 13. Limitations
 

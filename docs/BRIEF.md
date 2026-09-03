@@ -133,7 +133,7 @@ independent datasets after our own coded labels tested at κ ≈ 0 · sealed rea
 · four baselines · Diebold–Mariano, stationary bootstrap, Reality Check / SPA, permutation,
 matched placebo, regime blocks, 162-cell specification curve · a filtration audit of
 **15,784** point-in-time checks with zero violations · two independent runs reproducing the
-same content digest · two adversarial reviews · **three published retractions of the
+same content digest · two adversarial reviews · **four published retractions of the
 project's own earlier positive findings.**
 
 *Full paper: `docs/PAPER_DRAFT.md`. Propagation study: `docs/RIPPLE_FINDINGS.md`.

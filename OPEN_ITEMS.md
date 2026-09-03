@@ -113,23 +113,37 @@ or **C** (re-run), **Cowork** (the four surfaces).
 (100% dyadic in 1946–73 → 7% by 2015–26) all move together, and the recent era dominates
 the sample. Owner **B** — stratified diagnostic, registered first, gating nothing.
 
-**1.5 A VALIDATED claim in `edge_battery.json` asserts what a new study would test, and its
-gate is the discredited one.** *(Found by C while registering the magnitude study,
-2026-09-03.)* `severity_dose_response` is carried as **VALIDATED** — the proposition that
-event severity produces a dose-response in outcomes. That is exactly what
-`MAGNITUDE_REGISTRATION.md` sets out to test, and it was validated by the same gate that never
-looks at a non-event day: the gate on which five propagation edges were retracted. A live
-VALIDATED assertion resting on a discredited gate is the highest-severity kind of stale claim
-this project can carry, because it is machine-readable and other surfaces read it. C has
-pre-registered its re-test with the verdict words fixed in advance. Owner **C** (re-test),
-**Cowork** (ensure no published surface quotes it meanwhile). *Same class of defect as the
-`v2.0` tag asserting "escalation conditioning validated OOS".*
+**1.5 ~~A VALIDATED claim in `edge_battery.json`~~ — CLOSED, RETRACTED.** *(C, `417c3a4`,
+under verdict words fixed in `MAGNITUDE_REGISTRATION.md` §5 sealed at `8cb9d3d` before the
+re-test ran.)* `severity_dose_response` does not survive: amplification +5.079 [+1.003, +9.364],
+*p* = 0.030 → **+2.071 [−4.067, +8.209], *p* = 0.269**, with the observed gap inside the central
+95% of a VIX+GPR-matched placebo the published test never built. Re-estimated as ordinary ripple
+cells, both arms null and the **low** arm larger. **The project's fourth published retraction**
+(paper §12.2). Two defects inflated it: the known non-event-day gate, and a unit-of-dependence
+error — clustering within *event type* inherited by a test grouped by *severity*, so 36
+overlapping same-severity episodes were counted as independent (106 → 92 used → 56 required).
+`edge_battery.json` was **not** modified; a test asserts the module never writes to it and the
+status went to the owning session as a handoff, exactly as Amendment B did for the propagation
+edges. **Residual, unaudited:** `copper_growth` and `hy_credit_stress` are validated by the same
+gate and share the defect; reported, not re-tested, no claim made.
 
-**1.6 `events.severity` mixes measured and inferred values in one column.** *(Same source.)*
-A free ordinal magnitude, populated for 305 of 313 events and unused by the engine — but
-**102 of 313 values are auto-assigned by class** in `admit_events.py`. Measured and inferred
-in a single column is what INV-5 forbids, and the field is a candidate input to the magnitude
-study, so it must be split before anything reads it. Owner **C**.
+**1.6 RE-SCOPED — a latent code defect, not a live data defect. C corrected its own report.**
+The "102 of 313 severity values auto-assigned by class" I registered as a live INV-5 breach
+resolves to **zero**: `data/extract/admission_log.csv` does not exist, no current event carries
+an `AUTO-ADMIT` rec_reason, and all 32 current events in `candidate_review.csv` are
+`joe_decision=approve`. The 102 overlap is what chance predicts — `SEV_BAND` is {2,3}, the modal
+values of a 1–5 ordinal. The mechanism in `admit_events.py` *would* create the violation if it
+ran; it has not run against this corpus. Proposed additive fix: write the provisional value to
+`severity_provisional` with a `severity_source`, leave `severity` NULL until a human sets it.
+**The live issue that survives, and matters more:** `severity` carries no per-value source
+anywhere. It is analyst judgement throughout — uniform, so not an INV-5 breach, but **inferred**,
+and Amendment C-1 now registers that it may never serve as a quantity magnitude, only as a
+labelled-inferred ordinal comparator. *Also recorded so it cannot be quoted as corroboration:*
+the registered robustness split is **one-sided** — `SEV_BAND` = {2,3}, severity 3 is in neither
+arm and severity 2 is in the low arm only, so the restriction strips 14 low-severity events and
+**zero** high-severity ones. The off-band estimate is duly larger (+4.223 [−0.162, +8.609],
+*p* = 0.064) *because* the filter can only strip the low arm, and its band still covers zero. A
+test asserts the one-sidedness.
 
 ## Tier 2 — the target and the corpus
 

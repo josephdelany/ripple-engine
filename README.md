@@ -166,7 +166,7 @@ labels after our own scored κ ≈ 0 · sealed reads hashed before outcomes are 
 four baselines · Diebold–Mariano, stationary bootstrap, Reality Check / SPA, permutation,
 matched placebo, regime blocks, a 162-cell specification curve · a filtration audit of
 **15,784** point-in-time checks with zero violations · two independent runs reproducing the
-same content digest · two adversarial reviews · **three published retractions of the
+same content digest · two adversarial reviews · **four published retractions of the
 project's own earlier positive findings.**
 
 ## Run it
