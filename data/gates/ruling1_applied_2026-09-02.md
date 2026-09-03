@@ -71,6 +71,14 @@ It is not surfaced as a finding on any page, in any export, or in the paper.
 re-validate them; no surface calls them validated. `tests/test_evidence.py` (4, one new) — a withdrawn pack
 must carry its ruling and must not read as a live claim, and palladium's must carry every reason.
 
+## Suite
+
+`python3 -m pytest -q` after the ruling: **419 passed, 15 skipped, 1 xfailed, 0 failed** (10 min).
+One existing test had encoded the pre-ruling world — `test_propagation.py::test_p1_graph_layers_and_backbone`
+asserted Brent was in the validated backbone. It is inverted, not deleted: the backbone must now be empty,
+`backbone_retracted_2026_09_02` must name exactly the registered five, and each must carry
+`retracted_h1_retest` in the table the build just wrote. The single xfail is B-12's monthly-tier smoke.
+
 ## What I did not do
 - Did not touch `RIPPLE_REGISTRATION.md` or `data/ripple/*` — session C's files; its re-test stands as
   computed and is only pointed at from here.
