@@ -55,6 +55,33 @@ market state, does not beat pooling within that same class.* That is a real resu
 "formalised historical analogy contains no out-of-sample predictive information," which is what the
 abstract claims.
 
+### A3. The escalation target is 83% a country-violence indicator, not a dyadic escalation measure
+
+`src/state/ies90.py:385–420`, `score_ged()`, rule `GED.location.ge250`. A level may be assigned from
+a **location** death count — violence anywhere in the affected country within the 90-day window —
+when no dyadic record covers. Amendment 2's "dyadic beats location" only applies when a dyadic
+record *exists*.
+
+**Measured across the 132 labelled events (`event_outcomes.basis`):**
+
+| basis | level 0 | 1 | 2 | 3 | total |
+|---|---:|---:|---:|---:|---:|
+| **dyadic** | 11 | 3 | 5 | 4 | **23** |
+| **location** | 62 | 6 | 25 | 16 | **109** |
+
+**83% of all labels, and 47 of the 59 non-zero labels, are location-based.** The entire non-zero
+signal of the escalation target rests on **12 dyadically-grounded events**.
+
+**Consequence, and it explains the whole escalation arm.** The target is not *"did the event's two
+parties escalate against each other"* — it is largely *"was there violence in the affected country
+in the next 90 days."* Country violence is enormously autocorrelated, which is why a persistence
+rule beats the engine: persistence is not out-forecasting analogy, **it is exploiting the fact that
+the target is a country fixed effect.** This also mechanically explains OPEN_ITEMS 1.1 ("the target
+is substantially a persistence variable"), and it shows that the ICB/GED location artefact session G
+found in the grid panel **is present in the main corpus too, and dominates it.**
+
+**The paper describes IES-90 as an escalation measure for the event's dyad. In operation it is not.**
+
 ---
 
 ## TIER 2 — Published claims that do not survive
@@ -75,6 +102,30 @@ with the pre-trend in the same sentence.**
 Bacon (1991); Borenstein, Cameron & Gilbert (1997, *QJE*); a large subsequent literature.
 **Reposition as replication on spot rather than retail.**
 
+### B4. The model family lacks diversity, which weakens Hedge, SPA and the Reality Check
+
+`data/walk_forward/menu.json`. Of twelve similarity items: **M02, M04 and M10 weight the `situation`
+block, which is empty for 84% of events** — they are substantially inert. M01/M06/M07 differ only in
+*k* (8, 5, 12). M08/M09 differ only in the retrieval threshold (0.30, 0.50).
+
+**Consequence.** Hedge over near-redundant experts converges to uniform — the sampled sealed read
+shows all thirteen weights at exactly 0.076923 = 1/13. SPA and White's Reality Check across a family
+of near-identical models have little power to detect a winner. And "fitting does not beat frozen"
+(+0.0013, *p* = 0.820 in the grid study) is partly a statement about a family with little to choose
+between.
+
+### B5. Vintage is enforced on the situation block but `as_of` equals the observation date elsewhere
+
+In `observations`, `as_of` equals `obs_date` for the revision-prone EIA series (stocks, refinery
+utilisation). **EIA weekly inventories are first published several days after the week they
+describe and are subsequently revised.** Stamping the observation date as the knowable date assumes
+the value was available on the day it describes.
+
+`inv_sigma` — in `MARKET_SERIES`, and one of only three fields in the "physical" block — derives
+from those stocks. **So the block the paper leans on after Amendment H emptied the situation block
+carries a mild look-ahead of its own.** Smaller than A1–A3, but it undercuts the claim that the
+market block is the clean one.
+
 ---
 
 ## TIER 3 — Structural limits on interpretation
@@ -92,6 +143,10 @@ Bacon (1991); Borenstein, Cameron & Gilbert (1997, *QJE*); a large subsequent li
 
 ## What is genuinely strong — and this is not consolation
 
+- **The scoring implementations are correct.** CRPS is the proper `E|X−y| − ½E|X−X′|` with a sound
+  O(n log n) formulation; Brier is the multi-category form; RPS follows Epstein (1969);
+  `skill = 1 − engine/ref` is the standard skill score. I checked these first because an error here
+  would invalidate every number in the project. There is none.
 - **The test suite is real.** 915 test functions, 2,689 assertions, and **zero tests without an
   assertion**. That is better discipline than most production codebases.
 - **The filtration is honest.** Baselines draw from the *same* filtration-constrained pool as the
@@ -111,6 +166,7 @@ Bacon (1991); Borenstein, Cameron & Gilbert (1997, *QJE*); a large subsequent li
 
 | # | action | why | cost |
 |---|---|---|---|
+| **R0a** | **Restate the escalation target.** It is 83% location-based; the non-zero signal rests on 12 dyadic events. Say so in the abstract and §5, and reframe the persistence result as a consequence of it. | A3 — the escalation arm measures something other than what it claims | 1.5 h |
 | **R0** | **Restate the price result.** It tests forecasting of *raw* 20-day returns, not event effects. Either say so plainly in the abstract and §8, or re-run against an abnormal-return target with a pre-event estimation window. | A1 — the largest single defect | 1 h to restate · 3–4 h to re-run |
 | **R1** | **Restate the escalation headline** as *within-class reranking vs within-class pooling*, with k=8, median pool 18, 26% no-selection, 84% no-state, all stated at the top of §8. | A2 — the abstract currently overclaims scope | 1.5 h |
 | **R2** | Withdraw B1 and B2; reposition B3 as replication. Corrections of record. | published claims that fail | 1 h |
