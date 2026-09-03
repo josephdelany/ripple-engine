@@ -913,3 +913,51 @@ one holds, and when the rebuild happens, is Joe's decision with Session B, and i
 in `data/handoffs/K_to_B_2026-09-02_ongoing_war.md` §0 with the one-line check that
 distinguishes them. Session K does not choose it, and does not half-apply the amendment to
 avoid having to ask.
+
+### Amendment 4.1 (2026-09-03, registered before the code, after the Amendment 4 rebuild exposed the defect) — an audit in progress survives a target rebuild
+
+*Session K. Amends A1.3's audit-sheet rule only. No level, window, source, precedence or
+threshold changes; no published run is touched; nothing enters `events`.*
+
+**The defect, found by the rebuild itself.** `data/audits/ies90_audit_30.csv` is drawn as 30
+events **stratified by level × decade over the pool that has a level** (A1.3, seed 20260902).
+Amendment 4 moved 52 events out of that pool, so the strata quotas moved and the draw
+returned a different sample: **19 of the 30 rows changed, and the one row Joe had already
+answered (`iran_iraq_war_1980`) left the sheet** — not because its label changed (it is still
+level 3) but because the 1980s × level-3 quota did. `tests/test_audit_ies90.py::
+test_joes_answered_row_survives_the_regeneration` caught it, which is what it is for.
+
+Joe's answer itself was never at risk: it lives in `data/audits/outcome_audit.json`, which
+this session did not touch, and the pre-rebuild sheet is in git at `213209e`. What was at
+risk is worse than a lost answer — **the sheet Joe is working through can be reshuffled
+under him by any target amendment**, so the §7 label-audit gate (κ ≥ 0.6, *every* row
+answered) can never be completed while the target is still moving. Reverting the sheet was
+rejected as the fix: a pre-rebuild sheet shows `ies90_level` values that no longer exist in
+`event_outcomes`, so Joe would be checking the engine against labels the engine no longer
+holds. That is a false artifact, and a worse failure than a reshuffle.
+
+**The rule.** The sheet is drawn as A1.3 registers it, with one clause added before it:
+
+1. **Every event already carrying an answer in `data/audits/outcome_audit.json` is retained
+   on the sheet**, in date order, and the stratified largest-remainder draw fills the
+   remaining `30 − n_answered` seats from the rest of the pool. The seed, the strata and the
+   largest-remainder rule are unchanged; the draw is still deterministic.
+2. **An answered event that Amendment 4 removed from the pool is still retained**, carrying
+   `ies90_level` blank, `rule_fired = UNDATED.continuation` or `UNCOVERED`, and
+   `pinned_reason = answered_before_rebuild; no longer G-scorable`. Joe's answer is a record
+   of what he checked and does not silently vanish because the target moved. Such a row is
+   **excluded from κ** and the exclusion is counted, because there is no engine level to
+   agree or disagree with — never dropped silently, never counted as agreement.
+3. The sheet gains a `pinned` column (`1` for a retained answered row, `0` for a drawn one)
+   so the two kinds are never confused, and the audit tool can tell a resumed row from a new
+   one.
+
+**Why this and not a bigger fix.** The alternative — freezing the sheet permanently at its
+first draw — would mean the audit never covers the target actually in use, which is the
+opposite failure. Retaining answers and redrawing the rest keeps both properties: the audit
+covers the live target, and work already done is never thrown away.
+
+**Expected effect, stated before running it:** one row is currently answered, so 1 seat is
+pinned and 29 are drawn; the sheet stays 30 rows; `iran_iraq_war_1980` returns; the other 29
+are drawn by the unchanged rule and most will differ from the pre-rebuild sheet, because the
+pool genuinely changed. κ is unaffected — 1 answered row, κ still null, `passed` still false.
