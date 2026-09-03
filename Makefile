@@ -44,12 +44,17 @@ REPRO_DB ?=
 REPRO_FORCE ?= 0
 PY := python3
 
-.PHONY: reproduce reproduce-central
+.PHONY: reproduce reproduce-central test-public
 
 # Authoritative public-product reproducer. This target is offline and uses only the committed,
 # transparent input bundle. It must reproduce the three frozen scientific artifacts byte-for-byte.
 reproduce-central:
 	$(PY) src/reproduce_structural_surface.py
+
+# The maintained public-product gate. The historical 1,009-test research suite remains available
+# with `python3 -m pytest -q`, but includes networked loaders and guards for superseded publications.
+test-public:
+	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py
 
 reproduce:
 	@set -euo pipefail; \

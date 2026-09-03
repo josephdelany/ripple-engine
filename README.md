@@ -1,286 +1,58 @@
-# Historical analogy in geopolitical and oil-market forecasting
+# Structural versus surface historical analogy
 
-**Can historical precedent be turned into a systematic, point-in-time forecasting tool for
-geopolitical shocks and oil markets?**
+Can a geopolitical forecasting instrument do better by comparing the full observable state around past events rather than matching a surface label such as “chokepoint disruption” or “sanctions”?
 
-Joseph Delany · Colby College · 2026
-**[One page](docs/BRIEF.md)** · **[Full paper](docs/PAPER_DRAFT.md)** ·
-**[Propagation study](docs/RIPPLE_FINDINGS.md)** · **[What to read first](INDEX.md)** ·
-**[Adversarial audit of this project](docs/ADVERSARIAL_AUDIT.md)** · **[Open items](OPEN_ITEMS.md)**
+This repository’s authoritative result is a registered, walk-forward comparison on 313 dated geopolitical and oil-policy events. Both methods receive exactly the same prior-event pool and forecast the same outcome: Brent’s 20-trading-day abnormal return. The only intended difference is how they weight history.
 
----
+## Result
 
-## The question
+Across 264 scored forecast dates, structural weighting had mean CRPS **8.337**, versus **8.782** for surface-class weighting. The paired difference was **−0.446** (95% stationary-bootstrap interval **[−0.623, −0.271]**; Diebold–Mariano *p* = **1.57×10⁻⁶**).
 
-Analysts reason by precedent. *This confrontation looks like 1990, not like 2019.* The
-reasoning is everywhere in geopolitical risk work and it is almost never tested, because
-testing it requires something awkward: you have to ask not just whether history contains
-patterns, but whether those patterns were **available to an analyst at the time**.
+That result has an essential qualification. Uniform pooling scored **8.392**. Structural weighting’s advantage over pooling was only **−0.055** (95% interval **[−0.115, +0.006]**; *p* = **0.090**), while surface-class weighting was materially worse than pooling. The defensible conclusion is:
 
-That distinction is the whole project. A political-risk index published in 2024 describes
-2018 accurately — and tells you nothing an analyst could have used in 2018. A forecasting
-system that quietly consumes such a variable is not reasoning from history; it is
-reasoning from hindsight, and it will look skilful for the wrong reason.
+> Strict structural weighting beats surface-class matching, but at the registered 20-day horizon it does not distinguishably beat pooling. Most of the measured gap comes from surface selection doing harm.
 
-So: does formalised historical analogy contain out-of-sample predictive information about
-geopolitical escalation and oil prices, once hindsight is removed?
+This is professionally consequential without being a claim of production forecasting skill: an analyst should not narrow precedent by event label and assume the remaining cases are more informative.
 
-**Three conditions have to hold for it to.** The state you compute similarity on must be
-*knowable at the forecast date*, not merely recorded for it. The pool of prior cases must be
-*dense* enough that "most similar precedent" means something. And the target must carry
-information *beyond its own recent history*. Failure of any one is enough to sink the method, and
-none of them is about whether history rhymes — the first is a claim about archives, the second
-about sample size, the third about the outcome variable. **All three fail on this record, and the
-paper measures by how much** ([§1.1](docs/PAPER_DRAFT.md), §13.1).
+Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. See [the registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) for the frozen decision rules.
 
-## The data
+## Reproduce the central experiment
 
-**313** dated geopolitical and policy shocks, 1973–2026, human-gated under a codebook.
-**27** academic and government sources — Correlates of War, ICB, UCDP, ATOP, Polity,
-V-Dem, SIPRI, Archigos, UNGA ideal points, GPR, EIA, CFTC, World Bank, IMF, FRED, Energy
-Institute, Kilian — assembled into a world-state panel of 352k rows. **772** price and
-macro series back to 1946.
+Requirements: Python 3.11+ and the packages in `requirements.txt`.
 
-Escalation outcomes are computed from **ICB, COW MID, COW War and UCDP**, never from our
-own corpus — after our own coded outcomes were tested against those datasets and scored
-κ ≈ 0, at which point they were retired.
-
-## The method
-
-```
-     event at t
-         │
-         ▼
-  ┌──────────────────┐
-  │  VINTAGE FILTER  │   only information demonstrably available on date t
-  └──────────────────┘
-         │
-         ▼
-   world-state vector  ──▶  similar prior events  ──▶  outcome distribution
-                                                              │
-                                                              ▼
-                                                     forecast, SEALED (hashed)
-                                                              │
-                                            ┌─────────────────┴──────────────┐
-                                            ▼                                ▼
-                                   observed outcome at t+90        four baselines:
-                                            │                      climatology, persistence,
-                                            ▼                      random analogues, frozen
-                                    proper scoring rules
+```bash
+python3 -m pip install -r requirements.txt
+make reproduce-central
+make test-public
 ```
 
-Pre-registered; amendments dated and appended, never edits; every result published as
-computed.
+`make reproduce-central` uses only the committed, transparent input bundle in `data/structural_surface/input/`. It rebuilds the sealed reads, scores, and summary in a temporary directory and requires their SHA-256 hashes to match the frozen manifest. It does not require the uncommitted research database or network access.
 
-## Three results
+## Instrument demonstration
 
-*Run `walk_20260903T052633Z`, on the escalation target as rebuilt under Amendment 4
-(184 labelled events → 132; 100 scored).*
-
-| | |
-|---:|:---|
-| **−0.084** | escalation Brier skill vs the base rate (95% CI −0.175 … **+0.004**, *p* = 0.076). Worse than climatology — but at *n* = 100 the interval **crosses zero**, so not distinguishably so. |
-| **−0.304** | escalation skill vs **persistence**. The dyad's own last 90 days score 0.545 against the engine's 0.710 (*p* = 0.025). On the **ordinal** score the same gap is −0.175 at *p* = 0.26 — not distinguishable from zero. A registered follow-up found this gap was the *estimand*, not the analogies — see below. |
-| **+0.134** | price CRPS skill vs persistence (95% CI +0.076 … +0.193, *p* < 0.001). The one comparison the analogue engine wins, and the only sign stable across every run. |
-
-On **price** the engine *is* significantly worse than the base rate (−0.074, CI −0.140 … −0.021,
-*p* = 0.011). On **escalation**, at this sample size, it is not.
-
-## The finding
-
-An earlier run of the same code showed **parity** with the base rate (−0.005). Those runs
-took the per-event state fields as *coded* rather than as *knowable*. Enforcing the vintage
-rule on them revealed that **262 of 313 events have no state field demonstrably available
-on the day** — and the apparent signal disappeared with it.
-
-A second registered amendment then rebuilt the *target*: the "ongoing conflict → no level" rule
-was extended to COW War and UCDP GED, and a missing covering record stopped silently reading as
-level 0. That took the escalation target from 184 labelled events to **132** (100 scored) and
-moved 59 of 187 labels. **Both amendments made the result smaller and less certain, and both
-were committed before the code that implemented them.**
-
-> The analogical structure the engine appeared to find was, to a first approximation,
-> hindsight.
-
-![The vintage rule, and what it cost](docs/figures/fig1_vintage.png)
-
-*Left: the corpus split by whether any state field was knowable at t
-(`data/state/situation_knowable.json`). Right: escalation Brier skill vs climatology before
-and after Amendment H (`data/walk_forward/summary.json` ·
-`tiers.daily.G.engine_vs.climatology`; the before-run from `STATE_OF_THE_ENGINE.md` §5 and
-`data/handoffs/B_run_delta.md`). Drawn by `src/figures_paper.py`.*
-
-Two explanations for the null were then registered in writing and tested. **Both were
-falsified.** Walk-forward recalibration made escalation worse (−0.700). The
-label-permutation test that had rejected "the engine is noise" at *p* = 0.002 before the
-vintage amendment now sits at ***p* = 0.0500** — exactly on the registered threshold, over
-1,000 permutations whose resolution is 0.001. Reported as a knife-edge, read as nothing.
-
-### The baselines, in full
-
-![Escalation: what each rule actually scores](docs/figures/fig2_escalation_baselines.png)
-
-*Brier score, lower is better. Source: `data/walk_forward/summary.json` ·
-`tiers.daily.G.engine_vs.*` and `tiers.daily.G.items_vs_climatology.M13_recalibrated`.
-Drawn by `src/figures_paper.py`.*
-
-![Price: CRPS skill against each of the four baselines](docs/figures/fig3_price_baselines.png)
-
-*CRPS skill with 95% intervals; grey where the interval crosses zero. Source:
-`data/walk_forward/summary.json` · `tiers.daily.P.engine_vs.*`. Drawn by
-`src/figures_paper.py`.*
-
-## The follow-up that repaired the question — and did not rescue the answer
-
-The −0.304 above asks the engine to forecast the escalation *level* from scratch, while
-persistence starts from the answer. Re-anchoring the identical sealed reads on the
-**change** — same twelve items, same sealed weights, same analogs, nothing re-retrieved —
-moves the mixture from **0.682 to 0.506** against persistence's 0.494. Most of the deficit
-was a missing anchor.
-
-Asked the fair question — *does analogy add anything once the dyad's own recent state is
-known?* — the registered verdict is **NO ADDITION**: +0.034 Brier skill, DM *p* = 0.181,
-permutation *p* = 0.124, nothing surviving FDR, against a measured minimum detectable skill
-of 0.067. Not "no effect": *not detectable at n = 150*.
-
-And a registered control separates the two things that pooling can be doing. Substituting
-the class's unconditional change distribution for the retrieved analogues scores **0.4626
-against 0.4643** — paired difference −0.004, *p* = 0.766. **The gain is pooling, not
-similarity.** The retrieval step, which is the whole idea of the engine, is
-interchangeable with the base rate.
-
-## Two companion results from the same infrastructure
-
-**Market attribution.** Inverting the usual event study — taking the market's largest moves
-rather than our chosen events — **14 of 44 largest Brent moves have no identifiable event
-in the corpus**, and in 14 of the 28 attributed episodes *every* attributed event was
-already public more than 20 trading days before the move began. Geopolitical classes are
-under-represented inside big **crude** moves and 2–3× over-represented inside big
-**diesel-crack** moves: shocks express themselves in refining margins more than in crude.
-
-**Propagation.** A registered, placebo-controlled local-projection study of crude →
-products → cracks → gas/LNG → fertilizer → freight → credit: **21 of 477 cells transmit,
-against 1–24 expected under no transmission at all**. The same estimator recovers Känzig's
-(2021) published oil-supply-news shock cleanly at every horizon — the silence is not an
-instrument failure. **A follow-up study on physical outcomes issues two errata against that
-result** and they are published beside it, not folded into it: the study's one transmitting
-*physical* cell (Cape of Good Hope transits) was estimated on a Brent trading-day index that
-discards weekends, and tanker transits happen at weekends — on the full calendar record it
-covers zero at all nine horizons, so that hop has **zero** transmitting cells, not one. And
-the monthly hops ran with no placebo, so "zero of 54 at fertilizer" was arithmetic about a
-flag rather than a finding about fertilizer. The physical study also found the record goes
-dark where it matters: Iran stops reporting production in **2018-07**, the month secondary
-sanctions were reimposed.
-
-## The result that actually answers the market question
-
-The engine's failure has a specific cause, and it is not "history doesn't rhyme." A registered
-kill-test isolated it. Take the **44 days that are both a corpus OPEC event and a Känzig (2021)
-OPEC announcement day** — the same days, four regressors, differing *only* in what they say about
-those days:
-
-| regressor on Brent, h = 5 | β | band |
-|---|---|---|
-| the **0/1 event indicator** | −1.572 | [−5.423, +2.279] — **covers zero** |
-| a **continuous measure** of the same events | **+2.230** | [+0.809, +3.651] — **excludes zero** |
-| both together | indicator collapses to −0.483 | magnitude holds at +2.208 |
-| our own hand-coded `severity` ordinal | −0.996 | covers zero |
-
-**Geopolitical events move oil. Occurrence flags don't measure by how much.** This project's own
-replications confirm the first half: Känzig's oil-supply news shock, run through this estimator,
-moves Brent **+0.851 at h = 0 rising to +2.37 at h = 20**, every horizon excluding zero; the
-Baumeister–Hamilton supply shock moves physical production **+0.760**; the 2026 Hormuz closure
-moved Brent **+48.5%**. None of that is in dispute.
-
-The finding is about **encoding**. A dated 0/1 flag discards the only thing that varies — how much
-an event revised expectations. Two OPEC announcements both get a 1; one shifts the curve and one is
-fully anticipated. On the 44 shared days the flag carries nothing beyond a continuous measure of
-the same events, and collapses in its presence.
-
-That is a result about the **instrument**, and any system built on dated event dummies inherits it
-— including commercial geopolitical-risk products, which are built exactly this way. It is also why
-this engine failed: it forecast from occurrence, not from magnitude.
-
-Three findings sit beside it, all pointing the same way:
-
-- **The dummy's one win on a physical quantity is a timing artefact.** Production dips 0.549% in
-  the month *before* an OPEC announcement and rebounds 0.674% in it — the coefficient is the
-  rebound leg of a V. The dummy marks *when OPEC meets*, not *what OPEC decided*.
-- **The tightening classes may not be shocks at all.** Sanctions, chokepoint disruption and
-  conflict escalation correlate **r = −0.023** with the identified oil-supply shock over 614
-  months. Near-orthogonal.
-- **A reroutable closure is a freight event, not a price event.** Red Sea 2024 cut Bab el-Mandeb
-  flow **−56.6%** with Cape reroutes **+101.8%** and Brent **−4.9%**. Hormuz 2026 cut flow
-  **−92.3%** with only **+20.7%** reroute — and Brent rose **+48.5%**. There is no reroute out of
-  the Gulf. A price-only study sees the first and concludes nothing happened.
-
-## What this does not claim
-
-Not that historical analogy fails. The narrower, defensible claim: **this implementation,
-under a strict point-in-time information constraint, did not outperform simple baselines
-for escalation** — on a corpus whose historical arm is thin (8 events in the 1970s) and
-whose state vector is mostly unavailable at read time. Measured power puts the minimum
-detectable escalation skill at **0.137**; detecting +0.05 would need roughly 1,200
-scored reads against **100** today.
-
-## Research integrity
-
-Pre-registration with git timestamps · dated amendments, never edits · independent outcome
-labels after our own scored κ ≈ 0 · sealed reads hashed before outcomes are looked up ·
-four baselines · Diebold–Mariano, stationary bootstrap, Reality Check / SPA, permutation,
-matched placebo, regime blocks, a 162-cell specification curve · a filtration audit of
-**15,241** point-in-time checks with zero violations · two independent runs reproducing the
-same content digest · two adversarial reviews · **four published retractions of the
-project's own earlier positive findings.**
-
-## Run it
-
-```
-./go                      # refresh, rebuild, open http://127.0.0.1:5050/app
-make reproduce            # rebuild summary.json from source, full registered draws
-pytest -q                 # 447 passed, 15 skipped
+```bash
+python3 src/structural_surface_demo.py
 ```
 
-The desk: Feed (market state, gated stream), Story (any development read in a desk's
-order), Big moves, Walk (open any sealed read and its score), Ledger (claims that resolve
-from data).
+The demo produces one sealed retrospective read for the 2026 Hormuz closure and shows the candidate pool, structural weights, surface weights, forecast distributions, and scores. It demonstrates mechanics; one event is not validation. Details are in [docs/DEMO.md](docs/DEMO.md).
 
-## Where it is going
+## Public-product map
 
-`PATH.md` is the route. The change-estimand experiment that this section used to
-name as next has been run, and its answer is above.
+- `docs/PAPER.md` — authoritative methods-and-evidence paper.
+- `registrations/STRUCTURAL_SURFACE_EXPERIMENT.md` — decisions frozen before computation.
+- `src/structural_surface_experiment.py` — central experiment.
+- `src/reproduce_structural_surface.py` — offline hash-checked reproduction.
+- `src/structural_surface_demo.py` — small instrument demonstration.
+- `data/structural_surface/` — inputs, sealed reads, scores, summary, and manifest.
+- `tests/test_structural_surface_*.py` — scientific and reproduction invariants.
+- `docs/audit/` — adversarial audit and claim corrections.
 
-### Update: the density route has a first answer
+The repository also preserves the six-week research history and superseded analyses. They are not part of the authoritative claim unless the paper cites them. Recovery tag `closure-core-frozen-2026-09-03` identifies the pre-closure frozen core.
 
-The grid ran. 476 month-end dates 1987–2026, six price targets, five horizons, **10,857 scored
-cells** — and an *effective* sample of **1,979** against 249 for the event panel, because
-nominal counts are never reported as effective ones here. Thirteen times the evidence, and
-enough that fitting parameters becomes legitimate rather than overfitting.
+`docs/audit/PUBLIC_PRODUCT_CLOSURE.md` records what was retained, what is archival, and the state of the historical test suite. “Archival” means preserved for auditability and recovery, not endorsed as a current result.
 
-**Fitting did not help.** With the block weights and metric scale fitted by nested
-walk-forward cross-validation, the fitted model beats the frozen registered constants by
-**+0.001 CRPS skill, *p* = 0.820** — a registered either-way test that fell on the side of
-*the constants were already at the achievable optimum*. The fitted weights never converge:
-15 distinct selections across 414 reads, the modal one taking 24.9%.
+## Scope and integrity
 
-**And one thing moved, to the edge of detectability.** At n = 150 the engine could not
-separate from randomly drawn analogs at all. On the grid the point estimate turns positive
-and the interval only just includes zero: **+0.010, CI [−0.0004, +0.021], *p* = 0.052**, not
-surviving the study's own multiplicity correction. That is *consistent with* retrieval
-carrying a small real signal the event panel was too small to see — it does not establish one.
-The PIT histogram independently shows the forecast is too sharp, which is a measured fact
-where "underpowered" remains an inference.
+The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare structural and surface analogy on identical support, with point-in-time eligibility and an abnormal-return target.
 
-All inference resamples whole grid dates: **413 dates** is the inferential *n*, and the 10,857
-cells are a cell count, never an *n*.
-
-The open problem is *n*: 150 scored escalation reads against a measured requirement of
-~1,200. The registered route was backwards — expand the pre-1987 corpus — and that route is
-now measured shut: six pre-1974 records built to the full sourcing standard buy **zero**
-scored reads, and the four that matter most are unscoreable on both branches, because
-monthly WTI before 1973 carries 16 distinct values in 324 months. The remaining route is
-forwards in density: make the unit of observation a **date** rather than an event, scoring
-on a periodic grid across multiple horizons and price targets, with escalation labels at
-the dyad-date level. That is a different question, registered as a new study — and it also
-removes the selection problem the Big Moves census exposes, since scoring only on chosen
-events never tests the engine on the days the market actually moved.
+License: [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
