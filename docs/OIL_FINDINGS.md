@@ -1,37 +1,55 @@
 # What this project found about oil
 
 *2026-09-03. The market findings, separated from the forecasting result. Every figure traced to a
-named file. These are the results that stand on their own, independent of whether the analog engine
-forecasts.*
+named file.*
+
+> **Evidence grade, stated first, because "finding" is doing too much work otherwise.** Each result
+> below is tagged:
+>
+> - **[TESTED]** — a hypothesis test with an interval, surviving multiple-testing correction where
+>   a family exists.
+> - **[DESCRIPTIVE]** — a measured count or rate with no significance test. Real, checkable, and
+>   *not* an established effect.
+> - **[NULL]** — a test run and not rejected.
+> - **[CASE]** — a comparison of two or three episodes. Illustrative, not inferential.
+>
+> A reader with an econometrics background will ask which is which within a minute. Do not present
+> a DESCRIPTIVE result as though it were TESTED.
 
 ---
 
-## 1. Pass-through from crude to products is asymmetric — and the asymmetry reverses by horizon and product class
+## 1. [TESTED] At one month, light ends rise with crude and do not fall with it
 
-The strongest and least expected result in the project, and it had gone unreported.
+The strongest result in the project, and it had gone unreported. **Corrected for multiplicity across
+the 17-test family by Benjamini–Hochberg**; only the results below survive at *q* < 0.05.
 
 **At one month (h = 20), light ends rise with crude and do not fall with it.**
 
-| product | β to crude **up** | β to crude **down** | W | *p* |
-|---|---:|---:|---:|---:|
-| **propane** | **+1.050** | **−0.015** | +1.065 | **<0.0001** |
-| gasoline, Gulf | +1.258 | +0.173 | +1.085 | 0.0011 |
-| gasoline, NYH | +1.136 | +0.215 | +0.921 | 0.0047 |
-| propane (h = 10) | +0.700 | +0.279 | +0.420 | 0.0220 |
+| product | β to crude **up** | β to crude **down** | W | *p* | **BH *q*** |
+|---|---:|---:|---:|---:|---:|
+| **propane** | **+1.050** | **−0.015** | +1.065 | <0.0001 | **<0.0001 ✓** |
+| gasoline, Gulf | +1.258 | +0.173 | +1.085 | 0.0011 | **0.0094 ✓** |
+| gasoline, NYH | +1.136 | +0.215 | +0.921 | 0.0047 | **0.0266 ✓** |
+| propane (h = 10) | +0.700 | +0.279 | +0.420 | 0.0220 | 0.0935 ✗ |
 
 **Propane tracks crude up roughly one-for-one and is statistically flat on the way down.** This is
 the classic "rockets and feathers" pattern, measured here on spot rather than retail, and strongly
 significant across three light-end products.
 
-**At one week (h = 5), middle distillates do the opposite.**
+**At one week the point estimates reverse for middle distillates — but this DOES NOT survive
+correction and must not be presented as a finding.**
 
-| product | β to crude **up** | β to crude **down** | W | *p* |
-|---|---:|---:|---:|---:|
-| jet, Gulf | +0.493 | **+0.769** | −0.276 | 0.0342 |
-| heating oil, NYH | +0.442 | **+0.718** | −0.277 | 0.0406 |
+| product | β up | β down | W | *p* | **BH *q*** |
+|---|---:|---:|---:|---:|---:|
+| jet, Gulf | +0.493 | +0.769 | −0.276 | 0.0342 | **0.1150 ✗** |
+| heating oil, NYH | +0.442 | +0.718 | −0.277 | 0.0406 | **0.1150 ✗** |
 
-Jet and heating oil follow crude **down** more strongly than up in the first week — the reverse
-asymmetry, and it inverts by the one-month horizon where the light ends dominate.
+> **Correction of record.** An earlier version of this document reported the asymmetry as
+> "reversing by horizon and product class" and presented these two rows as a finding. Across the
+> 17-test family the reversal does **not** survive Benjamini–Hochberg (*q* = 0.115 for both).
+> Uncorrected, seven of 17 tests clear *p* < 0.10, which is roughly what testing 17 things produces.
+> **The defensible claim is the one-month light-end asymmetry only.** The one-week reversal is
+> suggestive and unestablished, and is retained here as a hypothesis rather than a result.
 
 **Why it matters.** Anyone hedging a product exposure with crude is carrying an asymmetry that
 changes sign depending on which product and which horizon. A propane position hedged with crude at
@@ -44,7 +62,7 @@ underlying nonlinear response. Both signs enter together; nothing is censored.*
 
 ---
 
-## 2. Roughly a third of the largest moves have no identifiable cause at all
+## 2. [DESCRIPTIVE] Roughly a third of the largest moves have no identifiable cause
 
 | asset | episodes | with **no** identifiable corpus event |
 |---|---:|---:|
@@ -59,7 +77,7 @@ which is consistent with §4 below.
 
 ---
 
-## 3. The market prices a geopolitical event about a month before the "event"
+## 3. [DESCRIPTIVE] The market prices a geopolitical event about a month before the "event"
 
 | asset | median lag | 75th pct | max | episodes where **every** attributed event was already public | **any** |
 |---|---:|---:|---:|---:|---:|
@@ -75,7 +93,7 @@ largely already made.
 
 ---
 
-## 4. Geopolitical shocks land in refining margins, not in crude flat price
+## 4. [DESCRIPTIVE — testable, not yet tested] Geopolitical shocks land in refining margins, not crude
 
 Share of events in each class coinciding with a top-5% move in that asset:
 
@@ -90,11 +108,18 @@ Share of events in each class coinciding with a top-5% move in that asset:
 
 **Every military and geopolitical class concentrates in the crack; the market and policy classes
 invert.** A crude-only view of geopolitical risk is watching the wrong instrument.
+
+**What this is not, yet.** These are frequencies, not a test. Because the denominators match per
+class, these are *the same events scored against two assets* — paired binary data, for which
+McNemar's test on the discordant pairs is the correct instrument. That requires the event-level
+table rather than these margins and **has not been run**. Until it is, this is a striking rate
+difference and not an established effect. (One inconsistency to resolve when it is run:
+`infrastructure_attack` shows 44 against crude and 45 against the crack.)
 `data/big_moves/summary.json` · `p_big_given_class`
 
 ---
 
-## 5. A chokepoint closure is a price event only if the ships cannot go around
+## 5. [CASE, n = 2] A chokepoint closure is a price event only if the ships cannot go around
 
 | | flow | reroute | Brent |
 |---|---:|---:|---:|
@@ -107,7 +132,7 @@ is a price event** — and a price-only study looks at the Red Sea and concludes
 
 ---
 
-## 6. Event-occurrence flags carry no information about the size of a response
+## 6. [TESTED] Event-occurrence flags carry no information about the size of a response
 
 On the **44 days that are both a corpus OPEC event and a Känzig (2021) announcement** — same days,
 four regressors differing only in what they say about those days:
@@ -126,17 +151,22 @@ dummies.
 
 ---
 
-## 7. The event classes people call "geopolitical oil risk" are near-orthogonal to identified supply shocks
+## 7. [TESTED — as a bound, not an effect] "Geopolitical oil risk" classes are near-orthogonal to identified supply shocks
 
 The tightening classes — sanctions, chokepoint disruption, conflict escalation — correlate
-**r = −0.023** with the identified oil-supply shock over **614 months**. Effectively unrelated. The
-prior question is therefore not how heavily to weight these events but **whether they are supply
-shocks at all**.
+**r = −0.023** with the identified oil-supply shock over **614 months**.
+
+**Stated precisely, because "no relationship" overclaims.** The Fisher-*z* 95% interval is
+**[−0.102, +0.056]**, which contains zero — so no relationship is *established*. What the sample
+size does buy is a **bound**: it rules out any correlation with |r| greater than about **0.10**,
+i.e. more than **1% shared variance**. That is the useful form of the claim — not "they are
+unrelated" but "any relationship is smaller than 1% of variance." The prior question is therefore
+not how heavily to weight these events but **whether they are supply shocks at all**.
 `MAGNITUDE_REGISTRATION.md` §13.1
 
 ---
 
-## 8. Real supply shocks do move real quantities — the instrument works
+## 8. [TESTED] Real supply shocks do move real quantities — the instrument works
 
 Run through this project's own estimator: Känzig's oil-supply news shock moves Brent **+0.851
 (SE 0.103) at h = 0, rising to +2.37 at h = 20**, every horizon excluding zero. The
@@ -148,7 +178,7 @@ Baumeister–Hamilton identified supply shock moves JODI physical production **+
 
 ---
 
-## 9. The chain does not transmit the way the industry narrative assumes
+## 9. [NULL] The chain does not transmit the way the industry narrative assumes
 
 Across **477 node×shock cells** spanning crude → refined products → cracks → gas/LNG → fertilizer →
 freight → credit, **21 transmit against 1–24 expected under no transmission at all.** The observed
@@ -158,7 +188,7 @@ and the equity/macro nodes beside the chain — and vanish along it.
 
 ---
 
-## 10. The physical record goes dark exactly where it matters most
+## 10. [DESCRIPTIVE] The physical record goes dark exactly where it matters most
 
 JODI reporting ends: **Iran 2018-07** — the month US secondary sanctions were reimposed — **UAE and
 Qatar 2018-12, Russia 2023-03, Iraq 2024-03.** Of 122 de-overlapped events naming a producer,
