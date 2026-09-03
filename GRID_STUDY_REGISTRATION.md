@@ -50,14 +50,14 @@ Consequently, and bindingly:
 Session B owns `GRID_STUDY_REGISTRATION.md`, `src/engine/grid/**`, `tests/test_grid_power.py` and its own
 files under `data/grid/`.
 
-**`data/grid/` is shared with session G, by filename, and neither session moves the other's files.**
-Amended 2026-09-03 on G's handoff (`data/handoffs/G_to_B_2026-09-03_grid_probe.md`): G's brief assigns
-`data/grid/` to G and this document's first draft claimed it for B without knowing that. G offered to move
-to `data/grid/g/**`; **B declines the move** — G's `PROBE.json`, `PROBE.md` and `G4_REGISTRATION.md` are
-published paths cited in a committed handoff, and relocating them to resolve a collision that does not
-exist in practice would break citations for no benefit. To keep it that way, **this study's own outputs are
-namespaced under `data/grid/price/`** (§3.8), so the generic names this Part registers can never collide
-with G's panel if it is later built.
+**`data/grid/**` is B's, excluding `data/grid/g/**`, which is G's.** Amended twice on 2026-09-03. The
+first draft claimed `data/grid/**` for B without knowing Joe's brief had assigned `data/grid/` to G. G
+offered to relocate to `data/grid/g/**`; **B declined, and Joe overruled the refusal.** The refusal is
+recorded rather than deleted: B argued that moving would break citations already in a committed handoff,
+which is true but small and one-off, and a directory with one unambiguous owner is worth more than a
+jointly-held one. B keeps `data/grid/**`; G writes `data/grid/g/**`; the word was given in
+`data/handoffs/B_to_G_2026-09-03b_move_to_grid_g.md`. This study's own outputs stay namespaced under
+`data/grid/price/` and `data/grid/escalation/` regardless.
 
 ### 0.4 Why the study is proposed at all — the two defects it addresses
 Both are measured, not asserted, and both are facts about the published run rather than results of this study:
