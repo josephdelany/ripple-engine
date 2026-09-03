@@ -1,7 +1,7 @@
 {
  "protocol": "WALK_FORWARD_PROTOCOL.md (2026-09-02)",
- "run_id": "walk_20260902T210135Z",
- "generated_at": "2026-09-02T21:02:57.100036+00:00",
+ "run_id": "walk_20260903T003422Z",
+ "generated_at": "2026-09-03T00:35:33.838004+00:00",
  "registered": {
   "g_target": "IES-90 level in (d, d+90] + DEAL flag (OUTCOME_MAPPING.md Amendment 1 and later amendments; event_outcomes source='ies90'; the label registration the run saw is recorded in data_state.ies90_registration); sr_outcome_90 retired",
   "g_scores": {
@@ -11867,7 +11867,60 @@
  "verdict": {
   "audit_passed": false,
   "audit_record": {
-   "note": "data/audits/outcome_audit.json absent: label audit not recorded (Step 4 pending)"
+   "auditor": "joe",
+   "protocol": "WALK_FORWARD_PROTOCOL.md \u00a71 (kappa >= 0.6 against sources) / \u00a77",
+   "threshold": 0.6,
+   "sheet": "data/audits/ies90_audit_30.csv",
+   "started_at": "2026-09-02T23:39:35+00:00",
+   "dated": "2026-09-03T00:11:17+00:00",
+   "rows": [
+    {
+     "event_id": "iran_iraq_war_1980",
+     "event_date": "1980-09-22",
+     "engine_level": 3,
+     "engine_deal": 0,
+     "engine_basis": "dyadic",
+     "rule_fired": "WAR.inter.pair",
+     "joe_level": 3,
+     "joe_deal": 0,
+     "joe_note": "",
+     "answered_at": "2026-09-03T00:02:23+00:00"
+    }
+   ],
+   "n_rows": 30,
+   "n_done": 1,
+   "kappa": null,
+   "passed": false,
+   "confusion_joe_x_engine": {
+    "0": {
+     "0": 0,
+     "1": 0,
+     "2": 0,
+     "3": 0
+    },
+    "1": {
+     "0": 0,
+     "1": 0,
+     "2": 0,
+     "3": 0
+    },
+    "2": {
+     "0": 0,
+     "1": 0,
+     "2": 0,
+     "3": 0
+    },
+    "3": {
+     "0": 0,
+     "1": 0,
+     "2": 0,
+     "3": 1
+    }
+   },
+   "deal_agreement": {
+    "n": 1,
+    "agree": 1
+   }
   },
   "tiers_permitting_validation": [
    "daily"
@@ -12344,7 +12397,7 @@
    "fields_known_at_t": 60
   },
   "archived_runs": {
-   "walk_20260902T200654Z": {
+   "walk_20260902T210135Z": {
     "reads.jsonl": 313,
     "scores.jsonl": 313,
     "weights.jsonl": 313,
@@ -12359,7 +12412,7 @@
   "ok": true,
   "n_records": 313,
   "first_bad_line": null,
-  "run_in_tree": "walk_20260902T210135Z"
+  "run_in_tree": "walk_20260903T003422Z"
  },
  "determinism": {
   "content_digest": "2a90ff4a88f30f6f50433a2b5268dc1feaf9bc219b5ef2ec575ef15dce57f116",
