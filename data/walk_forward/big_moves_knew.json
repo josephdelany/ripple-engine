@@ -30,7 +30,7 @@
     "engine_p10": -4.87,
     "engine_p90": 11.03,
     "M": "NOT_MATERIAL",
-    "G_top": "0",
+    "G_top": "2",
     "realized_chg_pct": 23.59550561797752,
     "realized_level": "3",
     "realized_deal": 0
@@ -67,7 +67,7 @@
     "M": "MATERIAL",
     "G_top": "3",
     "realized_chg_pct": -2.8436018957346043,
-    "realized_level": "3",
+    "realized_level": "1",
     "realized_deal": 0
    },
    {
@@ -78,10 +78,10 @@
     "engine_p10": null,
     "engine_p90": null,
     "M": null,
-    "G_top": "3",
+    "G_top": "0",
     "realized_chg_pct": 6.460674157303359,
-    "realized_level": "3",
-    "realized_deal": 0
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -236,7 +236,7 @@
     "engine_p10": -4.87,
     "engine_p90": 23.6,
     "M": "MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": -29.08653846153847,
     "realized_level": "3",
     "realized_deal": 0
@@ -287,7 +287,7 @@
     "engine_p10": -29.09,
     "engine_p90": 11.03,
     "M": "MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": -2.9389600602863553,
     "realized_level": "0",
     "realized_deal": 0
@@ -317,7 +317,7 @@
     "engine_p10": -9.0,
     "engine_p90": -7.56,
     "M": "NOT_MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": -14.180437695399739,
     "realized_level": "0",
     "realized_deal": null
@@ -458,8 +458,8 @@
     "M": "MATERIAL",
     "G_top": "2",
     "realized_chg_pct": -24.995907677197582,
-    "realized_level": "2",
-    "realized_deal": 0
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "libya_ports_clashes_2014",
@@ -469,9 +469,9 @@
     "engine_p10": -9.0,
     "engine_p90": 2.75,
     "M": "NOT_MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": -24.995907677197582,
-    "realized_level": "2",
+    "realized_level": null,
     "realized_deal": null
    }
   ]
@@ -589,8 +589,8 @@
     "M": "NOT_MATERIAL",
     "G_top": "0",
     "realized_chg_pct": 30.330634278002712,
-    "realized_level": "3",
-    "realized_deal": 0
+    "realized_level": null,
+    "realized_deal": null
    },
    {
     "event_id": "nigeria_nda_forcados_2016",
@@ -602,8 +602,8 @@
     "M": "NOT_MATERIAL",
     "G_top": "0",
     "realized_chg_pct": 20.585397233837256,
-    "realized_level": "3",
-    "realized_deal": 0
+    "realized_level": null,
+    "realized_deal": null
    }
   ]
  },
@@ -721,11 +721,11 @@
     "event_id": "libya_sharara_2018",
     "date": "2018-12-08",
     "type": "conflict_escalation",
-    "engine_p50": -0.6,
+    "engine_p50": -0.55,
     "engine_p10": -29.09,
     "engine_p90": 10.42,
     "M": "MATERIAL",
-    "G_top": "0",
+    "G_top": "3",
     "realized_chg_pct": -2.471388289931997,
     "realized_level": "2",
     "realized_deal": 0
@@ -909,7 +909,7 @@
     "date": "2020-06-06",
     "type": "opec_decision",
     "engine_p50": 4.57,
-    "engine_p10": -1.81,
+    "engine_p10": 1.65,
     "engine_p90": 20.06,
     "M": "MATERIAL",
     "G_top": null,
@@ -931,7 +931,7 @@
     "date": "2020-11-23",
     "type": "infrastructure_attack",
     "engine_p50": -1.9,
-    "engine_p10": -12.15,
+    "engine_p10": -14.99,
     "engine_p90": 14.43,
     "M": "NOT_MATERIAL",
     "G_top": "0",
@@ -973,7 +973,7 @@
     "engine_p10": -10.52,
     "engine_p90": 8.45,
     "M": "NOT_MATERIAL",
-    "G_top": "3",
+    "G_top": "2",
     "realized_chg_pct": 12.01111772880683,
     "realized_level": "0",
     "realized_deal": null
@@ -1043,7 +1043,7 @@
     "event_id": "russia_invades_ukraine_2022",
     "date": "2022-02-24",
     "type": "conflict_escalation",
-    "engine_p50": 3.6,
+    "engine_p50": 2.32,
     "engine_p10": -29.09,
     "engine_p90": 13.44,
     "M": "MATERIAL",
@@ -1217,7 +1217,7 @@
     "engine_p10": -6.37,
     "engine_p90": 3.54,
     "M": "NOT_MATERIAL",
-    "G_top": "2",
+    "G_top": "0",
     "realized_chg_pct": -11.775892334698646,
     "realized_level": "0",
     "realized_deal": null
@@ -1252,7 +1252,7 @@
     "engine_p10": -3.34,
     "engine_p90": 2.21,
     "M": "NOT_MATERIAL",
-    "G_top": "2",
+    "G_top": "1",
     "realized_chg_pct": 46.59146640510055,
     "realized_level": null,
     "realized_deal": null
