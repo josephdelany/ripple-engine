@@ -1,0 +1,104 @@
+{
+ "drawn_by": "src/figures_paper.py",
+ "sources": {
+  "summary": {
+   "path": "data/walk_forward/summary.json",
+   "run_id": "walk_20260903T003422Z",
+   "generated_at": "2026-09-03T00:35:33.838004+00:00"
+  },
+  "knowable": {
+   "path": "data/state/situation_knowable.json",
+   "generated_at": "2026-09-02T19:22:26+00:00"
+  },
+  "pre_amendment_h": {
+   "paths": [
+    "STATE_OF_THE_ENGINE.md section 5",
+    "data/handoffs/B_run_delta.md (193022Z column)"
+   ],
+   "run_id": "walk_20260902T193022Z"
+  }
+ },
+ "contrast_ratios_vs_ground": {
+  "finding": 19.03,
+  "evidence": 14.36,
+  "provenance": 5.18,
+  "verdict:crosses_zero": 5.18,
+  "verdict:excludes_zero_worse": 5.19,
+  "verdict:excludes_zero_better": 6.06
+ },
+ "figures": {
+  "fig1_vintage.png": {
+   "events": 313,
+   "with_state_knowable_at_t": 51,
+   "without": 262,
+   "fields_kept": 60,
+   "fields_dropped_after_t": 726,
+   "skill_before_amendment_h": {
+    "est": -0.0053315237127760096,
+    "ci95": [
+     -0.083,
+     0.067
+    ],
+    "dm_p": 0.8837017777161833,
+    "run_id": "walk_20260902T193022Z"
+   },
+   "skill_after_amendment_h": {
+    "est": -0.09655235680492913,
+    "ci95": [
+     -0.1796845693934324,
+     -0.01823848882063939
+    ],
+    "dm_p": 0.022458573887114364,
+    "n": 150
+   }
+  },
+  "fig2_escalation_baselines.png": {
+   "brier": {
+    "persistence": 0.4804666666666666,
+    "climatology": 0.7010597406851313,
+    "the engine": 0.7687487109093333,
+    "M13 recalibrated": 1.1914369561185458
+   }
+  },
+  "fig3_price_baselines.png": {
+   "crps_skill": {
+    "persistence": {
+     "est": 0.1284812157048223,
+     "ci95": [
+      0.07013975939879763,
+      0.1851651977959312
+     ],
+     "dm_p": 3.2720183975154526e-05,
+     "n": 253
+    },
+    "frozen": {
+     "est": 0.006982537080964524,
+     "ci95": [
+      0.0035856995211175366,
+      0.011160894778903484
+     ],
+     "dm_p": 8.375456141829218e-05,
+     "n": 253
+    },
+    "random_analogs": {
+     "est": -0.005117493720343758,
+     "ci95": [
+      -0.06016883815873202,
+      0.04906078727189398
+     ],
+     "dm_p": 0.851667881074827,
+     "n": 253
+    },
+    "climatology": {
+     "est": -0.07054206603285595,
+     "ci95": [
+      -0.1364122188090316,
+      -0.017397357087930138
+     ],
+     "dm_p": 0.015954742511341324,
+     "n": 253
+    }
+   }
+  }
+ }
+}

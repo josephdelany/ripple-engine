@@ -46,6 +46,7 @@ DB_FREE_FILES = {
     "test_diagnostic_hostile.py",    # Amendment K: reads the committed summary.json only
     "test_travel_irf.py",            # DESIGN.md Amendment 1: an ast scan of src/ + the committed
                                      # data/ripple/irf.json; its two Story tests carry their own skipif
+    "test_figures_paper.py",         # Session I: the paper figures -- committed JSON/Markdown only
 }
 
 
