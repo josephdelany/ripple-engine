@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "press_candidate",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/July_2021_Gulf_of_Oman_incident",
  "parties": [],
@@ -46,6 +46,6 @@ Keyword overlap cannot identify a specific event -- four tightenings of the matc
     - opened: Marine Mammals; Incidental Take During Specified Activities; North Slope, Alaska (2021-08-05)
 - **GDELT DOC 2.0** — `press_candidate`; query=Drone attack strikes
     - opened: China , Hamas & More : US Not Alone , A List of Countries Thatve Aced Drone Warfare (2021-08-28)
-- **UK National Archives** — `none_found`; query=Drone attack strikes; n_hits=0
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2021 are not open before about 2041, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

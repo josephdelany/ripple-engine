@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "press_candidate",
  "built_by": "session A",
- "built_at": "2026-09-02T23:48:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/Attacks_on_the_Eternity_C",
  "parties": [],
@@ -48,6 +48,6 @@ Keyword overlap cannot identify a specific event -- four tightenings of the matc
     - opened: إغلاق مطار إيلات بسبب هجمات الحوثيين (2025-07-16)
     - opened: Husiden İsraile Sert Tepki :  Saldırılarımız Sürecek   (2025-07-03)
     - opened: إعلام عبري : إسرائيل تحث أمريكا على ضرب الحوثيين مجددا – تلفزيون الفجر (2025-07-11)
-- **UK National Archives** — `undetermined`; query=Houthis resume attacks; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2025 are not open before about 2045, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

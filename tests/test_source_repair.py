@@ -52,7 +52,10 @@ def test_a_refusal_is_undetermined_and_blocks_only_on_no_answer(monkeypatch):
     monkeypatch.setattr(SR, "_get", lambda url, params=None: {"status": 429, "text": "", "url": url})
     r = SR.fedreg_route(ev, d)
     assert r["status"] == "undetermined" and "refused" in r["note"]
-    assert SR.tna_route(ev, d)["status"] == "undetermined"
+    # §6.6: within the UK 20-year rule the archive cannot answer, so the route is out of coverage and is not called
+    assert SR.tna_route(ev, d)["status"] == "out_of_coverage" and "20-year rule" in SR.tna_route(ev, d)["note"]
+    old = pd.Timestamp("1990-06-01")                       # outside the rule, a non-200 is still undetermined (§5.1)
+    assert SR.tna_route(ev, old)["status"] == "undetermined"
     # every route undetermined or out of coverage -> blocked-by-declassification, never "none found"
     res = SR.repair(ev, routes=[lambda e, dd: {"route": "a", "status": "undetermined"}, lambda e, dd: {"route": "b", "status": "out_of_coverage"}])
     assert res["outcome"] == "blocked-by-declassification"

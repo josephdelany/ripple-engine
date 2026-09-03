@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "none_found",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/2022_Jeddah_missile_attack",
  "parties": [
@@ -37,6 +37,6 @@ Every reachable route answered and none held a document or file matching this ev
     - opened: اليمن - المشاط يعلن مبادرة سلام يمنية لثلاثة أيام : تتحوّل ثا ...  (2022-03-26)
     - opened: جريدة الرياض | الاعتداءات على مرافق مصفاة « ياسرف » تسببت في « انخفاض مؤقت » للإنتاج (2022-03-22)
     - opened: Are Saudi Arabia and the UAE No Longer U . S . Partners ?  (2022-04-16)
-- **UK National Archives** — `undetermined`; query=Houthi strike sets Saudi Arabia; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2022 are not open before about 2042, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

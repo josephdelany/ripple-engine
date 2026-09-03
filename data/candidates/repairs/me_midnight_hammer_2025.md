@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "press_candidate",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/2025_United_States_strikes_on_Iranian_nuclear_sites",
  "parties": [],
@@ -48,6 +48,6 @@ Keyword overlap cannot identify a specific event -- four tightenings of the matc
     - opened: ترامب : مستعدون لشن ضربات متكررة على المنشآت النووية الإيرانية إذا لزم الأمر (2025-07-22)
     - opened: ترامب يلوّح بشن ضربات متكررة على إيران  إذا لزم الأمر   (2025-07-22)
     - opened: ردا على تصريحات عراقجي ، ترامب يهدد إيران بشن ضربات متكررة على منشآتها النووية (2025-07-22)
-- **UK National Archives** — `undetermined`; query=strikes Iranian nuclear; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2025 are not open before about 2045, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

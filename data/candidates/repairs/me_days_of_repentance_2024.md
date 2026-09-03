@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "press_candidate",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran",
  "parties": [
@@ -51,6 +51,6 @@ Keyword overlap cannot identify a specific event -- four tightenings of the matc
     - opened: كبير مستشاري خامنئي : إيران تستعد للرد على ضربات إسرائيل (2024-11-24)
     - opened: كبير مستشاري خامنئي : إيران تستعد للرد على ضربات إسرائيل (2024-11-24)
     - opened: Israeli Strikes Reportedly Destroy Iran Covert Nuclear Facility (2024-11-18)
-- **UK National Archives** — `undetermined`; query=Israel strikes Iranian Iran; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2024 are not open before about 2044, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

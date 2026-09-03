@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "none_found",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/2004_world_oil_market_chronology",
  "parties": [],

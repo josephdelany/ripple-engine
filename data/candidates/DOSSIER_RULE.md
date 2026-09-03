@@ -162,3 +162,11 @@ event**, and no further tightening of it will be attempted. Corrected:
 The consequence, stated plainly: for events outside US federal policy and outside FRUS's era, this toolchain can
 currently offer Joe a place to look and nothing more. That is a limit of the reachable routes (`ROUTE_TABLE.md` §4),
 not of the historical record.
+
+### §6.6 (2026-09-02, registered before the code) — the UK release rule is coverage, not a failed call
+Ten of session A's 27 post-2000 repairs recorded the UK National Archives as `undetermined` (HTTP 202, no body). All
+ten are dated 2022-2025. Under the UK 20-year rule those files are not open yet, so the archive has nothing to return
+and the 202 is the API declining a query it cannot serve, not a transient failure — a retry reproduced all ten exactly.
+Recording it as `undetermined` overstates our uncertainty: we know why there is no answer. Corrected: an event dated
+within **20 years of today** is `out_of_coverage` for this route, with the release rule named, and the route is not
+called. Outside that window a 202 or any non-200 remains `undetermined` under §5.1.

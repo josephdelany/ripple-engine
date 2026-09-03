@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "press_candidate",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/Assassination_of_Ismail_Haniyeh",
  "parties": [
@@ -47,6 +47,6 @@ Keyword overlap cannot identify a specific event -- four tightenings of the matc
 - **Federal Register** — `none_found`; query=Hamas leader Ismail Iran; n_hits=0
 - **GDELT DOC 2.0** — `press_candidate`; query=Hamas leader Ismail Iran
     - opened:   Will Live Forever With Allah : Slain Hamas Leader Ismail Haniyeh Poster In Kerala Sparks (2024-08-26)
-- **UK National Archives** — `undetermined`; query=Hamas leader Ismail Iran; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2024 are not open before about 2044, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

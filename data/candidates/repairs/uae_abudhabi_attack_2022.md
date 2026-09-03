@@ -7,7 +7,7 @@
  "cohort": "encyclopaedia",
  "outcome": "none_found",
  "built_by": "session A",
- "built_at": "2026-09-02T23:46:04+00:00",
+ "built_at": "2026-09-03T00:01:15+00:00",
  "rule": "data/candidates/DOSSIER_RULE.md \u00a76 (2026-09-02)",
  "current_source": "https://en.wikipedia.org/wiki/2022_Abu_Dhabi_attack",
  "parties": [
@@ -36,6 +36,6 @@ Every reachable route answered and none held a document or file matching this ev
 - **GDELT DOC 2.0** — `none_found`; query=Houthi drone missile United Arab Emirates. the only hit was an aggregator/listing page, which names no event (§6.3(2))
     - opened: US upgrades travel warning to UAE (2022-01-28)
     - opened: Uae Yemen Drones : Latest News , Photos , Videos on Uae Yemen Drones (2022-02-03)
-- **UK National Archives** — `undetermined`; query=Houthi drone missile United Arab Emirates; search_status=202. the source refused or failed (§5.1)
+- **UK National Archives** — `out_of_coverage`. the UK 20-year rule: files from 2022 are not open before about 2042, so the archive has nothing to return (§6.6)
 
 Joe: this replaces nothing until you say so. `events` is untouched; the current source above still stands.

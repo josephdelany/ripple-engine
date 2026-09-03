@@ -48,7 +48,8 @@ FEDREG_FROM = "1994-01-01"          # ROUTE_TABLE.md §1: verified coverage
 AGGREGATOR = re.compile(r"latest news|photos\s*,\s*videos|news\s*,\s*photos|live updates|/topics?/|: latest news", re.I)
 PRIMARY_ROUTES = {"FRUS", "Federal Register"}          # §6.3(1): these yield primary documents; GDELT yields press
 BEFORE, AFTER = 3, 30                       # the window [d-3d, d+30d], as §6.2
-FRUS_TO = "1994-12-31"                      # FRUS volumes run to the early 1990s (§6.1)
+FRUS_TO = "1994-12-31"
+TNA_RELEASE_YEARS = 20                      # §6.6: the UK 20-year rule -- newer files are not open, so the API cannot answer                      # FRUS volumes run to the early 1990s (§6.1)
 UNREACHABLE = ["CIA CREST (cia.gov/readingroom): every search form redirects to the landing page; results need JavaScript",
                "UN Security Council / UN Digital Library: HTTP 403 to scripts; the digital library serves a JS challenge",
                "OPEC archive (opec.org): HTTP 403 (Cloudflare)",
@@ -108,6 +109,10 @@ def frus_route(ev, d):
 
 def tna_route(ev, d):
     """A UK National Archives FILE whose covering dates contain d and whose title names the subject (§6.2 partial)."""
+    cutoff = pd.Timestamp.now(tz="UTC").tz_localize(None) - pd.DateOffset(years=TNA_RELEASE_YEARS)
+    if d > cutoff:
+        return {"route": "UK National Archives", "status": "out_of_coverage",
+                "note": f"the UK {TNA_RELEASE_YEARS}-year rule: files from {d.year} are not open before about {d.year + TNA_RELEASE_YEARS}, so the archive has nothing to return (§6.6)"}
     if not searchable(ev["title"], ev["parties"]):
         return {"route": "UK National Archives", "status": "not_run", "note": "no query can name a state or carry two content terms (§5.2)"}
     terms = query_terms(ev["title"], ev["parties"])
