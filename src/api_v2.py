@@ -445,7 +445,16 @@ def register(app):
             walk[task] = {ref: {k: d.get(k) for k in ("n", "skill", "ci95", "dm_p")}
                           for ref, d in ev.items() if isinstance(d, dict)}
             walk[task]["score"] = (daily.get(task) or {}).get("score")
-        walk["monthly_scored"] = ((s_.get("tiers") or {}).get("monthly") or {}).get("n_scored_burn_in")
+        monthly = ((s_.get("tiers") or {}).get("monthly") or {})
+        walk["monthly_scored"] = monthly.get("n_scored_burn_in")
+        walk["monthly_reads"] = monthly.get("n_reads")
+        walk["burn_in"] = (s_.get("registered") or {}).get("burn_in")
+        walk["daily_scored"] = daily.get("n_scored_burn_in")
+        # §1.1 C3 quotes the magnitude by which persistence beats the engine; the signed skill stays beside
+        # it. A sentence may only show a declared path, so the magnitude is a path rather than a JS abs().
+        gp = (walk.get("G") or {}).get("persistence") or {}
+        if gp.get("skill") is not None:
+            gp["skill_abs"] = round(abs(gp["skill"]), 3)
 
         doc = _json(DATA / "ripple" / "irf.json") or {}
         CLS = ("chokepoint_disruption", "infrastructure_attack", "conflict_escalation", "opec_decision",
@@ -489,8 +498,15 @@ def register(app):
                                                 "in_line": len(f.get("in_line") or []),
                                                 "noise": len(f.get("noise") or [])},
                 "source": "data/feed.json"}
+        # §1.1 C3's second measurement: the share of the change target that is exactly zero, from the
+        # registered delta experiment (Amendment L). Read, not recomputed.
+        de = _json(DATA / "walk_forward" / "delta_experiment.json") or {}
+        sz = ((de.get("target") or {}).get("share_zero"))
+        delta = {"share_zero": sz, "share_zero_pct": (round(sz * 100, 1) if sz is not None else None),
+                 "n_published_scored_G": de.get("n_published_scored_G"),
+                 "source": "data/walk_forward/delta_experiment.json"}
         return {"vintage": vintage, "walk": walk, "travel": travel, "ledger": ledger, "corpus": corpus,
-                "dark": dark, "big": big, "feed": feed, "record": api_record()}
+                "dark": dark, "big": big, "feed": feed, "delta": delta, "record": api_record()}
 
     @app.get("/api/walk/audit")
     def api_walk_audit():

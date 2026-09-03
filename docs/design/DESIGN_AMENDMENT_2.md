@@ -152,6 +152,18 @@ by the sign of the estimate would have shown both as amber and been wrong about 
 zero and better → green. Never from the point estimate, never from the *p*-value, and never from the status
 string's wording. **[T]**
 
+**How, and why it is not a new set of colour rules.** My first implementation gave the bar its own
+`.v-worse` / `.v-better` text-colour rules. `tests/test_design_spec.py` rejected it, correctly and for the
+right reason: §2 registers **one** absence language "so it is used identically everywhere", and that file
+records that the propagation band already "carried a private `.ib`/`.v-*` implementation of the same idea"
+and was made to consume the shared component. A second set of verdict colours is a second language.
+
+So the bar draws the **same `interval()` mark** as every other verdict on the desk — a 54×11 span with its
+tick and its zero rule — and the colour arrives through §2's own component. There are still exactly two
+amber/green declarations in the stylesheet, which is what the §2 test counts.
+`tests/test_record_bar.py::test_a26b_the_bar_reuses_the_shared_component_and_does_not_invent_a_second_language`
+pins it so the shortcut cannot come back.
+
 ---
 
 ## A2.7 — Five screens become four, ordered as an argument

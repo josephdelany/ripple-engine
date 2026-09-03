@@ -227,7 +227,14 @@ async function loadFeed(){
 }
 /* DESIGN.md §5 as amended by A2.6: named fields, and STATE@t is one of them. The vintage wall is the
    project's most novel result, so it rides the record bar on every screen rather than living on one. */
-function renderRecordBar(r, v){ const st=r.statuses||{}; const au=r.audit||{};
+function renderRecordBar(r, v, w){ const st=r.statuses||{}; const au=r.audit||{};
+  const W=w||{}, Gc=((W.G||{}).climatology)||{}, Pc=((W.P||{}).climatology)||{};
+  /* A2.6b: the verdict's colour comes from the INTERVAL, and it is drawn with the SAME component every
+     other interval on the desk uses. §2 registers one absence language; a parallel set of text-colour
+     rules would be a second one (a private .v-* implementation was removed for exactly that reason). */
+  const dom = domainOf([{est:Gc.skill, ci:Gc.ci95}, {est:Pc.skill, ci:Pc.ci95}]);
+  const mark = (x) => x.ci95 ? interval(x.skill, x.ci95, dom, verdictOf(x.skill, x.ci95, x.n, null), 54, 11) : '';
+  const gMark = Gc.ci95 ? mark(Gc) : '', pMark = Pc.ci95 ? mark(Pc) : '';
   if(v && v.kept!=null){
     $('#recordbar').innerHTML = [
       ['CORPUS', `${r.n_events??'—'} events`], ['GEO', `${r.n_geopolitical??'—'} coded`],
@@ -235,15 +242,18 @@ function renderRecordBar(r, v){ const st=r.statuses||{}; const au=r.audit||{};
       ['READS', `${r.n_reads??'—'} sealed`],
       /* §5: a status line, not a sentence. The §7 status is shown to its first clause and carried in full
          in the title attribute, so the verbatim string is still one hover from the reader. */
-      ['G', String(st['engine:G']||'—').split(' (')[0], st['engine:G']],
-      ['P', String(st['engine:P']||'—').split(' (')[0], st['engine:P']],
+      /* A2.6b: colour from the interval. With walk_20260903T052633Z escalation crosses zero and is
+         neutral; price still excludes zero and stays amber. Colouring by the estimate's sign would have
+         called both amber and been wrong about escalation. */
+      ['G', String(st['engine:G']||'—').split(' (')[0], st['engine:G'], gMark],
+      ['P', String(st['engine:P']||'—').split(' (')[0], st['engine:P'], pMark],
       ['AUDIT', `${au.n_done??0} of ${au.n_rows??0}${au.passed?'':' · not passed'}`],
-    ].map(([k,val,full])=>`<span style="margin-right:16px"${full?` title="${esc(String(full))}"`:''}><span class="t-prov">${esc(k)}</span> <span class="t-ev">${esc(String(val))}</span></span>`).join('')
+    ].map(([k,val,full,markSvg])=>`<span style="margin-right:16px;white-space:nowrap"${full?` title="${esc(String(full))}"`:''}><span class="t-prov">${esc(k)}</span> <span class="t-ev">${esc(String(val))}</span>${markSvg||''}</span>`).join('')
       + `<span class="t-prov">run ${esc(r.run_id||'—')}</span>`;
     return;
   }
   $('#recordbar').textContent=`record: ${r.n_events??'—'} events (${r.n_geopolitical??'—'} geopolitical, ${r.n_ies90_labels??'—'} IES-90 labels) · ${r.n_reads??'—'} sealed reads · engine:G — ${st['engine:G']||'—'} · engine:P — ${st['engine:P']||'—'} · run ${r.run_id||'—'} · label audit ${au.status||'pending'}${au.n_rows?` ${au.n_done||0}/${au.n_rows}`:''}${au.kappa!=null?` κ ${num(au.kappa,3)}`:''}`;}
-async function loadRecord(){try{const d=await desk(); renderRecordBar(d.record||await api('/api/record'), d.vintage);}catch(e){$('#recordbar').textContent='record: unavailable ('+e.message+')';}}
+async function loadRecord(){try{const d=await desk(); renderRecordBar(d.record||await api('/api/record'), d.vintage, d.walk);}catch(e){$('#recordbar').textContent='record: unavailable ('+e.message+')';}}
 function renderFeed(f){
     const row=(s,sig)=>`<div class="story-row" data-text="${esc(s.headline)}" data-url="${esc(s.url||'')}"><div>${chip(SIG[s.significance]||s.significance)}${(s.flags||[]).concat(s.gate_flags||[]).map(x=>`<div style="margin-top:4px">${chip(FLAG[x]||x,'c-flag')}</div>`).join('')}</div><div><div class="h">${esc(s.headline)}</div><div class="cls">${esc((s.event_class||'no class').replace(/_/g,' '))} · ${esc(s.source)} · <span class="mono">${esc(s.when)}</span>${s.entities&&s.entities.length?' · '+esc(s.entities.slice(0,3).join(', ')):''}</div></div><div>${s.rates&&s.rates.brent?`<div class="dim" style="font-size:11.5px">crude ${s.rates.brent.ratio}× · products ${s.rates.diesel_crack?s.rates.diesel_crack.ratio:'—'}×</div>`:''}${s.headline_verdict?`<div style="margin-top:3px">${vchip(s.headline_verdict)}</div>`:''}</div><div><button class="btn" style="font-size:12px">Read</button></div></div>`;
     $('#feed').innerHTML=(f.material||[]).map(s=>row(s)).join('')||'<p class="dim">Nothing material cleared the gate today.</p>';
@@ -572,8 +582,16 @@ function verbatim(text, src){
    every numeric token must be derivable from the declared paths. A number it cannot derive is a failure.
    ============================================================================================================ */
 const SENTENCES = {
-  /* A.1 — The result */
+  /* A.1 — The result. §1.1's three conditions lead the screen (Joe's brief, 2026-09-03). */
   'res.lede':          {t:'Restricted to what was knowable at the time, the record goes quiet.', f:{}},
+  'res.frame':         {t:'A state-conditioned analog forecaster needs three things. On this record none of them holds, and each failure is measured.', f:{}},
+  'res.c1':            {t:'Observability. {a} of {b} events have no state that was knowable at the forecast date.',
+                        f:{a:'vintage.events_with_no_situation_field_at_t', b:'vintage.events'}},
+  'res.c2':            {t:'Density. The monthly tier scores {a} of its {b} reads: every class sits below the registered burn-in of {c}.',
+                        f:{a:'walk.monthly_scored', b:'walk.monthly_reads', c:'walk.burn_in'}},
+  'res.c3':            {t:'Non-degeneracy. Persistence beats the engine on Brier by {a}, and {b}% of the change target is exactly zero.',
+                        f:{a:'walk.G.persistence.skill_abs', b:'delta.share_zero_pct'}},
+  'res.frame.close':   {t:'Each is a property of the record, not of the reasoning.', f:{}},
   'res.vintage':       {t:'For {a} of {b} events the engine has no state to condition on at all.',
                         f:{a:'vintage.events_with_no_situation_field_at_t', b:'vintage.events'}},
   'res.vintage.detail':{t:'{a} of {b} situation field-values became knowable after the event they describe. {c} survive.',
@@ -763,7 +781,19 @@ async function loadResult(){try{
 
   $('#result').innerHTML = `
     <p class="t-find" style="font-size:28px">${say('res.lede', d)}</p>
-    <p class="t-ev" style="margin:0 0 26px">Three findings from the corpus and 772 series, 1973–2026, every one pre-registered.</p>
+    <p class="t-ev" style="margin:0 0 8px">${say('res.frame', d)}</p>
+    <p class="t-prov" style="margin:0 0 22px">The three conditions are registered in PAPER_DRAFT §1.1, before this run. Each is separately measurable and each is measured below.</p>
+
+    <!-- §1.1's frame, and the whole point of the screen: three conditions, three measurements, no hedge. -->
+    <section style="margin-bottom:30px;border-left:2px solid var(--line2);padding-left:14px">
+      <p class="t-find" style="font-size:20px">C1 · ${say('res.c1', d)}</p>
+      <p class="t-prov" style="margin:0 0 12px">${esc(d.vintage.source)}</p>
+      <p class="t-find" style="font-size:20px">C2 · ${say('res.c2', d)}</p>
+      <p class="t-prov" style="margin:0 0 12px">${esc((d.walk||{}).source||'')} · tiers.monthly, registered.burn_in</p>
+      <p class="t-find" style="font-size:20px">C3 · ${say('res.c3', d)}</p>
+      <p class="t-prov" style="margin:0 0 12px">${esc((d.delta||{}).source||'')} · ${esc((d.walk||{}).source||'')}</p>
+      <p class="t-ev" style="margin:0">${say('res.frame.close', d)}</p>
+    </section>
 
     <section style="margin-bottom:28px">
       <p class="t-find">${say('res.vintage', d)}</p>

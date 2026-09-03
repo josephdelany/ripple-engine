@@ -50,14 +50,14 @@ def registered_ids_from_appendix():
     """The sentence ids Appendix A registers, parsed from the amendment's markdown tables."""
     txt = AMENDMENT.read_text()
     app_a = txt.split("## Appendix A", 1)[1]
-    return set(re.findall(r"^\|\s*`([a-z]+\.[a-z.]+)`\s*\|", app_a, re.M))
+    return set(re.findall(r"^\|\s*`([a-z][a-z0-9]*(?:\.[a-z0-9]+)+)`\s*\|", app_a, re.M))
 
 
 def registered_ids_from_app():
     """The ids the page actually registers, read out of the SENTENCES literal."""
     src = APP.read_text()
     block = src.split("const SENTENCES = {", 1)[1].split("\n};", 1)[0]
-    return set(re.findall(r"^\s*'([a-z]+\.[a-z.]+)':", block, re.M))
+    return set(re.findall(r"^\s*'([a-z][a-z0-9]*(?:\.[a-z0-9]+)+)':", block, re.M))
 
 
 def test_a28_registry_and_appendix_name_the_same_sentences():
