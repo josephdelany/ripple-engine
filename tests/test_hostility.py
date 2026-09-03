@@ -103,7 +103,12 @@ def test_rows_match_the_database(rows, events):
                 elif f == "basis":
                     assert (got or "uncovered") == row["basis"], f"{eid} basis"
                 else:
-                    assert got == row["rule"], f"{eid} rule_fired"
+                    # rule_fired lists every rule that attained the level. Amendment 2 A2.3
+                    # fixes the order *between* sources but not within one, and a re-run can
+                    # flip two rules of the same source; the audit's claim is which rules
+                    # fired, so compare as a set and let a genuine change still fail.
+                    assert set((got or "").split(",")) == set(row["rule"].split(",")), \
+                        f"{eid} rule_fired: db {got!r} vs audit {row['rule']!r}"
 
 
 def test_coding_uses_only_the_registered_vocabulary(rows):

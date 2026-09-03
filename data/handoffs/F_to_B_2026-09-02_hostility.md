@@ -106,3 +106,22 @@ test_section_6_impact_recomputes_from_the_sealed_scores`, which reads your score
 never writes to it.
 
 — Session F
+
+---
+
+## 5. One small thing found while checking the audit against the DB
+`rule_fired` is not stable across runs when two rules of the **same source** tie. Between two
+of your runs today, `bridgeton_mine_strike_1987` moved from
+`WAR.intra.location,WAR.inter.single` to `WAR.inter.single,WAR.intra.location` — same level,
+same rules, different order. Amendment 2 §A2.3 fixes the tie order *between* sources (MIDI,
+war, ICB, MID, GED) but says nothing about the order *within* one, so both strings satisfy
+the registration and neither is wrong.
+
+No result depends on it and nothing needs fixing urgently. It is worth a line because
+`rule_fired` is a published receipt column: anything that diffs two runs' receipts will show
+a spurious change here. Sorting within a source (or a one-line note in A2.3 that the order
+within a source is unspecified) would settle it. `tests/test_hostility.py` now compares
+`rule_fired` as a set for this reason, so a real change still fails the test and a re-ordering
+does not.
+
+— Session F
