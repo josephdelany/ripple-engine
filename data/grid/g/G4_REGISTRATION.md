@@ -433,3 +433,65 @@ is not known to this amendment.
 It does not score anything, fit anything, or compute a skill. It does not filter the panel. It does
 not change §5.1's degeneracy test, which was decided on the probe and stands. It does not touch
 `src/walk*.py`, `data/walk_forward/**` or `data/grid/**` outside `data/grid/g/**`.
+
+---
+
+## Amendment 4 (2026-09-03) — three checks the panel owes, from B's withdrawal note
+
+*Registered before the code that implements them. `data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md`
+withdraws session B's Part IV: Joe ruled the multiplier-4 gate Option A, so the grid study is a price arm
+only and **no forecaster will be scored on this panel**. The panel remains what A3 built it as — a
+descriptive object. B offered three things it wrote for the withdrawn scorer, on the ground that they are
+properties of the **panel** and not of any forecaster run on it. G agrees on all three and adopts them
+here, with attribution. §§1–4 and Amendments 1–3 are unchanged.*
+
+### A4.1 The share-zero tripwire, computed before the marginals are read and not after someone asks
+
+§5.1 fixed the degeneracy bar at **0.95** and decided it on the **1998 probe**. That was the right thing to
+register before the probe and it is not enough for a built panel: a bar met in aggregate can be breached in
+a slice, and 1998's ΔIES share-zero of 0.9017 was inside the bar and not comfortably. From this amendment
+the panel publishes share-zero **per year and over the whole span**, on **ΔIES and on the level**, for the
+**full panel and for the `opposed_side` subset** — eight series in all — against the same 0.95 bar.
+
+Binding, and in this order: a breach is **reported immediately and prominently**; the slice is **never
+dropped**; the bar is **never moved**. A panel year that breaches is a fact about that year, published as
+one. Nothing about §5.1's verdict on the probe is re-judged.
+
+### A4.2 VR-3 becomes an assertion, not a property the build is trusted to have
+
+A3.2 restricts the active set to records whose spell **ends strictly before `t`**. The probe measured the
+effect (39 of 335 cells in 2018) and the build applies the rule — but applying a rule and checking it held
+are different things, and "a rule that was true in the probe can stop being true in the build" (B). From
+this amendment, every published panel carries an **admission audit** computed by an independent path over
+the built file: for every cell, at least one dyadic record admits its dyad at its date **with spell end
+`< t`**, and no cell exists whose only admitting records end at or after `t`. This is the same standing as
+`WALK_FORWARD_PROTOCOL.md` Amendment F.1's filtration audit: **a single violation voids the panel**
+(`admission_audit.asserted` false), and the count and the first violation are published either way.
+
+### A4.3 Effective n beside every nominal count, and never instead of it
+
+Nominal n is not effective n on a panel this clustered, and A3's §6 addendum already showed why in the
+particular case (1991–1995 supplies 44.7 % of the rows and 17.6 % of the non-zero cells). From this
+amendment the panel publishes, beside every nominal count it reports:
+
+- **DEFF from a two-way cluster on (date, dyad)**, Cameron–Gelbach–Miller, via
+  `src/engine/grid/power_arithmetic.two_way_cluster_deff` — session B's function, called, not copied;
+- **DEFF on the stacked series** via `power_arithmetic.deff_block`, **with B's correction of the same day
+  taken**: a measured design effect below 1 is a finite-sample artefact and is floored at 1, so `n_eff`
+  may never exceed `n_nominal`, and `deff_floored_at_1` records when the floor fires;
+- **`n_eff = n_nominal / DEFF`**, on the full panel and on the `opposed_side` subset.
+
+**Stated limitation, and its direction.** DEFF properly belongs to the **score-differential** series, and
+this panel has no scores — nothing is fitted on it and nothing forecasts it. The DEFF published here is
+therefore computed on the **outcome** (ΔIES) itself. A score differential carries the forecaster's own
+target-specific error in addition to the outcome, so its correlations should be **no larger** than the
+outcome's; the outcome-based DEFF is therefore an **upper bound on DEFF** and the `n_eff` published here is
+a **floor**. That is an argument, not a proof, and it is B's §2.3 argument applied to G's panel rather than
+a new one. Anyone who later computes a score differential on this panel should recompute DEFF on it and
+publish the difference rather than inheriting this number.
+
+### A4.4 Attribution
+
+A4.1–A4.3 are session B's designs, offered in the withdrawal note and adopted here unchanged in substance.
+The panel calls B's functions from `src/engine/grid/power_arithmetic.py` rather than copying the arithmetic,
+so a later correction to them reaches this panel too — as B's `deff_block` floor correction did.
