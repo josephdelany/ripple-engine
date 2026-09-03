@@ -13,10 +13,28 @@ WHAT THIS PROVES, AND WHAT IT DOES NOT. Read this before trusting it.
   a semantic one. It is not a substitute for reading.
 
   What it is FOR: after a re-run overwrites data/walk_forward/summary.json, nobody can
-  hand-check 1,600 lines of prose. A number that used to be −0.097 and is now something
-  else will no longer be found ANYWHERE in the record, and the suite goes red naming the
-  document, the line and the number. That is the failure mode this exists to catch, and
-  the one the project can least afford to ship.
+  hand-check 1,600 lines of prose. This makes the suite go red instead.
+
+  The protection is GRADED, and the grades are not equal. Stated plainly so nobody
+  reads a green suite as more than it is:
+
+    STRONG   the run-id check. summary.json owns the run id and delta_experiment.json
+             carries derived_from_run as a foreign key to it. When a re-run lands,
+             this fails deterministically, every time, whatever happened to the
+             numbers. This is the guard.
+    SHARP    path-level drift on RESOLVED claims (n_paths <= 3). The exact field the
+             number was traced to must still print it; a renamed or dropped field
+             fails too.
+    WEAK     object-level existence on AMBIGUOUS claims. It only notices when a value
+             disappears from its object entirely, and a three-decimal number can
+             survive elsewhere in the same file by coincidence. Most headline numbers
+             are in this class, because summary.json legitimately stores the same
+             quantity in a dozen places. Treat a green result here as "not obviously
+             broken", never as "checked".
+
+  A worked simulation of the Amendment 4 re-run (new run id, escalation scores moved)
+  fires the STRONG check on summary.json and the SHARP check on three claims, and the
+  WEAK check catches nothing. That is the honest measure of this file.
 
 The design is lifted from two tests that already earned their place in
 tests/test_figures_paper.py: the run-id assertion (a figure drawn from a superseded run
@@ -284,23 +302,37 @@ MAX_DP = 6
 TRACEABLE_MAX_PATHS = 3
 
 
-def index_numeric_leaves(obj, prefix=""):
-    """Every numeric leaf in a JSON object, as a list of (value, json path)."""
+def show_path(segments):
+    """A segment list rendered for a reader: tiers.daily.G.engine_vs.frozen.skill"""
+    out = ""
+    for seg in segments:
+        out += f"[{seg}]" if isinstance(seg, int) else (f".{seg}" if out else str(seg))
+    return out
+
+
+def index_numeric_leaves(obj):
+    """Every numeric leaf, as (value, path SEGMENTS).
+
+    Segments, not a dotted string: this record contains keys that themselves
+    contain dots (`C1_fixed_0.5`), so a dotted path cannot be parsed back and the
+    path-level drift check would silently fail on exactly the claims it was built
+    to protect. Found by that check failing on its first run.
+    """
     leaves = []
 
-    def walk(node, path):
+    def walk(node, segments):
         if isinstance(node, bool):
             return
         if isinstance(node, (int, float)):
-            leaves.append((float(node), path))
+            leaves.append((float(node), tuple(segments)))
         elif isinstance(node, dict):
             for k, v in node.items():
-                walk(v, f"{path}.{k}" if path else k)
+                walk(v, segments + [k])
         elif isinstance(node, list):
             for i, v in enumerate(node):
-                walk(v, f"{path}[{i}]")
+                walk(v, segments + [i])
 
-    walk(obj, prefix)
+    walk(obj, [])
     return leaves
 
 
@@ -316,6 +348,19 @@ def build_lookup(leaves):
             bucket = lookup[dp].setdefault(round(value, dp), [])
             bucket.append(path)
     return lookup
+
+
+def _specificity(segments):
+    """Rank candidate paths so the most plausible citation is shown first.
+
+    Alphabetical order is useless here: it made -0.600 -- the engine's skill against
+    persistence -- point at big_moves_knew[33].reads[5].engine_p50. A short path with
+    no array indices (G_joint_across_tiers.skill) is far more likely to be the field
+    a sentence is quoting than a deep one inside a per-event array.
+    """
+    depth = len(segments)
+    n_index = sum(1 for seg in segments if isinstance(seg, int))
+    return (n_index, depth, show_path(segments))
 
 
 def resolve(claim, ordered_lookups, max_paths=4):
@@ -338,15 +383,74 @@ def resolve(claim, ordered_lookups, max_paths=4):
     primary, also_in = None, []
     for obj_path, lookup in ordered_lookups:
         table = lookup[dp]
-        paths = sorted({p for t in targets for p in table.get(t, ())})
+        paths = sorted({p for t in targets for p in table.get(t, ())},
+                       key=_specificity)
         if not paths:
             continue
         if primary is None:
-            primary = {"object": obj_path, "paths": paths[:max_paths],
+            primary = {"object": obj_path, "segments": paths[:max_paths],
                        "n_paths": len(paths)}
         else:
             also_in.append({"object": obj_path, "n_paths": len(paths)})
     return primary, also_in
+
+
+def resolve_in(claim, lookup, max_paths=4):
+    """Does this claim's value still exist in ONE named object?
+
+    The drift check must ask this, not "is it anywhere in the record". The
+    propagation file holds 91k leaves and at three decimals contains almost every
+    value in [-1, 1], so "anywhere" is always true and catches nothing. A walk
+    number that resolved in summary.json has to still be in summary.json.
+    """
+    dp = min(claim["decimals"], MAX_DP)
+    targets = {round(claim["value"], dp), round(-claim["value"], dp)}
+    if claim["percent"]:
+        targets |= {round(claim["value"] / 100.0, dp),
+                    round(-claim["value"] / 100.0, dp)}
+    table = lookup[dp]
+    paths = sorted({p for t in targets for p in table.get(t, ())}, key=_specificity)
+    return paths[:max_paths], len(paths)
+
+
+def value_at(obj, segments):
+    """The value at a path, given as segments. None if the path is gone.
+
+    A re-run that renames or drops a field is as much a drift as one that changes
+    a number, so a missing path is a failure, not a skip.
+    """
+    node = obj
+    for seg in segments:
+        if isinstance(seg, int):
+            if not isinstance(node, list) or seg >= len(node):
+                return None
+            node = node[seg]
+        else:
+            if not isinstance(node, dict) or seg not in node:
+                return None
+            node = node[seg]
+    if isinstance(node, bool) or not isinstance(node, (int, float)):
+        return None
+    return node
+
+
+def still_at_path(claim, obj):
+    """True while at least one of a RESOLVED claim's own paths still prints it.
+
+    This is the sharp end of the guard. Object-level existence is a weak net: a
+    three-decimal value can survive somewhere else in the same file by coincidence.
+    Checking the exact field the number was traced to does not have that problem.
+    """
+    dp = min(claim["decimals"], MAX_DP)
+    targets = {round(claim["value"], dp), round(-claim["value"], dp)}
+    if claim["percent"]:
+        targets |= {round(claim["value"] / 100.0, dp),
+                    round(-claim["value"] / 100.0, dp)}
+    for segments in claim.get("path_segments", []):
+        v = value_at(obj, segments)
+        if v is not None and round(float(v), dp) in targets:
+            return True
+    return False
 
 
 def match_derived(claim, objs):
@@ -455,7 +559,9 @@ def build():
             c["why"] = exc["why"]
             if primary:
                 c["coincidental_object"] = primary["object"]
-                c["coincidental_paths"] = primary["paths"]
+                c["coincidental_paths"] = [
+                    f"{primary['object']} :: {show_path(seg)}"
+                    for seg in primary["segments"]]
         elif primary is None:
             der = match_derived(c, objs)
             if der:
@@ -466,7 +572,9 @@ def build():
                 c["status"] = "UNSOURCED"
         else:
             c["object"] = primary["object"]
-            c["paths"] = [f"{primary['object']} :: {p}" for p in primary["paths"]]
+            c["path_segments"] = [list(seg) for seg in primary["segments"]]
+            c["paths"] = [f"{primary['object']} :: {show_path(seg)}"
+                          for seg in primary["segments"]]
             c["n_paths"] = primary["n_paths"]
             if also_in:
                 c["also_in"] = also_in
@@ -511,6 +619,18 @@ def render_markdown(inv):
         "It does **not** prove the prose is citing that path — a number can resolve by",
         "coincidence, and `n_paths` says how many places it occurs. This is an existence",
         "and staleness guard, not a semantic one, and it is not a substitute for reading.",
+        "",
+        "The protection is **graded**, and the grades are not equal:",
+        "",
+        "| grade | what it covers | how it behaves on a re-run |",
+        "|---|---|---|",
+        "| **strong** | the run id itself | fails deterministically, every time |",
+        "| **sharp** | RESOLVED claims | the exact field must still print the number |",
+        "| **weak** | AMBIGUOUS claims | only notices if the value leaves the file entirely |",
+        "",
+        "Most headline numbers are AMBIGUOUS, because `summary.json` legitimately stores",
+        "the same quantity in a dozen places. A green suite means *the run is current*;",
+        "it does not mean every sentence has been checked.",
         "",
         "**UNSOURCED is reported, never fixed.** The guard does not guess at a source for",
         "a number it cannot find, and never invents one to shorten its own list.",

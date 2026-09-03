@@ -4,7 +4,7 @@
  "threshold": 0.6,
  "sheet": "data/audits/ies90_audit_30.csv (regenerated 2026-09-03 with session F hostility; same 30 rows, same order)",
  "started_at": "2026-09-02T23:39:35+00:00",
- "dated": "2026-09-03T01:18:25+00:00",
+ "dated": "2026-09-03T05:05:29+00:00",
  "rows": [
   {
    "event_id": "iran_iraq_war_1980",
@@ -18,11 +18,15 @@
    "joe_note": "",
    "answered_at": "2026-09-03T00:02:23+00:00",
    "hostility": "hostile",
-   "g_scorable": "yes"
+   "g_scorable": "yes",
+   "superseded": true,
+   "superseded_at": "2026-09-03T05:05:27+00:00",
+   "superseded_by": "OUTCOME_MAPPING.md Amendment 4.2 (2026-09-03)",
+   "superseded_reason": "Answered under the pre-Amendment-4.2 display, which printed \"ENGINE: level 3 (war)\" and the rule that produced it on the line above the question. The answer agrees with the engine, and that agreement carries no information: kappa over an anchored coding measures agreement with a number the coder was just shown, not inter-rater reliability. The row is kept as the record that the audit was once run contaminated; it is excluded from kappa and from n_done, and the event is offered again for a blind re-grade."
   }
  ],
  "n_rows": 30,
- "n_done": 1,
+ "n_done": 0,
  "kappa": null,
  "passed": false,
  "confusion_joe_x_engine": {
@@ -48,37 +52,34 @@
    "0": 0,
    "1": 0,
    "2": 0,
-   "3": 1
+   "3": 0
   }
  },
- "deal_agreement": {
-  "n": 1,
-  "agree": 1
- },
+ "deal_agreement": null,
  "kappa_by_hostility": {
   "all_rows": {
    "kappa": null,
-   "n": 1,
+   "n": 0,
    "gate": true,
    "why": "the \u00a77 gate figure: the published runs scored every one of these labels, so the audit must cover what was actually used"
   },
   "hostile_only": {
    "kappa": null,
-   "n": 1,
+   "n": 0,
    "gate": false,
    "why": "diagnostic: rows Amendment 3 still scores (hostility == hostile)"
   },
   "hostile_plus_ambiguous": {
    "kappa": null,
-   "n": 1,
+   "n": 0,
    "gate": false,
    "why": "diagnostic: adds the rows the record leaves contested"
   }
  },
  "sheet_hostility": {
-  "non_hostile": 5,
-  "ambiguous": 3,
-  "hostile": 20,
-  "hostile_unattributed": 2
- }
+  "non_hostile": 7,
+  "ambiguous": 4,
+  "hostile": 19
+ },
+ "display_note": "OUTCOME_MAPPING.md Amendment 4.2 (2026-09-03): the audit display is blind -- the engine's level, DEAL, basis and rule_fired, the per-record level_contributed and record_rule, and the event_id are withheld until after the answer is recorded. Rows answered before this amendment are marked superseded and re-asked. No kappa from before 2026-09-03 is comparable with any kappa after it."
 }

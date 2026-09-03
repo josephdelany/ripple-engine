@@ -252,17 +252,43 @@ def test_the_story_never_loads_empty():
     assert "emptyState(" in fn, "if even the record is unreachable, say why rather than showing a blank"
 
 
-def test_the_story_has_six_bands_in_the_registered_order():
-    """§3.1: six labelled bands down the page, in this order."""
+def test_the_story_is_the_registered_spine_in_order():
+    """§3.1 AS AMENDED by Amendment 2 A2.8 (adopted 2026-09-03): the six numbered bands become a narrative
+    spine — Question, what was knowable, what the record predicted, what happened, where it travelled, what
+    we got wrong. The order is still registered and still enforced; only the form changed.
+
+    This test was rewritten rather than deleted when the spec changed. The old assertion (six `N · Title`
+    headings) was correct against §3.1 as first written and is wrong against §3.1 as amended; a registered
+    spec changes by dated amendment and its test follows the amendment.
+    """
     html = app()
     bands = re.findall(r'data-band="(\d)"', html)
     assert bands == ["1", "2", "3", "4", "5", "6"], bands
-    for n, words in ((1, "The read"), (2, "Is it priced"), (3, "Is the narrative right"),
-                     (4, "What is the tail"), (5, "Where does it travel"), (6, "How much to trust this")):
-        if n == 1:
-            assert "theRead(s)" in html
-        else:
-            assert re.search(r"<h2>" + str(n) + r" · " + words, html), f"band {n} must be '{words}'"
+    assert "theRead(s)" in html                       # band 1 is the question: the record's own words
+    for n, words in ((2, "What was knowable, and was it priced?"),
+                     (3, "What the story claimed"),
+                     (4, "What happened next, in comparable cases"),
+                     (5, "Where it travelled"),
+                     (6, "What we got wrong")):
+        assert f"<h2>{words}</h2>" in html, f"band {n} must be '{words}'"
+
+
+def test_a28_each_spine_section_opens_with_a_registered_sentence():
+    """A2.8: the spine's sections state their finding through the registry, never by hand."""
+    html = app()
+    for sid in ("case.knowable.none", "case.knowable.some", "case.priced", "case.priced.none",
+                "case.claims", "case.tail", "case.tail.none", "case.tail.thin",
+                "case.travel", "case.travel.none"):
+        assert f"'{sid}'" in html, f"{sid} is registered in Appendix A but never rendered"
+
+
+def test_a28_the_desk_does_not_compose_a_finding_by_hand():
+    """theRead() used to assemble the opening line out of two different populations. It may not come back:
+    a Finding-tier string built by concatenating measured values is what the registry exists to replace."""
+    html = app()
+    read = html.split("function theRead(s){", 1)[1].split("\nfunction ", 1)[0]
+    assert "bits.push" not in read, "theRead is composing a sentence by hand again"
+    assert "verbatim(" in read, "band 1's finding must be the record's own words, marked verbatim"
 
 
 def test_uncheckable_claims_collapse_behind_their_count():

@@ -62,7 +62,9 @@ this file wins.*
   and its patches go to Joe under §3 of that document, like E's. Registrations
   are dated and committed before the code that uses them.
 
-- **Session I** (the figures) owns: `docs/figures/**` and `src/figures_paper.py`.
+- **Session I** (the figures, and the citation guard) owns: `docs/figures/**`,
+  `src/figures_paper.py`, `src/citation_guard.py`, `docs/citation_inventory.json`
+  and `docs/CITATION_INVENTORY.md`.
   It draws the paper figures and nothing else. It **computes nothing**: every
   number on every figure is read out of a committed file, each figure carries the
   path it was read from, and `tests/test_figures_paper.py` re-reads the sources and
@@ -78,6 +80,15 @@ this file wins.*
   re-runs the walk: if `summary.json` moves, the figures are redrawn from it, never
   the other way round. Defects it finds while reading another session's tree go to
   `data/handoffs/I_to_<who>_<date>.md`.
+  The **citation guard** is the same discipline applied to the prose: every numeric
+  claim in `README.md`, `docs/BRIEF.md`, `docs/PAPER_DRAFT.md`, `docs/EXPLAIN.md`
+  and `OPEN_ITEMS.md` is inventoried against a declared registry of run objects,
+  and `tests/test_citation_guard.py` goes **red when the run those numbers came
+  from is superseded**. Session I READS those five documents and never edits them:
+  the guard reports what cannot be traced, it never repairs a sentence. UNSOURCED
+  is published and left standing — the guard never guesses at a source, and a
+  registered exception or derived formula is added only when it can be *evaluated*
+  against the record, never inferred to shorten the list.
 - **Session K** (the ongoing-war defect in the G target) owns: `OUTCOME_MAPPING.md`
   **amendments** and `src/state/ies90.py`. Both are carved out of Session A's block by
   Joe's brief of 2026-09-02; A keeps the rest of `src/state/**`,

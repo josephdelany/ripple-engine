@@ -94,15 +94,29 @@ def test_citation_guard_every_in_record_claim_still_resolves(inventory, record):
     inventory was built, so both are evidence that the prose matched the data. If a
     re-run moves the value, it will be found nowhere and this names it.
     """
-    ordered = [(r["path"], r["lookup"]) for r in record]
+    lookups = {r["path"]: r["lookup"] for r in record}
+    objs = {r["path"]: r["obj"] for r in record}
     gone = []
     for c in inventory["claims"]:
         if c["status"] not in ("RESOLVED", "AMBIGUOUS"):
             continue
-        primary, _ = cg.resolve(c, ordered)
-        if primary is None:
-            gone.append(f"  {c['document']}:{c['line']}  {c['raw']}  |  "
-                        f"{c['context'][:90]}")
+        obj = objs.get(c["object"])
+        assert obj is not None, (
+            f"{c['object']} resolved a claim but is no longer a declared object")
+        if c["status"] == "RESOLVED":
+            # Sharp check: the exact field this number was traced to must still
+            # print it. Renaming or dropping the field counts as drift too.
+            ok = cg.still_at_path(c, obj)
+            where = c["paths"][0]
+        else:
+            # AMBIGUOUS has no single field to point at, so the best available
+            # check is that the value is still somewhere in the SAME object --
+            # never in the record as a whole, which irf.json would always satisfy.
+            ok = bool(cg.resolve_in(c, lookups[c["object"]])[0])
+            where = c["object"]
+        if not ok:
+            gone.append(f"  {c['document']}:{c['line']}  {c['raw']}  "
+                        f"({c['status'].lower()}, was {where})  |  {c['context'][:70]}")
     assert not gone, (
         f"{len(gone)} published number(s) are no longer anywhere in the declared "
         f"record. The prose says something the data no longer says:\n"

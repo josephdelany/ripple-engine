@@ -89,15 +89,9 @@ def test_every_sheet_row_carries_session_F_hostility_and_none_are_dropped():
 
 def test_a_non_hostile_row_tells_joe_the_target_would_not_score_it():
     ev = AU.load_sheet()
-    shown = []
-    import builtins
-    real = builtins.print
-    builtins.print = lambda *a, **k: shown.append(" ".join(str(x) for x in a))
-    try:
-        AU.show("abqaiq_arabian_1977", ev["abqaiq_arabian_1977"], 1, 30)
-    finally:
-        builtins.print = real
-    text = "\n".join(shown)
+    # A4.2.2: the display is now built by the pure renderer, so the test reads exactly what Joe reads instead of
+    # monkeypatching print (which no longer intercepts anything: show()'s `echo=print` default binds at def time).
+    text = "\n".join(AU.render_row(ev["abqaiq_arabian_1977"], 1, 30))
     assert "non_hostile" in text and "NOT G-scorable under Amendment 3" in text
     assert AU.NON_HOSTILE_NOTICE in text
     assert "no_independent_outcome" in text and "the published run scored it anyway" in text
@@ -123,14 +117,25 @@ def test_kappa_is_published_three_ways_and_the_gate_reads_all_rows(tmp_path):
 
 
 def test_joes_answered_row_survives_the_regeneration():
-    """iran_iraq_war_1980 was answered before the sheet was regenerated with the hostility field."""
+    """iran_iraq_war_1980 was answered before the sheet was regenerated with the hostility field, and again before
+    the Amendment 4 rebuild redrew it (A4.1 pins answered rows onto the sheet). It is now marked SUPERSEDED under
+    Amendment 4.2 -- it was answered while the screen showed "ENGINE: level 3" -- so it no longer counts as an
+    answer. The point of the test is unchanged and is if anything sharper: his row is never silently dropped."""
     import json
     o = json.loads((ROOT / "data" / "audits" / "outcome_audit.json").read_text())
     row = next((r for r in o["rows"] if r["event_id"] == "iran_iraq_war_1980"), None)
     assert row is not None, "Joe's answered row was lost in the regeneration"
     assert row["joe_level"] == 3 and row["engine_level"] == 3 and row["answered_at"].startswith("2026-09-03")
     assert row["hostility"] == "hostile"                                    # back-filled, his answer untouched
-    assert o["auditor"] == "joe" and o["n_done"] == 1 and o["n_rows"] == 30
-    assert o["sheet_hostility"] == {"non_hostile": 5, "ambiguous": 3, "hostile": 20, "hostile_unattributed": 2}
+    # A4.2.5: kept and marked, never deleted; excluded from kappa and from n_done, and re-asked blind.
+    assert row["superseded"] is True and "Amendment 4.2" in row["superseded_by"]
+    assert "ENGINE: level 3" in row["superseded_reason"] and "anchored" not in row["superseded_reason"].split(".")[0]
+    assert o["auditor"] == "joe" and o["n_done"] == 0 and o["n_rows"] == 30
+    assert o["kappa"] is None and o["passed"] is False
+    # the sheet's hostility mix is read from the LIVE sheet, which the Amendment 4 rebuild redrew
+    import sys as _s; _s.path.insert(0, str(ROOT / "src"))
+    from collections import Counter as _C
+    assert o["sheet_hostility"] == dict(_C(v["event"].get("hostility") or "not_coded" for v in AU.load_sheet().values()))
+    assert sum(o["sheet_hostility"].values()) == 30
     ids = [r["event_id"] for r in __import__("csv").DictReader(open(ROOT / "data" / "audits" / "ies90_audit_30.csv", encoding="utf-8")) if r["row_type"] == "event"]
     assert "iran_iraq_war_1980" in ids and len(ids) == 30                   # still on the sheet he is working through

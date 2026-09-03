@@ -1,13 +1,21 @@
 """audit_ies90.py -- Joe's audit recorder for the IES-90 label audit (PATH Step 4 gate; Brief A-5).
 
-Walks data/audits/ies90_audit_30.csv event by event in the terminal: the event, its dyad/location set, the engine's
-level / basis / rule_fired, and every source record that produced the level with the URL of that record's page.
+Walks data/audits/ies90_audit_30.csv event by event in the terminal: the event, its dyad/location set, and every
+source record with its fields, its dates and the URL of that record's page.
+
+OUTCOME_MAPPING.md Amendment 4.2 (2026-09-03) -- THE DISPLAY IS BLIND. The engine's level, DEAL, basis and
+rule_fired, the per-record level_contributed and record_rule, and the event_id are NOT shown before the prompt.
+kappa is an inter-rater statistic; a coder shown the engine's answer one line above the question is not an
+independent rater, and the number stops meaning what the section 7 gate reads it as. The record is shown; the
+mapping is the thing under test. `--reveal` prints the engine's answer AFTER a row is recorded, and is off by
+default because thirty reveals train the rater over a session (A4.2.4).
 Asks Joe for HIS level (0/1/2/3), the DEAL flag, and a note; writes data/audits/outcome_audit.json after every
 answer (resumable). The code never fills a row: a blank answer records nothing. kappa is Cohen's unweighted kappa
 over the four levels between Joe and the engine on the answered rows (outcomes.cohen_kappa, the Step 4 code);
 `passed` is true only when every row is answered and kappa >= 0.6 (WALK_FORWARD_PROTOCOL.md §1 / §7).
 
-Run:  python3 src/audit_ies90.py            # resume where Joe left off
+Run:  python3 src/audit_ies90.py            # resume where Joe left off (blind)
+      python3 src/audit_ies90.py --reveal   # blind while answering; show the engine's answer after each row
       python3 src/audit_ies90.py --status   # progress only, no questions
 """
 import csv
@@ -78,9 +86,12 @@ def load_out(path=OUT):
 
 
 def kappa(rows, keep=None):
-    """Cohen's kappa between Joe and the engine over the answered rows. `keep` filters on the row's hostility."""
+    """Cohen's kappa between Joe and the engine over the answered rows. `keep` filters on the row's hostility.
+    A4.2.5: a SUPERSEDED row -- answered under the pre-Amendment-4.2 display, which showed the engine's level
+    before asking -- is not an independent coding and never enters kappa or n_done."""
     import outcomes as O
-    sel = [r for r in rows if str(r.get("joe_level")) in LEVELS and (keep is None or r.get("hostility") in keep)]
+    sel = [r for r in rows if not r.get("superseded") and str(r.get("joe_level")) in LEVELS
+           and (keep is None or r.get("hostility") in keep)]
     k, n, conf = O.cohen_kappa([str(r["joe_level"]) for r in sel], [str(r["engine_level"]) for r in sel], labels=LEVELS)
     return k, n, conf
 
@@ -107,32 +118,78 @@ def finalize(out, n_rows, sheet_hostility=None):
     out["passed"] = bool(n_rows and n == n_rows and k is not None and k >= THRESHOLD)
     out["dated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out["deal_agreement"] = None
-    pairs = [(r["joe_deal"], r["engine_deal"]) for r in out["rows"] if r.get("joe_deal") in (0, 1) and r.get("engine_deal") in (0, 1)]
+    pairs = [(r["joe_deal"], r["engine_deal"]) for r in out["rows"]
+             if not r.get("superseded") and r.get("joe_deal") in (0, 1) and r.get("engine_deal") in (0, 1)]
     if pairs:
         out["deal_agreement"] = {"n": len(pairs), "agree": sum(1 for a, b in pairs if a == b)}
     return out
 
 
-def show(eid, item, i, n):
+# --------------------------------------------------------------------- Amendment 4.2: the blind display
+
+# A4.2.3: every way an engine-ASSIGNED level or a registered rule id can appear inside a source record's text.
+# Source fields (hihost, viol, forout, settlmnt, best, dates, window relations) are deliberately NOT matched.
+_REDACT = [
+    (re.compile(r"\s*->\s*undated-for-W\s*\([^)]*\)"), ""),          # "-> undated-for-W (A4.2, no level)"
+    (re.compile(r"\s*;?\s*B already at level\s*\d+[^;)]*"), ""),
+    (re.compile(r"\s*;?\s*delta_level\s*\d*"), ""),
+    (re.compile(r"\s*->\s*delta_level\s*\d*"), ""),
+    (re.compile(r"onset dated\s*->\s*\d+;?\s*"), "onset dated; "),
+    (re.compile(r"\blevel\s*\d+\s*asserted from coverage"), "no record in W"),
+    (re.compile(r"\s*\(no level\)"), ""),
+    (re.compile(r"\s*->\s*level\s*\d+"), ""),
+    (re.compile(r"\blevel\s*\d+\b"), "level"),
+    (re.compile(r"\b(?:MIDI|WAR|ICB|MID|GED|NONE|UNCOVERED|UNDATED)\.[A-Za-z_]+(?:\.[A-Za-z0-9_]+)?"), ""),
+    (re.compile(r"\bUNCOVERED\b"), ""),
+]
+
+
+def redact(text):
+    """A4.2.3: strip any statement of an engine-assigned level or any registered rule id; leave the record alone."""
+    t = text or ""
+    for pat, sub in _REDACT:
+        t = pat.sub(sub, t)
+    return re.sub(r"\s{2,}", " ", t).replace("( ", "(").replace(" )", ")").replace(" ;", ";").strip(" ;")
+
+
+def render_row(item, i, n):
+    """A4.2.2: EXACTLY what Joe sees before he is asked for his level, as a list of lines.
+    Pure -- no printing, no state -- so tests/test_audit_blind.py can assert on it. Nothing engine-derived
+    may appear here: not the level, not the DEAL, not the basis, not a rule id, not the event_id."""
     e = item["event"]
-    print("=" * 78)
-    print(f"[{i}/{n}] {eid}   {e['event_date']} ({e['date_precision']})   class {e['class']}")
     host = e.get("hostility") or "not_coded"
-    print(f"  {e['title']}")
-    print(f"  source: {e['source_url']}")
-    print(f"  HOSTILITY (session F, data/spine/CLASS_AUDIT.md): {host} -- {G_SCORABLE_NOTE.get(host, 'not coded in CLASS_AUDIT.md')}"
-          + (f" [{e['hostility_note']}]" if e.get("hostility_note") else ""))
+    out = ["=" * 78,
+           f"[{i}/{n}]   {e['event_date']} ({e['date_precision']})   class {e['class']}",
+           f"  {e['title']}",
+           f"  source: {e['source_url']}",
+           f"  HOSTILITY (session F, data/spine/CLASS_AUDIT.md): {host} -- {G_SCORABLE_NOTE.get(host, 'not coded in CLASS_AUDIT.md')}"
+           + (f" [{e['hostility_note']}]" if e.get("hostility_note") else "")]
     if host == "non_hostile":
-        print(f"  !! {NON_HOSTILE_NOTICE}")
-    print(f"  countries A: {e['countries_A'] or '-'}   location L: {e['location_L'] or '-'}" + (f"   (littoral: {e['littoral_from']})" if e.get("littoral_from") else ""))
-    print(f"  ENGINE: level {e['ies90_level']} ({e['ies90_level_meaning']})   DEAL {e['ies90_deal'] or '-'}   basis {e['basis']}   rule {e['rule_fired']}")
-    print("  source records:")
-    for s in item["sources"]:
-        print(f"    - [{s['src']}/{s['record_basis']}] {s['record']}  {s['record_dates']}  -> level {s['level_contributed'] or '-'}  rule {s['record_rule'] or '-'}")
-        print(f"        {s['code_and_rule']}")
-        u = record_url(s["src"], s["record"], e["location_L"])
+        out.append(f"  !! {NON_HOSTILE_NOTICE}")
+    out.append(f"  countries A: {e['countries_A'] or '-'}   location L: {e['location_L'] or '-'}"
+               + (f"   (littoral: {e['littoral_from']})" if e.get("littoral_from") else ""))
+    out.append("  source records (the engine's level, its rule and its per-record mapping are withheld -- A4.2):")
+    for s_ in item["sources"]:
+        out.append(f"    - [{s_['src']}/{s_['record_basis']}] {s_['record']}  {s_['record_dates']}")
+        code = redact(s_["code_and_rule"])
+        if code:
+            out.append(f"        {code}")
+        u = record_url(s_["src"], s_["record"], e["location_L"])
         if u:
-            print(f"        open: {u}")
+            out.append(f"        open: {u}")
+    return out
+
+
+def engine_answer_lines(item):
+    """A4.2.4: the reveal. NEVER called before a row is recorded."""
+    e = item["event"]
+    return [f"  [reveal] ENGINE: level {e['ies90_level']} ({e['ies90_level_meaning']})   DEAL {e['ies90_deal'] or '-'}"
+            f"   basis {e['basis']}   rule {e['rule_fired']}"]
+
+
+def show(eid, item, i, n, echo=print):
+    for line in render_row(item, i, n):
+        echo(line)
 
 
 def ask_row(ask):
@@ -154,22 +211,31 @@ def ask_row(ask):
     return {"joe_level": int(lv), "joe_deal": (1 if d.startswith("y") else 0 if d.startswith("n") else None), "joe_note": note}
 
 
-def run(sheet=SHEET, out_path=OUT, ask=input, echo=print):
+def run(sheet=SHEET, out_path=OUT, ask=input, echo=print, reveal=False):
     ev = load_sheet(sheet)
     out = load_out(out_path)
     out["started_at"] = out.get("started_at") or datetime.now(timezone.utc).isoformat(timespec="seconds")
-    done = {r["event_id"] for r in out["rows"]}
+    out["display"] = ("blind: OUTCOME_MAPPING.md Amendment 4.2 -- the engine's level, DEAL, basis, rule_fired, "
+                      "per-record level_contributed/record_rule and the event_id are withheld until after the answer")
+    out["reveal_after_each_row"] = bool(reveal)
+    # A4.2.5: a superseded row is not an answer. It is offered again for a blind re-grade and never enters kappa.
+    done = {r["event_id"] for r in out["rows"] if not r.get("superseded")}
     todo = [e for e in ev if e not in done]
     from collections import Counter as _C
     sheet_host = dict(_C(v["event"].get("hostility") or "not_coded" for v in ev.values()))
+    n_sup = sum(1 for r in out["rows"] if r.get("superseded"))
     echo(f"IES-90 label audit -- {len(done)} of {len(ev)} rows answered; {len(todo)} to go. Auditor: joe. Ctrl-C or q to stop; answers are saved as you go.")
+    echo("  BLIND (OUTCOME_MAPPING Amendment 4.2): the engine's level, DEAL, basis and rule are NOT shown before you answer."
+         + ("  --reveal is ON: they print after each row is recorded." if reveal else ""))
+    if n_sup:
+        echo(f"  {n_sup} earlier row(s) are superseded (answered under the old, unblinded display) and are offered again for a blind re-grade.")
     echo(f"  hostility on this sheet (session F): {sheet_host}. Rows the registered target no longer scores are kept and marked, not dropped:")
     echo(f"  the published runs scored them, so the audit covers what was used. kappa is reported all-rows (the §7 gate), hostile-only, and hostile+ambiguous.")
     n = len(ev)
     for i, eid in enumerate(list(ev), 1):
         if eid in done:
             continue
-        show(eid, ev[eid], i, n)
+        show(eid, ev[eid], i, n, echo)
         ans = ask_row(ask)
         if ans == "quit":
             break
@@ -182,6 +248,9 @@ def run(sheet=SHEET, out_path=OUT, ask=input, echo=print):
                             "engine_deal": (int(float(e["ies90_deal"])) if e["ies90_deal"] not in ("", None) else None),
                             "engine_basis": e["basis"], "rule_fired": e["rule_fired"], **ans,
                             "answered_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+        if reveal:                                     # A4.2.4: only ever AFTER the answer is recorded
+            for line in engine_answer_lines(ev[eid]):
+                echo(line)
         finalize(out, n, sheet_host)
         Path(out_path).write_text(json.dumps(out, indent=1))
     finalize(out, n, sheet_host)
@@ -208,4 +277,5 @@ if __name__ == "__main__":
     if "--status" in sys.argv:
         print(json.dumps(status(), indent=1))
     else:
-        run()
+        # A4.2.4: --reveal is an explicit, knowing opt-in. Blind is the default and the registered procedure.
+        run(reveal="--reveal" in sys.argv)

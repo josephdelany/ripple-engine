@@ -33,8 +33,9 @@ from source fields; you derive them from the same records.
 your event's pair, it sets the level. A record matched only through one country or a
 location — every UCDP GED row, every COW intra-state war — is shown to you but does
 not set the level, because it answers "was there violence in that country", not "did
-these two escalate". The screen labels each record `dyadic` or `location`, and prints
-`basis` for the engine's own choice.
+these two escalate". The screen labels each record `dyadic` or `location`. **It does
+not tell you what the engine concluded** — applying this rule is part of what you are
+being asked to do. See the next section.
 
 ## The DEAL flag
 
@@ -52,6 +53,32 @@ days, by agreement. Two coded fields carry it, and both are printed for you:
 So: if a printed ICB record shows `forout 1` or `forout 2`, or a MID record shows
 `settlmnt 1`, and its dates fall in W → **y**. If the covering records show otherwise
 → **n**. If no ICB or MID record covers W at all → **blank**, which records "unknown".
+
+## What you are not shown, and why
+
+`OUTCOME_MAPPING.md` **Amendment 4.2** (2026-09-03). Until 3 September this screen printed
+the engine's answer — `ENGINE: level 3 (war) … rule WAR.inter.pair` — on the line above the
+question, and every source record carried `-> level 3` and its rule id. That made κ
+meaningless: it measured agreement with a number you had just read, not independent
+agreement with the mapping. Every row answered before that date is marked `superseded` in
+`data/audits/outcome_audit.json`, with the reason, and is asked again.
+
+**Withheld until after you answer:** the engine's level, its DEAL, its `basis`, its
+`rule_fired`, each record's `level_contributed` and rule id, and the `event_id` — which
+frequently names the answer (`iran_iraq_war_1980`).
+
+**Still shown, because it is the record and you need it:** the date and its precision, the
+class, the title, the source link, session F's hostility coding, the countries and the
+location set, and for every source record its source, its `dyadic`/`location` label, its
+identifier, its dates, its page URL, and its coded fields — `hihost 5`, `viol 4`,
+`forout 2`, `settlmnt 1`, `best 258 in W` — and where the record sits relative to the
+window. Nothing you need in order to answer has been taken away; only the answer has.
+
+If you want the engine's call as you go, `python3 src/audit_ies90.py --reveal` prints it
+**after** each row is recorded. It is off by default on purpose: thirty reveals teach you
+the engine's mapping over a session, so the last rows are graded by a better-trained reader
+than the first, and that drift is invisible inside a single κ. `--status` shows everything
+once you are done.
 
 ## When to answer blank
 
