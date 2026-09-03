@@ -185,3 +185,40 @@ It does not admit an event. It does not write to `events`, `data/events.csv`,
 the tier split, the horizon, or any registered threshold — a gap that is closed by
 lowering the bar is INV-6 territory and is not on the table. It does not open
 `pre1987_candidates_outcomes.csv`.
+
+---
+
+## Amendment 1 (2026-09-02) — intra-state war in a producer state counts as severity
+*Dated and appended before the screen is run; §3.1 above stays as the record of what was
+registered first.*
+
+§3.1's severity test **V** listed MID `hihost ∈ {4,5}`, ICB `viol ≥ 3` and COW inter-state
+war, and so excluded COW **intra-state** war records. That is wrong for this corpus and the
+corpus itself proves it: `iran_oilworkers_strike_1978` and `iran_revolution_1979` — two of the
+fourteen monthly events already admitted — are exactly an intra-state upheaval inside a
+producer state, and both carry IES-90 level 3. A screen that would not have surfaced the
+Iranian revolution is not a screen for oil-relevant strength.
+
+**V is amended to:** MID `hihost = 5`, or MID `hihost = 4`, or ICB `viol ≥ 3`, or a COW
+inter-state war record, **or a COW intra-state war record in which a state party's registered
+role includes `producer`**. Nothing else in §3.1 changes; the tier definitions are unchanged
+and still read off `P`, `T`, `V`, `M`. The count of episodes that enter Tier A or B **only**
+through this amendment is published in `G1_GAP.md` so the amendment's effect is visible and
+not merged into the totals.
+
+---
+
+## Amendment 2 (2026-09-02) — scenario 5, the P-alive window
+*Dated and appended. Registered **after** diagnostic D2 was computed and **before** scenario 5
+was computed, and the order is stated rather than hidden: D2 is a registered diagnostic and
+scenario 5 is the feasibility count its result forces. Scenario 5 is a count of candidate
+episodes and of scored reads under the same registered predicate; no score, no threshold and
+no verdict depends on it.*
+
+D2 asks whether the monthly tier's P target is a traded price before 1973. Scenario 5 asks
+the consequence: **if admission is confined to the window in which the P target moves at all,
+is a 30-read monthly tier reachable, and at what cost?** Computed exactly as scenarios 2–4,
+with the candidate pool restricted to episodes dated on or after 1973-01-01, and reported
+beside the unrestricted numbers, never in place of them. The pre-1973 episode counts stay
+published: a pre-1973 event that cannot be scored on P can still be scored on G, and the two
+are reported separately so the choice is Joe's and not the code's.
