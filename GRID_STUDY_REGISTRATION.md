@@ -389,3 +389,54 @@ Established by reading the files, before any arithmetic:
 - Targets and spans as listed in §2.6; the six exist and are loaded.
 - Conflict sources and spans as listed in §2.5, with the Dyadic MID row-count discrepancy stated.
 - `state_panel` 352,295 rows, `observations` 678,280 rows, `situation_state` 11,089 rows, 772 series.
+
+---
+
+## Amendment 1 to Part III (2026-09-03) — the block set, corrected before the code that fits it
+*Session B. Registered before `src/engine/grid/price_walk.py` existed. §3.4 fixed the parameter count at
+six and required a dated amendment to change it; this is that amendment, and it **removes** parameters
+rather than adding them, so §2.9's floor is met more easily, not less. Re-checked below regardless.*
+
+**The defect.** §3.4 named five block weights — physical, market, **actors**, **dyads**, system. Two of
+those blocks have no fields on a price grid: `actors` and `dyads` are situation fields that exist only for a
+coded corpus event (`similarity.SR_MAP`), and a grid date is not an event. Registering weights for blocks
+that carry nothing would have produced two free parameters fitted to noise.
+
+**The corrected block set**, from the thirteen market fields that do exist, grouped by mechanism and fixed
+here before any fit, with each field's measured coverage on the 476 month-end dates beside it:
+
+| block | fields (coverage of 476 month-ends) |
+|---|---|
+| **physical** | `inv_sigma` (476), `diesel_crack` (476), `brent_wti_spread_z` (460) |
+| **market** | `brent_vol20` (471), `vix_pct` (429), `cot_pct` (231), `ovx_pct` (220) |
+| **macro** | `curve_2s10s` (476), `real_rate` (272), `usd_z` (237), `credit_stress` (215) |
+| **geopolitical** | `gpr` (476), `conflict_intensity_pct` (441) |
+
+**Parameter count: five named — four block weights on the simplex (three free) plus one metric scale.**
+§2.9's floor re-checked as required: 5 × 20 = **100** effective units needed against **989.5** available in
+each inner training set. The condition holds.
+
+**The candidate set, registered before it is searched.** The fit selects from a finite registered grid, in
+the project's idiom (§5's menu), not by unconstrained optimisation: block weights on the simplex in steps of
+**0.25** (35 vectors) × metric scale τ ∈ **{0.25, 0.5, 1, 2, 4}** = **175 candidates**. The frozen
+comparator (§3.3.4) is the equal-weight vector (0.25, 0.25, 0.25, 0.25) at τ = 1.
+
+**The rest of the design, fixed here because the code follows immediately:**
+- **Distance.** Standardised on the grid, expanding and point-in-time: the mean and sd of a field come from
+  grid dates **strictly before t**, and both endpoints of a comparison are standardised on **t's** stats so
+  they share a scale. Per block, the mean squared difference over the fields known at **both** dates; a
+  block with no commonly-known field is dropped for that pair and its weight redistributed over the rest,
+  with the drop counted.
+- **Retrieval.** k = 12 nearest eligible grid dates; atom weights ∝ exp(−d/τ) within the k.
+- **Eligibility and burn-in.** An analog u is eligible for a read at t with horizon h only if u + h ≤ t in
+  trading days — the analog's own outcome must have closed by t. A read is scored only from the first grid
+  date with **≥ 60** closed prior grid dates; earlier reads are issued and marked `no_adequate_precedent`.
+- **The inner-fold criterion, stated exactly.** Candidate c's weights at outer read t are selected by the
+  cumulative registered CRPS of c's own reads at grid dates u whose outcome closed by t. Because each such
+  read was itself formed from analogs closed by u, every quantity entering the selection is knowable at t.
+  This is expanding-origin nested CV, not k-fold, which is the form §2 already registers for this project.
+- **Baselines on the grid.** Grid-climatology (all closed prior returns, uniform — §1.3), no-change (a point
+  mass at zero return), random analogs (k drawn from the eligible pool at the registered per-date seed), and
+  the frozen equal-weight engine (§3.3.4).
+- **Determinism.** The registered seeds of Amendment I; every read carries a content hash and the run a
+  content digest.
