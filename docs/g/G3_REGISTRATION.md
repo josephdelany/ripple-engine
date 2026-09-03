@@ -234,3 +234,111 @@ It does not write to `events` or `situation_state`; it does not change Amendment
 session A's to change; it does not change `read.py`'s `KNOWABLE_FIELDS` or any threshold; it
 does not admit any event; it does not re-score any run; and it makes no claim that a field it
 dates is *correct* — only that a dated document establishes when it could have been known.
+
+---
+
+## Amendment 1 (2026-09-03) — two defects in §3, found by running it; and one false exclusion left standing
+
+*Dated and appended, never edited. The rule of §3 was run, the audit table of §6 was read
+row by row against the dossiers, and three things came out of it. Two are defects in the
+mechanism and are corrected here **before** the corrected code is written (charter §2 rule
+4). The third is a judgement the rule got wrong in the conservative direction, and it is
+**left standing**, for the reason in A1.3. The first run's numbers are superseded by the
+re-run; both are published in `SITUATION_VINTAGE.md` so the effect of this amendment is
+visible and not merely asserted.*
+
+### A1.1 The `c.` token in (e.1) matches abbreviations, not only "circa"
+
+(e.1) lists `c.` among the tokens that make a `Doc. date` cell unparseable. It was written
+for "c. 2022 (retrospective)" — circa. As a bare substring it also matches `U.S.` and `D.C.`,
+and it therefore rejected
+
+    carter_doctrine_1980  S1  "January 23, 1980, House Chamber, U.S. Capitol, Washington, D.C."
+
+which is a fully dated primary document. Corrected: the token is `c.` **immediately followed
+by a year** — the regular expression `\bc\.\s*(?:1[89]|20)\d{2}\b` — which is what "circa"
+means and what the clause was written to catch. Every cell in the tree was re-checked against
+the old token: it fired twice, once correctly (`thai_baht_float_1997` S4, "c. 2022") and once
+wrongly (above). **Direction and size of the change, stated: this recovers one value**,
+`carter_doctrine_1980` / `actor`, and no other. It is a parser correcting itself to its own
+stated meaning, not a threshold moved to gain a number.
+
+### A1.2 (e.2 i) assumed one bullet per entity_id; four dossiers carry two
+
+`bullet_for()` returned the **first** bullet whose leading backticked token matched. Four
+dossiers give an entity two bullets, one per role, because they flag a role duplication in
+the record they are documenting:
+
+    iran_oilworkers_strike_1978 · iran_revolution_1979 · shah_leaves_iran_1979
+    opec_price_collapse_1986
+
+In each, the `target` field was matched against the **`actor`** bullet and then rejected for
+having no `target` role word — the right answer reached by the wrong route, which makes the
+audit table's reason wrong. Corrected:
+
+- where a role word is required ((e.2 ii), the `actor` and `target` fields), the bullet is
+  the one whose first 160 characters carry the required role word; if none does, the first
+  bullet is used and the rejection is reported against it, as now;
+- where no role word is required ((e.3) `tempo`, (e.4) `asset_role`), **every** bullet for
+  that entity must satisfy (e.2 iii) and (e.2 iv), and the entity's date is the **maximum**
+  over those bullets of each bullet's own earliest cited document date. Taking the maximum,
+  and rejecting if any one bullet is negated, is the non-cherry-picking direction: a second
+  bullet can only make the field later or reject it, never earlier.
+
+### A1.3 One false exclusion, published and left standing
+
+(e.5)'s phrase `not named` rejected
+
+    embargo_lifted_1974 · actor · country.saudi_arabia
+    "— actor — Saudi Arabia is the lead intermediary pressing for the lift throughout [S2]
+     and [S3], though not named as a signatory in the retrieved text of [S1] itself."
+
+The bullet is a *positive* attribution sourced to two documents, qualified as to a third.
+The negation list read the qualification as a rejection. **This is left as a rejection and
+is not corrected.** The reason is the one §6 already states: a phrase list tuned after
+seeing which rows it excluded is no longer a registered rule, and a rule loosened to gain a
+value is the failure mode this project exists to avoid (charter §2, INV-6 in spirit). The
+error costs coverage, which is the safe direction. The row is published in
+`SITUATION_VINTAGE.md` §4 under this clause so Joe can admit it by hand if he judges the
+bullet supports the date; the machine will not admit it for him.
+
+The same reading applies to `bridgeton_mine_strike_1987` / `chokepoint.hormuz`, caught by
+the token `gap`: there the bullet's substance — that the mine strike happened near Farsi
+Island and *not* at the Strait of Hormuz — does dispute the coding, so the rejection is
+right on the merits and the token that caught it is coincidental. Both rows are in the
+audit table with the bullet verbatim, which is the only way either can be checked.
+
+### A1.4 What does not change
+
+Nothing in §3's dates, §4's `conflict_scope` correction (e.8), the clamp (e.6), the
+direction of the bound (e.7), the negation list's membership, or §5's outputs. The
+before/after table is re-run under A1.1 and A1.2 and both runs are published.
+
+---
+
+## Amendment 2 (2026-09-03) — the precedence diagnostic. Registered AFTER the numbers, gates nothing.
+
+*This amendment is written **after** the run of Amendment 1 was read, and it says so. It adds a
+DIAGNOSTIC in the standing of `WALK_FORWARD_PROTOCOL.md` Amendment K: published beside the
+registered number, published whichever way it comes out, and **it cannot move the registered
+number or any verdict.** (e.0) is unchanged and remains the rule.*
+
+**What it answers.** (e.0) makes rule (e) replace rule (a) in both directions, so three values
+that rule (a) kept are now dropped: a document date can be later than a date in a URL path.
+There is a defensible alternative reading — that `knowable_at` is the **earliest** date any
+retrieved receipt establishes, so the two rules should be combined by `min`, not by precedence.
+That reading was not registered, and it is not adopted here, because a rule chosen after its
+effect on the count is known is not a registered rule. It is *measured* instead:
+
+> **`diagnostic_min_of_a_and_e`**: for every value, `min(rule (a) or (c) date, rule (e) date)`,
+> with the clamp (e.6) still applied. Published in `SITUATION_VINTAGE.json` as its own block
+> and as a labelled line in §1 of `SITUATION_VINTAGE.md`, never folded into the headline.
+
+**Why it is worth a number.** The three values it recovers are `iran_eo12959_embargo_1995`
+(the Federal Register cell reads "Signed May 6, 1995; published May 9, 1995", and (e.1) takes
+the later date within a cell) and both fields of `korea_imf_bailout_1997` (whose dossier's
+earliest document is a Federal Reserve statement of 16 December 1997, three and a half weeks
+after the event). In each the event's own `source_url` carries a date on the day. Whether that
+URL date is a real publication date or a content-management path is exactly what rule (a)
+cannot tell, and is why (e.0) preferred the transcribed document. The diagnostic prices that
+preference; it does not overturn it.
