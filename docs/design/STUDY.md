@@ -33,6 +33,7 @@ The design question changed because the results changed. These are the results, 
 | big Brent moves with **no identified event** | **15 of 43 (34.9%)**, Wilson [0.224, 0.498] | `data/big_moves/brent.json` |
 | ledger: record vs narrative | 19 of 36 vs 17 of 36; disagree on 34; record right on 18 of 34, Wilson [0.367, 0.685]; McNemar exact *p* = 0.864 | `data/ledger/resolutions.jsonl` |
 | feed today (2026-07-28) | 2 material, 0 in line, 12 noise | `data/feed.json` |
+| no-adequate-precedent state | fires for **2 of 187** geopolitical events (`yom_kippur_war_1973`, `iran_oilworkers_strike_1978`); 23 more fall back to the parent class as `thin` | `src/escalation.py`, read at each event's own date |
 | series gone dark | 40 of 772 last reported before 2025-09 | `data/oil.db` |
 | — non-randomly | Iran's five JODI series all end 2018-07 (US secondary sanctions reimposed); UAE + Qatar end 2018-12; Russian crude stocks 2009; Kazakh 2014 | same |
 

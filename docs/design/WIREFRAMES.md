@@ -303,6 +303,26 @@ records. This reads correctly at n=1, where a scoreboard reads as failure.
  ▶ 14 uncheckable claims — logged, not scored                                        ░collapsed
 ```
 
+### The same screen, no adequate precedent — `yom_kippur_war_1973`, read at 1973-10-06
+
+The first event in the corpus. Nothing precedes it, so the retrieval returns nothing — not because
+the search failed but because point-in-time honesty means there is nothing behind this date.
+
+```
+ ░ knowable 1973-10-06 · conflict escalation · the first event in the corpus
+ ▓ Nothing in the record precedes this event, so the engine has no reference class.
+ ▒ 0 analogs. Best similarity 0.000 against a retrieval threshold of 0.400.
+ ▒ The pool is every geopolitical event knowable before 1973-10-06, and it is empty.
+ ▨ Is it priced?         — no fan: a comparable set needs at least one comparable event.
+ ▨ What is the tail?     — no adequate precedent. This is the state, not a failure of it.
+ ▨ Where does it travel? — class-level pass-through only; this event contributes to it,
+ ▨                         and is not conditioned on it.
+ ░ escalation.py RETRIEVE_MIN 0.400 · COND_SIM 0.500 · COND_MIN_N 8
+ ▒ The second and only other case is iran_oilworkers_strike_1978, which fails differently:
+ ▒ prior events exist, and the closest scores 0.377 — just under the registered threshold.
+ ░ Measured over all 187 geopolitical events read at their own date, 2026-09-03.
+```
+
 ---
 
 ## 6. What each ugly state looks like, collected
@@ -311,7 +331,7 @@ The four states that must never look like a bug, and the exact words:
 
 | state | where it is real today | rendering |
 |---|---|---|
-| **no adequate precedent** | a registered state (`branches.no_adequate_precedent`); **false** for Abqaiq, which has 23 analogs — I did not verify which corpus events set it true, so no example is quoted | Finding-tier sentence naming *why* none can be computed; never an empty panel |
+| **no adequate precedent** | fires for **2 of 187** geopolitical events read at their own date: `yom_kippur_war_1973` (max similarity 0.000, nothing precedes it) and `iran_oilworkers_strike_1978` (0.377 against a 0.400 threshold). A further **23** fall back to the parent class as `thin`. False for Abqaiq, which has 23 analogs | Finding-tier sentence naming *why* none can be computed; never an empty panel |
 | **insufficient (n=…)** | 55 of 371 propagation cells; 10 of 12 ledger source rows; `transit_hormuz` n=14 | hatch, never colour; caption `insufficient (n=14): below the registered minimum of 15 events` |
 | **a null hop** | 301 of 371 cells; all 4 crude cells for infrastructure_attack | grey bar, zero rule drawn, caption *"The interval crosses zero: no effect distinguishable from none at this sample size."* |
 | **uncheckable / never resolves** | 14 uncheckable in the recent window; 12 hypothetical claims | collapsed behind a count with the reason, per Metaculus annulment |
