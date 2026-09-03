@@ -9,6 +9,8 @@ coding agents as architect and reviewer. Every number in this repo is one hop
 from its receipt; every threshold was registered before it was computed; every
 result is published as computed, nulls included.
 
+**One page:** `docs/BRIEF.md` — the question, the data, three numbers, the finding.
+**The full paper:** `docs/PAPER_DRAFT.md`.
 **New here?** `INDEX.md` is the map — what to read in what order, which files are
 the frozen registered record, and which are superseded and why.
 
@@ -30,8 +32,8 @@ the frozen registered record, and which are superseded and why.
   published runs used the *before* corpus; every result is conditional on it.
   Also: a monthly price spine back to 1946, 598 series and
   467k observations, and ~8,000 measured price-transmission edges across crude,
-  products, gas, LNG and fertilizer. A world-state panel (280k rows, 17 open
-  academic and government datasets — COW, ATOP, ICB, UCDP, Polity, V-Dem, SIPRI,
+  products, gas, LNG and fertilizer. A world-state panel (280k rows, 27 academic and
+  government sources — COW, ATOP, ICB, UCDP, Polity, V-Dem, SIPRI,
   GPR, EIA, Energy Institute, Kilian, UNGA ideal points, WDI, Archigos) joined to
   every event with the **vintage rule**: the engine at date *t* sees only what was
   knowable at *t*.

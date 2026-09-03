@@ -28,7 +28,7 @@ changes, zero label changes; `data/gates/negative_control_spine_2026-09-03.md`).
 Analysts read a geopolitical shock by analogy: *this looks like 1990, or 2019, or
 2022*. We ask whether that reading, made explicit and disciplined, has forecasting
 value. We build a corpus of 313 dated geopolitical and policy shocks (1973–2026), a
-world-state panel drawn from seventeen open academic and government datasets and
+world-state panel drawn from 27 academic and government sources and
 joined to each event under a vintage rule (the engine at date *t* sees only what was
 knowable at *t*), and a state-conditioned analog engine that reads each event as a
 frequency distribution over independently coded escalation outcomes (IES-90:
@@ -215,7 +215,7 @@ variables, coverage and licence in `WORLD_STATE_SOURCES.md`: ICB v16, COW NMC v7
 COW MID 5, COW War, ATOP 5.1, UCDP 26.1, CSP Polity5 / Coups / MEPV, V-Dem v16,
 SIPRI, GPR and GPRH, EIA surplus capacity and NYMEX curves, Energy Institute
 Statistical Review, Kilian's index of global real economic activity, UNGA ideal
-points (Voeten), WDI, Archigos. Seventeen loaders populate 34 of 70 registered
+points (Voeten), WDI, Archigos. Twenty-seven loaders populate 49 of 70 registered
 fields (`data/state/status.json`); the remainder are listed as gaps with reasons.
 **Vintage rule:** the engine at date *t* sees only rows whose vintage is ≤ *t*.
 A registered limitation (protocol §1) is that the per-event situation fields
