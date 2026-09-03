@@ -143,3 +143,49 @@ def test_the_desk_stays_one_file_with_no_dependency_and_no_cdn():
     # every fetch the page makes is same-origin and under /api/
     for url in re.findall(r"api\(\s*[`'\"]([^`'\"]+)", html):
         assert url.startswith("/api/"), f"{url} is not a same-origin API path"
+
+
+# --- §2 the absence language, as source rules (the DOM behaviour is in tests/test_app_render.py) --------------
+
+def test_the_absence_language_exists_as_one_shared_helper_set():
+    """§2 says the language is registered "so it is used identically everywhere" — so it is one set of functions,
+    not a habit each screen repeats. The governing pattern is the forest plot: one zero rule, one shared domain."""
+    html = app()
+    for fn in ("verdictOf", "caption", "domainOf", "interval", "forest", "wilson", "emptyState", "verbatim"):
+        assert re.search(r"function\s+" + fn + r"\s*\(", html), f"{fn}() must be the one implementation"
+
+
+def test_only_three_verdict_states_plus_insufficient():
+    """§2: three states only. Amber and green carry the verdict, never the sign."""
+    html = app()
+    states = set(re.findall(r"\.iv-([a-z]+)", html))
+    assert states == {"crosses", "worse", "better", "insufficient", "hatch"}, states
+    assert re.search(r"\.iv-crosses[^{]*\{[^}]*var\(--t3\)", html), "crosses-zero must be neutral grey"
+    assert re.search(r"\.iv-worse[^{]*\{[^}]*var\(--hot\)", html), "engine worse must be amber"
+    assert re.search(r"\.iv-better[^{]*\{[^}]*var\(--cool\)", html), "engine better must be green"
+
+
+def test_insufficient_is_hatched_and_never_coloured():
+    """§2: insufficient is not null. It is hatched, never coloured, and labelled with its n."""
+    html = app()
+    assert ".iv-insufficient .span{stroke:none}" in html
+    assert 'pattern id="hatch"' in html and ".iv-hatch{fill:url(#hatch)}" in html
+
+
+def test_the_interval_is_a_span_and_never_a_bar_grown_from_zero():
+    """A bar anchored at a baseline makes readers judge points inside it as likelier than points outside
+    (within-the-bar bias), so the mark spans the interval and the estimate is a tick on it."""
+    html = app()
+    fn = html[html.index("function interval("):html.index("function forest(")]
+    assert 'class="span"' in fn and 'class="tick"' in fn
+    assert "<rect" not in fn.replace('<rect class="iv-hatch"', ""), "the only rect is the insufficient hatch"
+
+
+def test_the_interval_component_always_draws_the_zero_rule():
+    """§2: any chart of an effect draws a zero rule at full contrast, labelled. No exceptions.
+    The learning curve gains its own labelled rule in step 6; this covers the shared component."""
+    html = app()
+    fn = html[html.index("function interval("):html.index("function forest(")]
+    assert 'class="zero"' in fn, "interval() must draw the zero rule"
+    assert fn.index('class="zero"') < fn.index('class="span"'), "the zero rule is drawn under the interval, not over it"
+    assert ".iv .zero{stroke:var(--t2)" in html, "the zero rule is drawn at full contrast, not dimmed"

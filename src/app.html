@@ -75,6 +75,41 @@ details summary{cursor:pointer;color:var(--t2);padding:10px 0}
 iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 .search{display:flex;gap:6px;margin:8px 0}.search input{flex:1;background:var(--s1);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit}
 .hit{padding:6px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}.hit:hover{background:var(--s1)}
+
+/* ============================================================================================================
+   DESIGN.md §2 — THE ABSENCE LANGUAGE. Registered once, used identically everywhere.
+   The governing pattern is the forest plot: one vertical line of no effect, one row per comparison, the estimate
+   as a tick and the interval as a span, all on a SHARED domain. An interval crossing the line is this project's
+   commonest state and must look composed, not broken.
+   The span is the interval; it never grows from zero (a bar anchored at a baseline makes readers judge points
+   inside it as likelier than points outside).
+   ============================================================================================================ */
+.forest{--fx:180px}                                   /* width of the plot column */
+.forest table{width:100%;border-collapse:collapse}
+.forest th{font-size:11px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;text-align:left;padding:0 10px 6px 0;border:0}
+.forest td{padding:5px 10px 5px 0;border:0;vertical-align:middle;font-size:13.5px}
+.forest .lab{color:var(--t2)}
+.forest .est{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--t);white-space:nowrap}
+.forest .n{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--t3);font-size:12px}
+.forest .plot{width:var(--fx)}
+.iv{display:block}
+.iv .zero{stroke:var(--t2);stroke-width:1}            /* §2: the zero rule, always drawn, at full contrast */
+.iv .span{stroke-width:3;stroke-linecap:butt}
+.iv .tick{stroke-width:2}
+.iv-crosses .span,.iv-crosses .tick{stroke:var(--t3)}                      /* the composed, ordinary state */
+.iv-worse   .span,.iv-worse   .tick{stroke:var(--hot)}                     /* excludes zero, engine worse */
+.iv-better  .span,.iv-better  .tick{stroke:var(--cool)}                    /* excludes zero, engine better */
+.iv-insufficient .span{stroke:none}
+.iv-hatch{fill:url(#hatch)}                                                /* insufficient: hatched, never coloured */
+.cap{font-size:12px;color:var(--t2);margin:2px 0 0;max-width:62ch}
+.cap-ins{color:var(--t3)}
+.domain{font-size:11px;color:var(--t3);font-family:var(--mono);margin:6px 0 0}
+.empty{font-size:13px;color:var(--t2);border-left:2px solid var(--line2);padding:6px 0 6px 10px;margin:4px 0}
+.empty b{color:var(--t);font-weight:500}
+/* §1 the three tiers. Nothing on any screen sits outside them. */
+.t-find{font-size:24px;line-height:1.25;font-weight:500;color:var(--t);letter-spacing:-.2px;margin:0 0 6px}
+.t-ev{font-size:13.5px;color:var(--t2)}
+.t-prov{font-size:11px;color:var(--t3);font-weight:400}
 </style>
 </head>
 <body>
@@ -352,6 +387,100 @@ function engineSection(e){ if(!e) return '';
   </div>`;}
 
 /* ---------------- WALK ---------------- */
+/* ============================================================================================================
+   DESIGN.md §2 — the absence language, as one helper set. Every screen consumes these; nothing rolls its own.
+   ============================================================================================================ */
+const HATCH_DEFS = '<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="none"/><line x1="0" y1="0" x2="0" y2="5" stroke="var(--t3)" stroke-width="1.6"/></pattern></defs>';
+
+/* §2: three states only, plus insufficient. Never inferred from the sign of the estimate. */
+function verdictOf(est, ci, n, minN){
+  if(n!=null && minN!=null && n < minN) return 'insufficient';
+  if(est==null || !ci || ci.length!==2 || ci[0]==null || ci[1]==null) return 'insufficient';
+  const lo=Math.min(ci[0],ci[1]), hi=Math.max(ci[0],ci[1]);
+  if(lo<=0 && hi>=0) return 'crosses';
+  return hi<0 ? 'worse' : 'better';          /* skill: below zero is the engine doing worse than the reference */
+}
+
+/* §2: every null gets a caption in plain words, not a symbol. One function so the language is identical everywhere. */
+function caption(state, n){
+  const N = (n==null?'':' (n='+n+')');
+  if(state==='crosses') return 'The interval crosses zero: no effect distinguishable from none at this sample size'+N+'.';
+  if(state==='worse')   return 'The 95% interval lies entirely below zero'+N+': the engine did worse than this reference.';
+  if(state==='better')  return 'The 95% interval lies entirely above zero'+N+': the engine did better than this reference.';
+  return 'insufficient'+(n==null?'':' (n='+n+')')+': too little data to place an interval.';
+}
+
+/* A shared domain for a whole table, symmetric about zero so the zero rule sits in one place down every row.
+   Rows in the insufficient state are EXCLUDED: they are hatched rather than plotted, so letting a thin row's wild
+   values set the scale would compress every readable row for no gain. */
+function domainOf(rows){
+  let m=0;
+  for(const r of rows){
+    if(r.state==='insufficient') continue;
+    for(const v of [r.est, r.ci&&r.ci[0], r.ci&&r.ci[1]]) if(v!=null && isFinite(v)) m=Math.max(m, Math.abs(v));
+  }
+  m = m>0 ? m*1.08 : 1;
+  return [-m, m];
+}
+
+/* One forest row: zero rule, interval as a span, estimate as a tick. Never a bar growing from zero. */
+function interval(est, ci, dom, state, w, h){
+  w = w||180; h = h||18;
+  const [lo,hi] = dom, x = v => (v-lo)/(hi-lo)*w, z = x(0);
+  let s = `<svg class="iv ${'iv-'+state}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img">${HATCH_DEFS}`;
+  s += `<line class="zero" x1="${z.toFixed(1)}" y1="1" x2="${z.toFixed(1)}" y2="${h-1}"/>`;
+  if(state==='insufficient'){
+    s += `<rect class="iv-hatch" x="2" y="${(h/2-4).toFixed(1)}" width="${w-4}" height="8"/>`;
+  }else if(ci && ci.length===2 && ci[0]!=null){
+    const a=x(Math.min(ci[0],ci[1])), b=x(Math.max(ci[0],ci[1]));
+    s += `<line class="span" x1="${a.toFixed(1)}" y1="${(h/2).toFixed(1)}" x2="${b.toFixed(1)}" y2="${(h/2).toFixed(1)}"/>`;
+    if(est!=null) s += `<line class="tick" x1="${x(est).toFixed(1)}" y1="${(h/2-5).toFixed(1)}" x2="${x(est).toFixed(1)}" y2="${(h/2+5).toFixed(1)}"/>`;
+  }
+  return s + '</svg>';
+}
+
+/* A whole forest table: shared domain, printed once, so rows are comparable. §2 + Cleveland & McGill. */
+function forest(rows, opts){
+  opts = opts||{};
+  const minN = opts.minN==null ? null : opts.minN;
+  rows = rows.map(r => Object.assign({}, r, {state: r.state || verdictOf(r.est, r.ci, r.n, minN)}));
+  const dom = opts.domain || domainOf(rows);
+  const head = `<tr><th>${esc(opts.labelHead||'vs')}</th><th>${esc(opts.estHead||'estimate')}</th><th>n</th><th class="plot"></th></tr>`;
+  const body = rows.map(r=>{
+    const st = r.state || verdictOf(r.est, r.ci, r.n, minN);
+    const src = r.src ? ` data-src="${esc(r.src)}"` : '';
+    return `<tr data-state="${st}"><td class="lab">${esc(r.label)}</td>`
+      + `<td class="est"${src}>${r.est==null?'—':sk(r.est)}${r.ci&&r.ci[0]!=null?` <span class="t-prov">[${num(r.ci[0],3)}, ${num(r.ci[1],3)}]</span>`:''}</td>`
+      + `<td class="n">${r.n==null?'—':r.n}</td>`
+      + `<td class="plot">${interval(r.est, r.ci, dom, st)}</td></tr>`;
+  }).join('');
+  const caps = rows.map(r=>{
+    const st = r.state || verdictOf(r.est, r.ci, r.n, minN);
+    return `<p class="cap${st==='insufficient'?' cap-ins':''}" data-state="${st}">${esc(r.label)}: ${esc(caption(st, r.n))}</p>`;
+  }).join('');
+  return `<div class="forest"><table>${head}${body}</table>`
+    + `<p class="domain">scale ${num(dom[0],2)} to ${num(dom[1],2)} · zero rule drawn on every row</p>${caps}</div>`;
+}
+
+/* Wilson score interval for a proportion: k of n has an interval, so §1 says it must be shown with one. */
+function wilson(k, n, z){
+  if(!n) return null;
+  z = z||1.959963985;
+  const p=k/n, d=1+z*z/n, c=p+z*z/(2*n), s=z*Math.sqrt(p*(1-p)/n + z*z/(4*n*n));
+  return [(c-s)/d, (c+s)/d];
+}
+
+/* §6: no empty state that looks like a bug. Every empty region says why it is empty and when it will fill. */
+function emptyState(why, when){
+  return `<p class="empty"><b>${esc(why)}</b>${when?' '+esc(when):''}</p>`;
+}
+
+/* Amendment 1 A1.2: verbatim quoted material is marked, so the vocabulary inventory can find it and the desk's own
+   copy stays bound by §6. Everything the record said passes through here. */
+function verbatim(text, src){
+  return `<span data-verbatim${src?` data-src="${esc(src)}"`:''}>${esc(text)}</span>`;
+}
+
 function sk(v){return v==null?'—':(v>0?'+':'')+(+v).toFixed(3);}
 function ci(c){return c&&c.length===2?`[${(+c[0]).toFixed(3)}, ${(+c[1]).toFixed(3)}]`:'—';}
 function pv(p){return p==null?'—':(+p<0.001?'<0.001':(+p).toFixed(3));}
