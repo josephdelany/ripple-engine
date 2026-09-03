@@ -172,6 +172,41 @@ flag rather than a finding about fertilizer. The physical study also found the r
 dark where it matters: Iran stops reporting production in **2018-07**, the month secondary
 sanctions were reimposed.
 
+## The result that actually answers the market question
+
+The engine's failure has a specific cause, and it is not "history doesn't rhyme." A registered
+kill-test isolated it. Take the **44 days that are both a corpus OPEC event and a Känzig (2021)
+OPEC announcement day** — the same days, four regressors, differing *only* in what they say about
+those days:
+
+| regressor on Brent, h = 5 | β | band |
+|---|---|---|
+| the **0/1 event indicator** | −1.572 | [−5.423, +2.279] — **covers zero** |
+| a **continuous measure** of the same events | **+2.230** | [+0.809, +3.651] — **excludes zero** |
+| both together | indicator collapses to −0.483 | magnitude holds at +2.208 |
+| our own hand-coded `severity` ordinal | −0.996 | covers zero |
+
+**Event *occurrence* is not the quantity that moves the oil market. The market's revision of
+belief is.** The indicator carries nothing the continuous measure does not already have, and it
+collapses the moment the continuous measure is in the regression.
+
+That is a result about the **instrument**, and it applies to any system built on dated event
+dummies — including commercial geopolitical-risk products, which are built exactly this way. It
+also explains the engine: it was asked to forecast from indicators of event occurrence.
+
+Three findings sit beside it, all pointing the same way:
+
+- **The dummy's one win on a physical quantity is a timing artefact.** Production dips 0.549% in
+  the month *before* an OPEC announcement and rebounds 0.674% in it — the coefficient is the
+  rebound leg of a V. The dummy marks *when OPEC meets*, not *what OPEC decided*.
+- **The tightening classes may not be shocks at all.** Sanctions, chokepoint disruption and
+  conflict escalation correlate **r = −0.023** with the identified oil-supply shock over 614
+  months. Near-orthogonal.
+- **A reroutable closure is a freight event, not a price event.** Red Sea 2024 cut Bab el-Mandeb
+  flow **−56.6%** with Cape reroutes **+101.8%** and Brent **−4.9%**. Hormuz 2026 cut flow
+  **−92.3%** with only **+20.7%** reroute — and Brent rose **+48.5%**. There is no reroute out of
+  the Gulf. A price-only study sees the first and concludes nothing happened.
+
 ## What this does not claim
 
 Not that historical analogy fails. The narrower, defensible claim: **this implementation,

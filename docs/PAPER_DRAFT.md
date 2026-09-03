@@ -163,6 +163,19 @@ index (tanker transits happen at weekends; the trading-day index discards them),
 monthly hops ran with no placebo, so they could not have transmitted by construction. **§12,
 §12.1.**
 
+**6. The clearest positive result is about the instrument, not the engine.** A registered
+kill-test on the **44 days that are both a corpus OPEC event and a Känzig announcement day** —
+same days, four regressors, differing only in what they say about those days — finds that the 0/1
+event indicator's band **covers zero** (−1.572) while a continuous measure of the same events
+**excludes** it (+2.230), and the indicator collapses to −0.483 once the continuous measure is
+present. Our own severity ordinal fails too. On the physical side the dummy's one positive band is
+a **timing artefact**: production dips 0.549% the month before an announcement and rebounds 0.674%
+in it, so the coefficient is the rebound leg of a V — the dummy marks *when OPEC meets*, not *what
+OPEC decided*. **Event occurrence is not the quantity that moves the oil market; belief revision
+is.** That applies to any system built on dated event dummies, including commercial ones. And the
+tightening classes correlate **r = −0.023** with the identified supply shock over 614 months, so
+whether those events are shocks at all is the prior question. **§12.3.**
+
 **What the paper does not claim.** Not that historical analogy fails. The defensible claim is
 narrower: *this implementation, under a strict point-in-time information constraint, did not
 outperform simple baselines for escalation* — on a corpus whose historical arm is thin and
@@ -940,6 +953,64 @@ measured block length.
 Two related claims in the same file, `copper_growth` and `hy_credit_stress`, are marked validated
 by the same gate and share the defect. They are reported, not re-tested; we make no claim about
 either.
+
+### 12.3 The event dummy is the wrong instrument — and this is the project's clearest positive result
+
+Every result above rests on the same regressor: a 0/1 indicator that a coded event occurred on a
+date. That is also what the geopolitical-risk literature and most commercial risk products are
+built from. A registered kill-test (`MAGNITUDE_REGISTRATION.md` §3, sealed at `8cb9d3d`, with its
+threshold quantified and committed *before* the estimator ran) asked whether the indicator carries
+anything a continuous measure of the same events does not.
+
+**The design isolates the regressor from the sample.** It uses the **44 days that are both a
+corpus `opec_decision` event and a Känzig (2021) OPEC announcement day** — 35 entering each
+estimation. Four specifications differ *only* in what the regressor says about those same days.
+(An earlier version of this comparison, in a superseded draft, ran Känzig on 128 announcement days
+against the dummy on 47 corpus events, and so confounded the regressor with the sample. This does
+not.)
+
+**Price (Brent, h = 5):**
+
+| regressor | β | band |
+|---|---|---|
+| **A** the event dummy | −1.572 | [−5.423, +2.279] — **covers zero** |
+| **B** the magnitude (futures-price surprise) | **+2.230** | [+0.809, +3.651] — **excludes zero** |
+| **C** both together | dummy **−0.483** (covers zero) · magnitude +2.208 (excludes zero) | |
+| **D** our own `severity` ordinal | −0.996 | [−2.638, +0.646] — covers zero |
+
+**On the same days, the indicator carries nothing the continuous surprise does not already
+have, and it collapses the moment the surprise is in the regression.** Our own hand-coded severity
+ordinal fails too, which closes the cheapest available substitute.
+
+**The honest limit on this.** It does not show that magnitude is the right instrument in general:
+the evidence is entirely on the price side, and a futures-price surprise predicting prices is close
+to circular by construction. What it shows is the negative half, which is not circular — **event
+*occurrence* is not the informative quantity.** The market's revision of belief is.
+
+**Quantity (JODI production, h = 0) — and here the dummy's one win is an artefact.** The indicator
+gets the only band excluding zero (+0.881 [+0.151, +1.611]) and it clears the registered
+state-matched placebo at the 99.2nd percentile, so the disqualifying evidence had to be found
+elsewhere: it exists at h = 0 and no other horizon; production falls **−0.549% in the month before**
+an announcement and rebounds **+0.674% in the announcement month** against an all-month mean of
++0.065%; and at monthly resolution the announcement and the production month are the same month, so
+the ordering within it is not identified. **The coefficient is the rebound leg of a V centred on the
+announcement — the dummy marks *when OPEC meets*, a timing feature correlated with production
+conditions, not *what OPEC decided*.** The magnitude shows none of this pattern. It is the quantity
+analogue of §4's `anticipated` flag.
+
+**And the binding question this exposes.** Stage 0 ran on `opec_decision`, the class *least*
+exposed to the objection, correlating r = 0.431 with |Känzig|. **The tightening classes — sanctions,
+chokepoint disruption, conflict escalation — correlate r = −0.023 with the identified oil-supply
+shock over 614 months.** Near-orthogonal. A pass on OPEC decisions therefore does not license
+treating those events as supply shocks at all, and the prior question is not *how heavily to weight
+a shock* but *whether these events are shocks*. That is registered as the next study and it is
+where we would now start.
+
+**Why this reframes the paper.** §1.1's three conditions explain why a state-conditioned analog
+forecaster could not work here. This explains something narrower and more practical: **the
+instrument itself was wrong.** The engine was asked to forecast from indicators of event
+occurrence, and event occurrence is measurably not the quantity that moves the oil market — a
+result that applies to any system, ours or commercial, built on dated event dummies.
 
 ## 13. Limitations
 

@@ -93,6 +93,25 @@ not survive being re-estimated on the calendar record (tanker transits happen at
 the trading-day index discards them), and the monthly hops ran with no placebo, so they could
 not have transmitted by construction.
 
+### The result that answers the market question
+
+A registered kill-test on the **44 days that are both a corpus OPEC event and a Känzig
+announcement day** — same days, four regressors, differing only in what they say about those days.
+The **0/1 event indicator's band covers zero** (−1.572); a **continuous measure of the same events
+excludes zero** (+2.230); and the indicator **collapses to −0.483** once the continuous measure is
+present. Our own severity ordinal fails too.
+
+**Event occurrence is not the quantity that moves oil. Belief revision is.** That is a finding
+about the instrument, and it applies to anything built on dated event dummies — including
+commercial risk products. It is also why the engine failed: it forecast from occurrence.
+
+Beside it: the dummy's one positive band on physical production is a **timing artefact** (output
+dips 0.549% the month before an OPEC meeting and rebounds 0.674% in it — the dummy marks *when
+OPEC meets*, not *what it decided*); the tightening classes correlate **r = −0.023** with the
+identified supply shock over 614 months; and a **reroutable closure is a freight event, not a
+price event** — Red Sea 2024 cut flow 56.6% while Brent *fell* 4.9%, against Hormuz 2026 cutting
+flow 92.3% with Brent up 48.5%.
+
 ### What this is not
 
 Not a claim that historical analogy fails. It is the narrower, defensible claim: **this
