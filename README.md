@@ -5,7 +5,8 @@ geopolitical shocks and oil markets?**
 
 Joseph Delany · Colby College · 2026
 **[One page](docs/BRIEF.md)** · **[Full paper](docs/PAPER_DRAFT.md)** ·
-**[Propagation study](docs/RIPPLE_FINDINGS.md)** · **[What to read first](INDEX.md)** · **[Open items](OPEN_ITEMS.md)**
+**[Propagation study](docs/RIPPLE_FINDINGS.md)** · **[What to read first](INDEX.md)** ·
+**[Adversarial audit of this project](docs/ADVERSARIAL_AUDIT.md)** · **[Open items](OPEN_ITEMS.md)**
 
 ---
 
@@ -23,6 +24,14 @@ reasoning from hindsight, and it will look skilful for the wrong reason.
 
 So: does formalised historical analogy contain out-of-sample predictive information about
 geopolitical escalation and oil prices, once hindsight is removed?
+
+**Three conditions have to hold for it to.** The state you compute similarity on must be
+*knowable at the forecast date*, not merely recorded for it. The pool of prior cases must be
+*dense* enough that "most similar precedent" means something. And the target must carry
+information *beyond its own recent history*. Failure of any one is enough to sink the method, and
+none of them is about whether history rhymes — the first is a claim about archives, the second
+about sample size, the third about the outcome variable. **All three fail on this record, and the
+paper measures by how much** ([§1.1](docs/PAPER_DRAFT.md), §13.1).
 
 ## The data
 

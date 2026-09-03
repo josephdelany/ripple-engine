@@ -38,6 +38,36 @@
 > useful for the market consequences of a shock than for predicting the shock's own
 > political trajectory.
 
+## If they ask: "why would you expect this to work at all?"
+
+*This is the question that separates a research project from a science-fair project. Have it cold.*
+
+> I wrote down what would have to be true before I tested anything. A forecaster that reasons from
+> similar historical cases needs three conditions to hold, and each one is measurable.
+>
+> First, **observability** — the information you compute similarity on has to have been available
+> on the day, not just recorded for that day. Second, **density** — you need enough prior cases
+> near the current situation that "the most similar precedent" means something; with twelve cases
+> the nearest one is only near by comparison. Third, **non-degeneracy** — the thing you're
+> predicting has to carry information beyond its own recent history, because if it doesn't, a rule
+> that just says "expect more of the same" captures most of what's capturable.
+>
+> Failing any one of those is enough to sink the method, and none of them is about whether history
+> rhymes. The first is a claim about archives, the second about sample size, the third about the
+> outcome variable.
+>
+> All three failed on my record, and I can say by how much. 262 of my 313 events had no state
+> information provably available on the day. My median pool of comparable prior cases was eight in
+> the late eighties against thirty-six in the 2020s, and every case in the historical tier sat
+> below the minimum I'd registered. And persistence beat my engine, with 73% of the change target
+> being exactly zero.
+>
+> So the conclusion isn't "analogy doesn't work." It's that the conditions under which it *could*
+> work are checkable in advance, and on the historical record available for this domain they
+> aren't met — for three specific, quantified reasons, each suggesting a different repair. That's
+> the useful part: anyone attempting this next can be held to those three conditions before they
+> build, rather than after they've produced a number.
+
 ## If they ask: "so did it work?"
 
 > Not the way I expected. Under the strict point-in-time test it significantly
