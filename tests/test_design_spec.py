@@ -237,3 +237,47 @@ def test_cards_carry_no_border():
     html = app()
     m = re.search(r"\.card\{([^}]*)\}", html)
     assert m and "border:0" in m.group(1), "the card border is the cheapest possible hierarchy; spacing does the work"
+
+
+# --- §3.1 the Story page ------------------------------------------------------------------------------------
+
+def test_the_story_never_loads_empty():
+    """§3.1 [T]: "It must never load empty." On open with no selection it shows the most material story from
+    today's feed; if the feed is empty, the most recent corpus event."""
+    html = app()
+    assert re.search(r"function\s+loadDefaultStory\s*\(", html)
+    assert re.search(r"boot\(\)\s*\{[^}]*loadDefaultStory\(\)", html), "the default story must load at boot"
+    fn = html[html.index("async function loadDefaultStory("):html.index("async function readEvent(")]
+    assert "/api/feed" in fn and "/api/events" in fn, "feed first, then the corpus"
+    assert "emptyState(" in fn, "if even the record is unreachable, say why rather than showing a blank"
+
+
+def test_the_story_has_six_bands_in_the_registered_order():
+    """§3.1: six labelled bands down the page, in this order."""
+    html = app()
+    bands = re.findall(r'data-band="(\d)"', html)
+    assert bands == ["1", "2", "3", "4", "5", "6"], bands
+    for n, words in ((1, "The read"), (2, "Is it priced"), (3, "Is the narrative right"),
+                     (4, "What is the tail"), (5, "Where does it travel"), (6, "How much to trust this")):
+        if n == 1:
+            assert "theRead(s)" in html
+        else:
+            assert re.search(r"<h2>" + str(n) + r" · " + words, html), f"band {n} must be '{words}'"
+
+
+def test_uncheckable_claims_collapse_behind_their_count():
+    """§3.1(3) [T]: "Uncheckable claims are collapsed behind a count, not listed inline." They are logged, not
+    displayed."""
+    html = app()
+    assert re.search(r"un\.length\s*\?\s*`<details><summary>\$\{un\.length\}", html)
+    assert "uncheckable claim${un.length===1?'':'s'}" in html
+
+
+def test_quoted_material_is_marked_so_the_inventory_can_find_it():
+    """Amendment 1 A1.2: the desk's own copy is bound by §6; what a source said is reported as the source said it,
+    inside a data-verbatim node carrying its source."""
+    html = app()
+    assert re.search(r"function\s+verbatim\s*\(", html)
+    assert "data-verbatim" in html
+    assert "verbatim(s.title" in html, "the corpus title is the record's words"
+    assert re.search(r'class="q">\$\{verbatim\(', html), "claim text is the source's words"

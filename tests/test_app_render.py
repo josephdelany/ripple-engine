@@ -1,4 +1,4 @@
-"""Brief A-3: the desk page (src/app.html) renders section 5 from trust.walk_forward as the API returns it.
+"""Brief A-3: the desk page (src/app.html) renders the trust band (DESIGN.md §3.1 band 6) from trust.walk_forward as the API returns it.
 Real story payloads for september_11_attacks_2001 and hormuz_closure_2026 go through renderStory() under jsdom;
 the rendered text must be non-empty, carry the run_id and the two §7 statuses verbatim, and say VALIDATED nowhere.
 jsdom is looked up via NODE_PATH, then tools/node_modules; absent -> skipped with the install line, never faked."""
@@ -32,8 +32,10 @@ w.eval(m[1].replace(BOOT, ''));            // define the page functions without 
 const out = {};
 for (const [id, s] of Object.entries(stories)) {
   w.renderStory(s);
-  const sec = [...w.document.querySelectorAll('#story h2')].find(h => h.textContent.startsWith('5 ·'));
-  out[id] = {text: w.document.querySelector('#story').textContent, section5: sec ? sec.parentElement.textContent : ''};
+  // target the band by its data attribute, not by heading text: the bands were renumbered when the read band
+  // was added (§3.1), and a test that matches on "5 ·" silently follows the wrong band.
+  const sec = w.document.querySelector('#story [data-band="6"]');
+  out[id] = {text: w.document.querySelector('#story').textContent, section5: sec ? sec.textContent : ''};
 }
 process.stdout.write(JSON.stringify(out));
 """
