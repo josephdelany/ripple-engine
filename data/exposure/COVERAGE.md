@@ -4,7 +4,7 @@
 
 > **§5 GATE NOT MET: 5 COMPLETE against a registered minimum of 30.** Stage 1 is therefore reported as **descriptive only and no verdict is issued** — registered in advance, in §5, so it cannot be waived now that the number is known.
 
-**80 events across 7 blocks.**
+**82 events across 7 blocks.**
 
 | block | n | COMPLETE | PARTIAL | EMPTY | INVALID |
 |---|---:|---:|---:|---:|---:|
@@ -14,17 +14,17 @@
 | D | 13 | 1 | 8 | 3 | 1 |
 | E | 13 | 0 | 10 | 3 | 0 |
 | F | 10 | 2 | 8 | 0 | 0 |
-| G_accident | 5 | 0 | 2 | 2 | 1 |
-| **total** | **80** | **5** | **47** | **23** | **5** |
+| G_accident | 7 | 1 | 2 | 4 | 0 |
+| **total** | **82** | **6** | **47** | **25** | **4** |
 
-The §5 gate is counted over **A, B, C, D, E, F** only. G_accident declares `counts_toward_gate: false` (EXPOSURE_REGISTRATION Amendment 1) and that declaration is honoured, not overridden: a block saying its own rows do not count cannot carry the gate over the line. COMPLETE across **all** blocks including the excluded one is **5**, published here so the exclusion is visible rather than silent.
+The §5 gate is counted over **A, B, C, D, E, F** only. G_accident declares `counts_toward_gate: false` (EXPOSURE_REGISTRATION Amendment 1) and that declaration is honoured, not overridden: a block saying its own rows do not count cannot carry the gate over the line. COMPLETE across **all** blocks including the excluded one is **6**, published here so the exclusion is visible rather than silent.
 
 
 ## Hard failures — §2's rule, not a warning
 
 *"Any numeric present without `source_url` / `source_publisher` / `source_date` is a HARD FAILURE." An event with one cannot be COMPLETE whatever else it carries: it is INVALID, because an unsourced magnitude is invisible downstream and that is the failure that produced `severity`.*
 
-**5 event(s):**
+**4 event(s):**
 
 | block | event | failure |
 |---|---|---|
@@ -32,15 +32,13 @@ The §5 gate is counted over **A, B, C, D, E, F** only. G_accident declares `cou
 | B | `nigeria_mend_bonga_2008` | capacity_nameplate_kbd comes from a source dated 2008-06-20, after the event (2008-06-19), but retrospective is not true -- §2 requires the flag be carried |
 | B | `kirkuk_ceyhan_isis_2014` | days_to_full_restore is 'ongoing' with no ongoing_stamp_date -- §2 permits 'ongoing' only with a stamp date |
 | D | `colonial_pipeline_shutdown_2021` | capacity_nameplate_kbd comes from a source dated 2021-05-11, after the event (2021-05-07), but retrospective is not true -- §2 requires the flag be carried |
-| G_accident | `pes_philadelphia_fire_2019` | capacity_nameplate_kbd comes from a source dated 2019-07-03, after the event (2019-06-21), but retrospective is not true -- §2 requires the flag be carried |
 
 ## Declared status vs computed status
 
-**4 disagreement(s).** The computed value governs.
+**3 disagreement(s).** The computed value governs.
 
 | block | event | declared | computed |
 |---|---|---|---|
 | B | `saudi_abqaiq_foiled_2006` | COMPLETE | **INVALID** |
 | B | `nigeria_mend_bonga_2008` | PARTIAL | **INVALID** |
 | B | `kirkuk_ceyhan_isis_2014` | COMPLETE | **INVALID** |
-| G_accident | `pes_philadelphia_fire_2019` | COMPLETE | **INVALID** |

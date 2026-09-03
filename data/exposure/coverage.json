@@ -2,7 +2,7 @@
  "coverage": {
   "registration": "EXPOSURE_REGISTRATION.md §2 (2026-09-03, commit 22da52f)",
   "generated_by": "src/exposure_schema.py",
-  "n_events": 80,
+  "n_events": 82,
   "by_block": {
    "A": {
     "n": 13,
@@ -47,18 +47,18 @@
     "INVALID": 0
    },
    "G_accident": {
-    "n": 5,
-    "COMPLETE": 0,
+    "n": 7,
+    "COMPLETE": 1,
     "PARTIAL": 2,
-    "EMPTY": 2,
-    "INVALID": 1
+    "EMPTY": 4,
+    "INVALID": 0
    }
   },
   "total": {
-   "COMPLETE": 5,
+   "COMPLETE": 6,
    "PARTIAL": 47,
-   "EMPTY": 23,
-   "INVALID": 5
+   "EMPTY": 25,
+   "INVALID": 4
   },
   "gate": {
    "registered_minimum_complete": 30,
@@ -74,12 +74,12 @@
    "blocks_excluded_by_own_declaration": [
     "G_accident"
    ],
-   "n_complete_including_excluded_blocks": 5,
+   "n_complete_including_excluded_blocks": 6,
    "gate_met": false,
    "consequence_if_not_met": "§5: Stage 1 is reported as DESCRIPTIVE ONLY and no verdict is issued -- registered in advance so it cannot be waived later"
   },
   "hard_failures": {
-   "n": 5,
+   "n": 4,
    "rows": [
     {
      "block": "B",
@@ -108,18 +108,11 @@
      "hard_failures": [
       "capacity_nameplate_kbd comes from a source dated 2021-05-11, after the event (2021-05-07), but retrospective is not true -- §2 requires the flag be carried"
      ]
-    },
-    {
-     "block": "G_accident",
-     "event_id": "pes_philadelphia_fire_2019",
-     "hard_failures": [
-      "capacity_nameplate_kbd comes from a source dated 2019-07-03, after the event (2019-06-21), but retrospective is not true -- §2 requires the flag be carried"
-     ]
     }
    ]
   },
   "declared_vs_computed_disagreements": {
-   "n": 4,
+   "n": 3,
    "rows": [
     {
      "block": "B",
@@ -136,12 +129,6 @@
     {
      "block": "B",
      "event_id": "kirkuk_ceyhan_isis_2014",
-     "declared": "COMPLETE",
-     "computed": "INVALID"
-    },
-    {
-     "block": "G_accident",
-     "event_id": "pes_philadelphia_fire_2019",
      "declared": "COMPLETE",
      "computed": "INVALID"
     }
@@ -1764,11 +1751,9 @@
   "G_accident": [
    {
     "event_id": "pes_philadelphia_fire_2019",
-    "computed_status": "INVALID",
+    "computed_status": "COMPLETE",
     "declared_status": "COMPLETE",
-    "hard_failures": [
-     "capacity_nameplate_kbd comes from a source dated 2019-07-03, after the event (2019-06-21), but retrospective is not true -- §2 requires the flag be carried"
-    ],
+    "hard_failures": [],
     "notes": [
      "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
     ],
@@ -1818,7 +1803,7 @@
     }
    },
    {
-    "event_id": "superior_refinery_fire_2018",
+    "event_id": "superior_refinery_outage",
     "computed_status": "PARTIAL",
     "declared_status": "PARTIAL",
     "hard_failures": [],
@@ -1841,7 +1826,7 @@
     }
    },
    {
-    "event_id": "hurricane_harvey_gulf_2017",
+    "event_id": "hurricane_katrina_2005",
     "computed_status": "EMPTY",
     "declared_status": "EMPTY",
     "hard_failures": [],
@@ -1859,7 +1844,43 @@
     "provenance_kind": {}
    },
    {
-    "event_id": "hurricane_ida_gulf_2021",
+    "event_id": "hurricane_rita_2005",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_harvey_2017",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_ida_2021",
     "computed_status": "EMPTY",
     "declared_status": "EMPTY",
     "hard_failures": [],
