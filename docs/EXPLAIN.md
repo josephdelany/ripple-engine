@@ -80,6 +80,32 @@
 > similarity. The retrieval step, which is the entire idea of the engine, turned out to be
 > interchangeable with the average.
 
+## If they ask: "would more data have fixed it?"
+
+*This is the question every null invites, and it is the one most projects cannot answer.*
+
+> I tested it rather than speculating. I rebuilt the evaluation so the unit of observation was
+> a date rather than an event — 476 month-end dates, six price series, five horizons, about
+> eleven thousand scored forecasts. The important part is that I computed the *effective*
+> sample size rather than quoting the raw count, because overlapping horizons and correlated
+> price series mean fifty times the rows is nowhere near fifty times the evidence. It came to
+> about two thousand effective observations against two hundred and fifty before.
+>
+> At that size, actually fitting the model becomes legitimate instead of overfitting. So I
+> fitted it — the block weights and the similarity scale, by nested cross-validation where
+> every quantity used to choose a parameter had to be knowable at the time. **It didn't beat
+> the constants I'd registered by hand.** The difference was two thousandths of a point with a
+> p-value of 0.64, and the fitted weights never settled — fifteen different selections across
+> four hundred folds. That was a genuine either-way test and it came back saying my registered
+> guesses were already about as good as this design gets.
+>
+> One thing did change, though, and it's the reason I don't describe the project as a flat
+> null. At the small sample the engine couldn't be distinguished from drawing historical
+> analogies *at random*. At the larger one it can — a small effect, but a real one. So the
+> honest verdict isn't "analogy doesn't work." It's that the retrieval step is underpowered and
+> its forecasts are too confident, and I can show both with a calibration diagnostic. Getting
+> to a more precise negative result is what the extra data bought.
+
 ## If they ask: "what would you do next?"
 
 > The binding constraint is sample size — 150 scored reads against about 1,200 needed. I'd

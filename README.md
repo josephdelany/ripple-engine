@@ -186,6 +186,25 @@ from data).
 `PATH.md` is the route. The change-estimand experiment that this section used to
 name as next has been run, and its answer is above.
 
+### Update: the density route has a first answer
+
+The grid ran. 476 month-end dates 1987–2026, six price targets, five horizons, **10,857 scored
+cells** — and an *effective* sample of **1,979** against 249 for the event panel, because
+nominal counts are never reported as effective ones here. Thirteen times the evidence, and
+enough that fitting parameters becomes legitimate rather than overfitting.
+
+**Fitting did not help.** With the block weights and metric scale fitted by nested
+walk-forward cross-validation, the fitted model beats the frozen registered constants by
+**+0.002 CRPS skill, *p* = 0.642** — a registered either-way test that fell on the side of
+*the constants were already at the achievable optimum*. The fitted weights never converge:
+15 distinct selections across 414 reads, the modal one taking 24.9%.
+
+**But one thing changed.** At n = 150 the engine could not separate from randomly drawn
+analogs. At n_eff ≈ 2,000 it does: **+0.010, *p* = 0.010**. The retrieval step is not
+worthless — it is underpowered and its predictive distribution is too sharp, which the PIT
+histogram and a size-corrected score both say directly. That is a more precise verdict than
+the flat null, and it took thirteen times the data to earn it.
+
 The open problem is *n*: 150 scored escalation reads against a measured requirement of
 ~1,200. The registered route was backwards — expand the pre-1987 corpus — and that route is
 now measured shut: six pre-1974 records built to the full sourcing standard buy **zero**
