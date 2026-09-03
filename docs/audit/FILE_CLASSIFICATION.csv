@@ -1185,8 +1185,10 @@ docs/MAGNITUDE_STAGE0.md,archive_planning_narrative
 docs/OIL_FINDINGS.md,archive_planning_narrative
 docs/PAPER.md,maintained_core
 docs/PAPER_DRAFT.md,archive_planning_narrative
+docs/README.md,maintained_core
 docs/README_v1_record.md,archive_planning_narrative
 docs/README_v2_technical.md,archive_planning_narrative
+docs/RESUME.md,maintained_core
 docs/RESUME_AND_APPLICATION.md,archive_planning_narrative
 docs/RIPPLE_FINDINGS.md,archive_planning_narrative
 docs/RIPPLE_PHYSICAL.md,archive_planning_narrative
@@ -1316,7 +1318,7 @@ registrations/RIPPLE_REGISTRATION.md,archive_planning_narrative
 registrations/SPINE_REGISTRATION.md,archive_planning_narrative
 registrations/STRUCTURAL_SURFACE_EXPERIMENT.md,maintained_core
 repro.sh,archive_scientific_code
-requirements.txt,maintained_core
+requirements.txt,archive_scientific_code
 scaffolding/BRIEF_STANDARD.md,archive_planning_narrative
 scaffolding/BUILD_V2.md,archive_planning_narrative
 scaffolding/BUILD_V3.md,archive_planning_narrative
@@ -1402,6 +1404,7 @@ src/engine/__init__.py,required_dependency
 src/engine/abnormal_price.py,archive_scientific_code
 src/engine/amendment_p_run.py,archive_scientific_code
 src/engine/delta_experiment.py,archive_scientific_code
+src/engine/diagnostic_basis.py,archive_scientific_code
 src/engine/diagnostic_hostile.py,archive_scientific_code
 src/engine/grid/__init__.py,archive_scientific_code
 src/engine/grid/power_arithmetic.py,archive_scientific_code
@@ -1497,6 +1500,7 @@ src/promote_alert.py,archive_scientific_code
 src/propagate.py,archive_scientific_code
 src/propagation.py,archive_scientific_code
 src/propagation_graph.py,archive_scientific_code
+src/public_claim_guard.py,maintained_core
 src/question.html,archive_interface_operations
 src/quiet_compare.py,archive_scientific_code
 src/read_backtest.py,archive_scientific_code
@@ -1694,6 +1698,7 @@ tests/test_magnitude_stage0.py,archive_scientific_tests
 tests/test_monthly_tier.py,archive_scientific_tests
 tests/test_orient.py,archive_scientific_tests
 tests/test_propagation.py,archive_scientific_tests
+tests/test_public_claim_guard.py,maintained_core
 tests/test_read.py,archive_scientific_tests
 tests/test_read_exposure.py,archive_scientific_tests
 tests/test_reader.py,archive_scientific_tests

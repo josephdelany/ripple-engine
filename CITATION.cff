@@ -1,38 +1,34 @@
 cff-version: 1.2.0
-message: "If you use this software or its record, please cite it as below."
+message: "If you use this research software or its evidence, please cite it as below."
 type: software
-title: "Ripple Engine: a pre-registered, historically-conditioned engine for reading geopolitical shocks in the oil economy, with a sealed walk-forward test"
+title: "Structural versus surface historical analogy in geopolitical oil events"
 authors:
   - family-names: Delany
     given-names: Joseph
     email: joseph.delany21@gmail.com
     affiliation: "Colby College"
-version: "2.5"
-date-released: "2026-09-02"
+version: "3.0"
+date-released: "2026-09-03"
 repository-code: "https://github.com/josephdelany/ripple-engine"
 license: MIT
 keywords:
-  - oil markets
+  - historical analogy
   - geopolitical risk
-  - analog forecasting
-  - walk-forward validation
-  - pre-registration
+  - oil markets
+  - walk-forward evaluation
   - proper scoring rules
 abstract: >-
-  A corpus of 313 dated geopolitical and policy shocks (1973–2026), a world-state
-  panel from seventeen open datasets joined under a vintage rule, a market-defined
-  census of the largest oil-price moves, a state-conditioned analog engine reading
-  each event as a frequency distribution over independently coded escalation
-  outcomes (IES-90) and 20-day price paths, and a pre-registered walk-forward test
-  with sealed reads, strictly proper scores, four baselines, and data-snooping,
-  placebo, permutation, regime and specification-curve controls. The engine has no
-  skill beyond the base rate on either target (run walk_20260902T182828Z); the
-  null is published as computed.
+  A registered walk-forward experiment compares structural state similarity with
+  event-class matching on identical prior-event support. Across 264 forecast dates,
+  structural weighting improves mean CRPS relative to surface matching, but is not
+  distinguishable from uniform historical pooling at the registered 20-trading-day
+  horizon. The evidence shows that surface-label filtering can discard useful
+  precedents; it does not establish production forecasting skill.
 references:
   - type: report
-    title: "Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy"
+    title: "When historical analogy helps—and when the label hurts"
     authors:
       - family-names: Delany
         given-names: Joseph
     year: 2026
-    notes: "docs/PAPER_DRAFT.md in this repository"
+    notes: "docs/PAPER.md in this repository"

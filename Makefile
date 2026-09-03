@@ -44,7 +44,7 @@ REPRO_DB ?=
 REPRO_FORCE ?= 0
 PY := python3
 
-.PHONY: reproduce reproduce-central test-public
+.PHONY: reproduce reproduce-central test-public verify-submission
 
 # Authoritative public-product reproducer. This target is offline and uses only the committed,
 # transparent input bundle. It must reproduce the three frozen scientific artifacts byte-for-byte.
@@ -54,8 +54,13 @@ reproduce-central:
 # The maintained public-product gate. The historical 1,009-test research suite remains available
 # with `python3 -m pytest -q`, but includes networked loaders and guards for superseded publications.
 test-public:
-	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_public_claim_guard.py
+	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_public_claim_guard.py tests/test_verify_submission.py
 	$(PY) src/public_claim_guard.py
+
+verify-submission: reproduce-central test-public
+	$(PY) src/verify_submission.py
+	$(PY) src/classify_public_product.py
+	git diff --exit-code -- docs/audit/FILE_CLASSIFICATION.csv
 
 reproduce:
 	@set -euo pipefail; \

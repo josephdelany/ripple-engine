@@ -23,7 +23,7 @@ Generated artifacts, repetitive dossiers, tests, interfaces, and planning files 
 
 ## Frozen evidence
 
-`make reproduce-central` was run after the final diagnostics. It reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. The maintained test gate is `make test-public`: 11 tests pass.
+`make reproduce-central` was run after the final diagnostics. It reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. The maintained test gate is `make test-public`: 15 tests pass, including semantic public-claim and link checks.
 
 The complete historical suite was also run at closure: **991 passed, 13 skipped, 1 expected failure, and 5 failed** out of 1,009. None of the five affects the central experiment. One is a networked ICB loader test that attempts a Duke download in an offline environment. Four are guards tied to the superseded README/figure/citation publication system. They remain visible rather than being weakened to create a cosmetically green historical suite.
 

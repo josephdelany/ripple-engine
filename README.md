@@ -20,10 +20,10 @@ For applications and interviews, use only [the verified résumé language](docs/
 
 ## Reproduce the central experiment
 
-Requirements: Python 3.11+ and the packages in `requirements.txt`.
+Requirements: Python 3.11+ and the packages in `requirements-public.txt`.
 
 ```bash
-python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements-public.txt
 make reproduce-central
 make test-public
 ```
@@ -59,3 +59,6 @@ The repository also preserves the six-week research history and superseded analy
 The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare structural and surface analogy on identical support, with point-in-time eligibility and an abnormal-return target.
 
 License: [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
+
+Before submission, run `make verify-submission`. It performs exact reproduction, maintained tests,
+semantic claim checks, local-link validation, and classification-ledger drift detection.
