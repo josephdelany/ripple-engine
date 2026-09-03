@@ -17,6 +17,7 @@ This is professionally consequential without being a claim of production forecas
 Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. See [the registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) for the frozen decision rules.
 
 For applications and interviews, use only [the verified résumé language](docs/RESUME.md).
+The exact release decision and gates are in [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md).
 
 ## Reproduce the central experiment
 
@@ -49,6 +50,7 @@ The demo produces one sealed retrospective read for the 2026 Hormuz closure and 
 - `data/structural_surface/` — inputs, sealed reads, scores, summary, and manifest.
 - `tests/test_structural_surface_*.py` — scientific and reproduction invariants.
 - `docs/audit/` — adversarial audit and claim corrections.
+- `SUBMISSION_STATUS.md` — release scope, verified gates, and excluded local work.
 
 The repository also preserves the six-week research history and superseded analyses. They are not part of the authoritative claim unless the paper cites them. Recovery tag `closure-core-frozen-2026-09-03` identifies the pre-closure frozen core.
 

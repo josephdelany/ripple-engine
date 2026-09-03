@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "audit" / "FILE_CLASSIFICATION.csv"
 
 CORE = {
-    "README.md", "Makefile", "requirements-public.txt", "LICENSE", "CITATION.cff",
+    "README.md", "SUBMISSION_STATUS.md", "Makefile", "requirements-public.txt", "LICENSE", "CITATION.cff",
     "docs/PAPER.md", "docs/RESUME.md", "docs/README.md", "docs/EVENTS_CODEBOOK.md", "docs/DEMO.md",
     "docs/audit/PUBLIC_PRODUCT_CLOSURE.md",
     "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
