@@ -57,10 +57,55 @@ within 60. No amendment covers either, and both constants landed in the same com
 registration, so git cannot show registered-before-computed. Owner **Joe** (ruling: amend
 with the honest history, or re-run under the registered rule), then **B**.
 
-**1.3 The placebo condition is unresolved.** *(finding 1.)* The size-matched reference the
-placebo passes under exists only in an unratified amendment; against climatology it fails.
-Recorded as UNRESOLVED in README and paper §9. Owner **Joe** — ratify prospectively for v3,
-or withdraw. Not resolvable retroactively either way.
+**1.3 The placebo condition is unresolved — and its interval is computed on the wrong unit.**
+*(finding 1; second defect found by B's interval audit, 2026-09-03.)* The size-matched
+reference the placebo passes under exists only in an unratified amendment; against climatology
+it fails. Recorded as UNRESOLVED in README and paper §9.
+
+**The new fact.** `placebo.*` in `summary.json` (`walk.py:1033`) bootstraps **411 pseudo-reads
+as i.i.d.** (`mean_block=1.0, lag=0`). They are not: the 411 rows are **82 source events × 5
+reps**, and the reps are matched on the *same* VIX-percentile decile of the *same* event.
+Correcting to a source-event cluster widens by ≈ √(411/82) ≈ 2.24: `vs_random_analogs` skill
+−0.0473, CI [−0.0828, −0.0082] → ≈ [−0.13, +0.04], **covering zero**, and DM *p* 0.019 → ≈ 0.19.
+**`null_holds` would flip false → true.** `vs_climatology` (*p* = 9e-7) survives any plausible
+widening; `fair_vs_climatology` already covers zero.
+
+**RULED 2026-09-03: fix it, with the direction registered before the computation.** The
+correction runs *in the engine's favour* — it removes a published mark against us, since
+`null_holds: false` is currently evidence that the placebo null fails. That is the direction in
+which a correction deserves the most scrutiny, and B stopped at the audit table rather than
+proceeding to the fix for exactly that reason. A defect is a defect whichever way it cuts, and
+declining to fix errors that favour us would be the same bias as fixing only those that hurt.
+So: register the expected direction, the estimator and the exact re-run **before computing** —
+the Amendment M pattern — then run it and publish as computed. The registration is what makes
+this credible rather than convenient. Owner **B** (register, then re-run), **Cowork** (§9 and
+README).
+
+**1.7 The interval audit, and what it found.** *(B, `docs/INTERVAL_AUDIT_2026-09-03.md`,
+read-only — nothing re-run, nothing fixed.)* Commissioned after B found the defect in its own
+published grid file. **The defect is not widespread: two files carry it, one already
+corrected.** Every other interval is computed on the right unit, because the event-study
+modules de-overlap into clusters before bootstrapping (`propagation_graph`,
+`local_projections`, `cross_chain`, `edge_battery`, `evidentiary_bar`, `frozen_lens`,
+`placebo_vixmatched`, `supply_chain`, `research`) and the walk uses the stationary block
+bootstrap at its own measured block. `ripple_lp.py` is explicitly correct — Newey–West at
+bandwidth *h*, lag-augmented, clustered, BH across the family, which is the textbook treatment
+of the horizon-stacking trap. **All three premises Cowork gave B were wrong, each in the
+engine's favour, and B checked rather than accepted them:** the delta experiment does not stack
+dyads or horizons (150 rows, 150 unique events); the 162-cell specification curve publishes a
+distribution and no interval; and the propagation study's cells are cluster-collapsed with
+BH-FDR gating `status = validated`. Two residual hygiene items, neither touching a published
+conclusion: `brief.py` intervals are not de-overlapped (disclosed in prose, no number attached),
+and `walk.py:_replay` mis-estimates the P-tier block on some spec-curve rows that publish no
+interval. **Verdict: a published erratum is not warranted; one targeted correction is (1.3).**
+
+**1.2 RULED 2026-09-03 — re-run under the registered rule, publish both.** The Big Moves
+clustering constants go back to the registered 60-trading-day, no-merge rule as the primary
+result; the as-computed 90-calendar-day merged version is published beside it; and an amendment
+names the honest history, that both constants landed in the same commit as the registration so
+git cannot demonstrate registered-before-computed. Expect the episode count and every ratio
+built on it to move, including the "15 of 43" that README and BRIEF both carry. Owner **B**
+or **C** (re-run), **Cowork** (the four surfaces).
 
 **1.4 The escalation result is confounded three ways by era.** Skill by era: 1987–99
 +0.009 (n=2, median pool 8), 2000–09 +0.068 (n=10, pool 10), 2010–19 −0.103 (n=51, pool
