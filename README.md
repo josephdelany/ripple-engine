@@ -5,7 +5,7 @@ geopolitical shocks and oil markets?**
 
 Joseph Delany · Colby College · 2026
 **[One page](docs/BRIEF.md)** · **[Full paper](docs/PAPER_DRAFT.md)** ·
-**[Propagation study](docs/RIPPLE_FINDINGS.md)** · **[What to read first](INDEX.md)**
+**[Propagation study](docs/RIPPLE_FINDINGS.md)** · **[What to read first](INDEX.md)** · **[Open items](OPEN_ITEMS.md)**
 
 ---
 
