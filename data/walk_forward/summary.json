@@ -5019,6 +5019,154 @@
       "L- enters the target, the baseline and the analogue anchor at once; an L- coverage error cancels in no-change and does not cancel in the target. The >= 2-source sensitivity is published.",
       "a diagnostic-standing re-anchoring of a SEALED run: no retrieval repeated, no Hedge weight re-fitted; C2's lambda is the only fitted quantity and is fitted walk-forward on closed reads."
      ]
+    },
+    "diagnostic_hostile": {
+     "registered": false,
+     "what": "the daily-tier G comparisons on the G-scorable reads only (hostility in hostile / hostile_unattributed); climatology re-estimated on the reduced pool, random analogs re-drawn from it; engine, frozen and persistence forecasts taken AS SEALED",
+     "amendment": "WALK_FORWARD_PROTOCOL.md Amendment K (2026-09-03); exclusion set OUTCOME_MAPPING.md Amendment 3 A3.3, coded in data/spine/CLASS_AUDIT.md before any count under it",
+     "gates": "nothing -- \u00a73 and \u00a77 are untouched and every verdict is unchanged",
+     "derived_from_run": "walk_20260903T052633Z",
+     "computed_at": "2026-09-03T21:15:44+00:00",
+     "n_published": 100,
+     "n_retained": 79,
+     "n_dropped": 21,
+     "dropped_by_hostility": {
+      "non_hostile": 14,
+      "ambiguous": 7
+     },
+     "retained_by_hostility": {
+      "hostile": 78,
+      "hostile_unattributed": 1
+     },
+     "level0_share_published": {
+      "k": 57,
+      "n": 100,
+      "pct": 57.0
+     },
+     "level0_share_retained": {
+      "k": 37,
+      "n": 79,
+      "pct": 46.8
+     },
+     "climatology_pool": {
+      "mean_size_published": 22.2,
+      "mean_size_reduced": 18.9,
+      "note": "the baseline moves, not only the engine's score -- Amendment K.2"
+     },
+     "dependence": {
+      "cluster_days": 35,
+      "mean_block": 1.46,
+      "hac_lag": 0
+     },
+     "brier": {
+      "climatology": {
+       "n": 79,
+       "engine_mean": 0.7774066945379746,
+       "ref_mean": 0.7225927171886901,
+       "skill": -0.07585736203174465,
+       "ci95": [
+        -0.2013556046908967,
+        0.029758017158378555
+       ],
+       "dm_hln": 1.3407214701904286,
+       "dm_p": 0.1839025937508918,
+       "ref": "climatology"
+      },
+      "frozen": {
+       "n": 79,
+       "engine_mean": 0.7774066945379746,
+       "ref_mean": 0.8002093299265824,
+       "skill": 0.02849583794617827,
+       "ci95": [
+        0.008730877835592756,
+        0.04939849103421356
+       ],
+       "dm_hln": -2.6998411295182367,
+       "dm_p": 0.008503716271867301,
+       "ref": "frozen"
+      },
+      "random_analogs": {
+       "n": 79,
+       "engine_mean": 0.7774066945379746,
+       "ref_mean": 0.7636550274118086,
+       "skill": -0.018007695402429746,
+       "ci95": [
+        -0.13225328079293677,
+        0.0875494296193729
+       ],
+       "dm_hln": 0.3287914951244885,
+       "dm_p": 0.7431944292609121,
+       "ref": "random_analogs"
+      },
+      "persistence": {
+       "n": 79,
+       "engine_mean": 0.7774066945379746,
+       "ref_mean": 0.6579026656030657,
+       "skill": -0.18164393485982577,
+       "ci95": [
+        -0.5947955787836547,
+        0.06269834436301325
+       ],
+       "dm_hln": 1.5096858237829487,
+       "dm_p": 0.13516405433295864,
+       "ref": "persistence"
+      }
+     },
+     "rps": {
+      "climatology": {
+       "n": 79,
+       "engine_mean": 0.6635021290012658,
+       "ref_mean": 0.6561189880064543,
+       "skill": -0.011252747031821775,
+       "ci95": [
+        -0.13780684827018921,
+        0.10148238800066227
+       ],
+       "dm_hln": 0.1807859199445309,
+       "dm_p": 0.8570045327489277,
+       "ref": "climatology"
+      },
+      "frozen": {
+       "n": 79,
+       "engine_mean": 0.6635021290012658,
+       "ref_mean": 0.678126090750633,
+       "skill": 0.02156525452837188,
+       "ci95": [
+        -7.836366888436045e-05,
+        0.042992111313577754
+       ],
+       "dm_hln": -1.9475983621011712,
+       "dm_p": 0.05506149921403947,
+       "ref": "frozen"
+      },
+      "random_analogs": {
+       "n": 79,
+       "engine_mean": 0.6635021290012658,
+       "ref_mean": 0.6907020329228738,
+       "skill": 0.03938008377723312,
+       "ci95": [
+        -0.08458705126555309,
+        0.15003155746485017
+       ],
+       "dm_hln": -0.6471474901915371,
+       "dm_p": 0.5194365298069834,
+       "ref": "random_analogs"
+      },
+      "persistence": {
+       "n": 79,
+       "engine_mean": 0.6635021290012658,
+       "ref_mean": 0.6581816141776017,
+       "skill": -0.008083657624365692,
+       "ci95": [
+        -0.41312418878637575,
+        0.23250932525354642
+       ],
+       "dm_hln": 0.056071045827094775,
+       "dm_p": 0.9554285920289942,
+       "ref": "persistence"
+      }
+     },
+     "limit": "n falls from 100 to 79, so every interval widens; min_tier_n 30 is still met but the measured minimum detectable skill at the published n = 150 was already 0.127. A diagnostic on a SEALED run, not a new run, and not the run the paper reports."
     }
    },
    "P": {
