@@ -275,3 +275,62 @@ in the denominator.
 registered rule refuses to retry under a disguised user-agent) → 2 dropped for no extractable
 publication date → **14 stories read**. Every drop is listed with its reason in
 `data/ledger/backfill_manifest.json`.
+
+## Amendment 8 — 2026-09-03, session H, AFTER the backfill (disclosed, not registered first)
+
+Four things found while writing the tests that H-1..H-4 should have shipped with. All four are
+disclosures or additive fields; none changes a verdict rule, a threshold or a published ratio.
+Recorded here rather than in a commit message so they cannot be lost (charter §4.5).
+
+### (a) `pending` is split into `awaiting_horizon` and `never_resolves` — defect L-2
+`resolve()` skips `modality = hypothetical` permanently, but `scoreboards()["counts"]["pending"]`
+counted those claims as pending anyway, so a surface reading it promised twelve resolutions that are
+never coming. Found by session A while building the Ledger screen
+(`data/handoffs/A_to_H_2026-09-03_pending_count.md`) and independently by session H's own recount;
+answered in `data/handoffs/H_to_A_2026-09-03_pending_split.md`. `counts` now also carries
+`awaiting_horizon` (1), `never_resolves` (12) and `never_resolves_reason`. `pending` (13) is kept
+and is exactly the sum. **The underlying defect L-2 remains open**: §2 says a hypothetical claim
+resolves if its antecedent enters the corpus, and no mechanism does that. Building one is a future
+amendment; naming the 12 honestly is not a substitute for it.
+
+### (b) The blind sheet is only PARTLY blind — the id slugs telegraph some classes
+`data/reader_eval/blind_sheet_30.md` prints the gold's own id beside each headline, and 9 of the 30
+ids contain a token of their own class (`russia_sectoral_sanctions_2014` → `sanctions`; every
+`opec_*` → `opec_decision`). Those rows can be coded without reading the headline, and agreement on
+them is 9/9 against 17/21 on the rest. The published kappa is therefore inflated by construction.
+Not corrected — re-drawing the sheet after seeing the answers is exactly what the registered seed
+exists to prevent (Amendment 3). Instead `audit_reader.kappa_report()` now computes and publishes
+`blindness_caveat` in `data/reader_eval/kappa_coders.json`, giving the honest lower bound on the 21
+rows that do not telegraph:
+
+| pair | headline kappa (n=30) | excluding telegraphed (n=21) |
+|---|---|---|
+| A vs H | 0.8307 | **0.7383** |
+| reader vs A | 0.7945 | **0.6948** |
+| reader vs H | 0.8370 | **0.7586** |
+
+All three stay above the 0.6 bar, so no conclusion changes; the number to quote is the right-hand
+column. This does not touch the "UNAUDITED" label, which only Joe's own coding can retire.
+
+### (c) A stored claim's `checkable` flag is NOT reproducible from `ledger.type_claim()`
+On the LLM path, `reader.read_story()` takes the model's proposed `kind`/`checkable` and passes it
+through `reader.cage_claim()`, which validates against the source text and can only downgrade or
+reject — it never upgrades or repairs. `ledger.type_claim()` is used only on the labelled regex
+fallback. So re-typing a stored sentence reproduces its stored flag for 61 of 112 claims and not the
+other 48 (3 lack the fields to try), and **the uncheckable ratio in `uncheckable_audit.json` cannot
+be recomputed offline from `type_claim` alone**. This is the design working as intended, not a
+defect, but it was nowhere written down, and anyone re-deriving the H-3 ratio the obvious way would
+get a different number and reasonably conclude the audit was wrong. Pinned by
+`tests/test_uncheckable_audit.py::test_H2_stored_typing_is_the_caged_reader_not_a_fresh_regex`, which
+fails if either typing drifts. What *is* reproducible offline, and is now checked on every run, is
+the fabrication guard: all 98 backfill quotes appear verbatim in their committed page receipts.
+
+### (d) Defect L-1's fix is demonstrated by a failing test, and moved no number
+The charter permits H to fix a resolver defect in shared `src/ledger.py` only where it can be
+demonstrated with a failing test. `tests/test_ledger_backfill.py::test_L1_log_claims_persists_entities`
+is that test; it was run against a scratch copy of the pre-fix `ledger.py` and fails there
+("log_claims dropped the entities field"), and passes after. Separately, and importantly for INV-6:
+on the committed data the defect would have inflated the escalation corpus counts (2→8, 1→3) but
+**flipped zero verdicts**, because `claim_true` is `count > 0` and the one zero is zero either way.
+The escalation true-rate of 5/6 is therefore not a product of this fix, and must not be read as one.
+Asserted in `::test_L1_entity_restriction_narrows_the_window_but_moved_no_verdict`.

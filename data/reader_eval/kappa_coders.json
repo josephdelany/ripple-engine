@@ -1,7 +1,7 @@
 {
  "seed": 20260902,
  "n_sample": 30,
- "generated_at": "2026-09-03T02:33:20+00:00",
+ "generated_at": "2026-09-03T03:31:15+00:00",
  "labels": [
   "chokepoint_disruption",
   "conflict_escalation",
@@ -277,6 +277,36 @@
      "sanctions": 0,
      "none": 1
     }
+   }
+  }
+ },
+ "blindness_caveat": {
+  "n_telegraphed": 9,
+  "n_total": 30,
+  "telegraphed_ids": [
+   "iran_sanctions_reimposed_2018",
+   "opec_2007_09_11",
+   "opec_accelerate_hike_2022",
+   "opec_algiers_accord_2016",
+   "opec_cut_jan_2001",
+   "opec_cut_july_2001",
+   "opec_talks_collapse_2020",
+   "opec_unwind_plan_2024",
+   "russia_sectoral_sanctions_2014"
+  ],
+  "why": "the id slug printed on the sheet contains a token of the row's own gold class, so that row can be coded without reading the headline",
+  "subset_kappa_excluding_telegraphed": {
+   "A_vs_H": {
+    "kappa": 0.7383,
+    "n": 21
+   },
+   "reader_vs_A": {
+    "kappa": 0.6948,
+    "n": 21
+   },
+   "reader_vs_H": {
+    "kappa": 0.7586,
+    "n": 21
    }
   }
  }

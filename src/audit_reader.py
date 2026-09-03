@@ -139,6 +139,29 @@ def kappa_report(echo=print, with_reader=True):
         out["pairs"][name] = {"n": n, "kappa": k, "raw_agreement": round(agree / len(common), 4),
                               "note": note, "confusion": conf}
     add("A_vs_H", A, H, "session A's gold vs session H's blind coding -- two Claude sessions (diagnostic)")
+
+    # BLINDNESS CAVEAT (session H, found by its own test). The sheet hides every label, but the gold's
+    # *id slug* is printed next to each headline and some slugs contain their own class as a word
+    # ("russia_sectoral_sanctions_2014" -> sanctions; every "opec_*" -> opec_decision). On those rows a
+    # coder can score without reading the headline, so the headline kappa is inflated by construction.
+    # Published, not corrected: re-drawing the sheet after seeing the answers is exactly what the
+    # registered seed exists to prevent. The honest lower bound is the kappa on the rows that do NOT
+    # telegraph. Reported for every pair.
+    def _telegraphs(i, cls):
+        return any(t in i.lower() for t in str(cls).split("_") if len(t) > 3)
+    tele = [i for i in ids if _telegraphs(i, A.get(i) or "none")]
+    clean_ids = [i for i in ids if i not in tele]
+    caveat = {"n_telegraphed": len(tele), "n_total": len(ids), "telegraphed_ids": tele,
+              "why": "the id slug printed on the sheet contains a token of the row's own gold class, so "
+                     "that row can be coded without reading the headline",
+              "subset_kappa_excluding_telegraphed": {}}
+    for name, pair in (("A_vs_H", (A, H)), ("reader_vs_A", (rd, A)), ("reader_vs_H", (rd, H))):
+        x, y = pair
+        common = [i for i in clean_ids if i in x and i in y]
+        if len(common) > 1:
+            k, n, _ = _kappa([x[i] for i in common], [y[i] for i in common])
+            caveat["subset_kappa_excluding_telegraphed"][name] = {"kappa": k, "n": n}
+    out["blindness_caveat"] = caveat
     if rd:
         add("reader_vs_A", rd, A, "the reader against the gold it is scored on")
         add("reader_vs_H", rd, H, "the reader against an independent blind coding")

@@ -359,13 +359,22 @@ def scoreboards(conn=None):
     for b in sources:
         b["true_rate"] = round(b["true"] / b["n"], 2)
     pending = [c for c in checkable if c["claim_id"] not in {r["claim_id"] for r in res}]
+    # A->H handoff 2026-09-03 (defect L-2): resolve() skips modality=hypothetical permanently, so a
+    # hypothetical claim that is checkable in FORM sits in `pending` for ever. Reported bare, "13 pending"
+    # promises the reader twelve resolutions that are never coming. `pending` is kept (it is the sum, and
+    # consumers fall back to it) and split into the two honest halves. No verdict, no threshold, no ratio.
+    never = [c for c in pending if c.get("modality") == "hypothetical"]
+    awaiting = [c for c in pending if c.get("modality") != "hypothetical"]
     return {"engine": {"rows": engine, "walk": walk, "verdict": (wf.get("verdict") or {}), "protocol": wf.get("protocol"),
                        "label": ("G target = IES-90 (independent dated codings; OUTCOME_MAPPING.md); 30-event audit pending"
                                  if walk else "outcomes are corpus-derived (situation records observe subsequent corpus events); "
                                               "not yet audited against fresh sources")},
             "record_vs_narrative": rvn,
             "sources": sources,
-            "counts": {"claims_logged": len(claims), "checkable": len(checkable), "resolved": len(res), "pending": len(pending)},
+            "counts": {"claims_logged": len(claims), "checkable": len(checkable), "resolved": len(res),
+                       "pending": len(pending), "awaiting_horizon": len(awaiting), "never_resolves": len(never),
+                       "never_resolves_reason": "modality=hypothetical; resolve() skips it and no antecedent "
+                                               "mechanism exists (defect L-2, open)"},
             "registration": "CLAIM_LEDGER_REGISTRATION.md",
             "note": "Nothing here is hand-edited. Boards below n=8 are labelled seeding."}
 
