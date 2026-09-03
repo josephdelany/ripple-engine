@@ -2,7 +2,7 @@
  "coverage": {
   "registration": "EXPOSURE_REGISTRATION.md §2 (2026-09-03, commit 22da52f)",
   "generated_by": "src/exposure_schema.py",
-  "n_events": 174,
+  "n_events": 195,
   "by_block": {
    "A": {
     "n": 13,
@@ -47,17 +47,17 @@
     "INVALID": 0
    },
    "G_accident": {
-    "n": 99,
-    "COMPLETE": 81,
-    "PARTIAL": 14,
-    "EMPTY": 4,
+    "n": 120,
+    "COMPLETE": 82,
+    "PARTIAL": 21,
+    "EMPTY": 17,
     "INVALID": 0
    }
   },
   "total": {
-   "COMPLETE": 86,
-   "PARTIAL": 59,
-   "EMPTY": 25,
+   "COMPLETE": 87,
+   "PARTIAL": 66,
+   "EMPTY": 38,
    "INVALID": 4
   },
   "gate": {
@@ -74,7 +74,7 @@
    "blocks_excluded_by_own_declaration": [
     "G_accident"
    ],
-   "n_complete_including_excluded_blocks": 86,
+   "n_complete_including_excluded_blocks": 87,
    "gate_met": false,
    "consequence_if_not_met": "§5: Stage 1 is reported as DESCRIPTIVE ONLY and no verdict is issued -- registered in advance so it cannot be waived later"
   },
@@ -4524,6 +4524,407 @@
      "days_to_partial_restore": "per_field",
      "days_to_full_restore": "per_field"
     }
+   },
+   {
+    "event_id": "phillips66_alliance_ida_2021",
+    "computed_status": "COMPLETE",
+    "declared_status": "COMPLETE",
+    "hard_failures": [],
+    "notes": [
+     "days_to_full_restore is 'never': the asset did not reopen. A permanent closure is a measured outcome, not a missing value, and is counted as filled."
+    ],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "missing_required": [],
+    "filled_numeric": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field",
+     "capacity_affected_kbd": "per_field",
+     "days_to_partial_restore": "per_field",
+     "days_to_full_restore": "per_field"
+    }
+   },
+   {
+    "event_id": "sabine_pass_lng_laura_2020",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "cameron_lng_laura_2020",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "bayway_sandy_2012",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "gustav_ike_gom_2008",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "katrina_rita_gom_2005",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "winter_storm_uri_2021",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_ian_2022",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "exxonmobil_baton_rouge_francine_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd"
+    ],
+    "missing_required": [
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [
+     "capacity_nameplate_kbd"
+    ],
+    "provenance_kind": {
+     "capacity_nameplate_kbd": "per_field"
+    }
+   },
+   {
+    "event_id": "hurricane_francine_2024",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "capeco_bayamon_tank_explosion_2009",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "pemex_deer_park_h2s_2024",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_laura_2020",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_sally_2020",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_delta_2020",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_zeta_2020",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_gustav_2008",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_ike_2008",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_laura_gom_2020",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "hurricane_nicholas_2021",
+    "computed_status": "EMPTY",
+    "declared_status": "EMPTY",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [],
+    "missing_required": [
+     "asset_name",
+     "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "silver_eagle_woods_cross_jan_2009",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
    }
   ]
  }
