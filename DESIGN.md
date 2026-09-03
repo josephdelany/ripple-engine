@@ -166,3 +166,85 @@ with their colour from §2. It is a status line, not a sentence. **[T]**
   line beneath it, always.
 
 Sources consulted are listed in the commit message for this file.
+
+---
+
+## Amendment 1 — the propagation band's binding to `data/ripple/irf.json`
+*2026-09-03. Registered before the code that reads under it (SESSION_CHARTER §2 rule 2).*
+
+§3.1 band 5 ("Where does it travel?") said *measured IRFs from `data/ripple/irf.json`*
+without saying **which** of the 932 estimates. This amendment fixes the selection, the
+interval, and the words, so the band cannot be re-cut after seeing it.
+
+Until now band 5 was wired to `src/propagate.py`, which conditioned its contributing
+events on `sr_outcome_90` — a label retired at κ≈0 on 2026-09-02 (OUTCOME_MAPPING.md
+Amendment 1). Nothing may condition on a retired label. The filter goes; the band moves
+to the registered local projections.
+
+### A1.1 Selection — one class, every registered cell
+
+For a story of class `C`, the band shows every row of `data/ripple/irf.json` with:
+
+| field | value | why |
+|---|---|---|
+| `shock` | `C` | the story's own class; the seven corpus classes map 1:1 onto the registered shock sets |
+| `spec` | `total` | the primary specification. `crude_conditioned` is the mechanism decomposition and carries **no verdict** — it is not a display layer |
+| `sample` | `full` | excludes the gas structural-break subsamples (`pre_/post_2009`, registration [2.7]) |
+
+That is **53 cells** for each of the seven classes. All 53 are shown. **The band is never
+filtered by verdict, by significance, or by whether the interval is interesting.** Where a
+class is absent from the file the band states that and shows nothing.
+
+### A1.2 What each cell displays
+
+At the row's own registered `headline_h` (never a horizon chosen after the fact):
+
+- **estimate** — `beta`
+- **band** — `[lo95, hi95]`, Eicker–Huber–White HC1, the registered primary standard error
+  (Montiel Olea & Plagborg-Møller 2021). `lo90/hi90` and the Newey–West `se_nw` are carried
+  as Provenance, never as the headline band.
+- **n** — `n_events`, always beside the estimate; `T` as Provenance
+- **verdict** — `TRANSMITTING` / `NULL` / `INSUFFICIENT` verbatim from the file. The band
+  never computes a verdict of its own.
+- **unit** — `%` for `log` / `log1p` transforms; index points for `lvl` / `pp`
+
+### A1.3 Verdict → colour → caption (the §2 absence language, bound)
+
+| verdict | state | colour | caption |
+|---|---|---|---|
+| `NULL` | `crosses_zero` | neutral grey | *"The interval crosses zero: no effect distinguishable from none at this sample size."* |
+| `NULL` + `fragile` | `crosses_zero` | neutral grey | *"Reported null and flagged fragile: the EHW interval excludes zero, Newey–West does not."* |
+| `TRANSMITTING` | `excludes_zero` | green | *"The 95% interval excludes zero under both standard errors, and the estimate sits outside the state-matched placebo band."* |
+| `INSUFFICIENT` | `insufficient` | hatch, never coloured | *"insufficient (n=…): below the registered minimum of 15 events."* |
+
+**Amber is not used in this band.** §2 reserves amber for *excludes zero, engine worse* — a
+walk-forward comparison against a baseline. A local projection has no baseline to be worse
+than, so the amber state does not arise here. It is left unused rather than repurposed.
+
+The zero line is drawn on every cell (§2), including the insufficient ones.
+
+### A1.4 Order, and the finding sentence
+
+Cells are grouped by the registration's hop ladder, in this order, and within a hop in the
+order the registration lists the nodes:
+
+`0` crude · `1` refined products & cracks · `2` physical flow & stocks · `3` gas & LNG ·
+`4` fertiliser & coal · `x` macro cross-asset · `e` equity proxies
+
+The Finding-tier sentence above the band is a count, not an adjective:
+
+> *"k of 53 registered cells transmit for this class."*
+
+Where `k = 0` the sentence says so in words — *"No cell transmits for this class"* — and the
+band is still drawn in full. **A class with nothing transmitting is the finding, not an
+empty state.** **[T]**
+
+### A1.5 Provenance carried with the band
+
+`data/ripple/irf.json` · `meta.registration` (RIPPLE_REGISTRATION.md + Amendments A, B) ·
+`meta.when` · `meta.seed` · `meta.n_placebo`. Displayed in Provenance tier, per §1.
+
+### A1.6 What this amendment does not do
+
+It does not re-run, re-estimate, or re-cut anything in `data/ripple/`. It is a read. The
+estimates were computed once under the sealed registration and are displayed as computed.
