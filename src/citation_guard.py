@@ -393,6 +393,13 @@ def _classify_exclusion(raw, digits, decimals, before, after):
             return "year"
     if after[:1] == "Z" and decimals == 0 and len(digits) == 6:
         return "run identifier (walk_...Z)"
+    # A numbered item heading: "**2.4 Post-2000 sourcing cannot be repaired**".
+    # These were resolving coincidentally against the record and then showing up in
+    # the drift report as though a published quantity had moved.
+    line_prefix = before.rsplit("\n", 1)[-1]
+    if (re.fullmatch(r"\s*\**\s*", line_prefix) and decimals in (1, 2)
+            and re.match(r"^\s+[A-Z(]", after)):
+        return "identifier (numbered item heading)"
     if _LABEL_BEFORE.search(before[-12:]):
         return "identifier (section, amendment, item or figure reference)"
     if re.match(r"^\s*[-–—]\s*\d", after) and decimals == 0 and len(digits) == 4:

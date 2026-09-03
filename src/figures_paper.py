@@ -352,6 +352,20 @@ def row_name(ax, y, name, sub, emphasis=False):
                 ha="right", va="top", fontsize=9.2, color=PROVENANCE)
 
 
+def axes_span(ax):
+    """An axes' left and right edge in figure coordinates.
+
+    Asked of the axes rather than written as a constant. The right panel's hardcoded
+    x-position happened to equal persistence's Brier score after the Amendment 4
+    re-run, and tripped the no-literal-results test -- a false alarm, but a true
+    signal that magic layout numbers and published results were sharing a namespace.
+    The layout now has no bare numbers left to collide with, and this docstring
+    quotes none either, which is why the value is described rather than printed.
+    """
+    box = ax.get_position()
+    return box.x0, box.x1
+
+
 def mono_ticks(ax):
     ax.tick_params(axis="x", labelsize=9.5)
     for lab in ax.get_xticklabels():
@@ -447,10 +461,12 @@ def fig1_vintage(summary, knowable, pre_h):
     zero_rule(axr, "0 = parity with the base rate")
 
     # -- the stack under both panels ----------------------------------------
-    units(fig, f"events in the corpus  (n = {total})", x=0.040)
+    left_x0, _ = axes_span(axl)
+    right_x0, right_x1 = axes_span(axr)
+    units(fig, f"events in the corpus  (n = {total})", x=left_x0)
     units(fig, f"Brier skill vs climatology, 95% CI   (daily tier, "
-               f"n = {post['n']} scored escalation reads)", x=0.545)
-    direction(fig, 0.545, 0.980)
+               f"n = {post['n']} scored escalation reads)", x=right_x0)
+    direction(fig, right_x0, right_x1)
     caption(fig,
             f"Left \u2014 at field level, {kept_fields} situation fields survive "
             f"the rule and {dropped_fields} are dropped as dated after $t$.\n"
@@ -545,16 +561,17 @@ def fig2_escalation_baselines(summary):
     # DESIGN section 2: the zero rule is drawn, at full contrast, labelled.
     # On a proper score, zero is a perfect forecast -- and the 'better' end.
     zero_rule(ax, "0 = a perfect forecast")
+    ax_x0, ax_x1 = axes_span(ax)
 
     units(fig, f"Brier score \u2014 multi-category over IES-90 levels 0\u20133, "
-               f"horizon (d, d+90]   (n = {n} scored escalation reads)", x=0.235)
-    direction(fig, 0.235, 0.965, left="\u25c0  LOWER IS BETTER", right="worse  \u25b6",
+               f"horizon (d, d+90]   (n = {n} scored escalation reads)", x=ax_x0)
+    direction(fig, ax_x0, ax_x1, left="\u25c0  LOWER IS BETTER", right="worse  \u25b6",
               emphasis=True)
     caption(fig,
             "Bar colour is the verdict on the comparison printed beneath the bar, "
             "never the level: amber where the 95% interval excludes zero against the "
             "engine. The engine\u2019s own bar carries no verdict.",
-            x=0.235, width=125)
+            x=ax_x0, width=125)
     provenance(fig,
                f"{SUMMARY}   (run {summary['run_id']})\n"
                f"  levels     tiers.daily.G.engine_vs.<persistence|climatology>"
@@ -610,10 +627,11 @@ def fig3_price_baselines(summary):
     ax.set_xlim(lo_all - 0.12 * span, hi_all + 0.12 * span)
     mono_ticks(ax)
     zero_rule(ax, "0 = no better, no worse")
+    ax_x0, ax_x1 = axes_span(ax)
 
     units(fig, f"CRPS skill, engine vs baseline, 95% CI   (daily tier, "
-               f"+20 trading days, n = {n} scored price reads)", x=0.235)
-    direction(fig, 0.235, 0.965)
+               f"+20 trading days, n = {n} scored price reads)", x=ax_x0)
+    direction(fig, ax_x0, ax_x1)
     # DESIGN section 2: every null gets a caption in plain words, not a symbol.
     null_refs = [pretty[r["ref"]][0][3:] for r, st in zip(rows, states)
                  if st == "crosses_zero"]
@@ -622,7 +640,7 @@ def fig3_price_baselines(summary):
             + (f"  Here: {', '.join(null_refs)}." if null_refs else "")
             + "\nAmber \u2014 the interval excludes zero and the engine is worse.   "
               "Green \u2014 the interval excludes zero and the engine is better.",
-            x=0.235, width=125)
+            x=ax_x0, width=125)
     provenance(fig,
                f"{SUMMARY}   (run {summary['run_id']})\n"
                f"  tiers.daily.P.engine_vs.<persistence|frozen|random_analogs|"
