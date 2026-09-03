@@ -164,6 +164,91 @@ def _json(p, default=None):
         return default if default is not None else {}
 
 
+def _pending_detail(rows, resolved):
+    """Split "pending" into the claims that can still resolve and the ones that never will.
+
+    DESIGN.md §3.3 wants the Ledger to lead with the checkable and to show a HORIZON where a
+    scoreboard is empty. Both need a pending count that means something. `ledger.scoreboards()`
+    counts pending as "checkable and not yet resolved", but `ledger.resolve()` skips
+    `modality == 'hypothetical'` unconditionally -- a claim like "Iran WILL retaliate IF ..." is
+    checkable in form and unresolvable in fact. Those claims sit in the count for ever, so a
+    screen that prints the raw number tells the reader a resolution is coming that never is.
+
+    So the two are separated here and named on the screen. This computes no verdict and resolves
+    nothing; it reports which bucket each unresolved claim is in and why. ledger.py is shared with
+    session H and is not edited from here -- the defect in its `counts.pending` is written up in
+    data/handoffs/A_to_H_2026-09-03_pending_count.md.
+    """
+    open_claims = [c for c in rows if c.get("checkable") and c["claim_id"] not in resolved]
+    hypo = [c for c in open_claims if c.get("modality") == "hypothetical"]
+    awaiting = [c for c in open_claims if c.get("modality") != "hypothetical"]
+    return {
+        "open": len(open_claims),
+        "awaiting_horizon": len(awaiting),
+        "never_resolves": len(hypo),
+        "never_resolves_why": ("logged as hypothetical (a conditional or a forecast attributed to someone else); "
+                               "ledger.resolve() skips this modality, so these are recorded, not pending"),
+        "next_due": _next_due(awaiting),
+        "source": "data/ledger/claims.jsonl + data/ledger/resolutions.jsonl",
+    }
+
+
+def _next_due(awaiting):
+    """The soonest horizon among claims that can still resolve, or a stated reason there is none.
+
+    A calendar-unit claim has an exact due date: knowable + horizon_days. A trading-unit claim does
+    NOT -- `ledger.resolve()` waits for the price series to carry `horizon_days` more observations,
+    and nobody knows today which calendar date the 20th future trading day lands on. It is reported
+    in the unit it is actually measured in (trading days observed, out of the horizon) rather than
+    converted to a calendar date by a fudge factor, which would be a number with no source
+    (charter section 2 rule 1, DESIGN.md section 6).
+    """
+    from datetime import date, timedelta
+    cal, trade = [], []
+    for c in awaiting:
+        k = (c.get("knowable") or c.get("logged_at") or "")[:10]
+        h = c.get("horizon_days")
+        if not k or h is None:
+            continue
+        if c.get("horizon_unit") == "calendar":
+            try:
+                cal.append((str(date.fromisoformat(k) + timedelta(days=int(h))), c["claim_id"]))
+            except ValueError:
+                continue
+        else:
+            trade.append((k, h, c))
+    if cal:
+        due, cid = min(cal)
+        return {"date": due, "claim_id": cid, "basis": "calendar days from the knowable date, exact"}
+    if not trade:
+        return {"date": None, "note": "no claim is awaiting a horizon"}
+    # Trading-unit: say how far along the soonest claim is, measured against the series itself.
+    import ledger as L
+    import pandas as pd
+    conn = sqlite3.connect(DB)
+    try:
+        best = None
+        for k, h, c in trade:
+            try:
+                s = L._price(conn, c.get("series") or "fred.DCOILBRENTEU")
+                pos = s.index.searchsorted(pd.Timestamp(k))
+                seen = max(0, len(s) - 1 - int(pos))
+                last = str(s.index[-1].date()) if len(s) else None
+            except Exception:
+                continue
+            row = {"date": None, "claim_id": c["claim_id"], "horizon_days": h, "horizon_unit": "trading",
+                   "observed": min(seen, h), "series": c.get("series") or "fred.DCOILBRENTEU",
+                   "series_last_obs": last,
+                   "basis": (f"{min(seen, h)} of {h} trading days observed since {k}; the due date is the "
+                             f"date of the {h}th trading observation, which is not knowable in advance. "
+                             f"{c.get('series') or 'fred.DCOILBRENTEU'} ends {last}.")}
+            if best is None or row["observed"] > best["observed"]:
+                best = row
+        return best or {"date": None, "note": "no price series available for the awaiting claims"}
+    finally:
+        conn.close()
+
+
 def register(app):
     @app.get("/app", response_class=HTMLResponse)
     def app_page():
@@ -225,7 +310,8 @@ def register(app):
                            "resolution": res.get(r["claim_id"])})
         rp = DATA / "reader_eval" / "score.json"                 # Brief A-9: the desk measures its own reading
         reval = _json(rp) or {"label": "reader accuracy (unaudited gold)", "note": "not run: python3 src/reader_eval.py"}
-        return {**boards, "recent": recent, "reader_eval": {k: reval.get(k) for k in ("label", "class_accuracy", "class_correct", "n", "entity_f1", "reader_modes",
+        return {**boards, "recent": recent, "pending_detail": _pending_detail(rows, res),
+                "reader_eval": {k: reval.get(k) for k in ("label", "class_accuracy", "class_correct", "n", "entity_f1", "reader_modes",
                                                                                     "model", "gold_status", "generated_at", "threshold_class", "note")}}
 
     @app.post("/api/ledger/resolve")

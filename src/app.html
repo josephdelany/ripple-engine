@@ -594,17 +594,94 @@ async function openWalkRead(id){ const box=$('#wk-read'); box.innerHTML='<p clas
   }catch(e){box.innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 
 /* ---------------- LEDGER ---------------- */
-async function loadLedger(){try{const l=await api('/api/ledger');const e=l.engine||{};const rvn=l.record_vs_narrative||{};const c=l.counts||{};const re_=l.reader_eval||{};
-  $('#ledger').innerHTML=`<p class="mono dim" style="margin:0 0 8px">${esc(re_.label||'reader accuracy (unaudited gold)')}: ${re_.class_accuracy!=null?`class ${(re_.class_accuracy*100).toFixed(0)}% (${re_.class_correct}/${re_.n}) · entity F1 ${num(re_.entity_f1,2)} · modes ${esc(JSON.stringify(re_.reader_modes||{}))} · ${esc(re_.gold_status||'')} · threshold ${re_.threshold_class}`:esc(re_.note||'not run')}</p><div class="grid" style="grid-template-columns:1fr 1fr">
+/* DESIGN.md §3.3. The screen "reads as broken": a wall of Uncheckable and boards reading zero -- all honest,
+   all looking like failure. The fix is not to hide any of it. It is to lead with what IS checkable, put every
+   proportion on the §2 interval language so a coin-flip result looks like a result rather than an absence of
+   one, and collapse the uncheckable behind their count -- they are logged, not displayed. */
+const LEDGER_LIVE_AT = 8;            /* ledger.py MIN_N -- the n at which a board stops being labelled seeding */
+
+/* A k-of-n proportion in the §2 language, measured against the COIN FLIP rather than against zero: the question
+   on this screen is never "is the rate above nothing" but "is it better than being right half the time". The
+   estimate and its Wilson interval are both shifted by 0.5, so the zero rule that §2 requires on every chart is
+   the coin flip, and the same helper set draws it as everywhere else. */
+function coinRow(label, k, n, src){
+  const w = n ? wilson(k, n) : null;
+  return {label: `${label} — ${k} of ${n}`, n: n, src: src,
+          est: n ? k/n - 0.5 : null,
+          ci: w ? [w[0] - 0.5, w[1] - 0.5] : null};
+}
+
+async function loadLedger(){try{
+  const l = await api('/api/ledger');
+  const e = l.engine||{}, rvn = l.record_vs_narrative||{}, c = l.counts||{}, re_ = l.reader_eval||{}, pd = l.pending_detail||{};
+  const recent = l.recent||[], nCall = rvn.with_record_call||0;
+
+  /* The board. The third row is the PAIRED comparison -- the resolved claims where exactly one of the record
+     and the narrative was right -- and it is the only one of the three that answers the screen's question. */
+  const disc = (rvn.record_only_right||0) + (rvn.narrative_only_right||0);
+  const boards = [
+    coinRow('Record right', rvn.record_right||0, nCall, 'data/ledger/resolutions.jsonl'),
+    coinRow('Narrative right', rvn.narrative_right||0, nCall, 'data/ledger/resolutions.jsonl'),
+    coinRow('Record right where the two disagree', rvn.record_only_right||0, disc, 'data/ledger/resolutions.jsonl')];
+  const paired = boards[2], pstate = verdictOf(paired.est, paired.ci, paired.n, LEDGER_LIVE_AT);
+
+  /* §1 Finding tier: one sentence a person could say aloud, computed from the board every time. A null is the
+     finding and is stated as one -- never left as three cards reading zero. */
+  const lede = !nCall
+    ? `${c.claims_logged||0} claims logged, ${c.checkable||0} checkable. No claim has reached its horizon yet.`
+    : pstate === 'insufficient' ? `${nCall} resolved claims carry a record call: too few to separate the record from the narrative.`
+    : pstate === 'crosses'      ? `At ${nCall} resolved claims the record and the narrative are not distinguishable.`
+    : pstate === 'better'       ? `On ${nCall} resolved claims the record is right more often than the narrative.`
+    :                             `On ${nCall} resolved claims the narrative is right more often than the record.`;
+
+  /* §3.3: a board with nothing resolved shows the HORIZON, not a zero. "pending" is split first, because
+     ledger.resolve() skips modality=hypothetical for ever -- those claims are recorded, not pending, and a
+     screen that counts them promises resolutions that never come (data/handoffs/A_to_H_2026-09-03_pending_count.md). */
+  const nd = pd.next_due||{};
+  const pendLine = pd.awaiting_horizon==null ? ''
+    : `${pd.awaiting_horizon} claim${pd.awaiting_horizon===1?'':'s'} awaiting a horizon`
+      + (pd.never_resolves ? `, ${pd.never_resolves} logged as hypothetical and never resolved` : '') + '.';
+  const horizonLine = nd.date ? `First resolution due ${nd.date}.` : (nd.basis || nd.note || '');
+
+  const checkable = recent.filter(r => r.checkable), unch = recent.filter(r => !r.checkable);
+  const claimRowL = r => `<tr><td class="mono dim">${esc((r.logged_at||'').slice(0,10))}</td><td>${esc(r.source||'')}</td>`
+    + `<td class="q" style="font-size:13.5px">${verbatim(r.text||'', r.source)}</td><td class="dim">${esc(r.kind||'')}</td>`
+    + `<td>${r.verdict?vchip(r.verdict):'—'}</td><td class="mono">${r.r!=null?Math.round(r.r*100)+'%':'—'}</td>`
+    + `<td class="mono">${r.resolution?(r.resolution.claim_true?'claim true':'claim false')+(r.resolution.record_true==null?'':r.resolution.record_true?' · record right':' · record wrong')
+        :(r.modality==='hypothetical'?'never resolves':'awaiting horizon')}</td></tr>`;
+  const claimHead = '<tr><th>Logged</th><th>Source</th><th>Claim</th><th>Kind</th><th>Verdict</th><th>r</th><th>Resolution</th></tr>';
+
+  /* §2: a source rate on 3 claims is not a source-quality finding. Rows under MIN_N hatch as insufficient
+     rather than printing a 0% or a 100% that reads like one. */
+  const srcRows = (l.sources||[]).map(b => coinRow(`${b.source} · ${b.kind}`, b.true, b.n, 'data/ledger/resolutions.jsonl'));
+
+  $('#ledger').innerHTML = `<p class="t-find">${esc(lede)}</p>
+    <p class="t-ev" style="margin:0 0 4px">${esc(`${c.claims_logged||0} claims logged · ${c.checkable||0} checkable · ${c.resolved||0} resolved · ${nCall} with a record call`)}. ${esc(pendLine)}</p>
+    <p class="t-prov" style="margin:0 0 16px">${esc(horizonLine)} Board status <b>${esc(rvn.status||'')}</b> — a board is labelled seeding below n=${LEDGER_LIVE_AT}. ${esc(pd.source||'data/ledger/claims.jsonl')} · ${esc(l.registration||'')}</p>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
     <div class="card"><h2>Engine vs base rate — the walk</h2>${e.walk?(()=>{const t=(e.walk.tiers||{}).daily||{};const g=t.G||{},p=t.P||{};return `<table><tr><th>task</th><th>vs climatology</th><th>CI</th><th>DM p</th><th>SPA p</th></tr><tr><td>escalation (G, ${esc(g.score||'')})</td><td class="mono">${sk((g.climatology||{}).skill)}</td><td class="mono dim">${ci((g.climatology||{}).ci95)}</td><td class="mono">${pv((g.climatology||{}).dm_p)}</td><td class="mono">${pv(g.spa_p)}</td></tr><tr><td>price (P, ${esc(p.score||'')})</td><td class="mono">${sk((p.climatology||{}).skill)}</td><td class="mono dim">${ci((p.climatology||{}).ci95)}</td><td class="mono">${pv((p.climatology||{}).dm_p)}</td><td class="mono">${pv(p.spa_p)}</td></tr></table><p class="dim" style="font-size:12px;margin:8px 0 0">${esc((e.walk.verdict||{}).G_conditioning||'')} · ${esc((e.walk.verdict||{}).P_conditioning||'')} · permutation p ${pv(e.walk.permutation_p)} · placebo null ${e.walk.placebo_null_holds}</p>`;})():''}<table><tr><th>Window</th><th>Test</th><th>n</th><th>G Brier</th><th>base</th><th>skill</th><th>P skill</th></tr>${(e.rows||[]).map(w=>`<tr><td>${esc(w.window)}</td><td class="mono dim">${(w.test_window||[]).join(' → ')}</td><td class="mono">${w.n}</td><td class="mono">${w.G_brier_conditioned}</td><td class="mono dim">${w.G_brier_baseline}</td><td class="mono">${w.G_skill}</td><td class="mono">${w.P_skill}</td></tr>`).join('')}</table>
       <p class="dim" style="font-size:12px;margin:8px 0 0">${esc((e.verdict||{}).G_conditioning||'')}; P: ${esc((e.verdict||{}).P_conditioning||'')}. Protocol ${esc(e.protocol||'')}.</p><p class="dim" style="font-size:12px;margin:4px 0 0">${esc(e.label||'')}</p></div>
     <div class="card"><h2>Record vs narrative — resolved claims</h2>
-      <div class="branches" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div class="l">Resolved</div><div class="n">${rvn.resolved||0}</div></div><div class="card"><div class="l">Record right</div><div class="n">${rvn.record_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div><div class="card"><div class="l">Narrative right</div><div class="n">${rvn.narrative_right||0}<span class="dim" style="font-size:13px"> of ${rvn.with_record_call||0}</span></div></div></div>
-      <p class="dim" style="font-size:12px;margin:10px 0 0">Status: <b>${esc(rvn.status||'')}</b>. ${c.claims_logged||0} claims logged · ${c.checkable||0} checkable · ${c.pending||0} pending resolution. Nothing is hand-resolved; the board turns live at n=8.</p></div></div>
-    <div class="card" style="margin-top:12px"><h2>Sources — resolved-true rate by outlet and claim type</h2>${(l.sources||[]).length?`<table><tr><th>Source</th><th>Claim type</th><th>Resolved true</th><th>n</th></tr>${l.sources.map(b=>`<tr><td>${esc(b.source)}</td><td>${esc(b.kind)}</td><td class="mono">${Math.round(b.true_rate*100)}%</td><td class="mono">${b.n}</td></tr>`).join('')}</table>`:'<p class="dim">No resolved claims yet. Sources accrue as horizons pass.</p>'}</div>
-    <div class="card" style="margin-top:12px"><h2>Recent claims read (newest first)</h2>${(l.recent||[]).length?`<table><tr><th>Logged</th><th>Source</th><th>Claim</th><th>Kind</th><th>Verdict</th><th>r</th><th>Resolution</th></tr>${l.recent.map(r=>`<tr><td class="mono dim">${esc((r.logged_at||'').slice(0,10))}</td><td>${esc(r.source||'')}</td><td class="q" style="font-size:13.5px">${esc(r.text)}</td><td class="dim">${esc(r.kind)}</td><td>${r.verdict?vchip(r.verdict):'—'}</td><td class="mono">${r.r!=null?Math.round(r.r*100)+'%':'—'}</td><td class="mono">${r.resolution?(r.resolution.claim_true?'claim true':'claim false')+(r.resolution.record_true==null?'':r.resolution.record_true?' · record right':' · record wrong'):(r.checkable?'pending':'—')}</td></tr>`).join('')}</table>`:'<p class="dim">Nothing logged yet. Every story read from the Feed or pasted above logs its checkable claims here.</p>'}
-      <div style="margin-top:10px"><button class="btn" id="resolve">Resolve claims past horizon</button> <span class="dim" style="font-size:12px">${esc(l.note||'')}</span></div></div>`;
-  $('#resolve').onclick=async()=>{const r=await api('/api/ledger/resolve',{method:'POST'});alert(r.newly_resolved+' newly resolved');loadLedger();};
+      ${nCall ? forest(boards, {labelHead:'board', estHead:'rate − coin flip', minN: LEDGER_LIVE_AT})
+              + `<p class="domain">the zero rule on this board is the coin flip: being right half the time. ${esc(`both right ${(rvn.record_right||0)-(rvn.record_only_right||0)} · both wrong ${nCall-(rvn.record_right||0)-(rvn.narrative_only_right||0)} · they disagree on ${disc} of ${nCall}`)}</p>`
+              : emptyState('No claim has reached its horizon yet, so no board can be scored.', horizonLine)}
+      <p class="t-prov" style="margin:10px 0 0">Nothing is hand-resolved. ${esc(l.note||'')}</p></div></div>
+    <div class="card" style="margin-top:12px"><h2>Sources — resolved-true rate by outlet and claim type</h2>
+      ${srcRows.length ? forest(srcRows, {labelHead:'source · claim type', estHead:'rate − coin flip', minN: LEDGER_LIVE_AT})
+                       : emptyState('No resolved claims yet, so no source has a rate.', horizonLine)}</div>
+    <div class="card" style="margin-top:12px"><h2>Reader — how well the desk reads a headline</h2>
+      <p class="t-ev" style="margin:0">${re_.class_accuracy!=null?esc(`class ${(re_.class_accuracy*100).toFixed(0)}% (${re_.class_correct}/${re_.n}) · entity F1 ${num(re_.entity_f1,2)}`):esc(re_.note||'not run')}</p>
+      <p class="t-prov" style="margin:2px 0 0">${esc(re_.label||'reader accuracy (unaudited gold)')} · ${esc(re_.gold_status||'')} · data/reader_eval/score.json</p></div>
+    <div class="card" style="margin-top:12px"><h2>Recent claims read (newest first)</h2>
+      ${checkable.length ? `<table>${claimHead}${checkable.map(claimRowL).join('')}</table>`
+                         : emptyState('No checkable claim has been logged yet.', 'Every story read from the Feed or pasted into Story logs its checkable claims here.')}
+      ${unch.length ? `<details><summary>${unch.length} uncheckable claim${unch.length===1?'':'s'} — logged, not scored</summary><table>${claimHead}${unch.map(claimRowL).join('')}</table></details>` : ''}
+      <div style="margin-top:10px"><button class="btn" id="resolve">Resolve claims past horizon</button> <span class="t-prov" id="resolve-msg"></span></div></div>`;
+  $('#resolve').onclick = async () => {
+    const m = $('#resolve-msg'); m.textContent = 'resolving…';
+    try{ const r = await api('/api/ledger/resolve',{method:'POST'}); m.textContent = `${r.newly_resolved} newly resolved`; loadLedger(); }
+    catch(err){ m.textContent = err.message; }
+  };
   }catch(e){$('#ledger').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 
 /* ==== BOOT (test harnesses strip from this marker to the matching end marker; DESIGN.md Amendment 1 A1.4:
