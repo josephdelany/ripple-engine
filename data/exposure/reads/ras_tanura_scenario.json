@@ -1,0 +1,2147 @@
+{
+ "registration": "EXPOSURE_REGISTRATION.md §4 (2026-09-03, commit 22da52f)",
+ "generated_by": "src/read_exposure.py",
+ "query": {
+  "asset_name": "Ras Tanura terminal (scenario, not a historical record)",
+  "asset_type": "terminal",
+  "operator": "Saudi Aramco",
+  "country_iso3": "SAU",
+  "capacity_nameplate_kbd": 6500,
+  "capacity_affected_kbd": 3250
+ },
+ "retrieval": {
+  "n_cases_searched": 80,
+  "n_comparable": 5,
+  "asset_type_gate": "terminal",
+  "excluded": {
+   "case has no asset_type -- an unknown type cannot be asserted to match": 28,
+   "comparable only on country -- geography is not exposure similarity": 9,
+   "asset_type field != terminal": 4,
+   "asset_type pipeline != terminal": 10,
+   "asset_type chokepoint != terminal": 8,
+   "asset_type processing != terminal": 3,
+   "asset_type refinery != terminal": 12,
+   "asset_type out_of_schema_enum != terminal": 1
+  },
+  "rule": "asset_type is a gate; within it, cases are ranked on the fields BOTH sides carry. A field missing on either side is not compared -- it contributes no similarity and no penalty -- and a measured 0 is compared as the value it is."
+ },
+ "not_a_probability": "Every figure here is a historical frequency over a named and counted set of past cases. Nothing in this output is the probability of anything happening.",
+ "state": "ok",
+ "n": 5,
+ "reference_class": "terminal cases; capacity affected 0-700 kb/d (n=3 of 5 carry it); 2016-2025",
+ "fields_that_drove_the_match": {
+  "country_iso3": {
+   "n_cases": 4,
+   "share_of_n": 0.8
+  },
+  "capacity_nameplate_kbd": {
+   "n_cases": 4,
+   "share_of_n": 0.8
+  },
+  "capacity_affected_kbd": {
+   "n_cases": 3,
+   "share_of_n": 0.6
+  },
+  "affected_share": {
+   "n_cases": 2,
+   "share_of_n": 0.4
+  }
+ },
+ "status_mix_of_matches": {
+  "PARTIAL": 4,
+  "COMPLETE": 1
+ },
+ "duration": {
+  "days_to_partial_restore": {
+   "n_matches": 5,
+   "n_numeric": 3,
+   "categories": {
+    "unknown": {
+     "n": 2,
+     "share_of_n": 0.4
+    }
+   },
+   "quantiles_days": {
+    "min": 0.0,
+    "p25": 1.0,
+    "median": 2.0,
+    "p75": 16.5,
+    "max": 31.0
+   },
+   "note": "'ongoing' and 'never' are outcomes, not long durations, and are counted as categories rather than folded into the quantiles. n_numeric is the n behind quantiles_days; n_matches is the n behind the categories.",
+   "cases": [
+    {
+     "event_id": "ras_tanura_attack_2021",
+     "days": 0
+    },
+    {
+     "event_id": "rus_novorossiysk_terminal_2025",
+     "days": 2
+    },
+    {
+     "event_id": "cpc_novorossiysk_storm_2022",
+     "days": 31
+    }
+   ]
+  },
+  "days_to_full_restore": {
+   "n_matches": 5,
+   "n_numeric": 3,
+   "categories": {
+    "unknown": {
+     "n": 2,
+     "share_of_n": 0.4
+    }
+   },
+   "quantiles_days": {
+    "min": 0.0,
+    "p25": 1.5,
+    "median": 3.0,
+    "p75": 240.5,
+    "max": 478.0
+   },
+   "note": "'ongoing' and 'never' are outcomes, not long durations, and are counted as categories rather than folded into the quantiles. n_numeric is the n behind quantiles_days; n_matches is the n behind the categories.",
+   "cases": [
+    {
+     "event_id": "ras_tanura_attack_2021",
+     "days": 0
+    },
+    {
+     "event_id": "rus_novorossiysk_terminal_2025",
+     "days": 3
+    },
+    {
+     "event_id": "nigeria_nda_forcados_2016",
+     "days": 478
+    }
+   ]
+  }
+ },
+ "price": {
+  "brent": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -2.78,
+     "p25": -1.43,
+     "median": -0.46,
+     "p75": 1.3,
+     "max": 6.82
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -1.43
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -0.46
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 6.82
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -2.78
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 1.3
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -3.8,
+     "p25": -0.69,
+     "median": 0.37,
+     "p75": 2.22,
+     "max": 6.79
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.69
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 2.22
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 6.79
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -3.8
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.37
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -9.36,
+     "p25": -1.06,
+     "median": 1.15,
+     "p75": 2.1,
+     "max": 2.61
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.15
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -1.06
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 2.61
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -9.36
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 2.1
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -20.95,
+     "p25": -6.04,
+     "median": 0.98,
+     "p75": 5.37,
+     "max": 14.92
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -6.04
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.98
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 14.92
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -20.95
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 5.37
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -17.54,
+     "p25": -9.03,
+     "median": -2.11,
+     "p75": 7.68,
+     "max": 20.59
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -9.03
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -2.11
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 20.59
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -17.54
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 7.68
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -9.72,
+     "p25": 0.91,
+     "median": 8.54,
+     "p75": 11.0,
+     "max": 37.7
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.91
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 8.54
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 37.7
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -9.72
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 11.0
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -7.07,
+     "p25": -2.56,
+     "median": 4.85,
+     "p75": 12.72,
+     "max": 48.21
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 4.85
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 12.72
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 48.21
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -7.07
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -2.56
+     }
+    ]
+   }
+  },
+  "wti": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -1.55,
+     "p25": -1.47,
+     "median": -0.6,
+     "p75": -0.34,
+     "max": 5.61
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -1.55
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -0.34
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 5.61
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -0.6
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -1.47
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -0.89,
+     "p25": 0.34,
+     "median": 1.05,
+     "p75": 1.14,
+     "max": 5.92
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.89
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 1.05
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 5.92
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 1.14
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.34
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -6.16,
+     "p25": -3.3,
+     "median": 0.51,
+     "p75": 3.52,
+     "max": 9.6
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.51
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -3.3
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 9.6
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -6.16
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 3.52
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -16.1,
+     "p25": -5.46,
+     "median": -2.3,
+     "p75": 5.97,
+     "max": 18.38
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -5.46
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -2.3
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 18.38
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -16.1
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 5.97
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -9.57,
+     "p25": -8.75,
+     "median": -6.41,
+     "p75": 9.75,
+     "max": 25.03
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -8.75
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -6.41
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 25.03
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -9.57
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 9.75
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -2.33,
+     "p25": 1.06,
+     "median": 1.59,
+     "p75": 9.51,
+     "max": 43.55
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.06
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 1.59
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 43.55
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -2.33
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 9.51
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -5.92,
+     "p25": -4.64,
+     "median": 3.63,
+     "p75": 5.78,
+     "max": 59.07
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 5.78
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 3.63
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 59.07
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -4.64
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -5.92
+     }
+    ]
+   }
+  },
+  "diesel": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -0.68,
+     "p25": -0.45,
+     "median": 0.21,
+     "p75": 1.64,
+     "max": 5.06
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.68
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.21
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 5.06
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 1.64
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.45
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -1.1,
+     "p25": -0.3,
+     "median": 0.45,
+     "p75": 4.33,
+     "max": 6.44
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.45
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 6.44
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 4.33
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -1.1
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.3
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -10.27,
+     "p25": -3.86,
+     "median": -1.21,
+     "p75": -0.93,
+     "max": 1.48
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.48
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -3.86
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -0.93
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -10.27
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -1.21
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -15.01,
+     "p25": -7.88,
+     "median": -4.65,
+     "p75": -0.96,
+     "max": 6.19
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -4.65
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -7.88
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 6.19
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -15.01
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.96
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -14.64,
+     "p25": -6.41,
+     "median": -1.39,
+     "p75": 0.2,
+     "max": 4.33
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -6.41
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -14.64
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 4.33
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -1.39
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.2
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -14.32,
+     "p25": -3.45,
+     "median": 3.23,
+     "p75": 3.58,
+     "max": 24.25
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 3.58
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -14.32
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 24.25
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -3.45
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 3.23
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -10.71,
+     "p25": -10.44,
+     "median": 5.5,
+     "p75": 7.04,
+     "max": 37.05
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 7.04
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -10.71
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 37.05
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 5.5
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -10.44
+     }
+    ]
+   }
+  },
+  "gasoline": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -2.01,
+     "p25": -1.87,
+     "median": -0.34,
+     "p75": -0.15,
+     "max": 1.39
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.15
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -2.01
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 1.39
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -1.87
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.34
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -2.03,
+     "p25": -1.43,
+     "median": 0.45,
+     "p75": 2.26,
+     "max": 3.03
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.26
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -1.43
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -2.03
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.45
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 3.03
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -9.14,
+     "p25": -3.57,
+     "median": -3.3,
+     "p75": 3.83,
+     "max": 5.8
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 5.8
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -9.14
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -3.3
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -3.57
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 3.83
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -10.82,
+     "p25": -8.7,
+     "median": -2.46,
+     "p75": 7.46,
+     "max": 8.98
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -2.46
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -8.7
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 7.46
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -10.82
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 8.98
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -16.76,
+     "p25": -4.43,
+     "median": -0.87,
+     "p75": 10.12,
+     "max": 34.65
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.87
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -16.76
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 34.65
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -4.43
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 10.12
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 1.08,
+     "p25": 6.37,
+     "median": 9.93,
+     "p75": 12.41,
+     "max": 43.39
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 6.37
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 1.08
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 43.39
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 9.93
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 12.41
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -4.35,
+     "p25": 4.72,
+     "median": 7.44,
+     "p75": 15.48,
+     "max": 51.17
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 7.44
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 4.72
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 51.17
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 15.48
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -4.35
+     }
+    ]
+   }
+  },
+  "jet": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -0.47,
+     "p25": -0.05,
+     "median": 0.21,
+     "p75": 3.12,
+     "max": 5.66
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -0.47
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.21
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 5.66
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 3.12
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.05
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -0.44,
+     "p25": -0.21,
+     "median": 0.7,
+     "p75": 4.93,
+     "max": 6.69
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.7
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 6.69
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 4.93
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -0.44
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.21
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -9.34,
+     "p25": -5.45,
+     "median": -0.21,
+     "p75": 2.22,
+     "max": 4.11
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.22
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -9.34
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -5.45
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 4.11
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.21
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -10.95,
+     "p25": -6.53,
+     "median": -4.5,
+     "p75": 0.32,
+     "max": 4.4
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -4.5
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -10.95
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 4.4
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -6.53
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.32
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -18.33,
+     "p25": -6.67,
+     "median": 0.6,
+     "p75": 1.9,
+     "max": 10.48
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": -6.67
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -18.33
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 10.48
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.6
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 1.9
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -13.17,
+     "p25": -7.24,
+     "median": 3.04,
+     "p75": 4.16,
+     "max": 22.22
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 3.04
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -13.17
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 22.22
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -7.24
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 4.16
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percent change in price over h trading days",
+    "quantiles": {
+     "min": -10.06,
+     "p25": -7.22,
+     "median": 6.61,
+     "p75": 9.58,
+     "max": 32.49
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 6.61
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -10.06
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 32.49
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 9.58
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -7.22
+     }
+    ]
+   }
+  },
+  "diesel_crack": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -1.76,
+     "p25": -1.75,
+     "median": 0.66,
+     "p75": 0.75,
+     "max": 4.41
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.75
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.66
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -1.76
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 4.41
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -1.75
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -2.45,
+     "p25": -0.67,
+     "median": 1.15,
+     "p75": 2.7,
+     "max": 4.22
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.15
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 4.22
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -2.45
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 2.7
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -0.67
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -3.53,
+     "p25": -3.31,
+     "median": -2.8,
+     "p75": -0.91,
+     "max": 0.33
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.33
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -2.8
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -3.53
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": -0.91
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -3.31
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -8.85,
+     "p25": -8.73,
+     "median": -6.33,
+     "p75": 1.39,
+     "max": 5.93
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.39
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -8.85
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -8.73
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 5.93
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -6.33
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -16.25,
+     "p25": -12.53,
+     "median": -7.48,
+     "p75": 2.62,
+     "max": 16.15
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.62
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -12.53
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -16.25
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 16.15
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -7.48
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -22.86,
+     "p25": -13.45,
+     "median": -7.77,
+     "p75": 2.66,
+     "max": 6.27
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.66
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -22.86
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -13.45
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 6.27
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -7.77
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -23.42,
+     "p25": -11.17,
+     "median": -7.88,
+     "p75": 2.18,
+     "max": 12.57
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.18
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -23.42
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -11.17
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 12.57
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -7.88
+     }
+    ]
+   }
+  },
+  "gasoline_crack": {
+   "h0": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": 0.0,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 0.0,
+     "max": 0.0
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 0.0
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": 0.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 0.0
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.0
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 0.0
+     }
+    ]
+   },
+   "h1": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -5.43,
+     "p25": -1.64,
+     "median": -1.56,
+     "p75": 0.9,
+     "max": 1.27
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 1.27
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -1.56
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -5.43
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 0.9
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -1.64
+     }
+    ]
+   },
+   "h2": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -8.81,
+     "p25": -3.65,
+     "median": 2.66,
+     "p75": 2.95,
+     "max": 4.25
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.95
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -3.65
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -8.81
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 4.25
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 2.66
+     }
+    ]
+   },
+   "h5": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -8.08,
+     "p25": -5.91,
+     "median": 1.73,
+     "p75": 4.65,
+     "max": 5.79
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 4.65
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -8.08
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -5.91
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 5.79
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 1.73
+     }
+    ]
+   },
+   "h10": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -9.67,
+     "p25": -7.46,
+     "median": 3.58,
+     "p75": 3.61,
+     "max": 10.13
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 3.58
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -9.67
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": -7.46
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 10.13
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 3.61
+     }
+    ]
+   },
+   "h20": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -14.64,
+     "p25": 2.44,
+     "median": 8.16,
+     "p75": 13.11,
+     "max": 14.06
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 8.16
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -14.64
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 14.06
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 13.11
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 2.44
+     }
+    ]
+   },
+   "h40": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -7.46,
+     "p25": 1.41,
+     "median": 5.45,
+     "p75": 5.69,
+     "max": 19.64
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 5.45
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -7.46
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 5.69
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 19.64
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": 1.41
+     }
+    ]
+   },
+   "h60": {
+    "n": 5,
+    "n_matches_without_price_data": 0,
+    "unit": "percentage-point difference: product change minus crude change",
+    "quantiles": {
+     "min": -8.0,
+     "p25": -1.78,
+     "median": 2.59,
+     "p75": 2.96,
+     "max": 22.55
+    },
+    "cases": [
+     {
+      "event_id": "ras_tanura_attack_2021",
+      "pct": 2.59
+     },
+     {
+      "event_id": "rus_novorossiysk_terminal_2025",
+      "pct": -8.0
+     },
+     {
+      "event_id": "nigeria_nda_forcados_2016",
+      "pct": 2.96
+     },
+     {
+      "event_id": "cpc_novorossiysk_storm_2022",
+      "pct": 22.55
+     },
+     {
+      "event_id": "venezuela_blackout_2019",
+      "pct": -1.78
+     }
+    ]
+   }
+  }
+ },
+ "headline_horizon": "h20",
+ "matches": [
+  {
+   "event_id": "ras_tanura_attack_2021",
+   "date": "2021-03-07",
+   "block": "C",
+   "status": "PARTIAL",
+   "asset_name": "Ras Tanura port, petroleum tank farm",
+   "asset_type": "terminal",
+   "similarity": 0.5,
+   "fields_used": {
+    "capacity_affected_kbd": 0.0,
+    "country_iso3": 1.0
+   },
+   "fields_not_compared": {
+    "capacity_nameplate_kbd": "missing on case",
+    "affected_share": "missing on case"
+   },
+   "capacity_affected_kbd": 0,
+   "capacity_nameplate_kbd": "unknown",
+   "days_to_partial_restore": 0,
+   "days_to_full_restore": 0
+  },
+  {
+   "event_id": "rus_novorossiysk_terminal_2025",
+   "date": "2025-11-14",
+   "block": "F",
+   "status": "COMPLETE",
+   "asset_name": "Sheskharis oil transshipment complex, Novorossiysk",
+   "asset_type": "terminal",
+   "similarity": 0.274,
+   "fields_used": {
+    "capacity_affected_kbd": 0.3332,
+    "capacity_nameplate_kbd": 0.1062,
+    "affected_share": 0.6566,
+    "country_iso3": 0.0
+   },
+   "fields_not_compared": {},
+   "capacity_affected_kbd": 700,
+   "capacity_nameplate_kbd": 830,
+   "days_to_partial_restore": 2,
+   "days_to_full_restore": 3
+  },
+  {
+   "event_id": "nigeria_nda_forcados_2016",
+   "date": "2016-02-14",
+   "block": "B",
+   "status": "PARTIAL",
+   "asset_name": "Forcados terminal and Trans Forcados subsea crude export line",
+   "asset_type": "terminal",
+   "similarity": 0.1967,
+   "fields_used": {
+    "capacity_affected_kbd": 0.0902,
+    "capacity_nameplate_kbd": 0.0,
+    "affected_share": 0.5
+   },
+   "fields_not_compared": {
+    "country_iso3": "missing on case"
+   },
+   "capacity_affected_kbd": 400,
+   "capacity_nameplate_kbd": 400,
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": 478
+  },
+  {
+   "event_id": "cpc_novorossiysk_storm_2022",
+   "date": "2022-03-23",
+   "block": "D",
+   "status": "PARTIAL",
+   "asset_name": "Caspian Pipeline Consortium Marine Terminal, Yuzhnaya Ozereyevka (Novorossiysk)",
+   "asset_type": "terminal",
+   "similarity": 0.1666,
+   "fields_used": {
+    "capacity_nameplate_kbd": 0.3332,
+    "country_iso3": 0.0
+   },
+   "fields_not_compared": {
+    "capacity_affected_kbd": "missing on case",
+    "affected_share": "missing on case"
+   },
+   "capacity_affected_kbd": "unknown",
+   "capacity_nameplate_kbd": 1400,
+   "days_to_partial_restore": 31,
+   "days_to_full_restore": "unknown"
+  },
+  {
+   "event_id": "venezuela_blackout_2019",
+   "date": "2019-03-07",
+   "block": "B",
+   "status": "PARTIAL",
+   "asset_name": "Jose Terminal, Jose industrial complex, north-east Venezuela",
+   "asset_type": "terminal",
+   "similarity": 0.1538,
+   "fields_used": {
+    "capacity_nameplate_kbd": 0.3077,
+    "country_iso3": 0.0
+   },
+   "fields_not_compared": {
+    "capacity_affected_kbd": "missing on case",
+    "affected_share": "missing on case"
+   },
+   "capacity_affected_kbd": "unknown",
+   "capacity_nameplate_kbd": 1320,
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": "unknown"
+  }
+ ]
+}
