@@ -34,7 +34,12 @@ the fall is the rule and the rest is selection. **41% of the target's rank varia
 of its labels are still what persistence would say** — partly mechanical, not only
 mechanical, and the engine still has a legitimate baseline to beat.
 
-**1.1a — BLOCKING, needs Joe's ruling tonight.** The tree is in an **incoherent state**:
+**1.1a — RULED 2026-09-03: tag, rebuild, re-run.** Joe's ruling: tag the sealed record
+first (done — `record-pre-amendment-4` at `18561e2`, so the published numbers stay citable
+after the target changes under them), then rebuild `event_outcomes` under Amendment 4 and
+re-run the walk. §8–§11 and the delta experiment are all on the pre-amendment target and the
+paper owes a sentence saying so. Owner **K** (rebuild), **B** (re-run), **Cowork** (the
+sentence). *The state that made this blocking:* The tree is in an **incoherent state**:
 `event_outcomes` in `data/oil.db` still carries the pre-amendment 76/6/48/54 = 184, while
 `src/state/ies90.py` is post-amendment, and `src/engine/persistence.py` calls
 `ies90.score_event` **live** (Amendment B.1: "called, never copied"). **Any walk run right
@@ -85,7 +90,29 @@ archival effort. This is a finding, published in paper §14. The remaining route
 date-grid study (2.5). Residual for **Joe**: whether the codebook gains a class for a
 concession or ownership change — four records currently sit in `opec_decision` by elimination.
 
-**2.5 *n* is the binding constraint, and the date grid is the only remaining route.**
+**2.5 *n* is the binding constraint; the date grid is the only remaining route, and
+G-4 measured its ceiling.** *(Probe reported 2026-09-03; scope RULED: build 1987–2014.)*
+G's one-year probes found the grid is viable but bounded, and the boundary is a property of
+the sources, not of our effort: **after 2014 every non-zero ΔIES cell is an artefact** (1998:
+23 of 29 non-zero cells rest on opposed-side evidence; 2018: **0 of 43**; 2024: **0 of 21**).
+Two mechanisms, both verified against `ies90.py` rather than inferred — ICB records crisis
+*actors*, not sides, so at 2018-01-31 the dyad `gbr|usa` scores IES level 3 from ICB crisis
+489, the UK and the US recorded as at war with each other, and all six of 2018's level-3
+dyads are pairwise combinations of {GBR, Russia, Syria, USA}: one episode counted six times.
+GED is a *location* count replicated across every dyad containing that country. MID, MIDI and
+COW War are the only sided sources, and `covers()` needs d+90 ≤ coverage end, so all three
+stop at **2014-10-02**. Density per grid date is 29–31 active dyad-dates (1998) falling to
+10–12 (2024); ΔIES share-zero is 90.2% / 85.3% / 54.4% — inside the registered 95%
+non-degeneracy bar, but not comfortably. The strict release-date vintage rule kills every
+cell (0 of 357), which is why `WORLD_STATE_CODEBOOK` Amendment 1 already rejects
+release-date-as-vintage as a definition error; under the project's actual convention 86.8% /
+88.4% / 44.4% survive. G's own added check (VR-3) found a real leak: 39 of 335 cells in 2018
+admitted on a record still running at *t* — selection on the future.
+**Ruling:** build the panel for **1987–2014**, on the VR-3 active set, with the evidence-basis
+bucket beside every result, and register three limits up front — it can never reach the
+present, never carry VALIDATED (every cell is `retrospective=1`), and never score onset
+(R-ACT makes it a recurrence panel by construction). Owner **G** (panel), **B** (walk).
+*Original framing:*
 150 scored escalation reads against ~1,200 required; §11's power block puts the requirement
 higher still at the skill actually observed. Registered as a **new study, new estimand** —
 the unit of observation becomes a date, not an event: a periodic grid (468 month-ends or
