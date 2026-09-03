@@ -248,3 +248,50 @@ empty state.** **[T]**
 
 It does not re-run, re-estimate, or re-cut anything in `data/ripple/`. It is a read. The
 estimates were computed once under the sealed registration and are displayed as computed.
+
+---
+
+## Amendment 1 — 2026-09-03, after session A read the spec against the code
+
+*Two errors in §4 and §6 as first written, and one rule the spec did not have. Registered
+before the build starts. Nothing above is edited.*
+
+**A1.1 The spec failed its own contrast rule.** §4 requires Provenance ≥ 4.5:1 against the
+ground; the colour as built measures **3.65**. Provenance becomes `#8a8880`, which clears
+4.5:1 with headroom. Finding and Evidence pass as they stand. A test measures all three
+rather than trusting the hex values.
+
+**A1.2 The forbidden-word rule was unimplementable as written.** §6 bans "predicts",
+"validated", "signal", "confirms" and the existing test greps all rendered text. But the
+desk must render corpus titles **verbatim** — and three live records contain a banned
+substring, including the event title *"Russia confirms floating wheat export tax"*. A rule
+that forces the desk to alter a source title is worse than no rule: it would make the
+interface edit the record to satisfy a lint.
+
+The rule splits, as session A proposed:
+
+- **Absolute ban on every string the desk writes itself** — labels, captions, verdict text,
+  headings, generated sentences. No exception, no escape hatch.
+- **Verbatim quoted material** — corpus titles, headline text, claim text, source
+  sentences — renders inside a node marked `data-verbatim` with its source attribute. The
+  test **inventories** these rather than banning them: it asserts every banned word found
+  in rendered text sits inside a `data-verbatim` node, and prints the inventory so a
+  reviewer can see exactly which source strings carry them. **[T]**
+
+The distinction is the project's own: what the desk asserts is bound by the record; what a
+source said is reported as the source said it.
+
+**A1.3 Nothing in this spec would have been verified in CI.** Both jsdom tests skip where
+node is absent, and the render test additionally skips whenever the database is, which is
+always in CI. The spec's rules therefore split into two files: `tests/test_design_spec.py`,
+which is static and runs everywhere (contrast ratios, palette membership, vocabulary,
+tier-class presence), and the jsdom tests, which cover DOM structure and may skip. **A
+rule that can only be checked where the checker never runs is not a rule. [T]**
+
+**A1.4 A render test had silently stopped testing.** `tests/test_app_render.py` strips the
+page bootstrap with a regex anchored to `loadFeed();`; that line now reads
+`loadFeed(); loadRecord();`, the anchor no longer matches, and the boot path has been
+running inside the test — passing only because both calls swallow their own fetch failure.
+Session A found this while reading the spec against the code. The replacement must not
+depend on matching a source line: strip by a stable marker the page emits for the purpose,
+and assert the marker exists. **[T]**
