@@ -597,3 +597,56 @@ status the published run gave it whatever this experiment says.
 amendment id live in `tests/test_delta_experiment.py`. The numbers go to Cowork in
 `data/handoffs/B_to_Cowork_2026-09-03_delta_experiment.md`, **as computed**, whichever of the four
 verdicts holds.
+
+## Amendment M (2026-09-03) — pooling or similarity? the three-pool control on Amendment L (gates nothing)
+*Registered BEFORE the numbers, and registered **post hoc**: this control was motivated by Amendment L's
+result, which is stated here rather than concealed. It therefore takes DIAGNOSTIC standing, exactly as
+Amendment K does — published beside the registered numbers, published whichever way it comes out, and it
+**cannot move any verdict**. L.7's NO ADDITION stands whatever M shows. §3 and §7 are untouched, nothing is
+re-scored, and no v2 number is re-judged. Session B.*
+
+### M.1 Why
+Amendment L found that the registered equal pool C1 (½ no-change + ½ analogue) scores 0.4643 against
+no-change's 0.4805 — a gain that does not clear any of L.7's conditions — while the **Δ-climatology**
+baseline alone scores 0.4635, better than the retrieved analogue's 0.4799 and marginally better than C1
+itself. That leaves L's headline number ambiguous between two readings which the registered comparisons
+cannot separate:
+
+- **pooling** — any second distribution, pooled with a 0.9-sharp point mass, buys the same shrinkage; or
+- **similarity** — the *retrieved* analogues specifically carry something the unconditional distribution does not.
+
+L's registered baselines answer this for the components in isolation (analogue 0.4799 vs random analogs
+0.4824 vs Δ-climatology 0.4635) but not **inside the pool**, which is the object L was built to test.
+
+### M.2 What is computed
+Three pools at the **identical registered weight λ = 0.5**, differing only in the second component, so the
+weight cannot explain any difference between them:
+
+| pool | second component | isolates |
+|---|---|---|
+| **C1** (from L.4, unchanged) | the retrieved analogue mixture, k ≤ 12 atoms | similarity + atom count |
+| **C0r** | random analogs from the read's own point-in-time G pool, same k, same sealed seed and draws | atom count alone |
+| **C0** | the read's own point-in-time Δ-climatology, the whole pool | pooling alone |
+
+Reported: each pool against no-change (skill, stationary-bootstrap CI at the registered 2,000 draws, DM/HLN
+at the tier's measured HAC lag) and — the comparison the amendment exists for — **C1 against C0 and C1
+against C0r, paired on the same reads**, on the registered Brier and on RPS.
+
+### M.3 How it is read, stated before the numbers exist
+- **C1 ≈ C0** → the gain is **pooling**. The retrieved analogues are interchangeable with the unconditional
+  Δ distribution and similarity retrieval contributes nothing inside the pool.
+- **C1 > C0** → the gain is **similarity**: retrieval carries something the unconditional distribution does
+  not, *even though* L.7 says the gain does not clear its conditions. This would be reported as a
+  diagnostic direction, never as a result that changes L's verdict.
+- **C1 < C0** → retrieval **costs** the pool: the engine would do better pooling persistence with the class
+  base rate than with its own analogues.
+- **C0r vs C0** prices the small-atom penalty of E.3 inside the pool with content held fixed (the same pool,
+  the same draws, k atoms against all of them), so a C1 < C0 gap can be attributed to atom count or to
+  content rather than left ambiguous.
+
+All four readings are publishable and none is preferred.
+
+### M.4 Publication
+`data/walk_forward/delta_experiment.json → diagnostic_pools`, carrying `registered_post_hoc: true`,
+`gates: nothing`, and the sentence that this control was motivated by L's own result. Test:
+`tests/test_delta_experiment.py::test_M2_*`.
