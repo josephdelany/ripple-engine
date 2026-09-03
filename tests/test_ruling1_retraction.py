@@ -49,7 +49,7 @@ def test_ruling1_no_surface_calls_the_five_validated():
     g = json.load(open(os.path.join(ROOT, "data", "propagation_graph.json")))
     assert g["backbone_validated"] == []
     assert set(g["backbone_retracted_2026_09_02"]) == {e.split(".", 1)[1] for e in FIVE}
-    ev = open(os.path.join(ROOT, "EVIDENCE.md"), encoding="utf-8").read()
+    ev = open(os.path.join(ROOT, "docs", "reference", "EVIDENCE.md"), encoding="utf-8").read()
     assert "Retracted 2026-09-02" in ev and "retracted_h1_retest" in ev
     for node in ("brent_oil", "platinum", "heating_oil", "5y_breakeven", "s&p_500"):
         card = json.load(open(os.path.join(ROOT, "data", "evidence", f"node.{node}.json")))
