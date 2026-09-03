@@ -99,12 +99,20 @@
 > four hundred folds. That was a genuine either-way test and it came back saying my registered
 > guesses were already about as good as this design gets.
 >
-> One thing did change, though, and it's the reason I don't describe the project as a flat
-> null. At the small sample the engine couldn't be distinguished from drawing historical
-> analogies *at random*. At the larger one it can — a small effect, but a real one. So the
-> honest verdict isn't "analogy doesn't work." It's that the retrieval step is underpowered and
-> its forecasts are too confident, and I can show both with a calibration diagnostic. Getting
-> to a more precise negative result is what the extra data bought.
+> One thing did move, though, and it's the reason I don't describe the project as a flat null.
+> At the small sample the engine couldn't be distinguished from drawing historical analogies
+> *at random*. On the larger one the estimate turns positive and lands right on the edge —
+> p = 0.052, and it doesn't survive the correction for testing nineteen things at once. So I
+> can't claim retrieval works. What I can say is that the result is *consistent with* a small
+> real signal the smaller sample was too weak to see, and that a calibration diagnostic shows
+> the forecasts are too confident — which is measured, where "underpowered" is inferred.
+> Getting to a more precise negative result is what the extra data bought.
+>
+> I'd flag one thing about that comparison if you pushed on it, because I got it wrong the
+> first time. My initial intervals treated ten thousand cells as ten thousand independent
+> observations, when six price series on the same date move together. Resampling whole dates
+> instead, the estimate barely moved but the p-value went from 0.010 to 0.052 — the finding
+> survived, the *strength* of it didn't. The inferential sample is 413 dates, not 10,857 cells.
 
 ## If they ask: "what would you do next?"
 

@@ -140,9 +140,10 @@ retrieved analogues: it scores **0.4626 against 0.4643**, paired difference −0
 *p* = 0.766. **The gain is pooling, not similarity.** The similarity metric — the entire idea
 of the engine — is doing no measurable work, which independently confirms §8's finding that
 the engine cannot separate from randomly drawn analogs. **§11.3.** *Scope: this is an
-escalation result at n = 150. On a companion price panel with thirteen times the effective
-evidence, retrieval does separate from random analogs (+0.010, p = 0.010) — so the honest
-reading is that the similarity step is underpowered here, not worthless (§14.1).*
+escalation result at n = 150. On a companion price panel with far more evidence, retrieval sits
+at the edge of detectability against random analogs (+0.010, p = 0.052, not surviving FDR) —
+consistent with a small real signal the event panel was too small to see, but not establishing
+one (§14.1).*
 
 **5. The engine's second claim, that shocks propagate along a physical chain, is a null with
 its own errata.** Across 477 node×shock cells, 21 transmit against 1–24 expected under no
@@ -890,7 +891,9 @@ Route 3 above is no longer hypothetical. A companion study
 observation a **date** rather than an event: 476 month-end grid dates from 1987-01-30 to
 2026-08-25, six price targets, five horizons, **10,857 scored cells**. Its effective sample
 size is computed rather than assumed — nominal counts are never reported as effective ones —
-and comes to **n_eff = 1,979**, against 249 for the event-triggered price panel. Roughly
+and comes to **n_eff = 1,979**, against 249 for the event-triggered price panel. Every
+interval and test below resamples **whole grid dates** (413 of them); the 10,857 is a cell
+count and is never used as an *n*. Roughly
 thirteen times the evidence, and enough that fitting parameters becomes legitimate under the
 registered floor (5 parameters, 100 effective units required, 989.5 available).
 
@@ -900,7 +903,7 @@ question every null invites, which is whether more data would have rescued the r
 
 **It would not. Fitting does not beat the registered constants.** With the block weights and
 the metric scale fitted by nested walk-forward cross-validation, the fitted model scores
-+0.0020 CRPS skill over the frozen engine, CI [−0.0067, +0.0110], DM *p* = 0.642. That is
++0.0013 CRPS skill over the frozen engine, CI [−0.0104, +0.0128], DM *p* = 0.820. That is
 §3.4's registered either-way answer, and it fell on the side of *the constants we registered
 were already at the achievable optimum*. The fitted weights do not converge: 15 distinct
 selections across 414 reads, the modal one taking only 24.9% of them — a fitted model whose
@@ -908,8 +911,8 @@ weights swing across folds is a different object from one whose weights settle, 
 registration required that trajectory be published for exactly this reason.
 
 **Against the base rate the grid engine still loses**, and by more than the event study did:
-CRPS skill −0.0720, CI [−0.0811, −0.0637], *p* < 0.001 on all six targets and all five
-horizons. Two diagnostics say most of that is an artefact of forecast *sharpness* rather than
+CRPS skill −0.0706, CI [−0.0826, −0.0587], *p* < 0.0001, surviving FDR on all six targets
+and all five horizons. Two diagnostics say most of that is an artefact of forecast *sharpness* rather than
 of forecast *content*. The Ferro size-corrected score, which charges a 12-atom forecast a
 penalty a large climatology pool never pays, moves the engine from 0.1573 to 0.1448 against
 climatology's 0.1459 — the sign flips. And the PIT histogram shows why: the fitted forecast is
@@ -917,22 +920,43 @@ U-shaped (1751 … 1532 across ten bins) where climatology is nearly flat (1178 
 twelve-analog distribution is too sharp, and the registered CRPS charges it for that. The gate
 score decides and the diagnostic sits beside it, unpromoted.
 
-**One result genuinely differs from the event study, and it qualifies Finding 4.** On the
-event-triggered panel the engine could not separate from randomly drawn analogs (escalation
+**One result points a different way from the event study, and it qualifies Finding 4 — but
+only to the edge of detectability, and the first version of this paragraph overstated it.** On
+the event-triggered panel the engine could not separate from randomly drawn analogs (escalation
 −0.021, *p* = 0.58; price −0.005, *p* = 0.85), and §11.3 found the retrieved analogues
-interchangeable with the class base rate. On the grid, with thirteen times the effective
-evidence, **retrieval does separate**: CRPS skill against random analogs of +0.0103, CI
-[+0.0022, +0.0184], *p* = 0.010. The similarity metric is doing measurable work here that it
-was not doing — or could not be shown to be doing — at n = 150.
+interchangeable with the class base rate. On the grid the point estimate is positive and the
+interval only just includes zero: CRPS skill against random analogs **+0.0102, CI [−0.0004,
++0.0212], *p* = 0.052**, and it does **not** survive the study's Benjamini–Hochberg correction
+across its 19 comparisons (*q* = 0.062, rank 16 of 19).
 
-So Finding 4 should be read as scoped, and this paper scopes it: *on the escalation target, at
-n = 150, the pooling and not the similarity is doing the work*. On the price target at
-n_eff ≈ 2,000, similarity contributes a small but detectable amount — while remaining far short
-of the base rate on the registered score. Neither result rescues the engine. Together they say
-something more precise than either: the retrieval step is not worthless, it is **underpowered
-and over-sharp**, and the honest description of this design is that it needs an order of
-magnitude more evidence and a wider predictive distribution before its central idea can be
-fairly judged.
+*Correction of record.* An earlier draft of this section reported +0.0103, CI [+0.0022,
++0.0184], *p* = 0.010 for this comparison and described the similarity metric as doing
+"measurable work". Those intervals were computed on the flattened 10,857-cell vector with a
+block length derived from dates — but adjacent entries in that array are *different targets on
+the same date*, correlating about 0.9, so the bootstrap resampled blocks that were not blocks
+in time and the test saw roughly 10,857 quasi-independent observations where the study's own
+arithmetic says there are far fewer. Re-run with **whole dates resampled together**, so that
+all cells of a date move as one, the point estimate barely moves (+0.0103 → +0.0102) and the
+inference changes: the interval crosses zero. The inferential *n* is **413 grid dates**;
+10,857 is a cell count and is not an *n*. This was the same defect — nominal reported as
+effective — that §14.1 exists to warn about, found in this study's own inference rather than in
+its counting.
+
+So Finding 4 is scoped, and scoped more narrowly than the first draft scoped it: *on the
+escalation target, at n = 150, the pooling and not the similarity is doing the work.* On the
+price grid the result is **consistent with retrieval carrying a small real signal that the
+event panel was too small to see — it does not establish one.** A *p* of 0.052 sitting beside a
+PIT histogram that shows the forecast is too sharp tells a coherent story about why the effect
+is borderline; a *p* of 0.010 would have invited the reader to ask why we did not simply claim
+skill.
+
+Two cautions belong in this paragraph rather than a footnote. First, the two panels differ in
+**unit** (event vs date), **target** (escalation vs price), **score** (Brier vs CRPS) *and*
+sample size, so power is one of four things that changed and not a demonstrated cause. Second,
+"over-sharp" is **measured** — the PIT histogram shows it — while "underpowered" is
+**inferred**. The defensible joint statement is that the retrieval step is over-sharp and
+plausibly underpowered rather than worthless, and that this design needs a wider predictive
+distribution and more evidence before its central idea can be fairly judged.
 
 ## 15. The integrity record
 

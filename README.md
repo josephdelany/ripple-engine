@@ -195,15 +195,20 @@ enough that fitting parameters becomes legitimate rather than overfitting.
 
 **Fitting did not help.** With the block weights and metric scale fitted by nested
 walk-forward cross-validation, the fitted model beats the frozen registered constants by
-**+0.002 CRPS skill, *p* = 0.642** — a registered either-way test that fell on the side of
+**+0.001 CRPS skill, *p* = 0.820** — a registered either-way test that fell on the side of
 *the constants were already at the achievable optimum*. The fitted weights never converge:
 15 distinct selections across 414 reads, the modal one taking 24.9%.
 
-**But one thing changed.** At n = 150 the engine could not separate from randomly drawn
-analogs. At n_eff ≈ 2,000 it does: **+0.010, *p* = 0.010**. The retrieval step is not
-worthless — it is underpowered and its predictive distribution is too sharp, which the PIT
-histogram and a size-corrected score both say directly. That is a more precise verdict than
-the flat null, and it took thirteen times the data to earn it.
+**And one thing moved, to the edge of detectability.** At n = 150 the engine could not
+separate from randomly drawn analogs at all. On the grid the point estimate turns positive
+and the interval only just includes zero: **+0.010, CI [−0.0004, +0.021], *p* = 0.052**, not
+surviving the study's own multiplicity correction. That is *consistent with* retrieval
+carrying a small real signal the event panel was too small to see — it does not establish one.
+The PIT histogram independently shows the forecast is too sharp, which is a measured fact
+where "underpowered" remains an inference.
+
+All inference resamples whole grid dates: **413 dates** is the inferential *n*, and the 10,857
+cells are a cell count, never an *n*.
 
 The open problem is *n*: 150 scored escalation reads against a measured requirement of
 ~1,200. The registered route was backwards — expand the pre-1987 corpus — and that route is

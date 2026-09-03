@@ -113,9 +113,11 @@ inside the pool, if anything marginally better (paired −0.004, *p* = 0.766).
 *n* — and it has now been partly tested. A companion grid study makes the unit a **date**
 rather than an event: 476 month-end dates, 10,857 scored cells, effective *n* **1,979** against
 249 for the event panel. **Fitting the model did not beat the registered constants**
-(+0.002 CRPS, *p* = 0.642) — a genuine either-way test, answered against the fitted model. But
-retrieval, which could not separate from random analogs at n = 150, does separate at n ≈ 2,000
-(**+0.010, *p* = 0.010**). The design is underpowered and over-sharp rather than empty.
+(+0.001 CRPS, *p* = 0.820) — a genuine either-way test, answered against the fitted model. And
+retrieval, which could not separate from random analogs at all at n = 150, reaches the edge of
+detectability here (**+0.010, *p* = 0.052**, not surviving FDR): consistent with a small real
+signal the event panel was too small to see, not establishing one. Inference is on **413 grid
+dates**, never on the 10,857 cells.
 
 *n*. 150 scored reads against ~1,200 required. Expanding the corpus backwards is measured
 shut — six pre-1974 records at full sourcing standard buy zero scored reads, and pre-1973
