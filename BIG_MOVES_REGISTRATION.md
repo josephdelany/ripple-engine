@@ -64,3 +64,64 @@ cluster window 365 days; same-sign merge within 180 days; onset = the extreme
 within [end − W months, end]; attribution = corpus events knowable within
 [onset − 31 days, end], lag from onset, ANTICIPATED if lag > 60 days. Every
 monthly number is labelled "monthly resolution"; the two tiers are never pooled.
+
+## Amendment 4 — 2026-09-03, session H, on Joe's ruling: the code never implemented §3, and the registered rule becomes the primary result
+
+Registered BEFORE the re-run. The reading in "How the two windows combine" below is fixed here so
+it cannot be chosen after seeing which reading gives the nicer number.
+
+### The discrepancy
+`§3` (as revised by Amendments 1–2, which changed the onset/end definitions but never the cluster
+window and never added a merge) registers, for the daily tier:
+
+> consecutive qualifying dates within **60 trading days** of an episode's start belong to that
+> episode
+
+`src/big_moves.py` has, since its first line of history:
+
+    CLUSTER_DAYS = 90    # compared with (d2 - d1).days -> CALENDAR days, not trading days
+    MERGE_DAYS  = 60    # a same-sign merge step across the 20d and 60d windows
+
+Three deviations, not one: the window is **90 not 60**, it is counted in **calendar not trading
+days** (so 90 calendar ≈ 62 trading — the label `unit="trading days"` in `TIERS["daily"]` is simply
+wrong), and there is a **merge step that §3 does not contain at all**. A same-sign merge *is*
+registered — in Amendment 3, for the **monthly** tier only, at 180 days. It was never registered for
+the daily tier.
+
+### The history, stated plainly because git cannot
+`BIG_MOVES_REGISTRATION.md` and `src/big_moves.py` both first appear in the same commit,
+`594d2fa` ("v2 day-1"). There is therefore **no commit in which the registration exists and the code
+does not**, and the project's central discipline — registered before computed — cannot be
+demonstrated from history for this file. Worse, the code has *never* agreed with the registration:
+the 90/merge values are present in that first commit. So this is not drift introduced later; either
+the registration was written to describe an intent the code never had, or the code was written
+without reading §3. Which of the two is unknowable now, and this amendment does not guess.
+
+### How the two windows combine — the ambiguity, settled before computing
+§1 computes returns over **both** a 20-day and a 60-day window and §2 thresholds each against its
+own distribution, but §3 says only "consecutive qualifying dates" and never says whether the two
+windows' qualifying dates are one set or two. The as-computed code resolved this with the merge step
+— the original comment reads "20d and 60d episodes with onsets this close and same sign merge" —
+i.e. the merge exists to solve a problem §3 leaves open, which is why it cannot simply be deleted.
+
+The registered rule is therefore read **literally and in the only way that needs no unregistered
+step**: the qualifying dates from both windows are pooled into one ordered set, and that set is
+clustered once, within 60 trading days of the episode's start. No merge. Onset and end follow
+Amendment 1 (end = date of maximal |trailing return| in the cluster; onset = the price extreme
+within [end − W, end], W taken from the window of the maximal date). This reading is recorded here
+before the re-run.
+
+### The ruling (Joe, 2026-09-03)
+1. The **REGISTERED** rule is the primary result. Every published figure is computed under it.
+2. The **AS-COMPUTED** rule is published beside it, labelled, so the change is visible and the old
+   numbers are not silently retracted.
+3. Neither is chosen after the fact, and no threshold moves in either.
+
+### What this is expected to move
+The episode count and everything built on it: `no_identified_event` and the "15 of 43" figure
+carried by `README.md`, `docs/BRIEF.md` and `docs/PAPER_DRAFT.md`; `p_class_given_big`;
+`p_big_given_class` and `everyday_base_rate_pct`, which are the **materiality gate's inputs**
+(CLAIM_LEDGER_REGISTRATION.md §1), so MATERIAL/IN LINE/NOISE calls may change too. Both sets are
+published in `data/big_moves/<asset>.json` under `registered` and `as_computed`, and the surfaces
+are updated by Joe once both are in hand. Nothing here changes a threshold, an attribution window or
+the top-5% cut.
