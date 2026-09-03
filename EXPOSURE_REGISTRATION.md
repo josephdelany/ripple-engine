@@ -1,0 +1,97 @@
+# EXPOSURE & VULNERABILITY — registration, written before any code
+
+*2026-09-03. Committed before `src/exposure.py` and before any field is filled. Verdict words and
+exclusion rules fixed here.*
+
+## §0 What this is
+
+`docs/VISION_AND_BUILD.md` established that the project's environment vector is 13 macro-financial
+fields and 4 dyad flags, and that the missing layer is physical. `PHYSICAL_EXPOSURE_REGISTRATION.md`
+registered the country-level exposure study. **This registration adds the layer that was designed
+into the schema and never filled:** `events.sr_target_capacity` is populated for all 313 events with
+the literal string `"unknown"`, and `sr_asset_role` is `"unknown"` for 271 of 313.
+
+The project is hereby stated in the architecture it has always implied — the four modules of a
+catastrophe model (NAIC; Casualty Actuarial Society), with the retrieval step being reference-class
+forecasting in Flyvbjerg's sense:
+
+| module | supplies | status |
+|---|---|---|
+| **Hazard** | the event catalogue and reference-class retrieval | built: 313 events, walk-forward, sealed reads |
+| **Vulnerability** | capacity affected → duration of outage | **this registration** |
+| **Exposure** | which asset, what capacity, what criticality | **this registration** (history) + intake schema (live) |
+| **Financial** | volume-days lost → price and margin response across the complex | built: 53-node propagation |
+
+## §1 Scope, stated so it cannot be overread
+
+Exposure is populated **only for the 75 events whose class involves a physical asset** — 48
+`infrastructure_attack` and 27 `chokepoint_disruption`. The other 238 events (sanctions, policy
+response, OPEC decision, conflict escalation, demand shock) have no damaged facility and are
+**out of scope by construction, not by omission**. Every result from this layer is a result about
+75 events and is reported as such.
+
+## §2 The schema — 6 required, 6 optional, and the rule that makes it defensible
+
+Required (an event is `COMPLETE` only with all six):
+
+| field | unit | note |
+|---|---|---|
+| `asset_name` | text | the specific refinery, terminal, field, pipeline or chokepoint |
+| `asset_type` | enum | refinery · terminal · field · pipeline · chokepoint · processing · storage |
+| `capacity_nameplate_kbd` | kb/d | the asset's capacity **at the time of the event**, not today |
+| `capacity_affected_kbd` | kb/d | capacity taken offline by this event |
+| `days_to_partial_restore` | days | to first material resumption |
+| `days_to_full_restore` | days | to pre-event capacity; `ongoing` permitted with a stamp date |
+
+Optional — filled only where a source volunteers them, never inferred: `operator`,
+`country_iso3`, `export_share_pct`, `downstream_dependency`, `alt_routing_available`,
+`prior_incidents_same_asset`.
+
+Provenance, required on every filled numeric field: `source_url`, `source_publisher`,
+`source_date`.
+
+> **THE RULE. Every figure names a source and a date, or the field stays `unknown`.**
+> No estimate, no interpolation, no "approximately", no inference from a neighbouring event. An
+> event with six sourced fields is worth more than an event with eighteen where one is a guess,
+> because the guess is invisible downstream. This is the failure that produced `severity` — an
+> unsourced analyst ordinal that Amendment C-1 now bars from carrying magnitude — and it will not
+> be repeated in the variable built to replace it.
+
+**Vintage.** `capacity_nameplate_kbd` must be the figure as of the event date, from a source
+published before or contemporaneous with it where one exists; where only a later source gives the
+figure, `source_date` records that and the value is flagged `retrospective: true`. Capacity changes
+slowly, so retrospective capacity is admissible **as a covariate** and inadmissible for any claim
+about what was knowable at *t*. A test asserts the flag is carried.
+
+## §3 The two-stage model, registered because the naive version leaks
+
+Realised duration is an **outcome**, not a predictor. Regressing price on realised duration would
+be leakage of the class Amendment H caught. Therefore:
+
+- **Stage 1 (vulnerability).** `duration ~ capacity_affected + capacity_share + asset_type + context`.
+  Fitted walk-forward: each event predicted from events strictly before it. Published with its *n*.
+- **Stage 2 (financial).** Price and margin response regressed on **predicted volume-days lost**
+  from Stage 1 — never on realised duration.
+- A test asserts no Stage 2 regressor derives from an outcome observed at or after the event.
+
+## §4 The live read — the deliverable
+
+`read(exposure) → distribution`. Given a supplied exposure conforming to §2, retrieve comparable
+historical cases **by exposure similarity**, and return the duration distribution and the
+price/margin distribution across the complex, each with its *n* and its reference class named. This
+is the operator-supplied exposure module of a catastrophe model, and it is what makes the project an
+instrument rather than a study.
+
+**Registered constraint:** the read returns **historical frequencies with their *n*, never an
+occurrence probability**, per the project's standing rule. A read with fewer than 5 comparable cases
+returns `no adequate precedent` as a first-class state.
+
+## §5 Verdict words, fixed now
+
+- **VULNERABILITY MODELLED** iff Stage 1 beats a class-mean baseline out of sample on duration.
+- **PHYSICAL MAGNITUDE CARRIES** iff Stage 2 with predicted volume-days beats the class dummy, with
+  the dummy's coefficient moving toward zero when both are present.
+- **NO ADDITION** is a permitted outcome for either stage and is **not** a failure of the study.
+- Coverage is reported before any estimate: how many of 75 reached `COMPLETE`, and the exclusion
+  table for the rest. **If fewer than 30 reach `COMPLETE`, Stage 1 is reported as descriptive only
+  and no verdict is issued** — registered now so it cannot be waived later.
