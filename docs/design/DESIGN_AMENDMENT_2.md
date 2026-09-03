@@ -134,6 +134,26 @@ the fact — not merely about this corpus.
 
 ---
 
+## A2.6b — The record bar's verdicts carry §2 colour, and the colour is read from the interval
+
+**Defect, found when run `walk_20260903T052633Z` replaced `walk_20260903T003422Z`.** §5 says the record
+bar's "two verdicts [are] in Evidence tier **with their colour from §2**". They were rendered as plain
+text with no colour at all, so the bar could not distinguish the three states §2 registers.
+
+It stopped being cosmetic with this run. Escalation against climatology moved from
+skill −0.097, CI [−0.180, −0.018] — **excluding zero**, the amber "engine worse" state — to
+skill −0.084, CI [−0.175, **+0.004**], *p* 0.076 — **crossing zero**, the neutral state. Price against
+climatology stayed at −0.074, CI [−0.140, −0.021], *p* 0.011, which still excludes zero and stays amber.
+A bar that colours neither cannot show that one of the two verdicts changed state, and a bar that coloured
+by the sign of the estimate would have shown both as amber and been wrong about escalation.
+
+**Registered.** The record bar's verdict fields take their colour from the **interval**, through the same
+`verdictOf()` the forest rows use: crosses zero → neutral grey; excludes zero and worse → amber; excludes
+zero and better → green. Never from the point estimate, never from the *p*-value, and never from the status
+string's wording. **[T]**
+
+---
+
 ## A2.7 — Five screens become four, ordered as an argument
 
 **Defect.** Feed / Story / Big moves / Ledger / Walk mirrors the pipeline, not a reader's question.
@@ -273,6 +293,26 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 | `res.ledger` | *"At {n} resolved claims the record and the narrative are not distinguishable."* | `ledger.with_record_call` | when the paired interval crosses even odds |
 | `res.ledger.sep` | *"On {n} resolved claims the {who} is right more often."* | `ledger.with_record_call`; {who} from the sign of the paired interval | when it excludes even odds |
 | `res.ledger.empty` | *"No claim has reached its horizon yet."* | — | when `ledger.with_record_call` is 0 |
+
+**Addition, 2026-09-03, registered before the code.** Joe's brief of this date: *"The 90-second landing
+screen should state the three conditions from paper §1.1 — that is now the project's frame and the desk
+should lead with it."* PAPER_DRAFT §1.1 registers C1 observability, C2 density, C3 non-degeneracy, and
+reports that all three fail on this corpus. The landing screen leads with them.
+
+| id | template | slots → source paths | when |
+|---|---|---|---|
+| `res.frame` | *"A state-conditioned analog forecaster needs three things. On this record none of them holds, and each failure is measured."* | — (fixed) | always |
+| `res.c1` | *"Observability. {a} of {b} events have no state that was knowable at the forecast date."* | `vintage.events_with_no_situation_field_at_t`, `vintage.events` | always |
+| `res.c2` | *"Density. The monthly tier scores {a} of its {b} reads: every class sits below the registered burn-in of {c}."* | `walk.monthly_scored`, `walk.monthly_reads`, `walk.burn_in` | always |
+| `res.c3` | *"Non-degeneracy. Persistence beats the engine on Brier by {a}, and {b}% of the change target is exactly zero."* | `walk.G.persistence.skill_abs`, `delta.share_zero_pct` | always |
+| `res.frame.close` | *"Each is a property of the record, not of the reasoning."* | — (fixed, §1.1's own words) | always |
+
+**What C2 does NOT say, and why.** §1.1's table also gives *"median analog pool 8 in 1987–99 against 36 in
+2020–26"*. That comparison exists in the paper's prose and in **no machine-readable file in the repo** — I
+looked. §6 forbids a number whose file is not reachable in one click, so the desk states the half of C2 that
+is sourced (`data/walk_forward/summary.json`: monthly `n_scored_burn_in` 0 of `n_reads` 14, against
+`registered.burn_in` 8) and stays silent on the era comparison until something computes it to a file. The
+sourced half is the operative one: it is why the historical arm scores nothing.
 
 ### A.2 — How you'd catch us
 
