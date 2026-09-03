@@ -54,6 +54,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "oil.db"
 OUT_DIR = ROOT / "data" / "spine"
 
+# Text below this line in AUDIT.md is hand-written and preserved when the file is
+# regenerated. Everything above it is computed.
+APPEND_SENTINEL = "<!-- APPENDED BELOW: hand-written, preserved across regeneration -->"
+
 # Text that marks a record as still carrying drafting scaffolding rather than a finished
 # narrative. Matched case-insensitively against the description.
 PLACEHOLDER_MARKERS = ("deep-history tier", "draft coding", "placeholder", "todo")
@@ -394,7 +398,18 @@ def main() -> None:
 
     md, payload = build_report(rows)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "AUDIT.md").write_text(md, encoding="utf-8")
+
+    # Anything below the sentinel is hand-written and survives regeneration. The
+    # generated tables above it are always rebuilt from the database, so a dated record
+    # of a repair can live in the same file as the live numbers without either one
+    # silently overwriting the other.
+    out = OUT_DIR / "AUDIT.md"
+    appended = ""
+    if out.exists():
+        prev = out.read_text(encoding="utf-8")
+        if APPEND_SENTINEL in prev:
+            appended = "\n" + APPEND_SENTINEL + prev.split(APPEND_SENTINEL, 1)[1]
+    out.write_text(md + appended, encoding="utf-8")
     (OUT_DIR / "audit.json").write_text(json.dumps(payload, indent=1), encoding="utf-8")
 
     o = payload["overall"]

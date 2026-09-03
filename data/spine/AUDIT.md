@@ -1,6 +1,6 @@
 # Spine audit — the honest baseline
 
-*Generated 2026-09-03T00:02:11+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
+*Generated 2026-09-03T00:45:20+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
 Session E, step E-1: published before any record is rewritten, so the repair can be
 scored against a number rather than an impression. Every figure below is computed;
 none is asserted. Re-run the script to regenerate this file.*
@@ -148,49 +148,103 @@ field values were derived from this corpus, so they cannot be evidence about it.
 
 `data/spine/audit.json` carries the same numbers per event for later runs to diff.
 
----
+<!-- APPENDED BELOW: hand-written, preserved across regeneration -->
 
-## Archive reach — 2026-09-02 (session A; appended, not generated)
+# 2026-09-02 — the pre-2000 repair, before and after
 
-> **2026-09-02 — 27 post-2000 encyclopaedia-only records, 4 routes consulted each (9 probed in all),
-> 0 replaced by a primary document, 19 with nothing found, 8 places to look, 0 unexplained.**
+*Session E. The tables above are regenerated from the database on every run of
+`src/spine_audit.py`; this section is written by hand and preserved. It records what four
+applied patches changed, what is still open, and what cannot be repaired at all.*
 
-Every corpus event whose only citation is an encyclopaedia and whose date is 2000 or later was put
-through every primary-document route reachable without a key. Not one could be replaced. This is a
-result about **archive reach**, not about effort and not about whether the sources exist: for each
-record the routes either answered and held nothing, or were out of coverage for a stated reason.
+## What was done
 
-| outcome | n |
-|---|---|
-| closed-primary (a dated government document naming the event) | **0** |
-| press_candidate (a dated article sharing the event's terms — a place to look, never a repair) | 8 |
-| none_found (every reachable route answered, and held nothing) | 19 |
-| partial / blocked-by-declassification | 0 / 0 |
+All 35 pre-2000 records were taken to `SPINE_REGISTRATION.md`: a dossier each under
+`data/dossiers/`, 31 of 35 passing `src/spine_check.py`, 4 honest partials, none claiming
+more than it shows. Four patches were then applied on Joe's line
+(`src/spine_apply.py --approved-by joe`), each backed up and applied in one transaction:
+`pre1990_a` (29 rows), `pre1990_b` (13), `1990s_a` (7), `1990s_b` (17) — **66 field changes
+applied, 13 rows flagged and left open**.
 
-By decade: 2000s 11 none-found · 2010s 5 none-found · 2020s 8 press candidates, 3 none-found.
+## Before and after, by decade
 
-**The 108 route calls behind it (27 records × 4 routes)**
+Baseline is the audit committed at `2dd291f`, before any record was rewritten.
 
-| route | answered, no hit | hit | out of coverage | why out of coverage |
+| decade | n | ≥2 source domains | bare site-root URL | encyclopaedia-only | drafting scaffolding |
+|---|---|---|---|---|---|
+| 1970s | 8 | 0 → **7** | 3 → **1** | 0 → 0 | 8 → **5** |
+| 1980s | 11 | 0 → **5** | 6 → **2** | 0 → 0 | 10 → **5** |
+| 1990s | 16 | 0 → **10** | 0 → 0 | 4 → **1** | 6 → **4** |
+| 2000s | 43 | 0 → 0 | 0 → 0 | 11 → 11 | 4 → 4 |
+| 2010s | 85 | 0 → 0 | 0 → 0 | 5 → 5 | 11 → 11 |
+| 2020s | 150 | 0 → 0 | 0 → 0 | 11 → 11 | 10 → 10 |
+| **total** | **313** | **0 → 22** | **9 → 3** | **31 → 28** | **49 → 39** |
+
+The encyclopaedia column's baseline was measured when that check was added, a few commits
+after `2dd291f`; every other baseline is from `2dd291f` itself. The post-2000 rows are
+unchanged because they are Session A's half of the repair, not E's.
+
+The first column is the one that matters. The codebook's two-source rule had been an
+admission standard the corpus had never met in a single record. Twenty-two records now
+meet it, all of them pre-2000.
+
+## Still open: the 13 rows flagged `needs_joe`
+
+None of these was decided by Session E. Each is a judgement, an unresolved conflict between
+sources, or a value no source supports.
+
+| # | batch | record and field | now | what the dossier says |
 |---|---|---|---|---|
-| FRUS | 0 | 0 | 27 | volumes stop in the early 1990s |
-| Federal Register | 27 | 0 | 0 | in coverage (1994→); held nothing — these are mostly non-US events |
-| UK National Archives | 10 | 0 | 17 | the UK 20-year rule: files from 2006 on are not open |
-| GDELT DOC 2.0 | 4 | 8 | 15 | coverage begins 2017 |
+| 1 | pre1990_a | `iran_oilworkers_strike_1978`.type | `infrastructure_attack` | a labour strike is not a "direct strike" on infrastructure; no closed-set class fits |
+| 2 | pre1990_b | `kharg_strikes_1985`.event_date | 1985-08-15 | the single retrieved source says 14 August; do not change on one source |
+| 3 | pre1990_b | `kharg_strikes_1985`.date_precision | day | hangs on the one-day discrepancy above |
+| 4 | pre1990_b | `opec_price_collapse_1986`.event_date | 1986-01-01 | do not set a single day; `1985-12` if a value is required |
+| 5 | pre1990_b | `opec_price_collapse_1986`.date_precision | day | month: no day is pinnable in either the September or December 1985 window |
+| 6 | pre1990_b | `bridgeton_mine_strike_1987`.surprise | 3 | borderline 2–3; do not change silently |
+| 7 | pre1990_b | `praying_mantis_1988`.surprise | 3 | possibly overstated given the October 1987 precedent |
+| 8 | pre1990_b | `iran_iraq_ceasefire_1988`.type | `policy_response` | unsupported by the evidence, and no closed-set class fits a de-escalation |
+| 9 | 1990s_a | `iraq_invades_kuwait_1990`.surprise | 5 | the evidence supports the existing code |
+| 10 | 1990s_a | `desert_storm_air_campaign_1991`.description | draft text | drop the "DRAFT coding" language; the substance is accurate |
+| 11 | 1990s_a | `ilsa_sanctions_1996`.description | "$20M/yr" | the $20M/$40M split is not in the statute text; both sources give $40 million |
+| 12 | 1990s_b | `opec_cut_june_1998`.source_url | Wikipedia | no replacement retrievable; the dossier recommends unsetting rather than keeping it |
+| 13 | 1990s_b | `opec_cut_june_1998`.confidence | high | assigned on the strength of a now-disqualified source |
 
-**Routes probed and their state:** wired — FRUS (1945→early 1990s), Federal Register (1994→),
-UK National Archives (file-level only, 20-year rule), GDELT DOC 2.0 (2017→). Reachable but not wired —
-govinfo (needs an `api.data.gov` key; the shared `DEMO_KEY` cap would throttle a run and read as an
-absence). Not reachable by script — CIA CREST (search needs JavaScript), UN Security Council and UN
-Digital Library (403 / JS challenge), OPEC archive (403), US NARA catalog (JavaScript app shell).
+A fourteenth question is open without being a patch row: `iran_iraq_ceasefire_1988` is dated
+1988-08-20, the day the ceasefire took effect, while the UN's own mission history records the
+Secretary-General announcing it on 8 August "with effect from 0300 GMT on 20 August". The
+codebook dates an event to the first day the market could have known. The dossier flagged
+this rather than proposing it, so no change was applied.
 
-**Read across:** for a non-US event between 2000 and 2016 there is no free route that can supply a
-primary document — FRUS has ended, the UK files are not open, GDELT has not begun, and the Federal
-Register covers only US federal action. That window is the whole of the gap, and it is why the
-automatic second-source pass over the 473 post-1987 candidates returned "absent" for 438 of them.
-That figure measures our reach, not the historical record.
+## What cannot be repaired, and why
 
-*This section is appended by hand and is **not** produced by `src/spine_audit.py`; regenerating this
-file drops it. The same content, with endpoints and the per-record index, is kept at
-`data/spine/archive_reach_2026-09-02.md` — restore from there, or have the generator include it
-(handoff `data/handoffs/A_to_E_2026-09-02_archive_reach.md`).*
+**Four records are blocked by declassification, not by effort.** `iran_revolution_1979`
+needs *Foreign Relations of the United States* Volume X (Iran, January 1977 – November 1979);
+`tanker_war_1984`, `kharg_strikes_1985` and `iraq_kharg_1986` need FRUS 1981–1988 Volumes XX
+and XXI (Iran, Iraq). All three volumes were checked directly and are marked "Being Cleared":
+they are not published. These records rest on scholarly secondary sources and will stay
+`partial` until the United States declassifies the volumes. No route table, subscription or
+further searching changes that.
+
+**Twenty-eight records have no citable domain at all.** They cite an encyclopaedia and
+nothing else, which the codebook's own inclusion criterion 2 — "a primary or major-wire
+source exists. No source = not in the dataset" — does not admit. All 28 are post-2000 and
+belong to Session A's half of the repair. Ten of them are OPEC decisions, which is the
+hardest case: `opec.org` returns HTTP 402, the Oxford Institute for Energy Studies 403, the
+Congressional Research Service 403, and the Associated Press refuses the client, so the
+class that most needs re-sourcing is the class with no free route to a document
+(`SPINE_REGISTRATION.md` Amendment 2).
+
+**One record has now proved that constraint individually.** `opec_cut_june_1998` defeated
+about twenty documented retrieval routes — OPEC, Oxford, the EIA, the IEA, the IMF, the
+Congressional Research Service, UPI, the BIS, FRASER, the Federal Reserve, GovInfo including
+a full Congressional Record day and the API, the Internet Archive, and three search engines.
+None named a June 1998 OPEC decision. Its Wikipedia citation therefore stands, flagged, and
+the dossier recommends unsetting the field rather than keeping a source the codebook does not
+admit. It is the clearest single instance of the general problem: for OPEC decisions the
+corpus cannot currently be repaired by any free route, and closing them needs an archive the
+project does not have.
+
+**One measure did not move and should not be explained away.** `descriptions ≥ 700 chars`
+went from 0 to 1. The 120–250 word narratives live in the dossiers; what a patch writes into
+`events.description` is a one-paragraph summary. Either the corpus row should carry the
+narrative, which is a further patch, or `SPINE_REGISTRATION.md` §7 is counting the wrong
+artifact. The measure was not redefined to make it pass.
