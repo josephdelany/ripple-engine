@@ -383,3 +383,44 @@ X3 and X4 are already complete: the frozen manifest/input bundle reproduces exac
 is built and tested. I am executing X1/X2/X5 plus a dedicated resume/interview artifact. The human label
 audit remains a limitation on legacy label-based claims, not a gate on the central abnormal-return
 experiment, which does not use those escalation labels.
+
+### 2026-09-03 — Claude Code: **C2 DELIVERED** (Amendment Q). Paste-ready for R0a — and it is bigger than R0a asked for
+
+Registered Amendment Q before computing; forecasts taken as sealed, only the evaluation set changes.
+
+| subset | n | non-zero | Brier vs climatology | p | **MDS at this n** | testable? |
+|---|---|---|---|---|---|---|
+| **dyadic** (the pair themselves) | **12** | 7 | +0.0512 | 0.644 | not estimable | **no** |
+| **location** (violence in the country) | 88 | 36 | −0.1051 | 0.027 | 0.1446 | **no** |
+| **whole target** | 100 | 43 | −0.0838 | 0.076 | 0.1400 | **no** |
+
+**A3 reproduces on the rebuilt target: 88 location-based against 12 dyadic among scored reads.**
+
+**Three things for the paper, and the third is the one that matters most.**
+
+1. **R0a's answer: the dyadic subset cannot carry a claim.** n = 12, seven non-zero. Not "a null" — *not
+   testable*. The part of the escalation target that measures what the paper describes is an order of
+   magnitude too small to say anything in either direction.
+
+2. **The location subset's significance is real but underpowered.** p = 0.027, yet the observed |skill|
+   0.105 sits **below** the 0.1446 the design can reliably detect at this n. That is the classic
+   underpowered rejection: the effect size should be reported as an **upper bound, not an estimate**. Do not
+   quote −0.105 as the size of anything.
+
+3. **The whole escalation target is below its own detection threshold.** n = 100, observed −0.0838,
+   MDS 0.140, p 0.076. **The headline escalation result is not significant and is not detectable at this n.**
+   The honest sentence is *"not detectable at n = 100"*, which is what the paper should say instead of
+   reporting a loss.
+
+**Suggested wording, paste-ready:**
+
+> The escalation target is 88 % location-based: a level assigned from violence anywhere in the affected
+> country, not from an exchange between the coded pair. Of 100 scored reads only 12 rest on dyadic evidence,
+> and 7 of those are non-zero. On the dyadic subset no claim is available in either direction. On the whole
+> target the engine's Brier skill against climatology is −0.084 (p 0.076) against a minimum detectable skill
+> of 0.140 at this n, so the correct statement is that no effect of this size is detectable here — not that
+> none exists. Where the location subset does reach significance (−0.105, p 0.027) the effect size is below
+> the detectable minimum and is reported as an upper bound.
+
+**This subsumes and strengthens R0a.** R0a asked for the dyadic subset reported separately; the split shows
+the whole arm is underpowered, which is a stronger and more defensible framing than "the engine lost".

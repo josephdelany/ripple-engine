@@ -5167,6 +5167,151 @@
       }
      },
      "limit": "n falls from 100 to 79, so every interval widens; min_tier_n 30 is still met but the measured minimum detectable skill at the published n = 150 was already 0.127. A diagnostic on a SEALED run, not a new run, and not the run the paper reports."
+    },
+    "diagnostic_basis": {
+     "amendment": "WALK_FORWARD_PROTOCOL.md Amendment Q (2026-09-03); addresses docs/audit/01_TIER1_design_defects.md A3 and remediation R0a",
+     "registered": true,
+     "standing": "DIAGNOSTIC -- gates nothing; the whole-target numbers stand",
+     "derived_from_run": "walk_20260903T052633Z",
+     "forecasts": "taken as sealed; only the evaluation set changes",
+     "subsets": {
+      "dyadic": {
+       "n": 12,
+       "n_nonzero": 7,
+       "mean_block": 1.0,
+       "hac_lag": 0,
+       "brier_vs_climatology": {
+        "n": 12,
+        "skill": 0.051213660731769584,
+        "ci95": [
+         -0.1675612752873748,
+         0.23603563861779708
+        ],
+        "dm_p": 0.6442928167027098
+       },
+       "mds_skill_at_this_n": null,
+       "testable": false,
+       "reading": "NOT TESTABLE AT THIS n: the smallest skill detectable here is None, larger than the observed 0.0512. This subset cannot support a claim in either direction (Q.3).",
+       "brier_vs_persistence": {
+        "n": 12,
+        "skill": -1.119279236554358,
+        "ci95": [
+         -29.698178805625,
+         -0.028269862446548295
+        ],
+        "dm_p": 0.07385866079533687
+       },
+       "rps_vs_climatology": {
+        "n": 12,
+        "skill": -0.004767675854156828,
+        "ci95": [
+         -0.20416885886541314,
+         0.1906027670732982
+        ],
+        "dm_p": 0.964616050068694
+       },
+       "rps_vs_persistence": {
+        "n": 12,
+        "skill": -1.4738017469302993,
+        "ci95": [
+         -55.34698253409092,
+         0.024105267915978574
+        ],
+        "dm_p": 0.09353841459212364
+       }
+      },
+      "location": {
+       "n": 88,
+       "n_nonzero": 36,
+       "mean_block": 1.52,
+       "hac_lag": 1,
+       "brier_vs_climatology": {
+        "n": 88,
+        "skill": -0.10511692999843048,
+        "ci95": [
+         -0.20474249010099255,
+         -0.01617085868746929
+        ],
+        "dm_p": 0.02739669263758282
+       },
+       "mds_skill_at_this_n": 0.1446,
+       "testable": false,
+       "reading": "NOT TESTABLE AT THIS n: the smallest skill detectable here is 0.1446, larger than the observed -0.1051. This subset cannot support a claim in either direction (Q.3).",
+       "brier_vs_persistence": {
+        "n": 88,
+        "skill": -0.238915625594329,
+        "ci95": [
+         -0.6306727948518054,
+         -0.0009805958987926145
+        ],
+        "dm_p": 0.05921942699433069
+       },
+       "rps_vs_climatology": {
+        "n": 88,
+        "skill": -0.0028876248212590383,
+        "ci95": [
+         -0.12402156095188072,
+         0.10325866453031352
+        ],
+        "dm_p": 0.9583644797811359
+       },
+       "rps_vs_persistence": {
+        "n": 88,
+        "skill": -0.11710304707704067,
+        "ci95": [
+         -0.5453984324545437,
+         0.15441483781019902
+        ],
+        "dm_p": 0.44071125861266314
+       }
+      },
+      "all": {
+       "n": 100,
+       "n_nonzero": 43,
+       "mean_block": 1.54,
+       "hac_lag": 1,
+       "brier_vs_climatology": {
+        "n": 100,
+        "skill": -0.08380646019657534,
+        "ci95": [
+         -0.17722920464339117,
+         0.003832474185052048
+        ],
+        "dm_p": 0.07577512054768887
+       },
+       "mds_skill_at_this_n": 0.14,
+       "testable": false,
+       "reading": "NOT TESTABLE AT THIS n: the smallest skill detectable here is 0.14, larger than the observed -0.0838. This subset cannot support a claim in either direction (Q.3).",
+       "brier_vs_persistence": {
+        "n": 100,
+        "skill": -0.3035349358128998,
+        "ci95": [
+         -0.7529513006789693,
+         -0.05499491024006914
+        ],
+        "dm_p": 0.024838631463994787
+       },
+       "rps_vs_climatology": {
+        "n": 100,
+        "skill": -0.0030556294938679507,
+        "ci95": [
+         -0.11760595618208125,
+         0.09402280450946456
+        ],
+        "dm_p": 0.9543000107237987
+       },
+       "rps_vs_persistence": {
+        "n": 100,
+        "skill": -0.17477512746183943,
+        "ci95": [
+         -0.6513706615209497,
+         0.09331460237050303
+        ],
+        "dm_p": 0.25961953870254684
+       }
+      }
+     },
+     "headline": "The target is 88 location-based against 12 dyadic among scored reads. A3's finding reproduces on the rebuilt target."
     }
    },
    "P": {

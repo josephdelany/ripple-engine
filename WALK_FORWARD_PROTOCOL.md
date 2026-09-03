@@ -87,3 +87,22 @@ and an unfiltered run is a diagnostic on the design, not a new gate.
 ### P.4 Guards
 The registered draws, SPA with climatology as benchmark, BH-FDR across the reported family, and the
 filtration audit of Amendment F.1 all apply unchanged. A run whose filtration audit fails is void, as always.
+
+## Amendment Q (2026-09-03) — the escalation target split by evidence basis, from the sealed run
+*Registered BEFORE the code. Session B. `docs/audit/01_TIER1_design_defects.md` A3 establishes that the
+IES-90 target is **83 % location-based** — a country-violence indicator — and only 17 % dyadic. On the
+rebuilt target the split is **23 dyadic (12 non-zero) against 109 location**. Remediation item R0a needs the
+dyadic subset scored separately, because it is the only part of the target that measures what the paper
+describes. Computed from the sealed run by substitution only; nothing is re-read or re-retrieved.*
+
+- **Q.1** The scored daily G reads are partitioned by `event_outcomes.basis` into `dyadic` and `location`.
+  Every forecast is taken **as sealed**; only the evaluation set changes.
+- **Q.2** For each subset: n, the engine's Brier and RPS against climatology and against persistence with
+  the registered bootstrap and DM/HLN, and — the number that decides whether the subset can carry a claim
+  at all — the **measured minimum detectable skill at that n**.
+- **Q.3 Registered before the numbers.** The dyadic subset is expected to be **too small to test**: the
+  measured MDS at n = 150 was 0.127, and this subset is an order of magnitude smaller. **If its MDS exceeds
+  its observed skill the correct report is "not testable at this n", not a null**, and the paper must say
+  that the dyadically-grounded part of its target cannot support a claim in either direction.
+- **Q.4** DIAGNOSTIC standing. It gates nothing, moves no §7 verdict, and the registered whole-target
+  numbers stand. Published at `summary.json → tiers.daily.G.diagnostic_basis`.
