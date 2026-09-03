@@ -334,3 +334,84 @@ on the committed data the defect would have inflated the escalation corpus count
 **flipped zero verdicts**, because `claim_true` is `count > 0` and the one zero is zero either way.
 The escalation true-rate of 5/6 is therefore not a product of this fix, and must not be read as one.
 Asserted in `::test_L1_entity_restriction_narrows_the_window_but_moved_no_verdict`.
+
+## Amendment 9 — 2026-09-03, session H, BEFORE the antecedent gate is built (registered first, computed after)
+
+Closes defect L-2 as a *mechanism*. §2 says a hypothetical claim "resolves only if the antecedent
+event enters the corpus" and no code ever tested that, so `resolve()` skipped `modality=hypothetical`
+outright and twelve checkable claims sat in `pending` for ever. This registers the test. It is
+written before a single hypothetical claim is resolved, and it is deliberately built to REFUSE more
+often than it answers, for the reason in §9.4.
+
+### 9.1 What an antecedent is, and the registered markers
+A hypothetical claim has an antecedent only if its verbatim text contains one of the registered
+conditional markers, which introduce a proposition on which the consequent depends:
+
+    if · should · unless · were to · in the event that · provided that · so long as ·
+    as long as · whenever
+
+A bare modal or hedge — `could`, `would`, `may`, `might`, `risks`, `expects`, `threatens`,
+`potentially`, `possibly` — is **not** an antecedent. It is a hedge on an unconditional
+proposition. A claim carrying only a hedge has no antecedent to enter the corpus, so §2's mechanism
+does not reach it and never will; it is closed as `NO_ANTECEDENT`, not left pending.
+The antecedent clause is the text from the marker to the end of the sentence or the next clause
+boundary, taken verbatim. It is never paraphrased and never supplied by a model.
+
+### 9.2 The antecedent predicate, derived mechanically
+The predicate is read out of the antecedent clause by rule, never coded by hand (charter §2.3
+forbids hand resolution). Exactly two predicates are registered:
+
+- **PRICE** — the clause states a level (`ledger.LEVEL`). Predicate: the claim's series touches
+  that level, in the direction the clause states, at or before the claim's horizon. Testable
+  whenever the series covers the window.
+- **CORPUS** — the clause names at least one country entity. Predicate: a corpus event of
+  `conflict_escalation`, `infrastructure_attack` or `chokepoint_disruption`, with `sr_actor` equal
+  to that entity, dated in `(knowable, knowable + horizon]`.
+
+A clause matching neither — most often because its subject is a pronoun ("if **it** does anything"),
+a mass noun ("if **the aggression** continues") or an unnamed situation ("if **the situation** was
+not quickly resolved") — yields no predicate.
+
+### 9.3 The four outcomes. Only one of them resolves anything.
+Every hypothetical claim gets exactly one status, appended to `data/ledger/antecedents.jsonl`
+(append-only, one row per claim per run, never edited):
+
+| status | meaning | effect |
+|---|---|---|
+| `NO_ANTECEDENT` | no registered marker: a hedge, not a conditional | closed for ever; a reader typing defect, handed to A |
+| `ANTECEDENT_UNTESTABLE` | has a marker, but no PRICE or CORPUS predicate can be derived, or the field needed is not coded on the events in the window | **REFUSED**; nothing resolved, the reason published |
+| `ANTECEDENT_NOT_MET` | predicate derived and tested; the antecedent did not occur in the window | **VOID** — see §9.5 |
+| `ANTECEDENT_MET` | predicate derived and satisfied | the claim's consequent is resolved by the normal `resolve()` path for its kind, and only then |
+
+`ledger.resolve()`'s skip of `modality=hypothetical` is lifted for, and only for, claims recorded
+`ANTECEDENT_MET`. Every other hypothetical claim stays unresolved, as now.
+
+### 9.4 Why this refuses so much, on purpose
+`sr_actor` is coded on **65 of 187** geopolitical records (35%). If a CORPUS predicate were tested
+against that field naively, a claim would be marked `ANTECEDENT_NOT_MET` whenever the qualifying
+event exists but its actor is blank — and the published verdict would be a missing-data artefact
+wearing the clothes of a substantive finding. So the CORPUS predicate is testable **only if at
+least one event in the claim's own window carries a coded `sr_actor`**; where the window's events
+are entirely unlabelled, the status is `ANTECEDENT_UNTESTABLE` and nothing is published. A refusal
+is the correct output of a missing field. This is the same discipline as the Challenge loop
+(Amendment 4) and the same reason.
+
+### 9.5 A VOID claim is not evidence about the record
+A conditional whose antecedent never occurred has not been shown right and has not been shown
+wrong: "if Iran attacks, prices spike" is not refuted by Iran not attacking. `ANTECEDENT_NOT_MET`
+claims are therefore **excluded from every scoreboard** — from `record_vs_narrative`, from the
+per-kind rates and from the story votes — and are reported as their own count with the reason.
+Counting them either way would be a base-rate error, and counting them as false would flatter the
+record. They never enter `resolutions.jsonl`.
+
+### 9.6 What this does NOT do
+It does not parse the consequent, it does not decide whether the antecedent is *the same*
+proposition the sentence conditions on beyond the entity/level test above, and it cannot rescue a
+claim the reader mis-typed. It is expected to resolve very few of the twelve — possibly none — and
+that null is the published result, not a reason to loosen the predicate. Widening the marker list
+or the predicate set after seeing which claims resolve is forbidden; any change is a new dated
+amendment stating what it does to the counts.
+
+### 9.7 Files
+`src/antecedent.py` (new, session H), `data/ledger/antecedents.jsonl` (new, append-only),
+`tests/test_antecedent.py`. `src/ledger.py` gains the gated skip only.
