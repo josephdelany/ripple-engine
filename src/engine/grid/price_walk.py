@@ -77,6 +77,74 @@ CANDIDATES = [(w, t) for w in simplex_grid() for t in TAU_GRID]
 
 # ----------------------------------------------------------------- the panel
 
+# ---------------------------------------------------------------- Amendment 2: the abnormal-return target
+
+EST_WINDOW = 250          # trading days in the estimation window
+EST_GAP = 21              # trading days between the estimation window and the read (20-day horizon + 1)
+EST_MIN = 100             # minimum usable observations, else the read is dropped and counted
+FACTOR = {"diesel_crack": "brent", "gasoline_crack": "brent"}      # market model; all others constant-mean
+
+
+def abnormal_returns(series, cal, grid, gi, R_raw):
+    """Amendment 2 (A2.1). AR(t,h) = raw(t,h) - h*alpha - beta*factor(t,h), with alpha and beta estimated by
+    OLS on DAILY log returns over the 250 trading days ending EST_GAP days before the read -- so the read's
+    own horizon can never enter its own benchmark. Constant-mean (beta = 0) for crude and gas; market model
+    on Brent for the cracks. Returns the AR array and the count of reads dropped for a short window."""
+    # TARGETS here is PA.TARGETS: a flat {name: series_id} map of STRINGS, not specs.
+    lvl, dropped = {}, 0
+    for name, sid in TARGETS.items():
+        s_ = series.get(sid)
+        if s_ is not None:
+            with np.errstate(divide="ignore", invalid="ignore"):
+                lvl[name] = np.log(s_.reindex(cal).to_numpy(float))
+    T, A, H = R_raw.shape
+    AR = np.full_like(R_raw, np.nan)
+    diag = {}
+    for ai, name in enumerate(TARGETS):
+        if name not in lvl:
+            continue
+        y = lvl[name]
+        f = lvl.get(FACTOR.get(name)) if FACTOR.get(name) in lvl else None
+        dy = np.diff(y, prepend=np.nan)
+        df_ = np.diff(f, prepend=np.nan) if f is not None else None
+        n_ok = 0
+        for ti, g0 in enumerate(gi):
+            e1 = g0 - EST_GAP
+            e0 = e1 - EST_WINDOW
+            if e0 < 1:
+                dropped += 1; continue
+            ry = dy[e0:e1]
+            if df_ is None:
+                m = np.isfinite(ry)
+                if m.sum() < EST_MIN:
+                    dropped += 1; continue
+                alpha, beta = float(ry[m].mean()), 0.0
+            else:
+                rf = df_[e0:e1]
+                m = np.isfinite(ry) & np.isfinite(rf)
+                if m.sum() < EST_MIN:
+                    dropped += 1; continue
+                X = np.column_stack([np.ones(m.sum()), rf[m]])
+                b_, *_ = np.linalg.lstsq(X, ry[m], rcond=None)
+                alpha, beta = float(b_[0]), float(b_[1])
+            n_ok += 1
+            for hi, h in enumerate(HORIZONS):
+                raw = R_raw[ti, ai, hi]
+                if not np.isfinite(raw):
+                    continue
+                exp_ = 100.0 * h * alpha
+                if df_ is not None:
+                    fi = list(TARGETS).index(FACTOR[name])
+                    fr = R_raw[ti, fi, hi]
+                    if not np.isfinite(fr):
+                        continue
+                    exp_ += beta * fr
+                AR[ti, ai, hi] = raw - exp_
+        diag[name] = {"model": ("market_model_on_" + FACTOR[name]) if df_ is not None else "constant_mean",
+                      "reads_with_a_model": n_ok}
+    return AR, dropped, diag
+
+
 def build_panel():
     """Grid dates, the point-in-time state matrix and the return matrix. All from the loaded DB."""
     conn = sqlite3.connect(PA.DB)
@@ -112,7 +180,7 @@ def build_panel():
             v1 = np.where(ok, on[np.clip(gi + h, 0, len(cal) - 1)], np.nan)
             with np.errstate(divide="ignore", invalid="ignore"):
                 R[:, ai, hi] = np.log(v1 / v0)
-    return grid, gi, fields, S, R
+    return grid, gi, fields, S, R, series, cal
 
 
 def block_distances(S, fields):
@@ -212,6 +280,19 @@ def baseline_scores(R, elig, gi):
                          for _ in range(25)]
                 rand[t, ai, hi] = float(np.mean(draws))
     return clim, noch, rand
+
+
+def crps_all(D, R, gi, cand):
+    """CRPS of one registered candidate at every (grid date, target, horizon) on the supplied target array."""
+    w, tau = cand
+    T, A, H = R.shape
+    out = np.full((T, A, H), np.nan)
+    dist = combined(D, w)
+    masks = {h: eligible_mask(T, gi, h) for h in HORIZONS}
+    for hi, h in enumerate(HORIZONS):
+        for ai in range(A):
+            out[:, ai, hi], _ = crps_grid(dist, R, masks[h], ai, hi, tau=tau)
+    return out, dist
 
 
 def candidate_scores(D, R, gi, cands, quiet=False):
@@ -315,13 +396,16 @@ def _hash(obj):
 def run(fast=False):
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     run_id = "grid_price_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    grid, gi, fields, S, R = build_panel()
+    grid, gi, fields, S, R, series, cal = build_panel()
     T = len(grid)
     print(f"grid {T} month-ends {grid[0].date()}..{grid[-1].date()}; {len(fields)} fields", flush=True)
     D = block_distances(S, fields)
     cands = CANDIDATES[:15] if fast else CANDIDATES
     n_boot, n_spa = (200, 200) if fast else (N_BOOT, N_SPA)
 
+    AR, n_dropped, ar_diag = abnormal_returns(series, cal, grid, gi, R)
+    print(f"abnormal-return target built: {n_dropped} read-target cells dropped for a short estimation window",
+          flush=True)
     print(f"scoring {len(cands)} registered candidates ...", flush=True)
     cand_crps = candidate_scores(D, R, gi, cands)
     chosen, n_inner = nested_cv(cand_crps, gi, cands)
@@ -489,11 +573,69 @@ def run(fast=False):
                           "note": "§6: Benjamini-Hochberg across the family this file reports. A comparison "
                                   "that does not survive is not a finding."}
     (OUT_DIR / "training.json").write_text(json.dumps(traj, indent=1))
+    # ---- Amendment 2: the SAME engine, analogs, baselines and inference on the abnormal-return target
+    print("re-scoring the identical design on the abnormal-return target ...", flush=True)
+    frozen_ar, _ = crps_all(D, AR, gi, cands[frozen_ci])
+    fitted_ar = np.full_like(frozen_ar, np.nan)
+    by_c = {}
+    for t in range(T):
+        ci_ = chosen[t]
+        if ci_ < 0:
+            continue
+        if ci_ not in by_c:
+            by_c[ci_], _ = crps_all(D, AR, gi, cands[ci_])
+        fitted_ar[t] = by_c[ci_][t]
+    clim_ar = np.full_like(frozen_ar, np.nan); noch_ar = np.full_like(frozen_ar, np.nan)
+    rand_ar = np.full_like(frozen_ar, np.nan)
+    for hi, h in enumerate(HORIZONS):
+        m_ = eligible_mask(T, gi, h)
+        c1, n1, r1 = baseline_scores(AR[:, :, [hi]], m_, gi)
+        clim_ar[:, :, hi] = c1[:, :, 0]; noch_ar[:, :, hi] = n1[:, :, 0]; rand_ar[:, :, hi] = r1[:, :, 0]
+    refs_ar = {"grid_climatology": clim_ar, "no_change": noch_ar, "random_analogs": rand_ar, "frozen": frozen_ar}
+    summary["abnormal_return_target"] = {
+        "amendment": "GRID_STUDY_REGISTRATION.md Part III Amendment 2 (2026-09-03), answering "
+                     "docs/audit/01_TIER1_design_defects.md A1",
+        "model": ar_diag, "estimation_window_td": EST_WINDOW, "gap_td": EST_GAP, "min_obs": EST_MIN,
+        "n_cells_dropped_short_window": int(n_dropped),
+        "n_scored_cells": int(np.isfinite(fitted_ar).sum()),
+        "fitted_vs": {k: block(fitted_ar, v, k) for k, v in refs_ar.items()},
+        "the_comparison": block(fitted_ar, frozen_ar, "frozen"),
+        "per_target": {a: block(fitted_ar[:, ai][:, None, :], clim_ar[:, ai][:, None, :], "grid_climatology")
+                       for ai, a in enumerate(TARGETS)},
+        "note": "identical engine, analogs, baselines, cluster structure and inference; ONLY the target "
+                "changed. Any movement is attributable to the target definition and to nothing else.",
+    }
+    # §6's multiplicity guards on the ABNORMAL arm too. Omitting them here while requiring them on the raw
+    # arm would be exactly the double standard this project exists to prevent.
+    fam_ar = ["fitted", "frozen", "random_analogs", "no_change"]
+    arrs_ar = {"fitted": fitted_ar, "frozen": frozen_ar, "random_analogs": rand_ar, "no_change": noch_ar}
+    cols_ar = []
+    for nm in fam_ar:
+        a_, b_, _ = per_date(arrs_ar[nm], clim_ar)
+        cols_ar.append(b_ - a_)
+    L_ar = min(len(c) for c in cols_ar)
+    spa_ar = INF.spa(np.column_stack([c[:L_ar] for c in cols_ar]), n_boot=n_spa, mean_block=mb)
+    spa_ar["best_model"] = fam_ar[spa_ar["best_model"]]; spa_ar["models"] = fam_ar
+    spa_ar["benchmark"] = "grid_climatology_abnormal"
+    summary["abnormal_return_target"]["spa"] = spa_ar
+    nm_ar, p_ar = [], []
+    for k, v in summary["abnormal_return_target"]["fitted_vs"].items():
+        if v.get("dm_p") is not None:
+            nm_ar.append(f"fitted_vs:{k}"); p_ar.append(v["dm_p"])
+    for k, v in summary["abnormal_return_target"]["per_target"].items():
+        if v.get("dm_p") is not None:
+            nm_ar.append(f"per_target:{k}"); p_ar.append(v["dm_p"])
+    if p_ar:
+        summary["abnormal_return_target"]["fdr"] = {
+            "names": nm_ar, "p": p_ar, "bh": INF.bh_fdr(p_ar, q=0.05),
+            "note": "§6 BH-FDR across the abnormal arm's own family. A comparison that does not survive is "
+                    "not a finding, on this arm exactly as on the raw one."}
     summary["determinism"] = {"content_digest": _hash([summary["registered"], dates,
                                                        np.nan_to_num(fitted, nan=-999).round(6).tolist()])}
     (OUT_DIR / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
     np.savez_compressed(OUT_DIR / "scores.npz", fitted=fitted, frozen=frozen, clim=clim,
-                        noch=noch, rand=rand, chosen=chosen)
+                        noch=noch, rand=rand, chosen=chosen, fitted_ar=fitted_ar,
+                        frozen_ar=frozen_ar, clim_ar=clim_ar, noch_ar=noch_ar, rand_ar=rand_ar)
     return summary
 
 

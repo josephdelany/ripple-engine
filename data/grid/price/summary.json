@@ -2,8 +2,8 @@
  "study": "GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03)",
  "unit": "date",
  "estimand": "given the world state on date t, the distribution of the h-day return -- NOT the event-triggered estimand; no number in data/walk_forward/** is re-judged (\u00a70.2)",
- "run_id": "grid_price_20260903T045529Z",
- "generated_at": "2026-09-03T04:58:26+00:00",
+ "run_id": "grid_price_20260903T212828Z",
+ "generated_at": "2026-09-03T21:33:51+00:00",
  "registered": {
   "blocks": {
    "physical": [
@@ -619,6 +619,292 @@
    "q": 0.05
   },
   "note": "\u00a76: Benjamini-Hochberg across the family this file reports. A comparison that does not survive is not a finding."
+ },
+ "abnormal_return_target": {
+  "amendment": "GRID_STUDY_REGISTRATION.md Part III Amendment 2 (2026-09-03), answering docs/audit/01_TIER1_design_defects.md A1",
+  "model": {
+   "brent": {
+    "model": "constant_mean",
+    "reads_with_a_model": 464
+   },
+   "wti": {
+    "model": "constant_mean",
+    "reads_with_a_model": 464
+   },
+   "diesel_crack": {
+    "model": "market_model_on_brent",
+    "reads_with_a_model": 464
+   },
+   "gasoline_crack": {
+    "model": "market_model_on_brent",
+    "reads_with_a_model": 464
+   },
+   "henry_hub": {
+    "model": "constant_mean",
+    "reads_with_a_model": 350
+   },
+   "propane": {
+    "model": "constant_mean",
+    "reads_with_a_model": 404
+   }
+  },
+  "estimation_window_td": 250,
+  "gap_td": 21,
+  "min_obs": 100,
+  "n_cells_dropped_short_window": 246,
+  "n_scored_cells": 10512,
+  "fitted_vs": {
+   "grid_climatology": {
+    "n_dates": 403,
+    "n_cells": 10512,
+    "mean": 4.659038879085683,
+    "ref_mean": 4.6885621388508145,
+    "skill": 0.0062968686114860395,
+    "ci95": [
+     -0.02769724382946148,
+     0.04107132870985177
+    ],
+    "dm_hln": -0.38454580180345677,
+    "dm_p": 0.7007773005759916,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "no_change": {
+    "n_dates": 403,
+    "n_cells": 10512,
+    "mean": 4.659038879085683,
+    "ref_mean": 6.205459280036577,
+    "skill": 0.24920321464776074,
+    "ci95": [
+     0.22198989496432628,
+     0.2760841559678007
+    ],
+    "dm_hln": -13.367836032846848,
+    "dm_p": 0.0,
+    "ref": "no_change",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "random_analogs": {
+    "n_dates": 403,
+    "n_cells": 10512,
+    "mean": 4.659038879085683,
+    "ref_mean": 5.0124208671995225,
+    "skill": 0.07050126026453896,
+    "ci95": [
+     0.03969005937144867,
+     0.10218133060780157
+    ],
+    "dm_hln": -4.575735155877575,
+    "dm_p": 6.332184300683608e-06,
+    "ref": "random_analogs",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "frozen": {
+    "n_dates": 403,
+    "n_cells": 10512,
+    "mean": 4.659038879085683,
+    "ref_mean": 4.664075745288635,
+    "skill": 0.0010799280453451798,
+    "ci95": [
+     -0.027108104533729183,
+     0.029521580052465884
+    ],
+    "dm_hln": -0.07933479927188848,
+    "dm_p": 0.9368058043149792,
+    "ref": "frozen",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   }
+  },
+  "the_comparison": {
+   "n_dates": 403,
+   "n_cells": 10512,
+   "mean": 4.659038879085683,
+   "ref_mean": 4.664075745288635,
+   "skill": 0.0010799280453451798,
+   "ci95": [
+    -0.027108104533729183,
+    0.029521580052465884
+   ],
+   "dm_hln": -0.07933479927188848,
+   "dm_p": 0.9368058043149792,
+   "ref": "frozen",
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+  },
+  "per_target": {
+   "brent": {
+    "n_dates": 399,
+    "n_cells": 1961,
+    "mean": 1.9775091744546038,
+    "ref_mean": 2.102124540657532,
+    "skill": 0.059280677140065685,
+    "ci95": [
+     -0.002117079165222135,
+     0.11621209383609932
+    ],
+    "dm_hln": -1.9728825246865473,
+    "dm_p": 0.04920055400037526,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "wti": {
+    "n_dates": 396,
+    "n_cells": 1920,
+    "mean": 2.0118565279260983,
+    "ref_mean": 2.0996305979164736,
+    "skill": 0.041804529843238236,
+    "ci95": [
+     -0.019145651185023583,
+     0.0985533316410566
+    ],
+    "dm_hln": -1.4521320281560786,
+    "dm_p": 0.1472587257198814,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "diesel_crack": {
+    "n_dates": 390,
+    "n_cells": 1855,
+    "mean": 6.470772108427091,
+    "ref_mean": 6.866289169011396,
+    "skill": 0.057602738662585584,
+    "ci95": [
+     -0.006255058946418466,
+     0.11734703957183236
+    ],
+    "dm_hln": -1.7889128464769495,
+    "dm_p": 0.0744068106909821,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "gasoline_crack": {
+    "n_dates": 390,
+    "n_cells": 1826,
+    "mean": 11.405910070745234,
+    "ref_mean": 10.781156362963781,
+    "skill": -0.05794867329145248,
+    "ci95": [
+     -0.11609275001064245,
+     -0.0012163701323631515
+    ],
+    "dm_hln": 2.1742012772355,
+    "dm_p": 0.030292247464100308,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "henry_hub": {
+    "n_dates": 279,
+    "n_cells": 1356,
+    "mean": 3.288711572911526,
+    "ref_mean": 3.380379428025529,
+    "skill": 0.027117623055570972,
+    "ci95": [
+     -0.04653678055436553,
+     0.0915865232922048
+    ],
+    "dm_hln": -0.8186040997793377,
+    "dm_p": 0.4137134699011218,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   },
+   "propane": {
+    "n_dates": 332,
+    "n_cells": 1594,
+    "mean": 2.7492157515230162,
+    "ref_mean": 2.9186489083299243,
+    "skill": 0.05805191447431035,
+    "ci95": [
+     -0.0116195113060911,
+     0.124698571887504
+    ],
+    "dm_hln": -1.73996860808576,
+    "dm_p": 0.08279398260458604,
+    "ref": "grid_climatology",
+    "score": "crps",
+    "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
+   }
+  },
+  "note": "identical engine, analogs, baselines, cluster structure and inference; ONLY the target changed. Any movement is attributable to the target definition and to nothing else.",
+  "spa": {
+   "n_models": 4,
+   "T": 403,
+   "stat": 0.3850237955265756,
+   "best_model": "fitted",
+   "best_mean_gain": 0.029523259765131062,
+   "p_rc": 0.7902097902097902,
+   "p_spa": 0.46553446553446554,
+   "n_boot": 1000,
+   "models": [
+    "fitted",
+    "frozen",
+    "random_analogs",
+    "no_change"
+   ],
+   "benchmark": "grid_climatology_abnormal"
+  },
+  "fdr": {
+   "names": [
+    "fitted_vs:grid_climatology",
+    "fitted_vs:no_change",
+    "fitted_vs:random_analogs",
+    "fitted_vs:frozen",
+    "per_target:brent",
+    "per_target:wti",
+    "per_target:diesel_crack",
+    "per_target:gasoline_crack",
+    "per_target:henry_hub",
+    "per_target:propane"
+   ],
+   "p": [
+    0.7007773005759916,
+    0.0,
+    6.332184300683608e-06,
+    0.9368058043149792,
+    0.04920055400037526,
+    0.1472587257198814,
+    0.0744068106909821,
+    0.030292247464100308,
+    0.4137134699011218,
+    0.08279398260458604
+   ],
+   "bh": {
+    "survive": [
+     false,
+     true,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "qvalues": [
+     0.7786414450844351,
+     0.0,
+     3.166092150341804e-05,
+     0.9368058043149791,
+     0.12300138500093816,
+     0.21036960817125916,
+     0.1379899710076434,
+     0.10097415821366769,
+     0.5171418373764023,
+     0.1379899710076434
+    ],
+    "q": 0.05
+   },
+   "note": "\u00a76 BH-FDR across the abnormal arm's own family. A comparison that does not survive is not a finding, on this arm exactly as on the raw one."
+  }
  },
  "determinism": {
   "content_digest": "40ce38396b6da3f9e67f878cf43cc0a9901b451e4d3ca752d1ddf379e167cd43"
