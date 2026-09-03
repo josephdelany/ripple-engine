@@ -490,3 +490,40 @@ den_significant = (b["ehw_covers_zero"] is False)  # False for every pair in the
 
 No estimate, band, verdict or placebo percentile in this document was recomputed. The files
 were read as committed.
+
+---
+
+## Erratum — 2026-09-03, from the Amendment C run (`docs/RIPPLE_PHYSICAL.md`)
+
+*Appended, never edited in place. Every table above stands as computed on 2026-09-02; the two
+corrections below are additions to how those tables must be read, both found by running Amendment C's
+physical-quantity study with the same estimator on a larger sample.*
+
+**E-1. §1.4's Cape of Good Hope cell does not survive the full physical record.** The table reports
+`Cape of Good Hope transits × conflict_escalation, h=5, +20.659 [+8.772, +32.547], n=16`, BH
+survivor — the only TRANSMITTING cell at hop 2 and one of seven BH survivors in the study. It was
+estimated on the Brent **trading-day** index, which discards weekends; tanker transits happen at
+weekends. Re-estimated on the registered Amendment C sample (all 2,799 calendar days, 2019-01-01 →
+2026-08-30, de-overlapped within the window) the same cell is **+4.03 [−6.89, +14.96]** — covering
+zero. It covers zero on the calendar index at **every one of nine horizons**, including h = 7, the
+calendar-day equivalent of trading-day h = 5 (which spans 7.2 calendar days on average). On the
+trading-day index it excludes zero at exactly one horizon of six, the registered headline.
+**Its verdict on the full record is NULL.** Two further transit cells flip the same way
+(`bab_el_mandeb × tightening`, `suez × chokepoint_disruption`). §5.7 above already hedged this cell
+as "a description of that episode"; the hedge was right and insufficient.
+
+Consequence for §1.2 and §1.4: hop 2 has **zero** transmitting cells, not one, and the study has
+**six** BH survivors at hop 2 and below, not seven. The one-sentence result — that the chain is
+silent except at its two ends — is strengthened, not weakened, by this correction.
+
+**E-2. No monthly cell in this study could have transmitted.** Every monthly node was run with
+`do_placebo=False`, and Amendment B's TRANSMITTING verdict *requires* the placebo. So the monthly
+nodes were NULL-or-INSUFFICIENT **by construction**, and §1.2's "hop 4 fertilizer: 0 transmitting of
+54" is arithmetic about a flag, not a finding about fertilizer. Hop 3 is affected for 3 of its 5
+nodes (the monthly gas and LNG nodes; Henry Hub and TTF are daily and were scored properly).
+`src/ripple_physical.py` implements the registered placebo construction on the monthly grid; it is
+weak there (108 pool months, 58 state buckets, heavy fallback to VIX-only matching) and that
+weakness is reported. **§1.2's hop-3 and hop-4 rows should be read as "not scored", not as "scored
+and empty".**
+
+Neither erratum changes a coefficient, a band, an n, or a placebo percentile in any table above.

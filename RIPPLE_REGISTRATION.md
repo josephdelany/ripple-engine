@@ -557,3 +557,46 @@ construction, verdict vocabulary or multiple-testing rule — all of those carry
 from §2. No magnitude-bearing shock for the non-OPEC classes, which the findings name as the
 study's principal weakness, is registered here because none exists yet; building one is its own
 brief and needs its own registration before it is used.
+
+## Amendment C — addendum, 2026-09-03, AFTER computing: what was run, and the three disclosed departures
+*Amendment C above was registration only. This addendum records what the run actually did, written
+after the fact and labelled as such. It changes no registered parameter; C.4 still holds. Results are
+in `docs/RIPPLE_PHYSICAL.md`, data in `data/ripple/physical.json`, code in `src/ripple_physical.py`,
+tests in `tests/test_ripple_physical.py` (20 passed).*
+
+**The seal held.** All nine JODI counts (C.2) and all nine PortWatch counts (C.3) reproduce exactly,
+including the counterintuitive `all` (16) < `tightening` (24) that C.3 recorded in advance; 294
+months, 67 event months, 21 production series ≥200 months, 2,799 calendar days. A test asserts each.
+
+**Three departures, all disclosed, none of them a change to a registered constant:**
+
+1. **A monthly placebo now exists.** v2 ran every monthly node with `do_placebo=False`, which made
+   Amendment B's TRANSMITTING verdict unreachable for monthly nodes *by construction*. That is a
+   defect in v2, recorded as erratum E-2 in `docs/RIPPLE_FINDINGS.md` rather than repaired silently.
+   The monthly buckets are §2.5's daily construction evaluated on the monthly grid. It is weak (108
+   pool months, 58 buckets, mean 26.4 buckets per cell falling back to VIX-only matching) and every
+   monthly verdict is qualified by that.
+2. **PortWatch runs on the calendar-daily index**, the registered 2,799 days, rather than v2's Brent
+   trading-day index. Tanker transits happen at weekends and the trading-day index discards 28% of
+   the physical record. The trading-day version is reported beside it, and the two disagree on three
+   cells — including v2's only transmitting physical cell (erratum E-1). C.3 fixed the sample at
+   2,799 days, so the calendar index is the registered reading; the disagreement is reported either
+   way.
+3. **A post-hoc degeneracy screen**, written after the first run produced a "+47% Nigerian
+   refinery-intake response" that is a near-zero denominator. It is computed from the series alone
+   (>10% zero observations, or monthly log-change SD > 25) and never from a coefficient, it is
+   labelled post-hoc wherever it appears, and **both tallies are published** (22/954 unscreened,
+   21/765 screened; null-expected 2–48 and 2–38 respectively).
+
+**One thing registered wrongly, recorded for v4 and not changed now.** C.2 set the JODI headline at
+h = 3 months. The external check (`bh.supply_shock`, the identified structural supply shock, on JODI
+aggregate production, same code) shows the production response lives at h = 0–1 and is gone by h = 2,
+while the same shock's price response runs undiminished to h = 12. **h = 3 was registered where a
+physical response has already decayed.** The headline stands for this study because it was sealed;
+v4 should register h = 0–1 for quantity outcomes. The corpus dummies find nothing at h = 0 or h = 1
+either, so this did not hide a result — but it would have.
+
+**What was NOT done.** No new shock series (the magnitude-bearing shock for non-OPEC classes remains
+unbuilt and remains the study's principal weakness); no change to v2 nodes, horizons, lag lengths,
+minimum n, verdict vocabulary or the BH rule; `propagation_edges` was not touched; nothing outside
+`src/ripple_*`, `tests/test_ripple_*`, `data/ripple/**` and this session's own docs was edited.
