@@ -116,7 +116,7 @@
 
 ## If they ask: "what would you do next?"
 
-> The binding constraint is sample size — 150 scored reads against about 1,200 needed. I'd
+> The binding constraint is sample size — 100 scored reads against about 1,200 needed. I'd
 > registered expanding the corpus backwards as the route, and then measured that it doesn't
 > work: six pre-1974 records built to full sourcing standard buy zero additional *scored*
 > reads, and the pre-1973 oil price isn't a traded series — 16 distinct values in 324 months
