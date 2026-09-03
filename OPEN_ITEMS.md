@@ -153,6 +153,38 @@ archival effort. This is a finding, published in paper §14. The remaining route
 date-grid study (2.5). Residual for **Joe**: whether the codebook gains a class for a
 concession or ownership change — four records currently sit in `opec_decision` by elimination.
 
+**2.5a DELIVERED — the dyad-date panel exists, with its limits structural.** *(G, 2026-09-03.)*
+**15,740 dyad-date cells, n_eff 9,733** (two-way cluster on date × dyad; block estimator
+13,554), of which **1,160 informative**, over 333 month-ends 1987-01-31 … 2014-09-30 on 156
+dyads. Per ruling 4.5 nothing scores a forecasting engine on it; it is a descriptive object.
+Its three limits are written as properties of the construction rather than caveats: never
+reaches the present, never carries VALIDATED (every cell `retrospective = 1`), never scores
+onset (R-ACT admits a dyad only after a recorded clash, so skill here would be skill at
+continuation and de-escalation only). VR-3 held on an independent path — 15,740 cells, 0
+violations — and removes 861 dyad-dates that plain R-ACT would have selected on a record still
+running at *t*.
+
+**The degeneracy tripwire fired 21 times, and where it fired is a finding.** The panel is inside
+the registered 0.95 share-zero bar overall (ΔIES 0.9191, L 0.9034) but breaches it in **1989 and
+1991–1995**, across all four series — the Gulf War shadow years. Three independent measures
+agree on that block: 44.7% of the rows, 17.6% of the signal, and individually degenerate by the
+registered bar. Slices stay in and the bar stays at 0.95, as registered.
+
+**The effective-count pairing is now structural, and this is the pattern the rest of the project
+should adopt.** The nominal count no longer exists as a scalar anywhere in the panel's outputs:
+`size.cells`, `dIES.n_defined` and `strict_subset.cells` are objects
+(`{nominal, n_eff_two_way, n_eff_block, informative}`), so a programmatic reader gets the pair or
+a `KeyError`. A generated citation line — written by the code from the computed numbers, with no
+version of it lacking the effective count — leads every file. One writer (`finalize` →
+`write_panel`) applies the pairing before writing, so no code path can publish a nominal without
+an effective. A test requires an effective figure within 300 characters of every nominal
+occurrence, and a test *of that test* proves it fires. It caught two bare counts the moment it
+existed, including one in G's own reconciliation table. The headline is the **two-way** figure
+because it covers both axes of a dyad-date panel — and G noted explicitly that it is also the
+*smaller* of the two, so the choice cannot be read as having been made for that reason.
+*This is the schema-level answer to the defect Cowork committed tonight and B committed in the
+grid file: it moves the guarantee from discipline to structure.*
+
 **2.5 *n* is the binding constraint; the date grid is the only remaining route, and
 G-4 measured its ceiling.** *(Probe reported 2026-09-03; scope RULED: build 1987–2014.)*
 G's one-year probes found the grid is viable but bounded, and the boundary is a property of
