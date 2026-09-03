@@ -101,7 +101,7 @@ def test_a13_priced_in_is_display_only_with_vintage_before_knowable():
     assert pin["curve_front_spread_m1_m4"]["status"] == "ok" and pin["curve_front_spread_m1_m4"]["vintage"] <= "2001-09-11"
     # never scored: the ledger's verdict code does not read it
     assert "priced_in" not in (ROOT / "src" / "ledger.py").read_text() and "priced_in" not in (ROOT / "src" / "materiality.py").read_text()
-    assert "Amendment 5" in (ROOT / "CLAIM_LEDGER_REGISTRATION.md").read_text()
+    assert "Amendment 5" in (ROOT / "registrations" / "CLAIM_LEDGER_REGISTRATION.md").read_text()
 
 
 def test_a14_record_endpoint_and_feed_flags():
@@ -171,4 +171,4 @@ def test_a15_reader_schema_states_date_and_confidence_and_fallback_never_dates()
     finally:
         os.environ.pop("RIPPLE_READER", None)
     assert fb["event_date"] is None and fb["confidence"] == "fallback" and fb["reader"]["mode"] == "regex_fallback"
-    assert "Amendment 6" in (ROOT / "CLAIM_LEDGER_REGISTRATION.md").read_text()
+    assert "Amendment 6" in (ROOT / "registrations" / "CLAIM_LEDGER_REGISTRATION.md").read_text()

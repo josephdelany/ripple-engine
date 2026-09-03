@@ -227,7 +227,7 @@ def test_S2_the_exclusion_table_counts_every_event_exactly_once():
 def test_S2_the_published_table_states_the_spare_gap_rather_than_the_registered_one():
     """§2 excludes events whose SPARE "predates 2003". The loader only has 2022-> because the STEO
     archive 403s. The document must report the hole that exists, not the one that was registered."""
-    p = ROOT / "EXPOSURE.md"
+    p = ROOT / "docs" / "reference" / "EXPOSURE.md"
     if not p.exists():
         pytest.skip("run python3 src/exposure.py first")
     md = p.read_text()

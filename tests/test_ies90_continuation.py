@@ -176,7 +176,7 @@ def test_A4_6_the_counts_mode_does_not_write_to_event_outcomes():
 def test_A4_5_the_prediction_is_registered_in_the_amendment_before_it_is_scored():
     """The numbers in A4_PREDICTION must be the ones written into OUTCOME_MAPPING.md, or the prediction is
     being edited after the fact."""
-    doc = (ROOT / "OUTCOME_MAPPING.md").read_text()
+    doc = (ROOT / "docs" / "reference" / "OUTCOME_MAPPING.md").read_text()
     assert "### A4.5 Expected effect on n and on the level distribution" in doc
     for point in ("~15", "~34", "~58", "~62", "~122"):
         assert point in doc, f"predicted point estimate {point} missing from the registered amendment"

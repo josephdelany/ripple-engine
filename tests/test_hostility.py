@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "data" / "spine" / "CLASS_AUDIT.md"
 DB = ROOT / "data" / "oil.db"
 SCORES = ROOT / "data" / "walk_forward" / "scores.jsonl"
-MAPPING = ROOT / "OUTCOME_MAPPING.md"
+MAPPING = ROOT / "docs" / "reference" / "OUTCOME_MAPPING.md"
 
 GEO_CLASSES = ("infrastructure_attack", "chokepoint_disruption",
                "conflict_escalation", "sanctions")

@@ -21,7 +21,8 @@ DATA = ROOT / "data"
 DB = DATA / "oil.db"
 RAW = DATA / "state" / "raw"          # free downloads, gitignored (rebuilt by the loaders)
 LOCAL = DATA / "state" / "local"      # licence-restricted files, gitignored, README stubs committed
-CODEBOOK = ROOT / "WORLD_STATE_CODEBOOK.md"
+CODEBOOK = ROOT / "docs" / "reference" / "WORLD_STATE_CODEBOOK.md"   # moved by the 74->6 root
+                                                                     # restructure; path only
 sys.path.insert(0, str(ROOT / "src"))
 
 SCHEMA = """

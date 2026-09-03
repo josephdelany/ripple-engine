@@ -18,7 +18,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-MD = ROOT / "EVALUATION.md"
+MD = ROOT / "docs" / "reference" / "EVALUATION.md"
 JSON_OUT = ROOT / "data" / "evaluation.json"
 SUMMARY = ROOT / "data" / "walk_forward" / "summary.json"
 BAR = ROOT / "data" / "evidentiary_bar.json"

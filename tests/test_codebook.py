@@ -11,7 +11,7 @@ URL = re.compile(r"https?://[^\s|)]+")
 
 def rows():
     out = []
-    for line in (ROOT / "WORLD_STATE_CODEBOOK.md").read_text(encoding="utf-8").splitlines():
+    for line in (ROOT / "docs" / "reference" / "WORLD_STATE_CODEBOOK.md").read_text(encoding="utf-8").splitlines():
         if not line.startswith("|") or line.startswith("| block") or line.startswith("|---"):
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
@@ -37,8 +37,8 @@ def test_cb2_rule_ids_and_field_ids_are_unique():
 
 
 def test_cb3_no_source_url_outside_the_register():
-    register = (ROOT / "WORLD_STATE_SOURCES.md").read_text(encoding="utf-8") + (ROOT / "WORLD_STATE_FRAMEWORK.md").read_text(encoding="utf-8")
-    text = (ROOT / "WORLD_STATE_CODEBOOK.md").read_text(encoding="utf-8")
+    register = (ROOT / "docs" / "reference" / "WORLD_STATE_SOURCES.md").read_text(encoding="utf-8") + (ROOT / "docs" / "reference" / "WORLD_STATE_FRAMEWORK.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs" / "reference" / "WORLD_STATE_CODEBOOK.md").read_text(encoding="utf-8")
     urls = {u.rstrip(".,") for u in URL.findall(text)}
     assert urls, "the codebook must cite its sources"
     missing = sorted(u for u in urls if u not in register)

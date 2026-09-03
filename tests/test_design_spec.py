@@ -16,7 +16,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "src" / "app.html"
 BIG = ROOT / "src" / "big_moves.html"
-DESIGN = ROOT / "DESIGN.md"
+DESIGN = ROOT / "docs" / "reference" / "DESIGN.md"
 
 # §6: no word stronger than the record. Amendment 1 A1.2 splits the rule -- absolute for strings the desk writes
 # itself, inventoried for verbatim quoted material.
