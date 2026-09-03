@@ -676,8 +676,17 @@ same pool.
 This diagnostic gates nothing. But it is the sharpest statement in this paper of what the
 engine's retrieval step is worth, and it is consistent with §8's finding that the engine is
 indistinguishable from random analogs on the level estimand (−0.021, *p* = 0.58). Two
-estimands, two designs, the same answer: **the pooling is doing the work, and the
-similarity metric is not.**
+estimands, two designs, the same answer: **on this corpus, at this sample size, the pooling is
+doing the work and the similarity metric is not.**
+
+*Scope, and a forward pointer.* That sentence is bounded by the words "at this sample size",
+and §14.1 is where the bound bites. On a companion price panel with substantially more
+evidence, the engine's margin over random analogs turns positive and lands at the edge of
+detectability (+0.010, *p* = 0.052, not surviving that study's own FDR). So this section
+establishes that similarity does no *detectable* work **here**; it does not establish that
+similarity is worthless in general, and §14.1 gives the reason to think the difference is at
+least partly power. A reader who takes §11.3 alone will overread it, which is why the summary
+in §0 carries the same qualification.
 
 ### 11.4 What §11 does and does not revise
 
