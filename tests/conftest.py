@@ -11,6 +11,7 @@
 """
 import os
 import sqlite3
+import time
 import sys
 from pathlib import Path
 
@@ -57,21 +58,54 @@ DB_FREE_FILES = {
     "test_uncheckable_audit.py",
     "test_challenge_loop.py",
     "test_antecedent.py",            # Amendments 9/9.1: the antecedent gate; its corpus tests self-skip
+    "test_big_moves_variants.py",    # BIG_MOVES Amendment 4: registered vs as-computed clustering. The
+                                     # series tests take a self-skipping fixture; the published-file tests
+                                     # read committed data/big_moves/*.json and run without a DB.
     "test_citation_guard.py",        # Session I: the citation guard over the five published documents --
                                      # committed JSON/Markdown only. In the CI gate on purpose: it is the
                                      # test that goes red when a re-run supersedes the numbers in the prose.
 }
 
 
-def _db_ready():
-    """True only if a POPULATED oil.db exists (has the events table with rows). A fresh sqlite connect
-    would auto-create an empty file, so we check for real content, not just the file's existence."""
+class DatabaseBusy(Exception):
+    """The DB is present and populated but locked by another process.
+
+    This is NOT the same condition as 'no DB here' and must never be silently converted into one.
+    Session A, 2026-09-03: a concurrent write lock made _db_ready() return False, which skipped
+    435 of 792 tests and still exited 0 printing a pass. Three silent-skip failures surfaced the
+    same day (jsdom never installed; [T] tests reading the stylesheet; this). A suite that reports
+    green while not running is worse than a red one, because charter S2.7 gates commits on green.
+    """
+
+
+def _db_ready(_retries=5, _wait=2.0):
+    """True only if a POPULATED oil.db exists (has the events table with rows).
+
+    A fresh sqlite connect would auto-create an empty file, so we check for real content rather
+    than the file's existence. Absent -> False (a legitimate skip). LOCKED -> retry, then raise
+    DatabaseBusy: a busy database is a reason to wait or fail, never a reason to report a pass.
+    """
     if not DB.exists():
         return False
-    try:
-        return sqlite3.connect(DB).execute("SELECT COUNT(*) FROM events").fetchone()[0] > 0
-    except sqlite3.Error:
-        return False
+    last = None
+    for attempt in range(_retries):
+        try:
+            con = sqlite3.connect(DB, timeout=_wait)
+            try:
+                return con.execute("SELECT COUNT(*) FROM events").fetchone()[0] > 0
+            finally:
+                con.close()
+        except sqlite3.OperationalError as e:
+            last = e
+            if "locked" not in str(e).lower() and "busy" not in str(e).lower():
+                return False          # genuinely malformed / unreadable -> treat as absent
+            time.sleep(_wait)
+        except sqlite3.DatabaseError:
+            return False              # corrupt or not a database -> absent
+    raise DatabaseBusy(
+        f"data/oil.db is present but locked after {_retries} attempts ({last}). "
+        "Refusing to skip the DB-integration suite and report a pass: another session is holding "
+        "a write lock. Wait for it to finish and re-run.")
 
 
 def pytest_collection_modifyitems(config, items):
@@ -89,3 +123,28 @@ def pytest_collection_modifyitems(config, items):
     if n:
         print(f"\n[conftest] no built oil.db -> skipping {n} DB-integration test(s); "
               f"running the {len(items) - n} deterministic logic test(s) as the gate.")
+    config._ripple_skipped_for_db = n
+
+
+def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    """A run that skipped most of itself may not exit green silently.
+
+    The DB-free gate is a real, intended mode (CI checkout with no oil.db). What is not intended is
+    a run that skips the majority of the suite for any *other* reason and still prints a pass. This
+    prints the ratio on every run so 'green' can be read honestly, and fails the run when skips
+    exceed the floor without the DB-free gate being the cause.
+    """
+    n_db = getattr(config, "_ripple_skipped_for_db", 0)
+    stats = terminalreporter.stats
+    passed, skipped = len(stats.get("passed", [])), len(stats.get("skipped", []))
+    total = passed + skipped + len(stats.get("failed", [])) + len(stats.get("error", []))
+    if not total:
+        return
+    unexplained = skipped - n_db
+    terminalreporter.write_sep("-", f"ripple: {passed} passed, {skipped} skipped "
+                                   f"({n_db} for the DB-free gate, {unexplained} otherwise) of {total}")
+    if unexplained > total * 0.25:
+        terminalreporter.write_sep("!", f"REFUSING TO REPORT GREEN: {unexplained} tests skipped for "
+                                       f"reasons other than the DB-free gate ({unexplained/total:.0%} "
+                                       f"of the suite). A silently-skipped suite is not a passing one.")
+        terminalreporter._session.exitstatus = 1
