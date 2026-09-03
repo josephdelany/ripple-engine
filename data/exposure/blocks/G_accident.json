@@ -1,0 +1,453 @@
+{
+ "block": "G_accident",
+ "n": 5,
+ "schema": "EXPOSURE_REGISTRATION.md §2 + Amendment 1 (cause as a declared covariate)",
+ "registration": "EXPOSURE_REGISTRATION.md Amendment 1 (2026-09-03), committed before any row here was filled",
+ "filled_by": "Session G, 2026-09-03",
+ "counts_toward_gate": false,
+ "gate_note": "§5's gate of 30 COMPLETE is about the CORPUS (the 75). No row here counts toward it. The attack attempt closed at 8 of 75 and Stage 1 remains descriptive only.",
+ "provenance_model": "PER-FIELD. Every filled value maps to its own source_url, source_publisher, source_date, verbatim quote and retrospective flag. A value with no entry in `provenance` was not sourced.",
+ "excluded_deliberately": "The 2020 economic refinery closures EIA lists (Shell Convent 211,146 b/cd; Marathon Martinez 161,000; HollyFrontier Cheyenne 48,000; Western Gallup 27,000; Dakota Prairie 19,000) were retrieved and are NOT included. They are commercial closures, not outage events, and adding them would raise the COMPLETE count with rows that answer a different question.",
+ "events": [
+  {
+   "event_id": "pes_philadelphia_fire_2019",
+   "date": "2019-06-21",
+   "date_precision": "day",
+   "cause": "fire_explosion",
+   "title": "Fire and explosion at the Philadelphia Energy Solutions refinery; refinery permanently closed",
+   "asset_name": "Philadelphia Energy Solutions (PES) refinery, South Philadelphia, Pennsylvania",
+   "asset_type": "refinery",
+   "capacity_nameplate_kbd": 335,
+   "capacity_affected_kbd": 335,
+   "days_to_partial_restore": "never",
+   "days_to_full_restore": "never",
+   "operator": "unknown",
+   "country_iso3": "USA",
+   "export_share_pct": "unknown",
+   "downstream_dependency": "unknown",
+   "alt_routing_available": "unknown",
+   "prior_incidents_same_asset": "unknown",
+   "capacity_units_note": "unknown",
+   "provenance": {
+    "cause": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 3 July 2019",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2019/190703/includes/analysis_print.php",
+     "source_date": "2019-07-03",
+     "quote": "On Friday, June 21, the Philadelphia Energy Solutions (PES) 335,000 barrels per day (b/d) refinery in South Philadelphia experienced a major fire and explosion.",
+     "retrospective": false
+    },
+    "asset_name": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 3 July 2019",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2019/190703/includes/analysis_print.php",
+     "source_date": "2019-07-03",
+     "quote": "the Philadelphia Energy Solutions (PES) 335,000 barrels per day (b/d) refinery in South Philadelphia",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 3 July 2019",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2019/190703/includes/analysis_print.php",
+     "source_date": "2019-07-03",
+     "quote": "refinery in South Philadelphia",
+     "retrospective": false
+    },
+    "country_iso3": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Refinery closures decreased U.S. refinery capacity during 2020'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=48636",
+     "source_date": "2021-07-08",
+     "quote": "The Philadelphia Energy Solutions refinery in Philadelphia, Pennsylvania: 335,000 b/cd",
+     "retrospective": true
+    },
+    "capacity_nameplate_kbd": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 3 July 2019",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2019/190703/includes/analysis_print.php",
+     "source_date": "2019-07-03",
+     "quote": "the Philadelphia Energy Solutions (PES) 335,000 barrels per day (b/d) refinery",
+     "retrospective": false,
+     "note": "Published 12 days after the event, so flagged retrospective=false only because the figure is the refinery's own stated capacity in a source contemporaneous with the outage week; the independent 2021 confirmation is carried on capacity_affected_kbd."
+    },
+    "capacity_affected_kbd": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Refinery closures decreased U.S. refinery capacity during 2020'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=48636",
+     "source_date": "2021-07-08",
+     "quote": "The Philadelphia Energy Solutions refinery in Philadelphia, Pennsylvania: 335,000 b/cd",
+     "retrospective": true,
+     "note": "The whole refinery. EIA lists it among the capacity removed during 2020 and records it as permanently closed by 1 January 2021 following the 2019 incident."
+    },
+    "days_to_partial_restore": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Refinery closures decreased U.S. refinery capacity during 2020'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=48636",
+     "source_date": "2021-07-08",
+     "quote": "permanently closed",
+     "retrospective": true,
+     "note": "'never' rather than a day count: the refinery did not resume. Stamp date 2021-07-08."
+    },
+    "days_to_full_restore": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Refinery closures decreased U.S. refinery capacity during 2020'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=48636",
+     "source_date": "2021-07-08",
+     "quote": "permanently closed",
+     "retrospective": true,
+     "note": "'never'. Stamp date 2021-07-08. This is the only row in the block where both duration fields are determinate, and they are determinate BECAUSE the answer is 'never'."
+    }
+   },
+   "unfilled_reason": {},
+   "required_filled": 6,
+   "status": "COMPLETE",
+   "retrospective": true
+  },
+  {
+   "event_id": "toledo_bp_husky_fire_2022",
+   "date": "2022-09",
+   "date_precision": "month",
+   "cause": "fire_explosion",
+   "title": "Fire at the bp-Husky (now Cenovus) Toledo refinery causes a long-term outage",
+   "asset_name": "Cenovus Toledo refinery (formerly bp-Husky Toledo), Ohio",
+   "asset_type": "refinery",
+   "capacity_nameplate_kbd": 150,
+   "capacity_affected_kbd": "unknown",
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": "unknown",
+   "operator": "unknown",
+   "country_iso3": "USA",
+   "export_share_pct": "unknown",
+   "downstream_dependency": "unknown",
+   "alt_routing_available": "unknown",
+   "prior_incidents_same_asset": "unknown",
+   "capacity_units_note": "unknown",
+   "provenance": {
+    "cause": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "A fire at the bp-Husky Toledo refinery last September resulted in a long-term outage",
+     "retrospective": true
+    },
+    "asset_name": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "the 150,000-barrel-per-day (b/d) Cenovus Toledo refinery (formerly the bp-Husky Toledo refinery)",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "refinery",
+     "retrospective": true
+    },
+    "country_iso3": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "Toledo refinery",
+     "retrospective": true
+    },
+    "capacity_nameplate_kbd": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "the 150,000-barrel-per-day (b/d) Cenovus Toledo refinery",
+     "retrospective": true
+    }
+   },
+   "unfilled_reason": {
+    "capacity_affected_kbd": "EIA says only that the fire 'resulted in a long-term outage'. No barrels-per-day figure for the volume offline is given, and the refinery's nameplate is not that volume.",
+    "days_to_partial_restore": "EIA says 'the refinery resumed operations in June' — a MONTH. The incident is dated only as 'last September'. A day count computed between two month-precision endpoints would manufacture precision neither source gives.",
+    "days_to_full_restore": "No source retrieved states a return to pre-fire capacity."
+   },
+   "required_filled": 3,
+   "status": "PARTIAL",
+   "retrospective": true
+  },
+  {
+   "event_id": "superior_refinery_fire_2018",
+   "date": "unknown",
+   "date_precision": "unknown",
+   "cause": "unknown",
+   "title": "Outage at the Superior, Wisconsin refinery; restart in April 2023 (incident date and cause unsourced)",
+   "asset_name": "Superior refinery, Wisconsin (Husky, later Cenovus)",
+   "asset_type": "refinery",
+   "capacity_nameplate_kbd": 40,
+   "capacity_affected_kbd": "unknown",
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": "unknown",
+   "operator": "unknown",
+   "country_iso3": "USA",
+   "export_share_pct": "unknown",
+   "downstream_dependency": "unknown",
+   "alt_routing_available": "unknown",
+   "prior_incidents_same_asset": "unknown",
+   "capacity_units_note": "unknown",
+   "provenance": {
+    "asset_name": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "the 40,000-b/d Superior refinery in Wisconsin",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "refinery",
+     "retrospective": true
+    },
+    "country_iso3": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "Superior refinery in Wisconsin",
+     "retrospective": true
+    },
+    "capacity_nameplate_kbd": {
+     "source_publisher": "U.S. Energy Information Administration, This Week in Petroleum, 2 August 2023",
+     "source_url": "https://www.eia.gov/petroleum/weekly/archive/2023/230802/includes/analysis_print.php",
+     "source_date": "2023-08-02",
+     "quote": "the 40,000-b/d Superior refinery in Wisconsin",
+     "retrospective": true
+    }
+   },
+   "unfilled_reason": {
+    "date": "NO retrieved source dates the incident. EIA's 2023 issue names the refinery and its restart but not the event. The date is left unknown rather than supplied from memory — the same rule that governs every other field.",
+    "cause": "No retrieved source attributes the outage to a fire or explosion. Left unknown; the event was selected for this block on the expectation of one, and the expectation is not a source.",
+    "capacity_affected_kbd": "No source retrieved gives the volume taken offline.",
+    "days_to_partial_restore": "EIA gives 'beginning in April 2023' — a month — and no incident date, so no interval is computable from sourced endpoints.",
+    "days_to_full_restore": "No source retrieved."
+   },
+   "required_filled": 3,
+   "status": "PARTIAL",
+   "retrospective": true
+  },
+  {
+   "event_id": "hurricane_harvey_gulf_2017",
+   "date": "2017-08",
+   "date_precision": "month",
+   "cause": "hurricane",
+   "title": "Hurricane Harvey: US Gulf Coast refinery runs fall",
+   "asset_name": "unknown",
+   "asset_type": "unknown",
+   "capacity_nameplate_kbd": "unknown",
+   "capacity_affected_kbd": "unknown",
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": "unknown",
+   "operator": "unknown",
+   "country_iso3": "USA",
+   "export_share_pct": "unknown",
+   "downstream_dependency": "unknown",
+   "alt_routing_available": "unknown",
+   "prior_incidents_same_asset": "unknown",
+   "capacity_units_note": "AGGREGATE regional throughput, not an asset's capacity offline. Deliberately not written into capacity_affected_kbd.",
+   "provenance": {
+    "cause": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Harvey caused U.S. Gulf Coast refinery runs to drop, gasoline prices to rise'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=32852",
+     "source_date": "2017-09-11",
+     "quote": "Hurricane Harvey caused U.S. Gulf Coast refinery runs to drop, gasoline prices to rise",
+     "retrospective": false
+    },
+    "country_iso3": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Harvey caused U.S. Gulf Coast refinery runs to drop, gasoline prices to rise'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=32852",
+     "source_date": "2017-09-11",
+     "quote": "U.S. Gulf Coast",
+     "retrospective": false
+    },
+    "capacity_units_note": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Harvey caused U.S. Gulf Coast refinery runs to drop, gasoline prices to rise'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=32852",
+     "source_date": "2017-09-11",
+     "quote": "gross inputs to refineries in the U.S. Gulf Coast fell by 3.2 million b/d, or 34%, from the previous week",
+     "retrospective": false,
+     "note": "AGGREGATE regional throughput, not an asset's capacity offline. Deliberately not written into capacity_affected_kbd."
+    }
+   },
+   "unfilled_reason": {
+    "asset_name": "CATEGORY MISMATCH, not a gap: EIA reports this event at PADD-3 aggregate level and names no refinery. A hurricane damages a region, and §2's schema presumes a point asset. Route tested and confirmed.",
+    "asset_type": "Follows from asset_name.",
+    "capacity_nameplate_kbd": "No asset, so no nameplate.",
+    "capacity_affected_kbd": "Only the aggregate 3.2 million b/d fall in regional gross inputs is published; it is throughput across many refineries, not one asset's capacity offline.",
+    "days_to_partial_restore": "The article gives no restoration date for any refinery.",
+    "days_to_full_restore": "Not published."
+   },
+   "required_filled": 0,
+   "status": "EMPTY",
+   "retrospective": false
+  },
+  {
+   "event_id": "hurricane_ida_gulf_2021",
+   "date": "2021-08",
+   "date_precision": "month",
+   "cause": "hurricane",
+   "title": "Hurricane Ida disrupts Gulf Coast crude production and refining",
+   "asset_name": "unknown",
+   "asset_type": "unknown",
+   "capacity_nameplate_kbd": "unknown",
+   "capacity_affected_kbd": "unknown",
+   "days_to_partial_restore": "unknown",
+   "days_to_full_restore": "unknown",
+   "operator": "unknown",
+   "country_iso3": "USA",
+   "export_share_pct": "unknown",
+   "downstream_dependency": "unknown",
+   "alt_routing_available": "unknown",
+   "prior_incidents_same_asset": "unknown",
+   "capacity_units_note": "AGGREGATE. 'At least nine refineries' are counted and none is named or sized.",
+   "provenance": {
+    "cause": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Ida disrupted crude oil production and refining activity'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=49576",
+     "source_date": "2021-09-16",
+     "quote": "Hurricane Ida disrupted crude oil production and refining activity",
+     "retrospective": false
+    },
+    "country_iso3": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Ida disrupted crude oil production and refining activity'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=49576",
+     "source_date": "2021-09-16",
+     "quote": "Gulf Coast",
+     "retrospective": false
+    },
+    "capacity_units_note": {
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy, 'Hurricane Ida disrupted crude oil production and refining activity'",
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=49576",
+     "source_date": "2021-09-16",
+     "quote": "At least nine refineries shut down or reduced production; gross inputs into Gulf Coast refineries fell by 1.6 million b/d",
+     "retrospective": false,
+     "note": "AGGREGATE. 'At least nine refineries' are counted and none is named or sized."
+    }
+   },
+   "unfilled_reason": {
+    "asset_name": "CATEGORY MISMATCH, as with Harvey and confirmed by a second independent test: EIA names no refinery and reports 'at least nine refineries shut down or reduced production'.",
+    "asset_type": "Follows from asset_name.",
+    "capacity_nameplate_kbd": "No asset.",
+    "capacity_affected_kbd": "Only the aggregate 1.6 million b/d fall in regional gross inputs.",
+    "days_to_partial_restore": "No restoration date for any facility is published.",
+    "days_to_full_restore": "Not published."
+   },
+   "required_filled": 0,
+   "status": "EMPTY",
+   "retrospective": false
+  }
+ ],
+ "summary": {
+  "COMPLETE": 1,
+  "PARTIAL": 2,
+  "EMPTY": 2,
+  "required_fields_filled": 12,
+  "of_possible": 30
+ },
+ "comparison_A1_4": {
+  "registered": "EXPOSURE_REGISTRATION.md Amendment 1 §A1.4 — the contrast is the deliverable and is reported whichever way it comes out.",
+  "attack_class": {
+   "n": 75,
+   "COMPLETE": 8,
+   "PARTIAL": 46,
+   "EMPTY": 21,
+   "complete_rate": 0.107,
+   "per_field": {
+    "asset_name": {
+     "filled": 54,
+     "of": 75,
+     "rate": 0.72
+    },
+    "asset_type": {
+     "filled": 49,
+     "of": 75,
+     "rate": 0.653
+    },
+    "capacity_nameplate_kbd": {
+     "filled": 20,
+     "of": 75,
+     "rate": 0.267
+    },
+    "capacity_affected_kbd": {
+     "filled": 13,
+     "of": 75,
+     "rate": 0.173
+    },
+    "days_to_partial_restore": {
+     "filled": 17,
+     "of": 75,
+     "rate": 0.227
+    },
+    "days_to_full_restore": {
+     "filled": 15,
+     "of": 75,
+     "rate": 0.2
+    }
+   },
+   "fields_filled": 168,
+   "of_possible": 450,
+   "field_rate": 0.373
+  },
+  "accident_class": {
+   "n": 5,
+   "COMPLETE": 1,
+   "PARTIAL": 2,
+   "EMPTY": 2,
+   "complete_rate": 0.2,
+   "per_field": {
+    "asset_name": {
+     "filled": 3,
+     "of": 5,
+     "rate": 0.6
+    },
+    "asset_type": {
+     "filled": 3,
+     "of": 5,
+     "rate": 0.6
+    },
+    "capacity_nameplate_kbd": {
+     "filled": 3,
+     "of": 5,
+     "rate": 0.6
+    },
+    "capacity_affected_kbd": {
+     "filled": 1,
+     "of": 5,
+     "rate": 0.2
+    },
+    "days_to_partial_restore": {
+     "filled": 1,
+     "of": 5,
+     "rate": 0.2
+    },
+    "days_to_full_restore": {
+     "filled": 1,
+     "of": 5,
+     "rate": 0.2
+    }
+   },
+   "fields_filled": 12,
+   "of_possible": 30,
+   "field_rate": 0.4
+  },
+  "by_cause_subclass": {
+   "fire_explosion": {
+    "n": 2,
+    "COMPLETE": 1,
+    "fields": 9,
+    "of": 12,
+    "rate": 0.75
+   },
+   "hurricane": {
+    "n": 2,
+    "COMPLETE": 0,
+    "fields": 0,
+    "of": 12,
+    "rate": 0.0
+   },
+   "unknown": {
+    "n": 1,
+    "COMPLETE": 0,
+    "fields": 3,
+    "of": 6,
+    "rate": 0.5
+   }
+  },
+  "finding": "A1.4 registered that the contrast is reported whichever way it comes out. It comes out SPLIT, and the split is sharper than either verdict would have been.\n\nHEADLINE RATES ARE CLOSE AND SETTLE NOTHING: attack class 168/450 = 37.3% of required fields filled; accident class 12/30 = 40.0%. On COMPLETE rate, 10.7% against 20.0%, on an accident n of 5. No claim rests on either.\n\nTHE PER-FIELD SPLIT IS THE RESULT. Joe's prediction holds decisively for ONE field and fails for the other three:\n  capacity_nameplate_kbd   attack 26.7%  ->  accident 60.0%   PREDICTION HOLDS\n  capacity_affected_kbd    attack 17.3%  ->  accident 20.0%   no gap\n  days_to_partial_restore  attack 22.7%  ->  accident 20.0%   no gap\n  days_to_full_restore     attack 20.0%  ->  accident 20.0%   no gap\n\nSo the information environment differs on the ASSET'S STANDING PROPERTIES and not on THE OUTAGE. That is explicable: US refinery nameplate capacity is a statutory annual EIA report, published whether or not anything happens to the refinery, whereas the volume a particular incident took offline and the date it came back are not anyone's reporting obligation. EIA writes 'a long-term outage' (Toledo) and 'resumed operations in June' rather than a barrels-per-day figure and a date. The belligerent-contests-the-figures mechanism the prediction assumed is not needed to explain the attack class's missing durations, because the accident class is missing them too, at the same rate, with no belligerent anywhere near it.\n\nTHE ONE COMPLETE ROW SHOWS WHY. Philadelphia Energy Solutions completes 6/6 because the refinery never restarted: both duration fields are determinate BECAUSE the answer is 'never'. Duration is recoverable when an outage is permanent and largely not otherwise.\n\nTHE HURRICANE SUBCLASS FAILS ASSET IDENTIFICATION OUTRIGHT, 0 of 2, tested independently on Harvey and Ida. EIA reports both at PADD-3 aggregate — 'gross inputs to refineries in the U.S. Gulf Coast fell by 3.2 million b/d' and 'at least nine refineries shut down or reduced production' — and names no facility. That is the SAME category mismatch that emptied the campaign-type rows of Block A, and its appearance in the best-instrumented accident reporting in the world shows the mismatch belongs to the schema and the event's geometry, not to conflict reporting. By subclass the field rate is 75% for point-asset fires and 0% for hurricanes.\n\nFOR STAGE 1: the binding constraint on the vulnerability model is not cause and not the corpus. It is that `duration` — the dependent variable — is published for roughly one event in five regardless of who caused it.",
+  "limitation_restated": "A1.4 registered it before the numbers: the accident set is US assets under EIA and CSB reporting mandates and the attack set is not, so any gap measures cause confounded with reporting regime. With n=5 on the accident side, no gap of the size seen here would be interpretable anyway."
+ }
+}
