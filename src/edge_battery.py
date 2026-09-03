@@ -379,6 +379,15 @@ def run():
                     "chokepoint>sanction test's clustering bug was fixed (chokepoint now fairly tested, "
                     "null). Family grew 10 -> 12.",
     }
+    # Retraction adjudication -- see src/retractions.py. Entries keep every figure; only the claim
+    # of current validity changes. tests/test_retraction_guard.py enforces this.
+    import retractions as _R
+    for _e in report.get("amplification", []):
+        _R.stamp(_e, _e.get("hypothesis"))
+    report["validated"] = [_e["hypothesis"] for _e in report.get("amplification", []) if _e.get("validated")]
+    report["validated_retracted"] = [_e["hypothesis"] for _e in report.get("amplification", []) if _e.get("retracted")]
+    report["n_validated"] = len(report["validated"])
+    report["retraction_note"] = "Filtered through src/retractions.py against data/evidentiary_bar.json."
     OUT.write_text(json.dumps(report, indent=2, default=str))
     return report
 

@@ -136,6 +136,19 @@ def run():
             if survivors else
             "No leading indicator survives all four gates -- the honest null."),
     }
+    # A re-discovery is not a re-validation. H1 is downgraded under the single evidentiary bar, and the
+    # placebo objection is about NON-events, which a correlation scan over real events cannot answer.
+    # src/retractions.py is the one place that knows; tests/test_retraction_guard.py enforces it.
+    import retractions as _R
+    for _s in report.get("survivors", []):
+        if _s.get("is_rediscovered_h1") and not _R.may_be_live("H1"):
+            _rec = _R.adjudication()[_R.canonical("H1")]
+            _s["status"] = ("re-discovered H1 -- H1 is NOT validated: " + _R.pointer("H1")
+                            + ". Re-discovery does not answer the placebo.")
+            _s["retracted"] = True
+            _s["retier"] = _rec["retier"]
+            _s["retracted_on"] = _rec["on"]
+            _s["retracted_reference"] = _rec["reference"]
     OUT.write_text(json.dumps(report, indent=2))
     return report
 

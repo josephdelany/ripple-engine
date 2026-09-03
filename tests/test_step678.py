@@ -58,7 +58,11 @@ def test_sr1_registry_tiering_is_derived():
     import signal_registry, json
     r = signal_registry.build()
     by = r["by_status"]
-    assert "h1_vix_conditioning" in by["live"]
+    # H1 was downgraded under the single evidentiary bar (data/evidentiary_bar.json,
+    # docs/red_team_1.md R7) and the registry now tiers it as retracted. This assertion used to
+    # require it to be LIVE, which made a green suite depend on carrying a retracted claim.
+    assert "h1_vix_conditioning" in by["retracted"]
+    assert "h1_vix_conditioning" not in by["live"]
     for null_sig in ("h2_conditioning", "h3_conditioning", "analogue_turbulence",
                      "knn_state_probability"):
         assert null_sig in by["rejected"]

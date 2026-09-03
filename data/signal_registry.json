@@ -1,10 +1,8 @@
 {
-  "generated_at": "2026-09-03T05:09:54+00:00",
+  "generated_at": "2026-09-03T19:20:46+00:00",
   "n_signals": 7,
   "by_status": {
-    "live": [
-      "h1_vix_conditioning"
-    ],
+    "live": [],
     "experimental": [
       "realized_vol_magnitude"
     ],
@@ -14,6 +12,9 @@
       "analogue_turbulence",
       "knn_state_probability",
       "nowcast_inventory"
+    ],
+    "retracted": [
+      "h1_vix_conditioning"
     ]
   },
   "signals": [
@@ -25,8 +26,11 @@
       "inputs": "derived.vix_pct (t-1); |CAR+20|",
       "oos_metric": "walk-forward realized amplification (ON minus OFF), pp",
       "oos_value": 7.64,
-      "status": "live",
-      "evidence": "amp 6.0412pp, 95%CI [1.557, 10.087], FDR q=0.0072, survives_bonferroni=True; walk-forward OOS +7.64pp"
+      "status": "retracted",
+      "evidence": "amp 6.0412pp, 95%CI [1.557, 10.087], FDR q=0.0072, survives_bonferroni=True; walk-forward OOS +7.64pp  [WITHDRAWN DOWNGRADE (SUGGESTIVE) 2026-09-03; data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar). Figures kept: a retracted result's diagnostics are part of the record.]",
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "signal_id": "h2_conditioning",
@@ -95,5 +99,6 @@
       "evidence": "68% coverage 0.745 (in band True), beats persistence False"
     }
   ],
-  "belief_state_vars": 3
+  "belief_state_vars": 3,
+  "retraction_note": "Statuses adjudicated against data/evidentiary_bar.json via src/retractions.py."
 }

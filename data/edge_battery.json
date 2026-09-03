@@ -2,12 +2,8 @@
   "what": "Pre-registered edge battery: a family of economically-distinct conditioned event-study hypotheses, family-wise corrected (BH-FDR q=0.10 AND Bonferroni alpha=0.05) across prior + new tests, every verdict reported. The mispricing edge is reported alongside as suggestive (small-N), never folded into the amplification FDR.",
   "pre_registration": "src/edge_battery.py docstring + HYPOTHESES (frozen before results; see git).",
   "family_size": 13,
-  "n_validated": 3,
-  "validated": [
-    "copper_growth",
-    "hy_credit_stress",
-    "severity_dose_response"
-  ],
+  "n_validated": 0,
+  "validated": [],
   "fdr": {
     "q": 0.1,
     "n_survive": 6
@@ -90,13 +86,17 @@
       "survives_fdr": true,
       "bonferroni_adj": 0.0312,
       "survives_bonferroni": true,
-      "validated": true,
+      "validated": false,
       "robustness": {
         "robust": true,
         "min": 3.2659,
         "max": 4.4243,
         "n_jackknife": 71
-      }
+      },
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "hypothesis": "palladium_supply",
@@ -121,7 +121,11 @@
       "survives_fdr": true,
       "bonferroni_adj": 0.3016,
       "survives_bonferroni": false,
-      "validated": false
+      "validated": false,
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "hypothesis": "silver_growth",
@@ -271,13 +275,17 @@
       "survives_fdr": true,
       "bonferroni_adj": 0.325,
       "survives_bonferroni": false,
-      "validated": true,
+      "validated": false,
       "robustness": {
         "robust": true,
         "min": 0.5695,
         "max": 1.6892,
         "n_jackknife": 49
-      }
+      },
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "hypothesis": "conflict_intensity_gold",
@@ -354,13 +362,17 @@
       "survives_fdr": true,
       "bonferroni_adj": 0.3939,
       "survives_bonferroni": false,
-      "validated": true,
+      "validated": false,
       "robustness": {
         "robust": true,
         "min": 4.2687,
         "max": 5.3615,
         "n_jackknife": 116
-      }
+      },
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "PAPER_DRAFT.md \u00a712.2"
     }
   ],
   "mispricing": {
@@ -395,5 +407,12 @@
     "natural_gas": "weather/storage-driven; no clean market-state proxy",
     "wheat": "supply/weather-driven; no clean market-state proxy"
   },
-  "wss_note": "WS-S: credit was un-capped via a HYG-drawdown proxy (derived.credit_stress) and is now a tested, VALIDATED hypothesis (hy_credit_stress), not an exclusion. The chokepoint>sanction test's clustering bug was fixed (chokepoint now fairly tested, null). Family grew 10 -> 12."
+  "wss_note": "WS-S: credit was un-capped via a HYG-drawdown proxy (derived.credit_stress) and is now a tested, VALIDATED hypothesis (hy_credit_stress), not an exclusion. The chokepoint>sanction test's clustering bug was fixed (chokepoint now fairly tested, null). Family grew 10 -> 12.",
+  "validated_retracted_2026_09_03": [
+    "copper_growth",
+    "palladium_supply",
+    "hy_credit_stress",
+    "severity_dose_response"
+  ],
+  "retraction_note": "`validated` is filtered through src/retractions.py against data/evidentiary_bar.json. Entries withdrawn under the single evidentiary bar keep every figure and are listed in validated_retracted_2026_09_03; severity_dose_response is RETRACTED outright (PAPER_DRAFT.md \u00a712.2)."
 }

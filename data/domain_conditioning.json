@@ -1,9 +1,7 @@
 {
   "what": "Pre-declared, apt, FDR-corrected conditioning: each commodity vs its natural driver (not generic VIX-stress). Pre-registration is the module docstring.",
   "n_hypotheses": 4,
-  "validated": [
-    "copper_growth"
-  ],
+  "validated": [],
   "results": [
     {
       "hypothesis": "gold_safe_haven",
@@ -54,7 +52,11 @@
       "ci_excludes_zero": true,
       "perm_p": 0.0024,
       "fdr_q": 0.0096,
-      "validated": true
+      "validated": false,
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "hypothesis": "palladium_supply",
@@ -71,8 +73,17 @@
       "ci_excludes_zero": false,
       "perm_p": 0.0232,
       "fdr_q": 0.0464,
-      "validated": false
+      "validated": false,
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     }
   ],
-  "note": "wheat excluded on purpose (supply/weather-driven; no clean market-state proxy)."
+  "note": "wheat excluded on purpose (supply/weather-driven; no clean market-state proxy).",
+  "validated_retracted": [
+    "copper_growth",
+    "palladium_supply"
+  ],
+  "retraction_note": "Filtered through src/retractions.py against data/evidentiary_bar.json."
 }

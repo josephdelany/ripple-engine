@@ -2,10 +2,7 @@
   "what": "Pre-registered cross-chain battery (V3): directions fixed before results; BH-FDR q=0.10 across the family; raw perm-p reported alongside.",
   "n_tested": 5,
   "family_fdr_q": 0.1,
-  "validated": [
-    "CC2_supply_gasoline_crack",
-    "CC5_fertilizer_corn"
-  ],
+  "validated": [],
   "placebo_false_positives": 0,
   "placebo_note": "shuffled event dates; a sound family yields ~0 placebo hits",
   "results": [
@@ -493,7 +490,11 @@
       "survives_fdr": true,
       "fdr_q": 0.0077,
       "survives_bonferroni": true,
-      "validated": true
+      "validated": false,
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "ok": true,
@@ -768,7 +769,16 @@
       "survives_fdr": true,
       "fdr_q": 0.0005,
       "survives_bonferroni": true,
-      "validated": true
+      "validated": false,
+      "retracted": true,
+      "retier": "SUGGESTIVE (bar leg-1 N/A)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     }
-  ]
+  ],
+  "validated_retracted_2026_09_03": [
+    "CC2_supply_gasoline_crack",
+    "CC5_fertilizer_corn"
+  ],
+  "retraction_note": "`validated` is filtered through src/retractions.py against data/evidentiary_bar.json."
 }

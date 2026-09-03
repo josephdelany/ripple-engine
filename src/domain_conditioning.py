@@ -67,6 +67,15 @@ def run():
                       "driver (not generic VIX-stress). Pre-registration is the module docstring.",
               "n_hypotheses": len(results), "validated": val, "results": results,
               "note": "wheat excluded on purpose (supply/weather-driven; no clean market-state proxy)."}
+    # Retraction adjudication (src/retractions.py, against data/evidentiary_bar.json). Entries keep
+    # every figure; only the claim of current validity changes. Enforced by tests/test_retraction_guard.py.
+    import retractions as _R
+    for _r in report.get("results", []):
+        _R.stamp(_r, _r.get("id") or _r.get("hypothesis") or _r.get("domain"))
+    report["validated"] = [x for x in report.get("validated", []) if _R.may_be_live(x)]
+    report["validated_retracted"] = [(_r.get("id") or _r.get("hypothesis") or _r.get("domain"))
+                                     for _r in report.get("results", []) if _r.get("retracted")]
+    report["retraction_note"] = "Filtered through src/retractions.py against data/evidentiary_bar.json."
     OUT.write_text(json.dumps(report, indent=2, default=str))
     return report
 

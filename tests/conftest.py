@@ -61,6 +61,10 @@ DB_FREE_FILES = {
     "test_big_moves_variants.py",    # BIG_MOVES Amendment 4: registered vs as-computed clustering. The
                                      # series tests take a self-skipping fixture; the published-file tests
                                      # read committed data/big_moves/*.json and run without a DB.
+    # The retraction guard: reads data/*.json + docs/PAPER_DRAFT.md, needs no database. It is in the CI
+    # gate deliberately -- it exists to stop a retracted claim being carried live, and a guard that only
+    # runs where the DB happens to exist would not have caught any of the six instances it was written for.
+    "test_retraction_guard.py",
     "test_citation_guard.py",        # Session I: the citation guard over the five published documents --
                                      # committed JSON/Markdown only. In the CI gate on purpose: it is the
                                      # test that goes red when a re-run supersedes the numbers in the prose.

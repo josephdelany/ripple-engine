@@ -13,8 +13,13 @@
       "as_of_reading": "2026-09-01",
       "event_median": 44.73,
       "direction": "high amplifies",
-      "verdict": "HOLDS",
-      "amplifier": "ON"
+      "verdict": "DOWNGRADE (SUGGESTIVE)",
+      "amplifier": "ON",
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)",
+      "retraction_note": "`amplifier` is the CURRENT VIX state reading and stays factual. What is retracted is the VERDICT -- that the state amplifies the ripple. DOWNGRADE (SUGGESTIVE) 2026-09-03; data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     "H2": {
       "hypothesis": "H2",
@@ -107,5 +112,6 @@
     "as_of": "2026-09-01"
   },
   "read": "Inventories 1.9\u03c3 above seasonal norm (H2 amplifier OFF); VIX 48th pct (H1 ON). A supply shock today lands on a physically well-supplied but psychologically stressed market.",
-  "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast."
+  "note": "Amplifier thresholds/base rates computed from data/oil.db with robustness.py clustering; verdicts consumed from the pre-registered record. H3 failed pre-registration and is never an amplifier. This is a conditional read of history, not a forecast.",
+  "retraction_note": "Hypothesis verdicts are adjudicated via src/retractions.py."
 }

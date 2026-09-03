@@ -11,6 +11,14 @@ surface was edited.*
 — still carries H1 as **live** with Bonferroni-surviving evidence, a claim the paper and the conceded
 adversarial review **publicly retracted**. Two other files carry the same stale belief.
 
+> **RESOLVED 2026-09-03, and the scope was larger than this sweep found.** §1's contradiction is
+> fixed. A generic guard (`tests/test_retraction_guard.py`, in the DB-free CI gate) now walks every
+> `data/**/*.json` and fails if a claim adjudicated as retracted or downgraded is marked live anywhere;
+> `src/retractions.py` reads the verdicts from `data/evidentiary_bar.json` rather than restating them.
+> Running it found **eight** affected files, not the three named here — `domain_conditioning.json` and
+> `engine_read.json` were carrying the same stale beliefs and nobody had looked at them. All eight are
+> marked in the propagation-graph convention: every figure kept, status changed, dated pointer added.
+
 ---
 
 ## 0. Provenance caveat that caps three of these files

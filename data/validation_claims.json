@@ -16,7 +16,7 @@
       "desc": "high VIX (stress) amplifies",
       "documented_verdict_20ev": "HOLDS",
       "documented_amp_pp": 10.3,
-      "current_verdict": "HOLDS",
+      "current_verdict": "DOWNGRADE (SUGGESTIVE)",
       "drifted": false,
       "amp_pp": 6.0412,
       "n_episodes": 87,
@@ -31,7 +31,12 @@
       "survives_fdr_10pct": true,
       "bonferroni_p": 0.0072,
       "survives_bonferroni_5pct": true,
-      "statistically_validated": true
+      "statistically_validated": false,
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)",
+      "retraction_note": "The figures above are the ORIGINAL computation and are kept as the record. They are diagnostics on a downgraded hypothesis, not a result: the VIX-matched placebo reproduces the raw amplification with non-events (data/placebo_vixmatched.json)."
     },
     {
       "hid": "H2",
@@ -80,5 +85,6 @@
       "statistically_validated": false
     }
   ],
-  "honest_note": "At N ~ 91 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks."
+  "honest_note": "At N ~ 91 episodes the bootstrap CIs are wide by construction -- a small sample cannot promote a claim to a confident edge. The value here is honesty about uncertainty, and the multiple-testing context: we ran three tests, so a single small p is worth less than it looks.",
+  "retraction_note": "Verdicts are adjudicated against data/evidentiary_bar.json via src/retractions.py."
 }

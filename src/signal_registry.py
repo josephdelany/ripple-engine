@@ -169,10 +169,28 @@ def build():
     conn.commit()
     nb = write_belief_state(conn)
     conn.close()
+    # A claim retracted or downgraded under the single evidentiary bar may not be written back as
+    # live. This is the defect that produced six stale belief files; src/retractions.py is the one
+    # place that knows, and tests/test_retraction_guard.py fails the build if this is skipped.
+    import retractions as _R
+    for r in rows:
+        if not _R.may_be_live(r["signal_id"]):
+            rec = _R.adjudication()[_R.canonical(r["signal_id"])]
+            r["status"] = "retracted"
+            r["retier"] = rec["retier"]
+            r["retracted_on"] = rec["on"]
+            r["retracted_reference"] = rec["reference"]
+            if "[WITHDRAWN" not in r.get("evidence", ""):
+                r["evidence"] = r.get("evidence", "") + f"  [WITHDRAWN {_R.pointer(r['signal_id'])}. " \
+                    "Figures kept: a retracted result's diagnostics are part of the record.]"
+    # every status key is always present, including empty ones: consumers index by_status["live"] and
+    # an absent key is a KeyError, whereas an empty list is the honest answer "no live signals".
+    statuses = ["live", "experimental", "rejected", "retracted"]
+    statuses += sorted({r["status"] for r in rows} - set(statuses))
     report = {"generated_at": now, "n_signals": len(rows),
-              "by_status": {s: [r["signal_id"] for r in rows if r["status"] == s]
-                            for s in ("live", "experimental", "rejected")},
-              "signals": rows, "belief_state_vars": nb}
+              "by_status": {s: [r["signal_id"] for r in rows if r["status"] == s] for s in statuses},
+              "signals": rows, "belief_state_vars": nb,
+              "retraction_note": "Statuses adjudicated against data/evidentiary_bar.json via src/retractions.py."}
     OUT.write_text(json.dumps(report, indent=2))
     return report
 
