@@ -957,7 +957,7 @@ def _replay(corpus, reads, scores, tier, burn, k, H, cluster_days, p):
     return out
 
 
-def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
+def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802, out_dir_for_placebo=WF):
     """VIX-matched pseudo-events (§6): for each scored daily read, a non-event date in the same VIX decile,
     >= 30 days from any corpus event; the same coded situation fields at that date; the frozen (uniform)
     mixture of the menu read as of the pseudo-date; engine P-skill vs climatology must be ~0."""
@@ -1028,17 +1028,54 @@ def placebo(corpus, menu, reads, scores, p, reps=None, seed=19900802):
     if len(rows) < 10:
         return {"note": f"only {len(rows)} placebo reads; not enough", "n": len(rows), "null_holds": None}
 
+    # Amendment N (2026-09-03): the 411 rows are 82 SOURCE EVENTS x 5 registered reps, and the reps of one
+    # event are matched on the same VIX decile of the same event. The unit of dependence is the source
+    # event, not the pseudo-read. Both estimators are published; the cluster one is primary.
+    ev_ids = sorted({r["event_id"] for r in rows})
+    ev_pos = {e: i for i, e in enumerate(ev_ids)}
+    ev_of_row = np.array([ev_pos[r["event_id"]] for r in rows])
+    ev_first_date = {e: min(r["pseudo_date"] for r in rows if r["event_id"] == e) for e in ev_ids}
+    ev_order = np.argsort([ev_first_date[e] for e in ev_ids], kind="stable")
+    mb_ev = _mean_block([ev_first_date[ev_ids[i]] for i in ev_order], p["cluster_days"])
+    lag_ev = max(int(round(mb_ev)) - 1, 0)
+
+    def _by_event(v):
+        """One value per source event: the mean over that event's reps, in source-date order."""
+        out = np.array([v[ev_of_row == j].mean() for j in range(len(ev_ids))])
+        return out[ev_order]
+
     def block(ek, rk, label):
         e_ = np.array([r[ek] for r in rows]); c_ = np.array([r[rk] for r in rows])
-        ci = INF.bootstrap_ci(lambda idx: 1 - e_[idx].mean() / c_[idx].mean(), len(rows), n_boot=min(p["n_boot"], 1000), mean_block=1.0)
-        dm = INF.dm_test(e_, c_, h=1, lag=0)
-        return {"reference": label, "skill": ci["estimate"], "ci95": [ci["lo"], ci["hi"]], "dm_p": dm.get("p_value"),
+        # (a) the superseded i.i.d. estimator, retained exactly as it was computed (Amendment N.4)
+        ci_i = INF.bootstrap_ci(lambda idx: 1 - e_[idx].mean() / c_[idx].mean(), len(rows), n_boot=min(p["n_boot"], 1000), mean_block=1.0)
+        dm_i = INF.dm_test(e_, c_, h=1, lag=0)
+        iid = {"skill": ci_i["estimate"], "ci95": [ci_i["lo"], ci_i["hi"]], "dm_p": dm_i.get("p_value"),
+               "n": len(rows), "unit": "pseudo-read (i.i.d.)",
+               "superseded_by": "Amendment N -- the reps of one source event are a cluster, not five draws"}
+        # (b) the primary: resample SOURCE EVENTS, all of an event's reps travelling together
+        ee, cc = _by_event(e_), _by_event(c_)
+        ci_c = INF.bootstrap_ci(lambda idx: None if cc[idx].mean() == 0 else 1 - ee[idx].mean() / cc[idx].mean(),
+                                len(ee), n_boot=min(p["n_boot"], 1000), mean_block=mb_ev)
+        dm_c = INF.dm_test(ee, cc, h=1, lag=lag_ev)
+        return {"reference": label, "skill": ci_c["estimate"], "ci95": [ci_c["lo"], ci_c["hi"]],
+                "dm_p": dm_c.get("p_value"),
                 "engine_mean": float(e_.mean()), "ref_mean": float(c_.mean()),
-                "covers_zero": bool(ci["lo"] is not None and ci["lo"] <= 0 <= ci["hi"])}
+                "covers_zero": bool(ci_c["lo"] is not None and ci_c["lo"] <= 0 <= ci_c["hi"]),
+                "estimator": "source_event_cluster", "n_clusters": len(ev_ids), "n_rows": len(rows),
+                "mean_block": round(mb_ev, 2), "hac_lag": lag_ev,
+                "estimator_iid_superseded": iid}
     vs_rand = block("engine_crps", "rand_crps", f"random_analogs, k={k_rand} (registered CRPS; size-matched)")
     vs_clim = block("engine_crps", "clim_crps", "climatology (registered CRPS)")
     fair = block("engine_crps_fair", "clim_crps_fair", "climatology (crps_fair -- diagnostic, not registered)")
+    # Amendment N.5: seal the per-read rows so a future estimator change is a recomputation, not a re-run
+    try:
+        with (out_dir_for_placebo / "placebo_rows.jsonl").open("w", encoding="utf-8") as fh:
+            for r in rows:
+                fh.write(json.dumps(r, default=str) + "\n")
+    except Exception:
+        pass
     return {"n": len(rows), "reps": reps, "k_random": k_rand, "random_draws": draws,
+            "n_source_events": len(ev_ids), "estimator": "source_event_cluster (Amendment N)",
             "vs_random_analogs": vs_rand, "vs_climatology": vs_clim, "fair_vs_climatology": fair,
             "skill": vs_rand["skill"], "ci95": vs_rand["ci95"], "dm_p": vs_rand["dm_p"], "null_holds": vs_rand["covers_zero"],
             "null_reference": ("random_analogs -- protocol §4 baseline 3, the same k drawn at random from the class: size-matched, so a "

@@ -87,3 +87,43 @@ def test_amendment_b_walk_seals_persistence_and_counts_the_fallback(tmp_path):
         if s_["outcome"]["level"]:
             assert s_["scores"]["persistence"]["G"]["brier"] is not None
     assert W.verify_file(tmp_path / "kn" / "reads.jsonl")[0]
+
+
+# ---------------------------------------------------------------- Amendment N: the placebo estimator
+
+def test_AMENDMENT_N_placebo_resamples_source_events_not_pseudo_reads():
+    """The 411 published rows were 82 source events x 5 reps, bootstrapped i.i.d. The reps of one event are
+    matched on the same VIX decile of the same event: a cluster, not five draws. Both estimators must be
+    published, the cluster one primary, and the cluster n must be the event count."""
+    import json as _json
+    from pathlib import Path as _P
+    p = _P(__file__).resolve().parents[1] / "data" / "walk_forward" / "summary.json"
+    if not p.exists():
+        import pytest as _pt
+        _pt.skip("no published run")
+    pl = _json.loads(p.read_text()).get("placebo") or {}
+    b = pl.get("vs_random_analogs") or {}
+    if "estimator" not in b:
+        import pytest as _pt
+        _pt.skip("the run in the tree predates Amendment N")
+    assert b["estimator"] == "source_event_cluster"
+    assert b["n_clusters"] == pl["n_source_events"] < b["n_rows"], "clusters are events, rows are reps x events"
+    assert b["n_rows"] == pl["n"]
+    iid = b["estimator_iid_superseded"]
+    assert iid["n"] == b["n_rows"] and "superseded_by" in iid
+    # the correction may only WIDEN: the cluster interval must contain the i.i.d. one's centre
+    lo, hi = b["ci95"]; ilo, ihi = iid["ci95"]
+    if None not in (lo, hi, ilo, ihi):
+        assert (hi - lo) >= (ihi - ilo) - 1e-9, "a cluster bootstrap on fewer units cannot be narrower"
+
+
+def test_AMENDMENT_N_placebo_rows_are_sealed_for_future_recomputation():
+    from pathlib import Path as _P
+    f = _P(__file__).resolve().parents[1] / "data" / "walk_forward" / "placebo_rows.jsonl"
+    if not f.exists():
+        import pytest as _pt
+        _pt.skip("no placebo rows sealed yet (pre-Amendment-N run in the tree)")
+    import json as _json
+    rows = [_json.loads(l) for l in f.open() if l.strip()]
+    assert rows and {"rep", "event_id", "pseudo_date", "engine_crps", "clim_crps", "rand_crps"} <= set(rows[0])
+    assert len({r["event_id"] for r in rows}) < len(rows), "reps x events, so events are fewer than rows"
