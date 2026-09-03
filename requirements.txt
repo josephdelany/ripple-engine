@@ -1,14 +1,19 @@
 # Runtime dependencies for the daily pipeline (what CI installs, and any fresh
 # clone needs). The engine's statistics are hand-rolled on numpy/pandas -- there is
 # deliberately no scipy/statsmodels/sklearn here.
-pandas
-numpy
-requests
-matplotlib
-pyyaml          # situations.yaml + digest situations card
-feedparser      # watcher RSS feeds
-rapidfuzz       # corroborate.py headline clustering (fast, C++-backed, CI-light)
-xlrd            # fetch_gpr reads the GPR .xls
-yfinance        # fetch_market_live: fresh real oil/risk prices (free, headless)
+#
+# Pinned == to the versions actually installed on the workstation that ran the
+# D-6 replication check (2026-09-02), python3 3.14.3 (/usr/local/bin/python3, no
+# venv -- this is also the interpreter repro.sh and src/walk.py run under here).
+pandas==2.3.3
+numpy==2.4.3
+requests==2.34.2
+matplotlib==3.11.1
+pyyaml==6.0.3          # situations.yaml + digest situations card
+feedparser==6.0.11     # watcher RSS feeds
+rapidfuzz==3.14.5      # corroborate.py headline clustering (fast, C++-backed, CI-light)
+xlrd==2.0.2            # fetch_gpr reads the GPR .xls
+yfinance==1.5.1        # fetch_market_live: fresh real oil/risk prices (free, headless)
+pytest==9.0.3          # tests/, including tests/test_reproduce.py (D-6)
 # NOTE: the local MCP server (src/mcp_server.py) additionally needs `mcp`; it runs
 # only on your workstation, not in CI -- install it there per ops/MCP.md.

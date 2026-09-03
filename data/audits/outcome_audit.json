@@ -1,0 +1,56 @@
+{
+ "auditor": "joe",
+ "protocol": "WALK_FORWARD_PROTOCOL.md \u00a71 (kappa >= 0.6 against sources) / \u00a77",
+ "threshold": 0.6,
+ "sheet": "data/audits/ies90_audit_30.csv",
+ "started_at": "2026-09-02T23:39:35+00:00",
+ "dated": "2026-09-03T00:11:17+00:00",
+ "rows": [
+  {
+   "event_id": "iran_iraq_war_1980",
+   "event_date": "1980-09-22",
+   "engine_level": 3,
+   "engine_deal": 0,
+   "engine_basis": "dyadic",
+   "rule_fired": "WAR.inter.pair",
+   "joe_level": 3,
+   "joe_deal": 0,
+   "joe_note": "",
+   "answered_at": "2026-09-03T00:02:23+00:00"
+  }
+ ],
+ "n_rows": 30,
+ "n_done": 1,
+ "kappa": null,
+ "passed": false,
+ "confusion_joe_x_engine": {
+  "0": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "1": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "2": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "3": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 1
+  }
+ },
+ "deal_agreement": {
+  "n": 1,
+  "agree": 1
+ }
+}
