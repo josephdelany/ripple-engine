@@ -10,7 +10,12 @@ this file wins.*
   `src/api_v2.py`, `src/app.html`, `src/acceptance_v2.py`, corpus tooling
   (`admit_events.py`, extractor runs), PATH Steps 1–5, 9, 11.
 - **Session B** owns: `src/engine/**`, `src/walk.py`, `data/walk_forward/**`,
-  PATH Steps 6–8, the walk figures.
+  PATH Steps 6–8, the walk figures. Added by Joe's brief of 2026-09-03 (the grid
+  study, a new estimand with the unit a date rather than an event):
+  `GRID_STUDY_REGISTRATION.md`, `src/engine/grid/**`, `data/grid/**` and
+  `tests/test_grid_*.py`. The grid study reads `data/walk_forward/**` and never
+  writes there; no event-triggered number is re-judged by it, and the two units are
+  never pooled (GRID_STUDY_REGISTRATION §0.2).
 - **Session E** (the history spine) owns: `EVENTS_CODEBOOK.md`,
   `data/events*.csv`, `data/dossiers/**`, `data/spine/**`, `src/spine_audit.py`,
   `SPINE_REGISTRATION.md`, `docs/spine/**`; `src/dossier.py` is **shared with A**
