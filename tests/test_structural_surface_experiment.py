@@ -109,12 +109,20 @@ def test_frozen_manifest_names_every_reproducible_scientific_output():
 
 def test_frozen_manifest_distinguishes_registration_implementation_and_execution():
     manifest = json.loads((M.OUT / "manifest.json").read_text())
-    assert manifest["registration_commits"] == M.REGISTRATION_COMMITS
-    assert manifest["implementation_commits"] == M.IMPLEMENTATION_COMMITS
+    assert manifest["initial_registration_commits"] == M.INITIAL_REGISTRATION_COMMITS
+    assert manifest["initial_implementation_commits"] == M.INITIAL_IMPLEMENTATION_COMMITS
+    assert manifest["corrections"] == M.CORRECTIONS
     assert "implementation_commit" not in manifest
-    for registered in manifest["registration_commits"]:
+    for registered in manifest["initial_registration_commits"]:
         subprocess.run(["git", "merge-base", "--is-ancestor", registered,
-                        manifest["implementation_commits"][0]], cwd=M.ROOT, check=True)
-    for implemented in manifest["implementation_commits"]:
+                        manifest["initial_implementation_commits"][0]], cwd=M.ROOT, check=True)
+    for implemented in manifest["initial_implementation_commits"]:
         subprocess.run(["git", "merge-base", "--is-ancestor", implemented,
+                        manifest["execution_commit"]], cwd=M.ROOT, check=True)
+    for correction in manifest["corrections"]:
+        subprocess.run(["git", "merge-base", "--is-ancestor",
+                        correction["registration_commit"],
+                        correction["implementation_commit"]], cwd=M.ROOT, check=True)
+        subprocess.run(["git", "merge-base", "--is-ancestor",
+                        correction["implementation_commit"],
                         manifest["execution_commit"]], cwd=M.ROOT, check=True)
