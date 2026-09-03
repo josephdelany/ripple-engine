@@ -237,11 +237,18 @@ def reanchoring_check(rows, run_id):
         w = np.array(w); w = w / w.sum()
         d = {L: float(w[[i for i, x in enumerate(lab) if x == L]].sum()) for L in SC.LEVELS}
         mine.append(SC.brier(d, y)); sealed.append(SC.brier(r["engine"]["G"], y))
+    abst = sum(1 for row in rows for it in reads[row["event_id"]]["items"][:ANALOG_ITEMS] if not (it.get("G_ids") or []))
     return {"what": "the same twelve items, the same sealed weights, the analogs voting on LEVEL instead of "
                     "on CHANGE -- a check that the re-anchoring is the only thing this experiment changes",
             "level_mixture_M01_M12": round(float(np.mean(mine)), 6),
             "sealed_engine_G_13_items": round(float(np.mean(sealed)), 6),
             "difference_is": "M13's share of the sealed Hedge weight, which the twelve-item mixture drops",
+            "abstain_rule_departure": {
+                "item_slots": len(rows) * ANALOG_ITEMS, "abstaining": abst,
+                "note": "L.2 charges an item with no analog the dIES-climatology forecast (the registered "
+                        "abstain rule, registered before this code); the sealed walk instead drops such an "
+                        "item from the mixture by zeroing its weight. Measured difference in mean Brier on "
+                        "the retained set: 0.00035. Disclosed so that 'pure re-anchoring' is precise."},
             "gates": "nothing; a validation of this module"}
 
 
@@ -297,11 +304,14 @@ def combinations(rows):
 
 FORECASTERS = ("C1_fixed_0.5", "C2_walkforward_lambda", "C3_hedge", "analogue",
                "no_change", "climatology", "frozen", "random_analogs")
-ATOMIC = ("analogue", "climatology", "frozen", "random_analogs")   # L.5: fair scores defined only here
 
 
 def score_rows(rows):
-    """Registered Brier (the gate), RPS and log score beside it, Ferro fair forms as diagnostic."""
+    """Registered Brier (the gate), RPS and log score beside it, Ferro fair forms as diagnostic (L.5).
+
+    The log score applies read.LOG_FLOOR across the seven dIES categories rather than the four levels, so
+    it is comparable BETWEEN the forecasters here and not with the level-tier log scores. Brier and RPS
+    carry no floor and are comparable with both (the L.2 identity)."""
     S = {f: {"brier": [], "rps": [], "log": [], "brier_fair": [], "rps_fair": []} for f in FORECASTERS}
     for r in rows:
         y = r["delta"]
@@ -394,6 +404,46 @@ def permutations(rows, cl, n_perm, seed=19900802):
                                          "recomputed with each read's own L- (feasible by construction)"),
             "forecast_block": blk(null_fc, "the analogue dIES distributions permuted across intact clusters and "
                                            "re-clipped to the receiving read's feasible set; gates nothing")}
+
+
+# ---------------------------------------------------------------- Amendment M: pooling or similarity?
+
+def diagnostic_pools(rows, S, mb, lag, n_boot):
+    """Amendment M (2026-09-03), DIAGNOSTIC, registered POST HOC and labelled as such: three pools at the
+    IDENTICAL registered weight 0.5 whose only difference is the second component -- the retrieved analogue
+    (C1), random analogs from the same point-in-time pool at the sealed k/seed/draws (C0r), and the whole
+    dIES-climatology (C0). Gates nothing; L.7's verdict stands whatever this shows."""
+    y = [r["delta"] for r in rows]
+    c0 = [brier(pool(r["d"]["no_change"], r["d"]["climatology"], LAMBDA_DEFAULT), y[i]) for i, r in enumerate(rows)]
+    c0_rps = [rps(pool(r["d"]["no_change"], r["d"]["climatology"], LAMBDA_DEFAULT), y[i]) for i, r in enumerate(rows)]
+    c0r, c0r_rps = [], []
+    for i, r in enumerate(rows):
+        pools = [pool(r["d"]["no_change"], d, LAMBDA_DEFAULT) for d in r["d"]["random_analogs"]]
+        c0r.append(float(np.mean([brier(x, y[i]) for x in pools])))
+        c0r_rps.append(float(np.mean([rps(x, y[i]) for x in pools])))
+    c1, c1_rps = S["C1_fixed_0.5"]["brier"], S["C1_fixed_0.5"]["rps"]
+    base, base_rps = S["no_change"]["brier"], S["no_change"]["rps"]
+    return {
+        "amendment": "WALK_FORWARD_PROTOCOL.md Amendment M (2026-09-03)",
+        "registered_post_hoc": True, "gates": "nothing -- L.7's verdict stands whatever this shows",
+        "motivated_by": "Amendment L's own result: C1 gains over no-change while dIES-climatology alone "
+                        "scores better than the retrieved analogue, which leaves 'pooling' and 'similarity' "
+                        "unseparated inside the pool",
+        "lambda": LAMBDA_DEFAULT,
+        "means": {"C1_analogue": round(float(np.mean(c1)), 6), "C0r_random_analogs": round(float(np.mean(c0r)), 6),
+                  "C0_climatology": round(float(np.mean(c0)), 6), "no_change": round(float(np.mean(base)), 6)},
+        "means_rps": {"C1_analogue": round(float(np.mean(c1_rps)), 6), "C0r_random_analogs": round(float(np.mean(c0r_rps)), 6),
+                      "C0_climatology": round(float(np.mean(c0_rps)), 6), "no_change": round(float(np.mean(base_rps)), 6)},
+        "vs_no_change": {"brier": {"C1": _block(c1, base, mb, lag, n_boot), "C0r": _block(c0r, base, mb, lag, n_boot),
+                                   "C0": _block(c0, base, mb, lag, n_boot)},
+                         "rps": {"C1": _block(c1_rps, base_rps, mb, lag, n_boot), "C0r": _block(c0r_rps, base_rps, mb, lag, n_boot),
+                                 "C0": _block(c0_rps, base_rps, mb, lag, n_boot)}},
+        "C1_vs": {"brier": {"C0": _block(c1, c0, mb, lag, n_boot), "C0r": _block(c1, c0r, mb, lag, n_boot)},
+                  "rps": {"C0": _block(c1_rps, c0_rps, mb, lag, n_boot), "C0r": _block(c1_rps, c0r_rps, mb, lag, n_boot)}},
+        "reading": "M.3: C1 ~ C0 -> the gain is pooling; C1 > C0 -> similarity carries something inside the "
+                   "pool; C1 < C0 -> retrieval costs the pool; C0r vs C0 prices the small-atom penalty of "
+                   "E.3 with content held fixed",
+    }
 
 
 # ---------------------------------------------------------------- the verdict (L.7)
@@ -516,6 +566,7 @@ def compute(run_id=None, n_boot=None, n_spa=None, n_perm=None):
         "hedge_w_nochange_trajectory": comb["hedge_w_nochange_trajectory"],
         "spa": spa, "permutation": perm, "power": power, "fdr": {"names": fdr_names, "p": fdr_p, "bh": bh},
         "sensitivity_covering_ge2": sens,
+        "diagnostic_pools": diagnostic_pools(rows, S, mb, lag, n_boot),
         "verdict": {"label": v, "reading": why,
                     "rule": "WALK_FORWARD_PROTOCOL.md Amendment L.7, written before these numbers existed",
                     "cannot": "make anything VALIDATED -- the §7 label audit is 1 of 30 rows in"},

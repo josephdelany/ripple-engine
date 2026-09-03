@@ -4,7 +4,7 @@
  "registered": true,
  "gates": "nothing in \u00a77; engine:G on the level estimand is unchanged",
  "derived_from_run": "walk_20260903T003422Z",
- "computed_at": "2026-09-03T03:02:26+00:00",
+ "computed_at": "2026-09-03T03:22:52+00:00",
  "tier": "daily",
  "n_published_scored_G": 150,
  "n_retained": 150,
@@ -295,6 +295,11 @@
   "level_mixture_M01_M12": 0.762929,
   "sealed_engine_G_13_items": 0.768749,
   "difference_is": "M13's share of the sealed Hedge weight, which the twelve-item mixture drops",
+  "abstain_rule_departure": {
+   "item_slots": 1800,
+   "abstaining": 58,
+   "note": "L.2 charges an item with no analog the dIES-climatology forecast (the registered abstain rule, registered before this code); the sealed walk instead drops such an item from the mixture by zeroing its weight. Measured difference in mean Brier on the retained set: 0.00035. Disclosed so that 'pure re-anchoring' is precise."
+  },
   "gates": "nothing; a validation of this module"
  },
  "combination": {
@@ -875,6 +880,168 @@
     "dm_ok": true
    }
   }
+ },
+ "diagnostic_pools": {
+  "amendment": "WALK_FORWARD_PROTOCOL.md Amendment M (2026-09-03)",
+  "registered_post_hoc": true,
+  "gates": "nothing -- L.7's verdict stands whatever this shows",
+  "motivated_by": "Amendment L's own result: C1 gains over no-change while dIES-climatology alone scores better than the retrieved analogue, which leaves 'pooling' and 'similarity' unseparated inside the pool",
+  "lambda": 0.5,
+  "means": {
+   "C1_analogue": 0.46434,
+   "C0r_random_analogs": 0.467678,
+   "C0_climatology": 0.462636,
+   "no_change": 0.480467
+  },
+  "means_rps": {
+   "C1_analogue": 0.363329,
+   "C0r_random_analogs": 0.36754,
+   "C0_climatology": 0.362996,
+   "no_change": 0.380467
+  },
+  "vs_no_change": {
+   "brier": {
+    "C1": {
+     "n": 150,
+     "mean": 0.4643395791031344,
+     "ref_mean": 0.4804666666666666,
+     "skill": 0.03356546599874888,
+     "ci95": [
+      -0.012376498021643284,
+      0.07844326208094961
+     ],
+     "dm_hln": -1.3437380898457507,
+     "dm_p": 0.1810757986409286,
+     "dm_ok": true
+    },
+    "C0r": {
+     "n": 150,
+     "mean": 0.46767791666666675,
+     "ref_mean": 0.4804666666666666,
+     "skill": 0.02661735118634634,
+     "ci95": [
+      -0.008053606333238664,
+      0.0612722419928771
+     ],
+     "dm_hln": -1.385024708275351,
+     "dm_p": 0.16811510752504288,
+     "dm_ok": true
+    },
+    "C0": {
+     "n": 150,
+     "mean": 0.4626364432961009,
+     "ref_mean": 0.4804666666666666,
+     "skill": 0.03711021930879499,
+     "ci95": [
+      0.0028621369042243776,
+      0.07234480614752758
+     ],
+     "dm_hln": -1.9290059633327994,
+     "dm_p": 0.05563097406868178,
+     "dm_ok": true
+    }
+   },
+   "rps": {
+    "C1": {
+     "n": 150,
+     "mean": 0.36332924379835596,
+     "ref_mean": 0.3804666666666666,
+     "skill": 0.045043165064773016,
+     "ci95": [
+      0.0014722346925694469,
+      0.08562548690785435
+     ],
+     "dm_hln": -1.8713591950032316,
+     "dm_p": 0.06325593075056801,
+     "dm_ok": true
+    },
+    "C0r": {
+     "n": 150,
+     "mean": 0.36754,
+     "ref_mean": 0.3804666666666666,
+     "skill": 0.033975819169440924,
+     "ci95": [
+      0.0027986955914144837,
+      0.06305187981190036
+     ],
+     "dm_hln": -1.8925634665514763,
+     "dm_p": 0.06035548530871937,
+     "dm_ok": true
+    },
+    "C0": {
+     "n": 150,
+     "mean": 0.3629958427391388,
+     "ref_mean": 0.3804666666666666,
+     "skill": 0.045919460121415234,
+     "ci95": [
+      0.01419643590878621,
+      0.07592151281827751
+     ],
+     "dm_hln": -2.4540196046035248,
+     "dm_p": 0.015279233641605217,
+     "dm_ok": true
+    }
+   }
+  },
+  "C1_vs": {
+   "brier": {
+    "C0": {
+     "n": 150,
+     "mean": 0.4643395791031344,
+     "ref_mean": 0.4626364432961009,
+     "skill": -0.0036813697487800834,
+     "ci95": [
+      -0.02875743549235037,
+      0.020448889398225152
+     ],
+     "dm_hln": 0.29820211336172625,
+     "dm_p": 0.765964340423605,
+     "dm_ok": true
+    },
+    "C0r": {
+     "n": 150,
+     "mean": 0.4643395791031344,
+     "ref_mean": 0.46767791666666675,
+     "skill": 0.007138112458518586,
+     "ci95": [
+      -0.016177228996816305,
+      0.030315228527219556
+     ],
+     "dm_hln": -0.5913606737271172,
+     "dm_p": 0.5551748762644502,
+     "dm_ok": true
+    }
+   },
+   "rps": {
+    "C0": {
+     "n": 150,
+     "mean": 0.36332924379835596,
+     "ref_mean": 0.3629958427391388,
+     "skill": -0.0009184707370235579,
+     "ci95": [
+      -0.025116027047051785,
+      0.020968539058003742
+     ],
+     "dm_hln": 0.07748943232446198,
+     "dm_p": 0.9383381570818026,
+     "dm_ok": true
+    },
+    "C0r": {
+     "n": 150,
+     "mean": 0.36332924379835596,
+     "ref_mean": 0.36754,
+     "skill": 0.01145659302836155,
+     "ci95": [
+      -0.010364942507017213,
+      0.03290318188732755
+     ],
+     "dm_hln": -1.0069733159096856,
+     "dm_p": 0.31558008735981846,
+     "dm_ok": true
+    }
+   }
+  },
+  "reading": "M.3: C1 ~ C0 -> the gain is pooling; C1 > C0 -> similarity carries something inside the pool; C1 < C0 -> retrieval costs the pool; C0r vs C0 prices the small-atom penalty of E.3 with content held fixed"
  },
  "verdict": {
   "label": "NO ADDITION",

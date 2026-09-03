@@ -267,3 +267,37 @@ def test_L9_published_json_matches_the_module_on_the_headline_numbers():
     assert out["scores"]["no_change"]["brier_fair"] == out["scores"]["no_change"]["brier"]
     for f in ("C1_fixed_0.5", "C2_walkforward_lambda", "C3_hedge"):
         assert out["scores"][f]["brier_fair"] is None, "a pool with a non-atomic component has no Ferro form"
+
+
+# ---------------------------------------------------------------- M: pooling or similarity? (diagnostic)
+
+def test_M2_the_three_pools_share_the_registered_lambda_and_differ_only_in_the_second_component():
+    """M.2: if the weight differed between the pools it could explain any gap between them, and the
+    control would answer nothing."""
+    rows = _synthetic_rows(n=60, seed=13)
+    DX.combinations(rows)                       # the pools live on the rows the combinations build
+    out = DX.diagnostic_pools(rows, DX.score_rows(rows), 1.5, 0, 200)
+    assert out["lambda"] == DX.LAMBDA_DEFAULT == 0.5
+    r = rows[0]
+    for second in ("analogue", "climatology"):
+        p = DX.pool(r["d"]["no_change"], r["d"][second], DX.LAMBDA_DEFAULT)
+        assert p["0"] == pytest.approx(0.5 * r["d"]["no_change"]["0"] + 0.5 * r["d"][second]["0"])
+    assert set(out["means"]) == {"C1_analogue", "C0r_random_analogs", "C0_climatology", "no_change"}
+
+
+def test_M2_the_control_is_labelled_post_hoc_and_gates_nothing():
+    """Registered post hoc and said so: the standing of Amendment K, never dressed up as foresight."""
+    rows = _synthetic_rows(n=60, seed=17)
+    DX.combinations(rows)
+    out = DX.diagnostic_pools(rows, DX.score_rows(rows), 1.5, 0, 200)
+    assert out["registered_post_hoc"] is True
+    assert out["gates"].startswith("nothing")
+
+
+@sealed_only
+def test_M4_published_control_does_not_move_the_L7_verdict():
+    if not DX.OUT.exists():
+        pytest.skip("delta_experiment.json not yet computed")
+    o = json.loads(DX.OUT.read_text())
+    assert o["diagnostic_pools"]["registered_post_hoc"] is True
+    assert o["verdict"]["label"] == "NO ADDITION", "L.7's verdict is decided by L's registered conditions alone"
