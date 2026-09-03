@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT FOR SUBMISSION.** This document contains legacy analyses and a known Stage 0 provenance-path defect. Use [`docs/PAPER.md`](PAPER.md) for the current finding.
+
 # What this project found about oil
 
 *2026-09-03. The market findings, separated from the forecasting result. Every figure traced to a

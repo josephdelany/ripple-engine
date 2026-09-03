@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT FOR SUBMISSION.** Use [`README.md`](../README.md), [`docs/PAPER.md`](PAPER.md), and [`docs/RESUME.md`](RESUME.md). Numbers below describe legacy analyses.
+
 # Historical analogy in geopolitical and oil-market forecasting
 
 **Joseph Delany · Colby College · 2026 · [github.com/josephdelany/ripple-engine](https://github.com/josephdelany/ripple-engine)**

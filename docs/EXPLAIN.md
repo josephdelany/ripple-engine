@@ -1,3 +1,5 @@
+> **SUPERSEDED — DO NOT USE FOR INTERVIEWS.** Use [`docs/RESUME.md`](RESUME.md) for the verified explanation.
+
 # Saying it out loud
 
 *The versions to have ready. Written to be spoken, not read.*

@@ -8,13 +8,14 @@ OUT = ROOT / "docs" / "audit" / "FILE_CLASSIFICATION.csv"
 
 CORE = {
     "README.md", "Makefile", "requirements.txt", "LICENSE", "CITATION.cff",
-    "docs/PAPER.md", "docs/EVENTS_CODEBOOK.md", "docs/DEMO.md",
+    "docs/PAPER.md", "docs/RESUME.md", "docs/README.md", "docs/EVENTS_CODEBOOK.md", "docs/DEMO.md",
     "docs/audit/PUBLIC_PRODUCT_CLOSURE.md",
     "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
     "src/structural_surface_experiment.py", "src/reproduce_structural_surface.py",
     "src/export_structural_surface_inputs.py", "src/structural_surface_demo.py",
-    "src/classify_public_product.py", "tests/test_structural_surface_experiment.py",
-    "tests/test_structural_surface_demo.py", "docs/audit/FILE_CLASSIFICATION.csv",
+    "src/classify_public_product.py", "src/public_claim_guard.py",
+    "tests/test_structural_surface_experiment.py", "tests/test_structural_surface_demo.py",
+    "tests/test_public_claim_guard.py", "docs/audit/FILE_CLASSIFICATION.csv",
 }
 DEPENDENCY = {"src/engine/inference.py", "src/engine/scoring.py",
               "src/engine/__init__.py", "docs/reference/WORLD_STATE_CODEBOOK.md"}

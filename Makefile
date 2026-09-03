@@ -54,7 +54,8 @@ reproduce-central:
 # The maintained public-product gate. The historical 1,009-test research suite remains available
 # with `python3 -m pytest -q`, but includes networked loaders and guards for superseded publications.
 test-public:
-	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py
+	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_public_claim_guard.py
+	$(PY) src/public_claim_guard.py
 
 reproduce:
 	@set -euo pipefail; \

@@ -16,6 +16,8 @@ This is professionally consequential without being a claim of production forecas
 
 Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. See [the registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) for the frozen decision rules.
 
+For applications and interviews, use only [the verified résumé language](docs/RESUME.md).
+
 ## Reproduce the central experiment
 
 Requirements: Python 3.11+ and the packages in `requirements.txt`.
@@ -39,6 +41,7 @@ The demo produces one sealed retrospective read for the 2026 Hormuz closure and 
 ## Public-product map
 
 - `docs/PAPER.md` — authoritative methods-and-evidence paper.
+- `docs/RESUME.md` — verified résumé bullets and interview explanation.
 - `registrations/STRUCTURAL_SURFACE_EXPERIMENT.md` — decisions frozen before computation.
 - `src/structural_surface_experiment.py` — central experiment.
 - `src/reproduce_structural_surface.py` — offline hash-checked reproduction.

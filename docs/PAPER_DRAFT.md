@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT FOR SUBMISSION.** This draft describes the legacy event walk. The authoritative paper is [`docs/PAPER.md`](PAPER.md), based on the registered structural-versus-surface experiment.
+
 # Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy
 
 **Joseph Delany** — Colby College, Department of History (Middle East focus)

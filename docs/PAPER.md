@@ -10,7 +10,7 @@ Analysts often select historical precedents from visible event labels: a closure
 
 ## 1. Research question
 
-When an analyst says that a contemporary shock resembles a famous precedent, is that inference or pattern matching? Surface analogy selects cases because their event labels agree. Structural analogy compares the wider state: geopolitical alignment, conflict conditions, market conditions, and other variables observable at the forecast date.
+When an analyst says that a contemporary shock resembles a famous precedent, is that inference or pattern matching? Historical work establishes that policymakers use analogies and that poorly chosen precedents can distort decisions (May 1973; Jervis 1976; Khong 1992). Surface analogy selects cases because their event labels agree. Structural analogy compares the wider state: geopolitical alignment, conflict conditions, market conditions, and other variables observable at the forecast date.
 
 The instrument is the experiment. Its state vector defines “structure”; its distance rule defines correspondence; its candidate pool defines which precedents are admissible; its vintage rule defines what could have been known; its outcome defines “what followed”; and its baselines define “adds information.” The [registered protocol](../registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) fixes those choices.
 
@@ -26,7 +26,7 @@ At each forecast date, both arms receive every prior, outcome-closed event with 
 
 Surface distance is zero when two events share a class and one otherwise. Structural distance is the equal-block average of normalized field distances over fields jointly available to the pair. Both become weights through the same kernel, `exp(−d/0.25)`. The forecast is the weighted empirical distribution of prior abnormal returns.
 
-The primary score is weighted CRPS. Each forecast is serialized and sealed by SHA-256 before its target is attached. Inference is paired by date: Diebold–Mariano with Newey–West variance and a stationary-bootstrap interval. Uniform weighting on identical support is a registered diagnostic separating useful similarity from pooling.
+The primary score is weighted CRPS, a strictly proper score for predictive distributions (Gneiting and Raftery 2007). Each forecast is serialized and sealed by SHA-256 before its target is attached. Inference is paired by date using the Diebold–Mariano comparison with a finite-sample correction (Diebold and Mariano 1995; Harvey, Leybourne, and Newbold 1997), Newey–West variance, and a stationary-bootstrap interval (Politis and Romano 1994). Uniform weighting on identical support is a registered diagnostic separating useful similarity from pooling.
 
 ## 4. Primary result
 
@@ -61,3 +61,13 @@ The next serious analysis is prospective collection of time-stamped states and f
 Run `make reproduce-central`. It uses the committed input bundle, rebuilds central outputs in isolation, and verifies byte-for-byte hashes against `data/structural_surface/manifest.json`. The scientific artifacts are `reads.jsonl`, `scores.jsonl`, and `summary.json`. Tests enforce filtration, equal support, seal-before-outcome order, scoring, and deterministic reproduction.
 
 The six-week system and retractions remain in repository history and the audit record, but are not additional validated findings. Tag `closure-core-frozen-2026-09-03` is the pre-closure recovery point.
+
+## References
+
+- Diebold, F. X., and R. S. Mariano. 1995. “Comparing Predictive Accuracy.” *Journal of Business & Economic Statistics* 13(3): 253–263.
+- Gneiting, T., and A. E. Raftery. 2007. “Strictly Proper Scoring Rules, Prediction, and Estimation.” *Journal of the American Statistical Association* 102(477): 359–378.
+- Harvey, D., S. Leybourne, and P. Newbold. 1997. “Testing the Equality of Prediction Mean Squared Errors.” *International Journal of Forecasting* 13(2): 281–291.
+- Jervis, R. 1976. *Perception and Misperception in International Politics*. Princeton University Press.
+- Khong, Y. F. 1992. *Analogies at War: Korea, Munich, Dien Bien Phu, and the Vietnam Decisions of 1965*. Princeton University Press.
+- May, E. R. 1973. *“Lessons” of the Past: The Use and Misuse of History in American Foreign Policy*. Oxford University Press.
+- Politis, D. N., and J. P. Romano. 1994. “The Stationary Bootstrap.” *Journal of the American Statistical Association* 89(428): 1303–1313.

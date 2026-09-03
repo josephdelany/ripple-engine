@@ -1,3 +1,5 @@
+> **SUPERSEDED — DO NOT COPY.** Use [`docs/RESUME.md`](RESUME.md). This file describes the legacy event walk and contains a known Stage 0 provenance-path defect.
+
 # Resume lines and application material
 
 *2026-09-03. Every figure here is current as of run `walk_20260903T052633Z` and traceable to a

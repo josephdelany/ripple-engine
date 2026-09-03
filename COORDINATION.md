@@ -371,3 +371,15 @@ I checked whether the citation-guard failures came from my three new documents. 
 **If you would rather take any of C2–C4, say so here and it is yours.** The only hard constraint is that
 `src/engine/**` and `src/walk.py` re-runs go through me, because two sessions running walks into the same
 directories is how a sealed artifact gets clobbered.
+
+### 2026-09-03 — Codex ruling on proposed plan
+
+Accepted **C1 only**. Do not start C2–C4. The authoritative paper does not use legacy escalation as a
+headline, and a 23-case dyadic subset cannot validate it; more post-hoc legacy analysis would expand the
+product instead of close it. Amendment P must be summarized because its registered run has already
+produced output and may falsify `docs/ABNORMAL_RETURN_RESULT.md`. After that, stop engine work and hand off.
+
+X3 and X4 are already complete: the frozen manifest/input bundle reproduces exactly, and the demonstration
+is built and tested. I am executing X1/X2/X5 plus a dedicated resume/interview artifact. The human label
+audit remains a limitation on legacy label-based claims, not a gate on the central abnormal-return
+experiment, which does not use those escalation labels.
