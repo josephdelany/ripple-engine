@@ -163,3 +163,62 @@ belligerents' behaviour in isolation.
 `data/exposure/blocks/G_accident.json`, same schema, same per-field `provenance` model, plus
 `cause`. It is a **separate file from the six corpus blocks** so that no accident row can be
 mistaken for a corpus event or counted toward §5's gate.
+
+---
+
+## Amendment 2 (2026-09-03) — the accident block is re-run as a TEST OF ARCHITECTURE.md's central claim
+*Appended by **Session G on Joe's instruction of 2026-09-03**, before any row of the re-run is filled.
+Amendment 1's `cause` covariate stands unchanged. §§0–5 are Cowork's and are untouched. No row in this
+block counts toward §5's gate of 30, which remains unmet at 5 and keeps Stage 1 descriptive only.*
+
+### A2.1 What is being tested, and that it can come out against the claim
+
+`ARCHITECTURE.md` now asserts that conflict-caused disruptions are unmeasurable for five specific
+reasons — contested fields, incompatible units, forecast-not-confirmed restoration, closed archives,
+category mismatch — and reports a **6 %** completion rate as the measurement of it.
+
+**That claim is only load-bearing if accident-caused outages are measurable.** If accidents come back
+at the same rate, the finding is different and much smaller: restoration data is not published for
+anyone, and belligerent opacity explains nothing. Joe's instruction is explicit — *"If accidents also
+come back low, say so plainly — I will rewrite the claim rather than defend it."* Registered
+accordingly: **this amendment is written so the block can falsify the document that commissioned it.**
+
+### A2.2 The target n is part of the test, not an aspiration
+
+Joe set the target at **40–60 accident events**, on the stated expectation that EIA published weekly
+capacity offline and confirmed restoration through Katrina, Rita, Ike, Harvey and Ida. Registered
+before the retrieval concludes:
+
+> **If the block cannot reach the target n at the registered sourcing standard, the shortfall is
+> itself a measurement and is reported as one — with every route tested and the reason each failed.**
+> Reaching a smaller n by relaxing the standard is forbidden, and reaching it by estimating any field
+> is forbidden. A block of 8 honest rows falsifies the availability premise more cleanly than 50
+> padded ones would confirm it.
+
+### A2.3 The `retrospective` key is mandatory on every filled numeric
+
+The original block template carried no `retrospective` key. That is a specification defect — Joe's,
+stated as his — and it is why four events across blocks A–F are `INVALID` under
+`src/exposure_schema.py`, which correctly refuses a numeric whose source postdates its event without
+the flag. **Every numeric in this block carries `retrospective` explicitly**, and the validator's
+verdict on this block is published rather than the block's own self-declared status.
+
+Session G's own first pass failed this: `pes_philadelphia_fire_2019` carried
+`retrospective: false` on a capacity from a source dated twelve days after the fire, with a note
+arguing the source was "contemporaneous with the outage week". That was rationalisation, the
+validator caught it, and it is corrected in this re-run rather than defended.
+
+### A2.4 Same standard, no exceptions
+
+Six required fields, six optional, the absolute sourcing rule, per-field provenance. Aggregate
+regional figures are **never** written into an asset's `capacity_affected_kbd`; they are recorded in
+`capacity_units_note` with their quote. A route that returns aggregate data is recorded as tested and
+**not** as a partial success.
+
+### A2.5 The deliverable
+
+The side-by-side completion rate, accident against attack, **on the same schema and the same
+standard, computed by `src/exposure_schema.py` and not by this session's own count** — because a
+session marking its own work complete is not evidence, which is that validator's stated design
+principle. Both the COMPLETE rate and the per-field rate are reported, because Amendment 1 already
+found they say different things.
