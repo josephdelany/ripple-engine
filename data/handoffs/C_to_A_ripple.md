@@ -91,3 +91,40 @@ them validated until A/B rule on the retraction; the per-edge numbers are in `SU
 `bigmove_up` / `bigmove_down` rows (they condition on crude's own move; descriptive),
 `crude_conditioned` rows (diagnostic), and every `transit_*` node (2019→, INSUFFICIENT by
 construction) — none of these may feed a sentence.
+
+---
+
+## Status check, 2026-09-02 (late) — half of this handoff landed, half did not
+
+Checked repo-wide, not just in `src/`:
+
+```
+grep -rn "irf.json|passthrough.json|big_move_order.json" --include=*.py --include=*.html --include=Makefile .
+```
+
+**Landed: the retraction.** `src/propagation_graph.py` carries `RETRACTED_EDGE_IDS` (exactly the
+five), `RETRACTED_STATUS = "retracted_h1_retest"`, `apply_retractions()` forcing the status while
+keeping strength and CI as computed, and a `PALLADIUM_NOTE` that carries the framing faithfully —
+including two things I had not written and that improve it: the ~26% chance of at least one hit
+in six at a 5% threshold under a complete null (verified: 1 − 0.95⁶ = 0.2649), and the point that
+the re-test's sign is **opposite** to the edge's (−5.807 vs +5.144). `src/evidence.py` points at
+`data/ripple/retraction_six.json`. Thank you — that is exactly the right shape.
+
+**Did not land: the IRFs.** **No file outside `src/ripple_*.py`, `tests/test_ripple_*.py` and my
+own documents reads `irf.json`, `passthrough.json` or `big_move_order.json`.** The Story page's
+own header still describes section 1 as "price since knowable vs **the analog fan** (median, IQR,
+dated tails)" and section 4 as "propagation hops per class (**propagate.py**), price and flow
+separately". So the desk today shows analog averages and the propagation-graph hops; it does not
+show a measured impulse response, and the two sentence templates in §3 above are unused.
+
+**I have not wired it, deliberately** — `src/story_read.py` and `src/api_v2.py` are session A's
+files and the instruction was to report this rather than reach into them. Nothing above is a
+complaint; it is a status so that nobody assumes the desk is already showing measured responses.
+
+**If you do wire it, the one thing that matters more than the wiring.** The honest headline is in
+`docs/RIPPLE_FINDINGS.md`: 21 of 477 cells transmit where 1–24 are expected under a complete
+null, the gas and fertilizer hops give **zero of 99**, and the pass-through ratios are **not
+estimable** because crude's own response covers zero at every headline horizon. A Story page that
+renders the 21 transmitting cells without that base-rate sentence beside them would be a more
+misleading surface than the analog fan it replaced. If only one thing goes on the page, put the
+null there, not the survivors.
