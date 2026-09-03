@@ -25,9 +25,9 @@ Generated artifacts, repetitive dossiers, tests, interfaces, and planning files 
 
 ## Frozen evidence
 
-`make reproduce-central` was run after the final diagnostics. It reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. The maintained test gate is `make test-public`: 15 tests pass, including semantic public-claim and link checks.
+`make reproduce-central` was run after the final diagnostics and reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. `make test-public` is only a fast 15-test central subset. It is not evidence that the repository suite passes and must never be reported as such. Plain `pytest -q` and `make test-full` collect the complete suite and are the release gate.
 
-The complete historical suite was also run at closure: **991 passed, 13 skipped, 1 expected failure, and 5 failed** out of 1,009. None of the five affects the central experiment. One is a networked ICB loader test that attempts a Duke download in an offline environment. Four are guards tied to the superseded README/figure/citation publication system. They remain visible rather than being weakened to create a cosmetically green historical suite.
+An earlier closure incorrectly presented the scoped 15-test result as “default test suite: 15 passed.” That statement is retracted. At that point the complete suite still had five observed failures: two provenance reads of a moved superseded source, one stale figure reachability assumption, one unregistered central result in the citation guard, and one cached ICB loader that unnecessarily contacted the network. The causes were repaired directly; collection was restored before the next full-suite run.
 
 ## Confirmed provenance defect
 

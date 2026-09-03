@@ -34,37 +34,39 @@ file. Later matches are recorded as `also_in`, never as the citation.
 
 | # | object | role | run id | stamp | numeric leaves |
 |---:|---|---|---|---|---:|
-| 1 | `data/walk_forward/summary.json` | the published walk | `walk_20260903T052633Z` | 2026-09-03T05:28:25.275266+00:00 | 6,667 |
-| 2 | `data/walk_forward/delta_experiment.json` | Amendment L/M, §11 -- derived from the walk | `walk_20260903T052633Z` | 2026-09-03T05:58:30+00:00 | 571 |
-| 3 | `data/state/situation_knowable.json` | the vintage filter's own counts | — | 2026-09-02T19:22:26+00:00 | 947 |
-| 4 | `data/big_moves/summary.json` | the big-moves census | — | — | 248 |
-| 5 | `data/walk_forward/big_moves_knew.json` | big moves, what was knowable | — | — | 332 |
-| 6 | `data/reader_eval/score.json` | the reader's gold-set score | — | — | 41 |
-| 7 | `data/state/outcomes_kappa.json` | the retired label's kappa | — | 2026-09-02T15:46:40+00:00 | 98 |
-| 8 | `data/acceptance_dod.json` | definition of done | — | 2026-09-03T01:34:23+00:00 | 6 |
-| 9 | `data/walk_forward/menu.json` | the registered Hedge menu | — | — | 108 |
-| 10 | `data/grid/power_arithmetic.json` | the grid study's effective-n arithmetic | — | — | 781 |
-| 11 | `data/grid/price/summary.json` | the grid study, price side | — | — | 317 |
-| 12 | `data/grid/g/PANEL.json` | the grid study, escalation panel | — | — | 535 |
-| 13 | `data/ripple/irf.json` | the propagation study (91k leaves -- resolved last, see note above) | — | 2026-09-02T23:32:21+00:00 | 91,161 |
-| 14 | `data/candidates/pre1987_candidates.csv` | the pre-1987 candidate sheet | — | — | 2 |
-| 15 | `data/candidates/post1987_candidates.csv` | the post-1987 candidate sheet | — | — | 1,089 |
-| 16 | `data/candidates/pre1987_candidates_outcomes.csv` | pre-1987 candidates, outcome columns | — | — | 679 |
-| 17 | `data/candidates/pre1987_ranked.csv` | pre-1987 candidates, ranked | — | — | 2,768 |
+| 1 | `data/structural_surface/summary.json` | the authoritative structural-versus-surface experiment | — | — | 344 |
+| 2 | `data/ripple/external_checks.json` | external checks cited by the superseded brief | — | — | 296 |
+| 3 | `data/walk_forward/summary.json` | the published walk | `walk_20260903T052633Z` | 2026-09-03T05:28:25.275266+00:00 | 6,896 |
+| 4 | `data/walk_forward/delta_experiment.json` | Amendment L/M, §11 -- derived from the walk | `walk_20260903T052633Z` | 2026-09-03T05:58:30+00:00 | 571 |
+| 5 | `data/state/situation_knowable.json` | the vintage filter's own counts | — | 2026-09-02T19:22:26+00:00 | 947 |
+| 6 | `data/big_moves/summary.json` | the big-moves census | — | — | 248 |
+| 7 | `data/walk_forward/big_moves_knew.json` | big moves, what was knowable | — | — | 332 |
+| 8 | `data/reader_eval/score.json` | the reader's gold-set score | — | — | 41 |
+| 9 | `data/state/outcomes_kappa.json` | the retired label's kappa | — | 2026-09-02T15:46:40+00:00 | 98 |
+| 10 | `data/acceptance_dod.json` | definition of done | — | 2026-09-03T01:34:23+00:00 | 6 |
+| 11 | `data/walk_forward/menu.json` | the registered Hedge menu | — | — | 108 |
+| 12 | `data/grid/power_arithmetic.json` | the grid study's effective-n arithmetic | — | — | 781 |
+| 13 | `data/grid/price/summary.json` | the grid study, price side | — | — | 455 |
+| 14 | `data/grid/g/PANEL.json` | the grid study, escalation panel | — | — | 535 |
+| 15 | `data/ripple/irf.json` | the propagation study (91k leaves -- resolved last, see note above) | — | 2026-09-02T23:32:21+00:00 | 91,161 |
+| 16 | `data/candidates/pre1987_candidates.csv` | the pre-1987 candidate sheet | — | — | 2 |
+| 17 | `data/candidates/post1987_candidates.csv` | the post-1987 candidate sheet | — | — | 1,089 |
+| 18 | `data/candidates/pre1987_candidates_outcomes.csv` | pre-1987 candidates, outcome columns | — | — | 679 |
+| 19 | `data/candidates/pre1987_ranked.csv` | pre-1987 candidates, ranked | — | — | 2,768 |
 
 ## Counts
 
 | class | n | meaning |
 |---:|---:|---|
-| RESOLVED | 306 | traceable to at most 3 named paths |
-| EXCEPTION | 1 | registered as living outside the run objects |
-| DERIVED | 5 | arithmetic over stored fields, recomputed here |
+| RESOLVED | 596 | traceable to at most 3 named paths |
+| EXCEPTION | 0 | registered as living outside the run objects |
+| DERIVED | 4 | arithmetic over stored fields, recomputed here |
 | SELF_REFERENTIAL | 0 | **a denominator that sums only from its own sentence** |
 | HISTORICAL | 5 | quoted as having been wrong, inside a correction region |
-| AMBIGUOUS | 1086 | in the record, but in too many places to call it a citation |
-| UNSOURCED | 16 | **found nowhere in the declared record** |
+| AMBIGUOUS | 805 | in the record, but in too many places to call it a citation |
+| UNSOURCED | 12 | **found nowhere in the declared record** |
 | EXCLUDED | 495 | not a claim (year, identifier, bibliography, code span) |
-| | **1914** | numeric tokens scanned across 5 documents |
+| | **1917** | numeric tokens scanned across 5 documents |
 
 ## UNSOURCED — what we cannot trace
 
@@ -75,20 +77,16 @@ some may be wrong. Deciding which is a person's job, not the guard's.
 
 | document | line | number | context |
 |---|---:|---:|---|
-| `README.md` | 41 | `772` | Institute, Kilian — assembled into a world-state panel of 352k rows. **772** price and |
-| `README.md` | 190 | `15,241` | **15,241** point-in-time checks with zero violations · two independent runs reproducing the |
-| `docs/BRIEF.md` | 18 | `772` | Kilian) · **772** price and macro series back to 1946 · escalation outcomes computed from |
-| `docs/BRIEF.md` | 140 | `15,241` | **15,241** point-in-time checks with zero violations · independent runs reproducing the |
-| `docs/PAPER_DRAFT.md` | 176 | `614` | tightening classes correlate **r = −0.023** with the identified supply shock over 614 months, so |
-| `docs/PAPER_DRAFT.md` | 246 | `786` | \| **C1** Observability \| **262 of 313** events have no situation field knowable at *t*; 726 of 786 situation values were knowabl |
-| `docs/PAPER_DRAFT.md` | 360 | `772` | **A note on the physical record, found while auditing series freshness.** Of 772 loaded |
-| `docs/PAPER_DRAFT.md` | 645 | `15,241` | standing filtration audit over every read: 15,241 checks across analog dates, |
-| `docs/PAPER_DRAFT.md` | 737 | `1,800` | zeroes its weight; 58 of 1,800 item slots abstain, and the measured difference in mean Brier |
-| `docs/PAPER_DRAFT.md` | 738 | `0.00035` | is 0.00035. |
-| `docs/PAPER_DRAFT.md` | 857 | `−196.7` | delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock). |
-| `docs/PAPER_DRAFT.md` | 857 | `+220.1` | delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock). |
-| `docs/PAPER_DRAFT.md` | 1004 | `614` | shock over 614 months.** Near-orthogonal. A pass on OPEC decisions therefore does not license |
-| `docs/PAPER_DRAFT.md` | 1369 | `15,241` | \| Filtration audit: 15,241 checks, 0 violations \| `filtration_audit` \| |
+| `docs/BRIEF.md` | 20 | `772` | Kilian) · **772** price and macro series back to 1946 · escalation outcomes computed from |
+| `docs/BRIEF.md` | 164 | `15,241` | **15,241** point-in-time checks with zero violations · independent runs reproducing the |
+| `docs/PAPER_DRAFT.md` | 261 | `786` | \| **C1** Observability \| **262 of 313** events have no situation field knowable at *t*; 726 of 786 situation values were knowabl |
+| `docs/PAPER_DRAFT.md` | 375 | `772` | **A note on the physical record, found while auditing series freshness.** Of 772 loaded |
+| `docs/PAPER_DRAFT.md` | 660 | `15,241` | standing filtration audit over every read: 15,241 checks across analog dates, |
+| `docs/PAPER_DRAFT.md` | 752 | `1,800` | zeroes its weight; 58 of 1,800 item slots abstain, and the measured difference in mean Brier |
+| `docs/PAPER_DRAFT.md` | 753 | `0.00035` | is 0.00035. |
+| `docs/PAPER_DRAFT.md` | 872 | `−196.7` | delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock). |
+| `docs/PAPER_DRAFT.md` | 872 | `+220.1` | delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock). |
+| `docs/PAPER_DRAFT.md` | 1473 | `15,241` | \| Filtration audit: 15,241 checks, 0 violations \| `filtration_audit` \| |
 | `OPEN_ITEMS.md` | 228 | `2,028` | 2,028 week-ends, 1987–2026), multiple horizons, multiple price targets, and escalation |
 | `OPEN_ITEMS.md` | 234 | `786` | **2.3 The state vector is empty once vintage binds.** 726 of 786 situation values dropped |
 
@@ -119,14 +117,14 @@ number should do. Without this class every correction the project
 publishes would make the guard noisier, penalising the one behaviour it
 exists to protect.
 
-104 claim(s) in total sit inside a correction region; the ones that
+106 claim(s) in total sit inside a correction region; the ones that
 still resolve are classed normally and marked `correction region` in the
 tables below. **No claim in a correction region is checked for drift** —
 a superseded number is expected to leave the record.
 
 | document | line | number | context |
 |---|---:|---:|---|
-| `docs/PAPER_DRAFT.md` | 924 | `+8.209` | amplification **+2.071 [−4.067, +8.209]**, permutation *p* = 0.269, with the observed gap sitting |
+| `docs/PAPER_DRAFT.md` | 939 | `+8.209` | amplification **+2.071 [−4.067, +8.209]**, permutation *p* = 0.269, with the observed gap sitting |
 | `OPEN_ITEMS.md` | 19 | `20,473` | Strictly before *d*: Ukraine 2022 is **79**, not 20,473; Israel–Hamas 2023 is **28**, not |
 | `OPEN_ITEMS.md` | 20 | `3,835` | 3,835; Israel–Iran 2025 is **4**, not 959. Those are war *onsets* and their level 3 is |
 | `OPEN_ITEMS.md` | 20 | `959` | 3,835; Israel–Iran 2025 is **4**, not 959. Those are war *onsets* and their level 3 is |
@@ -141,11 +139,10 @@ rather than being quietly accepted.
 
 | document | line | number | recomputed | from |
 |---|---:|---:|---:|---|
-| `README.md` | 162 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
-| `docs/BRIEF.md` | 87 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
-| `docs/PAPER_DRAFT.md` | 94 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
-| `docs/PAPER_DRAFT.md` | 158 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
-| `docs/PAPER_DRAFT.md` | 843 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
+| `docs/BRIEF.md` | 89 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
+| `docs/PAPER_DRAFT.md` | 96 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
+| `docs/PAPER_DRAFT.md` | 160 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
+| `docs/PAPER_DRAFT.md` | 858 | `477` | 477 | count of data/ripple/irf.json :: rows[*] whose `verdict` is not null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. Predicate registered in PAPER_DRAFT section 12 and Appendix A. |
 
 ## EXCEPTION — registered as living outside the run objects
 
@@ -156,7 +153,6 @@ live fields. A value-only rule would have filed it under one of them.
 
 | document | line | number | holds it | also matches (coincidence) |
 |---|---:|---:|---|---|
-| `README.md` | 91 | `−0.005` | `STATE_OF_THE_ENGINE.md (section 5)`, `data/handoffs/B_run_delta.md (193022Z column)` | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.0.within_bin_covariance` |
 
 ## AMBIGUOUS — in the record, but not traceable to one path
 
@@ -166,1092 +162,811 @@ claim to know which field the prose meant. Listed with the first few.
 
 | document | line | number | n_paths | first matches |
 |---|---:|---:|---:|---|
-| `README.md` | 38 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `README.md` | 39 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `README.md` | 46 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `README.md` | 78 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `README.md` | 82 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `README.md` | 82 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `README.md` | 82 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `README.md` | 82 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `README.md` | 82 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `README.md` | 82 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `README.md` | 83 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `README.md` | 83 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `README.md` | 83 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `README.md` | 83 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `README.md` | 83 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `README.md` | 84 | `+0.134` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[58].skill_frozen_vs_clim` |
-| `README.md` | 84 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `README.md` | 84 | `+0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `README.md` | 84 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `README.md` | 86 | `−0.074` | 20 | `data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.skill` |
-| `README.md` | 86 | `−0.140` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[90].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.ci95[0]` |
-| `README.md` | 86 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `README.md` | 87 | `0.011` | 15 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
-| `README.md` | 93 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `README.md` | 98 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `README.md` | 98 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `README.md` | 99 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
-| `README.md` | 114 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
-| `README.md` | 115 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `README.md` | 116 | `0.0500` | 13 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `README.md` | 117 | `1,000` | 9 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
-| `README.md` | 117 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `README.md` | 129 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `README.md` | 138 | `0.682` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].climatology` |
-| `README.md` | 138 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `README.md` | 142 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
-| `README.md` | 143 | `0.124` | 9 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
-| `README.md` | 144 | `0.067` | 14 | `data/walk_forward/summary.json :: placebo.skill`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.skill` |
-| `README.md` | 144 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `README.md` | 148 | `−0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `README.md` | 155 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `README.md` | 155 | `44` | 5 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[43].n` |
-| `README.md` | 156 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `README.md` | 156 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `README.md` | 157 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `README.md` | 158 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `README.md` | 158 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `README.md` | 162 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `README.md` | 163 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `README.md` | 163 | `24` | 14 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fn` |
-| `README.md` | 170 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `README.md` | 172 | `07` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `README.md` | 179 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `README.md` | 181 | `0.137` | 6 | `data/walk_forward/summary.json :: power.G.by_n.100.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `README.md` | 181 | `+0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `README.md` | 182 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `README.md` | 187 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `README.md` | 213 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
-| `README.md` | 213 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `README.md` | 214 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
-| `README.md` | 220 | `+0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `README.md` | 222 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `README.md` | 222 | `24.9%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `README.md` | 224 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `README.md` | 226 | `+0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `README.md` | 226 | `−0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
-| `README.md` | 226 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `README.md` | 226 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `README.md` | 232 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `README.md` | 235 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `README.md` | 239 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/BRIEF.md` | 15 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/BRIEF.md` | 16 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/BRIEF.md` | 33 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/BRIEF.md` | 37 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/BRIEF.md` | 37 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/BRIEF.md` | 37 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/BRIEF.md` | 37 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/BRIEF.md` | 37 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/BRIEF.md` | 37 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/BRIEF.md` | 38 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/BRIEF.md` | 38 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/BRIEF.md` | 38 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/BRIEF.md` | 39 | `+0.134` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[58].skill_frozen_vs_clim` |
-| `docs/BRIEF.md` | 39 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/BRIEF.md` | 41 | `−0.074` | 20 | `data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.skill` |
-| `docs/BRIEF.md` | 41 | `0.011` | 15 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
-| `docs/BRIEF.md` | 48 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/BRIEF.md` | 62 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
-| `docs/BRIEF.md` | 63 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/BRIEF.md` | 63 | `0.124` | 9 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
-| `docs/BRIEF.md` | 81 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/BRIEF.md` | 81 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/BRIEF.md` | 81 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/BRIEF.md` | 81 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `docs/BRIEF.md` | 82 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/BRIEF.md` | 84 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/BRIEF.md` | 84 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/BRIEF.md` | 87 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/BRIEF.md` | 88 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/BRIEF.md` | 88 | `24` | 14 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fn` |
-| `docs/BRIEF.md` | 100 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/BRIEF.md` | 102 | `0.137` | 6 | `data/walk_forward/summary.json :: power.G.by_n.100.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `docs/BRIEF.md` | 103 | `+0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/BRIEF.md` | 103 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/BRIEF.md` | 109 | `0.682` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].climatology` |
-| `docs/BRIEF.md` | 109 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `docs/BRIEF.md` | 111 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
-| `docs/BRIEF.md` | 112 | `0.067` | 14 | `data/walk_forward/summary.json :: placebo.skill`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.skill` |
-| `docs/BRIEF.md` | 112 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/BRIEF.md` | 114 | `−0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/BRIEF.md` | 119 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
-| `docs/BRIEF.md` | 119 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/BRIEF.md` | 119 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
-| `docs/BRIEF.md` | 121 | `+0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/BRIEF.md` | 122 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/BRIEF.md` | 123 | `+0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/BRIEF.md` | 123 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/BRIEF.md` | 125 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/BRIEF.md` | 127 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/BRIEF.md` | 129 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/BRIEF.md` | 137 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 4 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 4 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 10 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 10 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `docs/PAPER_DRAFT.md` | 10 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 13 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 14 | `73` | 4 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.0`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[72].n` |
-| `docs/PAPER_DRAFT.md` | 14 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 14 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 14 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 14 | `55` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
-| `docs/PAPER_DRAFT.md` | 15 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
-| `docs/PAPER_DRAFT.md` | 30 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
-| `docs/PAPER_DRAFT.md` | 44 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 45 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/PAPER_DRAFT.md` | 50 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 57 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 57 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 57 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 57 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/PAPER_DRAFT.md` | 57 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/PAPER_DRAFT.md` | 58 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
-| `docs/PAPER_DRAFT.md` | 58 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 58 | `−0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 58 | `0.016` | 16 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 60 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 60 | `−0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
-| `docs/PAPER_DRAFT.md` | 64 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 70 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 71 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 71 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/PAPER_DRAFT.md` | 71 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 72 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 76 | `0.682` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].climatology` |
-| `docs/PAPER_DRAFT.md` | 76 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `docs/PAPER_DRAFT.md` | 79 | `+0.051` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[10].dm_p` |
-| `docs/PAPER_DRAFT.md` | 79 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
-| `docs/PAPER_DRAFT.md` | 80 | `0.067` | 14 | `data/walk_forward/summary.json :: placebo.skill`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 81 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 84 | `−0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/PAPER_DRAFT.md` | 86 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
-| `docs/PAPER_DRAFT.md` | 86 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 88 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/PAPER_DRAFT.md` | 89 | `0.0500` | 13 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 92 | `+0.134` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[58].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 93 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 94 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 95 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 95 | `24` | 14 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fn` |
-| `docs/PAPER_DRAFT.md` | 95 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
-| `docs/PAPER_DRAFT.md` | 99 | `35%` | 2685 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 100 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 104 | `+0.12` | 70 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 113 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 120 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 122 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 124 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 124 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 124 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 124 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 124 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/PAPER_DRAFT.md` | 124 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/PAPER_DRAFT.md` | 125 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 126 | `−0.074` | 20 | `data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 126 | `−0.140` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[90].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 126 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 126 | `0.011` | 15 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
-| `docs/PAPER_DRAFT.md` | 130 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 132 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 132 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/PAPER_DRAFT.md` | 133 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 133 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 136 | `0.682` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].climatology` |
-| `docs/PAPER_DRAFT.md` | 137 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `docs/PAPER_DRAFT.md` | 139 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 140 | `+0.051` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[10].dm_p` |
-| `docs/PAPER_DRAFT.md` | 141 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
-| `docs/PAPER_DRAFT.md` | 141 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 142 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
-| `docs/PAPER_DRAFT.md` | 143 | `0.117` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[56].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 145 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 147 | `+0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 147 | `−0.031` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.0.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.3.reliability` |
-| `docs/PAPER_DRAFT.md` | 147 | `+0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
-| `docs/PAPER_DRAFT.md` | 147 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
-| `docs/PAPER_DRAFT.md` | 152 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 153 | `+0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/PAPER_DRAFT.md` | 153 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 157 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 158 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 158 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 158 | `24` | 14 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fn` |
-| `docs/PAPER_DRAFT.md` | 166 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 167 | `44` | 5 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[43].n` |
-| `docs/PAPER_DRAFT.md` | 168 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 168 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 170 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
-| `docs/PAPER_DRAFT.md` | 170 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 172 | `0.549%` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 172 | `0.674%` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 176 | `−0.023` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.P.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.0.resolution` |
-| `docs/PAPER_DRAFT.md` | 190 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 213 | `1.1` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.random_analogs.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 246 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 247 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 247 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
-| `docs/PAPER_DRAFT.md` | 247 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 247 | `26` | 17 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.tp`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tp` |
-| `docs/PAPER_DRAFT.md` | 247 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 248 | `73%` | 1151 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 259 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 295 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 297 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 297 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `docs/PAPER_DRAFT.md` | 297 | `06` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 297 | `06` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 297 | `17` | 14 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 298 | `57` | 5 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[56].n` |
-| `docs/PAPER_DRAFT.md` | 298 | `57` | 5 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[56].n` |
-| `docs/PAPER_DRAFT.md` | 298 | `55` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
-| `docs/PAPER_DRAFT.md` | 299 | `52` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[51].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[51].n` |
-| `docs/PAPER_DRAFT.md` | 299 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `docs/PAPER_DRAFT.md` | 299 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/PAPER_DRAFT.md` | 300 | `17` | 14 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 309 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 309 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 311 | `11.9%` | 966 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 312 | `25.0%` | 349 | `data/walk_forward/summary.json :: placebo.random_draws`<br>`data/walk_forward/summary.json :: registered.eta` |
-| `docs/PAPER_DRAFT.md` | 313 | `63.1%` | 225 | `data/walk_forward/summary.json :: verdict.audit_record.threshold`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 314 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 316 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 317 | `11` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.excluded.persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 317 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 317 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 317 | `85` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.T`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.T` |
-| `docs/PAPER_DRAFT.md` | 317 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 322 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
-| `docs/PAPER_DRAFT.md` | 323 | `22` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[21].n` |
-| `docs/PAPER_DRAFT.md` | 323 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 324 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 324 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 324 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 324 | `11` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.excluded.persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 324 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `docs/PAPER_DRAFT.md` | 324 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 325 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 325 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 326 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `docs/PAPER_DRAFT.md` | 326 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 328 | `17` | 14 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 328 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 328 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 329 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 335 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 339 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 340 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/PAPER_DRAFT.md` | 347 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 356 | `05` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 356 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 356 | `01` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 356 | `02` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 361 | `40` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.first_active_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.combination.min_n` |
-| `docs/PAPER_DRAFT.md` | 376 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 376 | `5.1` | 4 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: big_moves_knew[33].reads[3].realized_chg_pct` |
-| `docs/PAPER_DRAFT.md` | 376 | `26.1` | 8 | `data/ripple/irf.json :: rows[545].irf[4].hi95`<br>`data/ripple/irf.json :: rows[559].irf[6].lo90` |
-| `docs/PAPER_DRAFT.md` | 379 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 379 | `70` | 4 | `data/walk_forward/summary.json :: data_state.codebook_fields`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[69].n` |
-| `docs/PAPER_DRAFT.md` | 388 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 391 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 391 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
-| `docs/PAPER_DRAFT.md` | 391 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 391 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 394 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 395 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 395 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 401 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 401 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 401 | `35%` | 2685 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 401 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `docs/PAPER_DRAFT.md` | 401 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 401 | `50%` | 2625 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 401 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 401 | `71%` | 1155 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 401 | `18.3%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `docs/PAPER_DRAFT.md` | 402 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
-| `docs/PAPER_DRAFT.md` | 402 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 402 | `30%` | 2635 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 402 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
-| `docs/PAPER_DRAFT.md` | 402 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 402 | `38%` | 2626 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 402 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
-| `docs/PAPER_DRAFT.md` | 402 | `56%` | 1151 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 402 | `18.6%` | 231 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `docs/PAPER_DRAFT.md` | 403 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 403 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 403 | `19%` | 2634 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 403 | `29` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[28].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[28].n` |
-| `docs/PAPER_DRAFT.md` | 403 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 403 | `24%` | 2635 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 403 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
-| `docs/PAPER_DRAFT.md` | 403 | `79%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 403 | `16.8%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `docs/PAPER_DRAFT.md` | 404 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
-| `docs/PAPER_DRAFT.md` | 404 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 404 | `14.7%` | 961 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 407 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 409 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 409 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 410 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 410 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `docs/PAPER_DRAFT.md` | 411 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 411 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 411 | `33%` | 2626 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 412 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 412 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
-| `docs/PAPER_DRAFT.md` | 412 | `43%` | 2626 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 413 | `22` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[21].n` |
-| `docs/PAPER_DRAFT.md` | 413 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 413 | `61%` | 1155 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 418 | `1.61` | 105 | `data/ripple/irf.json :: rows[476].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[481].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 418 | `1.61` | 105 | `data/ripple/irf.json :: rows[476].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[481].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 419 | `0.62` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.frozen_vs_climatology.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 420 | `0.79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 420 | `0.84` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].climatology` |
-| `docs/PAPER_DRAFT.md` | 422 | `2.29` | 67 | `data/ripple/irf.json :: rows[426].placebo.beta_real`<br>`data/ripple/irf.json :: rows[441].placebo.pseudo_p2_5` |
-| `docs/PAPER_DRAFT.md` | 422 | `2.62` | 60 | `data/ripple/irf.json :: rows[113].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[123].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 429 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 429 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 432 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 435 | `+90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 438 | `−0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 438 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 438 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
-| `docs/PAPER_DRAFT.md` | 439 | `0.6` | 225 | `data/walk_forward/summary.json :: verdict.audit_record.threshold`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 440 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 440 | `02` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 444 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 444 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 444 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 445 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 445 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 448 | `98.4%` | 77 | `data/walk_forward/summary.json :: power.G.hac_lag`<br>`data/walk_forward/summary.json :: power.P.hac_lag` |
-| `docs/PAPER_DRAFT.md` | 448 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 449 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 449 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 449 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 450 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 450 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `docs/PAPER_DRAFT.md` | 450 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 450 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 450 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
-| `docs/PAPER_DRAFT.md` | 450 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 455 | `5.1` | 4 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: big_moves_knew[33].reads[3].realized_chg_pct` |
-| `docs/PAPER_DRAFT.md` | 462 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 462 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 466 | `489` | 171 | `data/ripple/irf.json :: rows[761].irf[5].T`<br>`data/ripple/irf.json :: rows[762].irf[5].T` |
-| `docs/PAPER_DRAFT.md` | 467 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 467 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 468 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 468 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 468 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 468 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 468 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 470 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 478 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 478 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 482 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 483 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 486 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 490 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 495 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 500 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 500 | `0.4` | 93 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M06_uniform_k5.recall` |
-| `docs/PAPER_DRAFT.md` | 502 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 507 | `0.25` | 22 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `docs/PAPER_DRAFT.md` | 511 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 513 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 513 | `02` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 514 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 517 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 520 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `docs/PAPER_DRAFT.md` | 520 | `50` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[49].n` |
-| `docs/PAPER_DRAFT.md` | 520 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 522 | `25` | 121 | `data/walk_forward/summary.json :: placebo.random_draws`<br>`data/walk_forward/summary.json :: registered.random_draws` |
-| `docs/PAPER_DRAFT.md` | 524 | `35` | 64 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
-| `docs/PAPER_DRAFT.md` | 525 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 525 | `1,000` | 9 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
-| `docs/PAPER_DRAFT.md` | 526 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 526 | `1,000` | 9 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
-| `docs/PAPER_DRAFT.md` | 527 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 527 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 533 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 533 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 533 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 533 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 534 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 534 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 539 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 541 | `246` | 56 | `data/walk_forward/summary.json :: power.P.n_measured`<br>`data/walk_forward/summary.json :: power.P.n_series` |
-| `docs/PAPER_DRAFT.md` | 541 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 542 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 542 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 548 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 552 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 552 | `−0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
-| `docs/PAPER_DRAFT.md` | 557 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 557 | `0.655` | 8 | `data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean`<br>`data/walk_forward/summary.json :: permutation.climatology_brier` |
-| `docs/PAPER_DRAFT.md` | 558 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 558 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 558 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 558 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/PAPER_DRAFT.md` | 558 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/PAPER_DRAFT.md` | 559 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 560 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 560 | `0.022` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.0.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.skill` |
-| `docs/PAPER_DRAFT.md` | 561 | `52` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[51].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[51].n` |
-| `docs/PAPER_DRAFT.md` | 562 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 562 | `0.58` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[20]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[21]` |
-| `docs/PAPER_DRAFT.md` | 563 | `+0.007` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 563 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 564 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 564 | `1.00` | 60 | `data/walk_forward/summary.json :: power.G.hac_lag`<br>`data/walk_forward/summary.json :: power.P.hac_lag` |
-| `docs/PAPER_DRAFT.md` | 565 | `0.65` | 37 | `data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean`<br>`data/walk_forward/summary.json :: permutation.climatology_brier` |
-| `docs/PAPER_DRAFT.md` | 569 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 571 | `50` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[49].n` |
-| `docs/PAPER_DRAFT.md` | 571 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 571 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
+| `README.md` | 5 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `README.md` | 9 | `264` | 39 | `data/structural_surface/summary.json :: n_event_reads`<br>`data/structural_surface/summary.json :: n_inferential_dates` |
+| `README.md` | 9 | `−0.446` | 4 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `README.md` | 9 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `README.md` | 11 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `README.md` | 24 | `3.11` | 55 | `data/ripple/irf.json :: rows[14].irf[3].se_nw`<br>`data/ripple/irf.json :: rows[153].irf[5].se_nw` |
+| `docs/BRIEF.md` | 17 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/BRIEF.md` | 18 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/BRIEF.md` | 35 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/BRIEF.md` | 39 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
+| `docs/BRIEF.md` | 39 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 39 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/BRIEF.md` | 39 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/BRIEF.md` | 39 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/BRIEF.md` | 40 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/BRIEF.md` | 40 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/BRIEF.md` | 40 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
+| `docs/BRIEF.md` | 40 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/BRIEF.md` | 40 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/BRIEF.md` | 43 | `0.011` | 18 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
+| `docs/BRIEF.md` | 50 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/BRIEF.md` | 64 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
+| `docs/BRIEF.md` | 65 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/BRIEF.md` | 65 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
+| `docs/BRIEF.md` | 83 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/BRIEF.md` | 83 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/BRIEF.md` | 86 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/BRIEF.md` | 86 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/BRIEF.md` | 90 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 102 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/BRIEF.md` | 102 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 103 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
+| `docs/BRIEF.md` | 103 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
+| `docs/BRIEF.md` | 107 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/BRIEF.md` | 108 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/BRIEF.md` | 108 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 109 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 114 | `0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/BRIEF.md` | 114 | `0.674%` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/BRIEF.md` | 117 | `56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/BRIEF.md` | 117 | `4.9%` | 40 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.dm` |
+| `docs/BRIEF.md` | 124 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/BRIEF.md` | 127 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/BRIEF.md` | 133 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
+| `docs/BRIEF.md` | 135 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
+| `docs/BRIEF.md` | 136 | `0.067` | 14 | `data/walk_forward/summary.json :: placebo.skill`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.skill` |
+| `docs/BRIEF.md` | 136 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/BRIEF.md` | 143 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
+| `docs/BRIEF.md` | 143 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/BRIEF.md` | 143 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
+| `docs/BRIEF.md` | 146 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/BRIEF.md` | 147 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/BRIEF.md` | 149 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/BRIEF.md` | 151 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/BRIEF.md` | 161 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 6 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 6 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 12 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 12 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
+| `docs/PAPER_DRAFT.md` | 15 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 16 | `73` | 4 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.0`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[72].n` |
+| `docs/PAPER_DRAFT.md` | 16 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 16 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 16 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
+| `docs/PAPER_DRAFT.md` | 17 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
+| `docs/PAPER_DRAFT.md` | 32 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
+| `docs/PAPER_DRAFT.md` | 46 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 47 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/PAPER_DRAFT.md` | 59 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
+| `docs/PAPER_DRAFT.md` | 59 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 59 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 59 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 60 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
+| `docs/PAPER_DRAFT.md` | 60 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 60 | `0.016` | 18 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 62 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 66 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 72 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 73 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 73 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/PAPER_DRAFT.md` | 73 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 73 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 73 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 78 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
+| `docs/PAPER_DRAFT.md` | 81 | `+0.051` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.dyadic.brier_vs_climatology.skill` |
+| `docs/PAPER_DRAFT.md` | 81 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
+| `docs/PAPER_DRAFT.md` | 82 | `0.067` | 14 | `data/walk_forward/summary.json :: placebo.skill`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 83 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 88 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
+| `docs/PAPER_DRAFT.md` | 90 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/PAPER_DRAFT.md` | 91 | `0.0500` | 14 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
+| `docs/PAPER_DRAFT.md` | 97 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 97 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
+| `docs/PAPER_DRAFT.md` | 101 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 115 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 122 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 124 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 126 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 126 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
+| `docs/PAPER_DRAFT.md` | 126 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 126 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 126 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 127 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 128 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 128 | `0.011` | 18 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
+| `docs/PAPER_DRAFT.md` | 132 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 134 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 134 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/PAPER_DRAFT.md` | 134 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 134 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 135 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 139 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
+| `docs/PAPER_DRAFT.md` | 141 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 142 | `+0.051` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.dyadic.brier_vs_climatology.skill` |
+| `docs/PAPER_DRAFT.md` | 143 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
+| `docs/PAPER_DRAFT.md` | 143 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
+| `docs/PAPER_DRAFT.md` | 144 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
+| `docs/PAPER_DRAFT.md` | 147 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 149 | `+0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
+| `docs/PAPER_DRAFT.md` | 149 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
+| `docs/PAPER_DRAFT.md` | 154 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 155 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 159 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 160 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 168 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 170 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 170 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 172 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
+| `docs/PAPER_DRAFT.md` | 172 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 174 | `0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 174 | `0.674%` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 177 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 185 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 185 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 186 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 187 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 205 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 261 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 262 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 262 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
+| `docs/PAPER_DRAFT.md` | 262 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 262 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 263 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 263 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 274 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 310 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 312 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 312 | `06` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 312 | `06` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 312 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 313 | `57` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_published.k` |
+| `docs/PAPER_DRAFT.md` | 313 | `57` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_published.k` |
+| `docs/PAPER_DRAFT.md` | 313 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
+| `docs/PAPER_DRAFT.md` | 314 | `52` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[51].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[51].n` |
+| `docs/PAPER_DRAFT.md` | 314 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
+| `docs/PAPER_DRAFT.md` | 314 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/PAPER_DRAFT.md` | 315 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 324 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 324 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 326 | `11.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 327 | `25.0%` | 21 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 328 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 329 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
+| `docs/PAPER_DRAFT.md` | 331 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 332 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 332 | `85` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.T`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.T` |
+| `docs/PAPER_DRAFT.md` | 332 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 337 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
+| `docs/PAPER_DRAFT.md` | 338 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 339 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 339 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 340 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 340 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 341 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/PAPER_DRAFT.md` | 341 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
+| `docs/PAPER_DRAFT.md` | 343 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 343 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 343 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 344 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 350 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 351 | `79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.n` |
+| `docs/PAPER_DRAFT.md` | 354 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 355 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/PAPER_DRAFT.md` | 362 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 371 | `05` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 371 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 371 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 391 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 391 | `26.1` | 8 | `data/ripple/irf.json :: rows[545].irf[4].hi95`<br>`data/ripple/irf.json :: rows[559].irf[6].lo90` |
+| `docs/PAPER_DRAFT.md` | 394 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
+| `docs/PAPER_DRAFT.md` | 394 | `70` | 4 | `data/walk_forward/summary.json :: data_state.codebook_fields`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[69].n` |
+| `docs/PAPER_DRAFT.md` | 403 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 406 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 410 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 410 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 416 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 416 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 416 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/PAPER_DRAFT.md` | 416 | `50%` | 98 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 416 | `71%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 416 | `18.3%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 417 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
+| `docs/PAPER_DRAFT.md` | 417 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 417 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
+| `docs/PAPER_DRAFT.md` | 417 | `38%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 417 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
+| `docs/PAPER_DRAFT.md` | 417 | `56%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 417 | `18.6%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 418 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 418 | `19%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 418 | `24%` | 98 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: abstentions.target_unusable` |
+| `docs/PAPER_DRAFT.md` | 418 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
+| `docs/PAPER_DRAFT.md` | 418 | `79%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 418 | `16.8%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 419 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
+| `docs/PAPER_DRAFT.md` | 419 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 419 | `14.7%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 424 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 425 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/PAPER_DRAFT.md` | 426 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 426 | `33%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 427 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
+| `docs/PAPER_DRAFT.md` | 427 | `43%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 428 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 428 | `61%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 435 | `0.79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 437 | `2.62` | 60 | `data/ripple/irf.json :: rows[113].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[123].placebo.beta_real` |
+| `docs/PAPER_DRAFT.md` | 444 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 444 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 447 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 450 | `+90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 453 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 453 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
+| `docs/PAPER_DRAFT.md` | 454 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 455 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 455 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 459 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 459 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 459 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 460 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 460 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 463 | `98.4%` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 463 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 464 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 464 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 464 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 465 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 465 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
+| `docs/PAPER_DRAFT.md` | 465 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 465 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
+| `docs/PAPER_DRAFT.md` | 465 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 477 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 477 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 481 | `489` | 4 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].T`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].n_events` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 483 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 485 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 493 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 493 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 497 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 498 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 501 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 510 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 515 | `0.4` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 522 | `0.25` | 22 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.skill` |
+| `docs/PAPER_DRAFT.md` | 528 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 528 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 529 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 532 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 535 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 539 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
+| `docs/PAPER_DRAFT.md` | 539 | `2,000` | 19 | `data/structural_surface/summary.json :: n_boot`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.n_boot` |
+| `docs/PAPER_DRAFT.md` | 540 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
+| `docs/PAPER_DRAFT.md` | 541 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
+| `docs/PAPER_DRAFT.md` | 542 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 542 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 548 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 548 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 549 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 554 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 556 | `246` | 63 | `data/walk_forward/summary.json :: power.P.n_measured`<br>`data/walk_forward/summary.json :: power.P.n_series` |
+| `docs/PAPER_DRAFT.md` | 556 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 557 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 563 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 567 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
 | `docs/PAPER_DRAFT.md` | 572 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 572 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
-| `docs/PAPER_DRAFT.md` | 572 | `−0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
-| `docs/PAPER_DRAFT.md` | 572 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/PAPER_DRAFT.md` | 573 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 573 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 573 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/PAPER_DRAFT.md` | 578 | `−0.013` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M07_uniform_k12.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.frozen_vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 579 | `0.95` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `docs/PAPER_DRAFT.md` | 579 | `+0.056` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
-| `docs/PAPER_DRAFT.md` | 579 | `0.28` | 9 | `data/walk_forward/summary.json :: tiers.daily.M.M10_situation_2x_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.random_analogs.dm_p` |
-| `docs/PAPER_DRAFT.md` | 579 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 579 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 580 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 583 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
-| `docs/PAPER_DRAFT.md` | 583 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 583 | `−0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 584 | `0.016` | 16 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 585 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 585 | `0.85` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M02_situation_only.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 585 | `+0.007` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 585 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 586 | `+0.134` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[58].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 586 | `+0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/PAPER_DRAFT.md` | 586 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 589 | `0.337` | 22 | `data/ripple/irf.json :: rows[132].irf[1].z_ehw`<br>`data/ripple/irf.json :: rows[138].irf[1].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 589 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
-| `docs/PAPER_DRAFT.md` | 597 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 599 | `−0.108` | 9 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[49].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 599 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
-| `docs/PAPER_DRAFT.md` | 599 | `−0.099` | 9 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M11_physical_actors_2x.skill` |
-| `docs/PAPER_DRAFT.md` | 600 | `−0.081` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[9].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 600 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 600 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
-| `docs/PAPER_DRAFT.md` | 603 | `−0.150` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: big_moves_knew[32].reads[0].engine_p50` |
-| `docs/PAPER_DRAFT.md` | 603 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
-| `docs/PAPER_DRAFT.md` | 603 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 604 | `0.0` | 1102 | `data/walk_forward/summary.json :: filtration_audit.n_violations`<br>`data/walk_forward/summary.json :: permutation.null_sd` |
-| `docs/PAPER_DRAFT.md` | 605 | `22%` | 2627 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 609 | `400` | 8 | `data/walk_forward/summary.json :: power.G.n_sims`<br>`data/walk_forward/summary.json :: power.P.n_sims` |
-| `docs/PAPER_DRAFT.md` | 609 | `80%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 609 | `0.137` | 6 | `data/walk_forward/summary.json :: power.G.by_n.100.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `docs/PAPER_DRAFT.md` | 610 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 610 | `0.085` | 12 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 610 | `+0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 615 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 616 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 616 | `−0.083` | 8 | `data/walk_forward/summary.json :: spec_curve.rows[31].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[33].skill` |
-| `docs/PAPER_DRAFT.md` | 616 | `−0.008` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 617 | `−0.106` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.uncertainty`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.uncertainty` |
-| `docs/PAPER_DRAFT.md` | 617 | `−0.142` | 5 | `data/walk_forward/summary.json :: spec_curve.skill_distribution.min`<br>`data/walk_forward/summary.json :: spec_curve.rows[121].skill` |
-| `docs/PAPER_DRAFT.md` | 617 | `−0.063` | 7 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[38].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 618 | `+0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 627 | `−0.133` | 5 | `data/walk_forward/summary.json :: permutation.null_mean`<br>`data/walk_forward/summary.json :: permutation.block.null_mean` |
-| `docs/PAPER_DRAFT.md` | 628 | `0.043` | 17 | `data/walk_forward/summary.json :: permutation.null_sd`<br>`data/walk_forward/summary.json :: permutation.block.null_sd` |
-| `docs/PAPER_DRAFT.md` | 628 | `−0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
-| `docs/PAPER_DRAFT.md` | 628 | `−0.057` | 12 | `data/walk_forward/summary.json :: permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 628 | `0.0500` | 13 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 629 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 629 | `1,000` | 9 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
-| `docs/PAPER_DRAFT.md` | 629 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 630 | `0.059` | 23 | `data/walk_forward/summary.json :: permutation.iid.p_value`<br>`data/walk_forward/summary.json :: spec_curve.rows[72].skill` |
-| `docs/PAPER_DRAFT.md` | 631 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
-| `docs/PAPER_DRAFT.md` | 632 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/PAPER_DRAFT.md` | 632 | `+0.013` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M07_uniform_k12.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.frozen_vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 637 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 646 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 649 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 649 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 657 | `+0.007` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 657 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 657 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 660 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `docs/PAPER_DRAFT.md` | 665 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 666 | `0.033` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.spa.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.frozen.skill` |
-| `docs/PAPER_DRAFT.md` | 667 | `0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
-| `docs/PAPER_DRAFT.md` | 668 | `0.042` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_sd`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_p` |
-| `docs/PAPER_DRAFT.md` | 668 | `0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 671 | `40` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.first_active_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.combination.min_n` |
-| `docs/PAPER_DRAFT.md` | 671 | `40` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.first_active_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.combination.min_n` |
-| `docs/PAPER_DRAFT.md` | 673 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
-| `docs/PAPER_DRAFT.md` | 673 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
-| `docs/PAPER_DRAFT.md` | 674 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 679 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 681 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/PAPER_DRAFT.md` | 683 | `0.124` | 9 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
-| `docs/PAPER_DRAFT.md` | 683 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 687 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 697 | `11` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.excluded.persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 699 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 704 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 708 | `−3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 708 | `+3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 710 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 715 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 716 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 720 | `11.1` | 73 | `data/ripple/irf.json :: rows[193].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[12].irf[6].hi95` |
-| `docs/PAPER_DRAFT.md` | 724 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `docs/PAPER_DRAFT.md` | 727 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
-| `docs/PAPER_DRAFT.md` | 730 | `0.682` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].climatology` |
-| `docs/PAPER_DRAFT.md` | 731 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `docs/PAPER_DRAFT.md` | 732 | `−0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/PAPER_DRAFT.md` | 737 | `58` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[57].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[57].n` |
-| `docs/PAPER_DRAFT.md` | 744 | `11.2` | 4 | `data/walk_forward/summary.json :: big_moves_knew[34].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[34].reads[4].engine_p90` |
-| `docs/PAPER_DRAFT.md` | 746 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
-| `docs/PAPER_DRAFT.md` | 747 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 747 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 747 | `73.0%` | 456 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 747 | `0.90` | 6 | `data/walk_forward/summary.json :: registered.spec.big_move_q[0]`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].top_q` |
-| `docs/PAPER_DRAFT.md` | 750 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 752 | `0.4693` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C1_analogue`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C1_fixed_0.5.brier` |
-| `docs/PAPER_DRAFT.md` | 752 | `+0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
-| `docs/PAPER_DRAFT.md` | 752 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
-| `docs/PAPER_DRAFT.md` | 756 | `+0.0075` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[79].dm_p` |
-| `docs/PAPER_DRAFT.md` | 756 | `0.886` | 9 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[4]` |
-| `docs/PAPER_DRAFT.md` | 757 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
-| `docs/PAPER_DRAFT.md` | 759 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
-| `docs/PAPER_DRAFT.md` | 760 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 764 | `0.0` | 1102 | `data/walk_forward/summary.json :: filtration_audit.n_violations`<br>`data/walk_forward/summary.json :: permutation.null_sd` |
-| `docs/PAPER_DRAFT.md` | 764 | `1.0` | 77 | `data/walk_forward/summary.json :: power.G.hac_lag`<br>`data/walk_forward/summary.json :: power.P.hac_lag` |
-| `docs/PAPER_DRAFT.md` | 765 | `67` | 5 | `data/walk_forward/summary.json :: leakage_test.recalibration_rule.n_reads_with_different_M13`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].n` |
-| `docs/PAPER_DRAFT.md` | 765 | `0.6` | 225 | `data/walk_forward/summary.json :: verdict.audit_record.threshold`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 765 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 765 | `0.7` | 452 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 765 | `29` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[28].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[28].n` |
-| `docs/PAPER_DRAFT.md` | 765 | `0.5` | 197 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.dm_p` |
-| `docs/PAPER_DRAFT.md` | 766 | `0.449` | 20 | `data/ripple/irf.json :: rows[113].irf[3].beta`<br>`data/ripple/irf.json :: rows[19].irf[1].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 766 | `0.582` | 24 | `data/ripple/irf.json :: rows[23].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[159].irf[2].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 769 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
-| `docs/PAPER_DRAFT.md` | 769 | `0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
-| `docs/PAPER_DRAFT.md` | 771 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 772 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 772 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
-| `docs/PAPER_DRAFT.md` | 772 | `+0.0075` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[79].dm_p` |
-| `docs/PAPER_DRAFT.md` | 777 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 779 | `0.5` | 197 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.dm_p` |
-| `docs/PAPER_DRAFT.md` | 784 | `0.4693` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C1_analogue`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C1_fixed_0.5.brier` |
-| `docs/PAPER_DRAFT.md` | 784 | `+0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
-| `docs/PAPER_DRAFT.md` | 784 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
-| `docs/PAPER_DRAFT.md` | 786 | `0.219` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 788 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
-| `docs/PAPER_DRAFT.md` | 791 | `+0.0278` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[130].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 796 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
-| `docs/PAPER_DRAFT.md` | 800 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
-| `docs/PAPER_DRAFT.md` | 804 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 804 | `0.58` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[20]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[21]` |
-| `docs/PAPER_DRAFT.md` | 811 | `+0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/PAPER_DRAFT.md` | 811 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 826 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 835 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 835 | `42` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[41].n` |
-| `docs/PAPER_DRAFT.md` | 835 | `38` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.pit_engine.chi2`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[37].n` |
-| `docs/PAPER_DRAFT.md` | 836 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 836 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
-| `docs/PAPER_DRAFT.md` | 836 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
-| `docs/PAPER_DRAFT.md` | 837 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 837 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
-| `docs/PAPER_DRAFT.md` | 838 | `35` | 64 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
-| `docs/PAPER_DRAFT.md` | 839 | `500` | 288 | `data/ripple/irf.json :: meta.n_placebo`<br>`data/ripple/irf.json :: rows[0].placebo.n_pseudo` |
-| `docs/PAPER_DRAFT.md` | 840 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 841 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 843 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 843 | `55` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
-| `docs/PAPER_DRAFT.md` | 846 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 846 | `24` | 14 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fn` |
-| `docs/PAPER_DRAFT.md` | 851 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 851 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 851 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `docs/PAPER_DRAFT.md` | 852 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
-| `docs/PAPER_DRAFT.md` | 861 | `+0.85` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M02_situation_only.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 861 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 861 | `+2.37` | 64 | `data/ripple/irf.json :: rows[173].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[435].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 861 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 865 | `12.1` | 71 | `data/ripple/irf.json :: rows[0].irf[7].lo90`<br>`data/ripple/irf.json :: rows[131].irf[4].lo90` |
-| `docs/PAPER_DRAFT.md` | 873 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 876 | `−6.89` | 12 | `data/ripple/irf.json :: rows[410].irf[6].lo90`<br>`data/ripple/irf.json :: rows[563].irf[3].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 879 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 879 | `7.2` | 21 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M12_dyads_system_2x.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 879 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 879 | `+3.69` | 37 | `data/ripple/irf.json :: rows[107].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[333].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 880 | `−9.60` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[126].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[132].climatology` |
-| `docs/PAPER_DRAFT.md` | 880 | `0.30` | 18 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision` |
-| `docs/PAPER_DRAFT.md` | 885 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 886 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 887 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 887 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 892 | `+0.760` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[34].climatology` |
-| `docs/PAPER_DRAFT.md` | 892 | `+0.496` | 27 | `data/ripple/irf.json :: rows[25].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[102].irf[1].beta` |
-| `docs/PAPER_DRAFT.md` | 893 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 896 | `−56.6%` | 225 | `data/walk_forward/summary.json :: verdict.audit_record.threshold`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 896 | `+101.8%` | 77 | `data/walk_forward/summary.json :: power.G.hac_lag`<br>`data/walk_forward/summary.json :: power.P.hac_lag` |
-| `docs/PAPER_DRAFT.md` | 896 | `−4.9%` | 1108 | `data/walk_forward/summary.json :: filtration_audit.n_violations`<br>`data/walk_forward/summary.json :: permutation.null_sd` |
-| `docs/PAPER_DRAFT.md` | 897 | `−92.3%` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `docs/PAPER_DRAFT.md` | 897 | `+20.7%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `docs/PAPER_DRAFT.md` | 897 | `+48.5%` | 197 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.dm_p` |
-| `docs/PAPER_DRAFT.md` | 900 | `07` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 901 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 901 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 902 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 907 | `+20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 908 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 908 | `500` | 288 | `data/ripple/irf.json :: meta.n_placebo`<br>`data/ripple/irf.json :: rows[0].placebo.n_pseudo` |
-| `docs/PAPER_DRAFT.md` | 921 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 921 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 921 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 921 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 921 | `+1.003` | 5 | `data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_used` |
-| `docs/PAPER_DRAFT.md` | 922 | `0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
-| `docs/PAPER_DRAFT.md` | 924 | `−4.067` | 4 | `data/ripple/irf.json :: rows[327].irf[6].hi95`<br>`data/ripple/irf.json :: rows[596].irf[5].hi90` |
-| `docs/PAPER_DRAFT.md` | 925 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 925 | `−2.306` | 8 | `data/ripple/irf.json :: rows[19].irf[2].hi90`<br>`data/ripple/irf.json :: rows[425].irf[1].hi95` |
-| `docs/PAPER_DRAFT.md` | 925 | `+2.192` | 6 | `data/ripple/irf.json :: rows[18].irf[4].lo95`<br>`data/ripple/irf.json :: rows[331].irf[5].z_ehw` |
-| `docs/PAPER_DRAFT.md` | 927 | `−2.248` | 6 | `data/ripple/irf.json :: rows[120].irf[7].se_nw`<br>`data/ripple/irf.json :: rows[161].irf[0].beta` |
-| `docs/PAPER_DRAFT.md` | 937 | `56` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.abstain_rule_departure.abstaining`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[55].n` |
-| `docs/PAPER_DRAFT.md` | 938 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 941 | `0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/PAPER_DRAFT.md` | 941 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 942 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
-| `docs/PAPER_DRAFT.md` | 943 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 959 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 959 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 965 | `44` | 5 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[43].n` |
-| `docs/PAPER_DRAFT.md` | 966 | `35` | 64 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
-| `docs/PAPER_DRAFT.md` | 969 | `47` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[46].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[46].n` |
-| `docs/PAPER_DRAFT.md` | 972 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 977 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
-| `docs/PAPER_DRAFT.md` | 978 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 978 | `+2.208` | 11 | `data/ripple/irf.json :: rows[125].irf[2].hi95`<br>`data/ripple/irf.json :: rows[181].irf[7].se_nw` |
-| `docs/PAPER_DRAFT.md` | 979 | `−0.996` | 16 | `data/ripple/irf.json :: rows[160].irf[3].p_ehw`<br>`data/ripple/irf.json :: rows[188].irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 979 | `−2.638` | 6 | `data/ripple/irf.json :: rows[273].irf[4].hi95`<br>`data/ripple/irf.json :: rows[378].irf[6].lo90` |
-| `docs/PAPER_DRAFT.md` | 990 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 991 | `+0.881` | 28 | `data/ripple/irf.json :: rows[110].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[140].irf[2].z_ehw` |
-| `docs/PAPER_DRAFT.md` | 991 | `+1.611` | 20 | `data/ripple/irf.json :: rows[481].placebo.beta_real`<br>`data/ripple/irf.json :: rows[126].irf[3].lo90` |
-| `docs/PAPER_DRAFT.md` | 993 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 993 | `−0.549%` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 994 | `+0.674%` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 995 | `+0.065%` | 43 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1001 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1002 | `0.431` | 39 | `data/ripple/irf.json :: rows[0].irf[4].beta`<br>`data/ripple/irf.json :: rows[108].irf[0].beta` |
-| `docs/PAPER_DRAFT.md` | 1003 | `−0.023` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.P.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.0.resolution` |
-| `docs/PAPER_DRAFT.md` | 1015 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `docs/PAPER_DRAFT.md` | 1017 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1017 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1019 | `80%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1019 | `0.137` | 6 | `data/walk_forward/summary.json :: power.G.by_n.100.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `docs/PAPER_DRAFT.md` | 1019 | `0.085` | 12 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 1020 | `+0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 1024 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 1024 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1028 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1031 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1031 | `3.2` | 8 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 1031 | `33` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[32].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[32].n` |
-| `docs/PAPER_DRAFT.md` | 1031 | `18%` | 2633 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1032 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/PAPER_DRAFT.md` | 1032 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `docs/PAPER_DRAFT.md` | 1032 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/PAPER_DRAFT.md` | 1032 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1033 | `18%` | 2633 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1036 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1038 | `42.0%` | 98 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M06_uniform_k5.recall` |
-| `docs/PAPER_DRAFT.md` | 1038 | `36.8%` | 93 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M06_uniform_k5.recall` |
-| `docs/PAPER_DRAFT.md` | 1039 | `32.5%` | 98 | `data/walk_forward/summary.json :: tiers.daily.G.spa.p_spa`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.precision` |
-| `docs/PAPER_DRAFT.md` | 1044 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 1045 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1045 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 1047 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1047 | `+0.119` | 7 | `data/walk_forward/summary.json :: placebo.ci95[0]`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1050 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 1051 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 1052 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1052 | `11` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.excluded.persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1052 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 1055 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1056 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1058 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `docs/PAPER_DRAFT.md` | 1058 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 1058 | `41` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[40].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[40].n` |
-| `docs/PAPER_DRAFT.md` | 1061 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1061 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 1061 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1062 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 1071 | `13.1` | 60 | `data/ripple/irf.json :: rows[575].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[591].placebo.pseudo_p2_5` |
-| `docs/PAPER_DRAFT.md` | 1078 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1081 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1082 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
-| `docs/PAPER_DRAFT.md` | 1088 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1090 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 1091 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
-| `docs/PAPER_DRAFT.md` | 1096 | `73%` | 1151 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1097 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 1109 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `docs/PAPER_DRAFT.md` | 1111 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 1112 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1112 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1113 | `0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 1123 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1125 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 1129 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `docs/PAPER_DRAFT.md` | 1133 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1134 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1138 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1141 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 1142 | `83.5%` | 230 | `data/walk_forward/summary.json :: power.G.power_target`<br>`data/walk_forward/summary.json :: power.P.power_target` |
-| `docs/PAPER_DRAFT.md` | 1152 | `35%` | 2685 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1160 | `14.1` | 52 | `data/ripple/irf.json :: rows[595].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[0].irf[7].lo95` |
-| `docs/PAPER_DRAFT.md` | 1162 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1164 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
-| `docs/PAPER_DRAFT.md` | 1164 | `01` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1164 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1165 | `08` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1165 | `25` | 121 | `data/walk_forward/summary.json :: placebo.random_draws`<br>`data/walk_forward/summary.json :: registered.random_draws` |
-| `docs/PAPER_DRAFT.md` | 1165 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1167 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
-| `docs/PAPER_DRAFT.md` | 1168 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1171 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `docs/PAPER_DRAFT.md` | 1171 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 1179 | `+0.0013` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1181 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 1182 | `24.9%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `docs/PAPER_DRAFT.md` | 1187 | `0.0001` | 16 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.frozen.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1189 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 1199 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1199 | `0.58` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[20]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[21]` |
-| `docs/PAPER_DRAFT.md` | 1199 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 1199 | `0.85` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M02_situation_only.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1201 | `−0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1202 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1203 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 1203 | `0.062` | 24 | `data/walk_forward/summary.json :: spec_curve.rows[126].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[128].skill` |
-| `docs/PAPER_DRAFT.md` | 1203 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/PAPER_DRAFT.md` | 1203 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 1206 | `0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/PAPER_DRAFT.md` | 1207 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1209 | `0.9` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `docs/PAPER_DRAFT.md` | 1210 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1214 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1219 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1221 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1223 | `0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/PAPER_DRAFT.md` | 1234 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 1241 | `+5.56` | 36 | `data/ripple/irf.json :: rows[199].placebo.beta_real`<br>`data/ripple/irf.json :: rows[144].irf[4].hi90` |
-| `docs/PAPER_DRAFT.md` | 1244 | `+0.12` | 70 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 1244 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1348 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1348 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `docs/PAPER_DRAFT.md` | 1348 | `06` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1348 | `06` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1348 | `17` | 14 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1349 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `docs/PAPER_DRAFT.md` | 1349 | `55` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
-| `docs/PAPER_DRAFT.md` | 1349 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `docs/PAPER_DRAFT.md` | 1350 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1350 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1350 | `11.9%` | 966 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1350 | `25.0%` | 349 | `data/walk_forward/summary.json :: placebo.random_draws`<br>`data/walk_forward/summary.json :: registered.eta` |
-| `docs/PAPER_DRAFT.md` | 1350 | `63.1%` | 225 | `data/walk_forward/summary.json :: verdict.audit_record.threshold`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 1350 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 1350 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `docs/PAPER_DRAFT.md` | 1351 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1351 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1351 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
-| `docs/PAPER_DRAFT.md` | 1352 | `−0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1352 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
-| `docs/PAPER_DRAFT.md` | 1353 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1355 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1355 | `35` | 64 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
-| `docs/PAPER_DRAFT.md` | 1356 | `−0.084` | 10 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 1356 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 1356 | `+0.004` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.resolution` |
-| `docs/PAPER_DRAFT.md` | 1356 | `0.076` | 26 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1356 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 1356 | `0.655` | 8 | `data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean`<br>`data/walk_forward/summary.json :: permutation.climatology_brier` |
-| `docs/PAPER_DRAFT.md` | 1356 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 1357 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
-| `docs/PAPER_DRAFT.md` | 1357 | `−0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
-| `docs/PAPER_DRAFT.md` | 1357 | `0.025` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/PAPER_DRAFT.md` | 1357 | `50` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[49].n` |
-| `docs/PAPER_DRAFT.md` | 1357 | `96` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_known`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tn` |
-| `docs/PAPER_DRAFT.md` | 1358 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1358 | `0.58` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[20]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[21]` |
-| `docs/PAPER_DRAFT.md` | 1358 | `+0.007` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1358 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1359 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `docs/PAPER_DRAFT.md` | 1359 | `1.00` | 60 | `data/walk_forward/summary.json :: power.G.hac_lag`<br>`data/walk_forward/summary.json :: power.P.hac_lag` |
-| `docs/PAPER_DRAFT.md` | 1359 | `0.65` | 37 | `data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean`<br>`data/walk_forward/summary.json :: permutation.climatology_brier` |
-| `docs/PAPER_DRAFT.md` | 1360 | `−0.003` | 28 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.murphy_gap` |
-| `docs/PAPER_DRAFT.md` | 1360 | `+0.056` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
-| `docs/PAPER_DRAFT.md` | 1360 | `−0.175` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 1360 | `0.26` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 1361 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
-| `docs/PAPER_DRAFT.md` | 1361 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1361 | `−0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 1361 | `0.016` | 16 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 1361 | `+0.129` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M01_uniform_k8.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M11_physical_actors_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1361 | `−0.005` | 38 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 1361 | `+0.007` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1362 | `0.337` | 22 | `data/ripple/irf.json :: rows[132].irf[1].z_ehw`<br>`data/ripple/irf.json :: rows[138].irf[1].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 1362 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
-| `docs/PAPER_DRAFT.md` | 1363 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
-| `docs/PAPER_DRAFT.md` | 1363 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
-| `docs/PAPER_DRAFT.md` | 1363 | `0.001` | 37 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1364 | `80%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1364 | `0.085` | 12 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 1364 | `80%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 1364 | `+0.05` | 143 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 1365 | `−0.150` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: big_moves_knew[32].reads[0].engine_p50` |
-| `docs/PAPER_DRAFT.md` | 1365 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
-| `docs/PAPER_DRAFT.md` | 1365 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1365 | `0%` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1366 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1366 | `−0.083` | 8 | `data/walk_forward/summary.json :: spec_curve.rows[31].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[33].skill` |
-| `docs/PAPER_DRAFT.md` | 1366 | `−0.008` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
-| `docs/PAPER_DRAFT.md` | 1366 | `−0.106` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.uncertainty`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.uncertainty` |
-| `docs/PAPER_DRAFT.md` | 1366 | `+0.017` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.1.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 1367 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1367 | `−0.101` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[82].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1367 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1367 | `0.124` | 9 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
-| `docs/PAPER_DRAFT.md` | 1367 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
-| `docs/PAPER_DRAFT.md` | 1369 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/PAPER_DRAFT.md` | 1370 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/PAPER_DRAFT.md` | 1370 | `8.30` | 7 | `data/walk_forward/summary.json :: leakage_test.scores.P.sealed`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.engine_mean` |
-| `docs/PAPER_DRAFT.md` | 1370 | `8.00` | 119 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `docs/PAPER_DRAFT.md` | 1370 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1373 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1373 | `+0.119` | 7 | `data/walk_forward/summary.json :: placebo.ci95[0]`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1375 | `+5.56` | 36 | `data/ripple/irf.json :: rows[199].placebo.beta_real`<br>`data/ripple/irf.json :: rows[144].irf[4].hi90` |
-| `docs/EXPLAIN.md` | 7 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `docs/EXPLAIN.md` | 16 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
-| `docs/EXPLAIN.md` | 21 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/EXPLAIN.md` | 22 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/EXPLAIN.md` | 31 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/EXPLAIN.md` | 35 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `docs/EXPLAIN.md` | 59 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/EXPLAIN.md` | 62 | `73%` | 1151 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `docs/EXPLAIN.md` | 97 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/EXPLAIN.md` | 118 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
-| `docs/EXPLAIN.md` | 128 | `0.64` | 31 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.ref_mean` |
-| `docs/EXPLAIN.md` | 135 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/EXPLAIN.md` | 144 | `0.010` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.murphy_gap`<br>`data/walk_forward/summary.json :: fdr.family[8].q_value` |
-| `docs/EXPLAIN.md` | 144 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/EXPLAIN.md` | 145 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/EXPLAIN.md` | 149 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/EXPLAIN.md` | 152 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `docs/EXPLAIN.md` | 159 | `35%` | 2685 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/EXPLAIN.md` | 161 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/EXPLAIN.md` | 182 | `30%` | 2635 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `docs/EXPLAIN.md` | 182 | `30%` | 2635 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 3 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 3 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 13 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
+| `docs/PAPER_DRAFT.md` | 573 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
+| `docs/PAPER_DRAFT.md` | 573 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 573 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 573 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 574 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 575 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 576 | `52` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[51].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[51].n` |
+| `docs/PAPER_DRAFT.md` | 577 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 578 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 579 | `1.00` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 584 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 586 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 586 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 587 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 587 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/PAPER_DRAFT.md` | 587 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 587 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
+| `docs/PAPER_DRAFT.md` | 587 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 588 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 588 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/PAPER_DRAFT.md` | 594 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
+| `docs/PAPER_DRAFT.md` | 594 | `+0.056` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
+| `docs/PAPER_DRAFT.md` | 594 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 598 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
+| `docs/PAPER_DRAFT.md` | 598 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 599 | `0.016` | 18 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 600 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 600 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 601 | `+0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 604 | `0.337` | 22 | `data/ripple/irf.json :: rows[132].irf[1].z_ehw`<br>`data/ripple/irf.json :: rows[138].irf[1].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 604 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
+| `docs/PAPER_DRAFT.md` | 612 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 614 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
+| `docs/PAPER_DRAFT.md` | 614 | `−0.099` | 9 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M11_physical_actors_2x.skill` |
+| `docs/PAPER_DRAFT.md` | 615 | `−0.081` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[9].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 615 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 615 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
+| `docs/PAPER_DRAFT.md` | 618 | `−0.150` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.random_analogs.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 618 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
+| `docs/PAPER_DRAFT.md` | 618 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 619 | `0.0` | 32 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 620 | `22%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 624 | `400` | 8 | `data/walk_forward/summary.json :: power.G.n_sims`<br>`data/walk_forward/summary.json :: power.P.n_sims` |
+| `docs/PAPER_DRAFT.md` | 624 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 625 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 625 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
+| `docs/PAPER_DRAFT.md` | 630 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 631 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 631 | `−0.008` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 632 | `−0.142` | 5 | `data/walk_forward/summary.json :: spec_curve.skill_distribution.min`<br>`data/walk_forward/summary.json :: spec_curve.rows[121].skill` |
+| `docs/PAPER_DRAFT.md` | 632 | `−0.063` | 8 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[38].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 642 | `−0.133` | 5 | `data/walk_forward/summary.json :: permutation.null_mean`<br>`data/walk_forward/summary.json :: permutation.block.null_mean` |
+| `docs/PAPER_DRAFT.md` | 643 | `0.043` | 18 | `data/walk_forward/summary.json :: permutation.null_sd`<br>`data/walk_forward/summary.json :: permutation.block.null_sd` |
+| `docs/PAPER_DRAFT.md` | 643 | `−0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
+| `docs/PAPER_DRAFT.md` | 643 | `−0.057` | 12 | `data/walk_forward/summary.json :: permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 643 | `0.0500` | 14 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
+| `docs/PAPER_DRAFT.md` | 644 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
+| `docs/PAPER_DRAFT.md` | 645 | `0.059` | 27 | `data/walk_forward/summary.json :: permutation.iid.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.engine_vs.climatology.skill` |
+| `docs/PAPER_DRAFT.md` | 646 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
+| `docs/PAPER_DRAFT.md` | 647 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/PAPER_DRAFT.md` | 661 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 664 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 672 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 680 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 681 | `0.033` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.spa.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.frozen.skill` |
+| `docs/PAPER_DRAFT.md` | 682 | `0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
+| `docs/PAPER_DRAFT.md` | 683 | `0.042` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_sd`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_p` |
+| `docs/PAPER_DRAFT.md` | 683 | `0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 688 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
+| `docs/PAPER_DRAFT.md` | 688 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
+| `docs/PAPER_DRAFT.md` | 694 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 696 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/PAPER_DRAFT.md` | 698 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
+| `docs/PAPER_DRAFT.md` | 698 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 702 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 714 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 719 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 723 | `−3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 723 | `+3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 725 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 731 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 735 | `11.1` | 73 | `data/ripple/irf.json :: rows[193].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[12].irf[6].hi95` |
+| `docs/PAPER_DRAFT.md` | 742 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
+| `docs/PAPER_DRAFT.md` | 746 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
+| `docs/PAPER_DRAFT.md` | 747 | `−0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 752 | `58` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[57].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[57].n` |
+| `docs/PAPER_DRAFT.md` | 755 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 759 | `11.2` | 4 | `data/walk_forward/summary.json :: big_moves_knew[34].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[34].reads[4].engine_p90` |
+| `docs/PAPER_DRAFT.md` | 761 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
+| `docs/PAPER_DRAFT.md` | 762 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 762 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 762 | `73.0%` | 12 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_nw` |
+| `docs/PAPER_DRAFT.md` | 765 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 767 | `0.4693` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C1_analogue`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C1_fixed_0.5.brier` |
+| `docs/PAPER_DRAFT.md` | 767 | `+0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
+| `docs/PAPER_DRAFT.md` | 767 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
+| `docs/PAPER_DRAFT.md` | 771 | `+0.0075` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[79].dm_p` |
+| `docs/PAPER_DRAFT.md` | 771 | `0.886` | 9 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[4]` |
+| `docs/PAPER_DRAFT.md` | 772 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
+| `docs/PAPER_DRAFT.md` | 774 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
+| `docs/PAPER_DRAFT.md` | 775 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
+| `docs/PAPER_DRAFT.md` | 779 | `0.0` | 32 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 779 | `1.0` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 780 | `67` | 5 | `data/walk_forward/summary.json :: leakage_test.recalibration_rule.n_reads_with_different_M13`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].n` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.7` | 12 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_nw` |
+| `docs/PAPER_DRAFT.md` | 781 | `0.449` | 20 | `data/ripple/irf.json :: rows[113].irf[3].beta`<br>`data/ripple/irf.json :: rows[19].irf[1].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 781 | `0.582` | 24 | `data/ripple/irf.json :: rows[23].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[159].irf[2].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 784 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
+| `docs/PAPER_DRAFT.md` | 784 | `0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
+| `docs/PAPER_DRAFT.md` | 786 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 787 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 787 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
+| `docs/PAPER_DRAFT.md` | 787 | `+0.0075` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[79].dm_p` |
+| `docs/PAPER_DRAFT.md` | 792 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 799 | `0.4693` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C1_analogue`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C1_fixed_0.5.brier` |
+| `docs/PAPER_DRAFT.md` | 799 | `+0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
+| `docs/PAPER_DRAFT.md` | 799 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
+| `docs/PAPER_DRAFT.md` | 801 | `0.219` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 803 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
+| `docs/PAPER_DRAFT.md` | 806 | `+0.0278` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[130].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 811 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
+| `docs/PAPER_DRAFT.md` | 815 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
+| `docs/PAPER_DRAFT.md` | 819 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 826 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 835 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 850 | `38` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.pit_engine.chi2`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[37].n` |
+| `docs/PAPER_DRAFT.md` | 851 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
+| `docs/PAPER_DRAFT.md` | 851 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
+| `docs/PAPER_DRAFT.md` | 852 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 853 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
+| `docs/PAPER_DRAFT.md` | 855 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 856 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 858 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
+| `docs/PAPER_DRAFT.md` | 861 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 866 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 866 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 867 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
+| `docs/PAPER_DRAFT.md` | 876 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 880 | `12.1` | 71 | `data/ripple/irf.json :: rows[0].irf[7].lo90`<br>`data/ripple/irf.json :: rows[131].irf[4].lo90` |
+| `docs/PAPER_DRAFT.md` | 888 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 891 | `−6.89` | 12 | `data/ripple/irf.json :: rows[410].irf[6].lo90`<br>`data/ripple/irf.json :: rows[563].irf[3].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 894 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 895 | `−9.60` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[126].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[132].climatology` |
+| `docs/PAPER_DRAFT.md` | 895 | `0.30` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision` |
+| `docs/PAPER_DRAFT.md` | 901 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 902 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 902 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 907 | `+0.760` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[34].climatology` |
+| `docs/PAPER_DRAFT.md` | 907 | `+0.496` | 27 | `data/ripple/irf.json :: rows[25].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[102].irf[1].beta` |
+| `docs/PAPER_DRAFT.md` | 908 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 911 | `−56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 911 | `+101.8%` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 911 | `−4.9%` | 40 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.dm` |
+| `docs/PAPER_DRAFT.md` | 912 | `+20.7%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 916 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 923 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 936 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 936 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 936 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 936 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 936 | `+1.003` | 5 | `data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_used` |
+| `docs/PAPER_DRAFT.md` | 939 | `−4.067` | 4 | `data/ripple/irf.json :: rows[327].irf[6].hi95`<br>`data/ripple/irf.json :: rows[596].irf[5].hi90` |
+| `docs/PAPER_DRAFT.md` | 940 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 940 | `−2.306` | 8 | `data/ripple/irf.json :: rows[19].irf[2].hi90`<br>`data/ripple/irf.json :: rows[425].irf[1].hi95` |
+| `docs/PAPER_DRAFT.md` | 942 | `−2.248` | 6 | `data/ripple/irf.json :: rows[120].irf[7].se_nw`<br>`data/ripple/irf.json :: rows[161].irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 952 | `56` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.abstain_rule_departure.abstaining`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[55].n` |
+| `docs/PAPER_DRAFT.md` | 953 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 956 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 957 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
+| `docs/PAPER_DRAFT.md` | 958 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 974 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 974 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 981 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
+| `docs/PAPER_DRAFT.md` | 984 | `47` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.pct`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_analog_atoms_dropped` |
+| `docs/PAPER_DRAFT.md` | 987 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 992 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
+| `docs/PAPER_DRAFT.md` | 993 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 993 | `+2.208` | 11 | `data/ripple/irf.json :: rows[125].irf[2].hi95`<br>`data/ripple/irf.json :: rows[181].irf[7].se_nw` |
+| `docs/PAPER_DRAFT.md` | 994 | `−0.996` | 16 | `data/ripple/irf.json :: rows[160].irf[3].p_ehw`<br>`data/ripple/irf.json :: rows[188].irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 994 | `−2.638` | 6 | `data/ripple/irf.json :: rows[273].irf[4].hi95`<br>`data/ripple/irf.json :: rows[378].irf[6].lo90` |
+| `docs/PAPER_DRAFT.md` | 1003 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1004 | `+0.760` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[34].climatology` |
+| `docs/PAPER_DRAFT.md` | 1004 | `+0.496` | 27 | `data/ripple/irf.json :: rows[25].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[102].irf[1].beta` |
+| `docs/PAPER_DRAFT.md` | 1008 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1008 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1010 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1020 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1021 | `+0.881` | 28 | `data/ripple/irf.json :: rows[110].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[140].irf[2].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 1021 | `+1.611` | 20 | `data/ripple/irf.json :: rows[481].placebo.beta_real`<br>`data/ripple/irf.json :: rows[126].irf[3].lo90` |
+| `docs/PAPER_DRAFT.md` | 1023 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1023 | `−0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 1024 | `+0.674%` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1031 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1056 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
+| `docs/PAPER_DRAFT.md` | 1056 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
+| `docs/PAPER_DRAFT.md` | 1056 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/PAPER_DRAFT.md` | 1060 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1060 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1060 | `47` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.pct`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_analog_atoms_dropped` |
+| `docs/PAPER_DRAFT.md` | 1060 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
+| `docs/PAPER_DRAFT.md` | 1061 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1061 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 1066 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1066 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1069 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
+| `docs/PAPER_DRAFT.md` | 1070 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1074 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1077 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1080 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 1083 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 1085 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 1086 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1088 | `403` | 6 | `data/grid/price/summary.json :: abnormal_return_target.spa.T`<br>`data/grid/price/summary.json :: abnormal_return_target.the_comparison.n_dates` |
+| `docs/PAPER_DRAFT.md` | 1090 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1097 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1097 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
+| `docs/PAPER_DRAFT.md` | 1104 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1104 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1108 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1121 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1121 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 1123 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1123 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
+| `docs/PAPER_DRAFT.md` | 1128 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1128 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1132 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1135 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1135 | `3.2` | 4 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].hi95`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].hi95` |
+| `docs/PAPER_DRAFT.md` | 1135 | `33` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[32].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[32].n` |
+| `docs/PAPER_DRAFT.md` | 1135 | `18%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1136 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/PAPER_DRAFT.md` | 1136 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 1137 | `18%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1140 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1142 | `42.0%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1142 | `36.8%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1143 | `32.5%` | 10 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1148 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 1149 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1149 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1151 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1151 | `+0.119` | 7 | `data/walk_forward/summary.json :: placebo.ci95[0]`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1154 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1155 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
+| `docs/PAPER_DRAFT.md` | 1156 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1159 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1160 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 1162 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1165 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1165 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1166 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1175 | `13.1` | 60 | `data/ripple/irf.json :: rows[575].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[591].placebo.pseudo_p2_5` |
+| `docs/PAPER_DRAFT.md` | 1182 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1185 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1192 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1195 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
+| `docs/PAPER_DRAFT.md` | 1200 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1216 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 1216 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1227 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1229 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1233 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1237 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1238 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 1242 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1246 | `83.5%` | 8 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 1256 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1266 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1268 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
+| `docs/PAPER_DRAFT.md` | 1268 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1268 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `docs/PAPER_DRAFT.md` | 1269 | `08` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1269 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/PAPER_DRAFT.md` | 1271 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
+| `docs/PAPER_DRAFT.md` | 1272 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/PAPER_DRAFT.md` | 1275 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1275 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 1283 | `+0.0013` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1286 | `24.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1291 | `0.0001` | 21 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.frozen.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1303 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1303 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 1305 | `−0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1306 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1307 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 1307 | `0.062` | 24 | `data/walk_forward/summary.json :: spec_curve.rows[126].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[128].skill` |
+| `docs/PAPER_DRAFT.md` | 1307 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
+| `docs/PAPER_DRAFT.md` | 1311 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/PAPER_DRAFT.md` | 1314 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/PAPER_DRAFT.md` | 1318 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/PAPER_DRAFT.md` | 1323 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 1325 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1345 | `+5.56` | 36 | `data/ripple/irf.json :: rows[199].placebo.beta_real`<br>`data/ripple/irf.json :: rows[144].irf[4].hi90` |
+| `docs/PAPER_DRAFT.md` | 1452 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1452 | `06` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1452 | `06` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1452 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 1453 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
+| `docs/PAPER_DRAFT.md` | 1454 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1454 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1454 | `11.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1454 | `25.0%` | 21 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1454 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1454 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
+| `docs/PAPER_DRAFT.md` | 1454 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1455 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `docs/PAPER_DRAFT.md` | 1455 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1455 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
+| `docs/PAPER_DRAFT.md` | 1456 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
+| `docs/PAPER_DRAFT.md` | 1457 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1459 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
+| `docs/PAPER_DRAFT.md` | 1459 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
+| `docs/PAPER_DRAFT.md` | 1460 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
+| `docs/PAPER_DRAFT.md` | 1460 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 1460 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1460 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/PAPER_DRAFT.md` | 1460 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 1461 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 1461 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
+| `docs/PAPER_DRAFT.md` | 1461 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 1461 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 1461 | `96` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_known`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tn` |
+| `docs/PAPER_DRAFT.md` | 1462 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1462 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1463 | `1.00` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 1464 | `−0.003` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.murphy_gap` |
+| `docs/PAPER_DRAFT.md` | 1464 | `+0.056` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
+| `docs/PAPER_DRAFT.md` | 1464 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
+| `docs/PAPER_DRAFT.md` | 1465 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
+| `docs/PAPER_DRAFT.md` | 1465 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1465 | `0.016` | 18 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
+| `docs/PAPER_DRAFT.md` | 1465 | `+0.129` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M01_uniform_k8.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M11_physical_actors_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1465 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 1465 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
+| `docs/PAPER_DRAFT.md` | 1466 | `0.337` | 22 | `data/ripple/irf.json :: rows[132].irf[1].z_ehw`<br>`data/ripple/irf.json :: rows[138].irf[1].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1466 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
+| `docs/PAPER_DRAFT.md` | 1467 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
+| `docs/PAPER_DRAFT.md` | 1467 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
+| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1468 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
+| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1469 | `−0.150` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.random_analogs.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1469 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
+| `docs/PAPER_DRAFT.md` | 1469 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1469 | `0%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.008` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 1471 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1471 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
+| `docs/PAPER_DRAFT.md` | 1471 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
+| `docs/PAPER_DRAFT.md` | 1473 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1474 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
+| `docs/PAPER_DRAFT.md` | 1474 | `8.30` | 7 | `data/walk_forward/summary.json :: leakage_test.scores.P.sealed`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 1474 | `8.00` | 119 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
+| `docs/PAPER_DRAFT.md` | 1474 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/PAPER_DRAFT.md` | 1477 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1477 | `+0.119` | 7 | `data/walk_forward/summary.json :: placebo.ci95[0]`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1479 | `+5.56` | 36 | `data/ripple/irf.json :: rows[199].placebo.beta_real`<br>`data/ripple/irf.json :: rows[144].irf[4].hi90` |
+| `docs/EXPLAIN.md` | 23 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/EXPLAIN.md` | 24 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
+| `docs/EXPLAIN.md` | 33 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/EXPLAIN.md` | 37 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
+| `docs/EXPLAIN.md` | 61 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/EXPLAIN.md` | 64 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/EXPLAIN.md` | 99 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
+| `docs/EXPLAIN.md` | 120 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
+| `docs/EXPLAIN.md` | 137 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/EXPLAIN.md` | 146 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
+| `docs/EXPLAIN.md` | 147 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
+| `docs/EXPLAIN.md` | 151 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/EXPLAIN.md` | 161 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/EXPLAIN.md` | 163 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
+| `docs/EXPLAIN.md` | 184 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/EXPLAIN.md` | 184 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 3 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 3 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 13 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 19 | `79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.n` |
 | `OPEN_ITEMS.md` | 19 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `OPEN_ITEMS.md` | 20 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `OPEN_ITEMS.md` | 20 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 21 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 20 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `OPEN_ITEMS.md` | 20 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 21 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 21 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `OPEN_ITEMS.md` | 22 | `38` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.pit_engine.chi2`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[37].n` |
-| `OPEN_ITEMS.md` | 28 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 29 | `−28%` | 2640 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 29 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 29 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `OPEN_ITEMS.md` | 29 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `OPEN_ITEMS.md` | 30 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
+| `OPEN_ITEMS.md` | 28 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 29 | `−28%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 29 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 30 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 30 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `OPEN_ITEMS.md` | 30 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 30 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 30 | `55` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
+| `OPEN_ITEMS.md` | 30 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `OPEN_ITEMS.md` | 30 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 30 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
 | `OPEN_ITEMS.md` | 30 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
 | `OPEN_ITEMS.md` | 31 | `0.640` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[53].climatology` |
-| `OPEN_ITEMS.md` | 33 | `41%` | 2625 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 33 | `73%` | 1151 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 37 | `1.1` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.random_analogs.dm_hln` |
-| `OPEN_ITEMS.md` | 37 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 37 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 43 | `6` | 120 | `data/walk_forward/summary.json :: placebo.vs_climatology.engine_mean`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.engine_mean` |
+| `OPEN_ITEMS.md` | 33 | `41%` | 99 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 33 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 37 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 37 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 43 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `OPEN_ITEMS.md` | 43 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
-| `OPEN_ITEMS.md` | 43 | `54` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[53].n` |
-| `OPEN_ITEMS.md` | 54 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
 | `OPEN_ITEMS.md` | 55 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `OPEN_ITEMS.md` | 56 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
-| `OPEN_ITEMS.md` | 61 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 61 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 61 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 61 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 66 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
-| `OPEN_ITEMS.md` | 66 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
+| `OPEN_ITEMS.md` | 66 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `OPEN_ITEMS.md` | 68 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
 | `OPEN_ITEMS.md` | 69 | `−0.0082` | 7 | `data/ripple/irf.json :: rows[244].irf[0].beta`<br>`data/ripple/irf.json :: rows[248].irf[1].se_ehw` |
-| `OPEN_ITEMS.md` | 69 | `−0.13` | 43 | `data/walk_forward/summary.json :: permutation.null_mean`<br>`data/walk_forward/summary.json :: permutation.block.null_mean` |
-| `OPEN_ITEMS.md` | 69 | `+0.04` | 126 | `data/walk_forward/summary.json :: permutation.null_sd`<br>`data/walk_forward/summary.json :: permutation.block.null_sd` |
-| `OPEN_ITEMS.md` | 69 | `0.019` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[4].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[63].skill_engine_vs_clim` |
-| `OPEN_ITEMS.md` | 69 | `0.19` | 18 | `data/walk_forward/summary.json :: tiers.daily.P.pin50_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.skill` |
-| `OPEN_ITEMS.md` | 70 | `9` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 70 | `7` | 224 | `data/walk_forward/summary.json :: determinism.seeds.reliability_bands`<br>`data/walk_forward/summary.json :: registered.seeds.reliability_bands` |
-| `OPEN_ITEMS.md` | 73 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 73 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 69 | `+0.04` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.dm.p_value` |
+| `OPEN_ITEMS.md` | 69 | `0.19` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.mean_diff` |
+| `OPEN_ITEMS.md` | 70 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 73 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 73 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 95 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `OPEN_ITEMS.md` | 95 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `OPEN_ITEMS.md` | 100 | `1.3` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.stat` |
-| `OPEN_ITEMS.md` | 102 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 102 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 103 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
+| `OPEN_ITEMS.md` | 100 | `1.3` | 6 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 102 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 102 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 104 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `OPEN_ITEMS.md` | 107 | `15` | 74 | `data/walk_forward/summary.json :: tiers.daily.G.spa.n_models`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.n_models` |
-| `OPEN_ITEMS.md` | 107 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
+| `OPEN_ITEMS.md` | 107 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `OPEN_ITEMS.md` | 110 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
-| `OPEN_ITEMS.md` | 111 | `+0.009` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.0.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C2_walkforward_lambda.skill` |
-| `OPEN_ITEMS.md` | 111 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 111 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `OPEN_ITEMS.md` | 111 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
+| `OPEN_ITEMS.md` | 111 | `+0.009` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.0.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.brier.frozen.dm_p` |
+| `OPEN_ITEMS.md` | 111 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 111 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `OPEN_ITEMS.md` | 111 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 111 | `+0.068` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.C1_fixed_0.5.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.rps.C1.skill` |
-| `OPEN_ITEMS.md` | 111 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `OPEN_ITEMS.md` | 111 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `OPEN_ITEMS.md` | 111 | `19` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `OPEN_ITEMS.md` | 111 | `−0.103` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M01_uniform_k8.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M11_physical_actors_2x.skill` |
+| `OPEN_ITEMS.md` | 111 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
 | `OPEN_ITEMS.md` | 111 | `51` | 10 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_a_situation_field_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fp` |
 | `OPEN_ITEMS.md` | 112 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
-| `OPEN_ITEMS.md` | 112 | `26` | 17 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.tp`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tp` |
-| `OPEN_ITEMS.md` | 112 | `−0.117` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[56].skill_engine_vs_clim` |
-| `OPEN_ITEMS.md` | 112 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
-| `OPEN_ITEMS.md` | 113 | `100%` | 1213 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.n` |
+| `OPEN_ITEMS.md` | 112 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
+| `OPEN_ITEMS.md` | 113 | `100%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 113 | `73` | 4 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.0`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[72].n` |
-| `OPEN_ITEMS.md` | 113 | `7%` | 2845 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 113 | `26` | 17 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.tp`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tp` |
-| `OPEN_ITEMS.md` | 116 | `1.5` | 10 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.P.spa.stat` |
+| `OPEN_ITEMS.md` | 113 | `7%` | 100 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 118 | `+1.003` | 5 | `data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_used` |
-| `OPEN_ITEMS.md` | 119 | `0.030` | 21 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `OPEN_ITEMS.md` | 119 | `−4.067` | 4 | `data/ripple/irf.json :: rows[327].irf[6].hi95`<br>`data/ripple/irf.json :: rows[596].irf[5].hi90` |
-| `OPEN_ITEMS.md` | 120 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 123 | `36` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].n_episodes` |
+| `OPEN_ITEMS.md` | 120 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 123 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
 | `OPEN_ITEMS.md` | 124 | `56` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.abstain_rule_departure.abstaining`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[55].n` |
 | `OPEN_ITEMS.md` | 131 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `OPEN_ITEMS.md` | 133 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
-| `OPEN_ITEMS.md` | 134 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 134 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 135 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 135 | `5` | 83 | `data/walk_forward/summary.json :: placebo.reps`<br>`data/walk_forward/summary.json :: registered.placebo_reps` |
-| `OPEN_ITEMS.md` | 140 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 142 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 142 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 142 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 143 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 143 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
+| `OPEN_ITEMS.md` | 134 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 134 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 135 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 135 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `OPEN_ITEMS.md` | 140 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 142 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 142 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 142 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 143 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 145 | `0.064` | 15 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: spec_curve.rows[37].skill` |
 | `OPEN_ITEMS.md` | 150 | `33` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[32].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[32].n` |
-| `OPEN_ITEMS.md` | 151 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `OPEN_ITEMS.md` | 151 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `OPEN_ITEMS.md` | 157 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 157 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 157 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 157 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 157 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `OPEN_ITEMS.md` | 157 | `11` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.excluded.persistence_fallback`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.engine_mean` |
-| `OPEN_ITEMS.md` | 157 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
+| `OPEN_ITEMS.md` | 157 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 157 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 157 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 157 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 157 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
 | `OPEN_ITEMS.md` | 158 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `OPEN_ITEMS.md` | 159 | `8` | 351 | `data/walk_forward/summary.json :: placebo.k_random`<br>`data/walk_forward/summary.json :: registered.burn_in` |
-| `OPEN_ITEMS.md` | 160 | `14` | 19 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
-| `OPEN_ITEMS.md` | 160 | `20` | 73 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.3`<br>`data/walk_forward/summary.json :: tiers.daily.horizon` |
-| `OPEN_ITEMS.md` | 160 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 160 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 163 | `16` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[15].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[15].n` |
-| `OPEN_ITEMS.md` | 164 | `83.5%` | 230 | `data/walk_forward/summary.json :: power.G.power_target`<br>`data/walk_forward/summary.json :: power.P.power_target` |
-| `OPEN_ITEMS.md` | 164 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 167 | `2.5` | 5 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.dm_hln`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.dm_hln` |
-| `OPEN_ITEMS.md` | 170 | `2.5` | 5 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.dm_hln`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.dm_hln` |
-| `OPEN_ITEMS.md` | 170 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 170 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 159 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `OPEN_ITEMS.md` | 160 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 160 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `OPEN_ITEMS.md` | 164 | `83.5%` | 8 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_ehw` |
+| `OPEN_ITEMS.md` | 164 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 170 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 170 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 172 | `1,160` | 5 | `data/grid/g/PANEL.json :: dIES.n_nonzero`<br>`data/grid/g/PANEL.json :: dIES.n_defined.informative` |
 | `OPEN_ITEMS.md` | 172 | `333` | 4 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.mid_family_2014.n_grid_dates_covered`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.availability.henry_hub|h20` |
-| `OPEN_ITEMS.md` | 172 | `01` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 172 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 172 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 177 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 181 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `OPEN_ITEMS.md` | 182 | `0.95` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `OPEN_ITEMS.md` | 184 | `44.7%` | 93 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M06_uniform_k5.recall` |
-| `OPEN_ITEMS.md` | 184 | `17.6%` | 230 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.base_rate` |
-| `OPEN_ITEMS.md` | 185 | `0.95` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `OPEN_ITEMS.md` | 202 | `2.5` | 5 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.dm_hln`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.dm_hln` |
-| `OPEN_ITEMS.md` | 203 | `4` | 27 | `data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.ambiguous`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.frozen.dm_hln` |
-| `OPEN_ITEMS.md` | 203 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 203 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 172 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 172 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 172 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `OPEN_ITEMS.md` | 177 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 182 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
+| `OPEN_ITEMS.md` | 184 | `44.7%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `OPEN_ITEMS.md` | 184 | `17.6%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `OPEN_ITEMS.md` | 185 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
+| `OPEN_ITEMS.md` | 203 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `OPEN_ITEMS.md` | 203 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 203 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 206 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
-| `OPEN_ITEMS.md` | 206 | `29` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[28].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[28].n` |
-| `OPEN_ITEMS.md` | 206 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 206 | `43` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: spec_curve.materiality[3].n_episodes` |
-| `OPEN_ITEMS.md` | 206 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 206 | `21` | 6 | `data/walk_forward/summary.json :: tiers.daily.M.M12_dyads_system_2x.fn`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].n_episodes` |
-| `OPEN_ITEMS.md` | 208 | `01` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 208 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 209 | `489` | 171 | `data/ripple/irf.json :: rows[761].irf[5].T`<br>`data/ripple/irf.json :: rows[762].irf[5].T` |
+| `OPEN_ITEMS.md` | 206 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 206 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `OPEN_ITEMS.md` | 206 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 208 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 208 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 209 | `489` | 4 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].T`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].n_events` |
 | `OPEN_ITEMS.md` | 212 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `OPEN_ITEMS.md` | 213 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `OPEN_ITEMS.md` | 213 | `02` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 213 | `29` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[28].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[28].n` |
-| `OPEN_ITEMS.md` | 214 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `OPEN_ITEMS.md` | 214 | `12` | 76 | `data/walk_forward/summary.json :: registered.k_max`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.marginal.2` |
-| `OPEN_ITEMS.md` | 214 | `90.2%` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `OPEN_ITEMS.md` | 214 | `85.3%` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `OPEN_ITEMS.md` | 214 | `54.4%` | 197 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.dm_p` |
-| `OPEN_ITEMS.md` | 214 | `95%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 216 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
-| `OPEN_ITEMS.md` | 217 | `86.8%` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `OPEN_ITEMS.md` | 218 | `88.4%` | 65 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.p_spa` |
-| `OPEN_ITEMS.md` | 218 | `44.4%` | 93 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M06_uniform_k5.recall` |
+| `OPEN_ITEMS.md` | 213 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 214 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 216 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 218 | `44.4%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
 | `OPEN_ITEMS.md` | 225 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `OPEN_ITEMS.md` | 229 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `OPEN_ITEMS.md` | 235 | `3` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 236 | `60` | 4 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_known_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[59].n` |
+| `OPEN_ITEMS.md` | 235 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 240 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `OPEN_ITEMS.md` | 241 | `0` | 2621 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.skill` |
+| `OPEN_ITEMS.md` | 241 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 241 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `OPEN_ITEMS.md` | 248 | `51` | 10 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_a_situation_field_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fp` |
-| `OPEN_ITEMS.md` | 248 | `93%` | 1152 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 251 | `100` | 66 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `OPEN_ITEMS.md` | 252 | `84%` | 1150 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 255 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 259 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
-| `OPEN_ITEMS.md` | 259 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 259 | `30` | 14 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 263 | `13` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[12].n` |
-| `OPEN_ITEMS.md` | 265 | `1.2` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.mean_block`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.stat` |
-| `OPEN_ITEMS.md` | 265 | `1.3` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.stat` |
-| `OPEN_ITEMS.md` | 266 | `2.1` | 4 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.G.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
-| `OPEN_ITEMS.md` | 266 | `2.2` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M10_situation_2x_k12.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_hln` |
-| `OPEN_ITEMS.md` | 266 | `2` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 272 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 272 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
-| `OPEN_ITEMS.md` | 275 | `10` | 216 | `data/walk_forward/summary.json :: registered.pit_bins`<br>`data/walk_forward/summary.json :: tiers.daily.P.pit_climatology.bins` |
-| `OPEN_ITEMS.md` | 275 | `02` | 87 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_hln`<br>`data/walk_forward/summary.json :: registered.g_scale` |
-| `OPEN_ITEMS.md` | 282 | `09` | 187 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.1`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.n_dropped` |
-| `OPEN_ITEMS.md` | 282 | `03` | 65 | `data/walk_forward/summary.json :: filtration_audit.release_lags_days.cot_pct`<br>`data/walk_forward/summary.json :: placebo.fair_vs_climatology.mean_block` |
+| `OPEN_ITEMS.md` | 248 | `93%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 251 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `OPEN_ITEMS.md` | 252 | `84%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 255 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 259 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 259 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `OPEN_ITEMS.md` | 259 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
+| `OPEN_ITEMS.md` | 265 | `1.3` | 6 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 266 | `2.1` | 6 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.G.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
+| `OPEN_ITEMS.md` | 266 | `2.2` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 266 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 272 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 272 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
+| `OPEN_ITEMS.md` | 275 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 282 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 282 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 282 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `OPEN_ITEMS.md` | 296 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `OPEN_ITEMS.md` | 304 | `6.1` | 6 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.P.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.ref_mean` |
-| `OPEN_ITEMS.md` | 305 | `1` | 1147 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: G_joint_across_tiers.ref_mean` |
+| `OPEN_ITEMS.md` | 305 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 
 ## RESOLVED — the number, and where it is in the record
 
@@ -1259,312 +974,602 @@ claim to know which field the prose meant. Listed with the first few.
 
 | document | line | number | n_paths | resolves to |
 |---|---:|---:|---:|---|
-| `README.md` | 41 | `352` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[351]` |
-| `README.md` | 78 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
-| `README.md` | 78 | `132` | 3 | `data/walk_forward/summary.json :: data_state.n_geo_with_ies90_level`<br>`data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[131].n` |
-| `README.md` | 83 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `README.md` | 83 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `README.md` | 84 | `+0.193` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.ci95[1]` |
-| `README.md` | 93 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `README.md` | 98 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
-| `README.md` | 98 | `132` | 3 | `data/walk_forward/summary.json :: data_state.n_geo_with_ies90_level`<br>`data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[131].n` |
-| `README.md` | 99 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `README.md` | 135 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `README.md` | 138 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `README.md` | 142 | `0.181` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.diagram[0].band95[1]` |
-| `README.md` | 147 | `0.4626` | 3 | `data/ripple/irf.json :: rows[377].irf[4].hi95`<br>`data/ripple/irf.json :: rows[611].irf[4].lo90`<br>`data/ripple/irf.json :: rows[679].irf[6].hi95` |
-| `README.md` | 148 | `0.4643` | 3 | `data/ripple/irf.json :: rows[467].irf[7].p_ehw`<br>`data/ripple/irf.json :: rows[601].irf[6].p_ehw`<br>`data/ripple/irf.json :: rows[721].irf[0].lo95` |
-| `README.md` | 148 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
-| `README.md` | 181 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `README.md` | 189 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `README.md` | 214 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
-| `README.md` | 220 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
-| `README.md` | 222 | `414` | 1 | `data/grid/price/summary.json :: training.n_reads_with_a_fit` |
-| `README.md` | 232 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `README.md` | 236 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `README.md` | 239 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/BRIEF.md` | 38 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/BRIEF.md` | 38 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `docs/BRIEF.md` | 48 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/BRIEF.md` | 102 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/BRIEF.md` | 109 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/BRIEF.md` | 111 | `0.181` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.diagram[0].band95[1]` |
-| `docs/BRIEF.md` | 114 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
-| `docs/BRIEF.md` | 120 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
-| `docs/BRIEF.md` | 121 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
-| `docs/BRIEF.md` | 124 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `docs/BRIEF.md` | 127 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/BRIEF.md` | 129 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/BRIEF.md` | 139 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 9 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
-| `docs/PAPER_DRAFT.md` | 10 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
-| `docs/PAPER_DRAFT.md` | 14 | `132` | 3 | `data/walk_forward/summary.json :: data_state.n_geo_with_ies90_level`<br>`data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[131].n` |
-| `docs/PAPER_DRAFT.md` | 15 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `docs/PAPER_DRAFT.md` | 64 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 71 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `docs/PAPER_DRAFT.md` | 71 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 76 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/PAPER_DRAFT.md` | 79 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
-| `docs/PAPER_DRAFT.md` | 84 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
-| `docs/PAPER_DRAFT.md` | 91 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 122 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 132 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `docs/PAPER_DRAFT.md` | 132 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 136 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/PAPER_DRAFT.md` | 141 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
-| `docs/PAPER_DRAFT.md` | 169 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 246 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 246 | `726` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_blanked` |
-| `docs/PAPER_DRAFT.md` | 248 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 300 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `docs/PAPER_DRAFT.md` | 313 | `148` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].n` |
-| `docs/PAPER_DRAFT.md` | 325 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 326 | `39` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[38].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[38].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[38].n` |
-| `docs/PAPER_DRAFT.md` | 336 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
-| `docs/PAPER_DRAFT.md` | 336 | `79` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[78].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[78].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[78].n` |
-| `docs/PAPER_DRAFT.md` | 357 | `598` | 1 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[105]` |
-| `docs/PAPER_DRAFT.md` | 393 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 418 | `1.85` | 3 | `data/grid/power_arithmetic.json :: multipliers.month_end.2_targets.n_eff_added_per_cell`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_used` |
-| `docs/PAPER_DRAFT.md` | 422 | `1.98` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 422 | `2.06` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 438 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 448 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
-| `docs/PAPER_DRAFT.md` | 448 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `docs/PAPER_DRAFT.md` | 449 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
-| `docs/PAPER_DRAFT.md` | 524 | `2.32` | 3 | `data/walk_forward/summary.json :: big_moves_knew[11].reads[0].engine_p50`<br>`data/walk_forward/summary.json :: big_moves_knew[37].reads[4].engine_p50`<br>`data/walk_forward/summary.json :: big_moves_knew[9].reads[0].engine_p50` |
-| `docs/PAPER_DRAFT.md` | 524 | `2,000` | 1 | `data/walk_forward/summary.json :: registered.n_boot` |
-| `docs/PAPER_DRAFT.md` | 528 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 541 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
-| `docs/PAPER_DRAFT.md` | 548 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 572 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `docs/PAPER_DRAFT.md` | 572 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 580 | `+0.144` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M07_uniform_k12.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 586 | `+0.193` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 589 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
-| `docs/PAPER_DRAFT.md` | 590 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 602 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 604 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 610 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 611 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 637 | `34` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[33].n` |
-| `docs/PAPER_DRAFT.md` | 637 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 673 | `−0.590` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.analogue.ci95[0]`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[4][1]` |
-| `docs/PAPER_DRAFT.md` | 673 | `−0.457` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C1_fixed_0.5.mean` |
-| `docs/PAPER_DRAFT.md` | 687 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 724 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
-| `docs/PAPER_DRAFT.md` | 725 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
-| `docs/PAPER_DRAFT.md` | 726 | `0.5064` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/PAPER_DRAFT.md` | 730 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/PAPER_DRAFT.md` | 732 | `0.764` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[44].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[3]` |
-| `docs/PAPER_DRAFT.md` | 733 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
-| `docs/PAPER_DRAFT.md` | 734 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
-| `docs/PAPER_DRAFT.md` | 740 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 752 | `−0.0389` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 752 | `+0.1276` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 753 | `0.4764` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C2_walkforward_lambda.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.mean` |
-| `docs/PAPER_DRAFT.md` | 753 | `+0.0360` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 753 | `−0.0422` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[81].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 753 | `+0.1108` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 753 | `0.352` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[1]` |
-| `docs/PAPER_DRAFT.md` | 754 | `0.4725` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C3_hedge.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.mean` |
-| `docs/PAPER_DRAFT.md` | 754 | `+0.0438` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[102].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 754 | `−0.0379` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 754 | `+0.1177` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 754 | `0.272` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[2]` |
-| `docs/PAPER_DRAFT.md` | 755 | `0.5064` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
-| `docs/PAPER_DRAFT.md` | 755 | `−0.0246` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.skill` |
-| `docs/PAPER_DRAFT.md` | 755 | `−0.2347` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 755 | `+0.1203` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[60].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 755 | `0.764` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[44].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[3]` |
-| `docs/PAPER_DRAFT.md` | 756 | `0.4905` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.climatology.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.mean` |
-| `docs/PAPER_DRAFT.md` | 756 | `−0.1141` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 756 | `+0.1043` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 761 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
-| `docs/PAPER_DRAFT.md` | 769 | `0.1167` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill` |
-| `docs/PAPER_DRAFT.md` | 773 | `0.876` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.random_analogs.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[13]` |
-| `docs/PAPER_DRAFT.md` | 775 | `11.3` | 2 | `data/walk_forward/summary.json :: big_moves_knew[28].reads[2].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[29].reads[0].engine_p90` |
-| `docs/PAPER_DRAFT.md` | 785 | `0.4827` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.mean` |
-| `docs/PAPER_DRAFT.md` | 785 | `+0.0232` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[61].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 785 | `0.399` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.dm_p` |
-| `docs/PAPER_DRAFT.md` | 786 | `0.4774` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0_climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0.mean` |
-| `docs/PAPER_DRAFT.md` | 786 | `+0.0341` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[99].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 788 | `+0.0169` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 788 | `−0.0311` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[122].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 788 | `+0.0584` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[165].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 788 | `+0.0224` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[124].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 789 | `0.302` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.dm_p` |
-| `docs/PAPER_DRAFT.md` | 791 | `0.197` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 795 | `−0.0037` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[29].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 795 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
-| `docs/PAPER_DRAFT.md` | 796 | `+0.0169` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
-| `docs/PAPER_DRAFT.md` | 817 | `11.4` | 3 | `data/walk_forward/summary.json :: big_moves_knew[27].reads[0].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[33].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[34].reads[0].engine_p90` |
-| `docs/PAPER_DRAFT.md` | 820 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 843 | `401` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[400]` |
-| `docs/PAPER_DRAFT.md` | 844 | `477` | 3 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[97]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[116]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[416]` |
-| `docs/PAPER_DRAFT.md` | 845 | `932` | 2 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.sided_only_2014.n_dyads`<br>`data/grid/power_arithmetic.json :: escalation_panel.week_end.sided_only_2014.n_dyads` |
-| `docs/PAPER_DRAFT.md` | 845 | `455` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[454]` |
-| `docs/PAPER_DRAFT.md` | 851 | `171` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[170].n` |
-| `docs/PAPER_DRAFT.md` | 860 | `128` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[127].n` |
-| `docs/PAPER_DRAFT.md` | 873 | `+20.66` | 3 | `data/ripple/irf.json :: rows[587].placebo.beta_real`<br>`data/ripple/irf.json :: rows[580].irf[1].hi90`<br>`data/ripple/irf.json :: rows[587].irf[3].beta` |
-| `docs/PAPER_DRAFT.md` | 873 | `+8.77` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[169].climatology` |
-| `docs/PAPER_DRAFT.md` | 873 | `+32.55` | 1 | `data/ripple/irf.json :: rows[587].irf[3].hi95` |
-| `docs/PAPER_DRAFT.md` | 876 | `2,799` | 1 | `data/candidates/post1987_candidates.csv :: columns.source_id[12]` |
-| `docs/PAPER_DRAFT.md` | 876 | `+4.03` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.diesel_crack|h60.deff_bartlett` |
-| `docs/PAPER_DRAFT.md` | 876 | `+14.96` | 1 | `data/ripple/irf.json :: rows[916].irf[2].hi90` |
-| `docs/PAPER_DRAFT.md` | 880 | `+16.99` | 3 | `data/ripple/irf.json :: rows[521].irf[0].hi95`<br>`data/ripple/irf.json :: rows[542].irf[4].lo95`<br>`data/ripple/irf.json :: rows[592].irf[1].hi90` |
-| `docs/PAPER_DRAFT.md` | 892 | `+1.023` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.gasoline_crack|h5.disagreement` |
-| `docs/PAPER_DRAFT.md` | 901 | `122` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.final_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[121].n` |
-| `docs/PAPER_DRAFT.md` | 918 | `12.2` | 3 | `data/walk_forward/summary.json :: big_moves_knew[37].reads[2].engine_p10`<br>`data/walk_forward/summary.json :: big_moves_knew[40].reads[0].engine_p10`<br>`data/walk_forward/summary.json :: big_moves_knew[40].reads[0].engine_p50` |
-| `docs/PAPER_DRAFT.md` | 921 | `+5.079` | 2 | `data/ripple/irf.json :: rows[218].irf[6].se_nw`<br>`data/ripple/irf.json :: rows[652].irf[2].se_nw` |
-| `docs/PAPER_DRAFT.md` | 922 | `+9.364` | 1 | `data/ripple/irf.json :: rows[574].irf[2].hi95` |
-| `docs/PAPER_DRAFT.md` | 922 | `116` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M10_situation_2x_k12.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[115].n` |
-| `docs/PAPER_DRAFT.md` | 924 | `+2.071` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.brent|h10.deff_bartlett` |
-| `docs/PAPER_DRAFT.md` | 924 | `0.269` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.diagram[0].observed_freq` |
-| `docs/PAPER_DRAFT.md` | 928 | `−1.391` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.mean_block` |
-| `docs/PAPER_DRAFT.md` | 936 | `106` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].n` |
-| `docs/PAPER_DRAFT.md` | 936 | `92` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[91].n` |
-| `docs/PAPER_DRAFT.md` | 942 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
-| `docs/PAPER_DRAFT.md` | 957 | `12.3` | 3 | `data/grid/price/summary.json :: spa.stat`<br>`data/grid/price/summary.json :: diagnostic_fair.fitted_vs_climatology_registered.dm_hln`<br>`data/grid/price/summary.json :: fitted_vs.grid_climatology.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 968 | `128` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[127].n` |
-| `docs/PAPER_DRAFT.md` | 976 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 976 | `−5.423` | 3 | `data/ripple/irf.json :: rows[41].irf[6].hi90`<br>`data/ripple/irf.json :: rows[592].irf[7].se_ehw`<br>`data/ripple/irf.json :: rows[804].irf[3].hi90` |
-| `docs/PAPER_DRAFT.md` | 976 | `+2.279` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 977 | `+0.809` | 1 | `data/grid/g/PANEL.json :: share_zero_tripwire.series.full_panel.L.per_year.1997.share_zero` |
-| `docs/PAPER_DRAFT.md` | 977 | `+3.651` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[0].engine` |
-| `docs/PAPER_DRAFT.md` | 979 | `+0.646` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.ref_mean` |
-| `docs/PAPER_DRAFT.md` | 991 | `+0.151` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.frozen.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1017 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 1020 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 1024 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 1029 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `docs/PAPER_DRAFT.md` | 1031 | `3.1` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M08_uniform_loose_030.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.frozen.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 1051 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 1078 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 1082 | `83` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[82].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[82].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[82].n` |
-| `docs/PAPER_DRAFT.md` | 1090 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/PAPER_DRAFT.md` | 1097 | `34` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[33].n` |
-| `docs/PAPER_DRAFT.md` | 1133 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 1141 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/PAPER_DRAFT.md` | 1167 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
-| `docs/PAPER_DRAFT.md` | 1168 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `docs/PAPER_DRAFT.md` | 1171 | `989.5` | 1 | `data/grid/power_arithmetic.json :: verdicts.month_end.training.effective_units_available_inner` |
-| `docs/PAPER_DRAFT.md` | 1179 | `−0.0104` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.C2_walkforward_lambda.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1179 | `+0.0128` | 2 | `data/grid/price/summary.json :: the_comparison.ci95[1]`<br>`data/grid/price/summary.json :: fitted_vs.frozen.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 1179 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
-| `docs/PAPER_DRAFT.md` | 1182 | `414` | 1 | `data/grid/price/summary.json :: training.n_reads_with_a_fit` |
-| `docs/PAPER_DRAFT.md` | 1187 | `−0.0706` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[208].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1187 | `−0.0826` | 2 | `data/grid/price/summary.json :: diagnostic_fair.fitted_vs_climatology_registered.ci95[0]`<br>`data/grid/price/summary.json :: fitted_vs.grid_climatology.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1187 | `−0.0587` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[158].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1190 | `0.1573` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.fitted` |
-| `docs/PAPER_DRAFT.md` | 1190 | `0.1448` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.fitted_fair` |
-| `docs/PAPER_DRAFT.md` | 1191 | `0.1459` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.climatology_fair` |
-| `docs/PAPER_DRAFT.md` | 1192 | `1751` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_fitted[0]` |
-| `docs/PAPER_DRAFT.md` | 1192 | `1532` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_fitted[9]` |
-| `docs/PAPER_DRAFT.md` | 1192 | `1178` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_climatology[0]` |
-| `docs/PAPER_DRAFT.md` | 1192 | `1095` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_climatology[9]` |
-| `docs/PAPER_DRAFT.md` | 1201 | `+0.0102` | 1 | `data/grid/price/summary.json :: fitted_vs.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 1202 | `+0.0212` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[65].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[68].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1205 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
-| `docs/PAPER_DRAFT.md` | 1205 | `+0.0022` | 3 | `data/walk_forward/summary.json :: spec_curve.rows[139].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[141].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[143].dm_p` |
-| `docs/PAPER_DRAFT.md` | 1206 | `+0.0184` | 1 | `data/ripple/irf.json :: rows[245].irf[1].beta` |
-| `docs/PAPER_DRAFT.md` | 1212 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
-| `docs/PAPER_DRAFT.md` | 1212 | `+0.0102` | 1 | `data/grid/price/summary.json :: fitted_vs.random_analogs.skill` |
-| `docs/PAPER_DRAFT.md` | 1213 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `docs/PAPER_DRAFT.md` | 1248 | `322` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[321]` |
-| `docs/PAPER_DRAFT.md` | 1349 | `477` | 3 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[97]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[116]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[416]` |
-| `docs/PAPER_DRAFT.md` | 1349 | `401` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[400]` |
-| `docs/PAPER_DRAFT.md` | 1349 | `932` | 2 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.sided_only_2014.n_dyads`<br>`data/grid/power_arithmetic.json :: escalation_panel.week_end.sided_only_2014.n_dyads` |
-| `docs/PAPER_DRAFT.md` | 1349 | `455` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[454]` |
-| `docs/PAPER_DRAFT.md` | 1350 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 1350 | `148` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
-| `docs/PAPER_DRAFT.md` | 1351 | `126` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[125].n` |
-| `docs/PAPER_DRAFT.md` | 1352 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1353 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 1355 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
-| `docs/PAPER_DRAFT.md` | 1355 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 1355 | `2.32` | 3 | `data/walk_forward/summary.json :: big_moves_knew[11].reads[0].engine_p50`<br>`data/walk_forward/summary.json :: big_moves_knew[37].reads[4].engine_p50`<br>`data/walk_forward/summary.json :: big_moves_knew[9].reads[0].engine_p50` |
-| `docs/PAPER_DRAFT.md` | 1357 | `−0.304` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_fair.engine_vs_persistence.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 1357 | `0.545` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.hedge_w_nochange_trajectory[17]` |
-| `docs/PAPER_DRAFT.md` | 1362 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
-| `docs/PAPER_DRAFT.md` | 1363 | `−0.457` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C1_fixed_0.5.mean` |
-| `docs/PAPER_DRAFT.md` | 1364 | `0.127` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[63].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1364 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 1365 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 1368 | `34` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[33].n` |
-| `docs/PAPER_DRAFT.md` | 1368 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 1370 | `0.597` | 1 | `data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
-| `docs/PAPER_DRAFT.md` | 1377 | `624` | 1 | `data/candidates/pre1987_candidates.csv :: n_rows` |
-| `docs/PAPER_DRAFT.md` | 1377 | `473` | 2 | `data/candidates/post1987_candidates.csv :: n_rows`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[400]` |
-| `docs/EXPLAIN.md` | 31 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/EXPLAIN.md` | 59 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/EXPLAIN.md` | 101 | `0.769` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[89].frozen` |
-| `docs/EXPLAIN.md` | 101 | `0.480` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.rps.spa.p_rc` |
-| `docs/EXPLAIN.md` | 145 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `docs/EXPLAIN.md` | 149 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/EXPLAIN.md` | 152 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/EXPLAIN.md` | 165 | `624` | 1 | `data/candidates/pre1987_candidates.csv :: n_rows` |
-| `OPEN_ITEMS.md` | 19 | `79` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[78].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[78].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[78].n` |
-| `OPEN_ITEMS.md` | 21 | `250` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[249]` |
+| `README.md` | 5 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `README.md` | 9 | `8.337` | 3 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_a`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_a` |
+| `README.md` | 9 | `8.782` | 3 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_a` |
+| `README.md` | 9 | `−0.623` | 2 | `data/structural_surface/summary.json :: ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[0]` |
+| `README.md` | 9 | `−0.271` | 2 | `data/structural_surface/summary.json :: ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[1]` |
+| `README.md` | 9 | `1.57` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
+| `README.md` | 9 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `README.md` | 11 | `8.392` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_b` |
+| `README.md` | 11 | `−0.055` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.mean_diff` |
+| `README.md` | 11 | `−0.115` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `README.md` | 11 | `+0.006` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[1]` |
+| `README.md` | 11 | `0.090` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.p_value` |
+| `README.md` | 13 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/BRIEF.md` | 39 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/BRIEF.md` | 41 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 41 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/BRIEF.md` | 43 | `−0.074` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 50 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/BRIEF.md` | 83 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/BRIEF.md` | 83 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/BRIEF.md` | 84 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/BRIEF.md` | 89 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/BRIEF.md` | 90 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
+| `docs/BRIEF.md` | 100 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
+| `docs/BRIEF.md` | 102 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
+| `docs/BRIEF.md` | 107 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/BRIEF.md` | 107 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/BRIEF.md` | 108 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/BRIEF.md` | 108 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 115 | `−0.023` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.r` |
+| `docs/BRIEF.md` | 116 | `614` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.n_months` |
+| `docs/BRIEF.md` | 118 | `92.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/BRIEF.md` | 118 | `48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 126 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
+| `docs/BRIEF.md` | 126 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/BRIEF.md` | 127 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 133 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
+| `docs/BRIEF.md` | 133 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/BRIEF.md` | 135 | `0.181` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.diagram[0].band95[1]` |
+| `docs/BRIEF.md` | 138 | `−0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/BRIEF.md` | 138 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/BRIEF.md` | 144 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
+| `docs/BRIEF.md` | 145 | `+0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/BRIEF.md` | 145 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
+| `docs/BRIEF.md` | 147 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 148 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
+| `docs/BRIEF.md` | 151 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/BRIEF.md` | 153 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/BRIEF.md` | 153 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
+| `docs/BRIEF.md` | 163 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 11 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
+| `docs/PAPER_DRAFT.md` | 12 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
+| `docs/PAPER_DRAFT.md` | 12 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 16 | `132` | 3 | `data/walk_forward/summary.json :: data_state.n_geo_with_ies90_level`<br>`data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[131].n` |
+| `docs/PAPER_DRAFT.md` | 16 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 17 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `docs/PAPER_DRAFT.md` | 52 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 59 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 60 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 62 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 66 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 74 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 78 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
+| `docs/PAPER_DRAFT.md` | 78 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 81 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
+| `docs/PAPER_DRAFT.md` | 86 | `−0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 86 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/PAPER_DRAFT.md` | 88 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 93 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 94 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 95 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 96 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 97 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
+| `docs/PAPER_DRAFT.md` | 102 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 106 | `+0.12` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 124 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 126 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 128 | `−0.074` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 128 | `−0.140` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 135 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 138 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
+| `docs/PAPER_DRAFT.md` | 138 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 143 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
+| `docs/PAPER_DRAFT.md` | 145 | `0.117` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 149 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 149 | `−0.031` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 155 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 160 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 160 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
+| `docs/PAPER_DRAFT.md` | 169 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
+| `docs/PAPER_DRAFT.md` | 171 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 177 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 177 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 177 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 178 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 181 | `−0.023` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.r` |
+| `docs/PAPER_DRAFT.md` | 181 | `614` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.n_months` |
+| `docs/PAPER_DRAFT.md` | 184 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 185 | `80` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].n` |
+| `docs/PAPER_DRAFT.md` | 228 | `1.1` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 261 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 261 | `726` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_blanked` |
+| `docs/PAPER_DRAFT.md` | 262 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
+| `docs/PAPER_DRAFT.md` | 312 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 315 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `docs/PAPER_DRAFT.md` | 328 | `148` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].n` |
+| `docs/PAPER_DRAFT.md` | 332 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 332 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 338 | `22` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.bigmove_down` |
+| `docs/PAPER_DRAFT.md` | 339 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 339 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 339 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 339 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 340 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 341 | `39` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.policy_response` |
+| `docs/PAPER_DRAFT.md` | 351 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
+| `docs/PAPER_DRAFT.md` | 371 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 372 | `598` | 1 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[105]` |
+| `docs/PAPER_DRAFT.md` | 376 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
+| `docs/PAPER_DRAFT.md` | 391 | `5.1` | 3 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[4].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 406 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 406 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `docs/PAPER_DRAFT.md` | 406 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 408 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 409 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 416 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 416 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 416 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 417 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 417 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 418 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 418 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
+| `docs/PAPER_DRAFT.md` | 418 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 422 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 424 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 425 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 426 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 427 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 428 | `22` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.bigmove_down` |
+| `docs/PAPER_DRAFT.md` | 433 | `1.61` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].beta` |
+| `docs/PAPER_DRAFT.md` | 433 | `1.61` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].beta` |
+| `docs/PAPER_DRAFT.md` | 433 | `1.85` | 3 | `data/grid/power_arithmetic.json :: multipliers.month_end.2_targets.n_eff_added_per_cell`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_used` |
+| `docs/PAPER_DRAFT.md` | 434 | `0.62` | 2 | `data/structural_surface/summary.json :: ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 435 | `0.84` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[3].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 437 | `2.29` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[2].hi95` |
+| `docs/PAPER_DRAFT.md` | 437 | `1.98` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 437 | `2.06` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 453 | `−0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 453 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 463 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
+| `docs/PAPER_DRAFT.md` | 463 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `docs/PAPER_DRAFT.md` | 464 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
+| `docs/PAPER_DRAFT.md` | 465 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 470 | `5.1` | 3 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[4].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 482 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 482 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 505 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 515 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 517 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 526 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 535 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 535 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
+| `docs/PAPER_DRAFT.md` | 537 | `25` | 1 | `data/structural_surface/summary.json :: abstentions.pool_lt_8` |
+| `docs/PAPER_DRAFT.md` | 539 | `2.32` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].lo90` |
+| `docs/PAPER_DRAFT.md` | 540 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 541 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 543 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 549 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 556 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
+| `docs/PAPER_DRAFT.md` | 557 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 563 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 567 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 572 | `0.655` | 2 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[1].se_nw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 573 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 575 | `0.022` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 577 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
+| `docs/PAPER_DRAFT.md` | 578 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 579 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 580 | `0.65` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 586 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
+| `docs/PAPER_DRAFT.md` | 587 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 588 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 593 | `−0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 594 | `0.28` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 594 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 595 | `+0.144` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M07_uniform_k12.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 595 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 598 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 600 | `0.85` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 600 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 601 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 601 | `+0.193` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 601 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 604 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
+| `docs/PAPER_DRAFT.md` | 605 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
+| `docs/PAPER_DRAFT.md` | 614 | `−0.108` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 617 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 619 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 624 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 625 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
+| `docs/PAPER_DRAFT.md` | 625 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 626 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/PAPER_DRAFT.md` | 631 | `−0.083` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 632 | `−0.106` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 633 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 644 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 644 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 647 | `+0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 652 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
+| `docs/PAPER_DRAFT.md` | 652 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 652 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 664 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 672 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 672 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 675 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 686 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
+| `docs/PAPER_DRAFT.md` | 686 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
+| `docs/PAPER_DRAFT.md` | 688 | `−0.590` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.analogue.ci95[0]`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[4][1]` |
+| `docs/PAPER_DRAFT.md` | 688 | `−0.457` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C1_fixed_0.5.mean` |
+| `docs/PAPER_DRAFT.md` | 689 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 702 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 712 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 730 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 739 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `docs/PAPER_DRAFT.md` | 739 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
+| `docs/PAPER_DRAFT.md` | 740 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
+| `docs/PAPER_DRAFT.md` | 741 | `0.5064` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 745 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
+| `docs/PAPER_DRAFT.md` | 745 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 747 | `0.764` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90` |
+| `docs/PAPER_DRAFT.md` | 748 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
+| `docs/PAPER_DRAFT.md` | 749 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
+| `docs/PAPER_DRAFT.md` | 762 | `0.90` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 767 | `−0.0389` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 767 | `+0.1276` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 768 | `0.4764` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C2_walkforward_lambda.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.mean` |
+| `docs/PAPER_DRAFT.md` | 768 | `+0.0360` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 768 | `−0.0422` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[81].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 768 | `+0.1108` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 768 | `0.352` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[1]` |
+| `docs/PAPER_DRAFT.md` | 769 | `0.4725` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C3_hedge.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.mean` |
+| `docs/PAPER_DRAFT.md` | 769 | `+0.0438` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[102].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 769 | `−0.0379` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 769 | `+0.1177` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 769 | `0.272` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C3_hedge.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[2]` |
+| `docs/PAPER_DRAFT.md` | 770 | `0.5064` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 770 | `−0.0246` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.skill` |
+| `docs/PAPER_DRAFT.md` | 770 | `−0.2347` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 770 | `+0.1203` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[60].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 770 | `0.764` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90` |
+| `docs/PAPER_DRAFT.md` | 771 | `0.4905` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.climatology.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.mean` |
+| `docs/PAPER_DRAFT.md` | 771 | `−0.1141` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 771 | `+0.1043` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 776 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
+| `docs/PAPER_DRAFT.md` | 780 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 780 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.5` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 784 | `0.1167` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill` |
+| `docs/PAPER_DRAFT.md` | 788 | `0.876` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.random_analogs.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[13]` |
+| `docs/PAPER_DRAFT.md` | 790 | `11.3` | 2 | `data/walk_forward/summary.json :: big_moves_knew[28].reads[2].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[29].reads[0].engine_p90` |
+| `docs/PAPER_DRAFT.md` | 794 | `0.5` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 800 | `0.4827` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.mean` |
+| `docs/PAPER_DRAFT.md` | 800 | `+0.0232` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[61].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 800 | `0.399` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.dm_p` |
+| `docs/PAPER_DRAFT.md` | 801 | `0.4774` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0_climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0.mean` |
+| `docs/PAPER_DRAFT.md` | 801 | `+0.0341` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[99].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 803 | `+0.0169` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
+| `docs/PAPER_DRAFT.md` | 803 | `−0.0311` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[122].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 803 | `+0.0584` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[165].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 803 | `+0.0224` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[124].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 804 | `0.302` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.dm_p` |
+| `docs/PAPER_DRAFT.md` | 806 | `0.197` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 810 | `−0.0037` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[29].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 810 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/PAPER_DRAFT.md` | 811 | `+0.0169` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
+| `docs/PAPER_DRAFT.md` | 819 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
+| `docs/PAPER_DRAFT.md` | 826 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 832 | `11.4` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 841 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 850 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 850 | `42` | 2 | `data/ripple/external_checks.json :: meta.runtime_s`<br>`data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.sanctions` |
+| `docs/PAPER_DRAFT.md` | 851 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 852 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `docs/PAPER_DRAFT.md` | 854 | `500` | 1 | `data/ripple/external_checks.json :: meta.n_placebo` |
+| `docs/PAPER_DRAFT.md` | 858 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 858 | `401` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[400]` |
+| `docs/PAPER_DRAFT.md` | 859 | `477` | 3 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[97]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[116]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[416]` |
+| `docs/PAPER_DRAFT.md` | 860 | `932` | 2 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.sided_only_2014.n_dyads`<br>`data/grid/power_arithmetic.json :: escalation_panel.week_end.sided_only_2014.n_dyads` |
+| `docs/PAPER_DRAFT.md` | 860 | `455` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[454]` |
+| `docs/PAPER_DRAFT.md` | 861 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
+| `docs/PAPER_DRAFT.md` | 866 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `docs/PAPER_DRAFT.md` | 866 | `171` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[170].n` |
+| `docs/PAPER_DRAFT.md` | 875 | `128` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.n_announcement_days` |
+| `docs/PAPER_DRAFT.md` | 876 | `+0.85` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 876 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 876 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 888 | `+20.66` | 3 | `data/ripple/irf.json :: rows[587].placebo.beta_real`<br>`data/ripple/irf.json :: rows[580].irf[1].hi90`<br>`data/ripple/irf.json :: rows[587].irf[3].beta` |
+| `docs/PAPER_DRAFT.md` | 888 | `+8.77` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[169].climatology` |
+| `docs/PAPER_DRAFT.md` | 888 | `+32.55` | 1 | `data/ripple/irf.json :: rows[587].irf[3].hi95` |
+| `docs/PAPER_DRAFT.md` | 891 | `2,799` | 1 | `data/candidates/post1987_candidates.csv :: columns.source_id[12]` |
+| `docs/PAPER_DRAFT.md` | 891 | `+4.03` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.diesel_crack|h60.deff_bartlett` |
+| `docs/PAPER_DRAFT.md` | 891 | `+14.96` | 1 | `data/ripple/irf.json :: rows[916].irf[2].hi90` |
+| `docs/PAPER_DRAFT.md` | 894 | `7.2` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].lo95` |
+| `docs/PAPER_DRAFT.md` | 894 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 894 | `+3.69` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[4].hi95`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].hi95` |
+| `docs/PAPER_DRAFT.md` | 895 | `+16.99` | 3 | `data/ripple/irf.json :: rows[521].irf[0].hi95`<br>`data/ripple/irf.json :: rows[542].irf[4].lo95`<br>`data/ripple/irf.json :: rows[592].irf[1].hi90` |
+| `docs/PAPER_DRAFT.md` | 900 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 907 | `+1.023` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 912 | `−92.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 912 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 915 | `07` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 916 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 916 | `122` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.final_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[121].n` |
+| `docs/PAPER_DRAFT.md` | 917 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 922 | `+20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 923 | `500` | 1 | `data/ripple/external_checks.json :: meta.n_placebo` |
+| `docs/PAPER_DRAFT.md` | 933 | `12.2` | 3 | `data/walk_forward/summary.json :: big_moves_knew[37].reads[2].engine_p10`<br>`data/walk_forward/summary.json :: big_moves_knew[40].reads[0].engine_p10`<br>`data/walk_forward/summary.json :: big_moves_knew[40].reads[0].engine_p50` |
+| `docs/PAPER_DRAFT.md` | 936 | `+5.079` | 2 | `data/ripple/irf.json :: rows[218].irf[6].se_nw`<br>`data/ripple/irf.json :: rows[652].irf[2].se_nw` |
+| `docs/PAPER_DRAFT.md` | 937 | `+9.364` | 1 | `data/ripple/irf.json :: rows[574].irf[2].hi95` |
+| `docs/PAPER_DRAFT.md` | 937 | `116` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M10_situation_2x_k12.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[115].n` |
+| `docs/PAPER_DRAFT.md` | 937 | `0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 939 | `+2.071` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.brent|h10.deff_bartlett` |
+| `docs/PAPER_DRAFT.md` | 939 | `0.269` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.diagram[0].observed_freq` |
+| `docs/PAPER_DRAFT.md` | 940 | `+2.192` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 943 | `−1.391` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.mean_block` |
+| `docs/PAPER_DRAFT.md` | 951 | `106` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].n` |
+| `docs/PAPER_DRAFT.md` | 951 | `92` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[91].n` |
+| `docs/PAPER_DRAFT.md` | 956 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 957 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
+| `docs/PAPER_DRAFT.md` | 972 | `12.3` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 980 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
+| `docs/PAPER_DRAFT.md` | 983 | `128` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.n_announcement_days` |
+| `docs/PAPER_DRAFT.md` | 991 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 991 | `−5.423` | 3 | `data/ripple/irf.json :: rows[41].irf[6].hi90`<br>`data/ripple/irf.json :: rows[592].irf[7].se_ehw`<br>`data/ripple/irf.json :: rows[804].irf[3].hi90` |
+| `docs/PAPER_DRAFT.md` | 991 | `+2.279` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 992 | `+0.809` | 1 | `data/grid/g/PANEL.json :: share_zero_tripwire.series.full_panel.L.per_year.1997.share_zero` |
+| `docs/PAPER_DRAFT.md` | 992 | `+3.651` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[0].engine` |
+| `docs/PAPER_DRAFT.md` | 994 | `+0.646` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.ref_mean` |
+| `docs/PAPER_DRAFT.md` | 1003 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 1003 | `0.103` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_nw` |
+| `docs/PAPER_DRAFT.md` | 1003 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1003 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 1004 | `+1.023` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 1005 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1011 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
+| `docs/PAPER_DRAFT.md` | 1021 | `+0.151` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.frozen.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1025 | `+0.065%` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1032 | `0.431` | 1 | `data/ripple/external_checks.json :: corr_opec_count_vs_abs_kanzig_monthly.r` |
+| `docs/PAPER_DRAFT.md` | 1033 | `−0.023` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.r` |
+| `docs/PAPER_DRAFT.md` | 1034 | `614` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.n_months` |
+| `docs/PAPER_DRAFT.md` | 1045 | `12.4` | 1 | `data/grid/price/summary.json :: frozen_vs.grid_climatology.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1057 | `238` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[237].n` |
+| `docs/PAPER_DRAFT.md` | 1060 | `80` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].n` |
+| `docs/PAPER_DRAFT.md` | 1073 | `240` | 3 | `data/walk_forward/summary.json :: tiers.daily.M.M08_uniform_loose_030.n`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M08_uniform_loose_030.n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[239].n` |
+| `docs/PAPER_DRAFT.md` | 1073 | `250` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.estimation_window_td` |
+| `docs/PAPER_DRAFT.md` | 1073 | `314` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[313]` |
+| `docs/PAPER_DRAFT.md` | 1073 | `300` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[3][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[3][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[3][0]` |
+| `docs/PAPER_DRAFT.md` | 1078 | `140` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[139].n` |
+| `docs/PAPER_DRAFT.md` | 1084 | `11.3` | 2 | `data/walk_forward/summary.json :: big_moves_knew[28].reads[2].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[29].reads[0].engine_p90` |
+| `docs/PAPER_DRAFT.md` | 1085 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1088 | `404` | 3 | `data/grid/price/summary.json :: per_target.diesel_crack.n_dates`<br>`data/grid/price/summary.json :: per_target.gasoline_crack.n_dates`<br>`data/grid/price/summary.json :: abnormal_return_target.model.propane.reads_with_a_model` |
+| `docs/PAPER_DRAFT.md` | 1119 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `docs/PAPER_DRAFT.md` | 1121 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
+| `docs/PAPER_DRAFT.md` | 1123 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
+| `docs/PAPER_DRAFT.md` | 1124 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1124 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/PAPER_DRAFT.md` | 1128 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 1133 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `docs/PAPER_DRAFT.md` | 1135 | `3.1` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[3].hi95` |
+| `docs/PAPER_DRAFT.md` | 1136 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/PAPER_DRAFT.md` | 1136 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `docs/PAPER_DRAFT.md` | 1155 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 1156 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1156 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 1162 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1162 | `41` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.n`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.n` |
+| `docs/PAPER_DRAFT.md` | 1165 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1182 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 1186 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `docs/PAPER_DRAFT.md` | 1186 | `83` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.n` |
+| `docs/PAPER_DRAFT.md` | 1194 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 1194 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
+| `docs/PAPER_DRAFT.md` | 1201 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
+| `docs/PAPER_DRAFT.md` | 1201 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 1213 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1215 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1217 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1237 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/PAPER_DRAFT.md` | 1245 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 1245 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
+| `docs/PAPER_DRAFT.md` | 1264 | `14.1` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1269 | `25` | 1 | `data/structural_surface/summary.json :: abstentions.pool_lt_8` |
+| `docs/PAPER_DRAFT.md` | 1271 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
+| `docs/PAPER_DRAFT.md` | 1272 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
+| `docs/PAPER_DRAFT.md` | 1275 | `989.5` | 1 | `data/grid/power_arithmetic.json :: verdicts.month_end.training.effective_units_available_inner` |
+| `docs/PAPER_DRAFT.md` | 1283 | `−0.0104` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.C2_walkforward_lambda.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1283 | `+0.0128` | 2 | `data/grid/price/summary.json :: the_comparison.ci95[1]`<br>`data/grid/price/summary.json :: fitted_vs.frozen.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1283 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
+| `docs/PAPER_DRAFT.md` | 1285 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 1286 | `414` | 1 | `data/grid/price/summary.json :: training.n_reads_with_a_fit` |
+| `docs/PAPER_DRAFT.md` | 1291 | `−0.0706` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[208].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1291 | `−0.0826` | 2 | `data/grid/price/summary.json :: diagnostic_fair.fitted_vs_climatology_registered.ci95[0]`<br>`data/grid/price/summary.json :: fitted_vs.grid_climatology.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1291 | `−0.0587` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[158].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1293 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1294 | `0.1573` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.fitted` |
+| `docs/PAPER_DRAFT.md` | 1294 | `0.1448` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.fitted_fair` |
+| `docs/PAPER_DRAFT.md` | 1295 | `0.1459` | 1 | `data/grid/price/summary.json :: diagnostic_fair.means.climatology_fair` |
+| `docs/PAPER_DRAFT.md` | 1296 | `1751` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_fitted[0]` |
+| `docs/PAPER_DRAFT.md` | 1296 | `1532` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_fitted[9]` |
+| `docs/PAPER_DRAFT.md` | 1296 | `1178` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_climatology[0]` |
+| `docs/PAPER_DRAFT.md` | 1296 | `1095` | 1 | `data/grid/price/summary.json :: calibration.pit_hist_climatology[9]` |
+| `docs/PAPER_DRAFT.md` | 1303 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
+| `docs/PAPER_DRAFT.md` | 1303 | `0.85` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
+| `docs/PAPER_DRAFT.md` | 1305 | `+0.0102` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.engine_vs.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.frozen.abnormal_skill` |
+| `docs/PAPER_DRAFT.md` | 1306 | `+0.0212` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[65].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[68].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1307 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/PAPER_DRAFT.md` | 1309 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
+| `docs/PAPER_DRAFT.md` | 1309 | `+0.0022` | 3 | `data/walk_forward/summary.json :: spec_curve.rows[139].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[141].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[143].dm_p` |
+| `docs/PAPER_DRAFT.md` | 1310 | `+0.0184` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1310 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1313 | `0.9` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1316 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
+| `docs/PAPER_DRAFT.md` | 1316 | `+0.0102` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.engine_vs.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.frozen.abnormal_skill` |
+| `docs/PAPER_DRAFT.md` | 1317 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
+| `docs/PAPER_DRAFT.md` | 1327 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1338 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 1348 | `+0.12` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1348 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1352 | `322` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[321]` |
+| `docs/PAPER_DRAFT.md` | 1452 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1453 | `477` | 3 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[97]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[116]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[416]` |
+| `docs/PAPER_DRAFT.md` | 1453 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
+| `docs/PAPER_DRAFT.md` | 1453 | `401` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[400]` |
+| `docs/PAPER_DRAFT.md` | 1453 | `932` | 2 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.sided_only_2014.n_dyads`<br>`data/grid/power_arithmetic.json :: escalation_panel.week_end.sided_only_2014.n_dyads` |
+| `docs/PAPER_DRAFT.md` | 1453 | `455` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[454]` |
+| `docs/PAPER_DRAFT.md` | 1453 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1454 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 1454 | `148` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[147].n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 1455 | `126` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[125].n` |
+| `docs/PAPER_DRAFT.md` | 1456 | `−0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1456 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1457 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/PAPER_DRAFT.md` | 1459 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
+| `docs/PAPER_DRAFT.md` | 1459 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
+| `docs/PAPER_DRAFT.md` | 1459 | `2.32` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].lo90` |
+| `docs/PAPER_DRAFT.md` | 1460 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1460 | `0.655` | 2 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[1].se_nw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 1461 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1461 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
+| `docs/PAPER_DRAFT.md` | 1462 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
+| `docs/PAPER_DRAFT.md` | 1462 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1463 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 1463 | `0.65` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 1464 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1465 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1466 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
+| `docs/PAPER_DRAFT.md` | 1467 | `−0.457` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C1_fixed_0.5.mean` |
+| `docs/PAPER_DRAFT.md` | 1467 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1468 | `0.127` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[63].skill_frozen_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1468 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/PAPER_DRAFT.md` | 1468 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1469 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.083` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.106` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1470 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1471 | `−0.101` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1471 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1472 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
+| `docs/PAPER_DRAFT.md` | 1472 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `docs/PAPER_DRAFT.md` | 1474 | `0.597` | 1 | `data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
+| `docs/PAPER_DRAFT.md` | 1481 | `624` | 1 | `data/candidates/pre1987_candidates.csv :: n_rows` |
+| `docs/PAPER_DRAFT.md` | 1481 | `473` | 2 | `data/candidates/post1987_candidates.csv :: n_rows`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[400]` |
+| `docs/EXPLAIN.md` | 9 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `docs/EXPLAIN.md` | 18 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `docs/EXPLAIN.md` | 33 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/EXPLAIN.md` | 61 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/EXPLAIN.md` | 103 | `0.769` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[89].frozen` |
+| `docs/EXPLAIN.md` | 103 | `0.480` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.rps.spa.p_rc` |
+| `docs/EXPLAIN.md` | 130 | `0.64` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff` |
+| `docs/EXPLAIN.md` | 146 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/EXPLAIN.md` | 147 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
+| `docs/EXPLAIN.md` | 151 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `docs/EXPLAIN.md` | 154 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `docs/EXPLAIN.md` | 154 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
+| `docs/EXPLAIN.md` | 167 | `624` | 1 | `data/candidates/pre1987_candidates.csv :: n_rows` |
+| `OPEN_ITEMS.md` | 21 | `250` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.estimation_window_td` |
 | `OPEN_ITEMS.md` | 22 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `OPEN_ITEMS.md` | 22 | `34` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[33].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[33].n` |
+| `OPEN_ITEMS.md` | 22 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
 | `OPEN_ITEMS.md` | 29 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
 | `OPEN_ITEMS.md` | 29 | `132` | 3 | `data/walk_forward/summary.json :: data_state.n_geo_with_ies90_level`<br>`data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[131].n` |
+| `OPEN_ITEMS.md` | 29 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `OPEN_ITEMS.md` | 29 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `OPEN_ITEMS.md` | 30 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
 | `OPEN_ITEMS.md` | 31 | `0.407` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.diagram[0].band95[1]` |
 | `OPEN_ITEMS.md` | 32 | `120` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[119].n` |
 | `OPEN_ITEMS.md` | 32 | `0.484` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.diagram[2].forecast_mean` |
 | `OPEN_ITEMS.md` | 32 | `0.407` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.diagram[0].band95[1]` |
+| `OPEN_ITEMS.md` | 37 | `1.1` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 43 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
 | `OPEN_ITEMS.md` | 43 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
+| `OPEN_ITEMS.md` | 54 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `OPEN_ITEMS.md` | 56 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
 | `OPEN_ITEMS.md` | 65 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
 | `OPEN_ITEMS.md` | 66 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
 | `OPEN_ITEMS.md` | 68 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
-| `OPEN_ITEMS.md` | 68 | `2.24` | 1 | `data/grid/g/PANEL.json :: icb_replication.dyads_per_crisis.mean` |
+| `OPEN_ITEMS.md` | 68 | `2.24` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].beta` |
 | `OPEN_ITEMS.md` | 69 | `−0.0473` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[22].skill_engine_vs_clim` |
 | `OPEN_ITEMS.md` | 69 | `−0.0828` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[12].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M10_situation_2x_k12.ci95[1]` |
+| `OPEN_ITEMS.md` | 69 | `−0.13` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `OPEN_ITEMS.md` | 69 | `0.019` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
+| `OPEN_ITEMS.md` | 70 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `OPEN_ITEMS.md` | 95 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
+| `OPEN_ITEMS.md` | 103 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `OPEN_ITEMS.md` | 107 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `OPEN_ITEMS.md` | 111 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `OPEN_ITEMS.md` | 111 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `OPEN_ITEMS.md` | 111 | `−0.103` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_nw` |
+| `OPEN_ITEMS.md` | 112 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
+| `OPEN_ITEMS.md` | 112 | `−0.117` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff` |
 | `OPEN_ITEMS.md` | 112 | `87` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[86].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[86].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[86].n` |
 | `OPEN_ITEMS.md` | 112 | `0.751` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[62].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[64].frozen` |
 | `OPEN_ITEMS.md` | 112 | `0.659` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].climatology` |
+| `OPEN_ITEMS.md` | 113 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
+| `OPEN_ITEMS.md` | 116 | `1.5` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].se_ehw` |
 | `OPEN_ITEMS.md` | 118 | `+5.079` | 2 | `data/ripple/irf.json :: rows[218].irf[6].se_nw`<br>`data/ripple/irf.json :: rows[652].irf[2].se_nw` |
 | `OPEN_ITEMS.md` | 118 | `+9.364` | 1 | `data/ripple/irf.json :: rows[574].irf[2].hi95` |
+| `OPEN_ITEMS.md` | 119 | `0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
 | `OPEN_ITEMS.md` | 119 | `+2.071` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.brent|h10.deff_bartlett` |
 | `OPEN_ITEMS.md` | 119 | `0.269` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.diagram[0].observed_freq` |
 | `OPEN_ITEMS.md` | 124 | `106` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].n` |
 | `OPEN_ITEMS.md` | 124 | `92` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[91].n` |
 | `OPEN_ITEMS.md` | 131 | `102` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[101].n` |
 | `OPEN_ITEMS.md` | 134 | `102` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[101].n` |
+| `OPEN_ITEMS.md` | 143 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `OPEN_ITEMS.md` | 144 | `+4.223` | 2 | `data/ripple/irf.json :: rows[762].irf[4].beta`<br>`data/ripple/irf.json :: rows[885].irf[5].se_ehw` |
-| `OPEN_ITEMS.md` | 144 | `−0.162` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.forecast_block.p_value`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.ci95[0]` |
+| `OPEN_ITEMS.md` | 144 | `−0.162` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.mean_diff` |
 | `OPEN_ITEMS.md` | 144 | `+8.609` | 1 | `data/ripple/irf.json :: rows[792].irf[3].lo90` |
 | `OPEN_ITEMS.md` | 150 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
+| `OPEN_ITEMS.md` | 151 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `OPEN_ITEMS.md` | 151 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `OPEN_ITEMS.md` | 157 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `OPEN_ITEMS.md` | 157 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
+| `OPEN_ITEMS.md` | 160 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `OPEN_ITEMS.md` | 160 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
+| `OPEN_ITEMS.md` | 163 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
 | `OPEN_ITEMS.md` | 164 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
 | `OPEN_ITEMS.md` | 165 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
+| `OPEN_ITEMS.md` | 167 | `2.5` | 2 | `data/ripple/external_checks.json :: kanzig_h5.hi95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[3].hi95` |
+| `OPEN_ITEMS.md` | 170 | `2.5` | 2 | `data/ripple/external_checks.json :: kanzig_h5.hi95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[3].hi95` |
 | `OPEN_ITEMS.md` | 171 | `15,740` | 3 | `data/grid/g/PANEL.json :: admission_audit.cells_checked`<br>`data/grid/g/PANEL.json :: size.cells.nominal`<br>`data/grid/g/PANEL.json :: effective_n.reconciliation_with_B.G_panel.n_nominal_cells` |
 | `OPEN_ITEMS.md` | 171 | `9,733` | 3 | `data/grid/g/PANEL.json :: dIES.n_defined.n_eff_two_way`<br>`data/grid/g/PANEL.json :: effective_n.full_panel.n_eff_two_way`<br>`data/grid/g/PANEL.json :: size.cells.n_eff_two_way` |
 | `OPEN_ITEMS.md` | 172 | `13,554` | 3 | `data/grid/g/PANEL.json :: dIES.n_defined.n_eff_block`<br>`data/grid/g/PANEL.json :: effective_n.full_panel.n_eff_block`<br>`data/grid/g/PANEL.json :: size.cells.n_eff_block` |
 | `OPEN_ITEMS.md` | 172 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `OPEN_ITEMS.md` | 172 | `156` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[155].n` |
-| `OPEN_ITEMS.md` | 173 | `4.5` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.dm_hln`<br>`data/walk_forward/summary.json :: big_moves_knew[24].reads[0].engine_p50` |
+| `OPEN_ITEMS.md` | 173 | `4.5` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[6].z_ehw` |
 | `OPEN_ITEMS.md` | 177 | `15,740` | 3 | `data/grid/g/PANEL.json :: admission_audit.cells_checked`<br>`data/grid/g/PANEL.json :: size.cells.nominal`<br>`data/grid/g/PANEL.json :: effective_n.reconciliation_with_B.G_panel.n_nominal_cells` |
 | `OPEN_ITEMS.md` | 178 | `861` | 1 | `data/grid/g/PANEL.json :: size.cells_dropped_by_VR3` |
+| `OPEN_ITEMS.md` | 181 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `OPEN_ITEMS.md` | 182 | `0.9191` | 2 | `data/grid/g/PANEL.json :: dIES.share_zero`<br>`data/grid/g/PANEL.json :: share_zero_tripwire.series.full_panel.dIES.share_zero_overall` |
 | `OPEN_ITEMS.md` | 182 | `0.9034` | 3 | `data/grid/g/PANEL.json :: L.share_zero`<br>`data/grid/g/PANEL.json :: effective_n.reconciliation_with_B.G_panel.share_level_0`<br>`data/grid/g/PANEL.json :: share_zero_tripwire.series.full_panel.L.share_zero_overall` |
 | `OPEN_ITEMS.md` | 194 | `300` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[3][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[3][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[3][0]` |
+| `OPEN_ITEMS.md` | 202 | `2.5` | 2 | `data/ripple/external_checks.json :: kanzig_h5.hi95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[3].hi95` |
+| `OPEN_ITEMS.md` | 206 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
+| `OPEN_ITEMS.md` | 206 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `OPEN_ITEMS.md` | 208 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `OPEN_ITEMS.md` | 213 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `OPEN_ITEMS.md` | 213 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
 | `OPEN_ITEMS.md` | 213 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
+| `OPEN_ITEMS.md` | 214 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `OPEN_ITEMS.md` | 214 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `OPEN_ITEMS.md` | 214 | `90.2%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `OPEN_ITEMS.md` | 214 | `85.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `OPEN_ITEMS.md` | 214 | `54.4%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `OPEN_ITEMS.md` | 216 | `357` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[356]` |
-| `OPEN_ITEMS.md` | 218 | `39` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[38].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[38].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[38].n` |
+| `OPEN_ITEMS.md` | 217 | `86.8%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `OPEN_ITEMS.md` | 218 | `88.4%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `OPEN_ITEMS.md` | 218 | `39` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.policy_response` |
 | `OPEN_ITEMS.md` | 218 | `335` | 1 | `data/grid/g/PANEL.json :: by_year.2002.cells` |
 | `OPEN_ITEMS.md` | 225 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
 | `OPEN_ITEMS.md` | 227 | `468` | 2 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[125]`<br>`data/candidates/post1987_candidates.csv :: columns.source_id[367]` |
 | `OPEN_ITEMS.md` | 234 | `726` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_blanked` |
-| `OPEN_ITEMS.md` | 236 | `83` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[82].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[82].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[82].n` |
-| `OPEN_ITEMS.md` | 247 | `3.1` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M08_uniform_loose_030.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.frozen.dm_hln` |
-| `OPEN_ITEMS.md` | 275 | `96.75%` | 3 | `data/walk_forward/summary.json :: registered.spec.big_move_q[2]`<br>`data/walk_forward/summary.json :: spec_curve.materiality[4].top_q`<br>`data/walk_forward/summary.json :: spec_curve.materiality[5].top_q` |
-| `OPEN_ITEMS.md` | 287 | `4.4` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[0].climatology`<br>`data/walk_forward/summary.json :: big_moves_knew[29].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[41].reads[0].engine_p50` |
+| `OPEN_ITEMS.md` | 236 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
+| `OPEN_ITEMS.md` | 236 | `83` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.n` |
+| `OPEN_ITEMS.md` | 247 | `3.1` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[3].hi95` |
+| `OPEN_ITEMS.md` | 263 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
+| `OPEN_ITEMS.md` | 265 | `1.2` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 275 | `96.75%` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].lo90` |
+| `OPEN_ITEMS.md` | 275 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `OPEN_ITEMS.md` | 287 | `4.4` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.dm.dm` |
+| `OPEN_ITEMS.md` | 304 | `6.1` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_structural` |
 
 ## EXCLUDED — not claims, and why
 
@@ -1572,388 +1577,388 @@ Published so the filter itself can be audited rather than trusted.
 
 | document | line | number | excluded because |
 |---|---:|---:|---|
-| `README.md` | 6 | `2026` | year |
-| `README.md` | 15 | `1990` | year |
-| `README.md` | 15 | `2019` | year |
-| `README.md` | 20 | `2024` | year |
-| `README.md` | 21 | `2018` | year |
-| `README.md` | 21 | `2018` | year |
-| `README.md` | 34 | `1.1` | identifier (section, amendment, item or figure reference) |
-| `README.md` | 34 | `13.1` | identifier (section, amendment, item or figure reference) |
-| `README.md` | 38 | `1973` | year |
-| `README.md` | 38 | `2026` | year |
-| `README.md` | 42 | `1946` | year |
-| `README.md` | 77 | `4` | identifier (section, amendment, item or figure reference) |
-| `README.md` | 110 | `5` | identifier (section, amendment, item or figure reference) |
-| `README.md` | 164 | `2021` | year |
-| `README.md` | 172 | `2018` | year |
-| `README.md` | 179 | `1970` | year |
-| `README.md` | 213 | `1987` | year |
-| `README.md` | 213 | `2026` | year |
-| `README.md` | 236 | `1987` | year |
-| `README.md` | 237 | `1974` | year |
-| `README.md` | 239 | `1973` | year |
-| `docs/BRIEF.md` | 3 | `2026` | year |
-| `docs/BRIEF.md` | 9 | `1990` | year |
-| `docs/BRIEF.md` | 9 | `2019` | year |
-| `docs/BRIEF.md` | 15 | `1973` | year |
-| `docs/BRIEF.md` | 15 | `2026` | year |
-| `docs/BRIEF.md` | 18 | `1946` | year |
-| `docs/BRIEF.md` | 33 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/BRIEF.md` | 58 | `5` | identifier (section, amendment, item or figure reference) |
-| `docs/BRIEF.md` | 89 | `2021` | year |
-| `docs/BRIEF.md` | 101 | `1970` | year |
-| `docs/BRIEF.md` | 128 | `1974` | year |
-| `docs/BRIEF.md` | 128 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 4 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 8 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 8 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 9 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 10 | `90` | identifier (section, amendment, item or figure reference) |
+| `README.md` | 32 | `256` | identifier (section, amendment, item or figure reference) |
+| `README.md` | 40 | `2026` | year |
+| `docs/BRIEF.md` | 5 | `2026` | year |
+| `docs/BRIEF.md` | 11 | `1990` | year |
+| `docs/BRIEF.md` | 11 | `2019` | year |
+| `docs/BRIEF.md` | 17 | `1973` | year |
+| `docs/BRIEF.md` | 17 | `2026` | year |
+| `docs/BRIEF.md` | 20 | `1946` | year |
+| `docs/BRIEF.md` | 35 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/BRIEF.md` | 60 | `5` | identifier (section, amendment, item or figure reference) |
+| `docs/BRIEF.md` | 91 | `2021` | year |
+| `docs/BRIEF.md` | 108 | `2026` | year |
+| `docs/BRIEF.md` | 117 | `2024` | year |
+| `docs/BRIEF.md` | 117 | `2026` | year |
+| `docs/BRIEF.md` | 125 | `1970` | year |
+| `docs/BRIEF.md` | 152 | `1974` | year |
+| `docs/BRIEF.md` | 152 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 6 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 10 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 10 | `11` | identifier (section, amendment, item or figure reference) |
 | `docs/PAPER_DRAFT.md` | 11 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 22 | `210135` | run identifier (walk_...Z) |
-| `docs/PAPER_DRAFT.md` | 23 | `193022` | run identifier (walk_...Z) |
-| `docs/PAPER_DRAFT.md` | 23 | `182828` | run identifier (walk_...Z) |
-| `docs/PAPER_DRAFT.md` | 29 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 31 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 31 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 42 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 42 | `2019` | year |
-| `docs/PAPER_DRAFT.md` | 43 | `2022` | year |
-| `docs/PAPER_DRAFT.md` | 44 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 44 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 48 | `90` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 73 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 96 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 98 | `12` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 99 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 116 | `1.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 118 | `13.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 128 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 137 | `11.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 143 | `11.2` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 150 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 151 | `11.3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 155 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 159 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 163 | `12` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 164 | `12.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 177 | `12.3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 182 | `14` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 183 | `13` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 186 | `10` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 186 | `12` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 186 | `12.2` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 194 | `2` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 196 | `2019` | year |
-| `docs/PAPER_DRAFT.md` | 196 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 202 | `7` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 206 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 208 | `5` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 211 | `7` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 217 | `1992` | year |
-| `docs/PAPER_DRAFT.md` | 217 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 217 | `1976` | year |
-| `docs/PAPER_DRAFT.md` | 246 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 247 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 247 | `2020` | year |
-| `docs/PAPER_DRAFT.md` | 247 | `9` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 247 | `14` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 248 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 248 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 248 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 254 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 257 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 257 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 262 | `2009` | year |
-| `docs/PAPER_DRAFT.md` | 263 | `2019` | year |
-| `docs/PAPER_DRAFT.md` | 264 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 266 | `2022` | year |
-| `docs/PAPER_DRAFT.md` | 269 | `1950` | year |
-| `docs/PAPER_DRAFT.md` | 270 | `2007` | year |
-| `docs/PAPER_DRAFT.md` | 270 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 271 | `1995` | year |
-| `docs/PAPER_DRAFT.md` | 272 | `1997` | year |
-| `docs/PAPER_DRAFT.md` | 272 | `1994` | year |
-| `docs/PAPER_DRAFT.md` | 273 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 273 | `2005` | year |
-| `docs/PAPER_DRAFT.md` | 274 | `1995` | year |
-| `docs/PAPER_DRAFT.md` | 275 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 275 | `1997` | year |
-| `docs/PAPER_DRAFT.md` | 276 | `2020` | year |
-| `docs/PAPER_DRAFT.md` | 276 | `1984` | year |
-| `docs/PAPER_DRAFT.md` | 280 | `1992` | year |
-| `docs/PAPER_DRAFT.md` | 283 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 284 | `1976` | year |
-| `docs/PAPER_DRAFT.md` | 288 | `1.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 289 | `2007` | year |
-| `docs/PAPER_DRAFT.md` | 290 | `2015` | year |
-| `docs/PAPER_DRAFT.md` | 297 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 297 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 317 | `1970` | year |
-| `docs/PAPER_DRAFT.md` | 317 | `1980` | year |
-| `docs/PAPER_DRAFT.md` | 317 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 318 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 318 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 318 | `2010` | year |
-| `docs/PAPER_DRAFT.md` | 318 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 319 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 322 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 324 | `1970` | year |
-| `docs/PAPER_DRAFT.md` | 324 | `1980` | year |
-| `docs/PAPER_DRAFT.md` | 325 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 326 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 328 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 329 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 329 | `1979` | year |
-| `docs/PAPER_DRAFT.md` | 330 | `12170` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 336 | `1969` | year |
-| `docs/PAPER_DRAFT.md` | 336 | `1977` | year |
-| `docs/PAPER_DRAFT.md` | 340 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 12 | `90` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 13 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 24 | `210135` | run identifier (walk_...Z) |
+| `docs/PAPER_DRAFT.md` | 25 | `193022` | run identifier (walk_...Z) |
+| `docs/PAPER_DRAFT.md` | 25 | `182828` | run identifier (walk_...Z) |
+| `docs/PAPER_DRAFT.md` | 31 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 33 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 33 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 44 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 44 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 45 | `2022` | year |
+| `docs/PAPER_DRAFT.md` | 46 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 46 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 50 | `90` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 75 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 98 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 100 | `12` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 101 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 118 | `1.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 120 | `13.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 130 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 139 | `11.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 145 | `11.2` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 152 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 153 | `11.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 157 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 161 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 165 | `12` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 166 | `12.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 177 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 182 | `12.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 190 | `2006` | year |
+| `docs/PAPER_DRAFT.md` | 190 | `12.4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 197 | `14` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 198 | `13` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 201 | `10` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 201 | `12` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 201 | `12.2` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 209 | `2` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 211 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 211 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 217 | `7` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 221 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 223 | `5` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 226 | `7` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 232 | `1992` | year |
+| `docs/PAPER_DRAFT.md` | 232 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 232 | `1976` | year |
+| `docs/PAPER_DRAFT.md` | 261 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 262 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 262 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 262 | `9` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 262 | `14` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 263 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 263 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 263 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 269 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 272 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 272 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 277 | `2009` | year |
+| `docs/PAPER_DRAFT.md` | 278 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 279 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 281 | `2022` | year |
+| `docs/PAPER_DRAFT.md` | 284 | `1950` | year |
+| `docs/PAPER_DRAFT.md` | 285 | `2007` | year |
+| `docs/PAPER_DRAFT.md` | 285 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 286 | `1995` | year |
+| `docs/PAPER_DRAFT.md` | 287 | `1997` | year |
+| `docs/PAPER_DRAFT.md` | 287 | `1994` | year |
+| `docs/PAPER_DRAFT.md` | 288 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 288 | `2005` | year |
+| `docs/PAPER_DRAFT.md` | 289 | `1995` | year |
+| `docs/PAPER_DRAFT.md` | 290 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 290 | `1997` | year |
+| `docs/PAPER_DRAFT.md` | 291 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 291 | `1984` | year |
+| `docs/PAPER_DRAFT.md` | 295 | `1992` | year |
+| `docs/PAPER_DRAFT.md` | 298 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 299 | `1976` | year |
+| `docs/PAPER_DRAFT.md` | 303 | `1.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 304 | `2007` | year |
+| `docs/PAPER_DRAFT.md` | 305 | `2015` | year |
+| `docs/PAPER_DRAFT.md` | 312 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 312 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 332 | `1970` | year |
+| `docs/PAPER_DRAFT.md` | 332 | `1980` | year |
+| `docs/PAPER_DRAFT.md` | 332 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 333 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 333 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 333 | `2010` | year |
+| `docs/PAPER_DRAFT.md` | 333 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 334 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 337 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 339 | `1970` | year |
+| `docs/PAPER_DRAFT.md` | 339 | `1980` | year |
+| `docs/PAPER_DRAFT.md` | 340 | `1990` | year |
 | `docs/PAPER_DRAFT.md` | 341 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 342 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 343 | `2016` | year |
-| `docs/PAPER_DRAFT.md` | 345 | `2017` | year |
-| `docs/PAPER_DRAFT.md` | 347 | `1998` | year |
-| `docs/PAPER_DRAFT.md` | 356 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 356 | `1986` | year |
-| `docs/PAPER_DRAFT.md` | 357 | `1946` | year |
-| `docs/PAPER_DRAFT.md` | 361 | `2025` | year |
-| `docs/PAPER_DRAFT.md` | 363 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 364 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 365 | `2009` | year |
-| `docs/PAPER_DRAFT.md` | 365 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 368 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 382 | `1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 386 | `5` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 390 | `5%` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 401 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 402 | `1986` | year |
-| `docs/PAPER_DRAFT.md` | 403 | `1986` | year |
-| `docs/PAPER_DRAFT.md` | 404 | `1946` | year |
-| `docs/PAPER_DRAFT.md` | 427 | `5%` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 440 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 440 | `1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 443 | `90` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 446 | `2` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 457 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 467 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 472 | `3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 493 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 493 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 501 | `90` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 513 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 515 | `256` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 528 | `2008` | year |
-| `docs/PAPER_DRAFT.md` | 528 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 343 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 344 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 344 | `1979` | year |
+| `docs/PAPER_DRAFT.md` | 345 | `12170` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 351 | `1969` | year |
+| `docs/PAPER_DRAFT.md` | 351 | `1977` | year |
+| `docs/PAPER_DRAFT.md` | 355 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 356 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 357 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 358 | `2016` | year |
+| `docs/PAPER_DRAFT.md` | 360 | `2017` | year |
+| `docs/PAPER_DRAFT.md` | 362 | `1998` | year |
+| `docs/PAPER_DRAFT.md` | 371 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 371 | `1986` | year |
+| `docs/PAPER_DRAFT.md` | 372 | `1946` | year |
+| `docs/PAPER_DRAFT.md` | 376 | `2025` | year |
+| `docs/PAPER_DRAFT.md` | 378 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 379 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 380 | `2009` | year |
+| `docs/PAPER_DRAFT.md` | 380 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 383 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 397 | `1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 401 | `5` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 405 | `5%` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 416 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 417 | `1986` | year |
+| `docs/PAPER_DRAFT.md` | 418 | `1986` | year |
+| `docs/PAPER_DRAFT.md` | 419 | `1946` | year |
+| `docs/PAPER_DRAFT.md` | 442 | `5%` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 455 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 455 | `1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 458 | `90` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 461 | `2` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 472 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 482 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 487 | `3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 508 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 508 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 516 | `90` | identifier (section, amendment, item or figure reference) |
 | `docs/PAPER_DRAFT.md` | 528 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 532 | `7` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 543 | `13` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 553 | `210135` | run identifier (walk_...Z) |
-| `docs/PAPER_DRAFT.md` | 560 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 593 | `7` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 599 | `2008` | year |
-| `docs/PAPER_DRAFT.md` | 599 | `2020` | year |
-| `docs/PAPER_DRAFT.md` | 600 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 620 | `1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 628 | `95` | ordinal |
-| `docs/PAPER_DRAFT.md` | 647 | `200654` | run identifier (walk_...Z) |
-| `docs/PAPER_DRAFT.md` | 699 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 718 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 741 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 742 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 765 | `0.5` | identifier (numbered item heading) |
-| `docs/PAPER_DRAFT.md` | 795 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 803 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 809 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 813 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 814 | `11.3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 815 | `0` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 817 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 820 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 836 | `2005` | year |
-| `docs/PAPER_DRAFT.md` | 853 | `12.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 860 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 894 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 896 | `2024` | year |
-| `docs/PAPER_DRAFT.md` | 897 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 900 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 901 | `2018` | year |
-| `docs/PAPER_DRAFT.md` | 901 | `2023` | year |
-| `docs/PAPER_DRAFT.md` | 913 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 925 | `95.8` | ordinal |
-| `docs/PAPER_DRAFT.md` | 932 | `12` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 941 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 943 | `9` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 961 | `3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 966 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 992 | `99.2` | ordinal |
-| `docs/PAPER_DRAFT.md` | 999 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1009 | `1.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1025 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1038 | `0` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1050 | `3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1053 | `1970` | year |
-| `docs/PAPER_DRAFT.md` | 1053 | `1980` | year |
-| `docs/PAPER_DRAFT.md` | 1053 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 1054 | `1990` | year |
-| `docs/PAPER_DRAFT.md` | 1055 | `90` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1057 | `7` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1058 | `5%` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1063 | `3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1073 | `1.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1087 | `1974` | year |
-| `docs/PAPER_DRAFT.md` | 1090 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 1091 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 1097 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1098 | `3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1119 | `10` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1123 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1128 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1134 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1135 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 1136 | `1974` | year |
-| `docs/PAPER_DRAFT.md` | 1139 | `1970` | year |
-| `docs/PAPER_DRAFT.md` | 1139 | `1971` | year |
-| `docs/PAPER_DRAFT.md` | 1139 | `1971` | year |
-| `docs/PAPER_DRAFT.md` | 1139 | `1972` | year |
-| `docs/PAPER_DRAFT.md` | 1142 | `1972` | year |
-| `docs/PAPER_DRAFT.md` | 1151 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1164 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 1165 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 1174 | `8` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1174 | `11` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1180 | `3.4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1196 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1199 | `11.3` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1215 | `14.1` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1218 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1255 | `1992` | year |
-| `docs/PAPER_DRAFT.md` | 1256 | `1965` | year |
-| `docs/PAPER_DRAFT.md` | 1258 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 1261 | `1976` | year |
-| `docs/PAPER_DRAFT.md` | 1264 | `2019` | year |
-| `docs/PAPER_DRAFT.md` | 1266 | `109` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1266 | `5` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1266 | `1873` | year range |
-| `docs/PAPER_DRAFT.md` | 1266 | `1910` | year |
-| `docs/PAPER_DRAFT.md` | 1268 | `1995` | year |
-| `docs/PAPER_DRAFT.md` | 1269 | `57` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1269 | `1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1269 | `289` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1269 | `300` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1273 | `1950` | year |
-| `docs/PAPER_DRAFT.md` | 1274 | `78` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1274 | `1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1274 | `1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1274 | `3` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1276 | `2022` | year |
-| `docs/PAPER_DRAFT.md` | 1277 | `112` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1277 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1277 | `1194` | year range |
-| `docs/PAPER_DRAFT.md` | 1277 | `1225` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1279 | `1984` | year |
-| `docs/PAPER_DRAFT.md` | 1281 | `147` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1281 | `2` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1281 | `278` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1281 | `292` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1283 | `1995` | year |
-| `docs/PAPER_DRAFT.md` | 1284 | `13` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1284 | `3` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1284 | `253` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1284 | `263` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1286 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 1287 | `140` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1287 | `683` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1287 | `1917` | year |
-| `docs/PAPER_DRAFT.md` | 1287 | `1923` | year |
-| `docs/PAPER_DRAFT.md` | 1289 | `1997` | year |
-| `docs/PAPER_DRAFT.md` | 1291 | `55` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1291 | `1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1291 | `119` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1291 | `139` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1293 | `2007` | year |
-| `docs/PAPER_DRAFT.md` | 1294 | `102` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1294 | `477` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1295 | `359` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1295 | `378` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1297 | `2007` | year |
-| `docs/PAPER_DRAFT.md` | 1298 | `23` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1298 | `3` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1298 | `365` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1298 | `376` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1300 | `2005` | year |
-| `docs/PAPER_DRAFT.md` | 1301 | `23` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1301 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1301 | `365` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1301 | `380` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1303 | `1997` | year |
-| `docs/PAPER_DRAFT.md` | 1304 | `13` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1304 | `2` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1304 | `281` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1304 | `291` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1306 | `2021` | year |
-| `docs/PAPER_DRAFT.md` | 1307 | `111` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1307 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1307 | `1092` | year range |
-| `docs/PAPER_DRAFT.md` | 1307 | `1125` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1309 | `2009` | year |
-| `docs/PAPER_DRAFT.md` | 1310 | `99` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1310 | `3` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1311 | `1053` | year range |
-| `docs/PAPER_DRAFT.md` | 1311 | `1069` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1313 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 1314 | `12` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1314 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1314 | `595` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1314 | `600` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1316 | `2022` | year |
-| `docs/PAPER_DRAFT.md` | 1316 | `2011` | year |
-| `docs/PAPER_DRAFT.md` | 1316 | `2014` | year |
-| `docs/PAPER_DRAFT.md` | 1317 | `39` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1317 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1317 | `470` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1317 | `482` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1319 | `1994` | year |
-| `docs/PAPER_DRAFT.md` | 1320 | `89` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1320 | `428` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1320 | `1303` | year range |
-| `docs/PAPER_DRAFT.md` | 1320 | `1313` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1322 | `2020` | year |
-| `docs/PAPER_DRAFT.md` | 1323 | `4` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1323 | `1208` | year range |
-| `docs/PAPER_DRAFT.md` | 1323 | `1214` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1325 | `2015` | year |
-| `docs/PAPER_DRAFT.md` | 1328 | `2000` | year |
-| `docs/PAPER_DRAFT.md` | 1328 | `68` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1328 | `5` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1329 | `1097` | year range |
-| `docs/PAPER_DRAFT.md` | 1329 | `1126` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1331 | `5` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1331 | `5.1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1331 | `26.1` | bibliography (journal volume, issue or page range) |
-| `docs/PAPER_DRAFT.md` | 1341 | `4` | identifier (section, amendment, item or figure reference) |
-| `docs/PAPER_DRAFT.md` | 1348 | `1973` | year |
-| `docs/PAPER_DRAFT.md` | 1348 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 1372 | `2008` | year |
-| `docs/PAPER_DRAFT.md` | 1372 | `2020` | year |
-| `docs/PAPER_DRAFT.md` | 1372 | `2026` | year |
-| `docs/PAPER_DRAFT.md` | 1377 | `1987` | year |
-| `docs/PAPER_DRAFT.md` | 1377 | `1987` | year |
-| `docs/EXPLAIN.md` | 18 | `1990` | year |
-| `docs/EXPLAIN.md` | 18 | `2019` | year |
-| `docs/EXPLAIN.md` | 21 | `1973` | year |
-| `docs/EXPLAIN.md` | 21 | `2026` | year |
-| `docs/EXPLAIN.md` | 30 | `2024` | year |
-| `docs/EXPLAIN.md` | 30 | `2018` | year |
-| `docs/EXPLAIN.md` | 31 | `2018` | year |
-| `docs/EXPLAIN.md` | 61 | `2020` | year |
-| `docs/EXPLAIN.md` | 151 | `1974` | year |
-| `docs/EXPLAIN.md` | 152 | `1973` | year |
-| `docs/EXPLAIN.md` | 166 | `1987` | year |
-| `docs/EXPLAIN.md` | 175 | `2024` | year |
-| `docs/EXPLAIN.md` | 175 | `2018` | year |
-| `docs/EXPLAIN.md` | 175 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 530 | `256` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 543 | `2008` | year |
+| `docs/PAPER_DRAFT.md` | 543 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 543 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 547 | `7` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 558 | `13` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 568 | `210135` | run identifier (walk_...Z) |
+| `docs/PAPER_DRAFT.md` | 575 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 608 | `7` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 614 | `2008` | year |
+| `docs/PAPER_DRAFT.md` | 614 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 615 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 635 | `1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 643 | `95` | ordinal |
+| `docs/PAPER_DRAFT.md` | 662 | `200654` | run identifier (walk_...Z) |
+| `docs/PAPER_DRAFT.md` | 714 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 733 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 756 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 757 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 780 | `0.5` | identifier (numbered item heading) |
+| `docs/PAPER_DRAFT.md` | 810 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 818 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 824 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 828 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 829 | `11.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 830 | `0` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 832 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 835 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 851 | `2005` | year |
+| `docs/PAPER_DRAFT.md` | 868 | `12.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 875 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 909 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 911 | `2024` | year |
+| `docs/PAPER_DRAFT.md` | 912 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 915 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 916 | `2018` | year |
+| `docs/PAPER_DRAFT.md` | 916 | `2023` | year |
+| `docs/PAPER_DRAFT.md` | 928 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 940 | `95.8` | ordinal |
+| `docs/PAPER_DRAFT.md` | 947 | `12` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 956 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 958 | `9` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 976 | `3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 981 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 1003 | `12` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1005 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 1006 | `2009` | year |
+| `docs/PAPER_DRAFT.md` | 1006 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 1006 | `2022` | year |
+| `docs/PAPER_DRAFT.md` | 1022 | `99.2` | ordinal |
+| `docs/PAPER_DRAFT.md` | 1029 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1039 | `1.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1047 | `12.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1061 | `5` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1076 | `2024` | year |
+| `docs/PAPER_DRAFT.md` | 1080 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 1086 | `1977` | year |
+| `docs/PAPER_DRAFT.md` | 1086 | `2006` | year |
+| `docs/PAPER_DRAFT.md` | 1100 | `2` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1104 | `12.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1129 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1142 | `0` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1154 | `3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1157 | `1970` | year |
+| `docs/PAPER_DRAFT.md` | 1157 | `1980` | year |
+| `docs/PAPER_DRAFT.md` | 1157 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 1158 | `1990` | year |
+| `docs/PAPER_DRAFT.md` | 1159 | `90` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1161 | `7` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1162 | `5%` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1167 | `3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1177 | `1.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1191 | `1974` | year |
+| `docs/PAPER_DRAFT.md` | 1194 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 1195 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 1201 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1202 | `3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1223 | `10` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1227 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1232 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1238 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1239 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 1240 | `1974` | year |
+| `docs/PAPER_DRAFT.md` | 1243 | `1970` | year |
+| `docs/PAPER_DRAFT.md` | 1243 | `1971` | year |
+| `docs/PAPER_DRAFT.md` | 1243 | `1971` | year |
+| `docs/PAPER_DRAFT.md` | 1243 | `1972` | year |
+| `docs/PAPER_DRAFT.md` | 1246 | `1972` | year |
+| `docs/PAPER_DRAFT.md` | 1255 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1268 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 1269 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 1278 | `8` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1278 | `11` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1284 | `3.4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1300 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1303 | `11.3` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1319 | `14.1` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1322 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1359 | `1992` | year |
+| `docs/PAPER_DRAFT.md` | 1360 | `1965` | year |
+| `docs/PAPER_DRAFT.md` | 1362 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 1365 | `1976` | year |
+| `docs/PAPER_DRAFT.md` | 1368 | `2019` | year |
+| `docs/PAPER_DRAFT.md` | 1370 | `109` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1370 | `5` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1370 | `1873` | year range |
+| `docs/PAPER_DRAFT.md` | 1370 | `1910` | year |
+| `docs/PAPER_DRAFT.md` | 1372 | `1995` | year |
+| `docs/PAPER_DRAFT.md` | 1373 | `57` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1373 | `1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1373 | `289` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1373 | `300` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1377 | `1950` | year |
+| `docs/PAPER_DRAFT.md` | 1378 | `78` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1378 | `1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1378 | `1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1378 | `3` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1380 | `2022` | year |
+| `docs/PAPER_DRAFT.md` | 1381 | `112` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1381 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1381 | `1194` | year range |
+| `docs/PAPER_DRAFT.md` | 1381 | `1225` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1383 | `1984` | year |
+| `docs/PAPER_DRAFT.md` | 1385 | `147` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1385 | `2` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1385 | `278` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1385 | `292` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1387 | `1995` | year |
+| `docs/PAPER_DRAFT.md` | 1388 | `13` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1388 | `3` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1388 | `253` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1388 | `263` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1390 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 1391 | `140` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1391 | `683` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1391 | `1917` | year |
+| `docs/PAPER_DRAFT.md` | 1391 | `1923` | year |
+| `docs/PAPER_DRAFT.md` | 1393 | `1997` | year |
+| `docs/PAPER_DRAFT.md` | 1395 | `55` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1395 | `1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1395 | `119` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1395 | `139` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1397 | `2007` | year |
+| `docs/PAPER_DRAFT.md` | 1398 | `102` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1398 | `477` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1399 | `359` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1399 | `378` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1401 | `2007` | year |
+| `docs/PAPER_DRAFT.md` | 1402 | `23` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1402 | `3` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1402 | `365` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1402 | `376` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1404 | `2005` | year |
+| `docs/PAPER_DRAFT.md` | 1405 | `23` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1405 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1405 | `365` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1405 | `380` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1407 | `1997` | year |
+| `docs/PAPER_DRAFT.md` | 1408 | `13` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1408 | `2` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1408 | `281` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1408 | `291` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1410 | `2021` | year |
+| `docs/PAPER_DRAFT.md` | 1411 | `111` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1411 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1411 | `1092` | year range |
+| `docs/PAPER_DRAFT.md` | 1411 | `1125` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1413 | `2009` | year |
+| `docs/PAPER_DRAFT.md` | 1414 | `99` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1414 | `3` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1415 | `1053` | year range |
+| `docs/PAPER_DRAFT.md` | 1415 | `1069` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1417 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 1418 | `12` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1418 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1418 | `595` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1418 | `600` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1420 | `2022` | year |
+| `docs/PAPER_DRAFT.md` | 1420 | `2011` | year |
+| `docs/PAPER_DRAFT.md` | 1420 | `2014` | year |
+| `docs/PAPER_DRAFT.md` | 1421 | `39` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1421 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1421 | `470` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1421 | `482` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1423 | `1994` | year |
+| `docs/PAPER_DRAFT.md` | 1424 | `89` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1424 | `428` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1424 | `1303` | year range |
+| `docs/PAPER_DRAFT.md` | 1424 | `1313` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1426 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 1427 | `4` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1427 | `1208` | year range |
+| `docs/PAPER_DRAFT.md` | 1427 | `1214` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1429 | `2015` | year |
+| `docs/PAPER_DRAFT.md` | 1432 | `2000` | year |
+| `docs/PAPER_DRAFT.md` | 1432 | `68` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1432 | `5` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1433 | `1097` | year range |
+| `docs/PAPER_DRAFT.md` | 1433 | `1126` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1435 | `5` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1435 | `5.1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1435 | `26.1` | bibliography (journal volume, issue or page range) |
+| `docs/PAPER_DRAFT.md` | 1445 | `4` | identifier (section, amendment, item or figure reference) |
+| `docs/PAPER_DRAFT.md` | 1452 | `1973` | year |
+| `docs/PAPER_DRAFT.md` | 1452 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 1476 | `2008` | year |
+| `docs/PAPER_DRAFT.md` | 1476 | `2020` | year |
+| `docs/PAPER_DRAFT.md` | 1476 | `2026` | year |
+| `docs/PAPER_DRAFT.md` | 1481 | `1987` | year |
+| `docs/PAPER_DRAFT.md` | 1481 | `1987` | year |
+| `docs/EXPLAIN.md` | 20 | `1990` | year |
+| `docs/EXPLAIN.md` | 20 | `2019` | year |
+| `docs/EXPLAIN.md` | 23 | `1973` | year |
+| `docs/EXPLAIN.md` | 23 | `2026` | year |
+| `docs/EXPLAIN.md` | 32 | `2024` | year |
+| `docs/EXPLAIN.md` | 32 | `2018` | year |
+| `docs/EXPLAIN.md` | 33 | `2018` | year |
+| `docs/EXPLAIN.md` | 63 | `2020` | year |
+| `docs/EXPLAIN.md` | 153 | `1974` | year |
+| `docs/EXPLAIN.md` | 154 | `1973` | year |
+| `docs/EXPLAIN.md` | 168 | `1987` | year |
+| `docs/EXPLAIN.md` | 177 | `2024` | year |
+| `docs/EXPLAIN.md` | 177 | `2018` | year |
+| `docs/EXPLAIN.md` | 177 | `2018` | year |
 | `OPEN_ITEMS.md` | 3 | `2026` | year |
 | `OPEN_ITEMS.md` | 10 | `1` | identifier (section, amendment, item or figure reference) |
 | `OPEN_ITEMS.md` | 12 | `1.1` | identifier (numbered item heading) |

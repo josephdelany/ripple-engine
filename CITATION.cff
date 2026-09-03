@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this research software or its evidence, please cite it as below."
 type: software
-title: "Structural versus surface historical analogy in geopolitical oil events"
+title: "When event labels hurt historical analogy: structural versus surface matching in geopolitical oil events"
 authors:
   - family-names: Delany
     given-names: Joseph
@@ -26,7 +26,7 @@ abstract: >-
   precedents; it does not establish production forecasting skill.
 references:
   - type: report
-    title: "When historical analogy helps—and when the label hurts"
+    title: "When event labels hurt historical analogy"
     authors:
       - family-names: Delany
         given-names: Joseph

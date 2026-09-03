@@ -1,4 +1,4 @@
-# When historical analogy helps—and when the label hurts
+# When event labels hurt historical analogy
 
 ## A registered comparison of structural and surface matching in geopolitical oil events
 
@@ -6,7 +6,7 @@ Joseph Delany · Colby College · 2026
 
 ## Abstract
 
-Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time structural state vector or by event-class identity. Structural weighting records mean CRPS 8.337 against 8.782 for surface matching (paired difference −0.446; 95% stationary-bootstrap interval [−0.623, −0.271]; DM *p*=1.57×10⁻⁶; 264 dates). But uniform pooling scores 8.392, and structure does not distinguishably beat it (difference −0.055; interval [−0.115, +0.006]; *p*=0.090). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels discard useful cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
+Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time structural state vector or by event-class identity. Structural weighting records mean CRPS 8.337 against 8.782 for surface matching (paired difference −0.446; 95% stationary-bootstrap interval [−0.623, −0.271]; DM *p*=1.57×10⁻⁶; 264 dates). But uniform pooling scores 8.392, and structure does not distinguishably beat it (difference −0.055; interval [−0.115, +0.006]; *p*=0.090). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
 
 ## 1. Research question
 

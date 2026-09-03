@@ -113,6 +113,10 @@ DOCUMENTS = ["README.md", "docs/BRIEF.md", "docs/PAPER_DRAFT.md", "docs/EXPLAIN.
 # ---------------------------------------------------------------------------
 
 RUN_OBJECTS = [
+    {"path": "data/structural_surface/summary.json", "run_key": None,
+     "stamp_key": None, "role": "the authoritative structural-versus-surface experiment"},
+    {"path": "data/ripple/external_checks.json", "run_key": None,
+     "stamp_key": None, "role": "external checks cited by the superseded brief"},
     {"path": "data/walk_forward/summary.json", "run_key": "run_id",
      "stamp_key": "generated_at", "role": "the published walk"},
     {"path": "data/walk_forward/delta_experiment.json", "run_key": "derived_from_run",

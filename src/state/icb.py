@@ -41,12 +41,16 @@ def _box_download(share_url, dest):
 
 
 def fetch(force=False):
+    sys_p = P.raw_path("icb", "icb1v16.csv")
+    dy_p = P.raw_path("icb", "icb_dyads_v16.csv")
+    dy_meta = Path(str(dy_p) + ".meta.json")
+    if sys_p.exists() and dy_p.exists() and dy_meta.exists() and not force:
+        return {"system": sys_p, "dyads": dy_p}, json.loads(dy_meta.read_text())
     page = requests.get(PAGE, timeout=60, headers={"User-Agent": "Mozilla/5.0 (ripple-engine research)"}).text
     links = dict((t.strip(), u) for u, t in re.findall(r'<a[^>]+href="(https://duke\.box\.com[^"]+)"[^>]*>(.*?)</a>', page, re.S))
-    sys_p = P.raw_path("icb", "icb1v16.csv")
     if not sys_p.exists() or force:
         _box_download(links["ICB1 v16 data"], sys_p)
-    dy_p, meta = P.fetch_file(links.get("ICB Dyads v16", DYADS_URL), P.raw_path("icb", "icb_dyads_v16.csv"), force=force)
+    dy_p, meta = P.fetch_file(links.get("ICB Dyads v16", DYADS_URL), dy_p, force=force)
     return {"system": sys_p, "dyads": dy_p}, meta
 
 

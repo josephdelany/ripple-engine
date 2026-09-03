@@ -2,7 +2,7 @@
 
 ## Release decision
 
-The maintained research product is ready for résumé use and external review from the release tag named below. It contains one qualified finding, one reproducible experiment, one methods paper, and one instrument demonstration.
+The maintained research product contains one qualified finding, one reproducible experiment, one methods paper, and one instrument demonstration. It is not release-ready until every gate below passes on the same committed revision and a new release tag is created.
 
 ## Defensible finding
 
@@ -12,7 +12,7 @@ On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.337 
 
 - `make verify-submission`: passes.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
-- Default `pytest -q`: 15 passed.
+- Default `pytest -q`: latest unscoped run passed 1,000 tests, skipped 13 environment-dependent tests, and recorded 1 expected failure, with zero unexpected failures.
 - Public claims match `data/structural_surface/summary.json`.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.
@@ -33,6 +33,8 @@ On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.337 
 ## Excluded local work
 
 Five pre-existing modified data files and the untracked `data/walk_forward/unfiltered/` diagnostic are not part of the submission commit. They were deliberately neither staged nor discarded. The unfiltered event-walk diagnostic is legacy work and cannot alter the frozen central result.
+
+The earlier `submission-v1.0.0` tag was issued after only a 15-test scoped gate and is retracted. It must not be submitted or cited as a verified release.
 
 ## Human-use constraint
 

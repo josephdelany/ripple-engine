@@ -64,7 +64,7 @@ OUT = ROOT / "docs" / "figures"
 
 SUMMARY = "data/walk_forward/summary.json"
 KNOWABLE = "data/state/situation_knowable.json"
-STATE_OF = "STATE_OF_THE_ENGINE.md"
+STATE_OF = "docs/superseded/STATE_OF_THE_ENGINE.md"
 RUN_DELTA = "data/handoffs/B_run_delta.md"
 
 # The run whose numbers STATE_OF_THE_ENGINE.md section 5 and B_run_delta.md's

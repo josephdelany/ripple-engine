@@ -62,5 +62,5 @@ The project originally attempted escalation forecasting, cross-asset propagation
 
 License: [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
 
-Before submission, run `make verify-submission`. It performs exact reproduction, maintained tests,
+Before submission, run `make verify-submission`. It performs exact reproduction, the complete repository test suite,
 semantic claim checks, local-link validation, and classification-ledger drift detection.

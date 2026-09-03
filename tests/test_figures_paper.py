@@ -171,5 +171,6 @@ def test_figures_paper_every_figure_is_reachable_from_a_page():
     for name in PNGS:
         assert any(name in p for p in pages), f"{name} is drawn but never shown"
     for page in pages:
-        assert "src/figures_paper.py" in page, \
-            "the page shows the figures without naming what drew them"
+        if any(name in page for name in PNGS):
+            assert "src/figures_paper.py" in page, \
+                "a page shows the figures without naming what drew them"
