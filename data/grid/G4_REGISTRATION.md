@@ -216,3 +216,120 @@ It does not build the full panel. It does not change `ies90.py`, `COVER`, the IE
 threshold, or OUTCOME_MAPPING. It does not touch `src/walk*.py` or `data/walk_forward/**`. It
 does not admit any event. It makes no claim that a dyad-date panel is the right unit — only
 that if it is built, this is how, and these are the numbers that decide.
+
+---
+
+## Amendment 1 (2026-09-03) — three defects in §4's VR-2 stamp, found by reading the probe's own rejections
+
+*Dated and appended before the corrected code (charter §2 rule 4). The first probe run is superseded
+by the second; both are published in `PROBE.md` so the effect is visible and not asserted. §4's
+three-rule structure, VR-1, VR-3, §2's active rule, §3's regime table and §5.1's degeneracy test are
+unchanged — this amendment corrects only **how a cell's VR-2 vintage is computed**, and its direction
+is stated below.*
+
+The first implementation stamped a cell from **every** record `ies90.score_event` returned, using the
+**end** of each record's dated span. Decomposing the 1998 rejections showed it wrong three ways, and
+all three make it **too strict** — VR-2 survival was understated, never overstated.
+
+### A1.1 It stamped records that did not set the level, and on the wrong basis
+
+`score_event` returns records on both the **dyadic** and the **location** basis, and applies dyadic
+precedence when choosing the level (OUTCOME_MAPPING Amendment 2.1). The stamp ignored that. Example
+from the run: at `t = 1998-01-31` the dyad `country.canada|country.usa` was stamped `1998-02-24`
+because the United States is an actor in an ICB crisis running `1997-11-13..1998-02-23` — a crisis
+that has nothing to do with Canada, on the location basis, and which did **not** set that cell's
+level. Corrected: **only the records on the cell's chosen `basis` whose level equals the chosen level
+(the setters) are stamped.** A level-0 cell with no setter — a covering source that looked and found
+nothing (`NONE.covered`) — is stamped at the window's own close, which is what "nothing happened in
+this window" becomes knowable on.
+
+### A1.2 It dated `.onset` rules from the end of the record, not the onset
+
+`score_mid` and `score_icb` assign level 1 under their `.onset` rules precisely because the dispute or
+crisis **starts** inside the window and its peak is undated within it. The level therefore rests on
+the onset and is knowable then. The stamp used the record's end. Example from the run: at
+`t = 1998-01-31` the dyad `country.gbr|country.iraq` carried `MID.pair.onset 1997-11-14..2003-05-02`
+and was stamped **2003-05-03** — five years late, for a level asserted by a dispute that began in
+November 1997. Corrected, per rule id:
+
+| rule | what the level rests on | stamp |
+|---|---|---|
+| `MID.*.onset`, `ICB.*.onset` | the dated onset inside the window | **spell start + 1 day** |
+| `MID.*.wholly`, `ICB.*.wholly` | the record's peak (`hihost` / `viol`), known only when it closes | spell end + 1 day |
+| `MIDI.*.overlap` | an incident, days long | spell end + 1 day |
+| `WAR.inter.*`, `WAR.intra.*` | a war spell **overlapping** the window → level 3 | max(spell start, window start) + 1 day |
+| `GED.location.ge25`, `ge250` | a cumulative count over the whole window | window end + 1 day |
+| `NONE.covered` | a covering source with a dated view and nothing in it | window end + 1 day |
+| `*.continuation` | nothing (Amendment 4 refuses to date it) | not stamped; sets no level |
+
+### A1.3 `NONE.covered` was treated as a record
+
+It is not a record; it is the absence of one. It is now stamped at the window close under A1.1 rather
+than carried as evidence with a span.
+
+### A1.4 What is added, not corrected
+
+Every cell now also carries **`label_available_at` = `t + 91 days`** — the day after the forward
+window `(t, t+90]` closes. This is not a filter: §4 already rules that vintage binds on the features
+and the selection, never on the target. It is recorded because a walk over this grid must know when
+each label can first be scored, and because it makes the one-quarter lag between a read and its score
+explicit rather than implicit.
+
+### A1.5 Direction, stated
+
+All three corrections **raise** VR-2 survival and none can lower it. That is not a reason to trust the
+new number more; it is a reason to publish both, which `PROBE.md` §4 does. **VR-1 is unaffected** —
+it is decided by dataset release dates, not by which record set the level — and VR-1's count was, and
+remains, the number the brief asked for.
+
+### A1.6 The cells are published
+
+`PROBE.json` now carries every cell (825 of them across the three probe years) with its dyad, date,
+L, L⁻, ΔIES, the rules that fired, the stamp each rule produced, and the VR-1/VR-2/VR-3 decision.
+A reader can take any row and check the decision against `ies90.py`'s rule ids without running
+anything. Registration §6's audit obligation, met at the cell level.
+
+---
+
+## Amendment 2 (2026-09-03) — the evidence-basis diagnostic. Registered AFTER the first probe, gates nothing.
+
+*Written after the corrected probe was read, and it says so. It adds a DIAGNOSTIC in the standing of
+`WALK_FORWARD_PROTOCOL.md` Amendment K: published beside the registered counts, published whichever
+way it comes out, and it moves no registered number and no verdict. §5.1's degeneracy test is
+untouched and is decided on the registered shares alone.*
+
+**Why it was written.** The probe's non-zero ΔIES cells turned out to concentrate on very few dyads —
+in 2018, all 43 came from six pairwise combinations of the same four states. Reading two of them
+against `ies90.py` showed two mechanisms that a dyad-date grid creates and an event corpus does not:
+
+- **ICB records crisis *actors*, not sides.** `score_icb`'s dyadic test is `both members are actors
+  in the same crisis`. For a corpus event that is safe, because `_actors_and_pairs` builds the pair
+  from the event's coded **actor** and **target** roles. On a grid the pair is supplied mechanically,
+  so **two allies in the same crisis read as a dyad in conflict with each other.** Verified: at
+  `t = 2018-01-31` the dyad `country.gbr|country.usa` scores **IES level 3 on the dyadic basis** from
+  `ICB.pair.wholly`, ICB crisis 489 *SYRIA CHEMICAL WEAPONS III*, `viol 4` — the United Kingdom and
+  the United States, co-belligerents, recorded as at war with one another.
+- **GED is a location count, replicated across every dyad containing that location.** Verified: at
+  `t = 2024-03-31` the dyad `country.iran|country.uae` scores level 2 from `GED.location.ge25`, 42
+  state-based deaths — deaths inside Iran, from Iran's own conflicts, with no UAE involvement. Every
+  dyad containing Iran receives the same level from the same deaths.
+
+**What the diagnostic computes.** For every cell with a non-zero ΔIES, the union of the setter rules
+behind L and L⁻ is classified into exactly one of three buckets:
+
+1. **opposed-side evidence** — at least one setter is a MID, MIDI or COW War rule, the three sources
+   that record which side a state was on;
+2. **ICB co-actor only** — every setter is an ICB rule, so the pair is attested only as co-actors in
+   one crisis and may be allies. Sub-flagged when the pair has **never** appeared as opponents in
+   MID, MIDI or COW War anywhere in the sources' whole coverage;
+3. **GED location count only** — every setter is a GED rule, so the level is a death count in one or
+   both countries and is not a statement about the pair at all.
+
+Bucket 1 is the only one in which the cell is evidence about the dyad. Buckets 2 and 3 are published
+as counts, not removed: removing them would be a post-hoc filter, and the point of the diagnostic is
+to price the panel, not to improve it.
+
+**Limit, stated.** Bucket 2 is a *risk* flag, not a verdict on each cell: ICB co-actors are sometimes
+genuine opponents, and the diagnostic cannot tell which without a sides field ICB does not have. It
+counts how much of the panel's signal rests on evidence that **cannot distinguish an ally from an
+adversary**, which is the honest question, and it does not claim every such cell is wrong.
