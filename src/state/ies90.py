@@ -417,6 +417,22 @@ def score_ged(d, L, series):
     return (None if cont else lv), delta_lv, deaths, recs
 
 
+def location_set(A, roles, entities):
+    """The location set L: the event's `location` and `target` country entities, falling back to the actor
+    set A when it codes neither, plus the littoral or host states of any chokepoint/facility entity on the
+    event (A2.2 -- location only, never A or P). Returns (L, littoral_used).
+
+    Factored out so that anything else needing "which countries is this event physically about" -- the
+    physical-exposure builder in src/exposure.py is the first -- calls the SAME function rather than a
+    second copy that drifts. Two implementations of one definition is how a corpus ends up with two
+    answers to the same question."""
+    L = (set(roles.get("location", set())) | set(roles.get("target", set()))) or set(A)
+    lit = {e: LITTORAL[e] for e in entities if e in LITTORAL}
+    for states in lit.values():
+        L |= set(states)
+    return L, lit
+
+
 def score_event(d, A, pairs, L, src):
     """All sources for one event. Returns the dict that becomes the ies90 rows."""
     out = {"levels": {}, "recs": [], "deal": None, "deaths": {}, "delta_level": None, "delta_basis": None}
@@ -506,10 +522,7 @@ def run(conn, src=None, write=True):
             continue
         A, pairs = O._actors_and_pairs(r, ents, roles)
         rr = roles.get(r.event_id, {})
-        L = (set(rr.get("location", set())) | set(rr.get("target", set()))) or set(A)
-        lit = {e: LITTORAL[e] for e in ents_all.get(r.event_id, set()) if e in LITTORAL}     # A2.2: location only
-        for e, states in lit.items():
-            L |= set(states)
+        L, lit = location_set(A, rr, ents_all.get(r.event_id, set()))
         res = score_event(r.event_date, A, pairs, L, src)
         res["littoral"] = lit
         res.update({"type": r.type, "date": str(r.event_date.date()), "title": r.title, "url": r.source_url,
