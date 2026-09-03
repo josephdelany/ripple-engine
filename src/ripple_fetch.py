@@ -406,13 +406,15 @@ def parse_portwatch_features(features):
     return out
 
 
-def parse_jodi(raw, product, flow, unit, country):
-    """One JODI annual CSV -> DataFrame[date,value] for one country/product/flow at the PINNED
-    unit. Month 'YYYY-MM' -> first of month. CONVBBL is never accepted (it is a conversion
-    factor, not a volume); missing markers '-' and 'x' are dropped, never zero-filled."""
+def jodi_filter(df, product, flow, unit, country):
+    """One ALREADY-PARSED JODI annual table -> DataFrame[date,value] for one country/product/flow
+    at the PINNED unit. Month 'YYYY-MM' -> first of month. CONVBBL is never accepted (it is a
+    conversion factor, not a volume); '-' and 'x' are dropped, never zero-filled.
+    Split from parse_jodi so a 26 MB file is parsed ONCE per year rather than once per series:
+    the first version re-read every file for each of the 110 specs (5,500 full CSV parses) and
+    ran for over an hour on a 3-minute download."""
     if unit == "CONVBBL":
         raise ValueError("CONVBBL is a conversion factor, not a volume -- refusing to load it as data")
-    df = pd.read_csv(io.BytesIO(raw), dtype=str)
     m = ((df["REF_AREA"] == country) & (df["ENERGY_PRODUCT"] == product)
          & (df["FLOW_BREAKDOWN"] == flow) & (df["UNIT_MEASURE"] == unit))
     sub = df[m]
@@ -423,6 +425,13 @@ def parse_jodi(raw, product, flow, unit, country):
     out = pd.DataFrame({"date": sub.loc[keep, "TIME_PERIOD"].astype(str) + "-01",
                         "value": pd.to_numeric(val[keep], errors="coerce")})
     return out.dropna().drop_duplicates("date").sort_values("date").reset_index(drop=True)
+
+
+def parse_jodi(raw, product, flow, unit, country):
+    """Bytes form of jodi_filter (used by the tests and for one-off checks)."""
+    if unit == "CONVBBL":
+        raise ValueError("CONVBBL is a conversion factor, not a volume -- refusing to load it as data")
+    return jodi_filter(pd.read_csv(io.BytesIO(raw), dtype=str), product, flow, unit, country)
 
 
 def parse_cftc_zip(raw, family):
@@ -605,12 +614,14 @@ def fetch_live(only=None):
                 if raw is None:
                     print(f"  ! JODI {cls} {year}: {type(last).__name__}: {last}")
                     continue
+                table = pd.read_csv(io.BytesIO(raw), dtype=str)        # parsed ONCE per year file
+                print(f"    JODI {cls} {year}: {len(raw)/1e6:.1f} MB, {len(table):,} rows", flush=True)
                 for sid, sp in jodi_specs:
                     c, prod, flow, unit, country = sp["key"]
                     if c != cls:
                         continue
                     try:
-                        part = parse_jodi(raw, prod, flow, unit, country)
+                        part = jodi_filter(table, prod, flow, unit, country)
                         if len(part):
                             acc[sid].append(part)
                     except Exception as e:
