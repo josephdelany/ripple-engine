@@ -6,7 +6,7 @@
 <title>Ripple Engine</title>
 <style>
 :root{--bg:#0f1114;--s1:#161a1f;--s2:#1d2228;--line:#2a3038;--line2:#3a424c;--t:#e8e6e1;--t2:#a9a69f;--t3:#8a8880;
---hot:#e0653a;--hotbg:#3a2018;--cool:#3fbf95;--coolbg:#12302a;--warn:#e0a33a;--warnbg:#3a2c12;--mono:ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Inter,Segoe UI,Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
+--hot:#e0653a;--cool:#3fbf95;--mono:ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Inter,Segoe UI,Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 var(--sans)}
 /* DESIGN.md §4: figures are tabular and monospaced everywhere they appear, so decimals align down a column. */
 .mono,.num,table,th,td,dd,.kv dd{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
@@ -24,15 +24,23 @@ main{max-width:1180px;margin:0 auto;padding:18px 22px 60px}
 h1{font-size:22px;font-weight:500;margin:0 0 4px}h2{font-size:12px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 10px}
 .muted{color:var(--t2)}.dim{color:var(--t3)}.mono{font-family:var(--mono);font-size:12.5px}
 .chip{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:5px;letter-spacing:.2px;white-space:nowrap}
-.c-MATERIAL{background:var(--hotbg);color:var(--hot)}.c-IN_LINE{background:var(--s2);color:var(--t2)}.c-NOISE{background:var(--s1);color:var(--t3);border:1px solid var(--line)}
-.c-SUPPORTED{background:var(--coolbg);color:var(--cool)}.c-MIXED{background:var(--warnbg);color:var(--warn)}.c-UNSUPPORTED{background:var(--hotbg);color:var(--hot)}.c-THIN,.c-UNCHECKABLE,.c-NOPRECEDENT,.c-PENDING{background:var(--s2);color:var(--t3)}
-.c-flag{background:var(--warnbg);color:var(--warn)}
-.card{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+/* §2 strict: amber and green carry an INTERVAL VERDICT and nothing else. Chips separate by weight, ground and an
+   inset rule instead of by hue, so colour keeps exactly one meaning across the whole desk. */
+.c-MATERIAL{background:var(--s2);color:var(--t);box-shadow:inset 2px 0 0 var(--t)}
+.c-IN_LINE{background:var(--s2);color:var(--t2)}
+.c-NOISE{background:transparent;color:var(--t3);border:1px solid var(--line)}
+.c-SUPPORTED{background:var(--s2);color:var(--t);box-shadow:inset 2px 0 0 var(--t2)}
+.c-MIXED{background:var(--s2);color:var(--t2)}
+.c-UNSUPPORTED{background:var(--s2);color:var(--t);box-shadow:inset 2px 0 0 var(--t3)}
+.c-THIN,.c-UNCHECKABLE,.c-NOPRECEDENT,.c-PENDING{background:var(--s2);color:var(--t3)}
+.c-flag{background:transparent;color:var(--t3);border:1px solid var(--line)}
+/* §4: no card borders where a spacing rule will do -- boxes are the cheapest hierarchy and read as a template. */
+.card{background:var(--s1);border:0;border-radius:8px;padding:14px 16px}
 .grid{display:grid;gap:12px}
 .rb{display:flex;height:9px;border-radius:3px;overflow:hidden;background:var(--s2)}.rb i{display:block;height:100%}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
 .strip .card{padding:10px 12px}.strip .v{font-size:18px;font-weight:500}.strip .pct{height:5px;background:var(--s2);border-radius:3px;position:relative;margin:8px 0 4px}
-.strip .pct b{position:absolute;top:-3px;width:3px;height:11px;background:var(--hot);border-radius:2px}
+.strip .pct b{position:absolute;top:-3px;width:3px;height:11px;background:var(--t);border-radius:2px}
 .story-row{display:grid;grid-template-columns:100px minmax(0,1fr) 170px 90px;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
 .story-row:hover{background:var(--s1)}.story-row .h{font-size:15px}.story-row .cls{font-size:12px;color:var(--t2)}
 .sec{border-top:1px solid var(--line);padding:16px 0}
@@ -42,7 +50,7 @@ h1{font-size:22px;font-weight:500;margin:0 0 4px}h2{font-size:12px;font-weight:5
 .branches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .branches .card .n{font-size:24px;font-weight:500}.branches .card .l{font-size:12px;color:var(--t2)}
 table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--t3);font-weight:500;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line2)}td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-.ev-m{color:var(--cool);font-family:var(--mono);font-size:12px}.ev-j{color:var(--warn);font-family:var(--mono);font-size:12px}
+.ev-m{color:var(--t2);font-family:var(--mono);font-size:12px}.ev-j{color:var(--t3);font-family:var(--mono);font-size:12px}
 .chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}.hop{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:150px}
 .hop .a{font-weight:500}.hop .m{font-family:var(--mono);font-size:12px;color:var(--t2)}.arrow{align-self:center;color:var(--t3)}
 /* band 5 "where does it travel" -- DESIGN.md §2 absence language + Amendment 1 A1.3 */
@@ -51,27 +59,23 @@ table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;colo
 .trav .nd{font-size:12.5px}.trav .num{font-family:var(--mono);font-size:12px;color:var(--t2);text-align:right;font-variant-numeric:tabular-nums}
 .trav .nn{font-family:var(--mono);font-size:12px;color:var(--t3);text-align:right}
 .hopgrp{margin:16px 0 2px;font-size:12px;color:var(--t2);letter-spacing:.4px}
-.ib{position:relative;height:15px}
-.ib .z{position:absolute;top:0;bottom:0;width:1px;background:var(--t);opacity:.8}      /* zero rule, always drawn */
-.ib .bar{position:absolute;top:5px;height:5px;border-radius:2px}
-.ib .tk{position:absolute;top:1px;width:2px;height:13px;border-radius:1px}
-.v-NULL .bar{background:var(--line2)}.v-NULL .tk{background:var(--t2)}                  /* crosses zero: neutral */
-.v-TRANSMITTING .bar{background:var(--coolbg)}.v-TRANSMITTING .tk{background:var(--cool)}
-.v-INSUFFICIENT .bar{background:repeating-linear-gradient(45deg,var(--line2) 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1px var(--line)}
-.v-INSUFFICIENT .tk{background:var(--t3)}                                              /* hatched, never coloured */
-.c-TRANSMITTING{background:var(--coolbg);color:var(--cool)}
+/* Band 5 previously carried its own .ib/.v-* implementation of the same language. §2 registers the language
+   "so it is used identically everywhere", so it now consumes the shared .iv set above; only the verdict CHIPS
+   remain, and they carry no hue (§2 strict). Amendment 1 A1.3 maps the file's verdicts onto the §2 states:
+   NULL -> crosses, TRANSMITTING -> better (green), INSUFFICIENT -> hatch. Amber does not arise in this band. */
+.c-TRANSMITTING{background:var(--s2);color:var(--t);box-shadow:inset 2px 0 0 var(--t)}
 .c-NULL{background:var(--s2);color:var(--t2)}
-.c-INSUFFICIENT{background:var(--s1);color:var(--t3);border:1px solid var(--line)}
+.c-INSUFFICIENT{background:transparent;color:var(--t3);border:1px solid var(--line)}
 .travcap{grid-column:1/-1;font-size:11.5px;color:var(--t3);padding:1px 0 7px;margin-top:-3px}
 .finding{font-size:22px;font-weight:500;line-height:1.3;margin:0 0 6px}
 .two{display:grid;grid-template-columns:2fr 1fr;gap:16px}
 textarea{width:100%;min-height:120px;background:var(--s2);border:1px solid var(--line);color:var(--t);border-radius:8px;padding:10px;font:inherit;resize:vertical}
 details summary{cursor:pointer;color:var(--t2);padding:10px 0}
 .bars{display:flex;align-items:flex-end;gap:6px;height:120px;border-bottom:1px solid var(--line2)}
-.bars div{flex:1;background:var(--cool);position:relative}.bars div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--t3)}
+.bars div{flex:1;background:var(--t2);position:relative}.bars div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--t3)}
 .kv{display:grid;grid-template-columns:170px 1fr;gap:4px 12px;font-size:13px}.kv dt{color:var(--t3)}.kv dd{margin:0}
 .note{font-size:12.5px;color:var(--t2);border-left:2px solid var(--line2);padding:4px 12px;margin:10px 0}
-.err{color:var(--hot);font-family:var(--mono);font-size:12.5px;padding:10px 0}
+.err{color:var(--t);font-family:var(--mono);font-size:12.5px;padding:10px 0;border-left:2px solid var(--t2);padding-left:8px}
 iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 .search{display:flex;gap:6px;margin:8px 0}.search input{flex:1;background:var(--s1);border:1px solid var(--line);color:var(--t);padding:6px 10px;border-radius:6px;font:inherit}
 .hit{padding:6px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}.hit:hover{background:var(--s1)}
@@ -175,15 +179,13 @@ function travelBand(t){
     // one symmetric scale per hop so bars within a hop are comparable; zero sits at the centre
     const m=Math.max(...h.cells.map(c=>Math.max(Math.abs(c.lo95??0),Math.abs(c.hi95??0))),1e-9);
     return h.cells.map(c=>{
-      const L=c.lo95==null?null:50+50*c.lo95/m, R=c.hi95==null?null:50+50*c.hi95/m;
-      const T=c.estimate==null?null:50+50*c.estimate/m;
-      const bar=L==null?'':`<i class="bar" style="left:${Math.min(L,R)}%;width:${Math.max(Math.abs(R-L),0.4)}%"></i>`;
-      const tk=T==null?'':`<i class="tk" style="left:calc(${T}% - 1px)"></i>`;
+      /* Amendment 1 A1.3: the file's verdict maps onto a §2 state; the band never computes a verdict of its own. */
+      const st = c.verdict==='TRANSMITTING' ? 'better' : (c.verdict==='INSUFFICIENT' ? 'insufficient' : 'crosses');
       // the plain-null caption is stated once for the band; only the states that differ are captioned inline
       const cap=(c.verdict==='NULL'&&!c.fragile)?'':`<div class="travcap">${esc(c.caption)}</div>`;
-      return `<div class="trav v-${c.verdict}">
+      return `<div class="trav iv-${st}" data-verdict="${esc(c.verdict)}">
         <div class="nd">${esc(c.node)}<span class="dim" style="font-size:11px"> · h=${c.h} ${esc(c.freq)}</span></div>
-        <div class="ib"><i class="z" style="left:50%"></i>${bar}${tk}</div>
+        <div class="ib">${interval(c.estimate, [c.lo95, c.hi95], [-m, m], st, 200, 15)}</div>
         <div class="num">${fmt(c)} <span class="dim">${band(c)}</span></div>
         <div class="nn">${c.n==null?'—':c.n}</div>
         <div><span class="chip c-${c.verdict}">${esc(c.verdict)}</span>${c.fragile?' <span class="chip c-flag">FRAGILE</span>':''}</div>
@@ -205,8 +207,8 @@ const FLAG={LOUD_QUIET:'Loud / quiet',QUIET_LOUD:'Quiet / loud',product_side:'pr
 function chip(v,extra){const k=String(v||'').replace(/\s+/g,'');return `<span class="chip c-${esc(k)} ${extra||''}">${esc(v)}</span>`;}
 function vchip(v){const label={NOPRECEDENT:'No precedent'}[String(v).replace(/\s+/g,'')]||v;return `<span class="chip c-${esc(String(v).replace(/\s+/g,''))}">${esc(label.charAt(0)+label.slice(1).toLowerCase())}</span>`;}
 function rb(bar){ if(!bar||!bar.n) return '<span class="dim mono">—</span>';
-  if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--hot)"></i></div>`;}
-  const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--cool)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--hot)"></i></div>`;}
+  if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--t2)"></i></div>`;}
+  const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--t3)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--t)"></i></div>`;}
 const SCREENS=new Set(['feed','story','big','ledger','walk']);
 function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('on',x.id==='s-'+s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));window.scrollTo(0,0);
   if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger(); if(s==='walk')loadWalk();}
@@ -260,15 +262,15 @@ function fanSvg(pr){const w=640,h=210,x0=50,x1=600;const fan=pr.fan;if(!fan)retu
   const poly=(a,b)=>a.map((v,i)=>`${x(i)},${y(v)}`).join(' ')+' '+b.map((v,i)=>`${x(i)},${y(v)}`).reverse().join(' ');
   const line=a=>a.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' ');
   let s=`<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="price path vs analog fan">`;
-  s+=`<polygon points="${poly(fan.p25,fan.p75)}" fill="#12302a"/>`;
-  s+=`<path d="${line(fan.min)}" stroke="#6f6d67" stroke-dasharray="3 4" fill="none"/><path d="${line(fan.max)}" stroke="#6f6d67" stroke-dasharray="3 4" fill="none"/>`;
-  s+=`<path d="${line(fan.median)}" stroke="#3fbf95" stroke-width="1.5" fill="none"/>`;
-  s+=`<line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="#2a3038"/>`;
-  if(pr.path_pct&&pr.path_pct.length>1)s+=`<path d="${line(pr.path_pct)}" stroke="#e0653a" stroke-width="2.5" fill="none"/>`;
-  if(pr.path_pct&&pr.path_pct.length){const i=pr.path_pct.length-1;s+=`<circle cx="${x(i)}" cy="${y(pr.path_pct[i])}" r="3.5" fill="#e0653a"/><text x="${Math.min(x(i)+6,x1-70)}" y="${y(pr.path_pct[i])-8}" font-size="11" fill="#e0653a">now ${pct(pr.path_pct[i])}</text>`;}
-  if(pr.tails){s+=`<text x="${x1+4}" y="${y(fan.max[H])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.high.date.slice(0,4))} ${pct(pr.tails.high.chg_pct,0)}</text><text x="${x1+4}" y="${y(fan.min[H])+4}" font-size="10" fill="#a9a69f">${esc(pr.tails.low.date.slice(0,4))} ${pct(pr.tails.low.chg_pct,0)}</text>`;}
-  s+=`<text x="${x1-150}" y="${y(fan.median[H])+14}" font-size="10.5" fill="#3fbf95">analog median ${pct(fan.median[H])} · IQR band · n=${fan.n}</text>`;
-  s+=`<text x="${x0}" y="${h-8}" font-size="10" fill="#6f6d67">day 0 · knowable ${esc(pr.knowable)}</text><text x="${x1-24}" y="${h-8}" font-size="10" fill="#6f6d67">${pr.resolution==='monthly'?'+3m':'+20d'}</text></svg>`;return s;}
+  s+=`<polygon points="${poly(fan.p25,fan.p75)}" fill="var(--s2)"/>`;
+  s+=`<path d="${line(fan.min)}" stroke="var(--t3)" stroke-dasharray="3 4" fill="none"/><path d="${line(fan.max)}" stroke="var(--t3)" stroke-dasharray="3 4" fill="none"/>`;
+  s+=`<path d="${line(fan.median)}" stroke="var(--t3)" stroke-width="1.5" fill="none"/>`;
+  s+=`<line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="var(--t2)"/>`;
+  if(pr.path_pct&&pr.path_pct.length>1)s+=`<path d="${line(pr.path_pct)}" stroke="var(--t)" stroke-width="2.5" fill="none"/>`;
+  if(pr.path_pct&&pr.path_pct.length){const i=pr.path_pct.length-1;s+=`<circle cx="${x(i)}" cy="${y(pr.path_pct[i])}" r="3.5" fill="var(--t)"/><text x="${Math.min(x(i)+6,x1-70)}" y="${y(pr.path_pct[i])-8}" font-size="11" fill="var(--t)">now ${pct(pr.path_pct[i])}</text>`;}
+  if(pr.tails){s+=`<text x="${x1+4}" y="${y(fan.max[H])+4}" font-size="10" fill="var(--t2)">${esc(pr.tails.high.date.slice(0,4))} ${pct(pr.tails.high.chg_pct,0)}</text><text x="${x1+4}" y="${y(fan.min[H])+4}" font-size="10" fill="var(--t2)">${esc(pr.tails.low.date.slice(0,4))} ${pct(pr.tails.low.chg_pct,0)}</text>`;}
+  s+=`<text x="${x1-150}" y="${y(fan.median[H])+14}" font-size="10.5" fill="var(--t3)">analog median ${pct(fan.median[H])} · IQR band · n=${fan.n}</text>`;
+  s+=`<text x="${x0}" y="${h-8}" font-size="10" fill="var(--t3)">day 0 · knowable ${esc(pr.knowable)}</text><text x="${x1-24}" y="${h-8}" font-size="10" fill="var(--t3)">${pr.resolution==='monthly'?'+3m':'+20d'}</text></svg>`;return s;}
 
 function renderStory(s){
   const sig=s.significance||{};const r=sig.rates||{};  const side=a=>r[a]?`${r[a].label}: ${r[a].rate_pct}% of ${r[a].n} vs everyday ${r[a].base_pct}% (${r[a].ratio}×)`:'';
@@ -487,11 +489,11 @@ function pv(p){return p==null?'—':(+p<0.001?'<0.001':(+p).toFixed(3));}
 function curveSvg(lc){ if(!lc||!lc.length) return '';
   const w=900,h=180,x0=40,x1=880; const vals=lc.map(r=>r.skill_engine_vs_clim); const lo=Math.min(-0.1,...vals),hi=Math.max(0.1,...vals);
   const x=i=>x0+i*(x1-x0)/Math.max(1,lc.length-1), y=v=>15+(hi-v)/(hi-lo)*(h-45);
-  let s=`<svg viewBox="0 0 ${w} ${h}" width="100%"><line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="#3a424c"/>`;
-  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_engine_vs_clim)).join(' ')}" stroke="#e0653a" stroke-width="2" fill="none"/>`;
-  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_frozen_vs_clim)).join(' ')}" stroke="#6f6d67" stroke-width="1" stroke-dasharray="3 3" fill="none"/>`;
-  [0,Math.floor(lc.length/2),lc.length-1].forEach(i=>{s+=`<text x="${x(i)}" y="${h-4}" font-size="10" fill="#6f6d67" text-anchor="middle">${esc(lc[i].date)}</text>`;});
-  s+=`<text x="${x0}" y="12" font-size="10" fill="#a9a69f">cumulative skill vs climatology (engine solid, frozen dashed) · +${hi.toFixed(2)} top, ${lo.toFixed(2)} bottom</text></svg>`; return s;}
+  let s=`<svg viewBox="0 0 ${w} ${h}" width="100%"><line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}" stroke="var(--t2)"/>`;
+  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_engine_vs_clim)).join(' ')}" stroke="var(--t)" stroke-width="2" fill="none"/>`;
+  s+=`<path d="${lc.map((r,i)=>(i?'L':'M')+x(i)+' '+y(r.skill_frozen_vs_clim)).join(' ')}" stroke="var(--t3)" stroke-width="1" stroke-dasharray="3 3" fill="none"/>`;
+  [0,Math.floor(lc.length/2),lc.length-1].forEach(i=>{s+=`<text x="${x(i)}" y="${h-4}" font-size="10" fill="var(--t3)" text-anchor="middle">${esc(lc[i].date)}</text>`;});
+  s+=`<text x="${x0}" y="12" font-size="10" fill="var(--t2)">cumulative skill vs climatology (engine solid, frozen dashed) · +${hi.toFixed(2)} top, ${lo.toFixed(2)} bottom</text></svg>`; return s;}
 async function loadWalk(){ try{
   const s=await api('/api/walk/summary'); const au=await api('/api/walk/audit').catch(()=>({status:'pending'})); const d=(s.tiers||{}).daily||{}; const G=d.G||{}, P=d.P||{}; const gv=G.engine_vs||{}, pv_=P.engine_vs||{};
   const v=s.verdict||{}; const perm=s.permutation||{}; const pl=s.placebo||{}; const rb=s.regime_blocks||{};

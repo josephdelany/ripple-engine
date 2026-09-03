@@ -189,3 +189,51 @@ def test_the_interval_component_always_draws_the_zero_rule():
     assert 'class="zero"' in fn, "interval() must draw the zero rule"
     assert fn.index('class="zero"') < fn.index('class="span"'), "the zero rule is drawn under the interval, not over it"
     assert ".iv .zero{stroke:var(--t2)" in html, "the zero rule is drawn at full contrast, not dimmed"
+
+
+# --- §1 the three tiers, §2 strict colour, §4 no boxes -------------------------------------------------------
+
+def test_amber_and_green_appear_nowhere_but_an_interval_verdict():
+    """§2: "Amber and green are used nowhere else in the interface." Strict, per the ruling of 2026-09-03: colour
+    means an interval that excludes zero and nothing else. Claim chips, Material, the fan path, the learning curve
+    and the outcome distribution all separate by weight, ground and rule instead."""
+    html = app()
+    uses = re.findall(r"[^\n]*var\(--(?:hot|cool)\)[^\n]*", html)
+    assert len(uses) == 2, f"amber/green used {len(uses)} times:\n" + "\n".join(u.strip()[:110] for u in uses)
+    assert any(".iv-worse" in u and "--hot" in u for u in uses), "amber is the excludes-zero-engine-worse state"
+    assert any(".iv-better" in u and "--cool" in u for u in uses), "green is the excludes-zero-engine-better state"
+
+
+def test_no_colour_outside_the_permitted_palette():
+    """§6: ground, three text tiers, amber, green, and the hatch. The yellow --warn is retired."""
+    html = app()
+    assert "--warn" not in html, "yellow is outside the permitted palette"
+    stray = set(re.findall(r'"(#[0-9a-fA-F]{6})"', html))
+    assert not stray, f"hard-coded hex in markup instead of a palette token: {stray}"
+
+
+def test_there_is_one_absence_language_not_two():
+    """§2 registers the language "so it is used identically everywhere". The propagation band carried a private
+    .ib/.v-* implementation of the same idea; it now consumes the shared component. Amendment 1 A1.3 maps the
+    file's verdicts onto the §2 states: NULL -> crosses, TRANSMITTING -> better, INSUFFICIENT -> hatch."""
+    html = app()
+    assert ".v-NULL" not in html and ".v-TRANSMITTING .bar" not in html, "the private interval bar must be gone"
+    band = html[html.index("function travelBand("):html.index("const esc=")]
+    assert "interval(c.estimate" in band, "band 5 must draw through the shared interval() helper"
+    assert re.search(r"iv-\$\{st\}", band), "band 5 rows carry the shared state class"
+
+
+def test_the_three_tiers_are_declared_as_classes():
+    """§1: three tiers, strictly; nothing on any screen sits outside them."""
+    html = app()
+    for cls, size in ((".t-find", 24), (".t-ev", 13.5), (".t-prov", 11)):
+        m = re.search(re.escape(cls) + r"\{[^}]*font-size:([\d.]+)px", html)
+        assert m, f"{cls} must be declared"
+        assert abs(float(m.group(1)) - size) < 4, f"{cls} is {m.group(1)}px, outside its tier band"
+
+
+def test_cards_carry_no_border():
+    """§4: no card borders where a spacing rule will do."""
+    html = app()
+    m = re.search(r"\.card\{([^}]*)\}", html)
+    assert m and "border:0" in m.group(1), "the card border is the cheapest possible hierarchy; spacing does the work"
