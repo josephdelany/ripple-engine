@@ -5,7 +5,8 @@ Order is the desk's order and nothing else is on the page:
   1 is it priced?  -- price since knowable vs the analog fan (median, IQR, dated tails); flow side
   2 is it right?   -- the story's claims verbatim, typed and given a measured verdict (ledger.py)
   3 the tail       -- escalation branches from Layer G (escalation.py), then-vs-now table
-  4 where it goes  -- propagation hops per class (propagate.py), price and flow separately
+  4 where it goes  -- measured pass-through per hop for this class, read from data/ripple/irf.json
+                     (registered local projections; DESIGN.md Amendment 1). Nulls are shown, never dropped.
   5 trust          -- walk-forward stamp (as computed, labelled), retrieval quality, freshness, sources
 
 Inputs: a pasted headline/paragraph/URL (live) or a corpus event_id (historical, point-in-time).
@@ -126,6 +127,134 @@ def flow_side(conn, etype):
             "realized_disruption_fraction_pct": prop.get("realized_disruption_fraction_pct"),
             "contributing_n": prop.get("contributing_n"),
             "reading": prop.get("reading"), "caveat": prop.get("caveat")}
+
+
+# ----------------------------------------------------------------------------- 4. where does it travel?
+# DESIGN.md §3.1 band 5 + Amendment 1 (2026-09-03). This band used to come from propagate.py, which
+# conditioned its contributing events on sr_outcome_90 -- a label retired at κ≈0 (OUTCOME_MAPPING.md
+# Amendment 1). Nothing may condition on a retired label, so the band now reads the registered local
+# projections instead. This code computes NOTHING: it selects, labels and orders rows that were
+# estimated once under the sealed registration (RIPPLE_REGISTRATION.md + Amendments A, B).
+
+RIPPLE_IRF = DATA / "ripple" / "irf.json"
+IRF_SPEC, IRF_SAMPLE = "total", "full"    # Amendment 1 A1.1: the only verdict-bearing cut
+IRF_MIN_N = 15                            # RIPPLE_REGISTRATION [2.5] MIN_N, quoted in the caption
+# Amendment 1 A1.4 -- the hop ladder, in display order. Hop keys are as written in irf.json.
+HOP_LADDER = [("0", "crude"), ("1", "refined products & cracks"), ("2", "physical flow & stocks"),
+              ("3", "gas & LNG"), ("4", "fertiliser & coal"), ("x", "macro cross-asset"),
+              ("e", "equity proxies")]
+_IRF = {}
+
+
+def _irf_doc():
+    """Load data/ripple/irf.json once per process (2.6 MB), re-reading only if the file changes."""
+    try:
+        m = RIPPLE_IRF.stat().st_mtime
+    except OSError:
+        return None
+    if _IRF.get("mtime") != m:
+        try:
+            _IRF["doc"] = json.loads(RIPPLE_IRF.read_text())
+        except Exception:
+            return None
+        _IRF["mtime"] = m
+    return _IRF.get("doc")
+
+
+def _irf_cell(row):
+    """One registered cell at its OWN headline horizon, in the absence language (Amendment 1 A1.2-A1.3).
+
+    The verdict is copied verbatim from the file -- this function never decides one. Colour and caption
+    are the registered mapping, so a null looks composed rather than broken (DESIGN.md §2).
+    """
+    h = next((x for x in row["irf"] if x["h"] == row["headline_h"]), None) or {}
+    n, v, fragile = row.get("n_events"), row.get("verdict"), bool(row.get("fragile"))
+    if v == "TRANSMITTING":
+        state, colour = "excludes_zero", "green"
+        caption = ("The 95% interval excludes zero under both standard errors, and the estimate sits "
+                   "outside the state-matched placebo band.")
+    elif v == "INSUFFICIENT":
+        state, colour = "insufficient", "hatch"        # hatched, never coloured: insufficient ≠ null
+        caption = f"insufficient (n={n}): below the registered minimum of {IRF_MIN_N} events."
+    elif v == "NULL":                                  # the commonest state, and the finding
+        state, colour = "crosses_zero", "neutral"
+        caption = ("Reported null and flagged fragile: the EHW interval excludes zero, Newey–West does not."
+                   if fragile else
+                   "The interval crosses zero: no effect distinguishable from none at this sample size.")
+    else:
+        # The file carries no verdict for this cell. A1.2 says the verdict is verbatim from the file and
+        # the band never decides one -- so an absent verdict is reported as absent, NOT captioned as a
+        # null. Saying "the interval crosses zero" here would be the desk asserting a result the record
+        # does not contain (charter §2 rule 1). Unreachable for the seven corpus classes as the file
+        # stands (371/371 cells carry a verdict); it is here so a re-run that drops one is visible.
+        state, colour = "no_verdict", "hatch"
+        caption = (f"No verdict recorded for this cell in {RIPPLE_IRF.name}: it is shown, uncoloured, "
+                   "rather than being reported as a null.")
+    return {
+        # Evidence tier (Amendment 1 A1.2): the estimate, its band, its n, its verdict
+        "node": row["node"], "series_id": row["series_id"], "freq": row["freq"], "h": row["headline_h"],
+        "unit": "%" if row["transform"] in ("log", "log1p") else "index points",
+        "estimate": h.get("beta"), "lo95": h.get("lo95"), "hi95": h.get("hi95"), "n": n,
+        "verdict": v, "fragile": fragile, "state": state, "colour": colour, "caption": caption,
+        "zero_line": True,                             # §2: the zero rule is drawn on every cell
+        # Provenance tier only -- never the headline band
+        "lo90": h.get("lo90"), "hi90": h.get("hi90"), "se_ehw": h.get("se_ehw"), "se_nw": h.get("se_nw"),
+        "p_ehw": h.get("p_ehw"), "T": h.get("T"), "transform": row["transform"],
+        "placebo_percentile": (row.get("placebo") or {}).get("percentile"),
+        "bh_q10_reject": row.get("bh_q10_reject"),
+    }
+
+
+def travel(etype):
+    """Band 5, 'Where does it travel?' -- the measured pass-through for this story's class.
+
+    Returns EVERY registered cell for the class (53 of them), nulls included. The band is never
+    filtered by verdict or by whether an interval looks interesting: where a hop is null we say so,
+    because the absence is the finding (DESIGN.md Amendment 1 A1.1, A1.4).
+    """
+    src = "data/ripple/irf.json"
+    doc = _irf_doc()
+    if not doc:
+        return {"available": False, "source": src,
+                "note": f"{src} not present; run: python3 src/ripple_lp.py"}
+    meta = doc.get("meta") or {}
+    prov = {"source": src, "registration": meta.get("registration"), "run_when": meta.get("when"),
+            "seed": meta.get("seed"), "n_placebo": meta.get("n_placebo"),
+            "spec": IRF_SPEC, "sample": IRF_SAMPLE}
+    if not etype:
+        return {"available": False, **prov,
+                "note": "no event class: this band is conditioned on the story's class"}
+    rows = [r for r in (doc.get("rows") or [])
+            if r.get("shock") == etype and r.get("spec") == IRF_SPEC and r.get("sample") == IRF_SAMPLE]
+    if not rows:
+        return {"available": False, "shock": etype, **prov,
+                "note": f"'{etype}' is not a registered shock set in {src}; no cells were estimated for it"}
+    hops, cells = [], []
+    for key, label in HOP_LADDER:
+        got = [_irf_cell(r) for r in rows if str(r.get("hop")) == key]   # file order = registration order
+        if got:
+            hops.append({"hop": key, "label": label, "cells": got})
+            cells += got
+    counts = {k: sum(1 for c in cells if c["verdict"] == k) for k in ("TRANSMITTING", "NULL", "INSUFFICIENT")}
+    # a cell the file left unverdicted is counted as such, never folded into NULL (see _irf_cell)
+    counts["NO_VERDICT"] = sum(1 for c in cells if c["state"] == "no_verdict")
+    counts["FRAGILE"] = sum(1 for c in cells if c["fragile"])
+    counts["cells"] = len(cells)
+    k = counts["TRANSMITTING"]
+    out = {"available": True, "shock": etype, **prov, "hops": hops, "counts": counts, "zero_line": True,
+           # Finding tier (A1.4): a count, never an adjective. k=0 is stated in words, not left blank.
+           "finding": (f"No cell transmits for this class: all {counts['cells']} registered cells are "
+                       f"null or insufficient." if k == 0 else
+                       f"{k} of {counts['cells']} registered cells transmit for this class."),
+           "label": ("lag-augmented local projections, 95% EHW HC1 band, placebo-controlled against "
+                     f"{meta.get('n_placebo')} state-matched pseudo-events; verdicts TRANSMITTING / "
+                     "NULL / INSUFFICIENT as registered"),
+           "caveat": ("Every registered cell for this class is shown, nulls included: the band is never "
+                      "filtered by verdict (DESIGN.md Amendment 1 A1.1).")}
+    if len(cells) != len(rows):        # a new hop key in the registration must not silently drop rows
+        out["note"] = (f"{len(rows) - len(cells)} of {len(rows)} cells sit outside the registered hop "
+                       f"ladder and are NOT shown; extend HOP_LADDER (DESIGN.md Amendment 1 A1.4)")
+    return out
 
 
 # ----------------------------------------------------------------------------- 3. branches
@@ -311,7 +440,6 @@ def read(arg=None, event_id=None, knowable=None, log=True):
                 v["basis"] += " — monthly resolution"
             t["verdict"] = v
             claims.append(t)
-        prop = P.propagate(conn, event_type=etype) if etype else {}
         story = {
             "story_id": story_id, "event_id": eid, "title": title, "description": desc, "url": url, "source": source,
             "article_type": article_type, "scope": scope, "was_url": was_url,
@@ -326,9 +454,9 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             "claims": claims,
             "n_checkable": sum(1 for c in claims if c["checkable"]),
             "branches": br,
-            "propagation": {"hops": prop.get("hops"), "contributing_n": prop.get("contributing_n"),
-                            "realized_disruption_fraction_pct": prop.get("realized_disruption_fraction_pct"),
-                            "caveat": prop.get("caveat")} if prop else {},
+            # DESIGN.md §3.1 band 5 + Amendment 1: the registered local projections for this class,
+            # every cell including the nulls. Nothing here conditions on the retired sr_outcome_90.
+            "propagation": travel(etype),
             "trust": trust(conn, etype, br),
             "engine": _engine_block(eid, k) if eid else {"available": False,
                                                           "note": "live stories are read on class + entities; the state-vector engine needs a coded situation record (PATH Step 9)"},
@@ -379,8 +507,18 @@ def _print(s):
         print(f"  BRANCHES ({br.get('basis')}, n={br.get('n')}): {br.get('counts')} -- {b.get('basis_note')}")
         for a in (b.get("analogs") or [])[:3]:
             print(f"    analog {a['date']} sim={a['similarity']} {a['outcome_90']} :: {a['title'][:60]}")
-    for h in (s["propagation"].get("hops") or [])[:5]:
-        print(f"  HOP {h['label']:<22} signed_med {h['signed_median_pct']:>6}% n={h['n']} material {h['material_move_pct']}%")
+    tv = s["propagation"]
+    if tv.get("available"):
+        print(f"  TRAVEL: {tv['finding']}  [{tv['source']}]")
+        for hop in tv["hops"]:
+            for c in hop["cells"]:
+                est = f"{c['estimate']:+.3f}{c['unit'][0] if c['unit'] == '%' else ''}" if c["estimate"] is not None else "no estimate"
+                band = f"[{c['lo95']:+.3f}, {c['hi95']:+.3f}]" if c["lo95"] is not None else "no band"
+                flag = " (FRAGILE)" if c["fragile"] else ""
+                print(f"    hop {hop['hop']:<2} {c['node']:<24} {est:>12} {band:>22} "
+                      f"n={c['n']:<3} {c['verdict']}{flag}")
+    else:
+        print(f"  TRAVEL: unavailable -- {tv.get('note')}")
     print(f"  TRUST: {s['trust']['walk_forward']['verdict']}")
 
 

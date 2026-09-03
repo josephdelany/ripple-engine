@@ -346,11 +346,12 @@ def situation_read(event_id):
         return JSONResponse({"error": f"unknown event {event_id}"}, status_code=404)
     e = dict(zip(cols, row))
     g = escalation.read_event(conn, event_id)
-    layer_p = {}
-    if not g.get("no_adequate_precedent"):
-        for b, rate in (g.get("branch_rates", {}).get("rates") or {}).items():
-            if rate:
-                layer_p[b] = propagate.propagate(conn, branch=b)
+    # Layer P used to be computed once per Layer-G branch, i.e. conditioned on sr_outcome_90 through
+    # propagate(branch=...). That label is retired (OUTCOME_MAPPING.md Amendment 1, 2026-09-02) and
+    # nothing may condition on it, so Layer P is now the unconditioned read for the event's class.
+    layer_p = propagate.propagate(conn, event_type=e["type"])
+    layer_p["conditioning"] = ("class only. Per-branch Layer P is withdrawn: it conditioned on "
+                               "sr_outcome_90, retired at κ≈0 (OUTCOME_MAPPING.md Amendment 1).")
     br = cur.execute("SELECT obs_date, value FROM observations WHERE series_id='fred.DCOILBRENTEU' "
                      "ORDER BY obs_date DESC LIMIT 6").fetchall()
     ovx = cur.execute("SELECT value FROM observations WHERE series_id='derived.ovx_pct' "
@@ -363,7 +364,8 @@ def situation_read(event_id):
         "event": {"id": e["event_id"], "title": e.get("title"), "date": e["event_date"],
                   "type": e["type"], "actor": e.get("sr_actor"), "target": e.get("sr_target")},
         "record": json.loads(e["sr_json"]) if e.get("sr_json") else None,
-        "layer_g": g, "layer_p": layer_p, "live_overlay": overlay,
+        "layer_g": {**g, "outcome_label": "retired: sr_outcome_90, κ≈0 vs ICB/MID/UCDP (OUTCOME_MAPPING.md Amendment 1, 2026-09-02) — corpus-derived, not an outcome", "retired": True},
+        "layer_p": layer_p, "live_overlay": overlay,
         "track_record": _track_record(),
     }
 
@@ -452,6 +454,7 @@ def register_terminal(app):
         rows = conn.execute(
             "SELECT event_id, event_date, type, title FROM events "
             "WHERE type IN ('conflict_escalation','infrastructure_attack','chokepoint_disruption','sanctions') "
-            "AND sr_outcome_90 IS NOT NULL ORDER BY event_date DESC").fetchall()
+            # was: AND sr_outcome_90 IS NOT NULL -- a retired label must not decide which events exist
+            "ORDER BY event_date DESC").fetchall()
         conn.close()
         return [{"event_id": r[0], "date": r[1], "type": r[2], "title": r[3]} for r in rows]

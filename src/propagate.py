@@ -1,14 +1,23 @@
 """
-propagate.py -- B3: Layer P, propagation per branch (spec §4.3; A4).
+propagate.py -- B3: Layer P, the FLOW read and the realized-disruption fraction (spec §4.3; A4).
 
-Given a Layer-G branch (CONTAINED / LIMITED_RETALIATION / WIDENING / RESOLUTION_BY_DEAL),
-walk the oil value chain and report, at each hop, the MEASURED market reaction of the events
-that actually resolved to that branch -- PRICE side (signed CAR: avg, n, range) beside a FLOW
-read -- plus the realized-disruption fraction: the share of contributing events whose Brent
-move was a large, sustained, one-directional supply signal (a real disruption) versus the
-majority that were a two-sided risk premium. This is the "conflict doesn't stop trade"
-headline, reported as a fraction with n, never a slogan. Branch-conditioning links Layer G to
-Layer P: filter the contributing events by their observed outcome_90.
+Walk the oil value chain and report, at each hop, the MEASURED market reaction of the events in
+a class -- PRICE side (signed CAR: avg, n, range) beside a FLOW read -- plus the
+realized-disruption fraction: the share of contributing events whose Brent move was a large,
+sustained, one-directional supply signal (a real disruption) versus the majority that were a
+two-sided risk premium. This is the "conflict doesn't stop trade" headline, reported as a
+fraction with n, never a slogan.
+
+BRANCH-CONDITIONING REMOVED, 2026-09-03. This module used to take a Layer-G branch
+(CONTAINED / LIMITED_RETALIATION / WIDENING / RESOLUTION_BY_DEAL) and filter its contributing
+events on `sr_outcome_90`. That label was retired at κ≈0 against ICB/MID/UCDP on 2026-09-02
+(OUTCOME_MAPPING.md Amendment 1) -- it is corpus-derived, not an outcome -- and nothing may
+condition on a retired label. The parameter is gone rather than defaulted, so a caller that
+still asks for a branch fails loudly instead of quietly getting unfiltered numbers.
+
+The Story page's "where does it travel" band no longer comes from here at all: it reads the
+registered local projections in data/ripple/irf.json (DESIGN.md Amendment 1, story_read.travel).
+What remains of this module is the CAR-based hop read and the live-transit flow side.
 
 Reuses the measured `edges` (event x asset CAR) and live transits; recomputes nothing.
 """
@@ -38,11 +47,9 @@ CHAIN = [
 DISRUPTION_MIN = 10.0    # |CAR20| >= this AND signed-consistent => a real, sustained supply move
 
 
-def _contributing(conn, branch=None, event_type=None):
+def _contributing(conn, event_type=None):
     q = f"SELECT event_id FROM events WHERE type IN ({','.join('?'*len(GEO_TYPES))})"
     args = list(GEO_TYPES)
-    if branch:
-        q += " AND sr_outcome_90=?"; args.append(branch)
     if event_type:
         q += " AND type=?"; args.append(event_type)
     return [r[0] for r in conn.execute(q, args)]
@@ -80,8 +87,8 @@ def _live_flow(conn):
     return out
 
 
-def propagate(conn, branch=None, event_type=None):
-    ids = _contributing(conn, branch=branch, event_type=event_type)
+def propagate(conn, event_type=None):
+    ids = _contributing(conn, event_type=event_type)
     hops = []
     for tier, sid, label in CHAIN:
         h = _hop(conn, sid, ids)
@@ -91,13 +98,13 @@ def propagate(conn, branch=None, event_type=None):
     crude = next((h for h in hops if h["series_id"] == "fred.DCOILBRENTEU"), None)
     disruption_fraction = (crude["material_move_pct"] if crude else None)
     return {
-        "branch": branch or "ALL", "event_type": event_type,
+        "event_type": event_type or "ALL",
         "contributing_n": len(ids),
         "hops": hops,
         "realized_disruption_fraction_pct": disruption_fraction,
         "flow_now": _live_flow(conn),
-        "reading": (f"Of the {crude['n']} events on record that resolved to "
-                    f"{branch or 'this class'}, {crude['material_move_pct']}% produced a "
+        "reading": (f"Of the {crude['n']} events on record in "
+                    f"{event_type or 'this class'}, {crude['material_move_pct']}% produced a "
                     f"large sustained Brent move (>= {DISRUPTION_MIN:.0f}%); the majority "
                     f"({crude['no_lasting_move_pct']}% within +/-5%) did not — the flow held and "
                     f"the market carried a risk premium, not a realized cut.") if crude else
@@ -110,8 +117,8 @@ def propagate(conn, branch=None, event_type=None):
 if __name__ == "__main__":
     import json
     c = connect(read_only=True)
-    for b in (None, "WIDENING", "CONTAINED"):
-        p = propagate(c, branch=b)
-        print(f"\n=== branch={p['branch']} n={p['contributing_n']} disruption={p['realized_disruption_fraction_pct']}% ===")
+    for t in (None, "infrastructure_attack", "chokepoint_disruption"):
+        p = propagate(c, event_type=t)
+        print(f"\n=== class={p['event_type']} n={p['contributing_n']} disruption={p['realized_disruption_fraction_pct']}% ===")
         for h in p["hops"][:6]:
             print(f"  {h['label']:<22} signed_med {h['signed_median_pct']:>6}%  n={h['n']:<3} material {h['material_move_pct']}% no-lasting {h['no_lasting_move_pct']}%")

@@ -31,7 +31,10 @@ def test_abqaiq_is_read_point_in_time():
     br = s["branches"]
     assert br["applicable"] and all(a["date"] < "2019-09-14" for a in br["analogs"])
     assert s["significance"]["significance"] in ("MATERIAL", "IN_LINE", "NOISE")
-    assert s["propagation"]["hops"] and all("n" in h for h in s["propagation"]["hops"])
+    # band 5 now reads data/ripple/irf.json, not the retired-label propagate.py (DESIGN.md Amendment 1)
+    tv = s["propagation"]
+    assert tv["available"] and tv["source"] == "data/ripple/irf.json" and tv["shock"] == s["event_class"]
+    assert all("n" in c and "verdict" in c and "lo95" in c for h in tv["hops"] for c in h["cells"])
     # Brief A-2: trust rows come from the walk summary on IES-90 labels; the corpus-derived branch rates carry the retired label
     wf = s["trust"]["walk_forward"]
     assert "IES-90" in wf["label"] and "protocol §7" in wf["label"] and wf["run_id"] and wf["run_id"] in wf["label"]
@@ -59,7 +62,10 @@ def test_off_topic_text_is_noise_without_fabrication():
     assert s["event_class"] in (None, "")
     assert s["significance"]["significance"] == "NOISE"
     assert s["priced"].get("fan") is None
-    assert not s["propagation"]
+    # the travel band invents nothing for an off-topic story, and says WHY it is empty rather than
+    # rendering a blank region (DESIGN.md §6 + Amendment 1)
+    assert s["propagation"]["available"] is False and "hops" not in s["propagation"]
+    assert "no event class" in s["propagation"]["note"]
 
 
 def test_v2_endpoints():
@@ -106,3 +112,34 @@ def test_walk_and_engine_endpoints():
     st = c.get("/api/story?id=september_11_attacks_2001").json()
     assert st["engine"]["available"] and st["engine"]["G"]["n"] > 0
     assert c.get("/api/walk/read?id=not_a_real_event").status_code == 404
+
+
+def test_travel_band_shows_every_registered_cell_and_never_invents_a_verdict():
+    """DESIGN.md Amendment 1 A1.1-A1.4: all 53 cells per class, verdicts verbatim from the file.
+
+    The band is the project's absence language under load -- for most classes almost every cell is a
+    null, and that is the finding rather than an empty screen. Two things are pinned here: the count
+    (nothing is filtered out for being uninteresting), and that the desk never captions a cell the
+    file did not verdict.
+    """
+    t = SR.travel("chokepoint_disruption")
+    assert t["available"] and t["spec"] == "total" and t["sample"] == "full"
+    cells = [c for h in t["hops"] for c in h["cells"]]
+    assert len(cells) == 53 and t["counts"]["cells"] == 53 and "note" not in t
+    assert [h["hop"] for h in t["hops"]] == ["0", "1", "2", "3", "4", "x", "e"]   # A1.4 hop ladder order
+    assert all(c["verdict"] in ("TRANSMITTING", "NULL", "INSUFFICIENT") for c in cells)
+    assert all(c["zero_line"] for c in cells)                                     # §2: drawn on every cell
+    assert t["counts"]["NO_VERDICT"] == 0
+    # A1.3: amber is reserved for a walk-forward comparison and does not arise here
+    assert "amber" not in {c["colour"] for c in cells}
+    # insufficient is hatched, never coloured
+    assert all(c["colour"] == "hatch" for c in cells if c["verdict"] == "INSUFFICIENT")
+    # the finding sentence is a count, not an adjective, and states k=0 in words
+    k = t["counts"]["TRANSMITTING"]
+    assert (f"{k} of 53" in t["finding"]) if k else ("No cell transmits" in t["finding"])
+
+    # A1.2: a cell the file leaves unverdicted is reported as unverdicted, not captioned as a null
+    cell = SR._irf_cell({"node": "x", "series_id": "s", "freq": "d", "headline_h": 1,
+                         "transform": "log", "n_events": 40, "irf": [{"h": 1, "beta": 0.0}]})
+    assert cell["verdict"] is None and cell["state"] == "no_verdict" and cell["colour"] == "hatch"
+    assert "No verdict recorded" in cell["caption"] and "crosses zero" not in cell["caption"]
