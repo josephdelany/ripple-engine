@@ -45,9 +45,10 @@ def classify(path):
 
 def main():
     tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
-    paths = sorted(set(tracked) | {"src/classify_public_product.py", "docs/audit/FILE_CLASSIFICATION.csv"})
+    declared = {p for p in CORE | DEPENDENCY | EVIDENCE if (ROOT / p).exists()}
+    paths = sorted(set(tracked) | declared)
     with OUT.open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["path", "classification"])
         w.writerows((p, classify(p)) for p in paths)
     print(f"classified {len(paths)} files -> {OUT.relative_to(ROOT)}")

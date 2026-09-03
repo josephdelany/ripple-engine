@@ -1318,6 +1318,7 @@ registrations/RIPPLE_REGISTRATION.md,archive_planning_narrative
 registrations/SPINE_REGISTRATION.md,archive_planning_narrative
 registrations/STRUCTURAL_SURFACE_EXPERIMENT.md,maintained_core
 repro.sh,archive_scientific_code
+requirements-public.txt,maintained_core
 requirements.txt,archive_scientific_code
 scaffolding/BRIEF_STANDARD.md,archive_planning_narrative
 scaffolding/BUILD_V2.md,archive_planning_narrative
@@ -1585,6 +1586,7 @@ src/two_source_backfill.py,archive_scientific_code
 src/uncheckable_audit.py,archive_scientific_code
 src/validate.py,archive_scientific_code
 src/validate_gpr.py,archive_scientific_code
+src/verify_submission.py,maintained_core
 src/vintage_check.py,archive_scientific_code
 src/walk.py,archive_scientific_code
 src/walk_forward.py,archive_scientific_code
@@ -1735,6 +1737,7 @@ tests/test_v2_challenge.py,archive_scientific_tests
 tests/test_v2_gate_ledger.py,archive_scientific_tests
 tests/test_v2_story_api.py,archive_scientific_tests
 tests/test_validate.py,archive_scientific_tests
+tests/test_verify_submission.py,maintained_core
 tests/test_walk.py,archive_scientific_tests
 tests/test_walk_archive.py,archive_scientific_tests
 tests/test_walk_baselines.py,archive_scientific_tests
