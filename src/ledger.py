@@ -258,6 +258,29 @@ def _rows(p):
     return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
 
 
+def _antecedent_counts():
+    """The Amendment 9 status of every unresolved hypothetical claim, so `never_resolves` is
+    reported by REASON rather than as one opaque number."""
+    try:
+        import antecedent as _A
+        from collections import Counter as _C
+        rows = _rows(_A.OUT) if _A.OUT.exists() else []
+        latest = {r["claim_id"]: r["status"] for r in rows}
+        return dict(_C(latest.values()))
+    except Exception:                                            # noqa: BLE001
+        return {}
+
+
+def _antecedent_met():
+    """Claim ids whose antecedent the Amendment 9 gate recorded as MET. Imported lazily so ledger
+    keeps working if the gate has never been run (empty set -> today's behaviour, nothing resolved)."""
+    try:
+        import antecedent as _A
+        return _A.met_ids()
+    except Exception:                                            # noqa: BLE001 -- never block resolution
+        return set()
+
+
 def resolve(conn, today=None):
     """Resolve every checkable claim past its horizon, from data. Appends to resolutions.jsonl."""
     today = pd.Timestamp(today or date.today())
@@ -266,7 +289,14 @@ def resolve(conn, today=None):
     LEDGER_DIR.mkdir(parents=True, exist_ok=True)
     with open(RESOLUTIONS, "a", encoding="utf-8") as f:
         for c in _rows(CLAIMS):
-            if not c.get("checkable") or c["claim_id"] in done or c.get("modality") == "hypothetical":
+            # Amendment 9 (defect L-2): a hypothetical claim is skipped UNLESS its antecedent has
+            # been recorded ANTECEDENT_MET by the registered gate. §2 always said such a claim
+            # "resolves only if the antecedent event enters the corpus"; nothing tested it until now,
+            # so these sat in `pending` for ever. The gate refuses far more often than it answers,
+            # by design (Amendment 9 §9.4, 9.1) -- on the committed corpus it admits none.
+            if c.get("modality") == "hypothetical" and c["claim_id"] not in _antecedent_met():
+                continue
+            if not c.get("checkable") or c["claim_id"] in done:
                 continue
             k0 = pd.Timestamp(c["knowable"])
             res = None
@@ -373,8 +403,11 @@ def scoreboards(conn=None):
             "sources": sources,
             "counts": {"claims_logged": len(claims), "checkable": len(checkable), "resolved": len(res),
                        "pending": len(pending), "awaiting_horizon": len(awaiting), "never_resolves": len(never),
-                       "never_resolves_reason": "modality=hypothetical; resolve() skips it and no antecedent "
-                                               "mechanism exists (defect L-2, open)"},
+                       "hypothetical_by_antecedent_status": _antecedent_counts(),
+                       "never_resolves_reason": "modality=hypothetical. The Amendment 9 antecedent gate now "
+                                               "tests each one; see hypothetical_by_antecedent_status for the "
+                                               "reason per claim. On the committed corpus it admits none: "
+                                               "2 circular, 3 untestable, 7 carry no antecedent at all"},
             "registration": "CLAIM_LEDGER_REGISTRATION.md",
             "note": "Nothing here is hand-edited. Boards below n=8 are labelled seeding."}
 

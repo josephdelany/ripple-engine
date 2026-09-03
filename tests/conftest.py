@@ -47,6 +47,16 @@ DB_FREE_FILES = {
     "test_travel_irf.py",            # DESIGN.md Amendment 1: an ast scan of src/ + the committed
                                      # data/ripple/irf.json; its two Story tests carry their own skipif
     "test_figures_paper.py",         # Session I: the paper figures -- committed JSON/Markdown only
+    # Session H, the claim loop. All four read committed artifacts (data/ledger/**, data/reader_eval/**);
+    # every DB-dependent test in them carries its own skipif or takes a self-skipping `conn` fixture.
+    # Verified to pass with no oil.db present. They are in the CI gate because two of their checks are
+    # the ones least safe to lose silently: the fabrication guard (every backfill quote must appear
+    # verbatim in its archived page) and the L-1 regression test (log_claims must persist entities).
+    "test_ledger_backfill.py",
+    "test_audit_reader.py",
+    "test_uncheckable_audit.py",
+    "test_challenge_loop.py",
+    "test_antecedent.py",            # Amendments 9/9.1: the antecedent gate; its corpus tests self-skip
 }
 
 
