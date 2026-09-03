@@ -190,39 +190,71 @@ def test_all_non_hostile_events_currently_carry_a_level(rows):
 
 
 @pytest.mark.skipif(not SCORES.exists(), reason="walk scores not present")
-def test_section_6_impact_recomputes_from_the_sealed_scores(rows):
-    """The published-run figures are read out of B's scores file, never retyped by hand.
-    This test recomputes them; it does not re-score anything and never writes."""
-    scored = [json.loads(l) for l in SCORES.open(encoding="utf-8")]
+def _section6(scored, rows):
+    """The §6 set and every figure in it, DERIVED from the sealed scores of the published run.
+    Nothing run-specific is written down here: when B publishes a new run these move with it,
+    and the test's job is to check the document moved too. Before 2026-09-03 both sides of that
+    comparison were hardcoded to the same constants, so the test could only catch a typo in the
+    document -- never the case that actually happened, which was the run changing underneath it."""
     run = _published_run(scored)
     sel = [r for r in scored
            if r["run_id"] == run and r["tier"] == "daily" and r.get("burn_in_ok")
            and (r["scores"].get("engine") or {}).get("G")
            and (r["scores"].get("climatology") or {}).get("G")]
-    assert len(sel) == 150, f"the section-6 set is 150 scored G reads, got {len(sel)}"
-    lvl = lambda r: int(r["outcome"]["level"])
-    share = lambda rs: (sum(1 for r in rs if lvl(r) == 0), len(rs))
-
-    k, n = share(sel)
-    assert (k, n) == (63, 150) and round(k / n * 100, 1) == 42.0
-
-    affected = {e for e, r in rows.items() if r["hostility"] in NOT_SCORABLE}
     nh = {e for e, r in rows.items() if r["hostility"] == "non_hostile"}
-    in150 = {r["event_id"] for r in sel}
-    assert len(in150 & affected) == 27, sorted(in150 & affected)
-    assert len(in150 & nh) == 17, sorted(in150 & nh)
+    amb = {e for e, r in rows.items() if r["hostility"] == "ambiguous"}
+    hu = {e for e, r in rows.items() if r["hostility"] == "hostile_unattributed"}
 
-    k1, n1 = share([r for r in sel if r["event_id"] not in nh])
-    assert (k1, n1) == (49, 133) and round(k1 / n1 * 100, 1) == 36.8
-    k2, n2 = share([r for r in sel if r["event_id"] not in affected])
-    assert (k2, n2) == (40, 123) and round(k2 / n2 * 100, 1) == 32.5
+    def share(drop):
+        rs = [r for r in sel if r["event_id"] not in drop]
+        k = sum(1 for r in rs if int(r["outcome"]["level"]) == 0)
+        return len(rs), k, round(k / len(rs) * 100, 1)
 
+    in_set = {r["event_id"] for r in sel}
+    return {"run": run, "sel": sel, "n": len(sel), "in_set": in_set,
+            "nh": in_set & nh, "amb": in_set & amb, "hu": in_set & hu,
+            "published": share(set()), "no_nh": share(nh),
+            "no_nh_amb": share(nh | amb), "strictest": share(nh | amb | hu)}
+
+
+def test_section_6_impact_recomputes_from_the_sealed_scores(rows):
+    """The published-run figures are read out of B's scores file, never retyped by hand.
+    This test recomputes them and asserts the DOCUMENT carries what the recomputation gives;
+    it does not re-score anything and never writes."""
+    scored = [json.loads(l) for l in SCORES.open(encoding="utf-8")]
+    s6 = _section6(scored, rows)
     text = AUDIT.read_text(encoding="utf-8")
-    for s in ("| **as published** | 150 | 63 | **42.0%** |",
-              "| excluding the 17 `non_hostile` (the Amendment 3 rule as registered) | 133 | 49 | **36.8%** |",
-              "| also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |",
-              "| **all** | **150** | **17** | **10** | **27 (18%)** |"):
-        assert s in text, f"section 6 table drifted from the scores file: {s}"
+    sec6 = text[text.index("## 6."):text.index("## 7.")]
+
+    n, k, pct = s6["published"]
+    assert f"| **as published** | {n} | {k} | **{pct}%** |" in sec6, \
+        f"the as-published row must read {n} / {k} / {pct}% for run {s6['run']}"
+    n1, k1, p1 = s6["no_nh"]
+    assert (f"| excluding the {len(s6['nh'])} `non_hostile` (the Amendment 3 rule as registered) "
+            f"| {n1} | {k1} | **{p1}%** |") in sec6
+    n2, k2, p2 = s6["no_nh_amb"]
+    assert f"| also excluding the {len(s6['amb'])} `ambiguous` | {n2} | {k2} | **{p2}%** |" in sec6
+    n3, k3, p3 = s6["strictest"]
+    assert (f"| also excluding the {len(s6['hu'])} `hostile_unattributed` (the strictest reading) "
+            f"| {n3} | {k3} | **{p3}%** |") in sec6
+
+    aff = len(s6["nh"]) + len(s6["amb"])
+    assert f"**Affected: {aff} of the {s6['n']} reads ({round(100*aff/s6['n'],1)}%)**" in sec6
+    assert (f"| **all** | **{s6['n']}** | **{len(s6['nh'])}** | **{len(s6['amb'])}** "
+            f"| **{aff} ({round(100*aff/s6['n'])}%)** |") in sec6
+
+    # the by-class table, also derived
+    with _db() as conn:
+        cls = dict(conn.execute("select event_id, type from events").fetchall())
+    for c in GEO_CLASSES:
+        ids = {r["event_id"] for r in s6["sel"] if cls.get(r["event_id"]) == c}
+        a = len(ids & s6["nh"]) + len(ids & s6["amb"])
+        row = (f"| `{c}` | {len(ids)} | {len(ids & s6['nh'])} | {len(ids & s6['amb'])} "
+               f"| {a} ({round(100*a/len(ids)) if ids else 0}%) |")
+        assert row in sec6, f"by-class row drifted from the scores file: {row}"
+
+    # the run this section was computed from must be named in it
+    assert s6["run"] in sec6, f"section 6 must name the run it was recomputed from ({s6['run']})"
 
 
 @pytest.mark.skipif(not SCORES.exists(), reason="walk scores not present")
@@ -287,11 +319,19 @@ def test_the_ambiguous_diagnostic_is_published_both_ways():
     without them. A single-figure report of this target is incomplete."""
     text = AUDIT.read_text(encoding="utf-8")
     sec6 = text[text.index("## 6."):text.index("## 7.")]
-    assert "| excluding the 17 `non_hostile` (the Amendment 3 rule as registered) | 133 | 49 | **36.8%** |" in sec6, \
+    # derived, not hardcoded: the requirement is that BOTH bounds are present for whatever run
+    # is published, not that they equal any particular pair of numbers.
+    scored = [json.loads(l) for l in SCORES.open(encoding="utf-8")]
+    s6 = _section6(scored, _rows())
+    n1, k1, p1 = s6["no_nh"]
+    assert (f"| excluding the {len(s6['nh'])} `non_hostile` (the Amendment 3 rule as registered) "
+            f"| {n1} | {k1} | **{p1}%** |") in sec6, \
         "the share under the registered rule (ambiguous still excluded from scoring) is missing"
-    assert "| also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |" in sec6, \
+    n2, k2, p2 = s6["no_nh_amb"]
+    assert f"| also excluding the {len(s6['amb'])} `ambiguous` | {n2} | {k2} | **{p2}%** |" in sec6, \
         "the other bound (ambiguous also out of the denominator) is missing"
-    assert "| **as published** | 150 | 63 | **42.0%** |" in sec6
+    n, k, pct = s6["published"]
+    assert f"| **as published** | {n} | {k} | **{pct}%** |" in sec6
     assert "both with and without" in sec6, "section 6 must state the both-ways requirement"
 
 

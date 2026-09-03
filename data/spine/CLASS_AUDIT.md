@@ -418,115 +418,122 @@ into geopolitical classes for want of a better one. This is not a legacy-records
 
 ## 6. Impact on the published walk — reported, not applied
 
-> **[Amendment 4, 2026-09-03 — every figure in this section is on the PRE-Amendment-4 target
-> and is NOT recomputed here.]** The 150 scored reads, the 42.0% level-0 share and the three
-> exclusion rows below were all computed against the labels as they stood before the ongoing-
-> conflict rule reached COW War and UCDP GED. Against the rebuilt target, **49 of the 172
-> scored daily G reads leave the G target entirely** and 53 lose a knowable pre-window level.
-> Recomputing this section now would mix a pre-amendment run's reads with a post-amendment
-> target — the exact move A3.5 and A4.7 both forbid.
->
-> **State at 2026-09-03 05:35Z, and why the two §6 tests are red.** Session B's run
-> `walk_20260903T052633Z` — the first under Amendment 4 — has written all 313 rows to
-> `reads/scores/weights.jsonl`, but `summary.json` still describes the previous run
-> `walk_20260903T003422Z` (sealed 00:35Z, registration *"Amendment 1 + 1.1 + 2"*, 184 labels,
-> G n 150). B is still computing the summary. So the scores file and the summary currently
-> describe **different runs**, and `test_section_6_impact_recomputes_from_the_sealed_scores`
-> and `test_section_6_set_matches_the_published_summary` fail on exactly that gap: the scores
-> file's latest run carries **100** scored G reads, the published summary says 150. That is B's
-> run landing, not a defect in this audit, and **§6 is deliberately left alone rather than
-> restated against a run nobody has published yet.** When B's summary lands, §6 is recomputed
-> from the scores file — which is what those two tests exist to force — and the pre- and
-> post-amendment runs are reported separately, never pooled.
->
-> Counts: `data/state/ies90_amendment4_counts.json`; handoff:
-> `data/handoffs/K_to_F_2026-09-03_class_audit_stale.md`.
+> **Recomputed 2026-09-03 from the sealed scores of `walk_20260903T052633Z`**, Session B's
+> first run under OUTCOME_MAPPING Amendment 4 (`data_state.ies90_registration` =
+> *"Amendment 1 + 1.1 + 2 + 4"*, 132 events with a level, 55 `no_independent_outcome`). It
+> replaces the figures computed against `walk_20260903T003422Z`, whose target was the
+> pre-Amendment-4 one. **The two runs are reported separately and never pooled** (A3.5, A4.7);
+> the earlier figures are not restated here as a correction to this run's, they belong to a
+> different target and stand where they were published. Every number below is recomputed from
+> the scores file by `tests/test_hostility.py::test_section_6_impact_recomputes_from_the_sealed_scores`,
+> which derives them rather than storing them, so this section cannot silently drift from the
+> run again.
 
 Amendment 3 §A3.5: **no published run is re-scored.** These numbers say how much of the
 published G result rests on events for which the G target is undefined. They are an impact
 statement for the paper's limitations section and a handoff to Session B for v3.
 
-Set: the **150 daily-tier scored G reads** of the current published run — the reads that
+Set: the **100 daily-tier scored G reads** of the current published run — the reads that
 passed burn-in and carry both an engine and a climatology G score, matching
-`summary.json` `/tiers/daily/G/engine_vs/climatology/n` = 150. (Session B re-ran the walk
-during this session; the run id changed, the set and every figure below did not. The audit
-and its test read the run out of the scores file rather than naming it, so a re-run does not
-silently invalidate this section — it recomputes it.)
+`summary.json` `/tiers/daily/G/engine_vs/climatology/n` = 100. The set fell from 150 to 100
+because Amendment 4 removed 49 of the previously scored events from the G target altogether;
+that is a change in the *target*, not in this audit, and it is why every figure below differs
+from the ones this section carried before 2026-09-03.
 
 | | n | level-0 | share |
 |---|---:|---:|---:|
-| **as published** | 150 | 63 | **42.0%** |
-| excluding the 17 `non_hostile` (the Amendment 3 rule as registered) | 133 | 49 | **36.8%** |
-| also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |
-| also excluding the 2 `hostile_unattributed` (the strictest reading) | 121 | 40 | **33.1%** |
+| **as published** | 100 | 57 | **57.0%** |
+| excluding the 14 `non_hostile` (the Amendment 3 rule as registered) | 86 | 44 | **51.2%** |
+| also excluding the 7 `ambiguous` | 79 | 37 | **46.8%** |
+| also excluding the 1 `hostile_unattributed` (the strictest reading) | 78 | 37 | **47.4%** |
 
 **Every diagnostic of this target publishes the level-0 share both with and without the
 `ambiguous` events, as the table above does** — required by Amendment 3.3 §2 and asserted by
 `tests/test_hostility.py::test_the_ambiguous_diagnostic_is_published_both_ways`. Because
-`ambiguous` is terminal, the choice of whether to count those thirteen can never be settled by
+`ambiguous` is terminal, the choice of whether to count those events can never be settled by
 evidence; publishing both figures is therefore not a courtesy but the only honest way to
 report the target, and it lets a reader who disagrees with any single ambiguous coding read
 off the other bound without a re-run. Neither figure is the headline: the registered rule
-excludes `ambiguous` from G-scoring, so **36.8% is the share under Amendment 3** and 32.5% is
+excludes `ambiguous` from G-scoring, so **51.2% is the share under Amendment 3** and 46.8% is
 the bound that also drops them from the denominator.
 
-**Affected: 27 of the 150 reads (18.0%)** — 17 non-hostile, 10 ambiguous. By class:
+**The level-0 share rose from 42.0% to 57.0% between the two runs, and that is Amendment 4,
+not Amendment 3.** The events Amendment 4 removed were disproportionately the ones carrying
+levels 2 and 3 — a war already running is not a level 0 — so taking them out raised the
+share of zeros among what remains. It is a fact about the surviving population, not a change
+in any event's label direction, and it is why the base rate the engine is judged against
+moved between the two runs.
+
+**Affected: 21 of the 100 reads (21.0%)** — 14 non-hostile, 7 ambiguous. By class:
 
 | class | scored G reads | non_hostile | ambiguous | affected |
 |---|---:|---:|---:|---:|
-| `infrastructure_attack` | 38 | 1 | 2 | 3 (8%) |
-| `chokepoint_disruption` | 17 | 5 | 1 | 6 (35%) |
-| `conflict_escalation` | 46 | 8 | 2 | 10 (22%) |
-| `sanctions` | 49 | 3 | 5 | 8 (16%) |
-| **all** | **150** | **17** | **10** | **27 (18%)** |
+| `infrastructure_attack` | 13 | 1 | 1 | 2 (15%) |
+| `chokepoint_disruption` | 10 | 3 | 0 | 3 (30%) |
+| `conflict_escalation` | 35 | 8 | 1 | 9 (26%) |
+| `sanctions` | 42 | 2 | 5 | 7 (17%) |
+| **all** | **100** | **14** | **7** | **21 (21%)** |
 
-The 17 non-hostile reads, with the level each contributed — **the three non-zero ones are the
-damage**:
+The 14 non-hostile reads, with the level each contributed — **one of them is now non-zero**:
 
 | event | class | level |
 |---|---|---:|
-| `drc_cobalt_ban_2025` | sanctions | **3 — war** |
-| `druzhba_contamination_2019` | chokepoint_disruption | **2** |
 | `kurdistan_ceyhan_halt_2023` | chokepoint_disruption | **2** |
-| `venezuela_blackout_2019`, `suez_ever_given_2021`, `cpc_novorossiysk_storm_2022`, `codelco_elteniente_2025`, `indonesia_nickel_ban_2019`, `indonesia_palm_ban_2022`, `escondida_strike_2011`, `sa_platinum_strike_2014`, `escondida_strike_2017`, `lasbambas_blockade_2019`, `lasbambas_halt_2021`, `cuajone_shutdown_2022`, `peru_lasbambas_2022` | (mixed) | 0 |
+| `codelco_elteniente_2025`, `cpc_novorossiysk_storm_2022`, `cuajone_shutdown_2022`, `escondida_strike_2011`, `escondida_strike_2017`, `escondida_strike_2024`, `indonesia_nickel_ban_2019`, `indonesia_palm_ban_2022`, `lasbambas_blockade_2019`, `lasbambas_halt_2021`, `peru_lasbambas_2022`, `sa_platinum_strike_2014`, `suez_ever_given_2021` | (mixed) | 0 |
 
-Six more affected events are outside the 150 on tier or burn-in — `abqaiq_arabian_1977`,
-`iran_oilworkers_strike_1978`, `shah_leaves_iran_1979`, `earnest_will_1987`,
-`suez_tropic_brilliance_2004`, `libya_jathran_blockade_2013` — but they are still **retrieved
-as analogues**, which does not show up in the headline: an oil-workers' strike sits in the
-precedent set carrying level 3, war.
+Twelve affected events are outside the 100, on tier, burn-in, or because Amendment 4 no longer
+scores them — `abqaiq_arabian_1977`, `btc_pipeline_blast_2008`, `drc_cobalt_ban_2025`,
+`druzhba_contamination_2019`, `earnest_will_1987`, `iran_oilworkers_strike_1978`,
+`iraq_nasiriya_2019`, `libya_jathran_blockade_2013`, `saudi_suspends_bab_el_mandeb_2018`,
+`shah_leaves_iran_1979`, `suez_tropic_brilliance_2004`, `venezuela_blackout_2019`. Those still
+carrying a level are still **retrieved as analogues**, which does not show up in the headline:
+an oil-workers' strike sits in the precedent set carrying level 3, war.
 
-### 6.1 Reading the numbers honestly, and a correction to the first pass
-**The first pass understated this, and the direction has changed.** Reporting only
-`infrastructure_attack` and `chokepoint_disruption`, this section previously said 9 of 150
-reads affected (6.0%) and the level-0 share moving 42.0% → 41.0%, and concluded "the effect
-on the headline is small" and "this is not a level-0 inflation story". Across all four
-classes it is **27 of 150 (18.0%)** and the level-0 share moves **42.0% → 36.8%**, five
-points, because 14 of the 17 non-hostile reads are level 0. Both earlier sentences are
-withdrawn: the affected fraction is three times larger, and it *is* substantially a level-0
-story once the mining strikes and export bans are counted. The two-class numbers were correct
-for the two classes; the conclusion drawn from them was not safe to generalise, and it was
-drawn before the other 112 records had been read.
+### 6.1 Reading the numbers honestly, and what the second recomputation changed
+**Two of the three cases this section called "the qualitative damage" are gone, and not
+because anyone re-coded them.** Before Amendment 4 the three non-zero non-hostile reads were
+`drc_cobalt_ban_2025` (**level 3, war** — a cobalt price-support measure), 
+`druzhba_contamination_2019` (**level 2** — a pipeline contaminated to cover a theft) and
+`kurdistan_ceyhan_halt_2023` (**level 2** — an ICC arbitration award). The first two are now
+`no_independent_outcome` under Amendment 4: the GED deaths that manufactured their levels were
+already at that level across the whole pre-window, so they date nothing about the event. Only
+the arbitration award survives as a non-hostile read carrying force.
+
+That is the clearest evidence in this document that the two rules are **independent and
+partially overlapping, not redundant**. Amendment 4 removed two of Amendment 3's three worst
+cases while never asking whether the events were hostile — and Amendment 3 still catches
+`iran_oilworkers_strike_1978`, a labour strike carrying level 3, which Amendment 4 leaves
+scored because the Iranian Revolution's spell began only 58 days before it. Of the 33 events
+Amendment 3 excludes and the 55 Amendment 4 excludes, **3 are in both**.
+
+**The earlier corrections in this section stand as the record of two earlier passes and are
+not restated for this run.** The first pass, reading only `infrastructure_attack` and
+`chokepoint_disruption`, reported 9 of 150 reads affected (6.0%) and concluded "the effect on
+the headline is small"; the second, across all four classes, reported 27 of 150 (18.0%) and
+withdrew that conclusion. Both were computed on the pre-Amendment-4 target. On this run it is
+**21 of 100 (21.0%)**, and the level-0 share moves **57.0% → 51.2%**, six points, because 13
+of the 14 non-hostile reads are level 0. The direction of the second pass's conclusion is
+unchanged and its "not a level-0 inflation story" withdrawal still holds.
 
 What still holds, and what follows:
-1. **The three non-zero non-hostile reads remain the qualitative damage.** A cobalt export
-   ban reading as **war**, a contaminated pipeline and an arbitration award reading as *use
-   of force* — those are cases where the location fallback manufactured escalation out of
-   events with no adversary. The other 14 are level 0, which is the right answer for the
-   wrong reason: an event with no adversary has nothing to record in the window.
-2. **The base rate the engine is scored against moves by five points.** Climatology is
-   estimated from this outcome distribution, so removing the non-hostile reads changes the
-   comparison the engine is judged against, not merely the engine's own score. That makes
-   this a limitation on *both* sides of the skill comparison and it must be reported as such —
-   in whichever direction it turns out to run, which cannot be known until B re-runs.
+1. **The qualitative damage is now one read, not three, and the reason matters.** An
+   arbitration award reading as *use of force* is still the location fallback manufacturing
+   escalation out of an event with no adversary. The other 13 are level 0, which is the right
+   answer for the wrong reason: an event with no adversary has nothing to record in the
+   window.
+2. **The base rate the engine is scored against moved by fifteen points between the two runs,
+   and by six more under Amendment 3.** Climatology is estimated from this outcome
+   distribution, so both the target change and the precondition change the comparison the
+   engine is judged against, not merely the engine's own score. This is a limitation on *both*
+   sides of the skill comparison and must be reported as such.
 3. **No claim about skill is made here, in either direction.** What the audit removes is not
-   error but **27 reads that should never have been asked**. The honest statement for the
-   paper is that the target was mis-specified for 18% of the scored G reads, that this
-   cannot be corrected in the published run, and that it is corrected in v3.
+   error but **21 reads that should never have been asked**. The honest statement for the
+   paper is that the target was mis-specified for 21% of the scored G reads of this run, that
+   this cannot be corrected within the run, and that it is corrected in v3.
 
 Nothing above changes `summary.json`, `scores.jsonl` or `reads.jsonl`. Per §A3.5, every
-surface reporting G from this run carries: *"scored before Amendment 3; includes 17
-non-hostile events for which the G target is undefined (27 counting ambiguous) —
+surface reporting G from this run carries: *"scored before Amendment 3; includes 14
+non-hostile events for which the G target is undefined (21 counting ambiguous) —
 `data/spine/CLASS_AUDIT.md` §6."*
 
 ## 7. The class split — approved as a field, and Joe's two closing rulings
