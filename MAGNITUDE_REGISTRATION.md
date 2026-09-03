@@ -494,3 +494,66 @@ one-sidedness so it cannot later be quoted as corroboration.
 gate. This re-test says nothing about either individually, but they share that gate's defect and the
 same treatment is available to whoever owns them. Stage 0 of §3 has **not** been run; nothing in this
 amendment starts it.
+
+## Amendment C-2 — 2026-09-03, AFTER computing §3's kill-test: Stage 0 returns outcome 3
+
+*Appended, never edited in place. §3 above stands as sealed. Full result:
+`docs/MAGNITUDE_STAGE0.md`, `data/magnitude/stage0.json`, tests `tests/test_magnitude_stage0.py`.*
+
+**1. One implementation ruling, disclosed.** §3 wrote the rule as "B ≫ A" and never quantified it.
+Left that way the threshold could have been chosen after seeing the estimate. It was fixed in
+`src/magnitude_stage0.py` and **committed at `de70b04` with no `stage0.json` in the tree** — the git
+history is the receipt:
+
+> **B beats A** iff B's headline band excludes zero and A's does not, **or** both exclude zero and
+> |z_B| ≥ 2·|z_A|. Otherwise B ≈ A. C's condition: the dummy's coefficient in spec C covers zero.
+
+Coefficients are also reported per standard deviation of their own regressor, because a 0/1 dummy and
+a continuous surprise are not on the same scale.
+
+**2. The shared subsample is 44 days** — both a corpus `opec_decision` event (52 day-precision) and a
+Känzig announcement day (169); 35 enter each estimation sample. A, B, C and D differ only in the
+regressor.
+
+**3. THE ANSWER: `MAGNITUDE IS BELIEF, NOT BARRELS` (§12 outcome 3).** Build M-B only, and only as the
+§2.1 comparator. The study is neither killed nor cleared as briefed; it is narrowed.
+
+| | A dummy | B magnitude | C dummy \| magnitude | D severity |
+|---|---|---|---|---|
+| **Brent, h = 5** | −1.572 [−5.423, +2.279] | **+2.230 [+0.809, +3.651]** | **−0.483 (covers 0)** \| +2.208 (excludes 0) | −0.996 [−2.638, +0.646] |
+| **JODI production, h = 0** | **+0.881 [+0.151, +1.611]** | +0.073 [−0.093, +0.238] | +0.936 (excludes 0) \| +0.102 (covers 0) | +0.238 [−0.010, +0.485] |
+
+On price both registered conditions hold: B beats A, and the dummy collapses to −0.48 with a band
+covering zero once magnitude is present. **On quantity B does not beat A — it is beaten by A**, which
+is why the verdict is outcome 3 and not outcome 1.
+
+**4. §5's zero-cost baseline also fails.** Severity does not beat the dummy on either outcome, let
+alone the surprise. The cheapest possible route to Stage 1 is closed.
+
+**5. The one positive band on a physical quantity belongs to the DUMMY, and it is a timing artefact.**
+It clears the state-matched placebo (99.2nd percentile), so the disqualifying evidence is elsewhere
+and must travel with the number: it exists at h = 0 and at no other horizon; production falls
+**−0.549%** into the month *before* an announcement and rebounds **+0.674%** in the announcement
+month, against an all-month mean of **+0.065%**; and at monthly resolution the announcement and the
+production month coincide, so the ordering within the month is not identified. The magnitude shows
+none of it — which is what one expects if the dummy marks *when OPEC meets* and the surprise carries
+*what OPEC decided*. This is the quantity analogue of v2 §4.3's ANTICIPATED-IN-PRICE flag. The
+anticipation diagnostic and the expectation scoring were **added after** the rule returned its answer
+and are labelled as such in the code; neither feeds the decision rule.
+
+**6. Expectations (§11).** **E-1 PARTLY CONSISTENT** — every price sub-claim holds exactly; the
+overall verdict it predicted does not, because the production arm failed. **E-2 CONSISTENT**, and the
+reason registered in advance (R3, anticipation) is supported by the diagnostic.
+
+**7. What Stage 0 did NOT settle, restating §13.1 because it now governs.** Stage 0 ran on
+`opec_decision`, the class *least* exposed to R2: it correlates r = 0.431 with |Känzig|, while the
+tightening classes correlate **r = −0.023** with the identified supply shock over 614 months. A pass
+here does not license assuming the sanctions, chokepoint and conflict events are supply shocks at
+all. **R2 is now the binding question and it is prior to magnitude**: whether those events are shocks
+comes before how heavily to weight them. That is the next brief, and it needs its own registration
+before anything is computed under it.
+
+**8. Not licensed by this result.** Building M-Q for any non-OPEC class. The evidence for magnitude is
+entirely on the price side, and the price side is exactly where M-B is circular by construction
+(§2.1). Stage 0 showed that a magnitude-bearing regressor beats a dummy at predicting a price, which
+is close to showing that a price surprise predicts prices.

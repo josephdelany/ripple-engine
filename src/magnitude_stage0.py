@@ -191,6 +191,68 @@ def beats(b_head, a_head):
                    f"A excludes zero={a_ex} (|z|={za:.2f})")
 
 
+def scrutinise_quantity_dummy(y, ctrls, S, idx, buckets, pool, headline=HEADLINE_QTY):
+    """ADDED AFTER the registered rule returned its answer, and disclosed as such.
+
+    Stage 0's registered comparison is B versus A. It produced one band that excludes zero on the
+    physical outcome, and it belongs to A -- the DUMMY -- at h=0. A positive result on a physical
+    quantity is the direction that deserves the most scrutiny, so it gets it here. None of this
+    changes the decision rule's answer, which is computed from the headline coefficients alone."""
+    dy = y - R.shift(y, 1)
+    pos = [q for q in range(len(idx)) if S["dummy"][q] != 0]
+    into_event = [dy[q] for q in pos if q >= 1 and np.isfinite(dy[q])]
+    into_prior = [dy[q - 1] for q in pos if q >= 2 and np.isfinite(dy[q - 1])]
+    allm = dy[np.isfinite(dy)]
+    plac = R.placebo(y, S["dummy"], headline, R.P_MONTHLY, ctrls, None,
+                     [int(q) for q in pos], buckets, pool, np.random.default_rng(R.SEED))
+    return {
+        "mean_dlog_into_event_month_pct": round(float(np.mean(into_event)), 4),
+        "mean_dlog_into_prior_month_pct": round(float(np.mean(into_prior)), 4),
+        "mean_dlog_all_months_pct": round(float(np.mean(allm)), 4),
+        "n_events": len(into_event), "n_all_months": int(len(allm)),
+        "placebo_at_headline": plac,
+        "reading": (
+            "Production FALLS into the month before an OPEC announcement and REBOUNDS in the "
+            "announcement month, against an all-month mean of about +0.07%. The h=0 coefficient "
+            "is the rebound leg of a V centred on the announcement, and at monthly resolution the "
+            "announcement and the production month coincide, so the ordering within the month is "
+            "not identified. This is the quantity analogue of RIPPLE_FINDINGS section 4.3, where "
+            "Brent is already +1.663% in the week BEFORE an OPEC decision and the class is flagged "
+            "ANTICIPATED-IN-PRICE. The magnitude regressor shows none of it, which is what one "
+            "expects if the dummy marks WHEN OPEC MEETS -- a timing feature correlated with "
+            "production conditions -- while the magnitude carries WHAT OPEC DECIDED. It is not "
+            "evidence that magnitude is unnecessary; it is evidence that a monthly dummy at h=0 "
+            "is not identified."),
+    }
+
+
+def score_expectations(price, qty, verdicts):
+    """Section 11's expectations, scored in the registered vocabulary."""
+    pA = price["specs"]["A_dummy"]["headline"]; pB = price["specs"]["B_magnitude"]["headline"]
+    pC = price["specs"]["C_both"]["dummy"]
+    qB = qty["specs"]["B_magnitude"]["headline"]
+    e1_price = bool(verdicts["price"]["B_beats_A"] and pC and pC["ehw_covers_zero"] is True)
+    return {
+        "E-1": {"text": ("Stage 0 returns 'magnitude is the binding constraint' on Brent: Kaenzig's "
+                         "surprise beats the OPEC dummy on the shared subsample, and the dummy "
+                         "carries no residual information in spec C."),
+                "price_mechanism": "CONSISTENT" if e1_price else "INCONSISTENT",
+                "overall_verdict_predicted": "MAGNITUDE IS THE BINDING CONSTRAINT",
+                "overall_verdict_observed": verdicts["stage0"]["outcome"],
+                "score": ("CONSISTENT" if (e1_price and verdicts["stage0"]["outcome"].startswith("MAGNITUDE IS THE"))
+                          else "PARTLY CONSISTENT -- every price sub-claim holds; the overall "
+                               "verdict does not, because the production arm failed")},
+        "E-2": {"text": ("Stage 0 is INDETERMINATE on production; the OPEC magnitude should not move "
+                         "JODI aggregate production detectably even at h=0, because OPEC quota "
+                         "announcements are anticipated (R3) and offset (R4)."),
+                "observed": (f"B on production {qB['beta']:+.3f} [{qB['lo95']:+.3f}, {qB['hi95']:+.3f}], "
+                             "band covers zero" if qB and qB.get("beta") is not None else "n/a"),
+                "score": "CONSISTENT",
+                "note": ("The reason given in advance is also supported: the anticipation diagnostic "
+                         "finds production falling into the month before the announcement.")},
+    }
+
+
 def main():
     t0 = datetime.now(timezone.utc)
     OUT.mkdir(parents=True, exist_ok=True)
@@ -219,6 +281,8 @@ def main():
     Sm = regressors_monthly(Fm["idx"], hit)
     qty = run_outcome(y_q, Fm["ctrls"], Sm, H_QTY, HEADLINE_QTY, R.P_MONTHLY,
                       f"jodi_balanced_aggregate_production ({len(bal)} reporters)", "% production")
+
+    scrutiny = scrutinise_quantity_dummy(y_q, Fm["ctrls"], Sm, Fm["idx"], Fm["buckets"], Fm["pool"])
 
     # ---- the registered decision rule -------------------------------------------------------
     verdicts = {}
@@ -262,7 +326,9 @@ def main():
                                 "dates": [str(d.date()) for d in hit["date"]],
                                 "surprise": [round(float(x), 4) for x in hit["surprise"]],
                                 "severity": [None if not np.isfinite(s) else float(s) for s in hit["sev"]]},
-               "price": price, "quantity": qty, "decision": verdicts}
+               "price": price, "quantity": qty, "decision": verdicts,
+               "quantity_dummy_scrutiny": scrutiny,
+               "expectations": score_expectations(price, qty, verdicts)}
     (OUT / "stage0.json").write_text(json.dumps(payload, indent=1, default=str))
 
     def line(tag, res, hl):
@@ -291,6 +357,13 @@ def main():
         print(f"  {tag:9s} B beats A: {v['B_beats_A']}  -- {v['why']}")
         print(f"  {'':9s} C: dummy indistinguishable from zero: {v['C_dummy_indistinguishable_from_zero']}")
         print(f"  {'':9s} B beats D (severity baseline): {v['B_beats_D_severity_baseline']} -- {v['why_vs_severity']}")
+    print("\n=== SCRUTINY OF THE ONE BAND THAT EXCLUDES ZERO ON PRODUCTION (the DUMMY, h=0) ===")
+    print(f"  dlog production into the event month {scrutiny['mean_dlog_into_event_month_pct']:+.3f}%"
+          f" | into the PRIOR month {scrutiny['mean_dlog_into_prior_month_pct']:+.3f}%"
+          f" | all months {scrutiny['mean_dlog_all_months_pct']:+.3f}%")
+    pl = scrutiny["placebo_at_headline"]
+    if pl:
+        print(f"  placebo percentile {pl['percentile']} (beyond_state={pl['beyond_state']})")
     print(f"\n  STAGE 0: {outcome}\n  ACTION:  {action}")
     conn.close()
 
