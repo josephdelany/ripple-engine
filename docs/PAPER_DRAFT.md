@@ -14,8 +14,9 @@ draft is traced in Appendix A to the file that produced it; none is typed from m
 > target to **132 labelled events** (73 / 9 / 30 / 20) with 55 events becoming
 > `no_independent_outcome`, and moves 59 of 187 labels. **The rebuild has landed in the
 > database; the walk has not yet been re-run on it** — `summary.json` still reports
-> `walk_20260903T003422Z`, computed on the pre-amendment target. When the re-run lands, the
-> numbers below are superseded rather than retracted, and the two are distinguishable by tag. **No number in this draft has been adjusted in anticipation
+> the pre-amendment target — is tagged `record-pre-amendment-4` and is **superseded, not
+> retracted**. The two runs are distinguishable by tag, and every superseded number survives in
+> git history. **No number in this draft has been adjusted in anticipation
 > of that re-run.**
 
 This is the final version of the day's work. It supersedes v0.3 (run 210135Z), v0.2
@@ -1161,8 +1162,8 @@ Voeten UNGA ideal points; World Bank WDI; Archigos; FRED. Verified register:
 
 ## Appendix A — provenance of every number in this draft
 
-Run `walk_20260903T003422Z` (numerically identical to 210135Z; see the negative
-control note at the head of this draft). Paths are in `data/walk_forward/summary.json` unless
+Run `walk_20260903T052633Z` (the Amendment 4 re-run; the superseded
+`walk_20260903T003422Z` is tagged `record-pre-amendment-4`). Paths are in `data/walk_forward/summary.json` unless
 another file is named. Regenerate the whole run with `make reproduce`; two
 independent runs reproduce content digest `2a90ff4a…`.
 

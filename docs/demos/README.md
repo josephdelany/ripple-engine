@@ -1,4 +1,10 @@
-# Three sealed reads, walked through
+# Sealed reads, walked through
+
+> **SUPERSEDED, 2026-09-03.** All three pages below are computed on run
+> `walk_20260903T003422Z`. The current run is `walk_20260903T052633Z`, on a rebuilt escalation
+> target (184 labelled events → 132). **None of the three quoted hashes resolves any more**, and
+> `hormuz_closure_2026` no longer carries an escalation label at all. Each page carries its own
+> banner with its current hash. Regeneration is owed.
 
 PATH Step 10. Each page below is written *from the sealed read and its score* in
 `data/walk_forward/{reads,scores}.jsonl`, run `walk_20260903T003422Z` — the run
