@@ -179,6 +179,16 @@ that — ours and commercial ones alike. And the
 tightening classes correlate **r = −0.023** with the identified supply shock over 614 months, so
 whether those events are shocks at all is the prior question. **§12.3.**
 
+**7. The physical alternative was attempted and measured as unrecoverable.** Six researchers,
+disjoint blocks, one absolute sourcing rule, every route logged: **5 of 80 events (6%) reached a
+complete physical record**, against a registered gate of 30. Six walls, each hit independently —
+40% of events have no point asset; capacity is published in incompatible units; the two fields that
+define vulnerability are exactly the two an operator minimises and an attacker maximises;
+restoration is announced as forecast and never confirmed, which is what defeated even Abqaiq; the
+contemporaneous archive is closed before 2006; and one event is a copper mine. **§12.4.**
+*Conditional on a running test: this reads as conflict opacity only if accident-caused outages
+prove measurable on the same schema. If they do not, the claim narrows.*
+
 **What the paper does not claim.** Not that historical analogy fails. The defensible claim is
 narrower: *this implementation, under a strict point-in-time information constraint, did not
 outperform simple baselines for escalation* — on a corpus whose historical arm is thin and
@@ -1029,6 +1039,80 @@ forecaster could not work here. This explains something narrower and more practi
 instrument itself was wrong.** The engine was asked to forecast from indicators of event
 occurrence, and event occurrence is measurably not the quantity that moves the oil market — a
 result that applies to any system, ours or commercial, built on dated event dummies.
+
+### 12.4 Building the right instrument: an attempt, and what it measured
+
+§12.3 establishes that the event dummy discards magnitude. The obvious remedy is to supply the
+magnitude in physical units — capacity at risk, capacity affected, time to restore. This section
+reports that attempt and its result, because the result is a measurement rather than a gap.
+
+**Design.** `EXPOSURE_REGISTRATION.md`, committed before any field was filled, specified six
+required fields per event — asset name, asset type, nameplate capacity *at the time of the event*,
+capacity affected, days to partial restore, days to full restore — with provenance mandatory on
+every filled numeric and one absolute rule: **every figure names a source and a date, or the field
+stays `unknown`.** No estimate, no interpolation, no inference from a neighbouring event. Scope was
+the 75 events whose class involves a physical asset (48 infrastructure attacks, 27 chokepoint
+disruptions); the other 238 have no damaged facility and are out of scope by construction. Six
+independent researchers worked disjoint blocks with every route logged.
+
+**Result, by computed status rather than declared: 5 COMPLETE of 80 (6%), 47 partial, 23 empty,
+5 invalid.** The registered gate was 30 COMPLETE, below which §5 makes the vulnerability stage
+descriptive with no verdict. That gate was not met and its consequence stands.
+
+**Six walls, each encountered independently:**
+
+1. **Category mismatch.** Roughly 40% of the in-scope events have no point asset — tanker attacks,
+   sector-wide labour strikes, naval escort operations, multi-refinery aggregate rows. A ship
+   carries a cargo in barrels, not a throughput in barrels per day, and the schema has no vessel
+   type. The effective denominator was never 75.
+2. **Units are not comparable across reporting conventions.** Russian operators publish refinery
+   capacity in tonnes per year and never in barrels per day; every b/d figure in circulation is a
+   conversion at an unstated barrels-per-tonne factor, which is why published figures for the same
+   plant disagree (240 vs "around 250" for Tuapse; 314 vs 300 for Volgograd).
+3. **The two fields that define vulnerability are the two the belligerents contest.**
+   `capacity_affected` and `days_to_full_restore` are what an operator minimises and an attacker
+   maximises. Volgograd, February 2024: the operator reported operations unaffected; the regional
+   governor reported a blaze; wire sources reported one crude unit damaged, ~40% of the plant,
+   ~140 kb/d; an attacking-side source claimed the fire was deliberately set. None is independently
+   verifiable, both cannot be recorded, and the field stays unknown.
+4. **Restoration is announced as forecast, not confirmed as realised.** Abqaiq 2019 — the
+   best-documented event in the corpus, where the operator published nameplate, affected volume and
+   partial restore directly — still failed to reach COMPLETE on this field alone. Every source
+   gives an expectation. A near-fill of 19 days from a ministerial statement was caught and
+   rejected on checking that same statement: capacity was reported at 11.3 mb/d against a pre-event
+   maximum sustainable 12, so at day 19 capacity was demonstrably not restored.
+5. **The contemporaneous archive is closed for the historical arm.** For 1977–2006 the general
+   web archive did not resolve, a purpose-built pipeline-attack register failed on a certificate
+   mismatch, and contemporaneous wire copy returned 403 and 404. That block returned **zero
+   COMPLETE of thirteen**, which is an archival finding rather than a research failure.
+6. **A scope leak, recorded rather than forced.** One event is a copper mine: the class-based
+   selection was correct and the schema's units do not apply. Marked out-of-unit-scope.
+
+**Two sourced zeroes are data, not gaps.** Two attacks struck their targets and changed nothing —
+*"no interruptions to operations"*, *"no casualties or property loss"*. They are the low end of the
+vulnerability distribution and a damage function needs them.
+
+**Correction of record.** An earlier draft of this section reported 8 COMPLETE of 75, counting
+declared status. A validator that computes status from the data found four events whose declared
+status disagreed with the computed one, two declaring COMPLETE while computing INVALID. Four of the
+five hard failures share one cause, and it is the registration's: §2 required a `retrospective`
+flag and asserted a test would check it, while the block template shipped with no such key — a
+requirement with no field to satisfy it. Recorded rather than silently fixed.
+
+**What this establishes, and its limit.** §12.3 showed the 0/1 flag carries no incremental
+information. This shows that for conflict-caused disruption **the physical alternative is not
+recoverable from public sources** — not expensive, not slow, not recoverable, for six specific and
+independently encountered reasons. Any supply-risk instrument built on public data meets the same
+walls, and 6% is a measurement of how far short they fall.
+
+**The limit, stated because it is testable and currently untested.** This argument requires that
+accident-caused outages *are* measurable — hurricanes, fires, technical failures, where units are
+consistent, restoration dates are confirmed and no party contests the figures. If a matched attempt
+on accident-caused disruptions returns a similar completion rate, then the finding is not about the
+opacity of conflict but about the publication of outage data generally, and this section is wrong
+in its central claim. That comparison is registered and running; **the completion-rate contrast
+between accident-caused and attack-caused disruption, on one schema and one standard, is the
+measurement that decides it.**
 
 ## 13. Limitations
 
