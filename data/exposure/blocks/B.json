@@ -8,35 +8,102 @@
    "date": "2006-02-24",
    "type": "infrastructure_attack",
    "title": "Al-Qaeda suicide car-bomb attack on Saudi Abqaiq foiled",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Abqaiq (Baqiq) crude oil processing facility, Eastern Province, Saudi Arabia",
+   "asset_type": "processing",
    "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
+   "country_iso3": "SAU",
+   "capacity_nameplate_kbd": 7000,
+   "capacity_affected_kbd": 0,
    "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
-   "export_share_pct": "unknown",
-   "downstream_dependency": "unknown",
+   "days_to_partial_restore": 0,
+   "days_to_full_restore": 0,
+   "export_share_pct": "about two-thirds of Saudi crude exports, nearly 5.0 million b/d",
+   "downstream_dependency": "Ras Tanura (6.0 million b/d export capacity) and Ras al-Juaymah (3.0 million b/d export capacity)",
    "alt_routing_available": "unknown",
-   "prior_incidents_same_asset": "unknown",
+   "prior_incidents_same_asset": "first terrorist attack on a Saudi oil facility; a comparable attempt occurred at Yanbu in May 2004",
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 6,
+   "status": "COMPLETE",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "an attempted attack was foiled by Saudi security forces on February 24, 2006"
+    },
+    "asset_type": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "its facilities are the main oil processing centers for Arabian Extra Light and Arabian Light crude oils, with a capacity of more than 7.0 million barrels a day"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "its facilities are the main oil processing centers for Arabian Extra Light and Arabian Light crude oils, with a capacity of more than 7.0 million barrels a day"
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "The second car used the hole in the fence to enter the compound. It was then engaged by Saudi forces at the second tier of the security perimeter, approximately 1.0 mile away from the closest facility.",
+     "derivation": "the attack was foiled roughly one mile from the nearest facility (CSIS) and 'failed' (Washington Institute); no plant capacity was taken offline. Recorded as 0, not 'unknown', because the sources establish that nothing was hit."
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.washingtoninstitute.org/policy-analysis/al-qaeda-attack-abqaiq-vulnerability-saudi-oil",
+     "source_publisher": "The Washington Institute for Near East Policy",
+     "source_date": "2006-02-28",
+     "quote": "The attack failed.",
+     "derivation": "no outage occurred, so there is no restoration interval. 0 follows from the sourced fact that the attack never reached the facility."
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.washingtoninstitute.org/policy-analysis/al-qaeda-attack-abqaiq-vulnerability-saudi-oil",
+     "source_publisher": "The Washington Institute for Near East Policy",
+     "source_date": "2006-02-28",
+     "quote": "The attack failed.",
+     "derivation": "as above; no capacity was lost, so full restore is immediate by construction."
+    },
+    "country_iso3": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "the Abqaiq oil facility in eastern Saudi Arabia"
+    },
+    "downstream_dependency": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "Oil from Abqaiq goes to export terminals in Ras Tanura (with a 6.0 million barrels a day export capacity), Ras al-Juaymah (3.0 million barrels a day export capacity), and many other terminals in the Gulf."
+    },
+    "export_share_pct": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "Nearly two thirds of Saudi Arabia's crude oil is exported via Abqaiq, nearly 5.0 million barrels a day."
+    },
+    "prior_incidents_same_asset": {
+     "source_url": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+     "source_publisher": "Center for Strategic and International Studies, Khalid R. Al-Rodhan, 'The Impact of the Abqaiq Attack on Saudi Energy Security'",
+     "source_date": "2006-02-27",
+     "quote": "The same fears about Saudi energy security arose after the May 2004 attack in Yanbu. During that incident, the Saudi security forces were also able to suppress the attack."
+    }
+   }
   },
   {
    "event_id": "nigeria_mend_bonga_2008",
    "date": "2008-06-19",
    "type": "infrastructure_attack",
    "title": "MEND attacks Shell Bonga offshore FPSO",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
+   "asset_name": "Bonga FPSO (Bonga field), offshore Nigeria",
+   "asset_type": "field",
+   "operator": "Royal Dutch Shell PLC",
    "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
+   "capacity_nameplate_kbd": 225,
+   "capacity_affected_kbd": 225,
    "capacity_units_note": "unknown",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
@@ -47,22 +114,61 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.ogj.com/drilling-production/article/17268638/rebel-attack-shuts-shells-bonga-fpso-production",
+     "source_publisher": "Oil & Gas Journal",
+     "source_date": "2008-06-20",
+     "quote": "Rebel attack shuts Shell's Bonga FPSO production"
+    },
+    "asset_type": {
+     "source_url": "https://www.ogj.com/drilling-production/article/17268638/rebel-attack-shuts-shells-bonga-fpso-production",
+     "source_publisher": "Oil & Gas Journal",
+     "source_date": "2008-06-20",
+     "quote": "Bonga is a floating production, storage, and offloading (FPSO) vessel"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.ogj.com/drilling-production/article/17268638/rebel-attack-shuts-shells-bonga-fpso-production",
+     "source_publisher": "Oil & Gas Journal",
+     "source_date": "2008-06-20",
+     "quote": "The 225,000 b/d facility had been shut in."
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.ogj.com/drilling-production/article/17268638/rebel-attack-shuts-shells-bonga-fpso-production",
+     "source_publisher": "Oil & Gas Journal",
+     "source_date": "2008-06-20",
+     "quote": "The 225,000 b/d facility had been shut in.",
+     "derivation": "source states the facility was shut in entirely; affected equals the stated 225,000 b/d capacity, read from the same sentence."
+    },
+    "operator": {
+     "source_url": "https://www.ogj.com/drilling-production/article/17268638/rebel-attack-shuts-shells-bonga-fpso-production",
+     "source_publisher": "Oil & Gas Journal",
+     "source_date": "2008-06-20",
+     "quote": "Royal Dutch Shell PLC"
+    },
+    "_unfilled_field_notes": {
+     "days_to_partial_restore": "Unknown. The contemporaneous source (Oil & Gas Journal, 2008-06-20) reports the shut-in but explicitly no restart date: a Shell spokesman said 'an evaluation of the facility was under way but did not state when it would be complete.' Secondary reporting describes a roughly three-week outage and force majeure through July 2008, but no source giving a specific resumption date was opened.",
+     "days_to_full_restore": "Unknown, same reason."
+    }
+   },
+   "required_filled": 4,
+   "status": "PARTIAL"
   },
   {
    "event_id": "btc_pipeline_blast_2008",
    "date": "2008-08-05",
    "type": "infrastructure_attack",
    "title": "Baku-Tbilisi-Ceyhan pipeline explosion in Turkey",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
+   "asset_name": "Baku-Tbilisi-Ceyhan (BTC) pipeline",
+   "asset_type": "pipeline",
+   "operator": "BOTAS (Turkish section operator); BTC consortium of 11 owners, BP-led",
+   "country_iso3": "TUR",
+   "capacity_nameplate_kbd": 1200,
+   "capacity_affected_kbd": 1200,
    "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_partial_restore": 20,
+   "days_to_full_restore": 20,
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
@@ -70,45 +176,141 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "the transnational pipeline through Azerbaijan, Georgia, and Turkey was shut down until 25 August 2008 (D+20)"
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Azerbaijan/azerbaijan_bkgd.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Background Reference: Azerbaijan",
+     "source_date": "2019-01-07",
+     "quote": "Table 1. Azerbaijan's oil export pipelines ... Baku-Tbilisi-Ceyhan (BTC) Operating 1,200"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Azerbaijan/azerbaijan_bkgd.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Background Reference: Azerbaijan",
+     "source_date": "2019-01-07",
+     "quote": "Baku-Tbilisi-Ceyhan (BTC) Operating 1,200 [thousand barrels per day] 1,100 [miles] Sangachal terminal, near Baku, Azerbaijan; Ceyhan terminal, on Turkey's Mediterranean coast",
+     "retrospective": true
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "The pipeline remained shut down and under repair until 25 August (D+20), when pipeline operator BOTAS returned it to normal operations.",
+     "retrospective": true,
+     "derivation": "source states a COMPLETE shutdown of the pipeline; affected capacity is therefore the whole nameplate (EIA 1,200 kb/d). Flagged because it combines two sources rather than reading one number."
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "The pipeline remained shut down and under repair until 25 August (D+20)",
+     "retrospective": true,
+     "derivation": "the source reports no partial resumption before 25 August; partial and full restore are the same event in this source."
+    },
+    "days_to_full_restore": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "until 25 August (D+20), when pipeline operator Boru Hatlari Ile Petrol Tasima Anonim Sirketi (BOTAS) returned it to normal operations",
+     "retrospective": true
+    },
+    "operator": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "the Turkish state-owned operating company Boru Hatlari Ile Petrol Tasima Anonim Sirketi (BOTAS) and the BTC consortium of owners, which includes 11 multinational energy companies",
+     "retrospective": true
+    },
+    "country_iso3": {
+     "source_url": "https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_BTC-Reliability.pdf",
+     "source_publisher": "Idaho National Laboratory (US Dept of Energy), INL/RPT-22-69763",
+     "source_date": "2022-09-30",
+     "quote": "BTC Pipeline explosion in Refahiye, Turkey 2008",
+     "retrospective": true
+    }
+   },
+   "required_filled": 6,
+   "status": "COMPLETE"
   },
   {
    "event_id": "hormuz_iran_threat_2011",
    "date": "2011-12-27",
    "type": "chokepoint_disruption",
    "title": "Iran threatens to close the Strait of Hormuz",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Strait of Hormuz",
+   "asset_type": "chokepoint",
    "operator": "unknown",
    "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
+   "capacity_nameplate_kbd": 17000,
    "capacity_affected_kbd": "unknown",
    "capacity_units_note": "unknown",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
-   "alt_routing_available": "unknown",
+   "alt_routing_available": "yes - Saudi Petroline unused capacity 2.8 million b/d; UAE Abu Dhabi Crude Oil Pipeline 1.5 million b/d to Fujairah",
    "prior_incidents_same_asset": "unknown",
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 3,
+   "status": "PARTIAL",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=7830",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2012-09-05",
+     "quote": "The Strait of Hormuz, located between Oman and Iran, is the world's most important oil chokepoint due to its daily oil flow of about 17 million bbl/d in 2011"
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=7830",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2012-09-05",
+     "quote": "the world's most important oil chokepoint"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=7830",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2012-09-05",
+     "quote": "The Strait of Hormuz, located between Oman and Iran, is the world's most important oil chokepoint due to its daily oil flow of about 17 million bbl/d in 2011",
+     "retrospective": true,
+     "derivation": "a strait has no nameplate capacity; recorded as the measured 2011 transit volume EIA reports, the event year. Source published 2012-09-05, after the 2011-12-27 event."
+    },
+    "alt_routing_available": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=7830",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2012-09-05",
+     "quote": "Saudi Arabia recently increased its additional unused pipeline capacity to 2.8 million bbl/d ... The UAE recently opened a 1.5 million bbl/d Abu Dhabi Crude Oil Pipeline, which runs from Habshan ... to the port of Fujairah on the Gulf of Oman, allowing crude oil shipments to circumvent Hormuz.",
+     "retrospective": true
+    },
+    "_unfilled_field_notes": {
+     "capacity_affected_kbd": "Unknown. The corpus event is a verbal threat to close the strait. No source opened states either that a closure occurred or that transits were unaffected, so 0 is not written either - a zero would be as unsourced as any other number.",
+     "days_to_partial_restore": "Unknown, same reason.",
+     "days_to_full_restore": "Unknown, same reason."
+    }
+   }
   },
   {
    "event_id": "libya_jathran_blockade_2013",
    "date": "2013-08-01",
    "type": "chokepoint_disruption",
    "title": "Jathran's guards blockade Libya's eastern export terminals",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Es Sidra (Es Sider), Ras Lanuf, Zueitina and Marsa al-Hariga eastern export ports",
+   "asset_type": "terminal",
+   "operator": "Petroleum Facilities Guard faction led by Ibrahim Jidran (blockading party); ports operated by Libya's NOC",
+   "country_iso3": "LBY",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
    "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_partial_restore": 243,
+   "days_to_full_restore": 304,
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
@@ -116,22 +318,70 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 4,
+   "status": "PARTIAL",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "For almost a year, Libya's major eastern oil ports (Es Sidra, Ras Lanuf, Zueitina, and Marsa al-Hariga) were not able to export oil because of a blockade led by Ibrahim Jidran, a branch leader of the Petroleum Facilities Guard (PFG), which was hired to protect the facilities."
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "Libya's major eastern oil ports"
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "The port blockades began in late-July 2013 and ended after deals were made to reopen the ports in April 2014 (Zueitina and Marsa al-Hariga) and June 2014 (Es Sidra and Ras Lanuf).",
+     "derivation": "first material resumption = the April 2014 reopening of Zueitina and Marsa al-Hariga. The source gives a MONTH, not a day; days counted from the corpus event date 2013-08-01 to 2014-04-01 under a first-of-month convention, computed in code. Month precision is flagged so the imprecision is visible.",
+     "precision": "month"
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "ended after deals were made to reopen the ports in April 2014 (Zueitina and Marsa al-Hariga) and June 2014 (Es Sidra and Ras Lanuf)",
+     "derivation": "full restore = the June 2014 reopening of Es Sidra and Ras Lanuf, the last two ports. Month precision, first-of-month convention, computed in code.",
+     "precision": "month"
+    },
+    "operator": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "a blockade led by Ibrahim Jidran, a branch leader of the Petroleum Facilities Guard (PFG), which was hired to protect the facilities"
+    },
+    "country_iso3": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2014-11-25",
+     "quote": "Libya's major eastern oil ports"
+    },
+    "_unfilled_field_notes": {
+     "capacity_nameplate_kbd": "Unknown. Neither the EIA Libya brief of 2014-11-25 nor those of 2012-06 and 2015-11 gives an export capacity for Es Sidra, Ras Lanuf, Zueitina or Marsa al-Hariga. The 2012 brief gives 2010 export VOLUMES for some ports, which is a flow and not a capacity, and was not substituted.",
+     "capacity_affected_kbd": "Unknown, same reason - no per-terminal capacity to attribute."
+    }
+   }
   },
   {
    "event_id": "kirkuk_ceyhan_isis_2014",
    "date": "2014-03-02",
    "type": "chokepoint_disruption",
    "title": "ISIS attacks sever the Kirkuk-Ceyhan pipeline",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Iraq (Baghdad) section of the Iraq-Turkey (Kirkuk to Ceyhan) pipeline, Kirkuk to Fishkhabur",
+   "asset_type": "pipeline",
    "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
+   "country_iso3": "IRQ",
+   "capacity_nameplate_kbd": 600,
+   "capacity_affected_kbd": 260,
    "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_partial_restore": "ongoing",
+   "days_to_full_restore": "ongoing",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
@@ -139,17 +389,70 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 6,
+   "status": "COMPLETE",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "Iraq (Baghdad) section of Iraq to Turkey pipeline | Kirkuk to Fishkhabur | northern Iraq | 600 | not operating | The pipeline was the target of militant attacks and stopped operating in March 2014."
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "Status of main pipelines used to export crude oil produced in Iraq"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "Iraq (Baghdad) section of Iraq to Turkey pipeline ... northern Iraq 600 [nameplate capacity (000' bbl/d)] not operating",
+     "retrospective": true
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "The pipeline was the target of militant attacks and stopped operating in March 2014. The pipeline's effective capacity was significantly lower than its nameplate capacity prior to its closure. Crude exports from the pipeline averaged 260,000 bbl/d in 2013.",
+     "retrospective": true,
+     "derivation": "the source states the pipeline stopped operating and gives 260,000 bbl/d as its 2013 average crude exports. 260 is recorded as the volume actually taken offline; nameplate 600 is recorded separately because the source says effective capacity was 'significantly lower' than nameplate."
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "The Iraq portion of the Iraq (Kirkuk) to Turkey (Ceyhan) pipeline (IT pipeline) had already been severely damaged after being sabotaged by militants, and it has not operated since March 2014.",
+     "retrospective": true,
+     "derivation": "'ongoing' per EXPOSURE_REGISTRATION section 2, stamped at the source date 2015-01-30: no material resumption had occurred by then."
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "The Iraq portion of the Iraq to Turkey (IT) pipeline stopped operating in March 2014 after suffering several attacks by militants in the area. At the time this report was published, a significant portion of the pipeline was in ISIL-controlled territory. Given the extreme unstable environment along the pipeline and the extent of the pipeline's damage, it is unlikely that it will resume operations in th[e near term]",
+     "retrospective": true,
+     "derivation": "'ongoing', stamped 2015-01-30."
+    },
+    "country_iso3": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Iraq",
+     "source_date": "2015-01-30",
+     "quote": "northern Iraq"
+    }
+   }
   },
   {
    "event_id": "libya_ports_clashes_2014",
    "date": "2014-12-14",
    "type": "chokepoint_disruption",
    "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Es Sidra (Es Sider) export terminal, Libya's largest export terminal",
+   "asset_type": "terminal",
    "operator": "unknown",
-   "country_iso3": "unknown",
+   "country_iso3": "LBY",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
    "capacity_units_note": "unknown",
@@ -162,7 +465,35 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 2,
+   "status": "PARTIAL",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2015-11-19",
+     "quote": "in December 2014, the eastern Es Sidra export terminal, Libya's largest export terminal, caught on fire after it was hit by a rocket. Many of its storage tanks were severely damaged, significantly lowering its export capacity."
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2015-11-19",
+     "quote": "the eastern Es Sidra export terminal, Libya's largest export terminal"
+    },
+    "country_iso3": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2015.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Brief: Libya",
+     "source_date": "2015-11-19",
+     "quote": "the eastern Es Sidra export terminal"
+    },
+    "_unfilled_field_notes": {
+     "capacity_nameplate_kbd": "Unknown, as for the 2013 blockade. EIA (2015-11-19) states the December 2014 rocket strike left storage tanks 'severely damaged, significantly lowering its export capacity' but attaches no number to either the capacity or the reduction.",
+     "capacity_affected_kbd": "Unknown - the source is explicitly qualitative on the size of the loss.",
+     "days_to_partial_restore": "Unknown - no restoration date in any source opened.",
+     "days_to_full_restore": "Unknown, same reason."
+    }
+   }
   },
   {
    "event_id": "nda_bonny_2016",
@@ -185,22 +516,27 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 0,
+   "status": "EMPTY",
+   "provenance": {
+    "_empty_reason": "No source opened gave a capacity figure or a restoration date for the Bonny/Soku gas line specifically; EIA's Nigeria brief carries crude grades and refinery capacities but no terminal or gas-line nameplate. Left unknown rather than borrowing a figure from a neighbouring Niger Delta event."
+   }
   },
   {
    "event_id": "nigeria_nda_forcados_2016",
    "date": "2016-02-14",
    "type": "infrastructure_attack",
    "title": "Niger Delta Avengers bomb Trans Forcados subsea pipeline",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
+   "asset_name": "Forcados terminal and Trans Forcados subsea crude export line",
+   "asset_type": "terminal",
+   "operator": "Shell Petroleum Development Company of Nigeria Limited (SPDC)",
    "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
+   "capacity_nameplate_kbd": 400,
+   "capacity_affected_kbd": 400,
    "capacity_units_note": "unknown",
    "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_full_restore": 478,
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
@@ -208,7 +544,56 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "SPDC lifted the force majeure on crude oil exports from Forcados Terminal effective 16:00hrs (Nigerian Time) yesterday (June 6, 2017) following the completion of repair of the leaks on the Forcados Terminal crude export line."
+    },
+    "asset_type": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "The Forcados terminal - which is operated by Shell - has an export capacity of 400,000 barrels per day (bpd)."
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "The Forcados terminal - which is operated by Shell - has an export capacity of 400,000 barrels per day (bpd).",
+     "retrospective": true
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "Shell suspended exports from the Forcados terminal since last year owing to several attacks on the major trunk of the terminal's pipeline system.",
+     "retrospective": true,
+     "derivation": "source states exports from the terminal were suspended (in full) until the lifting; affected equals the stated 400,000 bpd export capacity. Flagged as a derivation, not a read figure."
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "SPDC lifted the force majeure on crude oil exports from Forcados Terminal effective 16:00hrs (Nigerian Time) yesterday (June 6, 2017)",
+     "retrospective": true,
+     "derivation": "calendar days from the corpus event date 2016-02-14 to the sourced lifting date 2017-06-06, computed in code (478)."
+    },
+    "operator": {
+     "source_url": "https://www.financialnigeria.com/shell-lifts-force-majeure-on-oil-exports-from-forcados-terminal-news-1342.html",
+     "source_publisher": "Financial Nigeria",
+     "source_date": "2017-06-07",
+     "quote": "SPDC lifted the force majeure on crude oil exports from Forcados Terminal",
+     "retrospective": true
+    },
+    "_unfilled_field_notes": {
+     "days_to_partial_restore": "LEFT UNKNOWN DELIBERATELY, and it must NOT be set equal to days_to_full_restore (478). Secondary reporting indicates the Trans Forcados line briefly resumed and loaded some cargoes around October 2016 before renewed attacks took it out again, which would make partial restore materially shorter than full. The one contemporaneous source opened (OilPrice, 2016-09-30) shows only PLANNED October/November loadings and states no tankers had loaded; the article that appears to confirm an actual October resumption (Ecofin Agency) returned HTTP 403 and could not be read. Field stays unknown until a source is actually opened."
+    }
+   },
+   "required_filled": 5,
+   "status": "PARTIAL"
   },
   {
    "event_id": "nigeria_nda_escravos_2016",
@@ -231,7 +616,12 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 0,
+   "status": "EMPTY",
+   "provenance": {
+    "_empty_reason": "Same wall as Bonny: no opened source gave Escravos facility capacity or an outage duration. EIA's Nigeria brief gives only the Escravos GTL plant (33,000 b/d), which is a different asset from the facilities attacked, so it was not used."
+   }
   },
   {
    "event_id": "bab_el_mandeb_houthi_tanker_2018",
@@ -254,41 +644,82 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 0,
+   "status": "EMPTY",
+   "provenance": {
+    "_empty_reason": "The asset struck was a single tanker under way, not a fixed-capacity facility. No opened source gave a capacity taken offline or a restoration interval, and the schema's asset types do not cover a vessel. Left unknown pending a ruling on whether vessel strikes belong in this layer at all."
+   }
   },
   {
    "event_id": "saudi_suspends_bab_el_mandeb_2018",
    "date": "2018-07-25",
    "type": "chokepoint_disruption",
    "title": "Saudi Arabia suspends oil shipments through Bab el-Mandeb",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Bab el-Mandeb Strait",
+   "asset_type": "chokepoint",
    "operator": "unknown",
    "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
+   "capacity_nameplate_kbd": 6200,
    "capacity_affected_kbd": "unknown",
    "capacity_units_note": "unknown",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
-   "alt_routing_available": "unknown",
+   "alt_routing_available": "yes - SUMED pipeline or around southern Africa",
    "prior_incidents_same_asset": "unknown",
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=41073",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2019-08-27",
+     "quote": "In 2018, an estimated 6.2 million barrels per day (b/d) of crude oil, condensate, and refined petroleum products flowed through the Bab el-Mandeb Strait"
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=41073",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2019-08-27",
+     "quote": "the Bab el-Mandeb Strait"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=41073",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2019-08-27",
+     "quote": "In 2018, an estimated 6.2 million barrels per day (b/d) of crude oil, condensate, and refined petroleum products flowed through the Bab el-Mandeb Strait toward Europe, the United States, and Asia, an increase from 5.1 million b/d in 2014.",
+     "retrospective": true,
+     "derivation": "chokepoint 'nameplate' is recorded as the measured transit volume EIA reports for 2018, the event year; a strait has no nameplate capacity."
+    },
+    "alt_routing_available": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=41073",
+     "source_publisher": "U.S. Energy Information Administration, Today in Energy",
+     "source_date": "2019-08-27",
+     "quote": "Closure of the Bab el-Mandeb Strait could keep tankers originating in the Persian Gulf from transiting the Suez Canal or reaching the SUMED Pipeline, forcing them to divert around the southern tip of Africa.",
+     "retrospective": true
+    },
+    "_unfilled_field_notes": {
+     "capacity_affected_kbd": "Unknown. The suspension applied to Saudi Aramco's own shipments through the strait, not to the strait's total 6.2 million b/d transit. No source opened gave the Saudi volume normally routed through Bab el-Mandeb, and the country total must not be substituted for it.",
+     "days_to_partial_restore": "Unknown at day precision. The Maritime Executive (2018-08-06) reports suspension on 25 July and that shipments 'has resumed' by the article date, giving an upper bound of 12 days, but states no resumption date. An upper bound derived from a publication date is not a duration, so the field stays unknown.",
+     "days_to_full_restore": "Unknown, same reason."
+    }
+   },
+   "required_filled": 3,
+   "status": "PARTIAL"
   },
   {
    "event_id": "venezuela_blackout_2019",
    "date": "2019-03-07",
    "type": "chokepoint_disruption",
    "title": "Venezuela nationwide blackout halts oil exports",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
+   "asset_name": "Jose Terminal, Jose industrial complex, north-east Venezuela",
+   "asset_type": "terminal",
+   "operator": "Petroleos de Venezuela, S.A. (PdVSA)",
+   "country_iso3": "VEN",
+   "capacity_nameplate_kbd": 1320,
    "capacity_affected_kbd": "unknown",
    "capacity_units_note": "unknown",
    "days_to_partial_restore": "unknown",
@@ -300,7 +731,69 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "unknown",
+   "required_filled": 3,
+   "status": "PARTIAL",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Executive Summary: Venezuela",
+     "source_date": "2019-01-07",
+     "quote": "Venezuela's largest terminal by barrels loaded is the Jose Terminal, located offshore of the Jose industrial complex in the northeast of Venezuela."
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Executive Summary: Venezuela",
+     "source_date": "2019-01-07",
+     "quote": "Venezuela's largest terminal by barrels loaded is the Jose Terminal"
+    },
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Executive Summary: Venezuela",
+     "source_date": "2019-01-07",
+     "quote": "It consists of two berths that can handle 300,000 deadweight tons at an average of 55,000 barrels per hour.",
+     "derivation": "the source gives a loading RATE of 55,000 barrels per hour; 55,000 x 24 = 1,320,000 b/d = 1,320 kb/d, computed in code. This is a berth loading rate, not a processing nameplate, and is flagged as such."
+    },
+    "operator": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Executive Summary: Venezuela",
+     "source_date": "2019-01-07",
+     "quote": "state-owned oil and natural gas company Petroleos de Venezuela, S.A. (PdVSA)"
+    },
+    "country_iso3": {
+     "source_url": "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+     "source_publisher": "U.S. Energy Information Administration, Country Analysis Executive Summary: Venezuela",
+     "source_date": "2019-01-07",
+     "quote": "in the northeast of Venezuela"
+    },
+    "_unfilled_field_notes": {
+     "capacity_affected_kbd": "Unknown. No source opened gave the volume of loading capacity lost at the Jose Terminal during the March 2019 national blackout.",
+     "days_to_partial_restore": "Unknown - no sourced restoration date.",
+     "days_to_full_restore": "Unknown, same reason."
+    }
+   }
   }
- ]
+ ],
+ "block_report": {
+  "researched_by": "Session C, 2026-09-03",
+  "registration": "EXPOSURE_REGISTRATION.md section 2, commit 22da52f",
+  "rule_applied": "Every figure names a source and a date, or the field stays 'unknown'. No estimate, no interpolation, no inference from a neighbouring event or a country total. Where a value is a logical consequence of a sourced statement rather than a figure read off the page, it carries an explicit 'derivation' string; where a source gives only a month, the field carries precision:'month'. Both are recorded so the step is visible downstream rather than invisible.",
+  "sources_opened": [
+   "https://csis-website-prod.s3.amazonaws.com/s3fs-public/legacy_files/files/media/csis/pubs/060227_abqaiqattack.pdf",
+   "https://www.eia.gov/international/content/analysis/countries_long/Iraq/archive/pdf/Iraq_2015.pdf",
+   "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2014.pdf",
+   "https://www.eia.gov/international/content/analysis/countries_long/Libya/archive/pdf/Libya_2015.pdf",
+   "https://www.eia.gov/international/content/analysis/countries_long/Venezuela/archive/pdf/Venezuela_2019.pdf",
+   "https://www.eia.gov/todayinenergy/detail.php?id=7830",
+   "https://www.washingtoninstitute.org/policy-analysis/al-qaeda-attack-abqaiq-vulnerability-saudi-oil"
+  ],
+  "counts": {
+   "COMPLETE": 3,
+   "PARTIAL": 7,
+   "EMPTY": 3
+  },
+  "gate_note": "EXPOSURE_REGISTRATION section 5 requires 30 COMPLETE across all six blocks before Stage 1 issues a verdict. This block contributes what it contributes; no field was filled to raise the count.",
+  "unfilled_fields_are_documented": true,
+  "note_on_zeros": "Zero is written only where a source establishes that nothing was taken offline - Abqaiq, where the attack was stopped about a mile from the nearest facility. It is NOT written for the Hormuz threat, where no source opened says whether transits changed. An unsourced zero is as much a guess as an unsourced magnitude, and it would be worse here because it reads as a measurement."
+ }
 }
