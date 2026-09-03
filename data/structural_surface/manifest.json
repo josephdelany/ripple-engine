@@ -1,10 +1,14 @@
 {
-  "generated_at": "2026-09-03T21:23:58.117823+00:00",
-  "implementation_commit": "132235c13218c8b5e52a0f5b9b4cb7df983f236b",
+  "generated_at": "2026-09-03T21:31:36.107126+00:00",
+  "implementation_commit": "852b5840a717ca648bd8b3f3b602f35edfe2b480",
   "inputs": {
-    "database": {
-      "path": "data/oil.db",
-      "sha256": "d04b251d492d37bf6d4506f0feeb65e9f4b2caaa7f050ca12655ca2832d8a7e6"
+    "bundle": {
+      "path": "data/structural_surface/input",
+      "files": {
+        "events.csv": "600dbb74c83f4c5df70bf39fcf62d3939ac42e2594a4ce3bc407efa3c8c5e428",
+        "market_observations.csv": "df22bfb380ddcd656386e1cdb0733ce285481df47d8835598b37e297275ca29a",
+        "situation_state.csv": "0da0cfb2cd6934afc68f38766e3f5063004e9e04a1d266f3bb031639f12c0c80"
+      }
     },
     "registration": {
       "path": "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
