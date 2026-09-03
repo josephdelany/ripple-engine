@@ -1,8 +1,10 @@
-# DESIGN.md — Amendment 2 (PROPOSED, not adopted)
+# DESIGN.md — Amendment 2 (ADOPTED 2026-09-03)
 
-*2026-09-03, session A. Registered as a proposal under SESSION_CHARTER §2 rule 2 and DESIGN.md's own
-practice: the spec changes by dated amendment, never by silent edit. **Nothing in DESIGN.md is
-edited by this file.** It requires Joe's approval before any code is written under it.*
+*2026-09-03, session A. Registered under SESSION_CHARTER §2 rule 2 and DESIGN.md's own practice:
+the spec changes by dated amendment, never by silent edit. **Nothing in DESIGN.md is edited by this
+file.** Ruled on by Joe on 2026-09-03 and adopted; the adoption record and the ruling that differs
+from the proposal are in §Adoption below. This document is registered BEFORE the code written under
+it, including Appendix A, which fixes every generated sentence before any is written.*
 
 *Basis: `docs/design/STUDY.md`, which measured the artefact built under Steps 0–4 against the spec
 that specified it. Every claim of a defect below is a measurement, with the method stated in STUDY §5.*
@@ -164,7 +166,7 @@ may contain a number that is not read from a named path. **[T]**
 
 ---
 
-## A2.9 — VSUP: flagged, NOT proposed for adoption
+## A2.9 — VSUP: flagged, NOT adopted (ruled 2026-09-03)
 
 The propagation band is 53 cells per class, of which 301 of 371 are null and 55 insufficient. Built
 as 53 stacked forest rows it is correct, complete, honest, and unreadable. Value-Suppressing
@@ -188,17 +190,135 @@ Amendment 1 (A1.1–A1.6 and A1.1–A1.4) stands in full.
 
 ---
 
-## Adoption
+## Adoption — ruled by Joe, 2026-09-03
 
-This amendment is a proposal. If Joe adopts it, it is committed **before** the code written under
-it, per charter §2 rule 2, and DESIGN.md gains a pointer to it — its body is not rewritten. If it is
-rejected in whole or in part, the rejection is recorded here with the reason and the build continues
-under DESIGN.md as it stands.
+| item | ruling |
+|---|---|
+| **A2.1** | **RULED, and NOT as proposed.** See below. |
+| **A2.2** | adopted as proposed |
+| **A2.3** | adopted as proposed |
+| **A2.4** | adopted as proposed |
+| **A2.5** | adopted as proposed |
+| **A2.6** | **ADOPTED** — record-bar field, the §3.6 region, and the registered absence wording, all as proposed |
+| **A2.7** | **ADOPTED** — four screens; Feed folds into *The record* as proof-of-operation, Ledger folds into *The result* |
+| **A2.8** | **ADOPTED, CONDITIONAL.** The condition is non-negotiable and is stated below |
+| **A2.9** | **NOT adopted**, as recorded. VSUP is not reached for until a bivariate palette has been measured against §4's contrast floors |
 
-**Open questions for Joe, in the order they block work:**
+### A2.1 as ruled — and the disagreement, recorded
 
-1. **A2.1** — is the skeptical reviewer the primary user? Everything else follows from this.
-2. **A2.7** — five screens to four? This is the largest single change and it reorders finished work.
-3. **A2.8** — does Story become prose? This has the highest fabrication risk of anything proposed and
-   is the one I would most understand you refusing.
-4. **A2.6** — the vintage wall needs a home whatever else is decided; it is currently invisible.
+I proposed the **skeptical technical reader** (five to twenty minutes, auditing the method). Joe ruled
+for the **ninety-second reader** — a recruiter or professor who opens the link once, does not return,
+and must reach the finding *and the integrity record* fast. Not the daily operator.
+
+Recorded per CLAUDE.md `<push_back>`: the argument was made, the ruling went the other way, and the
+build follows the ruling. The registered text of §0.1 is therefore:
+
+> *The desk is built for a reader who opens the link once, spends about ninety seconds, and does not
+> return. They must reach the finding and the integrity record fast. Where the interests of that
+> reader and a longer audit conflict, the ninety-second reader wins. The desk is not built for a
+> daily operator, and no surface may imply a monitoring product.*
+
+**What actually changes versus my proposal.** Less than it appears, and this is why I record it rather
+than contest it. Both readings demand the same things — a finding sentence at the top of every screen,
+the integrity record reachable rather than buried, and no surface implying a product. The ruling
+changes *emphasis*: the landing screen is optimised for a single visit rather than for an audit, and
+"How you'd catch us" must be reachable in one click rather than read in order. Where the two conflict
+during the build, the ninety-second reader wins and the conflict is noted at the point it arises.
+
+**One instruction carried verbatim into the build**, from the ruling: *the null is the finding, not an
+apology for one. It gets Finding-tier weight, not a hedge.* This is registered as a rule, not a
+preference: **a null result is rendered at Finding tier. No hedging verb, no apologetic clause, and no
+softening adverb may attach to it. [T]**
+
+### A2.8's condition, as ruled
+
+Adopted **only** with all three of these, in this order:
+
+1. Every generated sentence is registered in **Appendix A below, before any of them is written.**
+2. Every generated sentence is bound to named source fields — no number may appear in a sentence that
+   was not read from a declared path.
+3. The render test that inventories each rendered sentence against its declared source paths **exists
+   and passes before the first sentence renders**. *If the test does not exist, the prose does not ship.*
+
+---
+
+## Appendix A — the registered sentence set
+
+*Registered 2026-09-03, before any of these sentences was written. This is the complete set of
+sentences the desk generates about itself. A sentence not in this table may not be rendered; adding
+one is an amendment to this appendix, dated, before the code.*
+
+**Mechanism.** Each sentence is emitted by `say(id, payload)` into a node carrying
+`data-sentence="<id>"` and `data-fields="<comma-separated source paths>"`. Slots are resolved from the
+API payload by the declared path and by nothing else. Free text between slots is fixed here and may
+not be computed. Numbers are formatted by the shared helpers only.
+
+**The enforcement.** `tests/test_sentences.py` renders every screen under jsdom, collects every
+`[data-sentence]` node, and for each one: (a) asserts its id is in this appendix; (b) re-resolves its
+declared paths from the same payload; (c) asserts every numeric token in the rendered sentence is
+derivable from those resolved values; (d) asserts the fixed text matches this appendix's template with
+the slots removed. A numeric token that is not derivable is a **failure**, not a warning. **[T]**
+
+### A.1 — The result (landing screen)
+
+| id | template | slots → source paths | when |
+|---|---|---|---|
+| `res.lede` | *"Restricted to what was knowable at the time, the record goes quiet."* | — (no slots; fixed text) | always |
+| `res.vintage` | *"For {events_no_field} of {events} events the engine has no state to condition on at all."* | `vintage.events_with_no_situation_field_at_t`, `vintage.events` | always |
+| `res.vintage.detail` | *"{dropped} of {total} situation field-values were knowable only after the event they describe. {kept} survive."* | `vintage.dropped_after_t`, `vintage.total_values`, `vintage.kept` | always |
+| `res.walk` | *"The engine forecasts escalation {g_word} than climatology and prices {p_word} than persistence."* | `walk.G.climatology.skill` → {g_word} ∈ {better, worse, no differently}; `walk.P.persistence.skill` → {p_word}; word chosen by the interval's relation to zero, never by the point estimate | when both intervals exist |
+| `res.walk.null` | *"Against random analogs the interval crosses zero on both tasks: no effect distinguishable from none at this sample size (n={n_g}, n={n_p})."* | `walk.G.random_analogs.n`, `walk.P.random_analogs.n` | when both cross zero |
+| `res.travel` | *"{k} of {n} registered pass-through cells transmit."* | `travel.transmitting`, `travel.cells` | always |
+| `res.travel.none` | *"{cls} transmits nowhere: {n} registered cells, none of them transmitting."* | `travel.by_class[cls]`, `travel.cells_per_class` | when a class has 0 |
+| `res.ledger` | *"At {n} resolved claims the record and the narrative are not distinguishable."* | `ledger.with_record_call` | when the paired interval crosses even odds |
+| `res.ledger.sep` | *"On {n} resolved claims the {who} is right more often."* | `ledger.with_record_call`; {who} from the sign of the paired interval | when it excludes even odds |
+| `res.ledger.empty` | *"No claim has reached its horizon yet."* | — | when `ledger.with_record_call` is 0 |
+
+### A.2 — How you'd catch us
+
+| id | template | slots → source paths | when |
+|---|---|---|---|
+| `catch.vintage` | *"{dropped} of {total} field-values were dropped because they were knowable only after the event."* | `vintage.dropped_after_t`, `vintage.total_values` | always |
+| `catch.audit` | *"The {n_rows}-event label audit stands at {n_done} done; κ is not computable and the audit has not passed."* | `record.audit.n_rows`, `record.audit.n_done` | when `record.audit.passed` is false |
+| `catch.audit.passed` | *"The {n_rows}-event label audit passed at κ = {kappa}."* | `record.audit.n_rows`, `record.audit.kappa` | when passed is true |
+| `catch.placebo` | *"Every cell is tested against {n} state-matched placebo pseudo-events."* | `travel.n_placebo` | always |
+| `catch.dark` | *"{n} of {total} series stopped reporting before {cutoff}."* | `dark.n_stale`, `dark.n_series`, `dark.cutoff` | when `dark.n_stale` > 0 |
+
+### A.3 — A case (Story spine)
+
+| id | template | slots → source paths | when |
+|---|---|---|---|
+| `case.q` | *"{title}"* rendered as quoted material in a `data-verbatim` node | `story.title` | always |
+| `case.knowable.none` | *"No situation field for this event was knowable at t, so the engine read it on class and entities alone."* | — (fixed; the registered A2.6 wording) | when the event has 0 fields at t |
+| `case.knowable.some` | *"{k} situation field{s} for this event {was} knowable at t; the rest were dropped."* | `story.state_at_t.kept` | when > 0 |
+| `case.priced` | *"The realized path sits {pct}% {dir} the analog median at +{h} trading days, on {n} conditioned analogs."* | `story.priced.now_vs_median_pct`, `story.priced.horizon_td`, `story.priced.fan.n` | when a fan exists |
+| `case.priced.none` | *"No comparable set: an unclassified story has no reference class."* | — | when `story.priced.fan` is null |
+| `case.claims` | *"{n} claim{s} extracted, {c} checkable, {u} uncheckable."* | `story.claims.length`, `story.n_checkable` | always |
+| `case.tail.none` | *"Nothing in the record precedes this event, so the engine has no reference class."* | — | when `no_adequate_precedent` and 0 analogs |
+| `case.tail.thin` | *"The closest precedent scores {sim} against a retrieval threshold of {thr}, so no reference class is formed."* | `story.branches.max_similarity`, `story.branches.threshold` | when `no_adequate_precedent` and analogs exist |
+| `case.tail` | *"{k} of {n} analogs were contained at +90 days."* | `story.branches.counts.CONTAINED`, `story.branches.conditioned_n` | when precedent is adequate |
+| `case.travel` | *"{k} of {n} registered cells transmit for this class."* | `story.propagation.counts.TRANSMITTING`, `story.propagation.counts.cells` | when available |
+| `case.travel.none` | *"No cell transmits for this class: all {n} registered cells are null or insufficient."* | `story.propagation.counts.cells` | when k = 0 |
+
+### A.4 — The record
+
+| id | template | slots → source paths | when |
+|---|---|---|---|
+| `rec.noevent` | *"{k} of the {n} biggest Brent moves since {first} have no identified event at all."* | `big.no_identified_event`, `big.n_episodes`, `big.first` | always |
+| `rec.corpus` | *"{n} events, {from} to {to}, in {c} classes."* | `record.n_events`, corpus date range, class count | always |
+| `rec.feed` | *"The live loop ran on {day}: {m} material, {i} in line, {x} noise."* | `feed.day`, `feed.counts.*` | when a feed exists |
+
+### A.5 — Words that may never appear in a generated sentence
+
+In addition to §6's banned list (`predicts`, `validated`, `signal`, `confirms`), no generated sentence
+may contain a hedging or apologetic construction attached to a null: *only, merely, unfortunately,
+sadly, admittedly, disappointing, weak, fails to, we had hoped, although, despite*. A null is stated
+flatly. **[T]** — enforced in `tests/test_sentences.py` against every `[data-sentence]` node.
+
+---
+
+## Closing
+
+DESIGN.md's body is not rewritten. It gains a pointer to this file. Everything built after this
+commit is built under DESIGN.md as amended by Amendment 1 and this amendment, and Appendix A is
+binding on every sentence the desk writes about itself.
