@@ -95,3 +95,71 @@ returns `no adequate precedent` as a first-class state.
 - Coverage is reported before any estimate: how many of 75 reached `COMPLETE`, and the exclusion
   table for the rest. **If fewer than 30 reach `COMPLETE`, Stage 1 is reported as descriptive only
   and no verdict is issued** — registered now so it cannot be waived later.
+
+---
+
+## Amendment 1 (2026-09-03) — the expanded reference class: cause becomes a covariate, not a filter
+*Appended by **Session G on Joe's instruction of 2026-09-03**, before any accident-caused row is
+filled. §§0–5 above are Cowork's and are unchanged; this amendment adds a class and a covariate and
+changes no verdict word, no gate and no threshold. Amendments are dated and appended, never edited.*
+
+### A1.1 Why the class expands, and why it is not a rescue of the gate
+
+The attack-caused attempt closed at **8 `COMPLETE` of 75** against §5's registered gate of 30. **The
+gate holds and Stage 1 is descriptive only.** Nothing in this amendment changes that, and no
+accident-caused row counts toward the 30: §5's gate is about *the corpus*, and the corpus is the 75.
+
+The reason to expand is the estimand, not the count. §3's Stage 1 asks
+`duration ~ capacity_affected + capacity_share + asset_type + context`. **For that question the
+cause of damage is a covariate, not a membership test.** A refinery with 200 kb/d offline faces
+substantially the same restoration engineering whether the unit was lost to a fire, a hurricane or
+a drone: the same crude unit, the same procurement, the same turnaround crews. If cause matters to
+duration, that is a *finding* the model should be allowed to produce, and it cannot produce it while
+cause is a filter.
+
+### A1.2 The new field, declared before any row is filled
+
+Every row in the expanded class carries:
+
+| field | values |
+|---|---|
+| `cause` | `attack` · `hurricane` · `fire_explosion` · `technical` · `labour` · `other` |
+| `cause_source` | the same per-field provenance object as every other value |
+
+`cause` is a **declared covariate in Stage 1** and is **never** a selection criterion. Registered
+consequence: any Stage 1 result must be published both with and without `cause` as a regressor, so
+the reader can see what conditioning on it does.
+
+### A1.3 What does not change
+
+The six required fields, the six optional, **the absolute sourcing rule** (every figure names a
+source and a date or the field stays `unknown`; no estimate, no interpolation, no "approximately",
+no inference from a neighbouring event), the `retrospective` flag and its meaning, and §5's verdict
+words. Accident-caused rows are held to the identical standard — **the point of the exercise is
+lost if they are held to a lower one.**
+
+### A1.4 The contrast is the deliverable, and it is registered as such before it is measured
+
+The expanded class exists to be **compared**, not merely added. Registered now:
+
+> **The completion rate is reported for each cause class side by side, on the same six required
+> fields, and the difference is reported whichever way it comes out.**
+
+The prediction Joe put on the record, and it is falsifiable: **accident-caused outages are publicly
+measurable and attack-caused outages are not** — because EIA tracked accidents weekly in consistent
+units with confirmed rather than forecast restoration dates, and because no belligerent contests the
+figures. If the accident class completes at a rate close to the attack class's 8/75, the prediction
+is wrong and that is published.
+
+**Stated limitation, before the numbers.** The two classes differ in more than cause: the accident
+set is predominantly **US** assets under **EIA and CSB** reporting mandates, and the attack set is
+predominantly **not**. A completion gap therefore measures *cause confounded with reporting regime*,
+and cannot separate them. That is stated here so the finding is not overread as cause alone. The
+honest claim available from this design is about **the information environment**, not about
+belligerents' behaviour in isolation.
+
+### A1.5 Where it is written
+
+`data/exposure/blocks/G_accident.json`, same schema, same per-field `provenance` model, plus
+`cause`. It is a **separate file from the six corpus blocks** so that no accident row can be
+mistaken for a corpus event or counted toward §5's gate.
