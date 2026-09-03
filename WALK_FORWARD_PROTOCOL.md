@@ -375,3 +375,48 @@ rediscovering persistence.
 
 **Not computed here.** No Δ is computed, no code is written by this amendment, and no v2 number changes. The
 first v3 run publishes the Δ blocks beside the level blocks, as computed, whatever they say.
+
+## Amendment K (2026-09-03) — the hostility diagnostic on the sealed run (gates nothing)
+*Registered BEFORE the numbers are computed, on Joe's instruction. Session B. This amendment adds a
+DIAGNOSTIC, in the same standing as the Ferro size-corrected scores of Amendment A.5: it is published beside
+the registered numbers, it is published whichever way it comes out, and **it cannot move any verdict.**
+§3 and §7 are untouched. `data/walk_forward/reads.jsonl` is not re-scored (OUTCOME_MAPPING Amendment 3
+§A3.5); nothing about run `walk_20260903T003422Z` is re-judged.*
+
+### K.1 Why this is not a post-hoc subset
+The exclusion set is session F's `hostility` field, defined in OUTCOME_MAPPING.md Amendment 3 §A3.3 and
+coded for all 187 events of the four geopolitical classes **before any count under it was computed**
+(`data/spine/CLASS_AUDIT.md`; F's blocking condition "do not implement until all four classes are coded"
+was cleared at 0 of 4 outstanding). `non_hostile` and `ambiguous` return `no_independent_outcome` under
+A3.3 — the G target is *undefined* for those reads, not merely unfavourable. Removing reads whose target is
+undefined is a repair of the estimand, not a search over subsets; and because the field was registered and
+coded first, the subset could not have been chosen once its effect on the score was known.
+
+### K.2 What is computed
+On the daily tier of the published run, restricted to the **G-scorable** reads — `hostility` in
+{`hostile`, `hostile_unattributed`} — of the sealed scored set:
+- the engine's, frozen's and persistence's G forecasts are taken **as sealed**; nothing is re-read and no
+  analog is re-retrieved;
+- **climatology is re-estimated on the reduced distribution.** Each sealed read carries its own
+  point-in-time G pool (`baselines.random_analogs.g_pool_ids`) and that pool's labels
+  (`baselines.climatology.G_labels`), index-aligned. For the diagnostic, pool members that are not
+  G-scorable are dropped and the climatology forecast is the level frequency over what remains. This is the
+  point of the exercise: the baseline the engine is scored against moves, not only the engine's score;
+- **random analogs are re-drawn from the reduced pool**, same k and same per-event seed as the sealed run;
+- scores: multi-category Brier and RPS over the IES-90 levels, engine against each of the four baselines,
+  with the stationary-bootstrap interval and the DM/HLN test, using the tier's measured mean block and HAC
+  lag recomputed on the retained dates.
+
+### K.3 Publication
+`summary.json` gains `tiers.daily.G.diagnostic_hostile`, carrying its own `computed_at`, the sealed
+`run_id` it was derived from, `registered: false`, the retained and dropped counts by hostility value, the
+level-0 share before and after, and every comparison. It is written by `src/engine/diagnostic_hostile.py`
+from the sealed files, never by re-scoring, and a short section is added to
+`data/handoffs/B_run_delta_spine.md` answering one question: does the engine's negative skill widen, narrow
+or hold when the reads whose target is undefined are removed?
+
+### K.4 The limit, stated with the number
+n falls from 150 to the retained count, so every interval widens; the registered `min_tier_n` of 30 is still
+met but the comparison is materially less powerful than the one it sits beside (measured minimum detectable
+skill at the published n = 150 is already 0.127). This is a diagnostic on a sealed run, not a new run, and
+it is not the run the paper reports. Whatever it shows, `engine:G` stays SUGGESTIVE / null under §7.
