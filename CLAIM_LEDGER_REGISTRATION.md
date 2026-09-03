@@ -415,3 +415,42 @@ amendment stating what it does to the counts.
 ### 9.7 Files
 `src/antecedent.py` (new, session H), `data/ledger/antecedents.jsonl` (new, append-only),
 `tests/test_antecedent.py`. `src/ledger.py` gains the gated skip only.
+
+## Amendment 9.1 — 2026-09-03, session H, BEFORE any hypothetical claim is resolved (a flaw in Amendment 9, found by running it)
+
+Amendment 9 §9.6 said the gate "does not parse the consequent". Running it showed that is not a
+limitation you can leave standing: both claims it marked `ANTECEDENT_MET` are **circular**, and
+resolving either would have written a guaranteed-true row into the ledger.
+
+    ec1a39106780  "Moscow can break even if crude clocks in as low as $42 a barrel."
+                  antecedent predicate : PRICE  level 42.0  down  fred.DCOILBRENTEU
+                  consequent as typed  : level  level 42.0  down  fred.DCOILBRENTEU   <- the same test
+                  The sentence's actual consequent ("Moscow can break even") is a fiscal
+                  proposition the reader never captured. Resolving this claim would test the
+                  antecedent, call it the consequent, and score it true by construction.
+
+    b146604509f7  "...sending up to 120,000 troops should Iran attack US forces..."
+                  antecedent : a GEO corpus event with sr_actor = country.iran in the window (2)
+                  consequent : a GEO corpus event with any of the claim's entities in the window
+                  The antecedent's satisfying set is a SUBSET of the consequent's. Met implies true.
+
+### The rule
+A fifth status, `ANTECEDENT_CIRCULAR`, is added and is a **refusal**: the claim is never resolved
+and never enters `resolutions.jsonl`. A claim is circular when its antecedent's satisfying set is
+contained in its consequent's, tested concretely rather than by rule of thumb:
+
+- **PRICE** — the claim's typed consequent is a `level` claim on the same series, level and
+  direction as the antecedent. (Computed by comparing the stored fields, not assumed.)
+- **CORPUS** — the set of corpus event_ids satisfying the antecedent is a subset of the set
+  satisfying the consequent test that `ledger.resolve()` would run for that claim. Both sets are
+  computed and the subset relation is checked; the sizes are published on the row.
+
+### What this means for defect L-2
+The mechanism §2 describes now exists, is registered and is tested. On the committed corpus it
+resolves **none** of the twelve, and that null is the result. It is not a reason to loosen the
+predicate: the three refusals are refusals about a corpus that cannot yet distinguish "Iran
+attacked" from "someone escalated", and the two circular claims are refusals about a reader that
+typed the antecedent as the consequent. Both are fixed upstream — by coding `sr_actor` past
+65/187, and by the reader capturing a conditional's two halves separately — never by relaxing
+this gate. Until then the honest count is 0 resolved, and the twelve are reported by status rather
+than as "pending".
