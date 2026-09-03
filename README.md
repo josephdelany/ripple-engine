@@ -138,9 +138,17 @@ under-represented inside big **crude** moves and 2–3× over-represented inside
 
 **Propagation.** A registered, placebo-controlled local-projection study of crude →
 products → cracks → gas/LNG → fertilizer → freight → credit: **21 of 477 cells transmit,
-against 1–24 expected under no transmission at all**, and zero of 99 at the gas and
-fertilizer hops. The same estimator recovers Känzig's (2021) published oil-supply-news
-shock cleanly at every horizon — the silence is not an instrument failure.
+against 1–24 expected under no transmission at all**. The same estimator recovers Känzig's
+(2021) published oil-supply-news shock cleanly at every horizon — the silence is not an
+instrument failure. **A follow-up study on physical outcomes issues two errata against that
+result** and they are published beside it, not folded into it: the study's one transmitting
+*physical* cell (Cape of Good Hope transits) was estimated on a Brent trading-day index that
+discards weekends, and tanker transits happen at weekends — on the full calendar record it
+covers zero at all nine horizons, so that hop has **zero** transmitting cells, not one. And
+the monthly hops ran with no placebo, so "zero of 54 at fertilizer" was arithmetic about a
+flag rather than a finding about fertilizer. The physical study also found the record goes
+dark where it matters: Iran stops reporting production in **2018-07**, the month secondary
+sanctions were reimposed.
 
 ## What this does not claim
 

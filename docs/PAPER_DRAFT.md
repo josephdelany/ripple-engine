@@ -641,7 +641,8 @@ expectation, that some tightening class beats the matched placebo at Brent, fail
 The shape is more informative than the tally. Transmitting cells sit at the two *ends*
 — crude itself (4 of 36) and the equity and macro nodes beside the chain (13 of 171) —
 and vanish along it: **zero of 99 cells transmit at the gas/LNG and fertilizer hops**,
-four and five steps down. Pass-through ratios cannot be computed at all, because the
+four and five steps down. *(Two errata against this paragraph are recorded in §12.1; the
+sealed tables are not edited.)* Pass-through ratios cannot be computed at all, because the
 denominator is null: Brent's own response at the headline horizon covers zero, so every
 hop-to-hop ratio is a number divided by something indistinguishable from zero, and the
 delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled shock).
@@ -651,6 +652,46 @@ delta-method intervals say so ([−196.7, +220.1] for heating oil on the pooled 
 recovers his result cleanly — β on Brent of +0.85 at h = 0 rising to +2.37 at h = 20,
 every horizon excluding zero, with his sign, shape and persistence. The estimator finds
 an identified shock when one is there.
+
+### 12.1 Two errata, from the physical-outcomes follow-up
+
+A registered follow-up study extended the same design to *physical* outcomes — production,
+stocks and chokepoint transits rather than prices (`docs/RIPPLE_PHYSICAL.md`, Amendment C).
+It issues two corrections to the study above. Both are published beside the sealed tables
+rather than folded into them.
+
+**(i) The one transmitting physical cell does not survive.** Cape of Good Hope transits ×
+`conflict_escalation` at h = 5 was reported at +20.66 [+8.77, +32.55], a BH survivor and the
+only transmitting cell in the entire physical hop. It was estimated on the Brent
+**trading-day** index, which discards weekends — and tanker transits happen at weekends. On
+the full 2,799-day calendar record the same cell is **+4.03 [−6.89, +14.96]**, covering zero
+at *all nine* horizons; on the trading-day index it excluded zero at exactly one of six, the
+one that happened to be the registered headline. It is not a horizon artefact: trading-day
+h = 5 spans a mean 7.2 calendar days, and the matched calendar estimate at h = 7 is +3.69
+[−9.60, +16.99]. Day-of-week dummies move it by less than 0.30. Two further cells flip the
+same way (`bab_el_mandeb × tightening`, `suez × chokepoint_disruption`). **The physical hop
+has zero transmitting cells, not one.**
+
+**(ii) The monthly hops could not have transmitted.** Every monthly node in the study above
+ran with no placebo, and TRANSMITTING requires clearing one. So the striking "zero of 54 at
+the fertilizer hop" was **arithmetic about a flag, not a finding about fertilizer**. Hop 3 is
+affected the same way in 3 of 5 cells. The gas/LNG and fertilizer silence should be read as
+*untested*, not as *tested and null* — a weaker and more honest claim than the one this
+paper made.
+
+**What the follow-up adds rather than subtracts.** The nulls are bounded, not empty: the
+Baumeister–Hamilton identified supply shock moves JODI production **+0.760 [+0.496, +1.023]**
+at h = 0 with the same code, so the data and the estimator work and the weakness is the shock
+design — the same verdict §8 reaches for prices, now demonstrated twice with different
+outcome types. Two chokepoint closures separate cleanly and in opposite directions: Red Sea
+2024 cut Bab el-Mandeb flow −56.6% while Cape reroutes rose +101.8% and Brent fell −4.9%;
+Hormuz 2026 cut flow −92.3% with only +20.7% reroute, and Brent rose +48.5%. **A reroutable
+closure is a freight event, not a price event** — and a price-only study sees nothing there
+and concludes nothing happened. Finally, the physical record goes dark exactly where it
+matters: Iran stops reporting to JODI in **2018-07**, the month US secondary sanctions were
+reimposed, the UAE and Qatar in 2018-12, Russia in 2023-03. Of 122 de-overlapped events
+naming a producer, 21 fall after that producer stopped reporting. The missingness is caused
+by the treatment, and no weighting fixes that.
 
 **And five of six prior "validated" edges were retracted.** The stress-amplification
 edges inherited from the first version of this project (geopolitical shock under

@@ -9,15 +9,41 @@ Anything not listed here is done or explicitly out of scope.*
 
 ## Tier 1 — changes what a published number means
 
-**1.1 The escalation target is substantially a persistence variable.** *(red team 2
-finding 3, verified 2026-09-03.)* Of 54 level-3 "war" labels, **34 (63%) already had ≥250
-GED battle deaths in the 90 days before the event** — Iraq–Kuwait 1990 (905), Iraq 2003
-(6,584), Ukraine 2022 (20,473), Israel–Hamas 2023 (3,835). All 54 come from COW War or
-UCDP GED, the two sources Amendment 1.1's "ongoing → no level" rule was never extended to.
-`deaths_ged_pre90` is stored for 168 events and used once in `ies90.py`. **Consequence:**
-"did escalation follow?" is largely "was a war already running?", so the
-persistence-beats-engine headline is partly mechanical. Owner **A** (register + implement),
-**B** (re-run), **Cowork** (paper). *Highest priority in the project.*
+**1.1 The escalation target was substantially a persistence variable — registered,
+fixed, and awaiting a rebuild.** *(red team 2 finding 3; verified, **partly corrected**, and
+repaired by K, `c74ccd6` + `0a206b2`.)*
+
+*The correction, to our own brief.* The finding as I briefed it overstated itself for four
+events. `deaths_ged_pre90` is summed over `[d−89, d]` — **inclusive of the event day** — so
+for an event whose own day is the violent one, the "before" figure is mostly the event.
+Strictly before *d*: Ukraine 2022 is **79**, not 20,473; Israel–Hamas 2023 is **28**, not
+3,835; Israel–Iran 2025 is **4**, not 959. Those are war *onsets* and their level 3 is
+correct. The count of GED-set level 3 with ≥250 deaths genuinely before the event is **27 of
+38, not 31**. The 34-of-54 headline count and the source split reproduced exactly; the
+specific examples did not, and `OUTCOME_MAPPING.md` §(ii) records that rather than repeating
+it.
+
+*The defect is still real and still large.* Amendment 4 extends the "ongoing → no level"
+rule to COW War and UCDP GED, and stops `max(default=0)` silently reading "no covering
+record" as level 0 — the same defect with the sign reversed, not previously reported. The
+effect on the target is severe: **184 events with a level → 132 (−28%)**, level 3 **54 → 20**,
+level 2 **48 → 30**, `no_independent_outcome` **3 → 55**, 59 of 187 labels moving.
+Persistence's share of the target's rank variance falls ρ² **0.640 → 0.407**; holding the
+sample fixed at the 120 events scorable under both rules, 0.484 → 0.407, so about a third of
+the fall is the rule and the rest is selection. **41% of the target's rank variance and 73%
+of its labels are still what persistence would say** — partly mechanical, not only
+mechanical, and the engine still has a legitimate baseline to beat.
+
+**1.1a — BLOCKING, needs Joe's ruling tonight.** The tree is in an **incoherent state**:
+`event_outcomes` in `data/oil.db` still carries the pre-amendment 76/6/48/54 = 184, while
+`src/state/ies90.py` is post-amendment, and `src/engine/persistence.py` calls
+`ies90.score_event` **live** (Amendment B.1: "called, never copied"). **Any walk run right
+now scores a pre-amendment target against a post-amendment baseline, and does not announce
+it.** Two coherent states only: revert `ies90.py` to `c74ccd6`, or rebuild the `event_outcomes`
+level rows. K declined to choose and did not add a switch to dodge asking, which was right.
+Note that every published number — §8, §11, the delta experiment — is on the **pre**-amendment
+target, so a rebuild means those numbers describe a target that no longer exists and a re-run
+is owed. That is the record working, but it must be stated, not absorbed.
 
 **1.2 The Big Moves clustering constants are unregistered.** *(finding 2.)*
 `BIG_MOVES_REGISTRATION.md` registers clustering within 60 **trading** days and no merge

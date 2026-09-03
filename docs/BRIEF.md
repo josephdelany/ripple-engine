@@ -80,9 +80,13 @@ and 2–3× over-represented inside big *diesel-crack* moves.
 
 **Propagation.** A registered, placebo-controlled local-projection study of crude →
 products → cracks → gas/LNG → fertilizer → freight → credit: **21 of 477 cells transmit,
-against 1–24 expected under no transmission at all**, and zero of 99 at the gas and
-fertilizer hops. The same estimator recovers Känzig's (2021) published oil-supply-news
-shock cleanly at every horizon — so the silence is not an instrument failure.
+against 1–24 expected under no transmission at all**, while the same estimator recovers
+Känzig's (2021) published oil-supply-news shock cleanly at every horizon — so the silence is
+not an instrument failure. A follow-up on physical outcomes issues **two errata against that
+study**, published beside it rather than folded in: its one transmitting *physical* cell does
+not survive being re-estimated on the calendar record (tanker transits happen at weekends;
+the trading-day index discards them), and the monthly hops ran with no placebo, so they could
+not have transmitted by construction.
 
 ### What this is not
 
