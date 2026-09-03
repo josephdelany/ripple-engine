@@ -483,3 +483,77 @@ before running:
    `data/ripple/SUMMARY.md` and is mirrored to `RIPPLE_SUMMARY.md` at the repo root for
    the "who moved first" section the brief adds (C-6, descriptive, no test).
 No number had been computed when this was written.
+
+## Amendment C — 2026-09-02, REGISTRATION ONLY: two physical-quantity target families for v3
+*Nothing in this amendment has been computed. It is written now, before any run, because Joe's
+Rulings 2 and 3 made both sources loadable today and the sample sizes below are already fixed by
+the corpus — registering after seeing a first estimate is exactly what the seal forbids. Neither
+family is part of the v2 study reported in `docs/RIPPLE_FINDINGS.md`; that study's Table N is
+closed.*
+
+### C.1 Why these two, and what they add that v2 could not have
+Every outcome in v2 is a **price**. A price response conflates the size of a disruption with the
+market's belief about it, and §4.2 of the findings shows our tightening classes have almost no
+relationship with the identified structural supply shock (r = −0.023 over 614 months). Physical
+quantities break that conflation: a chokepoint either carries fewer tankers or it does not, and a
+country either produces fewer barrels or it does not. These are the first outcomes in this
+project that can falsify a "the shock was real but the market had already priced it" reading, so
+they are registered as **outcome nodes**, not as controls or conditioners.
+
+### C.2 Target family 1 — JODI-Oil monthly country production
+- **Nodes.** `jodi.<cc>.crude_production` (thousand bbl/day, pinned unit KBD), and as secondary
+  outcomes `jodi.<cc>.refinery_intake`, `jodi.<cc>.crude_stocks` (KBBL), `jodi.<cc>.crude_exports`,
+  `jodi.<cc>.products_demand`. 106 series are loaded; **21 production series carry ≥ 200 months.**
+- **Transform** 100·log for volumes; the registered horizons are the monthly set already in §2.2,
+  h ∈ {0, 1, 2, 3, 6, 9, 12} months, headline **h = 3**, lag p = 6 (+1 augmentation), controls as
+  §2.1 monthly.
+- **Sample and n, fixed now.** Window **2002-01 → 2026-06, 294 months.** De-overlapped corpus
+  events in that window: **all 67, tightening 51**; by class chokepoint 21, infrastructure 21,
+  conflict 34, OPEC 38, sanctions 36, demand 13, policy 36. Months containing at least one
+  de-overlapped event: **67 of 294**. So every class except demand_shock clears the registered
+  minimum of 15, and demand_shock (13) does not and is registered as INSUFFICIENT in advance.
+- **The registered restriction that makes this a test rather than a fishing trip.** A production
+  response is only interpretable where the shock plausibly reaches the producer. Registered now:
+  the primary test is **the producer named in the event's own actor/target fields** (a strike on
+  Saudi infrastructure tests Saudi production), with the pooled cross-country panel as the
+  secondary. Any country×class pair not named by the corpus is exploratory and BH-controlled.
+- **The coverage limit, registered before it can be discovered as a surprise.** Six reporters
+  stopped publishing production volumes: Iran 2018-07, UAE 2018-12, Qatar 2018-12, Brazil
+  2022-12, Russia 2023-03, Iraq 2024-03. Four are major OPEC producers. **The panel is
+  structurally missing the OPEC core after 2018**, so any post-2018 producer test is registered
+  as running on non-OPEC reporters only, and this must be said wherever a result appears.
+- **Expected direction, stated in advance:** a tightening event naming a producer lowers that
+  producer's crude production at h = 1–3 months, or the "disruption" was to expectations only.
+
+### C.3 Target family 2 — IMF PortWatch daily chokepoint transits
+- **Nodes.** `portwatch.<slug>.n_tanker` (headline), with `n_total` and `capacity_tanker` as
+  secondary, for the seven chokepoints already loaded and now seeded.
+- **Transform** 100·log(1+n) as in v2 Table N; daily horizons h ∈ {0, 1, 2, 5, 10, 20, 40, 60},
+  headline **h = 5**, lag p = 5 (+1), controls as §2.1 daily.
+- **Sample and n, fixed now.** Window **2019-01-01 → 2026-08-30, 2,799 days.** De-overlapped
+  events in that window by class: chokepoint 14, infrastructure 14, conflict 17, OPEC 15,
+  sanctions 19, demand 9, policy 22; **tightening 24**.
+- **A counterintuitive fact recorded now so it is not mistaken for a bug later.** The pooled
+  **all** shock de-overlaps to **16** clusters in this window — *fewer than the tightening
+  subset's 24* — because post-2019 events are dense enough that the 35-day chain rule merges
+  almost everything into a few long clusters. Registered consequence: in this window the pooled
+  `all` shock is **not** used; `tightening` and the per-class shocks are, and any v3 code that
+  assumes pooling raises n is wrong here.
+- **Registered restriction.** The primary test is **the chokepoint named by the event** (a Hormuz
+  event tests Hormuz), with Cape of Good Hope registered as the **reroute counter-node**: a real
+  Red Sea or Bab el-Mandeb closure should move Bab el-Mandeb down and Cape of Good Hope up, and a
+  result that moves both the same way is evidence of a common time trend, not a disruption.
+- **The confound registered in advance.** The 2024 Red Sea rerouting dominates this window. The
+  one transmitting transit cell in v2 (Cape of Good Hope, conflict escalation, +20.7%, n = 16) is
+  almost certainly that episode. v3 must report the leave-one-episode-out estimate beside the
+  full-sample one, and if the result rests on that episode it is reported as an episode
+  description, not a response.
+- **Expected direction, stated in advance:** a chokepoint disruption naming a strait lowers that
+  strait's tanker transits within 5 trading days and raises Cape of Good Hope transits.
+
+### C.4 What is *not* registered here
+No new shock series, no change to the v2 nodes, horizons, lag lengths, minimum n, placebo
+construction, verdict vocabulary or multiple-testing rule — all of those carry over unchanged
+from §2. No magnitude-bearing shock for the non-OPEC classes, which the findings name as the
+study's principal weakness, is registered here because none exists yet; building one is its own
+brief and needs its own registration before it is used.
