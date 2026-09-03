@@ -154,7 +154,26 @@ amendment before grading the rest.
 **4.2 The 13 ambiguous class rows.** Ruled terminal; no action, recorded.
 
 **4.3 Rulings outstanding:** the Big Moves constants (1.2), the placebo reference (1.3),
-whether v3 re-codes the taxonomy (2.1), pre-1987 admissions (2.2).
+whether v3 re-codes the taxonomy (2.1), pre-1987 admissions (2.2) — and, opened by G-2,
+whether `EVENTS_CODEBOOK.md` gains a class for a concession or ownership change, since four
+pre-1974 records currently sit in `opec_decision` by elimination. Also E's five proposed
+coding gaps (`docs/spine/CODEBOOK_AMENDMENT_PROPOSED.md`), which live in the adjacent
+repository and cannot be applied from here.
+
+**4.5 RULED 2026-09-03 — the multiplier-4 drop stands.** B's registered §2.7 drop rule is
+applied as written; the grid study has a **price arm only**. The escalation question stays on
+the event-triggered reads. Recorded reasoning, which B and Cowork reached independently: the
+dyad-date panel is 96.75% zeros, its coverage wall is hard at 2014-10-02 for every sided
+source, and every cell is `retrospective=1`, so under `WORLD_STATE_CODEBOOK` Amendment 1 it
+can describe and never validate. Density does not fix that, because the problem is not *n*.
+B's own note stands on the record: the ratio test is the wrong test and would be written
+differently today, and that is a separate question from whether this multiplier belongs in
+this study. The gate report is `data/gates/grid_multiplier4_2026-09-03.md`.
+
+**4.6 RULED 2026-09-03 — the desk's audience is the 90-second reader.** A recruiter or
+professor who opens the link once, does not return, and must reach the finding and the
+integrity record fast. A2.6, A2.7 and A2.8 are to be re-derived from that ruling by session A
+and re-proposed, rather than ruled separately on their old framing.
 
 **4.4 `launchd` access** so the daily loop runs unattended — needed for D7's ledger days.
 
