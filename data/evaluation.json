@@ -2,6 +2,34 @@
   "corpus": {
     "n_events": 313
   },
+  "registered_gates": {
+    "placebo": {
+      "source": "data/walk_forward/summary.json#/placebo",
+      "registration": "WALK_FORWARD_PROTOCOL.md \u00a76",
+      "run_id": "walk_20260903T052633Z",
+      "null_holds": false,
+      "skill": -0.0675,
+      "ci95": [
+        -0.1187,
+        -0.0201
+      ],
+      "dm_p": 0.0111,
+      "estimator": "source_event_cluster (Amendment N)",
+      "null_reference": "random_analogs -- protocol \u00a74 baseline 3, the same k drawn at random from the class: size-matched, so a null engine has zero expected skill against it. Against climatology the registered CRPS of a k-atom distribution is biased upward by E|X-X'|/(2k) (Ferro 2014), so that skill is negative under the null by sample size alone; it is published beside this, not gated on."
+    },
+    "h1": {
+      "source": "data/evidentiary_bar.json#/adjudicated/H1_vix_oil",
+      "registration": "docs/red_team_1.md R7 -- the single evidentiary bar",
+      "bar": "validated IFF (1) SAR-standardized effect AND (2) regime-block-robust 95% cluster-bootstrap CI excluding zero (full + drop 2008/2020/2026/all) AND (3) SAR permutation-p survives BH-FDR q=0.10 across the family.",
+      "legs": {
+        "1_sar_computed": true,
+        "2_regime_block_robust_ci_excludes_zero": false,
+        "3_survives_perm_fdr": false
+      },
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "validated": false
+    }
+  },
   "placebo": {
     "ran": true,
     "real_amp": 6.0412,
@@ -11,7 +39,8 @@
       4.3229
     ],
     "null_as_expected": true,
-    "note": "state labels shuffled on H1's episodes; amplification collapses to ~0 (CI spans 0). A non-null placebo would mean the framework finds signal in noise -- it does not."
+    "gates": false,
+    "note": "DIAGNOSTIC, NOT A GATE. State labels shuffled on H1's episodes -- an unregistered check on a hypothesis that has since been downgraded under the single evidentiary bar. The registered placebo is WALK_FORWARD_PROTOCOL \u00a76 (summary.json#/placebo); read that for the verdict. This figure passing says nothing about whether the registered placebo passes, and it does not."
   },
   "surface_consistency": {
     "quantity": "H1 amplification (Brent, pp)",
@@ -156,7 +185,8 @@
     "n_quarters": 67
   },
   "overall": {
-    "framework_sound": true,
-    "headline": "placebo null (good); surfaces consistent; gap-ledger skill vs base 0.0045; H1 holds out-of-sample (13.384pp on 2019+)"
+    "framework_sound": false,
+    "gates_source": "registered files only: WALK_FORWARD_PROTOCOL \u00a76 placebo and the red_team_1 R7 evidentiary bar. This module's own placebo and hold-out are diagnostics and gate nothing.",
+    "headline": "registered placebo (protocol \u00a76): NULL DOES NOT HOLD -- skill -0.0675, CI [-0.1187, -0.0201], DM p 0.0111; H1 under the single evidentiary bar: NOT VALIDATED -- DOWNGRADE (SUGGESTIVE), legs {'1_sar_computed': True, '2_regime_block_robust_ci_excludes_zero': False, '3_survives_perm_fdr': False}; surfaces consistent; gap-ledger skill vs base 0.0045"
   }
 }

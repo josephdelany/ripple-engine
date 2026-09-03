@@ -22,5 +22,14 @@ def test_st2_acceptance_aggregates_checks():
     assert r["verdict"] in ("COMMISSIONED", "DEGRADED")
     labels = " ".join(m for _, m in r["checks"])
     assert "framework_sound" in labels and "evidence packs" in labels and "cage" in labels
-    # with a sound framework + receipts + non-RED status, it should commission
-    assert r["commissioned"] is True
+    # Until 2026-09-03 this asserted commissioned is True. It no longer is, and that is the
+    # gate working: evaluate.py's framework_sound now comes from the REGISTERED gates (protocol
+    # §6 placebo null_holds is false; H1 is DOWNGRADE (SUGGESTIVE) under the R7 bar) instead of
+    # from its own placebo shuffle, and engine_status is RED. Commissioning while the registered
+    # placebo fails is exactly what SESSION_CHARTER §2.4 forbids. The assertion is therefore on
+    # the RELATION, which holds whichever way the checks fall.
+    assert r["commissioned"] is all(ok for ok, _ in r["checks"]), \
+        "commissioned must be true if and only if every check passes"
+    if not r["commissioned"]:
+        assert r["verdict"] == "DEGRADED"
+        assert [m for ok, m in r["checks"] if not ok], "DEGRADED with no failing check named"

@@ -48,8 +48,15 @@ def run(fast=False):
 
     ev = _rj("evaluation.json")
     fw = (ev.get("overall", {}) or {}).get("framework_sound")
+    # 2026-09-03: framework_sound is now computed in evaluate.py from the REGISTERED gates
+    # (WALK_FORWARD_PROTOCOL §6 placebo null_holds; the red_team_1 R7 evidentiary bar), not from
+    # evaluate.py's own placebo shuffle. The label said "placebo null" while the registered
+    # placebo was failing, so it is restated to name what is actually read.
+    gates = (ev.get("registered_gates") or {})
     checks.append((fw is True, f"evaluation framework_sound = {fw} "
-                   f"(placebo null + surfaces consistent)"))
+                   f"(registered placebo null_holds="
+                   f"{(gates.get('placebo') or {}).get('null_holds')}, H1 bar validated="
+                   f"{(gates.get('h1') or {}).get('validated')}, surfaces consistent)"))
 
     st = _rj("engine_status.json")
     verdict = st.get("verdict")

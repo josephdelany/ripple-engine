@@ -43,6 +43,69 @@ def _rj(name):
         return {}
 
 
+# ---------------------------------------------------------------- 0. the REGISTERED gates
+# This module used to answer "is the engine sound?" from its own checks. Two of them were not the
+# gates this repository registers, and both said the opposite of the registered answer:
+#   * its placebo shuffles H1's VIX state labels and passes if the CI spans zero. The REGISTERED
+#     placebo is WALK_FORWARD_PROTOCOL §6, published at summary.json#/placebo, and its null_holds
+#     is FALSE. EVALUATION.md said "placebo null (good)" at the repo root while the registered
+#     placebo was failing.
+#   * its temporal hold-out reported "H1 holds out-of-sample". H1 was DOWNGRADED under the single
+#     evidentiary bar (docs/red_team_1.md R7; data/evidentiary_bar.json) -- legs 2 and 3 fail -- and
+#     is one of the project's published retractions.
+# The verdict now comes from those two files. The module's own checks remain, as DIAGNOSTICS,
+# labelled as unregistered and gating nothing. A diagnostic that disagrees with a registered gate
+# is a fact about the diagnostic.
+
+def _r(x, nd=4):
+    """Round for a document a human reads; None stays None. Never rounds anything that is gated on."""
+    return None if x is None else round(float(x), nd)
+
+
+def registered_gates():
+    """The gates this repository actually registers, read from their own published files.
+    Never this module's own arithmetic. A missing file is reported as unavailable, never as a pass."""
+    out = {}
+    try:
+        s = json.loads((ROOT / "data" / "walk_forward" / "summary.json").read_text())
+        pl = s.get("placebo") or {}
+        out["placebo"] = {"source": "data/walk_forward/summary.json#/placebo",
+                          "registration": "WALK_FORWARD_PROTOCOL.md §6",
+                          "run_id": s.get("run_id"), "null_holds": pl.get("null_holds"),
+                          "skill": _r(pl.get("skill")), "ci95": [_r(x) for x in (pl.get("ci95") or [])],
+                          "dm_p": _r(pl.get("dm_p")),
+                          "estimator": pl.get("estimator"), "null_reference": pl.get("null_reference")}
+    except Exception as ex:
+        out["placebo"] = {"unavailable": f"{type(ex).__name__}: {ex}", "null_holds": None}
+    try:
+        b = json.loads((ROOT / "data" / "evidentiary_bar.json").read_text())
+        h1 = (b.get("adjudicated") or {}).get("H1_vix_oil") or {}
+        legs = h1.get("legs") or {}
+        out["h1"] = {"source": "data/evidentiary_bar.json#/adjudicated/H1_vix_oil",
+                     "registration": "docs/red_team_1.md R7 -- the single evidentiary bar",
+                     "bar": b.get("bar"), "legs": legs, "retier": h1.get("retier"),
+                     "validated": (all(legs.values()) if legs else None)}
+    except Exception as ex:
+        out["h1"] = {"unavailable": f"{type(ex).__name__}: {ex}", "validated": None}
+    return out
+
+
+def gate_status(g):
+    """(sound, headline) from the REGISTERED gates only."""
+    pl, h1 = g.get("placebo", {}), g.get("h1", {})
+    nh, val = pl.get("null_holds"), h1.get("validated")
+    bits = []
+    bits.append("registered placebo (protocol §6): " + (
+        "null holds" if nh is True else
+        f"NULL DOES NOT HOLD -- skill {pl.get('skill')}, CI {pl.get('ci95')}, DM p {pl.get('dm_p')}"
+        if nh is False else f"unavailable ({pl.get('unavailable')})"))
+    bits.append("H1 under the single evidentiary bar: " + (
+        "validated" if val is True else
+        f"NOT VALIDATED -- {h1.get('retier')}, legs {h1.get('legs')}" if val is False
+        else f"unavailable ({h1.get('unavailable')})"))
+    return (nh is True and val is True), "; ".join(bits)
+
+
 # ---------------------------------------------------------------- 1. placebo / negative control
 def placebo(conn):
     m, s = edge_battery._amp_arrays(conn, "derived.vix_pct", "fred.DCOILBRENTEU", 20)
@@ -62,8 +125,11 @@ def placebo(conn):
             "placebo_mean": round(float(np.mean(shuffled)), 4),
             "placebo_ci95": [round(float(lo), 4), round(float(hi), 4)],
             "null_as_expected": null_ok,
-            "note": "state labels shuffled on H1's episodes; amplification collapses to ~0 (CI spans 0). "
-                    "A non-null placebo would mean the framework finds signal in noise -- it does not."}
+            "gates": False,
+            "note": "DIAGNOSTIC, NOT A GATE. State labels shuffled on H1's episodes -- an unregistered check on a "
+                    "hypothesis that has since been downgraded under the single evidentiary bar. The registered "
+                    "placebo is WALK_FORWARD_PROTOCOL §6 (summary.json#/placebo); read that for the verdict. This "
+                    "figure passing says nothing about whether the registered placebo passes, and it does not."}
 
 
 # ---------------------------------------------------------------- 2. surface consistency
@@ -180,16 +246,20 @@ def run():
             "skill_vs_base": (qc.get("overall") or {}).get("skill_vs_base"),
             "n_quarters": qc.get("n_quarters")} if qc.get("ran") else {}
 
-    framework_ok = bool(pl.get("null_as_expected") and sc.get("all_consistent"))
+    gates = registered_gates()
+    gates_ok, gate_line = gate_status(gates)
+    framework_ok = bool(gates_ok and sc.get("all_consistent"))
     report = {"corpus": {"n_events": n_events},
+              "registered_gates": gates,
               "placebo": pl, "surface_consistency": sc, "calibration": cal, "power": pw,
               "miss_audit": ma, "temporal_holdout": holdout, "quarterly_calibration": qcal,
               "overall": {"framework_sound": framework_ok,
-                          "headline": f"placebo {'null (good)' if pl.get('null_as_expected') else 'NOT NULL (!!)'}; "
-                          f"surfaces {'consistent' if sc.get('all_consistent') else 'INCONSISTENT (!!)'}; "
-                          f"gap-ledger skill vs base {cal.get('skill_vs_base')}"
-                          + (f"; H1 holds out-of-sample ({holdout.get('oos_2019plus_amp_pp')}pp on 2019+)"
-                             if holdout.get("holds_out_of_sample") else "")}}
+                          "gates_source": "registered files only: WALK_FORWARD_PROTOCOL §6 placebo and the "
+                                          "red_team_1 R7 evidentiary bar. This module's own placebo and hold-out "
+                                          "are diagnostics and gate nothing.",
+                          "headline": gate_line
+                          + f"; surfaces {'consistent' if sc.get('all_consistent') else 'INCONSISTENT (!!)'}"
+                          + f"; gap-ledger skill vs base {cal.get('skill_vs_base')}"}}
     OUT.write_text(json.dumps(report, indent=2, default=str))
     _write_md(report)
     return report
@@ -238,16 +308,62 @@ def _bar_section():
     return L
 
 
+def _status_banner(r):
+    """The generator emits its own status. Before 2026-09-03 this file asserted "placebo null (good)"
+    and "H1 holds out-of-sample" at the repo root while the registered placebo was failing and H1 had
+    been downgraded; a banner was added by hand and would have been erased by the next regeneration.
+    A machine-generated file has to carry its own verdict, or it lies again on the next pipeline pass."""
+    g = r.get("registered_gates") or {}
+    pl, h1 = g.get("placebo", {}), g.get("h1", {})
+    if r["overall"]["framework_sound"]:
+        return []
+    L = ["> **THE REGISTERED GATES DO NOT PASS. Read this before any number below.**", ">"]
+    if pl.get("null_holds") is False:
+        L += [f"> - **The registered placebo fails.** `{pl['source']}` → `null_holds` is **false** "
+              f"(skill {pl.get('skill')}, CI {pl.get('ci95')}, DM p {pl.get('dm_p')}; run "
+              f"`{pl.get('run_id')}`), registered at {pl.get('registration')}. §1 below shuffles H1's "
+              f"state labels and spans zero; that is a **different, unregistered check** and it gates "
+              f"nothing.", ">"]
+    elif pl.get("null_holds") is None:
+        L += [f"> - **The registered placebo could not be read** ({pl.get('unavailable')}). Absence is "
+              f"reported as absence, never as a pass.", ">"]
+    if h1.get("validated") is False:
+        L += [f"> - **H1 is not validated — it is {h1.get('retier')}.** `{h1['source']}` → legs "
+              f"{h1.get('legs')} under {h1.get('registration')}. Any H1 figure below (§2 surface "
+              f"consistency, §6 hold-out) is a **diagnostic on a downgraded hypothesis**, not a result, "
+              f"and none of them re-validates it.", ">"]
+    elif h1.get("validated") is None:
+        L += [f"> - **The evidentiary bar could not be read** ({h1.get('unavailable')}).", ">"]
+    L += ["> For current status read `README.md`, `docs/PAPER_DRAFT.md` and `OPEN_ITEMS.md`.",
+          ">",
+          "> The frozen record is never edited; this banner is regenerated from the registered files "
+          "every time the module runs, so it cannot go stale while the gates stay red. It replaces a "
+          "hand-added banner of 2026-09-03, which said the same thing and which the next regeneration "
+          "would have erased.", ""]
+    return L
+
+
 def _write_md(r):
-    L = ["# EVALUATION — is the engine sound?", "",
-         "*Generated by `src/evaluate.py` over the committed artifacts. Reruns each pipeline pass.*", "",
-         f"**Overall:** {r['overall']['headline']}.", ""]
+    L = ["# EVALUATION — is the engine sound?", ""]
+    L += _status_banner(r)
+    L += ["*Generated by `src/evaluate.py` over the committed artifacts. Reruns each pipeline pass.*",
+          "*Verdict from the registered gates only (protocol §6 placebo; the red_team_1 R7 bar); this "
+          "module's own placebo and hold-out are diagnostics and gate nothing.*", "",
+          f"**Overall:** {r['overall']['headline']}.", ""]
     L += _bar_section()
     pl = r["placebo"]
-    L += ["## 1. Negative control (placebo)",
+    reg = (r.get("registered_gates") or {}).get("placebo", {})
+    L += ["## 1. Negative control on H1's state labels — DIAGNOSTIC, NOT THE REGISTERED PLACEBO",
           f"Shuffling H1's state labels collapses the amplification from **{pl.get('real_amp')}** to a "
           f"placebo mean **{pl.get('placebo_mean')}**, CI {pl.get('placebo_ci95')} — "
-          f"{'spans zero ✓ (the gate is not finding signal in noise)' if pl.get('null_as_expected') else 'DOES NOT span zero (!!)'}.", ""]
+          f"{'spans zero' if pl.get('null_as_expected') else 'does NOT span zero'}.",
+          "",
+          f"**This is not the placebo the project gates on.** The registered one is "
+          f"{reg.get('registration', 'WALK_FORWARD_PROTOCOL.md §6')} at `{reg.get('source', 'summary.json#/placebo')}`, "
+          f"and its `null_holds` is **{reg.get('null_holds')}**"
+          + (f" (skill {reg.get('skill')}, CI {reg.get('ci95')})." if reg.get('skill') is not None else ".")
+          + " The two ask different questions of different objects; this one passing is not evidence "
+            "that the registered one does, and here it does not.", ""]
     sc = r["surface_consistency"]
     L += ["## 2. Surface consistency",
           f"{sc['quantity']} across surfaces: {sc['values']} — "
@@ -276,10 +392,16 @@ def _write_md(r):
         L.append(f"| {m['subject']} | {m['engine_call']} | {m['outcome']} | {m['brier']} | {m['root_cause']} |")
     ho, qc = r.get("temporal_holdout") or {}, r.get("quarterly_calibration") or {}
     if ho:
-        L += ["", "## 6. Temporal hold-out (V-Q4) — H1 conditioning rule fit pre-2019, tested 2019+",
+        h1 = (r.get("registered_gates") or {}).get("h1", {})
+        L += ["", "## 6. Temporal hold-out (V-Q4) on H1 — DIAGNOSTIC ON A DOWNGRADED HYPOTHESIS",
               f"In-sample (pre-2019) **{ho.get('in_sample_pre2019_amp_pp')}pp** vs out-of-sample (2019+) "
-              f"**{ho.get('oos_2019plus_amp_pp')}pp** using the FROZEN pre-2019 VIX threshold — "
-              f"{'holds out-of-sample ✓' if ho.get('holds_out_of_sample') else 'does NOT clearly hold (reported honestly)'}."]
+              f"**{ho.get('oos_2019plus_amp_pp')}pp** using the FROZEN pre-2019 VIX threshold.",
+              "",
+              f"**This does not say H1 holds.** Under the single evidentiary bar "
+              f"({h1.get('registration', 'red_team_1 R7')}) H1 is **{h1.get('retier', 'not validated')}** — "
+              f"legs {h1.get('legs')} at `{h1.get('source', 'data/evidentiary_bar.json')}`. A split holding "
+              f"across one date cut is not the bar, and the bar is what decides. The figures are kept "
+              f"because a retracted result's diagnostics are part of the record, not because they revive it."]
     if qc:
         L += ["", "## 7. Quarterly calibration (V-Q4) — the forecast log as a standing OOS test",
               f"Overall n={qc.get('n')} ({qc.get('span')}), Brier **{qc.get('brier')}**, skill vs base "
@@ -294,7 +416,9 @@ def main():
     print("=" * 78)
     print("EVALUATION — soundness checks")
     print("=" * 78)
-    print(f"  placebo: {r['placebo'].get('placebo_ci95')} null_as_expected={r['placebo'].get('null_as_expected')}")
+    print(f"  REGISTERED gates: {r['overall']['headline']}")
+    print(f"  framework_sound (registered only): {r['overall']['framework_sound']}")
+    print(f"  [diagnostic] own placebo CI {r['placebo'].get('placebo_ci95')} spans_zero={r['placebo'].get('null_as_expected')} (gates nothing)")
     print(f"  surface consistency: {r['surface_consistency']['all_consistent']}  {r['surface_consistency']['values']}")
     c = r["calibration"]
     if c.get("ran"):

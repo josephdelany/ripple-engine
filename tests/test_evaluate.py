@@ -44,5 +44,23 @@ def test_ev3_validated_claims_are_robust():
 
 
 def test_ev4_framework_sound():
+    """Until 2026-09-03 this pinned framework_sound to True. That was the defect, not the check:
+    evaluate.py graded itself with its own placebo shuffle, which passes, while the REGISTERED
+    placebo (WALK_FORWARD_PROTOCOL §6, summary.json#/placebo/null_holds) was failing and H1 had
+    been downgraded under the red_team_1 R7 bar. A test that pins the answer cannot notice that.
+    It now asserts the RELATION -- sound if and only if the registered gates pass -- so it fails
+    whichever way the two disagree, and never has to be edited when a run changes."""
+    import json as _j
     r = _load()
-    assert r["overall"]["framework_sound"] is True
+    fw = r["overall"]["framework_sound"]
+    g = r.get("registered_gates") or {}
+    nh = (g.get("placebo") or {}).get("null_holds")
+    legs = (g.get("h1") or {}).get("legs") or {}
+    h1_ok = all(legs.values()) if legs else None
+    assert g, "the report must carry the registered gates it read"
+    if nh is False or h1_ok is False:
+        assert fw is False, f"framework_sound is {fw} while a registered gate fails (placebo {nh}, H1 {h1_ok})"
+    if nh is True and h1_ok is True:
+        assert fw == bool(r["surface_consistency"]["all_consistent"])
+    # and it must never be graded from this module's own placebo, which currently PASSES
+    assert r["placebo"].get("gates") is False
