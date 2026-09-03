@@ -29,6 +29,34 @@ this file wins.*
   implementation of an amendment is B's, in v3. `data/spine/CLASS_AUDIT.md` is
   carved out of Session E's `data/spine/**` by Joe's brief of 2026-09-02;
   `data/handoffs/F_to_E_2026-09-02_class_audit.md` records the carve-out.
+- **Session H** (the claim loop) owns: `data/ledger/**`, `data/reader_eval/**`,
+  `src/ledger_backfill.py`, `src/audit_reader.py`, `src/uncheckable_audit.py`,
+  `tests/test_ledger_backfill.py`, `tests/test_audit_reader.py`,
+  `tests/test_uncheckable_audit.py`, `tests/test_challenge_loop.py`. It is the
+  session that makes the Ledger's core mechanic actually fire: a claim logged at
+  its real knowable date and resolved from data at its horizon. `src/ledger.py`
+  and `src/challenge.py` are **shared** — H may fix a resolver defect it can
+  demonstrate with a failing test, and records the fix in an amendment; it never
+  changes a threshold or a verdict rule to move a ratio (that is INV-6 /
+  charter §2). Session H does **not** touch `src/engine/**`, `src/walk.py`,
+  `data/walk_forward/**` (B), `src/story_read.py`, `src/api_v2.py`,
+  `src/app.html`, `src/feed_build.py`, `src/reader.py` (A), `src/ripple_*` (C),
+  `data/dossiers/**`, `data/spine/**` (E). Defects found in those trees are
+  written to `data/handoffs/H_to_<who>_<date>.md` and reported, never patched
+  in place.
+- **Session G** (the pre-1973 tail) owns: the pre-1987 admission work under
+  `data/candidates/**` (the sheet, its registration and amendments, the
+  screen and the gap arithmetic), `data/dossiers/` for events dated **before
+  1973-01-01**, `src/situation_vintage.py`, `src/g_monthly_gap.py`, and
+  `docs/g/**`. It does **not** touch `src/engine/**`, `src/walk.py`,
+  `data/walk_forward/**` (B), `src/app.html`, `src/story_read.py`,
+  `src/api_v2.py`, `src/state/**` (A), `src/ripple_*` (C),
+  `data/spine/CLASS_AUDIT.md` (F), or any dossier dated 1973-01-01 or later (E).
+  It reads those trees and reports numbers; it never edits them and never
+  writes to the `events` table. Its dossiers are built to SPINE_REGISTRATION.md
+  and its patches go to Joe under §3 of that document, like E's. Registrations
+  are dated and committed before the code that uses them.
+
 - No session edits another's files. If you need a change there, write it as a
   request in `data/handoffs/<from>_to_<to>_<date>.md` and continue with what
   you can do. All may add tests under `tests/` with a unique basename.
