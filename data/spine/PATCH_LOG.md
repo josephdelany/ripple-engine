@@ -236,3 +236,41 @@ Scoreboard before → after:
 | drafting scaffolding | 41 | 41 |
 | descriptions ≥700 chars | 0 | 0 |
 
+### APPLIED `1990s_b` — 2026-09-03T00:02:11+00:00, approved by joe
+
+16 field changes across 8 events; 2 rows skipped. Backup: `data/backups/oil_20260903_000145_pre_spine_apply.db.gz`.
+
+| field change | from | to |
+|---|---|---|
+| `iran_eo12959_embargo_1995`.description | Clinton's Executive Order 12959 imposed a total US trade and | Executive Order 12959 (May 6, 1995) imposed a total U.S. embargo on trade with a |
+| `thai_baht_float_1997`.source_url | https://www.bot.or.th/en/our-roles/special-measures/Tom-Yum- | https://www.bis.org/publ/r_qt9711.pdf |
+| `thai_baht_float_1997`.description | Bank of Thailand abandons the dollar peg; baht falls 15-20%  | On 2 July 1997 the Thai authorities abandoned the currency peg after 'a first ma |
+| `thai_baht_float_1997`.surprise | 4 | 2 |
+| `thai_baht_float_1997`.confidence | medium | high |
+| `korea_imf_bailout_1997`.source_url | https://www.washingtonpost.com/archive/politics/1997/11/21/s | https://www.bis.org/publ/r_qt9802.pdf |
+| `korea_imf_bailout_1997`.confidence | high | medium |
+| `opec_jakarta_quota_increase_1997`.description | Conference of 26 Nov - 1 Dec 1997 lifts ceiling from 25 to 2 | OPEC's Conference of oil ministers, meeting in Jakarta 26 November – 1 December  |
+| `opec_jakarta_quota_increase_1997`.source_url | https://www.oxfordenergy.org/wpcms/wp-content/uploads/2010/1 | https://ora.ox.ac.uk/objects/uuid:4e02651d-eab4-4af2-8f38-9bc41ae07f50/files/mab |
+| `opec_cut_march_1998`.surprise | 3 | 2 |
+| `opec_cut_march_1998`.description | OPEC's 104th extraordinary meeting cut output by 1.245 milli | OPEC met in Vienna on 30 March 1998 to formalize production cuts, following a se |
+| `opec_cut_march_1998`.source_url | https://en.wikipedia.org/wiki/1998_world_oil_market_chronolo | https://ora.ox.ac.uk/objects/uuid:4e02651d-eab4-4af2-8f38-9bc41ae07f50/files/mab |
+| `russia_default_ltcm_1998`.source_url | https://en.wikipedia.org/wiki/1998_Russian_financial_crisis | https://www.bis.org/publ/r_qt9811.pdf |
+| `russia_default_ltcm_1998`.description | Russia defaulted on domestic debt and let the ruble collapse | On 17 August 1998, 'the Russian authorities' decision to float the rouble and de |
+| `operation_desert_fox_1998`.description | Four days of US/UK airstrikes on Iraqi military and WMD targ | On December 16, 1998, Clinton ordered strikes whose 'mission is to attack Iraq's |
+| `opec_cut_1999`.description | Vienna meeting ratifies the Hague framework (agreed ~10 days | OPEC's 11 member states voted in Vienna on 23 March 1999 to cut crude output by  |
+
+Skipped:
+
+- `opec_cut_june_1998`.source_url — needs_joe: the builder could not reduce it to a clean value
+- `opec_cut_june_1998`.confidence — needs_joe: the builder could not reduce it to a clean value
+
+Scoreboard before → after:
+
+| measure | before | after |
+|---|---|---|
+| events with ≥2 source domains | 17 | 22 |
+| encyclopaedia-only source_url | 30 | 28 |
+| bare site-root source_url | 3 | 3 |
+| drafting scaffolding | 41 | 39 |
+| descriptions ≥700 chars | 0 | 1 |
+

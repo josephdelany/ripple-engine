@@ -1,6 +1,6 @@
 # Spine audit — the honest baseline
 
-*Generated 2026-09-03T00:01:26+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
+*Generated 2026-09-03T00:02:11+00:00 by `src/spine_audit.py` from `data/oil.db` (read-only).
 Session E, step E-1: published before any record is rewritten, so the repair can be
 scored against a number rather than an impression. Every figure below is computed;
 none is asserted. Re-run the script to regenerate this file.*
@@ -23,16 +23,16 @@ summary of sources it does not itself constitute.
 | measure | value |
 |---|---|
 | events | 313 |
-| carrying drafting scaffolding | 41 (13.1%) |
-| with ≥ 2 distinct source domains | 17 (5.4%) |
-| with exactly 1 source domain | 296 |
+| carrying drafting scaffolding | 39 (12.5%) |
+| with ≥ 2 distinct source domains | 22 (7.0%) |
+| with exactly 1 source domain | 291 |
 | with 0 source domains | 0 |
 | whose `source_url` is a bare site root, not a document | 3 |
-| whose `source_url` is an encyclopaedia (wikipedia and similar) | 30 |
+| whose `source_url` is an encyclopaedia (wikipedia and similar) | 28 |
 | citing an encyclopaedia anywhere (incl. `sr_json`) | 31 |
-| with **no citable domain at all** once encyclopaedias are set aside | 30 |
-| description length, median / min / max (chars) | 150 / 53 / 487 |
-| descriptions ≥ 700 chars (roughly a 120-word narrative) | 0 |
+| with **no citable domain at all** once encyclopaedias are set aside | 28 |
+| description length, median / min / max (chars) | 150 / 53 / 794 |
+| descriptions ≥ 700 chars (roughly a 120-word narrative) | 1 |
 | `sr_json` field-source slots | 3130 |
 | — external URL | 11.9% |
 | — corpus-derived | 25.0% |
@@ -51,7 +51,7 @@ summary of sources it does not itself constitute.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1970s | 8 | 5 (62.5%) | 7 (87.5%) | 0 | 1 | 100 | 0 | 20.0 | 40.0 | 40.0 | 2 | 8 | 0 |
 | 1980s | 11 | 5 (45.5%) | 5 (45.5%) | 0 | 2 | 265 | 0 | 20.0 | 31.8 | 48.2 | 2 | 8 | 3 |
-| 1990s | 16 | 6 (37.5%) | 5 (31.2%) | 3 | 0 | 175 | 0 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
+| 1990s | 16 | 4 (25.0%) | 10 (62.5%) | 1 | 0 | 198 | 1 | 13.8 | 22.5 | 63.8 | 2 | 9 | 7 |
 | 2000s | 43 | 4 (9.3%) | 0 (0.0%) | 11 | 0 | 150 | 0 | 10.5 | 14.7 | 74.9 | 2 | 17 | 26 |
 | 2010s | 85 | 11 (12.9%) | 0 (0.0%) | 5 | 0 | 148 | 0 | 11.4 | 27.2 | 61.4 | 2 | 55 | 30 |
 | 2020s | 150 | 10 (6.7%) | 0 (0.0%) | 11 | 0 | 149 | 0 | 11.4 | 25.6 | 63.0 | 2 | 87 | 60 |
@@ -62,13 +62,13 @@ summary of sources it does not itself constitute.
 |---|---|---|---|---|---|---|---|---|---|---|
 | chokepoint_disruption | 27 | 5 (18.5%) | 1 (3.7%) | 150 | 12.2 | 48.9 | 38.9 | 1 | 25 | 0 |
 | conflict_escalation | 55 | 13 (23.6%) | 7 (12.7%) | 145 | 13.6 | 40.7 | 45.6 | 1 | 54 | 0 |
-| demand_shock | 17 | 1 (5.9%) | 0 (0.0%) | 147 | 11.8 | 0.0 | 88.2 | 17 | 0 | 17 |
+| demand_shock | 17 | 1 (5.9%) | 3 (17.6%) | 147 | 11.8 | 0.0 | 88.2 | 17 | 0 | 17 |
 | infrastructure_attack | 48 | 5 (10.4%) | 2 (4.2%) | 154 | 11.5 | 41.5 | 47.1 | 0 | 48 | 0 |
-| opec_decision | 52 | 3 (5.8%) | 0 (0.0%) | 149 | 10.2 | 0.0 | 89.8 | 52 | 0 | 52 |
+| opec_decision | 52 | 1 (1.9%) | 2 (3.8%) | 149 | 10.2 | 0.0 | 89.8 | 52 | 0 | 52 |
 | policy_response | 57 | 5 (8.8%) | 2 (3.5%) | 140 | 11.1 | 0.2 | 88.8 | 57 | 0 | 57 |
-| sanctions | 57 | 9 (15.8%) | 5 (8.8%) | 159 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
+| sanctions | 57 | 9 (15.8%) | 5 (8.8%) | 160 | 13.0 | 39.5 | 47.5 | 1 | 57 | 0 |
 
-## Every event still carrying drafting scaffolding (41)
+## Every event still carrying drafting scaffolding (39)
 
 | event_id | date | class | marker | desc len | domains | entities | IES-90 |
 |---|---|---|---|---|---|---|---|
@@ -84,10 +84,8 @@ summary of sources it does not itself constitute.
 | iran_iraq_ceasefire_1988 | 1988-08-20 | policy_response | deep-history tier | 82 | 2 | 2 | uncovered |
 | desert_storm_air_campaign_1991 | 1991-01-17 | conflict_escalation | draft coding | 191 | 1 | 5 | level |
 | ilsa_sanctions_1996 | 1996-08-05 | sanctions | draft coding | 205 | 1 | 4 | level |
-| thai_baht_float_1997 | 1997-07-02 | demand_shock | draft coding | 179 | 1 | 2 | uncovered |
-| opec_jakarta_quota_increase_1997 | 1997-12-01 | opec_decision | draft coding | 211 | 1 | 2 | uncovered |
-| operation_desert_fox_1998 | 1998-12-16 | conflict_escalation | draft coding | 201 | 1 | 4 | level |
-| opec_cut_1999 | 1999-03-23 | opec_decision | draft coding | 177 | 1 | 2 | uncovered |
+| thai_baht_float_1997 | 1997-07-02 | demand_shock | draft coding | 632 | 2 | 2 | uncovered |
+| operation_desert_fox_1998 | 1998-12-16 | conflict_escalation | draft coding | 794 | 1 | 4 | level |
 | september_11_attacks_2001 | 2001-09-11 | conflict_escalation | draft coding | 207 | 1 | 3 | level |
 | iea_release_katrina_2005 | 2005-09-02 | policy_response | draft coding | 145 | 1 | 2 | uncovered |
 | israel_hezbollah_war_2006 | 2006-07-12 | conflict_escalation | draft coding | 225 | 1 | 3 | level |
@@ -149,3 +147,50 @@ source. The `sr corpus %` column matters for the same reason a self-citation doe
 field values were derived from this corpus, so they cannot be evidence about it.
 
 `data/spine/audit.json` carries the same numbers per event for later runs to diff.
+
+---
+
+## Archive reach — 2026-09-02 (session A; appended, not generated)
+
+> **2026-09-02 — 27 post-2000 encyclopaedia-only records, 4 routes consulted each (9 probed in all),
+> 0 replaced by a primary document, 19 with nothing found, 8 places to look, 0 unexplained.**
+
+Every corpus event whose only citation is an encyclopaedia and whose date is 2000 or later was put
+through every primary-document route reachable without a key. Not one could be replaced. This is a
+result about **archive reach**, not about effort and not about whether the sources exist: for each
+record the routes either answered and held nothing, or were out of coverage for a stated reason.
+
+| outcome | n |
+|---|---|
+| closed-primary (a dated government document naming the event) | **0** |
+| press_candidate (a dated article sharing the event's terms — a place to look, never a repair) | 8 |
+| none_found (every reachable route answered, and held nothing) | 19 |
+| partial / blocked-by-declassification | 0 / 0 |
+
+By decade: 2000s 11 none-found · 2010s 5 none-found · 2020s 8 press candidates, 3 none-found.
+
+**The 108 route calls behind it (27 records × 4 routes)**
+
+| route | answered, no hit | hit | out of coverage | why out of coverage |
+|---|---|---|---|---|
+| FRUS | 0 | 0 | 27 | volumes stop in the early 1990s |
+| Federal Register | 27 | 0 | 0 | in coverage (1994→); held nothing — these are mostly non-US events |
+| UK National Archives | 10 | 0 | 17 | the UK 20-year rule: files from 2006 on are not open |
+| GDELT DOC 2.0 | 4 | 8 | 15 | coverage begins 2017 |
+
+**Routes probed and their state:** wired — FRUS (1945→early 1990s), Federal Register (1994→),
+UK National Archives (file-level only, 20-year rule), GDELT DOC 2.0 (2017→). Reachable but not wired —
+govinfo (needs an `api.data.gov` key; the shared `DEMO_KEY` cap would throttle a run and read as an
+absence). Not reachable by script — CIA CREST (search needs JavaScript), UN Security Council and UN
+Digital Library (403 / JS challenge), OPEC archive (403), US NARA catalog (JavaScript app shell).
+
+**Read across:** for a non-US event between 2000 and 2016 there is no free route that can supply a
+primary document — FRUS has ended, the UK files are not open, GDELT has not begun, and the Federal
+Register covers only US federal action. That window is the whole of the gap, and it is why the
+automatic second-source pass over the 473 post-1987 candidates returned "absent" for 438 of them.
+That figure measures our reach, not the historical record.
+
+*This section is appended by hand and is **not** produced by `src/spine_audit.py`; regenerating this
+file drops it. The same content, with endpoints and the per-record index, is kept at
+`data/spine/archive_reach_2026-09-02.md` — restore from there, or have the generator include it
+(handoff `data/handoffs/A_to_E_2026-09-02_archive_reach.md`).*
