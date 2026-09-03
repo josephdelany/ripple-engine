@@ -1,214 +1,367 @@
 """
 capacity.py -- T1 of PHYSICAL_EXPOSURE_REGISTRATION.md: the country capacity register.
 
-T1 needs, per country, CRUDE PRODUCTION CAPACITY and REFINING CAPACITY, each row carrying the
-PUBLICATION DATE of the register it came from -- not its reference year (section 3: the 2019 EI
-Review published mid-2020 may not inform a 2019 forecast, and a filtration test asserts it).
+T1 needs, per country, CRUDE PRODUCTION CAPACITY and REFINING CAPACITY, every row carrying the
+PUBLICATION DATE of the register it came from -- not its reference year. Section 3 is the trap: the
+2019 EI Review published mid-2020 may not inform a 2019 forecast, and `test_capacity_filtration`
+asserts that no value is ever read before it was published.
 
-THIS MODULE CURRENTLY RUNS ONLY ITS FEASIBILITY PROBE, because the probe's answer is that the
-register cannot be built to specification from anything reachable in this environment. Joe's brief
-asked for that answer inside an hour rather than a day, so it is reported before the build:
+WHAT THIS REGISTER ACTUALLY CONTAINS, stated before the code so nothing is oversold. The feasibility
+probe (kept below as `probe_sources`, reported to Joe before the build) established that no reachable
+source carries crude production capacity at COUNTRY resolution:
 
-    crude production capacity, by country ....  0 of 187 geopolitical events coverable
-    refining capacity, by country ...........  15 of 187 (the United States alone)
+    EI Statistical Review xlsx  ABSENT -- data/state/local/ei/ does not exist and energyinst.org is
+                                403 to scripts, exactly as src/state/bridge.py:60's
+                                refinery_capacity_annual GAPS entry already recorded. It carries
+                                refining capacity but not crude production capacity, so even
+                                delivered it closes one half of T1.
+    OPEC ASB                    403.  EIA IES API  403 (EIA_API_KEY unset).
+    EIA bulk INTL.zip           reachable, but its 13 "Capacity" records are empty navigation nodes.
+    EIA STEO + monthly archives reachable AND genuinely vintaged -- each release states its own
+                                forecast month on the `Dates` sheet -- but its capacity lines are
+                                regional aggregates, and its refining capacity is the US alone.
 
-The wall is the SOURCE, not the corpus: 160 of the 187 events carry a coded country, they name only
-28 distinct countries, and 145 of them are dated 2010 or later. There is nothing wrong with the
-events. There is no reachable register.
+So the register is built from STEO archives and is honest about its shape:
 
-WHAT WAS PROBED, and what each source turned out to be:
+    refining capacity     country  United States            -- a real country row, per vintage
+    crude prod. capacity  AGGREGATE OPEC / Middle East / Other / Africa / South America
+    surplus capacity      AGGREGATE OPEC and regions (this is section 2's SPARE(t), vintaged)
 
-  EI Statistical Review xlsx  -- Joe's first preference and the one src/state/bridge.py:60 has been
-                                 waiting for (`refinery_capacity_annual`). ABSENT: data/state/local/ei/
-                                 does not exist, and energyinst.org returns 403 to scripts, exactly as
-                                 that GAPS entry already recorded. Note also that the EI Review carries
-                                 refinery capacity but NOT crude production capacity -- consistent with
-                                 bridge.py listing a refinery_capacity_annual stub and no crude-capacity
-                                 stub. Even delivered, it solves one half of T1.
-  OPEC Annual Statistical Bulletin -- 403 to scripts.
-  EIA International Energy Statistics API -- 403 without EIA_API_KEY (unset; bridge.py records it).
-  EIA bulk INTL.zip           -- REACHABLE (24 MB, no key). Contains no petroleum capacity series:
-                                 the 13 records whose name is "Capacity" are empty navigation nodes
-                                 with no units, no geography and no data points.
-  EIA STEO + monthly archives -- REACHABLE and genuinely VINTAGED (each archived release has a known
-                                 publication month, which is exactly what section 3 requires). But its
-                                 capacity lines are aggregates, not countries: table 3d carries "Crude
-                                 oil production capacity" only as OPEC total / Middle East / Other,
-                                 and table 4b's "Refinery operable distillation capacity" is the
-                                 United States alone. Archives resolve back to January 2015
-                                 (jan14 and earlier 404).
+and every country the corpus names, for which no register exists, gets an explicit **null row with a
+reason** rather than a zero or a silent absence. Section 2's registered fallback governs: "Where a
+country has no capacity register before t, X1 is null, not zero."
 
-So the only country-resolved, vintage-dated capacity figure obtainable today is US refining capacity
-from STEO 4b, back to the January 2015 archive.
+`knowable_at` is the LAST DAY of the release month. STEO is published in the first half of its month,
+so end-of-month is conservative: it can only delay knowability, never manufacture look-ahead.
 
-Run:  python3 src/state/capacity.py       -> data/state/capacity_feasibility.json
+Run:  python3 src/state/capacity.py             -> data/state/capacity_register.json
+      python3 src/state/capacity.py --probe     -> data/state/capacity_feasibility.json
 """
 
+import calendar
 import json
+import re
 import sqlite3
+import sys
 import urllib.request
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
 
+warnings.filterwarnings("ignore")
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 DB = ROOT / "data" / "oil.db"
 OUT = ROOT / "data" / "state"
+RAW = ROOT / "data" / "state" / "raw" / "steo_archives"          # gitignored
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ripple-engine research loader)"}
 
 GEO_CLASSES = ("conflict_escalation", "infrastructure_attack", "chokepoint_disruption", "sanctions")
-STEO_ARCHIVE = "https://www.eia.gov/outlooks/steo/archives/{mon}{yy:02d}_base.xlsx"
+ARCHIVE = "https://www.eia.gov/outlooks/steo/archives/{mon}{yy:02d}_base.xlsx"
+CURRENT = ROOT / "data" / "state" / "raw" / "eia_steo" / "STEO_m.xlsx"
+MONTHS = ["jan", "apr", "jul", "oct"]                             # quarterly vintage grid
+YEARS = range(15, 27)
+BLOCKS = {
+    "crude_production_capacity": "crude oil production capacity",
+    "surplus_crude_production_capacity": "surplus crude oil production capacity",
+}
+REFINING_LABEL = "refinery operable distillation capacity"
+AGG_ENTITIES = {"africa": "region.africa", "south america": "region.south_america",
+                "middle east": "region.middle_east", "other": "region.other",
+                "opec total": "opec.total"}
 
-SOURCES = [
-    {"key": "ei_statistical_review", "preference": 1,
-     "what": "crude production capacity? NO. refining capacity by country? YES (annual)",
-     "local_path": "data/state/local/ei/", "url": "https://www.energyinst.org/statistical-review",
-     "status": None, "note": "bridge.py GAPS refinery_capacity_annual has been waiting for this file"},
-    {"key": "opec_asb", "preference": 2,
-     "what": "crude production capacity (OPEC members) + refining capacity",
-     "local_path": None, "url": "https://www.opec.org/opec_web/en/publications/202.htm",
-     "status": None, "note": ""},
-    {"key": "eia_ies_api", "preference": 3,
-     "what": "country capacity via API", "local_path": None,
-     "url": "https://api.eia.gov/v2/international/data/?frequency=annual&data[0]=value",
-     "status": None, "note": "needs EIA_API_KEY; bridge.py records it as unset"},
-    {"key": "eia_bulk_intl", "preference": 3,
-     "what": "no petroleum capacity series (the 13 'Capacity' records are empty nodes)",
-     "local_path": "data/state/raw/eia_intl/INTL.zip",
-     "url": "https://www.eia.gov/opendata/bulk/INTL.zip", "status": None, "note": ""},
-    {"key": "eia_steo_archives", "preference": 3,
-     "what": "VINTAGED. crude capacity = OPEC/Middle East/Other aggregates only; "
-             "refining capacity = United States only",
-     "local_path": "data/state/raw/eia_steo/STEO_m.xlsx",
-     "url": STEO_ARCHIVE.format(mon="jan", yy=15), "status": None, "note": ""},
-]
 
+# =============================================================================================
+# source probe (reported to Joe before the register was built)
+# =============================================================================================
 
 def head_ok(url, timeout=12):
     try:
-        req = urllib.request.Request(url, headers=UA, method="HEAD")
-        with urllib.request.urlopen(req, timeout=timeout) as r:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA, method="HEAD"),
+                                    timeout=timeout) as r:
             return {"reachable": r.status == 200, "http": r.status,
                     "bytes": r.headers.get("Content-Length")}
     except Exception as e:
         return {"reachable": False, "http": getattr(e, "code", type(e).__name__), "bytes": None}
 
 
-def steo_archive_depth(probe_years=range(5, 27)):
-    """The earliest January STEO archive that resolves -- the floor on any vintaged STEO figure."""
-    earliest, checked = None, {}
-    for yy in probe_years:
-        u = STEO_ARCHIVE.format(mon="jan", yy=yy)
-        ok = head_ok(u)["reachable"]
-        checked[f"jan{yy:02d}"] = ok
-        if ok:
-            earliest = 2000 + yy
-            break
-    return earliest, checked
+def probe_sources():
+    srcs = [
+        ("ei_statistical_review", 1, "https://www.energyinst.org/statistical-review",
+         "data/state/local/ei/", "refining capacity by country; NOT crude production capacity"),
+        ("opec_asb", 2, "https://www.opec.org/opec_web/en/publications/202.htm", None,
+         "crude production capacity (OPEC members) + refining capacity"),
+        ("eia_ies_api", 3, "https://api.eia.gov/v2/international/data/?frequency=annual&data[0]=value",
+         None, "needs EIA_API_KEY; bridge.py records it unset"),
+        ("eia_bulk_intl", 3, "https://www.eia.gov/opendata/bulk/INTL.zip",
+         "data/state/raw/eia_intl/INTL.zip", "no petroleum capacity series (13 empty 'Capacity' nodes)"),
+        ("eia_steo_archives", 3, ARCHIVE.format(mon="jan", yy=15),
+         "data/state/raw/steo_archives/", "VINTAGED; aggregates for crude capacity, US-only refining"),
+    ]
+    out = []
+    for key, pref, url, local, what in srcs:
+        out.append({"key": key, "preference": pref, "url": url, "what": what,
+                    "local_path": local,
+                    "local_present": bool(local and (ROOT / local).exists()),
+                    "probe": head_ok(url)})
+    return out
+
+
+# =============================================================================================
+# STEO archive parsing
+# =============================================================================================
+
+def fetch_vintage(mon, yy):
+    RAW.mkdir(parents=True, exist_ok=True)
+    p = RAW / f"{mon}{yy:02d}_base.xlsx"
+    if p.exists():
+        return p
+    try:
+        with urllib.request.urlopen(urllib.request.Request(ARCHIVE.format(mon=mon, yy=yy),
+                                                           headers=UA), timeout=90) as r:
+            p.write_bytes(r.read())
+        return p
+    except Exception:
+        return None
+
+
+def release_month(path):
+    """The release's own statement of its forecast month, from the `Dates` sheet."""
+    try:
+        d = pd.read_excel(path, sheet_name="Dates", header=None)
+    except Exception:
+        return None
+    for _, row in d.iterrows():
+        cells = [str(v) for v in row.tolist() if isinstance(v, str)]
+        if any("Forecast Month" in c for c in cells):
+            for v in row.tolist():
+                if isinstance(v, str) and re.match(r"^[A-Z][a-z]+ \d{4}$", v.strip()):
+                    return pd.Timestamp(v.strip())
+    return None
+
+
+def period_columns(df):
+    """column index -> Timestamp, from the sparse year row and the month row."""
+    yr_row = mo_row = None
+    for i in range(0, 8):
+        vals = df.iloc[i].tolist()
+        if mo_row is None and sum(1 for v in vals if isinstance(v, str) and v.strip()[:3] in
+                                  ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+                                   "Sep", "Oct", "Nov", "Dec")) >= 6:
+            mo_row = i
+        if yr_row is None and sum(1 for v in vals if isinstance(v, (int, float))
+                                  and v == v and 1990 < float(v) < 2100) >= 1:
+            yr_row = i
+    if mo_row is None or yr_row is None:
+        return {}
+    cols, cur = {}, None
+    for j in range(2, df.shape[1]):
+        y = df.iloc[yr_row, j]
+        if isinstance(y, (int, float)) and y == y and 1990 < float(y) < 2100:
+            cur = int(y)
+        m = df.iloc[mo_row, j]
+        if cur and isinstance(m, str) and m.strip()[:3] in calendar.month_abbr[1:]:
+            cols[j] = pd.Timestamp(year=cur, month=list(calendar.month_abbr).index(m.strip()[:3]), day=1)
+    return cols
+
+
+def find_block(df, label):
+    for i in range(len(df)):
+        v = df.iloc[i, 1]
+        if isinstance(v, str) and label in v.strip().lower():
+            return i
+    return None
+
+
+def read_vintage(path, pub):
+    """Every capacity row this release states, at the last period on or before the release month."""
+    rows = []
+    knowable = pd.Timestamp(pub.year, pub.month, calendar.monthrange(pub.year, pub.month)[1])
+    xl = pd.ExcelFile(path)
+
+    def latest_col(cols):
+        ok = [j for j, d in cols.items() if d <= pub]
+        return max(ok, key=lambda j: cols[j]) if ok else None
+
+    for sheet in xl.sheet_names:
+        try:
+            df = pd.read_excel(xl, sheet_name=sheet, header=None)
+        except Exception:
+            continue
+        cols = period_columns(df)
+        if not cols:
+            continue
+        j = latest_col(cols)
+        if j is None:
+            continue
+        for measure, label in BLOCKS.items():
+            st = find_block(df, label)
+            if st is None:
+                continue
+            for i in range(st + 1, min(st + 9, len(df))):
+                lab = df.iloc[i, 1]
+                if not isinstance(lab, str) or not lab.strip():
+                    break
+                key = lab.strip().lower()
+                if key not in AGG_ENTITIES:
+                    continue
+                val = df.iloc[i, j]
+                if not isinstance(val, (int, float)) or val != val:
+                    continue
+                rows.append({"measure": measure, "scope": "aggregate",
+                             "entity_id": AGG_ENTITIES[key], "entity_label": lab.strip(),
+                             "value_kbd": round(float(val) * 1000, 3), "unit": "kb/d",
+                             "reference_period": str(cols[j].date())[:7],
+                             "publication_date": str(pub.date())[:7],
+                             "knowable_at": str(knowable.date()),
+                             "source": "EIA STEO", "vintage_file": path.name, "sheet": sheet})
+        st = find_block(df, REFINING_LABEL)
+        if st is not None:
+            val = df.iloc[st, j]
+            if isinstance(val, (int, float)) and val == val:
+                rows.append({"measure": "refining_capacity", "scope": "country",
+                             "entity_id": "country.usa", "entity_label": "United States",
+                             "value_kbd": round(float(val) * 1000, 3), "unit": "kb/d",
+                             "reference_period": str(cols[j].date())[:7],
+                             "publication_date": str(pub.date())[:7],
+                             "knowable_at": str(knowable.date()),
+                             "source": "EIA STEO table 4b", "vintage_file": path.name, "sheet": sheet})
+    # de-duplicate: the same measure/entity can appear on more than one sheet in a release
+    seen, out = set(), []
+    for r in rows:
+        k = (r["measure"], r["entity_id"], r["publication_date"])
+        if k in seen:
+            continue
+        seen.add(k); out.append(r)
+    return out
+
+
+# =============================================================================================
+# the register
+# =============================================================================================
+
+def lookup(register, entity_id, measure, t):
+    """Section 3, enforced here rather than trusted: the most recent row PUBLISHED strictly on or
+    before t. Returns None where no register predates t -- null, not zero (section 2)."""
+    t = pd.Timestamp(t)
+    cand = [r for r in register
+            if r["entity_id"] == entity_id and r["measure"] == measure
+            and pd.Timestamp(r["knowable_at"]) <= t]
+    return max(cand, key=lambda r: pd.Timestamp(r["knowable_at"])) if cand else None
 
 
 def coded_country_sets(conn):
-    """Section 2 T1: 'countries c in the event's coded location/actor set'."""
     ev = pd.read_sql("SELECT event_id, event_date, type, sr_actor, sr_target FROM events", conn)
     ev["event_date"] = pd.to_datetime(ev["event_date"])
     geo = ev[ev["type"].isin(GEO_CLASSES)].copy()
     ee = pd.read_sql("SELECT ee.event_id, ee.role, e.entity_id, e.type "
                      "FROM event_entities ee JOIN entities e ON e.entity_id = ee.entity_id", conn)
-    sets = {}
-    for _, r in geo.iterrows():
-        s = {f for f in (r.sr_actor, r.sr_target) if isinstance(f, str) and f.startswith("country.")}
-        sets[r.event_id] = s
+    sets = {r.event_id: {f for f in (r.sr_actor, r.sr_target)
+                         if isinstance(f, str) and f.startswith("country.")}
+            for _, r in geo.iterrows()}
     for _, r in ee[(ee.type == "country") & (ee.role.isin(["actor", "target", "location"]))].iterrows():
         if r.event_id in sets:
             sets[r.event_id].add(r.entity_id)
     return geo, sets
 
 
-def main():
+def main(argv):
     t0 = datetime.now(timezone.utc)
     OUT.mkdir(parents=True, exist_ok=True)
+    sources = probe_sources()
+    if "--probe" in argv:
+        (OUT / "capacity_feasibility.json").write_text(json.dumps(
+            {"when": t0.isoformat(timespec="seconds"), "sources": sources}, indent=1, default=str))
+        for s in sources:
+            print(f"  [{s['key']:22s}] http={str(s['probe']['http']):>6} local={s['local_present']}")
+        return
+
+    vintages, register = [], []
+    todo = [(m, y) for y in YEARS for m in MONTHS]
+    for mon, yy in todo:
+        p = fetch_vintage(mon, yy)
+        if not p:
+            continue
+        pub = release_month(p)
+        if pub is None:
+            continue
+        rows = read_vintage(p, pub)
+        if rows:
+            register.extend(rows)
+            vintages.append({"file": p.name, "publication_month": str(pub.date())[:7],
+                             "knowable_at": rows[0]["knowable_at"], "rows": len(rows)})
+    if CURRENT.exists():
+        pub = release_month(CURRENT)
+        if pub is not None:
+            rows = read_vintage(CURRENT, pub)
+            if rows:
+                register.extend(rows)
+                vintages.append({"file": CURRENT.name, "publication_month": str(pub.date())[:7],
+                                 "knowable_at": rows[0]["knowable_at"], "rows": len(rows)})
+    register.sort(key=lambda r: (r["measure"], r["entity_id"], r["knowable_at"]))
+
     conn = sqlite3.connect(DB)
     geo, sets = coded_country_sets(conn)
+    named = sorted(set().union(*sets.values())) if sets else []
 
-    for s in SOURCES:
-        if s["local_path"]:
-            s["local_present"] = (ROOT / s["local_path"]).exists()
-        s["probe"] = head_ok(s["url"])
-    depth, checked = steo_archive_depth()
+    # explicit null rows: every country the corpus names, for each measure with no register
+    have = {(r["entity_id"], r["measure"]) for r in register}
+    gaps = []
+    for cc in named:
+        for measure in ("crude_production_capacity", "refining_capacity"):
+            if (cc, measure) in have:
+                continue
+            gaps.append({"measure": measure, "scope": "country", "entity_id": cc,
+                         "value_kbd": None, "unit": "kb/d", "knowable_at": None,
+                         "reason": ("no reachable register carries this measure at country "
+                                    "resolution: EI xlsx absent (403), OPEC ASB 403, EIA IES API "
+                                    "keyed, EIA bulk carries none, STEO is regional for crude "
+                                    "capacity and US-only for refining"),
+                         "registered_fallback": "PHYSICAL_EXPOSURE_REGISTRATION.md section 2: X1 is null, not zero"})
 
-    named = {e: v for e, v in sets.items() if v}
-    countries = sorted(set().union(*sets.values())) if sets else []
-    usa = [e for e, v in sets.items() if "country.usa" in v]
-    usa_after = [e for e in usa
-                 if depth and geo.loc[geo.event_id == e, "event_date"].iloc[0] >= pd.Timestamp(f"{depth}-01-01")]
-
-    by_decade = {}
-    for a, b in [(1973, 1979), (1980, 1989), (1990, 1999), (2000, 2009), (2010, 2019), (2020, 2026)]:
-        m = (geo.event_date.dt.year >= a) & (geo.event_date.dt.year <= b)
-        by_decade[f"{a}-{b}"] = {"events": int(m.sum()),
-                                 "with_coded_country": int(sum(1 for e in geo.loc[m, "event_id"] if sets[e]))}
+    # coverage, computed FROM the register by the same lookup the study would use
+    cov = {}
+    for measure in ("crude_production_capacity", "refining_capacity"):
+        n = 0
+        for _, e in geo.iterrows():
+            if any(lookup(register, cc, measure, e.event_date) for cc in sets[e.event_id]):
+                n += 1
+        cov[measure] = {"events_with_a_country_figure_published_before_the_event": n,
+                        "of": int(len(geo))}
 
     payload = {
         "meta": {"when": t0.isoformat(timespec="seconds"),
                  "registration": "PHYSICAL_EXPOSURE_REGISTRATION.md T1, committed 66b1c30",
-                 "status": "FEASIBILITY PROBE ONLY -- the register was not built, see verdict"},
-        "corpus_side": {
-            "geopolitical_events": int(len(geo)),
-            "classes": list(GEO_CLASSES),
-            "with_at_least_one_coded_country": len(named),
-            "without_any_coded_country": int(len(geo)) - len(named),
-            "distinct_countries_named": len(countries),
-            "countries": countries,
-            "by_period": by_decade,
-            "reads": "the corpus side is not the constraint",
-        },
-        "sources": SOURCES,
-        "steo_archive_depth": {"earliest_resolving_january_archive": depth, "probed": checked},
-        "coverage_answer": {
-            "question": ("how many of the 187 geopolitical events have a coded country with a "
-                         "capacity figure PUBLISHED BEFORE the event date"),
-            "crude_production_capacity_by_country": {
-                "events_coverable": 0, "of": int(len(geo)),
-                "why": "no reachable source carries crude production capacity at country resolution; "
-                       "STEO gives OPEC/Middle East/Other aggregates, EIA bulk carries none, "
-                       "OPEC ASB and the EIA API are 403/keyed, and the EI Review does not carry it"},
-            "refining_capacity_by_country": {
-                "events_coverable": len(usa_after), "of": int(len(geo)),
-                "countries_available": ["country.usa"],
-                "vintage_floor": f"{depth}-01" if depth else None,
-                "why": "STEO table 4b 'Refinery operable distillation capacity' is the United States "
-                       "alone; STEO monthly archives supply a genuine publication date but resolve "
-                       "only back to January 2015"},
-        },
-        "verdict": "BLOCKED ON SOURCE -- T1 cannot be built to section 3's specification today",
-        "unblocks": [
-            "data/state/local/ei/<EI Statistical Review xlsx> would supply REFINING capacity by "
-            "country with per-edition publication dates, closing bridge.py's refinery_capacity_annual "
-            "stub and about half of T1",
-            "crude production capacity by country needs OPEC ASB (403), IEA OMR (licensed) or the "
-            "EIA IES API (EIA_API_KEY unset) -- none reachable, and the EI Review does not carry it",
-        ],
+                 "knowable_at_rule": ("last day of the release month; STEO publishes in the first "
+                                      "half, so this is conservative and cannot create look-ahead"),
+                 "vintage_grid": "quarterly Jan/Apr/Jul/Oct 2015-2026 plus the current release",
+                 "sources_probed": sources},
+        "vintages": vintages,
+        "register": register,
+        "gaps": gaps,
+        "coverage": cov,
+        "corpus_side": {"geopolitical_events": int(len(geo)),
+                        "with_a_coded_country": sum(1 for v in sets.values() if v),
+                        "distinct_countries_named": len(named), "countries": named},
+        "verdict": ("PARTIAL -- refining capacity is a real country row for the United States only; "
+                    "crude production capacity exists at regional aggregate resolution and at no "
+                    "country. Every named country without a register carries an explicit null."),
     }
-    (OUT / "capacity_feasibility.json").write_text(json.dumps(payload, indent=1, default=str))
+    (OUT / "capacity_register.json").write_text(json.dumps(payload, indent=1, default=str))
 
-    c = payload["corpus_side"]
-    print(f"corpus side: {c['geopolitical_events']} geopolitical events, "
-          f"{c['with_at_least_one_coded_country']} with a coded country, "
-          f"{c['distinct_countries_named']} distinct countries")
-    for s in SOURCES:
-        lp = s.get("local_present")
-        print(f"  [{s['key']:22s}] pref {s['preference']}  http={str(s['probe']['http']):>6}  "
-              f"local_present={lp}")
-    print(f"  STEO archive floor: {depth}")
-    a = payload["coverage_answer"]
-    print(f"\nANSWER  crude production capacity by country: "
-          f"{a['crude_production_capacity_by_country']['events_coverable']} of {len(geo)}")
-    print(f"ANSWER  refining capacity by country:        "
-          f"{a['refining_capacity_by_country']['events_coverable']} of {len(geo)} (USA only)")
-    print(f"\n{payload['verdict']}")
+    print(f"vintages parsed: {len(vintages)}  register rows: {len(register)}  null rows: {len(gaps)}")
+    bym = {}
+    for r in register:
+        bym.setdefault((r["measure"], r["scope"]), set()).add(r["entity_id"])
+    for (m, sc), ents in sorted(bym.items()):
+        print(f"  {m:34s} [{sc:9s}] {len(ents)} entities  {sorted(ents)}")
+    print(f"\ncoverage of the {len(geo)} geopolitical events:")
+    for m, v in cov.items():
+        print(f"  {m:34s} {v['events_with_a_country_figure_published_before_the_event']} of {v['of']}")
     conn.close()
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
