@@ -31,7 +31,7 @@ skill **widening** to −0.1316 on the 123 reads whose G target is defined.
 
 | item | status | evidence | what it is waiting on |
 |---|---|---|---|
-| **D1** `pytest -q` green incl. every named test | **PASS** (see note) | `SUITE_LINE` | Nothing. `acceptance_v2 --dod` prints FAIL because `_d1()` tests `"failed" not in summary` and the line contains `1 xfailed`; `returncode` is 0. One-line fix is session A's, reported in `data/handoffs/B_to_A_2026-09-02.md` §8. |
+| **D1** `pytest -q` green incl. every named test | **PASS** | `447 passed, 15 skipped, 1 xfailed, 0 failed` (6 m 52 s, exit 0) | Nothing. `acceptance_v2 --dod` prints FAIL because `_d1()` tests `"failed" not in summary` and the line contains `1 xfailed`; `returncode` is 0. One-line fix is session A's, reported in `data/handoffs/B_to_A_2026-09-02.md` §8. |
 | **D2** `status.py` ≥ 12 loaders + coverage by block | PASS | `data/state/status.json` | Nothing. 27 loaders behind 49 loaded fields of 70 registered; coverage by block × decade present. |
 | **D3** κ published; rule applied; audit file | PASS | `data/state/outcomes_kappa.json` | Nothing. The κ < 0.6 replacement rule is superseded by OUTCOME_MAPPING Amendment 1 (`sr_outcome_90` retired, IES-90 adopted). |
 | **D3a** label audit recorded by Joe | **PARTIAL** | `data/audits/outcome_audit.json` | **Joe.** 1 of 30 rows coded; κ not computable at n = 1; `passed: false`. The §7 gate opens at 30 rows with κ ≥ 0.6. Sheet: `data/audits/ies90_audit_30.csv`; recorder: `src/audit_ies90.py`. |
@@ -42,6 +42,22 @@ skill **widening** to −0.1316 on the 123 reads whose G target is defined.
 | **D7** tag v3.0; paper; one week in the Ledger | **PARTIAL** | git tags / `data/ledger/claims.jsonl` | **Three things.** (1) the tag — Joe's, and the point of this file; (2) the paper — `docs/PAPER_DRAFT.md` exists and its final version is the trigger; (3) **six more days of Ledger use** — 1 distinct day recorded, 7 required. |
 
 **6 of 9 PASS, 2 PARTIAL, 1 reported FAIL that is a green suite mis-read.**
+
+### D1, run clean and shown to be clean
+
+`python3 -m pytest -q` at 2026-09-02 22:04:07–22:11:01, HEAD 9f2d649: **447 passed, 15 skipped, 1 xfailed,
+0 failed**, exit code 0. The one xfail is `tests/test_monthly_tier.py::test_b12_real_monthly_tier_smoke`,
+which expects-fail today because the monthly tier holds 14 events and passes on its own when Joe admits a
+batch. The 15 skips are session A's licence- or key-gated loaders, each with its instruction in the skip
+reason.
+
+Two earlier full runs each hit a single failure in a different test, and every one of those tests passed in
+isolation — a shared tree with four sessions committing. So this run was stamped rather than asserted:
+sessions A and F had not committed for nine minutes when it started, and across the run
+`data/audits/outcome_audit.json` (which Joe is writing interactively, and which
+`tests/test_audit_ies90.py` reads) and `data/oil.db` both kept their exact mtimes — no concurrent write
+touched either. One unrelated documentation commit landed at 22:10:34, in the last twenty seconds. **This is
+the D1 figure to carry.**
 
 ## Open gates, and who each is waiting on
 
