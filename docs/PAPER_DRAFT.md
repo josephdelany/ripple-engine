@@ -196,6 +196,19 @@ proved fixable.
 products, cracks, gas), a monthly WTI spine from 1946 (FRED `WTISPLC`), and ~598
 series in all.
 
+**A note on the physical record, found while auditing series freshness.** Of 772 loaded
+series, 40 last reported before September 2025. They are not broken loaders: they are
+countries that stopped reporting to JODI. **Iran's crude production, exports, stocks,
+refinery intake and product demand all end in July 2018** — the month US secondary
+sanctions were reimposed. The United Arab Emirates ends in December 2018; Russian crude
+stocks in December 2009; Kazakh crude stocks in March 2014. The consequence is
+uncomfortable and worth stating plainly: **the physical record goes dark for precisely the
+producers whose behaviour a geopolitical oil study most needs to observe, and it goes dark
+because of the geopolitics.** Any physical-flow analysis of the post-2018 period is
+therefore conditioned on the reporting of states that chose to keep reporting, which is
+not a random sample of states. This is a selection problem in the data itself, not in our
+handling of it, and we have no correction for it.
+
 **World-state panel.** Two layers (`WORLD_STATE_FRAMEWORK.md`): a panel with
 vintage (`state_panel`) and a per-event dossier. Sources, each verified for
 variables, coverage and licence in `WORLD_STATE_SOURCES.md`: ICB v16, COW NMC v7,
