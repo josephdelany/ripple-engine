@@ -1,4 +1,4 @@
-# Session G — retrieval routes, tested 2026-09-03
+# Session G — retrieval routes, tested 2026-09-03 (first pass) and 2026-09-03 (second pass)
 *Every route below was requested in this session's own fetch log. The status is what came
 back, not what is supposed to come back (SPINE_REGISTRATION §4's convention). This file is
 Session G's; it does not amend SPINE_REGISTRATION.md, which is Session E's. Where a route
@@ -48,3 +48,69 @@ Named in retrieved primary sources and absent from `entities`: `country.france`,
 `country.syria`, `country.jordan`, `country.algeria`, Qatar, the United Arab Emirates, and
 **any entity type for an oil company** (Occidental, the Oasis partners, Shell, BP, IPC).
 Reported, never invented.
+
+
+---
+
+# Second pass, 2026-09-03 — what the first pass got wrong
+
+The first pass concluded that the four 1970–72 commercial records could not reach a second
+registrable domain, and named `opec.org` (402), `oxfordenergy.org` (403),
+`crsreports.congress.gov` (403), UPI (no 1972 copy) and FRASER's *Economic Report of the
+President 1974* (reachable, silent) as the evidence. **That conclusion was wrong, and the
+error was the search's, not the archive's.**
+
+The first pass looked for a second **primary** — the producers' own record, the
+contemporaneous US economic record — and stopped when those failed. SPINE_REGISTRATION §1(a)
+does not require two primaries. It requires *two independent sources, at least one primary*,
+and says explicitly that "a scholarly secondary source (a monograph, a peer-reviewed article,
+a working paper) may serve as the second source and never as the primary." Every one of these
+records already had its primary (FRUS). What each needed was one independent domain of **any**
+role — and two such domains were already in Session E's own tested-working set, unused by G:
+`ora.ox.ac.uk` and `merip.org`. Recorded here rather than in a commit message, per charter
+§2 rule 5.
+
+## Routes that worked (second pass)
+
+| route | what was requested | status |
+|---|---|---|
+| **ORA (Oxford University Research Archive)** `ora.ox.ac.uk/objects/…/files/…` | Bassam Fattouh, *An Anatomy of the Crude Oil Pricing System*, OIES **WPM 40**, January 2011 (83 pp.) | **works.** The PDF does not convert in the fetch client; it was saved and the text extracted locally (as with Hamilton). Substantive on **Libya September 1970** (the Occidental settlement, income tax on an increased posted price, retroactive payment, the other companies following) and on **Tehran 1971** (the most-favoured-nation chain from Libya's terms; "the negotiations conducted in Tehran resulted in a collective decision to raise the posted price and increase the tax rate"; "the Tehran Agreement"). One sentence on **Iraq 1972**: "Iraq opted for nationalisation in 1972", plus the October 1972 participation agreement for context. **Never names Tripoli** — checked by string search over the whole extracted text, 0 occurrences |
+| **MERIP** `merip.org/YYYY/MM/<slug>/` | Michael Renner, "Restructuring the World Energy Industry", *MERIP Reports* No. 120, 26 January 1984; Shawna Bader-Blau, "Iraqi Unions vs. Big Oil", *Middle East Report* No. 243, 26 June 2007 | **works**, article text served with issue number and date. Renner 1984 is the **only** independent attestation of the **Tripoli** agreement retrieved by either pass, and it is one sentence. Bader-Blau 2007 gives one sentence on the 1972 IPC nationalisation |
+| **govinfo** `govinfo.gov/app/details/…` (metadata) | S. Prt. 93rd Congress, *The International petroleum cartel, the Iranian consortium, and U.S. national security*, prepared for the Subcommittee on Multinational Corporations, **February 21, 1974** | **metadata page works**; the item exists and is dated. See the failures below for why its text could not be read |
+
+## Routes that did not yield (second pass)
+
+| route | what was requested | status |
+|---|---|---|
+| `govinfo.gov/content/pkg/CPRT-93SPRT28516/html/…` | HTML rendering of the 1974 Senate committee print | **HTTP 404** — no HTML rendering exists for this item |
+| `govinfo.gov/content/pkg/CPRT-93SPRT28516/pdf/…` | the same item as PDF | **exceeds the fetch client's 10 MB limit.** Same wall Session E hit on the 1979 Senate print |
+| `govinfo.gov/content/pkg/GPO-CRECB-1970-pt23/pdf/…` | bound *Congressional Record*, September 1970, for Senate floor material on the Libyan cutbacks | **exceeds 10 MB.** The bound Record is scanned page images; every part file is oversized |
+| `govinfo.gov/content/pkg/CPRT-92HPRT70318O/pdf/…` | House Task Force on Energy briefings, 92nd Congress | **exceeds 10 MB** |
+| `fraser.stlouisfed.org/title/economic-report-president-45/…-1972-…` | *Economic Report of the President, 1972*, as the natural place for the Tehran/Tripoli agreements | the URL guessed for the 1972 volume returns a **browse listing, not the volume**; the 1972 report was not located this pass. The 1974 volume was read in the first pass and is silent |
+| `ora.ox.ac.uk` — Boué, "Opec at (More Than) Fifty: The Long Road to Baghdad, and Beyond", *Oxford Energy Forum* | a second ORA route for Tripoli | **retrieved and read in full (6 pp.); silent.** Zero occurrences of Tripoli, Tehran or Libya. It is about OPEC's founding, not 1971. A negative on a reachable route, recorded so it is not re-spent |
+| `digitalarchive.wilsoncenter.org`, `nsarchive.gwu.edu` | declassified holdings on the 1971 agreements | searched, **no document link surfaced**. Neither was fetched, and neither is cited |
+
+## What the second pass changed
+
+| record | before | after | second domain |
+|---|---|---|---|
+| `libya_posted_price_confrontation_1970` | partial — fails (a) | **complete** | `ora.ox.ac.uk` (substantive) |
+| `tehran_agreement_1971` | partial — fails (a) | **complete** | `ora.ox.ac.uk` (substantive, no figures) |
+| `tripoli_agreement_1971` | partial — fails (a) | **complete, narrowly** | `merip.org` (one sentence, no figures) |
+| `iraq_ipc_nationalisation_1972` | partial — fails (a) | **complete** | `ora.ox.ac.uk` + `merip.org` (both year-only) |
+
+The gap that remains is **not** clause (a). It is `severity`: no source retrieved by any pass
+gives barrels for any of the four, so all four keep `severity` = `unknown`. That is a
+measurement, not a hole to be filled.
+
+## Handoff to Session E (added by the second pass)
+
+3. **`ora.ox.ac.uk` and `merip.org` should be read as general routes, not as one-off finds.**
+   E's own dossiers established both, but SPINE_REGISTRATION §4's table does not list either,
+   so a later session has to rediscover them. ORA serves the OIES working-paper series in full
+   (Fattouh WPM 40 covers the whole 1928–2011 pricing history); MERIP serves *MERIP Reports*
+   and *Middle East Report* article text back to at least 1984, with issue number and date.
+4. **govinfo's pre-1990 scanned holdings are effectively closed to this toolchain.** Four
+   separate items were requested this pass and all four exceeded the 10 MB fetch limit; the
+   HTML renderings do not exist for that era. This is a tool limit, not an access limit, and it
+   is worth recording as such: the documents are public and free, and we cannot read them.
