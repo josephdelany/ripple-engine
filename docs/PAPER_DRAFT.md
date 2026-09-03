@@ -54,7 +54,19 @@ its edge was, to a first approximation, hindsight.
 
 Three further results are consistent with that. A naive persistence rule — the
 dyad's own maximum escalation level over the preceding 90 days — beats the engine
-decisively (Brier 0.480 vs 0.769; skill −0.600, *p* = 0.0002). A registered
+decisively (Brier 0.480 vs 0.769; skill −0.600, *p* = 0.0002). A registered follow-up
+(§11) shows that this particular gap was an artefact of the estimand rather than of the
+analogies: the engine was asked to forecast the *level* from scratch while persistence
+starts from the answer, and re-anchoring the identical sealed reads on the *change* moves
+the same mixture, at the same weights, from 0.769 to 0.480 — a dead heat with persistence.
+Asked the fair question — does the analogue distribution add anything once the dyad's own
+recent state is supplied? — the registered verdict is **NO ADDITION** (best combination
++0.034 Brier skill, DM *p* = 0.181, permutation *p* = 0.124, nothing surviving FDR;
+measured minimum detectable skill 0.067, so the honest statement is *not detectable at
+n = 150*). A registered control then separates the two things such a pool can be doing, and
+finds that **the gain is pooling, not similarity**: substituting the class's unconditional
+change distribution for the retrieved analogues is, if anything, marginally better (paired
+−0.004, *p* = 0.766). A registered
 walk-forward recalibration, which we had predicted in writing would rescue the
 engine by fixing miscalibration, instead made it worse (−0.700, *p* < 0.001): that
 hypothesis is **falsified**. And a label-permutation test that had rejected "the
@@ -67,7 +79,7 @@ the same silence on the transmission side: across 477 node×shock cells only 21
 transmit, against 1–24 expected under no transmission at all, with **zero of 99** at
 the gas/LNG and fertilizer hops — while the same estimator recovers Känzig's (2021)
 published oil-supply-news shock cleanly at every horizon, so the nulls are not an
-instrument failure (§11). Separately, a market-defined census of the largest Brent moves
+instrument failure (§12). Separately, a market-defined census of the largest Brent moves
 since 1987 finds that 35% have no identifiable event in the corpus, that in half of
 the attributed episodes every attributed event was knowable more than 20 trading
 days before the move began, and that
@@ -339,7 +351,7 @@ of the software unless this rule produced it (acceptance check D6).
 
 Daily tier: 299 reads, 253 scored after burn-in (price), 150 with an escalation
 label. The monthly tier has 14 reads and 0 scored beyond burn-in; it describes and
-cannot validate (§12).
+cannot validate (§13).
 
 **The vintage amendment, and what it did.** This run is the first in which the
 per-event situation fields are filtered by their own `knowable_at` (Amendment H;
@@ -489,7 +501,122 @@ That is a finding about historical data availability, not about the market. It i
 also the finding that the vintage rule was written to be able to catch, and the
 reason it was registered before any number was computed.
 
-## 11. The propagation study, in brief
+## 11. The estimand was wrong: re-anchoring on the dyad's own state
+
+The most robust result in §8 is that persistence beats the engine by 0.29 of Brier. That
+result invites a question it does not answer: is the engine *bad*, or was it asked the
+wrong question? The level estimand requires the engine to **replace** the dyad's recent
+history rather than to **improve** on it, and the state vector contains no field for the
+dyad's own current level — so the engine forecasts from scratch while persistence starts
+from the answer. Any forecaster that does not begin at persistence begins 0.29 behind.
+
+Amendment L (registered in `WALK_FORWARD_PROTOCOL.md`, commit `a2ae995`, before the module
+existed) re-anchors the identical sealed reads and asks for the **change**: the target is
+ΔIES = L − L⁻ on the ordered support {−3 … +3}; each analog votes with its *own* change,
+Δ_a = L_a − L⁻_a, taken from that analog's own sealed read; the baseline is a smoothed
+point mass on Δ = 0, which is exactly G-persistence expressed in this estimand. Nothing was
+re-retrieved and no weight was re-fitted — the same twelve items, the same sealed weights,
+the same analogs. The only change is what the analogs vote on.
+
+Registered in advance so that it can never be sold as a result: after clipping to the
+feasible set, Δ and level are in bijection, so the 7-category Δ Brier of any forecast equals
+the 4-level Brier of its implied level forecast, exactly. The reframing changes the forecast
+and the baseline; it does not change the score axis. Every number below is on the same axis
+as §8, and the code asserts the identity on every read.
+
+### 11.1 The anchoring defect, measured
+
+| forecaster | registered Brier |
+|---|---|
+| the sealed engine, 13 items, voting on **level** | 0.7687 |
+| the same mixture, M01–M12, voting on level (control) | 0.7629 |
+| **the same mixture, the same weights, voting on CHANGE** | **0.4799** |
+| G-persistence / no-change | 0.4805 |
+
+**The engine's entire deficit against persistence was the missing anchor, not the
+analogies.** Re-anchored, the analogue mixture and persistence are a dead heat: skill
++0.0012, DM *p* = 0.980. The control rebuilds the same twelve items voting on level and
+lands at 0.7629 against the sealed 0.7687 — the residual is M13's share of the Hedge weight
+— so re-anchoring is demonstrably the only thing that moved. One disclosed departure: L.2
+charges an item with no analog the Δ-climatology forecast where the sealed walk instead
+zeroes its weight; 58 of 1,800 item slots abstain, and the measured difference in mean Brier
+is 0.00035.
+
+This is a statement about the estimand, not about skill. It says the published −0.600 was
+measuring an anchoring failure. It does **not** say the engine has skill, and §8's number
+stands as computed on the question §8 asked.
+
+### 11.2 The registered verdict: NO ADDITION
+
+Does the analogue distribution add anything *once the anchor is supplied?* n = 150 retained
+of 150, 0 excluded, 0 of 10,885 analog slots lacking an L⁻. Δ = 0 on 110 of 150 reads
+(73.3%; L.8.1's near-degenerate threshold is 0.90, so the target is close to degenerate but
+not formally so).
+
+| forecaster | Brier | skill vs no-change | 95% CI | DM/HLN *p* |
+|---|---|---|---|---|
+| **C1** ½ no-change + ½ analogue (primary) | 0.4643 | +0.0336 | [−0.0124, +0.0784] | 0.181 |
+| **C2** walk-forward λ | 0.4671 | +0.0279 | [−0.0129, +0.0693] | 0.219 |
+| **C3** Hedge, registered η | 0.4656 | +0.0310 | [−0.0120, +0.0751] | 0.199 |
+| analogue alone | 0.4799 | +0.0012 | [−0.1033, +0.0868] | 0.980 |
+| Δ-climatology alone | 0.4635 | +0.0354 | [−0.0354, +0.1003] | 0.340 |
+| no-change (G-persistence) | 0.4805 | — | — | — |
+
+Every gate condition in L.7 fails: DM *p* = 0.181, the bootstrap CI includes zero, SPA over
+{C1,C2,C3} against the no-change benchmark gives *p* = 0.075, block label permutation
+*p* = 0.124, and nothing survives Benjamini–Hochberg across the 14 reported comparisons
+(minimum *q* = 0.387). The registered verdict is **NO ADDITION**.
+
+It is *not* the verdict that analogy degrades the forecast. L.7 has a DEGRADES branch and it
+did not fire: λ, free on a registered grid {0.0 … 1.0} and fitted only on closed reads, took
+0.5 (67 reads), 0.6 (54) and 0.7 (29), terminal 0.5; C3's Hedge weight on no-change stayed
+within [0.449, 0.582]. Both learners settle on roughly half the analogue.
+
+Nor is it the verdict that there is no effect. **The measured minimum detectable skill at
+n = 150 is 0.0666, and the observed skill is 0.0336 — half of it.** This is a null we could
+not have distinguished from a real effect of the size we observed, which is why L.8.7
+registered the power figure in advance. The honest sentence is *not detectable at n = 150*.
+On the better-sourced half (L⁻ carried by ≥ 2 sources, n = 66) C1's skill falls to +0.0075
+(*p* = 0.876).
+
+### 11.3 Pooling or similarity?
+
+C1's +0.034 is ambiguous, because pooling *any* second distribution with a sharp point mass
+buys shrinkage. Amendment M (commit `573628f`, registered before computation and labelled
+post-hoc because its motivation was) runs three pools at the identical λ = 0.5, differing
+only in the second component.
+
+| pool | second component | Brier | skill vs no-change | *p* |
+|---|---|---|---|---|
+| **C1** | the retrieved analogue | 0.4643 | +0.0336 | 0.181 |
+| **C0r** | random analogs, same pool, same sealed *k* and seed | 0.4677 | +0.0266 | 0.168 |
+| **C0** | the whole Δ-climatology | **0.4626** | +0.0371 | 0.056 |
+
+**C1 against C0, paired: −0.0037, CI [−0.0288, +0.0204], *p* = 0.766** (RPS: −0.0009,
+*p* = 0.938). By M.3's rule, written before the numbers: **the gain is pooling, not
+similarity.** The retrieved analogues are interchangeable with the class's unconditional Δ
+distribution inside the pool; if anything the unconditional distribution is marginally
+better, and it is the only forecaster in the experiment that comes near separating from
+persistence — at *p* = 0.056, which would not survive the multiplicity correction anyway.
+C1 against C0r is +0.0071 (*p* = 0.555): retrieval barely improves on random draws from the
+same pool.
+
+This diagnostic gates nothing. But it is the sharpest statement in this paper of what the
+engine's retrieval step is worth, and it is consistent with §8's finding that the engine is
+indistinguishable from random analogs on the level estimand (−0.021, *p* = 0.58). Two
+estimands, two designs, the same answer: **the pooling is doing the work, and the
+similarity metric is not.**
+
+### 11.4 What §11 does and does not revise
+
+Nothing here re-judges a v2 number. `engine:G` on the level estimand keeps exactly the
+status §8 gave it. What changes is the *interpretation* of the −0.600: it measured a defect
+in how the question was posed, and that defect is now found and repaired. What does not
+change is the verdict, which under a repaired estimand and a fair anchor is still that the
+analogue distribution adds nothing detectable at this sample size — and that what little it
+adds, the base rate supplies as well.
+
+## 12. The propagation study, in brief
 
 The engine's second claim is not about forecasting at all: that a shock arriving at
 crude *travels* — into refined products, cracks, gas and LNG, fertilizer, freight and
@@ -538,7 +665,7 @@ languages: conditioning on the historical record does not forecast escalation or
 better than the base rate, and geopolitical shocks do not measurably propagate down the
 petroleum chain beyond crude itself at these horizons and sample sizes.
 
-## 12. Limitations
+## 13. Limitations
 
 1. **Sample size, and the size of the gap.** 150 labelled escalation reads and 253
    price reads. Simulation under the measured block dependence puts the minimum
@@ -594,7 +721,7 @@ petroleum chain beyond crude itself at these horizons and sample sizes.
    number. The correct class placements are registered for v3, applied prospectively
    only.
 
-## 13. What would change the verdict
+## 14. What would change the verdict
 
 VALIDATED requires all of: positive registered skill with DM and SPA *p* < 0.05 on
 both tiers where *n* ≥ 30; skill > 0 in all three regime blocks; a null placebo;
@@ -608,18 +735,36 @@ Both of our own explanations for the earlier null have now been falsified (§10)
 we are careful about offering a third. What the record supports is three concrete,
 registrable routes, in descending order of what they would teach:
 
-1. **Start from persistence.** The single most robust result here is that a rule
-   using only the dyad's own recent escalation beats a state-conditioned analog
-   engine by 0.29 in Brier. The natural next estimand is the *change* from that
-   baseline, with the analog distribution asked to improve on persistence rather
-   than to replace it. Registered for v3; not computed.
+1. ~~**Start from persistence.**~~ **Computed, and closed (§11).** This route was
+   registered here as the most promising and has since been run. Re-anchoring on the
+   change repairs the estimand — the 0.29 gap was an anchoring failure, not an analogical
+   one — but the repaired question returns NO ADDITION, and a registered control shows the
+   small remaining gain is pooling rather than similarity. The route is no longer open; its
+   answer is in §11 and it is negative.
 2. **Make the state vector exist.** Amendment H's finding is that most events have
    no knowable state. Either the situation fields are re-derived from sources that
    carry real publication dates, or the design is conditioning on something the past
    did not contain. This is historical work, not modelling work.
-3. **Sample size.** 1,200 scored reads is the target; the 624 pre-1987 candidates
-   and the corpus repair are the only route to it, and both are underway with
-   admission reserved to the author.
+3. **Sample size — and the route to it has changed.** 1,200 scored reads is the
+   target against 150 today, and §11's power block puts the requirement higher still at
+   the skill actually observed. The pre-1987 expansion was registered as the route, and
+   that route is now measured shut: of six pre-1974 records built to the full sourcing
+   standard, admitting all six buys **zero** scored reads, because burn-in is per class at
+   8 and every monthly class sits below it. The four most consequential records — Libya
+   1970, Tehran 1971, Tripoli 1971, the IPC nationalisation 1972 — are unscoreable on both
+   branches: `opec_decision` is absent from the similarity engine's class set, and their
+   price target is a monthly WTI series carrying 16 distinct values across the 324 months
+   to 1972, with 83.5% of three-month changes exactly zero. There is no administered-price
+   era in which this design can be scored, and no amount of archival work changes that.
+   The remaining route to *n* is therefore not backwards in time but forwards in density:
+   making the unit of observation a **date** rather than an event, which multiplies the
+   sample through a periodic grid, multiple horizons, multiple price targets, and
+   escalation labels at the dyad-date rather than the event level. That is a different
+   estimand — *given the world state now, what follows?* rather than *given this event,
+   what follows?* — and it is registered as a new study rather than as a repair to this
+   one. It also removes a selection problem this paper documents but does not solve
+   (§4): scoring only on chosen event dates never tests the engine on the days the market
+   actually moved, and 35% of the largest Brent moves carry no corpus event at all.
 
 If a null survives all three, the conclusion is not that history is uninformative —
 persistence *is* history — but that the specific analogical move this project
@@ -627,7 +772,7 @@ formalised, "find state-similar precedents and average their outcomes", is the w
 way to use it at these horizons. On the present evidence that is the finding we would
 defend.
 
-## 14. The integrity record
+## 15. The integrity record
 
 Pre-registration files with git timestamps (`BRIEF_SKELETON.md`,
 `PRE_REGISTRATION_V2.md`, `BIG_MOVES_REGISTRATION.md`,

@@ -60,13 +60,39 @@
 > later knowledge. And simple baselines are extremely hard to beat: the recent behaviour of
 > the same pair of countries outperformed a much more elaborate system.
 
+## If they ask: "did you check whether you'd just asked it the wrong question?"
+
+*This is the answer that separates the project from a negative result someone gave up on.*
+
+> Yes, and I had. Persistence beat the engine by 0.29, but the comparison wasn't fair: I was
+> asking the engine to predict the escalation level from scratch while persistence starts
+> from the answer. So I re-anchored the identical sealed forecasts — same analogs, same
+> weights, nothing re-retrieved — to predict the *change* instead of the level. That moved
+> it from 0.769 to 0.480, a dead heat. The entire gap was a missing anchor, not bad
+> analogies.
+>
+> But that fixed the question without changing the answer. Asked properly — does analogy add
+> anything once you know where the dyad already stands? — it adds nothing detectable. And
+> then I ran one more control, which is the result I'd actually lead with: I swapped the
+> retrieved analogues for the plain base rate of that event class, holding everything else
+> identical. The base rate did just as well — marginally better, in fact. So the small gain
+> that existed was coming from *pooling two distributions*, not from the historical
+> similarity. The retrieval step, which is the entire idea of the engine, turned out to be
+> interchangeable with the average.
+
 ## If they ask: "what would you do next?"
 
-> Make persistence the baseline rather than an afterthought. The next experiment asks
-> whether historical analogy adds information about the *change* from a dyad's current
-> state, rather than replacing it. I'd also expand the pre-1987 corpus — I have 624
-> screened candidates — and rebuild the state variables from genuinely contemporaneous
-> sources.
+> The binding constraint is sample size — 150 scored reads against about 1,200 needed. I'd
+> registered expanding the corpus backwards as the route, and then measured that it doesn't
+> work: six pre-1974 records built to full sourcing standard buy zero additional *scored*
+> reads, and the pre-1973 oil price isn't a traded series — 16 distinct values in 324 months
+> — so there's nothing to forecast. So the route is forwards in density instead of backwards
+> in time: make the unit of observation a date rather than an event. Score on a regular grid
+> across several horizons and several price series, with escalation labels at the
+> dyad-date level. That's a different question, so it gets registered as a new study rather
+> than as a patch. It also fixes a selection problem I found but didn't solve — scoring only
+> on my chosen events means never testing the engine on the days the market actually moved,
+> and 35% of the biggest moves have no event in my corpus at all.
 
 ## If they ask: "why only 313 events?"
 

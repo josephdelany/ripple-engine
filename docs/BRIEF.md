@@ -46,9 +46,29 @@ day** — and the apparent signal disappeared with it.
 > The analogical structure the engine appeared to find was, to a first approximation,
 > hindsight.
 
+![The vintage rule, and what it cost](figures/fig1_vintage.png)
+
+*Source: `data/state/situation_knowable.json` (left); `data/walk_forward/summary.json` ·
+`tiers.daily.G.engine_vs.climatology`, with the pre-amendment run from
+`STATE_OF_THE_ENGINE.md` §5 and `data/handoffs/B_run_delta.md` (right). Drawn by
+`src/figures_paper.py`.*
+
 Two explanations for the null were then registered and tested. Both were **falsified**:
 walk-forward recalibration made escalation worse (−0.700), and the label-permutation test
 that had rejected "the engine is noise" at *p* = 0.002 no longer rejects (*p* = 0.124).
+
+### The baselines
+
+![Escalation: what each rule actually scores](figures/fig2_escalation_baselines.png)
+
+*Brier, lower is better. Source: `data/walk_forward/summary.json` ·
+`tiers.daily.G.engine_vs.*`, `...items_vs_climatology.M13_recalibrated`. Drawn by
+`src/figures_paper.py`.*
+
+![Price: CRPS skill against each of the four baselines](figures/fig3_price_baselines.png)
+
+*Source: `data/walk_forward/summary.json` · `tiers.daily.P.engine_vs.*`. Drawn by
+`src/figures_paper.py`.*
 
 ### Two companion results from the same infrastructure
 
@@ -73,11 +93,25 @@ the 1970s) and whose state vector is mostly unavailable at read time. Measured p
 the minimum detectable escalation skill at 0.127; roughly 1,200 scored reads would be
 needed to detect +0.05, against 150 today.
 
-### The next experiment
+### The follow-up
 
-Persistence is now the baseline to beat, not an afterthought. The registered v3 question:
-**does the analogue distribution add information about the *change* in escalation from the
-dyad's current state?** Either answer is informative.
+That v3 question — *does analogy add anything once the dyad's own recent state is known?* —
+has now been run. Re-anchoring the identical sealed reads on the **change** rather than the
+level moves the same mixture from **0.769 to 0.480**: the whole gap to persistence was a
+missing anchor, not the analogies. But the repaired question returns **NO ADDITION**
+(+0.034 skill, *p* = 0.181, nothing surviving FDR, against a measured minimum detectable
+skill of 0.067 — *not detectable at n = 150*). A registered control then shows **the gain
+is pooling, not similarity**: the class base rate substitutes for the retrieved analogues
+inside the pool, if anything marginally better (paired −0.004, *p* = 0.766).
+
+### The open problem
+
+*n*. 150 scored reads against ~1,200 required. Expanding the corpus backwards is measured
+shut — six pre-1974 records at full sourcing standard buy zero scored reads, and pre-1973
+monthly WTI carries 16 distinct values in 324 months. The route registered next makes the
+unit of observation a **date** rather than an event: a periodic grid, multiple horizons,
+multiple price targets, dyad-date escalation labels. A different estimand, and one that
+also fixes the selection problem in scoring only on chosen events.
 
 ### Research integrity
 

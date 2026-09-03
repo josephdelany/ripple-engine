@@ -68,7 +68,7 @@ computed.
 | | |
 |---:|:---|
 | **−0.097** | escalation Brier skill vs the base rate (95% CI −0.180 … −0.018, *p* = 0.022). The engine is significantly **worse** than climatology. |
-| **−0.600** | escalation skill vs **persistence**. A rule using only the dyad's own last 90 days scores 0.480 against the engine's 0.769. |
+| **−0.600** | escalation skill vs **persistence**. A rule using only the dyad's own last 90 days scores 0.480 against the engine's 0.769. A registered follow-up found this gap was the *estimand*, not the analogies — see below. |
 | **+0.129** | price CRPS skill vs persistence (*p* < 0.001). The one comparison the analogue engine wins. |
 
 ## The finding
@@ -81,10 +81,51 @@ on the day** — and the apparent signal disappeared with it.
 > The analogical structure the engine appeared to find was, to a first approximation,
 > hindsight.
 
+![The vintage rule, and what it cost](docs/figures/fig1_vintage.png)
+
+*Left: the corpus split by whether any state field was knowable at t
+(`data/state/situation_knowable.json`). Right: escalation Brier skill vs climatology before
+and after Amendment H (`data/walk_forward/summary.json` ·
+`tiers.daily.G.engine_vs.climatology`; the before-run from `STATE_OF_THE_ENGINE.md` §5 and
+`data/handoffs/B_run_delta.md`). Drawn by `src/figures_paper.py`.*
+
 Two explanations for the null were then registered in writing and tested. **Both were
 falsified.** Walk-forward recalibration made escalation worse (−0.700). The
 label-permutation test that had rejected "the engine is noise" at *p* = 0.002 no longer
 rejects (*p* = 0.124).
+
+### The baselines, in full
+
+![Escalation: what each rule actually scores](docs/figures/fig2_escalation_baselines.png)
+
+*Brier score, lower is better. Source: `data/walk_forward/summary.json` ·
+`tiers.daily.G.engine_vs.*` and `tiers.daily.G.items_vs_climatology.M13_recalibrated`.
+Drawn by `src/figures_paper.py`.*
+
+![Price: CRPS skill against each of the four baselines](docs/figures/fig3_price_baselines.png)
+
+*CRPS skill with 95% intervals; grey where the interval crosses zero. Source:
+`data/walk_forward/summary.json` · `tiers.daily.P.engine_vs.*`. Drawn by
+`src/figures_paper.py`.*
+
+## The follow-up that repaired the question — and did not rescue the answer
+
+The −0.600 above asks the engine to forecast the escalation *level* from scratch, while
+persistence starts from the answer. Re-anchoring the identical sealed reads on the
+**change** — same twelve items, same sealed weights, same analogs, nothing re-retrieved —
+moves the mixture from **0.769 to 0.480**, a dead heat with persistence. The entire deficit
+was a missing anchor.
+
+Asked the fair question — *does analogy add anything once the dyad's own recent state is
+known?* — the registered verdict is **NO ADDITION**: +0.034 Brier skill, DM *p* = 0.181,
+permutation *p* = 0.124, nothing surviving FDR, against a measured minimum detectable skill
+of 0.067. Not "no effect": *not detectable at n = 150*.
+
+And a registered control separates the two things that pooling can be doing. Substituting
+the class's unconditional change distribution for the retrieved analogues scores **0.4626
+against 0.4643** — paired difference −0.004, *p* = 0.766. **The gain is pooling, not
+similarity.** The retrieval step, which is the whole idea of the engine, is
+interchangeable with the base rate.
 
 ## Two companion results from the same infrastructure
 
@@ -134,6 +175,16 @@ from data).
 
 ## Where it is going
 
-`PATH.md` is the route. The next registered experiment follows from the persistence
-result: does the analogue distribution add information about the *change* in escalation
-from the dyad's current state, rather than replacing it? Either answer is informative.
+`PATH.md` is the route. The change-estimand experiment that this section used to
+name as next has been run, and its answer is above.
+
+The open problem is *n*: 150 scored escalation reads against a measured requirement of
+~1,200. The registered route was backwards — expand the pre-1987 corpus — and that route is
+now measured shut: six pre-1974 records built to the full sourcing standard buy **zero**
+scored reads, and the four that matter most are unscoreable on both branches, because
+monthly WTI before 1973 carries 16 distinct values in 324 months. The remaining route is
+forwards in density: make the unit of observation a **date** rather than an event, scoring
+on a periodic grid across multiple horizons and price targets, with escalation labels at
+the dyad-date level. That is a different question, registered as a new study — and it also
+removes the selection problem the Big Moves census exposes, since scoring only on chosen
+events never tests the engine on the days the market actually moved.

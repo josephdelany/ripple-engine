@@ -45,14 +45,35 @@ this; the correct four-way taxonomy (interstate military / interstate coercion /
 energy-geopolitical / non-state-domestic) is registered **prospectively only**. Owner
 **Joe** (whether v3 re-codes), **F** (already registered).
 
-**2.2 The historical corpus is thin.** 8 events in the 1970s, 11 in the 1980s, 16 in the
-1990s, against 150 after 2010. The monthly tier needs 33 events minimum, 43 to be readable;
-it has 14, 0 scored. 624 pre-1987 candidates screened. Owner **G** (dossiers), **Joe**
-(admission).
+**2.2 The historical corpus is thin — and the backward route is now measured shut.**
+*(G-1, G-2, closed 2026-09-03.)* 8 events in the 1970s, 11 in the 1980s, 16 in the 1990s,
+against 150 after 2010. G built six pre-1974 records to the full sourcing standard and
+measured what admitting them buys: **zero scored reads**, because burn-in is per class at 8
+and every monthly class is below it — the tier goes 14 → 20 and stays at 0 of the 30 it
+needs. The four most consequential (Libya 1970, Tehran 1971, Tripoli 1971, IPC 1972) are
+unscoreable on **both** branches: `opec_decision` is absent from `GEO_TYPES`
+(`similarity.py:46`), and their price target is monthly WTI, measured at 16 distinct values
+across the 324 months to 1972 with 83.5% of 3-month changes exactly zero. **Consequence:**
+expanding backwards cannot reach the ~1,200 reads the power block requires, at any amount of
+archival effort. This is a finding, published in paper §14. The remaining route to *n* is the
+date-grid study (2.5). Residual for **Joe**: whether the codebook gains a class for a
+concession or ownership change — four records currently sit in `opec_decision` by elimination.
+
+**2.5 *n* is the binding constraint, and the date grid is the only remaining route.**
+150 scored escalation reads against ~1,200 required; §11's power block puts the requirement
+higher still at the skill actually observed. Registered as a **new study, new estimand** —
+the unit of observation becomes a date, not an event: a periodic grid (468 month-ends or
+2,028 week-ends, 1987–2026), multiple horizons, multiple price targets, and escalation
+labels at the **dyad-date** level rather than bounded by our 313 chosen events. Also removes
+the event-selection problem the Big Moves census exposes. Owner **B** (the walk), **G** (the
+dyad-date label panel and its vintage stamp — the bottleneck, and the number that decides
+whether the route works at all).
 
 **2.3 The state vector is empty once vintage binds.** 726 of 786 situation values dropped
-as not-knowable; 60 kept across 313 events. Owner **G** (`situation_vintage.py`, deriving
-`knowable_at` from dossier source dates).
+as not-knowable. G-3 derived `knowable_at` from dossier document dates and recovered
+**60 → 83** kept at *t*, and established that `conflict_scope` can never be knowable at *t*
+at all. Delivered (`situation_vintage.py`); the residual emptiness is a documented finding,
+not an open task.
 
 **2.4 Post-2000 sourcing cannot be repaired by any reachable route.** 28 records have no
 citable domain; 0 of 27 post-2000 encyclopaedia-only records could be replaced through
@@ -61,7 +82,9 @@ not fixable. Owner — none; it is a finding.
 
 ## Tier 3 — loops that have never completed
 
-**3.1 The claim ledger has never resolved a claim end to end.** Owner **H** (in flight).
+**3.1 ~~The claim ledger has never resolved a claim end to end.~~** **Closed** (H,
+`0c97285`): 51 claims resolved from data at their horizon, and the 93% uncheckable rate was
+found to be a property of the reading matter, not a defect in the reader.
 
 **3.2 The reader's gold set is machine-graded.** 100 headlines coded by session A, reader
 scores 84% against them, labelled unaudited and gated by nothing. Owner **H** (inter-coder
