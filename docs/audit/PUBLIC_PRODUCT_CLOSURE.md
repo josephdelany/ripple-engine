@@ -6,6 +6,8 @@ The maintained product is one methods-and-evidence paper, one README, one regist
 
 This is a logical archive rather than a destructive file purge. It preserves provenance, avoids breaking paths while another coding session is active, and keeps every prior artifact recoverable. The git tag `closure-core-frozen-2026-09-03` is the recovery point. The authoritative surface is enumerated in `README.md`; files outside that map are historical unless the paper cites them.
 
+The two legacy GitHub Actions were physically moved to `archive/github-workflows/`. They no longer run autonomous feeds, publish the old dashboard, send alerts, or commit generated state from a submitted research repository.
+
 ## Repository-wide classification
 
 Every tracked file was classified during closure by path and role. The exhaustive ledger is

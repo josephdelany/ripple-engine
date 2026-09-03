@@ -30,6 +30,8 @@ def classify(path):
         return "required_dependency"
     if path in EVIDENCE or path.startswith("docs/audit/"):
         return "evidence_audit"
+    if path.startswith("archive/"):
+        return "archive_preserved"
     if path.startswith(("src/backend", "src/api", "src/terminal", "src/app")) or \
        path.endswith((".html", ".css")) or path.startswith("ops/"):
         return "archive_interface_operations"

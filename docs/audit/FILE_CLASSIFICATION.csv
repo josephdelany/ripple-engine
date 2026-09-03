@@ -1,6 +1,4 @@
 path,classification
-.github/workflows/track.yml,archive_scientific_code
-.github/workflows/watch.yml,archive_scientific_code
 .gitignore,archive_scientific_code
 ARCHITECTURE.md,archive_planning_narrative
 CITATION.cff,maintained_core
@@ -14,6 +12,8 @@ OPEN_ITEMS.md,archive_planning_narrative
 PATH.md,archive_planning_narrative
 README.md,maintained_core
 WALK_FORWARD_PROTOCOL.md,archive_planning_narrative
+archive/github-workflows/track.yml,archive_preserved
+archive/github-workflows/watch.yml,archive_preserved
 data/NUMBERS.md,archive_planning_narrative
 data/acceptance_dod.json,archive_generated_data
 data/alert_queue.csv,archive_generated_data
