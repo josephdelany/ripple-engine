@@ -440,3 +440,132 @@ comparator (§3.3.4) is the equal-weight vector (0.25, 0.25, 0.25, 0.25) at τ =
   the frozen equal-weight engine (§3.3.4).
 - **Determinism.** The registered seeds of Amendment I; every read carries a content hash and the run a
   content digest.
+
+---
+
+## Part IV — the ESCALATION arm, 1987–2014
+*Registered 2026-09-03 on Joe's ruling of the same date, **before any code and before G's panel exists**.
+It reverses the §2.7 DROP recorded in `data/gates/grid_multiplier4_2026-09-03.md`: Joe has ruled the arm is
+built, scoped to the window in which its evidence is real. §2.7 itself is NOT amended — the rule stands as
+written and this Part records that Joe overrode its application, which is the one authority that can.*
+
+### 4.0 The division of labour with G, and what B does not build
+Session G registered the panel in `data/grid/g/G4_REGISTRATION.md` Amendment 3 and builds it. **B does not
+build a dyad-date panel.** B builds the scored study on top of G's, which is exactly the split G's A3.3
+already names: *"the strict subset is `evidence_class == opposed_side`, and it is a selection B applies at
+scoring time, on a field that is already there."*
+
+- G owns: the active set, the labels, `L_evidence` / `Lpre_evidence` / `evidence_class`, the VR stamps, and
+  `data/grid/g/PANEL.{parquet,json,md}`.
+- B owns: the reads, the forecasts, the baselines, the scores, the inference, the effective-n accounting,
+  and `data/grid/escalation/**`.
+- **B never writes to `data/grid/g/**`.** The build is gated on `data/grid/g/PANEL.*` existing; until it
+  does, this Part is a registration and nothing else. B's provisional dyad panel in
+  `power_arithmetic.py` was a *measuring instrument for the arithmetic* and is superseded for every
+  purpose except that arithmetic; no number in this Part comes from it.
+
+### 4.1 The three limits, registered before the code — and what each forbids
+Inherited from G's A3.4, restated here as binding on **every number this study publishes**. They are
+properties of the construction, known now, and each carries a prohibition rather than a caveat:
+
+1. **It can never reach the present.** The panel ends **2014-09-30**, because `ies90.covers` needs
+   `t + 90 ≤` the coverage end and the last sided sources (MID / MIDI / COW War) end 2014-12-31. Every
+   summary object carries `span_ends: "2014-09-30"` **in the same object as every skill number**, and no
+   number from this arm may be quoted in support of a claim about the world after 2014 or about what a live
+   engine would do.
+2. **It can never carry VALIDATED.** Every cell is `retrospective = 1`; `WORLD_STATE_CODEBOOK.md`
+   Amendment 1 rules that a retrospective field alone can never make a read VALIDATED. **The ceiling of
+   this arm is SUGGESTIVE, a priori, and it is stated before any number rather than discovered after one.**
+   `n` does not touch this: the whole point of the grid was more `n`, and more `n` cannot buy the thing
+   this limit withholds.
+3. **It can never score onset.** The active set admits a dyad only after a recorded clash, so a dyad quiet
+   for five years that goes to war is absent from the grid at every date before its first record. What is
+   measured here is skill at **continuation and de-escalation**. The forecaster's most valuable act —
+   seeing a war coming in a quiet dyad — is outside what this panel can score, **by construction**. Every
+   summary carries `panel_type: "recurrence"`, and describing this arm as forecasting the outbreak of
+   conflict is forbidden.
+
+### 4.2 The unit, the active set, and the target
+- **Unit:** (grid date `t`, dyad `D`), month-ends 1987-01-31 … 2014-09-30 (333 dates), on **G's VR-3 active
+  set** — R-ACT with the VR-3 restriction, a dyad entering at `t` only on records whose spell **ends
+  strictly before `t`**.
+- **Target, primary: ΔIES = L − L⁻**, the estimand Amendment L registered and this project's evidence
+  supports — a G forecast that does not start from the dyad's own level starts behind (level Brier 0.769
+  against persistence's 0.480; re-anchored, the same analogues score 0.480). The **level** is scored beside
+  it, always, and by Amendment L.2's clipping identity the two agree exactly on Brier and RPS.
+- **Excluded and counted:** `evidence_class == undefined` (the level is `no_independent_outcome` at either
+  end). No cell is ever excluded by its evidence basis — that is §4.5's field, not a filter.
+
+### 4.3 The forecast
+The Amendment L construction, on the panel: for a read at `(t, D)`, the analogues are prior cells
+`(u, D')` with `u < t` whose own 90-day window **closed by `t`**, retrieved on the state block by the
+registered distance; each votes with **its own** ΔIES, computed at its own date. The mixture is clipped to
+the feasible set given `L⁻` and its implied level forecast is sealed beside it.
+
+### 4.4 Baselines
+1. **Panel-climatology**, re-estimated **on the panel** and point-in-time (§1.3) — the base rate on a
+   recurrence panel is not the base rate on the event corpus, and the comparison moves with it.
+2. **No-change** — a point mass on ΔIES = 0 with Amendment B.2's smoothing. This is persistence in this
+   estimand and **it is the baseline to beat.**
+3. **Random analogues** from the same point-in-time pool, same k, same seed — isolates similarity retrieval.
+4. **The frozen registered-weight engine.**
+The three combination rules of Amendment L (C1 fixed λ = 0.5 primary, C2 walk-forward λ on the registered
+grid, C3 Hedge) are carried over unchanged, so this arm's result is directly comparable with L's.
+
+### 4.5 Evidence basis beside every result, never as a filter
+Every reported number is computed **twice and published together**: on the **full panel**, and on the
+**strict subset** `evidence_class == opposed_side`. Neither is the headline alone; a number quoted without
+its pair is a misquotation. The `evidence_class` cross-tab and the covering-source mix by year are published
+in the same file. G's A3.3 order governs:
+`opposed_side > icb_co_actor > icb_co_actor_never_opposed > ged_location > undefined`.
+
+### 4.6 Effective n, never nominal
+Part II's machinery, unchanged: the **two-way dyad × date cluster** design effect with the registered
+1.5× tie-break against the block bootstrap, the larger used. Every reported `n` carries its `n_eff`, and
+the **informative-cell count** is published beside both — because, as Part II's own numbers showed,
+`n_eff` on a panel that is overwhelmingly zeros is driven by the zeros' dependence structure and is a
+**ceiling, not an estimate**. The naive product of multipliers is never reported as power.
+
+### 4.7 The share-zero tripwire, with an obligation attached
+G's §5.1 registers the degeneracy bar at **≥ 95 % zeros**. The probe measured ΔIES share-zero at **90.2 %**
+on 1998 — inside the bar and not comfortably. Registered here, before the numbers:
+- share-zero is computed **per year and over the whole window**, on ΔIES and on the level, on the full panel
+  and on the strict subset, and published before any skill number;
+- **if share-zero exceeds 95 % anywhere in the window, B reports it to Joe immediately** — a dated note
+  before any skill number computed on the breaching slice is published, not after. The slice is not silently
+  dropped and the bar is not moved (INV-6).
+
+### 4.8 The VR-3 leak, inherited by construction rather than rediscovered
+G's probe caught **39 of 335 cells in 2018 (11.6 %)** admitted on a record still running at `t` — selection
+on the future that would have moved the base rate silently. **B takes the VR-3 active set and never falls
+back to R-ACT.** Asserted in code, not assumed: for every admitted cell, the admitting record's spell end
+is strictly before `t`; a single violation voids the run, as Amendment F.1's filtration audit does for the
+event walk. `n_active` under plain R-ACT is published beside it so the size of the restriction stays visible.
+
+### 4.9 This arm does not run the event walk
+`src/walk.py` is frozen until K's rebuild lands (Joe's ruling, 2026-09-03; tag `record-pre-amendment-4`),
+because `event_outcomes` holds a pre-Amendment-4 target while `ies90.py` is post-amendment. **This arm reads
+G's PANEL, never `event_outcomes` live and never `score_event`**, so it is not blocked by the freeze — and
+it is registered that way here so the freeze cannot be broken by accident through this door. Any comparison
+this arm draws against the event-triggered walk uses the sealed run and says which target that run scored.
+
+### 4.10 Outputs
+`data/grid/escalation/{reads.jsonl, scores.jsonl, summary.json}` with the sealing, content-hash and digest
+rules of the protocol (§2, Amendments D and I). Tests: `tests/test_grid_escalation.py`, each name carrying
+its clause id, including the VR-3 assertion of §4.8 and the tripwire of §4.7.
+
+### 4.11 Expected failure modes, registered in advance
+1. **The base rate does the work.** At ~90 % zeros, no-change is very hard to beat and Amendment L already
+   found the analogue adds nothing detectable at n = 150. More `n` makes the test sharper, not the engine
+   better, and a null here is the likeliest single outcome.
+2. **A recurrence panel flatters continuation.** Skill at "this dyad stays where it is" is cheap on a panel
+   built from dyads that have already clashed. The onset limit (§4.1.3) is what makes that cheapness
+   invisible unless it is stated, which is why it is stated in every summary object.
+3. **The strict subset will be much smaller.** The probe's 1998 slice had 23 of 29 non-zero cells on
+   opposed-side evidence; the strict subset's `n_eff` may fall below the registered `min_tier_n` of 30 in
+   some years. Where it does, the year describes and does not test, and the file says so.
+4. **`n_eff` is a ceiling.** §4.6. If the informative-cell count and `n_eff` move in opposite directions —
+   as they did in Part II when contamination was removed — the informative-cell count is the one to read.
+5. **Nothing here can be VALIDATED**, so a good result is a SUGGESTIVE one and must be reported as such
+   even if every inferential condition passes. This is the failure mode most likely to be mishandled by a
+   reader, and §4.1.2 is repeated in the summary object for that reason.
