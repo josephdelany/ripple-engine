@@ -1,0 +1,218 @@
+# G-4 REGISTRATION — the dyad-date escalation panel: the grid, the "active" rule, and the vintage stamp
+*2026-09-03, Session G. Registered BEFORE `src/grid_labels.py` is written and BEFORE any
+count is computed (charter §2 rule 2). Nothing here writes to `events`, `event_outcomes`,
+`situation_state` or `data/walk_forward/**`. B owns `src/walk*.py` and `data/walk_forward/`
+this session; G writes only `data/grid/**` and `src/grid_labels.py`. Amendments are dated
+and appended, never edited.*
+
+## 0. What was read before this was written
+
+A parser and a rule cannot be specified for data nobody has opened, so the following were
+read first and are named so the order is checkable:
+
+- `src/state/ies90.py` — `score_event(d, A, pairs, L, src)`, the `COVER` map, `window()`,
+  `pre_window()`, and Amendment 4's continuation predicate `covered_by()`. **The grid reuses
+  this scorer unchanged**; it already carries Amendment 4 across COW War and GED, so the
+  defect the brief warns about is not inherited.
+- `src/state/outcomes.py` — `load_mid`, `load_icb`, `_actors_and_pairs`, and the shape of
+  `A` / `pairs` / `L`.
+- `src/engine/pre1987_candidates.py` `STATES` — the registered producer/transit roles, the
+  same table G-1's screen used.
+- `WORLD_STATE_CODEBOOK.md` §Rules and **Amendment 1** — session A's already-registered
+  resolution of exactly this vintage problem. §4 below is built on it and does not invent a
+  rival convention.
+- `data/state/raw/**/*.meta.json` — the HTTP `Last-Modified` of each dataset file actually
+  parsed. These are the release dates used in §4, read from the tree, not recalled.
+- `WALK_FORWARD_PROTOCOL.md` Amendment B.1 (the pre-window level) and Amendment J.3 (ΔIES).
+
+**Not computed before this file was committed:** no active-set size, no marginal
+distribution of L or ΔIES, and no vintage-survival count. §6's tables are produced by the
+code, after this file is in git.
+
+## 1. The grid
+
+- **Unit of observation:** the dyad-date `(a, b, t)`, `a < b`, both in the corpus entity
+  register (`src/state/countries.py`, 59 countries).
+- **Grid dates:** **calendar month-ends**, 1987-01-31 … 2026-08-31. Week-ends are considered
+  only if the monthly panel survives §6; they are not registered here.
+- **Windows**, following the registered convention rather than the brief's shorthand:
+  - **L (the forward label)** = the IES-90 level over **`(t, t+90]`** — `score_event(t)`.
+  - **L⁻ (the pre-window level)** = the IES-90 level over **`[t−90, t−1]`** —
+    `score_event(t − 91 days)`, exactly as `WALK_FORWARD_PROTOCOL.md` Amendment B.1 defines
+    G-persistence.
+  - Day `t` itself is in **neither** window. That is OUTCOME_MAPPING Amendment 4 clause A4.4,
+    and it is why the brief's `[t, t+90]` is implemented as `(t, t+90]`: a rule that put day
+    `t` in the forward window would let the grid date's own violence score its own label.
+- **ΔIES** = `L − L⁻` on the ordered set {−3…+3}, per `WALK_FORWARD_PROTOCOL.md`
+  Amendment J.3. A cell whose L **or** L⁻ is `no_independent_outcome` has **no ΔIES**; it is
+  excluded and counted, never scored 0.
+
+## 2. R-ACT — the "active dyad" rule (primary, registered before it is run)
+
+A dyad `{a,b}` is **active at grid date t** when **both** hold:
+
+1. **Oil relevance.** At least one of `a`, `b` has a registered role containing `producer`
+   or `transit` in `pre1987_candidates.STATES`. Roles that are `consumer` only do not
+   qualify.
+2. **A recent dyadic record.** Some record in a **dyadic-capable** source — MIDI 5.0
+   incidents, COW inter-state War v4.0, ICB v16, dyadic MID 4.03 — names `a` and `b` as
+   co-parties (on **opposite sides** where the source records sides) with a dated spell
+   intersecting the **activity window** `A_w = [t − 1825, t − 1]` — five calendar years,
+   ending strictly before `t`.
+
+GED is **not** admissible for clause 2: the cached UCDP GED 26.1 has no dyad field (the
+loader is location-only, `ies90.score_ged` docstring), so it cannot say that two states
+clashed with each other. This is a property of the cache, not of UCDP.
+
+### 2.1 The selection effects, stated before the numbers
+
+"Active" is a choice and it will drive the base rate. Four effects follow from R-ACT and are
+registered here so none of them can be discovered later and presented as a surprise:
+
+- **It is a recurrence panel, not an onset panel.** Clause 2 conditions on recorded conflict
+  in the preceding five years, so a dyad that was quiet for five years and then goes to war
+  is **excluded from the grid at every date before its first record**. Any skill measured on
+  this panel is skill at *continuation and de-escalation*, never at *onset*. The single most
+  valuable thing a forecaster could do — see a war coming in a quiet dyad — is outside what
+  this panel can score, by construction.
+- **The selector and the target share a data-generating process.** Clause 2 selects on the
+  same four sources that produce L. A dyad enters because a source recorded it, and a source
+  that records a dyad tends to record it again. This inflates persistence and **flatters the
+  no-change baseline** of Amendment J.3, which is the baseline the engine must beat. Any
+  ΔIES result on this panel must be read against that.
+- **The base rate is not the world's.** Clause 1 restricts to oil-relevant states. The panel
+  cannot speak about non-oil dyads, and its L distribution is not the interstate base rate.
+- **The five-year lookback is arbitrary.** It is registered at 1825 days. The probe reports
+  the active-set size at **1, 2, 5 and 10 years** as a pre-declared sensitivity. Five years
+  stays the primary whatever the sensitivity shows; the others are diagnostics.
+
+### 2.2 R-ACT-0 — the no-selection comparator (diagnostic; never replaces R-ACT)
+
+Clause 1 alone: **every** oil-relevant dyad at **every** grid date, with no recency
+condition. This is the honest base rate inside the oil universe and the only way to see how
+much clause 2 moves it. It is reported beside R-ACT and does not become the rule whatever
+the numbers say.
+
+## 3. The label, and the coverage regimes the grid cannot escape
+
+L and L⁻ come from `ies90.score_event` unchanged: max over the covering sources of the dated
+level, Amendment 4's continuation rule applied, `no_independent_outcome` where every record
+on the chosen basis is undated-for-the-window, and `None` where no source covers.
+
+`ies90.covers(src, d)` requires `d + 90 ≤ hi`, so each source's **last usable grid date** is
+its coverage end minus 90 days. From the `COVER` map as built:
+
+| source | coverage ends | last usable grid date |
+|---|---|---|
+| COW inter-state War v4.0 | 2007-12-31 | **2007-10-02** |
+| MIDI 5.0 · dyadic MID 4.03 · COW intra-state War v4.1 | 2014-12-31 | **2014-10-02** |
+| ICB v16 | 2021-12-31 | **2021-10-02** |
+| UCDP GED 26.1 | 2025-12-31 | **2025-10-02** |
+
+Registered as a consequence, before it is counted: **the label's definition changes three
+times across the grid.** 1987–2007 has five covering sources and a dyadic basis; 2008–2014
+has four; 2015–2021 has ICB and GED only; 2022–2025 has **GED alone**, which is
+location-based, not dyadic, and covers only the 49 of 59 register entities its name map
+reaches; from **2025-10-02 no source covers at all.** A panel whose label is a five-source
+dyadic maximum in 1995 and a one-source location count in 2023 is not measuring one thing,
+and a walk-forward run across that boundary is scoring a non-stationary target. §6 reports
+the covering-source mix per grid date so the size of this is visible rather than argued.
+
+## 4. The vintage stamp — three rules, all three reported
+
+`WORLD_STATE_CODEBOOK.md` **Amendment 1** already met this problem and ruled on it: taking
+`vintage` = the dataset's release date "made every historical value invisible … Seen in the
+first run and rejected as a definition error." G does not overturn session A's ruling; it
+applies it, and reports the strict reading beside it because the brief asks for that number.
+
+- **VR-2 (PRIMARY — session A's registered convention).** A cell's `vintage` is the date its
+  evidence became knowable under the source's own publication convention: for an
+  event-resolution record (a dispute, a crisis, a war spell, a death count), **the day after
+  the record's dated spell ends**. A cell is knowable at `t` when every record its level
+  rests on has `vintage ≤ t`. `release` is recorded separately on every cell (§4.1).
+  Records still running at `t` have no end date to stamp — and Amendment 4's continuation
+  rule already refuses to date them, so the two rules agree rather than conflict.
+- **VR-1 (STRICT — the reading the brief asks about).** A cell is knowable at `t` only when
+  the **dataset release** that supplies each record satisfies `release ≤ t`. Reported as a
+  count, not adopted.
+- **VR-3 (SELECTION knowability — new here, and the one neither VR-1 nor VR-2 covers).**
+  R-ACT clause 2 must be decidable at `t` from records knowable at `t`. A dyad admitted to
+  the grid on the strength of a record whose spell **ends after `t`** is a dyad selected on
+  the future, and it would poison the base rate silently rather than loudly. VR-3 recomputes
+  the active set admitting only records with spell end `< t`, and the probe publishes both
+  sizes.
+
+### 4.1 `release` — from the tree, not from memory
+
+Read from the `.meta.json` sidecars beside each parsed file (`P.fetch_file`'s recorded HTTP
+`Last-Modified`):
+
+| dataset | file | release (`Last-Modified`) |
+|---|---|---|
+| COW inter-state War v4.0 | `Inter-StateWarData_v4.0.csv` | **2022-07-12** |
+| COW intra-state War v4.1 | `Intra-StateWarData_v4.1.csv` | **2022-07-12** |
+| MID 5.0 (MIDI/MIDIP) | `MID-5-Data-and-Supporting-Materials.zip` | **2022-07-11** |
+| dyadic MID 4.03 | `dyadic_mid_4.03_update.zip` | **2025-04-06** |
+| ICB v16 | Box shared links | **null** — the host serves no `Last-Modified` |
+| UCDP GED 26.1 | `data/cache/ucdp_ged_26.1.json` | no sidecar; version string `26.1` |
+
+Where a release date is unknown (ICB, GED), VR-1 uses a **lower bound**: the dataset cannot
+have been released before its own coverage ended, so `release_lower_bound = coverage_end +
+1 day`. A lower bound on the release gives an **upper bound** on VR-1 survival, so the
+number VR-1 publishes is the most favourable one consistent with the evidence, and is
+labelled as such. No release date is guessed.
+
+### 4.2 `retrospective` — registered now, because it decides what the panel can ever be worth
+
+Codebook Amendment 1: `retrospective = 1` "when the series is a later *construction* rather
+than a contemporaneous record". A COW hostility level, an ICB violence code and a UCDP
+best-estimate death count are all later constructions: the *incident* was contemporaneous,
+the *coding* was not. **Every cell of this panel is therefore `retrospective = 1`, on every
+source, at every date.** Amendment 1's own consequence follows and is registered here rather
+than discovered later: "a retrospective field alone can never make a read VALIDATED." A
+panel built entirely from retrospective codings can support description, ranking and
+diagnosis; under the rule already on the books it cannot on its own carry a VALIDATED
+verdict, however large `n` becomes. **Density does not fix that, because the problem is not
+n.**
+
+## 5. The probe — registered before it is run
+
+The full panel is **not** built until §6 is published and read. The probe is three years of
+month-ends, chosen for their **coverage regime** (§3) and not for anything about their
+outcomes, which are not known to this registration:
+
+- **1998** — primary. All five sources cover; the dyadic basis is available.
+- **2018** — secondary. ICB and GED only; MID, MIDI and COW War have stopped covering.
+- **2024** — secondary, a boundary check. GED alone covers, and location-only.
+
+For each probe year the probe publishes, per grid date and pooled:
+1. `|ACTIVE(t)|` under R-ACT, and under R-ACT-0, and under R-ACT at lookbacks 1/2/5/10 y;
+2. the marginal distribution of **L**, of **L⁻**, and of **ΔIES**, with the share of cells
+   that are `no_independent_outcome` at either end and therefore have no ΔIES;
+3. **cells surviving VR-1**, **VR-2** and **VR-3**, each as a count and a share;
+4. the covering-source mix per grid date.
+
+### 5.1 The degeneracy test, fixed before the numbers are seen
+
+The brief sets the bar: *"if it is 95 % zeros the panel is degenerate and the whole route
+fails."* Registered as a decision rule, so it is not reinterpreted afterwards:
+
+> **DEGENERATE** if, on the 1998 probe, ≥ 95 % of cells with a defined ΔIES have ΔIES = 0,
+> **or** ≥ 95 % of cells with a defined L have L = 0.
+
+If the panel is DEGENERATE the finding is published as the answer and the full panel is not
+built. If it is not, §6 still gates the build on VR-1/VR-2/VR-3 and on §3's regime table,
+and the recommendation is made on all four together, not on `n` alone.
+
+## 6. Outputs
+
+`data/grid/PROBE.json` (machine-readable, every count), `data/grid/PROBE.md` (the tables and
+the verdict), `src/grid_labels.py` (the code; opens `oil.db` read-only, writes no table),
+`tests/test_g_grid_labels.py`. A handoff to B is written **after** §6 is read, not before.
+
+## 7. What this registration does not do
+
+It does not build the full panel. It does not change `ies90.py`, `COVER`, the IES ladder, any
+threshold, or OUTCOME_MAPPING. It does not touch `src/walk*.py` or `data/walk_forward/**`. It
+does not admit any event. It makes no claim that a dyad-date panel is the right unit — only
+that if it is built, this is how, and these are the numbers that decide.
