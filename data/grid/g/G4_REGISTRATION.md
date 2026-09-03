@@ -495,3 +495,66 @@ publish the difference rather than inheriting this number.
 A4.1–A4.3 are session B's designs, offered in the withdrawal note and adopted here unchanged in substance.
 The panel calls B's functions from `src/engine/grid/power_arithmetic.py` rather than copying the arithmetic,
 so a later correction to them reaches this panel too — as B's `deff_block` floor correction did.
+
+---
+
+## Amendment 5 (2026-09-03) — the effective count is not optional: nominal never appears alone
+
+*Registered before the code. Joe's instruction of 2026-09-03: "Your panel will be quoted by its nominal
+size by anyone who reads it quickly, and the whole lesson of tonight's arithmetic is that nominal counts
+overstate. **Make the effective number impossible to omit.**" A4.3 registered that `n_eff` is published
+beside every nominal count. That is a promise the author keeps. This amendment makes it a property of the
+artefact instead, so it survives an author who is in a hurry.*
+
+### A5.1 The nominal count stops existing as a scalar
+
+`PANEL.json`'s headline counts are no longer integers. `size.cells`, `dIES.n_defined` and
+`strict_subset.cells` become objects of the fixed shape
+
+```
+{ "nominal": N, "n_eff_two_way": E1, "n_eff_block": E2, "informative": K, "note": ... }
+```
+
+A programmatic reader **cannot** fetch a bare integer labelled `cells`; it gets the pair or it gets a
+`KeyError`. This is the whole mechanism: the number is not hidden behind discipline, it is behind the
+schema.
+
+### A5.2 The headline effective number is the two-way one, and why
+
+Two estimators are published (A4.3). The **two-way cluster on (date, dyad)** is the headline, because it
+accounts for **both** axes of dependence in a dyad-date panel, while `deff_block` is a time-only estimator
+on the stacked series. It also happens to be the smaller `n_eff` of the two, and that is stated so the
+choice cannot be read as having been made for that reason: the ground is the axes it covers, and the
+direction is noted only for honesty. Both remain published; neither is ever dropped.
+
+`WALK_FORWARD_PROTOCOL.md` §2.2's 1.5× tie-break is **not** applied between them — it governs two
+estimators of the *same* axis, and these are estimators of different axes. Stated so the omission is
+deliberate and visible.
+
+### A5.3 One citation line, written by the code, at the top of everything
+
+`PANEL.json.cite` and the first line under the title of `PANEL.md` carry one sentence, generated from the
+computed numbers and never typed by hand, of the form
+
+> *N dyad-date cells (n_eff E by two-way cluster on date × dyad; K informative), span … , 156 dyads.*
+
+It is the sentence a reader in a hurry copies. It contains the effective count because there is no version
+of it that does not.
+
+### A5.4 The panel cannot be written without its checks
+
+`build_main()` now runs A4.1–A4.3 before it writes anything, and the writer is a single function that
+takes the finished summary. There is no code path that publishes a panel with a nominal count and no
+effective count beside it, because there is no code path that publishes a panel without running the
+checks. A build whose admission audit fails (A4.2) still writes — the finding is the point — but writes
+with `admission_audit.asserted: false` at the head of the file.
+
+### A5.5 It is enforced by a test, not by care
+
+`tests/test_g_grid_labels.py` asserts, on the published files:
+- every headline count in `PANEL.json` is a paired object with both keys present and `n_eff ≤ nominal`;
+- **every occurrence of the nominal figure in `PANEL.md` has an effective figure within 300 characters**;
+- `cite` exists, is generated, and contains both numbers.
+
+A future edit that reintroduces a bare nominal count fails the suite. That is the difference between a
+convention and a rule.
