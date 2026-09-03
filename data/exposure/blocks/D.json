@@ -8,23 +8,65 @@
    "date": "2021-05-07",
    "type": "infrastructure_attack",
    "title": "Colonial Pipeline ransomware shutdown",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "asset_name": "Colonial Pipeline refined products pipeline system (approx. 5,500 miles, Gulf Coast to New York Harbor)",
+   "asset_type": "pipeline",
+   "operator": "Colonial Pipeline Company",
+   "country_iso3": "USA",
+   "capacity_nameplate_kbd": 2500,
+   "capacity_affected_kbd": 2500,
+   "capacity_units_note": "EIA states a '2.5-million-barrel-per-day (b/d) system'. DOE states the company 'proactively shut down its pipeline system' on 2021-05-07 and 'restarted their entire pipeline system' on 2021-05-13, so the affected capacity is the whole system. EIA noted on 2021-05-11 that main lines had not resumed while 'some smaller lines are operational'; no source quantifies the smaller lines, so no deduction is made and none is invented.",
+   "days_to_partial_restore": 5,
+   "days_to_full_restore": 6,
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=47917",
+   "source_publisher": "U.S. Energy Information Administration",
+   "source_date": "2021-05-11",
+   "confidence": "COMPLETE",
+   "provenance": {
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=47917",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2021-05-11",
+     "retrospective": false
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.energy.gov/ceser/colonial-pipeline-cyber-incident",
+     "source_publisher": "U.S. Department of Energy, CESER",
+     "source_date": "2021-05-13",
+     "retrospective": false
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.colpipe.com/news-insights/media-resources/post/media-statement-update-colonial-pipeline-system-disruption/",
+     "source_publisher": "Colonial Pipeline Company (operator statement)",
+     "source_date": "2021-05-12",
+     "retrospective": false
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.energy.gov/ceser/colonial-pipeline-cyber-incident",
+     "source_publisher": "U.S. Department of Energy, CESER",
+     "source_date": "2021-05-13",
+     "retrospective": false
+    },
+    "asset_name": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=47917",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2021-05-11",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=47917",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2021-05-11",
+     "retrospective": false
+    }
+   },
+   "restore_definitions": {
+    "partial": "2021-05-07 -> 2021-05-12: Colonial 'initiated the restart of pipeline operations at approximately 5 p.m. ET on Wednesday, May 12'",
+    "full": "2021-05-07 -> 2021-05-13: DOE, 'restarted their entire pipeline system and product delivery commenced to all markets'"
+   }
   },
   {
    "event_id": "mercer_street_2021",
@@ -37,7 +79,7 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "Attack on a product tanker under way off Oman. The damaged asset is a VESSEL, whose size is deadweight tonnage, not kb/d capacity; the schema has no vessel branch. NOT RESEARCHED in this session -- recorded as unexamined, not as searched-and-empty.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
@@ -47,53 +89,104 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "empty",
+   "research_status": "NOT_RESEARCHED_IN_THIS_SESSION"
   },
   {
    "event_id": "uae_abudhabi_attack_2022",
    "date": "2022-01-17",
    "type": "infrastructure_attack",
    "title": "Houthi drone-missile attack hits ADNOC Musaffah fuel facility",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "ADNOC Musaffah fuel depot / pipeline and terminal facility, Abu Dhabi (36 storage tanks)",
+   "asset_type": "terminal",
+   "operator": "Abu Dhabi National Oil Company (ADNOC)",
+   "country_iso3": "ARE",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "No source gives a capacity in kb/d for the Musaffah depot. What is sourced is that three fuel tanker VEHICLES exploded and that the Abu Dhabi media office said the incident 'did not disrupt essential operations at the site'. That statement is not a kb/d figure and is NOT converted into capacity_affected_kbd = 0: an operator's reassurance is not a measurement. Recorded because a high-salience attack with no sourced physical loss is exactly the case this variable exists to separate from a real outage.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.arabnews.com/node/2005976/middle-east",
+   "source_publisher": "Arab News",
+   "source_date": "2022-01-17",
+   "confidence": "partial",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.arabnews.com/node/2005976/middle-east",
+     "source_publisher": "Arab News",
+     "source_date": "2022-01-17",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://www.arabnews.com/node/2005976/middle-east",
+     "source_publisher": "Arab News",
+     "source_date": "2022-01-17",
+     "retrospective": false
+    },
+    "operator": {
+     "source_url": "https://www.arabnews.com/node/2005976/middle-east",
+     "source_publisher": "Arab News",
+     "source_date": "2022-01-17",
+     "retrospective": false
+    }
+   }
   },
   {
    "event_id": "cpc_novorossiysk_storm_2022",
    "date": "2022-03-23",
    "type": "chokepoint_disruption",
    "title": "Storm damage halts Kazakh crude exports at the CPC Novorossiysk terminal",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
+   "asset_name": "Caspian Pipeline Consortium Marine Terminal, Yuzhnaya Ozereyevka (Novorossiysk)",
+   "asset_type": "terminal",
+   "operator": "Caspian Pipeline Consortium",
+   "country_iso3": "RUS",
+   "capacity_nameplate_kbd": 1400,
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
+   "capacity_units_note": "Nameplate is the CPC system design capacity of 1.4 million b/d (EIA, retrospective). AFFECTED IS DELIBERATELY UNKNOWN. CPC's own release records damage to SPM-3 only ('displacement of the reinforcement carcass of one of the SPM-3 floating hoses') and its temporary decommissioning; it gives no volume. Widely repeated trade figures of 'up to 1 million b/d' are a PROJECTION of what exports could fall by, not a measurement of capacity taken offline, and the rule does not admit them.",
+   "days_to_partial_restore": 31,
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.cpc.ru/EN/press/releases/2022/Pages/20220321-2.aspx",
+   "source_publisher": "Caspian Pipeline Consortium (operator statement)",
+   "source_date": "2022-03-21",
+   "confidence": "partial",
+   "provenance": {
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/international/content/analysis/regions_of_interest/Caspian_Sea/pdf/Caspian%20Sea%20Regional%20Analysis%20Brief%202025.pdf",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2025-02-06",
+     "retrospective": true
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.cpc.ru/en/press/releases/2022/pages/20220425.aspx",
+     "source_publisher": "Caspian Pipeline Consortium (operator statement)",
+     "source_date": "2022-04-25",
+     "retrospective": false
+    },
+    "asset_name": {
+     "source_url": "https://www.cpc.ru/EN/press/releases/2022/Pages/20220321-2.aspx",
+     "source_publisher": "Caspian Pipeline Consortium (operator statement)",
+     "source_date": "2022-03-21",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://www.cpc.ru/EN/press/releases/2022/Pages/20220321-2.aspx",
+     "source_publisher": "Caspian Pipeline Consortium (operator statement)",
+     "source_date": "2022-03-21",
+     "retrospective": false
+    }
+   },
+   "restore_definitions": {
+    "partial": "2022-03-23 -> 2022-04-23 = 31 days: CPC states that on 23 April, after diving work and opening of the PLEM, 'crude oil loading was resumed from SPM-3', with the tanker Delta Commander moored and loading",
+    "full": "UNKNOWN. No source states when the terminal returned to pre-event capacity, and the status of the other moorings through the outage is not sourced here."
+   }
   },
   {
    "event_id": "saudi_jeddah_f1_2022",
@@ -106,7 +199,7 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "Aramco Jeddah bulk plant / distribution depot. NOT RESEARCHED in this session. Recorded as unexamined, not as searched-and-empty.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
@@ -116,99 +209,185 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "empty",
+   "research_status": "NOT_RESEARCHED_IN_THIS_SESSION"
   },
   {
    "event_id": "nord_stream_sabotage_2022",
    "date": "2022-09-26",
    "type": "infrastructure_attack",
    "title": "Nord Stream pipelines sabotaged",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Nord Stream 1 and Nord Stream 2 subsea gas pipelines, Baltic Sea near Bornholm",
+   "asset_type": "pipeline",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "TWO reasons, both recorded rather than resolved by assumption. (1) UNIT: a gas pipeline's capacity is billion cubic metres per year, not kb/d, and no sourced conversion is available here. (2) MORE IMPORTANT FOR ESTIMATION: neither pipeline was delivering gas when it was sabotaged -- Nord Stream 2 had never entered service and Nord Stream 1 had already been shut by Gazprom. So the physically affected FLOW was zero even though the destroyed capacity was large. An exposure variable that scored this event on nameplate would be measuring something that was not moving. Three of four lines were rendered inoperable; NS2 line B was undamaged.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.osw.waw.pl/en/publikacje/analyses/2022-09-29/sabotage-nord-stream-1-and-nord-stream-2-pipelines",
+   "source_publisher": "OSW Centre for Eastern Studies",
+   "source_date": "2022-09-29",
+   "confidence": "partial",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.osw.waw.pl/en/publikacje/analyses/2022-09-29/sabotage-nord-stream-1-and-nord-stream-2-pipelines",
+     "source_publisher": "OSW Centre for Eastern Studies",
+     "source_date": "2022-09-29",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://www.osw.waw.pl/en/publikacje/analyses/2022-09-29/sabotage-nord-stream-1-and-nord-stream-2-pipelines",
+     "source_publisher": "OSW Centre for Eastern Studies",
+     "source_date": "2022-09-29",
+     "retrospective": false
+    }
+   }
   },
   {
    "event_id": "kurdistan_ceyhan_halt_2023",
    "date": "2023-03-25",
    "type": "chokepoint_disruption",
    "title": "Turkey halts Iraqi Kurdistan crude exports at Ceyhan",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Iraq-Turkiye Pipeline (Kirkuk-Ceyhan), export terminal at Ceyhan",
+   "asset_type": "pipeline",
    "operator": "unknown",
-   "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "country_iso3": "IRQ",
+   "capacity_nameplate_kbd": 1600,
+   "capacity_affected_kbd": 400,
+   "capacity_units_note": "Nameplate is the ITP's nominal capacity ('two parallel lines, 48-inch and 40-inch, nominal capacity of 1.6 million b/d'), retrospective. Affected is the volume actually kept off the market: 'some 400,000 b/d of Kurdish crude from the Mediterranean market since March 2023'. The nameplate is far above the flow the halt removed and the two must not be confused downstream.",
+   "days_to_partial_restore": 1089,
+   "days_to_full_restore": "ongoing",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.rudaw.net/english/kurdistan/18032026",
+   "source_publisher": "Rudaw",
+   "source_date": "2026-03-18",
+   "confidence": "COMPLETE",
+   "ongoing_stamp_date": "2026-03-18",
+   "provenance": {
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/oil/100223-iraq-turkey-oil-pipeline-to-ceyhan-ready-to-restart-turkish-energy-minister",
+     "source_publisher": "S&P Global Commodity Insights",
+     "source_date": "2023-10-02",
+     "retrospective": true
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/oil/100223-iraq-turkey-oil-pipeline-to-ceyhan-ready-to-restart-turkish-energy-minister",
+     "source_publisher": "S&P Global Commodity Insights",
+     "source_date": "2023-10-02",
+     "retrospective": true
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://www.rudaw.net/english/kurdistan/18032026",
+     "source_publisher": "Rudaw",
+     "source_date": "2026-03-18",
+     "retrospective": false
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.rudaw.net/english/kurdistan/18032026",
+     "source_publisher": "Rudaw",
+     "source_date": "2026-03-18",
+     "retrospective": false
+    },
+    "asset_name": {
+     "source_url": "https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/oil/100223-iraq-turkey-oil-pipeline-to-ceyhan-ready-to-restart-turkish-energy-minister",
+     "source_publisher": "S&P Global Commodity Insights",
+     "source_date": "2023-10-02",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_url": "https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/oil/100223-iraq-turkey-oil-pipeline-to-ceyhan-ready-to-restart-turkish-energy-minister",
+     "source_publisher": "S&P Global Commodity Insights",
+     "source_date": "2023-10-02",
+     "retrospective": true
+    }
+   },
+   "restore_definitions": {
+    "partial": "2023-03-25 -> 2026-03-18 = 1089 days. 'Oil exports from the Sarlo station to the port of Ceyhan began today at 6:30 am', 250,000 b/d",
+    "full": "ONGOING as of 2026-03-18: the resumed 250 kb/d is below the ~400 kb/d the halt removed, so pre-event capacity is not restored"
+   }
   },
   {
    "event_id": "ukr_odesa_strike_2023",
    "date": "2023-07-18",
    "type": "infrastructure_attack",
    "title": "Russia strikes Odesa/Chornomorsk grain ports",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Odesa and Chornomorsk Black Sea port grain infrastructure (grain storage and port facilities)",
+   "asset_type": "terminal",
    "operator": "unknown",
-   "country_iso3": "unknown",
+   "country_iso3": "UKR",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF UNIT AND ARGUABLY OUT OF SCOPE. This event is classed infrastructure_attack in the corpus but the damaged asset is GRAIN port infrastructure -- warehouses and elevators -- with no petroleum capacity at all. Sourced damage is in tonnes of grain, which cannot be expressed in kb/d by any conversion. Recorded rather than dropped, because EXPOSURE_REGISTRATION \u00a71 scopes the layer to physical-asset classes and this is a case where the class is right and the UNIT is wrong. Whoever estimates on this file should treat grain-port events as a separate asset family or exclude them, and should not let them enter a kb/d regressor as nulls that look like missing data. Sourced tonnage for the late-July strikes: 'Russia destroyed more than 60,000 tons of grain'.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://press.un.org/en/2023/sc15367.doc.htm",
+   "source_publisher": "United Nations Security Council (meetings coverage)",
+   "source_date": "2023-07-26",
+   "confidence": "partial",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://press.un.org/en/2023/sc15367.doc.htm",
+     "source_publisher": "United Nations Security Council (meetings coverage)",
+     "source_date": "2023-07-26",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://press.un.org/en/2023/sc15367.doc.htm",
+     "source_publisher": "United Nations Security Council (meetings coverage)",
+     "source_date": "2023-07-26",
+     "retrospective": false
+    }
+   }
   },
   {
    "event_id": "ukr_izmail_strike_2023",
    "date": "2023-08-02",
    "type": "infrastructure_attack",
    "title": "Russian drones hit Izmail Danube grain port",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Izmail (and Reni) Danube river port grain infrastructure, warehouses and grain elevators",
+   "asset_type": "terminal",
    "operator": "unknown",
-   "country_iso3": "unknown",
+   "country_iso3": "UKR",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF UNIT AND ARGUABLY OUT OF SCOPE. This event is classed infrastructure_attack in the corpus but the damaged asset is GRAIN port infrastructure -- warehouses and elevators -- with no petroleum capacity at all. Sourced damage is in tonnes of grain, which cannot be expressed in kb/d by any conversion. Recorded rather than dropped, because EXPOSURE_REGISTRATION \u00a71 scopes the layer to physical-asset classes and this is a case where the class is right and the UNIT is wrong. Whoever estimates on this file should treat grain-port events as a separate asset family or exclude them, and should not let them enter a kb/d regressor as nulls that look like missing data. Sourced tonnage for the early-August strikes: 'almost 40,000 tons of grain damaged'. Danube ports are described as adding 10-15 million tons of capacity to Ukraine's grain export infrastructure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://news.un.org/en/story/2023/07/1139137",
+   "source_publisher": "UN News",
+   "source_date": "2023-07-24",
+   "confidence": "partial",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://news.un.org/en/story/2023/07/1139137",
+     "source_publisher": "UN News",
+     "source_date": "2023-07-24",
+     "retrospective": false
+    },
+    "asset_type": {
+     "source_url": "https://news.un.org/en/story/2023/07/1139137",
+     "source_publisher": "UN News",
+     "source_date": "2023-07-24",
+     "retrospective": false
+    }
+   }
   },
   {
    "event_id": "me_galaxy_leader_2023",
@@ -221,7 +400,7 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "Seizure of a car carrier in the Red Sea. The asset is a VESSEL and the event is a seizure rather than damage to petroleum capacity. NOT RESEARCHED in this session -- recorded as unexamined, not as searched-and-empty.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
@@ -231,76 +410,188 @@
    "source_url": "unknown",
    "source_publisher": "unknown",
    "source_date": "unknown",
-   "confidence": "unknown"
+   "confidence": "empty",
+   "research_status": "NOT_RESEARCHED_IN_THIS_SESSION"
   },
   {
    "event_id": "red_sea_attacks_2023",
    "date": "2023-12-01",
    "type": "chokepoint_disruption",
    "title": "Houthi attacks disrupt Red Sea shipping",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Bab el-Mandeb Strait",
+   "asset_type": "chokepoint",
    "operator": "unknown",
    "country_iso3": "unknown",
-   "capacity_nameplate_kbd": "unknown",
-   "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_nameplate_kbd": 8700,
+   "capacity_affected_kbd": 4700,
+   "capacity_units_note": "A strait has no nameplate capacity. Nameplate here is the OBSERVED normal throughput: 'Oil trade flows through the Bab el-Mandeb Strait averaged 8.7 million b/d in full-year 2023' (EIA). Affected is the measured decline to '4.0 million b/d in 2024 through August', i.e. 4.7 million b/d. This is a realised annual-average decline, NOT a capacity outage on the event date, and it is measured over a window that starts after the event. It must not be used as a point-in-time regressor without that caveat. SHARED ASSET WARNING, written for whoever estimates on this file (which is me). red_sea_attacks_2023 and me_maersk_diversions_2023 are two corpus events on ONE physical asset (Bab el-Mandeb) and ONE measured decline. They are 14 days apart and inside the same 35-day cluster. Treating them as two independent observations of exposure would double-count the only measurement there is. The capacity figures are carried on red_sea_attacks_2023 alone.",
    "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_full_restore": "ongoing",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
-   "alt_routing_available": "unknown",
+   "alt_routing_available": "yes -- Cape of Good Hope",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+   "source_publisher": "U.S. Energy Information Administration",
+   "source_date": "2024-10-01",
+   "confidence": "partial",
+   "ongoing_stamp_date": "2024-08-31",
+   "provenance": {
+    "capacity_nameplate_kbd": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "capacity_affected_kbd": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "asset_name": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "alt_routing_available": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=62263",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-07-01",
+     "retrospective": true
+    }
+   },
+   "restore_definitions": {
+    "partial": "UNKNOWN -- no source records a material recovery of Bab el-Mandeb flows",
+    "full": "ONGOING as of 2024-08-31: flows still averaging 4.0 vs 8.7 million b/d"
+   }
   },
   {
    "event_id": "me_maersk_diversions_2023",
    "date": "2023-12-15",
    "type": "chokepoint_disruption",
    "title": "Houthi drone strike triggers Red Sea shipping diversions",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Bab el-Mandeb Strait",
+   "asset_type": "chokepoint",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "Same physical asset as red_sea_attacks_2023, which carries the sourced figures. Left unknown HERE ON PURPOSE rather than duplicated. SHARED ASSET WARNING, written for whoever estimates on this file (which is me). red_sea_attacks_2023 and me_maersk_diversions_2023 are two corpus events on ONE physical asset (Bab el-Mandeb) and ONE measured decline. They are 14 days apart and inside the same 35-day cluster. Treating them as two independent observations of exposure would double-count the only measurement there is. The capacity figures are carried on red_sea_attacks_2023 alone.",
    "days_to_partial_restore": "unknown",
-   "days_to_full_restore": "unknown",
+   "days_to_full_restore": "ongoing",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
-   "alt_routing_available": "unknown",
+   "alt_routing_available": "yes -- Cape of Good Hope",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+   "source_publisher": "U.S. Energy Information Administration",
+   "source_date": "2024-10-01",
+   "confidence": "partial",
+   "ongoing_stamp_date": "2024-08-31",
+   "provenance": {
+    "asset_name": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    },
+    "days_to_full_restore": {
+     "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=63446",
+     "source_publisher": "U.S. Energy Information Administration",
+     "source_date": "2024-10-01",
+     "retrospective": true
+    }
+   }
   },
   {
    "event_id": "russia_ustluga_strike_2024",
    "date": "2024-01-21",
    "type": "infrastructure_attack",
    "title": "Ukraine drone strike ignites Novatek Ust-Luga Baltic export terminal",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Novatek Ust-Luga stable gas condensate processing and transshipment complex, Gulf of Finland",
+   "asset_type": "processing",
+   "operator": "PAO Novatek",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
+   "capacity_units_note": "UNIT MISMATCH, not a missing source. The complex is reported as three processing units of 3 million tonnes per year each (~9 Mt/y of stable gas condensate). Converting tonnes of gas condensate to barrels per day requires a density assumption that no source here supplies, and the rule bars an assumed conversion. The tonnage is recorded so a later step with a sourced density factor can fill kb/d without re-research.",
+   "days_to_partial_restore": 3,
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://biz.liga.net/en/all/tek/novosti/russia-manages-to-launch-terminal-in-ust-luga-after-drone-strike-operates-at-one-third-capacity",
+   "source_publisher": "Liga.net (business)",
+   "source_date": "2024-01-25",
+   "confidence": "partial",
+   "capacity_nameplate_alt_units": "9,000,000 tonnes/year (3 units x 3 Mt/y)",
+   "provenance": {
+    "capacity_nameplate_alt_units": {
+     "source_url": "https://biz.liga.net/en/all/tek/novosti/russia-manages-to-launch-terminal-in-ust-luga-after-drone-strike-operates-at-one-third-capacity",
+     "source_publisher": "Liga.net (business)",
+     "source_date": "2024-01-25",
+     "retrospective": true
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://biz.liga.net/en/all/tek/novosti/russia-manages-to-launch-terminal-in-ust-luga-after-drone-strike-operates-at-one-third-capacity",
+     "source_publisher": "Liga.net (business)",
+     "source_date": "2024-01-25",
+     "retrospective": true
+    },
+    "asset_name": {
+     "source_url": "https://biz.liga.net/en/all/tek/novosti/russia-manages-to-launch-terminal-in-ust-luga-after-drone-strike-operates-at-one-third-capacity",
+     "source_publisher": "Liga.net (business)",
+     "source_date": "2024-01-25",
+     "retrospective": true
+    },
+    "asset_type": {
+     "source_url": "https://biz.liga.net/en/all/tek/novosti/russia-manages-to-launch-terminal-in-ust-luga-after-drone-strike-operates-at-one-third-capacity",
+     "source_publisher": "Liga.net (business)",
+     "source_date": "2024-01-25",
+     "retrospective": true
+    }
+   },
+   "restore_definitions": {
+    "partial": "2024-01-21 -> 2024-01-24 = 3 days: resumed 'only as a transshipment facility [of] condensate to tankers', i.e. processing still down",
+    "full": "UNKNOWN. The only figure found is 'processing ... was restored only in mid-February', which is a month-part, not a date. No day is invented."
+   }
   }
- ]
+ ],
+ "fill_summary": {
+  "filled_by": "Session B, 2026-09-03",
+  "registration": "EXPOSURE_REGISTRATION.md (22da52f)",
+  "counts": {
+   "COMPLETE": 2,
+   "empty": 3,
+   "partial": 8
+  },
+  "COMPLETE_event_ids": [
+   "colonial_pipeline_shutdown_2021",
+   "kurdistan_ceyhan_halt_2023"
+  ],
+  "rule_applied": "Every figure names a source and a date, or the field stays unknown. No estimate, no interpolation, no inference from a neighbouring event. Where a field is unknown the note says WHY -- no source, unit mismatch, or not researched -- because those are different and only one of them is fixable by more searching.",
+  "schema_extension": "provenance{} carries PER-FIELD source_url / source_publisher / source_date / retrospective, because \u00a72 requires provenance on every filled numeric and different fields in the same event come from different sources. The flat source_* fields are retained and carry the asset-identification source.",
+  "for_the_estimator": "capacity_affected_kbd is the Stage 2 regressor; days_to_*_restore are Stage 1 OUTCOMES (\u00a73) and must never enter a price regression. Two events here share one asset and one measurement (see the SHARED ASSET WARNING on the Bab el-Mandeb rows)."
+ }
 }
