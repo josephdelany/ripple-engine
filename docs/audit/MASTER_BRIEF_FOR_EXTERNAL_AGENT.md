@@ -137,20 +137,123 @@ fields don't use it.
 
 ---
 
-## 6. WHAT IS UNEXAMINED — every file produces a published number
+## 6. WHAT IS UNEXAMINED — and my prioritisation has failed twice, so do not trust it
 
-| lines | file | claim it produces |
-|---:|---|---|
-| 607 | `engine/delta_experiment.py` | paper §11, the NO ADDITION verdict, re-anchoring 0.682→0.506 |
-| 644 | `engine/grid/power_arithmetic.py` | n_eff 1,979; "50× rows buys 7.9× power" |
-| 507 | `engine/grid/price_walk.py` | "fitting does not beat frozen", +0.0013, *p* = 0.820 |
-| 1,152 | `ripple_physical.py` | Red Sea vs Hormuz; JODI coverage dates |
-| 433 | `spine_audit.py` | provenance 11.9% / 25.0% / 63.1% |
-| 535 | `g_era_confound.py` | "era confound not separable at n = 150" |
-| 1,224 | `grid_labels.py` | the 15,740-cell dyad-date panel |
-| — | `big_moves.py` | episode counts, the `anticipated` flag, class conditionals |
+**147 files in `src/` write a published artifact. Together they are 43,914 lines. I have examined
+~1,750 of them — 4%.** An earlier version of this brief named eight files as priorities; that list
+covered **12%** of the claim-producing code and omitted `ripple_fetch.py`, the data-acquisition
+layer, which is the highest-risk file in the repository because a mislabelled or misaligned series
+corrupts everything downstream silently and no test would catch it.
 
----
+**I have now mis-prioritised twice. Do not work from my ranking. Work from this inventory.**
+
+### Two-pass protocol
+
+**PASS 1 — shallow, all files.** For each file below: what artifact does it write, and does any
+sentence in `README.md`, `docs/BRIEF.md`, `docs/PAPER_DRAFT.md` or `docs/OIL_FINDINGS.md` depend on
+it? Output one line per file. Flag anything where a published sentence depends on a computation you
+cannot immediately verify as matching its description.
+
+**PASS 2 — deep, flagged files only.** Apply the single question: *does the code compute the
+quantity the sentence describes?*
+
+**Pass 1 across everything beats Pass 2 on a subset.** The risk here is unknown-unknowns, and every
+defect found so far was in a file nobody had opened.
+
+### The inventory — files ≥ 200 lines that write a published artifact
+
+| lines | file |
+|---:|---|
+|  2374 | `src/backend.py` |
+|  1561 | `src/walk.py` |
+|  1224 | `src/grid_labels.py` |
+|  1152 | `src/ripple_physical.py` |
+|  1040 | `src/citation_guard.py` |
+|   863 | `src/ripple_lp.py` |
+|   851 | `src/state/ies90.py` |
+|   818 | `src/brief.py` |
+|   778 | `src/ripple_fetch.py` |
+|   715 | `src/figures_paper.py` |
+|   646 | `src/validate.py` |
+|   644 | `src/engine/grid/power_arithmetic.py` |
+|   623 | `src/reader.py` |
+|   607 | `src/engine/delta_experiment.py` |
+|   603 | `src/situation_vintage.py` |
+|   573 | `src/story_read.py` |
+|   573 | `src/digest.py` |
+|   535 | `src/g_era_confound.py` |
+|   527 | `src/read_exposure.py` |
+|   519 | `src/exposure_harness.py` |
+|   507 | `src/engine/grid/price_walk.py` |
+|   477 | `src/engine/read.py` |
+|   464 | `src/g_monthly_gap.py` |
+|   449 | `src/deconstruct.py` |
+|   434 | `src/edge_battery.py` |
+|   433 | `src/spine_audit.py` |
+|   432 | `src/evaluate.py` |
+|   425 | `src/ledger.py` |
+|   413 | `src/engine/similarity.py` |
+|   396 | `src/exposure.py` |
+|   388 | `src/magnitude_severity_retest.py` |
+|   386 | `src/corroborate.py` |
+|   385 | `src/acceptance_v2.py` |
+|   375 | `src/cross_asset.py` |
+|   372 | `src/magnitude_stage0.py` |
+|   367 | `src/state/capacity.py` |
+|   358 | `src/g_chokepoint_register.py` |
+|   357 | `src/state/outcomes.py` |
+|   353 | `src/dossier.py` |
+|   339 | `src/situation.py` |
+|   311 | `src/audit_reader.py` |
+|   302 | `src/source_repair.py` |
+|   300 | `src/ledger_backfill.py` |
+|   297 | `src/evidence.py` |
+|   296 | `src/state/situation_state.py` |
+|   295 | `src/spine_patch.py` |
+|   290 | `src/exposure_schema.py` |
+|   290 | `src/engine_read.py` |
+|   289 | `src/heartbeat.py` |
+|   282 | `src/inference.py` |
+|   281 | `src/audit_ies90.py` |
+|   274 | `src/propagation_graph.py` |
+|   271 | `src/antecedent.py` |
+|   262 | `src/frozen_lens.py` |
+|   260 | `src/scenario.py` |
+|   258 | `src/big_moves.py` |
+|   249 | `src/triage.py` |
+|   249 | `src/evidentiary_bar.py` |
+|   243 | `src/spine_apply.py` |
+|   238 | `src/challenge.py` |
+|   236 | `src/state/panel.py` |
+|   236 | `src/spine_check.py` |
+|   233 | `src/spec_curve.py` |
+|   233 | `src/gpr_signal.py` |
+|   232 | `src/situation_record.py` |
+|   229 | `src/cross_chain.py` |
+|   228 | `src/gaps.py` |
+|   227 | `src/uncheckable_audit.py` |
+|   227 | `src/triage_candidates.py` |
+|   222 | `src/fetch_predmkt.py` |
+|   222 | `src/analogue.py` |
+|   220 | `src/h5_gpr.py` |
+|   218 | `src/signal_registry.py` |
+|   216 | `src/probability.py` |
+|   209 | `src/state/bridge.py` |
+|   208 | `src/state/stubs.py` |
+|   204 | `src/apply_review.py` |
+|   202 | `src/chain_view.py` |
+
+*(plus 69 further files under 200 lines that also write artifacts)*
+
+**Known high-risk, previously unnamed:**
+- `src/ripple_fetch.py` — **data acquisition.** Series identity, alignment, units, transformation. An
+  error here is invisible downstream and invalidates everything built on the affected series.
+- `src/validate.py`, `src/acceptance_v2.py` — the acceptance gates. If a gate is wrong, "PASS" means
+  nothing.
+- `src/evaluate.py` — known to regenerate two retracted claims as current status.
+- `src/edge_battery.py` — produced the retracted H1 and `severity_dose_response`.
+- `src/state/ies90.py` — 851 lines; I read the function list and the thresholds, not the logic.
+- `src/walk.py` — 1,561 lines; I read the scoring and baseline construction, not the rest.
 
 ## 7. YOUR JOB — two questions
 
