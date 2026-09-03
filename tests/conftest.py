@@ -42,6 +42,7 @@ DB_FREE_FILES = {
     "test_walk_determinism.py",      # Amendment I: two synthetic runs
     "test_ruling1_retraction.py",    # Joe's Ruling 1: rows + committed artifacts; the DB branch self-guards
     "test_monthly_tier.py",          # B-12: synthetic monthly corpus; the real-corpus smoke carries its own skipif
+    "test_diagnostic_hostile.py",    # Amendment K: reads the committed summary.json only
 }
 
 

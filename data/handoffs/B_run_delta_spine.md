@@ -107,6 +107,47 @@ published run's sealed outcomes: **0 of 184 labels differ**, and the level count
 (0: 76, 1: 6, 2: 48, 3: 54). The rebuild reproduced the labels exactly, so the published summary describes
 labels that still exist. Had it not, this run would have been superseded rather than reported.
 
+## Diagnostic (Amendment K): the G block on the 123 G-scorable reads only
+
+Registered before computing (protocol Amendment K, commit 79c7490). Session F's `hostility` field
+(OUTCOME_MAPPING Amendment 3 §A3.3) was coded for all 187 events of the four geopolitical classes before any
+count under it; `non_hostile` and `ambiguous` make the G target **undefined**, so removing them repairs the
+estimand rather than searching subsets. Computed from the sealed files — the published run is not re-scored
+(§A3.5). Engine, frozen and persistence forecasts are taken as sealed; **climatology is re-estimated** on
+each read's own point-in-time pool minus its non-scorable members (mean pool 27.7 → 23.6), and random
+analogs are re-drawn from that reduced pool at the same k and per-event seed.
+
+Set: 150 published → **123 retained** (121 `hostile`, 2 `hostile_unattributed`), 27 dropped (17
+`non_hostile`, 10 `ambiguous`). Level-0 share **42.0 % → 32.5 %**.
+
+| comparison | published (n 150) | diagnostic (n 123) | direction |
+|---|---|---|---|
+| Brier vs climatology | −0.0966 (CI −0.180..−0.018, p 0.022) | **−0.1316 (CI −0.234..−0.028, p 0.012)** | **widens** |
+| Brier vs random analogs | −0.0212 (p 0.583) | −0.0574 (CI −0.151..+0.034, p 0.222) | widens |
+| Brier vs frozen | +0.0074 (p 0.029) | +0.0080 (CI +0.001..+0.016, p 0.033) | holds |
+| Brier vs persistence | −0.6000 (p <0.001) | −0.4871 (CI −1.101..−0.117, p 0.004) | narrows, still decisive |
+| RPS vs climatology | −0.0127 (p 0.770) | −0.0664 (CI −0.186..+0.044, p 0.251) | widens, still not significant |
+| RPS vs persistence | −0.7906 (p <0.001) | −0.5840 (CI −1.340..−0.169, p 0.002) | narrows, still decisive |
+
+**The answer to the question the diagnostic was set: the engine's negative skill widens.** Removing the
+reads whose target is undefined does not rescue it. Both sides get harder — climatology's mean Brier rises
+0.7011 → 0.7078 and the engine's 0.7687 → 0.8010 — but the engine loses ground faster, so the gap grows by
+about three and a half points and stays significant. Read plainly: the engine was doing relatively *better*
+on the reads that should never have been scored, which are disproportionately level-0 "none" and easy to
+call; on the events where the escalation question is actually well posed it does worse, not better. The one
+number that improves is the gap to persistence, and persistence still beats the engine by a wide margin on
+both scores.
+
+**The limit.** n falls 150 → 123, so every interval widens; `min_tier_n` 30 is still met but the measured
+minimum detectable skill at n = 150 was already 0.127. This is a diagnostic on a sealed run, not a new run:
+it gates nothing, changes no published number, and leaves `engine:G` SUGGESTIVE / null under §7. Published
+in `summary.json` at `tiers.daily.G.diagnostic_hostile` with `registered: false`.
+
+**One number in the instruction, corrected.** The brief said the level-0 share moves 42.0 % → 36.8 %. On the
+123-read set it is **32.5 %**; 36.8 % is the 133-read set that drops the 17 `non_hostile` but keeps the 10
+`ambiguous` (session F's table gives both). The diagnostic uses the 123 set as instructed, so 32.5 % is the
+figure that belongs beside it.
+
 ## For the paper
 
 The run to cite is **`walk_20260903T003422Z`** (`data/walk_forward/summary.json`, committed). Its numbers
