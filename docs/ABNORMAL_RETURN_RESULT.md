@@ -123,9 +123,39 @@ explains why beating random analogs — which are drawn from the same pool as cl
 grid and not on the walk.
 
 **Stated as a hypothesis.** It is consistent with both arms and with A2's documented mechanism, and it is
-falsifiable: re-run the event walk with the class filter removed and the two arms should converge. That is
-one line in `read.py` and a walk re-run, and it is the single most informative experiment left in the price
-arm. It has not been run and nothing here assumes its outcome.
+falsifiable: re-run the event walk with the class filter removed and the two arms should converge.
+
+> ## RETRACTED 2026-09-03 — the hypothesis above is WRONG, and it was tested rather than left standing
+>
+> Amendment P (registered `a69bd15` **before** the run, with this outcome named in advance as P.3's third
+> branch) removed the class filter and re-ran the walk. **The arms did not converge. The engine got
+> dramatically worse on every comparison.**
+>
+> | | class-filtered | unfiltered |
+> |---|---|---|
+> | G Brier vs climatology | −0.084 (p 0.076) | **−0.369 (p < 0.0001)** |
+> | G Brier vs random analogs | −0.016 (p 0.73) | **−0.252 (p 0.0003)** |
+> | G Brier vs persistence | −0.304 (p 0.025) | **−0.635 (p < 0.0001)** |
+> | P CRPS vs climatology | −0.074 (p 0.011) | **−0.114 (p < 0.0001)** |
+> | P CRPS vs random analogs | −0.007 (p 0.81) | −0.013 (p 0.55) |
+>
+> **The correct reading is P.3's third branch: class membership carries real information that the state
+> vector cannot recover.** Given a free choice over all prior history, the similarity metric selects *worse*
+> precedents than when it is confined to the event's own class. The class filter was not inflating the
+> baseline — it was doing genuine work that the 13 macro-financial fields and 4 dyad flags cannot reproduce.
+>
+> *Caveat, stated because it weakens the comparison:* the read sets are not identical (G n 100 → 123, P
+> n 246 → 296), because an unfiltered pool clears the burn-in for events a class-filtered pool cannot. The
+> direction is far too large to be an artefact of that, but the magnitudes are not strictly paired.
+>
+> **Why this matters for the central finding, and it strengthens it.** The registered experiment
+> (`data/structural_surface/summary.json`) shows structural weighting beats surface-class weighting *within
+> the same candidate pool*. This result shows that *removing* the class boundary altogether is worse than
+> keeping it. Together they say something sharper than either alone:
+>
+> > **Event class is a useful coarse filter and a bad fine-grained weight.** Use it to bound which history
+> > is admissible; do not use it to decide which of the admissible cases matters most. That is precisely the
+> > distinction between the two arms of the central experiment, and both halves of it are now measured.
 
 ## What the paper must now say about price
 
