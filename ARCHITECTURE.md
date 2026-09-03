@@ -47,8 +47,18 @@ figure names a source and a date, or the field stays `unknown`.** Six independen
 researched 75 physical-disruption events — 48 infrastructure attacks and 27 chokepoint disruptions
 — with every route logged.
 
-**Result: 8 COMPLETE of 75 (11%), 46 partial, 21 empty.** The registered gate was 30. It was not
-met, and §5's consequence stands: Stage 1 is descriptive only and no verdict issues.
+**Result, by computed status rather than declared: 5 COMPLETE of 80 (6%), 47 partial, 23 empty,
+5 INVALID.** The registered gate was 30. It was not met, and §5's consequence stands: Stage 1 is
+descriptive only and no verdict issues.
+
+> **Correction of record.** An earlier version of this section reported 8 COMPLETE of 75. That
+> count read the declared fields; session K's validator *computes* status from the data and found
+> **four events declaring a status that disagrees with the computed one — two declaring COMPLETE
+> while computing INVALID.** The validated figure is 5. Four of the five hard failures are the same
+> defect and it is the registration's, not the sessions': **§2 required a `retrospective` flag and
+> the block template shipped with no such key**, so there was nowhere on the form to carry it while
+> §2 asserted a test would check it — and until K wrote one, none did. A requirement with no field
+> to satisfy it is a specification error, and it is recorded here rather than quietly fixed.
 
 The five walls, each found independently and each logged:
 
@@ -83,6 +93,11 @@ web.archive.org does not resolve for this client, a purpose-built pipeline-attac
 a TLS certificate mismatch, and the contemporaneous wire copy returns 403 and 404. **Block A
 returned zero COMPLETE of 13** — and that is an archival finding, not a research failure.
 
+**6. A scope leak worth a ruling.** `codelco_elteniente_2025` is a **copper mine**. It sits inside
+the registered scope because §1 selects by event *class* and the class was right, but it has no
+kb/d and the schema's units do not apply. Recorded as `out_of_unit_scope` rather than forced into
+a numeric field.
+
 **Two sourced zeroes are worth naming**, because they are data and not gaps: Shaybah and Ras Tanura
 were attacks that struck and changed nothing — *"no interruptions to Saudi Aramco's oil
 operations"*, *"no casualties or property loss"*. They are the low end of the vulnerability
@@ -106,7 +121,7 @@ share of the events have no point asset at all.
 **That is a complete answer to the thesis question, and it generalises beyond this project.** Any
 geopolitical supply-risk product built on public data meets the same five walls. The honest
 conclusion is not that the instrument was built badly, but that **the layer it depends on does not
-exist in the public record, and now there is a measurement of how far short it falls: 11%.**
+exist in the public record, and now there is a measurement of how far short it falls: **6%**.
 
 ---
 
