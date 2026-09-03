@@ -1,71 +1,102 @@
 # CLASS AUDIT — is every event in the geopolitical classes a hostile act?
-*2026-09-02, Session F. All 75 events of `infrastructure_attack` and `chokepoint_disruption`,
-each read against its own record and coded under the hostility precondition registered as
-**OUTCOME_MAPPING Amendment 3 §A3.3** — which was committed before any count here was
-computed. Nothing in `events` changes; no class is re-coded; no run is re-scored. This is a
-reading of the existing record, published so it can be disputed row by row.*
+*2026-09-02, Session F. **All 187 events of the four geopolitical classes** —
+`infrastructure_attack` (48), `chokepoint_disruption` (27), `conflict_escalation` (55),
+`sanctions` (57) — each read against its own record and coded under the hostility
+precondition registered as **OUTCOME_MAPPING Amendment 3 §A3.3**, with the four cases the
+second pass exposed decided in **Amendment 3.2** before those classes were coded. The field
+itself is canon: **`EVENTS_CODEBOOK.md`, amendment 2026-09-02, approved by Joe.** Nothing in
+`events` changes; no class is re-coded; no run is re-scored. This is a reading of the
+existing record, published so it can be disputed row by row.*
+
+**Result: 151 hostile, 3 hostile-unattributed, 13 ambiguous, 20 non-hostile.
+33 of 187 events (18%) are not G-scorable.**
 
 ## 1. The question and where it came from
-Joe found the defect on the audit screen: events in the two geopolitical classes that are
-not hostile acts at all, carrying an IES-90 escalation level. A keyword scan measured it at
-7 candidates, of which 4 were held to be unambiguous non-hostile incidents
-(`abqaiq_arabian_1977`, `suez_tropic_brilliance_2004`, `cpc_novorossiysk_storm_2022`,
-`venezuela_blackout_2019`) and 3 were false positives of the scan's own vocabulary —
-`kuwait_oil_fires_1991` and `me_sounion_2024` (hostile, correctly classed; caught on "fire"
-and "ablaze") and `btc_pipeline_blast_2008` (contested; caught on "blast").
+Joe found the defect on the audit screen: events in the geopolitical classes that are not
+hostile acts at all, carrying an IES-90 escalation level. The types name **what was
+disrupted**, not **who did it**, so the classes conflate a hostile act with an incident, and
+every consumer that treats class as a proxy for "geopolitical" inherits the conflation.
 
-This audit does not take that scan on faith, and does not extend it. Every one of the 75
-records was read in full — title, description, coded entities, source — and coded on what
-the record says, with the four decisions that turn on an external fact checked against
-sources outside the corpus. The result **confirms the scan's three exclusions and enlarges
-its inclusion list from 4 to 9**, because the scan could only find events whose records
-happened to contain a hazard word.
+A keyword scan of the two damage classes measured it at 7 candidates, of which 4 were held
+to be unambiguous non-hostile incidents. Reading all 75 records instead found **9**. Reading
+the remaining 112 — `conflict_escalation` and `sanctions`, done second on Joe's instruction —
+found **11 more**, in shapes the first pass could not have predicted. The audit is now
+complete across all four geopolitical classes.
 
 ## 2. What was verified, and how
-**Method.** All 75 records dumped from `data/oil.db` with their IES-90 rows, read one by one,
-coded `hostile` / `hostile_unattributed` / `ambiguous` / `non_hostile` under Amendment 3
-§A3.3. The coding is a human reading of the record — like the codebook itself, and like the
-Admiralty and severity codings — not a regex, and it is published in full below so that
-anyone can check it against the same sources.
+**Method.** All 187 records dumped from `data/oil.db` with their IES-90 rows and read one by
+one — title, description, coded entities, source — then coded `hostile` /
+`hostile_unattributed` / `ambiguous` / `non_hostile`. The coding is a human reading of the
+record, like the codebook's own severity and surprise scales, and it is published in full
+below so anyone can check it against the same sources. **Never coded from the outcome**: the
+IES-90 column is shown beside each row because it is what the precondition would remove or
+keep, and it played no part in the coding.
 
-**The four external checks** (the codings that turn on a fact not in the record):
+**Eight external checks** — the codings that turn on a fact not in the record:
 
 | event | what was checked | finding |
 |---|---|---|
-| `abqaiq_arabian_1977` | was the 1977 Abqaiq fire an attack? | No. A buried 30-inch crude line failed at the gathering centre; the leak reached a power substation and ignited, 4 killed, 19 injured. A contemporaneous Capitol Hill rumour of Palestinian satchel charges was investigated and denied on the record by Aramco's president Frank Jungers — *"Absolutely not. It was a pipeline failure."* (Washington Post 1977-05-13 and 05-14; Process Safety Integrity case file 1977-05-11.) → **non_hostile**, with the rumour recorded |
-| `druzhba_contamination_2019` | deliberate, but directed at whom? | Organochloride-contaminated crude was injected at a small private collection point in Samara to cover the months-long theft of on-spec crude from the same tanks. Eight arrests including four Transneft Druzhba employees; two fled abroad under international warrants. (Russian Investigative Committee via RFE/RL and Meduza 2019-05-08; OSW 2019-05-08; Oxford Energy Comment, Yermakov, 2019-06.) → **non_hostile** under tie-break 3: crime for private gain, not an act against an adversary |
-| `btc_pipeline_blast_2008` | is the cause settled? | No, and it never was. The PKK claimed it (Al Jazeera 2008-08-07); US intelligence later attributed it to Russian cyber-sabotage of the pipeline's control system (Bloomberg 2014, reported via Eurasianet); that account was disputed in turn by ICS security researchers; the fire destroyed the evidence and the Turkish investigation could not establish whether a bomb was used. Because one live account is a technical failure, tie-break 1 does not apply. → **ambiguous** (Joe's reading confirmed) |
-| `codelco_elteniente_2025` | collapse or attack? | A seismically triggered underground collapse at Codelco's El Teniente, fatal, taking the mine offline and cutting ~48,000 t from 2025 copper output. → **non_hostile** — and it is a copper mine, so `infrastructure_attack` fits it on neither axis |
+| `abqaiq_arabian_1977` | was the 1977 Abqaiq fire an attack? | No. A buried 30-inch crude line failed; the leak reached a power substation and ignited; 4 killed, 19 injured. A Capitol Hill rumour of Palestinian satchel charges was investigated and denied on the record by Aramco's president — *"Absolutely not. It was a pipeline failure."* (Washington Post 1977-05-13/14.) → **non_hostile** |
+| `druzhba_contamination_2019` | deliberate, but directed at whom? | Organochloride crude injected at a private collection point in Samara to cover months of theft of on-spec crude; eight arrests including four Transneft Druzhba employees, two fled abroad. (Investigative Committee via RFE/RL; Meduza 2019-05-08; Oxford Energy 2019-06.) → **non_hostile**, tie-break 3 |
+| `btc_pipeline_blast_2008` | is the cause settled? | No, and never was. PKK claim (Al Jazeera 2008-08-07); later US attribution to Russian cyber-sabotage (Bloomberg 2014 via Eurasianet); disputed by ICS security researchers; the fire destroyed the evidence. One live account is a technical failure → **ambiguous** |
+| `codelco_elteniente_2025` | collapse or attack? | A seismically triggered underground collapse, fatal, ~48,000 t of 2025 copper lost. → **non_hostile** — and a copper mine, so the class fits on neither axis |
+| `kazakhstan_unrest_2022` | is "unrest over fuel prices" the whole event? | No — the record understates it. 227 killed including 19 police, 4,353 injured; security forces fired on crowds in Almaty on 5–6 January; CSTO troops deployed. (Kazakh prosecutors via Al Jazeera 2022-01-15; IPHR; Crisis Group.) → **hostile** under 3.2(d) |
+| `gabon_coup_2023` | was force used, or was it a paper transfer? | Force. Officers seized power, placed President Bongo under house arrest, arrested his son; gunfire in Libreville. (CNN, Al Jazeera, CNBC 2023-08-30.) → **hostile** under 3.2(d); no reported deaths does not make a coup non-hostile |
+| `drc_cobalt_ban_2025` | statecraft or price management? | Price management. ARECOMS suspended all cobalt exports for four months after prices hit a nine-year low below $10/lb, to curb oversupply and defend price; extended three months in June for the same reason. (ARECOMS decision 2025-02-22; IEA policy record; Project Blue.) → **non_hostile** under 3.2(c) |
+| `chn_gage_2023` | retaliation, or industrial security? | Unsettled, and that is the finding. MOFCOM's own statement gives "national security and interests" under the 2020 Export Control Law and **names no country** (MOFCOM press conference 2023-07-06); every outside reading treats it as retaliation for the US chip controls of October 2022 (CSIS; Stimson; ORF America). → **ambiguous**, and the same for the four sibling licensing measures |
 
-**Result against the scan.** Confirmed: the 4 named unambiguous non-hostile events are
-non-hostile; `kuwait_oil_fires_1991` and `me_sounion_2024` are hostile and correctly
-classed; `btc_pipeline_blast_2008` is contested. **Not found by the scan** — five further
-non-hostile events, none of which contains a hazard keyword:
+### 2.1 What the first pass found (the two damage classes)
+Confirmed the scan's three exclusions: `kuwait_oil_fires_1991` and `me_sounion_2024` are
+hostile and correctly classed (the scan caught them on "fire" and "ablaze"), and
+`btc_pipeline_blast_2008` is contested. Found five the scan could not reach, because their
+records contain no hazard word: `iran_oilworkers_strike_1978` (a labour strike carrying
+**level 3, war**), `druzhba_contamination_2019` (**level 2**), `kurdistan_ceyhan_halt_2023`
+(an ICC arbitration award, **level 2**), `suez_ever_given_2021`, `codelco_elteniente_2025`.
 
-| event | class | why the scan missed it | IES-90 level it carries |
-|---|---|---|---|
-| `iran_oilworkers_strike_1978` | infrastructure_attack | a **strike**: no hazard word, no attack either | **3 — war**, off the Iranian Revolution's intra-state war spell overlapping the window |
-| `druzhba_contamination_2019` | chokepoint_disruption | "contamination" reads as deliberate | **2 — use of force**, off GED deaths in Russia |
-| `suez_ever_given_2021` | chokepoint_disruption | "blocks the Suez Canal" — a grounding described by its effect | 0 |
-| `kurdistan_ceyhan_halt_2023` | chokepoint_disruption | a state "halts" a pipeline — reads as coercion, is an ICC arbitration award | **2 — use of force**, off GED deaths in Turkey |
-| `codelco_elteniente_2025` | infrastructure_attack | "collapse" of a copper mine | 0 |
+### 2.2 What the second pass found (conflict_escalation and sanctions)
+Three shapes, none of them visible from the first two classes:
 
-That is the substantive result of this audit: **the defect is roughly twice the size the
-keyword measurement showed, and the two worst individual cases — a labour strike scored as
-war, and an oil-theft cover-up scored as use of force — are both invisible to a keyword
-scan.** A scan can only find the incidents that describe themselves as incidents.
+1. **`conflict_escalation` contains eight industrial-relations events that are not conflicts
+   at all** — `escondida_strike_2011`, `sa_platinum_strike_2014`, `escondida_strike_2017`,
+   `lasbambas_blockade_2019`, `lasbambas_halt_2021`, `cuajone_shutdown_2022`,
+   `peru_lasbambas_2022`, `escondida_strike_2024`. Copper and platinum strikes and community
+   road blockades in Chile and Peru. The counterparty is an employer or a mine operator;
+   there is no state, no adversary and no act of force. They are in the corpus for a good
+   reason — they move metal prices — and they are in the wrong class for it. A ninth,
+   `marikana_strike_2012`, is ambiguous only because the record bundles the strike with the
+   police killing of 34 strikers.
+2. **`sanctions` contains three producer price-management export bans** —
+   `indonesia_nickel_ban_2019` (forcing domestic smelting), `indonesia_palm_ban_2022`
+   (curbing domestic cooking-oil prices) and `drc_cobalt_ban_2025` (defending a collapsed
+   cobalt price). Each is a producer managing its own market: the act of an `opec_decision`,
+   filed under `sanctions`. **`drc_cobalt_ban_2025` carries IES-90 level 3 — war** — off GED
+   deaths in the DRC. It is the worst single case in the corpus: a cobalt price-support
+   measure scored as war.
+3. **Five of China's critical-minerals export controls name no counterparty.**
+   `chn_gage_2023`, `chn_graphite_2023`, `chn_re_tech_2023`, `chn_antimony_2024` and
+   `chn_re_magnets_2025` are licensing regimes stated as national-security policy, with no
+   country in the measure and none in the coded entities — while `chn_ban_us_2024` (which
+   names the United States) and `chn_5minerals_2025` (explicit retaliation for US tariffs)
+   do name one. The same programme is half coded as statecraft and half not. They are
+   `ambiguous`, and the fix is a record fix, not a target fix.
 
-**Verified count: 9 non-hostile, 5 ambiguous, 3 hostile-but-unattributed, 58 hostile, of 75.**
-All 9 non-hostile events carry a non-null IES-90 level (four at 0, two at 2, one at 3, and
-two — `abqaiq_arabian_1977` and `suez_tropic_brilliance_2004` — at 0). None is
-`no_independent_outcome` today; under Amendment 3 all nine become so.
+**Against the first pass's own conclusion.** The first pass said the non-hostile share was
+"flat at about one in nine from 2000 on". Across all four classes it is higher and rises:
+18% of all 187 events are not G-scorable, and by decade the 2010s and 2020s run at 20% and
+18%. The earlier sentence was true of the two classes it described and is superseded here.
+
+**Verified count: 20 non-hostile, 13 ambiguous, 3 hostile-but-unattributed, 151 hostile, of
+187 — 33 events (18%) not G-scorable.**
 
 ## 3. Every event, with its evidence
-Coding values are Amendment 3 §A3.3. The IES-90 column is the level the event carries
-**today**, with its basis and the rule that fired — i.e. what the precondition would remove
-or keep, not a new computation. `—` is `no_independent_outcome` (uncovered window).
+Coding values are Amendment 3 §A3.3; rules (a)–(d) cited in the evidence are Amendment 3.2.
+`·de-escalatory` marks a row that is G-scorable under 3.2(b) — relief or settlement inside a
+live adversarial dyad — so the direction of the act is never lost inside a `hostile` value.
+The IES-90 column is the level the event carries **today**, with its basis and the rule that
+fired: what the precondition would remove or keep, not a new computation. `—` is
+`no_independent_outcome` (uncovered window).
 
-### infrastructure_attack — 48 events
+### infrastructure_attack — 48 events (40 hostile, 3 hostile-unattributed, 2 ambiguous, 3 non-hostile)
 
 | event_id | date | hostility | IES-90 | evidence for the coding |
 |---|---|---|---|---|
@@ -118,7 +149,7 @@ or keep, not a new computation. `—` is `no_independent_outcome` (uncovered win
 | `rus_saratov_strike_2025a` | 2025-08-11 | **hostile** | 2 (location, `GED.location.ge25`) | Ukrainian drone strike halted the Rosneft Saratov refinery; named state actor. |
 | `rus_ryazan_strike_2025b` | 2025-09-05 | **hostile** | 2 (location, `GED.location.ge25`) | Repeat Ukrainian drone strike on the Ryazan refinery; named state actor. |
 
-### chokepoint_disruption — 27 events
+### chokepoint_disruption — 27 events (18 hostile, 0 hostile-unattributed, 3 ambiguous, 6 non-hostile)
 
 | event_id | date | hostility | IES-90 | evidence for the coding |
 |---|---|---|---|---|
@@ -150,206 +181,354 @@ or keep, not a new computation. `—` is `no_independent_outcome` (uncovered win
 | `rus_novorossiysk_terminal_2025` | 2025-11-14 | **hostile** | — (uncovered, `UNCOVERED`) | Ukrainian drone strike on the Sheskharis complex halted loadings at Novorossiysk; named state actor. |
 | `hormuz_closure_2026` | 2026-03-04 | **hostile** | — (uncovered, `UNCOVERED`) | Iran declared Hormuz closed and attacked transiting tankers; named state actor. |
 
+### conflict_escalation — 55 events (44 hostile, 0 hostile-unattributed, 3 ambiguous, 8 non-hostile)
 
-## 4. The ambiguous five, named as ambiguous
-These are not "probably hostile" or "probably not". They are events where the record does
-not settle it, and Amendment 3 §A3.3 excludes them from G-scoring while listing them by
-name, so that a later decision — Joe's, or a better source — can move them either way
-without anything having been quietly assumed.
+| event_id | date | hostility | IES-90 | evidence for the coding |
+|---|---|---|---|---|
+| `yom_kippur_war_1973` | 1973-10-06 | **hostile** | 3 (dyadic, `WAR.inter.pair`) | Egypt and Syria attacked Israel across the Suez Canal and the Golan; named states, armed attack. |
+| `shah_leaves_iran_1979` | 1979-01-16 | **ambiguous** | 3 (location, `WAR.intra.location`) | The coded act is a ruler leaving the country. Amendment 3.2(d): a political turning point inside a revolution, not itself an act of force. The conflict around it is unambiguous; this row is not. |
+| `iran_revolution_1979` | 1979-02-11 | **hostile** | 3 (location, `WAR.intra.location`) | The Revolution culminates: armed uprising overthrowing a state, with the army's resistance collapsing in street fighting. 3.2(d); parties identified as classes. |
+| `iran_hostage_crisis_1979` | 1979-11-04 | **hostile** | 0 (dyadic, `NONE.covered`) | Seizure of the US embassy and its staff by an identified party (the students, with state acquiescence) against a state. Forcible seizure, one of H1's own examples. |
+| `iran_iraq_war_1980` | 1980-09-22 | **hostile** | 3 (dyadic, `WAR.inter.pair`) | Iraq launched ground and air attacks on Iranian territory; named states. |
+| `praying_mantis_1988` | 1988-04-18 | **hostile** | 2 (dyadic, `MID.pair.wholly`) | US forces destroyed two Iranian oil platforms and sank Iranian vessels; named states, use of force. |
+| `iran_air_655_1988` | 1988-07-03 | **hostile** | 0 (dyadic, `NONE.covered`) | USS Vincennes downed Iran Air 655. The missile launch was a deliberate use of force by a named state inside a live adversarial dyad during a combat engagement; the target identification was mistaken, the act was not accidental in H1's sense. |
+| `iraq_invades_kuwait_1990` | 1990-08-02 | **hostile** | 3 (dyadic, `WAR.inter.pair`) | Invasion; named states. |
+| `desert_storm_air_campaign_1991` | 1991-01-17 | **hostile** | 3 (dyadic, `WAR.inter.pair`) | Coalition air war on Iraq; named states. |
+| `operation_desert_fox_1998` | 1998-12-16 | **hostile** | 2 (dyadic, `MIDI.pair.overlap`) | US and UK airstrikes on Iraqi weapons and military targets, ordered on the record; named states. |
+| `september_11_attacks_2001` | 2001-09-11 | **hostile** | 3 (location, `WAR.inter.single`) | Coordinated attacks on the US by a named movement. (The record notes Joe may reclassify the type as demand_shock; that is a class question, not a hostility question, and is left alone.) |
+| `iraq_war_begins_2003` | 2003-03-20 | **hostile** | 3 (dyadic, `MIDI.pair.overlap,WAR.inter.pair`) | Invasion of Iraq; named states. |
+| `nigeria_warri_shutin_2003` | 2003-03-23 | **hostile** | 0 (location, `NONE.covered`) | Ijaw militia attacks forced evacuation and shut-in of ~800 kb/d; named armed group. |
+| `israel_hezbollah_war_2006` | 2006-07-12 | **hostile** | 2 (dyadic, `MIDI.pair.overlap`) | Hezbollah cross-border raid triggering a 34-day war; named parties. |
+| `turkey_pkk_incursion_2008` | 2008-02-21 | **hostile** | 2 (dyadic, `MIDI.pair.overlap`) | Turkish ground incursion into northern Iraq; named state. |
+| `russia_georgia_war_2008` | 2008-08-08 | **hostile** | 2 (dyadic, `MIDI.pair.overlap`) | Russian invasion of Georgia; named states. |
+| `egypt_revolution_2011` | 2011-01-25 | **hostile** | 0 (location, `NONE.covered`) | Mass uprising against the state, lethally repressed (roughly 850 killed) and ending in Mubarak's removal. Amendment 3.2(d): armed uprising and state violence, parties identified as classes. The record's framing as 'unrest threatening Suez transit' understates the event -- flagged to E. |
+| `libya_civil_war_2011` | 2011-02-17 | **hostile** | 3 (location, `GED.location.ge250`) | Uprising escalating into civil war; parties identified. |
+| `escondida_strike_2011` | 2011-07-21 | **non_hostile** | 0 (location, `NONE.covered`) | A two-week union work stoppage at a copper mine. Amendment 3.2(c): the counterparty is the employer. No adversary, no state, no act of force. |
+| `sudan_heglig_war_2012` | 2012-04-10 | **hostile** | 3 (location, `GED.location.ge250`) | South Sudan's army captured Heglig; cross-border fighting between named states. |
+| `marikana_strike_2012` | 2012-08-16 | **ambiguous** | 0 (location, `NONE.covered`) | The record bundles two things: a wildcat wage strike (the supply mechanism, 3.2(c) non-hostile) and police killing 34 strikers (lethal force by an identified state party, H1). The coded event is the strike; the massacre is what makes it a conflict record. Named as ambiguous rather than forced either way. |
+| `egypt_coup_suez_2013` | 2013-07-03 | **hostile** | 0 (location, `NONE.covered`) | Military removal of a sitting president, with lethal repression following. 3.2(d). |
+| `sa_platinum_strike_2014` | 2014-01-23 | **non_hostile** | 0 (location, `NONE.covered`) | A five-month AMCU wage strike across three platinum producers. 3.2(c). |
+| `mosul_isis_offensive_2014` | 2014-06-10 | **hostile** | 3 (location, `GED.location.ge250`) | ISIS overran Mosul; named armed group taking territory. 3.2(d). |
+| `libya_essider_clashes_2014` | 2014-12-13 | **hostile** | 2 (location, `GED.location.ge25`) | Armed fighting near the two largest export terminals; parties identified as factions. |
+| `saudi_intervention_yemen_2015` | 2015-03-26 | **hostile** | 0 (dyadic, `NONE.covered`) | Saudi-led coalition air campaign in Yemen; named states. |
+| `escondida_strike_2017` | 2017-02-09 | **non_hostile** | 0 (location, `NONE.covered`) | A 44-day union strike at the world's largest copper mine. 3.2(c). |
+| `kirkuk_seizure_2017` | 2017-10-16 | **hostile** | 3 (location, `GED.location.ge250`) | Iraqi forces retook Kirkuk from Kurdish control by military action; named parties. |
+| `libya_oil_crescent_2018` | 2018-06-14 | **hostile** | 0 (location, `NONE.covered`) | Fighters under Jedran stormed and closed the Es Sider and Ras Lanuf terminals; armed seizure by a named party. |
+| `libya_sharara_2018` | 2018-12-08 | **hostile** | 2 (location, `GED.location.ge25`) | Armed tribesmen seized the 315,000 b/d El Sharara field, forcing force majeure; armed seizure. |
+| `lasbambas_blockade_2019` | 2019-02-02 | **non_hostile** | 0 (location, `NONE.covered`) | A 60-day community road blockade over haulage through local land. 3.2(c): the counterparty is the mine operator. |
+| `iraq_nasiriya_2019` | 2019-12-28 | **ambiguous** | 2 (location, `GED.location.ge25`) | Anti-government protesters cut power and shut the field. The coded act is an unarmed protest occupation (3.2(c) shape), but it sits inside Iraq's Tishreen uprising, which the state repressed lethally (3.2(d) shape). The record does not settle which the row is about. |
+| `soleimani_strike_2020` | 2020-01-03 | **hostile** | 0 (dyadic, `NONE.covered`) | US strike killing an Iranian commander; named states. |
+| `lasbambas_halt_2021` | 2021-09-27 | **non_hostile** | 0 (location, `NONE.covered`) | Community road blockades forced the operator to halt the mine. 3.2(c). |
+| `kazakhstan_unrest_2022` | 2022-01-05 | **hostile** | 0 (location, `NONE.covered`) | The record's 'nationwide unrest over fuel prices' understates it: 227 killed including 19 police, 4,353 injured, security forces firing on crowds in Almaty on 5-6 January, and a CSTO military deployment (Kazakh prosecutors via Al Jazeera 2022-01-15; IPHR; Crisis Group). Amendment 3.2(d): a violently repressed uprising with a foreign troop deployment, parties identified. Understatement flagged to E. |
+| `russia_invades_ukraine_2022` | 2022-02-24 | **hostile** | 3 (location, `GED.location.ge250`) | Full-scale invasion; named states. |
+| `cuajone_shutdown_2022` | 2022-03-14 | **non_hostile** | 0 (location, `NONE.covered`) | A community blockade of the reservoir and rail line suspended the mine for over 50 days. 3.2(c). |
+| `peru_lasbambas_2022` | 2022-04-20 | **non_hostile** | 0 (location, `NONE.covered`) | Community members occupied the property and the operator suspended output. 3.2(c). |
+| `tw_pelosi_drills_2022` | 2022-08-04 | **hostile** | 0 (location, `NONE.covered`) | Live-fire drills and missile launches encircling Taiwan, closing shipping zones: a display of force by a named state, which is one of H1's own examples. |
+| `grain_deal_collapse_2023` | 2023-07-17 | **hostile** | 3 (location, `GED.location.ge250`) | Russia withdrew from the Black Sea Grain Initiative, closing safe passage for Ukrainian grain in an active war. A coercive act by a named state against an adversary; 3.2(a). |
+| `gabon_coup_2023` | 2023-08-30 | **hostile** | 0 (location, `NONE.covered`) | Army officers seized power, placed President Bongo under house arrest and arrested his son; gunfire in Libreville (CNN, Al Jazeera, CNBC 2023-08-30). 3.2(d); no deaths reported does not make a coup non-hostile. |
+| `israel_hamas_war_2023` | 2023-10-07 | **hostile** | 3 (location, `GED.location.ge250`) | Hamas attack on Israel and the onset of the Gaza war; named parties. |
+| `me_us_uk_strikes_2024` | 2024-01-11 | **hostile** | 3 (location, `GED.location.ge250`) | About 70 US and UK strikes on Houthi sites; named states. |
+| `me_damascus_consulate_2024` | 2024-04-01 | **hostile** | 2 (location, `GED.location.ge25`) | Israeli airstrike destroying Iran's Damascus consulate and killing IRGC commanders; attribution to Israel is universal though unclaimed at the time. |
+| `iran_strikes_israel_apr_2024` | 2024-04-13 | **hostile** | 3 (location, `GED.location.ge250`) | 300+ Iranian drones and missiles fired at Israel; named states, claimed. |
+| `me_haniyeh_2024` | 2024-07-31 | **hostile** | 2 (location, `GED.location.ge25`) | Assassination of Hamas's leader in Tehran; attributed to Israel and unclaimed -- every live account is a killing, so tie-break 1 keeps it hostile. |
+| `escondida_strike_2024` | 2024-08-13 | **non_hostile** | 0 (location, `NONE.covered`) | Union workers struck after wage talks collapsed. 3.2(c). |
+| `me_nasrallah_2024` | 2024-09-27 | **hostile** | 2 (location, `GED.location.ge25`) | Israeli airstrike killing Hezbollah's leader in Beirut; named state, claimed. |
+| `iran_strikes_israel_oct_2024` | 2024-10-01 | **hostile** | 3 (location, `GED.location.ge250`) | About 180 Iranian ballistic missiles fired at Israel; named states, claimed. |
+| `myanmar_re_seizure_2024` | 2024-10-20 | **hostile** | 3 (location, `GED.location.ge250`) | The Kachin Independence Army seized the rare-earth mining towns; named armed movement taking territory. 3.2(d). |
+| `me_days_of_repentance_2024` | 2024-10-26 | **hostile** | 2 (location, `GED.location.ge25`) | Israeli strikes on Iranian military sites; named states, claimed. |
+| `me_rough_rider_2025` | 2025-03-15 | **hostile** | 3 (location, `GED.location.ge250`) | Large-scale US air campaign against the Houthis; named state. |
+| `israel_iran_war_2025` | 2025-06-13 | **hostile** | 3 (location, `GED.location.ge250`) | Israeli air campaign against Iran opening a 12-day war; named states. |
+| `me_midnight_hammer_2025` | 2025-06-22 | **hostile** | 2 (location, `GED.location.ge25`) | US strikes on three Iranian nuclear sites; named state. |
+| `iran_israel_us_strike_2026` | 2026-02-28 | **hostile** | — (uncovered, `UNCOVERED`) | US and Israeli strikes on Iran; named states. |
 
-| event | date | the two readings | IES-90 today |
+### sanctions — 57 events (49 hostile, 0 hostile-unattributed, 5 ambiguous, 3 non-hostile)
+
+| event_id | date | hostility | IES-90 | evidence for the coding |
+|---|---|---|---|---|
+| `oapec_embargo_1973` | 1973-10-17 | **hostile** | 0 (dyadic, `NONE.covered`) | Arab producers cut output and threatened a total embargo on the US, tied to Israeli withdrawal. 3.2(a): non-kinetic coercion by named states against a named state. |
+| `embargo_lifted_1974` | 1974-03-18 | **hostile** ·de-escalatory | 0 (dyadic, `NONE.covered`) | The embargo on the US lifted, conditionally and partially. 3.2(b): a de-escalatory act inside the same identified adversarial dyad; the level and the DEAL flag are both defined for it. |
+| `iraq_un_661_embargo_1990` | 1990-08-06 | **hostile** | 3 (location, `WAR.inter.single`) | UN comprehensive sanctions and a total oil embargo on Iraq after the invasion of Kuwait. 3.2(a). |
+| `iraq_un_986_ofp_1995` | 1995-04-14 | **hostile** ·de-escalatory | 2 (location, `MIDI.single.overlap,GED.location.ge25`) | UNSCR 986 permitting limited Iraqi exports, easing the total embargo. 3.2(b). |
+| `iran_eo12959_embargo_1995` | 1995-05-06 | **hostile** | 0 (location, `NONE.covered`) | EO 12959, a total US trade and investment embargo on Iran. 3.2(a). |
+| `ilsa_sanctions_1996` | 1996-08-05 | **hostile** | 0 (dyadic, `NONE.covered`) | ILSA: US secondary sanctions on foreign firms investing in Iranian and Libyan petroleum. 3.2(a). |
+| `iraq_ofp_exports_begin_1996` | 1996-12-10 | **hostile** ·de-escalatory | 3 (location, `GED.location.ge250`) | First Iraqi exports under oil-for-food, returning capped volumes to market. 3.2(b). |
+| `iraq_oil_export_ban_2002` | 2002-04-08 | **hostile** | 2 (location, `MIDI.single.overlap`) | Iraq halted ~1.8 mb/d of its own exports for 30 days to protest Israel's West Bank incursion. A producer restricting exports, but explicitly as a political act against a named adversary -- 3.2(a), not 3.2(c). |
+| `iraq_sanctions_lifted_2003` | 2003-05-22 | **hostile** ·de-escalatory | 1 (location, `MIDI.single.overlap`) | UNSCR 1483 lifting economic sanctions on Iraq. 3.2(b). |
+| `libya_sanctions_lifted_2004` | 2004-04-23 | **hostile** ·de-escalatory | 0 (location, `NONE.covered`) | ILSA application terminated and sanctions eased after Libya's WMD renunciation. 3.2(b). |
+| `iran_cisada_2010` | 2010-07-01 | **hostile** | 2 (location, `MIDI.single.overlap,GED.location.ge25`) | CISADA penalising suppliers to Iran's refined-petroleum and petroleum-investment sectors. 3.2(a). |
+| `sanc_2011_11_21` | 2011-11-21 | **hostile** | 2 (location, `MID.single.wholly,MIDI.single.overlap`) | EO 13590 authorising sanctions on suppliers to Iran's petroleum and petrochemical sectors. 3.2(a). |
+| `ndaa_cbi_sanctions_2011` | 2011-12-31 | **hostile** | 1 (dyadic, `MIDI.pair.overlap`) | NDAA s.1245 blocking the Central Bank of Iran and threatening third-country banks. 3.2(a). |
+| `eu_iran_oil_embargo_2012` | 2012-01-23 | **hostile** | 2 (location, `MIDI.single.overlap`) | EU Council Decision banning import, purchase and transport of Iranian crude. 3.2(a). |
+| `swift_cutoff_iran_2012` | 2012-03-15 | **hostile** | 2 (location, `MID.single.wholly,MIDI.single.overlap`) | SWIFT disconnecting 30 Iranian banks under EU directive. 3.2(a). |
+| `sanc_2013_11_24` | 2013-11-24 | **hostile** ·de-escalatory | 2 (location, `MIDI.single.overlap`) | The JPOA interim deal pausing further cuts to Iranian exports. 3.2(b). |
+| `russia_sectoral_sanctions_2014` | 2014-07-16 | **hostile** | 2 (location, `MIDI.single.overlap,GED.location.ge25`) | First US sectoral sanctions on Russian energy financing under EO 13662. 3.2(a). |
+| `russia_oiltech_ban_2014` | 2014-09-12 | **hostile** | 2 (location, `MIDI.single.overlap,GED.location.ge25`) | US and EU ban on Arctic, deepwater and shale oil technology and services for Russia. 3.2(a). |
+| `iran_jcpoa_agreed_2015` | 2015-07-14 | **hostile** ·de-escalatory | 0 (location, `NONE.covered`) | The JCPOA agreed, opening the path to lifting oil sanctions. 3.2(b): the clearest case for the de-escalatory rule -- a negotiated settlement inside a live dyad, exactly what the DEAL flag measures. |
+| `iran_implementation_day_2016` | 2016-01-16 | **hostile** ·de-escalatory | 0 (location, `NONE.covered`) | IAEA verification and the lifting of nuclear-related oil sanctions. 3.2(b). |
+| `qatar_gulf_blockade_2017` | 2017-06-05 | **hostile** | 0 (location, `NONE.covered`) | Saudi Arabia, the UAE, Egypt and Bahrain cut ties and closed land, air and sea links to Qatar. A blockade by named states against a named state. |
+| `venezuela_financial_sanctions_2017` | 2017-08-25 | **hostile** | 0 (dyadic, `NONE.covered`) | EO 13808 barring dealings in new PDVSA and government debt. 3.2(a). |
+| `iran_sanctions_reimposed_2018` | 2018-05-08 | **hostile** | 0 (dyadic, `NONE.covered`) | US withdrawal from the JCPOA and signalled restoration of oil sanctions. 3.2(a). |
+| `iran_metals_windown_2018` | 2018-08-06 | **hostile** | 0 (location, `NONE.covered`) | First tranche of reimposed US sanctions on Iran taking effect. 3.2(a). |
+| `iran_oil_snapback_2018` | 2018-11-05 | **hostile** | 1 (location, `ICB.single.onset`) | US energy, shipping and banking sanctions reimposed on Iran with eight waivers. 3.2(a). |
+| `venezuela_sanctions_2019` | 2019-01-28 | **hostile** | 0 (dyadic, `NONE.covered`) | US sanctions on PDVSA exports. 3.2(a). |
+| `sanc_2019_04_08` | 2019-04-08 | **hostile** | 1 (location, `ICB.single.onset`) | US designation of the IRGC as a Foreign Terrorist Organization. 3.2(a). |
+| `us_ends_iran_waivers_2019` | 2019-04-22 | **hostile** | 1 (dyadic, `ICB.pair.onset`) | US ends all significant-reduction exceptions for buyers of Iranian crude. 3.2(a). |
+| `iran_pgpic_sanctions_2019` | 2019-06-07 | **hostile** | 2 (location, `GED.location.ge25`) | OFAC designation of Iran's largest petrochemical group and 39 subsidiaries. 3.2(a). |
+| `venezuela_asset_freeze_2019` | 2019-08-05 | **hostile** | 0 (dyadic, `NONE.covered`) | EO 13884 blocking all Venezuelan government property. 3.2(a). |
+| `indonesia_nickel_ban_2019` | 2019-09-02 | **non_hostile** | 0 (location, `NONE.covered`) | Indonesia banned nickel ore exports two years early to force downstream smelting at home. 3.2(c): industrial policy with no adversary; the counterparty is the world ore market. |
+| `rosneft_trading_venez_2020` | 2020-02-18 | **hostile** | 0 (location, `NONE.covered`) | OFAC designation of Rosneft Trading for handling Venezuelan crude. 3.2(a). |
+| `indonesia_palm_ban_2022` | 2022-04-28 | **non_hostile** | 0 (location, `NONE.covered`) | Palm-oil export ban to curb domestic cooking-oil prices. 3.2(c): a domestic price measure, no adversary. |
+| `sanc_2022_06_03` | 2022-06-03 | **hostile** | 0 (location, `NONE.covered`) | EU sixth package banning seaborne imports of Russian crude and products. 3.2(a). |
+| `sanc_2022_10_06` | 2022-10-06 | **hostile** | 2 (location, `GED.location.ge25`) | EU eighth package establishing the legal basis for the G7 price cap. 3.2(a). |
+| `us_chips_2022` | 2022-10-07 | **hostile** | 0 (location, `NONE.covered`) | US export controls on advanced computing chips and chipmaking equipment, with a foreign-direct-product rule, aimed at China's AI and supercomputing capability. The target state is named in the measure. 3.2(a). |
+| `eu_embargo_price_cap_2022` | 2022-12-05 | **hostile** | 0 (location, `NONE.covered`) | EU seaborne embargo and the G7 $60 price cap entering force. 3.2(a). |
+| `products_price_cap_2023` | 2023-02-05 | **hostile** | 0 (location, `NONE.covered`) | G7 price cap extended to Russian refined products. 3.2(a). |
+| `chn_gage_2023` | 2023-07-03 | **ambiguous** | 0 (location, `NONE.covered`) | MOFCOM export licensing on gallium and germanium, stated on the record as protecting 'national security and interests' under the 2020 Export Control Law and naming no country (MOFCOM press conference 2023-07-06), and read universally as retaliation for the US chip controls of October 2022 (CSIS, Stimson, ORF America). Adversarial in effect, industrial-security in form; the record does not settle which, so it is not settled here. |
+| `venezuela_gl44_relief_2023` | 2023-10-18 | **hostile** ·de-escalatory | 0 (location, `NONE.covered`) | OFAC GL 44 authorising Venezuelan oil transactions after the Barbados agreement. 3.2(b). |
+| `chn_graphite_2023` | 2023-10-20 | **ambiguous** | 0 (location, `NONE.covered`) | MOFCOM export permits for graphite, framed as licensing and naming no counterparty. Same shape as chn_gage_2023. |
+| `russia_pricecap_enforce_2023` | 2023-11-16 | **hostile** | 2 (location, `GED.location.ge25`) | OFAC sanctions on three Sovcomflot tankers for breaching the price cap. 3.2(a). |
+| `chn_re_tech_2023` | 2023-12-21 | **ambiguous** | 0 (location, `NONE.covered`) | China banned export of rare-earth extraction, separation and magnet technology. No counterparty named; strategic leverage in effect. Same shape as chn_gage_2023. |
+| `sanc_2024_02_23` | 2024-02-23 | **hostile** | 2 (location, `GED.location.ge25`) | OFAC designation of Sovcomflot and 14 crude tankers under EO 14024. 3.2(a). |
+| `russia_metals_ban_2024` | 2024-04-12 | **hostile** | 2 (location, `GED.location.ge25`) | Coordinated US and UK prohibition on Russian aluminium, copper and nickel at the LME and CME. 3.2(a). |
+| `venezuela_gl44_revoked_2024` | 2024-04-17 | **hostile** | 0 (location, `NONE.covered`) | GL 44 allowed to lapse and oil sanctions reimposed after the blocked election. 3.2(a) -- a re-imposition, not relief. |
+| `chn_antimony_2024` | 2024-08-15 | **ambiguous** | 0 (location, `NONE.covered`) | MOFCOM export licensing on antimony, no counterparty named. Same shape as chn_gage_2023. |
+| `sanc_2024_10_11` | 2024-10-11 | **hostile** | 2 (location, `GED.location.ge25`) | OFAC determination widening secondary sanctions on Iran's petroleum sector after Iran's missile attack on Israel. 3.2(a). |
+| `chn_ban_us_2024` | 2024-12-03 | **hostile** | 0 (location, `NONE.covered`) | China's first outright export ban naming the United States, on gallium, germanium, antimony and superhard materials. The counterparty is named in the measure, so 3.2(a) rather than the ambiguous licensing shape. |
+| `russia_shadow_fleet_sanctions_2025` | 2025-01-10 | **hostile** | 3 (location, `GED.location.ge250`) | OFAC action against two Russian producers and 183 shadow-fleet tankers. 3.2(a). |
+| `chn_5minerals_2025` | 2025-02-04 | **hostile** | 0 (location, `NONE.covered`) | Export licensing on tungsten, tellurium, bismuth, indium and molybdenum, announced by the record as retaliation for new US tariffs, with the US coded as an actor on the event. Named counterparty, so 3.2(a). |
+| `us_iran_maxpressure_2025` | 2025-02-05 | **hostile** | 0 (location, `NONE.covered`) | Presidential memorandum directing agencies to drive Iranian oil exports toward zero. 3.2(a). |
+| `drc_cobalt_ban_2025` | 2025-02-22 | **non_hostile** | 3 (location, `GED.location.ge250`) | ARECOMS suspended all DRC cobalt exports for four months after prices fell to a nine-year low below $10/lb, to curb oversupply and defend price; extended three months in June 2025 for the same reason (ARECOMS decision 2025-02-22; IEA policy record; Project Blue). 3.2(c): a producer managing its own market -- the act of an opec_decision, filed under sanctions. |
+| `us_chevron_venez_2025` | 2025-02-26 | **hostile** | 0 (location, `NONE.covered`) | Revocation of Chevron's licence to operate in Venezuela. 3.2(a). |
+| `us_venez_sectariff_2025` | 2025-03-24 | **hostile** | 0 (location, `NONE.covered`) | Order allowing 25% secondary tariffs on any country importing Venezuelan crude. 3.2(a). |
+| `chn_re_magnets_2025` | 2025-04-04 | **ambiguous** | 0 (location, `NONE.covered`) | Case-by-case export licensing on seven medium and heavy rare earths and permanent magnets. Counterparty described only as Western manufacturers, not named in the measure. Same shape as chn_gage_2023. |
+| `us_russia_sectariff_2025` | 2025-07-14 | **hostile** | 2 (location, `GED.location.ge25`) | Threatened 100% secondary tariffs on buyers of Russian energy within 50 days. An explicit threat of economic coercion against a named state; 3.2(a). |
+
+## 4. The thirteen ambiguous, named as ambiguous
+Not "probably hostile" or "probably not" — events where the record does not settle it.
+Amendment 3 §A3.3 excludes them from G-scoring and lists them by name, so a later decision
+can move them either way without anything having been quietly assumed.
+
+| event | date | class | the two readings |
 |---|---|---|---|
-| `earnest_will_1987` | 1987-07-22 | A US naval reflagging and escort operation. **Display of force by a named state** (and IES-90's own level 1 is "threat or display of force") vs **a protective deployment**, which tie-break 2 puts outside H1. | 3 (location) |
-| `btc_pipeline_blast_2008` | 2008-08-05 | **PKK bombing / Russian cyber-sabotage** vs **technical failure**; never settled, evidence incinerated. | 0 |
-| `libya_jathran_blockade_2013` | 2013-08-01 | **Armed blockade** by Petroleum Facilities Guard units under Jathran vs **an industrial and revenue dispute** by the force paid to guard the terminals — the cited source calls them protesters. | 0 |
-| `saudi_suspends_bab_el_mandeb_2018` | 2018-07-25 | The row folds two things together: **Houthi attacks on two Saudi tankers** (hostile) and **Riyadh's own decision to suspend transit** (tie-break 2: a precautionary state decision is not itself a hostile act). The coded actor is Saudi Arabia. | 0 |
-| `colonial_pipeline_shutdown_2021` | 2021-05-07 | **A directed ransomware attack** by DarkSide vs **extortion for private gain** (tie-break 3), with the shutdown itself Colonial's own precautionary decision. No covering source of IES-90 would ever carry it. | 0 |
+| `shah_leaves_iran_1979` | 1979-01-16 | conflict_escalation | The coded act is a ruler leaving the country — 3.2(d) makes a political turning point inside a revolution ambiguous, though the conflict around it is not. |
+| `earnest_will_1987` | 1987-07-22 | chokepoint_disruption | **Display of force by a named state** (IES-90's own level 1) vs **a protective escort**, which tie-break 2 puts outside H1. |
+| `btc_pipeline_blast_2008` | 2008-08-05 | infrastructure_attack | **PKK bombing / Russian cyber-sabotage** vs **technical failure**; never settled, evidence incinerated. |
+| `marikana_strike_2012` | 2012-08-16 | conflict_escalation | The record bundles a **wildcat wage strike** (the supply mechanism, 3.2(c)) with **police killing 34 strikers** (lethal state force). The coded event is the strike; the massacre is what makes it a conflict record. |
+| `libya_jathran_blockade_2013` | 2013-08-01 | chokepoint_disruption | **Armed blockade** by Petroleum Facilities Guard units vs **a revenue dispute** by the force paid to guard the terminals — the cited source calls them protesters. |
+| `chn_gage_2023` | 2023-07-03 | sanctions | **Retaliation for the US chip controls** (every outside reading) vs **national-security licensing** (MOFCOM's own statement, naming no country). |
+| `chn_graphite_2023` | 2023-10-20 | sanctions | As `chn_gage_2023`: a licensing regime with no counterparty named in the measure or in the coded entities. |
+| `chn_re_tech_2023` | 2023-12-21 | sanctions | As `chn_gage_2023`. |
+| `saudi_suspends_bab_el_mandeb_2018` | 2018-07-25 | chokepoint_disruption | The row folds **Houthi attacks on two Saudi tankers** together with **Riyadh's own decision to suspend transit**; the coded actor is Saudi Arabia, and tie-break 2 puts a precautionary decision outside H1. |
+| `iraq_nasiriya_2019` | 2019-12-28 | conflict_escalation | An **unarmed protest occupation** of a field (3.2(c) shape) inside **the lethally repressed Tishreen uprising** (3.2(d) shape). |
+| `colonial_pipeline_shutdown_2021` | 2021-05-07 | infrastructure_attack | **A directed ransomware attack** vs **extortion for private gain** (tie-break 3); the shutdown itself was Colonial's own precautionary decision. |
+| `chn_antimony_2024` | 2024-08-15 | sanctions | As `chn_gage_2023`. |
+| `chn_re_magnets_2025` | 2025-04-04 | sanctions | As `chn_gage_2023`; the counterparty is described only as Western manufacturers. |
 
-Two of the five (`saudi_suspends_bab_el_mandeb_2018`, and arguably
-`libya_jathran_blockade_2013`) are ambiguous because **the record bundles an act with a
-response to it**. That is a record-quality question for Session E, not a target question, and
-it is raised in the handoff rather than resolved here.
+**They are not thirteen unrelated hard cases — they are four repeating patterns**, which is
+more useful to Joe than the list:
+- **Five identical rows** (the China licensing measures) that one record fix would settle
+  together: name the counterparty in the measure, or state that none is named.
+- **Three rows that bundle an act with the response to it** (`saudi_suspends_bab_el_mandeb_2018`,
+  `marikana_strike_2012`, `libya_jathran_blockade_2013`) — the codebook's date rule wants one
+  dated act per row and these hold two.
+- **Two rows that are a turning point inside a conflict rather than an act of force**
+  (`shah_leaves_iran_1979`, `iraq_nasiriya_2019`).
+- **Three genuinely unsettled causes** (`btc_pipeline_blast_2008`, `colonial_pipeline_shutdown_2021`,
+  `earnest_will_1987`) — the only three where more record work would not help.
 
 ## 5. Counts by class and by decade
 
-| class | hostile | hostile_unattributed | ambiguous | non_hostile | total |
-|---|---:|---:|---:|---:|---:|
-| `infrastructure_attack` | 40 | 3 | 2 | 3 | 48 |
-| `chokepoint_disruption` | 18 | 0 | 3 | 6 | 27 |
-| **both** | **58** | **3** | **5** | **9** | **75** |
-
-| decade | hostile | hostile_unattributed | ambiguous | non_hostile | total | non-hostile share |
+| class | hostile | hostile_unattributed | ambiguous | non_hostile | total | not G-scorable |
 |---|---:|---:|---:|---:|---:|---:|
-| 1970s | 0 | 0 | 0 | 2 | 2 | 100% |
-| 1980s | 4 | 0 | 1 | 0 | 5 | 0% |
-| 1990s | 1 | 0 | 0 | 0 | 1 | 0% |
-| 2000s | 5 | 1 | 1 | 1 | 8 | 12% |
-| 2010s | 13 | 1 | 2 | 2 | 18 | 11% |
-| 2020s | 35 | 1 | 1 | 4 | 41 | 10% |
-| **all** | **58** | **3** | **5** | **9** | **75** | **12%** |
+| `infrastructure_attack` | 40 | 3 | 2 | 3 | 48 | 5 (10%) |
+| `chokepoint_disruption` | 18 | 0 | 3 | 6 | 27 | 9 (33%) |
+| `conflict_escalation` | 44 | 0 | 3 | 8 | 55 | 11 (20%) |
+| `sanctions` | 49 | 0 | 5 | 3 | 57 | 8 (14%) |
+| **all four** | **151** | **3** | **13** | **20** | **187** | **33 (18%)** |
 
-Two things in those tables are worth saying out loud.
+| decade | hostile | hostile_unattributed | ambiguous | non_hostile | total | not G-scorable |
+|---|---:|---:|---:|---:|---:|---:|
+| 1970s | 5 | 0 | 1 | 2 | 8 | 3 (38%) |
+| 1980s | 7 | 0 | 1 | 0 | 8 | 1 (12%) |
+| 1990s | 9 | 0 | 0 | 0 | 9 | 0 (0%) |
+| 2000s | 14 | 1 | 1 | 1 | 17 | 2 (12%) |
+| 2010s | 43 | 1 | 4 | 7 | 55 | 11 (20%) |
+| 2020s | 73 | 1 | 6 | 10 | 90 | 16 (18%) |
+| **all** | **151** | **3** | **13** | **20** | **187** | **33 (18%)** |
 
-**Both 1970s records are non-hostile.** The two oldest events in these classes — the 1977
-Abqaiq pipeline fire and the 1978 oil-workers' strike — are the only two the corpus has
-before 1984, and neither is an attack. The deep-history tier reached back for *oil supply
-disruptions* and filed them under a class named for attacks. Whatever the walk learns about
-`infrastructure_attack` before 1980, it learns from two incidents.
+Three things in those tables that the totals alone do not say.
 
-**The non-hostile share is stable at about one in nine from 2000 on** (12%, 11%, 10% by
-decade) and does not shrink as the corpus modernises. This is not a legacy-records problem
-that the recent, better-sourced events grow out of. It is what the class definition does.
+**The defect is not concentrated in the class named for attacks.** `infrastructure_attack` is
+the *cleanest* of the four at 10% not-scorable. The worst is `chokepoint_disruption` at 33% —
+a class defined by a *place* rather than an act, so anything that stops traffic through the
+place qualifies — followed by `conflict_escalation` at 20%, which is high only because eight
+mining strikes are filed in it. A reader who assumed the problem lived in the class that says
+"attack" would have looked in the wrong place.
+
+**The 1970s are the thinnest and the worst.** Eight events, three of them not G-scorable
+(38%): the 1977 Abqaiq pipeline fire, the 1978 oil-workers' strike, and the Shah's departure.
+Whatever the walk learns about the 1970s it learns from five hostile events.
+
+**The share does not fall as the corpus modernises.** 20% in the 2010s, 18% in the 2020s,
+against 12% in the 2000s and 0% in the 1990s. It rises, because the corpus's recent growth
+brought in metals and minerals events — strikes, blockades, export bans — that were coded
+into geopolitical classes for want of a better one. This is not a legacy-records problem.
 
 ## 6. Impact on the published walk — reported, not applied
 Amendment 3 §A3.5: **no published run is re-scored.** These numbers say how much of the
 published G result rests on events for which the G target is undefined. They are an impact
-statement for the paper's limitations section, and a handoff to Session B for v3.
+statement for the paper's limitations section and a handoff to Session B for v3.
 
-Set: the **150 daily-tier scored G reads** of run `walk_20260902T210135Z`
-(`data/walk_forward/summary.json` → `/tiers/daily/G`, n = 150), being the daily-tier reads
-that passed burn-in and carry both an engine and a climatology G score.
+Set: the **150 daily-tier scored G reads** of the current published run — the reads that
+passed burn-in and carry both an engine and a climatology G score, matching
+`summary.json` `/tiers/daily/G/engine_vs/climatology/n` = 150. (Session B re-ran the walk
+during this session; the run id changed, the set and every figure below did not. The audit
+and its test read the run out of the scores file rather than naming it, so a re-run does not
+silently invalidate this section — it recomputes it.)
 
 | | n | level-0 | share |
 |---|---:|---:|---:|
 | **as published** | 150 | 63 | **42.0%** |
-| excluding the 6 `non_hostile` (the Amendment 3 rule as registered) | 144 | 59 | **41.0%** |
-| also excluding the 3 `ambiguous` | 141 | 56 | **39.7%** |
-| also excluding the 2 `hostile_unattributed` (the strictest reading) | 139 | 56 | **40.3%** |
+| excluding the 17 `non_hostile` (the Amendment 3 rule as registered) | 133 | 49 | **36.8%** |
+| also excluding the 10 `ambiguous` | 123 | 40 | **32.5%** |
+| also excluding the 2 `hostile_unattributed` (the strictest reading) | 121 | 40 | **33.1%** |
 
-**Affected: 9 of the 150 reads (6.0%)** — 6 non-hostile, 3 ambiguous. Named, with the level
-each contributed:
+**Affected: 27 of the 150 reads (18.0%)** — 17 non-hostile, 10 ambiguous. By class:
 
-| event | coding | level in the run |
+| class | scored G reads | non_hostile | ambiguous | affected |
+|---|---:|---:|---:|---:|
+| `infrastructure_attack` | 38 | 1 | 2 | 3 (8%) |
+| `chokepoint_disruption` | 17 | 5 | 1 | 6 (35%) |
+| `conflict_escalation` | 46 | 8 | 2 | 10 (22%) |
+| `sanctions` | 49 | 3 | 5 | 8 (16%) |
+| **all** | **150** | **17** | **10** | **27 (18%)** |
+
+The 17 non-hostile reads, with the level each contributed — **the three non-zero ones are the
+damage**:
+
+| event | class | level |
 |---|---|---:|
-| `venezuela_blackout_2019` | non_hostile | 0 |
-| `druzhba_contamination_2019` | non_hostile | **2** |
-| `suez_ever_given_2021` | non_hostile | 0 |
-| `cpc_novorossiysk_storm_2022` | non_hostile | 0 |
-| `kurdistan_ceyhan_halt_2023` | non_hostile | **2** |
-| `codelco_elteniente_2025` | non_hostile | 0 |
-| `btc_pipeline_blast_2008` | ambiguous | 0 |
-| `saudi_suspends_bab_el_mandeb_2018` | ambiguous | 0 |
-| `colonial_pipeline_shutdown_2021` | ambiguous | 0 |
+| `drc_cobalt_ban_2025` | sanctions | **3 — war** |
+| `druzhba_contamination_2019` | chokepoint_disruption | **2** |
+| `kurdistan_ceyhan_halt_2023` | chokepoint_disruption | **2** |
+| `venezuela_blackout_2019`, `suez_ever_given_2021`, `cpc_novorossiysk_storm_2022`, `codelco_elteniente_2025`, `indonesia_nickel_ban_2019`, `indonesia_palm_ban_2022`, `escondida_strike_2011`, `sa_platinum_strike_2014`, `escondida_strike_2017`, `lasbambas_blockade_2019`, `lasbambas_halt_2021`, `cuajone_shutdown_2022`, `peru_lasbambas_2022` | (mixed) | 0 |
 
-The other five affected events (`abqaiq_arabian_1977`, `iran_oilworkers_strike_1978`,
-`suez_tropic_brilliance_2004`, `earnest_will_1987`, `libya_jathran_blockade_2013`) are
-already outside the 150 — the first two are monthly-tier, and all five fail the walk's
-burn-in. They are outside the headline G result but inside the corpus, so they still teach
-the engine as analogues: `iran_oilworkers_strike_1978` carries **level 3, war** wherever it
-is retrieved as a precedent.
+Six more affected events are outside the 150 on tier or burn-in — `abqaiq_arabian_1977`,
+`iran_oilworkers_strike_1978`, `shah_leaves_iran_1979`, `earnest_will_1987`,
+`suez_tropic_brilliance_2004`, `libya_jathran_blockade_2013` — but they are still **retrieved
+as analogues**, which does not show up in the headline: an oil-workers' strike sits in the
+precedent set carrying level 3, war.
 
-**Reading the numbers honestly.** The effect on the headline is small: n falls by 6 (4%) and
-the level-0 share by about one point, 42.0% → 41.0%. Two things follow, and only two.
-1. The defect is **not** a level-0 inflation story. Four of the six non-hostile reads in the
-   150 are level 0, but so is 42% of the whole set; removing them barely moves the base rate.
-   The two that are *not* level 0 are the damaging ones — a contaminated pipeline reading as
-   use of force, an arbitration award reading as use of force — because those are the cases
-   where the location fallback manufactured escalation out of nothing to do with the event.
-2. The engine's G skill against climatology is **not** materially explained by these events,
-   and this audit gives no ground to claim otherwise in either direction. What it removes is
-   not error but **9 reads that should never have been asked**, and the honest statement for
-   the paper is that the target was mis-specified for 6% of the scored G reads, in a way that
-   cannot be corrected in this run and is corrected in v3.
+### 6.1 Reading the numbers honestly, and a correction to the first pass
+**The first pass understated this, and the direction has changed.** Reporting only
+`infrastructure_attack` and `chokepoint_disruption`, this section previously said 9 of 150
+reads affected (6.0%) and the level-0 share moving 42.0% → 41.0%, and concluded "the effect
+on the headline is small" and "this is not a level-0 inflation story". Across all four
+classes it is **27 of 150 (18.0%)** and the level-0 share moves **42.0% → 36.8%**, five
+points, because 14 of the 17 non-hostile reads are level 0. Both earlier sentences are
+withdrawn: the affected fraction is three times larger, and it *is* substantially a level-0
+story once the mining strikes and export bans are counted. The two-class numbers were correct
+for the two classes; the conclusion drawn from them was not safe to generalise, and it was
+drawn before the other 112 records had been read.
 
-Nothing above changes `summary.json`, `scores.jsonl` or `reads.jsonl`. Per Amendment 3
-§A3.5, every surface reporting G from this run carries: *"scored before Amendment 3;
-includes 6 non-hostile events for which the G target is undefined (9 counting ambiguous) —
+What still holds, and what follows:
+1. **The three non-zero non-hostile reads remain the qualitative damage.** A cobalt export
+   ban reading as **war**, a contaminated pipeline and an arbitration award reading as *use
+   of force* — those are cases where the location fallback manufactured escalation out of
+   events with no adversary. The other 14 are level 0, which is the right answer for the
+   wrong reason: an event with no adversary has nothing to record in the window.
+2. **The base rate the engine is scored against moves by five points.** Climatology is
+   estimated from this outcome distribution, so removing the non-hostile reads changes the
+   comparison the engine is judged against, not merely the engine's own score. That makes
+   this a limitation on *both* sides of the skill comparison and it must be reported as such —
+   in whichever direction it turns out to run, which cannot be known until B re-runs.
+3. **No claim about skill is made here, in either direction.** What the audit removes is not
+   error but **27 reads that should never have been asked**. The honest statement for the
+   paper is that the target was mis-specified for 18% of the scored G reads, that this
+   cannot be corrected in the published run, and that it is corrected in v3.
+
+Nothing above changes `summary.json`, `scores.jsonl` or `reads.jsonl`. Per §A3.5, every
+surface reporting G from this run carries: *"scored before Amendment 3; includes 17
+non-hostile events for which the G target is undefined (27 counting ambiguous) —
 `data/spine/CLASS_AUDIT.md` §6."*
 
-## 7. Proposal (not applied) — should the two classes split into hostile and non-hostile?
-*A written proposal for Joe, per the brief. Nothing here is applied, and no codebook change
-is made: `EVENTS_CODEBOOK.md` is Session E's file and a class change is a Joe decision under
-SESSION_CHARTER §2 rule 3.*
+## 7. The class split — approved as a field, and what the second pass adds
+Joe approved CLASS_AUDIT §7.5's recommendation on 2026-09-02: **a `hostility` field, not new
+`events.type` values.** It is registered in `EVENTS_CODEBOOK.md` (amendment 2026-09-02) with
+the four values, the coding rules and the tie-breaks, and in `OUTCOME_MAPPING.md` Amendments
+3, 3.1 and 3.2. The `type` enum stays at seven values; no published per-class number changes;
+the field changes future computations only. The reasoning that earned the approval stands:
+renaming would break `p_class_given_big`, the analogue retrieval and every registered
+per-class number for an effect a field achieves exactly, and a field can hold `ambiguous`,
+which a type cannot — a point the second pass made expensive to ignore, since 13 of 187
+events need that value.
 
-### 7.1 The general defect
-The codebook names its classes after **what was disrupted** — a pipeline, a strait, a
-refinery — and the six original types read as a taxonomy of *causes*: an OPEC decision, a
-sanction, a war. `infrastructure_attack` and `chokepoint_disruption` are the two that
-straddle it. `infrastructure_attack` says "attack" and takes accidents; `chokepoint_disruption`
-says "disruption" and takes both a mined tanker and a grounded one. So the classes conflate a
-**hostile act** with an **incident**, and every consumer that treats class as a proxy for
-"geopolitical" — IES-90, the G target, the escalation analogues, the per-class Big Moves
-rates — inherits the conflation. The other five classes do not have this problem:
-`opec_decision`, `sanctions`, `policy_response`, `demand_shock` and `conflict_escalation` all
-name an act or an actor, not a piece of damaged equipment.
+### 7.1 What the split would do to the Big Moves per-class rates
+`p_big_given_class` = events of the class inside a big-move window (onset − 7 d daily, − 31 d
+monthly, to end) over events of the class inside the asset's coverage. Rules and episodes
+exactly as published (`BIG_MOVES_REGISTRATION.md` Amendment 2, `data/big_moves/*.json`); only
+the class denominators are split. **Not applied.**
 
-### 7.2 The proposal
-Split each into a hostile and a non-hostile subclass, as a **new field, not a new type**:
+| asset | class | as published | hostile only | non-hostile only |
+|---|---|---|---|---|
+| Brent (daily, from 1987-05) | `infrastructure_attack` | 5/44 = 11.4% | 5/41 = **12.2%** | 0/1 = 0% |
+| Brent | `chokepoint_disruption` | 4/26 = 15.4% | 3/17 = **17.6%** | 1/6 = 16.7% |
+| WTI (daily, from 1986-01) | `infrastructure_attack` | 6/45 = 13.3% | 6/42 = **14.3%** | 0/1 = 0% |
+| WTI | `chokepoint_disruption` | 4/26 = 15.4% | 4/17 = **23.5%** | 0/6 = 0% |
+| WTI monthly (from 1946) | `infrastructure_attack` | 12/48 = 25.0% | 11/43 = **25.6%** | 0/3 = 0% |
+| WTI monthly | `chokepoint_disruption` | 9/27 = 33.3% | 6/18 = **33.3%** | 3/6 = 50.0% |
 
-| existing type | hostile subclass | non-hostile subclass | count today |
-|---|---|---|---|
-| `infrastructure_attack` | `infrastructure_attack` (unchanged) | `infrastructure_incident` | 43 hostile* / 3 non-hostile / 2 ambiguous |
-| `chokepoint_disruption` | `chokepoint_interdiction` | `chokepoint_incident` | 18 hostile* / 6 non-hostile / 3 ambiguous |
+Read with the n's in view: the clean result is **WTI daily `chokepoint_disruption`, 15.4% →
+23.5%**, where all four big-move-adjacent chokepoint events are hostile and six non-hostile
+ones sit in the denominator diluting the rate by half — a hostile interdiction of a strait
+moves oil, a ship aground in one mostly does not. `infrastructure_attack` barely moves, having
+only three non-hostile events. The monthly chokepoint row runs the other way (non-hostile 3/6)
+because a 31-day attribution window is wide enough to catch a grounding or a storm inside an
+episode; that is a warning about attribution width at the monthly tier, not evidence that
+groundings move oil, and it is the row that most needs Joe's eye. **Every cell is
+single-digit-to-low-double-digit n and none of these differences is significant**; the case
+for the split rests on the classes meaning two different things, not on these rates.
 
-(*hostile including the 3 `hostile_unattributed`. Full split: 61 hostile, 9 non-hostile,
-5 ambiguous.)
+### 7.2 What the second pass adds to the class question
+The oil assets above cannot see the second pass's main finding, because eight of the eleven
+new non-hostile events are metals events. The equivalent split for copper, platinum, nickel,
+cobalt and rare earths is **not computed here**: those series are not in
+`data/big_moves/*.json`, and computing a new per-class rate on a new asset is a registered
+computation belonging to whoever owns Big Moves, not a by-product of an audit. What the audit
+can say without computing anything is that the eight Chile/Peru mining strikes and the three
+producer export bans are the *reason* a metals Big Moves table would differ from the oil one,
+and that a `hostility` split is the field that would separate them.
 
-**Recommended form: keep the seven types and add a `hostility` field.** Renaming types would
-break `p_class_given_big`, the analogue retrieval, the menus, every registered per-class
-number and every published figure, for an effect a field achieves exactly. A field is
-additive, is what Amendment 3 already requires the engine to carry, and lets the
-ambiguous five be *ambiguous* rather than forced into one bucket — which a type cannot do.
-The subclass names above are then views on `(type, hostility)`, not new canon.
-
-### 7.3 What it would do to the Big Moves per-class rates
-`p_big_given_class` = events of the class falling inside a big-move window (onset − 7 d
-daily, − 31 d monthly, to end), over events of the class inside the asset's coverage. Rules
-and episodes exactly as published (`BIG_MOVES_REGISTRATION.md` Amendment 2,
-`data/big_moves/*.json`); only the class denominators are split. **Not applied.**
-
-| asset | class | as published | hostile only | non-hostile only | ambiguous |
-|---|---|---|---|---|---|
-| Brent (daily, from 1987-05) | `infrastructure_attack` | 5/44 = 11.4% | 5/41 = **12.2%** | 0/1 = 0% | 0/2 |
-| Brent | `chokepoint_disruption` | 4/26 = 15.4% | 3/17 = **17.6%** | 1/6 = 16.7% | 0/3 |
-| WTI (daily, from 1986-01) | `infrastructure_attack` | 6/45 = 13.3% | 6/42 = **14.3%** | 0/1 = 0% | 0/2 |
-| WTI | `chokepoint_disruption` | 4/26 = 15.4% | 4/17 = **23.5%** | 0/6 = 0% | 0/3 |
-| WTI monthly (from 1946) | `infrastructure_attack` | 12/48 = 25.0% | 11/43 = **25.6%** | 0/3 = 0% | 1/2 |
-| WTI monthly | `chokepoint_disruption` | 9/27 = 33.3% | 6/18 = **33.3%** | 3/6 = 50.0% | 0/3 |
-
-Read with the n's in view, because they are small:
-- **The clean result is WTI daily `chokepoint_disruption`: 15.4% → 23.5%**, because all four
-  big-move-adjacent chokepoint events are hostile and six non-hostile events sit in the
-  denominator diluting the rate by half. That is the shape the split is supposed to reveal —
-  a hostile interdiction of a strait moves oil, a ship running aground in one mostly does not.
-- **`infrastructure_attack` barely moves** (11.4% → 12.2% Brent, 13.3% → 14.3% WTI, 25.0% →
-  25.6% monthly): only 3 of its 48 events are non-hostile, so there is little to remove.
-- **The monthly chokepoint row runs the other way**, 33.3% published → 33.3% hostile with
-  non-hostile at 3/6 = 50%: at 31 days before onset and monthly episodes the windows are wide
-  enough that a grounding or a storm often sits inside one. This is a warning about attribution
-  width at the monthly tier, not evidence that groundings move oil, and it is the row that
-  most needs Joe's eye.
-- Every cell is single-digit-to-low-double-digit n. **None of these differences is
-  significant**, and the proposal does not rest on them: it rests on the classes meaning two
-  different things. The rates are given because the brief asked what the split would do, and
-  the honest answer is "it sharpens one row out of six and the n's are too small to test".
-
-### 7.4 What the split would cost
-The corpus loses no event. The published Big Moves numbers stay as published (same
-retroactivity bar as Amendment 3 §A3.5): a split changes future computations, not the
-registered ones. The real costs are (a) `p_big_given_class` denominators of 17–18 for the
-hostile chokepoint rate, which is thin and must be labelled thin; and (b) someone must code
-`hostility` for `conflict_escalation` and `sanctions` too before the field is used anywhere,
-or the four geopolitical classes will be split two ways.
-
-### 7.5 Recommendation
-**Adopt the field, not the rename**, and only after the remaining two geopolitical classes
-are audited the same way. Amendment 3 already requires the coding to exist for G-scoring, so
-the field is being paid for regardless; the question is only whether it is also exposed as a
-class view. Recommend yes for the surfaces and the Big Moves table, no for the `events.type`
-enum.
+### 7.3 Two class placements that are Joe's call, not the field's
+The field records what an event *is*; it does not move an event to a better class. Two
+groups sit in a class that fits them on no axis, and the field marks but does not fix that:
+- **Eight mining strikes and community blockades in `conflict_escalation`.** They belong in
+  a labour-and-supply class, or in `demand_shock`'s supply-side twin, which does not exist.
+- **Three producer price-management export bans in `sanctions`** (`indonesia_nickel_ban_2019`,
+  `indonesia_palm_ban_2022`, `drc_cobalt_ban_2025`). Each is functionally an `opec_decision`
+  — a producer restricting its own output to move a price — and `opec_decision` is not
+  G-scored at all, which is the correct treatment for them.
+Moving either group is a codebook change and a Joe decision under SESSION_CHARTER §2 rule 3.
+Nothing is moved here, and the audit does not recommend a move over the field: the field
+already stops both groups being G-scored, which is the harm. The class placement affects
+`p_class_given_big` and the analogue retrieval, which is a separate question and a separate
+registration.
 
 ## 8. Receipts
-- Coding rule: `OUTCOME_MAPPING.md` Amendment 3 §A3.3 (committed before any count here).
+- Coding rule: `OUTCOME_MAPPING.md` Amendment 3 §A3.3 (values, tie-breaks) and Amendment 3.2
+  (rules (a)–(d) for `conflict_escalation` and `sanctions`), each committed **before** the
+  events it governs were coded and before any count here was computed. Field registered in
+  `EVENTS_CODEBOOK.md`, amendment 2026-09-02, approved by Joe.
 - Events and IES-90 rows: `data/oil.db` (`events`, `event_entities`, `event_outcomes`
-  `source='ies90'`), 75 rows in the two classes.
-- Walk numbers: `data/walk_forward/scores.jsonl`, run `walk_20260902T210135Z`, daily tier,
-  `burn_in_ok` and both engine and climatology G scored → n = 150, matching
-  `summary.json` `/tiers/daily/G/engine_vs/climatology/n`.
+  `source='ies90'`) — 187 rows in the four geopolitical classes.
+- Walk numbers: `data/walk_forward/scores.jsonl`, latest run, daily tier, `burn_in_ok` and
+  both engine and climatology G scored → n = 150, matching `data/walk_forward/summary.json`
+  `/tiers/daily/G/engine_vs/climatology/n`. The run is read from the file, never named.
 - Big Moves: `data/big_moves/{brent,wti,wti_monthly}.json`, episodes and coverage as
   published; attribution window from `src/big_moves.py` `TIERS[*]["attr_before_days"]`.
-- Checked by `tests/test_hostility.py`: every event of the two classes appears here exactly
-  once, its date, class and IES-90 level match the DB, the coding vocabulary is the
-  Amendment 3 vocabulary, the count tables agree with the rows, and the §6 impact figures
-  recompute from `scores.jsonl`.
+- Checked by `tests/test_hostility.py`: every event of the four classes appears here exactly
+  once, its date, class and IES-90 level match the DB, the coding vocabulary is the registered
+  vocabulary, the count tables agree with the rows, and the §6 impact figures recompute from
+  `scores.jsonl` against whatever run it currently holds.
 - Not touched: `events`, `data/walk_forward/**`, `data/dossiers/**`, `data/spine/patches/**`,
-  `EVENTS_CODEBOOK.md`, `src/**`.
+  `src/**`.
