@@ -23,6 +23,15 @@ SHEET = ROOT / "data" / "audits" / "ies90_audit_30.csv"
 OUT = ROOT / "data" / "audits" / "outcome_audit.json"
 THRESHOLD = 0.6
 LEVELS = ("0", "1", "2", "3")
+# OUTCOME_MAPPING.md Amendment 3 §A3.3: the hostility precondition on the G target, coded for all 187 geopolitical
+# events by session F (data/spine/CLASS_AUDIT.md) and carried on every row of the sheet. The rows are NOT dropped --
+# the published runs scored these labels, so the audit has to cover what was actually used -- but Joe is told which
+# rows the registered target would no longer score, so he grades them knowing that.
+NON_HOSTILE_NOTICE = ("Amendment 3 would return no_independent_outcome for this event; the published run scored it "
+                      "anyway. Record the level the sources support, and note the disagreement.")
+G_SCORABLE_NOTE = {"hostile": "G-scorable", "hostile_unattributed": "G-scorable, flagged (no party named in the record)",
+                   "ambiguous": "contested: the record is genuinely split between hostile and non-hostile",
+                   "non_hostile": "NOT G-scorable under Amendment 3"}
 sys.path.insert(0, str(ROOT / "src" / "state"))
 
 
@@ -68,20 +77,33 @@ def load_out(path=OUT):
             "kappa": None, "passed": False}
 
 
-def kappa(rows):
+def kappa(rows, keep=None):
+    """Cohen's kappa between Joe and the engine over the answered rows. `keep` filters on the row's hostility."""
     import outcomes as O
-    a = [str(r["joe_level"]) for r in rows if str(r.get("joe_level")) in LEVELS]
-    b = [str(r["engine_level"]) for r in rows if str(r.get("joe_level")) in LEVELS]
-    k, n, conf = O.cohen_kappa(a, b, labels=LEVELS)
+    sel = [r for r in rows if str(r.get("joe_level")) in LEVELS and (keep is None or r.get("hostility") in keep)]
+    k, n, conf = O.cohen_kappa([str(r["joe_level"]) for r in sel], [str(r["engine_level"]) for r in sel], labels=LEVELS)
     return k, n, conf
 
 
-def finalize(out, n_rows):
+def finalize(out, n_rows, sheet_hostility=None):
     k, n, conf = kappa(out["rows"])
     out["n_rows"] = n_rows
     out["n_done"] = n
     out["kappa"] = k
     out["confusion_joe_x_engine"] = conf
+    # Amendment 3 §A3.3: three figures, because the runs and the registered target disagree about which rows count.
+    # The §7 gate reads the all-rows figure -- that is the set the published runs actually scored.
+    kh, nh, _ = kappa(out["rows"], keep={"hostile"})
+    ka, na, _ = kappa(out["rows"], keep={"hostile", "ambiguous"})
+    out["kappa_by_hostility"] = {
+        "all_rows": {"kappa": k, "n": n, "gate": True,
+                     "why": "the §7 gate figure: the published runs scored every one of these labels, so the audit "
+                            "must cover what was actually used"},
+        "hostile_only": {"kappa": kh, "n": nh, "gate": False, "why": "diagnostic: rows Amendment 3 still scores (hostility == hostile)"},
+        "hostile_plus_ambiguous": {"kappa": ka, "n": na, "gate": False, "why": "diagnostic: adds the rows the record leaves contested"},
+    }
+    if sheet_hostility:
+        out["sheet_hostility"] = sheet_hostility
     out["passed"] = bool(n_rows and n == n_rows and k is not None and k >= THRESHOLD)
     out["dated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out["deal_agreement"] = None
@@ -95,8 +117,13 @@ def show(eid, item, i, n):
     e = item["event"]
     print("=" * 78)
     print(f"[{i}/{n}] {eid}   {e['event_date']} ({e['date_precision']})   class {e['class']}")
+    host = e.get("hostility") or "not_coded"
     print(f"  {e['title']}")
     print(f"  source: {e['source_url']}")
+    print(f"  HOSTILITY (session F, data/spine/CLASS_AUDIT.md): {host} -- {G_SCORABLE_NOTE.get(host, 'not coded in CLASS_AUDIT.md')}"
+          + (f" [{e['hostility_note']}]" if e.get("hostility_note") else ""))
+    if host == "non_hostile":
+        print(f"  !! {NON_HOSTILE_NOTICE}")
     print(f"  countries A: {e['countries_A'] or '-'}   location L: {e['location_L'] or '-'}" + (f"   (littoral: {e['littoral_from']})" if e.get("littoral_from") else ""))
     print(f"  ENGINE: level {e['ies90_level']} ({e['ies90_level_meaning']})   DEAL {e['ies90_deal'] or '-'}   basis {e['basis']}   rule {e['rule_fired']}")
     print("  source records:")
@@ -133,7 +160,11 @@ def run(sheet=SHEET, out_path=OUT, ask=input, echo=print):
     out["started_at"] = out.get("started_at") or datetime.now(timezone.utc).isoformat(timespec="seconds")
     done = {r["event_id"] for r in out["rows"]}
     todo = [e for e in ev if e not in done]
+    from collections import Counter as _C
+    sheet_host = dict(_C(v["event"].get("hostility") or "not_coded" for v in ev.values()))
     echo(f"IES-90 label audit -- {len(done)} of {len(ev)} rows answered; {len(todo)} to go. Auditor: joe. Ctrl-C or q to stop; answers are saved as you go.")
+    echo(f"  hostility on this sheet (session F): {sheet_host}. Rows the registered target no longer scores are kept and marked, not dropped:")
+    echo(f"  the published runs scored them, so the audit covers what was used. kappa is reported all-rows (the §7 gate), hostile-only, and hostile+ambiguous.")
     n = len(ev)
     for i, eid in enumerate(list(ev), 1):
         if eid in done:
@@ -146,15 +177,19 @@ def run(sheet=SHEET, out_path=OUT, ask=input, echo=print):
             echo("  skipped (nothing recorded)")
             continue
         e = ev[eid]["event"]
-        out["rows"].append({"event_id": eid, "event_date": e["event_date"], "engine_level": int(e["ies90_level"]),
+        out["rows"].append({"event_id": eid, "event_date": e["event_date"], "hostility": e.get("hostility"),
+                            "g_scorable": e.get("g_scorable"), "engine_level": int(e["ies90_level"]),
                             "engine_deal": (int(float(e["ies90_deal"])) if e["ies90_deal"] not in ("", None) else None),
                             "engine_basis": e["basis"], "rule_fired": e["rule_fired"], **ans,
                             "answered_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
-        finalize(out, n)
+        finalize(out, n, sheet_host)
         Path(out_path).write_text(json.dumps(out, indent=1))
-    finalize(out, n)
+    finalize(out, n, sheet_host)
     Path(out_path).write_text(json.dumps(out, indent=1))
-    echo(f"saved {Path(out_path).name}: {out['n_done']}/{out['n_rows']} answered, kappa {out['kappa']}, passed {out['passed']} (threshold {THRESHOLD}, all rows required)")
+    kb = out.get("kappa_by_hostility") or {}
+    echo(f"saved {Path(out_path).name}: {out['n_done']}/{out['n_rows']} answered, passed {out['passed']} (threshold {THRESHOLD}, all rows required)")
+    for name, blk in kb.items():
+        echo(f"   kappa {name:<22} {blk['kappa']} (n={blk['n']}){'  <- §7 gate' if blk.get('gate') else ''}")
     return out
 
 
@@ -165,7 +200,8 @@ def status(sheet=SHEET, out_path=OUT):
     o = json.loads(Path(out_path).read_text())
     st = "done" if o.get("n_done") == n and n else ("in progress" if o.get("n_done") else "pending")
     return {"status": st, "n_done": o.get("n_done", 0), "n_rows": n, "kappa": o.get("kappa"), "passed": bool(o.get("passed")),
-            "auditor": o.get("auditor"), "dated": o.get("dated"), "threshold": o.get("threshold", THRESHOLD)}
+            "auditor": o.get("auditor"), "dated": o.get("dated"), "threshold": o.get("threshold", THRESHOLD),
+            "kappa_by_hostility": o.get("kappa_by_hostility"), "sheet_hostility": o.get("sheet_hostility")}
 
 
 if __name__ == "__main__":

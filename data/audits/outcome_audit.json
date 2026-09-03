@@ -2,9 +2,9 @@
  "auditor": "joe",
  "protocol": "WALK_FORWARD_PROTOCOL.md \u00a71 (kappa >= 0.6 against sources) / \u00a77",
  "threshold": 0.6,
- "sheet": "data/audits/ies90_audit_30.csv",
+ "sheet": "data/audits/ies90_audit_30.csv (regenerated 2026-09-03 with session F hostility; same 30 rows, same order)",
  "started_at": "2026-09-02T23:39:35+00:00",
- "dated": "2026-09-03T00:11:17+00:00",
+ "dated": "2026-09-03T01:18:25+00:00",
  "rows": [
   {
    "event_id": "iran_iraq_war_1980",
@@ -16,7 +16,9 @@
    "joe_level": 3,
    "joe_deal": 0,
    "joe_note": "",
-   "answered_at": "2026-09-03T00:02:23+00:00"
+   "answered_at": "2026-09-03T00:02:23+00:00",
+   "hostility": "hostile",
+   "g_scorable": "yes"
   }
  ],
  "n_rows": 30,
@@ -52,5 +54,31 @@
  "deal_agreement": {
   "n": 1,
   "agree": 1
+ },
+ "kappa_by_hostility": {
+  "all_rows": {
+   "kappa": null,
+   "n": 1,
+   "gate": true,
+   "why": "the \u00a77 gate figure: the published runs scored every one of these labels, so the audit must cover what was actually used"
+  },
+  "hostile_only": {
+   "kappa": null,
+   "n": 1,
+   "gate": false,
+   "why": "diagnostic: rows Amendment 3 still scores (hostility == hostile)"
+  },
+  "hostile_plus_ambiguous": {
+   "kappa": null,
+   "n": 1,
+   "gate": false,
+   "why": "diagnostic: adds the rows the record leaves contested"
+  }
+ },
+ "sheet_hostility": {
+  "non_hostile": 5,
+  "ambiguous": 3,
+  "hostile": 20,
+  "hostile_unattributed": 2
  }
 }

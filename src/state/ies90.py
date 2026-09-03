@@ -15,6 +15,7 @@ Run:  python3 src/state/ies90.py
 import csv
 import json
 import random
+import re
 import sqlite3
 import sys
 import zipfile
@@ -34,6 +35,7 @@ SEED = 20260902
 WINDOW = 90
 DIST_OUT = P.DATA / "state" / "ies90_distribution.json"
 AUDIT_OUT = P.DATA / "audits" / "ies90_audit_30.csv"
+CLASS_AUDIT = P.DATA / "spine" / "CLASS_AUDIT.md"      # session F's reading of all 187 geopolitical events
 GED_CACHE = P.DATA / "cache" / "ucdp_ged_26.1.json"
 MID5_ZIP = P.raw_path("cow_mid", "MID-5-Data-and-Supporting-Materials.zip")
 WAR_URLS = {"inter": ("https://correlatesofwar.org/wp-content/uploads/Inter-StateWarData_v4.0.csv", "Inter-StateWarData_v4.0.csv"),
@@ -466,6 +468,38 @@ def run(conn, src=None, write=True):
     return rows, results
 
 
+def hostility_map(path=CLASS_AUDIT):
+    """{event_id: (hostility, note)} from session F's CLASS_AUDIT.md per-class tables. The precondition is registered
+    in OUTCOME_MAPPING.md Amendment 3 §A3.3 and the field is canon in EVENTS_CODEBOOK.md; this only reads it, so the
+    audit sheet can tell Joe which rows the registered target would no longer score. Absent file -> {}."""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    out, inside = {}, False
+    for ln in p.read_text().splitlines():
+        if re.match(r"^\|\s*event_id\s*\|\s*date\s*\|\s*hostility\s*\|", ln):
+            inside = True
+            continue
+        if inside:
+            if not ln.startswith("|"):
+                inside = False
+                continue
+            if re.match(r"^\|[\s\-:|]+\|$", ln):
+                continue
+            cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+            if len(cells) >= 3:
+                eid = cells[0].strip("`").strip()
+                raw = cells[2].strip().strip("*").strip("`").strip()
+                base = raw.split("**")[0].split("·")[0].strip() or raw
+                note = raw[len(base):].strip(" *·") if raw != base else ""
+                if eid and base:
+                    out[eid] = (base, note)
+    return out
+
+
+G_SCORABLE = {"hostile": "yes", "hostile_unattributed": "yes, flagged", "ambiguous": "contested", "non_hostile": "NO"}
+
+
 def _decade(date):
     return date[:3] + "0s"
 
@@ -529,18 +563,24 @@ def audit_pick(results, n=30, seed=SEED):
     return pick, total
 
 
-AUDIT_COLS = ["row_type", "event_id", "event_date", "date_precision", "class", "title", "source_url", "ies90_level", "ies90_level_meaning",
-              "ies90_deal", "basis", "rule_fired", "level_source", "covering_dyadic", "covering_location", "countries_A", "location_L", "littoral_from",
-              "src", "record_basis", "record_rule", "record", "record_dates", "code_and_rule", "level_contributed", "joe_check", "joe_note"]
+AUDIT_COLS = ["row_type", "event_id", "event_date", "date_precision", "class", "hostility", "g_scorable", "hostility_note", "title", "source_url",
+              "ies90_level", "ies90_level_meaning", "ies90_deal", "basis", "rule_fired", "level_source", "covering_dyadic", "covering_location",
+              "countries_A", "location_L", "littoral_from", "src", "record_basis", "record_rule", "record", "record_dates", "code_and_rule",
+              "level_contributed", "joe_check", "joe_note"]
 
 
-def write_audit(pick, path=AUDIT_OUT):
+def write_audit(pick, path=AUDIT_OUT, hostility=None):
+    """The 30-row sheet. Every row carries session F's hostility coding (CLASS_AUDIT.md) so Joe can see which rows
+    OUTCOME_MAPPING Amendment 3 would no longer score. The rows are NOT dropped: the published runs scored these
+    labels, so the audit has to cover what was actually used."""
+    hostility = hostility_map() if hostility is None else hostility
     path.parent.mkdir(parents=True, exist_ok=True)
     n_src = 0
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f); w.writerow(AUDIT_COLS)
         for e, v in pick:
-            head = [e, v["date"], v["precision"], v["type"], v["title"], v["url"], v["level"], LEVEL_MEANING[v["level"]],
+            host, hnote = hostility.get(e, ("not_coded", "not in CLASS_AUDIT.md"))
+            head = [e, v["date"], v["precision"], v["type"], host, G_SCORABLE.get(host, "?"), hnote, v["title"], v["url"], v["level"], LEVEL_MEANING[v["level"]],
                     "" if v["deal"] is None else v["deal"], v["basis"], ",".join(v["rule_fired"]), ",".join(v["level_source"]),
                     ",".join(v["covering_dyadic"]), ",".join(v["covering_location"]), ",".join(v["A"]), ",".join(v["L"]),
                     ";".join(f"{k}->{','.join(s)}" for k, s in sorted((v.get("littoral") or {}).items()))]
