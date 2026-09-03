@@ -57,6 +57,46 @@ this file wins.*
   and its patches go to Joe under §3 of that document, like E's. Registrations
   are dated and committed before the code that uses them.
 
+- **Session I** (the figures) owns: `docs/figures/**` and `src/figures_paper.py`.
+  It draws the paper figures and nothing else. It **computes nothing**: every
+  number on every figure is read out of a committed file, each figure carries the
+  path it was read from, and `tests/test_figures_paper.py` re-reads the sources and
+  fails if a figure and its source disagree or if a result is typed into the drawing
+  code. Where a figure needs a number that is not in `data/walk_forward/summary.json`
+  — the before/after panel needs the run before Amendment H, and that file publishes
+  one run — the figure names the other committed files it read on its own face rather
+  than carrying the number silently. Session I does **not** touch `src/engine/**`,
+  `src/walk.py`, `data/walk_forward/**` (B), `src/state/**`, `src/app.html`,
+  `src/api_v2.py`, `src/story_read.py` (A), `src/ripple_*` (C), `data/dossiers/**`,
+  `data/spine/**` (E), or `data/ledger/**` (H). It adds figures and their captions to
+  `README.md` and `docs/BRIEF.md` and edits nothing else in those pages. It never
+  re-runs the walk: if `summary.json` moves, the figures are redrawn from it, never
+  the other way round. Defects it finds while reading another session's tree go to
+  `data/handoffs/I_to_<who>_<date>.md`.
+- **Session K** (the ongoing-war defect in the G target) owns: `OUTCOME_MAPPING.md`
+  **amendments** and `src/state/ies90.py`. Both are carved out of Session A's block by
+  Joe's brief of 2026-09-02; A keeps the rest of `src/state/**`,
+  `WORLD_STATE_CODEBOOK.md`, and the body of `OUTCOME_MAPPING.md` §1-§6 (Session F keeps
+  its amendments on the hostility precondition, and K does not reopen them). K exists
+  because red team 2 finding 3 is a defect in the *rule*, not in the code that implements
+  it: Amendment 1.1's "ongoing -> no level" carve-out was never extended to COW War or
+  UCDP GED, and 34 of 54 level-3 "war" labels are wars that were already running.
+  It does **not** touch `src/app.html`, `src/story_read.py`, `src/api_v2.py` or the desk
+  (A, in flight), `src/engine/**`, `src/walk.py`, `data/walk_forward/**` (B),
+  `data/dossiers/**`, `data/spine/**` (E, F), `docs/g/**` (G), `data/ledger/**` (H),
+  `docs/figures/**` (I). It may add tests under `tests/` with a unique basename.
+  Three working rules that follow from where it sits:
+  1. **Amendment first, then code**, in separate commits, so the gap is visible in
+     `git log`. The expected effect on n and on the level distribution is written down
+     *before* the number is computed.
+  2. **It does not rewrite `event_outcomes` while another session holds an experiment
+     open on it.** `ies90.run(conn, write=False)` computes every count without touching
+     the table; the counts are published as a document and a JSON file, and the rebuild
+     is a separate, announced step Joe schedules with B. Changing the target under a
+     running experiment is the failure the seal exists to prevent.
+  3. **It commits by explicit path**, never `git add -A`: the shared tree carries other
+     sessions' staged and unstaged work at all times.
+
 - No session edits another's files. If you need a change there, write it as a
   request in `data/handoffs/<from>_to_<to>_<date>.md` and continue with what
   you can do. All may add tests under `tests/` with a unique basename.

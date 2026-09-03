@@ -493,3 +493,274 @@ excludes `ambiguous`, so the share **under Amendment 3** is the one that drops o
 `non_hostile`; the also-without-`ambiguous` figure is published beside it as the other bound,
 never instead of it. A single-figure report of this target is incomplete, and the audit's test
 asserts both figures are present.
+
+---
+
+## Amendment 4 (2026-09-02, registered before any count is computed under it) — the ongoing-conflict rule reaches COW War and UCDP GED, and "no level" stops meaning "level 0"
+*Session K, under the ownership carve-out in SESSION_CHARTER §1. Applies to IES-90
+(Amendments 1, 1.1, 2) and is orthogonal to Amendment 3 (F's hostility precondition asks
+whether the **event** is a hostile act; this asks whether the **record** can date an
+escalation inside W — an event can fail either, and the two exclusions are counted
+separately and never merged). Nothing in `events` changes; no class is re-coded; no
+published run is altered. This text was committed **before** the code that implements it
+and before any count under it was computed.*
+
+### A4.1 The defect, verified
+
+Red team 2 finding 3 (`docs/red_team_2.md`:64–83, Tier A5) says most level-3 "war" labels
+are wars that were already on before the event. Session K re-derived it rather than taking
+it on faith. Everything below was executed today against `event_outcomes` (source `ies90`)
+and the GED 26.1 cache; the scripts are in the session log and the receipts are the SQL and
+the `detail` column itself.
+
+**The scale as built.** 187 geopolitical events, 184 with a level, 3 `no_independent_outcome`.
+Levels: **0 → 76, 1 → 6, 2 → 48, 3 → 54.**
+
+**(i) The false threes — confirmed.** All 54 level-3 labels come from COW War (15), UCDP GED
+(38) or both (1) — exactly the two sources Amendment 1.1's "ongoing → no level" carve-out
+was written for ICB and Dyadic MID and never extended to. Of the 54, **34 carry a stored
+`deaths_ged_pre90` ≥ 250** (the remaining 10 with the field below the line, 10 more pre-dating
+GED coverage entirely). Of the 38 GED-set level 3, **31** have stored `deaths_ged_pre90` ≥ 250.
+Of the 16 COW-war-set level 3, **14** sit inside a war spell that started on or before `d`
+— Desert Storm 1991 is scored 3 from the Gulf War spell that began 1990-08-02, five and a
+half months before the event, while ICB crisis 393 and MID dispute 3957 both correctly
+returned *"ongoing at d, violence undated in W (no level)"* for the same war. One rule said
+"no level" and another said "war", about the same fact, in the same row.
+
+**(ii) A correction to the field the finding rests on.** `deaths_ged_pre90` is summed over
+`[d−89, d]` — **inclusive of the event day itself** (`ies90.py` `score_ged`, the one place
+the field is written and the only place it is used). For an event whose own day is the
+violent one, the "before" figure is mostly the event. Recomputed strictly before `d`:
+
+| event | `deaths_ged_pre90` as stored | strictly before `d` | on `d` itself |
+|---|---:|---:|---:|
+| `russia_invades_ukraine_2022` | 20,473 | **79** | 20,394 |
+| `israel_hamas_war_2023` | 3,835 | **28** | 3,807 |
+| `israel_iran_war_2025` | 959 | **4** | 955 |
+| `me_rough_rider_2025` | 537 | **173** | 364 |
+
+So the two headline examples of "a war that was already running" are the opposite: they are
+war *onsets*, and the level 3 on them is correct. The count of GED-set level 3 with ≥ 250
+deaths genuinely before the event is **27 of 38, not 31**; over all 54 it is **34 as stored
+and lower strictly before**. The defect is real and large; the specific arithmetic in the
+brief and in red team 2 §A5 overstates it for four events, and this amendment records that
+rather than repeating it.
+
+**(iii) The false zeros — the same defect, opposite sign, not previously reported.**
+Amendment 1.1 made an ongoing ICB crisis or MID dispute yield *no level*. But `score_event`
+takes `max(..., default=0)`, so an event whose only records are undated-for-W falls through
+to **level 0 = "none — a covering source has no dated record in W"**. That statement is
+false: the source has a record, and cannot date it. **18 events are scored 0 this way**,
+including the two most consequential geopolitical oil events of their decade:
+
+- `abqaiq_attack_2019` → level 0, from ICB crisis 496 ABQAIQ OIL STRIKE and crisis 474
+  HOUTHI REBELLION, both "ongoing at d".
+- `soleimani_strike_2020` → level 0, `level_source = icb`, `rule_fired = NONE.covered` —
+  while GED recorded **177 state-based deaths in Iran/Oman/UAE inside W against 0 in the
+  pre-window**. Amendment 2's dyadic precedence handed the level to ICB, ICB could not date
+  it, and the fresh location evidence was discarded. `level_source = icb` on a row where ICB
+  set nothing is itself incoherent.
+
+**(iv) Why this is one defect and not three.** A level-3 that reports a war already running,
+and a level-0 that reports "none" while a war is running, are the same confusion: **the
+scale conflates "the source records nothing in W" with "the source records something it
+cannot place in W".** Both readings are then a function of the *pre-existing conflict state*
+— which is precisely what the persistence baseline encodes. The target and the baseline
+therefore share variance by construction, and the published
+"persistence beats the engine for escalation" (skill −0.469, run 193022Z −0.467) is partly a
+statement about that construction rather than about historical analogy. That is the
+consequence; this amendment fixes the cause.
+
+### A4.2 The rule
+
+**Windows.** `W = (d, d+90] = [d+1, d+90]` (unchanged). **`B = [d−90, d−1]`**, the 90 days
+strictly before the event. **Day `d` belongs to the event and lies in neither window.** No
+new constant is introduced: `B` is the scale's own 90 days, run backwards.
+
+**Undated-for-W.** A source record is *undated-for-W* when it overlaps `W` but cannot place
+the level it would assert inside `W`. Three cases, one predicate:
+
+| source | undated-for-W when | rule id |
+|---|---|---|
+| **ICB**, **Dyadic MID** | ongoing at `d` — unchanged from Amendment 1.1, now given a rule id instead of a null | `ICB.<kind>.ongoing`, `MID.<kind>.ongoing` |
+| **COW War** (inter and intra) | the spell overlapping `W` also covers the whole of `B` (start ≤ `d−90` **and** end ≥ `d−1`) | `WAR.inter.continuation`, `WAR.intra.continuation` |
+| **UCDP GED** | the level over `B` reaches the level over `W`: `ged_level(D(B)) ≥ ged_level(D(W))` — the same registered ladder (250 → 3, 25 → 2), applied to the baseline | `GED.location.continuation` |
+| **MIDI/MIDIP** | the incident covers the whole of `B` (for uniformity; incidents are days long and this is expected never to fire) | `MIDI.continuation` |
+
+The COW and GED tests ask the same question in the vocabulary each source has: *was the
+state this record asserts for W already the state across the whole of the preceding 90 days?*
+A spell has no intensity, so for COW the test is coverage; GED is a count, so for GED it is
+the same threshold on the baseline. Neither test invents a number.
+
+**What the level is.** For an event, on the basis Amendment 2 selects, let `D` be the records
+yielding a dated level and `U` the records that are undated-for-W:
+
+1. `D ≠ ∅` → `level` = max over `D`. Unchanged.
+2. **`D = ∅` and `U ≠ ∅` → `no_independent_outcome` = 1, `level` null,
+   `rule_fired = UNDATED.continuation`.** The event is excluded from G-scoring and counted.
+   **This is what replaces an ongoing-war level.**
+3. `D = ∅`, `U = ∅`, ≥ 1 source covers `W` → `level` = 0. A true zero: a covering source has
+   a dated view of `W` and records nothing in it.
+4. No source covers `W` → `no_independent_outcome`, `rule_fired = UNCOVERED`. Unchanged.
+
+Rule 2 is evaluated **on the basis Amendment 2 already chose**. Where the basis is dyadic and
+every dyadic record is undated-for-W, the event is `no_independent_outcome` even though
+location records exist — A2.1 already ruled that location evidence does not answer the dyadic
+question. The location reading is not lost: it stays in `level_location`, so the alternative
+can be read off the published counts without a re-run, the same device A3.2 uses for
+`hostile_unattributed`. Under this rule `soleimani_strike_2020` becomes
+`no_independent_outcome` with `level_location = 2`, not level 0 and not level 2.
+
+### A4.3 What replaces an ongoing-war level, and why — decided before the number
+
+Joe's brief put two options: `no_independent_outcome`, or a level for the **change** in
+intensity. The answer is **`no_independent_outcome` for the G target** (§A4.2 rule 2), and
+the change published beside it as a separate, separately-named measure (§A4.4) — never
+inside `level`. Four reasons, all of which hold whichever way the resulting numbers fall.
+
+1. **Level 0 would be a fabricated zero.** The obvious cheap fix — extend "ongoing → no
+   level" verbatim and let `max(default=0)` do the rest — turns 34-odd wartime events into
+   "no escalation recorded". That is not a gap, it is a false statement, and it is the same
+   error as the false threes with the sign reversed. Whatever replaces the level, it cannot
+   be 0.
+2. **The target is undefined for these events, not zero and not unknown-but-estimable.**
+   When the only thing the sources say is "a war that was already running was still running",
+   they answer no question about what *this event* did. That is the identical situation
+   Amendment 3 legislated for non-hostile events, and it takes the identical value, for the
+   identical reason: *"a statement that the G question does not apply to this event, not that
+   the event is doubtful"* (§A3.2). One project, one answer for "the target does not exist
+   here".
+3. **A change-level inside `level` would put two measurands in one column.** Levels 0–3 are
+   defined as *states reached in W* ("none / threat or display / use of force / war").
+   A level derived from an increment is a different quantity. A `level = 3` meaning "MIDI
+   recorded hostility level 5 between the pair" and a `level = 3` meaning "deaths rose 250
+   over baseline" are not the same number, and every score, κ, RPS and Brier computed over
+   the column would be computed over a mixture. A1.4 already says in terms: *"It is not a
+   change score."* Making it half a change score is worse than either.
+4. **Choosing change thresholds now would be choosing them with the outcome in view.**
+   Session K has already seen `deaths_ged_pre90` and `deaths_ged_90` for all 54 level-3 rows
+   — they are published in the brief, in red team 2 and in §A4.1 above. Any *new* cut point
+   for an increment would be picked by someone who has seen the increments. The rule in
+   §A4.2 introduces no new number: it reuses the 90-day window and the 250/25 ladder that
+   were registered before any of this was visible. That is the only version of this
+   amendment that is honestly pre-registered.
+
+**The cost, stated plainly.** This removes a large share of the G target's n, and it removes
+it non-randomly: the events it removes are disproportionately the big wartime oil shocks.
+After this amendment the G target is defined on *events that did not occur inside a conflict
+already running at the same level* — a narrower claim than "escalation", and every surface
+and the paper must say so rather than quietly reporting a smaller n. **The loss is not a cost
+to be minimised** (§A3.4's words, and they apply again): every read removed was a read against
+a label that reported the neighbourhood rather than the event. Whether the removal makes the
+engine look better or worse against persistence and climatology is **not** a consideration in
+adopting the rule and must not become one.
+
+### A4.4 The change measure, published beside and never inside
+
+Where GED covers `W`, three fields are stored and none of them is `level`:
+
+- `deaths_ged_pre90` — **redefined** to `B = [d−90, d−1]`, strictly before `d`. The old
+  `[d−89, d]` definition is withdrawn; §A4.1(ii) is the reason and the four affected events
+  are named there.
+- `deaths_ged_on_d` — **new**: `D` over `[d, d]`, so the day-`d` mass that used to hide
+  inside the "before" figure is visible on its own and can never silently move between
+  windows again.
+- `delta_level` — **new**: `ged_level(max(0, D(W) − D(B)))`, by the same registered ladder,
+  with `delta_basis = 'location'` and `deaths_ged_delta` stored beside it.
+
+`delta_level` is **a published diagnostic, not the G target.** No surface may render it as
+IES-90, no score is computed against it under this amendment, and promoting it would need a
+further amendment registered before that score exists. It is written now, and handed to
+Session B now, for one reason: B is running the persistence-conditional experiment, and the
+question "does the engine beat persistence once the target stops encoding the pre-existing
+state?" has two defensible operationalisations — drop the contaminated events (§A4.2) or
+measure the increment (this section). Registering both before either is computed is what
+stops the choice being made afterwards, by whoever likes the answer better. Both are to be
+published as computed, side by side.
+
+### A4.5 Expected effect on n and on the level distribution — the prediction, written first
+
+Registered before the implementing code was run. Point estimate with an interval; being
+wrong here is informative and is reported as such in §A4.7.
+
+| quantity | as built | predicted after Amendment 4 | reasoning |
+|---|---:|---|---|
+| level 3 | 54 | **~15** (14–24) | 27 of 38 GED-set have `D(B) ≥ 250` strictly before `d`; ~11–13 of 16 COW spells cover all of `B`; the onsets (Yom Kippur, Kuwait 1990, Iraq 2003, Ukraine 2022, Gaza 2023, Israel–Iran 2025) survive |
+| level 2 | 48 | **~34** (30–42) | 26 of 37 GED-set level 2 have a baseline at or above the 25 line; a few level-3 continuations fall here when another record still dates something |
+| level 1 | 6 | **~6** (5–8) | ICB/MID onset rules unchanged |
+| level 0 | 76 | **~58** (55–62) | the 18 false zeros of §A4.1(iii) leave, and few arrive |
+| `no_independent_outcome` | 3 | **~62** (50–75) | the sum of the above, less events that retain a dated level from a second source |
+| events with a level (pre-Amendment-3) | 184 | **~122** (110–135) | ≈ a third of the G target's n |
+
+**Direction on the persistence baseline.** The shared variance between the target and the
+persistence predictor should fall, and the engine-vs-persistence skill (−0.469 at 182828Z,
+−0.467 at 193022Z) should move **toward zero**. It may not reach it. **If persistence still
+beats the engine on the de-contaminated target, that is a real result and it is published as
+one** — the point of the amendment is to make the comparison mean something, not to win it.
+The test is Session B's; §A4.6 hands B what it needs to run it.
+
+### A4.6 What Session K computes, and what it does not touch
+
+The counts in §A4.7 are computed with `ies90.run(conn, write=False)`: every level, source,
+rule and count, **without writing a row to `event_outcomes`**. Session B holds the
+persistence-conditional experiment open against the table as it stands; rewriting the target
+underneath a running experiment is exactly the move SESSION_CHARTER §2 rule 2 and the seal
+exist to prevent. The rebuild of the `ies90` rows is therefore a **separate, announced step**
+that Joe schedules with B, not a side effect of this amendment. Until it runs,
+`event_outcomes` holds the pre-Amendment-4 labels and every published run remains reproducible
+against them.
+
+### A4.7 No retroactive application
+
+**This amendment cannot be applied to any published run retroactively**, on the same terms as
+§A3.5, which is incorporated here by reference and not restated. The sealed reads were made
+against the target as it stood. Specifically:
+
+- Runs 182828Z and 193022Z stand as published, with their n, their scores, and the
+  engine-vs-persistence skill of −0.469 / −0.467 unchanged.
+- Every surface reporting a G result from a pre-amendment run carries: *"scored before
+  Amendment 4; the escalation label on N of these events reports a conflict already running
+  at the event date, or reports 'none' where a covering source could not date one"*, with N
+  and the receipt path from §A4.8.
+- The amendment governs **the next run**, and that run is reported separately — never pooled
+  with a pre-amendment run, never presented as a correction to its numbers.
+- The paper states the defect, the affected counts, the direction, and the fact that the
+  post-amendment G target is defined on a narrower population — rather than showing a
+  corrected result.
+- The prediction in §A4.5 is scored against the computed counts in the same document, as
+  written, whether or not it was right.
+
+### A4.8 Outputs and receipts
+
+- `data/state/ies90_amendment4_counts.json` — the level distribution before and after, by
+  level, by source, by rule fired, by basis and by decade; the continuation counts per source;
+  the `delta_level` distribution; and the §A4.5 prediction scored against the outcome. Written
+  by `ies90.py` in no-write mode; contains no row that is not derived from a covering source.
+- `event_outcomes` (source `ies90`) gains `deaths_ged_on_d`, `deaths_ged_delta`, `delta_level`,
+  `delta_basis`; `deaths_ged_pre90` is redefined per §A4.4; `rule_fired` gains the six rule
+  ids of §A4.2 — **all of these on the next rebuild, not now** (§A4.6).
+- `data/state/ies90_distribution.json` gains an `amendment_4` block on that rebuild.
+- `tests/test_ies90_continuation.py` — the rules of §A4.2 as unit tests, named for this
+  amendment, including the two cases that must not regress: a war onset at `d` keeps level 3,
+  and an event whose only records are undated-for-W is never level 0.
+- `data/handoffs/K_to_B_2026-09-02_ongoing_war.md` and
+  `data/handoffs/K_to_Cowork_2026-09-02_ongoing_war.md` — the counts, for the
+  persistence-conditional experiment and for the paper.
+
+### A4.9 What this amendment does not fix
+
+Named so that no one reads the fix as larger than it is.
+
+- **GED is still a location source.** A2.1 and A1.2 already say so; the continuation test is
+  computed on the same location deaths and inherits the same weakness. `delta_level` narrows
+  it (an increment in the location is closer to an event effect than a level in the location)
+  but does not close it. Only a dyadic GED pull would, and there is no `UCDP_TOKEN` in this
+  environment.
+- **It does not make the target a change score**, and A1.4 still stands. It removes the
+  events where the state reading is inherited; it does not re-express the ones that remain.
+- **It does not address Amendment 3's precondition**, which is Session F's and still awaits
+  all four classes being coded (A3.1 §2). An event can be dropped by either rule; the two
+  exclusion counts are reported separately and never merged into one "excluded" figure.
+- **It does not touch the P target**, which does not presuppose an adversary and is unaffected.
+- **It does not re-score anything.** No score, skill, CI or p-value in this repository moves
+  because of this text.
