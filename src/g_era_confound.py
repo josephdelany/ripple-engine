@@ -31,14 +31,23 @@ WF = ROOT / "data" / "walk_forward"
 OUT_JSON = ROOT / "docs" / "g" / "ERA_CONFOUND.json"
 OUT_MD = ROOT / "docs" / "g" / "ERA_CONFOUND.md"
 
-RUN_ID = "walk_20260903T003422Z"            # §2, pinned: the run summary.json publishes
+RUN_ID = "walk_20260903T052633Z"            # §2 + Amendment 2, re-pinned: the run summary.json publishes
+SUPERSEDED_RUN = "walk_20260903T003422Z"    # A2.2: retained and published, never deleted
 SEED = 19900802                             # protocol Amendment I's registered seed
 CLUSTER_DAYS = 35                           # protocol §2's registered clustering rule
 N_BOOT = 2000
 ERAS = (("1987-99", 1987, 1999), ("2000-09", 2000, 2009),
         ("2010-19", 2010, 2019), ("2020-26", 2020, 2026))       # §3, taken from OPEN_ITEMS, not chosen
-PUBLISHED = {"n": 150, "engine_mean": 0.7687487109093333,
-             "ref_mean": 0.7010597406851313, "skill": -0.09655235680492913}
+def _published():
+    """§2: the published G block, read from summary.json rather than hard-coded, so a re-run cannot
+    leave this diagnostic quietly describing a superseded number (Amendment 2)."""
+    s = json.loads((WF / "summary.json").read_text())
+    g = s["tiers"]["daily"]["G"]["engine_vs"]["climatology"]
+    return {"run_id": s["run_id"], "n": g["n"], "engine_mean": g["engine_mean"],
+            "ref_mean": g["ref_mean"], "skill": g["skill"]}
+
+
+PUBLISHED = _published()
 SEP_RHO = 0.80          # §5(a)
 SEP_CELL_N = 20         # §5(b)
 S4_HALF = 0.5           # §4: fair spread <= half the registered spread -> the artefact explains it
@@ -94,9 +103,10 @@ def baseline_check(sc):
     e = float(np.mean([g(r, "engine") for r in sc]))
     c = float(np.mean([g(r, "climatology") for r in sc]))
     got = {"n": len(sc), "engine_mean": e, "ref_mean": c, "skill": 1 - e / c}
-    ok = (got["n"] == PUBLISHED["n"]
+    ok = (PUBLISHED["run_id"] == RUN_ID and got["n"] == PUBLISHED["n"]
           and all(abs(got[k] - PUBLISHED[k]) < 1e-7 for k in ("engine_mean", "ref_mean", "skill")))
     return {"published": PUBLISHED, "recomputed": got, "agrees": bool(ok),
+            "pinned_is_published": PUBLISHED["run_id"] == RUN_ID,
             "rule": "§2: if this does not reproduce to the seventh decimal the diagnostic is void."}
 
 
@@ -315,6 +325,10 @@ def post_hoc(frame, tab_reg, tab_fair):
                                                          - x["brier_clim"] / x["n_atoms_clim"] for x in rs])),
             }
     di = [v["differential_inflation"] for v in by_era.values()]
+    # A1.3's defect recurring: a spread over bins is dominated by the tiny ones. Report BOTH, and
+    # make the n>=8 figure the one the reading uses (Amendment 2 A2.4).
+    MIN_BIN = 8
+    di_big = [v["differential_inflation"] for v in by_era.values() if v["n"] >= MIN_BIN]
     big = {n: {"registered_skill": tab_reg[n]["skill"], "fair_skill": tab_fair[n]["skill"],
                "n": tab_reg[n]["n"], "shift": tab_fair[n]["skill"] - tab_reg[n]["skill"]}
            for n in tab_reg if tab_reg[n].get("n", 0) >= 50}
@@ -329,12 +343,20 @@ def post_hoc(frame, tab_reg, tab_fair):
                                     "the 'size artefact' are one variable under two names, not two of "
                                     "OPEN_ITEMS 1.4's three confounds.")},
         "D2_differential_inflation_by_era": by_era,
-        "D2_swing": (max(di) - min(di)) if len(di) > 1 else None,
+        "D2_swing_all_bins": (max(di) - min(di)) if len(di) > 1 else None,
+        "D2_swing_bins_ge_8": (max(di_big) - min(di_big)) if len(di_big) > 1 else None,
+        "D2_min_bin_for_reading": MIN_BIN,
         "D2_registered_prediction_was": 0.068,
-        "D2_reading": ("§4 assumed k_engine constant at 5; it ranges "
-                       f"{min(ke)}-{max(ke)} and rises with era, so the differential inflation swings "
-                       "~0.014, not 0.068 -- about a tenth of the era gradient, not most of it. "
-                       "Direction supported, magnitude not."),
+        "D2_caveat": ("A spread over era bins is dominated by the smallest bins -- the same defect that "
+                      "sank the registered S4 statistic (A1.3). The all-bins figure is reported and the "
+                      f"n >= {MIN_BIN} figure is the one the reading uses. On the superseded run the "
+                      "all-bins swing was 0.016; on this run it is inflated by a single-read bin."),
+        "D2_reading": (f"§4 assumed k_engine constant at 5; it ranges {min(ke)}-{max(ke)} and rises "
+                       "with era, so the differential inflation across the bins large enough to read "
+                       f"(n >= {MIN_BIN}) swings "
+                       + (f"{max(di_big) - min(di_big):.4f}" if len(di_big) > 1 else "n/a")
+                       + " against the 0.068 registered -- a small fraction of the era gradient, not "
+                         "most of it. Direction supported, magnitude not."),
         "D3_bins_with_n_ge_50": big,
         "D3_reading": ("§7's own caveat applied, not a post-hoc cut: the two bins that carry the sample. "
                        "Stated as a LEVEL, never as a spread."),
@@ -371,9 +393,11 @@ def to_md(o):
       f"`n_atoms_engine` ranges **{min(x['n_atoms_engine'] for x in o['frame'] if x['n_atoms_engine'])}–"
       f"{max(x['n_atoms_engine'] for x in o['frame'] if x['n_atoms_engine'])}** and rises with era. That was "
       "a wrong statement about the inputs, not a prediction that failed.")
-    a(f"- **The magnitude was ~5× too large.** Measured differential inflation swings "
-      f"**{ph['D2_swing']:.4f}** across eras against the **{ph['D2_registered_prediction_was']}** registered. "
-      "Direction supported, size not.")
+    a(f"- **The magnitude was far too large.** Measured differential inflation swings "
+      f"**{ph['D2_swing_bins_ge_8']:.4f}** across the bins large enough to read "
+      f"(n ≥ {ph['D2_min_bin_for_reading']}) against the **{ph['D2_registered_prediction_was']}** "
+      f"registered. Direction supported, size not. (All-bins spread {ph['D2_swing_all_bins']:.4f} — "
+      "dominated by the smallest bin, the same defect that sank S4; both are published.)")
     a("- **The statistic was excluded by G's own §7.** S4 was a spread over four bins, two with n = 2 and "
       "n = 10, which §7 says are description and not inference — and those two bins drove the failure. "
       "It is left failed rather than swapped, because replacing a test after seeing it fail is the move "
@@ -445,6 +469,7 @@ def to_md(o):
         a(f"| {k} | {vv['n']} | {vv['k_engine_median']:.1f} | {vv['k_clim_median']:.1f} | "
           f"{vv['differential_inflation']:+.4f} |")
     a(f"\n{ph['D2_reading']}\n")
+    a(f"> {ph['D2_caveat']}\n")
     a("**D3 — the two bins that carry the sample** (§7's caveat applied, not a post-hoc cut). "
       "A level statement, never a spread:\n")
     a("| era | n | registered skill | fair skill | shift |")
@@ -492,6 +517,8 @@ def main():
         "verdict": verdict(sep, tab_reg, bc["recomputed"]["skill"]),
         "post_hoc": post_hoc(frame, tab_reg, tab_fair),
         "cannot": CANNOT,
+        "superseded_run": json.loads(Path("/tmp/g6_superseded.json").read_text())
+        if Path("/tmp/g6_superseded.json").exists() else None,
         "frame": frame,
     }
     if not bc["agrees"]:

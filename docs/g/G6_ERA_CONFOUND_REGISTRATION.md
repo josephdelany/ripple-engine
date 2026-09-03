@@ -208,3 +208,74 @@ present it as new.
 
 §5's separability rule and its verdict, §2's pinning and baseline check, §6's power block, §7's limits, and
 the standing of the whole document as a diagnostic that gates nothing.
+
+---
+
+## Amendment 2 (2026-09-03) — the run this was computed on has been superseded; re-pin, and one correction to G's own report
+
+*Dated and appended. Session B completed its Amendment 4 re-run while G-6 was being written.
+`summary.json` now publishes `walk_20260903T052633Z` and `walk_20260903T003422Z` has been archived
+to `data/walk_forward/runs/`. The first run's results are **not deleted** — this project annotates
+its record — and both are published side by side below.*
+
+### A2.1 The Amendment D report in §2 is withdrawn: it was the benign explanation
+
+§2 reported that `scores.jsonl` held two runs while `summary.json` described one, and said this was
+"either session B mid-run and the archive step has not fired yet, or Amendment D's invariant is not
+holding." **It was the first.** `scores.jsonl` now holds one run (313 rows) and
+`data/walk_forward/runs/walk_20260903T003422Z/{reads,scores,weights}.jsonl.gz` exists. Amendment D
+held; G caught the tree mid-write. The handoff's §6 first bullet is corrected here rather than
+edited there, and the **pinning was still right**: an analysis that had read the file during that
+window without filtering would have mixed two runs, and would not have known.
+
+### A2.2 The diagnostic re-pins to the published run, and the earlier one stays published
+
+`RUN_ID` moves to **`walk_20260903T052633Z`**, the run `summary.json` publishes, with its own §2
+baseline check against the new published G block. The earlier run's tables are retained in
+`ERA_CONFOUND.json` under `superseded_run` so nothing is lost, and §2's rule is unchanged: if the
+pinned run does not reproduce the published block to the seventh decimal the diagnostic is void.
+
+**The headline the diagnostic interrogates has changed**, and that is stated rather than absorbed:
+n **150 → 100**, registered skill **−0.0966 → −0.0838**, and B's size-corrected `diagnostic_fair`
+**+0.021 → +0.0711**. The verdict, the separability rule, and §7's limits are unchanged in form and
+are recomputed on the new run; whether they come out the same way is published either way.
+
+### A2.3 Why the tests caught this and nothing else did
+
+`tests/test_g_era_confound.py::test_g6_2_the_run_is_pinned_to_the_published_one` asserts the pinned
+run *is* the one `summary.json` publishes. It failed the moment B's re-run landed. That is the test
+doing its job: a diagnostic that silently keeps describing a superseded run is worse than one that
+stops. Registered here so the pattern is deliberate — **every G artefact that reads another
+session's published output carries a test that fails when that output moves.**
+
+### A2.4 The tiny-bin defect recurred, and that is the lesson rather than the patch
+
+A1.3 recorded that S4 failed because a **spread across era bins is dominated by the smallest bins**.
+Re-pinning exposed the same defect in A1.2's own replacement statistic: on the new run the earliest
+bin holds **one read**, and the all-bins differential-inflation spread reads **0.0687** — almost
+exactly §4's registered 0.068, which would have looked like vindication. On the bins large enough
+to read (n ≥ 8) it is **0.0094**, about a seventh of the registered figure.
+
+So A1.2's conclusion holds and its *number* was run-specific. Both spreads are now published, the
+n ≥ 8 figure is the one the reading uses, and the threshold is registered here rather than chosen
+per run. **The general lesson, and it applies to anything cut by era on this corpus: a spread
+statistic over unequal bins is a statement about the smallest bin.** G has now made that mistake
+twice in one document; it is recorded twice rather than tidied once.
+
+### A2.5 The results on both runs, and why the pair is stronger than either
+
+| | superseded `…003422Z` | published `…052633Z` |
+|---|---|---|
+| n | 150 | 100 |
+| registered skill | −0.0966 | −0.0838 |
+| verdict | **NOT SEPARABLE** | **NOT SEPARABLE** |
+| criteria fired | (a) ρ ≥ 0.80, (c) | **(b)** < 2 off-diagonal cells, (c) |
+| ρ(era, pool) | +0.848 | +0.718 |
+| D1: `k_clim == pool_g` | 150 / 150 | 100 / 100 |
+| engine's benefit from size correction | 3.70× | 3.74× |
+
+**The verdict is robust across the re-run and reaches the same answer by different criteria** — on
+the new run the era/pool correlation falls below the bar, and non-separability is carried instead by
+the disappearance of off-diagonal support as n falls. D1 and the 3.7× ratio are unchanged. That
+agreement across two differently-labelled runs is stronger evidence than either run alone, and it is
+the reason the superseded run is retained rather than dropped.

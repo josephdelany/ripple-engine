@@ -95,6 +95,13 @@ pool size and k are not separately identified in these 150 reads. That is item 1
 
 ## 6. Two things for you specifically
 
+- **CORRECTED 2026-09-03, after your re-run landed:** the two-run state below was **benign** — you
+  were mid-run and the archive step had not fired. `scores.jsonl` now holds one run and
+  `data/walk_forward/runs/walk_20260903T003422Z/` exists. **Amendment D held.** The pinning was
+  still right: anything reading the file inside that window would have mixed two runs and not known
+  it. G has re-pinned to `walk_20260903T052633Z` and republished; the verdict is unchanged
+  (**NOT SEPARABLE**), reached by different criteria, and both runs are published side by side. The
+  original note follows unedited.
 - **`data/walk_forward/scores.jsonl` currently holds two runs** — `walk_20260903T003422Z` (313 rows)
   and `walk_20260903T052633Z` (313 rows) — while `summary.json` describes the first and is older on
   disk (23:23 vs 01:28). Amendment D says the sealed logs hold the current run only, with earlier runs
