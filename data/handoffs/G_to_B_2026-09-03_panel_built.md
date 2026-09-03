@@ -1,16 +1,21 @@
-# G → B, 2026-09-03 — the panel is built: 15,740 dyad-date cells, 1987–2014, nothing filtered
+# G → B, 2026-09-03 — the panel is built: 15,740 dyad-date cells (n_eff 9,733), 1987–2014, nothing filtered
 
 Registered in `data/grid/g/G4_REGISTRATION.md` Amendment 3 (Joe's ruling), built by
 `src/grid_labels.py --build`, published at `data/grid/g/PANEL.{parquet,json,md}`. G writes to
 `data/grid/g/**` only; `data/grid/**` is yours and untouched. **Nothing is scored here** — this is
 size and marginals before you score anything on it.
 
+> **Cite it as:** 15,740 dyad-date cells (n_eff 9,733 by two-way cluster on date × dyad; 1,160
+> informative), 1987-01-31 to 2014-09-30, 156 dyads. **Quoting the nominal count alone overstates
+> this panel** — Amendment 5 makes the pair structural: `PANEL.json`'s headline counts are objects,
+> not integers, so a reader gets both numbers or a `KeyError`.
+
 ## 1. Size
 
 | | |
 |---|---|
 | span | month-ends **1987-01-31 … 2014-09-30**, 333 grid dates |
-| cells | **15,740** |
+| cells | **15,740 nominal · n_eff 9,733 · 1,160 informative** |
 | distinct dyads | **156** (of 561 oil-relevant pairs) |
 | active dyads per grid date (VR-3) | 17–124, **mean 47.3** |
 | dyad-dates removed by VR-3 | **861** (selected on a record still running at t) |
@@ -55,7 +60,7 @@ evidence at one end and not the other if you have reason to.
 
 ## 4. The thing that most affects your effective-n arithmetic
 
-**7,038 of the 15,740 cells — 44.7 % — fall in 1991–1995**, where the panel's density quadruples
+**7,038 of the 15,740 cells (n_eff 9,733) — 44.7 % — fall in 1991–1995**, where the panel's density quadruples
 (≈32 cells/date before, ≈100–122 in the window, ≈18–43 after). The cause is measured, not guessed:
 at 1993-06-30, **108 of 120 active dyads** qualify on a record that began in the Gulf War window and
 **89 of 120 qualify on ICB alone**. ICB's co-actor pairing does not only fabricate *levels* for ally
@@ -78,7 +83,7 @@ are genuinely distinct dyads on genuinely distinct dates. The dependence is defi
 
 ## 5. Vintage, unchanged from the probe
 
-VR-1 strict (dataset release ≤ t): **0 of 15,740**, as before, and an upper bound. VR-2 (session A's
+VR-1 strict (dataset release ≤ t): **0 of 15,740** (n_eff 9,733), as before, and an upper bound. VR-2 (session A's
 registered convention, `WORLD_STATE_CODEBOOK` Amendment 1): 14,518 (92.2 %). **Every cell is
 `retrospective = 1`.** Covering-source mix over the 333 grid dates: all five sided sources for 249
 of them, `mid` without `midi` for the first 72 (MIDI starts 1993), and `war` drops out after
@@ -135,7 +140,7 @@ same block: it is 44.7 % of the rows, 17.6 % of the non-zero cells, and **indivi
 by the project's own registered bar**. The slices stay in the panel and the bar stays at 0.95
 (A4.1); a year that breaches is a fact about that year, published as one.
 
-**A4.2 — VR-3 asserted. It held: 15,740 cells checked, 0 violations, `asserted: true`.** Computed
+**A4.2 — VR-3 asserted. It held: 15,740 cells checked (n_eff 9,733), 0 violations, `asserted: true`.** Computed
 on an independent path over the built parquet, in Amendment F.1's standing — one violation would
 void the panel.
 
@@ -152,7 +157,7 @@ your published `power_arithmetic.json` rather than from memory:
 | | dyads | with any variation | cells | share level 0 | DEFF | informative cells |
 |---|---|---|---|---|---|---|
 | B, full cross | 966 | **400** | 321,678 | 0.968 | 56.4 | 10,442 |
-| G, active set | 156 | 156 (all, by construction) | 15,740 | 0.903 | 1.47 | 1,160 |
+| G, active set | 156 | 156 (all, by construction) | 15,740 nominal / n_eff 9,733 | 0.903 | 1.47 | 1,160 |
 
 Your escalation panel is the **full cross** — every register dyad at every grid date, no active
 rule — so it carries dyads that are constant zero for the whole span, and a constant series is

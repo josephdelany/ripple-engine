@@ -1,6 +1,8 @@
 # The dyad-date escalation panel, 1987–2014 — size and marginals, before anything is scored
-*Built by `src/grid_labels.py` under `data/grid/g/G4_REGISTRATION.md` Amendment 3, which was
+*Built by `src/grid_labels.py` under `data/grid/g/G4_REGISTRATION.md` Amendments 3–5, which were
 committed first. Nothing here is a score, a forecast or a skill. No cell is filtered out.*
+
+> **Cite this panel as:** 15,740 dyad-date cells (n_eff 9,733 by two-way cluster on date x dyad; 1,160 informative), 1987-01-31 to 2014-09-30, 156 dyads. Quoting the nominal count alone overstates this panel.
 
 ## The three limits, first, because they are properties of the construction and not caveats
 
@@ -12,9 +14,10 @@ committed first. Nothing here is a score, a forecast or a skill. No cell is filt
 
 ## 1. Size
 
-- **15,740 cells** over **333 month-ends** (1987-01-31 … 2014-09-30), on **156 distinct dyads** of 561 oil-relevant pairs.
+- **15,740 cells nominal — n_eff 9,733** (two-way cluster on date × dyad, A5.2; block estimator 13,554), of which **1,160 informative** (non-zero ΔIES). Over **333 month-ends** (1987-01-31 … 2014-09-30), on **156 distinct dyads** of 561 oil-relevant pairs.
+- *Nominal overstates: the panel is 90 % zeros and heavily clustered. Quote the pair.*
 - active dyads per grid date (VR-3): 17–124 (mean 47.3); under plain R-ACT the mean is 49.9, so **VR-3 removes 861 dyad-dates** that were selected on a record still running at t.
-- L defined on 14,997 (0.9528) · ΔIES defined on 14,344 (0.9113)
+- L defined on 14,997 (0.9528) · ΔIES defined on **14,344 nominal / n_eff 9,733** (0.9113)
 
 ## 2. The ΔIES marginal — the number B needs before scoring
 
@@ -23,7 +26,7 @@ committed first. Nothing here is a score, a forecast or a skill. No cell is filt
 | cells | 8 | 266 | 323 | 13,184 | 363 | 200 |
 | share | 0.0006 | 0.0185 | 0.0225 | 0.9191 | 0.0253 | 0.0139 |
 
-**14,344 defined, 1,160 non-zero, share zero 0.9191.** L: {"0": 13548, "1": 579, "2": 851, "3": 19}, share zero 0.9034.
+**14,344 defined (n_eff 9,733), 1,160 non-zero, share zero 0.9191.** L: {"0": 13548, "1": 579, "2": 851, "3": 19}, share zero 0.9034.
 
 ## 3. Evidence class — a FIELD on every cell (A3.3), never a filter
 
@@ -35,7 +38,7 @@ committed first. Nothing here is a score, a forecast or a skill. No cell is filt
 | `ged_location` | 0 | 0 |
 | `undefined` | 1,396 | 0 |
 
-**The strict subset** (`evidence_class == opposed_side`): **14,232 cells** (0.9042 of the panel) on 156 dyads, last date 2014-09-30; ΔIES defined on 14,232, **1,059 non-zero**, share zero 0.9256. ΔIES: {"-3": 6, "-2": 258, "-1": 304, "0": 13173, "1": 295, "2": 196}
+**The strict subset** (`evidence_class == opposed_side`): **14,232 cells nominal, n_eff 12,076** (0.9042 of the panel) on 156 dyads, last date 2014-09-30; ΔIES defined on 14,232, **1,059 non-zero**, share zero 0.9256. ΔIES: {"-3": 6, "-2": 258, "-1": 304, "0": 13173, "1": 295, "2": 196}
 
 This is the subset the scored study runs on. It is a selection on a field that is already there; the diagnostic runs on the full panel. Nothing is rebuilt to move between them.
 
@@ -129,7 +132,7 @@ The slice stays in the panel and the bar stays at 0.95 (A4.1). A year that breac
 
 ### 7.2 Admission audit — VR-3 asserted, not trusted
 
-- cells checked: **15,740** · violations: **0** · `asserted`: **True**
+- cells checked: **15,740** (n_eff 9,733) · violations: **0** · `asserted`: **True**
 - A4.2: every admitted cell's admitting record ends strictly before t. One violation voids the panel (WALK_FORWARD_PROTOCOL Amendment F.1 standing).
 
 ### 7.3 Effective n beside nominal
@@ -151,7 +154,7 @@ Computed by calling `src/engine/grid/power_arithmetic.py (session B); functions 
 | | dyads | dyads with any variation | cells | share level 0 | DEFF | informative cells |
 |---|---|---|---|---|---|---|
 | B, full cross | 966 | 400 | 321,678 | 0.96754 | 56.417 | 10,442 |
-| G, active set | 156 | 156 (all, by construction) | 15,740 | 0.90338 | 1.4738 | 1,160 |
+| G, active set | 156 | 156 (all, by construction) | 15,740 nominal / n_eff 9,733 | 0.90338 | 1.4738 | 1,160 |
 
 They are different objects, not different answers. B's escalation panel is the FULL cross -- every register dyad at every grid date, no active rule -- so it carries dyads that are constant zero for the whole span, and a constant series is perfectly autocorrelated, which is what drives its DEFF up. B's own file records only 400 of 966 dyads with ANY variation. G's panel is the ACTIVE-SET panel (R-ACT + VR-3), which excludes those dyads by construction, so its DEFF is far lower and is the DEFF of the panel G actually built. Neither number transfers to the other panel.
 

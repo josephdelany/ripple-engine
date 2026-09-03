@@ -156,7 +156,8 @@ than a filter in one project's pipeline.
 ## Measured over the whole panel
 
 Computed by `src/grid_labels.py --build` over the 333 month-ends of 1987-01-31 … 2014-09-30
-(`PANEL.json.icb_replication`; the panel is 15,740 dyad-date cells on 156 dyads).
+(`PANEL.json.icb_replication`; the panel is 15,740 dyad-date cells — n_eff 9,733 by two-way
+cluster, 1,160 informative — on 156 dyads).
 
 **ICB sets a level on 158 cells, from 25 distinct crises.**
 Dyads per crisis: mean **2.24**, max **12**.
@@ -204,7 +205,7 @@ visible in the panel's density, which is not uniform:
 At 1993-06-30, **108 of the 120 active dyads** qualify on a record that began in the Gulf War
 window, and **89 of 120 qualify on ICB alone**.
 
-**7,038 of the panel's 15,740 cells — 44.7% — fall in 1991-1995.** They are
+**7,038 of the panel's 15,740 cells (n_eff 9,733) — 44.7% — fall in 1991-1995.** They are
 not fabricated labels: 6,524 of them carry `opposed_side` evidence,
 because MID and MIDI are covering and supply real levels (mostly zero). What is fabricated is
 their **existence on the grid**. And they are the panel's least informative half:

@@ -1088,8 +1088,9 @@ def checks_md(s):
     else:
         a("\nNo slice breaches the bar.")
     a(f"\n### 7.2 Admission audit — VR-3 asserted, not trusted\n")
-    a(f"- cells checked: **{aa['cells_checked']:,}** · violations: **{aa['violations']}** · "
-      f"`asserted`: **{aa['asserted']}**")
+    ce = (s["size"]["cells"] if isinstance(s["size"]["cells"], dict) else {"n_eff_two_way": None})
+    a(f"- cells checked: **{aa['cells_checked']:,}** (n_eff {ce['n_eff_two_way']:,.0f}) · "
+      f"violations: **{aa['violations']}** · `asserted`: **{aa['asserted']}**")
     a(f"- {aa['rule']}")
     if aa["first_violation"]:
         a(f"- first violation: `{json.dumps(aa['first_violation'])}`")
@@ -1116,22 +1117,15 @@ def checks_md(s):
         b_, g_ = r["B_panel"], r["G_panel"]
         a(f"| B, full cross | {b_['n_dyads']} | {b_['n_dyads_with_any_variation']} | {b_['n_nominal_cells']:,} | "
           f"{b_['share_level_0']} | {b_['D_eff']} | {b_['informative_cells']:,} |")
-        a(f"| G, active set | {g_['n_dyads']} | {g_['n_dyads']} (all, by construction) | {g_['n_nominal_cells']:,} | "
+        gn = s["size"]["cells"] if isinstance(s["size"]["cells"], dict) else {"n_eff_two_way": None}
+        a(f"| G, active set | {g_['n_dyads']} | {g_['n_dyads']} (all, by construction) | "
+          f"{g_['n_nominal_cells']:,} nominal / n_eff {gn['n_eff_two_way']:,.0f} | "
           f"{g_['share_level_0']} | {g_['D_eff_two_way']} | {g_['informative_cells']:,} |")
         a(f"\n{r['why_they_differ']}\n")
         a(f"**{r['shared_warning']}**")
     return "\n".join(L)
 
 
-if __name__ == "__main__":
-    if "--build" in sys.argv:
-        build_main()
-    elif "--addendum" in sys.argv:
-        panel_addendum()
-    elif "--checks" in sys.argv:
-        panel_checks()
-    else:
-        main()
 
 
 # ================================================================================================
@@ -1181,6 +1175,15 @@ def apply_amendment_5(s):
     return s
 
 
+def bare_nominal_offsets(text, nominal, effective, window=300):
+    """A5.5. Offsets in `text` where the nominal figure appears with no effective figure within
+    `window` characters either side. Empty list == the document never quotes nominal alone.
+    Factored out of the test so the enforcement itself can be tested on a known violation."""
+    import re as _re
+    hits = [m.start() for m in _re.finditer(_re.escape(str(nominal)), text)]
+    return [i for i in hits if str(effective) not in text[max(0, i - window):i + window]]
+
+
 def nom(x):
     """Read a headline count that may be a paired object (A5.1) or a plain int (pre-A5)."""
     return int(x["nominal"]) if isinstance(x, dict) else int(x)
@@ -1209,3 +1212,13 @@ def finalize(s, df, spells):
     s["amendment_4"] = ("A4.1-A4.3 are session B's designs, offered in "
                         "data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution.")
     return write_panel(s, df)
+
+if __name__ == "__main__":
+    if "--build" in sys.argv:
+        build_main()
+    elif "--addendum" in sys.argv:
+        panel_addendum()
+    elif "--checks" in sys.argv:
+        panel_checks()
+    else:
+        main()

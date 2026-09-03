@@ -6,6 +6,7 @@ data/grid/g/PROBE.json.
 """
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -306,9 +307,9 @@ def test_A3_the_panel_is_never_filtered_by_evidence_class():
     """A3.3: the strict subset is a SELECTION on a field, not a smaller build. Every class must be
     present in the panel, and the classes must sum to the cell count."""
     s = json.loads(PANEL.read_text())
-    assert sum(s["evidence_class"].values()) == s["size"]["cells"]
-    assert s["strict_subset"]["cells"] <= s["size"]["cells"]
-    assert s["strict_subset"]["cells"] == s["evidence_class"].get("opposed_side", 0)
+    assert sum(s["evidence_class"].values()) == G.nom(s["size"]["cells"])
+    assert G.nom(s["strict_subset"]["cells"]) <= G.nom(s["size"]["cells"])
+    assert G.nom(s["strict_subset"]["cells"]) == s["evidence_class"].get("opposed_side", 0)
 
 
 @pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
@@ -435,7 +436,7 @@ def test_A4_2_the_published_panel_passes_its_own_admission_audit():
     s = json.loads(PANEL.read_text())
     a = s["admission_audit"]
     assert a["asserted"] is True and a["violations"] == 0
-    assert a["cells_checked"] == s["size"]["cells"]
+    assert a["cells_checked"] == G.nom(s["size"]["cells"])
 
 
 @pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
@@ -473,3 +474,136 @@ def test_A4_1_the_published_tripwire_reports_breaches_without_dropping_them():
     years = {b["year"] for b in t["breaches"]}
     assert years & {"1991", "1992", "1993"}, years
     assert s["by_year"]["1992"]["cells"] > 0                               # not dropped
+
+
+# ================================================================================================
+# Amendment 5 — the effective count is not optional. These tests are the enforcement; without them
+# A5 is a convention an author in a hurry can drop.
+# ================================================================================================
+
+PANEL_MD = ROOT / "data" / "grid" / "g" / "PANEL.md"
+HEADLINE_KEYS = (("size", "cells"), ("dIES", "n_defined"), ("strict_subset", "cells"))
+
+
+def test_A5_1_paired_is_an_object_and_never_exceeds_nominal():
+    en = {"n_eff_two_way": 900.0, "n_eff_block": 950.0, "n_nonzero_nominal": 40}
+    p = G.paired(1000, en)
+    assert p["nominal"] == 1000 and p["n_eff_two_way"] == 900.0 and p["informative"] == 40
+    assert "note" in p and p["n_eff_two_way"] <= p["nominal"]
+    assert G.nom(p) == 1000 and G.nom(1000) == 1000              # readers use nom() for either shape
+
+
+def test_A5_1_apply_amendment_5_is_idempotent():
+    s = {"size": {"cells": 10, "distinct_dyads": 3}, "dIES": {"n_defined": 8, "n_nonzero": 2},
+         "strict_subset": {"cells": 7, "dIES_nonzero": 1}, "span": {"start": "a", "end": "b"},
+         "effective_n": {"full_panel": {"n_eff_two_way": 5.0, "n_eff_block": 6.0, "n_nonzero_nominal": 2},
+                         "opposed_side": {"n_eff_two_way": 4.0, "n_eff_block": 5.0, "n_nonzero_nominal": 1}}}
+    a = G.apply_amendment_5(dict(s))
+    b = G.apply_amendment_5(G.apply_amendment_5(dict(s)))
+    assert a["size"]["cells"] == b["size"]["cells"] == {"nominal": 10, "n_eff_two_way": 5.0,
+                                                       "n_eff_block": 6.0, "informative": 2,
+                                                       "note": G.PAIR_NOTE}
+
+
+def test_A5_3_the_citation_line_cannot_exist_without_the_effective_count():
+    s = G.apply_amendment_5({
+        "size": {"cells": 15740, "distinct_dyads": 156}, "dIES": {"n_defined": 14344, "n_nonzero": 1160},
+        "strict_subset": {"cells": 14232, "dIES_nonzero": 1059},
+        "span": {"start": "1987-01-31", "end": "2014-09-30"},
+        "effective_n": {"full_panel": {"n_eff_two_way": 9732.7, "n_eff_block": 13553.8, "n_nonzero_nominal": 1160},
+                        "opposed_side": {"n_eff_two_way": 12076.4, "n_eff_block": 13589.2, "n_nonzero_nominal": 1059}}})
+    assert "15,740" in s["cite"] and "9,733" in s["cite"] and "1,160" in s["cite"]
+    assert "overstates" in s["cite"]
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A5_1_no_headline_count_in_the_published_json_is_a_bare_integer():
+    """A5.1: a programmatic reader gets the pair or a KeyError. If this ever fails, someone can quote
+    the nominal size of this panel without its effective size, which is the thing A5 exists to stop."""
+    s = json.loads(PANEL.read_text())
+    for a, b in HEADLINE_KEYS:
+        v = s[a][b]
+        assert isinstance(v, dict), f"{a}.{b} is a bare {type(v).__name__} -- Amendment 5 violated"
+        for k in ("nominal", "n_eff_two_way", "n_eff_block", "informative", "note"):
+            assert k in v, f"{a}.{b} missing {k}"
+        assert v["n_eff_two_way"] <= v["nominal"]
+        assert v["informative"] <= v["nominal"]
+
+
+@pytest.mark.skipif(not PANEL_MD.exists(), reason="panel not built in this tree")
+def test_A5_5_every_nominal_figure_in_the_report_has_an_effective_figure_beside_it():
+    """A5.5, the enforcement Joe asked for: 'make the effective number impossible to omit'. Every
+    occurrence of the nominal cell count in PANEL.md must have an effective figure within 300
+    characters. A future edit that reintroduces a bare count fails here."""
+    s = json.loads(PANEL.read_text())
+    md = PANEL_MD.read_text()
+    nominal = f"{G.nom(s['size']['cells']):,}"
+    eff = f"{s['size']['cells']['n_eff_two_way']:,.0f}"
+    assert nominal in md, f"the nominal count {nominal} does not appear in PANEL.md at all"
+    hits = [m.start() for m in re.finditer(re.escape(nominal), md)]
+    bare = G.bare_nominal_offsets(md, nominal, eff)
+    assert not bare, (f"{len(bare)} of {len(hits)} occurrences of {nominal} in PANEL.md carry no "
+                      f"effective figure ({eff}) within 300 characters; first at offset {bare[:1]}")
+
+
+@pytest.mark.skipif(not PANEL_MD.exists(), reason="panel not built in this tree")
+def test_A5_3_the_report_leads_with_the_citation_line():
+    s = json.loads(PANEL.read_text())
+    md = PANEL_MD.read_text()
+    assert s["cite"] in md
+    assert md.index(s["cite"]) < md.index("## 1. Size"), "the cite line must precede the size section"
+
+
+def test_A5_4_there_is_exactly_one_writer_and_it_runs_the_checks_first():
+    """A5.4: no code path publishes a panel without its effective counts, because the only writer
+    applies Amendment 5 and the only route to it runs A4.1-A4.3 first."""
+    src_text = (ROOT / "src" / "grid_labels.py").read_text()
+    assert src_text.count('(PANEL_DIR / "PANEL.json").write_text') == 1
+    assert src_text.count('(PANEL_DIR / "PANEL.md").write_text') == 1
+    i = src_text.index("def write_panel(")
+    assert "apply_amendment_5(s)" in src_text[i:i + 700]
+    j = src_text.index("def finalize(")
+    body = src_text[j:j + 900]
+    for check in ("share_zero_tripwire(df)", "admission_audit(df, spells)", "effective_n(df)", "write_panel("):
+        assert check in body, check
+
+
+def test_A5_5_the_enforcement_itself_catches_a_bare_nominal():
+    """A test of the test. An enforcement nobody has seen fail is not an enforcement."""
+    good = "the panel has 15,740 cells (n_eff 9,733) and that is the pair"
+    bad = "the panel has 15,740 cells." + (" filler." * 60) + " n_eff 9,733 much later"
+    assert G.bare_nominal_offsets(good, "15,740", "9,733") == []
+    assert G.bare_nominal_offsets(bad, "15,740", "9,733") == [bad.index("15,740")]
+    # it is the WINDOW that decides, not the presence of the number somewhere in the file
+    assert G.bare_nominal_offsets(bad, "15,740", "9,733", window=10_000) == []
+    # and it fires on the real published file the moment a pair is broken (negative control)
+    md = PANEL_MD.read_text() if PANEL_MD.exists() else good
+    tampered = md.replace("15,740 cells nominal — n_eff 9,733", "15,740 cells", 1)
+    if tampered != md:
+        assert G.bare_nominal_offsets(tampered, "15,740", "9,733")
+
+
+G_SURFACES = (
+    ROOT / "data" / "grid" / "g" / "PANEL.md",
+    ROOT / "data" / "grid" / "g" / "ICB_DYADIC_REPLICATION.md",
+    ROOT / "data" / "handoffs" / "G_to_B_2026-09-03_panel_built.md",
+)
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A5_5_no_G_authored_surface_quotes_the_nominal_alone():
+    """A5.5 extended to every surface Session G writes about this panel, not just the report. Joe's
+    instruction was that the effective number be impossible to omit; a handoff that quotes 15,740
+    bare omits it just as effectively as a report would."""
+    s = json.loads(PANEL.read_text())
+    nominal = f"{G.nom(s['size']['cells']):,}"
+    eff = f"{s['size']['cells']['n_eff_two_way']:,.0f}"
+    offenders = {}
+    for p in G_SURFACES:
+        if not p.exists():
+            continue
+        bare = G.bare_nominal_offsets(p.read_text(), nominal, eff)
+        if bare:
+            offenders[p.name] = bare
+    assert not offenders, (f"these G-authored surfaces quote the nominal count {nominal} with no "
+                           f"effective figure ({eff}) within 300 characters: {offenders}")

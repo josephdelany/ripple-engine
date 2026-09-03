@@ -11,7 +11,13 @@
   "3. It never scores onset. R-ACT admits a dyad only after a recorded clash, so a dyad quiet for five years that goes to war is absent from the grid at every date before its first record. Skill measured here is skill at continuation and de-escalation, never at onset."
  ],
  "size": {
-  "cells": 15740,
+  "cells": {
+   "nominal": 15740,
+   "n_eff_two_way": 9732.7,
+   "n_eff_block": 13553.8,
+   "informative": 1160,
+   "note": "nominal overstates. n_eff is the two-way cluster on (date, dyad) -- A5.2 -- and is the number to quote; `informative` is the non-zero count, which is what actually discriminates."
+  },
   "distinct_dyads": 156,
   "oil_dyads_possible": 561,
   "active_per_date_vr3": {
@@ -36,7 +42,13 @@
   "share_zero": 0.9034
  },
  "dIES": {
-  "n_defined": 14344,
+  "n_defined": {
+   "nominal": 14344,
+   "n_eff_two_way": 9732.7,
+   "n_eff_block": 13553.8,
+   "informative": 1160,
+   "note": "nominal overstates. n_eff is the two-way cluster on (date, dyad) -- A5.2 -- and is the number to quote; `informative` is the non-zero count, which is what actually discriminates."
+  },
   "share_defined": 0.9113,
   "dist": {
    "-3": 8,
@@ -61,7 +73,13 @@
   "icb_co_actor_never_opposed": 18
  },
  "strict_subset": {
-  "cells": 14232,
+  "cells": {
+   "nominal": 14232,
+   "n_eff_two_way": 12076.4,
+   "n_eff_block": 13589.2,
+   "informative": 1059,
+   "note": "nominal overstates. n_eff is the two-way cluster on (date, dyad) -- A5.2 -- and is the number to quote; `informative` is the non-zero count, which is what actually discriminates."
+  },
   "share_of_panel": 0.9042,
   "dIES_defined": 14232,
   "dIES_nonzero": 1059,
@@ -1301,5 +1319,7 @@
    "n_nonzero_nominal": 1059
   }
  },
- "amendment_4": "A4.1-A4.3 are session B's designs, offered in data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution."
+ "amendment_4": "A4.1-A4.3 are session B's designs, offered in data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution.",
+ "cite": "15,740 dyad-date cells (n_eff 9,733 by two-way cluster on date x dyad; 1,160 informative), 1987-01-31 to 2014-09-30, 156 dyads. Quoting the nominal count alone overstates this panel.",
+ "amendment_5": "A5: the nominal count does not exist as a scalar in this file. Every headline count is a paired object and `cite` carries both numbers. Enforced by tests/test_g_grid_labels.py, not by care."
 }
