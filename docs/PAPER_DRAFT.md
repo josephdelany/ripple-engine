@@ -171,8 +171,11 @@ event indicator's band **covers zero** (−1.572) while a continuous measure of 
 present. Our own severity ordinal fails too. On the physical side the dummy's one positive band is
 a **timing artefact**: production dips 0.549% the month before an announcement and rebounds 0.674%
 in it, so the coefficient is the rebound leg of a V — the dummy marks *when OPEC meets*, not *what
-OPEC decided*. **Event occurrence is not the quantity that moves the oil market; belief revision
-is.** That applies to any system built on dated event dummies, including commercial ones. And the
+OPEC decided*. **This is not a claim that events do not move oil** — our own replication of
+Känzig's supply-news shock moves Brent +0.851 at h = 0 rising to +2.37 at h = 20, and Hormuz 2026
+moved it +48.5%. It is a claim about **encoding**: an occurrence flag discards magnitude, so it is
+a poor regressor for the size of a response, and any system built on dated event dummies inherits
+that — ours and commercial ones alike. And the
 tightening classes correlate **r = −0.023** with the identified supply shock over 614 months, so
 whether those events are shocks at all is the prior question. **§12.3.**
 
@@ -982,10 +985,25 @@ not.)
 have, and it collapses the moment the surprise is in the regression.** Our own hand-coded severity
 ordinal fails too, which closes the cheapest available substitute.
 
-**The honest limit on this.** It does not show that magnitude is the right instrument in general:
-the evidence is entirely on the price side, and a futures-price surprise predicting prices is close
-to circular by construction. What it shows is the negative half, which is not circular — **event
-*occurrence* is not the informative quantity.** The market's revision of belief is.
+**What this does and does not say, stated carefully because the distinction is the whole point.**
+It does **not** say geopolitical and military events do not move oil. This paper's own replications
+show that they do: Känzig's oil-supply news shock, run through our estimator, moves Brent
+**+0.851 (SE 0.103) at h = 0 rising to +2.37 at h = 20**, every horizon excluding zero (§12), and
+the Baumeister–Hamilton identified supply shock moves JODI production **+0.760 [+0.496, +1.023]**.
+The 2026 Hormuz closure moved Brent **+48.5%**. Events move oil, and the literature establishing
+that (Kilian 2009; Baumeister & Hamilton 2019; Caldara & Iacoviello 2022) is not in dispute here.
+
+What it says is narrower and is about **encoding**: a dated 0/1 flag that an event of some class
+occurred is a poor *regressor* for the size of the response, because it discards the one thing that
+varies — how much the event revised expectations. Two OPEC announcements both get a 1; one shifts
+the curve and one is fully anticipated. On the 44 shared days the flag carries no incremental
+information beyond a continuous measure of the same events, and collapses in its presence.
+
+**The honest limit.** This does not establish that magnitude is the right instrument in general:
+the evidence is on the price side, and a futures-price surprise predicting prices is close to
+circular. The non-circular half is the negative one — **occurrence flags do not measure
+magnitude**, and a forecasting system built on them is asking a variable with no variance to
+explain one with a great deal.
 
 **Quantity (JODI production, h = 0) — and here the dummy's one win is an artefact.** The indicator
 gets the only band excluding zero (+0.881 [+0.151, +1.611]) and it clears the registered

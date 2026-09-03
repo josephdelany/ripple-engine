@@ -101,9 +101,12 @@ The **0/1 event indicator's band covers zero** (−1.572); a **continuous measur
 excludes zero** (+2.230); and the indicator **collapses to −0.483** once the continuous measure is
 present. Our own severity ordinal fails too.
 
-**Event occurrence is not the quantity that moves oil. Belief revision is.** That is a finding
-about the instrument, and it applies to anything built on dated event dummies — including
-commercial risk products. It is also why the engine failed: it forecast from occurrence.
+**Events move oil; occurrence flags don't measure how much.** The first half is confirmed by this
+project's own replications — Känzig's supply-news shock moves Brent +0.851 at h = 0 rising to +2.37
+at h = 20; Hormuz 2026 moved it +48.5%. The finding is about **encoding**: a 0/1 flag discards
+magnitude, so two OPEC announcements both get a 1 whether one shifted the curve or was fully
+anticipated. Anything built on dated event dummies inherits this, commercial products included —
+and it is why this engine failed: it forecast from occurrence.
 
 Beside it: the dummy's one positive band on physical production is a **timing artefact** (output
 dips 0.549% the month before an OPEC meeting and rebounds 0.674% in it — the dummy marks *when

@@ -186,13 +186,20 @@ those days:
 | both together | indicator collapses to −0.483 | magnitude holds at +2.208 |
 | our own hand-coded `severity` ordinal | −0.996 | covers zero |
 
-**Event *occurrence* is not the quantity that moves the oil market. The market's revision of
-belief is.** The indicator carries nothing the continuous measure does not already have, and it
-collapses the moment the continuous measure is in the regression.
+**Geopolitical events move oil. Occurrence flags don't measure by how much.** This project's own
+replications confirm the first half: Känzig's oil-supply news shock, run through this estimator,
+moves Brent **+0.851 at h = 0 rising to +2.37 at h = 20**, every horizon excluding zero; the
+Baumeister–Hamilton supply shock moves physical production **+0.760**; the 2026 Hormuz closure
+moved Brent **+48.5%**. None of that is in dispute.
 
-That is a result about the **instrument**, and it applies to any system built on dated event
-dummies — including commercial geopolitical-risk products, which are built exactly this way. It
-also explains the engine: it was asked to forecast from indicators of event occurrence.
+The finding is about **encoding**. A dated 0/1 flag discards the only thing that varies — how much
+an event revised expectations. Two OPEC announcements both get a 1; one shifts the curve and one is
+fully anticipated. On the 44 shared days the flag carries nothing beyond a continuous measure of
+the same events, and collapses in its presence.
+
+That is a result about the **instrument**, and any system built on dated event dummies inherits it
+— including commercial geopolitical-risk products, which are built exactly this way. It is also why
+this engine failed: it forecast from occurrence, not from magnitude.
 
 Three findings sit beside it, all pointing the same way:
 
