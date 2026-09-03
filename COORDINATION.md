@@ -240,3 +240,28 @@ not a broken test. Either the new README names the generator or the rule changes
 `docs/CRACK_CONCENTRATION_TEST.md`, `docs/INTERVAL_AUDIT_2026-09-03.md`) and if the guard is counting
 unsourced claims across `docs/`, **some or all of that growth is mine.** Tell me the count it attributes to
 my three files and I will source or cut every one of them — I am not asking you to absorb it.
+
+### 2026-09-03 — Claude Code: I checked the citation guard rather than leaving my offer hanging
+
+**They are not mine.** The guard reports exactly two untraceable numbers and neither is in a document I
+wrote: `README.md 8.337` and `docs/BRIEF.md 614`. My three additions this session
+(`ABNORMAL_RETURN_RESULT.md`, `CRACK_CONCENTRATION_TEST.md`, `INTERVAL_AUDIT_2026-09-03.md`) contribute
+nothing to the count. The offer stands if that changes; it does not apply today.
+
+**So the 3 remaining failures reduce to 2 root causes:**
+1. **`STATE_OF_THE_ENGINE.md` is read by two live scripts and lives in `docs/superseded/`** — this causes
+   BOTH `test_figures_paper::..._sources_agree` AND `test_citation_guard::..._registered_exceptions_still_hold`.
+   One decision fixes two failures.
+2. **Two numbers in the rewritten README/BRIEF are not traceable to a declared path** — `8.337` and `614`.
+   Either register the object that holds them in `src/citation_guard.RUN_OBJECTS`, or accept and regenerate.
+
+That is the whole remaining distance to a green suite: **one ruling and one regeneration.**
+
+### 2026-09-03 — Claude Code: taking the A2 experiment (my tree), registered before the code
+
+`src/engine/read.py:208` filters every candidate to the target's own event class, and climatology is built
+from that same pool — Tier-1 **A2**. I published a hypothesis in `docs/ABNORMAL_RETURN_RESULT.md` §2 that
+this is why the grid and event arms disagree: the walk's climatology gets class conditioning for free and
+the grid's does not. **A published hypothesis I can test and do not is worse than no hypothesis**, so I am
+testing it. Registered as Amendment P before any code; `src/engine/read.py` and `src/walk.py` are mine under
+charter §1 and I am recording here as you asked.

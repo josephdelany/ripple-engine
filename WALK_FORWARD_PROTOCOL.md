@@ -49,3 +49,41 @@ withdrawn**, and it **cannot move any §7 verdict** on its own.
   it is the reason the guards in O.4 are mandatory rather than optional.
 Published in `summary.json → tiers.daily.P.diagnostic_abnormal` with `registered: true`,
 `derived_from_run`, and the dropped-window count.
+
+## Amendment P (2026-09-03) — the class filter removed: testing A2, and the hypothesis it was raised to explain
+*Registered BEFORE the code. Session B. `docs/audit/01_TIER1_design_defects.md` A2 establishes that
+`src/engine/read.py:208` restricts every retrieval candidate to the target's own event class, and that
+`walk.py` then builds climatology from that same pool — so class conditioning is given to the engine and to
+its baseline for free, and what is actually tested is reranking WITHIN a class. Amendment O's result raised
+a specific, falsifiable consequence, and this amendment tests it rather than leaving it asserted.*
+
+### P.1 The hypothesis, stated as published
+`docs/ABNORMAL_RETURN_RESULT.md` §2 observed that on the corrected abnormal-return target the grid arm's
+engine beats random analogs (+0.0705, p < 0.0001, surviving FDR) while the event walk's does not
+(+0.006, p 0.82), and proposed one mechanism: **the walk's climatology is class-filtered and the grid's is
+not**, so the walk's baseline is strong and the grid's is weak. **Prediction: remove the class filter from
+the walk and the two arms converge** — the walk's climatology weakens, and the engine's standing against
+climatology and against random analogs both improve.
+
+### P.2 What changes, and it is exactly one thing
+The candidate pool becomes **all prior events with a closed outcome**, not only same-class ones. Retrieval,
+k, the menu, the Hedge rule, the scores, the baselines, the clustering, the seeds and the inference are
+**unchanged**. Climatology is rebuilt from the unfiltered pool, as it always was from whatever pool the
+engine drew on. The run is a **separate, additionally published run**; `walk_20260903T052633Z` and every
+number in it stand.
+
+### P.3 Registered outcomes, before the numbers
+- **The arms converge** (walk's engine-vs-random-analogs rises toward the grid's, engine-vs-climatology
+  rises) → **A2 is confirmed as the mechanism**, and the paper must say that its published price and
+  escalation results are measurements of *within-class reranking against a class-conditioned baseline*,
+  which is a far narrower claim than "formalised historical analogy".
+- **They do not converge** → the hypothesis in `ABNORMAL_RETURN_RESULT.md` §2 is **wrong and is retracted
+  there by name**, and the arms differ for some other reason still to be found.
+- **The engine gets worse without the filter** → class membership was carrying real information that the
+  state vector cannot recover, which is itself a finding about what the similarity metric does not encode.
+All three are publishable. **This cannot promote anything**: §7 is untouched, the label audit is unpassed,
+and an unfiltered run is a diagnostic on the design, not a new gate.
+
+### P.4 Guards
+The registered draws, SPA with climatology as benchmark, BH-FDR across the reported family, and the
+filtration audit of Amendment F.1 all apply unchanged. A run whose filtration audit fails is void, as always.
