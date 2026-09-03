@@ -1,0 +1,1502 @@
+[
+ {
+  "event_id": "desert_storm_air_campaign_1991",
+  "date": "1991-01-17",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 4,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5
+ },
+ {
+  "event_id": "operation_desert_fox_1998",
+  "date": "1998-12-16",
+  "l_minus": 1,
+  "level": 2,
+  "delta": "1",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5008998640877069
+ },
+ {
+  "event_id": "september_11_attacks_2001",
+  "date": "2001-09-11",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.49452868134978323
+ },
+ {
+  "event_id": "iraq_war_begins_2003",
+  "date": "2003-03-20",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4485276612557016
+ },
+ {
+  "event_id": "nigeria_warri_shutin_2003",
+  "date": "2003-03-23",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4485276612557016
+ },
+ {
+  "event_id": "iraq_sanctions_lifted_2003",
+  "date": "2003-05-22",
+  "l_minus": 3,
+  "level": 1,
+  "delta": "-2",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4485276612557016
+ },
+ {
+  "event_id": "libya_sanctions_lifted_2004",
+  "date": "2004-04-23",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4652592383713453
+ },
+ {
+  "event_id": "israel_hezbollah_war_2006",
+  "date": "2006-07-12",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4646373100122248
+ },
+ {
+  "event_id": "turkey_pkk_incursion_2008",
+  "date": "2008-02-21",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4923092583703699
+ },
+ {
+  "event_id": "nigeria_mend_bonga_2008",
+  "date": "2008-06-19",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5181177087024812
+ },
+ {
+  "event_id": "btc_pipeline_blast_2008",
+  "date": "2008-08-05",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5181177087024812
+ },
+ {
+  "event_id": "russia_georgia_war_2008",
+  "date": "2008-08-08",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5181177087024812
+ },
+ {
+  "event_id": "iran_cisada_2010",
+  "date": "2010-07-01",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.516776875178425
+ },
+ {
+  "event_id": "egypt_revolution_2011",
+  "date": "2011-01-25",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.520139815819483
+ },
+ {
+  "event_id": "libya_civil_war_2011",
+  "date": "2011-02-17",
+  "l_minus": 0,
+  "level": 3,
+  "delta": "3",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.520139815819483
+ },
+ {
+  "event_id": "escondida_strike_2011",
+  "date": "2011-07-21",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5211720932543447
+ },
+ {
+  "event_id": "sanc_2011_11_21",
+  "date": "2011-11-21",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5207012470790308
+ },
+ {
+  "event_id": "ndaa_cbi_sanctions_2011",
+  "date": "2011-12-31",
+  "l_minus": 1,
+  "level": 1,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5207012470790308
+ },
+ {
+  "event_id": "eu_iran_oil_embargo_2012",
+  "date": "2012-01-23",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5207012470790308
+ },
+ {
+  "event_id": "swift_cutoff_iran_2012",
+  "date": "2012-03-15",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5227115410457931
+ },
+ {
+  "event_id": "sudan_heglig_war_2012",
+  "date": "2012-04-10",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5242484318013274
+ },
+ {
+  "event_id": "marikana_strike_2012",
+  "date": "2012-08-16",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5381087218483145
+ },
+ {
+  "event_id": "egypt_coup_suez_2013",
+  "date": "2013-07-03",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5375386089889029
+ },
+ {
+  "event_id": "sanc_2013_11_24",
+  "date": "2013-11-24",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5476743350492774
+ },
+ {
+  "event_id": "sa_platinum_strike_2014",
+  "date": "2014-01-23",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5476743350492774
+ },
+ {
+  "event_id": "mosul_isis_offensive_2014",
+  "date": "2014-06-10",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5557862249010384
+ },
+ {
+  "event_id": "russia_sectoral_sanctions_2014",
+  "date": "2014-07-16",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5557862249010384
+ },
+ {
+  "event_id": "russia_oiltech_ban_2014",
+  "date": "2014-09-12",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5551689193869128
+ },
+ {
+  "event_id": "libya_essider_clashes_2014",
+  "date": "2014-12-13",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 5,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5589237631674072
+ },
+ {
+  "event_id": "saudi_intervention_yemen_2015",
+  "date": "2015-03-26",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5736047834111574
+ },
+ {
+  "event_id": "iran_jcpoa_agreed_2015",
+  "date": "2015-07-14",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5775354085267956
+ },
+ {
+  "event_id": "iran_implementation_day_2016",
+  "date": "2016-01-16",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.576925319934818
+ },
+ {
+  "event_id": "nda_bonny_2016",
+  "date": "2016-02-10",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.576925319934818
+ },
+ {
+  "event_id": "nigeria_nda_forcados_2016",
+  "date": "2016-02-14",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.576925319934818
+ },
+ {
+  "event_id": "nigeria_nda_escravos_2016",
+  "date": "2016-05-25",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5750936530453904
+ },
+ {
+  "event_id": "escondida_strike_2017",
+  "date": "2017-02-09",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5744826362967482
+ },
+ {
+  "event_id": "qatar_gulf_blockade_2017",
+  "date": "2017-06-05",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.579953125872788
+ },
+ {
+  "event_id": "venezuela_financial_sanctions_2017",
+  "date": "2017-08-25",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.579953125872788
+ },
+ {
+  "event_id": "kirkuk_seizure_2017",
+  "date": "2017-10-16",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5793439856892361
+ },
+ {
+  "event_id": "bab_el_mandeb_houthi_tanker_2018",
+  "date": "2018-04-03",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5781405384506835
+ },
+ {
+  "event_id": "iran_sanctions_reimposed_2018",
+  "date": "2018-05-08",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5781405384506835
+ },
+ {
+  "event_id": "libya_oil_crescent_2018",
+  "date": "2018-06-14",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5781405384506835
+ },
+ {
+  "event_id": "saudi_suspends_bab_el_mandeb_2018",
+  "date": "2018-07-25",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5775306844918973
+ },
+ {
+  "event_id": "iran_metals_windown_2018",
+  "date": "2018-08-06",
+  "l_minus": 2,
+  "level": 0,
+  "delta": "-2",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5769205940754282
+ },
+ {
+  "event_id": "iran_oil_snapback_2018",
+  "date": "2018-11-05",
+  "l_minus": 0,
+  "level": 1,
+  "delta": "1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5671624321181936
+ },
+ {
+  "event_id": "libya_sharara_2018",
+  "date": "2018-12-08",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5671624321181936
+ },
+ {
+  "event_id": "venezuela_sanctions_2019",
+  "date": "2019-01-28",
+  "l_minus": 1,
+  "level": 0,
+  "delta": "-1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5671624321181936
+ },
+ {
+  "event_id": "lasbambas_blockade_2019",
+  "date": "2019-02-02",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5671624321181936
+ },
+ {
+  "event_id": "venezuela_blackout_2019",
+  "date": "2019-03-07",
+  "l_minus": 1,
+  "level": 0,
+  "delta": "-1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5787839094693435
+ },
+ {
+  "event_id": "sanc_2019_04_08",
+  "date": "2019-04-08",
+  "l_minus": 2,
+  "level": 1,
+  "delta": "-1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.559083756751276
+ },
+ {
+  "event_id": "druzhba_contamination_2019",
+  "date": "2019-04-20",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.559083756751276
+ },
+ {
+  "event_id": "us_ends_iran_waivers_2019",
+  "date": "2019-04-22",
+  "l_minus": 0,
+  "level": 1,
+  "delta": "1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.559083756751276
+ },
+ {
+  "event_id": "fujairah_tanker_sabotage_2019",
+  "date": "2019-05-12",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.538865313336788
+ },
+ {
+  "event_id": "saudi_ew_pipeline_2019",
+  "date": "2019-05-14",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.538865313336788
+ },
+ {
+  "event_id": "iran_pgpic_sanctions_2019",
+  "date": "2019-06-07",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5477045778496005
+ },
+ {
+  "event_id": "gulf_of_oman_tanker_attacks_2019",
+  "date": "2019-06-13",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5477045778496005
+ },
+ {
+  "event_id": "grace1_seizure_2019",
+  "date": "2019-07-04",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5477045778496005
+ },
+ {
+  "event_id": "stena_impero_seizure_2019",
+  "date": "2019-07-19",
+  "l_minus": 1,
+  "level": 1,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5341397877389037
+ },
+ {
+  "event_id": "venezuela_asset_freeze_2019",
+  "date": "2019-08-05",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5459380744832922
+ },
+ {
+  "event_id": "saudi_shaybah_2019",
+  "date": "2019-08-17",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5448533407964811
+ },
+ {
+  "event_id": "indonesia_nickel_ban_2019",
+  "date": "2019-09-02",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5448533407964811
+ },
+ {
+  "event_id": "abqaiq_attack_2019",
+  "date": "2019-09-14",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5549398961760031
+ },
+ {
+  "event_id": "iraq_nasiriya_2019",
+  "date": "2019-12-28",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5665473160293965
+ },
+ {
+  "event_id": "soleimani_strike_2020",
+  "date": "2020-01-03",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5665473160293965
+ },
+ {
+  "event_id": "libya_haftar_blockade_2020",
+  "date": "2020-01-18",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5665473160293965
+ },
+ {
+  "event_id": "rosneft_trading_venez_2020",
+  "date": "2020-02-18",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5665473160293965
+ },
+ {
+  "event_id": "saudi_jeddah_depot_2020",
+  "date": "2020-11-23",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5816717505680079
+ },
+ {
+  "event_id": "hankuk_chemi_seizure_2021",
+  "date": "2021-01-04",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5816717505680079
+ },
+ {
+  "event_id": "ras_tanura_attack_2021",
+  "date": "2021-03-07",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819102598077123
+ },
+ {
+  "event_id": "suez_ever_given_2021",
+  "date": "2021-03-23",
+  "l_minus": 2,
+  "level": 0,
+  "delta": "-2",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819102598077123
+ },
+ {
+  "event_id": "colonial_pipeline_shutdown_2021",
+  "date": "2021-05-07",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5815312329367242
+ },
+ {
+  "event_id": "mercer_street_2021",
+  "date": "2021-07-29",
+  "l_minus": 2,
+  "level": 0,
+  "delta": "-2",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5816410094560032
+ },
+ {
+  "event_id": "lasbambas_halt_2021",
+  "date": "2021-09-27",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 2,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.581033775894144
+ },
+ {
+  "event_id": "kazakhstan_unrest_2022",
+  "date": "2022-01-05",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "uae_abudhabi_attack_2022",
+  "date": "2022-01-17",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "russia_invades_ukraine_2022",
+  "date": "2022-02-24",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "cuajone_shutdown_2022",
+  "date": "2022-03-14",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "cpc_novorossiysk_storm_2022",
+  "date": "2022-03-23",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "saudi_jeddah_f1_2022",
+  "date": "2022-03-25",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5819238313821778
+ },
+ {
+  "event_id": "peru_lasbambas_2022",
+  "date": "2022-04-20",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5807732806305488
+ },
+ {
+  "event_id": "indonesia_palm_ban_2022",
+  "date": "2022-04-28",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.7,
+  "w_nochange_c3": 0.5807732806305488
+ },
+ {
+  "event_id": "sanc_2022_06_03",
+  "date": "2022-06-03",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5540463550529776
+ },
+ {
+  "event_id": "tw_pelosi_drills_2022",
+  "date": "2022-08-04",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5603265224998831
+ },
+ {
+  "event_id": "nord_stream_sabotage_2022",
+  "date": "2022-09-26",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5604601653785656
+ },
+ {
+  "event_id": "sanc_2022_10_06",
+  "date": "2022-10-06",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5604601653785656
+ },
+ {
+  "event_id": "us_chips_2022",
+  "date": "2022-10-07",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5604601653785656
+ },
+ {
+  "event_id": "eu_embargo_price_cap_2022",
+  "date": "2022-12-05",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.561545261498535
+ },
+ {
+  "event_id": "products_price_cap_2023",
+  "date": "2023-02-05",
+  "l_minus": 2,
+  "level": 0,
+  "delta": "-2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5556468749159806
+ },
+ {
+  "event_id": "kurdistan_ceyhan_halt_2023",
+  "date": "2023-03-25",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5550558407698354
+ },
+ {
+  "event_id": "chn_gage_2023",
+  "date": "2023-07-03",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5325550175186621
+ },
+ {
+  "event_id": "grain_deal_collapse_2023",
+  "date": "2023-07-17",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5325550175186621
+ },
+ {
+  "event_id": "ukr_odesa_strike_2023",
+  "date": "2023-07-18",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5325550175186621
+ },
+ {
+  "event_id": "ukr_izmail_strike_2023",
+  "date": "2023-08-02",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5325550175186621
+ },
+ {
+  "event_id": "gabon_coup_2023",
+  "date": "2023-08-30",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5325550175186621
+ },
+ {
+  "event_id": "israel_hamas_war_2023",
+  "date": "2023-10-07",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5328425244140762
+ },
+ {
+  "event_id": "venezuela_gl44_relief_2023",
+  "date": "2023-10-18",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5315977157511812
+ },
+ {
+  "event_id": "chn_graphite_2023",
+  "date": "2023-10-20",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5315977157511812
+ },
+ {
+  "event_id": "russia_pricecap_enforce_2023",
+  "date": "2023-11-16",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5309751629364119
+ },
+ {
+  "event_id": "me_galaxy_leader_2023",
+  "date": "2023-11-19",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5309751629364119
+ },
+ {
+  "event_id": "red_sea_attacks_2023",
+  "date": "2023-12-01",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5323974255560732
+ },
+ {
+  "event_id": "me_maersk_diversions_2023",
+  "date": "2023-12-15",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5323974255560732
+ },
+ {
+  "event_id": "chn_re_tech_2023",
+  "date": "2023-12-21",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5323974255560732
+ },
+ {
+  "event_id": "me_us_uk_strikes_2024",
+  "date": "2024-01-11",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5208222255166418
+ },
+ {
+  "event_id": "russia_ustluga_strike_2024",
+  "date": "2024-01-21",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5211744837781809
+ },
+ {
+  "event_id": "rus_tuapse_strike_2024a",
+  "date": "2024-01-25",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5211744837781809
+ },
+ {
+  "event_id": "me_marlin_luanda_2024",
+  "date": "2024-01-26",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5211744837781809
+ },
+ {
+  "event_id": "rus_volgograd_strike_2024",
+  "date": "2024-02-03",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5211744837781809
+ },
+ {
+  "event_id": "me_rubymar_2024",
+  "date": "2024-02-18",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.524050012921153
+ },
+ {
+  "event_id": "sanc_2024_02_23",
+  "date": "2024-02-23",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.524050012921153
+ },
+ {
+  "event_id": "russia_refineries_strikes_2024",
+  "date": "2024-03-13",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5240726011154448
+ },
+ {
+  "event_id": "rus_slavyansk_strike_2024",
+  "date": "2024-03-17",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5254288751989278
+ },
+ {
+  "event_id": "me_damascus_consulate_2024",
+  "date": "2024-04-01",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5255337851621995
+ },
+ {
+  "event_id": "russia_metals_ban_2024",
+  "date": "2024-04-12",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5249127054074336
+ },
+ {
+  "event_id": "iran_strikes_israel_apr_2024",
+  "date": "2024-04-13",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5249127054074336
+ },
+ {
+  "event_id": "venezuela_gl44_revoked_2024",
+  "date": "2024-04-17",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5249127054074336
+ },
+ {
+  "event_id": "rus_novorossiysk_depots_2024",
+  "date": "2024-05-17",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5228860990628773
+ },
+ {
+  "event_id": "me_mv_tutor_2024",
+  "date": "2024-06-12",
+  "l_minus": 3,
+  "level": 2,
+  "delta": "-1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5339715803663212
+ },
+ {
+  "event_id": "me_chios_lion_2024",
+  "date": "2024-07-15",
+  "l_minus": 3,
+  "level": 2,
+  "delta": "-1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5346423443469743
+ },
+ {
+  "event_id": "rus_tuapse_strike_2024b",
+  "date": "2024-07-22",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5340852792906807
+ },
+ {
+  "event_id": "me_haniyeh_2024",
+  "date": "2024-07-31",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5340852792906807
+ },
+ {
+  "event_id": "escondida_strike_2024",
+  "date": "2024-08-13",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5340852792906807
+ },
+ {
+  "event_id": "chn_antimony_2024",
+  "date": "2024-08-15",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5400593891116657
+ },
+ {
+  "event_id": "me_sounion_2024",
+  "date": "2024-08-21",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5400593891116657
+ },
+ {
+  "event_id": "me_nasrallah_2024",
+  "date": "2024-09-27",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5518335454503263
+ },
+ {
+  "event_id": "iran_strikes_israel_oct_2024",
+  "date": "2024-10-01",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5518335454503263
+ },
+ {
+  "event_id": "sanc_2024_10_11",
+  "date": "2024-10-11",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5518335454503263
+ },
+ {
+  "event_id": "myanmar_re_seizure_2024",
+  "date": "2024-10-20",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.568465432614513
+ },
+ {
+  "event_id": "me_days_of_repentance_2024",
+  "date": "2024-10-26",
+  "l_minus": 0,
+  "level": 2,
+  "delta": "2",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.568465432614513
+ },
+ {
+  "event_id": "chn_ban_us_2024",
+  "date": "2024-12-03",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5567633958880222
+ },
+ {
+  "event_id": "rus_novoshakhtinsk_strike_2024",
+  "date": "2024-12-19",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5567633958880222
+ },
+ {
+  "event_id": "russia_shadow_fleet_sanctions_2025",
+  "date": "2025-01-10",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.6,
+  "w_nochange_c3": 0.5298515424976805
+ },
+ {
+  "event_id": "rus_ryazan_strike_2025a",
+  "date": "2025-01-24",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "rus_volgograd_strike_2025",
+  "date": "2025-01-31",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "chn_5minerals_2025",
+  "date": "2025-02-04",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "us_iran_maxpressure_2025",
+  "date": "2025-02-05",
+  "l_minus": 2,
+  "level": 0,
+  "delta": "-2",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "cpc_kropotkinskaya_drone_2025",
+  "date": "2025-02-17",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "drc_cobalt_ban_2025",
+  "date": "2025-02-22",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "us_chevron_venez_2025",
+  "date": "2025-02-26",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5186026231344322
+ },
+ {
+  "event_id": "rus_novokuibyshevsk_strike_2025",
+  "date": "2025-03-10",
+  "l_minus": 3,
+  "level": 3,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5179784595757873
+ },
+ {
+  "event_id": "me_rough_rider_2025",
+  "date": "2025-03-15",
+  "l_minus": 2,
+  "level": 3,
+  "delta": "1",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5179784595757873
+ },
+ {
+  "event_id": "us_venez_sectariff_2025",
+  "date": "2025-03-24",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5182341001971837
+ },
+ {
+  "event_id": "chn_re_magnets_2025",
+  "date": "2025-04-04",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.5182341001971837
+ },
+ {
+  "event_id": "israel_iran_war_2025",
+  "date": "2025-06-13",
+  "l_minus": 0,
+  "level": 3,
+  "delta": "3",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.47534178350797746
+ },
+ {
+  "event_id": "me_midnight_hammer_2025",
+  "date": "2025-06-22",
+  "l_minus": 3,
+  "level": 2,
+  "delta": "-1",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4749026105270587
+ },
+ {
+  "event_id": "redsea_houthi_resume_2025",
+  "date": "2025-07-06",
+  "l_minus": 3,
+  "level": 2,
+  "delta": "-1",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ },
+ {
+  "event_id": "us_russia_sectariff_2025",
+  "date": "2025-07-14",
+  "l_minus": 3,
+  "level": 2,
+  "delta": "-1",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ },
+ {
+  "event_id": "codelco_elteniente_2025",
+  "date": "2025-07-31",
+  "l_minus": 0,
+  "level": 0,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ },
+ {
+  "event_id": "rus_saratov_strike_2025a",
+  "date": "2025-08-11",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ },
+ {
+  "event_id": "rus_druzhba_strike_2025a",
+  "date": "2025-08-18",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ },
+ {
+  "event_id": "rus_ryazan_strike_2025b",
+  "date": "2025-09-05",
+  "l_minus": 2,
+  "level": 2,
+  "delta": "0",
+  "covering_pre": 1,
+  "lambda_c2": 0.5,
+  "w_nochange_c3": 0.4816671937103301
+ }
+]
