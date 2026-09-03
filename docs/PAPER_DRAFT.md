@@ -1,9 +1,21 @@
 # Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy
 
 **Joseph Delany** — Colby College, Department of History (Middle East focus)
-Draft v1.0, 2026-09-03. Numbers from run `walk_20260903T003422Z`
+Draft v1.2, 2026-09-03. Numbers from run `walk_20260903T003422Z`
 (`data/walk_forward/summary.json`) unless a file is named. Every number in this
 draft is traced in Appendix A to the file that produced it; none is typed from memory.
+
+> **Which target these numbers describe.** Every result in §8–§11 is computed on the
+> escalation target as it stood before `OUTCOME_MAPPING.md` **Amendment 4** — 184 events
+> carrying an IES-90 level, distributed 76 / 6 / 48 / 54. That state is tagged
+> `record-pre-amendment-4`. Amendment 4, registered before its code and implemented after
+> these numbers were computed, extends the "ongoing conflict → no level" rule to COW War and
+> UCDP GED and stops a missing covering record from silently reading as level 0. It takes the
+> target to **132 labelled events** (73 / 9 / 30 / 20) with 55 events becoming
+> `no_independent_outcome`, and moves 59 of 187 labels. A re-run on the amended target is
+> in progress; when it lands, the numbers below are superseded rather than retracted, and the
+> two are distinguishable by tag. **No number in this draft has been adjusted in anticipation
+> of that re-run.**
 
 This is the final version of the day's work. It supersedes v0.3 (run 210135Z), v0.2
 (193022Z) and v0.1 (182828Z); every superseded number survives in git history and in
@@ -91,6 +103,64 @@ both downgrades are in the record. We argue the null is informative: at the
 horizons and sample sizes a human analyst actually works with, "history rhymes"
 does not yet cash out as a calibrated forecast, and we state what would change
 that verdict.
+
+---
+
+## 0. The findings, in the order they matter
+
+*A reader who stops here should still have the paper. Each finding names the section that
+computes it; none is stated more strongly here than there.*
+
+**1. Most of the apparent skill was hindsight, and that is measurable.** Enforcing a vintage
+rule on the per-event situation fields — admitting only what was demonstrably knowable on the
+day — revealed that **262 of 313 events have no situation field knowable at *t***. Retrieval
+falls back to the market block alone, and escalation skill moves from parity with the base
+rate (−0.005) to significantly worse than it (**−0.097**, 95% CI [−0.180, −0.018],
+*p* = 0.022). The state conditioning that gave the engine its edge was information assembled
+after the fact. This is a finding about the literature as much as about this corpus: most
+published event studies condition on variables built with later knowledge. **§8.**
+
+**2. A trivial baseline beat the engine — but the comparison was unfair, and repairing it
+changed the diagnosis rather than the verdict.** Persistence, a point mass on the dyad's own
+recent level, scored 0.480 against the engine's 0.769 (skill −0.600, *p* = 0.0002). That gap
+was an *anchoring* failure: the engine forecast the level from scratch while persistence
+starts from the answer. Re-anchoring the identical sealed reads on the **change** — same
+analogs, same weights, nothing re-retrieved — moves the mixture to **0.480**, a dead heat.
+**§11.1.**
+
+**3. Asked the fair question, analogy adds nothing detectable.** Once the dyad's own recent
+state is supplied, the registered verdict is **NO ADDITION**: best combination +0.034 Brier
+skill, DM *p* = 0.181, permutation *p* = 0.124, nothing surviving FDR. Reported as *not
+detectable at n = 150* and never as "no effect" — the measured minimum detectable skill is
+0.067, twice the observed. **§11.2.**
+
+**4. The retrieval step is interchangeable with the base rate.** A registered control holds
+everything constant and substitutes the class's unconditional change distribution for the
+retrieved analogues: it scores **0.4626 against 0.4643**, paired difference −0.004,
+*p* = 0.766. **The gain is pooling, not similarity.** The similarity metric — the entire idea
+of the engine — is doing no measurable work, which independently confirms §8's finding that
+the engine cannot separate from randomly drawn analogs. **§11.3.** *Scope: this is an
+escalation result at n = 150. On a companion price panel with thirteen times the effective
+evidence, retrieval does separate from random analogs (+0.010, p = 0.010) — so the honest
+reading is that the similarity step is underpowered here, not worthless (§14.1).*
+
+**5. The engine's second claim, that shocks propagate along a physical chain, is a null with
+its own errata.** Across 477 node×shock cells, 21 transmit against 1–24 expected under no
+transmission at all, while the same estimator recovers Känzig's (2021) published shock cleanly
+— so the silence is not instrument failure. A follow-up on physical outcomes then corrects the
+study twice: its one transmitting *physical* cell does not survive re-estimation on a calendar
+index (tanker transits happen at weekends; the trading-day index discards them), and the
+monthly hops ran with no placebo, so they could not have transmitted by construction. **§12,
+§12.1.**
+
+**What the paper does not claim.** Not that historical analogy fails. The defensible claim is
+narrower: *this implementation, under a strict point-in-time information constraint, did not
+outperform simple baselines for escalation* — on a corpus whose historical arm is thin and
+whose state vector is mostly unavailable at read time. §14 states what would change the
+verdict, and §13 states what is measured shut.
+
+**Three of this project's own positive findings have been retracted and published as
+retractions** (§10, §12). That is the record working, not a defect in it.
 
 ---
 
@@ -812,6 +882,57 @@ persistence *is* history — but that the specific analogical move this project
 formalised, "find state-similar precedents and average their outcomes", is the wrong
 way to use it at these horizons. On the present evidence that is the finding we would
 defend.
+
+### 14.1 The sample-size route, and its first answer
+
+Route 3 above is no longer hypothetical. A companion study
+(`GRID_STUDY_REGISTRATION.md`, run `grid_price_20260903T042725Z`) makes the unit of
+observation a **date** rather than an event: 476 month-end grid dates from 1987-01-30 to
+2026-08-25, six price targets, five horizons, **10,857 scored cells**. Its effective sample
+size is computed rather than assumed — nominal counts are never reported as effective ones —
+and comes to **n_eff = 1,979**, against 249 for the event-triggered price panel. Roughly
+thirteen times the evidence, and enough that fitting parameters becomes legitimate under the
+registered floor (5 parameters, 100 effective units required, 989.5 available).
+
+This is a **different estimand** — *given the world state on date t, what follows?* rather than
+*given this event, what follows?* — and it re-judges nothing in §8–§11. But it answers the
+question every null invites, which is whether more data would have rescued the result.
+
+**It would not. Fitting does not beat the registered constants.** With the block weights and
+the metric scale fitted by nested walk-forward cross-validation, the fitted model scores
++0.0020 CRPS skill over the frozen engine, CI [−0.0067, +0.0110], DM *p* = 0.642. That is
+§3.4's registered either-way answer, and it fell on the side of *the constants we registered
+were already at the achievable optimum*. The fitted weights do not converge: 15 distinct
+selections across 414 reads, the modal one taking only 24.9% of them — a fitted model whose
+weights swing across folds is a different object from one whose weights settle, and the
+registration required that trajectory be published for exactly this reason.
+
+**Against the base rate the grid engine still loses**, and by more than the event study did:
+CRPS skill −0.0720, CI [−0.0811, −0.0637], *p* < 0.001 on all six targets and all five
+horizons. Two diagnostics say most of that is an artefact of forecast *sharpness* rather than
+of forecast *content*. The Ferro size-corrected score, which charges a 12-atom forecast a
+penalty a large climatology pool never pays, moves the engine from 0.1573 to 0.1448 against
+climatology's 0.1459 — the sign flips. And the PIT histogram shows why: the fitted forecast is
+U-shaped (1751 … 1532 across ten bins) where climatology is nearly flat (1178 … 1095). A
+twelve-analog distribution is too sharp, and the registered CRPS charges it for that. The gate
+score decides and the diagnostic sits beside it, unpromoted.
+
+**One result genuinely differs from the event study, and it qualifies Finding 4.** On the
+event-triggered panel the engine could not separate from randomly drawn analogs (escalation
+−0.021, *p* = 0.58; price −0.005, *p* = 0.85), and §11.3 found the retrieved analogues
+interchangeable with the class base rate. On the grid, with thirteen times the effective
+evidence, **retrieval does separate**: CRPS skill against random analogs of +0.0103, CI
+[+0.0022, +0.0184], *p* = 0.010. The similarity metric is doing measurable work here that it
+was not doing — or could not be shown to be doing — at n = 150.
+
+So Finding 4 should be read as scoped, and this paper scopes it: *on the escalation target, at
+n = 150, the pooling and not the similarity is doing the work*. On the price target at
+n_eff ≈ 2,000, similarity contributes a small but detectable amount — while remaining far short
+of the base rate on the registered score. Neither result rescues the engine. Together they say
+something more precise than either: the retrieval step is not worthless, it is **underpowered
+and over-sharp**, and the honest description of this design is that it needs an order of
+magnitude more evidence and a wider predictive distribution before its central idea can be
+fairly judged.
 
 ## 15. The integrity record
 
