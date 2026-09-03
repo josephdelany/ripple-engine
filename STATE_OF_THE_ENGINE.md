@@ -1,5 +1,12 @@
 # STATE OF THE ENGINE — generated 2026-09-02T19:54:11+00:00
 
+> **SUPERSEDED, 2026-09-03.** Generated 2026-09-02T19:54Z, which is **two runs and two
+> registered amendments ago**. Every escalation number here predates both `OUTCOME_MAPPING.md`
+> Amendment 4 (which took the target from 184 labelled events to 132) and the re-run
+> `walk_20260903T052633Z`. It is accurate as a receipt of the state at its own timestamp and
+> should not be read as current. For current numbers see `README.md` and
+> `docs/PAPER_DRAFT.md`; for what is outstanding, `OPEN_ITEMS.md`.
+
 _Generated from the live `data/oil.db` and the published receipts by `src/state_of_engine.py` — not hand-typed. Every number names its receipt. The 2026-08-04 hand-written after-picture is kept at `docs/STATE_OF_THE_ENGINE_2026-08-04.md`._
 
 HEAD: `5026731 2026-09-02 Brief 2 B-8 (D2 finding 2, code): the admission sheet is blind -- pre1987_candidates.csv carries no o`
