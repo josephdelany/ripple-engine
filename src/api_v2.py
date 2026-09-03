@@ -417,6 +417,81 @@ def register(app):
                 "audit": {"status": au.get("status"), "n_done": au.get("n_done"), "n_rows": au.get("n_rows"), "kappa": au.get("kappa"), "passed": au.get("passed")},
                 "label": "the record: corpus, sealed reads, protocol §7 statuses verbatim, label audit"}
 
+    @app.get("/api/desk")
+    def api_desk():
+        """One payload for the four screens, with the exact paths DESIGN.md Amendment 2 Appendix A
+        declares. Every sentence the desk writes about itself resolves its slots from here and from
+        nothing else, so a sentence's numbers are traceable to a path by construction.
+
+        Computes nothing that a module has not already computed: this reads
+        data/state/situation_knowable.json, data/walk_forward/summary.json, data/ripple/irf.json,
+        data/big_moves/brent.json, data/feed.json and the corpus, and reshapes them."""
+        import ledger as L
+        v = _json(DATA / "state" / "situation_knowable.json") or {}
+        vintage = {"events": v.get("events"), "kept": v.get("kept"),
+                   "dropped_after_t": v.get("dropped_after_t"),
+                   "total_values": (v.get("kept") or 0) + (v.get("dropped_after_t") or 0) + (v.get("unknown") or 0),
+                   "events_with_no_situation_field_at_t": v.get("events_with_no_situation_field_at_t"),
+                   "source": "data/state/situation_knowable.json"}
+        vintage["events_with_a_field_at_t"] = ((vintage["events"] or 0)
+                                               - (vintage["events_with_no_situation_field_at_t"] or 0))
+
+        s_ = _json(DATA / "walk_forward" / "summary.json") or {}
+        daily = ((s_.get("tiers") or {}).get("daily") or {})
+        walk = {"run_id": s_.get("run_id"), "permutation_p": (s_.get("permutation") or {}).get("p_value"),
+                "source": "data/walk_forward/summary.json"}
+        for task in ("G", "P"):
+            ev = ((daily.get(task) or {}).get("engine_vs") or {})
+            walk[task] = {ref: {k: d.get(k) for k in ("n", "skill", "ci95", "dm_p")}
+                          for ref, d in ev.items() if isinstance(d, dict)}
+            walk[task]["score"] = (daily.get(task) or {}).get("score")
+        walk["monthly_scored"] = ((s_.get("tiers") or {}).get("monthly") or {}).get("n_scored_burn_in")
+
+        doc = _json(DATA / "ripple" / "irf.json") or {}
+        CLS = ("chokepoint_disruption", "infrastructure_attack", "conflict_escalation", "opec_decision",
+               "sanctions", "demand_shock", "policy_response")
+        rows = [r for r in (doc.get("rows") or [])
+                if r.get("spec") == "total" and r.get("sample") == "full" and r.get("shock") in CLS]
+        by_class = {c: sum(1 for r in rows if r["shock"] == c and r.get("verdict") == "TRANSMITTING") for c in CLS}
+        travel = {"cells": len(rows), "cells_per_class": (len(rows) // len(CLS)) if rows else 0,
+                  "transmitting": sum(1 for r in rows if r.get("verdict") == "TRANSMITTING"),
+                  "null": sum(1 for r in rows if r.get("verdict") == "NULL"),
+                  "insufficient": sum(1 for r in rows if r.get("verdict") == "INSUFFICIENT"),
+                  "bh_q10": sum(1 for r in rows if r.get("bh_q10_reject")),
+                  "by_class": by_class, "n_placebo": (doc.get("meta") or {}).get("n_placebo"),
+                  "registration": (doc.get("meta") or {}).get("registration"),
+                  "source": "data/ripple/irf.json"}
+
+        conn = sqlite3.connect(DB)
+        try:
+            boards = L.scoreboards(conn)
+            rvn = boards.get("record_vs_narrative") or {}
+            n_ev, d0, d1 = conn.execute("SELECT COUNT(*), MIN(event_date), MAX(event_date) FROM events").fetchone()
+            n_cls = conn.execute("SELECT COUNT(DISTINCT type) FROM events").fetchone()[0]
+            n_series = conn.execute("SELECT COUNT(DISTINCT series_id) FROM observations").fetchone()[0]
+            cutoff = "2025-09-01"
+            n_stale = conn.execute("SELECT COUNT(*) FROM (SELECT series_id, MAX(obs_date) m FROM observations "
+                                   "GROUP BY series_id HAVING m < ?)", (cutoff,)).fetchone()[0]
+        finally:
+            conn.close()
+        ledger = {**{k: rvn.get(k) for k in ("resolved", "with_record_call", "record_right", "narrative_right",
+                                             "record_only_right", "narrative_only_right", "status")},
+                  "counts": boards.get("counts"), "source": "data/ledger/resolutions.jsonl"}
+        corpus = {"n_events": n_ev, "first": d0, "last": d1, "n_classes": n_cls, "source": "data/oil.db"}
+        dark = {"n_stale": n_stale, "n_series": n_series, "cutoff": cutoff, "source": "data/oil.db"}
+
+        b = _json(DATA / "big_moves" / "brent.json") or {}
+        big = {k: b.get(k) for k in ("n_episodes", "no_identified_event", "everyday_base_rate_pct",
+                                     "first", "last", "p_class_given_big", "registration")}
+        big["source"] = "data/big_moves/brent.json"
+        f = _json(DATA / "feed.json") or {}
+        feed = {"day": f.get("day"), "counts": {"material": len(f.get("material") or []),
+                                                "in_line": len(f.get("in_line") or []),
+                                                "noise": len(f.get("noise") or [])},
+                "source": "data/feed.json"}
+        return {"vintage": vintage, "walk": walk, "travel": travel, "ledger": ledger, "corpus": corpus,
+                "dark": dark, "big": big, "feed": feed, "record": api_record()}
+
     @app.get("/api/walk/audit")
     def api_walk_audit():
         """The IES-90 label audit as recorded by Joe (data/audits/outcome_audit.json, written only by src/audit_ies90.py). Read-only."""

@@ -309,6 +309,12 @@ def probe_year(year, src, spells, oil, rel, verbose=True, opposed=None):
                 "vr3_active": p in act_vr3_set,
                 "retrospective": 1,                                                    # §4.2, every cell
                 "evidence_basis": (evidence_basis(rules, p, opposed) if d_ies not in (None, 0) else None),
+                "L_evidence": (Lev := evidence_class_of(fwd, p, opposed)),                 # A3.3
+                "Lpre_evidence": (Pev := evidence_class_of(pre, p, opposed)),
+                "evidence_class": weaker(Lev, Pev),
+                "L_setter_records": sorted({r["record"] for r in fwd["recs"]
+                                            if r.get("basis") == fwd.get("basis")
+                                            and r.get("level") is not None and r["level"] == fwd["level"]}),
             })
         if verbose:
             print(f"  {t}  active {len(act):>4}  (VR-3 {len(act_vr3):>4})  covering {','.join(covering_sources(t)) or 'NONE'}", flush=True)
@@ -396,6 +402,41 @@ def evidence_basis(rules, pair, opposed_pairs):
         return ("ICB co-actor only (may be allies)" if pair in opposed_pairs
                 else "ICB co-actor only, pair NEVER opposed in MID/MIDI/COW")
     return "other"
+
+
+# ---- A3.3: the evidence class as a FIELD on every cell, on a total order -----------------------
+# strongest to weakest. `evidence_class` of a cell is the WEAKER of its two ends.
+EVIDENCE_ORDER = ("opposed_side", "icb_co_actor", "icb_co_actor_never_opposed", "ged_location", "undefined")
+SIDED_LABEL_SOURCES = ("mid", "midi", "war")          # ies90 source ids that record which side a state was on
+
+
+def evidence_class_of(res, pair, opposed):
+    """A3.3. Which class the evidence at ONE end (L or L-) falls in. A true zero is classified by the
+    sources that were COVERING on the chosen basis -- a sided source that looked and found nothing is a
+    statement about the pair; GED finding no deaths is not."""
+    if res.get("level") is None:
+        return "undefined"
+    rules = setter_rules(res)
+    if rules:
+        if any(str(r).startswith(SIDED_SOURCES) for r in rules):
+            return "opposed_side"
+        if any(str(r).startswith("ICB") for r in rules):
+            return "icb_co_actor" if pair in opposed else "icb_co_actor_never_opposed"
+        if any(str(r).startswith("GED") for r in rules):
+            return "ged_location"
+        return "ged_location"
+    # a true zero: no setter. Classify by what was covering on the chosen basis.
+    cov = set(res.get("covering_dyadic") or []) if res.get("basis") == "dyadic" else set(res.get("covering") or [])
+    cov = cov or set(res.get("covering") or [])
+    if cov & set(SIDED_LABEL_SOURCES):
+        return "opposed_side"
+    if "icb" in cov:
+        return "icb_co_actor" if pair in opposed else "icb_co_actor_never_opposed"
+    return "ged_location"
+
+
+def weaker(a, b):
+    return a if EVIDENCE_ORDER.index(a) >= EVIDENCE_ORDER.index(b) else b
 
 
 def opposed_pairs(spells):
@@ -535,5 +576,337 @@ def main():
     return out
 
 
+# (entrypoint dispatch is at the foot of the file)
+
+
+# ================================================================================================
+# A3 — THE BUILD. Registered in G4_REGISTRATION Amendment 3 before this code was written.
+# Span 1987-01-31 .. 2014-09-30 (333 month-ends), VR-3 active set, evidence basis as a FIELD.
+# Nothing is filtered out of the panel; the strict subset is a selection on `evidence_class`.
+# ================================================================================================
+
+PANEL_START, PANEL_END = "1987-01-31", "2014-09-30"      # A3.1: the last month-end with t+90 <= 2014-12-31
+PANEL_DIR = ROOT / "data" / "grid" / "g"
+LIMITS = [
+    "1. It never reaches the present. The panel ends 2014-09-30 because its last sided source does "
+    "(MID / MIDI / COW intra-state War end 2014-12-31 and ies90.covers needs t+90 <= that). No number "
+    "computed on this panel describes the world after 2014, and it cannot be the panel a live engine reads.",
+    "2. It can never carry VALIDATED. Every cell is retrospective = 1: a COW hostility level, an ICB "
+    "violence code and a UCDP death estimate are later constructions, not contemporaneous records. "
+    "WORLD_STATE_CODEBOOK.md Amendment 1 -- a retrospective field alone can never make a read VALIDATED. "
+    "This is a property of the sources and n does not touch it.",
+    "3. It never scores onset. R-ACT admits a dyad only after a recorded clash, so a dyad quiet for five "
+    "years that goes to war is absent from the grid at every date before its first record. Skill measured "
+    "here is skill at continuation and de-escalation, never at onset.",
+]
+
+
+def panel_dates(start=PANEL_START, end=PANEL_END):
+    return [d.date().isoformat() for d in pd.date_range(start, end, freq="ME")]
+
+
+def build_panel(src=None, verbose=True):
+    """A3: the panel, 1987-2014, on the VR-3 active set. Returns (cells, per_date)."""
+    src = src or I.load_sources()
+    oil = oil_relevant()
+    spells = dyadic_spells(src)
+    opposed = opposed_pairs(spells)
+    rel = release_dates()
+    dyads_all = all_oil_dyads(oil)
+    dates = panel_dates()
+    cells, per_date = [], []
+    for i, t in enumerate(dates):
+        act_ract = active_at(t, spells, dyads_all)                       # published beside, A3.2
+        act = active_at(t, spells, dyads_all, vr3=True)                  # A3.2: the panel's active set
+        cov = covering_sources(t)
+        per_date.append({"date": t, "n_active_vr3": len(act), "n_active_ract": len(act_ract),
+                         "covering_sources": cov})
+        b0, b1 = I.pre_window(t)
+        pre_d = (pd.Timestamp(t) - pd.Timedelta(days=91)).date().isoformat()
+        for p in act:
+            a, b = sorted(p)
+            A, pairs, L = {a, b}, {p}, {a, b}
+            fwd = I.score_event(t, A, pairs, L, src)
+            pre = I.score_event(pre_d, A, pairs, L, src)
+            vin, stamps = cell_vintage(pre, b0, b1)
+            v1, _v1s = vr1_ok(pre, t, rel)
+            d_ies = (None if (fwd["level"] is None or pre["level"] is None) else fwd["level"] - pre["level"])
+            fwd_rules, pre_rules = sorted(setter_rules(fwd)), sorted(setter_rules(pre))
+            Lev, Pev = evidence_class_of(fwd, p, opposed), evidence_class_of(pre, p, opposed)
+            cells.append({
+                "date": t, "dyad_a": a, "dyad_b": b, "dyad": f"{a}|{b}",
+                "L": fwd["level"], "L_ni": fwd.get("ni_reason"), "L_basis": fwd.get("basis"),
+                "Lpre": pre["level"], "Lpre_ni": pre.get("ni_reason"), "dIES": d_ies,
+                "L_rules": ",".join(fwd_rules), "Lpre_rules": ",".join(pre_rules),
+                "L_records": "; ".join(sorted({r["record"] for r in fwd["recs"]
+                                               if r.get("basis") == fwd.get("basis") and r.get("level") is not None
+                                               and r["level"] == fwd["level"]})),
+                "L_evidence": Lev, "Lpre_evidence": Pev, "evidence_class": weaker(Lev, Pev),   # A3.3
+                "covering": ",".join(fwd.get("covering") or []),
+                "vr1_ok": v1, "vr2_vintage": vin, "vr2_ok": bool(vin) and vin <= t,
+                "label_available_at": (pd.Timestamp(t) + pd.Timedelta(days=91)).date().isoformat(),
+                "retrospective": 1,
+            })
+        if verbose and (i % 24 == 0 or i == len(dates) - 1):
+            print(f"  {t}  cells so far {len(cells):>6}  active {len(act):>3} (R-ACT {len(act_ract):>3})  "
+                  f"covering {','.join(cov) or 'NONE'}", flush=True)
+    return cells, per_date, {"releases": rel, "opposed_pairs": len(opposed), "n_oil_dyads": len(dyads_all)}
+
+
+def icb_replication(cells):
+    """A3.6, measured over the whole panel: for every ICB crisis that SETS a level, how many distinct
+    dyads it sets it for. This is the general form of the gbr|usa finding, counted rather than argued."""
+    by_crisis = defaultdict(set)
+    for c in cells:
+        if not c["L_records"] or "ICB" not in (c["L_rules"] or ""):
+            continue
+        for recname in c["L_records"].split("; "):
+            if recname.startswith("crisis "):
+                by_crisis[recname].add(c["dyad"])
+    counts = sorted(((len(v), k, sorted(v)) for k, v in by_crisis.items()), reverse=True)
+    dist = Counter(n for n, _k, _v in counts)
+    n_pairs = lambda k: k * (k - 1) // 2                                        # noqa: E731
+    return {
+        "n_crises_setting_a_level": len(counts),
+        "dyads_per_crisis": {"max": counts[0][0] if counts else 0,
+                             "mean": round(sum(n for n, _k, _v in counts) / max(len(counts), 1), 2),
+                             "distribution": {str(k): v for k, v in sorted(dist.items())}},
+        "cells_set_by_icb": sum(1 for c in cells if "ICB" in (c["L_rules"] or "")),
+        "top": [{"crisis": k, "n_dyads": n, "dyads": v} for n, k, v in counts[:12]],
+        "note": ("A crisis with k register actors on the grid sets a level for up to k(k-1)/2 dyads, "
+                 "because ICB records crisis ACTORS and not sides. k=4 -> 6 dyads."),
+        "k_to_pairs": {str(k): n_pairs(k) for k in range(2, 9)},
+    }
+
+
+def summarise_panel(cells, per_date, meta):
+    nL = [c for c in cells if c["L"] is not None]
+    nD = [c for c in cells if c["dIES"] is not None]
+    strict = [c for c in cells if c["evidence_class"] == "opposed_side"]
+    strictD = [c for c in strict if c["dIES"] is not None]
+    share = lambda k, tot: (round(k / tot, 4) if tot else None)                 # noqa: E731
+    by_year = defaultdict(lambda: {"cells": 0, "dIES_defined": 0, "dIES_nonzero": 0})
+    for c in cells:
+        y = by_year[c["date"][:4]]
+        y["cells"] += 1
+        if c["dIES"] is not None:
+            y["dIES_defined"] += 1
+            y["dIES_nonzero"] += int(c["dIES"] != 0)
+    return {
+        "span": {"start": PANEL_START, "end": PANEL_END, "grid_dates": len(per_date), "freq": "month-end"},
+        "limits": LIMITS,
+        "size": {"cells": len(cells), "distinct_dyads": len({c["dyad"] for c in cells}),
+                 "oil_dyads_possible": meta["n_oil_dyads"],
+                 "active_per_date_vr3": {"min": min(d["n_active_vr3"] for d in per_date),
+                                         "max": max(d["n_active_vr3"] for d in per_date),
+                                         "mean": round(sum(d["n_active_vr3"] for d in per_date) / len(per_date), 1)},
+                 "active_per_date_ract": {"mean": round(sum(d["n_active_ract"] for d in per_date) / len(per_date), 1)},
+                 "cells_dropped_by_VR3": sum(d["n_active_ract"] - d["n_active_vr3"] for d in per_date)},
+        "L": {"n_defined": len(nL), "share_defined": share(len(nL), len(cells)),
+              "dist": {str(k): v for k, v in sorted(Counter(c["L"] for c in nL).items())},
+              "share_zero": share(sum(1 for c in nL if c["L"] == 0), len(nL))},
+        "dIES": {"n_defined": len(nD), "share_defined": share(len(nD), len(cells)),
+                 "dist": {str(k): v for k, v in sorted(Counter(c["dIES"] for c in nD).items())},
+                 "share_zero": share(sum(1 for c in nD if c["dIES"] == 0), len(nD)),
+                 "n_nonzero": sum(1 for c in nD if c["dIES"] != 0)},
+        "evidence_class": dict(Counter(c["evidence_class"] for c in cells)),
+        "evidence_class_of_nonzero_dIES": dict(Counter(c["evidence_class"] for c in nD if c["dIES"] != 0)),
+        "strict_subset": {
+            "cells": len(strict), "share_of_panel": share(len(strict), len(cells)),
+            "dIES_defined": len(strictD), "dIES_nonzero": sum(1 for c in strictD if c["dIES"] != 0),
+            "dIES_share_zero": share(sum(1 for c in strictD if c["dIES"] == 0), len(strictD)),
+            "dIES_dist": {str(k): v for k, v in sorted(Counter(c["dIES"] for c in strictD).items())},
+            "distinct_dyads": len({c["dyad"] for c in strict}),
+            "last_date": max((c["date"] for c in strict), default=None)},
+        "no_independent_outcome": dict(Counter(
+            ("L:" + (c["L_ni"] or "none")) for c in cells if c["L"] is None)) | dict(Counter(
+            ("Lpre:" + (c["Lpre_ni"] or "none")) for c in cells if c["Lpre"] is None)),
+        "vintage": {"VR1_strict_release": {"n": sum(1 for c in cells if c["vr1_ok"]),
+                                           "share": share(sum(1 for c in cells if c["vr1_ok"]), len(cells))},
+                    "VR2_event_knowability": {"n": sum(1 for c in cells if c["vr2_ok"]),
+                                              "share": share(sum(1 for c in cells if c["vr2_ok"]), len(cells))},
+                    "retrospective_share": 1.0},
+        "covering_mix_by_grid_date": dict(Counter(",".join(d["covering_sources"]) or "NONE" for d in per_date)),
+        "by_year": {k: v for k, v in sorted(by_year.items())},
+        "releases": meta["releases"],
+    }
+
+
+def panel_md(s, icb):
+    L = []
+    a = L.append
+    a("# The dyad-date escalation panel, 1987–2014 — size and marginals, before anything is scored")
+    a("*Built by `src/grid_labels.py` under `data/grid/g/G4_REGISTRATION.md` Amendment 3, which was")
+    a("committed first. Nothing here is a score, a forecast or a skill. No cell is filtered out.*\n")
+    a("## The three limits, first, because they are properties of the construction and not caveats\n")
+    for x in s["limits"]:
+        a(f"> **{x}**\n")
+    a("## 1. Size\n")
+    z = s["size"]
+    a(f"- **{z['cells']:,} cells** over **{s['span']['grid_dates']} month-ends** "
+      f"({s['span']['start']} … {s['span']['end']}), on **{z['distinct_dyads']} distinct dyads** "
+      f"of {z['oil_dyads_possible']} oil-relevant pairs.")
+    a(f"- active dyads per grid date (VR-3): {z['active_per_date_vr3']['min']}–{z['active_per_date_vr3']['max']} "
+      f"(mean {z['active_per_date_vr3']['mean']}); under plain R-ACT the mean is "
+      f"{z['active_per_date_ract']['mean']}, so **VR-3 removes {z['cells_dropped_by_VR3']:,} dyad-dates** "
+      f"that were selected on a record still running at t.")
+    a(f"- L defined on {s['L']['n_defined']:,} ({s['L']['share_defined']}) · "
+      f"ΔIES defined on {s['dIES']['n_defined']:,} ({s['dIES']['share_defined']})\n")
+    a("## 2. The ΔIES marginal — the number B needs before scoring\n")
+    a("| ΔIES | " + " | ".join(s["dIES"]["dist"].keys()) + " |")
+    a("|---" * (len(s["dIES"]["dist"]) + 1) + "|")
+    a("| cells | " + " | ".join(f"{v:,}" for v in s["dIES"]["dist"].values()) + " |")
+    tot = s["dIES"]["n_defined"]
+    a("| share | " + " | ".join(f"{v / tot:.4f}" for v in s["dIES"]["dist"].values()) + " |")
+    a(f"\n**{s['dIES']['n_defined']:,} defined, {s['dIES']['n_nonzero']:,} non-zero, "
+      f"share zero {s['dIES']['share_zero']}.** L: {json.dumps(s['L']['dist'])}, share zero {s['L']['share_zero']}.\n")
+    a("## 3. Evidence class — a FIELD on every cell (A3.3), never a filter\n")
+    a("| class | all cells | of the non-zero ΔIES cells |")
+    a("|---|---|---|")
+    for k in EVIDENCE_ORDER:
+        a(f"| `{k}` | {s['evidence_class'].get(k, 0):,} | {s['evidence_class_of_nonzero_dIES'].get(k, 0):,} |")
+    ss = s["strict_subset"]
+    a(f"\n**The strict subset** (`evidence_class == opposed_side`): **{ss['cells']:,} cells** "
+      f"({ss['share_of_panel']} of the panel) on {ss['distinct_dyads']} dyads, last date {ss['last_date']}; "
+      f"ΔIES defined on {ss['dIES_defined']:,}, **{ss['dIES_nonzero']:,} non-zero**, share zero "
+      f"{ss['dIES_share_zero']}. ΔIES: {json.dumps(ss['dIES_dist'])}\n")
+    a("This is the subset the scored study runs on. It is a selection on a field that is already there; "
+      "the diagnostic runs on the full panel. Nothing is rebuilt to move between them.\n")
+    a("## 4. The ICB replication, measured over the whole panel (A3.6)\n")
+    a(f"- ICB sets a level on **{icb['cells_set_by_icb']:,} cells**, from "
+      f"**{icb['n_crises_setting_a_level']} distinct crises**.")
+    a(f"- dyads per crisis: max **{icb['dyads_per_crisis']['max']}**, mean {icb['dyads_per_crisis']['mean']}; "
+      f"distribution {json.dumps(icb['dyads_per_crisis']['distribution'])}")
+    a(f"- {icb['note']}\n")
+    a("| crisis | n dyads | the dyads |")
+    a("|---|---|---|")
+    for r in icb["top"][:8]:
+        a(f"| {r['crisis']} | **{r['n_dyads']}** | "
+          + ", ".join(x.replace("country.", "").replace("|", "–") for x in r["dyads"]) + " |")
+    a("\nSee `ICB_DYADIC_REPLICATION.md` for the write-up.\n")
+    a("## 5. Vintage and coverage\n")
+    v = s["vintage"]
+    a(f"- VR-1 strict (dataset release ≤ t): **{v['VR1_strict_release']['n']}** "
+      f"({v['VR1_strict_release']['share']}) — as on the probe, and an upper bound.")
+    a(f"- VR-2 (session A's registered convention): {v['VR2_event_knowability']['n']:,} "
+      f"({v['VR2_event_knowability']['share']}).")
+    a(f"- every cell `retrospective = 1`.")
+    a(f"- covering-source mix over the {s['span']['grid_dates']} grid dates: "
+      + " · ".join(f"`{k}` ×{n}" for k, n in sorted(s['covering_mix_by_grid_date'].items())))
+    a(f"\n- undefined, by reason: {json.dumps(s['no_independent_outcome'])}")
+    return "\n".join(L)
+
+
+def build_main():
+    print("loading sources ...", flush=True)
+    src = I.load_sources()
+    print(f"building the panel {PANEL_START} .. {PANEL_END} ...", flush=True)
+    cells, per_date, meta = build_panel(src)
+    s = summarise_panel(cells, per_date, meta)
+    icb = icb_replication(cells)
+    s["icb_replication"] = icb
+    PANEL_DIR.mkdir(parents=True, exist_ok=True)
+    df = pd.DataFrame(cells)
+    try:
+        df.to_parquet(PANEL_DIR / "PANEL.parquet", index=False)
+        wrote = "PANEL.parquet"
+    except Exception as e:                                    # pyarrow absent: csv.gz, same columns
+        df.to_csv(PANEL_DIR / "PANEL.csv.gz", index=False, compression="gzip")
+        wrote = f"PANEL.csv.gz ({type(e).__name__})"
+    s["panel_file"] = wrote
+    s["generated_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+    s["registration"] = "data/grid/g/G4_REGISTRATION.md Amendment 3 (2026-09-03)"
+    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
+    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, icb))
+    print(json.dumps({k: s[k] for k in ("span", "size", "L", "dIES", "evidence_class",
+                                        "evidence_class_of_nonzero_dIES", "strict_subset", "vintage",
+                                        "panel_file")}, indent=1, default=str))
+    return s
+
+
+
+
+# ---- A3 addendum: density over time, and the cost of the ICB co-actor ACTIVITY rule ------------
+# Computed from the built panel (seconds), so the 25-minute build is not re-run to add a block.
+# The activity effect is distinct from the LABEL effect of Amendment 2 / A3.6: ICB's co-actor
+# pairing does not only fabricate levels for ally pairs, it fabricates ACTIVITY -- a crisis with k
+# register actors makes k(k-1)/2 dyads "active" for the whole lookback, five years.
+
+SHADOW_WINDOW = (1991, 1995)          # measured below, not assumed; the years are read off the density series
+
+
+def panel_addendum():
+    s = json.loads((PANEL_DIR / "PANEL.json").read_text())
+    df = pd.read_parquet(PANEL_DIR / "PANEL.parquet") if (PANEL_DIR / "PANEL.parquet").exists() \
+        else pd.read_csv(PANEL_DIR / "PANEL.csv.gz")
+    df["year"] = df["date"].str[:4].astype(int)
+    per_date = df.groupby("date").size()
+    by_year = df.groupby("year").size() / df.groupby("year")["date"].nunique()
+    lo, hi = SHADOW_WINDOW
+    w, rest = df[df.year.between(lo, hi)], df[~df.year.between(lo, hi)]
+    rate = lambda x: (round(float(((x.dIES.notna()) & (x.dIES != 0)).sum() / max(int(x.dIES.notna().sum()), 1)), 4))  # noqa: E731
+    s["density"] = {
+        "cells_per_grid_date": {"min": int(per_date.min()), "max": int(per_date.max()),
+                                "mean": round(float(per_date.mean()), 1)},
+        "mean_cells_per_grid_date_by_year": {str(k): round(float(v), 1) for k, v in by_year.items()},
+        "note": ("The panel's own n is NOT uniform. The density quadruples 1991-1995 and falls back. "
+                 "That is the ICB co-actor rule acting on the ACTIVE SET, not on the label: a crisis "
+                 "with k register actors makes k(k-1)/2 dyads active for the full five-year lookback."),
+    }
+    s["icb_activity_shadow"] = {
+        "window": f"{lo}-{hi}",
+        "cells": int(len(w)), "share_of_panel": round(float(len(w) / len(df)), 4),
+        "dIES_nonzero_in_window": int(((w.dIES.notna()) & (w.dIES != 0)).sum()),
+        "dIES_nonzero_outside": int(((rest.dIES.notna()) & (rest.dIES != 0)).sum()),
+        "nonzero_rate_in_window": rate(w), "nonzero_rate_outside": rate(rest),
+        "distinct_dyads_in_window": int(w.dyad.nunique()),
+        "distinct_dyads_only_in_window": int(len(set(w.dyad) - set(rest.dyad))),
+        "evidence_class_in_window": {k: int(v) for k, v in w.evidence_class.value_counts().items()},
+        "reading": ("It adds rows, not coverage: every dyad active in the window is active elsewhere too. "
+                    "It supplies its share of the panel's rows and a far smaller share of its non-zero "
+                    "cells, so nominal n and informative n diverge here more than anywhere else."),
+    }
+    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
+    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, s["icb_replication"]) + "\n\n" + addendum_md(s))
+    print(json.dumps({"density": s["density"]["cells_per_grid_date"],
+                      "icb_activity_shadow": s["icb_activity_shadow"]}, indent=1, default=str))
+    return s
+
+
+def addendum_md(s):
+    L, a = [], None
+    a = L.append
+    d, sh = s["density"], s["icb_activity_shadow"]
+    a("## 6. The panel's own n is not uniform, and one crisis supplies nearly half of it\n")
+    a(f"Cells per grid date: {d['cells_per_grid_date']['min']}–{d['cells_per_grid_date']['max']} "
+      f"(mean {d['cells_per_grid_date']['mean']}). By year:\n")
+    ys = list(s["density"]["mean_cells_per_grid_date_by_year"].items())
+    a("| year | " + " | ".join(k for k, _v in ys) + " |")
+    a("|---" * (len(ys) + 1) + "|")
+    a("| cells/date | " + " | ".join(str(v) for _k, v in ys) + " |")
+    a(f"\n**{sh['cells']:,} of the panel's cells ({sh['share_of_panel']:.1%}) fall in {sh['window']}**, where the "
+      f"density quadruples. {d['note']}\n")
+    a("This is the **activity** limb of the ICB co-actor defect, and it is distinct from the **label** limb "
+      "of §4: here ICB does not fabricate a level, it fabricates a dyad-date's *existence*. The labels in "
+      f"that block are mostly sided ({sh['evidence_class_in_window'].get('opposed_side', 0):,} `opposed_side`) "
+      "and mostly zero:\n")
+    a("| | cells | non-zero ΔIES | non-zero rate |")
+    a("|---|---|---|---|")
+    a(f"| {sh['window']} | {sh['cells']:,} | {sh['dIES_nonzero_in_window']:,} | **{sh['nonzero_rate_in_window']}** |")
+    a(f"| all other years | {s['size']['cells'] - sh['cells']:,} | {sh['dIES_nonzero_outside']:,} | "
+      f"**{sh['nonzero_rate_outside']}** |")
+    a(f"\n{sh['reading']} It adds **{sh['distinct_dyads_only_in_window']}** dyads that appear nowhere else.\n")
+    a("**For whoever scores this panel:** the block is not wrong — the dyad-dates are real and their labels "
+      "are sided — but it is a low-information half of the sample created by a selection rule, and any "
+      "estimate that weights cells equally weights it accordingly. It is left in the panel, flagged, and "
+      "never removed by G (A3.3: evidence basis is a field, not a filter).")
+    return "\n".join(L)
+
+
 if __name__ == "__main__":
-    main()
+    if "--build" in sys.argv:
+        build_main()
+    elif "--addendum" in sys.argv:
+        panel_addendum()
+    else:
+        main()

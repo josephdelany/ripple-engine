@@ -1,0 +1,482 @@
+{
+ "span": {
+  "start": "1987-01-31",
+  "end": "2014-09-30",
+  "grid_dates": 333,
+  "freq": "month-end"
+ },
+ "limits": [
+  "1. It never reaches the present. The panel ends 2014-09-30 because its last sided source does (MID / MIDI / COW intra-state War end 2014-12-31 and ies90.covers needs t+90 <= that). No number computed on this panel describes the world after 2014, and it cannot be the panel a live engine reads.",
+  "2. It can never carry VALIDATED. Every cell is retrospective = 1: a COW hostility level, an ICB violence code and a UCDP death estimate are later constructions, not contemporaneous records. WORLD_STATE_CODEBOOK.md Amendment 1 -- a retrospective field alone can never make a read VALIDATED. This is a property of the sources and n does not touch it.",
+  "3. It never scores onset. R-ACT admits a dyad only after a recorded clash, so a dyad quiet for five years that goes to war is absent from the grid at every date before its first record. Skill measured here is skill at continuation and de-escalation, never at onset."
+ ],
+ "size": {
+  "cells": 15740,
+  "distinct_dyads": 156,
+  "oil_dyads_possible": 561,
+  "active_per_date_vr3": {
+   "min": 17,
+   "max": 124,
+   "mean": 47.3
+  },
+  "active_per_date_ract": {
+   "mean": 49.9
+  },
+  "cells_dropped_by_VR3": 861
+ },
+ "L": {
+  "n_defined": 14997,
+  "share_defined": 0.9528,
+  "dist": {
+   "0": 13548,
+   "1": 579,
+   "2": 851,
+   "3": 19
+  },
+  "share_zero": 0.9034
+ },
+ "dIES": {
+  "n_defined": 14344,
+  "share_defined": 0.9113,
+  "dist": {
+   "-3": 8,
+   "-2": 266,
+   "-1": 323,
+   "0": 13184,
+   "1": 363,
+   "2": 200
+  },
+  "share_zero": 0.9191,
+  "n_nonzero": 1160
+ },
+ "evidence_class": {
+  "opposed_side": 14232,
+  "undefined": 1396,
+  "icb_co_actor": 94,
+  "icb_co_actor_never_opposed": 18
+ },
+ "evidence_class_of_nonzero_dIES": {
+  "opposed_side": 1059,
+  "icb_co_actor": 83,
+  "icb_co_actor_never_opposed": 18
+ },
+ "strict_subset": {
+  "cells": 14232,
+  "share_of_panel": 0.9042,
+  "dIES_defined": 14232,
+  "dIES_nonzero": 1059,
+  "dIES_share_zero": 0.9256,
+  "dIES_dist": {
+   "-3": 6,
+   "-2": 258,
+   "-1": 304,
+   "0": 13173,
+   "1": 295,
+   "2": 196
+  },
+  "distinct_dyads": 156,
+  "last_date": "2014-09-30"
+ },
+ "no_independent_outcome": {
+  "L:undated": 743,
+  "Lpre:undated": 1080
+ },
+ "vintage": {
+  "VR1_strict_release": {
+   "n": 0,
+   "share": 0.0
+  },
+  "VR2_event_knowability": {
+   "n": 14518,
+   "share": 0.9224
+  },
+  "retrospective_share": 1.0
+ },
+ "covering_mix_by_grid_date": {
+  "icb,mid,war,war_intra": 24,
+  "ged,icb,mid,war,war_intra": 48,
+  "ged,icb,mid,midi,war,war_intra": 177,
+  "ged,icb,mid,midi,war_intra": 84
+ },
+ "by_year": {
+  "1987": {
+   "cells": 430,
+   "dIES_defined": 373,
+   "dIES_nonzero": 44
+  },
+  "1988": {
+   "cells": 430,
+   "dIES_defined": 391,
+   "dIES_nonzero": 39
+  },
+  "1989": {
+   "cells": 384,
+   "dIES_defined": 369,
+   "dIES_nonzero": 21
+  },
+  "1990": {
+   "cells": 388,
+   "dIES_defined": 325,
+   "dIES_nonzero": 46
+  },
+  "1991": {
+   "cells": 1208,
+   "dIES_defined": 823,
+   "dIES_nonzero": 22
+  },
+  "1992": {
+   "cells": 1459,
+   "dIES_defined": 1431,
+   "dIES_nonzero": 35
+  },
+  "1993": {
+   "cells": 1447,
+   "dIES_defined": 1433,
+   "dIES_nonzero": 41
+  },
+  "1994": {
+   "cells": 1460,
+   "dIES_defined": 1443,
+   "dIES_nonzero": 76
+  },
+  "1995": {
+   "cells": 1464,
+   "dIES_defined": 1433,
+   "dIES_nonzero": 30
+  },
+  "1996": {
+   "cells": 641,
+   "dIES_defined": 626,
+   "dIES_nonzero": 56
+  },
+  "1997": {
+   "cells": 366,
+   "dIES_defined": 339,
+   "dIES_nonzero": 52
+  },
+  "1998": {
+   "cells": 356,
+   "dIES_defined": 295,
+   "dIES_nonzero": 29
+  },
+  "1999": {
+   "cells": 384,
+   "dIES_defined": 311,
+   "dIES_nonzero": 61
+  },
+  "2000": {
+   "cells": 356,
+   "dIES_defined": 290,
+   "dIES_nonzero": 40
+  },
+  "2001": {
+   "cells": 340,
+   "dIES_defined": 281,
+   "dIES_nonzero": 40
+  },
+  "2002": {
+   "cells": 335,
+   "dIES_defined": 279,
+   "dIES_nonzero": 38
+  },
+  "2003": {
+   "cells": 385,
+   "dIES_defined": 349,
+   "dIES_nonzero": 65
+  },
+  "2004": {
+   "cells": 405,
+   "dIES_defined": 370,
+   "dIES_nonzero": 32
+  },
+  "2005": {
+   "cells": 406,
+   "dIES_defined": 404,
+   "dIES_nonzero": 50
+  },
+  "2006": {
+   "cells": 388,
+   "dIES_defined": 343,
+   "dIES_nonzero": 32
+  },
+  "2007": {
+   "cells": 378,
+   "dIES_defined": 337,
+   "dIES_nonzero": 28
+  },
+  "2008": {
+   "cells": 263,
+   "dIES_defined": 253,
+   "dIES_nonzero": 33
+  },
+  "2009": {
+   "cells": 222,
+   "dIES_defined": 214,
+   "dIES_nonzero": 35
+  },
+  "2010": {
+   "cells": 214,
+   "dIES_defined": 196,
+   "dIES_nonzero": 17
+  },
+  "2011": {
+   "cells": 303,
+   "dIES_defined": 222,
+   "dIES_nonzero": 61
+  },
+  "2012": {
+   "cells": 449,
+   "dIES_defined": 426,
+   "dIES_nonzero": 49
+  },
+  "2013": {
+   "cells": 485,
+   "dIES_defined": 442,
+   "dIES_nonzero": 50
+  },
+  "2014": {
+   "cells": 394,
+   "dIES_defined": 346,
+   "dIES_nonzero": 38
+  }
+ },
+ "releases": {
+  "war": {
+   "release": "2022-07-12",
+   "how": "HTTP Last-Modified of cow_war/Inter-StateWarData_v4.0.csv",
+   "release_lower_bound": "2022-07-12",
+   "bounded": false
+  },
+  "war_intra": {
+   "release": "2022-07-12",
+   "how": "HTTP Last-Modified of cow_war/Intra-StateWarData_v4.1.csv",
+   "release_lower_bound": "2022-07-12",
+   "bounded": false
+  },
+  "midi": {
+   "release": "2022-07-11",
+   "how": "HTTP Last-Modified of cow_mid/MID-5-Data-and-Supporting-Materials.zip",
+   "release_lower_bound": "2022-07-11",
+   "bounded": false
+  },
+  "mid": {
+   "release": "2025-04-06",
+   "how": "HTTP Last-Modified of cow_mid/dyadic_mid_4.03_update.zip",
+   "release_lower_bound": "2025-04-06",
+   "bounded": false
+  },
+  "icb": {
+   "release": null,
+   "how": "icb/icb_dyads_v16.csv: host serves no Last-Modified",
+   "release_lower_bound": "2022-01-01",
+   "bounded": true
+  },
+  "ged": {
+   "release": null,
+   "how": "no sidecar in the tree",
+   "release_lower_bound": "2026-01-01",
+   "bounded": true
+  }
+ },
+ "icb_replication": {
+  "n_crises_setting_a_level": 25,
+  "dyads_per_crisis": {
+   "max": 12,
+   "mean": 2.24,
+   "distribution": {
+    "1": 14,
+    "2": 3,
+    "3": 6,
+    "6": 1,
+    "12": 1
+   }
+  },
+  "cells_set_by_icb": 158,
+  "top": [
+   {
+    "crisis": "crisis 393 GULF WAR",
+    "n_dyads": 12,
+    "dyads": [
+     "country.bhr|country.iraq",
+     "country.bhr|country.qatar",
+     "country.canada|country.usa",
+     "country.egypt|country.israel",
+     "country.gbr|country.iraq",
+     "country.iraq|country.saudi_arabia",
+     "country.iraq|country.syr",
+     "country.iraq|country.turkey",
+     "country.iraq|country.usa",
+     "country.israel|country.syr",
+     "country.kuwait|country.saudi_arabia",
+     "country.syr|country.turkey"
+    ]
+   },
+   {
+    "crisis": "crisis 412 IRAQ DEPLOY./KUWAIT",
+    "n_dyads": 6,
+    "dyads": [
+     "country.iraq|country.kuwait",
+     "country.iraq|country.saudi_arabia",
+     "country.iraq|country.usa",
+     "country.kuwait|country.saudi_arabia",
+     "country.kuwait|country.usa",
+     "country.saudi_arabia|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 448 IRAN NUCLEAR II",
+    "n_dyads": 3,
+    "dyads": [
+     "country.gbr|country.iran",
+     "country.gbr|country.usa",
+     "country.iran|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 440 IRAQ REGIME CHANGE",
+    "n_dyads": 3,
+    "dyads": [
+     "country.gbr|country.iraq",
+     "country.gbr|country.usa",
+     "country.iraq|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 429 UNSCOM II",
+    "n_dyads": 3,
+    "dyads": [
+     "country.gbr|country.iraq",
+     "country.gbr|country.usa",
+     "country.iraq|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 422 UNSCOM I",
+    "n_dyads": 3,
+    "dyads": [
+     "country.gbr|country.iraq",
+     "country.gbr|country.usa",
+     "country.iraq|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 418 OPRN GRAPES OF WRATH",
+    "n_dyads": 3,
+    "dyads": [
+     "country.israel|country.lebanon",
+     "country.israel|country.syr",
+     "country.lebanon|country.syr"
+    ]
+   },
+   {
+    "crisis": "crisis 406 IRAQ NO-FLY ZONE",
+    "n_dyads": 3,
+    "dyads": [
+     "country.gbr|country.iraq",
+     "country.gbr|country.usa",
+     "country.iraq|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 451 ISRAEL LEBANON WAR II",
+    "n_dyads": 2,
+    "dyads": [
+     "country.israel|country.lebanon",
+     "country.israel|country.syr"
+    ]
+   },
+   {
+    "crisis": "crisis 430 KOSOVO",
+    "n_dyads": 2,
+    "dyads": [
+     "country.canada|country.usa",
+     "country.gbr|country.usa"
+    ]
+   },
+   {
+    "crisis": "crisis 409 OPTN. ACCOUNTABILITY",
+    "n_dyads": 2,
+    "dyads": [
+     "country.israel|country.lebanon",
+     "country.israel|country.syr"
+    ]
+   },
+   {
+    "crisis": "crisis 470 SYRIA CHEMICAL WEAPONS",
+    "n_dyads": 1,
+    "dyads": [
+     "country.syr|country.usa"
+    ]
+   }
+  ],
+  "note": "A crisis with k register actors on the grid sets a level for up to k(k-1)/2 dyads, because ICB records crisis ACTORS and not sides. k=4 -> 6 dyads.",
+  "k_to_pairs": {
+   "2": 1,
+   "3": 3,
+   "4": 6,
+   "5": 10,
+   "6": 15,
+   "7": 21,
+   "8": 28
+  }
+ },
+ "panel_file": "PANEL.parquet",
+ "generated_at": "2026-09-03T04:44:10+00:00",
+ "registration": "data/grid/g/G4_REGISTRATION.md Amendment 3 (2026-09-03)",
+ "density": {
+  "cells_per_grid_date": {
+   "min": 17,
+   "max": 124,
+   "mean": 47.3
+  },
+  "mean_cells_per_grid_date_by_year": {
+   "1987": 35.8,
+   "1988": 35.8,
+   "1989": 32.0,
+   "1990": 32.3,
+   "1991": 100.7,
+   "1992": 121.6,
+   "1993": 120.6,
+   "1994": 121.7,
+   "1995": 122.0,
+   "1996": 53.4,
+   "1997": 30.5,
+   "1998": 29.7,
+   "1999": 32.0,
+   "2000": 29.7,
+   "2001": 28.3,
+   "2002": 27.9,
+   "2003": 32.1,
+   "2004": 33.8,
+   "2005": 33.8,
+   "2006": 32.3,
+   "2007": 31.5,
+   "2008": 21.9,
+   "2009": 18.5,
+   "2010": 17.8,
+   "2011": 25.2,
+   "2012": 37.4,
+   "2013": 40.4,
+   "2014": 43.8
+  },
+  "note": "The panel's own n is NOT uniform. The density quadruples 1991-1995 and falls back. That is the ICB co-actor rule acting on the ACTIVE SET, not on the label: a crisis with k register actors makes k(k-1)/2 dyads active for the full five-year lookback."
+ },
+ "icb_activity_shadow": {
+  "window": "1991-1995",
+  "cells": 7038,
+  "share_of_panel": 0.4471,
+  "dIES_nonzero_in_window": 204,
+  "dIES_nonzero_outside": 956,
+  "nonzero_rate_in_window": 0.0311,
+  "nonzero_rate_outside": 0.1229,
+  "distinct_dyads_in_window": 134,
+  "distinct_dyads_only_in_window": 0,
+  "evidence_class_in_window": {
+   "opposed_side": 6524,
+   "undefined": 475,
+   "icb_co_actor": 24,
+   "icb_co_actor_never_opposed": 15
+  },
+  "reading": "It adds rows, not coverage: every dyad active in the window is active elsewhere too. It supplies its share of the panel's rows and a far smaller share of its non-zero cells, so nominal n and informative n diverge here more than anywhere else."
+ }
+}

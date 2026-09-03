@@ -224,3 +224,152 @@ def test_g4_writes_no_table_and_stays_out_of_Bs_tree():
     for bad in ("INSERT", "UPDATE ", "DELETE", "CREATE TABLE", "conn.commit", "walk_forward", "walk.py"):
         assert bad not in code, f"grid_labels.py references {bad!r} in code"
     assert "OUT_JSON" in code and 'data' in code
+
+
+# ================================================================================================
+# Amendment 3 — the build: span, VR-3 active set, evidence basis as a FIELD
+# ================================================================================================
+
+PANEL = ROOT / "data" / "grid" / "g" / "PANEL.json"
+
+
+def test_A3_1_the_span_ends_where_the_last_sided_source_stops_covering():
+    """A3.1: ies90.covers needs t+90 <= coverage end. MID / MIDI / COW intra-state War end 2014-12-31,
+    so 2014-09-30 is the last month-end that clears it and 2014-10-31 is not."""
+    assert G.PANEL_END == "2014-09-30"
+    assert I.covers("mid", "2014-09-30") and I.covers("midi", "2014-09-30")
+    assert not I.covers("mid", "2014-10-31") and not I.covers("midi", "2014-10-31")
+    d = G.panel_dates()
+    assert d[0] == "1987-01-31" and d[-1] == "2014-09-30" and len(d) == 333
+
+
+def test_A3_3_evidence_class_order_is_a_total_order_weakest_last():
+    assert G.EVIDENCE_ORDER[0] == "opposed_side" and G.EVIDENCE_ORDER[-1] == "undefined"
+    assert G.weaker("opposed_side", "ged_location") == "ged_location"
+    assert G.weaker("icb_co_actor", "opposed_side") == "icb_co_actor"
+    assert G.weaker("opposed_side", "opposed_side") == "opposed_side"
+
+
+def test_A3_3_a_true_zero_is_classified_by_what_was_covering_not_left_blank():
+    """A3.3: a zero recorded while a sided source was covering is a statement about the pair; a zero
+    while only GED covers is 'no deaths in either country', which is not."""
+    p = frozenset(("country.iran", "country.iraq"))
+    sided = {"level": 0, "recs": [], "basis": "dyadic", "covering": ["mid", "ged"], "covering_dyadic": ["mid"]}
+    ged_only = {"level": 0, "recs": [], "basis": "location", "covering": ["ged"], "covering_dyadic": []}
+    icb_only = {"level": 0, "recs": [], "basis": "dyadic", "covering": ["icb"], "covering_dyadic": ["icb"]}
+    assert G.evidence_class_of(sided, p, {p}) == "opposed_side"
+    assert G.evidence_class_of(ged_only, p, {p}) == "ged_location"
+    assert G.evidence_class_of(icb_only, p, {p}) == "icb_co_actor"
+    assert G.evidence_class_of(icb_only, p, set()) == "icb_co_actor_never_opposed"
+
+
+def test_A3_3_a_nonzero_is_classified_by_the_rule_that_set_it():
+    p = frozenset(("country.gbr", "country.usa"))
+    icb = res(3, [rec("ICB.pair.wholly", "2018-04-07..2018-04-14", 3, source="icb")])
+    mid = res(2, [rec("MID.pair.wholly", "1998-01-16..1998-01-27", 2)])
+    ged = res(2, [rec("GED.location.ge25", "2024-04-01..2024-06-29", 2, basis="location", source="ged")],
+              basis="location")
+    assert G.evidence_class_of(icb, p, set()) == "icb_co_actor_never_opposed"
+    assert G.evidence_class_of(mid, p, {p}) == "opposed_side"
+    assert G.evidence_class_of(ged, p, {p}) == "ged_location"
+
+
+def test_A3_3_undefined_is_its_own_class_and_is_the_weakest():
+    r = {"level": None, "recs": [], "basis": None, "covering": ["mid"]}
+    assert G.evidence_class_of(r, frozenset(("country.a", "country.b")), set()) == "undefined"
+    assert G.weaker("opposed_side", "undefined") == "undefined"
+
+
+def test_A3_6_icb_replication_counts_dyads_per_crisis():
+    """A3.6: a crisis with k register actors on the grid sets a level for up to k(k-1)/2 dyads."""
+    cells = [{"dyad": d, "L_rules": "ICB.pair.wholly", "L_records": "crisis 489 SYRIA CHEMICAL WEAPONS III"}
+             for d in ("a|b", "a|c", "a|d", "b|c", "b|d", "c|d")]
+    out = G.icb_replication(cells)
+    assert out["n_crises_setting_a_level"] == 1
+    assert out["dyads_per_crisis"]["max"] == 6
+    assert out["k_to_pairs"]["4"] == 6
+    assert out["cells_set_by_icb"] == 6
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A3_4_the_three_limits_are_carried_in_the_published_panel():
+    s = json.loads(PANEL.read_text())
+    assert len(s["limits"]) == 3
+    joined = " ".join(s["limits"]).lower()
+    for must in ("never reaches the present", "never carry validated", "never scores onset"):
+        assert must.split()[1] in joined
+    assert s["vintage"]["retrospective_share"] == 1.0
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A3_the_panel_is_never_filtered_by_evidence_class():
+    """A3.3: the strict subset is a SELECTION on a field, not a smaller build. Every class must be
+    present in the panel, and the classes must sum to the cell count."""
+    s = json.loads(PANEL.read_text())
+    assert sum(s["evidence_class"].values()) == s["size"]["cells"]
+    assert s["strict_subset"]["cells"] <= s["size"]["cells"]
+    assert s["strict_subset"]["cells"] == s["evidence_class"].get("opposed_side", 0)
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A3_2_VR3_removed_dyad_dates_and_the_count_is_published():
+    s = json.loads(PANEL.read_text())
+    assert s["size"]["cells_dropped_by_VR3"] >= 0
+    assert s["size"]["active_per_date_ract"]["mean"] >= s["size"]["active_per_date_vr3"]["mean"]
+
+
+@pytest.mark.skipif(not PANEL.exists(), reason="panel not built in this tree")
+def test_A3_1_no_cell_falls_outside_the_registered_span():
+    s = json.loads(PANEL.read_text())
+    assert s["span"]["start"] == "1987-01-31" and s["span"]["end"] == "2014-09-30"
+    assert s["span"]["grid_dates"] == 333
+
+
+# ================================================================================================
+# A3.6 — the ICB dyadic-replication finding, as a regression test on the source files
+# ================================================================================================
+
+def _icb_files():
+    sys.path.insert(0, str(ROOT / "src" / "state"))
+    import pandas as _pd
+    import panel as _P
+    dy = _pd.read_csv(_P.raw_path("icb", "icb_dyads_v16.csv"), encoding="latin-1")
+    dy.columns = [c.replace("ï»¿", "").replace("﻿", "") for c in dy.columns]
+    act = _pd.read_csv(_P.raw_path("icb", "icb2v16.csv"), encoding="latin-1")
+    act.columns = [c.replace("ï»¿", "").replace("﻿", "") for c in act.columns]
+    return dy, act
+
+
+def test_A3_6_icb_crisis_489_has_five_actors_and_only_four_adversarial_dyads():
+    """The published claim, asserted against the source files: ICB's ACTOR list for crisis 489 has
+    five states (10 possible pairs) while ICB's own DYAD file records four, and UKG-USA is not one
+    of them. If ICB v16 is ever replaced this test says so before the paper is wrong."""
+    dy, act = _icb_files()
+    actors = set(act[act.crisno == 489].cracid.astype(int))
+    assert actors == {2, 200, 220, 652, 365}, actors            # USA, UKG, FRN, SYR, RUS
+    d489 = dy[dy.crisno == 489]
+    pairs = {frozenset((int(a), int(b))) for a, b in zip(d489.statea, d489.stateb)}
+    assert pairs == {frozenset((2, 652)), frozenset((200, 652)),
+                     frozenset((220, 652)), frozenset((2, 365))}, pairs
+    assert frozenset((200, 2)) not in pairs                      # UKG-USA: allies, not a dyad
+    assert len(actors) * (len(actors) - 1) // 2 == 10 and len(pairs) == 4
+
+
+def test_A3_6_score_icb_pairs_on_the_actor_list_not_the_dyad_file():
+    """The mechanism, asserted on session A's code rather than described: the dyadic test is set
+    containment in the crisis's ACTOR set. Reported to A, never patched by G."""
+    src_text = (ROOT / "src" / "state" / "ies90.py").read_text()
+    assert "dy = any(set(p) <= mem for p in pairs)" in src_text
+    out_text = (ROOT / "src" / "state" / "outcomes.py").read_text()
+    assert 'dy = pd.read_csv(P.raw_path("icb", "icb_dyads_v16.csv")' in out_text
+    assert "members[int(r.crisno)].add(e)" in out_text            # the pairing is flattened away
+
+
+def test_A3_6_the_grid_scores_two_allies_as_level_3():
+    """The instance, end to end. Slow (loads every source), so it is the only test here that does."""
+    import ies90 as _I
+    s = _I.load_sources()
+    r = _I.score_event("2018-01-31", {"country.gbr", "country.usa"},
+                       {frozenset(("country.gbr", "country.usa"))}, {"country.gbr", "country.usa"}, s)
+    assert r["level"] == 3 and r["basis"] == "dyadic"
+    assert any(x["rule"] == "ICB.pair.wholly" and "489" in x["record"] for x in r["recs"])

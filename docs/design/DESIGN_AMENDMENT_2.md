@@ -288,7 +288,6 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 
 | id | template | slots → source paths | when |
 |---|---|---|---|
-| `case.q` | *"{title}"* rendered as quoted material in a `data-verbatim` node | `story.title` | always |
 | `case.knowable.none` | *"No situation field for this event was knowable at t, so the engine read it on class and entities alone."* | — (fixed; the registered A2.6 wording) | when the event has 0 fields at t |
 | `case.knowable.some` | *"{k} situation field{s} for this event {was} knowable at t; the rest were dropped."* | `story.state_at_t.kept` | when > 0 |
 | `case.priced` | *"The realized path sits {pct}% {dir} the analog median at +{h} trading days, on {n} conditioned analogs."* | `story.priced.now_vs_median_pct`, `story.priced.horizon_td`, `story.priced.fan.n` | when a fan exists |
@@ -299,6 +298,13 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 | `case.tail` | *"{k} of {n} analogs were contained at +90 days."* | `story.branches.counts.CONTAINED`, `story.branches.conditioned_n` | when precedent is adequate |
 | `case.travel` | *"{k} of {n} registered cells transmit for this class."* | `story.propagation.counts.TRANSMITTING`, `story.propagation.counts.cells` | when available |
 | `case.travel.none` | *"No cell transmits for this class: all {n} registered cells are null or insufficient."* | `story.propagation.counts.cells` | when k = 0 |
+
+**Correction, 2026-09-03, same day, before any sentence rendered.** A.3 first registered `case.q` for
+the story title. That was a mis-registration: a corpus title is **verbatim quoted material**, governed by
+Amendment 1 A1.2 (rendered in a `data-verbatim` node and inventoried, never edited by the desk), not by
+this appendix, which governs only sentences the desk **writes itself**. `tests/test_sentences.py` caught
+the drift on its first run — the registry and the appendix must name the same set — and the row is removed
+rather than implemented. The title still renders; it renders through `verbatim()`.
 
 ### A.4 — The record
 
