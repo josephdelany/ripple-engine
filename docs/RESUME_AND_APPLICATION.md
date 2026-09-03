@@ -7,11 +7,32 @@ named file. Nothing is rounded in the project's favour.*
 
 ## The one-line version (resume, project header)
 
-> **Ripple Engine** — pre-registered walk-forward test of whether historical analogy predicts
-> geopolitical escalation and oil prices once hindsight is removed. Python · 27 academic and
-> government datasets · [github.com/josephdelany/ripple-engine](https://github.com/josephdelany/ripple-engine)
+> **Ripple Engine** — a history-trained forecasting instrument over the petroleum complex:
+> crude, refined products, cracks, gas/LNG, fertilizer and freight. Pre-registered walk-forward
+> test of whether historical precedent predicts market response to geopolitical and military
+> events. Python · 27 academic and government datasets · 772 price series · 53-node propagation
+> chain · [github.com/josephdelany/ripple-engine](https://github.com/josephdelany/ripple-engine)
 
 ## Bullets — pick three or four
+
+**Findings** *(lead with these — they are positive and multi-product)*
+- Established that **military and geopolitical shocks land in refining margins rather than crude
+  flat price**: across four event classes — chokepoint disruption, infrastructure attack,
+  sanctions, conflict escalation — events are **1.9× to 2.5× more likely** to coincide with a
+  top-5% *diesel-crack* move than a top-5% *crude* move, while OPEC decisions and demand shocks
+  invert. A crude-only view of geopolitical risk is watching the wrong instrument.
+- Showed that **a reroutable chokepoint closure is a freight event, not a price event**: the 2024
+  Red Sea disruption cut Bab el-Mandeb transits **−56.6%** with Cape of Good Hope reroutes
+  **+101.8%** and Brent **−4.9%**, against the 2026 Hormuz closure cutting flow **−92.3%** with
+  only **+20.7%** reroute and Brent **+48.5%** — because there is no reroute out of the Gulf.
+- Demonstrated that **event-occurrence flags cannot measure shock magnitude**, on the 44 days that
+  are both a corpus OPEC event and a Känzig (2021) announcement: the 0/1 indicator's band covers
+  zero while a continuous measure of the *same events on the same days* excludes it, and the
+  indicator collapses once the continuous measure is present. This applies to any system built on
+  dated event dummies, commercial geopolitical-risk products included.
+- Located the binding data gap by measurement rather than assertion: three independent studies
+  converge on a missing **physical layer** — barrels at risk, facility criticality, outage duration
+  — specifying what a working version of the instrument would require.
 
 **Research design**
 - Designed and pre-registered a walk-forward forecasting test over **313 dated geopolitical and
@@ -85,6 +106,11 @@ named file. Nothing is rounded in the project's favour.*
 | four retractions | §10, §12, §12.2 |
 | interval audit | `docs/INTERVAL_AUDIT_2026-09-03.md` |
 | adversarial audit | `docs/ADVERSARIAL_AUDIT.md` |
+| geopolitical classes 1.9–2.5× more likely in diesel-crack than crude moves | `data/big_moves/summary.json` · `p_big_given_class` |
+| Red Sea vs Hormuz flow / reroute / price | `data/ripple/physical.json`; `docs/RIPPLE_PHYSICAL.md` §4 |
+| the 44 shared OPEC/Känzig days; dummy vs magnitude | `data/ripple/stage0.json`; paper §12.3 |
+| Känzig replication +0.851 → +2.37 on Brent | `data/ripple/external_checks.json` |
+| vision-versus-build gap, layer by layer | `docs/VISION_AND_BUILD.md` |
 
 ## Two things not to say
 
