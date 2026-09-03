@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-09-03T21:23:58.117823+00:00",
+  "implementation_commit": "132235c13218c8b5e52a0f5b9b4cb7df983f236b",
+  "inputs": {
+    "database": {
+      "path": "data/oil.db",
+      "sha256": "d04b251d492d37bf6d4506f0feeb65e9f4b2caaa7f050ca12655ca2832d8a7e6"
+    },
+    "registration": {
+      "path": "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
+      "sha256": "e800a397edf6e43a4498167d52e1695595d7db750d3be23a6832b704ab7aeae8"
+    }
+  },
+  "outputs": {
+    "reads.jsonl": "050f9673b26b600c1a9b756d2f354adef971c3e7872bf5e55579133c04f39e88",
+    "scores.jsonl": "0375e79ca886c240b266cfbac18334d7feecde73158d3b7121889199dc8b884e",
+    "summary.json": "a1b52fa76a5b2ab9a3e05760b23a11c383e03649e50705f7e9b8173e0226cd89"
+  }
+}
