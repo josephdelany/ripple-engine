@@ -164,3 +164,23 @@ VIX close. They are reconstructed from observations satisfying both `obs_date < 
 stored `as_of <= event_date`; no `derived.*` row is trusted as an availability receipt. This fixed
 set prevents a derived series whose loader copied `obs_date` into `as_of` from laundering revised
 information into the experiment.
+
+## Amendment 2 — correct the target horizon off-by-one (2026-09-03, before correction)
+
+The original target formula and implementation span 21 daily returns while calling the result a
+20-trading-day return: `log P(t+20) - log P(t-1)` includes the event-day return plus twenty later
+returns, yet subtracts only `20 * alpha_hat_t`. This is internally inconsistent and computes a
+different quantity from the sentence describing it.
+
+The corrected primary target contains exactly 20 returns. Let `p` be the first trading observation
+on or after the event date. The anchor is the last trading close before `p`; the endpoint is index
+`p+19`. The corrected formula is:
+
+    AR20 = 100 * ([log P(p+19) - log P(p-1)] - 20 * alpha_hat_t).
+
+The 5- and 10-return diagnostics use endpoints `p+4` and `p+9` respectively and subtract 5 and 10
+expected returns. Estimation-window, eligibility, candidate support, weights, sealing, CRPS,
+bootstrap, DM test, seed, and verdict rules remain unchanged. The corrected experiment is rerun once
+from the committed input bundle. Previous artifacts and their reported result remain recoverable in
+git history but cease to be authoritative. The corrected result is reported regardless of sign or
+significance.
