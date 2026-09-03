@@ -10,7 +10,7 @@ Built and audited a registered walk-forward experiment comparing structural stat
 - Constructed a point-in-time research pipeline that seals forecasts before outcome attachment and reproduces its central artifacts byte-for-byte from a committed input bundle.
 - Across 264 forecast dates, structural weighting improved mean CRPS from 8.782 to 8.337 versus surface-class matching (paired difference −0.446; 95% bootstrap interval [−0.623, −0.271]).
 - Found that structural weighting did not distinguishably beat uniform historical pooling at the registered 20-day horizon (difference −0.055; 95% interval [−0.115, +0.006]), indicating that event-label filtering—not lack of historical breadth—caused most of the surface method’s deficit.
-- Classified every tracked repository file, deep-audited the claim-producing components, and rebuilt the central experiment after identifying mismatches among the intended estimand, candidate pool, outcome definition, and recorded data availability.
+- Mechanically classified every tracked repository file, audited the components behind the central claims, and rebuilt the main experiment after identifying mismatches among the intended estimand, candidate pool, outcome definition, and recorded data availability.
 
 If space permits only two bullets, use the first and third. The third contains the decision-relevant finding and its limitation.
 

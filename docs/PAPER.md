@@ -40,7 +40,7 @@ Five- and ten-day outcomes were non-verdict diagnostics. At five days structure 
 
 ## 5. What the audit changed
 
-The earlier price walk forecast raw 20-day Brent returns (`src/engine/read.py:148`). That mixes event response with the ordinary market process. Target-only corrections give different answers in two legacy designs: the grid loss to climatology disappears, while the event-walk loss narrows but remains. This shows target construction matters and the designs are not interchangeable; neither replaces the direct experiment. The side-by-side record is `docs/ABNORMAL_RETURN_RESULT.md`.
+The earlier price walk forecast raw 20-day Brent returns (`src/engine/read.py:148`). That mixes event response with the ordinary market process. Target-only corrections gave different answers in two legacy designs, showing that target construction matters and those designs are not interchangeable. Neither replaces the direct experiment, and neither supplies an additional headline here.
 
 The earlier event walk admitted only same-class candidates (`src/engine/read.py:208`) and built climatology from that conditioned pool (`src/walk.py:262` in the audited version). It tested within-class reranking, not structural versus surface analogy. The central experiment removes that filter and holds support fixed.
 

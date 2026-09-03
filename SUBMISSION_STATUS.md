@@ -12,12 +12,13 @@ On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.337 
 
 - `make verify-submission`: passes.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
-- Default `pytest -q`: latest unscoped run passed 1,000 tests, skipped 13 environment-dependent tests, and recorded 1 expected failure, with zero unexpected failures.
+- Default `pytest -q`: latest unscoped run passed 1,000 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
 - Public claims match `data/structural_surface/summary.json`.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.
 - Former self-mutating GitHub Actions are inert under `archive/github-workflows/`.
 - Superseded paper, brief, oil-findings, explanation, and résumé documents carry warnings.
+- The run emitted four non-failing dependency/encoding warnings: three from legacy FastAPI/Starlette APIs and one from a Stata file decoded with its documented Latin-1 fallback.
 
 ## Submission contents
 

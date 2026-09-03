@@ -1,5 +1,7 @@
 import copy
+import json
 import sqlite3
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -90,7 +92,20 @@ def test_bundle_reconstructs_only_the_registered_tables(tmp_path):
 
 
 def test_frozen_manifest_names_every_reproducible_scientific_output():
-    import json
     manifest = json.loads((M.OUT / "manifest.json").read_text())
     assert set(manifest["outputs"]) == {"reads.jsonl", "scores.jsonl", "summary.json"}
     assert (M.OUT / "input" / "bundle_manifest.json").exists()
+
+
+def test_frozen_manifest_distinguishes_registration_implementation_and_execution():
+    manifest = json.loads((M.OUT / "manifest.json").read_text())
+    assert manifest["registration_commits"] == M.REGISTRATION_COMMITS
+    assert manifest["implementation_commits"] == M.IMPLEMENTATION_COMMITS
+    assert manifest["execution_commit"] not in manifest["implementation_commits"]
+    assert "implementation_commit" not in manifest
+    for registered in manifest["registration_commits"]:
+        subprocess.run(["git", "merge-base", "--is-ancestor", registered,
+                        manifest["implementation_commits"][0]], cwd=M.ROOT, check=True)
+    for implemented in manifest["implementation_commits"]:
+        subprocess.run(["git", "merge-base", "--is-ancestor", implemented,
+                        manifest["execution_commit"]], cwd=M.ROOT, check=True)

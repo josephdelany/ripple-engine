@@ -37,6 +37,16 @@ MIN_FIELDS = 3
 MIN_SCALE_N = 30
 TAU = 0.25
 SEED = 19900802
+REGISTRATION_COMMITS = [
+    "f38fd48250013e0023fed26a02cd8dbda78dfb41",
+    "475737638cf2cf30e22bd31472e5e2a45e7d149e",
+]
+IMPLEMENTATION_COMMITS = [
+    "47fdf3db81b017a1c7f24f52d3591ce38e5cc3e6",
+    "132235c13218c8b5e52a0f5b9b4cb7df983f236b",
+    "852b5840a717ca648bd8b3f3b602f35edfe2b480",
+    "051b188937b5de94e967d2f180ef9d14054594d8",
+]
 
 
 def canonical(obj):
@@ -464,7 +474,9 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
     else:
         source_input = {"database": {"path": str(Path(db).relative_to(ROOT)) if Path(db).is_relative_to(ROOT) else str(db),
                                       "sha256": file_hash(db)}}
-    manifest = {"generated_at": datetime.now(timezone.utc).isoformat(), "implementation_commit": commit,
+    manifest = {"generated_at": datetime.now(timezone.utc).isoformat(), "execution_commit": commit,
+                "registration_commits": REGISTRATION_COMMITS,
+                "implementation_commits": IMPLEMENTATION_COMMITS,
                 "inputs": {**source_input,
                            "registration": {"path": str(REGISTRATION.relative_to(ROOT)), "sha256": file_hash(REGISTRATION)}},
                 "outputs": {name: file_hash(out_dir / name) for name in ("reads.jsonl", "scores.jsonl", "summary.json")}}

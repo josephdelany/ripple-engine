@@ -29,6 +29,8 @@ Generated artifacts, repetitive dossiers, tests, interfaces, and planning files 
 
 An earlier closure incorrectly presented the scoped 15-test result as “default test suite: 15 passed.” That statement is retracted. At that point the complete suite still had five observed failures: two provenance reads of a moved superseded source, one stale figure reachability assumption, one unregistered central result in the citation guard, and one cached ICB loader that unnecessarily contacted the network. The causes were repaired directly; collection was restored before the next full-suite run.
 
+After repair, the unscoped suite completed with 1,000 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. The skipped and expected-failure counts remain part of the result and must be reported with it.
+
 ## Confirmed provenance defect
 
 The superseded `docs/OIL_FINDINGS.md` and `docs/RESUME_AND_APPLICATION.md` cite `data/ripple/stage0.json`, but the generator writes `data/magnitude/stage0.json` (`src/magnitude_stage0.py:42,332` in the audited revision). Therefore those documents do not point to their generating artifact. Neither document is part of the authoritative public claim.
