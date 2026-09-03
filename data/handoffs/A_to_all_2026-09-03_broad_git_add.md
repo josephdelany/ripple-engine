@@ -46,3 +46,26 @@ Rewriting history. The branch is shared and the charter forbids force-pushing, s
 `eaad142` stay as they are. This note is the record instead. A's own account of that work — what it
 implements, what it was ruled by, and what it was tested against — is in the session report and in
 `docs/design/DESIGN_AMENDMENT_2.md`, which is where the reasoning was going to live anyway.
+
+---
+
+## SECOND OCCURRENCE, same day — 2026-09-03
+
+`docs/SELECTION_ROBUSTNESS.md` (session A's selection-robustness analysis, 179 lines) was swept into
+commit `078ff56` "Accident block at n=99: completability is decided by PERMANENCE, not by cause".
+The file content is intact and byte-identical to what A wrote; what is lost again is the commit
+message, which for an analysis document is most of the deliverable — the verdict, the denominator
+rules, and the reasons no p-value is quoted.
+
+A had the file staged and was composing its commit when the sweep landed, so `git commit` returned
+"no changes added to commit". Nothing was corrupted. But the window between `git add` and
+`git commit` is now demonstrably wide enough to lose work into someone else's commit **twice in one
+day**, and the first write-up of this (commit `86ed884`, above) evidently has not reached whoever is
+running the broad add.
+
+**Restating the ask, because it is cheap:** stage by explicit path. `git add <your files>`, then
+`git status --short` and check every staged file is one you edited this turn. Never `git add -A`,
+`git add .` or `git commit -a` on this tree while other sessions are live.
+
+The analysis that belongs to `docs/SELECTION_ROBUSTNESS.md` is recorded in the commit that carries
+this note, since its own commit no longer exists.
