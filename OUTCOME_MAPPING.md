@@ -390,3 +390,21 @@ Therefore:
 Computed after this amendment was committed, over the 150 daily-tier scored G reads of run
 `walk_20260902T210135Z` (`data/walk_forward/summary.json`, `/tiers/daily/G`). Numbers are in
 `data/spine/CLASS_AUDIT.md` §5 with their receipt; they change nothing in the run.
+
+### Amendment 3.1 (2026-09-02, approved by Joe; registered before the remaining two classes are coded) — the field is canon, and the precondition waits for all four classes
+Joe approved §A3.2's precondition and CLASS_AUDIT §7.5's recommendation: a **`hostility`
+field**, not new `events.type` values. Registered in `EVENTS_CODEBOOK.md`, amendment
+2026-09-02, with the four values, the coding rules and the tie-breaks; the machine
+identifiers stay the §A3.3 ones (`hostile`, `non_hostile`, `ambiguous`,
+`hostile_unattributed`) and the codebook's hyphenated spellings are their display forms.
+The `type` enum stays at seven values and nothing in `events` changes.
+
+Two consequences, fixed here rather than left to whoever implements:
+1. **The field is required on all four geopolitical types** (`conflict_escalation`,
+   `infrastructure_attack`, `chokepoint_disruption`, `sanctions`) and is null-and-not-
+   applicable on the other three, which never claimed to be hostile acts.
+2. **The precondition is not implemented until all four are coded.** Implementing it while
+   only two classes carry the field would exclude non-hostile events from two classes and
+   silently keep them in the other two — a worse state than today, because the inconsistency
+   would be invisible in the output. `src/engine/**` and `src/walk.py` are Session B's;
+   the handoff carries this as a blocking condition with the outstanding count.
