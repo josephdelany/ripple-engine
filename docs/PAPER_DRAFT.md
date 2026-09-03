@@ -755,7 +755,9 @@ TRANSMITTING only if its 95% band excludes zero, its coefficient falls outside t
 central 95% of the matched placebo, and the Newey–West band agrees.
 
 **Result. Across 477 node×shock cells, 21 transmit, 401 are null and 55 are
-insufficient — where between 1 and 24 cells would transmit if nothing transmitted
+insufficient** — the 477 being the rows of `data/ripple/irf.json` that carry a verdict at all
+(932 rows in total; 455 are unscored and have `verdict: null`), a filter stated here because a
+citation audit could not otherwise reproduce the denominator — ** — where between 1 and 24 cells would transmit if nothing transmitted
 anywhere.** The observed count sits inside its own null interval. The registered
 expectation, that some tightening class beats the matched placebo at Brent, fails.
 
@@ -1114,6 +1116,7 @@ independent runs reproduce content digest `2a90ff4a…`.
 | Number | Path |
 |---|---|
 | 313 events; class counts; 1973-10-06 … 2026-06-17 | `oil.db` `events` |
+| propagation: **477** scored cells = 21 TRANSMITTING + 401 NULL + 55 INSUFFICIENT | `data/ripple/irf.json` :: `rows` where `verdict is not None` (932 rows total; 455 unscored). Tally also printed at `data/ripple/SUMMARY.md` line 12 |
 | spine audit: 0 of 313 with two source domains; 11.9% / 25.0% / 63.1% field provenance; 49 with draft text; 31 encyclopaedia-only; 9 bare eia.gov root; median 148 chars | `data/spine/AUDIT.md` (`src/spine_audit.py`) |
 | 187 geo; 184 labelled; 3 uncovered; levels 76/6/48/54; 95 deal; 126 uncovered = the three non-geopolitical classes | `data_state` |
 | κ −0.001 / −0.234 / 0.104 | `data/state/outcomes_kappa.json` |
