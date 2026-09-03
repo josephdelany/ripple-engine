@@ -26,7 +26,9 @@ const w = dom.window;
 w.fetch = () => Promise.reject(new Error('no network in the render check'));
 w.scrollTo = () => {};
 const m = html.match(/<script>([\s\S]*)<\/script>/);
-w.eval(m[1].replace(/loadFeed\(\);\s*$/m, ''));            // define the page functions without the network bootstrap
+const BOOT = /\/\* @boot-start \*\/[\s\S]*?\/\* @boot-end \*\//;
+if (!BOOT.test(html)) { console.error('BOOT MARKER MISSING: the page must emit @boot-start/@boot-end for the harness to strip'); process.exit(3); }
+w.eval(m[1].replace(BOOT, ''));            // define the page functions without the network bootstrap
 const out = {};
 for (const [id, s] of Object.entries(stories)) {
   w.renderStory(s);
@@ -60,6 +62,7 @@ def test_a3_section5_renders_trust_from_the_api_under_jsdom(tmp_path):
     js = tmp_path / "render.js"; js.write_text(NODE_SCRIPT)
     proc = subprocess.run(["node", str(js), str(ROOT / "src" / "app.html"), str(sp)], capture_output=True, text=True, timeout=120,
                           env={**os.environ, "NODE_PATH": np_})
+    assert proc.returncode != 3, "the page no longer emits the @boot-start/@boot-end marker the harness strips by"
     assert proc.returncode == 0, proc.stderr[-800:]
     out = json.loads(proc.stdout)
     summary = json.loads((ROOT / "data" / "walk_forward" / "summary.json").read_text())

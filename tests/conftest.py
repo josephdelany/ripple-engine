@@ -31,6 +31,7 @@ DB_FREE_FILES = {
     "test_ripple_fetch.py", "test_ripple_lp.py",
     "test_sowhat.py", "test_status.py", "test_two_source.py", "test_ucdp.py", "test_validate.py",
     "test_kappa.py", "test_gdelt_search.py",
+    "test_design_spec.py",           # DESIGN.md Amendment 1 A1.3: static rules, no browser and no DB, so CI enforces them
     "test_similarity.py",            # PATH Step 6: synthetic vectors + series only
     "test_read.py",                  # PATH Step 7: synthetic corpus; its one DB test carries its own skipif
     "test_walk.py",                  # PATH Step 8: synthetic corpus only
@@ -43,6 +44,8 @@ DB_FREE_FILES = {
     "test_ruling1_retraction.py",    # Joe's Ruling 1: rows + committed artifacts; the DB branch self-guards
     "test_monthly_tier.py",          # B-12: synthetic monthly corpus; the real-corpus smoke carries its own skipif
     "test_diagnostic_hostile.py",    # Amendment K: reads the committed summary.json only
+    "test_travel_irf.py",            # DESIGN.md Amendment 1: an ast scan of src/ + the committed
+                                     # data/ripple/irf.json; its two Story tests carry their own skipif
 }
 
 

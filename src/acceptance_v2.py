@@ -39,8 +39,9 @@ def run():
                 f"{cov}/{tot} carry a Situation Record; 20-event audit in data/situation_audit.md"))
 
     # A2 retrieval + no-adequate-precedent (unit-tested)
+    # was: AND sr_outcome_90 IS NOT NULL -- a retired label must not choose the event under test
     eid = cur.execute("SELECT event_id FROM events WHERE type='chokepoint_disruption' "
-                      "AND sr_outcome_90 IS NOT NULL ORDER BY event_date DESC LIMIT 1").fetchone()[0]
+                      "ORDER BY event_date DESC LIMIT 1").fetchone()[0]
     r = E.read_event(conn, eid)
     far = E.read(conn, {"event_id": "x", "type": "x"}, pool=[
         {"event_id": f"p{i}", "type": "conflict_escalation", "actor": "country.a",
@@ -58,13 +59,25 @@ def run():
                 f"branch rates from conditioned subset (n={br.get('n')}), basis '{br.get('basis')}', "
                 f"thin flag present; historical frequencies only"))
 
-    # A4 propagation: per-branch hops with n, price & flow separate
+    # A4 propagation: the Story band reads the registered local projections, not the retired branch.
+    # (Was: P.propagate(conn, branch="WIDENING") -- conditioned on sr_outcome_90, retired 2026-09-02.)
     import propagate as P
-    p = P.propagate(conn, branch="WIDENING")
+    import story_read as SR
+    p = P.propagate(conn, event_type="chokepoint_disruption")
     hop_ok = p.get("hops") and all("n" in h and "signed_median_pct" in h for h in p["hops"])
-    out.append(("A4 propagation", _u(bool(hop_ok) and "realized_disruption_fraction_pct" in p),
-                f"{len(p.get('hops', []))} hops with n + PRICE; realized-disruption fraction "
-                f"{p.get('realized_disruption_fraction_pct')}%; FLOW live (history gap stated)"))
+    tv = SR.travel("chokepoint_disruption")
+    cells = [c for h in (tv.get("hops") or []) for c in h["cells"]]
+    # every registered cell shown, nulls included, each with estimate + 95% band + n + verdict
+    band_ok = (tv.get("available") and cells
+               and all(c["verdict"] in ("TRANSMITTING", "NULL", "INSUFFICIENT") for c in cells)
+               and all(c["n"] is not None and c["caption"] for c in cells)
+               and any(c["verdict"] == "NULL" for c in cells))
+    out.append(("A4 propagation", _u(bool(hop_ok) and bool(band_ok) and "realized_disruption_fraction_pct" in p),
+                f"Story band: {len(cells)} registered cells from data/ripple/irf.json "
+                f"({tv.get('counts', {}).get('TRANSMITTING')} transmitting, "
+                f"{tv.get('counts', {}).get('NULL')} null, {tv.get('counts', {}).get('INSUFFICIENT')} insufficient), "
+                f"nulls shown not dropped (DESIGN.md Amendment 1); FLOW side {len(p.get('hops', []))} CAR hops "
+                f"with n, realized-disruption fraction {p.get('realized_disruption_fraction_pct')}%"))
 
     # A5 walk-forward: two windows, G/P vs baseline, published
     wf = {}
@@ -172,7 +185,10 @@ def _d1(fast):
                           capture_output=True, text=True, timeout=1800)
     tail = [l for l in proc.stdout.splitlines() if re.search(r"\d+ (passed|failed|error)", l)]
     summary = tail[-1].strip() if tail else (proc.stdout.strip().splitlines() or ["no output"])[-1]
-    ok = proc.returncode == 0 and "failed" not in summary and "error" not in summary
+    # 2026-09-03: this read `"failed" not in summary`, so a green suite reporting "1 xfailed" was called FAIL --
+    # "xfailed" contains "failed". Count the real failures instead; \b stops the count matching inside xfailed/xpassed.
+    n_bad = sum(int(m.group(1)) for m in re.finditer(r"\b(\d+) (?:failed|errors?)\b", summary))
+    ok = proc.returncode == 0 and n_bad == 0
     named = ["tests/test_codebook.py", "tests/state/test_vintage_rule.py", "tests/state/test_join_coverage.py", "tests/test_demo_911.py"]
     missing = [t for t in named if not _exists(t)]
     if ok and missing:

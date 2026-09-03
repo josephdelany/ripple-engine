@@ -121,7 +121,9 @@ const {JSDOM} = require('jsdom'); const fs = require('fs');
 const html = fs.readFileSync(process.argv[2], 'utf8'); const data = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
 const dom = new JSDOM(html, {runScripts: 'outside-only', url: 'http://localhost/app'}); const w = dom.window;
 w.fetch = () => Promise.reject(new Error('no network')); w.scrollTo = () => {};
-w.eval(html.match(/<script>([\s\S]*)<\/script>/)[1].replace(/loadFeed\(\); loadRecord\(\);\s*/m, ''));
+const BOOT = /\/\* @boot-start \*\/[\s\S]*?\/\* @boot-end \*\//;
+if (!BOOT.test(html)) { console.error('BOOT MARKER MISSING: the page must emit @boot-start/@boot-end for the harness to strip'); process.exit(3); }
+w.eval(html.match(/<script>([\s\S]*)<\/script>/)[1].replace(BOOT, ''));
 w.renderRecordBar(data.record); w.renderFeed(data.feed);
 process.stdout.write(JSON.stringify({bar: w.document.querySelector('#recordbar').textContent, lq: w.document.querySelector('#loudquiet').textContent,
   ql: w.document.querySelector('#quietloud').textContent, all: w.document.body.textContent}));
@@ -141,6 +143,7 @@ def test_a14_jsdom_record_bar_on_every_screen_and_blindspot_lists(tmp_path):
     (tmp_path / "d.json").write_text(json.dumps(data)); (tmp_path / "r.js").write_text(NODE)
     proc = subprocess.run(["node", str(tmp_path / "r.js"), str(ROOT / "src" / "app.html"), str(tmp_path / "d.json")], capture_output=True, text=True, timeout=120,
                           env={**os.environ, "NODE_PATH": np_})
+    assert proc.returncode != 3, "the page no longer emits the @boot-start/@boot-end marker the harness strips by"
     assert proc.returncode == 0, proc.stderr[-600:]
     out = json.loads(proc.stdout)
     r = data["record"]

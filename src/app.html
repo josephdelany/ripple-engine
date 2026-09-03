@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ripple Engine</title>
 <style>
-:root{--bg:#0f1114;--s1:#161a1f;--s2:#1d2228;--line:#2a3038;--line2:#3a424c;--t:#e8e6e1;--t2:#a9a69f;--t3:#6f6d67;
+:root{--bg:#0f1114;--s1:#161a1f;--s2:#1d2228;--line:#2a3038;--line2:#3a424c;--t:#e8e6e1;--t2:#a9a69f;--t3:#8a8880;
 --hot:#e0653a;--hotbg:#3a2018;--cool:#3fbf95;--coolbg:#12302a;--warn:#e0a33a;--warnbg:#3a2c12;--mono:ui-monospace,Menlo,Consolas,monospace;--sans:-apple-system,Inter,Segoe UI,Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 var(--sans)}
+/* DESIGN.md §4: figures are tabular and monospaced everywhere they appear, so decimals align down a column. */
+.mono,.num,table,th,td,dd,.kv dd{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
+.num{font-family:var(--mono)}
 a{color:inherit}
 .top{display:flex;align-items:center;gap:20px;padding:10px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
 .brand{font-weight:600;letter-spacing:.2px}.brand small{color:var(--t3);font-weight:400;margin-left:8px}
@@ -42,6 +45,25 @@ table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;colo
 .ev-m{color:var(--cool);font-family:var(--mono);font-size:12px}.ev-j{color:var(--warn);font-family:var(--mono);font-size:12px}
 .chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}.hop{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:150px}
 .hop .a{font-weight:500}.hop .m{font-family:var(--mono);font-size:12px;color:var(--t2)}.arrow{align-self:center;color:var(--t3)}
+/* band 5 "where does it travel" -- DESIGN.md §2 absence language + Amendment 1 A1.3 */
+.trav{display:grid;grid-template-columns:186px minmax(120px,1fr) 200px 48px 104px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
+.trav.head{color:var(--t3);font-size:12px;border-bottom:1px solid var(--line2)}
+.trav .nd{font-size:12.5px}.trav .num{font-family:var(--mono);font-size:12px;color:var(--t2);text-align:right;font-variant-numeric:tabular-nums}
+.trav .nn{font-family:var(--mono);font-size:12px;color:var(--t3);text-align:right}
+.hopgrp{margin:16px 0 2px;font-size:12px;color:var(--t2);letter-spacing:.4px}
+.ib{position:relative;height:15px}
+.ib .z{position:absolute;top:0;bottom:0;width:1px;background:var(--t);opacity:.8}      /* zero rule, always drawn */
+.ib .bar{position:absolute;top:5px;height:5px;border-radius:2px}
+.ib .tk{position:absolute;top:1px;width:2px;height:13px;border-radius:1px}
+.v-NULL .bar{background:var(--line2)}.v-NULL .tk{background:var(--t2)}                  /* crosses zero: neutral */
+.v-TRANSMITTING .bar{background:var(--coolbg)}.v-TRANSMITTING .tk{background:var(--cool)}
+.v-INSUFFICIENT .bar{background:repeating-linear-gradient(45deg,var(--line2) 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1px var(--line)}
+.v-INSUFFICIENT .tk{background:var(--t3)}                                              /* hatched, never coloured */
+.c-TRANSMITTING{background:var(--coolbg);color:var(--cool)}
+.c-NULL{background:var(--s2);color:var(--t2)}
+.c-INSUFFICIENT{background:var(--s1);color:var(--t3);border:1px solid var(--line)}
+.travcap{grid-column:1/-1;font-size:11.5px;color:var(--t3);padding:1px 0 7px;margin-top:-3px}
+.finding{font-size:22px;font-weight:500;line-height:1.3;margin:0 0 6px}
 .two{display:grid;grid-template-columns:2fr 1fr;gap:16px}
 textarea{width:100%;min-height:120px;background:var(--s2);border:1px solid var(--line);color:var(--t);border-radius:8px;padding:10px;font:inherit;resize:vertical}
 details summary{cursor:pointer;color:var(--t2);padding:10px 0}
@@ -103,6 +125,43 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 
 <script>
 const $=s=>document.querySelector(s);
+// ---- band 5, "where does it travel" -------------------------------------------------------------
+// DESIGN.md §3.1(5) + Amendment 1. Reads story.propagation, which story_read.travel() built from
+// data/ripple/irf.json. EVERY registered cell is drawn, nulls included -- a null hop is the finding,
+// so it is never dropped. The interval is a bar, the estimate a tick, and the zero rule is always
+// drawn at full contrast (§2). Colour carries the verdict, never the sign.
+function travelBand(t){
+  if(!t||!t.available) return `<p class="dim">Where it travels: unavailable — ${esc((t&&t.note)||'no propagation object')}</p>`;
+  const cells=(t.hops||[]).flatMap(h=>h.cells||[]);
+  const fmt=c=>c.estimate==null?'no estimate'
+    :`${c.estimate>0?'+':''}${c.estimate.toFixed(3)}${c.unit==='%'?'%':''}`;
+  const band=c=>c.lo95==null?'':`[${c.lo95>0?'+':''}${c.lo95.toFixed(2)}, ${c.hi95>0?'+':''}${c.hi95.toFixed(2)}]`;
+  const rows=(h)=>{
+    // one symmetric scale per hop so bars within a hop are comparable; zero sits at the centre
+    const m=Math.max(...h.cells.map(c=>Math.max(Math.abs(c.lo95??0),Math.abs(c.hi95??0))),1e-9);
+    return h.cells.map(c=>{
+      const L=c.lo95==null?null:50+50*c.lo95/m, R=c.hi95==null?null:50+50*c.hi95/m;
+      const T=c.estimate==null?null:50+50*c.estimate/m;
+      const bar=L==null?'':`<i class="bar" style="left:${Math.min(L,R)}%;width:${Math.max(Math.abs(R-L),0.4)}%"></i>`;
+      const tk=T==null?'':`<i class="tk" style="left:calc(${T}% - 1px)"></i>`;
+      // the plain-null caption is stated once for the band; only the states that differ are captioned inline
+      const cap=(c.verdict==='NULL'&&!c.fragile)?'':`<div class="travcap">${esc(c.caption)}</div>`;
+      return `<div class="trav v-${c.verdict}">
+        <div class="nd">${esc(c.node)}<span class="dim" style="font-size:11px"> · h=${c.h} ${esc(c.freq)}</span></div>
+        <div class="ib"><i class="z" style="left:50%"></i>${bar}${tk}</div>
+        <div class="num">${fmt(c)} <span class="dim">${band(c)}</span></div>
+        <div class="nn">${c.n==null?'—':c.n}</div>
+        <div><span class="chip c-${c.verdict}">${esc(c.verdict)}</span>${c.fragile?' <span class="chip c-flag">FRAGILE</span>':''}</div>
+      </div>${cap}`;}).join('');
+  };
+  const nulls=cells.filter(c=>c.verdict==='NULL'&&!c.fragile).length;
+  return `<p class="finding">${esc(t.finding)}</p>
+    ${nulls?`<p class="dim" style="font-size:12px;margin:0 0 10px">The ${nulls} cells marked NULL below: the interval crosses zero — no effect distinguishable from none at this sample size.</p>`:''}
+    <div class="trav head"><div>node</div><div>95% interval (EHW), zero centred</div><div style="text-align:right">estimate [95%]</div><div style="text-align:right">n</div><div>verdict</div></div>
+    ${(t.hops||[]).map(h=>`<div class="hopgrp">hop ${esc(h.hop)} · ${esc(h.label)}</div>${rows(h)}`).join('')}
+    <p class="dim" style="font-size:11.5px;margin-top:10px">${esc(t.caveat||'')}</p>
+    <p class="dim" style="font-size:11px">${esc(t.label||'')} · ${esc(t.source)} · spec ${esc(t.spec)}, sample ${esc(t.sample)} · ${esc(t.registration||'')} · run ${esc(t.run_when||'')} · seed ${esc(t.seed)}${t.note?' · '+esc(t.note):''}</p>`;
+}
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const num=(v,d=1)=>v==null?'—':(+v).toFixed(d);
 const pct=(v,d=1)=>v==null?'—':((+v>0?'+':'')+(+v).toFixed(d)+'%');
@@ -113,6 +172,7 @@ function vchip(v){const label={NOPRECEDENT:'No precedent'}[String(v).replace(/\s
 function rb(bar){ if(!bar||!bar.n) return '<span class="dim mono">—</span>';
   if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--hot)"></i></div>`;}
   const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--cool)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--hot)"></i></div>`;}
+const SCREENS=new Set(['feed','story','big','ledger','walk']);
 function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('on',x.id==='s-'+s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));window.scrollTo(0,0);
   if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger(); if(s==='walk')loadWalk();}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
@@ -219,9 +279,8 @@ function renderStory(s){
 
   ${engineSection(s.engine)}
 
-  <div class="sec"><h2>4 · Where does it travel? Measured pass-through per hop, this class</h2>
-    <div class="chain">${(s.propagation&&s.propagation.hops||[]).map((h,i)=>`${i?'<span class="arrow">→</span>':''}<div class="hop"><div class="a">${esc(h.label)}</div><div class="m">signed median ${pct(h.signed_median_pct)} · n=${h.n}</div><div class="dim" style="font-size:11px">material move ${h.material_move_pct}% · no lasting move ${h.no_lasting_move_pct}% · range ${h.lo}…${h.hi}</div></div>`).join('')||'<p class="dim">no measured edges for this class</p>'}</div>
-    <p class="dim" style="font-size:11.5px;margin-top:8px">${esc(s.propagation&&s.propagation.caveat||'')}</p></div>
+  <div class="sec"><h2>4 · Where does it travel? Registered local projections for this class</h2>
+    ${travelBand(s.propagation)}</div>
 
   <div class="sec two"><div><h2>5 · How much to trust this</h2><dl class="kv">
       ${(wf.rows||[]).map(w=>`<dt>${esc(w.metric)}</dt><dd class="mono">${num(w.value,3)}${w.ci95?` · 95% CI ${num(w.ci95[0],3)}..${num(w.ci95[1],3)}`:''}${w.dm_p!=null?` · DM p ${num(w.dm_p,3)}`:''}${w.covers_zero!=null?` · covers zero: ${w.covers_zero?'yes':'no'}`:''}${w.best_model?` · best ${esc(w.best_model)}`:''}${w.n!=null?` · n=${w.n}`:''} <span class="dim">${esc(w.path||'')}</span></dd>`).join('')}
@@ -368,8 +427,16 @@ async function loadLedger(){try{const l=await api('/api/ledger');const e=l.engin
   $('#resolve').onclick=async()=>{const r=await api('/api/ledger/resolve',{method:'POST'});alert(r.newly_resolved+' newly resolved');loadLedger();};
   }catch(e){$('#ledger').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 
-loadFeed(); loadRecord();
-if(location.hash&&location.hash.length>1)show(location.hash.slice(1));   /* /app#walk opens the walk screen */
+/* ==== BOOT (test harnesses strip from this marker to the matching end marker; DESIGN.md Amendment 1 A1.4:
+   the old harness anchored to a source line, the line changed, and the strip silently stopped happening) ==== */
+/* @boot-start */
+boot();
+function boot(){
+  loadFeed(); loadRecord();
+  const h = (location.hash||'').slice(1);
+  show(SCREENS.has(h) ? h : 'feed');          /* an unknown hash used to hide every screen */
+}
+/* @boot-end */
 </script>
 </body>
 </html>
