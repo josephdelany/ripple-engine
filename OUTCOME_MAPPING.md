@@ -973,3 +973,119 @@ covers the live target, and work already done is never thrown away.
 pinned and 29 are drawn; the sheet stays 30 rows; `iran_iraq_war_1980` returns; the other 29
 are drawn by the unchanged rule and most will differ from the pre-rebuild sheet, because the
 pool genuinely changed. κ is unaffected — 1 answered row, κ still null, `passed` still false.
+
+### Amendment 4.2 (2026-09-03, registered before the code, on Joe's ruling) — the label audit is blind: source fields shown, the engine's mapping withheld
+
+*Session K, on Joe's instruction of 2026-09-03. Amends the audit procedure around A1.3 and
+the display `docs/AUDIT_GUIDE.md` describes. No level, window, source, precedence or
+threshold changes; no published run is touched; nothing enters `events`. It changes what a
+human is shown before he answers, and therefore what κ means.*
+
+#### A4.2.1 The defect
+
+`src/audit_ies90.py::show()` prints, immediately **before** the prompt that asks Joe for his
+level:
+
+    ENGINE: level 3 (war)   DEAL 1   basis dyadic   rule WAR.inter.pair
+
+κ computed after that is not an inter-rater statistic. It measures agreement with a number
+the coder was shown one line earlier. `docs/AUDIT_GUIDE.md` states the standard the tool
+fails: *"Cohen's κ measures whether an independent reader agrees with the machine's mapping.
+**That is the only reason your answers matter: they must be yours, formed from the record on
+screen**"*, and it warns in terms that contamination *"corrupts κ, which is the number the §7
+gate depends on."* The guide also **describes** the engine line as part of the display
+(§"The four levels", *"prints `basis` for the engine's own choice"*), so the guide contradicts
+its own purpose; that sentence goes with this amendment.
+
+**The leak is wider than the `ENGINE:` line.** Measured over the 30-row sheet's 100 source
+rows, before writing any fix:
+
+| printed field | rows that state an engine-assigned level or rule id | of |
+|---|---:|---:|
+| `record_rule` (per source record) | **100** | 100 |
+| `level_contributed` (per source record) | every non-blank one | 100 |
+| `code_and_rule` (per source record) | **26** | 100 |
+
+`record_rule` is not a source field at all: `GED.location.ge250` *is* the statement "level 3",
+`GED.location.ge25` is "level 2", `NONE.covered` is "level 0". And `code_and_rule`, which is
+otherwise exactly what Joe should read, carries the mapping inside it on 26 rows — GED's
+`delta +188 -> delta_level 2`, MID's `(onset dated -> 1; hihost 4 is the undated peak)`, COW's
+`-> undated-for-W (A4.2, no level)`, and `level 0 asserted from coverage`. Suppressing the
+three lines named in the brief would have left all 26 of those in place.
+
+#### A4.2.2 The rule — what is shown, and what is withheld
+
+**The principle: the record is shown; the mapping is the thing under test.**
+
+| shown before the prompt | withheld until after the answer is recorded |
+|---|---|
+| event date and `date_precision`, class, title, `source_url` | the **event_id** |
+| hostility (session F) and its note | `ies90_level`, `ies90_level_meaning`, `ies90_deal` |
+| countries `A`, location set `L`, littoral origin | the event's `basis` (the engine's own choice) |
+| per record: source, `dyadic`/`location`, identifier, dates, page URL | per record: `level_contributed`, `record_rule` |
+| per record: `code_and_rule`, **redacted** per A4.2.3 | `rule_fired` |
+
+The per-record `dyadic` / `location` label **stays**: A2.1's precedence is a rule the guide
+asks Joe to apply himself, and the label states how the record matched, not what level it
+produced. `code_and_rule` stays because `hihost 5`, `viol 4`, `forout 2`, `settlmnt 1`,
+`best 258 in W` and the window relation (`wholly inside W`, `starts in W, ends after`,
+`ongoing at d`, `covers all of B`) are the record and the dating — precisely what he is asked
+to reason from.
+
+The `event_id` goes because it telegraphs the answer in plain words —
+`israel_hamas_war_2023`, `iran_iraq_war_1980`, `russia_invades_ukraine_2022` — and Session H
+measured that effect at 9 of 30 rows. The **title stays**: it is the record, Joe needs to know
+which event he is grading, and unlike the id it was not written by us to be a slug.
+
+#### A4.2.3 Redaction, and how it is enforced
+
+`code_and_rule` is passed through a redaction that removes any statement of an
+engine-assigned level or any registered rule id, and nothing else: `level <n>`,
+`-> level <n>`, `delta_level <n>`, `no level`, `undated-for-W`, `asserted from coverage`,
+`onset dated -> <n>`, `already at level <n>`, and any token of the form `SRC.kind.rule`.
+Source fields, counts, dates and window relations are untouched.
+
+Redaction by pattern is not trusted on its own. **The guard is a test**
+(`tests/test_audit_blind.py`): it renders every row of the live sheet through the same
+function the tool uses and fails if any engine-derived level token survives anywhere in the
+rendered text. A new leak added to `ies90.py`'s `code` strings — which is where all 26 of the
+current ones came from — fails that test rather than quietly reaching Joe.
+
+#### A4.2.4 The reveal, and why it is off by default
+
+Joe's brief allows the engine's answer to be shown *after* the row is recorded, or not at
+all. **The default is not at all**, with `--reveal` as an explicit opt-in. Per-row reveal does
+not contaminate the row it follows, but it contaminates the ones after it: a coder who sees
+the engine's answer thirty times learns the engine's mapping over the session, and the last
+rows of the sheet are graded by a better-trained rater than the first. That is a drift in the
+measurand within a single κ, and it is invisible in the number. Whoever is running the audit
+may take that trade knowingly with the flag; they may not take it by default. `--status`
+reports the engine's levels and disagreements freely once rows are recorded — the reveal is
+about *during*, not *after*.
+
+#### A4.2.5 Joe's answered row is superseded, not deleted
+
+The single answered row (`iran_iraq_war_1980`, `joe_level` 3, answered 2026-09-03T00:02:23Z)
+was recorded under the contaminated display: the screen said `ENGINE: level 3 (war)` and the
+answer was 3. It carries no information about agreement and must not enter κ.
+
+It is **kept in `data/audits/outcome_audit.json` and marked**, never removed:
+`superseded: true`, with `superseded_at`, `superseded_by: "OUTCOME_MAPPING.md Amendment
+4.2"`, and `superseded_reason` naming the anchoring. A superseded row is excluded from κ,
+from `n_done`, and from the "already answered" set, so the tool offers it again for a blind
+re-grade. Deleting it would erase the evidence that the audit was once run contaminated,
+which is the thing a reader most needs to know.
+
+Consequence, stated plainly: **`n_done` returns to 0 and no κ from before this amendment is
+comparable with any κ after it.** The §7 gate has not moved and has never been met — `passed`
+was already false.
+
+#### A4.2.6 A tension this exposes, recorded not resolved
+
+A1.3 says of the sheet: *"Joe checks the source rows against the sources; he does not code."*
+`docs/AUDIT_GUIDE.md` and §7's κ ask him to do exactly the opposite — to code a level
+independently so an inter-rater statistic exists. Those are two different exercises with two
+different validities, and the repository currently runs the second while A1.3 describes the
+first. This amendment makes the second one sound; it does not decide which one the §7 gate
+should be. That is Joe's, and it belongs in a WALK_FORWARD_PROTOCOL amendment (Session B's
+file), not here.
