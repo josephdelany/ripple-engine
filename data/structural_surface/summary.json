@@ -470,5 +470,87 @@
         }
       }
     }
+  },
+  "descriptive_non_verdict": {
+    "by_class": {
+      "chokepoint_disruption": {
+        "n": 21,
+        "mean_structural": 6.941037595031917,
+        "mean_surface": 7.45620608885406,
+        "mean_diff": -0.5151684938221437
+      },
+      "conflict_escalation": {
+        "n": 44,
+        "mean_structural": 7.838963412742774,
+        "mean_surface": 8.481172869047496,
+        "mean_diff": -0.642209456304721
+      },
+      "demand_shock": {
+        "n": 13,
+        "mean_structural": 13.664951131548579,
+        "mean_surface": 14.082885306620142,
+        "mean_diff": -0.4179341750715625
+      },
+      "infrastructure_attack": {
+        "n": 41,
+        "mean_structural": 6.176457485031875,
+        "mean_surface": 6.453425106971199,
+        "mean_diff": -0.27696762193932456
+      },
+      "opec_decision": {
+        "n": 41,
+        "mean_structural": 8.776928835650113,
+        "mean_surface": 8.976992983618489,
+        "mean_diff": -0.20006414796837638
+      },
+      "policy_response": {
+        "n": 54,
+        "mean_structural": 11.406581394889091,
+        "mean_surface": 12.291279357073094,
+        "mean_diff": -0.8846979621840035
+      },
+      "sanctions": {
+        "n": 50,
+        "mean_structural": 6.069839003731338,
+        "mean_surface": 6.186776400746846,
+        "mean_diff": -0.1169373970155088
+      }
+    },
+    "by_decade": {
+      "2000s": {
+        "n": 34,
+        "mean_structural": 7.717992311097245,
+        "mean_surface": 8.618999736594292,
+        "mean_diff": -0.9010074254970467
+      },
+      "2010s": {
+        "n": 83,
+        "mean_structural": 6.21082983053866,
+        "mean_surface": 6.648236985359912,
+        "mean_diff": -0.43740715482125186
+      },
+      "2020s": {
+        "n": 147,
+        "mean_structural": 9.679905540904818,
+        "mean_surface": 10.025134893159693,
+        "mean_diff": -0.34522935225487705
+      }
+    }
+  },
+  "availability_audit": {
+    "all_rows": 11089,
+    "situation_coded_rows": 60,
+    "panel_rows": 11029,
+    "strict_panel_rows": 671,
+    "release_after_event_rows": 10150,
+    "retrospective_rows": 2682,
+    "vintage_after_event_rows": 0,
+    "events_with_any_strict_panel_field": 227,
+    "event_vector_fields": {
+      "min": 2,
+      "median": 6.0,
+      "max": 16
+    },
+    "note": "exclusion reason counts overlap; strict_panel_rows is the conjunction"
   }
 }

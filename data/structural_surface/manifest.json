@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T21:31:36.107126+00:00",
-  "implementation_commit": "852b5840a717ca648bd8b3f3b602f35edfe2b480",
+  "generated_at": "2026-09-03T21:37:36.237226+00:00",
+  "implementation_commit": "6b296b8b4e0e11a2446872f8302bb688352f557f",
   "inputs": {
     "bundle": {
       "path": "data/structural_surface/input",
@@ -17,7 +17,7 @@
   },
   "outputs": {
     "reads.jsonl": "050f9673b26b600c1a9b756d2f354adef971c3e7872bf5e55579133c04f39e88",
-    "scores.jsonl": "0375e79ca886c240b266cfbac18334d7feecde73158d3b7121889199dc8b884e",
-    "summary.json": "a1b52fa76a5b2ab9a3e05760b23a11c383e03649e50705f7e9b8173e0226cd89"
+    "scores.jsonl": "c780d92df5ca8e1b6f12104898489d0642bdeb6fce11fcbe00a0bd5e9c27607b",
+    "summary.json": "2d32b4d18a2d9c5908a08a6cb443b8ee8eb25093b3a3b0a45f0778f92902dba9"
   }
 }
