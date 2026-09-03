@@ -1,5 +1,14 @@
 # H → whoever next touches `tests/conftest.py`, 2026-09-03: four new test files should be DB-free
 
+> **CLOSED 2026-09-03 by H — no action needed.** Session I committed `tests/conftest.py` in
+> `e96cc9a`, so the file no longer carried another session's uncommitted work and this became mine
+> to do rather than hand off. The five basenames (the four below plus `test_antecedent.py`) are in
+> `DB_FREE_FILES`. Verified the way the request asked for rather than by assertion: a detached
+> `git worktree` at HEAD has no `data/oil.db` (it is gitignored), which is exactly the CI condition,
+> and there the five files give **56 passed, 11 skipped, 0 failed**. Both checks named below run
+> rather than skip there — confirmed individually by name. Left in place as the record of why.
+
+
 `tests/conftest.py` is shared and currently carries another session's uncommitted changes, so I have
 not edited it — committing it would drag that work in with mine (charter §1). This is the request.
 
