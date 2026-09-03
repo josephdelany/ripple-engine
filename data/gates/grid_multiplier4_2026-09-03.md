@@ -63,16 +63,51 @@ would have been. *Cost: a rule amended after seeing the number it decided, with 
 
 **Option C — something else you specify.**
 
-My recommendation is **B**, and I want the reason for the recommendation on the record too: the disclosure
-under B (R = 0.013 printed beside every escalation number) is strictly more informative to a reader than the
-drop under A, which would delete the number and the disclosure together.
+### Recommendation — revised the same day, against my own earlier one
+
+**I first recommended B. I now recommend A**, on evidence that landed after I wrote it: session G's
+dyad-date probe (`data/grid/PROBE.md`, commit `b31a24e`), which tested the same panel against `ies90.py`'s
+own rules rather than by inference. Three of its findings bear directly:
+
+1. **After 2014 every non-zero dyad-date cell is an artefact.** MID, MIDI and COW War are the only sources
+   that record which *side* a state was on, and all three stop covering the grid at 2014-10-02. ICB records
+   crisis **actors**, so on a mechanically supplied pair allies read as adversaries — at 2018-01-31 the dyad
+   `country.gbr|country.usa` scores **IES level 3** from one Syria crisis, and all six of 2018's level-3
+   dyads are pairwise combinations of {GBR, Russia, Syria, USA}: one episode counted six times. GED is a
+   location death count replicated across every dyad containing that country: all 21 of 2024's non-zero
+   cells are Iran paired with Saudi Arabia, the UAE and the USA — one country's deaths, three times.
+2. **The contamination is not confined to the post-2014 tail.** I re-ran my own arithmetic with a
+   sided-evidence-only variant (MID alone, to 2014-10-02). Informative cells fall from **10,442 to 8,437**
+   at month-end: about a fifth of what my published `mid_family_2014` panel counted as information is ICB
+   co-actor artefact.
+3. **Every cell is retrospective**, so under `WORLD_STATE_CODEBOOK.md` Amendment 1 it can describe and never
+   validate — and, as G puts it, *density does not fix that, because the problem is not n.* Multiplier 4
+   cannot buy the thing the study wants most.
+
+So the rule that dropped multiplier 4 reached the right destination by faulty reasoning. I still think the
+ratio test is the wrong test and would write it differently today; that is a separate question from whether
+this particular multiplier should be in this particular study, and the answer to the second is now no.
+
+**What I would do instead, and am not doing without your word:** build the sided-evidence dyad-date panel
+for **1987–2014** as its own descriptive study, which is roughly where session G's probe also lands. It is a
+real object — 1998 alone yields 295 defined-ΔIES cells against the corpus's 14 monthly-tier events — but it
+is a *description of a closed period*, not a panel a live engine can read from, and it belongs in its own
+registration with that stated on the front page rather than as a multiplier inside a study whose price arm
+runs to 2026.
 
 ## Two things that are true whichever you choose
 
-**1. The escalation panel's n_eff is a ceiling, not an estimate.** The level panel is **96.75 % zeros**
-(311,236 of 321,678 covered cells at level 0; 2,321 at 1, 7,331 at 2, 790 at 3). A forecaster and its
+**1. The escalation panel's n_eff is a ceiling, not an estimate — and on this panel it is barely even that.**
+Removing the ICB contamination *raised* the computed n_eff (month-end 4,056 → 5,962) while *lowering* the
+informative cells (10,442 → 8,437), because n_eff on a 97 %-zero panel is driven by the zeros' dependence
+structure and not by the information. That is a warning about the measure, and I am not going to invent a
+better one after seeing the number. Read the informative-cell count, not the n_eff.
+
+The level panel is **96.75 % zeros** (311,236 of 321,678 covered cells at level 0; 2,321 at 1, 7,331 at 2,
+790 at 3). A forecaster and its
 climatology both get a level-0 cell right, so those cells carry no power to *discriminate* between them.
-The 4,056 figure counts them. The genuinely informative cells number **10,442** (month-end). Under
+The 4,056 figure counts them. The genuinely informative cells number **10,442** (month-end), of which
+about a fifth are ICB co-actor artefact, leaving **8,437** on sided evidence. Under
 Amendment L's finding that the right escalation target is ΔIES rather than the level, the moving share is
 smaller again. Whatever you rule, the G arm's real power is below 4,056 and the file says so.
 

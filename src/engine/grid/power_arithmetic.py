@@ -441,8 +441,19 @@ def compute():
         mb = W._mean_block([str(d.date()) for d in grid], CLUSTER_DAYS)
         lag = max(int(round(mb)) - 1, 0)
         blocks = {}
-        for wall_name, wall in (("mid_family_2014", "2014-12-31"), ("icb_2021", "2021-12-31")):
-            lvl, dyads, covered = dyad_panel(spells, grid, wall)
+        # Three variants. The third is added on session G's probe (data/grid/PROBE.md, commit b31a24e),
+        # which established -- against ies90.py's own rules, not by inference -- that MID, MIDI and COW War
+        # are the ONLY sources recording which SIDE a state was on, that they stop covering the grid at
+        # 2014-10-02, and that after that every non-zero dyad-date cell is an artefact: ICB records crisis
+        # ACTORS not sides, so on a mechanically-supplied pair allies read as adversaries (GBR|USA at IES 3
+        # from one Syria crisis), and GED is a location death count replicated across every dyad containing
+        # that country. `sided_only_2014` is therefore the only variant whose non-zero mass rests on evidence
+        # that the two states were on opposite sides.
+        for wall_name, wall, srcs in (("mid_family_2014", "2014-12-31", None),
+                                      ("icb_2021", "2021-12-31", None),
+                                      ("sided_only_2014", "2014-10-02", ("mid",))):
+            sp = spells if srcs is None else spells[spells.src.isin(srcs)]
+            lvl, dyads, covered = dyad_panel(sp, grid, wall)
             n_cells = int(covered.sum() * len(dyads))
             varying = [j for j in range(len(dyads)) if np.nanstd(lvl[covered, j]) > 0]
             Xv = lvl[np.ix_(covered, varying)] if varying else np.zeros((int(covered.sum()), 0))
@@ -484,6 +495,14 @@ def compute():
                 "n_eff": round(float(n_eff), 1),
                 "n_eff_separable_TxD_before_tiebreak": round(float(t_eff * d_eff), 1),
                 "realisation_ratio": round(float(n_eff) / n_cells, 5) if n_cells else None,
+                "sources": list(srcs) if srcs else "mid+icb",
+                "sided_evidence": bool(srcs),
+                "cross_session": ("session G's probe (data/grid/PROBE.md, commit b31a24e) found that after "
+                                  "2014 every non-zero dyad-date cell is an artefact -- ICB records crisis "
+                                  "ACTORS not sides, so allies read as adversaries on a mechanically supplied "
+                                  "pair, and GED is a location count replicated across every dyad containing "
+                                  "that country. Only the sided_only_2014 variant is free of that. The other "
+                                  "two are retained as published, and are contaminated."),
                 "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure "
                         "dependence and coverage. The study's labels are built by src/state/ies90.py under "
                         "its registered rules. A grid date whose window extends past the source's coverage "

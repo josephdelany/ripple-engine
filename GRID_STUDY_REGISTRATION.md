@@ -47,9 +47,17 @@ Consequently, and bindingly:
   I (determinism and the content digest). Where this document is silent, the protocol governs.
 
 ### 0.3 Ownership
-Session B owns `GRID_STUDY_REGISTRATION.md`, `src/engine/grid/**`, `data/grid/**` and
-`tests/test_grid_*.py`, added to its charter §1 block in the same commit as this document. It touches no
-other session's tree; requests go to `data/handoffs/` as always.
+Session B owns `GRID_STUDY_REGISTRATION.md`, `src/engine/grid/**`, `tests/test_grid_power.py` and its own
+files under `data/grid/`.
+
+**`data/grid/` is shared with session G, by filename, and neither session moves the other's files.**
+Amended 2026-09-03 on G's handoff (`data/handoffs/G_to_B_2026-09-03_grid_probe.md`): G's brief assigns
+`data/grid/` to G and this document's first draft claimed it for B without knowing that. G offered to move
+to `data/grid/g/**`; **B declines the move** — G's `PROBE.json`, `PROBE.md` and `G4_REGISTRATION.md` are
+published paths cited in a committed handoff, and relocating them to resolve a collision that does not
+exist in practice would break citations for no benefit. To keep it that way, **this study's own outputs are
+namespaced under `data/grid/price/`** (§3.8), so the generic names this Part registers can never collide
+with G's panel if it is later built.
 
 ### 0.4 Why the study is proposed at all — the two defects it addresses
 Both are measured, not asserted, and both are facts about the published run rather than results of this study:
@@ -365,8 +373,8 @@ result is never reported as though it validated an event-triggered claim, or the
    2018 conditions every physical-flow field on the states that chose to keep reporting.
 
 ### 3.8 Outputs
-`data/grid/reads.jsonl`, `scores.jsonl`, `summary.json` under the sealing, archiving and content-digest rules
-of the protocol (§2, Amendments D and I), plus `data/grid/training.json` (the fold-by-fold weight trajectory
+`data/grid/price/reads.jsonl`, `data/grid/price/scores.jsonl`, `data/grid/price/summary.json` under the sealing, archiving and content-digest rules
+of the protocol (§2, Amendments D and I), plus `data/grid/price/training.json` (the fold-by-fold weight trajectory
 of §3.4 and §3.7.3). Tests: `tests/test_grid_*.py`, each name carrying its clause id. Nothing is written to
 `data/walk_forward/**` (§0.2).
 

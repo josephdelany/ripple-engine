@@ -1,7 +1,7 @@
 {
  "registration": "GRID_STUDY_REGISTRATION.md Part II (2026-09-03), registered in commit 7afcb2c before this module existed",
  "what_this_is_not": "no forecast, no score, no skill is computed here; this is the pre-build arithmetic of how much each multiplier buys in units of power",
- "computed_at": "2026-09-03T03:50:56+00:00",
+ "computed_at": "2026-09-03T04:00:56+00:00",
  "registered": {
   "cluster_days": 35,
   "n_boot": 2000,
@@ -951,6 +951,9 @@
     "n_eff": 4056.3,
     "n_eff_separable_TxD_before_tiebreak": 6956.3,
     "realisation_ratio": 0.01261,
+    "sources": "mid+icb",
+    "sided_evidence": false,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
     "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
    },
    "icb_2021": {
@@ -994,6 +997,57 @@
     "n_eff": 6702.8,
     "n_eff_separable_TxD_before_tiebreak": 6702.8,
     "realisation_ratio": 0.01664,
+    "sources": "mid+icb",
+    "sided_evidence": false,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
+    "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
+   },
+   "sided_only_2014": {
+    "coverage_end": "2014-10-02",
+    "n_grid_dates_covered": 330,
+    "n_dyads": 932,
+    "n_dyads_with_any_variation": 391,
+    "n_nominal_cells": 307560,
+    "level_marginal": {
+     "0": 299123,
+     "1": 2563,
+     "2": 5084,
+     "3": 790
+    },
+    "share_level_0": 0.97257,
+    "informative_cells": 8437,
+    "informative_share_warning": "the level panel is 97.26 % zeros. A forecaster and its climatology both get those cells right, so they carry no power to DISCRIMINATE between them. \u00a72.3 registers that the direction of the proxy's error must be stated in advance: for the price panel the return proxy is expected to FLOOR M_eff; for this panel the level proxy is an UPPER BOUND on discriminating information, and the n_eff below should be read as a ceiling, not an estimate.",
+    "D_eff": 49.102,
+    "time": {
+     "series": "month_end|sided_only_2014|dyad_row_mean",
+     "n": 330,
+     "deff_bartlett": 1.9505,
+     "deff_bootstrap_ratio": 2.7178,
+     "disagreement": 1.393,
+     "tiebreak_fired": false,
+     "deff_used": 2.7178,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "T_eff": 121.42
+    },
+    "two_way_cluster": {
+     "n_cells": 307560,
+     "var_iid": 3.0940453309376817e-07,
+     "var_two_way": 2.296249916021495e-05,
+     "deff_two_way": 74.2151,
+     "rule": "Cameron-Gelbach-Miller two-way cluster on (date, dyad), relative to i.i.d."
+    },
+    "deff_separable_TxD": 51.586,
+    "deff_two_way": 74.2151,
+    "tiebreak_fired": false,
+    "deff_used": 51.586,
+    "n_eff": 5962.1,
+    "n_eff_separable_TxD_before_tiebreak": 5962.1,
+    "realisation_ratio": 0.01939,
+    "sources": [
+     "mid"
+    ],
+    "sided_evidence": true,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
     "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
    }
   },
@@ -1039,6 +1093,9 @@
     "n_eff": 4217.0,
     "n_eff_separable_TxD_before_tiebreak": 8046.2,
     "realisation_ratio": 0.00301,
+    "sources": "mid+icb",
+    "sided_evidence": false,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
     "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
    },
    "icb_2021": {
@@ -1082,6 +1139,57 @@
     "n_eff": 4794.3,
     "n_eff_separable_TxD_before_tiebreak": 8430.7,
     "realisation_ratio": 0.00274,
+    "sources": "mid+icb",
+    "sided_evidence": false,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
+    "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
+   },
+   "sided_only_2014": {
+    "coverage_end": "2014-10-02",
+    "n_grid_dates_covered": 1436,
+    "n_dyads": 932,
+    "n_dyads_with_any_variation": 391,
+    "n_nominal_cells": 1338352,
+    "level_marginal": {
+     "0": 1301462,
+     "1": 11243,
+     "2": 22220,
+     "3": 3427
+    },
+    "share_level_0": 0.97244,
+    "informative_cells": 36890,
+    "informative_share_warning": "the level panel is 97.24 % zeros. A forecaster and its climatology both get those cells right, so they carry no power to DISCRIMINATE between them. \u00a72.3 registers that the direction of the proxy's error must be stated in advance: for the price panel the return proxy is expected to FLOOR M_eff; for this panel the level proxy is an UPPER BOUND on discriminating information, and the n_eff below should be read as a ceiling, not an estimate.",
+    "D_eff": 49.078,
+    "time": {
+     "series": "week_end|sided_only_2014|dyad_row_mean",
+     "n": 1436,
+     "deff_bartlett": 5.8756,
+     "deff_bootstrap_ratio": 10.8293,
+     "disagreement": 1.843,
+     "tiebreak_fired": true,
+     "deff_used": 10.8293,
+     "rule": "\u00a72.2: both published; if they differ by more than 1.5x the LARGER is used everywhere",
+     "T_eff": 132.6
+    },
+    "two_way_cluster": {
+     "n_cells": 1338352,
+     "var_iid": 7.130180513395308e-08,
+     "var_two_way": 2.174177290042295e-05,
+     "deff_two_way": 304.926,
+     "rule": "Cameron-Gelbach-Miller two-way cluster on (date, dyad), relative to i.i.d."
+    },
+    "deff_separable_TxD": 205.65,
+    "deff_two_way": 304.926,
+    "tiebreak_fired": false,
+    "deff_used": 205.65,
+    "n_eff": 6507.9,
+    "n_eff_separable_TxD_before_tiebreak": 6507.9,
+    "realisation_ratio": 0.00486,
+    "sources": [
+     "mid"
+    ],
+    "sided_evidence": true,
+    "cross_session": "session G's probe (data/grid/PROBE.md, commit b31a24e) found that after 2014 every non-zero dyad-date cell is an artefact -- ICB records crisis ACTORS not sides, so allies read as adversaries on a mechanically supplied pair, and GED is a location count replicated across every dyad containing that country. Only the sided_only_2014 variant is free of that. The other two are retained as published, and are contaminated.",
     "note": "the panel is PROVISIONAL: reconstructed from MID and ICB dyad spells to measure dependence and coverage. The study's labels are built by src/state/ies90.py under its registered rules. A grid date whose window extends past the source's coverage end is NOT covered and is NaN, never 0."
    }
   }
