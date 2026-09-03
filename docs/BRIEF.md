@@ -30,11 +30,16 @@ appended; every result published as computed.
 
 ### Three results
 
+*Run `walk_20260903T052633Z`; escalation target rebuilt under Amendment 4, 100 scored reads.*
+
 | | |
 |---:|---|
-| **−0.097** | escalation Brier skill vs the base rate (95% CI −0.180 … −0.018, *p* = 0.022) — the engine is *worse* than climatology |
-| **−0.600** | escalation skill vs **persistence**: a rule using only the dyad's own last 90 days scores 0.480 against the engine's 0.769 |
-| **+0.129** | price CRPS skill vs persistence (*p* < 0.001) — the one comparison the analogue engine wins |
+| **−0.084** | escalation Brier skill vs the base rate (95% CI −0.175 … +0.004, *p* = 0.076) — worse than climatology, but the interval crosses zero at *n* = 100 |
+| **−0.304** | escalation skill vs **persistence**: the dyad's own last 90 days score 0.545 against the engine's 0.710 (*p* = 0.025). On the ordinal score the gap is not distinguishable from zero |
+| **+0.134** | price CRPS skill vs persistence (*p* < 0.001) — the one comparison the engine wins, and the only sign stable across every run |
+
+On *price* the engine is significantly worse than the base rate (−0.074, *p* = 0.011); on
+escalation, at this sample size, it is not.
 
 ### The finding
 
@@ -94,14 +99,14 @@ Not a claim that historical analogy fails. It is the narrower, defensible claim:
 implementation, under a strict point-in-time information constraint, did not outperform
 simple baselines for escalation** — on a corpus whose historical arm is thin (8 events in
 the 1970s) and whose state vector is mostly unavailable at read time. Measured power puts
-the minimum detectable escalation skill at 0.127; roughly 1,200 scored reads would be
-needed to detect +0.05, against 150 today.
+the minimum detectable escalation skill at 0.137; roughly 1,200 scored reads would be
+needed to detect +0.05, against 100 today.
 
 ### The follow-up
 
 That v3 question — *does analogy add anything once the dyad's own recent state is known?* —
 has now been run. Re-anchoring the identical sealed reads on the **change** rather than the
-level moves the same mixture from **0.769 to 0.480**: the whole gap to persistence was a
+level moves the same mixture from **0.682 to 0.506** against persistence's 0.494: most of the gap was a
 missing anchor, not the analogies. But the repaired question returns **NO ADDITION**
 (+0.034 skill, *p* = 0.181, nothing surviving FDR, against a measured minimum detectable
 skill of 0.067 — *not detectable at n = 150*). A registered control then shows **the gain
@@ -132,7 +137,7 @@ Pre-registration with git timestamps · dated amendments, never edits · outcome
 independent datasets after our own coded labels tested at κ ≈ 0 · sealed reads with hashes
 · four baselines · Diebold–Mariano, stationary bootstrap, Reality Check / SPA, permutation,
 matched placebo, regime blocks, 162-cell specification curve · a filtration audit of
-**15,784** point-in-time checks with zero violations · two independent runs reproducing the
+**15,241** point-in-time checks with zero violations · independent runs reproducing the
 same content digest · two adversarial reviews · **four published retractions of the
 project's own earlier positive findings.**
 

@@ -65,11 +65,17 @@ computed.
 
 ## Three results
 
+*Run `walk_20260903T052633Z`, on the escalation target as rebuilt under Amendment 4
+(184 labelled events → 132; 100 scored).*
+
 | | |
 |---:|:---|
-| **−0.097** | escalation Brier skill vs the base rate (95% CI −0.180 … −0.018, *p* = 0.022). The engine is significantly **worse** than climatology. |
-| **−0.600** | escalation skill vs **persistence**. A rule using only the dyad's own last 90 days scores 0.480 against the engine's 0.769. A registered follow-up found this gap was the *estimand*, not the analogies — see below. |
-| **+0.129** | price CRPS skill vs persistence (*p* < 0.001). The one comparison the analogue engine wins. |
+| **−0.084** | escalation Brier skill vs the base rate (95% CI −0.175 … **+0.004**, *p* = 0.076). Worse than climatology — but at *n* = 100 the interval **crosses zero**, so not distinguishably so. |
+| **−0.304** | escalation skill vs **persistence**. The dyad's own last 90 days score 0.545 against the engine's 0.710 (*p* = 0.025). On the **ordinal** score the same gap is −0.175 at *p* = 0.26 — not distinguishable from zero. A registered follow-up found this gap was the *estimand*, not the analogies — see below. |
+| **+0.134** | price CRPS skill vs persistence (95% CI +0.076 … +0.193, *p* < 0.001). The one comparison the analogue engine wins, and the only sign stable across every run. |
+
+On **price** the engine *is* significantly worse than the base rate (−0.074, CI −0.140 … −0.021,
+*p* = 0.011). On **escalation**, at this sample size, it is not.
 
 ## The finding
 
@@ -77,6 +83,12 @@ An earlier run of the same code showed **parity** with the base rate (−0.005).
 took the per-event state fields as *coded* rather than as *knowable*. Enforcing the vintage
 rule on them revealed that **262 of 313 events have no state field demonstrably available
 on the day** — and the apparent signal disappeared with it.
+
+A second registered amendment then rebuilt the *target*: the "ongoing conflict → no level" rule
+was extended to COW War and UCDP GED, and a missing covering record stopped silently reading as
+level 0. That took the escalation target from 184 labelled events to **132** (100 scored) and
+moved 59 of 187 labels. **Both amendments made the result smaller and less certain, and both
+were committed before the code that implemented them.**
 
 > The analogical structure the engine appeared to find was, to a first approximation,
 > hindsight.
@@ -91,8 +103,9 @@ and after Amendment H (`data/walk_forward/summary.json` ·
 
 Two explanations for the null were then registered in writing and tested. **Both were
 falsified.** Walk-forward recalibration made escalation worse (−0.700). The
-label-permutation test that had rejected "the engine is noise" at *p* = 0.002 no longer
-rejects (*p* = 0.124).
+label-permutation test that had rejected "the engine is noise" at *p* = 0.002 before the
+vintage amendment now sits at ***p* = 0.0500** — exactly on the registered threshold, over
+1,000 permutations whose resolution is 0.001. Reported as a knife-edge, read as nothing.
 
 ### The baselines, in full
 
@@ -110,10 +123,10 @@ Drawn by `src/figures_paper.py`.*
 
 ## The follow-up that repaired the question — and did not rescue the answer
 
-The −0.600 above asks the engine to forecast the escalation *level* from scratch, while
+The −0.304 above asks the engine to forecast the escalation *level* from scratch, while
 persistence starts from the answer. Re-anchoring the identical sealed reads on the
 **change** — same twelve items, same sealed weights, same analogs, nothing re-retrieved —
-moves the mixture from **0.769 to 0.480**, a dead heat with persistence. The entire deficit
+moves the mixture from **0.682 to 0.506** against persistence's 0.494. Most of the deficit
 was a missing anchor.
 
 Asked the fair question — *does analogy add anything once the dyad's own recent state is
@@ -130,7 +143,7 @@ interchangeable with the base rate.
 ## Two companion results from the same infrastructure
 
 **Market attribution.** Inverting the usual event study — taking the market's largest moves
-rather than our chosen events — **15 of 43 largest Brent moves have no identifiable event
+rather than our chosen events — **14 of 44 largest Brent moves have no identifiable event
 in the corpus**, and in 14 of the 28 attributed episodes *every* attributed event was
 already public more than 20 trading days before the move began. Geopolitical classes are
 under-represented inside big **crude** moves and 2–3× over-represented inside big
@@ -156,8 +169,8 @@ Not that historical analogy fails. The narrower, defensible claim: **this implem
 under a strict point-in-time information constraint, did not outperform simple baselines
 for escalation** — on a corpus whose historical arm is thin (8 events in the 1970s) and
 whose state vector is mostly unavailable at read time. Measured power puts the minimum
-detectable escalation skill at 0.127; detecting +0.05 would need roughly 1,200 scored
-reads against 150 today.
+detectable escalation skill at **0.137**; detecting +0.05 would need roughly 1,200
+scored reads against **100** today.
 
 ## Research integrity
 
@@ -165,7 +178,7 @@ Pre-registration with git timestamps · dated amendments, never edits · indepen
 labels after our own scored κ ≈ 0 · sealed reads hashed before outcomes are looked up ·
 four baselines · Diebold–Mariano, stationary bootstrap, Reality Check / SPA, permutation,
 matched placebo, regime blocks, a 162-cell specification curve · a filtration audit of
-**15,784** point-in-time checks with zero violations · two independent runs reproducing the
+**15,241** point-in-time checks with zero violations · two independent runs reproducing the
 same content digest · two adversarial reviews · **four published retractions of the
 project's own earlier positive findings.**
 

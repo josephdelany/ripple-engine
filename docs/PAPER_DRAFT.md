@@ -1,12 +1,12 @@
 # Does the record predict? A pre-registered walk-forward test of history-conditioned reads of geopolitical shocks in the oil economy
 
 **Joseph Delany** — Colby College, Department of History (Middle East focus)
-Draft v1.2, 2026-09-03. Numbers from run `walk_20260903T003422Z`
+Draft v1.3, 2026-09-03. Numbers from run `walk_20260903T052633Z`
 (`data/walk_forward/summary.json`) unless a file is named. Every number in this
 draft is traced in Appendix A to the file that produced it; none is typed from memory.
 
 > **Which target these numbers describe.** Every result in §8–§11 is computed on the
-> escalation target as it stood before `OUTCOME_MAPPING.md` **Amendment 4** — 184 events
+> escalation target **as rebuilt under** `OUTCOME_MAPPING.md` **Amendment 4** — 184 events
 > carrying an IES-90 level, distributed 76 / 6 / 48 / 54. That state is tagged
 > `record-pre-amendment-4`. Amendment 4, registered before its code and implemented after
 > these numbers were computed, extends the "ongoing conflict → no level" rule to COW War and
@@ -53,7 +53,7 @@ under Diebold–Mariano, stationary-bootstrap, Reality-Check/SPA, label-permutat
 matched-placebo, regime-block and specification-curve tests.
 
 **The engine is significantly *worse* than the base rate on both targets**
-(escalation Brier skill −0.097, 95% CI [−0.180, −0.018], DM *p* = 0.022; price
+(escalation Brier skill −0.084, 95% CI [−0.175, +0.004], DM *p* = 0.076; price
 CRPS skill −0.071, CI [−0.136, −0.017], *p* = 0.016), and the reason is the
 central finding of this study. Earlier runs of the same code showed parity with
 climatology (−0.005 and −0.030). Those runs took the per-event situation fields as
@@ -67,14 +67,15 @@ its edge was, to a first approximation, hindsight.
 
 Three further results are consistent with that. A naive persistence rule — the
 dyad's own maximum escalation level over the preceding 90 days — beats the engine
-decisively (Brier 0.480 vs 0.769; skill −0.600, *p* = 0.0002). A registered follow-up
+(Brier 0.545 vs 0.710; skill −0.304, *p* = 0.025 — and on the ordinal score −0.175 at
+*p* = 0.26, not distinguishable from zero). A registered follow-up
 (§11) shows that this particular gap was an artefact of the estimand rather than of the
 analogies: the engine was asked to forecast the *level* from scratch while persistence
 starts from the answer, and re-anchoring the identical sealed reads on the *change* moves
-the same mixture, at the same weights, from 0.769 to 0.480 — a dead heat with persistence.
+the same mixture, at the same weights, from 0.682 to 0.506 against persistence's 0.494.
 Asked the fair question — does the analogue distribution add anything once the dyad's own
 recent state is supplied? — the registered verdict is **NO ADDITION** (best combination
-+0.034 Brier skill, DM *p* = 0.181, permutation *p* = 0.124, nothing surviving FDR;
++0.051 Brier skill, DM *p* = 0.243, permutation *p* = 0.867, nothing surviving FDR;
 measured minimum detectable skill 0.067, so the honest statement is *not detectable at
 n = 150*). A registered control then separates the two things such a pool can be doing, and
 finds that **the gain is pooling, not similarity**: substituting the class's unconditional
@@ -84,9 +85,10 @@ walk-forward recalibration, which we had predicted in writing would rescue the
 engine by fixing miscalibration, instead made it worse (−0.700, *p* < 0.001): that
 hypothesis is **falsified**. And a label-permutation test that had rejected "the
 engine is noise" at *p* = 0.002 before the vintage amendment no longer rejects
-(*p* = 0.124): the structure it had detected was in the retrospective codings, not
+(*p* = 0.0500, exactly on the registered threshold): the structure it had detected was in the
+retrospective codings, not
 in the retrieval. The specification curve is negative in **all 162** registered
-settings. The engine's one surviving win is against persistence on price (+0.129,
+settings. The engine's one surviving win is against persistence on price (+0.134,
 *p* < 0.001). A companion propagation study, registered and placebo-controlled, finds
 the same silence on the transmission side: across 477 node×shock cells only 21
 transmit, against 1–24 expected under no transmission at all, with **zero of 99** at
@@ -116,29 +118,32 @@ computes it; none is stated more strongly here than there.*
 rule on the per-event situation fields — admitting only what was demonstrably knowable on the
 day — revealed that **262 of 313 events have no situation field knowable at *t***. Retrieval
 falls back to the market block alone, and escalation skill moves from parity with the base
-rate (−0.005) to significantly worse than it (**−0.097**, 95% CI [−0.180, −0.018],
-*p* = 0.022). The state conditioning that gave the engine its edge was information assembled
+rate (−0.005) to **−0.084** (95% CI [−0.175, **+0.004**], *p* = 0.076) — worse than the base
+rate, though at *n* = 100 the interval crosses zero. On the *price* target the same run is
+significantly worse than the base rate (−0.074, CI [−0.140, −0.021], *p* = 0.011). The state conditioning that gave the engine its edge was information assembled
 after the fact. This is a finding about the literature as much as about this corpus: most
 published event studies condition on variables built with later knowledge. **§8.**
 
 **2. A trivial baseline beat the engine — but the comparison was unfair, and repairing it
 changed the diagnosis rather than the verdict.** Persistence, a point mass on the dyad's own
-recent level, scored 0.480 against the engine's 0.769 (skill −0.600, *p* = 0.0002). That gap
-was an *anchoring* failure: the engine forecast the level from scratch while persistence
-starts from the answer. Re-anchoring the identical sealed reads on the **change** — same
-analogs, same weights, nothing re-retrieved — moves the mixture to **0.480**, a dead heat.
-**§11.1.**
+recent level, scores 0.545 against the engine's 0.710 (skill **−0.304**, *p* = 0.025) — and on
+the **ordinal** score the same gap is −0.175 at *p* = 0.26, not distinguishable from zero. Most
+of that gap was an *anchoring* failure: the engine forecast the level from scratch while
+persistence starts from the answer. Re-anchoring the identical sealed reads on the **change** —
+same analogs, same weights, nothing re-retrieved — moves the mixture from **0.682 to 0.506**
+against persistence's 0.494. **§11.1.**
 
 **3. Asked the fair question, analogy adds nothing detectable.** Once the dyad's own recent
-state is supplied, the registered verdict is **NO ADDITION**: best combination +0.034 Brier
-skill, DM *p* = 0.181, permutation *p* = 0.124, nothing surviving FDR. Reported as *not
-detectable at n = 150* and never as "no effect" — the measured minimum detectable skill is
-0.067, twice the observed. **§11.2.**
+state is supplied, the registered verdict is **NO ADDITION**: best combination +0.051 Brier
+skill, DM *p* = 0.243, SPA *p* = 0.123, permutation *p* = 0.867, nothing surviving FDR. Reported
+as *not detectable at n = 89* and never as "no effect" — the measured minimum detectable skill
+is 0.117, more than twice the observed. **§11.2.**
 
 **4. The retrieval step is interchangeable with the base rate.** A registered control holds
 everything constant and substitutes the class's unconditional change distribution for the
-retrieved analogues: it scores **0.4626 against 0.4643**, paired difference −0.004,
-*p* = 0.766. **The gain is pooling, not similarity.** The similarity metric — the entire idea
+retrieved analogues: paired difference **+0.017, CI [−0.031, +0.058], *p* = 0.439**. By
+Amendment M.3's rule, written before the numbers, C1 ≈ C0 means **the gain is pooling, not
+similarity** — retrieval and the base rate are interchangeable inside the pool. The similarity metric — the entire idea
 of the engine — is doing no measurable work, which independently confirms §8's finding that
 the engine cannot separate from randomly drawn analogs. **§11.3.** *Scope: this is an
 escalation result at n = 150. On a companion price panel with far more evidence, retrieval sits
@@ -461,7 +466,7 @@ of the software unless this rule produced it (acceptance check D6).
 
 ## 8. Results
 
-Daily tier: 299 reads, 253 scored after burn-in (price), 150 with an escalation
+Daily tier: 299 reads, 246 scored after burn-in (price), 100 with an escalation
 label. The monthly tier has 14 reads and 0 scored beyond burn-in; it describes and
 cannot validate (§13).
 
@@ -477,9 +482,11 @@ escalation skill −0.005 and price −0.030 (`data/handoffs/B_run_delta.md`, ru
 difference between those two runs is the difference between conditioning on the
 world as recorded and conditioning on the world as knowable.
 
-**Escalation (G), Brier vs climatology:** engine 0.769, climatology 0.701, skill
-**−0.097**, 95% CI [−0.180, −0.018], DM *p* = 0.022 — the engine is significantly
-*worse* than the base rate, and this comparison survives Benjamini–Hochberg. Vs
+**Escalation (G), Brier vs climatology:** engine 0.710, climatology 0.655, skill
+**−0.084**, 95% CI [−0.175, **+0.004**], DM *p* = 0.076 — worse than the base rate, but at
+*n* = 100 the interval crosses zero and the comparison no longer clears its own threshold.
+On the pre-Amendment-4 target the same comparison was −0.097 at *p* = 0.022; the target rebuild
+removed 52 events and the significance with them. Vs
 random analogs: −0.021 (*p* = 0.58) — indistinguishable from drawing analogs at
 random. Vs frozen: +0.007 (*p* = 0.029), i.e. Hedge learning is marginally *worse*
 than freezing the weights. SPA over the 15-model family: *p*_RC = 1.00,
@@ -489,22 +496,22 @@ than freezing the weights. SPA over the 15-model family: *p*_RC = 1.00,
 baseline (Amendment B) is G-persistence: a Laplace-smoothed point mass on the
 dyad's own maximum IES level over the preceding 90 days, from the same independent
 sources under the same vintage rule, falling back to climatology where no dyad
-level is knowable (2 of 150 reads). It scores **0.480** against the engine's 0.769
-— skill −0.600, CI [−1.031, −0.230], DM *p* = 0.0002, surviving FDR; on the ranked
-probability score −0.791 (*p* < 0.001). Escalation is strongly autocorrelated at 90
+level is knowable (50 of 100 reads now fall back, against 2 before the rebuild). It scores
+**0.545** against the engine's 0.710 — skill −0.304, CI [−0.821, −0.030], DM *p* = 0.025; on the
+ranked probability score −0.175 at *p* = 0.26, **not** distinguishable from zero. Escalation is strongly autocorrelated at 90
 days, and averaging over state-similar analogs from other dyads destroys that
 information. A forecaster who knew nothing but the dyad's own recent history would
 have beaten this engine decisively.
 
 **Ranked probability score** (published, not a gate): vs climatology −0.013
-(*p* = 0.77), vs random analogs +0.062 (*p* = 0.14), vs persistence −0.791. The
+(*p* = 0.95), vs random analogs +0.056 (*p* = 0.28), vs persistence −0.175 (*p* = 0.26). The
 ordering advantage over random analogs that v0.2 reported (+0.144, *p* < 0.001)
 does not survive the vintage rule either.
 
 **Price (P), CRPS vs climatology:** skill **−0.071**, CI [−0.136, −0.017],
 *p* = 0.016 — also significantly worse than the base rate, also surviving FDR. Vs
 random analogs −0.005 (*p* = 0.85). Vs frozen +0.007 (*p* < 0.001). Vs persistence
-**+0.129**, CI [+0.070, +0.185], *p* < 0.001 — the engine's one surviving win, and
+**+0.134**, CI [+0.076, +0.193], *p* < 0.001 — the engine's one surviving win, and
 the one result that has held its sign across all three runs.
 
 **Materiality (M):** precision 0.337, recall 0.544 against a base rate of 0.225
@@ -527,7 +534,7 @@ produces a positive escalation skill. In v0.2, before the vintage amendment, 22%
 were positive.
 
 **Power (simulated from the sealed score series under the measured block
-dependence, 400 replications).** Minimum detectable skill at 80% power is 0.127 on
+dependence, 400 replications).** Minimum detectable skill at 80% power is 0.137 on
 escalation (*n* = 150) and 0.085 on price (*n* = 253); detecting +0.05 on either
 would need roughly 1,200 scored reads. This cuts both ways and we state both: the
 study could not have detected a small positive edge, and the significantly negative
@@ -545,8 +552,10 @@ matched non-events as well as to real ones — consistent with an engine whose
 retrieval, stripped of retrospective state, is worse than not retrieving at all.
 
 **Label permutation.** With labels shuffled within class and Hedge and M13 replayed
-under the closed-by-*t* rule, the null distribution of skill has mean −0.101,
-SD 0.029, 95th percentile −0.053; the observed −0.066 gives block *p* = 0.124
+under the closed-by-*t* rule, the null distribution of skill has mean −0.133,
+SD 0.043, 95th percentile −0.058; the observed −0.057 gives block *p* = 0.0500 — exactly on the
+registered 0.05 threshold, over 1,000 permutations whose resolution is 0.001, with the i.i.d.
+variant at 0.059. We report the knife-edge and read nothing from it in either direction
 (i.i.d. *p* = 0.092). **The test no longer rejects.** In v0.2 it rejected at
 *p* = 0.002 with an observed +0.013, and we wrote there that "the engine finds
 structure in the labels but not enough to forecast with". That sentence is
@@ -560,8 +569,8 @@ the mirror image of a data-snooping problem: the family is overwhelmingly
 significant in the wrong direction.
 
 **Leakage and filtration.** The registered leakage test breaks the filtration and
-confirms the reads and scores change (G 0.769 → 0.638). Beyond it, this run adds a
-standing filtration audit over every read: 15,784 checks across analog dates,
+confirms the reads and scores change. Beyond it, this run adds a
+standing filtration audit over every read: 15,241 checks across analog dates,
 market values, persistence windows and both outcome windows, **0 violations**. An
 earlier firing of that audit (run 200654Z) was investigated and found to be a
 conservative path rather than a leak — session A's panel bridge supplies a market
@@ -640,44 +649,44 @@ as §8, and the code asserts the identity on every read.
 
 | forecaster | registered Brier |
 |---|---|
-| the sealed engine, 13 items, voting on **level** | 0.7687 |
-| the same mixture, M01–M12, voting on level (control) | 0.7629 |
-| **the same mixture, the same weights, voting on CHANGE** | **0.4799** |
-| G-persistence / no-change | 0.4805 |
+| the sealed engine, 13 items, voting on **level** | 0.6822 |
+| the same mixture, M01–M12, voting on level (control) | 0.6780 |
+| **the same mixture, the same weights, voting on CHANGE** | **0.5064** |
+| G-persistence / no-change | 0.4942 |
 
-**The engine's entire deficit against persistence was the missing anchor, not the
-analogies.** Re-anchored, the analogue mixture and persistence are a dead heat: skill
-+0.0012, DM *p* = 0.980. The control rebuilds the same twelve items voting on level and
-lands at 0.7629 against the sealed 0.7687 — the residual is M13's share of the Hedge weight
+**Most of the engine's deficit against persistence was the missing anchor, not the
+analogies.** Re-anchoring moves the mixture 0.682 → 0.506, closing the bulk of a gap to
+persistence's 0.494 — though it does not close it entirely: the re-anchored analogue mixture
+alone still scores −0.025 against no-change (*p* = 0.764), marginally worse rather than a dead
+heat. The control rebuilds the same twelve items voting on level and lands at 0.6780 against the
+sealed 0.6822 — the residual is M13's share of the Hedge weight
 — so re-anchoring is demonstrably the only thing that moved. One disclosed departure: L.2
 charges an item with no analog the Δ-climatology forecast where the sealed walk instead
 zeroes its weight; 58 of 1,800 item slots abstain, and the measured difference in mean Brier
 is 0.00035.
 
-This is a statement about the estimand, not about skill. It says the published −0.600 was
+This is a statement about the estimand, not about skill. It says the published −0.304 was
 measuring an anchoring failure. It does **not** say the engine has skill, and §8's number
 stands as computed on the question §8 asked.
 
 ### 11.2 The registered verdict: NO ADDITION
 
-Does the analogue distribution add anything *once the anchor is supplied?* n = 150 retained
-of 150, 0 excluded, 0 of 10,885 analog slots lacking an L⁻. Δ = 0 on 110 of 150 reads
-(73.3%; L.8.1's near-degenerate threshold is 0.90, so the target is close to degenerate but
+Does the analogue distribution add anything *once the anchor is supplied?* **n = 89 retained**
+of the 100 scored reads. Δ = 0 on 73.0% of them (; L.8.1's near-degenerate threshold is 0.90, so the target is close to degenerate but
 not formally so).
 
 | forecaster | Brier | skill vs no-change | 95% CI | DM/HLN *p* |
 |---|---|---|---|---|
-| **C1** ½ no-change + ½ analogue (primary) | 0.4643 | +0.0336 | [−0.0124, +0.0784] | 0.181 |
-| **C2** walk-forward λ | 0.4671 | +0.0279 | [−0.0129, +0.0693] | 0.219 |
-| **C3** Hedge, registered η | 0.4656 | +0.0310 | [−0.0120, +0.0751] | 0.199 |
-| analogue alone | 0.4799 | +0.0012 | [−0.1033, +0.0868] | 0.980 |
-| Δ-climatology alone | 0.4635 | +0.0354 | [−0.0354, +0.1003] | 0.340 |
-| no-change (G-persistence) | 0.4805 | — | — | — |
+| **C1** ½ no-change + ½ analogue (primary) | 0.4693 | +0.0505 | [−0.0389, +0.1276] | 0.243 |
+| **C2** walk-forward λ | 0.4764 | +0.0360 | [−0.0422, +0.1108] | 0.352 |
+| **C3** Hedge, registered η | 0.4725 | +0.0438 | [−0.0379, +0.1177] | 0.272 |
+| analogue alone | 0.5064 | −0.0246 | [−0.2347, +0.1203] | 0.764 |
+| Δ-climatology alone | 0.4905 | +0.0075 | [−0.1141, +0.1043] | 0.886 |
+| no-change (G-persistence) | 0.4942 | — | — | — |
 
-Every gate condition in L.7 fails: DM *p* = 0.181, the bootstrap CI includes zero, SPA over
-{C1,C2,C3} against the no-change benchmark gives *p* = 0.075, block label permutation
-*p* = 0.124, and nothing survives Benjamini–Hochberg across the 14 reported comparisons
-(minimum *q* = 0.387). The registered verdict is **NO ADDITION**.
+Every gate condition in L.7 fails: DM *p* = 0.243, the bootstrap CI includes zero, SPA over
+{C1,C2,C3} against the no-change benchmark gives *p* = 0.123, and block label permutation gives
+*p* = 0.867 — nothing survives Benjamini–Hochberg. The registered verdict is **NO ADDITION**.
 
 It is *not* the verdict that analogy degrades the forecast. L.7 has a DEGRADES branch and it
 did not fire: λ, free on a registered grid {0.0 … 1.0} and fitted only on closed reads, took
@@ -685,7 +694,7 @@ did not fire: λ, free on a registered grid {0.0 … 1.0} and fitted only on clo
 within [0.449, 0.582]. Both learners settle on roughly half the analogue.
 
 Nor is it the verdict that there is no effect. **The measured minimum detectable skill at
-n = 150 is 0.0666, and the observed skill is 0.0336 — half of it.** This is a null we could
+n = 89 is 0.1167, and the observed skill is 0.0505 — well under half of it.** This is a null we could
 not have distinguished from a real effect of the size we observed, which is why L.8.7
 registered the power figure in advance. The honest sentence is *not detectable at n = 150*.
 On the better-sourced half (L⁻ carried by ≥ 2 sources, n = 66) C1's skill falls to +0.0075
@@ -700,18 +709,23 @@ only in the second component.
 
 | pool | second component | Brier | skill vs no-change | *p* |
 |---|---|---|---|---|
-| **C1** | the retrieved analogue | 0.4643 | +0.0336 | 0.181 |
-| **C0r** | random analogs, same pool, same sealed *k* and seed | 0.4677 | +0.0266 | 0.168 |
-| **C0** | the whole Δ-climatology | **0.4626** | +0.0371 | 0.056 |
+| **C1** | the retrieved analogue | **0.4693** | +0.0505 | 0.243 |
+| **C0r** | random analogs, same pool, same sealed *k* and seed | 0.4827 | +0.0232 | 0.399 |
+| **C0** | the whole Δ-climatology | 0.4774 | +0.0341 | 0.219 |
 
-**C1 against C0, paired: −0.0037, CI [−0.0288, +0.0204], *p* = 0.766** (RPS: −0.0009,
-*p* = 0.938). By M.3's rule, written before the numbers: **the gain is pooling, not
-similarity.** The retrieved analogues are interchangeable with the class's unconditional Δ
-distribution inside the pool; if anything the unconditional distribution is marginally
-better, and it is the only forecaster in the experiment that comes near separating from
-persistence — at *p* = 0.056, which would not survive the multiplicity correction anyway.
-C1 against C0r is +0.0071 (*p* = 0.555): retrieval barely improves on random draws from the
-same pool.
+**C1 against C0, paired: +0.0169, CI [−0.0311, +0.0584], *p* = 0.439** (RPS: +0.0224,
+*p* = 0.302). By M.3's rule, written before the numbers — *C1 ≈ C0 → the gain is pooling* —
+**the gain is pooling, not similarity.** The retrieved analogues remain interchangeable with the
+class's unconditional Δ distribution inside the pool. C1 against C0r is +0.0278 (*p* = 0.197):
+retrieval does not separate from random draws from the same pool either.
+
+*One thing changed between drafts and it should be said rather than left for a reader to
+notice.* On the pre-Amendment-4 target this comparison ran −0.0037 (*p* = 0.766) — the base rate
+marginally *better* than retrieval. On the rebuilt target it runs +0.0169 (*p* = 0.439) —
+retrieval marginally better. **The sign of a point estimate flipped; the conclusion did not,
+because neither value is distinguishable from zero and M.3's rule turns on that rather than on
+the sign.** The instability of a non-significant point estimate across a target rebuild is
+itself a fact about how little this comparison can resolve at *n* = 89.
 
 This diagnostic gates nothing. But it is the sharpest statement in this paper of what the
 engine's retrieval step is worth, and it is consistent with §8's finding that the engine is
@@ -731,7 +745,7 @@ in §0 carries the same qualification.
 ### 11.4 What §11 does and does not revise
 
 Nothing here re-judges a v2 number. `engine:G` on the level estimand keeps exactly the
-status §8 gave it. What changes is the *interpretation* of the −0.600: it measured a defect
+status §8 gave it. What changes is the *interpretation* of the −0.304: it measured a defect
 in how the question was posed, and that defect is now found and repaired. What does not
 change is the verdict, which under a repaired estimand and a fair anchor is still that the
 analogue distribution adds nothing detectable at this sample size — and that what little it
@@ -872,7 +886,7 @@ either.
 
 1. **Sample size, and the size of the gap.** 150 labelled escalation reads and 253
    price reads. Simulation under the measured block dependence puts the minimum
-   detectable skill at 80% power at 0.127 (escalation) and 0.085 (price); detecting
+   detectable skill at 80% power at 0.137 (escalation) and 0.085 (price); detecting
    +0.05 on either would take roughly **1,200 scored reads — about eight times the
    present corpus**. This study can therefore report that the engine is
    significantly worse than the base rate, and cannot rule out a small positive
@@ -1162,11 +1176,11 @@ independent runs reproduce content digest `2a90ff4a…`.
 | 262 of 313 with no situation field at *t* | `WALK_FORWARD_PROTOCOL.md` Amendment H; `data/state/situation_knowable.json` |
 | Big Moves episodes, no-event, anticipation, base rates | `data/big_moves/{brent,wti,diesel_crack,wti_monthly}.json` |
 | 299 reads / 253 scored / 150 labelled; cluster 35, block 2.32 | `tiers.daily.*` |
-| G Brier −0.097 [−0.180, −0.018] p 0.022; means 0.769 / 0.701 | `tiers.daily.G.engine_vs.climatology` |
-| G vs persistence −0.600 [−1.031, −0.230] p 0.0002; ref mean 0.480; 2 fallbacks | `tiers.daily.G.engine_vs.persistence`, `n_persistence_fallback` |
+| G Brier −0.084 [−0.175, +0.004] p 0.076; means 0.710 / 0.655; n 100 | `tiers.daily.G.engine_vs.climatology` |
+| G vs persistence −0.304 [−0.821, −0.030] p 0.025; ref mean 0.545; 50 fallbacks, 96 known | `tiers.daily.G.engine_vs.persistence`, `n_persistence_fallback`, `n_persistence_known` |
 | G vs random −0.021 p 0.58; vs frozen +0.007 p 0.029 | `tiers.daily.G.engine_vs.{random_analogs,frozen}` |
 | G SPA: 15 models, p_RC 1.00, p_SPA 0.65 | `tiers.daily.G.spa` |
-| G RPS: clim −0.013, random +0.062, persistence −0.791 | `tiers.daily.G.rps.engine_vs` |
+| G RPS: clim −0.003, random +0.056, persistence −0.175 (p 0.26) | `tiers.daily.G.rps.engine_vs` |
 | P CRPS −0.071 [−0.136, −0.017] p 0.016; persistence +0.129; random −0.005; frozen +0.007 | `tiers.daily.P.engine_vs` |
 | M precision 0.337 / recall 0.544 / base 0.225 | `tiers.daily.M.engine` |
 | M13 −0.700 [−0.940, −0.457] p < 0.001; reliability by class | `tiers.daily.G.items_vs_climatology.M13_recalibrated`, `.murphy_M13` |
@@ -1175,8 +1189,8 @@ independent runs reproduce content digest `2a90ff4a…`.
 | Placebo −0.047 [−0.083, −0.008]; clim −0.106; fair +0.017 | `placebo.*` |
 | Permutation: observed −0.066, mean −0.101, SD 0.029, block p 0.124, iid 0.092 | `permutation` |
 | FDR: 34 comparisons, 31 survive, almost all losses | `fdr.family` |
-| Filtration audit: 15,784 checks, 0 violations | `filtration_audit` |
-| Leakage: G 0.769 → 0.638; P 8.25 → 8.01 | `leakage_test` |
+| Filtration audit: 15,241 checks, 0 violations | `filtration_audit` |
+| Leakage: G 0.710 → 0.597; P 8.30 → 8.00; 313 reads with different analogs | `leakage_test` |
 | Determinism: digest `2a90ff4a…`, seeds registered | `data_state.determinism` |
 | Regime blocks 2008 / 2020 / 2026 | `regime_blocks` |
 | Fair scores: Brier +0.021, RPS +0.119, CRPS diagnostic | `tiers.daily.{G,P}.diagnostic_fair` |
