@@ -420,3 +420,180 @@ n falls from 150 to the retained count, so every interval widens; the registered
 met but the comparison is materially less powerful than the one it sits beside (measured minimum detectable
 skill at the published n = 150 is already 0.127). This is a diagnostic on a sealed run, not a new run, and
 it is not the run the paper reports. Whatever it shows, `engine:G` stays SUGGESTIVE / null under §7.
+
+## Amendment L (2026-09-03) — the incremental-information experiment: ΔIES on the v2 corpus
+*Registered BEFORE any number under it is computed. Session B, on Joe's instruction of 2026-09-03, and
+independently arrived at by an external reviewer the same day. This amendment moves the Δ estimand of
+Amendment J.3 forward from the v3 trigger onto the **existing 150 scored daily-tier G reads** of the sealed
+run `walk_20260903T003422Z`. It is computed from the sealed files by the discipline of Amendment K —
+nothing is re-read, no analog is re-retrieved, no weight is re-fitted except the one object named in L.6 —
+and it does **not** re-judge any v2 number and does **not** change the status of `engine:G` under §7.*
+
+### L.0 Why the estimand changes
+The strongest result in the published run is that **G-persistence beats the engine**: registered
+multi-category Brier 0.4805 to 0.7687 (skill −0.600, DM/HLN p 0.0002, n 150), RPS 0.3798 to 0.6813
+(skill −0.791). Escalation levels persist and the engine's state vector carries no field for the dyad's
+own current level, so the level estimand asks the engine to **replace** the dyad's recent history rather
+than **improve** on it. The question that estimand cannot answer, and this one can:
+
+> **Does the analogue distribution carry information about escalation beyond what the dyad's own last
+> 90 days already say?**
+
+### L.1 The target
+For a scored daily-tier G read of event e at `as_of` = t with pre-window level L⁻ (Amendment B.1: the
+dyad's IES level over W⁻ = [t−90, t−1], as sealed in `baselines.persistence.level_pre`) and realized
+IES-90 level L over (d, d+90]:
+
+    ΔIES = L − L⁻,   an ordered categorical on {−3, −2, −1, 0, +1, +2, +3}.
+
+**Exclusions, each counted and published:** `outcome.no_independent_outcome` true; `persistence.fallback`
+true (L⁻ not knowable, B.3); a read carrying no analog with a knowable Δ (L.2). Only the daily tier is
+computed: the monthly tier has 0 scored G reads.
+
+### L.2 The forecast — the analogue distribution, re-anchored
+For each analog a carried by a menu item at this read (`items[*].G_ids`, index-aligned with
+`items[*].G_labels`, both already filtered by the walk to analogs whose branch window closed by t):
+
+    Δ_a = L_a − L⁻_a
+
+where L_a is the sealed analog label and **L⁻_a is that analog's own pre-window level, taken from the
+analog's own sealed read** (`baselines.persistence.level_pre`, computed on [d_a−90, d_a−1] and therefore
+strictly before d_a < t). An analog whose own read has `persistence.fallback` true contributes no Δ and is
+dropped from that item's distribution, counted as `n_analog_delta_dropped`. Structural check made before
+this amendment was written and reported here as a fact about the data, not a result: **0 of the 10,885
+analog slots carried by the 150 scored reads lack L⁻_a.**
+
+An item's Δ forecast is the frequency distribution of its Δ_a. An item with no Δ atom **abstains** and is
+charged the Δ-climatology forecast for that read — the registered abstain rule, unchanged.
+
+**The Δ engine (`analogue`) is the mixture over M01–M12 of their Δ distributions, weighted by the sealed
+run's Hedge G weights for those twelve items, renormalized to sum 1.** No retrieval is repeated and no
+Hedge weight is re-fitted: the Δ experiment is a **pure re-anchoring of the sealed run**. M13 is excluded
+and the reason is stated: it is a recalibration of the level mixture, not an analog retrieval, and carries
+no analogs to vote on Δ.
+
+**Feasibility (clipping, as J.3 registered).** Given L⁻, the feasible Δ are exactly {−L⁻, …, 3−L⁻}. Every
+forecast in this amendment is clipped to that set: mass on an infeasible Δ moves to the nearest feasible Δ
+(equivalently, the implied level forecast is clipped into 0..3 with mass accumulating at the boundary).
+
+**A consequence, registered so that it cannot be presented later as a finding.** After clipping, the map
+Δ ↔ level (ℓ = Δ + L⁻) is a bijection on the four feasible categories, so the 7-category Δ Brier and RPS
+of any clipped forecast are **numerically identical** to the 4-level Brier and RPS of its implied level
+forecast. The Δ framing therefore changes the **forecast** (the analogs vote on change, not on level) and
+the **baseline** (no-change ≡ G-persistence); it does not change the score axis. `assert_delta_level_identity`
+in the code checks this on every read. It follows that `no-change` in Δ space scores exactly what
+`persistence` scored in level space, and that the two estimands are directly comparable.
+
+### L.3 The baselines
+1. **no-change** — a point mass on Δ = 0 with Amendment B.2's smoothing (0.9 on Δ = 0, 0.1 spread equally
+   over the adjacent feasible Δ; a boundary L⁻ gives its one neighbour the whole 0.1). This is
+   G-persistence expressed in this estimand and **it is the baseline to beat**.
+2. **analogue alone** — L.2's mixture, unshrunk.
+3. **Δ-climatology** — the unconditional Δ distribution of the read's own point-in-time G pool
+   (`baselines.random_analogs.g_pool_ids` with the aligned `baselines.climatology.G_labels`, each member's
+   Δ formed with its own L⁻), clipped. The honest bar (§4 baseline 1).
+4. **random analogs** — k drawn from that same pool at the sealed k, seed and number of draws, scored on Δ
+   (§4 baseline 3): isolates whether *similarity retrieval* adds anything in this estimand.
+5. **frozen** — the equal-weight mixture over M01–M12's Δ distributions (§4 baseline 4).
+
+### L.4 The combination — stated before any number is seen
+The object of the experiment is the **combination** of the dyad's own history with the analogue
+distribution. Three combination rules are registered; no other is admissible under this amendment.
+
+- **C1 (PRIMARY), the registered weight.** Linear pool `0.5 · no-change + 0.5 · analogue`, clipped. λ = 0.5
+  is **fixed, registered, and not fitted to anything.** It is the primary because it cannot be gamed.
+- **C2, the walk-forward weight.** Linear pool `λ_i · no-change + (1 − λ_i) · analogue` where λ_i is chosen
+  at read i from the registered grid **{0.0, 0.1, …, 1.0}** as the value minimising the cumulative
+  registered Δ-Brier of the pool over the reads j in the scored set whose branch window had **closed by**
+  `as_of_i` (`g_closed_on ≤ as_of_i`) — the walk's closed-by-t rule, exactly Amendment C.2's. Fewer than
+  **40** such reads: λ_i = 0.5. Ties resolve to the **larger** λ (conservative: favours persistence). The
+  λ trajectory and the terminal λ* are published.
+- **C3, Hedge over the two.** The registered §5 update rule (exponentially-weighted average forecaster,
+  η = 0.25, loss = Δ-Brier / g_scale 2.0) over the two forecasters {no-change, analogue}, weights from past
+  **closed** reads only, initialised uniform. The weight trajectory is published.
+
+λ in C2 is the only quantity fitted anywhere in this amendment, and it is fitted walk-forward on closed
+reads only, on a grid registered here before it was computed.
+
+### L.5 The scores
+Amendment E.1 holds: this is a run on the **v2 corpus**, so the registered §3 scores gate.
+- **Gate score:** registered multi-category **Brier** over the seven ordered Δ categories.
+- **Beside it, always:** **RPS** over the same ordered categories (a Δ miss of one level must cost less
+  than a miss of three — this is why the ordinal score matters here), log score, and the **Ferro
+  size-corrected** fair Brier and fair RPS as DIAGNOSTIC (A.5 / E.1), never as a gate.
+- The implied level forecast is also scored on the v2 level scores; by L.2's identity these agree exactly,
+  and disagreement is a defect, not a finding.
+
+### L.6 Inference — the full registered draws
+Stationary block bootstrap **2,000** draws on the skill, mean block measured from the registered 35-day
+clustering on the retained dates; **Diebold–Mariano with the Harvey–Leybourne–Newbold** correction and HAC
+lag = round(mean block) − 1; **SPA (Hansen 2005) 1,000** draws over the combination family {C1, C2, C3}
+with **no-change as the benchmark**, so the best of the three is guarded; **Benjamini–Hochberg FDR** across
+every comparison this amendment reports. Two permutations, **1,000** draws each, seed 19900802:
+- **(i) label permutation, block form (F.2)** — the realized level L is permuted across intact 35-day
+  clusters and Δ recomputed as L_perm − L⁻ with each read's **own** L⁻ (feasible by construction). This is
+  the §7-form condition, per F.2.
+- **(ii) forecast permutation** — the analogue Δ distributions are permuted across intact clusters,
+  re-clipped to each receiving read's own feasible set, C1 recomposed, skill vs no-change recomputed. Null:
+  *the analogue distribution retrieved for this read carries no more information than one retrieved for a
+  different read.* Published beside (i); it does not gate.
+Measured **minimum detectable skill** at 80 % power at the retained n is published beside every result, so
+a null reads as "not detectable at this n," not "no effect." No placebo is run (the placebo tests P-side
+event selection, which this estimand does not touch); stated, not omitted silently.
+
+### L.7 The gate — four registered verdicts, decided before the numbers exist
+Let skill = 1 − Brier(C1) / Brier(no-change) on the retained set.
+
+- **INCREMENTAL** — skill > 0 **and** DM/HLN p < 0.05 **and** the 95 % bootstrap CI excludes 0 **and** SPA
+  p < 0.05 over the C-family against no-change **and** block label-permutation p < 0.05.
+  *Reading: historical analogy carries information beyond the dyad's own last 90 days.*
+- **INCREMENTAL-UNDER-FITTED-WEIGHT** — C1 fails the above, **but** C2 beats no-change with DM/HLN p < 0.05
+  and a CI excluding 0, **and** C2's terminal λ* < 0.5. *Reading: the analogue carries information, but only
+  at a weight the equal pool does not use.* Strictly weaker than INCREMENTAL and never reported as it.
+- **DEGRADES** — no-change beats C1 with DM/HLN p < 0.05 and a CI excluding 0, **and** C2's terminal
+  λ* ≥ 0.9. *Reading: the analogue actively degrades a good baseline — the fitted weight runs away from it
+  too.*
+- **NO ADDITION** — anything else, including the case where C1 loses but C2's λ* < 0.9. That case is
+  reported as NO ADDITION with the explicit note that **the loss is attributable to the registered equal
+  weight, not to the analogue's content** — a fixed 50/50 pool losing is not evidence that analogy degrades.
+  Published with the measured MDS at the retained n.
+
+**All four are publishable and none is preferred.** §7 is untouched: nothing in this amendment can make
+anything VALIDATED — the §7 label audit is 1 of 30 rows in — and `engine:G` on the level estimand keeps the
+status the published run gave it whatever this experiment says.
+
+### L.8 Expected failure modes, registered in advance
+1. **Near-degenerate target.** If Δ = 0 on most reads, no-change is near-unbeatable and the experiment is
+   underpowered by construction. The marginal Δ distribution and the Δ = 0 share are published beside the
+   result, and if that share exceeds 0.90 the estimand is declared near-degenerate in the same breath as
+   the verdict.
+2. **Fixed-weight conservatism.** A 50/50 linear pool of a sharp point mass and a diffuse analogue
+   distribution is worse than the sharp one whenever the analogue is weak — *even if the analogue carries
+   some information*. This is exactly why C2 and C3 are registered beside C1 and why DEGRADES additionally
+   requires λ* ≥ 0.9.
+3. **The small-atom penalty runs against the analogue.** The analogue side is a k ≤ 12-atom empirical
+   distribution and no-change is a point mass; the registered Brier charges the analogue Σp(1−p)/k that it
+   cannot charge a point mass (E.3). The direction of that bias is known and stated: it works **against**
+   the analogue. The Ferro fair scores are published beside for this reason and the gate still stays on the
+   registered score (E.1).
+4. **Shared-L⁻ error.** L⁻ enters the target, the baseline and the analogue anchor at once. A coverage
+   error in L⁻ inflates the target's error and **cancels** in no-change, mechanically favouring the
+   baseline. Sensitivity, registered: the whole comparison repeated on reads with ≥ 2 sources in
+   `covering_pre`.
+5. **Analog-side L⁻ noise.** Δ_a inherits the coverage of the analog's own W⁻. The distribution of
+   `covering_pre` sizes across analog slots is published.
+6. **Undefined targets.** `no_independent_outcome` is excluded (L.1); the Amendment K hostility set
+   (`non_hostile`, `ambiguous`, whose G target is undefined under OUTCOME_MAPPING A3.3) is published as a
+   registered secondary restriction, not as a chosen subset.
+7. **Power.** n = 150 before exclusions; the measured MDS on the level target at n = 150 was **0.127**. A
+   null here means "not detectable at this n."
+8. **The identity of L.2 is not a bug.** If the analogue re-anchoring changes nothing, C1 vs no-change
+   reproduces the level-estimand persistence comparison. That is the NO ADDITION branch, published as such.
+
+### L.9 Publication
+`src/engine/delta_experiment.py`, written from the sealed files only, produces
+`data/walk_forward/delta_experiment.json` and `summary.json → tiers.daily.G.experiment_delta`
+(`registered: true`, `amendment: L`, `derived_from_run`, `gates: engine:G unchanged`). Tests carrying the
+amendment id live in `tests/test_delta_experiment.py`. The numbers go to Cowork in
+`data/handoffs/B_to_Cowork_2026-09-03_delta_experiment.md`, **as computed**, whichever of the four
+verdicts holds.
