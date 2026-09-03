@@ -51,10 +51,83 @@ def series(conn, sid):
     return df.set_index("obs_date")["value"].astype(float)
 
 
-def episodes_for(s, kind, tier="daily"):
-    """Detect episodes per BIG_MOVES_REGISTRATION.md (Amendment 2 daily / Amendment 3 monthly). Pure; unit-tested."""
+def _trading_gap(index_pos, d1, d2):
+    """Trading days between two dates, counted as positions in the asset's own observation index.
+    §3 says 'within 60 trading days'; the as-computed code compared calendar days."""
+    return index_pos[d2] - index_pos[d1]
+
+
+def _episodes_registered(s, kind, tier):
+    """BIG_MOVES_REGISTRATION.md §3 as written, with Amendment 1's onset/end and Amendment 4's
+    reading of how the two windows combine (pooled, clustered once, no merge)."""
+    T = TIERS[tier]
+    lp = np.log(s[s > 0]) if kind == "price" else s
+    index_pos = {d: i for i, d in enumerate(s.index)}
+    CLUSTER_TD = 60 if tier == "daily" else T["cluster_days"]      # §3: 60 trading days (daily)
+
+    # pool the qualifying dates of every window into ONE ordered set, each tagged with its window
+    pooled = []
+    thresholds = {}
+    for W in T["windows"]:
+        r = (lp - lp.shift(W)).dropna()
+        if r.empty:
+            continue
+        thr = float(r.abs().quantile(TOP_Q))
+        thresholds[W] = thr
+        for d, v in r[r.abs() >= thr].items():
+            pooled.append((d, W, float(v)))
+    pooled.sort(key=lambda x: (x[0], x[1]))
+    if not pooled:
+        return []
+
+    eps, i = [], 0
+    while i < len(pooled):
+        j = i
+        while j + 1 < len(pooled) and _trading_gap(index_pos, pooled[i][0], pooled[j + 1][0]) <= CLUSTER_TD:
+            j += 1
+        clus = pooled[i:j + 1]
+        end, W, _ = max(clus, key=lambda x: abs(x[2]))              # Amendment 1: max |trailing return|
+        up = max(clus, key=lambda x: abs(x[2]))[2] > 0
+        win = s.loc[:end].iloc[-(W + 1):]
+        onset = win.idxmin() if up else win.idxmax()                # Amendment 1: the price extreme
+        chg = (s.loc[end] / s.loc[onset] - 1) * 100 if kind == "price" else s.loc[end] - s.loc[onset]
+        eps.append(dict(window=W, windows=sorted({w for _, w, _ in clus}), onset=str(onset.date()),
+                        end=str(end.date()), change=round(float(chg), 1), sign="+" if up else "-",
+                        from_=round(float(s.loc[onset]), 2), to=round(float(s.loc[end]), 2),
+                        threshold=round(thresholds[W], 3),
+                        days=int((pd.Timestamp(end) - pd.Timestamp(onset)).days),
+                        n_qualifying_dates=len({d for d, _, _ in clus})))
+        i = j + 1
+    return eps
+
+
+def episodes_for(s, kind, tier="daily", variant="as_computed"):
+    """Detect episodes per BIG_MOVES_REGISTRATION.md.
+
+    Two variants, both published (Amendment 4). Neither moves a threshold, an attribution window or
+    the top-5% cut; they differ ONLY in how qualifying dates are grouped into episodes.
+
+    "registered"   -- §3 as written: the qualifying dates of BOTH windows are pooled into one
+                      ordered set and clustered once, within 60 TRADING days of the episode's start.
+                      No merge step. This is the primary result.
+    "as_computed"  -- what src/big_moves.py has always done: cluster each window separately within
+                      90 CALENDAR days, then merge same-sign episodes whose onsets are within 60
+                      calendar days. The merge is not in §3; it was the device that combined the two
+                      windows. Kept, labelled, so the published history is not silently retracted.
+
+    The DEFAULT stays "as_computed" on purpose: src/walk.py (session B) calls this and its numbers
+    must not move without B choosing it. data/big_moves/*.json publishes both and leads with
+    "registered".
+    """
+    if variant not in ("registered", "as_computed"):
+        raise ValueError(f"unknown variant {variant!r}")
     T = TIERS[tier]
     WINDOWS_, CLUSTER, MERGE = T["windows"], T["cluster_days"], T["merge_days"]
+    if variant == "registered" and tier == "daily":
+        return _episodes_registered(s, kind, tier)
+    # The MONTHLY tier is not in dispute: Amendment 3 registers cluster 365 days + same-sign merge
+    # within 180, which is exactly what TIERS["monthly"] implements. Its registered rule IS the
+    # as-computed one, so both variants return the same episodes and neither is relabelled.
     if kind == "price":
         s = s[s > 0]
         lp = np.log(s)
@@ -145,15 +218,37 @@ def run():
         s = series(conn, sid)
         if s.empty:
             print(f"{label}: no data for {sid} (run src/fetch_wti_monthly.py)"); continue
-        eps = attribute(episodes_for(s, kind, tier), ev, tier)
+        # Amendment 4: the REGISTERED rule is the primary result and sits at the top level; the
+        # AS-COMPUTED rule is published beside it so the previous numbers are not silently retracted.
+        eps = attribute(episodes_for(s, kind, tier, variant="registered"), ev, tier)
+        alt = attribute(episodes_for(s, kind, tier, variant="as_computed"), ev, tier)
+        alt_rates = rates(alt, ev, s, tier)
         res = dict(asset=asset, label=label, series=sid, kind=kind, tier=tier, unit=TIERS[tier]["unit"],
                    first=str(s.index[0].date()), last=str(s.index[-1].date()),
-                   registration="BIG_MOVES_REGISTRATION.md (Amendment 2)" if tier == "daily" else "BIG_MOVES_REGISTRATION.md (Amendment 3, monthly resolution)",
-                   **rates(eps, ev, s, tier), episodes=eps)
+                   registration=("BIG_MOVES_REGISTRATION.md §3 as written (Amendments 1-2 for onset/end, "
+                                 "Amendment 4 for the re-run): qualifying dates of both windows pooled and "
+                                 "clustered once within 60 TRADING days, no merge step"
+                                 if tier == "daily" else
+                                 "BIG_MOVES_REGISTRATION.md (Amendment 3, monthly resolution)"),
+                   variant="registered",
+                   variant_note=("PRIMARY = the registered rule. `as_computed` below is what this file "
+                                 "published before 2026-09-03: clustering at 90 CALENDAR days plus an "
+                                 "unregistered same-sign merge within 60. Amendment 4 records why both "
+                                 "are here." if tier == "daily" else
+                                 "the monthly tier is not in dispute: Amendment 3 registers cluster 365 "
+                                 "days + same-sign merge within 180, which is what the code does, so both "
+                                 "variants are identical here"),
+                   **rates(eps, ev, s, tier), episodes=eps,
+                   as_computed=dict(variant="as_computed", **alt_rates, episodes=alt))
         json.dump(res, open(OUT / f"{asset}.json", "w"), indent=1)
-        summary[asset] = {k: v for k, v in res.items() if k != "episodes"}
+        summary[asset] = {k: v for k, v in res.items()
+                          if k not in ("episodes", "as_computed")}
+        summary[asset]["as_computed"] = {k: v for k, v in alt_rates.items()}
+        d = "" if tier != "daily" else (f"  (as-computed: {alt_rates['n_episodes']} episodes, "
+                                        f"{alt_rates['no_identified_event']} with no identified event, "
+                                        f"base {alt_rates['everyday_base_rate_pct']}%)")
         print(f"{label}: {res['n_episodes']} episodes, {res['no_identified_event']} with no identified event, "
-              f"everyday base {res['everyday_base_rate_pct']}%")
+              f"everyday base {res['everyday_base_rate_pct']}%{d}")
     json.dump(summary, open(OUT / "summary.json", "w"), indent=1)
     conn.close()
     return summary
