@@ -101,7 +101,15 @@ def test_rows_match_the_database(rows, events):
                     want = None if row["level"] == "—" else int(row["level"])
                     assert (None if got is None else int(got)) == want, f"{eid} level"
                 elif f == "basis":
-                    assert (got or "uncovered") == row["basis"], f"{eid} basis"
+                    # A4.2: `basis` is stored only for a row that HAS a level. A no_independent_outcome row
+                    # therefore has none, and the word the audit carries says which of the two reasons applies:
+                    # `undated` (a source covers the window but cannot date a level in it) or `uncovered`
+                    # (nothing covers it). Before Amendment 4 there was only the second, hence the old fallback.
+                    rule = conn.execute(
+                        "select value_text from event_outcomes where source='ies90' and field='rule_fired' "
+                        "and event_id=?", (eid,)).fetchone()
+                    default = "undated" if "UNDATED" in ((rule and rule[0]) or "") else "uncovered"
+                    assert (got or default) == row["basis"], f"{eid} basis"
                 else:
                     # rule_fired lists every rule that attained the level. Amendment 2 A2.3
                     # fixes the order *between* sources but not within one, and a re-run can
@@ -170,8 +178,15 @@ def test_all_non_hostile_events_currently_carry_a_level(rows):
     the precondition removes is scored today, so removal changes n."""
     nh = [e for e, r in rows.items() if r["hostility"] == "non_hostile"]
     assert len(nh) == 20, f"the audit found 20 non-hostile events, now {len(nh)}: {sorted(nh)}"
-    uncovered = [e for e in nh if rows[e]["level"] == "—"]
-    assert not uncovered, f"non-hostile but already no_independent_outcome: {uncovered}"
+    # Until 2026-09-03 every one of the 20 carried a level, so Amendment 3's removal changed n by 20.
+    # OUTCOME_MAPPING Amendment 4 has since removed two of them by a different route -- their GED deaths were
+    # already at the same level across the pre-window -- so Amendment 3's MARGINAL effect on the non-hostile
+    # class is now 18, not 20. The pair is named rather than tolerated: a third one appearing means the two
+    # rules are converging and the "orthogonal" claim in A4.9 needs re-checking, so this must fail.
+    already = sorted(e for e in nh if rows[e]["level"] == "—")
+    assert already == ["drc_cobalt_ban_2025", "druzhba_contamination_2019"], \
+        f"non-hostile and already no_independent_outcome under Amendment 4: {already}"
+    assert len(nh) - len(already) == 18
 
 
 @pytest.mark.skipif(not SCORES.exists(), reason="walk scores not present")
