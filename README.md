@@ -12,15 +12,19 @@ result is published as computed, nulls included.
 ## What it is
 
 - **The spine.** 313 coded geopolitical and policy shocks, 1973–2026, human-gated
-  under a codebook with per-field provenance ("sourced or unknown"). **The spine is
-  the project's weakest layer and is under repair:** each event carries one primary
-  source URL, not the two the codebook's admission rule requires (0 of 313 have two
-  independent sources recorded), event descriptions average one sentence, and the
-  coverage is badly skewed — 8 events in the 1970s, 11 in the 1980s, 16 in the
-  1990s, against 150 in the 2020s. The engine's analog pool before 1990 is
-  therefore thin by construction, which is visible in the 1990 demo. Repair is
-  registered and in progress (`data/candidates/`, `DOSSIER_RULE.md`): dossiers with
-  two verified sources per event, admitted only by the author.
+  under a codebook with per-field provenance ("sourced or unknown"). **The spine was
+  the project's weakest layer; it was measured, and repaired in part.** Before: 0 of
+  313 events carried two independent sources, 31 cited an encyclopaedia their own
+  codebook would not admit, 49 carried drafting scaffolding, and coverage ran 8 / 11 /
+  16 events for the 1970s / 1980s / 1990s against 150 in the 2020s. After the pre-2000
+  repair — every pre-2000 record dossiered from primary documents (FRUS, CIA, UN,
+  Executive Orders), 66 field changes in four audited transactions — **22 events carry
+  two independent sources**, bare-root citations are down from 9 to 3, and drafting
+  scaffolding from 49 to 39. What remains is documented by cause: four records blocked
+  by declassification (FRUS volumes still "Being Cleared"), 28 with no citable domain —
+  all post-2000, where **zero of 27 could be replaced by a primary document through
+  eight probed routes**, because between 2000 and 2016 no free archive reaches. The
+  published runs used the *before* corpus; every result is conditional on it.
   Also: a monthly price spine back to 1946, 598 series and
   467k observations, and ~8,000 measured price-transmission edges across crude,
   products, gas, LNG and fertilizer. A world-state panel (280k rows, 17 open

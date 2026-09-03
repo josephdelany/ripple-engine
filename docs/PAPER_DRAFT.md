@@ -126,29 +126,58 @@ decisions 52, infrastructure attacks 48, chokepoint disruptions 27, demand shock
 17 (`data/oil.db`, table `events`). 187 are geopolitical in the sense used for the
 escalation target.
 
-**This layer is the study's principal weakness, and we state its condition
-precisely rather than in summary.** (i) *Provenance.* Each event carries a single
-primary `source_url`; **0 of 313 record two independent sources**, so the
-codebook's two-source admission rule is a standard for future admissions, not a
-property of the present corpus. Per-field provenance is recorded in `sr_json`
-under a sourced-or-unknown rule, but a substantial share of those field sources
-are null or self-referential (`corpus:density`, `corpus:observed`), i.e. derived
-from the corpus rather than from an external record. (ii) *Depth.* Event
-descriptions have a median length of 148 characters — a sentence, not a case
-narrative; some carry draft coding notes in the text. (iii) *Coverage.* The
-distribution is heavily recent: 8 events in the 1970s, 11 in the 1980s, 16 in the
-1990s, 43 in the 2000s, 85 in the 2010s, 150 in the 2020s. The "1973–2026 spine"
-is in practice a dense 2010–2026 record with a thin historical tail, which is why
-the 1990 read in Appendix B draws on seven precedents and the monthly tier cannot
-be scored at all. (iv) *Selection.* Events were chosen by humans with hindsight;
-the Big Moves census (§4) is the check on this and finds 35% of the largest Brent
-moves have no corpus event at all.
+**This layer was the study's principal weakness, it was measured rather than
+described, and it was repaired in part on the same day.** We report both states,
+because the repair is itself evidence about what a historical corpus of this kind
+can and cannot be made to carry.
 
-Repair is registered and under way (`data/candidates/REGISTRATION.md`,
-`DOSSIER_RULE.md`): 624 pre-1987 candidates drawn mechanically from ICB, COW MID,
-COW War and UCDP are being turned into dossiers carrying two verified sources
-each, with admission by the author alone. Until that lands, every result in this
-paper should be read as conditional on a corpus whose historical arm is thin.
+*As the published runs saw it* (`data/spine/AUDIT.md`, first commit): each event
+carried a single primary `source_url` and **0 of 313 recorded two independent
+source domains**, so the codebook's own two-source admission rule was a standard
+the corpus had never met. Of the field-source slots in `sr_json`, 11.9% carried an
+external URL, 25.0% were corpus-derived and therefore could not corroborate the
+corpus, and 63.1% were null. Descriptions had a median length of 148 characters —
+a sentence, not a case narrative — and 49 still carried drafting scaffolding.
+Thirty-one records cited an encyclopaedia as their only source, which the
+codebook's inclusion rule does not admit. Coverage was heavily recent: 8 events in
+the 1970s, 11 in the 1980s, 16 in the 1990s, against 43, 85 and 150 in the decades
+after. The "1973–2026 spine" was in practice a dense 2010–2026 record with a thin
+historical tail — which is why the 1990 read in Appendix B draws on seven
+precedents and the monthly tier cannot be scored at all.
+
+*After the pre-2000 repair* (four dossier patches, 66 field changes, each applied
+in one transaction on the author's line): **22 of 313 events now carry two
+independent source domains** — 7 of 8 in the 1970s, 5 of 11 in the 1980s, 10 of 16
+in the 1990s. Bare site-root citations fell from 9 to 3, encyclopaedia-only from 31
+to 28, drafting scaffolding from 49 to 39. Every pre-2000 record now has a dossier
+citing primary documents: FRUS minutes of the Washington Special Actions Group of
+17 and 19 October 1973, a CIA Office of Economic Research memorandum of 19 October
+1973, Brzezinski's memorandum of 4 November 1979 written the day the Tehran embassy
+was seized, Executive Order 12170, Reagan's report to Congress on Operation Praying
+Mantis, and the UNIIMOG mission history among them.
+
+*What could not be repaired, and why* — three distinct reasons, each measured:
+
+1. **Declassification.** Four records cannot reach a primary source because the
+   volumes are unpublished: FRUS 1969–76 Volume X (Iran 1977–79) and the
+   Reagan-era Gulf volumes XX and XXI are marked "Being Cleared". The
+   declassification queue, not our effort, is the binding constraint on that decade.
+2. **Archive reach.** Twenty-eight records still have no citable domain, all
+   post-2000. Eight primary-document routes were probed live; **zero of 27
+   post-2000 encyclopaedia-only records could be replaced by a primary document
+   through any of them** (`data/spine/archive_reach_2026-09-02.md`). Between 2000
+   and 2016 no free route reaches: the State Department volumes have ended, UK
+   files are not yet open under the twenty-year rule, the free press index begins
+   in 2017, and the Federal Register covers only US federal action. That window is
+   the entire gap.
+3. **Genuine absence.** The June 1998 OPEC production cut defeated roughly twenty
+   documented routes individually; its dossier recommends leaving the source field
+   unset rather than retaining an encyclopaedia citation.
+
+The corpus the published runs used is the *before* state. Every result in this
+paper is conditional on it, and the repair — which post-dates the runs — is
+reported here so that a reader can see both what was wrong and how much of it
+proved fixable.
 
 **Prices.** A daily spine from FRED (Brent from 1987-05-20, WTI from 1986-01-02,
 products, cracks, gas), a monthly WTI spine from 1946 (FRED `WTISPLC`), and ~598
