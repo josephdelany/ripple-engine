@@ -401,6 +401,16 @@ def _wf_rows(wf):
     return rows, {"engine:G": (rules.get("engine:G") or {}).get("status"), "engine:P": (rules.get("engine:P") or {}).get("status")}
 
 
+def _audit_status():
+    """The IES-90 label audit as Joe recorded it, via the module that owns it. Read-only."""
+    try:
+        import audit_ies90 as AU
+        st = AU.status()
+        return {k: st.get(k) for k in ("n_done", "n_rows", "kappa", "passed", "status")}
+    except Exception as e:                                   # noqa: BLE001 -- reported, never hidden
+        return {"n_done": None, "n_rows": None, "passed": False, "note": f"audit status unavailable: {e}"}
+
+
 def trust(conn, etype, br):
     wf = _load("walk_forward/summary.json")
     st = _load("engine_status.json")
@@ -409,6 +419,10 @@ def trust(conn, etype, br):
     return {"walk_forward": {"rows": rows, "statuses": statuses, "run_id": run_id, "verdict": wf.get("verdict"), "protocol": wf.get("protocol"),
                              "n_scored_daily": ((wf.get("tiers") or {}).get("daily") or {}).get("n_scored_burn_in"),
                              "label": f"IES-90 (ICB/MID/War/UCDP), run {run_id}, protocol §7"},
+            # DESIGN.md Amendment 2 A2.2: band 6 must carry a Finding, and A2.8 says a Finding is a
+            # registered sentence bound to a path. The audit state is that path -- it is the honest
+            # answer to "what did we get wrong", and it is read live rather than asserted in fixed text.
+            "audit": _audit_status(),
             "retrieval": {"conditioned_n": (br or {}).get("conditioned_n"), "basis": ((br or {}).get("branch_rates") or {}).get("basis"),
                           "no_adequate_precedent": (br or {}).get("no_adequate_precedent")},
             "freshness": {"status": st.get("status") or st.get("light"), "as_of": st.get("as_of") or st.get("generated_at")}}

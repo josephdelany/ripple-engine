@@ -391,7 +391,8 @@ function renderStory(s){
     <p class="t-prov">Registered local projections for this class. Every cell is shown, nulls included.</p>
     ${travelBand(s.propagation)}</div>
 
-  <div class="sec two" data-band="6"><div><h2>What we got wrong</h2><dl class="kv">
+  <div class="sec two" data-band="6"><div><h2>What we got wrong</h2>
+    <p class="t-find" style="font-size:20px">${say('case.wrong', s)}</p><dl class="kv">
       ${(wf.rows||[]).map(w=>`<dt>${esc(w.metric)}</dt><dd class="mono">${num(w.value,3)}${w.ci95?` · 95% CI ${num(w.ci95[0],3)}..${num(w.ci95[1],3)}`:''}${w.dm_p!=null?` · DM p ${num(w.dm_p,3)}`:''}${w.covers_zero!=null?` · covers zero: ${w.covers_zero?'yes':'no'}`:''}${w.best_model?` · best ${esc(w.best_model)}`:''}${w.n!=null?` · n=${w.n}`:''} <span class="dim">${esc(w.path||'')}</span></dd>`).join('')}
       <dt>Protocol §7 status</dt><dd class="mono">engine:G — ${esc((wf.statuses||{})['engine:G']||'—')} · engine:P — ${esc((wf.statuses||{})['engine:P']||'—')}</dd>
       <dt>Run</dt><dd class="mono">${esc(wf.run_id||'—')}${wf.n_scored_daily!=null?` · ${wf.n_scored_daily} daily reads scored after burn-in`:''} · <a href="/app#result" onclick="show('result');return false">open the result</a></dd>
@@ -623,6 +624,8 @@ const SENTENCES = {
                         f:{a:'propagation.counts.TRANSMITTING', b:'propagation.counts.cells'}},
   'case.travel.none':  {t:'No cell transmits for this class: all {a} registered cells are null or insufficient.',
                         f:{a:'propagation.counts.cells'}},
+  'case.wrong':        {t:'This page is read against a target whose own label audit stands at {a} of {b}.',
+                        f:{a:'trust.audit.n_done', b:'trust.audit.n_rows'}},
 
   /* A.4 — The record */
   'rec.noevent':       {t:'{a} of the {b} biggest Brent moves since {c} have no identified event at all.',

@@ -298,6 +298,7 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 | `case.tail` | *"{k} of {n} analogs were contained at +{h} days."* | `story.branches.subset_counts.counts.CONTAINED`, `story.branches.subset_counts.n`, `story.branches.horizon_days` | when precedent is adequate |
 | `case.travel` | *"{k} of {n} registered cells transmit for this class."* | `story.propagation.counts.TRANSMITTING`, `story.propagation.counts.cells` | when available |
 | `case.travel.none` | *"No cell transmits for this class: all {n} registered cells are null or insufficient."* | `story.propagation.counts.cells` | when k = 0 |
+| `case.wrong` | *"This page is read against a target whose own label audit stands at {a} of {b}."* | `story.trust.audit.n_done`, `story.trust.audit.n_rows` | always — A2.2 requires band 6 to carry a Finding, and the audit is the honest one |
 
 **Correction, 2026-09-03, same day, before any sentence rendered.** A.3 first registered `case.q` for
 the story title. That was a mis-registration: a corpus title is **verbatim quoted material**, governed by
