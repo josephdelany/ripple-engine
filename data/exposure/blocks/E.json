@@ -1,99 +1,226 @@
 {
  "block": "E",
  "n": 13,
- "schema": "EXPOSURE_REGISTRATION.md \u00a72",
+ "schema": "EXPOSURE_REGISTRATION.md §2",
  "events": [
   {
    "event_id": "rus_tuapse_strike_2024a",
    "date": "2024-01-25",
    "type": "infrastructure_attack",
    "title": "Ukrainian drone strike on Rosneft Tuapse refinery",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Tuapse Refinery (LLC RN-Tuapse Refinery)",
+   "asset_type": "refinery",
+   "operator": "Rosneft",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
-   "days_to_partial_restore": "unknown",
+   "capacity_units_note": "Operator publishes capacity in tonnes, not barrels/day: Rosneft states design capacity '12 million tons/year for oil' for unit ELOU-AVT-12. No operator figure in b/d exists. Secondary b/d figures are conversions of that same 12 Mt/y and disagree (see conflicts), so kbd is left unknown rather than resolved by choosing a barrels-per-tonne factor, which would be this session's assumption and not a source's.",
+   "days_to_partial_restore": 97,
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+   "source_publisher": "Rosneft (operator's own site)",
+   "source_date": "retrieved 2026-09-03",
+   "confidence": "partial",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "asset_type": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "operator": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "country_iso3": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "days_to_partial_restore": {
+     "source_url": "https://kyivindependent.com/reuters-tuapse-refinery-hit-by-drone-resumes-work-after-3-months-of-repairs/",
+     "source_publisher": "Kyiv Independent, reporting Reuters citing two industry sources",
+     "source_date": "2024-05-07",
+     "derivation": "strike 2024-01-25 to first reported resumption 2024-05-01 = 97 days. Both dates are sourced; the day count is arithmetic on them, not an estimate. PARTIAL, not full: the source reports 20,000 tonnes processed on 1 May against a 12 Mt/y nameplate (~32,900 t/day)."
+    }
+   },
+   "retrospective": false,
+   "conflicts": [
+    {
+     "field": "capacity_nameplate_kbd",
+     "claims": [
+      {
+       "value_kbd": 240,
+       "claimed_by": "Ukrainska Pravda citing Reuters",
+       "note": "presented as the b/d equivalent of 12 Mt/y"
+      },
+      {
+       "value_kbd": "around 250",
+       "claimed_by": "Reuters via Kyiv Independent, 2024-05-07"
+      }
+     ],
+     "resolution": "declined; left unknown. Both are conversions of the operator's 12 Mt/y and differ only in the assumed barrels-per-tonne factor."
+    }
+   ],
+   "required_filled": 3
   },
   {
    "event_id": "me_marlin_luanda_2024",
    "date": "2024-01-26",
    "type": "infrastructure_attack",
    "title": "Houthi missile sets tanker Marlin Luanda ablaze in Gulf of Aden",
-   "asset_name": "unknown",
+   "asset_name": "Marlin Luanda (product tanker)",
    "asset_type": "unknown",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION, not for want of sources. The struck asset is a ship. `asset_type` has no vessel member in the EXPOSURE_REGISTRATION.md §2 enum (refinery · terminal · field · pipeline · chokepoint · processing · storage), and `capacity_nameplate_kbd` is undefined for a moving asset: a tanker has a cargo size in barrels, not a throughput in barrels per DAY. Filling it would require redefining the field, which is not this block's to do. Recorded here so the exclusion is visible rather than looking like a research failure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": false,
+   "required_filled": 1
   },
   {
    "event_id": "rus_volgograd_strike_2024",
    "date": "2024-02-03",
    "type": "infrastructure_attack",
    "title": "Ukrainian drone strike on Lukoil Volgograd refinery",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Volgograd Refinery",
+   "asset_type": "refinery",
+   "operator": "Lukoil",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "No operator-stated capacity was retrieved. The Moscow Times describes the plant only as 'the biggest producer of oil products in the federal South district'. Two different b/d figures circulate in secondary reporting (see conflicts) and Lukoil itself published none, so the conflict rule's remedy — take the operator's figure — is unavailable and the field stays unknown.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.themoscowtimes.com/2024/02/03/drone-attack-sets-russian-refinery-ablaze-governor-a83964",
+   "source_publisher": "The Moscow Times (Gov. Andrei Bocharov; Ukrainian claim via AFP)",
+   "source_date": "2024-02-03",
+   "confidence": "partial",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "https://www.themoscowtimes.com/2024/02/03/drone-attack-sets-russian-refinery-ablaze-governor-a83964",
+     "source_publisher": "The Moscow Times (Gov. Andrei Bocharov; Ukrainian claim via AFP)",
+     "source_date": "2024-02-03"
+    },
+    "asset_type": {
+     "source_url": "https://www.themoscowtimes.com/2024/02/03/drone-attack-sets-russian-refinery-ablaze-governor-a83964",
+     "source_publisher": "The Moscow Times (Gov. Andrei Bocharov; Ukrainian claim via AFP)",
+     "source_date": "2024-02-03"
+    },
+    "operator": {
+     "source_url": "https://www.themoscowtimes.com/2024/02/03/drone-attack-sets-russian-refinery-ablaze-governor-a83964",
+     "source_publisher": "The Moscow Times (Gov. Andrei Bocharov; Ukrainian claim via AFP)",
+     "source_date": "2024-02-03"
+    },
+    "country_iso3": {
+     "source_url": "https://www.themoscowtimes.com/2024/02/03/drone-attack-sets-russian-refinery-ablaze-governor-a83964",
+     "source_publisher": "The Moscow Times (Gov. Andrei Bocharov; Ukrainian claim via AFP)",
+     "source_date": "2024-02-03"
+    }
+   },
+   "retrospective": false,
+   "conflicts": [
+    {
+     "field": "capacity_affected_kbd / days_to_partial_restore / days_to_full_restore",
+     "claims": [
+      {
+       "claimed_by": "Lukoil (operator)",
+       "claim": "operations unaffected; fire on a pipe at the ELOU-AVT-5 unit extinguished, plant working normally"
+      },
+      {
+       "claimed_by": "Russian regional authority (Gov. Andrei Bocharov, via The Moscow Times)",
+       "claim": "blaze brought under control by the start of the morning; fire put out"
+      },
+      {
+       "claimed_by": "Reuters citing sources",
+       "claim": "primary unit CDU-1 damaged, about 40% of plant capacity, ~18,600 t/day (~140,000 b/d)"
+      },
+      {
+       "claimed_by": "Ukrainian defence-sector source via AFP",
+       "claim": "the fire was 'organized' by SBU drones"
+      }
+     ],
+     "resolution": "declined. The operator says nothing was lost and Reuters' sources say 40% was; these cannot both be recorded and neither is independently verifiable from open sources. Per the block brief, affected and duration stay unknown rather than picking a side."
+    },
+    {
+     "field": "capacity_nameplate_kbd",
+     "claims": [
+      {
+       "value_kbd": 314,
+       "claimed_by": "S&P Global Commodity Insights (headline figure)"
+      },
+      {
+       "value_kbd": 300,
+       "claimed_by": "other secondary reporting"
+      }
+     ],
+     "resolution": "declined; left unknown. Neither figure is the operator's own, and the S&P page returned HTTP 403 to retrieval so it was not read directly and is not cited as a source here."
+    }
+   ],
+   "required_filled": 2
   },
   {
    "event_id": "me_rubymar_2024",
    "date": "2024-02-18",
    "type": "infrastructure_attack",
    "title": "Houthi missile cripples Rubymar, the first ship sunk in the Red Sea crisis",
-   "asset_name": "unknown",
+   "asset_name": "Rubymar (bulk carrier)",
    "asset_type": "unknown",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION, not for want of sources. The struck asset is a ship. `asset_type` has no vessel member in the EXPOSURE_REGISTRATION.md §2 enum (refinery · terminal · field · pipeline · chokepoint · processing · storage), and `capacity_nameplate_kbd` is undefined for a moving asset: a tanker has a cargo size in barrels, not a throughput in barrels per DAY. Filling it would require redefining the field, which is not this block's to do. Recorded here so the exclusion is visible rather than looking like a research failure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": false,
+   "required_filled": 1
   },
   {
    "event_id": "russia_refineries_strikes_2024",
@@ -106,40 +233,78 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION. This corpus row is an aggregate — 'Ukraine escalates drone strikes on Russian refineries' — not a strike on one identified asset. EXPOSURE_REGISTRATION.md §2 requires a single `asset_name` and one `capacity_nameplate_kbd`; an aggregate has neither. Decomposing it into its constituent strikes would create events the corpus does not contain, which is out of this block's authority.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "retrospective": false,
+   "required_filled": 0
   },
   {
    "event_id": "rus_slavyansk_strike_2024",
    "date": "2024-03-17",
    "type": "infrastructure_attack",
    "title": "Ukrainian drone strike on Slavyansk-on-Kuban refinery",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Slavyansk refinery (Slavyansk-on-Kuban)",
+   "asset_type": "refinery",
+   "operator": "Slavyansk ECO",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "GlobalData's profile confirms the operator, the location and that the plant is a non-integrated topping refinery started in 2013, but its capacity figure sits behind a paid report and was not retrieved. Capacity figures seen only in search-engine summaries are not cited here.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "https://www.offshore-technology.com/marketdata/slavyansk-refinery-topping-russia/",
+   "source_publisher": "GlobalData / Offshore Technology",
+   "source_date": "retrieved 2026-09-03",
+   "confidence": "partial",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "https://www.offshore-technology.com/marketdata/slavyansk-refinery-topping-russia/",
+     "source_publisher": "GlobalData / Offshore Technology",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "asset_type": {
+     "source_url": "https://www.offshore-technology.com/marketdata/slavyansk-refinery-topping-russia/",
+     "source_publisher": "GlobalData / Offshore Technology",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "operator": {
+     "source_url": "https://www.offshore-technology.com/marketdata/slavyansk-refinery-topping-russia/",
+     "source_publisher": "GlobalData / Offshore Technology",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "country_iso3": {
+     "source_url": "https://www.offshore-technology.com/marketdata/slavyansk-refinery-topping-russia/",
+     "source_publisher": "GlobalData / Offshore Technology",
+     "source_date": "retrieved 2026-09-03"
+    }
+   },
+   "retrospective": true,
+   "conflicts": [
+    {
+     "field": "capacity_affected_kbd / days_to_full_restore",
+     "claims": [
+      {
+       "claimed_by": "Ukrainian sources (via Ukrainska Pravda / Militarnyi)",
+       "claim": "two AVT-6 atmospheric-vacuum distillation units destroyed; repair could take about a year"
+      }
+     ],
+     "resolution": "declined. Single-sided damage claim from the attacking party with no operator or independent confirmation retrieved. Recording a belligerent's damage assessment as a capacity figure is the exact failure the block brief warns against."
+    }
+   ],
+   "required_filled": 2
   },
   {
    "event_id": "rus_novorossiysk_depots_2024",
@@ -152,132 +317,226 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "EMPTY. No source was retrieved and read for this event within this block's working time. Nothing is recorded from memory or from unfetched search summaries. Left for a later pass rather than filled speculatively.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "empty",
+   "retrospective": false,
+   "required_filled": 0
   },
   {
    "event_id": "me_mv_tutor_2024",
    "date": "2024-06-12",
    "type": "infrastructure_attack",
    "title": "Houthi attack sinks bulk carrier MV Tutor in the Red Sea",
-   "asset_name": "unknown",
+   "asset_name": "MV Tutor (bulk carrier)",
    "asset_type": "unknown",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION, not for want of sources. The struck asset is a ship. `asset_type` has no vessel member in the EXPOSURE_REGISTRATION.md §2 enum (refinery · terminal · field · pipeline · chokepoint · processing · storage), and `capacity_nameplate_kbd` is undefined for a moving asset: a tanker has a cargo size in barrels, not a throughput in barrels per DAY. Filling it would require redefining the field, which is not this block's to do. Recorded here so the exclusion is visible rather than looking like a research failure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": false,
+   "required_filled": 1
   },
   {
    "event_id": "me_chios_lion_2024",
    "date": "2024-07-15",
    "type": "infrastructure_attack",
    "title": "Houthi drone boat hits tanker Chios Lion",
-   "asset_name": "unknown",
+   "asset_name": "Chios Lion (tanker)",
    "asset_type": "unknown",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION, not for want of sources. The struck asset is a ship. `asset_type` has no vessel member in the EXPOSURE_REGISTRATION.md §2 enum (refinery · terminal · field · pipeline · chokepoint · processing · storage), and `capacity_nameplate_kbd` is undefined for a moving asset: a tanker has a cargo size in barrels, not a throughput in barrels per DAY. Filling it would require redefining the field, which is not this block's to do. Recorded here so the exclusion is visible rather than looking like a research failure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": false,
+   "required_filled": 1
   },
   {
    "event_id": "rus_tuapse_strike_2024b",
    "date": "2024-07-22",
    "type": "infrastructure_attack",
    "title": "Ukrainian drone strike sets Rosneft Tuapse refinery on fire",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
-   "operator": "unknown",
-   "country_iso3": "unknown",
+   "asset_name": "Tuapse Refinery (LLC RN-Tuapse Refinery)",
+   "asset_type": "refinery",
+   "operator": "Rosneft",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "Asset identity from the operator's own site. Same tonnes-vs-barrels problem as the January strike. NOTE: nothing from the January event is carried over — no capacity-affected or restoration figure for THIS strike was retrieved, and reusing January's would be inference from a neighbouring strike on the same asset.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
-   "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "prior_incidents_same_asset": "at least one prior strike on the same asset in this block (rus_tuapse_strike_2024a, 2024-01-25)",
+   "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+   "source_publisher": "Rosneft (operator's own site)",
+   "source_date": "retrieved 2026-09-03",
+   "confidence": "partial",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "asset_type": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "operator": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "country_iso3": {
+     "source_url": "https://www.rosneft.com/business/Downstream/Neftepererabotka/OilRefineries/TuapseRefinery/",
+     "source_publisher": "Rosneft (operator's own site)",
+     "source_date": "retrieved 2026-09-03"
+    },
+    "prior_incidents_same_asset": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": true,
+   "required_filled": 2
   },
   {
    "event_id": "me_sounion_2024",
    "date": "2024-08-21",
    "type": "infrastructure_attack",
    "title": "Houthis set crude tanker Sounion ablaze in the Red Sea",
-   "asset_name": "unknown",
+   "asset_name": "Sounion (crude tanker)",
    "asset_type": "unknown",
    "operator": "unknown",
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "OUT OF SCOPE BY CONSTRUCTION, not for want of sources. The struck asset is a ship. `asset_type` has no vessel member in the EXPOSURE_REGISTRATION.md §2 enum (refinery · terminal · field · pipeline · chokepoint · processing · storage), and `capacity_nameplate_kbd` is undefined for a moving asset: a tanker has a cargo size in barrels, not a throughput in barrels per DAY. Filling it would require redefining the field, which is not this block's to do. Recorded here so the exclusion is visible rather than looking like a research failure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "out_of_scope",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "data/exposure/blocks/E.json",
+     "source_publisher": "corpus event title (this project)",
+     "source_date": "2026-09-03"
+    }
+   },
+   "retrospective": false,
+   "required_filled": 1
   },
   {
    "event_id": "rus_novoshakhtinsk_strike_2024",
    "date": "2024-12-19",
    "type": "infrastructure_attack",
    "title": "Ukrainian strike sparks blaze at Novoshakhtinsk refinery",
-   "asset_name": "unknown",
-   "asset_type": "unknown",
+   "asset_name": "Novoshakhtinsk Oil Products Plant",
+   "asset_type": "refinery",
    "operator": "unknown",
-   "country_iso3": "unknown",
+   "country_iso3": "RUS",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "No capacity retrieved from a source that was read. Search summaries offered 5.6-7.5 Mt/y as a RANGE and an explicit estimate ('approximately'), which the registration's rule bars from being recorded as a figure.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
-   "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "prior_incidents_same_asset": "4th strike on this enterprise during the full-scale war (this event inclusive)",
+   "source_url": "https://militarnyi.com/en/news/drones-strike-novoshakhtinsk-oil-refinery-triggering-fire/",
+   "source_publisher": "Militarnyi (acting governor Yuriy Slyusar; Reuters for prior-capacity context)",
+   "source_date": "2024-12-19",
+   "confidence": "partial",
+   "field_sources": {
+    "asset_name": {
+     "source_url": "https://militarnyi.com/en/news/drones-strike-novoshakhtinsk-oil-refinery-triggering-fire/",
+     "source_publisher": "Militarnyi (acting governor Yuriy Slyusar; Reuters for prior-capacity context)",
+     "source_date": "2024-12-19"
+    },
+    "asset_type": {
+     "source_url": "https://militarnyi.com/en/news/drones-strike-novoshakhtinsk-oil-refinery-triggering-fire/",
+     "source_publisher": "Militarnyi (acting governor Yuriy Slyusar; Reuters for prior-capacity context)",
+     "source_date": "2024-12-19"
+    },
+    "country_iso3": {
+     "source_url": "https://militarnyi.com/en/news/drones-strike-novoshakhtinsk-oil-refinery-triggering-fire/",
+     "source_publisher": "Militarnyi (acting governor Yuriy Slyusar; Reuters for prior-capacity context)",
+     "source_date": "2024-12-19"
+    },
+    "prior_incidents_same_asset": {
+     "source_url": "https://militarnyi.com/en/news/drones-strike-novoshakhtinsk-oil-refinery-triggering-fire/",
+     "source_publisher": "Militarnyi (acting governor Yuriy Slyusar; Reuters for prior-capacity context)",
+     "source_date": "2024-12-19"
+    }
+   },
+   "retrospective": false,
+   "conflicts": [
+    {
+     "field": "capacity_affected_kbd / days_to_partial_restore",
+     "claims": [
+      {
+       "claimed_by": "acting governor Yuriy Slyusar (Russian regional authority)",
+       "claim": "the fire at the refinery had been extinguished by morning"
+      }
+     ],
+     "resolution": "declined. Widely reported halts at this plant refer to the 25 December 2024 Storm Shadow strike, a DIFFERENT event six days later. Carrying that outage back to the 19 December strike would be inference from a neighbouring strike on the same asset, which the rule bars explicitly."
+    }
+   ],
+   "required_filled": 2
   },
   {
    "event_id": "rus_ryazan_strike_2025a",
@@ -290,17 +549,34 @@
    "country_iso3": "unknown",
    "capacity_nameplate_kbd": "unknown",
    "capacity_affected_kbd": "unknown",
-   "capacity_units_note": "unknown",
+   "capacity_units_note": "EMPTY. Search summaries reported a declared capacity of about 17 Mt/y and a Reuters-sourced suspension of operations, but no page carrying either claim was successfully retrieved and read, so neither is recorded. A figure seen only in a search-engine summary is not a source.",
    "days_to_partial_restore": "unknown",
    "days_to_full_restore": "unknown",
    "export_share_pct": "unknown",
    "downstream_dependency": "unknown",
    "alt_routing_available": "unknown",
    "prior_incidents_same_asset": "unknown",
-   "source_url": "unknown",
-   "source_publisher": "unknown",
-   "source_date": "unknown",
-   "confidence": "unknown"
+   "source_url": "data/exposure/blocks/E.json",
+   "source_publisher": "corpus event title (this project)",
+   "source_date": "2026-09-03",
+   "confidence": "empty",
+   "retrospective": false,
+   "required_filled": 0
   }
- ]
+ ],
+ "block_report": {
+  "filled_by": "Session I",
+  "filled_at": "2026-09-03",
+  "schema": "EXPOSURE_REGISTRATION.md §2",
+  "counts": {
+   "COMPLETE": 0,
+   "partial": 5,
+   "empty": 2,
+   "out_of_scope_by_construction": 6,
+   "total": 13
+  },
+  "events_with_conflicting_claims_declined": 4,
+  "sources_cited_were_all_retrieved_and_read": true,
+  "note": "Figures seen only in search-engine summaries are NOT recorded and their URLs are NOT cited. Every source_url in this file was fetched and read."
+ }
 }
