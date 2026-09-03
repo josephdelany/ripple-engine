@@ -139,3 +139,72 @@ are one cluster, so the era intervals respect the same dependence rule the headl
 `docs/g/ERA_CONFOUND.json`, `docs/g/ERA_CONFOUND.md`, `src/g_era_confound.py` (reads `oil.db` and
 `data/walk_forward/**` **read-only**, writes no table), `tests/test_g_era_confound.py`, and a
 handoff to B and to the owner of `OPEN_ITEMS.md`.
+
+---
+
+## Amendment 1 (2026-09-03) — §4's prediction was wrong three ways, and what the run actually showed
+
+*Dated and appended, never edited. The S4 verdict in §4 **stands as FAILED** on the statistic registered
+there; it is not re-cut, and its threshold is not moved. This amendment records why it failed, which parts
+of §4 were wrong as statements about the inputs rather than as predictions, and adds four post-hoc
+diagnostics in the standing of `WALK_FORWARD_PROTOCOL.md` Amendment K — published beside the registered
+result, published whichever way they come out, gating nothing.*
+
+### A1.1 The premise was false: the engine's atom count is not constant
+
+§4 states "the engine's distribution is built from its k analogs — `n_atoms = 5` on the read inspected"
+and derives the whole magnitude from `S/5`. **`n_atoms_engine` ranges 5–22 across the 150 reads** and its
+median rises with era: 6.5 → 8.0 → 11.0 → 14.0. It correlates with pool size at ρ = +0.65. G generalised
+from a single inspected read to a constant, and that was not a prediction that turned out wrong — it was a
+statement about the inputs that was wrong when it was written, and one more read would have caught it.
+
+### A1.2 The magnitude was therefore ~5× too large
+
+Because both atom counts grow together, the **differential** inflation `S_e/k_e − S_c/k_c` is far smaller
+than §4's arithmetic: measured by era it is **+0.0259 → +0.0242 → +0.0319 → +0.0401**, a swing of
+**0.014** in absolute Brier, against the **0.068** §4 registered. On a reference near 0.70 that is ≈ 0.02
+in skill against an observed registered-Brier era spread of 0.185. **On this approximation the size
+artefact accounts for roughly a tenth of the era gradient, not most of it.** The direction §4 predicted —
+the engine is handicapped more than climatology by finite k, increasingly so as the pool grows — is
+supported; the size is not.
+
+### A1.3 The statistic was the wrong one, by G's own §7
+
+S4 was defined on the **spread across all four eras**. Two of those bins have n = 2 and n = 10, and §7 of
+this same registration says whatever they show "is description, not inference". The spread is dominated by
+exactly those two bins: under fair Brier they read +0.128 (n = 2) and +0.335 (n = 10), which is what drove
+the fair spread to 0.351 and the ratio to 1.90. **A statistic that a document's own caveat excludes from
+inference should not have been the test.** It is left as registered and failed rather than swapped, because
+replacing a test after seeing it fail is the move this project exists to prevent.
+
+### A1.4 And `S/k` is not Ferro's correction
+
+§4's arithmetic treats the correction as subtracting `S/k`. The registered fair Brier (Amendment A.5, the
+weighted Ferro form with `c = Σw²/(1−Σw²)`) is not that, and the measured effect on the **level** is much
+larger than the `S/k` differential suggests: pooled, the correction moves the engine's mean by **−0.112**
+and climatology's by **−0.030**, so the engine benefits **≈ 3.7×** more. §4 conflated a *gradient* with a
+*level* and used an approximation for a formula that was already implemented in the tree.
+
+### A1.5 The four post-hoc diagnostics (Amendment K standing; they gate nothing)
+
+- **D1 — the identity.** `n_atoms_clim == n_pool_g` on **150 of 150 reads**, exactly. Climatology's atom
+  count *is* the pool size. **So "the pool-size confound" and "the size artefact" are not two of Joe's three
+  confounds — they are one variable under two names**, and correcting for either corrects for the other.
+- **D2 — the measured differential inflation by era** (A1.2's numbers), published as the honest replacement
+  for §4's registered arithmetic and labelled as computed after the fact.
+- **D3 — the era table restricted to bins with n ≥ 50.** This is not a post-hoc cut; it is §7's own
+  registered caveat applied. The two bins that carry the sample move, under size correction, from
+  **−0.1035 → +0.0124** (2010–19) and **−0.1169 → −0.0165** (2020–26). Stated as a **level**, never as a
+  spread.
+- **D4 — the level shift** of each score under correction (A1.4's numbers).
+
+**None of D1–D4 is a finding about the engine's skill**, and none of them re-judges anything: session B has
+**already published** the pooled size-corrected G comparison in `summary.json`
+(`tiers.daily.G.diagnostic_fair.engine_vs_climatology`: n 150, skill **+0.021**, CI [−0.067, +0.111],
+DM p 0.635, `registered: false`). G confirms that number; it did not discover it, and this document does not
+present it as new.
+
+### A1.6 What did not change
+
+§5's separability rule and its verdict, §2's pinning and baseline check, §6's power block, §7's limits, and
+the standing of the whole document as a diagnostic that gates nothing.
