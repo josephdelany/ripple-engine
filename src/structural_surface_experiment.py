@@ -301,7 +301,20 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
     try:
         events = [dict(zip(("event_id", "event_date", "type", "title", "date_precision"), r)) for r in conn.execute(
             "SELECT event_id,event_date,type,title,date_precision FROM events ORDER BY event_date,event_id")]
-        panel, panel_meta = reduce_panel(strict_panel_rows(conn), codebook_blocks())
+        strict_rows = strict_panel_rows(conn)
+        panel, panel_meta = reduce_panel(strict_rows, codebook_blocks())
+        audit_names = ("all_rows", "situation_coded_rows", "panel_rows", "strict_panel_rows",
+                       "release_after_event_rows", "retrospective_rows", "vintage_after_event_rows")
+        audit_values = conn.execute("""
+          SELECT COUNT(*),SUM(entity_id='situation'),SUM(entity_id!='situation'),
+            SUM(entity_id!='situation' AND obs_date<=e.event_date AND vintage<=e.event_date
+                AND release<=e.event_date AND retrospective=0),
+            SUM(entity_id!='situation' AND release>e.event_date),
+            SUM(entity_id!='situation' AND retrospective!=0),
+            SUM(entity_id!='situation' AND vintage>e.event_date)
+          FROM situation_state s JOIN events e ON e.event_id=s.event_id
+        """).fetchone()
+        state_audit = dict(zip(audit_names, audit_values))
         vectors, metadata = {}, {}
         for e in events:
             mv, mm = market_vector(conn, e["event_date"])
@@ -369,7 +382,7 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
                         "uniform": weighted_crps(hf["raw_atoms"], unif, ho["raw"])}}
         primary = diag["20"]["abnormal"]
         reads.append(read)
-        scores.append({"event_id": e["event_id"], "date": e["event_date"], "read_hash": read["hash"],
+        scores.append({"event_id": e["event_id"], "date": e["event_date"], "type": e["type"], "read_hash": read["hash"],
                        "outcome": target_outcomes[20]["value"], "raw_return": target_outcomes[20]["raw"],
                        "structural_crps": primary["structural"], "surface_crps": primary["surface"],
                        "uniform_crps": primary["uniform"],
@@ -417,6 +430,24 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
                 "structural_vs_uniform": paired_block(aa, uu, dates, n_boot),
                 "surface_vs_uniform": paired_block(bb, uu, dates, n_boot)}
     summary["diagnostics_non_verdict"] = diagnostics
+    def descriptive(rows):
+        return {"n": len(rows),
+                "mean_structural": float(np.mean([x["structural_crps"] for x in rows])),
+                "mean_surface": float(np.mean([x["surface_crps"] for x in rows])),
+                "mean_diff": float(np.mean([x["loss_diff"] for x in rows]))}
+    summary["descriptive_non_verdict"] = {
+        "by_class": {k: descriptive(v) for k, v in sorted(
+            ((k, [x for x in scores if x["type"] == k]) for k in {x["type"] for x in scores}))},
+        "by_decade": {k: descriptive(v) for k, v in sorted(
+            ((k, [x for x in scores if x["date"][:3] + "0s" == k])
+             for k in {x["date"][:3] + "0s" for x in scores}))}}
+    summary["availability_audit"] = {**{k: int(v or 0) for k, v in state_audit.items()},
+                                     "events_with_any_strict_panel_field": len(panel),
+                                     "event_vector_fields": {
+                                         "min": min(map(len, vectors.values())),
+                                         "median": float(np.median(list(map(len, vectors.values())))),
+                                         "max": max(map(len, vectors.values()))},
+                                     "note": "exclusion reason counts overlap; strict_panel_rows is the conjunction"}
 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "reads.jsonl").write_text("".join(canonical(x) + "\n" for x in reads))
