@@ -30,10 +30,11 @@ import panel as P  # noqa: E402
 import countries as C  # noqa: E402
 import outcomes as O  # noqa: E402
 
-REGISTRATION = "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 (2026-09-02)"
+REGISTRATION = "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 + 4 (2026-09-02)"
 SEED = 20260902
 WINDOW = 90
 DIST_OUT = P.DATA / "state" / "ies90_distribution.json"
+A4_OUT = P.DATA / "state" / "ies90_amendment4_counts.json"     # A4.8: before/after, computed with write=False
 AUDIT_OUT = P.DATA / "audits" / "ies90_audit_30.csv"
 CLASS_AUDIT = P.DATA / "spine" / "CLASS_AUDIT.md"      # session F's reading of all 187 geopolitical events
 GED_CACHE = P.DATA / "cache" / "ucdp_ged_26.1.json"
@@ -87,6 +88,18 @@ def window(d):
     """W = (d, d+90] as (first day, last day)."""
     d = pd.Timestamp(d)
     return d + pd.Timedelta(days=1), d + pd.Timedelta(days=WINDOW)
+
+
+def pre_window(d):
+    """A4.2: B = [d-90, d-1], the 90 days STRICTLY BEFORE d. Day d belongs to the event and is in neither
+    window (A4.4 -- the pre-Amendment-4 field ran [d-89, d] and so counted the event's own violence as 'before')."""
+    d = pd.Timestamp(d)
+    return d - pd.Timedelta(days=WINDOW), d - pd.Timedelta(days=1)
+
+
+def covered_by(spells, lo, hi):
+    """A4.2: does any one spell cover the WHOLE of [lo, hi]? (the COW / MIDI continuation test)"""
+    return any(st <= pd.Timestamp(lo) and en >= pd.Timestamp(hi) for st, en in spells)
 
 
 def covers(src, d):
@@ -241,19 +254,34 @@ def score_midi(d, A, pairs, inc, parts):
             ok = bool(set(side) & A)
         if ok:
             hits.append(r)
-    level = max((HOSTLEV_TO_LEVEL.get(int(r.hostlev), 0) for r in hits), default=0)
+    b0, b1 = pre_window(d)
     basis = "dyadic" if pairs else "location"
-    recs = [{"source": "midi", "basis": basis, "rule": f"MIDI.{'pair' if pairs else 'single'}.overlap",
-             "record": f"incident {int(r.incidnum)} (dispute {int(r.dispnum)})",
-             "dates": f"{r.start.date()}..{r.end.date()}", "code": f"hostlev {int(r.hostlev)} fatality {int(r.fatality)} action {int(r.action)}",
-             "level": HOSTLEV_TO_LEVEL.get(int(r.hostlev), 0)} for r in hits]
+    recs, level = [], 0
+    for r in hits:
+        lv = HOSTLEV_TO_LEVEL.get(int(r.hostlev), 0)
+        # A4.2: an incident that already covered the whole of B asserts nothing new about W (expected never to fire --
+        # MIDI incidents are days long -- but the predicate is the same one for all five sources).
+        cont = lv > 0 and covered_by([(r.start, r.end)], b0, b1)
+        rule = "MIDI.continuation" if cont else f"MIDI.{'pair' if pairs else 'single'}.overlap"
+        code = f"hostlev {int(r.hostlev)} fatality {int(r.fatality)} action {int(r.action)}"
+        if cont:
+            code += "; incident covers all of B -> undated-for-W (A4.2, no level)"
+        recs.append({"source": "midi", "basis": basis, "rule": rule, "record": f"incident {int(r.incidnum)} (dispute {int(r.dispnum)})",
+                     "dates": f"{r.start.date()}..{r.end.date()}", "code": code, "level": None if cont else lv})
+        if not cont:
+            level = max(level, lv)
     return level, recs
 
 
 def score_war(d, A, pairs, L, war, cover_inter=True, cover_intra=True):
     """A1.1.1: a COW war spell overlapping W -> 3. Inter-state: a pair in P on opposite sides (any participant in A
-    when P is empty); intra-state: a state party in L."""
+    when P is empty); intra-state: a state party in L.
+    A4.2: unless the spell also covers the WHOLE of B = [d-90, d-1] -- a war that was already running at this level
+    across the preceding 90 days asserts nothing about this event, so the record is undated-for-W and sets no level.
+    A spell that starts at, just before, or inside W is an ONSET and keeps level 3 (Yom Kippur 1973, Kuwait 1990,
+    Iraq 2003, Ukraine 2022 all keep it)."""
     w0, w1 = window(d)
+    b0, b1 = pre_window(d)
     level, recs = 0, []
     if cover_inter:
         by_war = defaultdict(list)
@@ -267,18 +295,29 @@ def score_war(d, A, pairs, L, war, cover_inter=True, cover_intra=True):
             else:
                 ok = bool(set(side) & A)
             if ok:
-                level = 3
+                spells = [sp for pp in ps for sp in pp["spells"]]
+                cont = covered_by(spells, b0, b1)                      # A4.2: the war already ran across the whole of B
                 sp = "; ".join(f"{st.date()}..{en.date()}" for st, en in ps[0]["spells"])
-                recs.append({"source": "war", "basis": "dyadic" if pairs else "location", "rule": f"WAR.inter.{'pair' if pairs else 'single'}",
+                recs.append({"source": "war", "basis": "dyadic" if pairs else "location",
+                             "rule": "WAR.inter.continuation" if cont else f"WAR.inter.{'pair' if pairs else 'single'}",
                              "record": f"COW inter-state war {wn} {ps[0]['name']} ({', '.join(f'{e}:side{s_}' for e, s_ in sorted(side.items()))})",
-                             "dates": sp, "code": "war spell overlaps W", "level": 3})
+                             "dates": sp,
+                             "code": "war spell covers all of B -> undated-for-W (A4.2, no level)" if cont else "war spell overlaps W",
+                             "level": None if cont else 3})
+                if not cont:
+                    level = 3
     if cover_intra:
         for p in war["intra"]:
             if p["ents"] & set(L) and any(st <= w1 and en >= w0 for st, en in p["spells"]):
-                level = 3
-                recs.append({"source": "war", "basis": "location", "rule": "WAR.intra.location",
+                cont = covered_by(p["spells"], b0, b1)                 # A4.2
+                recs.append({"source": "war", "basis": "location",
+                             "rule": "WAR.intra.continuation" if cont else "WAR.intra.location",
                              "record": f"COW intra-state war {p['war']} {p['name']} (state party {','.join(sorted(p['ents']))})",
-                             "dates": "; ".join(f"{st.date()}..{en.date()}" for st, en in p["spells"]), "code": "war spell overlaps W (location)", "level": 3})
+                             "dates": "; ".join(f"{st.date()}..{en.date()}" for st, en in p["spells"]),
+                             "code": "war spell covers all of B -> undated-for-W (A4.2, no level)" if cont else "war spell overlaps W (location)",
+                             "level": None if cont else 3})
+                if not cont:
+                    level = 3
     return level, recs
 
 
@@ -300,7 +339,7 @@ def score_mid(d, A, pairs, mid):
         elif w0 <= r.start <= w1:
             lv, how, rule = 1, f"starts in W, ends after (onset dated -> 1; hihost {h} is the undated peak)", f"MID.{kind}.onset"
         else:
-            lv, how, rule = None, "ongoing at d, force undated in W (no level)", None
+            lv, how, rule = None, "ongoing at d, force undated in W (no level)", f"MID.{kind}.ongoing"
         fired = w0 <= e <= w1 and int(r.settlmnt or 0) == 1
         deal = deal or int(fired)
         if lv is not None:
@@ -330,7 +369,7 @@ def score_icb(d, A, sysd, members, pairs=None):
         elif w0 <= c.trigdate <= w1:
             lv, how, rule = 1, f"triggered in W, ends after (onset dated -> 1; viol {viol} is the undated peak)", f"ICB.{kind}.onset"
         else:
-            lv, how, rule = None, "ongoing at d, violence undated in W (no level)", None
+            lv, how, rule = None, "ongoing at d, violence undated in W (no level)", f"ICB.{kind}.ongoing"
         forout = int(c.forout) if pd.notna(c.forout) else None
         fired = w0 <= c.termdate <= w1 and forout in (1, 2)
         deal = deal or int(fired)
@@ -343,22 +382,43 @@ def score_icb(d, A, sysd, members, pairs=None):
 
 
 def score_ged(d, L, series):
+    """A4.2 / A4.4. W = (d, d+90]; B = [d-90, d-1]; day d is in NEITHER and is reported on its own (deaths_ged_on_d).
+    A GED level is a CONTINUATION when the same registered ladder already reached it over B -- the war was running
+    at this level before the event, so the count in W asserts nothing new about the event. delta_level applies the
+    same ladder to the increment and is a published diagnostic, never the G target (A4.4)."""
     w0, w1 = window(d)
+    b0, b1 = pre_window(d)
     d = pd.Timestamp(d)
     d90 = ged_sum(series, L, w0, w1, "state")
-    pre = ged_sum(series, L, d - pd.Timedelta(days=WINDOW - 1), d, "state")
+    pre = ged_sum(series, L, b0, b1, "state")
+    on_d = ged_sum(series, L, d, d, "state")
     other = ged_sum(series, L, w0, w1, "other")
     lv = ged_level(d90)
-    rule = "GED.location.ge250" if lv == 3 else ("GED.location.ge25" if lv == 2 else "NONE.covered")   # < 25: a covering source, nothing in W
+    delta = d90 - pre
+    delta_lv = ged_level(max(0.0, delta))
+    cont = lv > 0 and ged_level(pre) >= lv
+    if cont:
+        rule = "GED.location.continuation"
+    elif lv == 3:
+        rule = "GED.location.ge250"
+    elif lv == 2:
+        rule = "GED.location.ge25"
+    else:
+        rule = "NONE.covered"                                          # < 25 in W: a covering source with a dated view, nothing in it
+    code = (f"best {d90:.0f} in W (B [{b0.date()}..{b1.date()}] {pre:.0f}; on d {on_d:.0f}; "
+            f"delta {delta:+.0f} -> delta_level {delta_lv}; one-sided/non-state {other:.0f})")
+    if cont:
+        code += f"; B already at level {lv} -> undated-for-W (A4.2, no level)"
     recs = [{"source": "ged", "basis": "location", "rule": rule, "record": f"GED state-based deaths in {','.join(sorted(L))} (location, not dyad)",
-             "dates": f"{w0.date()}..{w1.date()}", "code": f"best {d90:.0f} in W (pre-window 90d {pre:.0f}; one-sided/non-state {other:.0f})",
-             "level": lv}]
-    return lv, d90, pre, other, recs
+             "dates": f"{w0.date()}..{w1.date()}", "code": code, "level": None if cont else lv}]
+    deaths = {"deaths_ged_90": d90, "deaths_ged_pre90": pre, "deaths_ged_on_d": on_d,
+              "deaths_ged_delta": delta, "deaths_ged_other_90": other}
+    return (None if cont else lv), delta_lv, deaths, recs
 
 
 def score_event(d, A, pairs, L, src):
     """All sources for one event. Returns the dict that becomes the ies90 rows."""
-    out = {"levels": {}, "recs": [], "deal": None, "deaths": {}}
+    out = {"levels": {}, "recs": [], "deal": None, "deaths": {}, "delta_level": None, "delta_basis": None}
     deal_seen = False
     if A and covers("midi", d):
         lv, recs = score_midi(d, A, pairs, src["midi"], src["midip"]); out["levels"]["midi"] = lv; out["recs"] += recs
@@ -372,30 +432,44 @@ def score_event(d, A, pairs, L, src):
         lv, dl, recs = score_mid(d, A, pairs, src["mid"]); out["levels"]["mid"] = lv; out["recs"] += recs
         deal_seen = True; out["deal"] = max(out["deal"] or 0, dl)
     if L and covers("ged", d):
-        lv, d90, pre, other, recs = score_ged(d, L, src["ged"]); out["levels"]["ged"] = lv; out["recs"] += recs
-        out["deaths"] = {"deaths_ged_90": d90, "deaths_ged_pre90": pre, "deaths_ged_other_90": other}
+        lv, delta_lv, deaths, recs = score_ged(d, L, src["ged"])
+        out["levels"]["ged"] = lv; out["recs"] += recs; out["deaths"] = deaths
+        out["delta_level"], out["delta_basis"] = delta_lv, "location"          # A4.4: a diagnostic, never the G target
     if not deal_seen:
         out["deal"] = None
     covering = [s for s in SOURCES if s in out["levels"]]
     out["covering"] = covering
+    # A4.2: each covering source contributes its DATED level; None means it recorded something it could not place in W
+    # (ongoing at d, or a continuation across the whole of B); 0 means it looked at W and found nothing.
+    for sname in covering:
+        srecs = [x for x in out["recs"] if x["source"] == sname]
+        dated = [x for x in srecs if x["level"] is not None]
+        out["levels"][sname] = max((x["level"] for x in dated), default=None if srecs else 0)
     # A2.1 dyadic precedence: a dyadic-capable source covering W with P non-empty decides; location evidence is kept beside it
     dy_cov = [s for s in covering if s in DYADIC_SOURCES and pairs and (s != "war" or covers("war", d))]
-    loc_recs = [x for x in out["recs"] if x.get("basis") == "location" and x["level"] is not None]
-    dy_recs = [x for x in out["recs"] if x.get("basis") == "dyadic" and x["level"] is not None]
     out["covering_dyadic"], out["covering_location"] = dy_cov, [s for s in covering if s not in dy_cov]
-    out["level_location"] = max((x["level"] for x in loc_recs), default=0) if out["covering_location"] else None
-    if dy_cov:
-        out["basis"] = "dyadic"
-        out["level"] = max((x["level"] for x in dy_recs), default=0)
-        setters = [x for x in dy_recs if x["level"] == out["level"]]
-    elif covering:
-        out["basis"] = "location"
-        out["level"] = max((x["level"] for x in loc_recs), default=0)
-        setters = [x for x in loc_recs if x["level"] == out["level"]]
-    else:
-        out["basis"], out["level"], setters = None, None, []
+    by_basis = lambda b: [x for x in out["recs"] if x.get("basis") == b]                       # noqa: E731
+    dated = lambda rs: [x for x in rs if x["level"] is not None]                               # noqa: E731
+    undated = lambda rs: [x for x in rs if x["level"] is None]                                 # noqa: E731
+    loc, dy = by_basis("location"), by_basis("dyadic")
+    # A4.2 rule 2 applied to the location reading too, so level_location is never a false zero either
+    out["level_location"] = (max((x["level"] for x in dated(loc)), default=None if loc else 0)
+                             if out["covering_location"] else None)
+    chosen = dy if dy_cov else loc
+    out["basis"] = ("dyadic" if dy_cov else "location") if covering else None
+    out["ni_reason"] = None
+    if not covering:                                        # A4.2 rule 4 -- unchanged
+        out["level"], setters, out["ni_reason"] = None, [], "uncovered"
+    elif dated(chosen):                                     # A4.2 rule 1 -- unchanged
+        out["level"] = max(x["level"] for x in dated(chosen))
+        setters = [x for x in dated(chosen) if x["level"] == out["level"]]
+    elif undated(chosen):                                   # A4.2 rule 2 -- the ongoing/continuation exclusion
+        out["level"], setters, out["ni_reason"] = None, [], "undated"
+    else:                                                   # A4.2 rule 3 -- a true zero
+        out["level"], setters = 0, []
     if out["level"] is None:
-        out["level_source"], out["rule_fired"] = [], ["UNCOVERED"]
+        out["level_source"] = []
+        out["rule_fired"] = ["UNCOVERED"] if out["ni_reason"] == "uncovered" else ["UNDATED.continuation"]
     elif out["level"] == 0 and not setters:
         out["level_source"], out["rule_fired"] = list(dy_cov or covering), ["NONE.covered"]
     else:
@@ -442,9 +516,15 @@ def run(conn, src=None, write=True):
         results[r.event_id] = res
         detail = " | ".join(f"{x['source']}: {x['record']} {x['dates']} {x['code']}" for x in res["recs"]) or "no record in any covering source"
         if res["level"] is None:
-            rows.append((r.event_id, "ies90", "no_independent_outcome", 1.0, None,
-                         "no source covers (d, d+90]" if (A or res["L"]) else "no mapped country on the event", ts))
-            rows.append((r.event_id, "ies90", "rule_fired", None, "UNCOVERED", "Amendment 2", ts))
+            if res.get("ni_reason") == "undated":
+                why = ("A4.2 rule 2: every record on the " + str(res["basis"]) + " basis is undated-for-W "
+                       "(ongoing at d, or a continuation across the whole of B). The G target is not defined for "
+                       "this event; it is excluded and counted, never scored 0. | " + detail)
+            else:
+                why = "no source covers (d, d+90]" if (A or res["L"]) else "no mapped country on the event"
+            rows.append((r.event_id, "ies90", "no_independent_outcome", 1.0, None, why, ts))
+            rows.append((r.event_id, "ies90", "rule_fired", None, ",".join(res["rule_fired"]),
+                         "Amendment 4" if res.get("ni_reason") == "undated" else "Amendment 2", ts))
         else:
             rows.append((r.event_id, "ies90", "level", float(res["level"]), LEVEL_MEANING[res["level"]], detail, ts))
             rows.append((r.event_id, "ies90", "level_source", None, ",".join(res["level_source"]), detail, ts))
@@ -456,11 +536,23 @@ def run(conn, src=None, write=True):
         rows.append((r.event_id, "ies90", "covering_dyadic", None, ",".join(res["covering_dyadic"]) or None, "Amendment 2", ts))
         rows.append((r.event_id, "ies90", "covering_location", None, ",".join(res["covering_location"]) or None, "Amendment 2", ts))
         for s, lv in res["levels"].items():
-            rows.append((r.event_id, "ies90", f"level_{s}", float(lv), None, " | ".join(f"{x['record']} {x['dates']} {x['code']}" for x in res["recs"] if x["source"] == s) or "none in W", ts))
+            # A4.2: a null level_<source> is not a zero -- the source recorded something it could not date inside W
+            rows.append((r.event_id, "ies90", f"level_{s}", None if lv is None else float(lv),
+                         "undated-for-W" if lv is None else None,
+                         " | ".join(f"{x['record']} {x['dates']} {x['code']}" for x in res["recs"] if x["source"] == s) or "none in W", ts))
         if res["deal"] is not None:
             rows.append((r.event_id, "ies90", "deal", float(res["deal"]), None, "ICB forout 1/2 termination or MID settlmnt 1 end in W", ts))
         for f, v in res["deaths"].items():
-            rows.append((r.event_id, "ies90", f, float(v), None, "GED 26.1 state-based unless 'other'; location countries " + ",".join(res["L"]), ts))
+            rows.append((r.event_id, "ies90", f, float(v), None, "GED 26.1 state-based unless 'other'; location countries " + ",".join(res["L"])
+                         + ("; W = (d, d+90]" if f in ("deaths_ged_90", "deaths_ged_other_90") else
+                            "; B = [d-90, d-1], strictly before d (A4.4)" if f == "deaths_ged_pre90" else
+                            "; day d only, in neither window (A4.4)" if f == "deaths_ged_on_d" else
+                            "; D(W) - D(B) (A4.4)"), ts))
+        if res.get("delta_level") is not None:
+            # A4.4: a published diagnostic, NOT the G target. No score is computed against it under Amendment 4.
+            rows.append((r.event_id, "ies90", "delta_level", float(res["delta_level"]), LEVEL_MEANING[res["delta_level"]],
+                         "A4.4 diagnostic: the registered ladder applied to max(0, D(W) - D(B)); never the G target", ts))
+            rows.append((r.event_id, "ies90", "delta_basis", None, res["delta_basis"], "A4.4: GED is a location source", ts))
     if write:
         conn.execute("DELETE FROM event_outcomes WHERE source = 'ies90'")
         conn.executemany("INSERT OR REPLACE INTO event_outcomes VALUES (?,?,?,?,?,?,?)", rows)
@@ -539,6 +631,89 @@ def distribution(results, src):
                                     "retired_sr_outcome_90_x_ies90": {k: dict(v) for k, v in sorted(cross.items())}}}
 
 
+# ----------------------------------------------------------------------------- Amendment 4: before / after (A4.8)
+
+# A4.5, written into the amendment BEFORE this code ran. Scored against the outcome below, right or wrong.
+A4_PREDICTION = {"3": {"point": 15, "lo": 14, "hi": 24}, "2": {"point": 34, "lo": 30, "hi": 42},
+                 "1": {"point": 6, "lo": 5, "hi": 8}, "0": {"point": 58, "lo": 55, "hi": 62},
+                 "no_independent_outcome": {"point": 62, "lo": 50, "hi": 75},
+                 "events_with_a_level": {"point": 122, "lo": 110, "hi": 135}}
+CONTINUATION_RULES = ("WAR.inter.continuation", "WAR.intra.continuation", "GED.location.continuation",
+                      "MIDI.continuation", "ICB.pair.ongoing", "ICB.single.ongoing", "MID.pair.ongoing", "MID.single.ongoing")
+
+
+def _before(conn):
+    """The ies90 labels as they stand in event_outcomes -- i.e. pre-Amendment-4. Read-only."""
+    q = lambda f: dict(conn.execute("SELECT event_id, value FROM event_outcomes WHERE source='ies90' AND field=?", (f,)))  # noqa: E731
+    qt = lambda f: dict(conn.execute("SELECT event_id, value_text FROM event_outcomes WHERE source='ies90' AND field=?", (f,)))  # noqa: E731
+    lv, ni, srcs = q("level"), q("no_independent_outcome"), qt("level_source")
+    out = {}
+    for eid in set(lv) | set(ni):
+        out[eid] = {"level": None if eid in ni else int(lv[eid]), "level_source": srcs.get(eid, "")}
+    return out
+
+
+def amendment4_counts(conn, results):
+    """A4.8: the level distribution before and after Amendment 4, by level, source, rule, basis and decade, plus the
+    continuation counts and the A4.5 prediction scored against the outcome. Computed from a write=False run: not one
+    row of event_outcomes is touched (A4.6)."""
+    before = _before(conn)
+    lvl = lambda v: "no_independent_outcome" if v["level"] is None else str(v["level"])       # noqa: E731
+    b_counts = Counter("no_independent_outcome" if v["level"] is None else str(v["level"]) for v in before.values())
+    a_counts = Counter(lvl(v) for v in results.values())
+
+    moved, cont_by_src, cont_by_rule = [], Counter(), Counter()
+    for eid, v in sorted(results.items(), key=lambda kv: kv[1]["date"]):
+        for x in v["recs"]:
+            if x.get("rule") in CONTINUATION_RULES:
+                cont_by_src[x["source"]] += 1
+                cont_by_rule[x["rule"]] += 1
+        b = before.get(eid)
+        if b is None:
+            continue
+        if lvl(v) != ("no_independent_outcome" if b["level"] is None else str(b["level"])):
+            moved.append({"event_id": eid, "date": v["date"], "class": v["type"], "title": v["title"],
+                          "from": "no_independent_outcome" if b["level"] is None else b["level"],
+                          "from_source": b["level_source"], "to": "no_independent_outcome" if v["level"] is None else v["level"],
+                          "to_source": ",".join(v["level_source"]), "rule_fired": ",".join(v["rule_fired"]),
+                          "reason": v.get("ni_reason"), "level_location": v.get("level_location"),
+                          "delta_level": v.get("delta_level")})
+
+    def split(sel):
+        c = defaultdict(Counter)
+        for v in results.values():
+            c[sel(v)][lvl(v)] += 1
+        return {k: dict(sorted(x.items())) for k, x in sorted(c.items(), key=lambda kv: str(kv[0]))}
+
+    n_before_level = sum(v for k, v in b_counts.items() if k != "no_independent_outcome")
+    n_after_level = sum(v for k, v in a_counts.items() if k != "no_independent_outcome")
+    pred = {}
+    for k, exp in A4_PREDICTION.items():
+        got = n_after_level if k == "events_with_a_level" else a_counts.get(k, 0)
+        pred[k] = {"predicted": exp["point"], "interval": [exp["lo"], exp["hi"]], "observed": got,
+                   "inside_interval": exp["lo"] <= got <= exp["hi"], "error": got - exp["point"]}
+
+    return {"registration": REGISTRATION, "amendment": "OUTCOME_MAPPING.md Amendment 4 (2026-09-02)",
+            "generated_at": P.now(), "window_days": WINDOW,
+            "not_written_to_db": "computed with ies90.run(conn, write=False); event_outcomes is unchanged (A4.6)",
+            "not_retroactive": "published runs stand; this governs the next run (A4.7)",
+            "n_geopolitical_events": len(results),
+            "level_counts_before": dict(sorted(b_counts.items())), "level_counts_after": dict(sorted(a_counts.items())),
+            "events_with_a_level": {"before": n_before_level, "after": n_after_level, "removed": n_before_level - n_after_level},
+            "prediction_A4_5_scored": pred,
+            "continuation_records_by_source": dict(sorted(cont_by_src.items())),
+            "continuation_records_by_rule": dict(sorted(cont_by_rule.items())),
+            "after_by_source": split(lambda v: ",".join(v["level_source"]) or "-"),
+            "after_by_rule_fired": split(lambda v: ",".join(v["rule_fired"])),
+            "after_by_basis": split(lambda v: str(v["basis"])),
+            "after_by_class": split(lambda v: v["type"]),
+            "after_by_decade": split(lambda v: _decade(v["date"])),
+            "no_independent_outcome_reason": dict(sorted(Counter(v.get("ni_reason") or "-" for v in results.values() if v["level"] is None).items())),
+            "delta_level_counts": dict(sorted(Counter(str(v.get("delta_level")) for v in results.values()).items())),
+            "delta_level_note": "A4.4 diagnostic, never the G target; no score is computed against it under Amendment 4",
+            "rows_changed": {"n": len(moved), "rows": moved}}
+
+
 def audit_pick(results, n=30, seed=SEED):
     """30 events with a level, stratified by level x decade (largest remainder), seeded."""
     pool = [(e, v) for e, v in results.items() if v["level"] is not None]
@@ -593,10 +768,30 @@ def write_audit(pick, path=AUDIT_OUT, hostility=None):
 
 
 def main():
+    """Default: rebuild the ies90 rows in event_outcomes. `--counts`: compute everything and write NOTHING to the
+    database, publishing only data/state/ies90_amendment4_counts.json (A4.6 -- Session K does not move the target
+    while another session holds an experiment open on it; the rebuild is a separate, announced step)."""
+    counts_only = "--counts" in sys.argv
     src = load_sources()
     conn = sqlite3.connect(P.DB)
     try:
-        rows, results = run(conn, src)
+        rows, results = run(conn, src, write=not counts_only)
+        if counts_only:
+            a4 = amendment4_counts(conn, results)
+            A4_OUT.parent.mkdir(parents=True, exist_ok=True)
+            A4_OUT.write_text(json.dumps(a4, indent=1, default=str))
+            print(f"Amendment 4, computed with write=False (event_outcomes untouched) -> {A4_OUT}")
+            print(f"  before {a4['level_counts_before']}")
+            print(f"  after  {a4['level_counts_after']}")
+            print(f"  events with a level: {a4['events_with_a_level']}")
+            print(f"  rows changed: {a4['rows_changed']['n']}; no_independent_outcome by reason {a4['no_independent_outcome_reason']}")
+            print(f"  continuation records by rule: {a4['continuation_records_by_rule']}")
+            print(f"  delta_level (A4.4 diagnostic): {a4['delta_level_counts']}")
+            print("  A4.5 prediction, scored:")
+            for k, v in a4["prediction_A4_5_scored"].items():
+                print(f"    {k:<24} predicted {v['predicted']:>4} {str(v['interval']):<12} observed {v['observed']:>4}"
+                      f"  {'INSIDE' if v['inside_interval'] else 'OUTSIDE'} (err {v['error']:+d})")
+            return
     finally:
         conn.close()
     dist = distribution(results, src)

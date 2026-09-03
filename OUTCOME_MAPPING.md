@@ -764,3 +764,152 @@ Named so that no one reads the fix as larger than it is.
 - **It does not touch the P target**, which does not presuppose an adversary and is unaffected.
 - **It does not re-score anything.** No score, skill, CI or p-value in this repository moves
   because of this text.
+
+### A4.10 The counts, computed (appended 2026-09-02, after §A4.1–§A4.9 were committed)
+
+Computed by `python3 src/state/ies90.py --counts` — a `write=False` run, per §A4.6. Receipts:
+`data/state/ies90_amendment4_counts.json` and
+`data/state/ies90_amendment4_persistence_overlap.json`. **No row of `event_outcomes` was
+written and no published run moved.**
+
+**The distribution.**
+
+| level | before | after | |
+|---|---:|---:|---|
+| 0 — none | 76 | **73** | |
+| 1 — threat or display | 6 | **9** | |
+| 2 — use of force | 48 | **30** | |
+| 3 — war | 54 | **20** | |
+| `no_independent_outcome` | 3 | **55** | 3 uncovered (as before) + **52 undated-for-W** |
+| **events with a level** | **184** | **132** | **52 removed, 28 % of the G target's n** |
+
+**59 of 187 labels change.** 3 → `no_independent_outcome` 27; 2 → `no_independent_outcome` 22;
+3 → 2 four; 3 → 1 three; 0 → `no_independent_outcome` three.
+
+**The 20 surviving level 3, by the rule that set them:** `GED.location.ge250` 11,
+`WAR.inter.pair` 3, `WAR.intra.location` 3, `WAR.inter.single` 2,
+`MIDI.pair.overlap`+`WAR.inter.pair` 1. By source: GED 11, COW War 8, MIDI+War 1.
+
+**Continuation records found, by rule:** `GED.location.continuation` 58,
+`MID.single.ongoing` 51, `ICB.single.ongoing` 38, `MID.pair.ongoing` 14,
+`ICB.pair.ongoing` 12, `WAR.intra.continuation` 8, `WAR.inter.continuation` 6,
+`MIDI.continuation` 1 (the MIDI case was predicted never to fire; it fires once).
+
+**`delta_level` (§A4.4 diagnostic, not the target):** 0 → 119, 2 → 28, 3 → 21, not
+applicable (GED does not cover) → 19.
+
+**The behaviour that matters, checked event by event.** The war *onsets* keep level 3 —
+`yom_kippur_war_1973`, `iraq_invades_kuwait_1990`, `iraq_war_begins_2003`,
+`russia_invades_ukraine_2022`, `israel_hamas_war_2023` are all unchanged. The
+*continuations* leave: `rus_ryazan_strike_2025a` (6,927 GED deaths in B, 2,116 in W) and 26
+others go from "war" to `no_independent_outcome`. `desert_storm_air_campaign_1991` moves
+3 → 1, not to `no_independent_outcome`: the Gulf War spell is a continuation, but MID
+dispute 3974 *starts* inside W, and A1.1's onset rule dates that at level 1. That is the
+rule working: an onset inside W is dated evidence, and it outranks nothing.
+`soleimani_strike_2020` moves 0 → `no_independent_outcome` — the false zero is gone.
+
+**`abqaiq_attack_2019` does not move, and that is correct.** It stays level 0, because GED
+covered Saudi Arabia across W and recorded 1 death: a source with a dated view of W that
+found nothing in it. Rule 3, a true zero. It appeared in §A4.1(iii) as one of the 18
+suspicious zeros; on the rule it turns out only 3 of those 18 were false zeros, and the
+other 15 had a genuine dated zero beside the undated record. §A4.1(iii) overstated that
+count and this paragraph corrects it.
+
+**What the other option would have kept — the price of §A4.3, in numbers.** Of the 52
+events that leave the G target, `delta_level` (§A4.4) is 0 on 28, 2 on 13, 3 on 8, and not
+applicable on 3. **So the change measure would have carried a non-zero level on 21 of the
+52.** Those 21 are events where UCDP records a genuine *increase* in violence over the
+baseline — the strongest case against §A4.3's choice, and it is stated here rather than left
+for a reader to find. The choice stands on the four reasons in §A4.3, none of which is
+"it keeps more n"; and because `delta_level` is registered and published, the 21 are not
+lost — they are available to anyone scoring the change target, exactly as §A4.4 intends.
+
+**The §A4.5 prediction, scored. Four of six inside the interval; two misses, both mine.**
+
+| quantity | predicted | interval | observed | |
+|---|---:|---|---:|---|
+| level 3 | 15 | 14–24 | **20** | inside |
+| level 2 | 34 | 30–42 | **30** | inside |
+| level 1 | 6 | 5–8 | **9** | **outside, +3** |
+| level 0 | 58 | 55–62 | **73** | **outside, +15** |
+| `no_independent_outcome` | 62 | 50–75 | **55** | inside |
+| events with a level | 122 | 110–135 | **132** | inside |
+
+Both misses come from the same bad assumption: I predicted the 18 events of §A4.1(iii)
+would nearly all leave, and only 3 did (see the Abqaiq paragraph), which held level 0 up at
+73 instead of 58. The three-too-many at level 1 are the 3 → 1 moves like Desert Storm, which
+I did not think of at all — I predicted continuations would fall out of the sample, not that
+some would land on a dated onset one rung down. The rule is not adjusted to fit the
+prediction, and the prediction is not edited to fit the rule.
+
+### A4.11 Does the target still share its variance with the persistence baseline? — measured
+
+The question Joe's brief ends on. WALK_FORWARD_PROTOCOL Amendment B.1 defines the
+G-persistence forecast as **the same function on a shifted window**:
+`ies90.score_event(t − 91, A, P, L, sources)`. So Amendment 4 changes the *baseline* as well
+as the target, and both were recomputed under both rule sets — the pre-amendment code taken
+from git at `c74ccd6`, the post-amendment code as committed. A read at `t = d`; the walk's
+own reads use its `as_of` and its filters, so these are corpus-level diagnostics and **not**
+the walk's numbers. Receipt: `data/state/ies90_amendment4_persistence_overlap.json`.
+
+| | before | after |
+|---|---:|---:|
+| n with both target and persistence | 184 | 120 |
+| exact agreement (target level == persistence level) | **75.0 %** | **73.3 %** |
+| Spearman ρ | **0.800** | **0.638** |
+| ρ² — shared rank variance | **0.640** | **0.407** |
+| Cramér's V | 0.563 | 0.502 |
+
+The headline drop (0.640 → 0.407) is confounded: the two rows are different samples. Holding
+the sample fixed at the 120 events scorable under **both** rules:
+
+| same 120 events | old rules | Amendment 4 |
+|---|---:|---:|
+| Spearman ρ | 0.696 | **0.638** |
+| ρ² | 0.484 | **0.407** |
+| exact agreement | 75.8 % | **73.3 %** |
+
+**The answer, stated as it comes out: yes, it still shares its variance — less, and not by
+much on a like-for-like sample.** Of the 0.23 fall in ρ², about **0.08 is the rule** and the
+rest is the sample: the events Amendment 4 removes were the ones where target and
+persistence agreed most, so removing them lowers the correlation partly by selection.
+**41 % of the target's rank variance is still shared with the persistence forecast**, and
+73 % of labels are still exactly what persistence would have said.
+
+That residual is not a defect and this amendment does not try to remove it. Conflict is
+autocorrelated; a persistence forecast of a conflict scale *should* be good, and a baseline
+that is genuinely hard to beat is the point of having one. What Amendment 4 removes is the
+part that was true **by construction** — a label inherited from the pre-window because the
+rule could not date anything inside the window. What remains is a real property of the
+world. The published "persistence beats the engine for escalation" (−0.469 / −0.467) was
+therefore **partly** mechanical and is not *only* mechanical: after the fix the engine still
+has to beat a strong, legitimate baseline, and whether it does is Session B's to run and
+publish, either way.
+
+**One consequence Session B must price before running it.** Because B.1 reuses this
+function, the persistence forecast itself now returns `no_independent_outcome` far more
+often: **B.3's climatology fallback goes from 2 reads to 58** (of 187 corpus events; the
+walk's scored subset will differ). "Engine vs persistence" after Amendment 4 is therefore
+partly "engine vs climatology", `n_persistence_fallback` must be published beside the
+comparison as B.4 requires, and the comparison is materially less powerful than the one that
+produced −0.469. That is a fact about the experiment, not an argument against the amendment.
+
+### A4.12 One implementation consequence, recorded rather than worked around
+
+`src/engine/persistence.py` calls `ies90.score_event` **live** — WALK_FORWARD_PROTOCOL
+Amendment B.1 says "called, never copied", and that is what the code does. So committing the
+Amendment 4 code changes the **G-persistence baseline immediately**, while the labels in
+`event_outcomes` stay pre-amendment until the rebuild that §A4.6 defers. Between those two
+points a walk run would score a pre-amendment target against a post-amendment baseline —
+an invalid comparison that does not announce itself, because `walk.py` takes
+`data_state.ies90_registration` from `data/state/ies90_distribution.json`, which Session K
+did not regenerate.
+
+This is **not** a defect introduced by the amendment; it is a coupling the amendment makes
+visible, and the honest response is to name it rather than to add a switch that lets the
+registered rule be turned off. **The two coherent states are: everything pre-Amendment-4
+(`src/state/ies90.py` at `c74ccd6`), or everything post (the `ies90` rows rebuilt).** Which
+one holds, and when the rebuild happens, is Joe's decision with Session B, and it is carried
+in `data/handoffs/K_to_B_2026-09-02_ongoing_war.md` §0 with the one-line check that
+distinguishes them. Session K does not choose it, and does not half-apply the amendment to
+avoid having to ask.

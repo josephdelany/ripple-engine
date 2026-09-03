@@ -73,14 +73,24 @@ def test_i3_each_source_asserts_only_what_it_can_date():
     assert lv == 3 and recs[0]["source"] == "war"
     same = {"inter": [{**F["war"]["inter"][0]}, {**F["war"]["inter"][1], "side": 1}], "intra": []}
     assert I.score_war(d, A, pairs, A, same, True, True)[0] == 0
-    # intra-state war: location libya in L -> 3
-    assert I.score_war(d, {"country.libya"}, set(), {"country.libya"}, F["war"], True, True)[0] == 3
+    # intra-state war: location libya in L. The fixture spell runs 1999-01-01..2001-01-01, so it covers the WHOLE of
+    # B = [d-90, d-1] and is a CONTINUATION under OUTCOME_MAPPING Amendment 4 (A4.2) -- before Amendment 4 this
+    # asserted level 3, which was the defect: a civil war already running for a year set "war" on any event near it.
+    lv, recs = I.score_war(d, {"country.libya"}, set(), {"country.libya"}, F["war"], True, True)
+    assert lv == 0 and recs[0]["rule"] == "WAR.intra.continuation" and recs[0]["level"] is None
+    # ...and the same rule must NOT touch a war that starts near d: an onset keeps level 3 (A4.2)
+    fresh = {"inter": [], "intra": [{**F["war"]["intra"][0], "spells": [(pd.Timestamp("2000-01-10"), pd.Timestamp("2001-01-01"))]}]}
+    lv, recs = I.score_war(d, {"country.libya"}, set(), {"country.libya"}, fresh, True, True)
+    assert lv == 3 and recs[0]["rule"] == "WAR.intra.location"
     # MIDI: incident 100 iran vs iraq on opposite sides, hostlev 3 -> 1
     assert I.score_midi(d, A, pairs, F["midi"], F["midip"])[0] == 1
     # GED cum [0, 10, 40, 300] at 01-05 / 02-01 / 03-30: deaths in (01-15, 04-15] = (40-10) + (300-40) = 290 -> 3;
-    # pre-window (10-17, 01-15] = 10 (executed below, not recalled)
-    lv, d90, pre, other, _ = I.score_ged(d, {"country.iran"}, F["ged"])
-    assert (lv, float(d90), float(pre), float(other)) == (3, float((40 - 10) + (300 - 40)), 10.0, 0.0)
+    # B = [1999-10-17, 2000-01-14] = 10 (executed below, not recalled). 10 is below the 250 line, so this is a fresh
+    # escalation, not a continuation, and it keeps level 3 (A4.2). Day d carries nothing and is in neither window (A4.4).
+    lv, delta_lv, deaths, _ = I.score_ged(d, {"country.iran"}, F["ged"])
+    assert (lv, float(deaths["deaths_ged_90"]), float(deaths["deaths_ged_pre90"]), float(deaths["deaths_ged_other_90"])) \
+        == (3, float((40 - 10) + (300 - 40)), 10.0, 0.0)
+    assert float(deaths["deaths_ged_on_d"]) == 0.0 and float(deaths["deaths_ged_delta"]) == 280.0 and delta_lv == 3
 
 
 def test_i4_precedence_is_the_max_over_covering_sources_and_never_a_guess():
@@ -125,7 +135,10 @@ def test_i8b_amendment_2_littoral_map_is_location_only_and_maps_to_known_countri
     # registered rule ids only
     ok = {"MIDI.pair.overlap", "MIDI.single.overlap", "WAR.inter.pair", "WAR.inter.single", "WAR.intra.location",
           "ICB.pair.wholly", "ICB.pair.onset", "ICB.single.wholly", "ICB.single.onset", "MID.pair.wholly", "MID.pair.onset",
-          "MID.single.wholly", "MID.single.onset", "GED.location.ge250", "GED.location.ge25", "NONE.covered", "UNCOVERED"}
+          "MID.single.wholly", "MID.single.onset", "GED.location.ge250", "GED.location.ge25", "NONE.covered", "UNCOVERED",
+          # OUTCOME_MAPPING Amendment 4 (A4.2), written into the rows at the next ies90 rebuild:
+          "WAR.inter.continuation", "WAR.intra.continuation", "GED.location.continuation", "MIDI.continuation",
+          "ICB.pair.ongoing", "ICB.single.ongoing", "MID.pair.ongoing", "MID.single.ongoing", "UNDATED.continuation"}
     conn = _conn()
     seen = {r for (v,) in conn.execute("SELECT value_text FROM event_outcomes WHERE source='ies90' AND field='rule_fired'") for r in v.split(",")}
     assert seen <= ok, seen - ok
@@ -167,7 +180,12 @@ def test_i5_corpus_every_geopolitical_event_has_one_level_or_is_uncovered():
         if basis[e] == "location":
             assert lv[e] == loc[e], (e, lv[e], loc[e])
         else:
-            assert lv[e] <= max(per[e][s_] for s_ in dyc[e].split(",")), e
+            # A4.2: a per-source level is NULL when the source recorded something it could not date inside W.
+            # Such a source sets nothing, so it is excluded from the max -- and an event with a level must have
+            # at least one dyadic source that did date something.
+            dated = [per[e][s_] for s_ in dyc[e].split(",") if per[e].get(s_) is not None]
+            assert dated, (e, "level set on the dyadic basis with no dated dyadic source")
+            assert lv[e] <= max(dated), e
     # the other sources' rows (Step 4) are untouched by the ies90 run
     assert conn.execute("SELECT COUNT(*) FROM event_outcomes WHERE source IN ('icb','mid','ucdp','precedence')").fetchone()[0] > 0
 

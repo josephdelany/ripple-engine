@@ -1,0 +1,72 @@
+{
+ "question": "does the persistence baseline still share its variance with the target after Amendment 4?",
+ "method": "target = ies90.score_event(d); persistence = ies90.score_event(d - 91) per WALK_FORWARD_PROTOCOL Amendment B.1, both computed twice: once under the pre-Amendment-4 rules (git c74ccd6) and once under Amendment 4. A read at t = d; the walk's own reads use its as_of and its filters, so these are corpus-level diagnostics, not the walk's numbers.",
+ "before_amendment_4": {
+  "label": "pre-Amendment-4 rules",
+  "n_events": 187,
+  "n_with_target": 184,
+  "n_with_persistence": 185,
+  "n_persistence_fallback_B3": 2,
+  "n_both": 184,
+  "exact_agreement": 138,
+  "exact_agreement_pct": 75.0,
+  "spearman_rho": 0.8003,
+  "rho_squared_shared_rank_variance": 0.6405,
+  "cramers_v": 0.5625,
+  "target_dist": {
+   "0": 76,
+   "1": 6,
+   "2": 48,
+   "3": 54,
+   "null": 3
+  },
+  "persistence_dist": {
+   "0": 85,
+   "1": 8,
+   "2": 45,
+   "3": 47,
+   "null": 2
+  }
+ },
+ "after_amendment_4": {
+  "label": "Amendment 4",
+  "n_events": 187,
+  "n_with_target": 132,
+  "n_with_persistence": 129,
+  "n_persistence_fallback_B3": 58,
+  "n_both": 120,
+  "exact_agreement": 88,
+  "exact_agreement_pct": 73.3,
+  "spearman_rho": 0.6381,
+  "rho_squared_shared_rank_variance": 0.4072,
+  "cramers_v": 0.5023,
+  "target_dist": {
+   "0": 73,
+   "1": 9,
+   "2": 30,
+   "3": 20,
+   "null": 55
+  },
+  "persistence_dist": {
+   "0": 82,
+   "1": 10,
+   "2": 24,
+   "3": 13,
+   "null": 58
+  }
+ },
+ "same_events_both_rules": {
+  "note": "the two rows above are computed on different samples, so the drop in rho confounds the rule change with the sample change. This block holds the sample fixed at the events scorable under BOTH rules.",
+  "n": 120,
+  "old_rules": {
+   "spearman_rho": 0.6955,
+   "rho_squared": 0.4837,
+   "exact_agreement_pct": 75.8
+  },
+  "new_rules": {
+   "spearman_rho": 0.6381,
+   "rho_squared": 0.4072,
+   "exact_agreement_pct": 73.3
+  }
+ }
+}

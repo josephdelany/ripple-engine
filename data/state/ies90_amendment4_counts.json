@@ -1,0 +1,1147 @@
+{
+ "registration": "OUTCOME_MAPPING.md Amendment 1 + 1.1 + 2 + 4 (2026-09-02)",
+ "amendment": "OUTCOME_MAPPING.md Amendment 4 (2026-09-02)",
+ "generated_at": "2026-09-03T03:18:33+00:00",
+ "window_days": 90,
+ "not_written_to_db": "computed with ies90.run(conn, write=False); event_outcomes is unchanged (A4.6)",
+ "not_retroactive": "published runs stand; this governs the next run (A4.7)",
+ "n_geopolitical_events": 187,
+ "level_counts_before": {
+  "0": 76,
+  "1": 6,
+  "2": 48,
+  "3": 54,
+  "no_independent_outcome": 3
+ },
+ "level_counts_after": {
+  "0": 73,
+  "1": 9,
+  "2": 30,
+  "3": 20,
+  "no_independent_outcome": 55
+ },
+ "events_with_a_level": {
+  "before": 184,
+  "after": 132,
+  "removed": 52
+ },
+ "prediction_A4_5_scored": {
+  "3": {
+   "predicted": 15,
+   "interval": [
+    14,
+    24
+   ],
+   "observed": 20,
+   "inside_interval": true,
+   "error": 5
+  },
+  "2": {
+   "predicted": 34,
+   "interval": [
+    30,
+    42
+   ],
+   "observed": 30,
+   "inside_interval": true,
+   "error": -4
+  },
+  "1": {
+   "predicted": 6,
+   "interval": [
+    5,
+    8
+   ],
+   "observed": 9,
+   "inside_interval": false,
+   "error": 3
+  },
+  "0": {
+   "predicted": 58,
+   "interval": [
+    55,
+    62
+   ],
+   "observed": 73,
+   "inside_interval": false,
+   "error": 15
+  },
+  "no_independent_outcome": {
+   "predicted": 62,
+   "interval": [
+    50,
+    75
+   ],
+   "observed": 55,
+   "inside_interval": true,
+   "error": -7
+  },
+  "events_with_a_level": {
+   "predicted": 122,
+   "interval": [
+    110,
+    135
+   ],
+   "observed": 132,
+   "inside_interval": true,
+   "error": 10
+  }
+ },
+ "continuation_records_by_source": {
+  "ged": 58,
+  "icb": 50,
+  "mid": 65,
+  "midi": 1,
+  "war": 14
+ },
+ "continuation_records_by_rule": {
+  "GED.location.continuation": 58,
+  "ICB.pair.ongoing": 12,
+  "ICB.single.ongoing": 38,
+  "MID.pair.ongoing": 14,
+  "MID.single.ongoing": 51,
+  "MIDI.continuation": 1,
+  "WAR.inter.continuation": 6,
+  "WAR.intra.continuation": 8
+ },
+ "after_by_source": {
+  "-": {
+   "no_independent_outcome": 55
+  },
+  "ged": {
+   "0": 61,
+   "2": 11,
+   "3": 11
+  },
+  "icb": {
+   "0": 6,
+   "1": 4,
+   "2": 2
+  },
+  "mid": {
+   "1": 2,
+   "2": 2
+  },
+  "midi": {
+   "1": 3,
+   "2": 12
+  },
+  "midi,ged": {
+   "2": 1
+  },
+  "midi,icb,mid": {
+   "0": 1
+  },
+  "midi,mid": {
+   "2": 2
+  },
+  "midi,war": {
+   "3": 1
+  },
+  "midi,war,icb,mid": {
+   "0": 1
+  },
+  "war": {
+   "3": 8
+  },
+  "war,icb,mid": {
+   "0": 4
+  }
+ },
+ "after_by_rule_fired": {
+  "GED.location.ge25": {
+   "2": 11
+  },
+  "GED.location.ge250": {
+   "3": 11
+  },
+  "ICB.pair.onset": {
+   "1": 1
+  },
+  "ICB.single.onset": {
+   "1": 3
+  },
+  "ICB.single.wholly": {
+   "2": 2
+  },
+  "MID.pair.onset": {
+   "1": 1
+  },
+  "MID.pair.wholly": {
+   "2": 1
+  },
+  "MID.single.onset": {
+   "1": 1
+  },
+  "MID.single.wholly": {
+   "2": 1
+  },
+  "MIDI.pair.overlap": {
+   "1": 1,
+   "2": 4
+  },
+  "MIDI.pair.overlap,WAR.inter.pair": {
+   "3": 1
+  },
+  "MIDI.single.overlap": {
+   "1": 2,
+   "2": 8
+  },
+  "MIDI.single.overlap,GED.location.ge25": {
+   "2": 1
+  },
+  "MIDI.single.overlap,MID.single.wholly": {
+   "2": 2
+  },
+  "NONE.covered": {
+   "0": 73
+  },
+  "UNCOVERED": {
+   "no_independent_outcome": 3
+  },
+  "UNDATED.continuation": {
+   "no_independent_outcome": 52
+  },
+  "WAR.inter.pair": {
+   "3": 3
+  },
+  "WAR.inter.single": {
+   "3": 2
+  },
+  "WAR.intra.location": {
+   "3": 3
+  }
+ },
+ "after_by_basis": {
+  "None": {
+   "no_independent_outcome": 3
+  },
+  "dyadic": {
+   "0": 11,
+   "1": 3,
+   "2": 5,
+   "3": 4,
+   "no_independent_outcome": 6
+  },
+  "location": {
+   "0": 62,
+   "1": 6,
+   "2": 25,
+   "3": 16,
+   "no_independent_outcome": 46
+  }
+ },
+ "after_by_class": {
+  "chokepoint_disruption": {
+   "0": 10,
+   "1": 2,
+   "2": 3,
+   "3": 3,
+   "no_independent_outcome": 9
+  },
+  "conflict_escalation": {
+   "0": 18,
+   "1": 1,
+   "2": 12,
+   "3": 12,
+   "no_independent_outcome": 12
+  },
+  "infrastructure_attack": {
+   "0": 14,
+   "1": 1,
+   "2": 3,
+   "3": 3,
+   "no_independent_outcome": 27
+  },
+  "sanctions": {
+   "0": 31,
+   "1": 5,
+   "2": 12,
+   "3": 2,
+   "no_independent_outcome": 7
+  }
+ },
+ "after_by_decade": {
+  "1970s": {
+   "0": 3,
+   "3": 4,
+   "no_independent_outcome": 1
+  },
+  "1980s": {
+   "0": 1,
+   "1": 1,
+   "2": 3,
+   "3": 1,
+   "no_independent_outcome": 2
+  },
+  "1990s": {
+   "0": 2,
+   "1": 1,
+   "2": 2,
+   "3": 3,
+   "no_independent_outcome": 1
+  },
+  "2000s": {
+   "0": 8,
+   "1": 2,
+   "2": 4,
+   "3": 2,
+   "no_independent_outcome": 1
+  },
+  "2010s": {
+   "0": 24,
+   "1": 5,
+   "2": 13,
+   "3": 1,
+   "no_independent_outcome": 12
+  },
+  "2020s": {
+   "0": 35,
+   "2": 8,
+   "3": 9,
+   "no_independent_outcome": 38
+  }
+ },
+ "no_independent_outcome_reason": {
+  "uncovered": 3,
+  "undated": 52
+ },
+ "delta_level_counts": {
+  "0": 119,
+  "2": 28,
+  "3": 21,
+  "None": 19
+ },
+ "delta_level_note": "A4.4 diagnostic, never the G target; no score is computed against it under Amendment 4",
+ "rows_changed": {
+  "n": 59,
+  "rows": [
+   {
+    "event_id": "iran_hostage_crisis_1979",
+    "date": "1979-11-04",
+    "class": "conflict_escalation",
+    "title": "US embassy hostage crisis begins in Tehran",
+    "from": 0,
+    "from_source": "war,icb,mid",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": null
+   },
+   {
+    "event_id": "tanker_war_1984",
+    "date": "1984-03-27",
+    "class": "chokepoint_disruption",
+    "title": "Tanker War: attacks on Gulf shipping escalate",
+    "from": 3,
+    "from_source": "war",
+    "to": 2,
+    "to_source": "mid",
+    "rule_fired": "MID.single.wholly",
+    "reason": null,
+    "level_location": 2,
+    "delta_level": null
+   },
+   {
+    "event_id": "kharg_strikes_1985",
+    "date": "1985-08-15",
+    "class": "infrastructure_attack",
+    "title": "Iraq intensifies air strikes on Iran's Kharg Island oil terminal",
+    "from": 3,
+    "from_source": "war",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": null
+   },
+   {
+    "event_id": "iraq_kharg_1986",
+    "date": "1986-08-12",
+    "class": "infrastructure_attack",
+    "title": "Iraqi raids on Iran's Sirri Island oil terminal",
+    "from": 3,
+    "from_source": "war",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": null
+   },
+   {
+    "event_id": "earnest_will_1987",
+    "date": "1987-07-22",
+    "class": "chokepoint_disruption",
+    "title": "US reflags Kuwaiti tankers (Operation Earnest Will)",
+    "from": 3,
+    "from_source": "war",
+    "to": 1,
+    "to_source": "mid",
+    "rule_fired": "MID.single.onset",
+    "reason": null,
+    "level_location": 1,
+    "delta_level": null
+   },
+   {
+    "event_id": "bridgeton_mine_strike_1987",
+    "date": "1987-07-24",
+    "class": "chokepoint_disruption",
+    "title": "Tanker Bridgeton strikes Iranian mine in first Earnest Will convoy",
+    "from": 3,
+    "from_source": "war",
+    "to": 2,
+    "to_source": "icb",
+    "rule_fired": "ICB.single.wholly",
+    "reason": null,
+    "level_location": 2,
+    "delta_level": null
+   },
+   {
+    "event_id": "desert_storm_air_campaign_1991",
+    "date": "1991-01-17",
+    "class": "conflict_escalation",
+    "title": "Operation Desert Storm air campaign begins",
+    "from": 3,
+    "from_source": "war",
+    "to": 1,
+    "to_source": "mid",
+    "rule_fired": "MID.pair.onset",
+    "reason": null,
+    "level_location": 3,
+    "delta_level": 3
+   },
+   {
+    "event_id": "kuwait_oil_fires_1991",
+    "date": "1991-02-22",
+    "class": "infrastructure_attack",
+    "title": "Retreating Iraqi forces torch Kuwaiti oil wells",
+    "from": 3,
+    "from_source": "war",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": 3,
+    "delta_level": 3
+   },
+   {
+    "event_id": "iraq_pipeline_north_2004",
+    "date": "2004-08-03",
+    "class": "infrastructure_attack",
+    "title": "Insurgents bomb Kirkuk-Ceyhan pipeline halting northern Iraq exports",
+    "from": 3,
+    "from_source": "ged",
+    "to": 1,
+    "to_source": "midi",
+    "rule_fired": "MIDI.single.overlap",
+    "reason": null,
+    "level_location": 1,
+    "delta_level": 3
+   },
+   {
+    "event_id": "iraq_pipeline_south_2004",
+    "date": "2004-08-27",
+    "class": "infrastructure_attack",
+    "title": "Saboteurs halt southern Iraq oil exports in late-August 2004",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "sudan_heglig_war_2012",
+    "date": "2012-04-10",
+    "class": "conflict_escalation",
+    "title": "South Sudan seizes Sudan's Heglig oil field",
+    "from": 3,
+    "from_source": "ged",
+    "to": 2,
+    "to_source": "midi",
+    "rule_fired": "MIDI.single.overlap",
+    "reason": null,
+    "level_location": 2,
+    "delta_level": 0
+   },
+   {
+    "event_id": "kirkuk_ceyhan_isis_2014",
+    "date": "2014-03-02",
+    "class": "chokepoint_disruption",
+    "title": "ISIS attacks sever the Kirkuk-Ceyhan pipeline",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "mosul_isis_offensive_2014",
+    "date": "2014-06-10",
+    "class": "conflict_escalation",
+    "title": "ISIS captures Mosul and advances in northern Iraq",
+    "from": 3,
+    "from_source": "ged",
+    "to": 2,
+    "to_source": "midi",
+    "rule_fired": "MIDI.single.overlap",
+    "reason": null,
+    "level_location": 2,
+    "delta_level": 3
+   },
+   {
+    "event_id": "libya_essider_clashes_2014",
+    "date": "2014-12-13",
+    "class": "conflict_escalation",
+    "title": "Clashes shut Libya Es Sider and Ras Lanuf ports",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "libya_ports_clashes_2014",
+    "date": "2014-12-14",
+    "class": "chokepoint_disruption",
+    "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "nda_bonny_2016",
+    "date": "2016-02-10",
+    "class": "infrastructure_attack",
+    "title": "Niger Delta Avengers hit Bonny Soku gas line",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "nigeria_nda_forcados_2016",
+    "date": "2016-02-14",
+    "class": "infrastructure_attack",
+    "title": "Niger Delta Avengers bomb Trans Forcados subsea pipeline",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "nigeria_nda_escravos_2016",
+    "date": "2016-05-25",
+    "class": "infrastructure_attack",
+    "title": "Niger Delta Avengers bomb Chevron Escravos facilities",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "kirkuk_seizure_2017",
+    "date": "2017-10-16",
+    "class": "conflict_escalation",
+    "title": "Iraqi forces seize oil-rich Kirkuk from Kurds",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "bab_el_mandeb_houthi_tanker_2018",
+    "date": "2018-04-03",
+    "class": "chokepoint_disruption",
+    "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "venezuela_sanctions_2019",
+    "date": "2019-01-28",
+    "class": "sanctions",
+    "title": "US sanctions on PDVSA",
+    "from": 0,
+    "from_source": "icb",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": 0,
+    "delta_level": 0
+   },
+   {
+    "event_id": "druzhba_contamination_2019",
+    "date": "2019-04-20",
+    "class": "chokepoint_disruption",
+    "title": "Contaminated crude halts the Druzhba pipeline to Europe",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "fujairah_tanker_sabotage_2019",
+    "date": "2019-05-12",
+    "class": "infrastructure_attack",
+    "title": "Four tankers sabotaged off Fujairah near Hormuz",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "iraq_nasiriya_2019",
+    "date": "2019-12-28",
+    "class": "conflict_escalation",
+    "title": "Protesters shut Iraq Nasiriya oil field",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "soleimani_strike_2020",
+    "date": "2020-01-03",
+    "class": "conflict_escalation",
+    "title": "US strike kills Qassem Soleimani",
+    "from": 0,
+    "from_source": "icb",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": 2,
+    "delta_level": 2
+   },
+   {
+    "event_id": "grain_deal_collapse_2023",
+    "date": "2023-07-17",
+    "class": "conflict_escalation",
+    "title": "Russia terminates Black Sea grain deal",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "ukr_odesa_strike_2023",
+    "date": "2023-07-18",
+    "class": "infrastructure_attack",
+    "title": "Russia strikes Odesa/Chornomorsk grain ports",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "ukr_izmail_strike_2023",
+    "date": "2023-08-02",
+    "class": "infrastructure_attack",
+    "title": "Russian drones hit Izmail Danube grain port",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "russia_pricecap_enforce_2023",
+    "date": "2023-11-16",
+    "class": "sanctions",
+    "title": "US sanctions Sovcomflot tankers over price-cap breach",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "me_galaxy_leader_2023",
+    "date": "2023-11-19",
+    "class": "chokepoint_disruption",
+    "title": "Houthis seize Galaxy Leader car carrier in Red Sea",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "me_us_uk_strikes_2024",
+    "date": "2024-01-11",
+    "class": "conflict_escalation",
+    "title": "US and UK launch first airstrikes on Houthi targets in Yemen",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "russia_ustluga_strike_2024",
+    "date": "2024-01-21",
+    "class": "infrastructure_attack",
+    "title": "Ukraine drone strike ignites Novatek Ust-Luga Baltic export terminal",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "rus_tuapse_strike_2024a",
+    "date": "2024-01-25",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Rosneft Tuapse refinery",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "me_marlin_luanda_2024",
+    "date": "2024-01-26",
+    "class": "infrastructure_attack",
+    "title": "Houthi missile sets tanker Marlin Luanda ablaze in Gulf of Aden",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_volgograd_strike_2024",
+    "date": "2024-02-03",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Lukoil Volgograd refinery",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "me_rubymar_2024",
+    "date": "2024-02-18",
+    "class": "infrastructure_attack",
+    "title": "Houthi missile cripples Rubymar, the first ship sunk in the Red Sea crisis",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "sanc_2024_02_23",
+    "date": "2024-02-23",
+    "class": "sanctions",
+    "title": "US sanctions Russian state tanker group Sovcomflot",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "russia_refineries_strikes_2024",
+    "date": "2024-03-13",
+    "class": "infrastructure_attack",
+    "title": "Ukraine escalates drone strikes on Russian refineries",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "rus_slavyansk_strike_2024",
+    "date": "2024-03-17",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Slavyansk-on-Kuban refinery",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "russia_metals_ban_2024",
+    "date": "2024-04-12",
+    "class": "sanctions",
+    "title": "US and UK ban Russian aluminium copper nickel from exchanges",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 2
+   },
+   {
+    "event_id": "iran_strikes_israel_apr_2024",
+    "date": "2024-04-13",
+    "class": "conflict_escalation",
+    "title": "Iran's first direct missile and drone strike on Israel",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "me_mv_tutor_2024",
+    "date": "2024-06-12",
+    "class": "infrastructure_attack",
+    "title": "Houthi attack sinks bulk carrier MV Tutor in the Red Sea",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "me_chios_lion_2024",
+    "date": "2024-07-15",
+    "class": "infrastructure_attack",
+    "title": "Houthi drone boat hits tanker Chios Lion",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "me_sounion_2024",
+    "date": "2024-08-21",
+    "class": "infrastructure_attack",
+    "title": "Houthis set crude tanker Sounion ablaze in the Red Sea",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "iran_strikes_israel_oct_2024",
+    "date": "2024-10-01",
+    "class": "conflict_escalation",
+    "title": "Iran's October ballistic-missile strike on Israel",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 3
+   },
+   {
+    "event_id": "myanmar_re_seizure_2024",
+    "date": "2024-10-20",
+    "class": "conflict_escalation",
+    "title": "Kachin rebels seize Myanmar rare-earth mining hub",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_novoshakhtinsk_strike_2024",
+    "date": "2024-12-19",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian strike sparks blaze at Novoshakhtinsk refinery",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "russia_shadow_fleet_sanctions_2025",
+    "date": "2025-01-10",
+    "class": "sanctions",
+    "title": "US sanctions Gazprom Neft Surgutneftegas and 183 shadow-fleet tankers",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_ryazan_strike_2025a",
+    "date": "2025-01-24",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian mass drone strike on Rosneft Ryazan refinery",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_volgograd_strike_2025",
+    "date": "2025-01-31",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Lukoil Volgograd refinery",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "cpc_kropotkinskaya_drone_2025",
+    "date": "2025-02-17",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on CPC Kropotkinskaya pumping station",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "drc_cobalt_ban_2025",
+    "date": "2025-02-22",
+    "class": "sanctions",
+    "title": "DRC suspends all cobalt exports",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_novokuibyshevsk_strike_2025",
+    "date": "2025-03-10",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Rosneft Novokuibyshevsk refinery",
+    "from": 3,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "me_midnight_hammer_2025",
+    "date": "2025-06-22",
+    "class": "conflict_escalation",
+    "title": "US strikes Iranian nuclear sites Fordow Natanz and Isfahan",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "redsea_houthi_resume_2025",
+    "date": "2025-07-06",
+    "class": "chokepoint_disruption",
+    "title": "Houthis resume Red Sea attacks sinking Magic Seas",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "us_russia_sectariff_2025",
+    "date": "2025-07-14",
+    "class": "sanctions",
+    "title": "Trump threatens 100pct secondary tariffs on Russian oil buyers",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_saratov_strike_2025a",
+    "date": "2025-08-11",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike halts Rosneft Saratov refinery",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_druzhba_strike_2025a",
+    "date": "2025-08-18",
+    "class": "chokepoint_disruption",
+    "title": "Ukrainian strike halts Druzhba pipeline oil flow to Hungary and Slovakia",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   },
+   {
+    "event_id": "rus_ryazan_strike_2025b",
+    "date": "2025-09-05",
+    "class": "infrastructure_attack",
+    "title": "Ukrainian drone strike on Rosneft Ryazan refinery",
+    "from": 2,
+    "from_source": "ged",
+    "to": "no_independent_outcome",
+    "to_source": "",
+    "rule_fired": "UNDATED.continuation",
+    "reason": "undated",
+    "level_location": null,
+    "delta_level": 0
+   }
+  ]
+ }
+}
