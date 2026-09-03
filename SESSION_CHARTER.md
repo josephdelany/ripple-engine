@@ -62,9 +62,14 @@ this file wins.*
   and its patches go to Joe under §3 of that document, like E's. Registrations
   are dated and committed before the code that uses them.
 
-- **Session I** (the figures, and the citation guard) owns: `docs/figures/**`,
-  `src/figures_paper.py`, `src/citation_guard.py`, `docs/citation_inventory.json`
-  and `docs/CITATION_INVENTORY.md`.
+- **Session I** (the figures, the citation guard, and the demo pages) owns:
+  `docs/figures/**`, `docs/demos/**`, `src/figures_paper.py`,
+  `src/citation_guard.py`, `docs/citation_inventory.json` and
+  `docs/CITATION_INVENTORY.md`. `docs/demos/**` is assigned by Joe's brief of
+  2026-09-03, after the Amendment 4 re-run left all three pages superseded; they
+  are regenerated from `data/walk_forward/{reads,scores}.jsonl` of the live run
+  and from nothing else, and a page whose read the current target excludes is
+  restructured rather than re-quoted.
   It draws the paper figures and nothing else. It **computes nothing**: every
   number on every figure is read out of a committed file, each figure carries the
   path it was read from, and `tests/test_figures_paper.py` re-reads the sources and
