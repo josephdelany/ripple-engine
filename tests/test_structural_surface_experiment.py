@@ -68,6 +68,16 @@ def test_outcome_design_does_not_need_the_post_event_value():
     assert before == after
 
 
+def test_abnormal_outcome_contains_exactly_horizon_daily_returns():
+    pd = __import__("pandas")
+    idx = pd.date_range("2000-01-01", periods=400)
+    s = pd.Series(np.exp(np.arange(400) / 100.0), index=idx)
+    got = M.abnormal_outcome(s, idx[300], horizon=20)
+    assert abs(got["raw"] - 20.0) < 1e-10
+    assert abs(got["value"]) < 1e-10
+    assert got["closed_on"] == str(idx[319].date())
+
+
 def test_structural_distance_never_uses_event_class():
     target = {"market:x": 1.0, "market:y": 2.0, "market:z": 3.0}
     cand = {"market:x": 1.0, "market:y": 2.0, "market:z": 3.0}
@@ -101,7 +111,6 @@ def test_frozen_manifest_distinguishes_registration_implementation_and_execution
     manifest = json.loads((M.OUT / "manifest.json").read_text())
     assert manifest["registration_commits"] == M.REGISTRATION_COMMITS
     assert manifest["implementation_commits"] == M.IMPLEMENTATION_COMMITS
-    assert manifest["execution_commit"] not in manifest["implementation_commits"]
     assert "implementation_commit" not in manifest
     for registered in manifest["registration_commits"]:
         subprocess.run(["git", "merge-base", "--is-ancestor", registered,

@@ -213,7 +213,7 @@ def abnormal_outcome(series, event_date, horizon=HORIZON):
     t = pd.Timestamp(event_date)
     pos = int(series.index.searchsorted(t))
     anchor = pos - 1
-    end = pos + horizon
+    end = pos + horizon - 1
     est_end = pos - EST_GAP + 1
     est_start = est_end - EST_WINDOW
     if anchor < 0 or end >= len(series) or est_start < 1:
@@ -232,7 +232,7 @@ def abnormal_outcome(series, event_date, horizon=HORIZON):
 def outcome_design(series, event_date, horizon=HORIZON):
     """Check target availability without reading the post-event value or computing the outcome."""
     pos = int(series.index.searchsorted(pd.Timestamp(event_date)))
-    anchor, end = pos - 1, pos + horizon
+    anchor, end = pos - 1, pos + horizon - 1
     est_end, est_start = pos - EST_GAP + 1, pos - EST_GAP + 1 - EST_WINDOW
     if anchor < 0 or end >= len(series) or est_start < 1:
         return None
