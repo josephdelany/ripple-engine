@@ -19,7 +19,7 @@ inherited: a record that already covered the whole of the pre-window asserts not
 window and contributes NO level, rather than a false zero.
 
 Run:  python3 src/grid_labels.py            the registered probe (1998, 2018, 2024)
-Out:  data/grid/PROBE.json, data/grid/PROBE.md
+Out:  data/grid/g/PROBE.json, data/grid/g/PROBE.md
 """
 from __future__ import annotations
 
@@ -39,8 +39,8 @@ import ies90 as I          # noqa: E402  the scorer, reused unchanged
 import countries as C      # noqa: E402
 from engine.pre1987_candidates import STATES  # noqa: E402  the registered producer/transit roles
 
-OUT_JSON = ROOT / "data" / "grid" / "PROBE.json"
-OUT_MD = ROOT / "data" / "grid" / "PROBE.md"
+OUT_JSON = ROOT / "data" / "grid" / "g" / "PROBE.json"
+OUT_MD = ROOT / "data" / "grid" / "g" / "PROBE.md"
 RAW = ROOT / "data" / "state" / "raw"
 
 # ---- §1 the grid ------------------------------------------------------------------------------

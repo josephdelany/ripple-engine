@@ -2,7 +2,7 @@
 
 Every test names the clause of data/grid/G4_REGISTRATION.md it covers. Nothing here writes to any
 table; the fixtures are dicts built in the test, and the published-run assertions read
-data/grid/PROBE.json.
+data/grid/g/PROBE.json.
 """
 import datetime as dt
 import json
@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 import grid_labels as G  # noqa: E402
 import ies90 as I        # noqa: E402
 
-PROBE = ROOT / "data" / "grid" / "PROBE.json"
+PROBE = ROOT / "data" / "grid" / "g" / "PROBE.json"
 
 
 def rec(rule, dates, level, basis="dyadic", source="mid"):

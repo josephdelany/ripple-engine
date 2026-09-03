@@ -333,3 +333,103 @@ to price the panel, not to improve it.
 genuine opponents, and the diagnostic cannot tell which without a sides field ICB does not have. It
 counts how much of the panel's signal rests on evidence that **cannot distinguish an ally from an
 adversary**, which is the honest question, and it does not claim every such cell is wrong.
+
+---
+
+## Amendment 3 (2026-09-03) — the build, as Joe ruled it: 1987–2014, VR-3, evidence as a field
+
+*Registered before the build code (charter §2 rule 2). Joe's ruling of 2026-09-03, after reading
+`PROBE.md`: build the panel for **1987–2014**, on the **VR-3 active set**, with the **evidence basis
+beside every result**, and the three limits registered **up front**. This amendment fixes what is
+built; §§1–4 and Amendments 1–2 are unchanged and still govern the windows, the label, the stamps
+and the diagnostic. Ownership is settled: session B keeps `data/grid/**`; Session G writes to
+`data/grid/g/**` and `src/grid_labels.py`, and this file moved there in the same commit.*
+
+### A3.1 The span, and the arithmetic that fixes it
+
+Month-ends **1987-01-31 … 2014-09-30**, 333 grid dates. The end is not a preference: `ies90.covers`
+requires `t + 90 ≤` the source's coverage end, MID / MIDI / COW intra-state War end 2014-12-31, and
+`2014-09-30 + 90 = 2014-12-29` is the last month-end that clears it (`2014-10-31 + 90 = 2015-01-29`
+does not). **The 90-day horizon costs a quarter at every source's upper edge**, and the panel ends
+where its last sided source does.
+
+### A3.2 The active set is VR-3, not R-ACT
+
+The panel's active set is R-ACT **with the VR-3 restriction applied** (§4): a dyad enters at `t` only
+on records whose spell **ends strictly before `t`**. The probe measured what this costs and what it
+prevents: 39 of 335 cells in 2018 (11.6 %) were admitted on a record still running at `t`. Those are
+dyads selected on the future. `n_active` under plain R-ACT is still published beside it, so the size
+of the restriction is visible.
+
+### A3.3 Evidence basis is a FIELD on every cell, never a filter
+
+Joe's ruling: *"Carry the evidence basis as a FIELD, not a filter … then the scored study can be run
+on the strict subset and the diagnostic on the full panel, without rebuilding anything."* Registered
+accordingly. **No cell is ever removed from the panel by its evidence basis.** Every cell carries
+three fields:
+
+- **`L_evidence`** and **`Lpre_evidence`** — the class of what set that end's level;
+- **`evidence_class`** — the **weaker** of the two, under the total order registered below.
+
+Amendment 2 classified only the non-zero cells. That was enough to price the panel and is not enough
+to build on, because a **zero** also rests on evidence and the evidence differs in kind: a zero
+recorded while MID and MIDI were covering is a sided source saying *no dispute*, which is a statement
+about the pair; a zero while only GED covers is *no deaths in either country*, which is not. The
+classes, and their order from strongest to weakest:
+
+| class | when it fires | is it a statement about the pair? |
+|---|---|---|
+| `opposed_side` | a setter is a MID / MIDI / COW War rule, **or** the cell is a true zero and a sided source was covering on the chosen basis | **yes** |
+| `icb_co_actor` | every setter is an ICB rule, and the pair has been opponents in a sided source somewhere in its history | only if they were adversaries here, which ICB cannot say |
+| `icb_co_actor_never_opposed` | as above, and the pair has **never** been recorded as opponents in MID / MIDI / COW War | **probably not** |
+| `ged_location` | every setter is a GED rule, **or** the cell is a true zero and only GED was covering | **no** — a country-window death count |
+| `undefined` | the level is `no_independent_outcome` at that end | — |
+
+`evidence_class` is the weaker end under `opposed_side > icb_co_actor > icb_co_actor_never_opposed >
+ged_location > undefined`. **The strict subset is `evidence_class == opposed_side`**, and it is a
+selection B applies at scoring time, on a field that is already there.
+
+### A3.4 The three limits, registered before the panel exists
+
+Carried in `PANEL.json.limits`, printed at the head of `PANEL.md`, and repeated in the handoff. They
+are not caveats added to a result; they are properties of the construction, known now:
+
+1. **It never reaches the present.** The panel ends 2014-09-30 because its last sided source does. It
+   cannot be the panel a live engine reads from, and no number computed on it describes the world
+   after 2014.
+2. **It can never carry VALIDATED.** Every cell is `retrospective = 1` (§4.2) — a COW hostility level,
+   an ICB violence code and a UCDP death estimate are later constructions, not contemporaneous
+   records. `WORLD_STATE_CODEBOOK.md` Amendment 1: *a retrospective field alone can never make a read
+   VALIDATED.* This is a property of the sources and **`n` does not touch it.**
+3. **It never scores onset.** R-ACT admits a dyad only after a recorded clash (§2.1), so a dyad quiet
+   for five years that goes to war is absent from the grid at every date before its first record.
+   Skill measured here is skill at **continuation and de-escalation**. The forecaster's most valuable
+   act — seeing a war coming in a quiet dyad — is outside what this panel can score, by construction.
+
+### A3.5 What is published
+
+- `data/grid/g/PANEL.parquet` (or `.csv.gz` where pyarrow is absent) — one row per dyad-date, every
+  field, the whole panel, nothing filtered.
+- `data/grid/g/PANEL.json` — the marginals, the size, the limits, the evidence-class cross-tabs, the
+  covering-source mix by year, and the VR-1/VR-2/VR-3 counts on the full span.
+- `data/grid/g/PANEL.md` — the same for a reader, limits first.
+- `data/grid/g/ICB_DYADIC_REPLICATION.md` — the finding of A3.6, written to be lifted into the paper.
+
+### A3.6 The ICB replication finding is written up, not just applied
+
+Joe's ruling: *"it is publishable … a concrete, checkable statement about how a standard dataset
+behaves when used dyadically."* Registered as a deliverable of this build rather than a footnote:
+the note names the ICB crisis id, the six dyads, the rule that fired, and the general form of the
+error, and it states the scope of the claim — that this is a property of using an **actor-list**
+crisis dataset dyadically, not an error in ICB, which never claimed to record sides.
+
+The note also carries the **measured** replication count over the whole 1987–2014 panel, which the
+probe could not give from three years: for every ICB crisis that sets a level on any cell, how many
+distinct dyads it sets, and the distribution of that count. That number is computed by the build and
+is not known to this amendment.
+
+### A3.7 What this amendment does not do
+
+It does not score anything, fit anything, or compute a skill. It does not filter the panel. It does
+not change §5.1's degeneracy test, which was decided on the probe and stands. It does not touch
+`src/walk*.py`, `data/walk_forward/**` or `data/grid/**` outside `data/grid/g/**`.
