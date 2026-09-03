@@ -49,19 +49,44 @@ Three outputs, written to docs/:
 
 Every claim lands in exactly one class:
 
-  RESOLVED   found in a declared run object, at one or more named JSON paths
+  RESOLVED   found in a declared object, at three or fewer named paths
+  AMBIGUOUS  found, but in too many places to call any of them the citation
+  DERIVED    arithmetic over stored fields rather than a stored value. The formula
+             is declared HERE and EVALUATED; if it stops reproducing the printed
+             number the claim falls back to UNSOURCED rather than being accepted.
   EXCEPTION  a number the guard is TOLD is not in a run object, with the committed
-             file that does hold it. Registered here, in code, never inferred.
+             file that does hold it. Registered here, in code, never inferred, and
+             matched on the sentence as well as the value.
+  SELF_REFERENTIAL
+             resolves nowhere, and equals the sum of the numbers printed beside it.
+             A denominator asserted by the sentence that uses it is the shape a
+             fabricated denominator takes, so it is called out rather than left to
+             look like a number nobody indexed. The paper's `477` was this shape
+             until its predicate was published; it is DERIVED now.
+  HISTORICAL resolves nowhere, and sits inside a correction, erratum or retraction
+             region -- quoted as having been wrong, not asserted as right. A project
+             that publishes its own corrections will always contain wrong numbers on
+             purpose, and without this class every correction would make the guard
+             noisier, penalising the one behaviour it exists to protect. Nothing in
+             a correction region is checked for drift: a superseded number is
+             SUPPOSED to leave the record.
   UNSOURCED  looks like a published quantity, found nowhere in the declared record.
              REPORTED, NOT FIXED. The guard never guesses at a source, and never
              invents one to make its own list shorter.
-  EXCLUDED   not a claim at all -- a year, a section reference, a code span. The
-             REASON is published for every one of them, so the filter itself can be
-             audited rather than trusted.
+  EXCLUDED   not a claim at all -- a year, a section reference, a bibliography page
+             range, a code span. The REASON is published for every one of them, so
+             the filter itself can be audited rather than trusted.
+
+The record is JSON and CSV. A CSV is read as {n_rows, n_columns, columns}, because
+the documents cite those sheets for their row counts ("624 pre-1987 candidates") and
+a JSON-only index left those numbers untraceable for a reason that had nothing to do
+with the claim.
 
 Run:  python3 src/citation_guard.py
 """
 
+import csv
+import itertools
 import json
 import re
 from pathlib import Path
@@ -116,6 +141,19 @@ RUN_OBJECTS = [
     # file, so anything checked against it first resolves by coincidence.
     {"path": "data/ripple/irf.json", "run_key": None, "stamp_key": "meta.when",
      "role": "the propagation study (91k leaves -- resolved last, see note above)"},
+    # CSV sheets. The documents cite these for their ROW COUNTS ("624 pre-1987
+    # candidates"), which no JSON records, so a JSON-only index left those numbers
+    # untraceable for a reason that had nothing to do with the claim. A CSV reads
+    # into {n_rows, n_columns, columns: {...}} so a count sits at depth 1 and a cell
+    # at depth 3, and the specificity ranking prefers the count.
+    {"path": "data/candidates/pre1987_candidates.csv", "run_key": None,
+     "stamp_key": None, "role": "the pre-1987 candidate sheet"},
+    {"path": "data/candidates/post1987_candidates.csv", "run_key": None,
+     "stamp_key": None, "role": "the post-1987 candidate sheet"},
+    {"path": "data/candidates/pre1987_candidates_outcomes.csv", "run_key": None,
+     "stamp_key": None, "role": "pre-1987 candidates, outcome columns"},
+    {"path": "data/candidates/pre1987_ranked.csv", "run_key": None,
+     "stamp_key": None, "role": "pre-1987 candidates, ranked"},
 ]
 
 # ---------------------------------------------------------------------------
@@ -152,12 +190,31 @@ EXCEPTIONS = [
 # between a demonstrated identity and a guess.
 # ---------------------------------------------------------------------------
 
+def _scored_irf_cells(objs):
+    """Rows of data/ripple/irf.json that carry a verdict at all.
+
+    The paper's propagation denominator. It went UNSOURCED on this guard's first run
+    because section 12 asserted "477 node x shock cells" without stating the
+    predicate that produced it. The predicate is now written into section 12 and
+    Appendix A (1a18987), so it can be EVALUATED here rather than taken on trust.
+    """
+    return sum(1 for r in objs["data/ripple/irf.json"]["rows"]
+               if r.get("verdict") is not None)
+
+
 def _filtration_checks_total(objs):
     return sum(objs["data/walk_forward/summary.json"]["filtration_audit"]
                ["checks"].values())
 
 
 DERIVED = [
+    {"values": ["477"],
+     "context": re.compile(r"node.shock cells|cells transmit|of 477", re.I),
+     "formula": _scored_irf_cells,
+     "explain": "count of data/ripple/irf.json :: rows[*] whose `verdict` is not "
+                "null -- 401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, "
+                "455 unscored. Predicate registered in PAPER_DRAFT section 12 and "
+                "Appendix A."},
     {"values": ["15784"],
      "context": re.compile(r"filtration audit|point-in-time checks|checks", re.I),
      "formula": _filtration_checks_total,
@@ -212,6 +269,106 @@ def _blank_spans(text):
     return out, spans
 
 
+# A paragraph or section that exists to publish a number that WAS wrong. A paper
+# which corrects itself will always contain wrong numbers on purpose, and a guard
+# that cannot tell those apart gets noisier every time the project does the right
+# thing -- which is exactly backwards.
+_CORRECTION_OPENER = re.compile(
+    r"^\**\s*(?:correction|erratum|errata)\b|^\**\s*the correction\b|"
+    r"^an earlier draft\b|^\**\s*retract", re.I)
+# A paragraph can announce itself as a retraction inside its bolded lead-in rather
+# than at character zero -- "**1.5 ~~A VALIDATED claim~~ - CLOSED, RETRACTED.**".
+# A start-anchored rule missed exactly that, so the lead-in is searched too. Scoped
+# to the paragraph's FIRST line and its first 120 characters, so a paragraph that
+# merely mentions a retraction in passing is not swept in.
+_CORRECTION_LEADIN = re.compile(
+    r"RETRACTED|CORRECTION|ERRATUM|ERRATA|"
+    r"correction of record|erratum|errata|retracted under")
+_CORRECTION_LEADIN_WINDOW = 120
+_CORRECTION_HEADING = re.compile(r"errat(?:a|um)|correction|retraction", re.I)
+
+
+def _paragraph_is_a_correction(first_line):
+    """Does this paragraph announce itself as a correction, erratum or retraction?"""
+    head = first_line.strip()
+    if _CORRECTION_OPENER.search(head):
+        return True
+    return bool(_CORRECTION_LEADIN.search(head[:_CORRECTION_LEADIN_WINDOW]))
+
+
+def _correction_lines(text):
+    """Lines inside a correction, erratum or retraction region.
+
+    Two shapes, both published in the inventory so the rule can be audited:
+      - a HEADING that names itself a correction, until the next heading of the
+        same or a higher level;
+      - a PARAGRAPH whose FIRST LINE announces itself as one, until the next blank
+        line.
+
+    This does NOT exempt every number in the region. A correction paragraph quotes
+    the superseded value AND the current one, and the current one must still be
+    checked. The region only gives an UNRESOLVED number permission to be there:
+    HISTORICAL is (unresolved) AND (inside one of these). See build().
+    """
+    raw = text.splitlines()
+    lines, heading_level = set(), None
+    i = 0
+    while i < len(raw):
+        stripped = raw[i].strip()
+        if stripped.startswith("#"):
+            level = len(stripped) - len(stripped.lstrip("#"))
+            if _CORRECTION_HEADING.search(stripped):
+                heading_level = level
+            elif heading_level is not None and level <= heading_level:
+                heading_level = None
+            if heading_level is not None:
+                lines.add(i + 1)
+            i += 1
+            continue
+        if not stripped:
+            if heading_level is not None:
+                lines.add(i + 1)
+            i += 1
+            continue
+        # a paragraph: this line to the next blank or heading
+        j = i
+        while j < len(raw) and raw[j].strip() and not raw[j].strip().startswith("#"):
+            j += 1
+        if heading_level is not None or _paragraph_is_a_correction(raw[i]):
+            lines.update(range(i + 1, j + 1))
+        i = j
+    return lines
+
+
+def _numbers_in(context):
+    """Every numeric value printed in a line of prose."""
+    out = []
+    for m in _NUMBER.finditer(context.replace("\u2212", "-")):
+        sign, digits, frac = m.group(1), m.group(2), m.group(3) or ""
+        v = float(digits.replace(",", "") + frac)
+        out.append(-v if sign == "-" else v)
+    return out
+
+
+def self_referential_addends(claim, max_terms=5):
+    """Does this number exist only as the sum of the numbers printed beside it?
+
+    A denominator that resolves nowhere in the record but equals the parts listed
+    in its own sentence is asserting itself. That is precisely the shape a
+    fabricated denominator takes, so it gets its own class rather than sitting in
+    UNSOURCED looking like a number nobody happened to index.
+    """
+    if claim["decimals"] != 0 or abs(claim["value"]) < 3:
+        return None
+    others = [v for v in _numbers_in(claim["context"])
+              if v != claim["value"] and v > 0][:12]
+    for k in range(2, min(max_terms, len(others)) + 1):
+        for combo in itertools.combinations(others, k):
+            if abs(sum(combo) - abs(claim["value"])) < 1e-9:
+                return list(combo)
+    return None
+
+
 def _bibliography_lines(text):
     """Line numbers inside a References / Bibliography section.
 
@@ -249,6 +406,7 @@ def extract_claims(rel_path, text):
     """Every numeric token in a document, classified, with its line and context."""
     blanked, _ = _blank_spans(text)
     biblio = _bibliography_lines(text)
+    corrections = _correction_lines(text)
     line_starts = [0]
     for i, ch in enumerate(blanked):
         if ch == "\n":
@@ -285,6 +443,7 @@ def extract_claims(rel_path, text):
             "value": value, "decimals": decimals, "percent": bool(pct),
             "context": context[:200],
             "excluded_because": reason,
+            "in_correction_region": ln in corrections,
         })
     return claims
 
@@ -490,6 +649,36 @@ def match_exception(claim):
 
 # ---------------------------------------------------------------------------
 
+def read_csv_object(path):
+    """A CSV as an indexable object: its shape first, then its numeric columns.
+
+    Shape first because shape is what the prose cites -- the paper says "624
+    pre-1987 candidates" and means the number of rows in this file.
+    """
+    with path.open(newline="") as fh:
+        rows = list(csv.DictReader(fh))
+    columns = {}
+    for field in (rows[0].keys() if rows else []):
+        vals = []
+        for r in rows:
+            try:
+                vals.append(float(str(r[field]).replace(",", "")))
+            except (TypeError, ValueError):
+                continue
+        if vals:
+            columns[field] = vals
+    return {"n_rows": len(rows),
+            "n_columns": len(rows[0]) if rows else 0,
+            "columns": columns}
+
+
+def load_object(path):
+    """Read a declared object: JSON as itself, CSV via read_csv_object."""
+    if path.suffix.lower() == ".csv":
+        return read_csv_object(path)
+    return json.loads(path.read_text())
+
+
 def _get(obj, dotted):
     node = obj
     for part in dotted.split("."):
@@ -508,7 +697,7 @@ def load_record():
             raise FileNotFoundError(
                 f"{spec['path']} is declared in RUN_OBJECTS but is not in the tree. "
                 f"The guard reads it; fix the registry or restore the file.")
-        obj = json.loads(p.read_text())
+        obj = load_object(p)
         leaves = index_numeric_leaves(obj)
         record.append({
             "path": spec["path"], "role": spec["role"],
@@ -548,8 +737,18 @@ def build():
             c["status"] = "EXCLUDED"
             continue
         exc = match_exception(c)
+        der = match_derived(c, objs)
         primary, also_in = resolve(c, ordered_lookups)
-        if exc:
+        if der:
+            c["status"] = "DERIVED"
+            c["why"] = der["explain"]
+            c["recomputed"] = der["recomputed"]
+            if primary:
+                c["coincidental_object"] = primary["object"]
+                c["coincidental_paths"] = [
+                    f"{primary['object']} :: {show_path(seg)}"
+                    for seg in primary["segments"]]
+        elif exc:
             # Declared and reviewed, so it wins over any run-object match. Where the
             # value ALSO occurs in the record that is recorded, not hidden -- it is
             # the clearest evidence in this file of how easily a number resolves by
@@ -563,11 +762,22 @@ def build():
                     f"{primary['object']} :: {show_path(seg)}"
                     for seg in primary["segments"]]
         elif primary is None:
-            der = match_derived(c, objs)
-            if der:
-                c["status"] = "DERIVED"
-                c["why"] = der["explain"]
-                c["recomputed"] = der["recomputed"]
+            addends = self_referential_addends(c)
+            if c["in_correction_region"]:
+                # Quoted as having been wrong, not asserted as right. Without this
+                # class every correction the project publishes makes the guard
+                # noisier, which would penalise the one behaviour it exists to
+                # protect.
+                c["status"] = "HISTORICAL"
+                c["why"] = ("inside a correction / erratum / retraction region: a "
+                            "superseded number quoted deliberately, not a live claim")
+            elif addends:
+                c["status"] = "SELF_REFERENTIAL"
+                c["addends"] = addends
+                c["why"] = ("resolves nowhere in the record, and equals the sum of "
+                            "the numbers printed beside it "
+                            f"({' + '.join(_fmt_addend(a) for a in addends)}). The "
+                            "sentence is its own source.")
             else:
                 c["status"] = "UNSOURCED"
         else:
@@ -596,7 +806,8 @@ def build():
         "traceable_max_paths": TRACEABLE_MAX_PATHS,
         "counts": {s: sum(1 for c in claims if c["status"] == s)
                    for s in ("RESOLVED", "EXCEPTION", "DERIVED", "AMBIGUOUS",
-                             "UNSOURCED", "EXCLUDED")},
+                             "SELF_REFERENTIAL", "HISTORICAL", "UNSOURCED",
+                             "EXCLUDED")},
         "claims": claims,
     }
     return inventory
@@ -629,8 +840,10 @@ def render_markdown(inv):
         "| **weak** | AMBIGUOUS claims | only notices if the value leaves the file entirely |",
         "",
         "Most headline numbers are AMBIGUOUS, because `summary.json` legitimately stores",
-        "the same quantity in a dozen places. A green suite means *the run is current*;",
-        "it does not mean every sentence has been checked.",
+        "the same quantity in a dozen places. **Treat a green result there as \"not",
+        "obviously broken\", never as \"checked\".** A green suite means the run is",
+        "current; it does not mean any sentence has been validated, and this guard must",
+        "never be quoted as though it validated the paper.",
         "",
         "**UNSOURCED is reported, never fixed.** The guard does not guess at a source for",
         "a number it cannot find, and never invents one to shorten its own list.",
@@ -658,6 +871,10 @@ def render_markdown(inv):
         f"{inv['traceable_max_paths']} named paths |",
         f"| EXCEPTION | {c['EXCEPTION']} | registered as living outside the run objects |",
         f"| DERIVED | {c['DERIVED']} | arithmetic over stored fields, recomputed here |",
+        f"| SELF_REFERENTIAL | {c['SELF_REFERENTIAL']} | **a denominator that sums "
+        f"only from its own sentence** |",
+        f"| HISTORICAL | {c['HISTORICAL']} | quoted as having been wrong, inside a "
+        f"correction region |",
         f"| AMBIGUOUS | {c['AMBIGUOUS']} | in the record, but in too many places to "
         f"call it a citation |",
         f"| UNSOURCED | {c['UNSOURCED']} | **found nowhere in the declared record** |",
@@ -680,6 +897,52 @@ def render_markdown(inv):
         if cl["status"] == "UNSOURCED":
             ctx = cl["context"].replace("|", "\\|")[:130]
             lines.append(f"| `{cl['document']}` | {cl['line']} | `{cl['raw']}` | {ctx} |")
+    if not any(cl["status"] == "UNSOURCED" for cl in inv["claims"]):
+        lines.append("| — | — | — | *nothing untraceable in the current documents* |")
+
+    n_corr = sum(1 for cl in inv["claims"] if cl.get("in_correction_region")
+                 and cl["status"] != "EXCLUDED")
+    lines += ["", "## SELF_REFERENTIAL — the sentence is its own source", "",
+              "A number that resolves **nowhere** in the record and happens to equal the",
+              "sum of the numbers printed beside it. A denominator asserted by the same",
+              "sentence that uses it is exactly the shape a fabricated one takes, so it",
+              "gets its own class rather than sitting in UNSOURCED looking like a number",
+              "nobody happened to index.",
+              "",
+              "The paper's `477` was this shape on the guard's first run — it resolved",
+              "only as 21 + 401 + 55 from the sentence asserting it. It is now DERIVED,",
+              "because the predicate behind it was written into section 12 and Appendix A",
+              "and can be evaluated. The guard was right to flag it; the paper was wrong",
+              "not to state its own predicate. This class exists to catch the next one.",
+              "",
+              "| document | line | number | sums from | context |",
+              "|---|---:|---:|---|---|"]
+    for cl in inv["claims"]:
+        if cl["status"] == "SELF_REFERENTIAL":
+            lines.append(f"| `{cl['document']}` | {cl['line']} | `{cl['raw']}` | "
+                         f"{' + '.join(str(a) for a in cl['addends'])} | "
+                         f"{cl['context'][:90].replace('|', chr(92) + '|')} |")
+    if not any(cl["status"] == "SELF_REFERENTIAL" for cl in inv["claims"]):
+        lines.append("| — | — | — | — | *none in the current documents* |")
+
+    lines += ["", "## HISTORICAL — quoted as having been wrong", "",
+              "A project that publishes its own corrections will always contain wrong",
+              "numbers on purpose. These sit inside a correction, erratum or retraction",
+              "region and resolve nowhere in the record — which is what a superseded",
+              "number should do. Without this class every correction the project",
+              "publishes would make the guard noisier, penalising the one behaviour it",
+              "exists to protect.",
+              "",
+              f"{n_corr} claim(s) in total sit inside a correction region; the ones that",
+              "still resolve are classed normally and marked `correction region` in the",
+              "tables below. **No claim in a correction region is checked for drift** —",
+              "a superseded number is expected to leave the record.",
+              "",
+              "| document | line | number | context |", "|---|---:|---:|---|"]
+    for cl in inv["claims"]:
+        if cl["status"] == "HISTORICAL":
+            lines.append(f"| `{cl['document']}` | {cl['line']} | `{cl['raw']}` | "
+                         f"{cl['context'][:110].replace('|', chr(92) + '|')} |")
 
     lines += ["", "## DERIVED — arithmetic over stored fields, recomputed and checked",
               "",
@@ -756,6 +1019,10 @@ def main():
           f"{inv['traceable_max_paths']} named paths")
     print(f"  EXCEPTION {c['EXCEPTION']}   registered as outside the run objects")
     print(f"  DERIVED   {c['DERIVED']}   arithmetic over stored fields, recomputed")
+    print(f"  SELF_REF  {c['SELF_REFERENTIAL']}   <- a denominator that sums only "
+          f"from its own sentence")
+    print(f"  HISTORICAL {c['HISTORICAL']}  quoted as having been wrong, in a "
+          f"correction region")
     print(f"  AMBIGUOUS {c['AMBIGUOUS']}   in the record, in too many places to cite")
     print(f"  UNSOURCED {c['UNSOURCED']}   <- reported, not fixed")
     print(f"  EXCLUDED  {c['EXCLUDED']}   not claims (year, identifier, code span)")

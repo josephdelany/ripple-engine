@@ -100,6 +100,12 @@ def test_citation_guard_every_in_record_claim_still_resolves(inventory, record):
     for c in inventory["claims"]:
         if c["status"] not in ("RESOLVED", "AMBIGUOUS"):
             continue
+        if c.get("in_correction_region"):
+            # A number quoted as having been wrong is SUPPOSED to leave the record.
+            # Checking it for drift would make every correction the project
+            # publishes add noise here, penalising the behaviour this file exists
+            # to protect.
+            continue
         obj = objs.get(c["object"])
         assert obj is not None, (
             f"{c['object']} resolved a claim but is no longer a declared object")
@@ -216,3 +222,185 @@ def test_citation_guard_exceptions_need_the_sentence_not_just_the_value():
     miss = cg.match_exception({"context": "Vs random analogs -0.005 (p = 0.85).",
                                "value": -0.005, "decimals": 3})
     assert hit is not None and miss is None
+
+
+# --- the three coverage gaps closed on 2026-09-03 ----------------------------
+
+def test_citation_guard_indexes_csv_row_counts(record):
+    """624 and 473 were untraceable for a reason that had nothing to do with the
+    claim: the guard only read JSON, and those numbers are CSV row counts."""
+    by_path = {r["path"]: r for r in record}
+    pre = by_path["data/candidates/pre1987_candidates.csv"]
+    post = by_path["data/candidates/post1987_candidates.csv"]
+    assert pre["obj"]["n_rows"] == 624, pre["obj"]["n_rows"]
+    assert post["obj"]["n_rows"] == 473, post["obj"]["n_rows"]
+
+
+def test_citation_guard_csv_counts_actually_resolve_the_claims(inventory):
+    """The paper's '624 pre-1987 candidates; 473 post-1987 candidates'."""
+    got = {c["raw"]: c for c in inventory["claims"]
+           if c["raw"] in ("624", "473") and c["status"] != "EXCLUDED"}
+    assert got, "the candidate counts vanished from the documents"
+    for raw, c in got.items():
+        assert c["status"] in ("RESOLVED", "AMBIGUOUS"), (
+            f"{raw} is {c['status']}; CSV indexing was supposed to resolve it")
+
+
+def test_citation_guard_477_is_derived_from_its_published_predicate(record):
+    """The propagation denominator: rows of irf.json carrying any verdict.
+
+    401 NULL + 21 TRANSMITTING + 55 INSUFFICIENT of 932 rows, 455 unscored. The
+    predicate is registered in PAPER_DRAFT section 12 and Appendix A; this asserts
+    the arithmetic behind it rather than the number.
+    """
+    objs = {r["path"]: r["obj"] for r in record}
+    rows = objs["data/ripple/irf.json"]["rows"]
+    verdicts = {}
+    for r in rows:
+        verdicts[r.get("verdict")] = verdicts.get(r.get("verdict"), 0) + 1
+    assert cg._scored_irf_cells(objs) == 477
+    assert verdicts.get("NULL") == 401
+    assert verdicts.get("TRANSMITTING") == 21
+    assert verdicts.get("INSUFFICIENT") == 55
+    assert verdicts.get(None) == 455
+    assert len(rows) == 932
+
+
+def test_citation_guard_self_referential_detector_fires_on_the_papers_own_sentence():
+    """Proof the class works, using the sentence that motivated it.
+
+    477 is DERIVED now, because its predicate was published. Before that it
+    resolved ONLY as 21 + 401 + 55 from the sentence asserting it -- the exact
+    shape a fabricated denominator takes. This asserts the detector would have
+    caught it, so the class is not decoration.
+    """
+    claim = {"context": "**Result. Across 477 node×shock cells, 21 transmit, 401 "
+                        "are null and 55 are insufficient.",
+             "value": 477.0, "decimals": 0, "percent": False}
+    addends = cg.self_referential_addends(claim)
+    assert addends is not None, "the detector missed a self-asserting denominator"
+    assert sorted(addends) == [21.0, 55.0, 401.0], addends
+
+
+def test_citation_guard_self_referential_does_not_fire_on_ordinary_prose():
+    """It must not flag every number that happens to be a sum."""
+    claim = {"context": "The engine scored 0.769 against climatology's 0.701.",
+             "value": 0.769, "decimals": 3, "percent": False}
+    assert cg.self_referential_addends(claim) is None
+
+
+def test_citation_guard_marks_correction_regions():
+    """A paper that publishes its corrections contains wrong numbers on purpose."""
+    text = ("Live claim: skill 0.123.\n"
+            "\n"
+            "*Correction of record.* An earlier draft reported +0.0103, CI "
+            "[+0.0022, +0.0184].\n"
+            "It is now +0.0102.\n"
+            "\n"
+            "Back to live prose: 0.456.\n")
+    lines = cg._correction_lines(text)
+    assert 3 in lines and 4 in lines, lines
+    assert 1 not in lines and 6 not in lines, lines
+
+
+def test_citation_guard_correction_heading_covers_its_section():
+    text = ("## 12 Results\n"
+            "value 0.111\n"
+            "\n"
+            "### 12.1 Two errata, from the follow-up\n"
+            "we reported 0.222\n"
+            "\n"
+            "## 13 Next\n"
+            "value 0.333\n")
+    lines = cg._correction_lines(text)
+    assert 5 in lines, lines
+    assert 2 not in lines and 8 not in lines, lines
+
+
+def test_citation_guard_historical_numbers_are_exempt_from_drift(inventory):
+    """The functional point of the HISTORICAL class: a superseded number is
+    EXPECTED to leave the record, so it must never be reported as drift."""
+    corr = [c for c in inventory["claims"]
+            if c.get("in_correction_region") and c["status"] != "EXCLUDED"]
+    assert corr, "no correction regions found; the detector has stopped working"
+    assert any(c["status"] == "HISTORICAL" for c in inventory["claims"]), \
+        "a correction region exists but nothing was classed HISTORICAL"
+
+
+def test_citation_guard_keeps_the_graded_protection_statement_verbatim():
+    """The framing is load-bearing and must not be softened by a later edit.
+
+    Nobody may quote this guard as though it validated the paper.
+    """
+    # Whitespace-collapsed: these phrases are wrapped for line width in both files,
+    # and the requirement is that the WORDING survives, not its line breaks.
+    def flat(path):
+        return " ".join((ROOT / path).read_text().split())
+
+    src = flat("src/citation_guard.py")
+    md = flat("docs/CITATION_INVENTORY.md")
+    for phrase in ("STRONG", "SHARP", "WEAK"):
+        assert phrase in src, f"the graded-protection statement lost {phrase}"
+    for phrase in ('not obviously broken', 'never as \\"checked\\"'.replace("\\", ""),
+                   "not a substitute for reading"):
+        assert phrase in src, f"src lost: {phrase}"
+    for phrase in ("not obviously broken", "never as", "checked",
+                   "never be quoted as though it validated the paper"):
+        assert phrase in md, f"the published inventory lost: {phrase}"
+    for grade in ("strong", "sharp", "weak"):
+        assert grade in md, f"the inventory's graded table lost {grade}"
+
+
+def test_citation_guard_correction_regions_do_not_over_capture():
+    """Over-capture is the dangerous direction.
+
+    Nothing in a correction region is checked for drift, so a live paragraph swept
+    in by a loose rule would be silently exempted -- a worse failure than the noise
+    the class was added to remove. Two properties are asserted: every region really
+    does open with a correction marker, and no document is mostly correction.
+    """
+    for doc in cg.DOCUMENTS:
+        text = (ROOT / doc).read_text()
+        raw = text.splitlines()
+        lines = cg._correction_lines(text)
+        if not lines:
+            continue
+        share = len(lines) / max(len(raw), 1)
+        assert share <= 0.25, (
+            f"{doc}: {share:.0%} of the document is classed as a correction region; "
+            f"the opener rule has gone loose and is exempting live prose from drift")
+        starts = [n for n in sorted(lines) if n - 1 not in lines]
+        for n in starts:
+            head = raw[n - 1]
+            assert (cg._paragraph_is_a_correction(head)
+                    or head.strip().startswith("#")), (
+                f"{doc}:{n} was classed as a correction region but does not announce "
+                f"itself as one: {head.strip()[:80]!r}")
+
+
+def test_citation_guard_a_retraction_lead_in_is_detected():
+    """Regression: the opener was start-anchored and missed a paragraph that
+    announces its retraction inside a bolded lead-in, which is how OPEN_ITEMS
+    writes them."""
+    assert cg._paragraph_is_a_correction(
+        "**1.5 ~~A VALIDATED claim in `edge_battery.json`~~ — CLOSED, RETRACTED.**")
+    assert cg._paragraph_is_a_correction("*Correction of record.* An earlier draft")
+    assert not cg._paragraph_is_a_correction(
+        "Pre-registration with git timestamps · three published retractions of the "
+        "project's own earlier positive findings, which is the record working.")
+
+
+def test_citation_guard_the_same_number_is_classed_by_its_context():
+    """The same value must be treated differently inside and outside a correction.
+
+    Synthetic rather than pinned to live prose: both real occurrences of +8.209 now
+    sit in retraction paragraphs, which is correct but makes the documents unable to
+    demonstrate the distinction.
+    """
+    text = ("A live claim of 8.209 in ordinary prose.\n"
+            "\n"
+            "*Correction of record.* We earlier reported 8.209 and withdraw it.\n")
+    claims = [c for c in cg.extract_claims("t.md", text) if c["value"] == 8.209]
+    assert len(claims) == 2, claims
+    flags = {c["line"]: c["in_correction_region"] for c in claims}
+    assert flags == {1: False, 3: True}, flags

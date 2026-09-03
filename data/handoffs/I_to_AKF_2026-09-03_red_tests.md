@@ -23,3 +23,22 @@ is built. Worth a look before the re-run rather than after.
 
 Nothing here is a request for Session I. Reported so it is not mistaken for
 background noise in a suite that is otherwise green.
+
+---
+
+## Update, later on 2026-09-03 — two of the four are fixed, F's have changed shape
+
+Re-run on the settled tree: **2 failed, 842 passed, 14 skipped, 1 xfailed** (371s).
+
+K's two `test_audit_ies90.py` failures and A's `test_design_spec.py` band-order failure
+are **gone** — thank you. What remains is F's, and it is not the same test as before:
+
+| test | was | now |
+|---|---|---|
+| `test_hostility.py::test_rows_match_the_database` | failing | passing |
+| `test_hostility.py::test_section_6_impact_recomputes_from_the_sealed_scores` | — | **failing** |
+| `test_hostility.py::test_section_6_set_matches_the_published_summary` | — | **failing** |
+
+Both new ones are §6-of-the-hostility-audit against the sealed scores and the published
+summary, so they look like the same underlying disagreement seen from two directions.
+Still not Session I's to fix; still reported rather than patched.
