@@ -8,7 +8,8 @@ This is a logical archive rather than a destructive file purge. It preserves pro
 
 ## Repository-wide classification
 
-All 1,734 tracked files were classified during closure by path and role:
+Every tracked file was classified during closure by path and role. The exhaustive ledger is
+`docs/audit/FILE_CLASSIFICATION.csv`; regenerate it with `python3 src/classify_public_product.py`.
 
 - **Maintained core:** registration, central implementation, reproducer, demonstration, frozen transparent inputs/outputs, README, paper, codebook, and central tests.
 - **Required dependency:** inference/scoring code and the world-state codebook directly read by the central implementation.
