@@ -203,6 +203,25 @@ public domain (quoted above), acknowledgment requested.
   (TOTPRODS/TOTDEMO/KBD), from the annual CSVs 2002 → present.
 - **None of these is a node in the sealed RIPPLE_REGISTRATION.md Table N**, and none was used in
   the computed study. They are loaded for later work; using one needs a dated amendment first.
+- **Load receipt, 2026-09-02** (`--refresh --only jodi.`, ~19 min, 925 MB fetched and discarded):
+  **106 of 110 series loaded, 27,400 observations, 2002-01 → 2026-06**, 0 seeds written.
+  Spot checks against the pinned units: Saudi crude production 2026-01 = **10,100** thousand
+  bbl/day, US = **13,246.4**, US closing crude stocks = **676,671** thousand bbl.
+  Four series are empty and are reported as empty, not filled: `ru.products_demand`,
+  `cn.crude_stocks`, `kz.refinery_intake`, `kz.products_demand`.
+- **The coverage fact that matters most, and the proof the unit guard works.** Six reporters
+  stopped publishing crude-production VOLUMES while continuing to publish the conversion factor,
+  so their series end where the volumes end instead of running on with a number near 7,400:
+
+  | reporter | crude production ends | reporter | crude production ends |
+  |---|---|---|---|
+  | Iran | 2018-07 | Brazil | 2022-12 |
+  | UAE | 2018-12 | Russia | 2023-03 |
+  | Qatar | 2018-12 | Iraq | 2024-03 |
+
+  Four of the six are major OPEC producers. Any JODI-based production panel is therefore
+  **structurally missing the OPEC core after 2018**, and a loader without the CONVBBL guard
+  would instead have shown them reporting continuously to 2026 at implausibly flat values.
 
 ### OPEC MOMR — VERIFIED access, restrictive terms, NOT LOADED
 - opec.org/monthly-oil-market-report.html (opened in a browser; plain HTTP is a
