@@ -45,6 +45,11 @@ DATA = ROOT / "data"
 WF = DATA / "walk_forward"
 FAR_FUTURE = "2200-01-01"     # inside numpy's datetime64[ns] range (2262); 2999 overflowed to index 0
 
+# WALK_FORWARD_PROTOCOL.md Amendment P (2026-09-03): the registered design filters every retrieval
+# candidate to the target's own event class (Tier-1 A2). DEFAULT True -- the sealed run's behaviour is
+# unchanged. Set False only by the Amendment P driver, which writes to a separate output directory.
+CLASS_FILTER = True
+
 GEO_TYPES = S.GEO_TYPES
 LEVELS = S.LEVELS
 LEVEL_MEANING = S.LEVEL_MEANING
@@ -205,7 +210,7 @@ class Corpus:
         out = []
         ttier = target.get("tier") or self.tier_of(target["date"])
         for e in self.events:
-            if e["type"] != target["type"] or e["event_id"] == target.get("event_id"):
+            if (CLASS_FILTER and e["type"] != target["type"]) or e["event_id"] == target.get("event_id"):
                 continue
             if break_filtration:
                 out.append(self.vector(e["event_id"]) | {"tier": e["tier"],
