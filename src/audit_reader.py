@@ -274,14 +274,29 @@ def status():
                   passed=bool(o.get("passed")), audited_by_joe=bool(o.get("n_done")), dated=o.get("dated"))
     if KAPPA_OUT.exists():
         kk = json.loads(KAPPA_OUT.read_text())
-        st["kappa_A_vs_H"] = (kk.get("pairs", {}).get("A_vs_H") or {}).get("kappa")
-        st["kappa_A_vs_H_n"] = (kk.get("pairs", {}).get("A_vs_H") or {}).get("n")
+        st["kappa_A_vs_H_headline"] = (kk.get("pairs", {}).get("A_vs_H") or {}).get("kappa")
+        st["kappa_A_vs_H_headline_n"] = (kk.get("pairs", {}).get("A_vs_H") or {}).get("n")
+        # Amendment 8(b): the headline kappa is inflated by construction -- 9 of the 30 id slugs
+        # printed on the blind sheet contain a token of their own class, so those rows can be coded
+        # without reading the headline. The number any surface quotes is the lower bound on the rows
+        # that do NOT telegraph. The headline is carried alongside, named as inflated, never alone.
+        cav = kk.get("blindness_caveat") or {}
+        sub = (cav.get("subset_kappa_excluding_telegraphed") or {}).get("A_vs_H") or {}
+        st["kappa_A_vs_H"] = sub.get("kappa", st.get("kappa_A_vs_H_headline"))
+        st["kappa_A_vs_H_n"] = sub.get("n", st.get("kappa_A_vs_H_headline_n"))
+        st["kappa_quoted_is"] = ("excluding the {t} of {n} rows whose id slug telegraphs its own class"
+                                 .format(t=cav.get("n_telegraphed"), n=cav.get("n_total"))
+                                 if sub else "the headline on all rows (no blindness caveat computed)")
     kv = st.get("kappa_A_vs_H")
     st["label"] = ("reader accuracy, audited by Joe (kappa {k} vs the reader, n={n})".format(
         k=st["kappa_joe_vs_reader"], n=st["n_done"]) if st["passed"] else
-        "reader accuracy: UNAUDITED (inter-coder kappa {k} between sessions A and H, n={n}; "
-        "both are Claude -- a legibility check, not a human audit)".format(
-            k=kv if kv is not None else "not yet computed", n=st.get("kappa_A_vs_H_n", 0)))
+        "reader accuracy: UNAUDITED (inter-coder kappa {k} between sessions A and H, n={n} -- the "
+        "honest lower bound, {q}; the headline {h} on all {hn} is inflated by construction. Both "
+        "coders are Claude, so this measures whether the codebook is legible, not whether it is "
+        "right; only Joe's own coding retires UNAUDITED)".format(
+            k=kv if kv is not None else "not yet computed", n=st.get("kappa_A_vs_H_n", 0),
+            q=st.get("kappa_quoted_is", ""), h=st.get("kappa_A_vs_H_headline"),
+            hn=st.get("kappa_A_vs_H_headline_n", 0)))
     return st
 
 

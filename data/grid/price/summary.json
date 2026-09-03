@@ -2,8 +2,8 @@
  "study": "GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03)",
  "unit": "date",
  "estimand": "given the world state on date t, the distribution of the h-day return -- NOT the event-triggered estimand; no number in data/walk_forward/** is re-judged (\u00a70.2)",
- "run_id": "grid_price_20260903T042725Z",
- "generated_at": "2026-09-03T04:30:31+00:00",
+ "run_id": "grid_price_20260903T045529Z",
+ "generated_at": "2026-09-03T04:58:26+00:00",
  "registered": {
   "blocks": {
    "physical": [
@@ -79,119 +79,135 @@
  },
  "fitted_vs": {
   "grid_climatology": {
-   "n": 10857,
-   "mean": 0.1573418858122225,
-   "ref_mean": 0.14677651243919038,
-   "skill": -0.07198272528385208,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.15857043279298666,
+   "ref_mean": 0.14811525777150167,
+   "skill": -0.07058810266268623,
    "ci95": [
-    -0.08108672140073625,
-    -0.063650664548914
+    -0.08262629970864531,
+    -0.0586751530878708
    ],
-   "dm_hln": 16.20360420992079,
+   "dm_hln": 12.298175738675026,
    "dm_p": 0.0,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "no_change": {
-   "n": 10857,
-   "mean": 0.1573418858122225,
-   "ref_mean": 0.19268944155315573,
-   "skill": 0.1834431376001584,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.15857043279298666,
+   "ref_mean": 0.19441312064299532,
+   "skill": 0.18436352305576797,
    "ci95": [
-    0.1749496038228617,
-    0.191939518458038
+    0.17213039585122666,
+    0.1962805443634172
    ],
-   "dm_hln": -33.55522801902489,
+   "dm_hln": -22.190226006019717,
    "dm_p": 0.0,
    "ref": "no_change",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "random_analogs": {
-   "n": 10857,
-   "mean": 0.1573418858122225,
-   "ref_mean": 0.15898600028997803,
-   "skill": 0.01034125315912593,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.15857043279298666,
+   "ref_mean": 0.16021069557541676,
+   "skill": 0.0102381602959708,
    "ci95": [
-    0.0022003357880569954,
-    0.018366564453283923
+    -0.000445154694127845,
+    0.021177041471554383
    ],
-   "dm_hln": -2.5626220991443813,
-   "dm_p": 0.010401868775695045,
+   "dm_hln": -1.9453960345469714,
+   "dm_p": 0.05240714980930439,
    "ref": "random_analogs",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "frozen": {
-   "n": 10857,
-   "mean": 0.1573418858122225,
-   "ref_mean": 0.15766289396338018,
-   "skill": 0.0020360412211654078,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.15857043279298666,
+   "ref_mean": 0.1587823742904727,
+   "skill": 0.0013347923435023112,
    "ci95": [
-    -0.006679830743623552,
-    0.010992813258644374
+    -0.01042130119017256,
+    0.012843093312549689
    ],
-   "dm_hln": -0.46463582318691493,
-   "dm_p": 0.6422015921046946,
+   "dm_hln": -0.22726534362106648,
+   "dm_p": 0.8203301484805425,
    "ref": "frozen",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   }
  },
  "frozen_vs": {
   "grid_climatology": {
-   "n": 10873,
-   "mean": 0.15754932591725718,
-   "ref_mean": 0.14668796826580266,
-   "skill": -0.07404395725062773,
+   "n_dates": 415,
+   "n_cells": 10873,
+   "mean": 0.1583619160169997,
+   "ref_mean": 0.147776152835574,
+   "skill": -0.07163377160863127,
    "ci95": [
-    -0.08276101219222885,
-    -0.06545693318419205
+    -0.08394515439510741,
+    -0.05995846500698873
    ],
-   "dm_hln": 17.23620684248392,
+   "dm_hln": 12.351761921715742,
    "dm_p": 0.0,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "no_change": {
-   "n": 10873,
-   "mean": 0.15754932591725718,
-   "ref_mean": 0.1925332352376615,
-   "skill": 0.1817032227044877,
+   "n_dates": 415,
+   "n_cells": 10873,
+   "mean": 0.1583619160169997,
+   "ref_mean": 0.19383358286114127,
+   "skill": 0.18300062517831495,
    "ci95": [
-    0.1733728687332286,
-    0.19053551463532012
+    0.17182869127019268,
+    0.194106711325095
    ],
-   "dm_hln": -33.912702745954256,
+   "dm_hln": -22.198654525706647,
    "dm_p": 0.0,
    "ref": "no_change",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "random_analogs": {
-   "n": 10873,
-   "mean": 0.15754932591725718,
-   "ref_mean": 0.15890311720659211,
-   "skill": 0.008519601837482238,
+   "n_dates": 415,
+   "n_cells": 10873,
+   "mean": 0.1583619160169997,
+   "ref_mean": 0.15987555250947913,
+   "skill": 0.009467591940860887,
    "ci95": [
-    0.0005764482668363537,
-    0.016437794546082345
+    -0.001133042553134738,
+    0.021137553027940004
    ],
-   "dm_hln": -2.165007786794714,
-   "dm_p": 0.03040877325635405,
+   "dm_hln": -1.7439662766351998,
+   "dm_p": 0.08190718584061929,
    "ref": "random_analogs",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   }
  },
  "the_comparison": {
-  "n": 10857,
-  "mean": 0.1573418858122225,
-  "ref_mean": 0.15766289396338018,
-  "skill": 0.0020360412211654078,
+  "n_dates": 413,
+  "n_cells": 10857,
+  "mean": 0.15857043279298666,
+  "ref_mean": 0.1587823742904727,
+  "skill": 0.0013347923435023112,
   "ci95": [
-   -0.006679830743623552,
-   0.010992813258644374
+   -0.01042130119017256,
+   0.012843093312549689
   ],
-  "dm_hln": -0.46463582318691493,
-  "dm_p": 0.6422015921046946,
+  "dm_hln": -0.22726534362106648,
+  "dm_p": 0.8203301484805425,
   "ref": "frozen",
-  "score": "crps"
+  "score": "crps",
+  "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
  },
  "diagnostic_fair": {
   "what": "Ferro size-corrected CRPS (Amendment A.5 / E.3, inherited by \u00a70.2 and required by \u00a73.2). A k = 12 atom forecast is charged E|X-X'|/(2k) that a large climatology pool is not, so the correction can only RAISE the engine's measured standing against climatology. It is a diagnostic and it gates nothing: the registered CRPS decides.",
@@ -204,46 +220,52 @@
    "climatology_fair": 0.1458643522672503
   },
   "fitted_vs_climatology_registered": {
-   "n": 10857,
-   "mean": 0.1573418858122225,
-   "ref_mean": 0.14677651243919038,
-   "skill": -0.07198272528385208,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.15857043279298666,
+   "ref_mean": 0.14811525777150167,
+   "skill": -0.07058810266268623,
    "ci95": [
-    -0.08108672140073625,
-    -0.063650664548914
+    -0.08262629970864531,
+    -0.0586751530878708
    ],
-   "dm_hln": 16.20360420992079,
+   "dm_hln": 12.298175738675026,
    "dm_p": 0.0,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "fitted_vs_climatology_fair": {
-   "n": 10857,
-   "mean": 0.1448352302127067,
-   "ref_mean": 0.14595679687316632,
-   "skill": 0.007684237284504403,
+   "n_dates": 413,
+   "n_cells": 10857,
+   "mean": 0.1459752885264814,
+   "ref_mean": 0.14722820012674526,
+   "skill": 0.008509997399854474,
    "ci95": [
-    -0.0008498551927932745,
-    0.016332015787426747
+    -0.0026700054699978484,
+    0.019809090547333034
    ],
-   "dm_hln": -1.7719091386938506,
-   "dm_p": 0.07643768580394528,
+   "dm_hln": -1.5255219760625098,
+   "dm_p": 0.1278962094401137,
    "ref": "grid_climatology_fair",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "frozen_vs_climatology_fair": {
-   "n": 10873,
-   "mean": 0.1455520779929564,
-   "ref_mean": 0.14586435226725028,
-   "skill": 0.002140853947109167,
+   "n_dates": 415,
+   "n_cells": 10873,
+   "mean": 0.14643908158541238,
+   "ref_mean": 0.1468778396469218,
+   "skill": 0.002987231174996441,
    "ci95": [
-    -0.00611548606555684,
-    0.010631855245301795
+    -0.007898938038755134,
+    0.014687432883995185
    ],
-   "dm_hln": -0.5088783495224638,
-   "dm_p": 0.6108478231412775,
+   "dm_hln": -0.5307837460656113,
+   "dm_p": 0.5958532545477349,
    "ref": "grid_climatology_fair",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   }
  },
  "calibration": {
@@ -279,162 +301,202 @@
   "pit_n": 10857,
   "note": "a calibrated forecast has a flat PIT; \u00a73 registers the histogram, not a test statistic"
  },
+ "spa": {
+  "n_models": 4,
+  "T": 413,
+  "stat": -12.313091663791646,
+  "best_model": "fitted",
+  "best_mean_gain": -0.010455175021485009,
+  "p_rc": 1.0,
+  "p_spa": 0.7032967032967034,
+  "n_boot": 1000,
+  "models": [
+   "fitted",
+   "frozen",
+   "random_analogs",
+   "no_change"
+  ],
+  "benchmark": "grid_climatology",
+  "note": "\u00a76 / Part III \u00a73.2: with four models compared against one benchmark, the best of them is tested against the null that NONE beats it. Computed on per-date differentials, the same unit of dependence as every interval in this file."
+ },
  "per_target": {
   "brent": {
-   "n": 2000,
-   "mean": 0.06998213132746228,
-   "ref_mean": 0.06601640564913185,
-   "skill": -0.060071820623008865,
+   "n_dates": 407,
+   "n_cells": 2000,
+   "mean": 0.06974477612569495,
+   "ref_mean": 0.06577651637192194,
+   "skill": -0.060329430207814116,
    "ci95": [
-    -0.08242276490716414,
-    -0.03786894599770492
+    -0.08955074844077869,
+    -0.02900863683656137
    ],
-   "dm_hln": 6.05098928079336,
-   "dm_p": 1.714245634332201e-09,
+   "dm_hln": 4.257870227949943,
+   "dm_p": 2.5664996432972487e-05,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "wti": {
-   "n": 1974,
-   "mean": 0.06515578918547121,
-   "ref_mean": 0.06187795492625753,
-   "skill": -0.052972569360445254,
+   "n_dates": 406,
+   "n_cells": 1974,
+   "mean": 0.06489402962453764,
+   "ref_mean": 0.0615664663976628,
+   "skill": -0.05404830618963641,
    "ci95": [
-    -0.0735682050456141,
-    -0.031114864518040637
+    -0.08356258856053762,
+    -0.024990516288724292
    ],
-   "dm_hln": 5.552102713084709,
-   "dm_p": 3.2041667097360005e-08,
+   "dm_hln": 3.995945861313864,
+   "dm_p": 7.655228100689193e-05,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "diesel_crack": {
-   "n": 1953,
-   "mean": 0.22327351479213198,
-   "ref_mean": 0.2079527647780996,
-   "skill": -0.0736741828384957,
+   "n_dates": 404,
+   "n_cells": 1953,
+   "mean": 0.22348966738253057,
+   "ref_mean": 0.20813943000856364,
+   "skill": -0.07374978096814888,
    "ci95": [
-    -0.09115404118823883,
-    -0.056653324561496375
+    -0.09625408924891408,
+    -0.05282968083888077
    ],
-   "dm_hln": 8.795544594338386,
-   "dm_p": 0.0,
+   "dm_hln": 6.944221251936656,
+   "dm_p": 1.5322632052061635e-11,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "gasoline_crack": {
-   "n": 1925,
-   "mean": 0.37992542672084995,
-   "ref_mean": 0.351220543224475,
-   "skill": -0.08172894225617333,
+   "n_dates": 404,
+   "n_cells": 1925,
+   "mean": 0.3888558601793256,
+   "ref_mean": 0.35953484491323734,
+   "skill": -0.08155263858545903,
    "ci95": [
-    -0.09892699851017314,
-    -0.06530596876816971
+    -0.10421501499566832,
+    -0.06145640222969897
    ],
-   "dm_hln": 10.12884948728702,
-   "dm_p": 0.0,
+   "dm_hln": 8.101115803928032,
+   "dm_p": 6.661338147750939e-15,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "henry_hub": {
-   "n": 1383,
-   "mean": 0.10599731248622203,
-   "ref_mean": 0.09813849604067573,
-   "skill": -0.08007883514221614,
+   "n_dates": 286,
+   "n_cells": 1383,
+   "mean": 0.10580492781474268,
+   "ref_mean": 0.09816887903136161,
+   "skill": -0.0777848220202415,
    "ci95": [
-    -0.105568628437808,
-    -0.056178233026250544
+    -0.113343746054434,
+    -0.04641511593770154
    ],
-   "dm_hln": 7.085262774657148,
-   "dm_p": 2.204680882300636e-12,
+   "dm_hln": 4.8363351366176905,
+   "dm_p": 2.167376611739158e-06,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "propane": {
-   "n": 1622,
-   "mean": 0.07748160281204688,
-   "ref_mean": 0.07485565097817297,
-   "skill": -0.03508020836849868,
+   "n_dates": 337,
+   "n_cells": 1622,
+   "mean": 0.07717161782971454,
+   "ref_mean": 0.0743548787179978,
+   "skill": -0.03788237114069748,
    "ci95": [
-    -0.05932264212542711,
-    -0.012715103373180109
+    -0.06954305160648228,
+    -0.007488313405088008
    ],
-   "dm_hln": 3.2251073025670047,
-   "dm_p": 0.0012843436031715338,
+   "dm_hln": 2.5494216373520655,
+   "dm_p": 0.011233947476950057,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   }
  },
  "per_horizon": {
   "h5": {
-   "n": 2204,
-   "mean": 0.08961774908579893,
-   "ref_mean": 0.08571936210363972,
-   "skill": -0.045478488015879615,
+   "n_dates": 411,
+   "n_cells": 2204,
+   "mean": 0.09029573385189608,
+   "ref_mean": 0.08634657366494403,
+   "skill": -0.045736153958768844,
    "ci95": [
-    -0.06180384074623843,
-    -0.0306690139898372
+    -0.060534496154268924,
+    -0.03084680419397459
    ],
-   "dm_hln": 6.133015856242772,
-   "dm_p": 1.019133222257551e-09,
+   "dm_hln": 6.839845981586556,
+   "dm_p": 2.893063566489218e-11,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "h10": {
-   "n": 2187,
-   "mean": 0.1183049016644721,
-   "ref_mean": 0.11230179191848565,
-   "skill": -0.053455155464873005,
+   "n_dates": 413,
+   "n_cells": 2187,
+   "mean": 0.1182903182270777,
+   "ref_mean": 0.11262367083599532,
+   "skill": -0.05031488806055928,
    "ci95": [
-    -0.06804525955067754,
-    -0.03908451486207166
+    -0.06509772186852045,
+    -0.03565695974010606
    ],
-   "dm_hln": 7.3600059528414565,
-   "dm_p": 2.589040093425865e-13,
+   "dm_hln": 7.112952049022095,
+   "dm_p": 5.0608406354513136e-12,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "h20": {
-   "n": 2163,
-   "mean": 0.15483345727853476,
-   "ref_mean": 0.1441396584127756,
-   "skill": -0.07419053842305567,
+   "n_dates": 412,
+   "n_cells": 2163,
+   "mean": 0.15361077647795265,
+   "ref_mean": 0.1432657480610975,
+   "skill": -0.07220866506377654,
    "ci95": [
-    -0.08929742535660239,
-    -0.05985328421829585
+    -0.08835382331201869,
+    -0.05822690945398582
    ],
-   "dm_hln": 10.013568365567398,
+   "dm_hln": 9.958415315621805,
    "dm_p": 0.0,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "h40": {
-   "n": 2131,
-   "mean": 0.1984176159682137,
-   "ref_mean": 0.18421411614489133,
-   "skill": -0.07710321076670779,
+   "n_dates": 412,
+   "n_cells": 2131,
+   "mean": 0.1963274181670114,
+   "ref_mean": 0.1820433406787839,
+   "skill": -0.07846525687216332,
    "ci95": [
-    -0.09353642210925538,
-    -0.05983211050543634
+    -0.09945789041242814,
+    -0.0590239468352352
    ],
-   "dm_hln": 8.655482267875971,
-   "dm_p": 0.0,
+   "dm_hln": 7.653017625223336,
+   "dm_p": 1.412203687323199e-13,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   },
   "h60": {
-   "n": 2172,
-   "mean": 0.22756805138870365,
-   "ref_mean": 0.20934104046894242,
-   "skill": -0.08706850256849363,
+   "n_dates": 411,
+   "n_cells": 2172,
+   "mean": 0.22785570637649674,
+   "ref_mean": 0.20982340958183468,
+   "skill": -0.08594034779341042,
    "ci95": [
-    -0.1044880456940655,
-    -0.06927196410187793
+    -0.10635399091807196,
+    -0.06725714330061763
    ],
-   "dm_hln": 9.744752589148762,
-   "dm_p": 0.0,
+   "dm_hln": 8.600206920261234,
+   "dm_p": 2.220446049250313e-16,
    "ref": "grid_climatology",
-   "score": "crps"
+   "score": "crps",
+   "unit_of_dependence": "grid date -- all cells of a date resample together (\u00a72.8 applied to inference; n_cells is printed but is NOT the inferential n)"
   }
  },
  "pooling_disclosure": {
@@ -467,6 +529,96 @@
    "geopolitical"
   ],
   "note": "\u00a73.7.3 registered that the weight trajectory is published: a fitted model whose weights swing across folds is a different object from one whose weights converge."
+ },
+ "fdr": {
+  "names": [
+   "fitted_vs:grid_climatology",
+   "fitted_vs:no_change",
+   "fitted_vs:random_analogs",
+   "fitted_vs:frozen",
+   "frozen_vs:grid_climatology",
+   "frozen_vs:no_change",
+   "frozen_vs:random_analogs",
+   "the_comparison:fitted_vs_frozen",
+   "per_target:brent",
+   "per_target:wti",
+   "per_target:diesel_crack",
+   "per_target:gasoline_crack",
+   "per_target:henry_hub",
+   "per_target:propane",
+   "per_horizon:h5",
+   "per_horizon:h10",
+   "per_horizon:h20",
+   "per_horizon:h40",
+   "per_horizon:h60"
+  ],
+  "p": [
+   0.0,
+   0.0,
+   0.05240714980930439,
+   0.8203301484805425,
+   0.0,
+   0.0,
+   0.08190718584061929,
+   0.8203301484805425,
+   2.5664996432972487e-05,
+   7.655228100689193e-05,
+   1.5322632052061635e-11,
+   6.661338147750939e-15,
+   2.167376611739158e-06,
+   0.011233947476950057,
+   2.893063566489218e-11,
+   5.0608406354513136e-12,
+   0.0,
+   1.412203687323199e-13,
+   2.220446049250313e-16
+  ],
+  "bh": {
+   "survive": [
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "qvalues": [
+    0.0,
+    0.0,
+    0.06223349039854896,
+    0.8203301484805425,
+    0.0,
+    0.0,
+    0.09154332535128039,
+    0.8203301484805425,
+    3.751037940203671e-05,
+    0.00010389238136649619,
+    2.9113000898917105e-11,
+    1.8080774972466836e-14,
+    3.431679635253667e-06,
+    0.014229666804136738,
+    4.9971097966631945e-11,
+    1.0683996897063884e-11,
+    0.0,
+    3.353983757392598e-13,
+    7.031412489292658e-16
+   ],
+   "q": 0.05
+  },
+  "note": "\u00a76: Benjamini-Hochberg across the family this file reports. A comparison that does not survive is not a finding."
  },
  "determinism": {
   "content_digest": "40ce38396b6da3f9e67f878cf43cc0a9901b451e4d3ca752d1ddf379e167cd43"

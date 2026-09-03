@@ -265,7 +265,7 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 |---|---|---|---|
 | `res.lede` | *"Restricted to what was knowable at the time, the record goes quiet."* | — (no slots; fixed text) | always |
 | `res.vintage` | *"For {events_no_field} of {events} events the engine has no state to condition on at all."* | `vintage.events_with_no_situation_field_at_t`, `vintage.events` | always |
-| `res.vintage.detail` | *"{dropped} of {total} situation field-values were knowable only after the event they describe. {kept} survive."* | `vintage.dropped_after_t`, `vintage.total_values`, `vintage.kept` | always |
+| `res.vintage.detail` | *"{dropped} of {total} situation field-values became knowable after the event they describe. {kept} survive."* | `vintage.dropped_after_t`, `vintage.total_values`, `vintage.kept` | always |
 | `res.walk` | *"The engine forecasts escalation {g_word} than climatology and prices {p_word} than persistence."* | `walk.G.climatology.skill` → {g_word} ∈ {better, worse, no differently}; `walk.P.persistence.skill` → {p_word}; word chosen by the interval's relation to zero, never by the point estimate | when both intervals exist |
 | `res.walk.null` | *"Against random analogs the interval crosses zero on both tasks: no effect distinguishable from none at this sample size (n={n_g}, n={n_p})."* | `walk.G.random_analogs.n`, `walk.P.random_analogs.n` | when both cross zero |
 | `res.travel` | *"{k} of {n} registered pass-through cells transmit."* | `travel.transmitting`, `travel.cells` | always |
@@ -278,7 +278,7 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 
 | id | template | slots → source paths | when |
 |---|---|---|---|
-| `catch.vintage` | *"{dropped} of {total} field-values were dropped because they were knowable only after the event."* | `vintage.dropped_after_t`, `vintage.total_values` | always |
+| `catch.vintage` | *"{dropped} of {total} field-values were dropped because they became knowable after the event."* | `vintage.dropped_after_t`, `vintage.total_values` | always |
 | `catch.audit` | *"The {n_rows}-event label audit stands at {n_done} done; κ is not computable and the audit has not passed."* | `record.audit.n_rows`, `record.audit.n_done` | when `record.audit.passed` is false |
 | `catch.audit.passed` | *"The {n_rows}-event label audit passed at κ = {kappa}."* | `record.audit.n_rows`, `record.audit.kappa` | when passed is true |
 | `catch.placebo` | *"Every cell is tested against {n} state-matched placebo pseudo-events."* | `travel.n_placebo` | always |
@@ -290,12 +290,12 @@ the slots removed. A numeric token that is not derivable is a **failure**, not a
 |---|---|---|---|
 | `case.knowable.none` | *"No situation field for this event was knowable at t, so the engine read it on class and entities alone."* | — (fixed; the registered A2.6 wording) | when the event has 0 fields at t |
 | `case.knowable.some` | *"{k} situation field{s} for this event {was} knowable at t; the rest were dropped."* | `story.state_at_t.kept` | when > 0 |
-| `case.priced` | *"The realized path sits {pct}% {dir} the analog median at +{h} trading days, on {n} conditioned analogs."* | `story.priced.now_vs_median_pct`, `story.priced.horizon_td`, `story.priced.fan.n` | when a fan exists |
+| `case.priced` | *"The realized path sits {pct}% {dir} the analog median at +{h} trading days, on {n} conditioned analogs."* | `story.priced.now_vs_median_abs`, `story.priced.horizon_td`, `story.priced.fan.n` | when a fan exists |
 | `case.priced.none` | *"No comparable set: an unclassified story has no reference class."* | — | when `story.priced.fan` is null |
-| `case.claims` | *"{n} claim{s} extracted, {c} checkable, {u} uncheckable."* | `story.claims.length`, `story.n_checkable` | always |
+| `case.claims` | *"{n} {claim|claims} extracted, {c} checkable, {u} uncheckable."* | `story.n_claims`, `story.n_checkable`, `story.n_uncheckable` | always |
 | `case.tail.none` | *"Nothing in the record precedes this event, so the engine has no reference class."* | — | when `no_adequate_precedent` and 0 analogs |
 | `case.tail.thin` | *"The closest precedent scores {sim} against a retrieval threshold of {thr}, so no reference class is formed."* | `story.branches.max_similarity`, `story.branches.threshold` | when `no_adequate_precedent` and analogs exist |
-| `case.tail` | *"{k} of {n} analogs were contained at +90 days."* | `story.branches.counts.CONTAINED`, `story.branches.conditioned_n` | when precedent is adequate |
+| `case.tail` | *"{k} of {n} analogs were contained at +{h} days."* | `story.branches.subset_counts.counts.CONTAINED`, `story.branches.subset_counts.n`, `story.branches.horizon_days` | when precedent is adequate |
 | `case.travel` | *"{k} of {n} registered cells transmit for this class."* | `story.propagation.counts.TRANSMITTING`, `story.propagation.counts.cells` | when available |
 | `case.travel.none` | *"No cell transmits for this class: all {n} registered cells are null or insufficient."* | `story.propagation.counts.cells` | when k = 0 |
 
@@ -305,6 +305,13 @@ Amendment 1 A1.2 (rendered in a `data-verbatim` node and inventoried, never edit
 this appendix, which governs only sentences the desk **writes itself**. `tests/test_sentences.py` caught
 the drift on its first run — the registry and the appendix must name the same set — and the row is removed
 rather than implemented. The title still renders; it renders through `verbatim()`.
+
+**Correction 2, 2026-09-03.** A.5's ban caught `res.vintage.detail` and `catch.vintage`, both of which
+read "knowable **only** after the event". In those sentences "only" is precise rather than apologetic — it
+means *not until*. The sentences were reworded to "became knowable after the event"; **the rule was not
+relaxed**. Narrowing A.5 to let the token through would have been weakening a gate on first contact to make
+it pass, which is the one move this project does not make. The reworded sentences say the same thing and
+lose nothing.
 
 ### A.4 — The record
 

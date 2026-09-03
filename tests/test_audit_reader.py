@@ -163,3 +163,55 @@ def test_H3_a_passing_audit_requires_every_row_and_the_threshold():
             for _ in range(4)]
     low = AU.finalize({"rows": rows}, 4)
     assert low["passed"] is False, "passed with kappa below the threshold"
+
+
+# --------------------------------------------------------------- the number that reaches a surface
+
+def test_H3_the_quoted_kappa_is_the_telegraph_excluded_one_not_the_headline(monkeypatch, tmp_path, kappa):
+    """Joe's ruling of 2026-09-03. The headline 0.8307 is inflated by construction (9 of the 30 id
+    slugs telegraph their own class). Every surface that shows a kappa must show the lower bound on
+    the 21 rows that do not telegraph. status() is the single place all of them read it from."""
+    monkeypatch.setattr(AU, "OUT", tmp_path / "absent.json")
+    st = AU.status()
+    sub = kappa["blindness_caveat"]["subset_kappa_excluding_telegraphed"]["A_vs_H"]
+    assert st["kappa_A_vs_H"] == sub["kappa"], "status() quotes the headline, not the lower bound"
+    assert st["kappa_A_vs_H_n"] == sub["n"] == 21
+    assert st["kappa_A_vs_H"] < st["kappa_A_vs_H_headline"]
+    assert str(sub["kappa"]) in st["label"], "the quoted number is not in the label"
+    assert st["label"].index(str(sub["kappa"])) < st["label"].index(str(st["kappa_A_vs_H_headline"])), (
+        "the headline appears before the lower bound; the lower bound is the number to quote")
+
+
+def test_H3_the_headline_is_never_shown_without_being_named_inflated(monkeypatch, tmp_path):
+    monkeypatch.setattr(AU, "OUT", tmp_path / "absent.json")
+    label = AU.status()["label"]
+    assert "inflated by construction" in label
+    assert "honest lower bound" in label
+
+
+@pytest.mark.parametrize("clause", [
+    "Both coders are Claude",
+    "legible, not whether it is right",
+    "only Joe's own coding retires UNAUDITED",
+])
+def test_H3_the_framing_may_not_be_softened(monkeypatch, tmp_path, clause):
+    """Joe, 2026-09-03: 'Do not let that sentence get softened by anyone, including me.' Each clause
+    is pinned separately so a partial edit fails loudly rather than quietly weakening the claim."""
+    monkeypatch.setattr(AU, "OUT", tmp_path / "absent.json")
+    assert clause in AU.status()["label"], f"the framing lost: {clause!r}"
+
+
+def test_H3_the_kappa_file_keeps_its_warning_verbatim(kappa):
+    w = kappa["WARNING"]
+    assert "both Claude" in w or "both are Claude" in w
+    assert "NOT whether the gold is right" in w
+    assert "cannot retire" in w and "only Joe's answers can" in w
+
+
+def test_H3_the_published_score_shows_the_lower_bound(kappa):
+    """The end of the chain: /api/ledger and the Ledger screen render score.json's label."""
+    s = json.loads((EVAL / "score.json").read_text())
+    sub = kappa["blindness_caveat"]["subset_kappa_excluding_telegraphed"]["A_vs_H"]
+    assert s["audit"]["kappa_A_vs_H"] == sub["kappa"]
+    assert str(sub["kappa"]) in s["label"]
+    assert "UNAUDITED" in s["label"] and s["audit"]["passed"] is False

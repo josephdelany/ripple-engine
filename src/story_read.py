@@ -111,6 +111,9 @@ def priced(conn, etype, knowable, exclude_event=None):
             d = out["days_elapsed"]
             med = out["fan"]["median"][d]
             out["now_vs_median_pct"] = round(out["path_pct"][-1] - med, 2)
+            # the spine says "sits X% below the median": the slot carries the magnitude and the
+            # direction is a registered word slot, so the signed value is never re-signed in prose
+            out["now_vs_median_abs"] = abs(out["now_vs_median_pct"])
             up_share = float((A[:, d] > 0).mean())
             out["share_up_at_day"] = round(up_share, 2)
     else:
@@ -127,6 +130,26 @@ def flow_side(conn, etype):
             "realized_disruption_fraction_pct": prop.get("realized_disruption_fraction_pct"),
             "contributing_n": prop.get("contributing_n"),
             "reading": prop.get("reading"), "caveat": prop.get("caveat")}
+
+
+def _state_at_t(event_id):
+    """How many situation fields for this event were knowable at t (WORLD_STATE_FRAMEWORK Amendment A).
+
+    Read from data/state/situation_knowable.json, which src/state/situation_state.py wrote; nothing is
+    recomputed here. This is DESIGN.md Amendment 2 A2.6's finding at the level of one event: for 262 of
+    313 events the answer is zero, and the Story spine says so in words rather than leaving a blank.
+    """
+    if not event_id:
+        return {"kept": None, "source": "data/state/situation_knowable.json"}
+    try:
+        doc = json.loads((DATA / "state" / "situation_knowable.json").read_text())
+    except Exception:
+        return {"kept": None, "source": "data/state/situation_knowable.json",
+                "note": "situation_knowable.json not present; run src/state/situation_state.py"}
+    row = next((r for r in (doc.get("per_event") or []) if r.get("event_id") == event_id), None)
+    return {"kept": (row or {}).get("kept", 0) if row else 0,
+            "dropped_after_t": (row or {}).get("dropped_after_t") if row else None,
+            "in_panel": row is not None, "source": "data/state/situation_knowable.json"}
 
 
 # ----------------------------------------------------------------------------- 4. where does it travel?
@@ -282,6 +305,9 @@ def branches(conn, etype, event_id=None, entities=None, as_of=None):
     r["outcome_label"] = "retired: sr_outcome_90, κ≈0 vs ICB/MID/UCDP (OUTCOME_MAPPING.md Amendment 1, 2026-09-02) — corpus-derived, not an outcome"
     r["retired"] = True
     r["applicable"] = True
+    # the horizon the branches are read at, from the registered constant rather than typed into the page:
+    # DESIGN.md Amendment 2 Appendix A lets a sentence show a number only from a declared path.
+    r["horizon_days"] = L.ESCALATION_HORIZON_CD
     return r
 
 
@@ -453,6 +479,11 @@ def read(arg=None, event_id=None, knowable=None, log=True):
             "flow": flow_side(conn, etype) if etype else {},
             "claims": claims,
             "n_checkable": sum(1 for c in claims if c["checkable"]),
+            # Amendment 2 Appendix A declares a path for each of these; a sentence may only read a
+            # declared path, so the paths have to exist rather than be computed in the renderer.
+            "n_claims": len(claims),
+            "n_uncheckable": sum(1 for c in claims if not c["checkable"]),
+            "state_at_t": _state_at_t(eid),
             "branches": br,
             # DESIGN.md §3.1 band 5 + Amendment 1: the registered local projections for this class,
             # every cell including the nulls. Nothing here conditions on the retired sr_outcome_90.

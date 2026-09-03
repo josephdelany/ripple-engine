@@ -151,6 +151,36 @@ def test_III_3_2_every_pooled_horizon_number_carries_the_H_eff_disclosure():
     assert d["H_eff"] == pytest.approx(1.547, abs=0.01)
     assert d["H_eff_random_walk_benchmark"] == pytest.approx(1.550, abs=0.01)
     assert d["n_eff_joint"] < s["panel"]["n_scored_cells"], "n_eff is never the nominal cell count"
+    assert s["the_comparison"]["n_dates"] < s["panel"]["n_scored_cells"]
+
+
+@published_only
+def test_III_the_unit_of_dependence_is_the_grid_date_and_never_the_cell():
+    """The defect this test exists to prevent: the first cut flattened T x A x H and resampled it with a
+    block length measured in dates, so adjacent entries were different targets at the SAME date (Brent and
+    WTI 20-day returns correlate 0.906). It reported p 0.010 on the random-analogs comparison where the
+    correct construction gives 0.052. Every interval must resample whole dates."""
+    s = json.loads(PUBLISHED.read_text())
+    blocks = list(s["fitted_vs"].values()) + list(s["frozen_vs"].values()) + [s["the_comparison"]]
+    blocks += list(s["per_target"].values()) + list(s["per_horizon"].values())
+    for b in blocks:
+        if b.get("skill") is None:
+            continue
+        assert "n_dates" in b and "n_cells" in b, "both must be published; only n_dates is inferential"
+        assert b["n_dates"] < b["n_cells"], "the inferential n is dates, and there are fewer of them"
+        assert b["n_dates"] <= s["panel"]["n_grid_dates"]
+        assert "NOT the inferential n" in b["unit_of_dependence"]
+
+
+@published_only
+def test_III_3_2_the_multiplicity_guards_of_section_6_are_present():
+    """§3.2 inherits §6 unchanged, which includes SPA and BH-FDR. The first cut omitted both."""
+    s = json.loads(PUBLISHED.read_text())
+    assert s["spa"]["benchmark"] == "grid_climatology"
+    assert set(s["spa"]["models"]) == {"fitted", "frozen", "random_analogs", "no_change"}
+    assert s["spa"].get("p_spa") is not None
+    assert len(s["fdr"]["names"]) == len(s["fdr"]["p"]) >= 5
+    assert "bh" in s["fdr"] and len(s["fdr"]["bh"]["survive"]) == len(s["fdr"]["p"])
 
 
 @published_only

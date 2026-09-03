@@ -120,14 +120,37 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
 <div class="top">
   <div class="brand">Ripple Engine <small>the record, read live</small></div>
   <div class="nav">
-    <button data-s="feed" class="on">Feed</button><button data-s="story">Story</button><button data-s="big">Big moves</button><button data-s="ledger">Ledger</button><button data-s="walk">Walk</button>
+    <button data-s="result" class="on">The result</button><button data-s="catch">How you&rsquo;d catch us</button><button data-s="case">A case</button><button data-s="record">The record</button>
   </div>
   <span class="asof" id="asof" style="margin-left:auto"></span>
 </div>
 <div class="mono dim" id="recordbar" style="padding:4px 14px;border-bottom:1px solid var(--line);font-size:11.5px">record: loading…</div>
 <main>
 
-<section class="screen on" id="s-feed">
+<section class="screen on" id="s-result">
+  <div id="result"><span class="dim">loading…</span></div>
+  <details style="margin-top:18px"><summary>The walk in full — four baselines, both tasks, every interval</summary>
+    <div id="walk"><span class="dim">loading…</span></div></details>
+  <div id="ledger" style="margin-top:18px"><span class="dim">loading…</span></div>
+</section>
+
+<section class="screen" id="s-catch">
+  <div id="catch"><span class="dim">loading…</span></div>
+</section>
+
+<section class="screen" id="s-case">
+  <div class="search" style="margin-bottom:6px"><input id="evq" placeholder="Search 300+ coded events — Abqaiq, Hormuz, OPEC 2014, Kharg…"><button class="btn" id="evbtn">Search</button></div>
+  <div id="evhits"></div>
+  <div class="search" style="margin:10px 0 4px"><input id="readin" placeholder="Or paste a headline, paragraph or URL — it is read against the record like any corpus event"><button class="btn" id="readbtn">Read</button></div>
+  <p class="t-prov" style="margin:0 0 16px">Anything pasted here is read point-in-time and its checkable claims are logged to the ledger, exactly as a corpus event is.</p>
+  <div id="story"><p class="dim">Loading the most material story on the record…</p></div>
+</section>
+
+<section class="screen" id="s-record">
+  <div id="recordscreen"><span class="dim">loading…</span></div>
+  <h2 style="margin-top:22px">Every big move, and what was knowable while it happened</h2>
+  <iframe id="bigframe" title="Big moves"></iframe>
+  <h2 style="margin-top:22px">The live loop — proof of operation, not a recommendation</h2>
   <div class="two" style="margin-bottom:10px"><div><h2>Loud / quiet — attention high, record says everyday</h2><div id="loudquiet" class="dim">loading…</div></div>
     <div><h2>Quiet / loud — record says material, attention low</h2><div id="quietloud" class="dim">loading…</div></div></div>
   <h2>Market state — each asset against its own history</h2>
@@ -137,28 +160,6 @@ iframe{width:100%;height:1600px;border:0;background:var(--bg)}
   <details><summary id="inlinesum">In line</summary><div id="inline"></div></details>
   <details><summary id="noisesum">Noise shelf</summary><div id="noise"></div></details>
   <div class="note" id="feednote"></div>
-  <h2 style="margin-top:22px">Open a corpus event</h2>
-  <div class="search"><input id="evq" placeholder="Search 300+ coded events — Abqaiq, Hormuz, OPEC 2014, Kharg…"><button class="btn" id="evbtn">Search</button></div>
-  <div id="evhits"></div>
-  <h2 style="margin-top:22px">Read something the feeds missed</h2>
-  <div class="search"><input id="readin" placeholder="Paste a headline, paragraph, or URL — it is read against the record like any Feed story"><button class="btn" id="readbtn">Read</button></div>
-  <p class="dim" style="font-size:12px;margin:2px 0 0">The Feed is the front door; this is the side door for a story the watcher did not carry. Its checkable claims are logged to the Ledger the same way.</p>
-</section>
-
-<section class="screen" id="s-story"><div id="story"><p class="dim">Open a story from the Feed, search a corpus event, or use “Read something the feeds missed” on the Feed.</p></div></section>
-
-<section class="screen" id="s-big"><iframe id="bigframe" title="Big moves"></iframe></section>
-
-<section class="screen" id="s-walk">
-  <h1>The walk</h1>
-  <p class="muted" style="margin:0 0 14px">The engine forecasting the past in sequence, sealed before each outcome, scored with proper rules against four baselines, under WALK_FORWARD_PROTOCOL.md. Published as computed.</p>
-  <div id="walk"><span class="dim">loading…</span></div>
-</section>
-
-<section class="screen" id="s-ledger">
-  <h1>Ledger</h1>
-  <p class="muted" style="margin:0 0 16px">Three scoreboards. Nothing here is edited by hand; claims resolve from data at their horizon.</p>
-  <div id="ledger"><span class="dim">loading…</span></div>
 </section>
 </main>
 
@@ -209,7 +210,7 @@ function vchip(v){const label={NOPRECEDENT:'No precedent'}[String(v).replace(/\s
 function rb(bar){ if(!bar||!bar.n) return '<span class="dim mono">—</span>';
   if('escalated' in bar){const n=bar.n;return `<div class="rb" title="contained ${bar.contained} · escalated ${bar.escalated} of ${n}"><i style="width:${100*bar.contained/n}%;background:var(--line2)"></i><i style="width:${100*bar.escalated/n}%;background:var(--t2)"></i></div>`;}
   const n=bar.n;return `<div class="rb" title="down ${bar.down} · flat ${bar.flat} · up ${bar.up} of ${n}"><i style="width:${100*bar.down/n}%;background:var(--t3)"></i><i style="width:${100*bar.flat/n}%;background:var(--line2)"></i><i style="width:${100*bar.up/n}%;background:var(--t)"></i></div>`;}
-const SCREENS=new Set(['feed','story','big','ledger','walk']);
+const SCREENS=new Set(['result','catch','case','record']);
 function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('on',x.id==='s-'+s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));window.scrollTo(0,0);
   if(s==='big'&&!$('#bigframe').src)$('#bigframe').src='/big_moves'; if(s==='ledger')loadLedger(); if(s==='walk')loadWalk();}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
@@ -224,9 +225,25 @@ async function loadFeed(){
   try{const f=await api('/api/feed'); renderFeed(f);
   }catch(e){$('#feed').innerHTML=`<div class="err">${esc(e.message)}</div>`;}
 }
-function renderRecordBar(r){ const st=r.statuses||{}; const au=r.audit||{};
+/* DESIGN.md §5 as amended by A2.6: named fields, and STATE@t is one of them. The vintage wall is the
+   project's most novel result, so it rides the record bar on every screen rather than living on one. */
+function renderRecordBar(r, v){ const st=r.statuses||{}; const au=r.audit||{};
+  if(v && v.kept!=null){
+    $('#recordbar').innerHTML = [
+      ['CORPUS', `${r.n_events??'—'} events`], ['GEO', `${r.n_geopolitical??'—'} coded`],
+      ['STATE@t', `${v.kept} of ${v.total_values} knowable`],
+      ['READS', `${r.n_reads??'—'} sealed`],
+      /* §5: a status line, not a sentence. The §7 status is shown to its first clause and carried in full
+         in the title attribute, so the verbatim string is still one hover from the reader. */
+      ['G', String(st['engine:G']||'—').split(' (')[0], st['engine:G']],
+      ['P', String(st['engine:P']||'—').split(' (')[0], st['engine:P']],
+      ['AUDIT', `${au.n_done??0} of ${au.n_rows??0}${au.passed?'':' · not passed'}`],
+    ].map(([k,val,full])=>`<span style="margin-right:16px"${full?` title="${esc(String(full))}"`:''}><span class="t-prov">${esc(k)}</span> <span class="t-ev">${esc(String(val))}</span></span>`).join('')
+      + `<span class="t-prov">run ${esc(r.run_id||'—')}</span>`;
+    return;
+  }
   $('#recordbar').textContent=`record: ${r.n_events??'—'} events (${r.n_geopolitical??'—'} geopolitical, ${r.n_ies90_labels??'—'} IES-90 labels) · ${r.n_reads??'—'} sealed reads · engine:G — ${st['engine:G']||'—'} · engine:P — ${st['engine:P']||'—'} · run ${r.run_id||'—'} · label audit ${au.status||'pending'}${au.n_rows?` ${au.n_done||0}/${au.n_rows}`:''}${au.kappa!=null?` κ ${num(au.kappa,3)}`:''}`;}
-async function loadRecord(){try{renderRecordBar(await api('/api/record'));}catch(e){$('#recordbar').textContent='record: unavailable ('+e.message+')';}}
+async function loadRecord(){try{const d=await desk(); renderRecordBar(d.record||await api('/api/record'), d.vintage);}catch(e){$('#recordbar').textContent='record: unavailable ('+e.message+')';}}
 function renderFeed(f){
     const row=(s,sig)=>`<div class="story-row" data-text="${esc(s.headline)}" data-url="${esc(s.url||'')}"><div>${chip(SIG[s.significance]||s.significance)}${(s.flags||[]).concat(s.gate_flags||[]).map(x=>`<div style="margin-top:4px">${chip(FLAG[x]||x,'c-flag')}</div>`).join('')}</div><div><div class="h">${esc(s.headline)}</div><div class="cls">${esc((s.event_class||'no class').replace(/_/g,' '))} · ${esc(s.source)} · <span class="mono">${esc(s.when)}</span>${s.entities&&s.entities.length?' · '+esc(s.entities.slice(0,3).join(', ')):''}</div></div><div>${s.rates&&s.rates.brent?`<div class="dim" style="font-size:11.5px">crude ${s.rates.brent.ratio}× · products ${s.rates.diesel_crack?s.rates.diesel_crack.ratio:'—'}×</div>`:''}${s.headline_verdict?`<div style="margin-top:3px">${vchip(s.headline_verdict)}</div>`:''}</div><div><button class="btn" style="font-size:12px">Read</button></div></div>`;
     $('#feed').innerHTML=(f.material||[]).map(s=>row(s)).join('')||'<p class="dim">Nothing material cleared the gate today.</p>';
@@ -249,7 +266,7 @@ $('#evbtn').onclick=async()=>{const q=$('#evq').value.trim();const hits=await ap
 $('#evq').addEventListener('keydown',e=>{if(e.key==='Enter')$('#evbtn').click();});
 
 /* ---------------- STORY ---------------- */
-async function readText(t){$('#story').innerHTML='<p class="dim">reading against the record…</p>';show('story');
+async function readText(t){$('#story').innerHTML='<p class="dim">reading against the record…</p>';show('case');
   try{const body=/^https?:\/\//.test(t)?{url:t}:{text:t};renderStory(await api('/api/story',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}));}
   catch(e){$('#story').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 /* §3.1: "It must never load empty." On open with no selection the Story shows the most material story from
@@ -271,7 +288,7 @@ async function loadDefaultStory(){
   }
 }
 
-async function readEvent(id){$('#story').innerHTML='<p class="dim">reading point-in-time…</p>';show('story');
+async function readEvent(id){$('#story').innerHTML='<p class="dim">reading point-in-time…</p>';show('case');
   try{renderStory(await api('/api/story?id='+encodeURIComponent(id)));}catch(e){$('#story').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 $('#readbtn').onclick=()=>{const v=$('#readin').value.trim();if(v)readText(v);};
 $('#readin').addEventListener('keydown',e=>{if(e.key==='Enter')$('#readbtn').click();});
@@ -297,19 +314,15 @@ function claimRow(c){const v=c.verdict||{};return `<div class="claims"><span cla
 /* §3.1 band 1 — "The read": one sentence a person could say aloud, generated from the object. Every clause is a
    number already on the page; the desk adds no adjective of its own. */
 function theRead(s){
-  const pr=s.priced||{}, sig=s.significance||{}, tr=(s.trust||{}).retrieval||{};
-  const bits=[];
-  if(sig.significance==='MATERIAL') bits.push('Material for this class');
-  else if(sig.significance==='IN_LINE') bits.push('About the everyday rate');
-  else if(sig.significance) bits.push('Below the gate');
-  if(pr.now_vs_median_pct!=null){
-    const d=pr.now_vs_median_pct;
-    bits.push(`the market sits ${num(Math.abs(d),1)}% ${d>=0?'above':'below'} the analog median at ${pr.horizon_label||'the horizon'}`);
-  } else if(pr.fan && pr.fan.n){ bits.push(`${pr.fan.n} analogs priced this class`); }
-  if(tr.no_adequate_precedent) bits.push('and no adequate precedent was found');
-  else if(tr.conditioned_n!=null) bits.push(`on ${tr.conditioned_n} conditioned analogs`);
-  const line=(bits.join(', ')||'Read against the record')+'.';
-  return `<p class="t-find">${esc(line.charAt(0).toUpperCase()+line.slice(1))}</p>`;
+  /* A2.8: the spine's first section is the QUESTION, and the question is the record's own words. This used
+     to assemble a finding by hand out of two different populations -- the price median (priced.fan.n) and
+     the escalation analogs (trust.retrieval.conditioned_n) -- and read as though one n covered both. The
+     composed sentence is gone; the title is verbatim, and the significance is a label, not prose. */
+  const sig=s.significance||{};
+  const LAB={MATERIAL:'Material for this class', IN_LINE:'About the everyday rate', NOISE:'Below the gate'};
+  return `<p class="t-find" style="font-size:24px">${verbatim(s.title||s.description||'Untitled', s.source||s.url)}</p>`
+    + (sig.significance ? `<p class="t-ev" style="margin:2px 0 0">${esc(LAB[sig.significance]||sig.significance)}${sig.why?' — '+esc(sig.why):''}</p>` : '')
+    + `<p class="t-prov" style="margin:2px 0 0">knowable ${esc(s.knowable||'')} · ${esc((s.event_class||'no class matched').replace(/_/g,' '))} · ${esc((s.entities||[]).join(', '))}</p>`;
 }
 
 function renderStory(s){
@@ -328,7 +341,10 @@ function renderStory(s){
   <p class="dim" style="font-size:12.5px;margin:0 0 4px">${esc(sig.why||'')}</p>
   <p class="dim" style="font-size:12px;margin:0 0 14px">${esc(side('brent'))}${r.brent&&r.diesel_crack?' · ':''}${esc(side('diesel_crack'))}${sig.attention&&sig.attention.score!=null?` · attention ${num(sig.attention.score,0)}th pct (GPR${(sig.attention.evidence||{}).wiki_spikes&&(sig.attention.evidence||{}).wiki_spikes.length?', pageview spike':''})`:''}</p>
 
-  <div class="sec" data-band="2"><h2>2 · Is it priced? ${pr.resolution==='monthly'?'WTI (monthly spine, 1946–) since knowable vs the analog set — monthly resolution':'Brent since knowable vs the analog set'} (point-in-time)</h2>
+  <div class="sec" data-band="2"><h2>What was knowable, and was it priced?</h2>
+    <p class="t-ev" style="margin:0 0 8px">${s.state_at_t && s.state_at_t.kept ? say('case.knowable.some', s) : say('case.knowable.none', s)}</p>
+    <p class="t-find" style="font-size:20px">${pr.fan ? say('case.priced', s, {d: (pr.now_vs_median_pct||0) < 0 ? 'below' : 'above'}) : say('case.priced.none', s)}</p>
+    <h3 class="t-prov" style="margin:10px 0 4px;font-weight:400">${pr.resolution==='monthly'?'WTI (monthly spine, 1946–) since knowable vs the analog set — monthly resolution':'Brent since knowable vs the analog set'} (point-in-time)</h2>
     <dl class="kv" style="margin:6px 0 10px"><dt class="dim" style="grid-column:1/-1">What the market already knew at the knowable date — display only, never scored (Amendment 5)</dt>
       ${pinRow('Curve front spread M1−M4',pin.curve_front_spread_m1_m4)}${pinRow('Curve slope 1–3',pin.curve_slope_1_3)}${pinRow('OVX percentile (2007→)',pin.ovx_percentile)}${pinRow('Managed-money net length percentile (COT)',pin.cot_managed_money_net_percentile)}</dl>
     <div class="two"><div class="card">${fanSvg(pr)}${pr.price_note?`<div class="dim" style="font-size:12px">${esc(pr.price_note)}</div>`:''}
@@ -338,7 +354,9 @@ function renderStory(s){
         <dt>Realized disruption, this class</dt><dd class="mono">${fl.realized_disruption_fraction_pct!=null?fl.realized_disruption_fraction_pct+'% of '+fl.contributing_n:'—'}</dd></dl>
         <p class="dim" style="font-size:12px;margin:8px 0 0">${esc(fl.reading||'')}</p><p class="dim" style="font-size:11.5px;margin:4px 0 0">${esc(fl.caveat||'')}</p></div></div></div>
 
-  <div class="sec" data-band="3"><h2>3 · Is the narrative right? Claims verbatim, each read against its reference class</h2>
+  <div class="sec" data-band="3"><h2>What the story claimed</h2>
+    <p class="t-find" style="font-size:20px">${say('case.claims', s, {u: s.n_claims===1?'claim':'claims'})}</p>
+    <p class="t-prov">Each claim is rendered verbatim and read against its reference class.</p>
     <div class="claims head"><span>Claim</span><span>Verdict</span><span>Record bar (down · flat · up)</span><span>n</span><span>Resolves</span></div>
     ${(()=>{
       const all=(s.claims||[]), ck=all.filter(c=>c.checkable), un=all.filter(c=>!c.checkable);
@@ -350,7 +368,10 @@ function renderStory(s){
     })()}
     <p class="dim" style="font-size:12px;margin:8px 0 0">Verdicts are about the record, not truth: SUPPORTED ≥60%, UNSUPPORTED ≤40%, THIN below n=8 (CLAIM_LEDGER_REGISTRATION.md §3). Checkable claims are logged now and resolve from data at their horizon. Uncheckable claims stay visible so rhetoric sits beside evidence.</p></div>
 
-  <div class="sec" data-band="4"><h2>4 · What is the tail? Escalation branches at +90 days</h2>
+  <div class="sec" data-band="4"><h2>What happened next, in comparable cases</h2>
+    <p class="t-find" style="font-size:20px">${(()=>{const b=s.branches||{},sc=b.subset_counts||{};
+      if(b.no_adequate_precedent) return (b.analogs&&b.analogs.length)?say('case.tail.thin',s):say('case.tail.none',s);
+      return (sc.counts&&sc.counts.CONTAINED!=null)?say('case.tail',s):'';})()}</p>
     ${br.applicable?(br.no_adequate_precedent?`<p class="muted">No adequate precedent — max similarity ${br.max_similarity} below ${br.threshold}. Branch rates withheld.</p>`:`
     <div class="branches">${B.map(([k,l])=>`<div class="card"><div class="l">${l}</div><div class="n">${counts[k]||0} <span class="dim" style="font-size:13px">of ${n}</span></div><div class="dim" style="font-size:12px">${n?Math.round(100*(counts[k]||0)/n):0}%</div></div>`).join('')}</div>
     <p class="dim" style="font-size:12px;margin:10px 0 12px">${esc(rates.basis||'')}${rates.thin?' · thin conditioning, parent class shown':''} · ${esc(br.basis_note||'')} · ${esc(br.outcome_label||'')}</p>
@@ -365,13 +386,15 @@ function renderStory(s){
 
   ${engineSection(s.engine)}
 
-  <div class="sec" data-band="5"><h2>5 · Where does it travel? Registered local projections for this class</h2>
+  <div class="sec" data-band="5"><h2>Where it travelled</h2>
+    <p class="t-find" style="font-size:20px">${(s.propagation&&s.propagation.available)?((s.propagation.counts||{}).TRANSMITTING?say('case.travel',s):say('case.travel.none',s)):''}</p>
+    <p class="t-prov">Registered local projections for this class. Every cell is shown, nulls included.</p>
     ${travelBand(s.propagation)}</div>
 
-  <div class="sec two" data-band="6"><div><h2>6 · How much to trust this</h2><dl class="kv">
+  <div class="sec two" data-band="6"><div><h2>What we got wrong</h2><dl class="kv">
       ${(wf.rows||[]).map(w=>`<dt>${esc(w.metric)}</dt><dd class="mono">${num(w.value,3)}${w.ci95?` · 95% CI ${num(w.ci95[0],3)}..${num(w.ci95[1],3)}`:''}${w.dm_p!=null?` · DM p ${num(w.dm_p,3)}`:''}${w.covers_zero!=null?` · covers zero: ${w.covers_zero?'yes':'no'}`:''}${w.best_model?` · best ${esc(w.best_model)}`:''}${w.n!=null?` · n=${w.n}`:''} <span class="dim">${esc(w.path||'')}</span></dd>`).join('')}
       <dt>Protocol §7 status</dt><dd class="mono">engine:G — ${esc((wf.statuses||{})['engine:G']||'—')} · engine:P — ${esc((wf.statuses||{})['engine:P']||'—')}</dd>
-      <dt>Run</dt><dd class="mono">${esc(wf.run_id||'—')}${wf.n_scored_daily!=null?` · ${wf.n_scored_daily} daily reads scored after burn-in`:''} · <a href="/app#walk" onclick="show('walk');return false">open the walk</a></dd>
+      <dt>Run</dt><dd class="mono">${esc(wf.run_id||'—')}${wf.n_scored_daily!=null?` · ${wf.n_scored_daily} daily reads scored after burn-in`:''} · <a href="/app#result" onclick="show('result');return false">open the result</a></dd>
       <dt>Label</dt><dd class="dim">${esc(wf.label||'')}</dd>
       <dt>Retrieval</dt><dd class="mono">${(tr.retrieval||{}).conditioned_n??'—'} conditioned · ${esc((tr.retrieval||{}).basis||'')}</dd>
       <dt>Data freshness</dt><dd class="mono">${esc((tr.freshness||{}).status||'—')} · ${esc((tr.freshness||{}).as_of||'')}</dd></dl>
@@ -552,7 +575,7 @@ const SENTENCES = {
   'res.lede':          {t:'Restricted to what was knowable at the time, the record goes quiet.', f:{}},
   'res.vintage':       {t:'For {a} of {b} events the engine has no state to condition on at all.',
                         f:{a:'vintage.events_with_no_situation_field_at_t', b:'vintage.events'}},
-  'res.vintage.detail':{t:'{a} of {b} situation field-values were knowable only after the event they describe. {c} survive.',
+  'res.vintage.detail':{t:'{a} of {b} situation field-values became knowable after the event they describe. {c} survive.',
                         f:{a:'vintage.dropped_after_t', b:'vintage.total_values', c:'vintage.kept'}},
   'res.walk':          {t:'The engine forecasts escalation {g} than climatology and prices {p} than persistence.',
                         f:{}, w:{g:['better','worse','no differently'], p:['better','worse','no differently']}},
@@ -570,7 +593,7 @@ const SENTENCES = {
   'res.ledger.empty':  {t:'No claim has reached its horizon yet.', f:{}},
 
   /* A.2 — How you'd catch us */
-  'catch.vintage':     {t:'{a} of {b} field-values were dropped because they were knowable only after the event.',
+  'catch.vintage':     {t:'{a} of {b} field-values were dropped because they became knowable after the event.',
                         f:{a:'vintage.dropped_after_t', b:'vintage.total_values'}},
   'catch.audit':       {t:'The {a}-event label audit stands at {b} done; κ is not computable and the audit has not passed.',
                         f:{a:'record.audit.n_rows', b:'record.audit.n_done'}},
@@ -589,13 +612,13 @@ const SENTENCES = {
                         f:{a:'priced.now_vs_median_abs', b:'priced.horizon_td', c:'priced.fan.n'},
                         w:{d:['below','above']}},
   'case.priced.none':  {t:'No comparable set: an unclassified story has no reference class.', f:{}},
-  'case.claims':       {t:'{a} claims extracted, {b} checkable, {c} uncheckable.',
-                        f:{a:'n_claims', b:'n_checkable', c:'n_uncheckable'}},
+  'case.claims':       {t:'{a} {u} extracted, {b} checkable, {c} uncheckable.',
+                        f:{a:'n_claims', b:'n_checkable', c:'n_uncheckable'}, w:{u:['claim','claims']}},
   'case.tail.none':    {t:'Nothing in the record precedes this event, so the engine has no reference class.', f:{}},
   'case.tail.thin':    {t:'The closest precedent scores {a} against a retrieval threshold of {b}, so no reference class is formed.',
                         f:{a:'branches.max_similarity', b:'branches.threshold'}},
-  'case.tail':         {t:'{a} of {b} analogs were contained at +90 days.',
-                        f:{a:'branches.counts.CONTAINED', b:'branches.conditioned_n'}},
+  'case.tail':         {t:'{a} of {b} analogs were contained at +{c} days.',
+                        f:{a:'branches.subset_counts.counts.CONTAINED', b:'branches.subset_counts.n', c:'branches.horizon_days'}},
   'case.travel':       {t:'{a} of {b} registered cells transmit for this class.',
                         f:{a:'propagation.counts.TRANSMITTING', b:'propagation.counts.cells'}},
   'case.travel.none':  {t:'No cell transmits for this class: all {a} registered cells are null or insufficient.',
@@ -710,6 +733,132 @@ async function openWalkRead(id){ const box=$('#wk-read'); box.innerHTML='<p clas
       <p class="dim" style="font-size:12px;margin-top:8px">Lower is better. The outcome was looked up ${esc(out.looked_up_at||'')} — after the seal.</p></div></div>`;
   }catch(e){box.innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
 
+/* ---------------- 1 · THE RESULT ---------------- */
+/* DESIGN.md Amendment 2, A2.7: the landing screen is the finding, not the feed. A2.1 as ruled: the reader
+   opens this link once, for about ninety seconds, and must reach the finding AND the integrity record fast.
+   And the rule carried verbatim from that ruling -- THE NULL IS THE FINDING, NOT AN APOLOGY FOR ONE. Every
+   null on this screen renders at Finding tier with no hedging clause; A.5 of the appendix makes that testable. */
+let DESK = null;
+async function desk(){ if(!DESK) DESK = await api('/api/desk'); return DESK; }
+
+async function loadResult(){try{
+  const d = await desk();
+  const W = d.walk||{}, G = W.G||{}, P = W.P||{}, T = d.travel||{};
+
+  /* the four baselines for both tasks, as one comparable forest (Metaculus: never one reference alone) */
+  const REFS = [['climatology','climatology'],['persistence','persistence'],['random_analogs','random analogs'],['frozen','frozen engine']];
+  const rows = [];
+  for(const [task,lab] of [['G','escalation'],['P','price']])
+    for(const [k,rl] of REFS){
+      const r = (task==='G'?G:P)[k]; if(!r) continue;
+      rows.push({label:`${lab} vs ${rl}`, est:r.skill, ci:r.ci95, n:r.n, src:'data/walk_forward/summary.json'});
+    }
+  const gw = skillWord((G.climatology||{}).ci95), pw = skillWord((P.persistence||{}).ci95);
+  const bothNull = skillWord((G.random_analogs||{}).ci95)==='no differently'
+                && skillWord((P.random_analogs||{}).ci95)==='no differently';
+  const zero = Object.keys(T.by_class||{}).filter(c => !T.by_class[c]);
+
+  $('#result').innerHTML = `
+    <p class="t-find" style="font-size:28px">${say('res.lede', d)}</p>
+    <p class="t-ev" style="margin:0 0 26px">Three findings from the corpus and 772 series, 1973–2026, every one pre-registered.</p>
+
+    <section style="margin-bottom:28px">
+      <p class="t-find">${say('res.vintage', d)}</p>
+      <p class="t-ev">${say('res.vintage.detail', d)}</p>
+      ${bar('events with at least one field at t', d.vintage.events_with_a_field_at_t, d.vintage.events)}
+      ${bar('field-values kept at t', d.vintage.kept, d.vintage.total_values)}
+      <p class="t-prov">This is what point-in-time honesty costs, and it is measured rather than assumed.
+        ${esc(d.vintage.source)}</p>
+    </section>
+
+    <section style="margin-bottom:28px">
+      <p class="t-find">${say('res.walk', d, {g:gw, p:pw})}</p>
+      ${forest(rows, {labelHead:'task vs reference', estHead:'skill'})}
+      ${bothNull ? `<p class="t-ev">${say('res.walk.null', d)}</p>` : ''}
+      <p class="t-prov">Permutation p ${pv(W.permutation_p)} · monthly tier ${W.monthly_scored} reads scored, so it carries no result · run ${esc(W.run_id||'')} · ${esc(W.source)}</p>
+    </section>
+
+    <section>
+      <p class="t-find">${say('res.travel', d)}</p>
+      <p class="t-ev">${T.null} null · ${T.insufficient} insufficient · ${T.bh_q10} survive Benjamini–Hochberg at q=0.10.</p>
+      ${Object.keys(T.by_class||{}).sort((a,b)=>T.by_class[b]-T.by_class[a]).map(c=>
+        `<div class="t-ev" style="display:flex;gap:10px;align-items:baseline">
+           <span style="min-width:210px">${esc(c.replace(/_/g,' '))}</span>
+           <span style="font-family:var(--mono)">${'█'.repeat(T.by_class[c])}${T.by_class[c]?'':'·'}</span>
+           <span class="t-prov">${T.by_class[c]} of ${T.cells_per_class}</span></div>`).join('')}
+      ${zero.map(c=>`<p class="t-find" style="font-size:19px;margin-top:10px">${say('res.travel.none', d, {c:c})}</p>`).join('')}
+      <p class="t-prov">${esc(T.registration||'')} · ${esc(T.source)}</p>
+    </section>`;
+  }catch(e){$('#result').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+
+/* A proportion as a plain filled bar with its own count beside it. Not a chart: a count of a whole, where
+   §1 says an interval "genuinely does not exist" because both numbers are known exactly. */
+function bar(label, k, n){
+  const pct = (n? k/n*100 : 0);
+  return `<div class="t-ev" style="display:flex;gap:10px;align-items:baseline;margin:2px 0">
+    <span style="min-width:250px">${esc(label)}</span>
+    <span style="font-family:var(--mono);letter-spacing:-1px">${'█'.repeat(Math.round(pct/2.5))}${'░'.repeat(40-Math.round(pct/2.5))}</span>
+    <span style="font-family:var(--mono)">${k} of ${n}</span><span class="t-prov">(${pct.toFixed(1)}%)</span></div>`;
+}
+
+/* ---------------- 2 · HOW YOU'D CATCH US ---------------- */
+/* A2.1 as ruled: the integrity record must be reachable fast, not read in order. Six named ways this could
+   be wrong, weakest link first. */
+async function loadCatch(){try{
+  const d = await desk();
+  const au = (d.record||{}).audit || {};
+  const checks = [
+    ['Look-ahead', `${say('catch.vintage', d)} The join drops any field knowable after t.`,
+     'charter §2 rule 5 · the Philadelphia Fed SPF benchmarks on the vintage its panelists had'],
+    ['Re-cutting', 'Windows, splits and metrics were registered before the run, and the pass-through cells were fixed before estimation.',
+     `${esc((d.travel||{}).registration||'')} · WALK_FORWARD_PROTOCOL.md`],
+    ['Cherry-picking', `Every registered cell is displayed, nulls included; the band is never filtered by verdict. ${(d.travel||{}).null} nulls are on the page.`,
+     'DESIGN.md Amendment 1 A1.1'],
+    ['Luck', say('catch.placebo', d), `${esc((d.travel||{}).source||'')} · permutation p ${pv((d.walk||{}).permutation_p)}`],
+    ['A bad target', 'IES-90 is coded from ICB, MID, UCDP and COW, not from our own corpus. The corpus-derived label was retired at κ≈0 and nothing conditions on it.',
+     'OUTCOME_MAPPING.md Amendment 1'],
+    ['Grading ourselves', au.passed ? say('catch.audit.passed', d) : say('catch.audit', d),
+     'data/audits/ies90_audit_30.csv — the weakest link, stated first'],
+  ];
+  $('#catch').innerHTML = `
+    <p class="t-find">Six ways this could be wrong, and what each one is checked against.</p>
+    <p class="t-ev" style="margin:0 0 20px">Nothing below is a claim about the results. It is what would have to be true for them to be worthless.</p>
+    ${checks.map(([h,body,prov],i)=>`<section style="margin-bottom:16px">
+        <p class="t-ev" style="margin:0"><b>${i+1} · ${esc(h)}</b> — ${body}</p>
+        <p class="t-prov" style="margin:1px 0 0">${prov}</p></section>`).join('')}
+    <section style="margin-top:26px">
+      <p class="t-find">The data itself is not a random sample, and we cannot correct it.</p>
+      <p class="t-ev">${say('catch.dark', d)} They did not break — they stopped being published.</p>
+      <p class="t-ev">Iran's five JODI series end in July 2018, the month US secondary sanctions were reimposed;
+        the UAE and Qatar end in December 2018; Russian crude stocks in 2009; Kazakh crude stocks in 2014.</p>
+      <p class="t-ev">Any post-2018 physical-flow result is conditioned on the states that chose to keep reporting.</p>
+      <p class="t-prov">Stated as a selection problem with no correction available. ${esc((d.dark||{}).source||'')}</p>
+    </section>`;
+  }catch(e){$('#catch').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+
+/* ---------------- 4 · THE RECORD ---------------- */
+async function loadRecordScreen(){try{
+  const d = await desk();
+  const B = d.big||{}, pcb = B.p_class_given_big||{};
+  const rows = Object.keys(pcb).map(c=>{
+    const [k,n] = pcb[c]; const w = wilson(k,n);
+    return {label:c.replace(/_/g,' ')+` — ${k} of ${n}`, est:(k/n)-(B.everyday_base_rate_pct/100),
+            ci:w?[w[0]-B.everyday_base_rate_pct/100, w[1]-B.everyday_base_rate_pct/100]:null,
+            n:n, src:'data/big_moves/brent.json'};
+  }).sort((a,b)=>b.est-a.est);
+  $('#recordscreen').innerHTML = `
+    <p class="t-find">${say('rec.noevent', d)}</p>
+    <p class="t-ev">Significance is the top 5% of 20- and 60-day moves in each asset's own history — defined here, not by a severity score.</p>
+    ${bar('big moves with no identified event', B.no_identified_event, B.n_episodes)}
+    <p class="t-prov">${esc(B.registration||'')} · ${esc(B.source||'')}</p>
+    <h2 style="margin-top:24px">Which class, given that a big move happened</h2>
+    ${forest(rows, {labelHead:'class', estHead:'rate − base rate'})}
+    <p class="t-prov">the zero rule on this board is the everyday base rate of ${B.everyday_base_rate_pct}%</p>
+    <p class="t-ev" style="margin-top:22px">${say('rec.corpus', d)}</p>
+    <p class="t-ev">${say('rec.feed', d)}</p>
+    <p class="t-prov">${esc((d.corpus||{}).source||'')} · ${esc((d.feed||{}).source||'')}</p>`;
+  }catch(e){$('#recordscreen').innerHTML=`<div class="err">${esc(e.message)}</div>`;}}
+
 /* ---------------- LEDGER ---------------- */
 /* DESIGN.md §3.3. The screen "reads as broken": a wall of Uncheckable and boards reading zero -- all honest,
    all looking like failure. The fix is not to hide any of it. It is to lead with what IS checkable, put every
@@ -744,12 +893,13 @@ async function loadLedger(){try{
 
   /* §1 Finding tier: one sentence a person could say aloud, computed from the board every time. A null is the
      finding and is stated as one -- never left as three cards reading zero. */
-  const lede = !nCall
-    ? `${c.claims_logged||0} claims logged, ${c.checkable||0} checkable. No claim has reached its horizon yet.`
-    : pstate === 'insufficient' ? `${nCall} resolved claims carry a record call: too few to separate the record from the narrative.`
-    : pstate === 'crosses'      ? `At ${nCall} resolved claims the record and the narrative are not distinguishable.`
-    : pstate === 'better'       ? `On ${nCall} resolved claims the record is right more often than the narrative.`
-    :                             `On ${nCall} resolved claims the narrative is right more often than the record.`;
+  /* A2.8: a sentence the desk writes about itself goes through the registry, here as everywhere. The
+     ledger payload is reshaped to the paths Appendix A declares for res.ledger.* */
+  const lp = {ledger:{with_record_call:nCall}};
+  const lede = !nCall            ? say('res.ledger.empty', lp)
+    : pstate === 'insufficient'  ? say('res.ledger', lp)
+    : pstate === 'crosses'       ? say('res.ledger', lp)
+    : say('res.ledger.sep', lp, {w: pstate === 'better' ? 'record' : 'narrative'});
 
   /* §3.3: a board with nothing resolved shows the HORIZON, not a zero. "pending" is split first, because
      ledger.resolve() skips modality=hypothetical for ever -- those claims are recorded, not pending, and a
@@ -772,7 +922,7 @@ async function loadLedger(){try{
      rather than printing a 0% or a 100% that reads like one. */
   const srcRows = (l.sources||[]).map(b => coinRow(`${b.source} · ${b.kind}`, b.true, b.n, 'data/ledger/resolutions.jsonl'));
 
-  $('#ledger').innerHTML = `<p class="t-find">${esc(lede)}</p>
+  $('#ledger').innerHTML = `<p class="t-find">${lede}</p>
     <p class="t-ev" style="margin:0 0 4px">${esc(`${c.claims_logged||0} claims logged · ${c.checkable||0} checkable · ${c.resolved||0} resolved · ${nCall} with a record call`)}. ${esc(pendLine)}</p>
     <p class="t-prov" style="margin:0 0 16px">${esc(horizonLine)} Board status <b>${esc(rvn.status||'')}</b> — a board is labelled seeding below n=${LEDGER_LIVE_AT}. ${esc(pd.source||'data/ledger/claims.jsonl')} · ${esc(l.registration||'')}</p>
     <div class="grid" style="grid-template-columns:1fr 1fr">
@@ -806,9 +956,9 @@ async function loadLedger(){try{
 /* @boot-start */
 boot();
 function boot(){
-  loadFeed(); loadRecord(); loadDefaultStory();
+  loadResult(); loadCatch(); loadRecordScreen(); loadFeed(); loadRecord(); loadDefaultStory();
   const h = (location.hash||'').slice(1);
-  show(SCREENS.has(h) ? h : 'feed');          /* an unknown hash used to hide every screen */
+  show(SCREENS.has(h) ? h : 'result');        /* A2.7: the landing screen is the finding, not the feed */
 }
 /* @boot-end */
 </script>

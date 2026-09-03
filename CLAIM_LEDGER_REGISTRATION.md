@@ -454,3 +454,26 @@ typed the antecedent as the consequent. Both are fixed upstream — by coding `s
 65/187, and by the reader capturing a conditional's two halves separately — never by relaxing
 this gate. Until then the honest count is 0 resolved, and the twelve are reported by status rather
 than as "pending".
+
+## Amendment 8.1 — 2026-09-03, Joe's ruling: which kappa a surface may quote
+
+Amendment 8(b) computed the blindness caveat but left the headline kappa in the published label.
+Joe ruled on 2026-09-03 that this is the wrong way round. **The number any surface quotes is the
+lower bound excluding the telegraphed rows — A vs H 0.7383 (n=21), reader vs A 0.6948 — not the
+headline 0.8307.** The headline may still appear, but only alongside the lower bound and only
+named as inflated by construction; it is never shown alone.
+
+`audit_reader.status()` is the single place every surface reads this from — `data/reader_eval/score.json`,
+`/api/ledger`'s `reader_eval` block and the Ledger screen all render its `label` — so the ruling is
+implemented there rather than in each surface. `status()` now returns `kappa_A_vs_H` = the lower
+bound, `kappa_A_vs_H_headline` = the inflated figure, and `kappa_quoted_is` naming the exclusion.
+
+The framing travels with the number and is pinned clause by clause in
+`tests/test_audit_reader.py::test_H3_the_framing_may_not_be_softened`, at Joe's instruction that it
+not be softened by anyone, including him:
+
+> Both coders are Claude, so this measures whether the codebook is legible, not whether it is
+> right; only Joe's own coding retires UNAUDITED.
+
+This changes no computed value. The reader's class accuracy is unchanged at 0.84 (100 headlines,
+`reader_modes {'llm': 100}`, model sonnet, read from cache) — only which kappa the label leads with.

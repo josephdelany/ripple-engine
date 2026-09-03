@@ -80,7 +80,7 @@
    "n": 1
   }
  ],
- "generated_at": "2026-09-03T02:33:56+00:00",
+ "generated_at": "2026-09-03T04:59:49+00:00",
  "gold": "data/reader_eval/gold_100.jsonl",
  "gold_status": "coded by session A, unaudited by Joe",
  "reader_env": "auto",
@@ -93,10 +93,13 @@
   "passed": false,
   "threshold": 0.6,
   "seed": 20260902,
-  "kappa_A_vs_H": 0.8307,
-  "kappa_A_vs_H_n": 30,
-  "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.8307 between sessions A and H, n=30; both are Claude -- a legibility check, not a human audit)"
+  "kappa_A_vs_H_headline": 0.8307,
+  "kappa_A_vs_H_headline_n": 30,
+  "kappa_A_vs_H": 0.7383,
+  "kappa_A_vs_H_n": 21,
+  "kappa_quoted_is": "excluding the 9 of 30 rows whose id slug telegraphs its own class",
+  "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.7383 between sessions A and H, n=21 -- the honest lower bound, excluding the 9 of 30 rows whose id slug telegraphs its own class; the headline 0.8307 on all 30 is inflated by construction. Both coders are Claude, so this measures whether the codebook is legible, not whether it is right; only Joe's own coding retires UNAUDITED)"
  },
- "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.8307 between sessions A and H, n=30; both are Claude -- a legibility check, not a human audit)",
+ "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.7383 between sessions A and H, n=21 -- the honest lower bound, excluding the 9 of 30 rows whose id slug telegraphs its own class; the headline 0.8307 on all 30 is inflated by construction. Both coders are Claude, so this measures whether the codebook is legible, not whether it is right; only Joe's own coding retires UNAUDITED)",
  "threshold_class": 0.8
 }

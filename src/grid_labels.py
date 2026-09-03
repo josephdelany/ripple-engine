@@ -651,7 +651,8 @@ def build_panel(src=None, verbose=True):
         if verbose and (i % 24 == 0 or i == len(dates) - 1):
             print(f"  {t}  cells so far {len(cells):>6}  active {len(act):>3} (R-ACT {len(act_ract):>3})  "
                   f"covering {','.join(cov) or 'NONE'}", flush=True)
-    return cells, per_date, {"releases": rel, "opposed_pairs": len(opposed), "n_oil_dyads": len(dyads_all)}
+    return cells, per_date, {"releases": rel, "opposed_pairs": len(opposed),
+                             "n_oil_dyads": len(dyads_all), "spells": spells}
 
 
 def icb_replication(cells):
@@ -737,29 +738,40 @@ def panel_md(s, icb):
     L = []
     a = L.append
     a("# The dyad-date escalation panel, 1987–2014 — size and marginals, before anything is scored")
-    a("*Built by `src/grid_labels.py` under `data/grid/g/G4_REGISTRATION.md` Amendment 3, which was")
+    a("*Built by `src/grid_labels.py` under `data/grid/g/G4_REGISTRATION.md` Amendments 3–5, which were")
     a("committed first. Nothing here is a score, a forecast or a skill. No cell is filtered out.*\n")
+    if s.get("cite"):
+        a("> **Cite this panel as:** " + s["cite"] + "\n")
     a("## The three limits, first, because they are properties of the construction and not caveats\n")
     for x in s["limits"]:
         a(f"> **{x}**\n")
     a("## 1. Size\n")
     z = s["size"]
-    a(f"- **{z['cells']:,} cells** over **{s['span']['grid_dates']} month-ends** "
+    c = z["cells"] if isinstance(z["cells"], dict) else {"nominal": z["cells"], "n_eff_two_way": None,
+                                                        "n_eff_block": None, "informative": None}
+    a(f"- **{c['nominal']:,} cells nominal — n_eff {c['n_eff_two_way']:,.0f}** (two-way cluster on "
+      f"date × dyad, A5.2; block estimator {c['n_eff_block']:,.0f}), of which **{c['informative']:,} "
+      f"informative** (non-zero ΔIES). Over **{s['span']['grid_dates']} month-ends** "
       f"({s['span']['start']} … {s['span']['end']}), on **{z['distinct_dyads']} distinct dyads** "
       f"of {z['oil_dyads_possible']} oil-relevant pairs.")
+    a("- *Nominal overstates: the panel is 90 % zeros and heavily clustered. Quote the pair.*")
     a(f"- active dyads per grid date (VR-3): {z['active_per_date_vr3']['min']}–{z['active_per_date_vr3']['max']} "
       f"(mean {z['active_per_date_vr3']['mean']}); under plain R-ACT the mean is "
       f"{z['active_per_date_ract']['mean']}, so **VR-3 removes {z['cells_dropped_by_VR3']:,} dyad-dates** "
       f"that were selected on a record still running at t.")
+    dd = s["dIES"]["n_defined"]
+    dd = dd if isinstance(dd, dict) else {"nominal": dd, "n_eff_two_way": None}
     a(f"- L defined on {s['L']['n_defined']:,} ({s['L']['share_defined']}) · "
-      f"ΔIES defined on {s['dIES']['n_defined']:,} ({s['dIES']['share_defined']})\n")
+      f"ΔIES defined on **{dd['nominal']:,} nominal / n_eff {dd['n_eff_two_way']:,.0f}** "
+      f"({s['dIES']['share_defined']})\n")
     a("## 2. The ΔIES marginal — the number B needs before scoring\n")
     a("| ΔIES | " + " | ".join(s["dIES"]["dist"].keys()) + " |")
     a("|---" * (len(s["dIES"]["dist"]) + 1) + "|")
     a("| cells | " + " | ".join(f"{v:,}" for v in s["dIES"]["dist"].values()) + " |")
-    tot = s["dIES"]["n_defined"]
+    tot = nom(s["dIES"]["n_defined"])
     a("| share | " + " | ".join(f"{v / tot:.4f}" for v in s["dIES"]["dist"].values()) + " |")
-    a(f"\n**{s['dIES']['n_defined']:,} defined, {s['dIES']['n_nonzero']:,} non-zero, "
+    a(f"\n**{tot:,} defined (n_eff {(s['dIES']['n_defined'] or {}).get('n_eff_two_way', 0):,.0f}), "
+      f"{s['dIES']['n_nonzero']:,} non-zero, "
       f"share zero {s['dIES']['share_zero']}.** L: {json.dumps(s['L']['dist'])}, share zero {s['L']['share_zero']}.\n")
     a("## 3. Evidence class — a FIELD on every cell (A3.3), never a filter\n")
     a("| class | all cells | of the non-zero ΔIES cells |")
@@ -767,7 +779,9 @@ def panel_md(s, icb):
     for k in EVIDENCE_ORDER:
         a(f"| `{k}` | {s['evidence_class'].get(k, 0):,} | {s['evidence_class_of_nonzero_dIES'].get(k, 0):,} |")
     ss = s["strict_subset"]
-    a(f"\n**The strict subset** (`evidence_class == opposed_side`): **{ss['cells']:,} cells** "
+    sc = ss["cells"] if isinstance(ss["cells"], dict) else {"nominal": ss["cells"], "n_eff_two_way": None}
+    a(f"\n**The strict subset** (`evidence_class == opposed_side`): **{sc['nominal']:,} cells nominal, "
+      f"n_eff {sc['n_eff_two_way']:,.0f}** "
       f"({ss['share_of_panel']} of the panel) on {ss['distinct_dyads']} dyads, last date {ss['last_date']}; "
       f"ΔIES defined on {ss['dIES_defined']:,}, **{ss['dIES_nonzero']:,} non-zero**, share zero "
       f"{ss['dIES_share_zero']}. ΔIES: {json.dumps(ss['dIES_dist'])}\n")
@@ -804,8 +818,7 @@ def build_main():
     print(f"building the panel {PANEL_START} .. {PANEL_END} ...", flush=True)
     cells, per_date, meta = build_panel(src)
     s = summarise_panel(cells, per_date, meta)
-    icb = icb_replication(cells)
-    s["icb_replication"] = icb
+    s["icb_replication"] = icb_replication(cells)
     PANEL_DIR.mkdir(parents=True, exist_ok=True)
     df = pd.DataFrame(cells)
     try:
@@ -816,12 +829,9 @@ def build_main():
         wrote = f"PANEL.csv.gz ({type(e).__name__})"
     s["panel_file"] = wrote
     s["generated_at"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
-    s["registration"] = "data/grid/g/G4_REGISTRATION.md Amendment 3 (2026-09-03)"
-    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
-    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, icb))
-    print(json.dumps({k: s[k] for k in ("span", "size", "L", "dIES", "evidence_class",
-                                        "evidence_class_of_nonzero_dIES", "strict_subset", "vintage",
-                                        "panel_file")}, indent=1, default=str))
+    s["registration"] = "data/grid/g/G4_REGISTRATION.md Amendments 3-5 (2026-09-03)"
+    s = finalize(s, df, meta["spells"])                       # A5.4: checks, then the single writer
+    print(s["cite"])
     return s
 
 
@@ -867,8 +877,7 @@ def panel_addendum():
                     "It supplies its share of the panel's rows and a far smaller share of its non-zero "
                     "cells, so nominal n and informative n diverge here more than anywhere else."),
     }
-    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
-    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, s["icb_replication"]) + "\n\n" + addendum_md(s))
+    write_panel(s, df)
     print(json.dumps({"density": s["density"]["cells_per_grid_date"],
                       "icb_activity_shadow": s["icb_activity_shadow"]}, indent=1, default=str))
     return s
@@ -894,7 +903,7 @@ def addendum_md(s):
     a("| | cells | non-zero ΔIES | non-zero rate |")
     a("|---|---|---|---|")
     a(f"| {sh['window']} | {sh['cells']:,} | {sh['dIES_nonzero_in_window']:,} | **{sh['nonzero_rate_in_window']}** |")
-    a(f"| all other years | {s['size']['cells'] - sh['cells']:,} | {sh['dIES_nonzero_outside']:,} | "
+    a(f"| all other years | {nom(s['size']['cells']) - sh['cells']:,} | {sh['dIES_nonzero_outside']:,} | "
       f"**{sh['nonzero_rate_outside']}** |")
     a(f"\n{sh['reading']} It adds **{sh['distinct_dyads_only_in_window']}** dyads that appear nowhere else.\n")
     a("**For whoever scores this panel:** the block is not wrong — the dyad-dates are real and their labels "
@@ -1045,16 +1054,8 @@ def panel_checks():
     s = json.loads((PANEL_DIR / "PANEL.json").read_text())
     df = pd.read_parquet(PANEL_DIR / "PANEL.parquet") if (PANEL_DIR / "PANEL.parquet").exists() \
         else pd.read_csv(PANEL_DIR / "PANEL.csv.gz")
-    src = I.load_sources()
-    spells = dyadic_spells(src)
-    s["share_zero_tripwire"] = share_zero_tripwire(df)          # A4.1
-    s["admission_audit"] = admission_audit(df, spells)          # A4.2
-    s["effective_n"] = effective_n(df)                          # A4.3
-    s["amendment_4"] = ("A4.1-A4.3 are session B's designs, offered in "
-                        "data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution.")
-    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
-    (PANEL_DIR / "PANEL.md").write_text(panel_md(s, s["icb_replication"]) + "\n\n" + addendum_md(s)
-                                        + "\n\n" + checks_md(s))
+    spells = dyadic_spells(I.load_sources())
+    s = finalize(s, df, spells)                                 # A4.1-A4.3 then the single writer
     print(json.dumps({"admission_audit": {k: v for k, v in s["admission_audit"].items() if k != "first_violation"},
                       "tripwire": {"n_breaches": s["share_zero_tripwire"]["n_breaches"],
                                    "breaches": s["share_zero_tripwire"]["breaches"][:8]},
@@ -1131,3 +1132,80 @@ if __name__ == "__main__":
         panel_checks()
     else:
         main()
+
+
+# ================================================================================================
+# Amendment 5 — the effective count is not optional. The nominal count stops existing as a scalar,
+# one generated citation line leads every file, and a test enforces both. Joe, 2026-09-03:
+# "Make the effective number impossible to omit."
+# ================================================================================================
+
+PAIR_NOTE = ("nominal overstates. n_eff is the two-way cluster on (date, dyad) -- A5.2 -- and is the "
+             "number to quote; `informative` is the non-zero count, which is what actually discriminates.")
+
+
+def paired(nominal, en_scope, informative=None):
+    """A5.1: a headline count is an OBJECT carrying its effective companions, never a bare integer.
+    A reader that wants the nominal must take the pair or get a KeyError."""
+    return {"nominal": int(nominal),
+            "n_eff_two_way": (en_scope or {}).get("n_eff_two_way"),
+            "n_eff_block": (en_scope or {}).get("n_eff_block"),
+            "informative": (int(informative) if informative is not None
+                            else (en_scope or {}).get("n_nonzero_nominal")),
+            "note": PAIR_NOTE}
+
+
+def cite_line(s):
+    """A5.3: the sentence a reader in a hurry copies. Generated, never typed."""
+    c, sp = s["size"]["cells"], s["span"]
+    return (f"{c['nominal']:,} dyad-date cells (n_eff {c['n_eff_two_way']:,.0f} by two-way cluster on "
+            f"date x dyad; {c['informative']:,} informative), {sp['start']} to {sp['end']}, "
+            f"{s['size']['distinct_dyads']} dyads. Quoting the nominal count alone overstates this panel.")
+
+
+def apply_amendment_5(s):
+    """A5.1 + A5.3, applied to a finished summary before it is written. Idempotent."""
+    en = s.get("effective_n") or {}
+    full, strict = en.get("full_panel") or {}, en.get("opposed_side") or {}
+    if not isinstance(s["size"]["cells"], dict):
+        s["size"]["cells"] = paired(s["size"]["cells"], full, s["dIES"]["n_nonzero"])
+    if not isinstance(s["dIES"]["n_defined"], dict):
+        s["dIES"]["n_defined"] = paired(s["dIES"]["n_defined"], full, s["dIES"]["n_nonzero"])
+    if not isinstance(s["strict_subset"]["cells"], dict):
+        s["strict_subset"]["cells"] = paired(s["strict_subset"]["cells"], strict,
+                                             s["strict_subset"]["dIES_nonzero"])
+    s["cite"] = cite_line(s)
+    s["amendment_5"] = ("A5: the nominal count does not exist as a scalar in this file. Every headline "
+                        "count is a paired object and `cite` carries both numbers. Enforced by "
+                        "tests/test_g_grid_labels.py, not by care.")
+    return s
+
+
+def nom(x):
+    """Read a headline count that may be a paired object (A5.1) or a plain int (pre-A5)."""
+    return int(x["nominal"]) if isinstance(x, dict) else int(x)
+
+
+def write_panel(s, df=None):
+    """A5.4: the ONLY writer. It applies Amendment 5 first, so there is no code path that publishes a
+    panel with a nominal count and no effective count beside it."""
+    s = apply_amendment_5(s)
+    PANEL_DIR.mkdir(parents=True, exist_ok=True)
+    (PANEL_DIR / "PANEL.json").write_text(json.dumps(s, indent=1, default=str))
+    body = panel_md(s, s["icb_replication"])
+    if "icb_activity_shadow" in s:
+        body += "\n\n" + addendum_md(s)
+    if "share_zero_tripwire" in s:
+        body += "\n\n" + checks_md(s)
+    (PANEL_DIR / "PANEL.md").write_text(body)
+    return s
+
+
+def finalize(s, df, spells):
+    """A5.4: run A4.1-A4.3, then write. Every publication path goes through here."""
+    s["share_zero_tripwire"] = share_zero_tripwire(df)
+    s["admission_audit"] = admission_audit(df, spells)
+    s["effective_n"] = effective_n(df)
+    s["amendment_4"] = ("A4.1-A4.3 are session B's designs, offered in "
+                        "data/handoffs/B_to_G_2026-09-03c_part_iv_withdrawn.md and adopted with attribution.")
+    return write_panel(s, df)

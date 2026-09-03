@@ -101,12 +101,17 @@ w.fetch = (u) => {
     if (typeof w[fn] === 'function') { try { await w[fn](); } catch (e) { out.push({error: fn + ': ' + e.message}); } }
   }
   if (typeof w.renderStory === 'function') { try { w.renderStory(story); } catch (e) { out.push({error: 'renderStory: ' + e.message}); } }
+  const finds = [...w.document.querySelectorAll('.t-find')].map(n => ({
+    text: (n.textContent || '').replace(/\s+/g, ' ').trim(),
+    registered: !!n.querySelector('[data-sentence]') || !!n.closest('[data-sentence]'),
+    verbatim: !!n.querySelector('[data-verbatim]') || !!n.closest('[data-verbatim]'),
+  }));
   const nodes = [...w.document.querySelectorAll('[data-sentence]')].map(n => ({
     id: n.getAttribute('data-sentence'),
     fields: (n.getAttribute('data-fields') || '').split(',').filter(Boolean),
     text: n.textContent,
   }));
-  process.stdout.write(JSON.stringify({nodes, errors: out}));
+  process.stdout.write(JSON.stringify({nodes, finds, errors: out}));
 })().catch(e => { console.error(e && e.stack || String(e)); process.exit(4); });
 """
 
@@ -224,3 +229,24 @@ def test_a28_the_gate_can_actually_fail():
     assert _derivable("15", [15, 371]) and _derivable("371", [15, 371])
     assert _derivable("1987", ["1987-05-20"]), "a date's parts must resolve"
     assert _derivable("17.8", [-17.8]), "an absolute value of a declared negative must resolve"
+
+
+def test_a28_no_finding_tier_sentence_escapes_the_registry(rendered):
+    """The hole this test closes: the inventory only ever saw [data-sentence] nodes, so a sentence the desk
+    composed by hand rendered freely as long as it carried no marker.
+
+    That was not hypothetical. `theRead()` assembled the Story's opening line out of two different
+    populations — the price median over `priced.fan.n` analogs and `trust.retrieval.conditioned_n`
+    escalation analogs — and read as though one n covered both. It was found by rendering the spine and
+    reading it, not by a test, which is exactly the gap. A Finding-tier element must now be either a
+    registered sentence or verbatim quoted material.
+    """
+    out, _, _ = rendered
+    if not out.get("finds"):
+        pytest.skip("nothing rendered at Finding tier")
+    loose = [f["text"] for f in out["finds"] if not f["registered"] and not f["verbatim"] and f["text"]]
+    # page chrome that states no result and carries no number is allowed to be fixed text
+    loose = [t for t in loose if re.search(r"\d", t)]
+    assert not loose, (
+        "Finding-tier text with numbers that is neither a registered sentence nor verbatim quoted "
+        f"material: {loose}")

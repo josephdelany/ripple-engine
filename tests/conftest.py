@@ -57,6 +57,9 @@ DB_FREE_FILES = {
     "test_uncheckable_audit.py",
     "test_challenge_loop.py",
     "test_antecedent.py",            # Amendments 9/9.1: the antecedent gate; its corpus tests self-skip
+    "test_citation_guard.py",        # Session I: the citation guard over the five published documents --
+                                     # committed JSON/Markdown only. In the CI gate on purpose: it is the
+                                     # test that goes red when a re-run supersedes the numbers in the prose.
 }
 
 

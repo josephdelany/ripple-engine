@@ -353,19 +353,37 @@ def run(fast=False):
     dates = [str(d.date()) for d in grid]
     mb = W._mean_block(dates, CLUSTER_DAYS); lag = max(int(round(mb)) - 1, 0)
 
+    def per_date(x, y):
+        """Reduce a T x ... score array to one value per grid date over the cells finite in BOTH.
+
+        THE CORRECTION THAT MATTERS. The first cut of this module flattened T x A x H to one long vector
+        and resampled it with a block length measured in DATES. Adjacent entries in that flat vector are
+        different targets at the same date -- Brent and WTI 20-day returns correlate 0.906 -- so a block of
+        two in flattened index space is not a block in time, and the interval was computed as though there
+        were 10,857 quasi-independent observations where §2.8's own arithmetic says there are 1,979. Every
+        interval and every p-value in this file now resamples WHOLE GRID DATES, all their cells moving
+        together, which is the same joint construction §2.8 registered for counting -- applied to inference."""
+        m = np.isfinite(x) & np.isfinite(y)
+        xr = np.where(m, x, np.nan).reshape(x.shape[0], -1)
+        yr = np.where(m, y, np.nan).reshape(y.shape[0], -1)
+        with np.errstate(invalid="ignore"):
+            a_ = np.nanmean(xr, axis=1); b_ = np.nanmean(yr, axis=1)
+        ok = np.isfinite(a_) & np.isfinite(b_)
+        return a_[ok], b_[ok], int(m.sum())
+
     def block(a, b, label):
-        m = np.isfinite(a) & np.isfinite(b)
-        x, y = a[m], b[m]
+        x, y, n_cells = per_date(a, b)
         if len(x) < 30:
-            return {"n": int(len(x)), "skill": None, "ref": label}
+            return {"n_dates": int(len(x)), "n_cells": n_cells, "skill": None, "ref": label}
         ci = INF.bootstrap_ci(lambda ix: None if y[ix].mean() == 0 else 1 - x[ix].mean() / y[ix].mean(),
                               len(x), n_boot=n_boot, mean_block=mb)
         dm = INF.dm_test(x, y, h=1, lag=lag)
-        return {"n": int(len(x)), "mean": float(x.mean()), "ref_mean": float(y.mean()),
-                "skill": ci["estimate"], "ci95": [ci["lo"], ci["hi"]],
-                "dm_hln": dm.get("dm_hln"), "dm_p": dm.get("p_value"), "ref": label, "score": "crps"}
+        return {"n_dates": int(len(x)), "n_cells": n_cells, "mean": float(x.mean()),
+                "ref_mean": float(y.mean()), "skill": ci["estimate"], "ci95": [ci["lo"], ci["hi"]],
+                "dm_hln": dm.get("dm_hln"), "dm_p": dm.get("p_value"), "ref": label, "score": "crps",
+                "unit_of_dependence": "grid date -- all cells of a date resample together (§2.8 applied "
+                                      "to inference; n_cells is printed but is NOT the inferential n)"}
 
-    flat = lambda x: x.reshape(-1)
     refs = {"grid_climatology": clim, "no_change": noch, "random_analogs": rand, "frozen": frozen}
     summary = {
         "study": "GRID_STUDY_REGISTRATION.md Part III + Amendment 1 (2026-09-03)",
@@ -382,12 +400,11 @@ def run(fast=False):
                   "n_scored_cells": int(np.isfinite(fitted).sum()),
                   "n_nominal_cells": int(np.isfinite(R).sum()),
                   "mean_block": round(mb, 2), "hac_lag": lag},
-        "fitted_vs": {k: block(flat(fitted), flat(v), k) for k, v in refs.items()},
-        "frozen_vs": {k: block(flat(frozen), flat(v), k) for k, v in refs.items() if k != "frozen"},
-        "the_comparison": block(flat(fitted), flat(frozen), "frozen"),
+        "fitted_vs": {k: block(fitted, v, k) for k, v in refs.items()},
+        "frozen_vs": {k: block(frozen, v, k) for k, v in refs.items() if k != "frozen"},
+        "the_comparison": block(fitted, frozen, "frozen"),
     }
 
-    fl = lambda x: x.reshape(-1)
     summary["diagnostic_fair"] = {
         "what": "Ferro size-corrected CRPS (Amendment A.5 / E.3, inherited by §0.2 and required by §3.2). "
                 "A k = 12 atom forecast is charged E|X-X'|/(2k) that a large climatology pool is not, so "
@@ -396,9 +413,9 @@ def run(fast=False):
         "means": {"fitted": float(np.nanmean(diag_fit["crps"])), "fitted_fair": float(np.nanmean(diag_fit["crps_fair"])),
                   "frozen": float(np.nanmean(diag_frz["crps"])), "frozen_fair": float(np.nanmean(diag_frz["crps_fair"])),
                   "climatology": float(np.nanmean(diag_clim["crps"])), "climatology_fair": float(np.nanmean(diag_clim["crps_fair"]))},
-        "fitted_vs_climatology_registered": block(fl(diag_fit["crps"]), fl(diag_clim["crps"]), "grid_climatology"),
-        "fitted_vs_climatology_fair": block(fl(diag_fit["crps_fair"]), fl(diag_clim["crps_fair"]), "grid_climatology_fair"),
-        "frozen_vs_climatology_fair": block(fl(diag_frz["crps_fair"]), fl(diag_clim["crps_fair"]), "grid_climatology_fair"),
+        "fitted_vs_climatology_registered": block(diag_fit["crps"], diag_clim["crps"], "grid_climatology"),
+        "fitted_vs_climatology_fair": block(diag_fit["crps_fair"], diag_clim["crps_fair"], "grid_climatology_fair"),
+        "frozen_vs_climatology_fair": block(diag_frz["crps_fair"], diag_clim["crps_fair"], "grid_climatology_fair"),
     }
     pit = diag_fit["pit"][np.isfinite(diag_fit["pit"])]
     pit_c = diag_clim["pit"][np.isfinite(diag_clim["pit"])]
@@ -410,10 +427,28 @@ def run(fast=False):
         "note": "a calibrated forecast has a flat PIT; §3 registers the histogram, not a test statistic",
     }
 
+    # §3.2 inherits §6 unchanged, which includes the multiplicity guards. The first cut omitted them.
+    fam = ["fitted", "frozen", "random_analogs", "no_change"]
+    arrs = {"fitted": fitted, "frozen": frozen, "random_analogs": rand, "no_change": noch}
+    base_d, _, _ = per_date(clim, clim)
+    cols = []
+    for nm in fam:
+        a_, b_, _ = per_date(arrs[nm], clim)
+        cols.append(b_ - a_)                      # benchmark minus model: positive means the model wins
+    L = min(len(c) for c in cols)
+    dmat = np.column_stack([c[:L] for c in cols])
+    spa = INF.spa(dmat, n_boot=n_spa, mean_block=mb)
+    spa["best_model"] = fam[spa["best_model"]]; spa["models"] = fam
+    spa["benchmark"] = "grid_climatology"
+    spa["note"] = ("§6 / Part III §3.2: with four models compared against one benchmark, the best of them is "
+                   "tested against the null that NONE beats it. Computed on per-date differentials, the same "
+                   "unit of dependence as every interval in this file.")
+    summary["spa"] = spa
+
     # per target and per horizon, with H_eff attached wherever horizons are pooled (Part III §3.2)
-    summary["per_target"] = {a: block(flat(fitted[:, ai]), flat(clim[:, ai]), "grid_climatology")
+    summary["per_target"] = {a: block(fitted[:, ai][:, None, :], clim[:, ai][:, None, :], "grid_climatology")
                              for ai, a in enumerate(TARGETS)}
-    summary["per_horizon"] = {f"h{h}": block(flat(fitted[:, :, hi]), flat(clim[:, :, hi]), "grid_climatology")
+    summary["per_horizon"] = {f"h{h}": block(fitted[:, :, hi][:, :, None], clim[:, :, hi][:, :, None], "grid_climatology")
                               for hi, h in enumerate(HORIZONS)}
     summary["pooling_disclosure"] = {
         "H_eff": 1.547, "H_eff_random_walk_benchmark": 1.550, "R_horizons": 0.137,
@@ -437,6 +472,22 @@ def run(fast=False):
         "note": "§3.7.3 registered that the weight trajectory is published: a fitted model whose weights "
                 "swing across folds is a different object from one whose weights converge.",
     }
+    # BH-FDR across every DM p-value this file reports (§6)
+    fdr_names, fdr_p = [], []
+    for grp in ("fitted_vs", "frozen_vs"):
+        for k, v in summary.get(grp, {}).items():
+            if v.get("dm_p") is not None:
+                fdr_names.append(f"{grp}:{k}"); fdr_p.append(v["dm_p"])
+    if summary["the_comparison"].get("dm_p") is not None:
+        fdr_names.append("the_comparison:fitted_vs_frozen"); fdr_p.append(summary["the_comparison"]["dm_p"])
+    for grp in ("per_target", "per_horizon"):
+        for k, v in summary.get(grp, {}).items():
+            if v.get("dm_p") is not None:
+                fdr_names.append(f"{grp}:{k}"); fdr_p.append(v["dm_p"])
+    if fdr_p:
+        summary["fdr"] = {"names": fdr_names, "p": fdr_p, "bh": INF.bh_fdr(fdr_p, q=0.05),
+                          "note": "§6: Benjamini-Hochberg across the family this file reports. A comparison "
+                                  "that does not survive is not a finding."}
     (OUT_DIR / "training.json").write_text(json.dumps(traj, indent=1))
     summary["determinism"] = {"content_digest": _hash([summary["registered"], dates,
                                                        np.nan_to_num(fitted, nan=-999).round(6).tolist()])}
