@@ -9,6 +9,9 @@ coding agents as architect and reviewer. Every number in this repo is one hop
 from its receipt; every threshold was registered before it was computed; every
 result is published as computed, nulls included.
 
+**New here?** `INDEX.md` is the map — what to read in what order, which files are
+the frozen registered record, and which are superseded and why.
+
 ## What it is
 
 - **The spine.** 313 coded geopolitical and policy shocks, 1973–2026, human-gated

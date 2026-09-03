@@ -1,5 +1,20 @@
 # METHOD — how the engine turns a geopolitical shock into a validated, priced consequence
 
+> **SUPERSEDED — 2026-09-03.** This document dates from the project's v1 period (July
+> 2026) and describes a "validated" portfolio that no longer exists. Every claim it calls
+> validated has since been retracted or downgraded, each by a test registered before it
+> ran: **H1** — geopolitical shocks amplifying ~5pp harder under volatility stress — did
+> not survive a VIX-matched placebo (`docs/red_team_1.md`); **five of the six**
+> stress-amplification propagation edges were retracted under a pre-registered re-test
+> (`data/ripple/retraction_six.json`); the propagation chain is silent, with 21 of 477
+> cells transmitting against 1–24 expected by chance (`docs/RIPPLE_FINDINGS.md`); and the
+> walk-forward engine is significantly **worse** than the base rate on both targets once
+> the vintage rule binds (`docs/PAPER_DRAFT.md` §8).
+>
+> Nothing below has been edited. This project annotates its record; it does not rewrite
+> it. For the current state read `README.md`, `docs/PAPER_DRAFT.md` and `EDGE_PORTFOLIO.md`.
+
+
 *The full framework, end to end. Written to be read and criticised — the opposite of a black box.
 Every stage names its honesty guard, because the trustworthiness is the product.*
 
