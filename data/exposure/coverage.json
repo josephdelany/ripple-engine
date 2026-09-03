@@ -2,7 +2,7 @@
  "coverage": {
   "registration": "EXPOSURE_REGISTRATION.md §2 (2026-09-03, commit 22da52f)",
   "generated_by": "src/exposure_schema.py",
-  "n_events": 82,
+  "n_events": 86,
   "by_block": {
    "A": {
     "n": 13,
@@ -47,16 +47,16 @@
     "INVALID": 0
    },
    "G_accident": {
-    "n": 7,
+    "n": 11,
     "COMPLETE": 1,
-    "PARTIAL": 2,
+    "PARTIAL": 6,
     "EMPTY": 4,
     "INVALID": 0
    }
   },
   "total": {
    "COMPLETE": 6,
-   "PARTIAL": 47,
+   "PARTIAL": 51,
    "EMPTY": 25,
    "INVALID": 4
   },
@@ -1803,7 +1803,7 @@
     }
    },
    {
-    "event_id": "superior_refinery_outage",
+    "event_id": "husky_superior_explosion_2018",
     "computed_status": "PARTIAL",
     "declared_status": "PARTIAL",
     "hard_failures": [],
@@ -1889,6 +1889,82 @@
     "missing_required": [
      "asset_name",
      "asset_type",
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "bp_texas_city_explosion_2005",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "chevron_richmond_fire_2012",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "tesoro_anacortes_explosion_2010",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
+     "capacity_nameplate_kbd",
+     "capacity_affected_kbd",
+     "days_to_partial_restore",
+     "days_to_full_restore"
+    ],
+    "filled_numeric": [],
+    "provenance_kind": {}
+   },
+   {
+    "event_id": "exxonmobil_torrance_esp_explosion_2015",
+    "computed_status": "PARTIAL",
+    "declared_status": "PARTIAL",
+    "hard_failures": [],
+    "notes": [],
+    "filled_required": [
+     "asset_name",
+     "asset_type"
+    ],
+    "missing_required": [
      "capacity_nameplate_kbd",
      "capacity_affected_kbd",
      "days_to_partial_restore",

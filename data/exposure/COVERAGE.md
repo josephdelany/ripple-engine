@@ -4,7 +4,7 @@
 
 > **§5 GATE NOT MET: 5 COMPLETE against a registered minimum of 30.** Stage 1 is therefore reported as **descriptive only and no verdict is issued** — registered in advance, in §5, so it cannot be waived now that the number is known.
 
-**82 events across 7 blocks.**
+**86 events across 7 blocks.**
 
 | block | n | COMPLETE | PARTIAL | EMPTY | INVALID |
 |---|---:|---:|---:|---:|---:|
@@ -14,8 +14,8 @@
 | D | 13 | 1 | 8 | 3 | 1 |
 | E | 13 | 0 | 10 | 3 | 0 |
 | F | 10 | 2 | 8 | 0 | 0 |
-| G_accident | 7 | 1 | 2 | 4 | 0 |
-| **total** | **82** | **6** | **47** | **25** | **4** |
+| G_accident | 11 | 1 | 6 | 4 | 0 |
+| **total** | **86** | **6** | **51** | **25** | **4** |
 
 The §5 gate is counted over **A, B, C, D, E, F** only. G_accident declares `counts_toward_gate: false` (EXPOSURE_REGISTRATION Amendment 1) and that declaration is honoured, not overridden: a block saying its own rows do not count cannot carry the gate over the line. COMPLETE across **all** blocks including the excluded one is **6**, published here so the exclusion is visible rather than silent.
 
