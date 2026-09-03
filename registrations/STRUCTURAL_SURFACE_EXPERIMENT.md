@@ -148,3 +148,19 @@ and is **INSUFFICIENT** below 30 inferential dates. Its result may not be pooled
 Implementation will write new artifacts under `data/structural_surface/`; it will not overwrite the
 existing walk or grid records. Required files are `reads.jsonl`, `scores.jsonl`, `summary.json`, and
 `manifest.json`, with input hashes and the implementation commit recorded in the manifest.
+
+## Amendment 1 — deterministic state reduction (2026-09-03, before implementation)
+
+`situation_state` can contain the same registered field for more than one event-relevant entity.
+The event-level vector reduces those rows as follows: one numeric value is the arithmetic mean of
+the available entity values; one categorical value is the sorted, `|`-joined set of available text
+values. The entity identifier itself is not included, because actor/target identity is a surface
+description and would make fields incomparable across cases. Global and single-entity fields pass
+through unchanged. The output records the contributing entity count for every reduced field.
+
+The market portion is limited to four directly observed series whose historical prints are held in
+the database: prior-close Brent and WTI 20-day changes, prior 20-day Brent volatility, and the prior
+VIX close. They are reconstructed from observations satisfying both `obs_date < event_date` and
+stored `as_of <= event_date`; no `derived.*` row is trusted as an availability receipt. This fixed
+set prevents a derived series whose loader copied `obs_date` into `as_of` from laundering revised
+information into the experiment.
