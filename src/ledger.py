@@ -238,6 +238,12 @@ def log_claims(story_id, source, knowable, claims, price_at_knowable=None, url=N
                    "knowable": str(knowable)[:10], "price_at_knowable": price_at_knowable,
                    "text": c["text"], "kind": c["kind"], "asset": c.get("asset"), "series": c.get("series"),
                    "direction": c.get("direction"), "level": c.get("level"), "modality": c.get("modality"),
+                   # Amendment 7 defect L-1: resolve() restricts an escalation claim's +90d corpus window to the
+                   # actors named in the story via c["entities"]. log_claims never wrote the field, so entities was
+                   # always empty at resolution and every escalation claim resolved against every conflict,
+                   # infrastructure-attack and chokepoint event on earth -- close to always true. Additive: new
+                   # rows carry it, rows written before this fix are untouched (append-only).
+                   "entities": list(c.get("entities") or []),
                    "event_class": c.get("event_class"), "horizon_days": c.get("horizon_days"),
                    "horizon_unit": c.get("horizon_unit"), "checkable": c.get("checkable"),
                    "verdict": (c.get("verdict") or {}).get("verdict"), "r": (c.get("verdict") or {}).get("r"),

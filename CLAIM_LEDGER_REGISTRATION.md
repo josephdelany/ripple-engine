@@ -184,3 +184,94 @@ is the capture timestamp. Amended, before the cage changes:
 2. Downstream, a `null` event_date keeps the existing capture-timestamp behaviour but the item says `date_basis:
    capture`; a stated date is shown with `date_basis: text`. Nothing in the gate, the ledger verdicts or the walk reads
    `confidence`; it is display and evaluation only (src/reader_eval.py scores date exactness where a date is returned).
+
+## Amendment 7 — 2026-09-02, session H, BEFORE the historical backfill is run (registered first, computed after)
+The ledger has 14 claims, 0 resolutions, and every claim carries `knowable = 2026-09-02`: the
+core mechanic of §4 — a claim resolving itself from data at its horizon — has never fired end to
+end, because nothing in the ledger is old enough to have a horizon in the past. This amendment
+fixes, before anything is read, how historical stories enter the ledger, so the first scoreboard
+cannot be the product of choosing convenient stories after seeing how they resolve.
+
+1. **Selection is mechanical, not chosen.** The backfill set is *every* row of the `events` table
+   with `event_date` in **2019-01-01 .. 2020-12-31** and `type` in {`infrastructure_attack`,
+   `chokepoint_disruption`, `opec_decision`, `conflict_escalation`} that carries an `http(s)`
+   `source_url` — **n = 19 events, fixed here before the first fetch**. Stories are not picked
+   individually; Abqaiq 2019, the March 2020 OPEC+ collapse and the 2019 Hormuz seizures fall
+   inside the rule rather than being named by it. The window is chosen so that every horizon
+   (+20 trading days, +90 calendar days) closed years before the Brent series ends (2026-08-25).
+2. **Text is fetched, never supplied.** Each `source_url` is fetched **once** with
+   `reader.fetch`, the raw page is archived under `data/ledger/backfill_pages/<event_id>.html` so
+   the read is auditable against the exact bytes that produced it, and the body and title are
+   `reader.body_from_html` / `reader.title_from_html` of that archived copy — the same
+   deterministic parsers `reader.prepare(url)` uses, on one fetch instead of two. A fetch failure, a paywall or a body under 120 characters
+   **drops the story and records the drop with its error**. No pasted substitute, no summary
+   standing in for an article, nothing written by a model or by a session. A dropped story is
+   reported in the denominator.
+3. **The knowable date is extracted, never assigned.** In order: (a) `article:published_time` /
+   `datePublished` / `og:article:published_time` in the page; (b) a `<time datetime="YYYY-MM-DD…">`
+   element; (c) a dateline element — an element whose class is `date`, `published` or `pubdate`
+   carrying `Month D, YYYY`; (d) a `/YYYY/MM/DD/` or `/YYYY/M/D/` path in the URL; (e) an explicit
+   `Published On <d Mon YYYY>` line in the parsed body. If none of the five yields a date, **the
+   story is dropped** — it is never backdated to the corpus
+   `event_date` and never stamped with today. `knowable_basis` (`meta` / `url_path` / `body`)
+   is recorded on every surviving row. The article date, not the event date, is the knowable
+   date: a story published after the event it describes was knowable when it was published.
+4. **The reader gets no class hint.** `reader.read_story(url)` is called exactly as a live URL read
+   calls it, with no `class_hint`: a live read has no corpus id and must classify for itself. The
+   reader's own `event_class` is the reference class for every verdict. The corpus's coded class is
+   recorded beside it and reader-vs-corpus agreement is published as a **diagnostic that gates
+   nothing**.
+5. **`price_at_knowable`** is Brent (`fred.DCOILBRENTEU`) at the first trading day on or after the
+   knowable date — the same index rule `ledger.resolve` uses, so the logged price and the resolved
+   path start on the same bar. *Disclosed limitation:* intraday timing is not modelled, so a story
+   published in the morning is scored against that day's close.
+6. **Verdicts are point-in-time.** `ledger.verdict_for(..., as_of=knowable)`: the reference class
+   contains only corpus events dated strictly before the knowable date. This is **stricter than the
+   live Story page**, which passes `as_of=None` on a URL read (defect S-1 below).
+7. **Resolution is untouched.** `ledger.resolve` runs as written. Nothing is hand-resolved, no row
+   is edited, corrections are new rows. The scoreboard is published with n whichever way it comes
+   out, including if it shows the record was wrong, or if n is too small to say anything — a null
+   is a result (§4, charter §2 rule 4).
+8. **No verdict rule, threshold or cut-off in §2–§4 is changed by this amendment.** If the
+   uncheckable share stays high, that is reported as a finding about the reader or the sources; it
+   is never improved by loosening §2.
+
+### Defects recorded before the run (found by reading the code, fixed or handed off, never worked around)
+- **L-1 — `ledger.log_claims` drops `entities`.** The reader emits `entities` on every claim
+  (`reader.to_ledger_claim`) and `ledger.resolve` reads `c.get("entities")` to restrict an
+  escalation claim's +90d corpus window to the actors named in the story — but `log_claims` never
+  writes the field, so `entities` is always empty at resolution and **every escalation claim
+  resolves against every conflict/attack/chokepoint event anywhere in the world**, which is close
+  to always true. Fix (session H, `src/ledger.py`, additive: a new field on new rows, existing rows
+  untouched, append-only preserved) plus a regression test naming the defect. This is a resolver
+  defect the backfill was built to find; it is fixed, not routed around.
+- **S-1 — `story_read.read` is point-in-time for the fan and not for the verdict.** Inside one
+  function, `priced()` filters analogs to those knowable before k, while `verdict_for` and
+  `branches` are passed `as_of=str(k.date()) if eid else None` — so a **URL** story gets a
+  reference class containing events from the future of its own knowable date. Harmless while every
+  URL read is dated today; wrong the moment one is not. `src/story_read.py` is session A's file:
+  this is handed off in `data/handoffs/H_to_A_2026-09-02_pit_verdict.md`, not patched here, and the
+  backfill passes `as_of=knowable` itself (rule 6) so nothing session H logs carries the leak.
+
+### Disclosure — methods (b) and (c) were added after the first extraction pass, before any claim was logged
+The extractor was written with methods (a), (d) and (e) only, before a single page was fetched. On
+the 16 pages that fetched, it returned no date for 5 of them, so the registered rule would have
+dropped Abqaiq 2019 — one of the three stories this backfill exists to test. Rather than
+hand-date that page, two further methods were added and **applied uniformly to all 16 pages**:
+`<time datetime=…>` and a dateline element (`class="date"` and kin). Both are structural — an
+element whose job on the page is to carry the publication date — and source-agnostic; neither
+names a site or a story. They recover 4 pages: `ecuador_leaves_opec_2019` (a `<time>` element) and
+the two EIA *Today in Energy* articles, whose own datelines read **2019-09-23** for Abqaiq (nine
+days after the attack) and **2020-09-23** for the OPEC+ record cut (five months after it) — later
+than the events, which is exactly right and is why the article date, not the event date, is the
+knowable date. The two pages that still carry no dateline element (`saudi_ew_pipeline_2019`,
+`gulf_of_oman_tanker_attacks_2019`, both globalsecurity.org reprints) **stay dropped**: no bespoke
+per-page pattern was written to rescue them. What this change moves is *which stories are read*,
+never a verdict rule, a threshold or a cut-off — §2–§4 are untouched, and the drops are reported
+in the denominator.
+
+### The set that survives the registered rule
+19 selected → 3 dropped on fetch (HTTP 403: mining.com, tj.usembassy.gov, timesofisrael.com; the
+registered rule refuses to retry under a disguised user-agent) → 2 dropped for no extractable
+publication date → **14 stories read**. Every drop is listed with its reason in
+`data/ledger/backfill_manifest.json`.

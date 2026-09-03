@@ -1,0 +1,283 @@
+{
+ "seed": 20260902,
+ "n_sample": 30,
+ "generated_at": "2026-09-03T02:33:20+00:00",
+ "labels": [
+  "chokepoint_disruption",
+  "conflict_escalation",
+  "demand_shock",
+  "infrastructure_attack",
+  "opec_decision",
+  "policy_response",
+  "sanctions",
+  "none"
+ ],
+ "threshold": 0.6,
+ "WARNING": "Session A and session H are both Claude. A-vs-H kappa measures whether the coding rule is legible to a second reading, NOT whether the gold is right. It cannot retire the 'unaudited' label; only Joe's answers can.",
+ "pairs": {
+  "A_vs_H": {
+   "n": 30,
+   "kappa": 0.8307,
+   "raw_agreement": 0.8667,
+   "note": "session A's gold vs session H's blind coding -- two Claude sessions (diagnostic)",
+   "confusion": {
+    "chokepoint_disruption": {
+     "chokepoint_disruption": 1,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "conflict_escalation": {
+     "chokepoint_disruption": 1,
+     "conflict_escalation": 3,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 1
+    },
+    "demand_shock": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 1,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "infrastructure_attack": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "opec_decision": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 7,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "policy_response": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 1,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 8,
+     "sanctions": 0,
+     "none": 0
+    },
+    "sanctions": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 1,
+     "sanctions": 6,
+     "none": 0
+    },
+    "none": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    }
+   }
+  },
+  "reader_vs_A": {
+   "n": 30,
+   "kappa": 0.7945,
+   "raw_agreement": 0.8333,
+   "note": "the reader against the gold it is scored on",
+   "confusion": {
+    "chokepoint_disruption": {
+     "chokepoint_disruption": 1,
+     "conflict_escalation": 1,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "conflict_escalation": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 3,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "demand_shock": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 1,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "infrastructure_attack": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "opec_decision": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 7,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "policy_response": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 6,
+     "sanctions": 0,
+     "none": 0
+    },
+    "sanctions": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 7,
+     "none": 0
+    },
+    "none": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 1,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 3,
+     "sanctions": 0,
+     "none": 0
+    }
+   }
+  },
+  "reader_vs_H": {
+   "n": 30,
+   "kappa": 0.837,
+   "raw_agreement": 0.8667,
+   "note": "the reader against an independent blind coding",
+   "confusion": {
+    "chokepoint_disruption": {
+     "chokepoint_disruption": 2,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "conflict_escalation": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 3,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "demand_shock": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 1,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "infrastructure_attack": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "opec_decision": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 7,
+     "policy_response": 0,
+     "sanctions": 0,
+     "none": 0
+    },
+    "policy_response": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 6,
+     "sanctions": 0,
+     "none": 0
+    },
+    "sanctions": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 0,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 1,
+     "sanctions": 6,
+     "none": 0
+    },
+    "none": {
+     "chokepoint_disruption": 0,
+     "conflict_escalation": 0,
+     "demand_shock": 1,
+     "infrastructure_attack": 0,
+     "opec_decision": 0,
+     "policy_response": 2,
+     "sanctions": 0,
+     "none": 1
+    }
+   }
+  }
+ }
+}

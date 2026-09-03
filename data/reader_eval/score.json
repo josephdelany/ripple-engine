@@ -80,11 +80,23 @@
    "n": 1
   }
  ],
- "generated_at": "2026-09-02T19:34:52+00:00",
+ "generated_at": "2026-09-03T02:33:56+00:00",
  "gold": "data/reader_eval/gold_100.jsonl",
  "gold_status": "coded by session A, unaudited by Joe",
  "reader_env": "auto",
  "model": "sonnet",
- "label": "reader accuracy (unaudited gold)",
+ "audit": {
+  "audited_by_joe": false,
+  "n_done": 0,
+  "n_rows": 30,
+  "kappa_joe_vs_reader": null,
+  "passed": false,
+  "threshold": 0.6,
+  "seed": 20260902,
+  "kappa_A_vs_H": 0.8307,
+  "kappa_A_vs_H_n": 30,
+  "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.8307 between sessions A and H, n=30; both are Claude -- a legibility check, not a human audit)"
+ },
+ "label": "reader accuracy: UNAUDITED (inter-coder kappa 0.8307 between sessions A and H, n=30; both are Claude -- a legibility check, not a human audit)",
  "threshold_class": 0.8
 }

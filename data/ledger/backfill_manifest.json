@@ -1,0 +1,4921 @@
+{
+ "registration": "CLAIM_LEDGER_REGISTRATION.md Amendment 7",
+ "generated_at": "2026-09-03T02:26:10+00:00",
+ "window": [
+  "2019-01-01",
+  "2020-12-31"
+ ],
+ "classes": [
+  "infrastructure_attack",
+  "chokepoint_disruption",
+  "opec_decision",
+  "conflict_escalation"
+ ],
+ "selected": 19,
+ "read": 14,
+ "dropped": 5,
+ "drops": [
+  {
+   "event_id": "lasbambas_blockade_2019",
+   "url": "https://www.mining.com/blockade-at-las-bambas-copper-mine-in-peru-risks-output-targets/",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://www.mining.com/blockade-at-las-bambas-copper-mine-in-peru-risks-output-targets/"
+  },
+  {
+   "event_id": "saudi_ew_pipeline_2019",
+   "url": "https://www.globalsecurity.org/wmd/library/news/saudi/saudi-190514-spa02.htm",
+   "drop_reason": "no extractable publication date (Amendment 7 rule 3); never backdated"
+  },
+  {
+   "event_id": "gulf_of_oman_tanker_attacks_2019",
+   "url": "https://www.globalsecurity.org/military/library/news/2019/06/mil-190613-isna01.htm",
+   "drop_reason": "no extractable publication date (Amendment 7 rule 3); never backdated"
+  },
+  {
+   "event_id": "soleimani_strike_2020",
+   "url": "https://tj.usembassy.gov/u-s-department-of-defense-statement-on-strikes-in-baghdad/",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://tj.usembassy.gov/u-s-department-of-defense-statement-on-strikes-in-baghdad/"
+  },
+  {
+   "event_id": "saudi_jeddah_depot_2020",
+   "url": "https://www.timesofisrael.com/fire-at-saudi-oil-depot-in-jeddah-as-iran-backed-houthis-claim-attack/",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/fire-at-saudi-oil-depot-in-jeddah-as-iran-backed-houthis-claim-attack/"
+  }
+ ],
+ "claims_logged": 98,
+ "dry_run": false,
+ "class_agreement": {
+  "n": 14,
+  "agree": 11,
+  "note": "reader vs corpus class; a DIAGNOSTIC, gates nothing (Amendment 7 rule 4)"
+ },
+ "stories": [
+  {
+   "event_id": "lasbambas_blockade_2019",
+   "corpus_event_date": "2019-02-02",
+   "corpus_class": "conflict_escalation",
+   "corpus_title": "Las Bambas transport-corridor blockade 2019",
+   "url": "https://www.mining.com/blockade-at-las-bambas-copper-mine-in-peru-risks-output-targets/",
+   "status": "DROPPED",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://www.mining.com/blockade-at-las-bambas-copper-mine-in-peru-risks-output-targets/"
+  },
+  {
+   "event_id": "venezuela_blackout_2019",
+   "corpus_event_date": "2019-03-07",
+   "corpus_class": "chokepoint_disruption",
+   "corpus_title": "Venezuela nationwide blackout halts oil exports",
+   "url": "https://en.wikipedia.org/wiki/2019_Venezuelan_blackouts",
+   "status": "READ",
+   "knowable": "2019-03-13",
+   "knowable_basis": "meta",
+   "days_after_event": 6,
+   "page_title": "2019 Venezuelan blackouts",
+   "body_chars": 8000,
+   "archive": "data/ledger/backfill_pages/venezuela_blackout_2019.html",
+   "price_at_knowable": 65.89,
+   "price_bar": "2019-03-13",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": null,
+   "class_agrees_with_corpus": false,
+   "entities": [
+    "country.venezuela",
+    "country.brazil"
+   ],
+   "n_claims": 3,
+   "n_checkable": 0,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "c1d673ee93f0",
+    "06a3459819e1",
+    "09e44d90cb50"
+   ]
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "corpus_event_date": "2019-04-20",
+   "corpus_class": "chokepoint_disruption",
+   "corpus_title": "Contaminated crude halts the Druzhba pipeline to Europe",
+   "url": "https://www.osw.waw.pl/en/publikacje/analyses/2019-05-08/dirty-oil-greatest-crisis-history-druzhba-pipeline",
+   "status": "READ",
+   "knowable": "2019-05-08",
+   "knowable_basis": "meta",
+   "days_after_event": 18,
+   "page_title": "Dirty oil: the greatest crisis in the history of the Druzhba pipeline",
+   "body_chars": 8000,
+   "archive": "data/ledger/backfill_pages/druzhba_contamination_2019.html",
+   "price_at_knowable": 71.09,
+   "price_bar": "2019-05-08",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "chokepoint_disruption",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "n_claims": 10,
+   "n_checkable": 8,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "326c2249c824",
+    "e8012bcad9bc",
+    "ebe91f4c1367",
+    "b187afaa9cb0",
+    "4a4cfe61f3f4",
+    "d1b0fdcaad33",
+    "f67c467192aa",
+    "5e76b8aec81d",
+    "de00126c90b0",
+    "3ea9e0a57850"
+   ]
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "corpus_event_date": "2019-05-12",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Four tankers sabotaged off Fujairah near Hormuz",
+   "url": "https://www.aljazeera.com/news/2019/5/14/us-military-probes-oil-tanker-sabotage-attacks-off-uae-coast",
+   "status": "READ",
+   "knowable": "2019-05-14",
+   "knowable_basis": "meta",
+   "days_after_event": 2,
+   "page_title": "US military probes oil tanker \u2018sabotage\u2019 off UAE coast",
+   "body_chars": 2699,
+   "archive": "data/ledger/backfill_pages/fujairah_tanker_sabotage_2019.html",
+   "price_at_knowable": 72.53,
+   "price_bar": "2019-05-14",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "infrastructure_attack",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "n_claims": 7,
+   "n_checkable": 4,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "c5059fdd3c75",
+    "a3d12c3cde0c",
+    "8efb7218e35e",
+    "b146604509f7",
+    "f7cdd2dcf24e",
+    "00b0b0eb0333",
+    "3d161abe9f71"
+   ]
+  },
+  {
+   "event_id": "saudi_ew_pipeline_2019",
+   "corpus_event_date": "2019-05-14",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Houthi drones strike Saudi East-West crude pipeline",
+   "url": "https://www.globalsecurity.org/wmd/library/news/saudi/saudi-190514-spa02.htm",
+   "status": "DROPPED",
+   "drop_reason": "no extractable publication date (Amendment 7 rule 3); never backdated"
+  },
+  {
+   "event_id": "gulf_of_oman_tanker_attacks_2019",
+   "corpus_event_date": "2019-06-13",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Gulf of Oman tanker attacks",
+   "url": "https://www.globalsecurity.org/military/library/news/2019/06/mil-190613-isna01.htm",
+   "status": "DROPPED",
+   "drop_reason": "no extractable publication date (Amendment 7 rule 3); never backdated"
+  },
+  {
+   "event_id": "grace1_seizure_2019",
+   "corpus_event_date": "2019-07-04",
+   "corpus_class": "chokepoint_disruption",
+   "corpus_title": "Royal Marines seize Iranian tanker Grace 1 off Gibraltar",
+   "url": "https://www.cnn.com/2019/08/15/middleeast/gibraltar-grace-1-oil-tanker-gbr-intl",
+   "status": "READ",
+   "knowable": "2019-08-15",
+   "knowable_basis": "meta",
+   "days_after_event": 42,
+   "page_title": "Gibraltar defies US and releases seized Iranian tanker Grace 1",
+   "body_chars": 8000,
+   "archive": "data/ledger/backfill_pages/grace1_seizure_2019.html",
+   "price_at_knowable": 57.37,
+   "price_bar": "2019-08-15",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": null,
+   "class_agrees_with_corpus": false,
+   "entities": [],
+   "n_claims": 0,
+   "n_checkable": 0,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": []
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "corpus_event_date": "2019-07-19",
+   "corpus_class": "chokepoint_disruption",
+   "corpus_title": "Iran seizes British tanker Stena Impero in Hormuz",
+   "url": "https://www.cnn.com/2019/07/19/middleeast/british-tanker-seized-iran-intl",
+   "status": "READ",
+   "knowable": "2019-07-19",
+   "knowable_basis": "meta",
+   "days_after_event": 0,
+   "page_title": "The Stena Impero",
+   "body_chars": 6769,
+   "archive": "data/ledger/backfill_pages/stena_impero_seizure_2019.html",
+   "price_at_knowable": 61.04,
+   "price_bar": "2019-07-19",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "chokepoint_disruption",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "n_claims": 11,
+   "n_checkable": 8,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "e854cf1bfad1",
+    "c591aae88ab9",
+    "d6d13e4a4250",
+    "9e298514bf17",
+    "fdcd9309d146",
+    "0c892166aa26",
+    "4d795cda31ad",
+    "051cad7b4d3c",
+    "a458d070e3ec",
+    "24624b3bbfca",
+    "a9b5378cc234"
+   ]
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "corpus_event_date": "2019-08-17",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Houthi drones strike Saudi Shaybah oil and gas field",
+   "url": "https://www.aljazeera.com/economy/2019/8/17/drone-attack-by-yemen-rebels-sparks-fire-in-saudi-oil-field",
+   "status": "READ",
+   "knowable": "2019-08-17",
+   "knowable_basis": "meta",
+   "days_after_event": 0,
+   "page_title": "Drone attack by Yemen rebels sparks fire in Saudi oil field",
+   "body_chars": 3655,
+   "archive": "data/ledger/backfill_pages/saudi_shaybah_2019.html",
+   "price_at_knowable": 59.79,
+   "price_bar": "2019-08-19",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "infrastructure_attack",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "n_claims": 7,
+   "n_checkable": 5,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "ae0d51bd0214",
+    "c1a6c65496de",
+    "f4d6c5343e5e",
+    "98a36950b1d3",
+    "f7dab0124ced",
+    "fbf9405bee29",
+    "952d08ba9713"
+   ]
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "corpus_event_date": "2019-09-14",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Attack on Saudi Abqaiq and Khurais facilities",
+   "url": "https://www.eia.gov/todayinenergy/detail.php?id=41413",
+   "status": "READ",
+   "knowable": "2019-09-23",
+   "knowable_basis": "dateline",
+   "days_after_event": 9,
+   "page_title": "Saudi Arabia crude oil production outage affects global crude oil and gasoline prices - U.S. Energy Information Administration (EIA)",
+   "body_chars": 6824,
+   "archive": "data/ledger/backfill_pages/abqaiq_attack_2019.html",
+   "price_at_knowable": 64.66,
+   "price_bar": "2019-09-23",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "infrastructure_attack",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "n_claims": 9,
+   "n_checkable": 7,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "12d02d73bdbd",
+    "238e4dcf3aae",
+    "02a1abac3b35",
+    "ce426445c86b",
+    "cc5cb3f6576e",
+    "cb0e00569755",
+    "c6e839504865",
+    "2cad26f44cc7",
+    "dfb055a72eab"
+   ]
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "corpus_event_date": "2019-10-01",
+   "corpus_class": "opec_decision",
+   "corpus_title": "Ecuador announces exit from OPEC (effective Jan 2020)",
+   "url": "https://www.enerdata.net/publications/daily-energy-news/ecuador-leave-opec-january-2020.html",
+   "status": "READ",
+   "knowable": "2019-10-04",
+   "knowable_basis": "time_element",
+   "days_after_event": 3,
+   "page_title": "Ecuador to leave OPEC in January 2020",
+   "body_chars": 894,
+   "archive": "data/ledger/backfill_pages/ecuador_leaves_opec_2019.html",
+   "price_at_knowable": 59.13,
+   "price_bar": "2019-10-04",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "opec_decision",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "n_claims": 5,
+   "n_checkable": 4,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "9f07ca817e81",
+    "8d29c3016a36",
+    "e08a8c180e6d",
+    "53f68125169b",
+    "477f6c50781e"
+   ]
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "corpus_event_date": "2019-12-06",
+   "corpus_class": "opec_decision",
+   "corpus_title": "OPEC+ agrees deeper 500kbd production cut",
+   "url": "https://www.cnbc.com/2019/12/05/opec-december-meeting-opec-production-cuts-in-question.html",
+   "status": "READ",
+   "knowable": "2019-12-05",
+   "knowable_basis": "meta",
+   "days_after_event": -1,
+   "page_title": "OPEC meeting ends with market expecting deep production cut",
+   "body_chars": 3503,
+   "archive": "data/ledger/backfill_pages/opec_deeper_cut_dec_2019.html",
+   "price_at_knowable": 65.67,
+   "price_bar": "2019-12-05",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "opec_decision",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "n_claims": 9,
+   "n_checkable": 2,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "c1a5c5a22880",
+    "97af7e0440d8",
+    "1a9a72578daa",
+    "9ee5cb5b00d0",
+    "c5af9f0e17ca",
+    "6cea378e1ba0",
+    "b6dfd05d1005",
+    "5518799d1503",
+    "9c553999fabe"
+   ]
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "corpus_event_date": "2019-12-28",
+   "corpus_class": "conflict_escalation",
+   "corpus_title": "Protesters shut Iraq Nasiriya oil field",
+   "url": "https://www.aljazeera.com/news/2019/12/30/iraq-operations-resume-at-nasiriya-oilfield-closed-over-protests",
+   "status": "READ",
+   "knowable": "2019-12-30",
+   "knowable_basis": "meta",
+   "days_after_event": 2,
+   "page_title": "Iraq: Operations resume at Nasiriya oilfield closed over protests",
+   "body_chars": 1272,
+   "archive": "data/ledger/backfill_pages/iraq_nasiriya_2019.html",
+   "price_at_knowable": 68.3,
+   "price_bar": "2019-12-30",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "infrastructure_attack",
+   "class_agrees_with_corpus": false,
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "n_claims": 5,
+   "n_checkable": 4,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "7efc8fead65a",
+    "94f9fae2071d",
+    "b99a1c2512ed",
+    "b890b5de5ea2",
+    "2db44ef3d0ea"
+   ]
+  },
+  {
+   "event_id": "soleimani_strike_2020",
+   "corpus_event_date": "2020-01-03",
+   "corpus_class": "conflict_escalation",
+   "corpus_title": "US strike kills Qassem Soleimani",
+   "url": "https://tj.usembassy.gov/u-s-department-of-defense-statement-on-strikes-in-baghdad/",
+   "status": "DROPPED",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://tj.usembassy.gov/u-s-department-of-defense-statement-on-strikes-in-baghdad/"
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "corpus_event_date": "2020-01-18",
+   "corpus_class": "chokepoint_disruption",
+   "corpus_title": "Pro-Haftar forces blockade Libya's oil export terminals",
+   "url": "https://www.aljazeera.com/news/2020/1/18/pro-haftar-forces-block-oil-exports-from-key-libya-ports",
+   "status": "READ",
+   "knowable": "2020-01-18",
+   "knowable_basis": "meta",
+   "days_after_event": 0,
+   "page_title": "Pro-Haftar forces \u2018block oil exports\u2019 from key Libya ports",
+   "body_chars": 3240,
+   "archive": "data/ledger/backfill_pages/libya_haftar_blockade_2020.html",
+   "price_at_knowable": 64.63,
+   "price_bar": "2020-01-20",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "chokepoint_disruption",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "n_claims": 5,
+   "n_checkable": 4,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "885260e807d4",
+    "7c6e67bc5383",
+    "e2ad605563aa",
+    "d0746d0d8d0d",
+    "bde508df73d5"
+   ]
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "corpus_event_date": "2020-03-06",
+   "corpus_class": "opec_decision",
+   "corpus_title": "OPEC+ talks collapse and price war begins",
+   "url": "https://www.aljazeera.com/economy/2020/3/6/russia-playing-with-fire-as-opec-talks-collapse",
+   "status": "READ",
+   "knowable": "2020-03-06",
+   "knowable_basis": "meta",
+   "days_after_event": 0,
+   "page_title": "Russia \u2018playing with fire\u2019 as OPEC+ talks collapse",
+   "body_chars": 3497,
+   "archive": "data/ledger/backfill_pages/opec_talks_collapse_2020.html",
+   "price_at_knowable": 45.6,
+   "price_bar": "2020-03-06",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "opec_decision",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "n_claims": 10,
+   "n_checkable": 6,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "ee70438f0d80",
+    "feaa3b10fe94",
+    "f358d9e21959",
+    "65116f50cc4e",
+    "2ef36037b368",
+    "69a2e4956b91",
+    "3cb31633a4c1",
+    "ec1a39106780",
+    "481eccce816e",
+    "a3c7c40f9dc4"
+   ]
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "corpus_event_date": "2020-04-12",
+   "corpus_class": "opec_decision",
+   "corpus_title": "OPEC+ agrees record production cut",
+   "url": "https://www.eia.gov/todayinenergy/detail.php?id=45236",
+   "status": "READ",
+   "knowable": "2020-09-23",
+   "knowable_basis": "dateline",
+   "days_after_event": 164,
+   "page_title": "OPEC+ agreement to reduce production contributes to global oil market rebalancing - U.S. Energy Information Administration (EIA)",
+   "body_chars": 3585,
+   "archive": "data/ledger/backfill_pages/opec_record_cut_2020.html",
+   "price_at_knowable": 41.09,
+   "price_bar": "2020-09-23",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "opec_decision",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "n_claims": 7,
+   "n_checkable": 5,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "d4a17c86b8b5",
+    "bc712d77d648",
+    "f189703bbb24",
+    "2baef068c40e",
+    "f2a16a73ed51",
+    "652cf57e29ea",
+    "b57dc8fa705f"
+   ]
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "corpus_event_date": "2020-06-06",
+   "corpus_class": "opec_decision",
+   "corpus_title": "OPEC+ extends record cuts through July",
+   "url": "https://www.cnbc.com/2020/06/06/opec-and-allies-reportedly-agree-to-extend-record-production-cut.html",
+   "status": "READ",
+   "knowable": "2020-06-06",
+   "knowable_basis": "meta",
+   "days_after_event": 0,
+   "page_title": "OPEC and allies agree to extend record oil production cut",
+   "body_chars": 4323,
+   "archive": "data/ledger/backfill_pages/opec_extend_june_2020.html",
+   "price_at_knowable": 39.66,
+   "price_bar": "2020-06-08",
+   "reader": {
+    "mode": "llm",
+    "model": "sonnet",
+    "cached": true,
+    "secs": null,
+    "error": null,
+    "registration": "CLAIM_LEDGER_REGISTRATION.md \u00a72 + Amendment 3"
+   },
+   "reader_class": "opec_decision",
+   "class_agrees_with_corpus": true,
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "n_claims": 10,
+   "n_checkable": 6,
+   "n_rejected": 0,
+   "rejected": [],
+   "ledger_ids": [
+    "d4e5f16303db",
+    "222423871a2c",
+    "d378254dc6de",
+    "dc578bc14417",
+    "010cd40658fa",
+    "44541da2385d",
+    "f6286a2a95ae",
+    "03b614ad4946",
+    "bf887e786c45",
+    "6ec490b203c7"
+   ]
+  },
+  {
+   "event_id": "saudi_jeddah_depot_2020",
+   "corpus_event_date": "2020-11-23",
+   "corpus_class": "infrastructure_attack",
+   "corpus_title": "Houthi cruise missile hits Aramco North Jeddah fuel depot",
+   "url": "https://www.timesofisrael.com/fire-at-saudi-oil-depot-in-jeddah-as-iran-backed-houthis-claim-attack/",
+   "status": "DROPPED",
+   "drop_reason": "fetch failed: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/fire-at-saudi-oil-depot-in-jeddah-as-iran-backed-houthis-claim-attack/"
+  }
+ ],
+ "claims": [
+  {
+   "event_id": "venezuela_blackout_2019",
+   "knowable": "2019-03-13",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "It was the largest power outage in the country's history,",
+   "quote": "It was the largest power outage in the country's history,",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": null,
+   "entities": [
+    "country.venezuela",
+    "country.brazil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "venezuela_blackout_2019",
+   "knowable": "2019-03-13",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "At least 43 deaths resulted.",
+   "quote": "At least 43 deaths resulted.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": null,
+   "entities": [
+    "country.venezuela",
+    "country.brazil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "venezuela_blackout_2019",
+   "knowable": "2019-03-13",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "as of 2019, 70-80% of Venezuela's power comes from Guri.",
+   "quote": "as of 2019, 70-80% of Venezuela's power comes from Guri.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": null,
+   "entities": [
+    "country.venezuela",
+    "country.brazil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "On 24 April the Polish oil logistics company PERN stopped receiving supplies from the Belarusian transmission system due to the heavy contamination",
+   "quote": "On 24 April the Polish oil logistics company PERN stopped receiving supplies from the Belarusian transmission system due to the heavy contamination",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "a day later a similar decision was taken by the Ukrainian company Ukrtransnafta, which operates the Ukrainian part of Druzhba's southern branch",
+   "quote": "a day later a similar decision was taken by the Ukrainian company Ukrtransnafta, which operates the Ukrainian part of Druzhba's southern branch",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "This resulted in supplies being cut off to refineries in Germany, Slovakia, the Czech Republic and Hungary.",
+   "quote": "This resulted in supplies being cut off to refineries in Germany, Slovakia, the Czech Republic and Hungary.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "A total of up to 5 million tonnes of crude oil, worth up to US$2.6 billion, has been contaminated.",
+   "quote": "A total of up to 5 million tonnes of crude oil, worth up to US$2.6 billion, has been contaminated.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "The complete cessation of oil transmission via Druzhba, which has now lasted over two weeks, is the most serious crisis in the 50-year history of this vital pipeline system",
+   "quote": "The complete cessation of oil transmission via Druzhba, which has now lasted over two weeks, is the most serious crisis in the 50-year history of this vital pipeline system",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Poland, the Czech Republic and Hungary have already started to draw on their strategic reserves",
+   "quote": "Poland, the Czech Republic and Hungary have already started to draw on their strategic reserves",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "On 18 April, Prime Minister Medvedev announced that as of 1 June the export of oil and oil products to Ukraine would be embargoed",
+   "quote": "On 18 April, Prime Minister Medvedev announced that as of 1 June the export of oil and oil products to Ukraine would be embargoed",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "In January 2006, Russia suspended oil transit along the Druzhba pipeline via Belarus for three days in connection with its energy disputes with Belarus.",
+   "quote": "In January 2006, Russia suspended oil transit along the Druzhba pipeline via Belarus for three days in connection with its energy disputes with Belarus.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "Minsk made public threats (including in a statement by President Alyaksandr Lukashenka on 11 April) that it could temporarily halt transit via Druzhba",
+   "quote": "Minsk made public threats (including in a statement by President Alyaksandr Lukashenka on 11 April) that it could temporarily halt transit via Druzhba",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.182,
+    "n": 11,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 1,
+     "up": 5,
+     "n": 11,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "druzhba_contamination_2019",
+   "knowable": "2019-05-08",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Belarus notified Russia's Transneft of its intention to raise its transit tariffs for the transmission of oil via Druzhba to its European customers by 23.1%",
+   "quote": "Belarus notified Russia's Transneft of its intention to raise its transit tariffs for the transmission of oil via Druzhba to its European customers by 23.1%",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "chokepoint.druzhba_pipeline",
+    "country.russia",
+    "country.ukraine",
+    "country.germany",
+    "country.hungary",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "The four ships - two Saudi, one Norwegian and one Emirati - were allegedly damaged in what Emirati officials described as acts of sabotage near the port of Fujairah.",
+   "quote": "The four ships - two Saudi, one Norwegian and one Emirati - were allegedly damaged in what Emirati officials described as acts of sabotage near the port of Fujairah.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.417,
+    "n": 12,
+    "k": 5,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 3,
+     "flat": 3,
+     "up": 6,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2019-05-12",
+       "title": "Four tankers sabotaged off Fujairah near Hormuz",
+       "chg_pct": -12.15
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "The incident happened 140km south of the Strait of Hormuz, where about one third of all oil traded by sea passes through.",
+   "quote": "The incident happened 140km south of the Strait of Hormuz, where about one third of all oil traded by sea passes through.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "US President Donald Trump has warned Iran if it does \"anything\" in the form of an attack it will \"suffer greatly\".",
+   "quote": "US President Donald Trump has warned Iran if it does \"anything\" in the form of an attack it will \"suffer greatly\".",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.312,
+    "n": 16,
+    "k": 5,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 11,
+     "escalated": 5,
+     "n": 16
+    }
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "the top US defence official has presented an updated military plan to Trump's administration that envisions sending up to 120,000 troops to the Middle East should Iran attack US forces or accelerate work on nuclear weapons.",
+   "quote": "the top US defence official has presented an updated military plan to Trump's administration that envisions sending up to 120,000 troops to the Middle East should Iran attack US forces or accelerate work on nuclear weapons.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.312,
+    "n": 16,
+    "k": 5,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 11,
+     "escalated": 5,
+     "n": 16
+    }
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "said it will not allow its oil exports to be halted.",
+   "quote": "said it will not allow its oil exports to be halted.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "imposed increasingly strict sanctions on Tehran.",
+   "quote": "imposed increasingly strict sanctions on Tehran.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "fujairah_tanker_sabotage_2019",
+   "knowable": "2019-05-14",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "has sent an aircraft carrier and B-52 bombers to the Gulf in a show of force against what US officials have said are threats to US troops in the region.",
+   "quote": "has sent an aircraft carrier and B-52 bombers to the Gulf in a show of force against what US officials have said are threats to US troops in the region.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.united_arab_emirates",
+    "country.saudi_arabia",
+    "country.norway",
+    "chokepoint.hormuz",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.312,
+    "n": 16,
+    "k": 5,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 11,
+     "escalated": 5,
+     "n": 16
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Iran announced the capture of one British-flagged ship in the narrow Strait of Hormuz on Friday, and US officials said that a second had also been seized.",
+   "quote": "Iran announced the capture of one British-flagged ship in the narrow Strait of Hormuz on Friday, and US officials said that a second had also been seized.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.167,
+    "n": 12,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 2,
+     "up": 5,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Iran's Islamic Revolutionary Guard Corps (IRGC) said that its navy had captured the British-flagged oil tanker, Stena Impero, according to Iran's state-run Press TV.",
+   "quote": "Iran's Islamic Revolutionary Guard Corps (IRGC) said that its navy had captured the British-flagged oil tanker, Stena Impero, according to Iran's state-run Press TV.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.167,
+    "n": 12,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 2,
+     "up": 5,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "US officials told CNN that another ship - the Liberian-flagged MV Mesdar tanker - had also been seized by Iran on Friday.",
+   "quote": "US officials told CNN that another ship - the Liberian-flagged MV Mesdar tanker - had also been seized by Iran on Friday.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.167,
+    "n": 12,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 2,
+     "up": 5,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "But Iranian military officials denied that Mesdar had been seized, Press TV reported, citing informed military sources.",
+   "quote": "But Iranian military officials denied that Mesdar had been seized, Press TV reported, citing informed military sources.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "\"Communication has been re-established with the vessel and Master confirmed that the armed guards have left and the vessel is free to continue the voyage,\" Norbulk Shipping said.",
+   "quote": "\"Communication has been re-established with the vessel and Master confirmed that the armed guards have left and the vessel is free to continue the voyage,\" Norbulk Shipping said.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.167,
+    "n": 12,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 2,
+     "up": 5,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "On Friday evening, the Mesdar was seen headed in a western direction into the Gulf, instead of north to Iran, according to MarineTraffic.com tracking data.",
+   "quote": "On Friday evening, the Mesdar was seen headed in a western direction into the Gulf, instead of north to Iran, according to MarineTraffic.com tracking data.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.167,
+    "n": 12,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 2,
+     "up": 5,
+     "n": 12,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "Hunt also said that there would be \"serious consequences \" if the situation was not quickly resolved, Reuters reported.",
+   "quote": "Hunt also said that there would be \"serious consequences \" if the situation was not quickly resolved, Reuters reported.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.314,
+    "n": 35,
+    "k": 11,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 24,
+     "escalated": 11,
+     "n": 35
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "On Thursday, the US Navy destroyed an Iranian drone using electronic jamming, a US defense official told CNN.",
+   "quote": "On Thursday, the US Navy destroyed an Iranian drone using electronic jamming, a US defense official told CNN.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.314,
+    "n": 35,
+    "k": 11,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 24,
+     "escalated": 11,
+     "n": 35
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "in June, tensions between the US and Iran escalated into a military standoff after an American drone was shot down by Iran over the Strait of Hormuz, one of the world's most vital shipping routes.",
+   "quote": "in June, tensions between the US and Iran escalated into a military standoff after an American drone was shot down by Iran over the Strait of Hormuz, one of the world's most vital shipping routes.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.314,
+    "n": 35,
+    "k": 11,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 24,
+     "escalated": 11,
+     "n": 35
+    }
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "In another incident last week, armed Iranian boats tried unsuccessfully to impede the passage of a British oil tanker in the Persian Gulf, according to two US officials with direct knowledge of the incident.",
+   "quote": "In another incident last week, armed Iranian boats tried unsuccessfully to impede the passage of a British oil tanker in the Persian Gulf, according to two US officials with direct knowledge of the incident.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "stena_impero_seizure_2019",
+   "knowable": "2019-07-19",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Richard Meade, the managing editor of shipping industry publication Lloyds List, described the significance of the Stena's seizure as \"huge\" for the region.",
+   "quote": "Richard Meade, the managing editor of shipping industry publication Lloyds List, described the significance of the Stena's seizure as \"huge\" for the region.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.iran",
+    "chokepoint.hormuz",
+    "country.united_kingdom",
+    "country.united_states",
+    "country.saudi_arabia",
+    "country.united_arab_emirates",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "There were no injuries and no interruptions to Saudi Aramco's oil operations.",
+   "quote": "There were no injuries and no interruptions to Saudi Aramco's oil operations.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "the group targeted the Shaybah oil field with 10 drones in what he said was the \"biggest attack in the depths\" of the kingdom, the world's top oil exporter",
+   "quote": "the group targeted the Shaybah oil field with 10 drones in what he said was the \"biggest attack in the depths\" of the kingdom, the world's top oil exporter",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.316,
+    "n": 19,
+    "k": 6,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 13,
+     "escalated": 6,
+     "n": 19
+    }
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Shaybah, which produces about a million barrels of crude oil a day",
+   "quote": "Shaybah, which produces about a million barrels of crude oil a day",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.429,
+    "n": 14,
+    "k": 6,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 4,
+     "flat": 3,
+     "up": 7,
+     "n": 14,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "In May, the Houthis claimed responsibility for a drone attack on two oil-pumping stations in Saudi Arabia that caused a small fire, but did not disrupt oil output or exports of crude and petroleum products.",
+   "quote": "In May, the Houthis claimed responsibility for a drone attack on two oil-pumping stations in Saudi Arabia that caused a small fire, but did not disrupt oil output or exports of crude and petroleum products.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "We promise the Saudi regime and the powers of aggression bigger and wider operations if the aggression continues",
+   "quote": "We promise the Saudi regime and the powers of aggression bigger and wider operations if the aggression continues",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.316,
+    "n": 19,
+    "k": 6,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 13,
+     "escalated": 6,
+     "n": 19
+    }
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "This terrorist sabotage follows a series of actions, including attacks against oil tankers, and are aimed at disrupting international oil supplies",
+   "quote": "This terrorist sabotage follows a series of actions, including attacks against oil tankers, and are aimed at disrupting international oil supplies",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.429,
+    "n": 14,
+    "k": 6,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 4,
+     "flat": 3,
+     "up": 7,
+     "n": 14,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "saudi_shaybah_2019",
+   "knowable": "2019-08-17",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "attacks on oil tankers in May and June blamed by the US on Iran, which denied responsibility",
+   "quote": "attacks on oil tankers in May and June blamed by the US on Iran, which denied responsibility",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.yemen",
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.natgas",
+    "country.united_arab_emirates",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.316,
+    "n": 19,
+    "k": 6,
+    "basis": "conditioned +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 13,
+     "escalated": 6,
+     "n": 19
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "direction",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "up",
+   "level": null,
+   "modality": "asserted",
+   "text": "Brent and West Texas Intermediate (WTI) crude oil prices experienced the largest single-day price increase in the past decade.",
+   "quote": "Brent and West Texas Intermediate (WTI) crude oil prices experienced the largest single-day price increase in the past decade.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "direction claim on brent at +20 trading days",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "Saudi Aramco reported that Abqaiq was producing 2 million b/d, and they expected its entire output capacity to be fully restored by the end of September.",
+   "quote": "Saudi Aramco reported that Abqaiq was producing 2 million b/d, and they expected its entire output capacity to be fully restored by the end of September.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "Saudi Aramco stated that crude oil exports to customers will continue by drawing on existing inventories and offering additional crude oil production from other fields.",
+   "quote": "Saudi Aramco stated that crude oil exports to customers will continue by drawing on existing inventories and offering additional crude oil production from other fields.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "Tanker loading estimates from third-party data sources indicate that loadings at two Saudi Arabian export facilities were restored to the pre-attack levels.",
+   "quote": "Tanker loading estimates from third-party data sources indicate that loadings at two Saudi Arabian export facilities were restored to the pre-attack levels.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "direction",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": null,
+   "modality": "asserted",
+   "text": "both Brent and WTI crude oil prices fell on Tuesday, September 17.",
+   "quote": "both Brent and WTI crude oil prices fell on Tuesday, September 17.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "direction claim on brent at +20 trading days",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": 2.55,
+   "modality": "asserted",
+   "text": "U.S. average regular retail gasoline prices averaged $2.55 per gallon, according to the U.S. Energy Information Administration's (EIA) Gasoline and Diesel Fuel Update",
+   "quote": "U.S. average regular retail gasoline prices averaged $2.55 per gallon, according to the U.S. Energy Information Administration's (EIA) Gasoline and Diesel Fuel Update",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "level claim without asset + stated level",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "level claim without asset + stated level"
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Each dollar per barrel of sustained price change in crude oil translates to an average change of about 2.4 cents per gallon in petroleum product prices.",
+   "quote": "Each dollar per barrel of sustained price change in crude oil translates to an average change of about 2.4 cents per gallon in petroleum product prices.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Saudi Arabia's crude oil production and export levels are each 0.5 million b/d lower than their respective 2018 annual averages.",
+   "quote": "Saudi Arabia's crude oil production and export levels are each 0.5 million b/d lower than their respective 2018 annual averages.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "abqaiq_attack_2019",
+   "knowable": "2019-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "recently hit a four-week average record low of 380,000 b/d in the week ending September 6",
+   "quote": "recently hit a four-week average record low of 380,000 b/d in the week ending September 6",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.saudi_arabia",
+    "commodity.crude_oil",
+    "commodity.brent",
+    "commodity.wti",
+    "commodity.gasoline",
+    "country.united_states",
+    "institution.us_doe"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "knowable": "2019-10-04",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Ecuador announced it will leave OPEC in January 2020",
+   "quote": "Ecuador announced it will leave OPEC in January 2020",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "knowable": "2019-10-04",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Ecuador's output quota, fixed at 508,000 bbl/d for the first six months of 2019, was inferior by 4% to its production, which reached 530,000 bbl/d, according to OPEC's data.",
+   "quote": "Ecuador's output quota, fixed at 508,000 bbl/d for the first six months of 2019, was inferior by 4% to its production, which reached 530,000 bbl/d, according to OPEC's data.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.371,
+    "n": 35,
+    "k": 13,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "knowable": "2019-10-04",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "whose production has reached close to 83,000 bbl/d in September 2019",
+   "quote": "whose production has reached close to 83,000 bbl/d in September 2019",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.371,
+    "n": 35,
+    "k": 13,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "knowable": "2019-10-04",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Ecuador's oil output reached 507,000 bbl/d in 2018 (OPEC).",
+   "quote": "Ecuador's oil output reached 507,000 bbl/d in 2018 (OPEC).",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.371,
+    "n": 35,
+    "k": 13,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "ecuador_leaves_opec_2019",
+   "knowable": "2019-10-04",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "ITT is expected to increase national production to 700,000 bbl/d by 2021.",
+   "quote": "ITT is expected to increase national production to 700,000 bbl/d by 2021.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "country.ecuador",
+    "institution.opec",
+    "commodity.crude_oil"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.371,
+    "n": 35,
+    "k": 13,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "hypothetical",
+   "text": "considered cutting production by an additional 500,000 barrels per day",
+   "quote": "considered cutting production by an additional 500,000 barrels per day",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "hypothetical",
+   "text": "It would bring the total production cut to 1.7 million barrels per day.",
+   "quote": "It would bring the total production cut to 1.7 million barrels per day.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Iran's oil minister said a deal had been reached",
+   "quote": "Iran's oil minister said a deal had been reached",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "hypothetical",
+   "text": "the steeper cuts would extend through the first quarter of 2020 and would only be implemented if each member complies with its current production quota",
+   "quote": "the steeper cuts would extend through the first quarter of 2020 and would only be implemented if each member complies with its current production quota",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "hypothetical",
+   "text": "condensates would no longer be quoted as part of output for countries, a move which would reduce the total impact of the cuts",
+   "quote": "condensates would no longer be quoted as part of output for countries, a move which would reduce the total impact of the cuts",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": 63.21,
+   "modality": "asserted",
+   "text": "In after hours trading international benchmark Brent crude gained 21 cents to trade at $63.21.",
+   "quote": "In after hours trading international benchmark Brent crude gained 21 cents to trade at $63.21.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $63 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "implied_move_pct": -3.7,
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.543,
+    "n": 35,
+    "k": 19,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": 58.33,
+   "modality": "asserted",
+   "text": "U.S. West Texas Intermediate shed 10 cents to trade at $58.33.",
+   "quote": "U.S. West Texas Intermediate shed 10 cents to trade at $58.33.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $58 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "implied_move_pct": -11.2,
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.314,
+    "n": 35,
+    "k": 11,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 16,
+     "n": 35,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC+, as a whole, was not even pumping as much as allotted.",
+   "quote": "OPEC+, as a whole, was not even pumping as much as allotted.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "opec_deeper_cut_dec_2019",
+   "knowable": "2019-12-05",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "It doesn't look promising to me,",
+   "quote": "It doesn't look promising to me,",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.brent",
+    "commodity.wti",
+    "country.russia",
+    "country.saudi_arabia",
+    "country.iraq",
+    "country.iran",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "knowable": "2019-12-30",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "Operations have resumed at Iraq's southern Nasiriya oilfield, the oil ministry said on Monday",
+   "quote": "Operations have resumed at Iraq's southern Nasiriya oilfield, the oil ministry said on Monday",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "knowable": "2019-12-30",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "asserted",
+   "text": "it will take up to two days for output to be fully restored",
+   "quote": "it will take up to two days for output to be fully restored",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "knowable": "2019-12-30",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Protesters broke into the oilfield , which produces 80,000-85,000 barrels of oil a day, on Saturday and forced employees to cut off electricity from its control station, taking it offline.",
+   "quote": "Protesters broke into the oilfield , which produces 80,000-85,000 barrels of oil a day, on Saturday and forced employees to cut off electricity from its control station, taking it offline.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "knowable": "2019-12-30",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "negated",
+   "text": "It did not affect Iraq's exports, the oil ministry said on Sunday",
+   "quote": "It did not affect Iraq's exports, the oil ministry said on Sunday",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "iraq_nasiriya_2019",
+   "knowable": "2019-12-30",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "resume",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "adding it would use additional output from southern oilfields in Basra to make up for the missing shipments",
+   "quote": "adding it would use additional output from southern oilfields in Basra to make up for the missing shipments",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "infrastructure_attack",
+   "entities": [
+    "country.iraq",
+    "commodity.crude_oil",
+    "country.iran"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.5,
+    "n": 16,
+    "k": 8,
+    "basis": "infrastructure_attack events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 5,
+     "flat": 3,
+     "up": 8,
+     "n": 16,
+     "tails": [
+      {
+       "date": "2019-05-14",
+       "title": "Houthi drones strike Saudi East-West crude pipeline",
+       "chg_pct": -14.99
+      },
+      {
+       "date": "2016-02-10",
+       "title": "Niger Delta Avengers hit Bonny Soku gas line",
+       "chg_pct": 30.33
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "knowable": "2020-01-18",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Forces loyal to Libyan renegade military commander Khalifa Haftar have blocked oil exports from the war-ravaged country's main ports on the eve of an international summit aimed at bringing peace to the North African country.",
+   "quote": "Forces loyal to Libyan renegade military commander Khalifa Haftar have blocked oil exports from the war-ravaged country's main ports on the eve of an international summit aimed at bringing peace to the North African country.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.154,
+    "n": 13,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 6,
+     "flat": 2,
+     "up": 5,
+     "n": 13,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "knowable": "2020-01-18",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "The National Oil Company (NOC) said the closure of Libya's \"oil crescent\" will cause the country's daily crude production to plunge from 1.3 million barrels to 500,000 barrels and cause losses of $55m a day.",
+   "quote": "The National Oil Company (NOC) said the closure of Libya's \"oil crescent\" will cause the country's daily crude production to plunge from 1.3 million barrels to 500,000 barrels and cause losses of $55m a day.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.154,
+    "n": 13,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 6,
+     "flat": 2,
+     "up": 5,
+     "n": 13,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "knowable": "2020-01-18",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Haftar's forces and oilfield guards have ordered five subsidiaries of the national oil company to halt exports from key oil fields and port terminals.",
+   "quote": "Haftar's forces and oilfield guards have ordered five subsidiaries of the national oil company to halt exports from key oil fields and port terminals.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.154,
+    "n": 13,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 6,
+     "flat": 2,
+     "up": 5,
+     "n": 13,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "knowable": "2020-01-18",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "the suspension of exports would prevent the company from fulfilling contracts with international oil companies.",
+   "quote": "the suspension of exports would prevent the company from fulfilling contracts with international oil companies.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.154,
+    "n": 13,
+    "k": 2,
+    "basis": "chokepoint_disruption events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 6,
+     "flat": 2,
+     "up": 5,
+     "n": 13,
+     "tails": [
+      {
+       "date": "2014-12-14",
+       "title": "Armed clashes force closure of Libya's Es Sider and Ras Lanuf oil ports",
+       "chg_pct": -25.0
+      },
+      {
+       "date": "2018-04-03",
+       "title": "Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches",
+       "chg_pct": 8.45
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "libya_haftar_blockade_2020",
+   "knowable": "2020-01-18",
+   "kind": "uncheckable",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "the United Nations mission in Libya expressed \"deep concern\" over the efforts to disrupt oil production, warning of \"devastating consequences\".",
+   "quote": "the United Nations mission in Libya expressed \"deep concern\" over the efforts to disrupt oil production, warning of \"devastating consequences\".",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "chokepoint_disruption",
+   "entities": [
+    "country.libya",
+    "commodity.crude_oil",
+    "chokepoint.libya_es_sider",
+    "country.turkey",
+    "country.russia"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "direction",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": null,
+   "modality": "asserted",
+   "text": "oil plunged 10 percent on Friday as a meeting in Vienna ended in acrimony between the cartel and Russia",
+   "quote": "oil plunged 10 percent on Friday as a meeting in Vienna ended in acrimony between the cartel and Russia",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "direction claim on brent at +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.472,
+    "n": 36,
+    "k": 17,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 17,
+     "n": 36,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "up",
+   "level": 46.0,
+   "modality": "asserted",
+   "text": "global benchmark Brent crude fell more than 10 percent on the news to fall below $46 a barrel on Friday, before recovering slightly.",
+   "quote": "global benchmark Brent crude fell more than 10 percent on the news to fall below $46 a barrel on Friday, before recovering slightly.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $46 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "implied_move_pct": 0.9,
+   "verdict": {
+    "verdict": "SUPPORTED",
+    "r": 0.694,
+    "n": 36,
+    "k": 25,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 17,
+     "n": 36,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC said on Friday it would remove all limits on the cartel's crude production",
+   "quote": "OPEC said on Friday it would remove all limits on the cartel's crude production",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC ministers citing \"an unprecedented situation\" agreed to cut output by 1.5 million barrels per day (bpd) - or 1.5 percent of global demand- until the end of 2020.",
+   "quote": "OPEC ministers citing \"an unprecedented situation\" agreed to cut output by 1.5 million barrels per day (bpd) - or 1.5 percent of global demand- until the end of 2020.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "They also agreed to extend cuts agreed to in December between the cartel and its allies - a grouping known as OPEC+, beyond the end of this month.",
+   "quote": "They also agreed to extend cuts agreed to in December between the cartel and its allies - a grouping known as OPEC+, beyond the end of this month.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "escalation",
+   "asset": "escalation",
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "asserted",
+   "text": "the cartel could not overcome Russian resistance - a major blow to OPEC's de facto leader and biggest producer, Saudi Arabia.",
+   "quote": "the cartel could not overcome Russian resistance - a major blow to OPEC's de facto leader and biggest producer, Saudi Arabia.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": true,
+   "why": "escalation claim between actors; resolves on +90d corpus outcome",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "THIN",
+    "r": 0,
+    "n": 0,
+    "k": 0,
+    "basis": "class +90d outcomes (corpus-derived)",
+    "bar": {
+     "contained": 0,
+     "escalated": 0,
+     "n": 0
+    }
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "up",
+   "level": 83.0,
+   "modality": "asserted",
+   "text": "The kingdom needs oil to fetch $83 a barrel to balance its state budget.",
+   "quote": "The kingdom needs oil to fetch $83 a barrel to balance its state budget.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $83 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "implied_move_pct": 82.0,
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.0,
+    "n": 36,
+    "k": 0,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 17,
+     "n": 36,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": 42.0,
+   "modality": "hypothetical",
+   "text": "Moscow can break even if crude clocks in as low as $42 a barrel.",
+   "quote": "Moscow can break even if crude clocks in as low as $42 a barrel.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $42 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "implied_move_pct": -7.9,
+   "verdict": {
+    "verdict": "MIXED",
+    "r": 0.417,
+    "n": 36,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 17,
+     "n": 36,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": "escalate",
+   "level": null,
+   "modality": "negated",
+   "text": "The Kremlin said on Friday that President Vladimir Putin had no plans to talk to the Saudi leadership, dashing hopes that a deal could be salvaged at the very top.",
+   "quote": "The Kremlin said on Friday that President Vladimir Putin had no plans to talk to the Saudi leadership, dashing hopes that a deal could be salvaged at the very top.",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "negated in the text (non-event): no read",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "negated in the text (non-event): no read"
+   }
+  },
+  {
+   "event_id": "opec_talks_collapse_2020",
+   "knowable": "2020-03-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": 25.0,
+   "modality": "hypothetical",
+   "text": "The decision risks sending oil prices into a free fall with the fundamental floor for prices, as in 2016, determined by the cost of completing US shale DUCs [drilled but uncompleted wells], which is now as low as $25 per barrel.",
+   "quote": "The decision risks sending oil prices into a free fall with the fundamental floor for prices, as in 2016, determined by the cost of completing US shale DUCs [drilled but uncompleted wells], which is now as low as $25 per barrel.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $25 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.russia",
+    "commodity.brent",
+    "country.united_states",
+    "country.china"
+   ],
+   "implied_move_pct": -45.2,
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.0,
+    "n": 36,
+    "k": 0,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 13,
+     "flat": 6,
+     "up": 17,
+     "n": 36,
+     "tails": [
+      {
+       "date": "2008-10-24",
+       "title": "OPEC emergency 1.5 mb/d cut in the financial crisis",
+       "chg_pct": -25.85
+      },
+      {
+       "date": "2004-12-10",
+       "title": "OPEC trims output 1 million bpd",
+       "chg_pct": 20.06
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": "down",
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC+ agreement called for a decrease in crude oil output by an initial 9.7 million barrels per day (b/d) that gradually tapers through April 2022, the end of the current agreement period.",
+   "quote": "OPEC+ agreement called for a decrease in crude oil output by an initial 9.7 million barrels per day (b/d) that gradually tapers through April 2022, the end of the current agreement period.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "The U.S. Energy Information Administration's (EIA) monthly data show that OPEC total crude oil production decreased by 6.0 million b/d from April to May, which was the largest monthly production decline since 1993.",
+   "quote": "The U.S. Energy Information Administration's (EIA) monthly data show that OPEC total crude oil production decreased by 6.0 million b/d from April to May, which was the largest monthly production decline since 1993.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.385,
+    "n": 39,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 19,
+     "n": 39,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Compared with January 2020 total petroleum liquids production, partner countries' output fell by an estimated 5.9 million b/d in May, 7.9 million b/d in June, 7.1 million b/d in July, and 5.6 million b/d in August.",
+   "quote": "Compared with January 2020 total petroleum liquids production, partner countries' output fell by an estimated 5.9 million b/d in May, 7.9 million b/d in June, 7.1 million b/d in July, and 5.6 million b/d in August.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.385,
+    "n": 39,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 19,
+     "n": 39,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC members Iran, Libya, and Venezuela were exempt from the production cut agreement because of economic sanctions or domestic political instability.",
+   "quote": "OPEC members Iran, Libya, and Venezuela were exempt from the production cut agreement because of economic sanctions or domestic political instability.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "EIA estimates that the OPEC+ agreement, along with declines in production elsewhere, including the United States, brought global supply lower than the level of global demand for the first time since mid-2019.",
+   "quote": "EIA estimates that the OPEC+ agreement, along with declines in production elsewhere, including the United States, brought global supply lower than the level of global demand for the first time since mid-2019.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.385,
+    "n": 39,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 19,
+     "n": 39,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Lower supply than demand has resulted in significant global liquid fuels inventory draws since June.",
+   "quote": "Lower supply than demand has resulted in significant global liquid fuels inventory draws since June.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.385,
+    "n": 39,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 19,
+     "n": 39,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_record_cut_2020",
+   "knowable": "2020-09-23",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "hypothetical",
+   "text": "EIA expects inventories to continue declining in the second half of 2020 and during most of 2021, resulting in a relatively balanced market by the end of next year, according to EIA's September 2020 Short-Term Energy Outlook .",
+   "quote": "EIA expects inventories to continue declining in the second half of 2020 and during most of 2021, resulting in a relatively balanced market by the end of next year, according to EIA's September 2020 Short-Term Energy Outlook .",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "commodity.crude_oil",
+    "country.iran",
+    "country.libya",
+    "country.venezuela",
+    "country.united_states"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.385,
+    "n": 39,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 19,
+     "n": 39,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "OPEC and its oil-producing allies agreed on Saturday to extend the group's historic production cut for an additional month in an ongoing effort to balance the global oil market.",
+   "quote": "OPEC and its oil-producing allies agreed on Saturday to extend the group's historic production cut for an additional month in an ongoing effort to balance the global oil market.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Beginning on May 1, the alliance cut production by 9.7 million barrels per day.",
+   "quote": "Beginning on May 1, the alliance cut production by 9.7 million barrels per day.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.395,
+    "n": 38,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "Now, July's production cut will be 9.6 million bpd after Mexico, which accounts for 100,000 bpd, said it remained committed to the group's prior agreement.",
+   "quote": "Now, July's production cut will be 9.6 million bpd after Mexico, which accounts for 100,000 bpd, said it remained committed to the group's prior agreement.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.395,
+    "n": 38,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Nations that have failed to curb output by their allocated amount must enact additional cuts in July, August and September in order to make up for non-compliance in May and June.",
+   "quote": "Nations that have failed to curb output by their allocated amount must enact additional cuts in July, August and September in order to make up for non-compliance in May and June.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "down",
+   "level": 39.55,
+   "modality": "asserted",
+   "text": "West Texas Intermediate jumped 5.72% to settle at $39.55",
+   "quote": "West Texas Intermediate jumped 5.72% to settle at $39.55",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $40 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "implied_move_pct": -0.3,
+   "verdict": {
+    "verdict": "SUPPORTED",
+    "r": 0.789,
+    "n": 38,
+    "k": 30,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "up",
+   "level": 42.3,
+   "modality": "asserted",
+   "text": "Brent crude gained 5.78% to settle at $42.30",
+   "quote": "Brent crude gained 5.78% to settle at $42.30",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $42 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "implied_move_pct": 6.7,
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.368,
+    "n": 38,
+    "k": 14,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "level",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "up",
+   "level": 65.65,
+   "modality": "asserted",
+   "text": "WTI is still about 40% below its January high of $65.65, however.",
+   "quote": "WTI is still about 40% below its January high of $65.65, however.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "level claim: $66 on brent within +20 trading days",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "implied_move_pct": 65.5,
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.0,
+    "n": 38,
+    "k": 0,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "flow",
+   "asset": "brent",
+   "series": "fred.DCOILBRENTEU",
+   "direction": "disrupt",
+   "level": null,
+   "modality": "asserted",
+   "text": "production has fallen from a record 13.1 million bpd in March to 11.2 million bpd, according to the U.S. Energy Information Administration.",
+   "quote": "production has fallen from a record 13.1 million bpd in March to 11.2 million bpd, according to the U.S. Energy Information Administration.",
+   "horizon_days": 20,
+   "horizon_unit": "trading",
+   "checkable": true,
+   "why": "flow claim (barrels/transits stop or resume); price proxy until flow history exists",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNSUPPORTED",
+    "r": 0.395,
+    "n": 38,
+    "k": 15,
+    "basis": "opec_decision events, DCOILBRENTEU at +20 trading days",
+    "bar": {
+     "down": 14,
+     "flat": 6,
+     "up": 18,
+     "n": 38,
+     "tails": [
+      {
+       "date": "2020-03-06",
+       "title": "OPEC+ talks collapse and price war begins",
+       "chg_pct": -46.64
+      },
+      {
+       "date": "2020-04-12",
+       "title": "OPEC+ agrees record production cut",
+       "chg_pct": 28.29
+      }
+     ]
+    }
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "uncheckable",
+   "asset": null,
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "Today we have grounds to be cautiously optimistic about the future, but we are not out of the woods yet and challenges ahead remain to be seen,",
+   "quote": "Today we have grounds to be cautiously optimistic about the future, but we are not out of the woods yet and challenges ahead remain to be seen,",
+   "horizon_days": null,
+   "horizon_unit": null,
+   "checkable": false,
+   "why": "no asset + direction/level + horizon in the quote",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "no asset + direction/level + horizon in the quote"
+   }
+  },
+  {
+   "event_id": "opec_extend_june_2020",
+   "knowable": "2020-06-06",
+   "kind": "policy",
+   "asset": "policy",
+   "series": null,
+   "direction": null,
+   "level": null,
+   "modality": "asserted",
+   "text": "despite the economic and financial circumstances that Iraq is facing, the country remains committed to the agreement.",
+   "quote": "despite the economic and financial circumstances that Iraq is facing, the country remains committed to the agreement.",
+   "horizon_days": 90,
+   "horizon_unit": "calendar",
+   "checkable": false,
+   "why": "policy claim; checkable only against a dated action entering the corpus (PENDING)",
+   "event_class": "opec_decision",
+   "entities": [
+    "institution.opec",
+    "country.saudi_arabia",
+    "country.mexico",
+    "country.iraq",
+    "country.united_states",
+    "commodity.wti",
+    "commodity.brent",
+    "institution.iea"
+   ],
+   "verdict": {
+    "verdict": "UNCHECKABLE",
+    "r": null,
+    "n": null,
+    "k": null,
+    "basis": "policy claim; checkable only against a dated action entering the corpus (PENDING)"
+   }
+  }
+ ]
+}

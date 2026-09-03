@@ -60,12 +60,20 @@ def run(fallback=False):
     heads = [g["headline"] for g in gold]
     reads = R.read_headlines(heads, use_cache=not fallback)
     s = score(gold, reads)
+    # H-3: the accuracy number may not be quoted bare. audit_reader.status() supplies the label, which
+    # says UNAUDITED and carries the inter-coder kappa until Joe has actually audited a sample himself.
+    try:
+        import audit_reader as AU
+        audit = AU.status()
+    except Exception as e:                                   # noqa: BLE001 -- reported, never hidden
+        audit = {"label": f"reader accuracy: UNAUDITED (audit status unavailable: {e})", "passed": False}
     s.update({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "gold": str(GOLD.relative_to(ROOT)),
               "gold_status": "coded by session A, unaudited by Joe", "reader_env": os.environ.get("RIPPLE_READER", "auto"),
               "model": (reads[0].get("reader") or {}).get("model") if reads else None,
-              "label": "reader accuracy (unaudited gold)", "threshold_class": 0.8})
+              "audit": audit, "label": audit["label"], "threshold_class": 0.8})
     OUT.write_text(json.dumps(s, indent=1))
     print(f"reader eval: class accuracy {s['class_accuracy']} ({s['class_correct']}/{s['n']}), entity F1 {s['entity_f1']}, modes {s['reader_modes']} -> {OUT.relative_to(ROOT)}")
+    print(f"   {s['label']}")
     for c in s["top_confusions"]:
         print(f"   gold {c['gold']:<22} read {c['read']:<22} x{c['n']}")
     return s
