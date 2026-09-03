@@ -188,6 +188,20 @@ def abnormal_outcome(series, event_date, horizon=HORIZON):
             "closed_on": str(series.index[end].date()), "n_est": int(len(est))}
 
 
+def outcome_design(series, event_date, horizon=HORIZON):
+    """Check target availability without reading the post-event value or computing the outcome."""
+    pos = int(series.index.searchsorted(pd.Timestamp(event_date)))
+    anchor, end = pos - 1, pos + horizon
+    est_end, est_start = pos - EST_GAP + 1, pos - EST_GAP + 1 - EST_WINDOW
+    if anchor < 0 or end >= len(series) or est_start < 1:
+        return None
+    rets = np.diff(np.log(series.iloc[:anchor + 1].to_numpy(float)), prepend=np.nan)
+    n_est = int(np.isfinite(rets[est_start:est_end]).sum())
+    if n_est < EST_MIN:
+        return None
+    return {"closed_on": str(series.index[end].date()), "n_est": n_est}
+
+
 def structural_distance(target, candidate, history, target_date, target_meta, candidate_meta):
     """Existing block-wise distance, with scaling learned only from earlier event states."""
     common = sorted(set(target) & set(candidate))
@@ -236,6 +250,21 @@ def file_hash(path):
     return h.hexdigest()
 
 
+def paired_block(a, b, dates, n_boot):
+    """Registered date-level paired inference, reused by primary and diagnostics."""
+    a, b = np.asarray(a, float), np.asarray(b, float)
+    mean_block = cluster_mean_block([pd.Timestamp(x) for x in dates])
+    lag = max(int(np.ceil(mean_block)) - 1, 0)
+    dm = INF.dm_test(a, b, h=1, lag=lag) if len(a) else {"ok": False, "n": 0}
+    ci = INF.bootstrap_ci(lambda ix: float(np.mean((a - b)[ix])), len(a), n_boot=n_boot,
+                          mean_block=mean_block, seed=SEED) if len(a) else {
+                              "estimate": None, "lo": None, "hi": None, "n_boot": 0}
+    return {"n": len(a), "mean_a": float(np.mean(a)) if len(a) else None,
+            "mean_b": float(np.mean(b)) if len(b) else None,
+            "mean_diff": ci.get("estimate"), "ci95": [ci.get("lo"), ci.get("hi")],
+            "dm": dm, "mean_block": mean_block, "n_boot": n_boot}
+
+
 def run(db=DB, out_dir=OUT, n_boot=2000):
     conn = sqlite3.connect(db)
     try:
@@ -251,16 +280,21 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
     finally:
         conn.close()
 
-    outcomes = {e["event_id"]: abnormal_outcome(brent, e["event_date"]) for e in events}
+    outcomes = {}
     history = [(e["event_date"], vectors[e["event_id"]]) for e in events]
     reads, scores, abstain = [], [], defaultdict(int)
     for e in events:
-        if e["date_precision"] != "day" or outcomes[e["event_id"]] is None:
+        target_design = outcome_design(brent, e["event_date"])
+        if e["date_precision"] != "day" or target_design is None:
             abstain["target_unusable"] += 1; continue
         candidates, details = [], []
         for c in events:
-            co = outcomes[c["event_id"]]
-            if c["event_date"] >= e["event_date"] or co is None or co["closed_on"] >= e["event_date"]:
+            if c["event_date"] >= e["event_date"]:
+                continue
+            if c["event_id"] not in outcomes:
+                outcomes[c["event_id"]] = {h: abnormal_outcome(brent, c["event_date"], h) for h in (5, 10, 20)}
+            co = outcomes[c["event_id"]][20]
+            if co is None or co["closed_on"] >= e["event_date"]:
                 continue
             sd = structural_distance(vectors[e["event_id"]], vectors[c["event_id"]], history,
                                      e["event_date"], metadata[e["event_id"]], metadata[c["event_id"]])
@@ -272,23 +306,43 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
         ds = np.asarray([x["distance"] for x in details])
         du = surface_distances(e["type"], [c["type"] for c in candidates])
         ws, wu = kernel_weights(ds), kernel_weights(du)
-        atoms = [outcomes[c["event_id"]]["value"] for c in candidates]
+        forecasts = {}
+        for h in (5, 10, 20):
+            forecasts[str(h)] = {
+                "abnormal_atoms": [outcomes[c["event_id"]][h]["value"] for c in candidates],
+                "raw_atoms": [outcomes[c["event_id"]][h]["raw"] for c in candidates],
+            }
         read = seal({"event_id": e["event_id"], "date": e["event_date"], "type": e["type"],
-                     "candidate_ids": [c["event_id"] for c in candidates], "atoms": atoms,
+                     "candidate_ids": [c["event_id"] for c in candidates], "forecasts": forecasts,
                      "structural": {"distances": ds.tolist(), "weights": ws.tolist(), "detail": details},
                      "surface": {"distances": du.tolist(), "weights": wu.tolist()},
                      "n_pool": len(candidates), "target_n_fields": len(vectors[e["event_id"]]),
                      "structural_n_eff": float(1 / np.sum(ws * ws)),
                      "surface_n_eff": float(1 / np.sum(wu * wu))})
         assert verify_seal(read)
-        y = outcomes[e["event_id"]]["value"]
-        ls, lu = weighted_crps(atoms, ws, y), weighted_crps(atoms, wu, y)
-        uniform = weighted_crps(atoms, np.ones(len(atoms)) / len(atoms), y)
+        # The target outcome is looked up only after the complete forecast object has been sealed.
+        target_outcomes = {h: abnormal_outcome(brent, e["event_date"], h) for h in (5, 10, 20)}
+        assert target_outcomes[20] is not None
+        outcomes[e["event_id"]] = target_outcomes
+        diag = {}
+        for h in (5, 10, 20):
+            ho, hf = target_outcomes[h], forecasts[str(h)]
+            unif = np.ones(len(candidates)) / len(candidates)
+            diag[str(h)] = {
+                "outcome": ho["value"], "raw_outcome": ho["raw"],
+                "abnormal": {"structural": weighted_crps(hf["abnormal_atoms"], ws, ho["value"]),
+                             "surface": weighted_crps(hf["abnormal_atoms"], wu, ho["value"]),
+                             "uniform": weighted_crps(hf["abnormal_atoms"], unif, ho["value"])},
+                "raw": {"structural": weighted_crps(hf["raw_atoms"], ws, ho["raw"]),
+                        "surface": weighted_crps(hf["raw_atoms"], wu, ho["raw"]),
+                        "uniform": weighted_crps(hf["raw_atoms"], unif, ho["raw"])}}
+        primary = diag["20"]["abnormal"]
         reads.append(read)
         scores.append({"event_id": e["event_id"], "date": e["event_date"], "read_hash": read["hash"],
-                       "outcome": y, "raw_return": outcomes[e["event_id"]]["raw"],
-                       "structural_crps": ls, "surface_crps": lu, "uniform_crps": uniform,
-                       "loss_diff": ls - lu})
+                       "outcome": target_outcomes[20]["value"], "raw_return": target_outcomes[20]["raw"],
+                       "structural_crps": primary["structural"], "surface_crps": primary["surface"],
+                       "uniform_crps": primary["uniform"],
+                       "loss_diff": primary["structural"] - primary["surface"], "diagnostics": diag})
 
     by_date = defaultdict(list)
     for s in scores:
@@ -296,12 +350,9 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
     dates = sorted(by_date)
     a = np.asarray([np.mean([x["structural_crps"] for x in by_date[d]]) for d in dates])
     b = np.asarray([np.mean([x["surface_crps"] for x in by_date[d]]) for d in dates])
-    dt = [pd.Timestamp(x) for x in dates]
-    mean_block = cluster_mean_block(dt)
-    dm = INF.dm_test(a, b, h=1, lag=max(int(np.ceil(mean_block)) - 1, 0)) if len(a) else {"ok": False, "n": 0}
-    ci = INF.bootstrap_ci(lambda ix: float(np.mean((a - b)[ix])), len(a), n_boot=n_boot,
-                          mean_block=mean_block, seed=SEED) if len(a) else {"estimate": None, "lo": None, "hi": None, "n_boot": 0}
-    est, lo, hi, p = ci.get("estimate"), ci.get("lo"), ci.get("hi"), dm.get("p_value")
+    primary_comparison = paired_block(a, b, dates, n_boot)
+    est, (lo, hi), dm = primary_comparison["mean_diff"], primary_comparison["ci95"], primary_comparison["dm"]
+    p = dm.get("p_value")
     if len(a) < 30:
         verdict = "INSUFFICIENT"
     elif est is not None and est < 0 and lo is not None and hi < 0 and p is not None and p < 0.05:
@@ -315,13 +366,26 @@ def run(db=DB, out_dir=OUT, n_boot=2000):
                "mean_loss": {"structural": float(np.mean(a)) if len(a) else None,
                              "surface": float(np.mean(b)) if len(b) else None},
                "mean_loss_diff_structural_minus_surface": est, "ci95": [lo, hi], "dm": dm,
-               "mean_block": mean_block, "n_boot": n_boot, "verdict": verdict,
+               "mean_block": primary_comparison["mean_block"], "n_boot": n_boot, "verdict": verdict,
                "pool": {"min": min((r["n_pool"] for r in reads), default=None),
                         "median": float(np.median([r["n_pool"] for r in reads])) if reads else None,
                         "max": max((r["n_pool"] for r in reads), default=None)},
                "effective_weight_n_median": {
                    "structural": float(np.median([r["structural_n_eff"] for r in reads])) if reads else None,
                    "surface": float(np.median([r["surface_n_eff"] for r in reads])) if reads else None}}
+    # Registered non-verdict pooling comparator and target/horizon diagnostics.
+    diagnostics = {}
+    for target_kind in ("abnormal", "raw"):
+        diagnostics[target_kind] = {}
+        for h in (5, 10, 20):
+            aa = np.asarray([np.mean([x["diagnostics"][str(h)][target_kind]["structural"] for x in by_date[d]]) for d in dates])
+            bb = np.asarray([np.mean([x["diagnostics"][str(h)][target_kind]["surface"] for x in by_date[d]]) for d in dates])
+            uu = np.asarray([np.mean([x["diagnostics"][str(h)][target_kind]["uniform"] for x in by_date[d]]) for d in dates])
+            diagnostics[target_kind][str(h)] = {
+                "structural_vs_surface": paired_block(aa, bb, dates, n_boot),
+                "structural_vs_uniform": paired_block(aa, uu, dates, n_boot),
+                "surface_vs_uniform": paired_block(bb, uu, dates, n_boot)}
+    summary["diagnostics_non_verdict"] = diagnostics
 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "reads.jsonl").write_text("".join(canonical(x) + "\n" for x in reads))

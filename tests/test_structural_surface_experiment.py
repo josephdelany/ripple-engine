@@ -47,12 +47,22 @@ def test_panel_reduction_is_registered_and_deterministic():
 
 
 def test_seal_precedes_outcome_and_detects_tampering():
-    r = M.seal({"event_id": "e", "candidate_ids": ["a"], "atoms": [1.0],
+    r = M.seal({"event_id": "e", "candidate_ids": ["a"], "forecasts": {"20": {"abnormal_atoms": [1.0]}},
                 "structural": {"weights": [1.0]}, "surface": {"weights": [1.0]}})
     assert "outcome" not in r
     assert M.verify_seal(r)
-    bad = copy.deepcopy(r); bad["atoms"][0] = 2.0
+    bad = copy.deepcopy(r); bad["forecasts"]["20"]["abnormal_atoms"][0] = 2.0
     assert not M.verify_seal(bad)
+
+
+def test_outcome_design_does_not_need_the_post_event_value():
+    idx = np.arange(400, dtype=float)
+    s = __import__("pandas").Series(np.exp(idx / 1000), index=__import__("pandas").date_range("2000-01-01", periods=400))
+    event = s.index[300]
+    before = M.outcome_design(s, event)
+    s.iloc[320] = np.nan
+    after = M.outcome_design(s, event)
+    assert before == after
 
 
 def test_structural_distance_never_uses_event_class():
