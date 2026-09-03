@@ -68,6 +68,24 @@ or withdraw. Not resolvable retroactively either way.
 (100% dyadic in 1946–73 → 7% by 2015–26) all move together, and the recent era dominates
 the sample. Owner **B** — stratified diagnostic, registered first, gating nothing.
 
+**1.5 A VALIDATED claim in `edge_battery.json` asserts what a new study would test, and its
+gate is the discredited one.** *(Found by C while registering the magnitude study,
+2026-09-03.)* `severity_dose_response` is carried as **VALIDATED** — the proposition that
+event severity produces a dose-response in outcomes. That is exactly what
+`MAGNITUDE_REGISTRATION.md` sets out to test, and it was validated by the same gate that never
+looks at a non-event day: the gate on which five propagation edges were retracted. A live
+VALIDATED assertion resting on a discredited gate is the highest-severity kind of stale claim
+this project can carry, because it is machine-readable and other surfaces read it. C has
+pre-registered its re-test with the verdict words fixed in advance. Owner **C** (re-test),
+**Cowork** (ensure no published surface quotes it meanwhile). *Same class of defect as the
+`v2.0` tag asserting "escalation conditioning validated OOS".*
+
+**1.6 `events.severity` mixes measured and inferred values in one column.** *(Same source.)*
+A free ordinal magnitude, populated for 305 of 313 events and unused by the engine — but
+**102 of 313 values are auto-assigned by class** in `admit_events.py`. Measured and inferred
+in a single column is what INV-5 forbids, and the field is a candidate input to the magnitude
+study, so it must be split before anything reads it. Owner **C**.
+
 ## Tier 2 — the target and the corpus
 
 **2.1 The event taxonomy conflates acts with incidents.** 33 of 187 geopolitical-class

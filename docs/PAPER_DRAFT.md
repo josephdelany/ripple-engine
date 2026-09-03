@@ -12,9 +12,10 @@ draft is traced in Appendix A to the file that produced it; none is typed from m
 > these numbers were computed, extends the "ongoing conflict → no level" rule to COW War and
 > UCDP GED and stops a missing covering record from silently reading as level 0. It takes the
 > target to **132 labelled events** (73 / 9 / 30 / 20) with 55 events becoming
-> `no_independent_outcome`, and moves 59 of 187 labels. A re-run on the amended target is
-> in progress; when it lands, the numbers below are superseded rather than retracted, and the
-> two are distinguishable by tag. **No number in this draft has been adjusted in anticipation
+> `no_independent_outcome`, and moves 59 of 187 labels. **The rebuild has landed in the
+> database; the walk has not yet been re-run on it** — `summary.json` still reports
+> `walk_20260903T003422Z`, computed on the pre-amendment target. When the re-run lands, the
+> numbers below are superseded rather than retracted, and the two are distinguishable by tag. **No number in this draft has been adjusted in anticipation
 > of that re-run.**
 
 This is the final version of the day's work. It supersedes v0.3 (run 210135Z), v0.2
