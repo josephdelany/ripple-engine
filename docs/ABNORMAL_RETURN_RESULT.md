@@ -68,10 +68,8 @@ registered constants remain at the achievable optimum, and Part III §3.4's eith
 - Not a claim of skill against climatology. SPA says no.
 - Not a per-target claim. Nothing survives FDR per target, and `gasoline_crack` runs the *opposite* way
   (−0.058, p 0.030 raw) — a mixed sign set is not a story.
-- Not transferable to the event walk without re-running it. This is the **grid** arm, unit = date. The event
-  walk still scores raw returns (`src/engine/read.py:148–177`) and its price numbers still carry A1 in full.
-  **The obvious next step is the same target change on the event walk**, which would test whether the
-  published event-level price null is the same artefact.
+- ~~Not transferable to the event walk without re-running it.~~ **Now tested there too — see §2 below. It does
+  not transfer, and the reason is the more interesting result.**
 - Nothing here is VALIDATED. §7's label audit is unpassed and this is a grid-arm result whose unit is a date.
 
 ## Provenance
@@ -80,3 +78,61 @@ Registered `caa345b` before any code. Both targets published side by side in
 `data/grid/price/summary.json` (`fitted_vs` for raw, `abnormal_return_target` for abnormal) and the raw
 result is **not withdrawn** — it is the number the paper reported and it stays on the record as what a
 raw-return target produces. Model diagnostics, dropped-cell counts, SPA and FDR are in the same object.
+
+
+---
+
+# 2. The same test on the EVENT walk — and it gives the opposite answer
+
+*Amendment O, registered `2151a71` before the code, computed from the sealed run `walk_20260903T052633Z`
+with no re-run: the analogs' identities and weights, the Hedge weights and the cluster structure are held
+exactly as sealed, and only each analog's outcome value is replaced by its abnormal counterpart.
+n = 246 scored; 17 events dropped for a short estimation window, 47 analog atoms dropped, all counted.*
+
+| engine vs | RAW skill | RAW p | ABNORMAL skill | ABNORMAL p |
+|---|---|---|---|---|
+| **climatology** | −0.0738 | 0.011 | **−0.0588** | **0.033** |
+| persistence | +0.1337 | <0.0001 | +0.1488 | <0.0001 |
+| random analogs | −0.0066 | 0.807 | +0.0060 | 0.817 |
+| frozen | +0.0105 | <0.0001 | +0.0102 | <0.0001 |
+
+**SPA (benchmark climatology): p = 0.533.** BH-FDR: 3 of 4 survive — `vs_persistence`, `vs_frozen`,
+`vs_climatology`. `vs_random_analogs` does not.
+
+## The event walk lands on Amendment O's FIRST branch, not the grid's
+
+**The loss to climatology narrows but persists and stays significant** (−0.074 → −0.059, p 0.033, surviving
+FDR). So on the walk the paper actually reports, **A1 is a real limitation but it is _not_ the cause of the
+price null.** The published price number stands, with the caveat that a quarter of the measured loss was
+target definition.
+
+**And retrieval still does not beat random analogs here** (+0.006, p 0.82) — where on the grid, on the same
+corrected target, it beat them by +0.0705 at p < 0.0001, surviving FDR.
+
+## Why the two arms disagree — a hypothesis the numbers support, not a demonstrated mechanism
+
+The two arms differ in exactly one structural way that bears on this: **the event walk's climatology pool is
+class-filtered and the grid's is not.** `src/engine/read.py:208` restricts every candidate to the target's
+own event class, and climatology is then computed from that same pool — which is Tier-1 **A2**. So on the
+event walk, climatology already carries class conditioning for free; on the grid, climatology is the pool of
+all prior grid dates and carries none.
+
+That predicts precisely what is observed: removing the market process from the target (A1) helps the engine
+against a *weak, unconditional* climatology and not against a *strong, class-conditioned* one. It also
+explains why beating random analogs — which are drawn from the same pool as climatology — separates on the
+grid and not on the walk.
+
+**Stated as a hypothesis.** It is consistent with both arms and with A2's documented mechanism, and it is
+falsifiable: re-run the event walk with the class filter removed and the two arms should converge. That is
+one line in `read.py` and a walk re-run, and it is the single most informative experiment left in the price
+arm. It has not been run and nothing here assumes its outcome.
+
+## What the paper must now say about price
+
+1. **The grid arm's loss to climatology was a target artefact and must be retracted** (§1).
+2. **The event arm's loss is not.** It survives the correction at p 0.033 and FDR, and it is the number the
+   paper reports. It stands, with the size of the target effect stated: about a quarter of it.
+3. **Retrieval beats random analogs on the grid and not on the walk**, on the same corrected target. The
+   difference is a property of the *baseline*, not of the retrieval, and A2 is the candidate explanation.
+4. **Nothing beats climatology under SPA on either arm** (grid p 0.466, walk p 0.533). No positive price
+   claim against climatology is available from either.

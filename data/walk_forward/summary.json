@@ -7915,7 +7915,161 @@
       "skill_engine_vs_clim": -0.07381,
       "skill_frozen_vs_clim": -0.08526
      }
-    ]
+    ],
+    "diagnostic_abnormal": {
+     "amendment": "WALK_FORWARD_PROTOCOL.md Amendment O (2026-09-03), registered in commit 2151a71 before this module existed; answers docs/audit/01_TIER1_design_defects.md A1",
+     "registered": true,
+     "standing": "DIAGNOSTIC -- published beside the registered raw-return numbers, which are NOT withdrawn; cannot move a \u00a77 verdict",
+     "derived_from_run": "walk_20260903T052633Z",
+     "no_rerun": "retrieval, analog identities, weights, Hedge weights and the cluster structure are held exactly as sealed (O.1)",
+     "computed_at": "2026-09-03T21:39:25+00:00",
+     "model": {
+      "form": "constant_mean (Brown & Warner 1985)",
+      "series": "fred.DCOILBRENTEU",
+      "estimation_window_td": 250,
+      "gap_td": 21,
+      "min_obs": 100,
+      "n_events_without_a_model": 17,
+      "n_analog_atoms_dropped": 47
+     },
+     "n_scored": 246,
+     "n_published_raw": 246,
+     "dependence": {
+      "mean_block": 2.3,
+      "hac_lag": 1
+     },
+     "raw_vs_abnormal": {
+      "climatology": {
+       "raw_skill": -0.07380892989994536,
+       "raw_dm_p": 0.010556564907864274,
+       "abnormal_skill": -0.05881143112811005,
+       "abnormal_dm_p": 0.03298441178041167
+      },
+      "persistence": {
+       "raw_skill": 0.13371796303920525,
+       "raw_dm_p": 1.1922400908304098e-05,
+       "abnormal_skill": 0.14882630911237849,
+       "abnormal_dm_p": 1.2328684326767814e-06
+      },
+      "random_analogs": {
+       "raw_skill": -0.006595332489315764,
+       "raw_dm_p": 0.8068723191042011,
+       "abnormal_skill": 0.005989926184017058,
+       "abnormal_dm_p": 0.817418419256086
+      },
+      "frozen": {
+       "raw_skill": 0.010549143603961864,
+       "raw_dm_p": 5.222633351076311e-05,
+       "abnormal_skill": 0.010172498909321925,
+       "abnormal_dm_p": 8.569878009279108e-05
+      }
+     },
+     "engine_vs": {
+      "climatology": {
+       "n": 246,
+       "engine_mean": 8.537721672385572,
+       "ref_mean": 8.06349593646629,
+       "skill": -0.05881143112811005,
+       "ci95": [
+        -0.12072855604771637,
+        -0.005667140133592514
+       ],
+       "dm_hln": 2.144407739047958,
+       "dm_p": 0.03298441178041167,
+       "ref": "climatology",
+       "score": "crps"
+      },
+      "persistence": {
+       "n": 246,
+       "engine_mean": 8.537721672385572,
+       "ref_mean": 10.030528156341697,
+       "skill": 0.14882630911237849,
+       "ci95": [
+        0.09554998439724138,
+        0.2041301923874876
+       ],
+       "dm_hln": -4.974354552266305,
+       "dm_p": 1.2328684326767814e-06,
+       "ref": "persistence",
+       "score": "crps"
+      },
+      "random_analogs": {
+       "n": 246,
+       "engine_mean": 8.537721672385572,
+       "ref_mean": 8.589170167671888,
+       "skill": 0.005989926184017058,
+       "ci95": [
+        -0.048941944871433225,
+        0.05860220708200079
+       ],
+       "dm_hln": -0.23111491434112444,
+       "dm_p": 0.817418419256086,
+       "ref": "random_analogs",
+       "score": "crps"
+      },
+      "frozen": {
+       "n": 246,
+       "engine_mean": 8.537721672385572,
+       "ref_mean": 8.625464197527315,
+       "skill": 0.010172498909321925,
+       "ci95": [
+        0.0052286663015100356,
+        0.015870370895008278
+       ],
+       "dm_hln": -3.994715250986948,
+       "dm_p": 8.569878009279108e-05,
+       "ref": "frozen",
+       "score": "crps"
+      }
+     },
+     "spa": {
+      "n_models": 4,
+      "T": 246,
+      "stat": -2.1487796248075113,
+      "best_model": "engine",
+      "best_mean_gain": -0.47422573591927936,
+      "p_rc": 1.0,
+      "p_spa": 0.5334665334665335,
+      "n_boot": 1000,
+      "models": [
+       "engine",
+       "frozen",
+       "random_analogs",
+       "persistence"
+      ],
+      "benchmark": "climatology"
+     },
+     "fdr": {
+      "names": [
+       "vs_climatology",
+       "vs_persistence",
+       "vs_random_analogs",
+       "vs_frozen"
+      ],
+      "p": [
+       0.03298441178041167,
+       1.2328684326767814e-06,
+       0.817418419256086,
+       8.569878009279108e-05
+      ],
+      "bh": {
+       "survive": [
+        true,
+        true,
+        false,
+        true
+       ],
+       "qvalues": [
+        0.04397921570721556,
+        4.9314737307071255e-06,
+        0.817418419256086,
+        0.00017139756018558217
+       ],
+       "q": 0.05
+      },
+      "note": "\u00a76 BH-FDR across this diagnostic's own family; a comparison that does not survive is not a finding, on this arm exactly as on the raw one"
+     }
+    }
    },
    "M": {
     "engine": {
