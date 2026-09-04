@@ -132,7 +132,23 @@ git diff --check && git status --short
 | `0173ccb` | registration + data audit, **before any detector code existed** |
 | `b67784f` | episode-duration ambiguity resolved before the first run |
 | `96035ed` | blind detector, committed input slice, frozen output, 32 tests |
-| *(this commit)* | sensitivity grid, linkage feasibility, amendments 2–3, status |
+| `1a0941f` | sensitivity grid, linkage feasibility, amendments 2–3, status |
+| `7797b04` | classification ledger regenerated for the v3 files |
+| `809d1f3` | v3 tests admitted to the DB-free gate so they run in a clean checkout |
+
+## Verification receipts
+
+| check | result |
+|---|---|
+| `make verify-submission` **before** any v3 change | **exit 0** |
+| `make verify-submission` on `research/v3` | **exit 0** |
+| `make verify-v3-foundation` | **exit 0** |
+| **clean detached worktree, no `data/oil.db`** | **97 passed, 0 skipped** |
+| `git status --porcelain` / `git diff --check` | clean |
+| `submission-v2.0.1` resolves to | `f4dd795` — unchanged |
+
+The clean-worktree run is the one that matters: the full suite, including all 40 v3 tests, passes
+with no database present and no network, from committed data alone.
 
 `submission-v2.0.1` still resolves to `f4dd795` and no existing tag was moved.
 
