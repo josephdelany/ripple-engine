@@ -31,6 +31,8 @@ make test-public
 
 `make reproduce-central` uses only the committed, transparent input bundle in `data/structural_surface/input/`. It rebuilds the sealed reads, scores, and summary in a temporary directory and requires their SHA-256 hashes to match the frozen manifest. It does not require the uncommitted research database or network access.
 
+That is a transparent input bundle, not a fully reproducible data pipeline. The bundle reproduces the experiment exactly; the bundle itself cannot be rebuilt and checked from its upstream sources, which are partly hand-obtained, key-gated or request-gated. Run `python3 src/bundle_provenance.py` for the checked status, and see [the provenance boundary](docs/audit/PROVENANCE_BOUNDARY.md).
+
 ## Instrument demonstration
 
 ```bash

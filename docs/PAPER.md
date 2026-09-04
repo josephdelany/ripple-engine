@@ -16,7 +16,9 @@ The instrument is the experiment. Its state vector defines “structure”; its 
 
 ## 2. Data and estimand
 
-The input bundle contains 313 events, 29,458 Brent observations, and 11,089 state observations. It is committed as CSV with hashes in `data/structural_surface/input/bundle_manifest.json`.
+The input bundle contains 313 events, 29,458 daily market observations across three series (Brent 9,963; WTI 10,231; VIX 9,264), and 11,089 state observations. It is committed as CSV with hashes in `data/structural_surface/input/bundle_manifest.json`.
+
+The bundle is where reproducibility stops, and the boundary is worth stating precisely. `make reproduce-central` rebuilds every frozen artifact from those CSVs alone, with no database, network access or credentials, and requires SHA-256 equality. The CSVs themselves cannot be re-derived and checked: they were exported from a gitignored 242 MB database whose recorded hash no longer matches the file present here, and 4,717 of the 11,089 state rows (42.5%) originate in Stata and Excel distributions that must be obtained by hand, with others key-gated or request-gated. Every row carries its own source, observation date, vintage, release date and retrospective flag, so an individual row can be audited against the dataset it names. This is auditability by receipt, not reproduction by pipeline. `src/bundle_provenance.py` checks both halves on demand and reports the upstream database as reproduced, diverged or absent rather than silently; [`docs/audit/PROVENANCE_BOUNDARY.md`](audit/PROVENANCE_BOUNDARY.md) records the full accounting.
 
 The primary outcome is cumulative abnormal Brent log return over exactly 20 daily returns, from the last close before the event through the nineteenth trading observation on or after it. Expected return is a constant mean estimated from up to 250 trading days ending 21 trading days before the event, with at least 100 observations required. This makes the outcome an event-window deviation from the prior market process rather than the raw movement of oil (`src/structural_surface_experiment.py`, function `abnormal_outcome`).
 
