@@ -1,0 +1,10 @@
+threshold,min_impaired_days,n_episodes,median_duration_days,median_fractional_impairment,longest_episode_days,is_primary,n_hormuz,n_suez,n_bab_el_mandeb,n_bosporus,n_malacca,n_panama
+0.6,3,44,7.0,0.6667,183,False,8,14,12,6,0,4
+0.6,5,24,14.5,0.7071,183,False,2,8,10,3,0,1
+0.6,7,16,19.5,0.7142,183,False,1,5,9,0,0,1
+0.7,3,106,5.0,0.5183,242,False,24,25,18,14,0,25
+0.7,5,39,10,0.5714,242,True,8,9,9,5,0,8
+0.7,7,19,16,0.6923,242,False,5,4,4,2,0,4
+0.8,3,195,7,0.4545,242,False,39,37,34,40,6,39
+0.8,5,98,12.0,0.5044,242,False,27,18,16,20,1,16
+0.8,7,59,16,0.54,242,False,19,10,10,10,1,9

@@ -1,0 +1,46 @@
+"""Fast non-statistical submission checks; expensive reproduction is in Makefile."""
+import re
+from pathlib import Path
+
+import public_claim_guard as claims
+
+ROOT = Path(__file__).resolve().parent.parent
+LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
+RELEASE_VERSION = "2.0.1"
+RELEASE_DATE = "2026-09-04"
+
+
+def broken_links():
+    broken = []
+    docs = sorted([
+        *ROOT.glob("*.md"),
+        *(ROOT / "docs").rglob("*.md"),
+        *(ROOT / "registrations").rglob("*.md"),
+    ])
+    for doc in docs:
+        for target in LINK.findall(doc.read_text(encoding="utf-8")):
+            target = target.split("#", 1)[0]
+            if not target or "://" in target or target.startswith("mailto:"):
+                continue
+            if not (doc.parent / target).resolve().exists():
+                broken.append(f"{doc.relative_to(ROOT)} -> {target}")
+    return broken
+
+
+def main():
+    problems = claims.violations()
+    problems += [f"broken link: {x}" for x in broken_links()]
+    cff = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    if "Market state versus event labels in historical analogy" not in cff:
+        problems.append("CITATION.cff does not name the authoritative project")
+    if f'version: "{RELEASE_VERSION}"' not in cff:
+        problems.append(f"CITATION.cff does not name release {RELEASE_VERSION}")
+    if f'date-released: "{RELEASE_DATE}"' not in cff:
+        problems.append(f"CITATION.cff does not name release date {RELEASE_DATE}")
+    if problems:
+        raise SystemExit("\n".join(problems))
+    print("submission metadata, claims, and local links: VERIFIED")
+
+
+if __name__ == "__main__":
+    main()

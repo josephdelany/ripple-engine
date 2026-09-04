@@ -1,0 +1,437 @@
+{
+  "primary": {
+    "eligible_events_not_linked": [
+      [
+        "hankuk_chemi_seizure_2021",
+        "2021-01-04",
+        "hormuz",
+        "Iran seizes South Korean tanker Hankuk Chemi in the Strait of Hormuz"
+      ],
+      [
+        "hormuz_closure_2026",
+        "2026-03-04",
+        "hormuz",
+        "Iran declares the Strait of Hormuz closed"
+      ],
+      [
+        "me_chios_lion_2024",
+        "2024-07-15",
+        "bab_el_mandeb",
+        "Houthi drone boat hits tanker Chios Lion"
+      ],
+      [
+        "me_galaxy_leader_2023",
+        "2023-11-19",
+        "bab_el_mandeb",
+        "Houthis seize Galaxy Leader car carrier in Red Sea"
+      ],
+      [
+        "me_marlin_luanda_2024",
+        "2024-01-26",
+        "bab_el_mandeb",
+        "Houthi missile sets tanker Marlin Luanda ablaze in Gulf of Aden"
+      ],
+      [
+        "me_midnight_hammer_2025",
+        "2025-06-22",
+        "hormuz",
+        "US strikes Iranian nuclear sites Fordow Natanz and Isfahan"
+      ],
+      [
+        "me_mv_tutor_2024",
+        "2024-06-12",
+        "bab_el_mandeb",
+        "Houthi attack sinks bulk carrier MV Tutor in the Red Sea"
+      ],
+      [
+        "me_rough_rider_2025",
+        "2025-03-15",
+        "bab_el_mandeb",
+        "US launches Operation Rough Rider air campaign against Yemen Houthis"
+      ],
+      [
+        "me_rubymar_2024",
+        "2024-02-18",
+        "bab_el_mandeb",
+        "Houthi missile cripples Rubymar, the first ship sunk in the Red Sea crisis"
+      ],
+      [
+        "me_us_uk_strikes_2024",
+        "2024-01-11",
+        "bab_el_mandeb",
+        "US and UK launch first airstrikes on Houthi targets in Yemen"
+      ],
+      [
+        "mercer_street_2021",
+        "2021-07-29",
+        "hormuz",
+        "Drone attack strikes tanker Mercer Street off Oman"
+      ],
+      [
+        "red_sea_attacks_2023",
+        "2023-12-01",
+        "bab_el_mandeb",
+        "Houthi attacks disrupt Red Sea shipping"
+      ],
+      [
+        "us_iran_hormuz_mou_2026",
+        "2026-06-17",
+        "hormuz",
+        "US-Iran MOU reopens the Strait of Hormuz"
+      ]
+    ],
+    "episodes_not_matched_to_catalogue": [
+      [
+        "bab_el_mandeb.n_tanker.2020-10-01",
+        "bab_el_mandeb",
+        "2020-10-01",
+        "2020-10-07",
+        "0.5"
+      ],
+      [
+        "bab_el_mandeb.n_tanker.2024-10-09",
+        "bab_el_mandeb",
+        "2024-10-09",
+        "2024-10-17",
+        "0.714286"
+      ],
+      [
+        "bab_el_mandeb.n_tanker.2024-11-15",
+        "bab_el_mandeb",
+        "2024-11-15",
+        "2024-11-27",
+        "0.461538"
+      ],
+      [
+        "bab_el_mandeb.n_tanker.2025-08-14",
+        "bab_el_mandeb",
+        "2025-08-14",
+        "2025-08-22",
+        "0.454545"
+      ],
+      [
+        "bab_el_mandeb.n_tanker.2026-07-21",
+        "bab_el_mandeb",
+        "2026-07-21",
+        "2026-08-17",
+        "0.692308"
+      ],
+      [
+        "bab_el_mandeb.n_tanker.2026-08-21",
+        "bab_el_mandeb",
+        "2026-08-21",
+        "2026-08-30",
+        "0.692308"
+      ],
+      [
+        "bosporus.n_tanker.2022-03-28",
+        "bosporus",
+        "2022-03-28",
+        "2022-04-06",
+        "0.826087"
+      ],
+      [
+        "bosporus.n_tanker.2026-02-15",
+        "bosporus",
+        "2026-02-15",
+        "2026-02-22",
+        "0.583333"
+      ],
+      [
+        "bosporus.n_tanker.2026-07-23",
+        "bosporus",
+        "2026-07-23",
+        "2026-07-30",
+        "0.565217"
+      ],
+      [
+        "bosporus.n_tanker.2026-08-03",
+        "bosporus",
+        "2026-08-03",
+        "2026-08-09",
+        "0.434783"
+      ],
+      [
+        "bosporus.n_tanker.2026-08-13",
+        "bosporus",
+        "2026-08-13",
+        "2026-08-18",
+        "0.608696"
+      ],
+      [
+        "hormuz.n_tanker.2020-02-09",
+        "hormuz",
+        "2020-02-09",
+        "2020-02-16",
+        "0.571429"
+      ],
+      [
+        "hormuz.n_tanker.2023-11-16",
+        "hormuz",
+        "2023-11-16",
+        "2023-11-25",
+        "0.473684"
+      ],
+      [
+        "hormuz.n_tanker.2023-12-11",
+        "hormuz",
+        "2023-12-11",
+        "2023-12-18",
+        "0.45614"
+      ],
+      [
+        "hormuz.n_tanker.2024-01-29",
+        "hormuz",
+        "2024-01-29",
+        "2024-02-09",
+        "0.418182"
+      ],
+      [
+        "hormuz.n_tanker.2024-12-31",
+        "hormuz",
+        "2024-12-31",
+        "2025-01-09",
+        "0.537037"
+      ],
+      [
+        "hormuz.n_tanker.2025-11-21",
+        "hormuz",
+        "2025-11-21",
+        "2026-01-06",
+        "0.645833"
+      ],
+      [
+        "hormuz.n_tanker.2026-01-11",
+        "hormuz",
+        "2026-01-11",
+        "2026-01-28",
+        "0.604167"
+      ],
+      [
+        "hormuz.n_tanker.2026-03-01",
+        "hormuz",
+        "2026-03-01",
+        "2026-08-30",
+        "1.0"
+      ],
+      [
+        "panama.n_tanker.2020-06-05",
+        "panama",
+        "2020-06-05",
+        "2020-06-13",
+        "0.461538"
+      ],
+      [
+        "panama.n_tanker.2020-06-18",
+        "panama",
+        "2020-06-18",
+        "2020-07-01",
+        "0.692308"
+      ],
+      [
+        "panama.n_tanker.2023-11-14",
+        "panama",
+        "2023-11-14",
+        "2023-11-28",
+        "0.461538"
+      ],
+      [
+        "panama.n_tanker.2023-12-04",
+        "panama",
+        "2023-12-04",
+        "2023-12-10",
+        "0.538462"
+      ],
+      [
+        "panama.n_tanker.2023-12-14",
+        "panama",
+        "2023-12-14",
+        "2023-12-21",
+        "0.538462"
+      ],
+      [
+        "panama.n_tanker.2023-12-25",
+        "panama",
+        "2023-12-25",
+        "2024-02-13",
+        "0.846154"
+      ],
+      [
+        "panama.n_tanker.2024-02-17",
+        "panama",
+        "2024-02-17",
+        "2024-03-03",
+        "0.5"
+      ],
+      [
+        "panama.n_tanker.2024-03-10",
+        "panama",
+        "2024-03-10",
+        "2024-03-19",
+        "0.583333"
+      ],
+      [
+        "suez.n_tanker.2020-08-08",
+        "suez",
+        "2020-08-08",
+        "2020-08-23",
+        "0.705882"
+      ],
+      [
+        "suez.n_tanker.2020-09-02",
+        "suez",
+        "2020-09-02",
+        "2020-09-11",
+        "0.529412"
+      ],
+      [
+        "suez.n_tanker.2020-09-15",
+        "suez",
+        "2020-09-15",
+        "2020-09-23",
+        "0.5625"
+      ],
+      [
+        "suez.n_tanker.2024-01-07",
+        "suez",
+        "2024-01-07",
+        "2024-05-06",
+        "0.75"
+      ],
+      [
+        "suez.n_tanker.2024-05-11",
+        "suez",
+        "2024-05-11",
+        "2024-06-03",
+        "0.695652"
+      ],
+      [
+        "suez.n_tanker.2024-06-08",
+        "suez",
+        "2024-06-08",
+        "2024-07-23",
+        "0.619048"
+      ],
+      [
+        "suez.n_tanker.2024-11-14",
+        "suez",
+        "2024-11-14",
+        "2024-11-21",
+        "0.5625"
+      ],
+      [
+        "suez.n_tanker.2024-11-28",
+        "suez",
+        "2024-11-28",
+        "2024-12-04",
+        "0.5"
+      ]
+    ],
+    "excluded_events": [
+      [
+        "bab_el_mandeb_houthi_tanker_2018",
+        "2018-04-03",
+        "before detection window"
+      ],
+      [
+        "bridgeton_mine_strike_1987",
+        "1987-07-24",
+        "before detection window"
+      ],
+      [
+        "egypt_coup_suez_2013",
+        "2013-07-03",
+        "before detection window"
+      ],
+      [
+        "egypt_revolution_2011",
+        "2011-01-25",
+        "before detection window"
+      ],
+      [
+        "fujairah_tanker_sabotage_2019",
+        "2019-05-12",
+        "before detection window"
+      ],
+      [
+        "gulf_of_oman_tanker_attacks_2019",
+        "2019-06-13",
+        "before detection window"
+      ],
+      [
+        "hormuz_iran_threat_2011",
+        "2011-12-27",
+        "before detection window"
+      ],
+      [
+        "saudi_suspends_bab_el_mandeb_2018",
+        "2018-07-25",
+        "before detection window"
+      ],
+      [
+        "soleimani_strike_2020",
+        "2020-01-03",
+        "before detection window"
+      ],
+      [
+        "stena_impero_seizure_2019",
+        "2019-07-19",
+        "before detection window"
+      ],
+      [
+        "suez_tropic_brilliance_2004",
+        "2004-11-08",
+        "before detection window"
+      ]
+    ],
+    "links": [
+      [
+        "me_maersk_diversions_2023",
+        "bab_el_mandeb.n_tanker.2023-12-28"
+      ],
+      [
+        "me_sounion_2024",
+        "bab_el_mandeb.n_tanker.2024-08-29"
+      ],
+      [
+        "redsea_houthi_resume_2025",
+        "bab_el_mandeb.n_tanker.2025-07-19"
+      ],
+      [
+        "suez_ever_given_2021",
+        "suez.n_tanker.2021-03-23"
+      ]
+    ],
+    "n_catalogue_total": 313,
+    "n_eligible_events": 17,
+    "n_eligible_events_linked": 4,
+    "n_episodes": 39,
+    "n_episodes_linked": 4,
+    "n_excluded_before_detection": 11,
+    "n_route_mapped": 28,
+    "proportion_A_events_linked": 0.2353,
+    "proportion_A_wilson95": [
+      0.0955,
+      0.4726
+    ],
+    "proportion_B_episodes_linked": 0.1026,
+    "proportion_B_wilson95": [
+      0.0406,
+      0.2358
+    ],
+    "window": [
+      -2,
+      14
+    ]
+  },
+  "strict_window_sensitivity": {
+    "n_eligible_events_linked": 4,
+    "n_episodes_linked": 4,
+    "proportion_A_events_linked": 0.2353,
+    "proportion_B_episodes_linked": 0.1026,
+    "window": [
+      0,
+      14
+    ]
+  }
+}

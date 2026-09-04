@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this research software or its evidence, please cite it as below."
+type: software
+title: "Market state versus event labels in historical analogy: a registered oil-market experiment"
+authors:
+  - family-names: Delany
+    given-names: Joseph
+    email: joseph.delany21@gmail.com
+    affiliation: "Colby College"
+version: "2.0.1"
+date-released: "2026-09-04"
+repository-code: "https://github.com/josephdelany/ripple-engine"
+license: MIT
+keywords:
+  - historical analogy
+  - geopolitical risk
+  - oil markets
+  - walk-forward evaluation
+  - proper scoring rules
+abstract: >-
+  A registered walk-forward experiment and concentration-matched ablation compare
+  recent market state with event-class matching on identical historical support.
+  Across 264 forecast dates, market-state matching outperforms event class at equal
+  effective sample size. Sparse event-level nonmarket aggregates do not improve
+  on market state, but the study does not test role-preserving relational
+  geopolitics or establish production forecasting skill.
+references:
+  - type: report
+    title: "Market state versus event labels in historical analogy"
+    authors:
+      - family-names: Delany
+        given-names: Joseph
+    year: 2026
+    notes: "docs/PAPER.md in this repository"

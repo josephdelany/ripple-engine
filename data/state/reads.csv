@@ -1,2 +1,0 @@
-made_at,situation_id,kind,anchor_date,anchor_series,anchor_value,horizon_days,expected_car,basis,amp_context,resolved_at,realized_car,error,notes
-2026-07-27T21:00:30+00:00,situation.israel_iran_war_2025,chokepoint_disruption,2026-07-20,fred.DCOILBRENTEU,86.99,20,-7.5,clustered base rate n=3 from engine_read 2026-07-24,H1:ON H2:ON H3:FAILED,2026-08-20T11:44:04+00:00,20.759,28.259,

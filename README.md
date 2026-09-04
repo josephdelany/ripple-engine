@@ -1,112 +1,127 @@
-# Ripple Engine
+# Market state versus event labels in historical analogy
 
-A personal, **pre-registered event-study engine** that measures how geopolitical
-shocks ripple through oil prices — and, crucially, whether they ripple *bigger*
-when markets are already stressed. It is a research instrument, not a newsreader:
-every number is one hop from the evidence that produced it, failed hypotheses are
-reported not buried, and the whole thing runs on **free, keyless data at $0**.
+When analysts choose historical precedents, does recent market state carry more useful information than a surface label such as “chokepoint disruption” or “sanctions”?
 
-Flagship build for the News-to-Markets project. Single-user tool, held to a bar a
-quant could inspect.
+This repository’s authoritative result is a registered walk-forward experiment and a separately registered explanatory ablation on 313 dated geopolitical and oil-policy events. Every method receives exactly the same prior-event pool and forecasts Brent’s 20-trading-day abnormal return; only the weighting rule changes.
 
-## The headline finding
+The catalogue spans 1973–2026, but the scored daily backtest does not: its 264 forecast dates run
+from 2001-09-11 through 2026-06-17, and 147 (55.7%) fall in the 2020s. This is a recent-era daily
+experiment, not a 53-year quantitative backtest.
 
-Geopolitical-risk shocks are **not** systematically associated with higher oil
-prices — the average ripple is close to null, and the negative-control placebo is
-null too. This is an *honest null*, and it matches the frontier literature
-(Caldara & Iacoviello's GPR work), found here independently. The engine's job now
-is defending that result at frontier standard — see `PRE_REGISTRATION.md` and
-`EVALUATION.md`.
+## Result
 
-Where the engine *does* find structure, it is receipted: the crude→products value
-chain transmits strongly, and two cross-asset edges (supply→gasoline crack;
-fertilizer→corn) validated against pre-registered nulls. See `EDGE_PORTFOLIO.md`.
+Across 264 scored forecast dates, the registered combined-state weighting had mean CRPS **8.341**, versus **8.784** for surface-class weighting. The paired difference was **−0.444** (95% stationary-bootstrap interval **[−0.613, −0.269]**; Diebold–Mariano *p* = **8.65×10⁻⁷**).
 
-## Is it sound? One command
+That result has an essential qualification. Uniform pooling scored **8.390**. Combined-state weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**). The original surface arm was also much more concentrated: median effective sample size 28.7 versus 130.2.
 
-```
-python3 src/acceptance.py        # prints COMMISSIONED or DEGRADED
-```
+A registered follow-up matched market-state, combined-state, and event-class weights to the same effective sample size. Market-state matching scored **8.286** against **8.422** for class matching: difference **−0.136**, 95% interval **[−0.234, −0.038]**, Holm-adjusted *p* = **0.013**. Under the registered event-level aggregation, adding the sparse leadership/dyadic fields scored **+0.051** worse than market-only matching (interval **[−0.001, +0.118]**; Holm-adjusted *p* = **0.114**). That contrast does not test properly represented relational geopolitics: numeric values for multiple event entities were averaged before comparison.
 
-It aggregates the checks that together mean "finished and sound": the test suite
-passes, the evaluation framework is sound (placebo null + every surface agrees on
-the headline number), `engine_status` is not RED, the no-fabrication cage tests
-are present, and every validated claim has an evidence pack. See
-`ACCEPTANCE_TEST.md` for what each check means.
+> Recent oil-market state outperforms event class as an analogy rule at equal concentration. No arm establishes production forecasting skill, and the experiment does not determine whether role-preserving geopolitical structure adds value.
 
-## The daily glance
+Note what that question is not. The project set out to ask whether correspondence across the wider geopolitical state beats matching on labels, and it cannot answer that. The registered file-release rule leaves the “combined-state” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. Multi-entity numeric values are also averaged into a single event value, erasing actor roles. So what was tested is market state, sometimes augmented by an event-level leadership aggregate, against event labels; full relational structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
 
-```
-python3 src/status.py            # GREEN / AMBER / RED, with reasons
-./go --refresh                   # rebuild the reads, open the digest, start the cockpit
-python3 src/backend.py           # the OpenBB cockpit surface on http://127.0.0.1:5050
-```
+## Why it matters
 
-## Reproduce every number from zero
+The result separates three claims that commentary often conflates. A method can outperform
+headline-category matching without demonstrating useful prediction; an apparent analogy advantage
+can largely reflect how concentrated its weights are; and a model called “structural” tests only
+the structure that its data representation actually preserves. The contribution is therefore both
+substantive—market context beats event class in the matched comparison—and methodological: analogy
+rules should be tested on identical support, at equal concentration, against unrestricted pooling.
 
-```
-bash repro.sh                    # 23 steps: schema -> free fetches -> corpus -> signals -> analyses
+Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. The decisions are frozen in the [central registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) and [ablation registration](registrations/STRUCTURAL_COMPONENT_ABLATION.md).
+
+For applications and interviews, use only [the verified résumé language](docs/RESUME.md).
+The exact release decision and gates are in [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md).
+
+## Reproduce the central experiment
+
+Requirements: Python 3.11+ and the packages in `requirements-public.txt`.
+
+```bash
+python3 -m pip install -r requirements-public.txt
+make reproduce-central
+make reproduce-ablation
+make test-public
 ```
 
-From a fresh clone this rebuilds `data/oil.db` in the one order that works —
-schema, every free data fetch (FRED prices & macro, EIA inventories, CFTC COT,
-GPR), the human-approved event corpus, the derived signals, and the analyses.
-Every paper's numbers are reproducible against the committed inputs;
-`data/repro_log.txt` is the receipt. `data/oil.db` itself is a derived artifact
-(gitignored) — never hand-edited, always rebuilt.
+Both reproduction targets use only committed inputs, rebuild into temporary directories, and require SHA-256 hashes to match the frozen manifests. They do not require the uncommitted research database or network access.
 
-## What's inside
+That is a transparent input bundle, not a fully reproducible data pipeline. The bundle reproduces the experiment exactly; the bundle itself cannot be rebuilt and checked from its upstream sources, which are partly hand-obtained, key-gated or request-gated. Run `python3 src/bundle_provenance.py` for the checked status, and see [the provenance boundary](docs/audit/PROVENANCE_BOUNDARY.md).
 
-- **The corpus** — 296 verified geopolitical/energy events across six domains
-  (energy, macro, commodities, Middle-East risk, conflict, geopolitics), each
-  carrying a real `source_url` + `retrieved_at`. Grows only via a caged LLM
-  extractor that **cannot fabricate** (`extract_events.py` → `admit_events.py`);
-  the registration sample stays frozen at N=289 so growth never contaminates the
-  pre-registered test. Coding rules: `../EVENTS_CODEBOOK.md`.
-- **The analysis** — event study + state-conditioned study (VIX / EIA inventories
-  / COT, measured point-in-time at t−1) + robustness, run once against a binding
-  pre-registration (H1–H3, fixed decision rule). `src/event_study.py`,
-  `src/conditioned_study.py`, `src/robustness.py`.
-- **The value chain** — keyless crude→products→petchem/fertilizer nodes and
-  mechanism-gated derived cracks; the CHAIN VIEW reports what transmits and what
-  is honestly decoupled.
-- **The living layer** — an always-on RSS watcher (10 feeds, 6 domains) that
-  *curates and never concludes*, a record-keeper that logs → resolves → scores
-  its own reads, and phone alerts for high-signal items. All caged.
-- **One canonical database** — `data/oil.db`, a seven-table generic schema
-  (`src/init_db.py`). New data = new rows via small `src/fetch_*.py` adapters;
-  no parallel databases, ever.
+## Instrument demonstration
 
-## Keeping it current (free, always-on)
-
-- **Locally:** `python3 src/refresh.py` pulls every series in isolation (one
-  failing never stops the others) and ends with a summary; `python3 src/heartbeat.py`
-  reports freshness and exits non-zero if anything is STALE/DEAD.
-- **In the cloud ($0):** `.github/workflows/track.yml` runs the whole
-  deterministic engine daily on GitHub Actions, rebuilds the DB from free
-  sources, pushes alerts, and publishes The Daily to Pages;
-  `.github/workflows/watch.yml` is the frequent news watcher. The deterministic
-  pytest gate runs first, so a broken build never reaches prod. Setup:
-  `ops/GITHUB_ACTIONS.md`.
-
-## Scientific-integrity rules (non-negotiable)
-
-1. **Pre-registration is binding** — H1–H3 and the decision rule are fixed in
-   `PRE_REGISTRATION.md`; windows/splits/metrics are never changed after seeing a
-   result.
-2. **Never fabricate data or sources** — every observation is sourced and
-   timestamped; unfetchable data is reported as missing, never filled in.
-3. **Point-in-time discipline** — state variables are read at t−1, no lookahead.
-4. **Honest reporting** — nulls and failed hypotheses are results.
-
-Full working rules: `CLAUDE.md`. Vision & current place: `../NORTH_STAR.md`.
-State of the build: `STATE_OF_THE_ENGINE.md`.
-
-## Setup
-
-```
-pip install -r requirements.txt   # numpy/scipy/statsmodels/fastapi/uvicorn, all free
+```bash
+python3 src/structural_surface_demo.py
 ```
 
-Python 3.12+ (CI runs 3.12). No API keys required for the core; optional secrets
-(`EIA_API_KEY`, `NTFY_TOPIC`, `FIRMS_KEY`) only enable extra data/alerts.
+The demo produces one sealed retrospective read for the 2026 Hormuz closure and shows the candidate pool, structural weights, surface weights, forecast distributions, and scores. It demonstrates mechanics; one event is not validation. Details are in [docs/DEMO.md](docs/DEMO.md).
+
+## Public-product map
+
+- `docs/PAPER.md` — authoritative methods-and-evidence paper.
+- `docs/RESUME.md` — verified résumé bullets and interview explanation.
+- `registrations/STRUCTURAL_SURFACE_EXPERIMENT.md` — decisions frozen before computation.
+- `registrations/STRUCTURAL_COMPONENT_ABLATION.md` — concentration and component analysis frozen before computation.
+- `src/structural_surface_experiment.py` — central experiment.
+- `src/structural_component_ablation.py` — registered explanatory ablation.
+- `src/reproduce_structural_surface.py` — offline hash-checked reproduction.
+- `src/reproduce_structural_component_ablation.py` — offline hash-checked ablation reproduction.
+- `src/structural_surface_demo.py` — small instrument demonstration.
+- `data/structural_surface/` — inputs, sealed reads, scores, summaries, ablation, and manifests.
+- `tests/test_structural_surface_*.py` — scientific and reproduction invariants.
+- `docs/audit/` — adversarial audit and claim corrections.
+- `SUBMISSION_STATUS.md` — release scope, verified gates, and excluded local work.
+
+The complete six-week research history and superseded analyses are preserved at recovery tag
+`full-research-archive-2026-09-03`; they are intentionally absent from public HEAD.
+
+`docs/audit/PUBLIC_PRODUCT_CLOSURE.md` records what was retained, what moved to the archive tag, and
+the distinct verification receipts for the historical and public trees.
+
+## Second study — measuring physical disruption directly
+
+The experiment above infers disruption from a curated list of geopolitical events. A second,
+self-contained study measures it instead, from vessel traffic.
+
+`src/disruption_episodes.py` is a preregistered, **event-blind** detector for sustained declines in
+tanker transits at seven maritime chokepoints, built on IMF PortWatch daily data (58,779
+observations, 2019–2026). The detection rule was committed before the detector was written, its
+threshold was derived from the input's own noise distribution rather than any outcome, and
+automated tests walk its dependency graph and fail if it can reach the event catalogue, any price
+series, or a known episode date.
+
+Blind to all of them, it independently recovers the Ever Given grounding (Suez, onset 2021-03-23),
+the Red Sea shipping crisis at two chokepoints simultaneously, the 2023–24 Panama Canal drought,
+and a Hormuz closure.
+
+Its one result that does not depend on any linkage rule:
+
+> **13 of 39 detected impairment episodes (33%) — including a 51-day Panama Canal episode and all
+> five Bosporus episodes — occur on routes for which the 313-event geopolitical catalogue contains
+> no eligible event at all.** Linkage requires a shared route, so no temporal rule changes this.
+
+A catalogue organised around notable geopolitical events misses a third of the physically
+measurable chokepoint disruption in this period, because much of that disruption is not
+geopolitical. Drought is not a crisis anyone declares.
+
+The event-linkage analysis this was built for is reported as **not identifiable** with the current
+catalogue, with three documented failure modes, rather than as a number that cannot be defended.
+No price data was analysed. Details: [`docs/V3_STATUS.md`](docs/V3_STATUS.md),
+[`docs/audit/V3_LINKAGE_FEASIBILITY.md`](docs/audit/V3_LINKAGE_FEASIBILITY.md), registration in
+[`registrations/DISRUPTION_REALIZATION.md`](registrations/DISRUPTION_REALIZATION.md).
+
+Unlike the first study, **this one's inputs are committed**: the IMF licence permits redistribution
+of the daily aggregates with attribution, so `data/v3/portwatch_daily.csv` ships in the repository
+and the episode table rebuilds from it offline. Run `make verify-v3-foundation`.
+
+*Sources: UN Global Platform; IMF PortWatch.*
+
+## Scope and integrity
+
+The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare registered combined-state and surface-class weighting on identical support, with point-in-time eligibility and an abnormal-return target.
+
+License: [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
+
+Before submission, run `make verify-submission`. It performs exact reproduction, the complete repository test suite,
+semantic claim checks, local-link validation, and classification-ledger drift detection.

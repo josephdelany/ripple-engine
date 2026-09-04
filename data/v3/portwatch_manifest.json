@@ -1,0 +1,39 @@
+{
+  "attribution": "Sources: UN Global Platform; IMF PortWatch.",
+  "files": {
+    "portwatch_daily.csv": {
+      "rows": 58779,
+      "sha256": "93a37a1e6916d17f94d71ff42deb22d906730ac78c597dace90c709ebbbedfa9"
+    }
+  },
+  "first_obs_date": "2019-01-01",
+  "last_obs_date": "2026-08-30",
+  "licence": "IMF Terms and Conditions, Copyright and Usage, special terms for statistical Data (imf.org/external/terms.htm, effective 2020-01-02): users may download, copy, publish and distribute Data from IMF Sites, with attribution and no alteration of integrity. Published daily aggregates only; upstream AIS inputs are third-party and are not redistributed here.",
+  "n_rows": 58779,
+  "n_series": 21,
+  "series": {
+    "portwatch.bab_el_mandeb.capacity_tanker": "metric tons/day",
+    "portwatch.bab_el_mandeb.n_tanker": "tankers/day",
+    "portwatch.bab_el_mandeb.n_total": "ships/day",
+    "portwatch.bosporus.capacity_tanker": "metric tons/day",
+    "portwatch.bosporus.n_tanker": "tankers/day",
+    "portwatch.bosporus.n_total": "ships/day",
+    "portwatch.cape_of_good_hope.capacity_tanker": "metric tons/day",
+    "portwatch.cape_of_good_hope.n_tanker": "tankers/day",
+    "portwatch.cape_of_good_hope.n_total": "ships/day",
+    "portwatch.hormuz.capacity_tanker": "metric tons/day",
+    "portwatch.hormuz.n_tanker": "tankers/day",
+    "portwatch.hormuz.n_total": "ships/day",
+    "portwatch.malacca.capacity_tanker": "metric tons/day",
+    "portwatch.malacca.n_tanker": "tankers/day",
+    "portwatch.malacca.n_total": "ships/day",
+    "portwatch.panama.capacity_tanker": "metric tons/day",
+    "portwatch.panama.n_tanker": "tankers/day",
+    "portwatch.panama.n_total": "ships/day",
+    "portwatch.suez.capacity_tanker": "metric tons/day",
+    "portwatch.suez.n_tanker": "tankers/day",
+    "portwatch.suez.n_total": "ships/day"
+  },
+  "source_database_sha256": "4dcde969d77fff1649b45b9f90c97fe6994ac55e3c9f2461fd6201717bc011ea",
+  "source_url": "https://portwatch.imf.org/"
+}

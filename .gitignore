@@ -10,6 +10,7 @@ data/*.db
 data/refresh_log.csv
 data/health_status.json
 data/launchd_refresh.log
+data/launchd_desk.log
 # engine_read.json is COMMITTED: the light 15-min watcher run reads today's
 # amplifier context from it (it does no market fetch of its own). Refreshed by the
 # daily full run.
@@ -63,3 +64,35 @@ data/calibration.json
 # V-Q1 quarterly frozen DB snapshots: large derived DB copies. data/vintage_check.txt IS the
 # committed receipt; the .db.gz vintages themselves are not source.
 data/vintages/
+# Workbench notes: Joe's private analysis drafts + exports (local writing pane).
+# Personal, never source -- the tool writes them; they never belong in the repo.
+data/notes/
+
+# Reader cache: model proposals keyed by content hash (derived; a story is re-read if absent)
+data/reader/
+
+# World-state panel caches (PATH Step 2): free downloads are rebuilt by the loaders; local/ holds
+# licence-restricted files (Polity/CSP, SIPRI, GSDB, NYT, EI 2026) that are never committed.
+data/state/raw/
+data/state/local/*
+!data/state/local/README.md
+
+# 2026-09-02 (session A): runtime + cache artefacts that must never be committed
+data/integrity_check.txt
+data/last_run.json
+data/oil.db-shm
+data/oil.db-wal
+data/state/health_alert_seen.txt
+# UCDP GED raw pull (CC BY, 40 MB, rebuilt by fetch_ucdp.py --refresh); extractor working files
+data/cache/
+data/extract/
+# keys and tokens live here (SESSION_CHARTER.md §6), never in the repo
+tools/config.json
+*.key
+*.token
+# jsdom for the app render check (tests/test_app_render.py): npm install --prefix tools jsdom
+tools/node_modules/
+tools/package*.json
+data/candidates/dossiers/_cache/
+# Amendment D: prior sealed runs, gzipped, kept on disk
+data/walk_forward/runs/
