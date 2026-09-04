@@ -8,8 +8,8 @@ This is the only current application document for the project. Every quantitativ
 Built and audited a registered walk-forward experiment comparing structural state similarity with event-class matching across 313 geopolitical and oil-policy events (1973–2026).
 
 - Constructed a point-in-time research pipeline that seals forecasts before outcome attachment and reproduces its central artifacts byte-for-byte from a committed input bundle.
-- Across 264 forecast dates, structural weighting improved mean CRPS from 8.782 to 8.337 versus surface-class matching (paired difference −0.446; 95% bootstrap interval [−0.623, −0.271]).
-- Found that structural weighting did not distinguishably beat uniform historical pooling at the registered 20-day horizon (difference −0.055; 95% interval [−0.115, +0.006]), indicating that event-label filtering—not lack of historical breadth—caused most of the surface method’s deficit.
+- Across 264 forecast dates, structural weighting improved mean CRPS from 8.784 to 8.341 versus surface-class matching (paired difference −0.444; 95% bootstrap interval [−0.613, −0.269]).
+- Found that structural weighting did not distinguishably beat uniform historical pooling at the registered 20-day horizon (difference −0.049; 95% interval [−0.112, +0.012]), indicating that event-label filtering—not lack of historical breadth—caused most of the surface method’s deficit.
 - Mechanically classified every tracked repository file, audited the components behind the central claims, and rebuilt the main experiment after identifying mismatches among the intended estimand, candidate pool, outcome definition, and recorded data availability.
 
 If space permits only two bullets, use the first and third. The third contains the decision-relevant finding and its limitation.
@@ -46,11 +46,11 @@ Be explicit about AI assistance if asked. A defensible formulation is: “I dire
 |---|---:|---|
 | catalogue | 313 events | input bundle and summary |
 | scored dates | 264 | `summary.json:n_inferential_dates` |
-| structural CRPS | 8.337 | `summary.json:mean_loss.structural` |
-| surface CRPS | 8.782 | `summary.json:mean_loss.surface` |
-| structural − surface | −0.446 | `summary.json:mean_loss_diff_structural_minus_surface` |
-| 95% interval | [−0.623, −0.271] | `summary.json:ci95` |
-| structure − uniform | −0.055 | `summary.json:diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
-| corresponding interval | [−0.115, +0.006] | same block, `ci95` |
+| structural CRPS | 8.341 | `summary.json:mean_loss.structural` |
+| surface CRPS | 8.784 | `summary.json:mean_loss.surface` |
+| structural − surface | −0.444 | `summary.json:mean_loss_diff_structural_minus_surface` |
+| 95% interval | [−0.613, −0.269] | `summary.json:ci95` |
+| structure − uniform | −0.049 | `summary.json:diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| corresponding interval | [−0.112, +0.012] | same block, `ci95` |
 
 CRPS is a proper score for a predictive distribution; lower is better. Explain the comparison and limitation before discussing the *p*-value.

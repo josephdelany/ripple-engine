@@ -6,9 +6,9 @@ This repository’s authoritative result is a registered, walk-forward compariso
 
 ## Result
 
-Across 264 scored forecast dates, structural weighting had mean CRPS **8.337**, versus **8.782** for surface-class weighting. The paired difference was **−0.446** (95% stationary-bootstrap interval **[−0.623, −0.271]**; Diebold–Mariano *p* = **1.57×10⁻⁶**).
+Across 264 scored forecast dates, structural weighting had mean CRPS **8.341**, versus **8.784** for surface-class weighting. The paired difference was **−0.444** (95% stationary-bootstrap interval **[−0.613, −0.269]**; Diebold–Mariano *p* = **8.65×10⁻⁷**).
 
-That result has an essential qualification. Uniform pooling scored **8.392**. Structural weighting’s advantage over pooling was only **−0.055** (95% interval **[−0.115, +0.006]**; *p* = **0.090**), while surface-class weighting was materially worse than pooling. The defensible conclusion is:
+That result has an essential qualification. Uniform pooling scored **8.390**. Structural weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**), while surface-class weighting was materially worse than pooling. The defensible conclusion is:
 
 > Strict structural weighting beats surface-class matching, but at the registered 20-day horizon it does not distinguishably beat pooling. Most of the measured gap comes from surface selection doing harm.
 

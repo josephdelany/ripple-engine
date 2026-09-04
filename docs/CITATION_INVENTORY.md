@@ -58,12 +58,12 @@ file. Later matches are recorded as `also_in`, never as the citation.
 
 | class | n | meaning |
 |---:|---:|---|
-| RESOLVED | 596 | traceable to at most 3 named paths |
+| RESOLVED | 573 | traceable to at most 3 named paths |
 | EXCEPTION | 0 | registered as living outside the run objects |
 | DERIVED | 4 | arithmetic over stored fields, recomputed here |
 | SELF_REFERENTIAL | 0 | **a denominator that sums only from its own sentence** |
 | HISTORICAL | 5 | quoted as having been wrong, inside a correction region |
-| AMBIGUOUS | 805 | in the record, but in too many places to call it a citation |
+| AMBIGUOUS | 828 | in the record, but in too many places to call it a citation |
 | UNSOURCED | 12 | **found nowhere in the declared record** |
 | EXCLUDED | 495 | not a claim (year, identifier, bibliography, code span) |
 | | **1917** | numeric tokens scanned across 5 documents |
@@ -164,46 +164,47 @@ claim to know which field the prose meant. Listed with the first few.
 |---|---:|---:|---:|---|
 | `README.md` | 5 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `README.md` | 9 | `264` | 39 | `data/structural_surface/summary.json :: n_event_reads`<br>`data/structural_surface/summary.json :: n_inferential_dates` |
-| `README.md` | 9 | `−0.446` | 4 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
-| `README.md` | 9 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `README.md` | 11 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `README.md` | 9 | `−0.444` | 4 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `README.md` | 9 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `README.md` | 11 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `README.md` | 24 | `3.11` | 55 | `data/ripple/irf.json :: rows[14].irf[3].se_nw`<br>`data/ripple/irf.json :: rows[153].irf[5].se_nw` |
 | `docs/BRIEF.md` | 17 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/BRIEF.md` | 18 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `docs/BRIEF.md` | 35 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/BRIEF.md` | 39 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/BRIEF.md` | 39 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 39 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/BRIEF.md` | 39 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/BRIEF.md` | 39 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
 | `docs/BRIEF.md` | 39 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/BRIEF.md` | 40 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
 | `docs/BRIEF.md` | 40 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/BRIEF.md` | 40 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
 | `docs/BRIEF.md` | 40 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
-| `docs/BRIEF.md` | 40 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
-| `docs/BRIEF.md` | 43 | `0.011` | 18 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
+| `docs/BRIEF.md` | 41 | `+0.134` | 7 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.persistence.raw_skill` |
+| `docs/BRIEF.md` | 43 | `−0.074` | 22 | `data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.skill` |
 | `docs/BRIEF.md` | 50 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/BRIEF.md` | 64 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
 | `docs/BRIEF.md` | 65 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
 | `docs/BRIEF.md` | 65 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
 | `docs/BRIEF.md` | 83 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/BRIEF.md` | 83 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/BRIEF.md` | 83 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `docs/BRIEF.md` | 86 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/BRIEF.md` | 86 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/BRIEF.md` | 86 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/BRIEF.md` | 90 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 90 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/BRIEF.md` | 102 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/BRIEF.md` | 102 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 102 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/BRIEF.md` | 103 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
 | `docs/BRIEF.md` | 103 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
 | `docs/BRIEF.md` | 107 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/BRIEF.md` | 108 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/BRIEF.md` | 108 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/BRIEF.md` | 109 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 108 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/BRIEF.md` | 109 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/BRIEF.md` | 114 | `0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
 | `docs/BRIEF.md` | 114 | `0.674%` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/BRIEF.md` | 117 | `56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
-| `docs/BRIEF.md` | 117 | `4.9%` | 40 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.dm` |
-| `docs/BRIEF.md` | 124 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/BRIEF.md` | 117 | `56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/BRIEF.md` | 117 | `4.9%` | 25 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/BRIEF.md` | 124 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `docs/BRIEF.md` | 127 | `+0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/BRIEF.md` | 127 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/BRIEF.md` | 133 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
 | `docs/BRIEF.md` | 135 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
@@ -217,13 +218,13 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/BRIEF.md` | 149 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
 | `docs/BRIEF.md` | 151 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/BRIEF.md` | 161 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 6 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 6 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 6 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 12 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 12 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `docs/PAPER_DRAFT.md` | 15 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 16 | `73` | 4 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.0`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[72].n` |
-| `docs/PAPER_DRAFT.md` | 16 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 16 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 16 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `docs/PAPER_DRAFT.md` | 16 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
 | `docs/PAPER_DRAFT.md` | 17 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
@@ -231,19 +232,18 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 46 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 47 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `docs/PAPER_DRAFT.md` | 59 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 59 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 59 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 59 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 59 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
 | `docs/PAPER_DRAFT.md` | 60 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
 | `docs/PAPER_DRAFT.md` | 60 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 60 | `0.016` | 18 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
 | `docs/PAPER_DRAFT.md` | 62 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 62 | `−0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `docs/PAPER_DRAFT.md` | 66 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 72 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 73 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 73 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
 | `docs/PAPER_DRAFT.md` | 73 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 73 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
 | `docs/PAPER_DRAFT.md` | 73 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 78 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
 | `docs/PAPER_DRAFT.md` | 81 | `+0.051` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.dyadic.brier_vs_climatology.skill` |
@@ -253,25 +253,24 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 88 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
 | `docs/PAPER_DRAFT.md` | 90 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
 | `docs/PAPER_DRAFT.md` | 91 | `0.0500` | 14 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
-| `docs/PAPER_DRAFT.md` | 97 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 94 | `+0.134` | 7 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.persistence.raw_skill` |
+| `docs/PAPER_DRAFT.md` | 97 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 97 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
 | `docs/PAPER_DRAFT.md` | 101 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 115 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 122 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 122 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 124 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 126 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
 | `docs/PAPER_DRAFT.md` | 126 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 126 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 126 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 126 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 126 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
 | `docs/PAPER_DRAFT.md` | 127 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 128 | `−0.074` | 22 | `data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.P.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.climatology.skill` |
 | `docs/PAPER_DRAFT.md` | 128 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 128 | `0.011` | 18 | `data/walk_forward/summary.json :: placebo.dm_p`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.dm_p` |
-| `docs/PAPER_DRAFT.md` | 132 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 132 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 134 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 134 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
 | `docs/PAPER_DRAFT.md` | 134 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 134 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
 | `docs/PAPER_DRAFT.md` | 135 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 139 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
 | `docs/PAPER_DRAFT.md` | 141 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
@@ -279,34 +278,36 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 143 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
 | `docs/PAPER_DRAFT.md` | 143 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
 | `docs/PAPER_DRAFT.md` | 144 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
-| `docs/PAPER_DRAFT.md` | 147 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 149 | `+0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
+| `docs/PAPER_DRAFT.md` | 145 | `0.117` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.rps_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill` |
+| `docs/PAPER_DRAFT.md` | 147 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 149 | `−0.031` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.0.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.3.reliability` |
 | `docs/PAPER_DRAFT.md` | 149 | `0.439` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means_rps.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.dm_p` |
 | `docs/PAPER_DRAFT.md` | 154 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/PAPER_DRAFT.md` | 155 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 159 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 160 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 159 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 160 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 168 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 170 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 170 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 170 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 172 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
 | `docs/PAPER_DRAFT.md` | 172 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 174 | `0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
 | `docs/PAPER_DRAFT.md` | 174 | `0.674%` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
 | `docs/PAPER_DRAFT.md` | 177 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 185 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 185 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 185 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 186 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `docs/PAPER_DRAFT.md` | 187 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 205 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 205 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 228 | `1.1` | 6 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[0].hi90`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[6].se_ehw` |
 | `docs/PAPER_DRAFT.md` | 261 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 262 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 262 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 262 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
 | `docs/PAPER_DRAFT.md` | 262 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
-| `docs/PAPER_DRAFT.md` | 262 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 262 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 263 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 263 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 274 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 263 | `73%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 274 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 310 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 312 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 312 | `06` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
@@ -321,229 +322,240 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 315 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
 | `docs/PAPER_DRAFT.md` | 324 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 324 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 326 | `11.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 327 | `25.0%` | 21 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 328 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 326 | `11.9%` | 32 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 327 | `25.0%` | 18 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 328 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 329 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 331 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 331 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 332 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 332 | `85` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.spa.T`<br>`data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.T` |
 | `docs/PAPER_DRAFT.md` | 332 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/PAPER_DRAFT.md` | 337 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
 | `docs/PAPER_DRAFT.md` | 338 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 339 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 339 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 340 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 339 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 339 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 340 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 340 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 341 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
 | `docs/PAPER_DRAFT.md` | 341 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
 | `docs/PAPER_DRAFT.md` | 343 | `17` | 15 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_events_without_a_model`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.engine_mean` |
 | `docs/PAPER_DRAFT.md` | 343 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
 | `docs/PAPER_DRAFT.md` | 343 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 344 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 350 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 344 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 350 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 351 | `79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.n` |
-| `docs/PAPER_DRAFT.md` | 354 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 354 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 355 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `docs/PAPER_DRAFT.md` | 362 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 371 | `05` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 371 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 371 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 391 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 371 | `05` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 371 | `01` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 371 | `02` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 391 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 391 | `5.1` | 8 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_a` |
 | `docs/PAPER_DRAFT.md` | 391 | `26.1` | 8 | `data/ripple/irf.json :: rows[545].irf[4].hi95`<br>`data/ripple/irf.json :: rows[559].irf[6].lo90` |
 | `docs/PAPER_DRAFT.md` | 394 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
 | `docs/PAPER_DRAFT.md` | 394 | `70` | 4 | `data/walk_forward/summary.json :: data_state.codebook_fields`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[69].n` |
-| `docs/PAPER_DRAFT.md` | 403 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 403 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 406 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 410 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 410 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 410 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 416 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 416 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 416 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/PAPER_DRAFT.md` | 416 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 416 | `50%` | 98 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 416 | `71%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 416 | `18.3%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 416 | `71%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 416 | `18.3%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 417 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
+| `docs/PAPER_DRAFT.md` | 417 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 417 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 417 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
 | `docs/PAPER_DRAFT.md` | 417 | `38%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 417 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
-| `docs/PAPER_DRAFT.md` | 417 | `56%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 417 | `18.6%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 417 | `56%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 417 | `18.6%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 418 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 418 | `19%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 418 | `24%` | 98 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: abstentions.target_unusable` |
 | `docs/PAPER_DRAFT.md` | 418 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
-| `docs/PAPER_DRAFT.md` | 418 | `79%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 418 | `16.8%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 418 | `79%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 418 | `16.8%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 419 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
-| `docs/PAPER_DRAFT.md` | 419 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 419 | `14.7%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 419 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 419 | `14.7%` | 32 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 424 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
+| `docs/PAPER_DRAFT.md` | 425 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 425 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
+| `docs/PAPER_DRAFT.md` | 426 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 426 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 426 | `33%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 427 | `46` | 5 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[45].n` |
 | `docs/PAPER_DRAFT.md` | 427 | `43%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 428 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
-| `docs/PAPER_DRAFT.md` | 428 | `61%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 428 | `61%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 435 | `0.79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.engine_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.engine_mean` |
 | `docs/PAPER_DRAFT.md` | 437 | `2.62` | 60 | `data/ripple/irf.json :: rows[113].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[123].placebo.beta_real` |
-| `docs/PAPER_DRAFT.md` | 444 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 444 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 444 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 447 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 447 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 450 | `+90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 453 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
-| `docs/PAPER_DRAFT.md` | 453 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
-| `docs/PAPER_DRAFT.md` | 454 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 455 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 455 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 454 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 455 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 455 | `02` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 459 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 459 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 459 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 460 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 459 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 460 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 460 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 463 | `98.4%` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 463 | `98.4%` | 21 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
 | `docs/PAPER_DRAFT.md` | 463 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 464 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 464 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 464 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 464 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 465 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 465 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 465 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `docs/PAPER_DRAFT.md` | 465 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 465 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
 | `docs/PAPER_DRAFT.md` | 465 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 477 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 477 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 470 | `5.1` | 8 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_a` |
+| `docs/PAPER_DRAFT.md` | 477 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 477 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 481 | `489` | 4 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].T`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].n_events` |
-| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 483 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 483 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 483 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 482 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 483 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 483 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 485 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 493 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 493 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 497 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 498 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 493 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 493 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 497 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 498 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 501 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 510 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 515 | `0.4` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 522 | `0.25` | 22 | `data/walk_forward/summary.json :: registered.eta`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.skill` |
-| `docs/PAPER_DRAFT.md` | 528 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 528 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 529 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 515 | `0.4` | 13 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 528 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 528 | `02` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 529 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 532 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 535 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 539 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
 | `docs/PAPER_DRAFT.md` | 539 | `2,000` | 19 | `data/structural_surface/summary.json :: n_boot`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.n_boot` |
+| `docs/PAPER_DRAFT.md` | 540 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 540 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
+| `docs/PAPER_DRAFT.md` | 541 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 541 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
-| `docs/PAPER_DRAFT.md` | 542 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 542 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 542 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `docs/PAPER_DRAFT.md` | 548 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `docs/PAPER_DRAFT.md` | 548 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 549 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 554 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 549 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 554 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 556 | `246` | 63 | `data/walk_forward/summary.json :: power.P.n_measured`<br>`data/walk_forward/summary.json :: power.P.n_series` |
 | `docs/PAPER_DRAFT.md` | 556 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
+| `docs/PAPER_DRAFT.md` | 557 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 557 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 563 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 567 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 567 | `−0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `docs/PAPER_DRAFT.md` | 572 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
 | `docs/PAPER_DRAFT.md` | 573 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
-| `docs/PAPER_DRAFT.md` | 573 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 573 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 573 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 573 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
 | `docs/PAPER_DRAFT.md` | 574 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/PAPER_DRAFT.md` | 575 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
+| `docs/PAPER_DRAFT.md` | 575 | `0.022` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.0.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.skill` |
 | `docs/PAPER_DRAFT.md` | 576 | `52` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[51].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[51].n` |
 | `docs/PAPER_DRAFT.md` | 577 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 578 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 579 | `1.00` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 578 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 579 | `1.00` | 20 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
 | `docs/PAPER_DRAFT.md` | 584 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 586 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `docs/PAPER_DRAFT.md` | 586 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 586 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 587 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 587 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
 | `docs/PAPER_DRAFT.md` | 587 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 587 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
-| `docs/PAPER_DRAFT.md` | 587 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 587 | `−0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `docs/PAPER_DRAFT.md` | 588 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 588 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/PAPER_DRAFT.md` | 594 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `docs/PAPER_DRAFT.md` | 594 | `+0.056` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
+| `docs/PAPER_DRAFT.md` | 594 | `0.28` | 9 | `data/walk_forward/summary.json :: tiers.daily.M.M10_situation_2x_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.random_analogs.dm_p` |
 | `docs/PAPER_DRAFT.md` | 594 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 598 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
 | `docs/PAPER_DRAFT.md` | 598 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 599 | `0.016` | 18 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.random_analogs.skill` |
 | `docs/PAPER_DRAFT.md` | 600 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
 | `docs/PAPER_DRAFT.md` | 600 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 601 | `+0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
+| `docs/PAPER_DRAFT.md` | 601 | `+0.134` | 7 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.persistence.raw_skill` |
 | `docs/PAPER_DRAFT.md` | 604 | `0.337` | 22 | `data/ripple/irf.json :: rows[132].irf[1].z_ehw`<br>`data/ripple/irf.json :: rows[138].irf[1].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 604 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
-| `docs/PAPER_DRAFT.md` | 612 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 612 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 614 | `−0.108` | 9 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.chokepoint_disruption.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[49].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 614 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
 | `docs/PAPER_DRAFT.md` | 614 | `−0.099` | 9 | `data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M11_physical_actors_2x.skill` |
-| `docs/PAPER_DRAFT.md` | 615 | `−0.081` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[33].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[9].skill_frozen_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 615 | `−0.097` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.spa_vs_persistence.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.engine_mean` |
 | `docs/PAPER_DRAFT.md` | 615 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
 | `docs/PAPER_DRAFT.md` | 618 | `−0.150` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.random_analogs.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 618 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
 | `docs/PAPER_DRAFT.md` | 618 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 619 | `0.0` | 32 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 619 | `0.0` | 25 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
 | `docs/PAPER_DRAFT.md` | 620 | `22%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 624 | `400` | 8 | `data/walk_forward/summary.json :: power.G.n_sims`<br>`data/walk_forward/summary.json :: power.P.n_sims` |
-| `docs/PAPER_DRAFT.md` | 624 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 624 | `80%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 625 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/PAPER_DRAFT.md` | 625 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 630 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 625 | `+0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 630 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 631 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 631 | `−0.008` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 631 | `−0.083` | 8 | `data/walk_forward/summary.json :: spec_curve.rows[31].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[33].skill` |
+| `docs/PAPER_DRAFT.md` | 632 | `−0.106` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.uncertainty`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.uncertainty` |
 | `docs/PAPER_DRAFT.md` | 632 | `−0.142` | 5 | `data/walk_forward/summary.json :: spec_curve.skill_distribution.min`<br>`data/walk_forward/summary.json :: spec_curve.rows[121].skill` |
-| `docs/PAPER_DRAFT.md` | 632 | `−0.063` | 8 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[38].skill_frozen_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 642 | `−0.133` | 5 | `data/walk_forward/summary.json :: permutation.null_mean`<br>`data/walk_forward/summary.json :: permutation.block.null_mean` |
 | `docs/PAPER_DRAFT.md` | 643 | `0.043` | 18 | `data/walk_forward/summary.json :: permutation.null_sd`<br>`data/walk_forward/summary.json :: permutation.block.null_sd` |
-| `docs/PAPER_DRAFT.md` | 643 | `−0.058` | 24 | `data/walk_forward/summary.json :: permutation.null_p95`<br>`data/walk_forward/summary.json :: permutation.block.null_p95` |
-| `docs/PAPER_DRAFT.md` | 643 | `−0.057` | 12 | `data/walk_forward/summary.json :: permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 643 | `0.0500` | 14 | `data/walk_forward/summary.json :: fdr.q`<br>`data/walk_forward/summary.json :: permutation.p_value` |
+| `docs/PAPER_DRAFT.md` | 644 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 644 | `1,000` | 10 | `data/walk_forward/summary.json :: permutation.n_perm`<br>`data/walk_forward/summary.json :: registered.n_perm` |
 | `docs/PAPER_DRAFT.md` | 645 | `0.059` | 27 | `data/walk_forward/summary.json :: permutation.iid.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.engine_vs.climatology.skill` |
 | `docs/PAPER_DRAFT.md` | 646 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
 | `docs/PAPER_DRAFT.md` | 647 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
+| `docs/PAPER_DRAFT.md` | 652 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 661 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 664 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 664 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 672 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 680 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 681 | `0.033` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.spa.best_mean_gain`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.frozen.skill` |
+| `docs/PAPER_DRAFT.md` | 672 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 680 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 682 | `0.0004` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.1.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M02_situation_only.dm_p` |
 | `docs/PAPER_DRAFT.md` | 683 | `0.042` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_sd`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_p` |
 | `docs/PAPER_DRAFT.md` | 683 | `0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
 | `docs/PAPER_DRAFT.md` | 688 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
 | `docs/PAPER_DRAFT.md` | 688 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
-| `docs/PAPER_DRAFT.md` | 694 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 694 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 696 | `0.002` | 46 | `data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M01_uniform_k8.dm_p` |
 | `docs/PAPER_DRAFT.md` | 698 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
 | `docs/PAPER_DRAFT.md` | 698 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 702 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 714 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 719 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 723 | `−3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 723 | `+3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 725 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 731 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 731 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 735 | `11.1` | 73 | `data/ripple/irf.json :: rows[193].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[12].irf[6].hi95` |
 | `docs/PAPER_DRAFT.md` | 742 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
 | `docs/PAPER_DRAFT.md` | 746 | `0.494` | 17 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.target.mean_l_minus` |
-| `docs/PAPER_DRAFT.md` | 747 | `−0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
 | `docs/PAPER_DRAFT.md` | 752 | `58` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[57].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[57].n` |
 | `docs/PAPER_DRAFT.md` | 755 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 759 | `11.2` | 4 | `data/walk_forward/summary.json :: big_moves_knew[34].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[34].reads[4].engine_p90` |
 | `docs/PAPER_DRAFT.md` | 761 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
 | `docs/PAPER_DRAFT.md` | 762 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/PAPER_DRAFT.md` | 762 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 762 | `73.0%` | 12 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_nw` |
-| `docs/PAPER_DRAFT.md` | 765 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 762 | `0.90` | 6 | `data/walk_forward/summary.json :: registered.spec.big_move_q[0]`<br>`data/walk_forward/summary.json :: spec_curve.materiality[0].top_q` |
+| `docs/PAPER_DRAFT.md` | 765 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 767 | `0.4693` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C1_analogue`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C1_fixed_0.5.brier` |
 | `docs/PAPER_DRAFT.md` | 767 | `+0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
 | `docs/PAPER_DRAFT.md` | 767 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
@@ -552,17 +564,16 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 772 | `0.4942` | 14 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.no_change` |
 | `docs/PAPER_DRAFT.md` | 774 | `0.243` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.dm_p` |
 | `docs/PAPER_DRAFT.md` | 775 | `0.123` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.log_score_vs_climatology.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.skill` |
-| `docs/PAPER_DRAFT.md` | 779 | `0.0` | 32 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 779 | `1.0` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 779 | `0.0` | 25 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 779 | `1.0` | 21 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
 | `docs/PAPER_DRAFT.md` | 780 | `67` | 5 | `data/walk_forward/summary.json :: leakage_test.recalibration_rule.n_reads_with_different_M13`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].n` |
-| `docs/PAPER_DRAFT.md` | 780 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 780 | `0.7` | 12 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_nw` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.6` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 781 | `0.449` | 20 | `data/ripple/irf.json :: rows[113].irf[3].beta`<br>`data/ripple/irf.json :: rows[19].irf[1].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 781 | `0.582` | 24 | `data/ripple/irf.json :: rows[23].placebo.pseudo_p97_5`<br>`data/ripple/irf.json :: rows[159].irf[2].se_ehw` |
 | `docs/PAPER_DRAFT.md` | 784 | `89` | 32 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.fp` |
 | `docs/PAPER_DRAFT.md` | 784 | `0.0505` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.observed_skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.skill` |
 | `docs/PAPER_DRAFT.md` | 786 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 787 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 787 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 787 | `66` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fp`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].n` |
 | `docs/PAPER_DRAFT.md` | 787 | `+0.0075` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[79].dm_p` |
 | `docs/PAPER_DRAFT.md` | 792 | `+0.034` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.random_analogs.skill` |
@@ -582,51 +593,53 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 851 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
 | `docs/PAPER_DRAFT.md` | 852 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 853 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
-| `docs/PAPER_DRAFT.md` | 855 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 856 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 855 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 856 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 858 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
-| `docs/PAPER_DRAFT.md` | 861 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 866 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 861 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 866 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 866 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 867 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
 | `docs/PAPER_DRAFT.md` | 876 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 880 | `12.1` | 71 | `data/ripple/irf.json :: rows[0].irf[7].lo90`<br>`data/ripple/irf.json :: rows[131].irf[4].lo90` |
-| `docs/PAPER_DRAFT.md` | 888 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 888 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 891 | `−6.89` | 12 | `data/ripple/irf.json :: rows[410].irf[6].lo90`<br>`data/ripple/irf.json :: rows[563].irf[3].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 894 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 894 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 895 | `−9.60` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[126].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[132].climatology` |
 | `docs/PAPER_DRAFT.md` | 895 | `0.30` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M01_uniform_k8.precision`<br>`data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision` |
 | `docs/PAPER_DRAFT.md` | 901 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 902 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 902 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 902 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 907 | `+0.760` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[34].climatology` |
 | `docs/PAPER_DRAFT.md` | 907 | `+0.496` | 27 | `data/ripple/irf.json :: rows[25].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[102].irf[1].beta` |
 | `docs/PAPER_DRAFT.md` | 908 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 911 | `−56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 911 | `+101.8%` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
-| `docs/PAPER_DRAFT.md` | 911 | `−4.9%` | 40 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.dm` |
-| `docs/PAPER_DRAFT.md` | 912 | `+20.7%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 911 | `−56.6%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 911 | `+101.8%` | 21 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 911 | `−4.9%` | 25 | `data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows`<br>`data/structural_surface/summary.json :: dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 912 | `+20.7%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 916 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 923 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 936 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 936 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 936 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 936 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 923 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 936 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 936 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 936 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 936 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 936 | `+1.003` | 5 | `data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_used` |
+| `docs/PAPER_DRAFT.md` | 937 | `0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `docs/PAPER_DRAFT.md` | 939 | `−4.067` | 4 | `data/ripple/irf.json :: rows[327].irf[6].hi95`<br>`data/ripple/irf.json :: rows[596].irf[5].hi90` |
-| `docs/PAPER_DRAFT.md` | 940 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 940 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 940 | `−2.306` | 8 | `data/ripple/irf.json :: rows[19].irf[2].hi90`<br>`data/ripple/irf.json :: rows[425].irf[1].hi95` |
+| `docs/PAPER_DRAFT.md` | 940 | `+2.192` | 6 | `data/ripple/irf.json :: rows[18].irf[4].lo95`<br>`data/ripple/irf.json :: rows[331].irf[5].z_ehw` |
 | `docs/PAPER_DRAFT.md` | 942 | `−2.248` | 6 | `data/ripple/irf.json :: rows[120].irf[7].se_nw`<br>`data/ripple/irf.json :: rows[161].irf[0].beta` |
 | `docs/PAPER_DRAFT.md` | 952 | `56` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.abstain_rule_departure.abstaining`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[55].n` |
 | `docs/PAPER_DRAFT.md` | 953 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
 | `docs/PAPER_DRAFT.md` | 956 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 957 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
-| `docs/PAPER_DRAFT.md` | 958 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 958 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 974 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 974 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 974 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 981 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
 | `docs/PAPER_DRAFT.md` | 984 | `47` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.pct`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_analog_atoms_dropped` |
-| `docs/PAPER_DRAFT.md` | 987 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 987 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 992 | `+2.230` | 6 | `data/ripple/irf.json :: rows[186].irf[6].se_ehw`<br>`data/ripple/irf.json :: rows[336].irf[7].se_nw` |
 | `docs/PAPER_DRAFT.md` | 993 | `−0.483` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 993 | `+2.208` | 11 | `data/ripple/irf.json :: rows[125].irf[2].hi95`<br>`data/ripple/irf.json :: rows[181].irf[7].se_nw` |
@@ -636,10 +649,9 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1004 | `+0.760` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].climatology`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[34].climatology` |
 | `docs/PAPER_DRAFT.md` | 1004 | `+0.496` | 27 | `data/ripple/irf.json :: rows[25].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[102].irf[1].beta` |
 | `docs/PAPER_DRAFT.md` | 1008 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1008 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1010 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1008 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1010 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1020 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1021 | `+0.881` | 28 | `data/ripple/irf.json :: rows[110].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[140].irf[2].z_ehw` |
 | `docs/PAPER_DRAFT.md` | 1021 | `+1.611` | 20 | `data/ripple/irf.json :: rows[481].placebo.beta_real`<br>`data/ripple/irf.json :: rows[126].irf[3].lo90` |
 | `docs/PAPER_DRAFT.md` | 1023 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1023 | `−0.549%` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
@@ -648,34 +660,35 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1056 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
 | `docs/PAPER_DRAFT.md` | 1056 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `docs/PAPER_DRAFT.md` | 1056 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `docs/PAPER_DRAFT.md` | 1060 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1060 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1060 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1060 | `47` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.pct`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.model.n_analog_atoms_dropped` |
 | `docs/PAPER_DRAFT.md` | 1060 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
-| `docs/PAPER_DRAFT.md` | 1061 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1061 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1061 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1066 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1066 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1066 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1069 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
-| `docs/PAPER_DRAFT.md` | 1070 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1070 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 1074 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 1077 | `40%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1080 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 1080 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `docs/PAPER_DRAFT.md` | 1083 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
 | `docs/PAPER_DRAFT.md` | 1085 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
-| `docs/PAPER_DRAFT.md` | 1086 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1086 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1088 | `403` | 6 | `data/grid/price/summary.json :: abnormal_return_target.spa.T`<br>`data/grid/price/summary.json :: abnormal_return_target.the_comparison.n_dates` |
 | `docs/PAPER_DRAFT.md` | 1090 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 1097 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1097 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1097 | `75` | 4 | `data/walk_forward/summary.json :: spec_curve.materiality[1].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[74].n` |
 | `docs/PAPER_DRAFT.md` | 1104 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1104 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1104 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1108 | `6%` | 103 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1121 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1121 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1121 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1123 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1123 | `80%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1123 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 1128 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1124 | `+0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1128 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 1128 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 1132 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 1135 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
@@ -686,51 +699,55 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1136 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/PAPER_DRAFT.md` | 1137 | `18%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1140 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 1142 | `42.0%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1142 | `36.8%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1143 | `32.5%` | 10 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1148 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `docs/PAPER_DRAFT.md` | 1149 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1149 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1142 | `42.0%` | 13 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1142 | `36.8%` | 13 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1143 | `32.5%` | 8 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1148 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `docs/PAPER_DRAFT.md` | 1149 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1149 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 1151 | `+0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1151 | `+0.119` | 7 | `data/walk_forward/summary.json :: placebo.ci95[0]`<br>`data/walk_forward/summary.json :: placebo.vs_random_analogs.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1154 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1154 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1155 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 1156 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1156 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1159 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 1160 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1162 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `docs/PAPER_DRAFT.md` | 1165 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1162 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1165 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1165 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `docs/PAPER_DRAFT.md` | 1165 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1166 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1166 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 1175 | `13.1` | 60 | `data/ripple/irf.json :: rows[575].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[591].placebo.pseudo_p2_5` |
 | `docs/PAPER_DRAFT.md` | 1182 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 1185 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `docs/PAPER_DRAFT.md` | 1192 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1192 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1195 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
-| `docs/PAPER_DRAFT.md` | 1200 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1200 | `73%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1213 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
+| `docs/PAPER_DRAFT.md` | 1215 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1216 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `docs/PAPER_DRAFT.md` | 1216 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `docs/PAPER_DRAFT.md` | 1227 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1229 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
-| `docs/PAPER_DRAFT.md` | 1233 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `docs/PAPER_DRAFT.md` | 1217 | `0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1227 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1233 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `docs/PAPER_DRAFT.md` | 1237 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 1238 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `docs/PAPER_DRAFT.md` | 1242 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 1246 | `83.5%` | 8 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_ehw` |
+| `docs/PAPER_DRAFT.md` | 1242 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1246 | `83.5%` | 4 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1256 | `35%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `docs/PAPER_DRAFT.md` | 1264 | `14.1` | 52 | `data/ripple/irf.json :: rows[595].placebo.pseudo_p2_5`<br>`data/ripple/irf.json :: rows[0].irf[7].lo95` |
 | `docs/PAPER_DRAFT.md` | 1266 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 1268 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
-| `docs/PAPER_DRAFT.md` | 1268 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1268 | `01` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1268 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `docs/PAPER_DRAFT.md` | 1269 | `08` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1269 | `08` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1269 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
 | `docs/PAPER_DRAFT.md` | 1271 | `1,979` | 4 | `data/grid/power_arithmetic.json :: verdicts.month_end.n_eff_price`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.joint.n_eff` |
 | `docs/PAPER_DRAFT.md` | 1272 | `10,857` | 9 | `data/grid/price/summary.json :: calibration.pit_n`<br>`data/grid/price/summary.json :: panel.n_scored_cells` |
-| `docs/PAPER_DRAFT.md` | 1275 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1275 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1275 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/PAPER_DRAFT.md` | 1283 | `+0.0013` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M08_uniform_loose_030.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M01_uniform_k8.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1286 | `24.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1286 | `24.9%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1291 | `0.0001` | 21 | `data/walk_forward/summary.json :: tiers.daily.P.engine_vs.frozen.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M09_uniform_strict_050.dm_p` |
 | `docs/PAPER_DRAFT.md` | 1303 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1303 | `−0.005` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.within_bin_covariance` |
@@ -752,34 +769,32 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1453 | `55` | 5 | `data/walk_forward/summary.json :: data_state.n_geo_no_independent_outcome`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[54].n` |
 | `docs/PAPER_DRAFT.md` | 1454 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1454 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/PAPER_DRAFT.md` | 1454 | `11.9%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1454 | `25.0%` | 21 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1454 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1454 | `11.9%` | 32 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1454 | `25.0%` | 18 | `data/structural_surface/summary.json :: abstentions.pool_lt_8`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1454 | `63.1%` | 5 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1454 | `49` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.sanctions.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[48].n` |
-| `docs/PAPER_DRAFT.md` | 1454 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 1454 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 1455 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `docs/PAPER_DRAFT.md` | 1455 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 1455 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `docs/PAPER_DRAFT.md` | 1455 | `95` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M06_uniform_k5.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M06_uniform_k5.n` |
-| `docs/PAPER_DRAFT.md` | 1456 | `0.104` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.null_p95`<br>`data/walk_forward/summary.json :: spec_curve.rows[11].skill` |
 | `docs/PAPER_DRAFT.md` | 1457 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/PAPER_DRAFT.md` | 1459 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `docs/PAPER_DRAFT.md` | 1459 | `35` | 65 | `data/walk_forward/summary.json :: registered.cluster_days`<br>`data/walk_forward/summary.json :: tiers.daily.dependence.cluster_days` |
 | `docs/PAPER_DRAFT.md` | 1460 | `−0.084` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.skill` |
 | `docs/PAPER_DRAFT.md` | 1460 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
-| `docs/PAPER_DRAFT.md` | 1460 | `0.076` | 28 | `data/walk_forward/summary.json :: G_joint_across_tiers.dm_p`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.dm_p` |
 | `docs/PAPER_DRAFT.md` | 1460 | `0.710` | 11 | `data/walk_forward/summary.json :: G_joint_across_tiers.engine_mean`<br>`data/walk_forward/summary.json :: leakage_test.scores.G.sealed` |
 | `docs/PAPER_DRAFT.md` | 1460 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
 | `docs/PAPER_DRAFT.md` | 1461 | `−0.304` | 4 | `data/walk_forward/summary.json :: tiers.daily.M.M04_situation_2x.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 1461 | `−0.821` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[11].frozen` |
-| `docs/PAPER_DRAFT.md` | 1461 | `0.025` | 19 | `data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.spa.best_mean_gain` |
+| `docs/PAPER_DRAFT.md` | 1461 | `−0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `docs/PAPER_DRAFT.md` | 1461 | `0.545` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.engine_vs.persistence.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 1461 | `96` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.n_persistence_known`<br>`data/walk_forward/summary.json :: tiers.daily.M.M02_situation_only.tn` |
 | `docs/PAPER_DRAFT.md` | 1462 | `−0.021` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.per_class.infrastructure_attack.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[14].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1462 | `+0.007` | 16 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.rps_engine_vs_climatology.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M05_market_2x.dm_p` |
-| `docs/PAPER_DRAFT.md` | 1463 | `1.00` | 19 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
+| `docs/PAPER_DRAFT.md` | 1462 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1463 | `1.00` | 20 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.h` |
 | `docs/PAPER_DRAFT.md` | 1464 | `−0.003` | 30 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.murphy_gap` |
-| `docs/PAPER_DRAFT.md` | 1464 | `+0.056` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.1.uncertainty` |
 | `docs/PAPER_DRAFT.md` | 1464 | `−0.175` | 11 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M04_situation_2x.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.persistence.skill` |
 | `docs/PAPER_DRAFT.md` | 1465 | `−0.071` | 10 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_fair.engine_vs_climatology.skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[25].skill` |
 | `docs/PAPER_DRAFT.md` | 1465 | `−0.136` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M08_uniform_loose_030.skill`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.P.ci95[0]` |
@@ -791,16 +806,20 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1466 | `0.544` | 21 | `data/ripple/irf.json :: rows[0].irf[0].se_ehw`<br>`data/ripple/irf.json :: rows[0].irf[0].se_nw` |
 | `docs/PAPER_DRAFT.md` | 1467 | `−0.700` | 40 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[44]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.lambda_trajectory[45]` |
 | `docs/PAPER_DRAFT.md` | 1467 | `−0.940` | 14 | `data/ripple/irf.json :: rows[107].irf[5].p_ehw`<br>`data/ripple/irf.json :: rows[214].irf[0].lo95` |
-| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1468 | `0.085` | 13 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.G.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.items_vs_climatology.M13_recalibrated.skill` |
-| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1468 | `80%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1468 | `+0.05` | 7 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1469 | `−0.150` | 6 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[3].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.random_analogs.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1469 | `−0.075` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.deal.base_rate`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.skill` |
 | `docs/PAPER_DRAFT.md` | 1469 | `−0.041` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1469 | `0%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/PAPER_DRAFT.md` | 1470 | `−0.047` | 12 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[13].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_frozen_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 1470 | `−0.008` | 15 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.within_bin_covariance` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.083` | 8 | `data/walk_forward/summary.json :: spec_curve.rows[31].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[33].skill` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.106` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.uncertainty`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.uncertainty` |
 | `docs/PAPER_DRAFT.md` | 1471 | `−0.066` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.reliability`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[179].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1471 | `−0.101` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[82].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].skill_engine_vs_clim` |
+| `docs/PAPER_DRAFT.md` | 1471 | `0.029` | 9 | `data/walk_forward/summary.json :: placebo.vs_random_analogs.estimator_iid_superseded.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[118].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1471 | `0.124` | 10 | `data/walk_forward/summary.json :: permutation.iid.null_mean`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.skill` |
 | `docs/PAPER_DRAFT.md` | 1471 | `0.092` | 11 | `data/walk_forward/summary.json :: spec_curve.rows[1].skill`<br>`data/walk_forward/summary.json :: spec_curve.rows[3].skill` |
 | `docs/PAPER_DRAFT.md` | 1473 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
@@ -816,8 +835,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/EXPLAIN.md` | 33 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/EXPLAIN.md` | 37 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `docs/EXPLAIN.md` | 61 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
-| `docs/EXPLAIN.md` | 64 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `docs/EXPLAIN.md` | 99 | `0.29` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.precision`<br>`data/walk_forward/summary.json :: tiers.daily.G.per_class.conflict_escalation.dm_hln` |
+| `docs/EXPLAIN.md` | 64 | `73%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `docs/EXPLAIN.md` | 120 | `476` | 8 | `data/grid/power_arithmetic.json :: grids.month_end.n_dates`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.n_grid_dates` |
 | `docs/EXPLAIN.md` | 137 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
 | `docs/EXPLAIN.md` | 146 | `0.052` | 10 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].skill_engine_vs_clim` |
@@ -827,12 +845,12 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/EXPLAIN.md` | 163 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `docs/EXPLAIN.md` | 184 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `docs/EXPLAIN.md` | 184 | `30%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `OPEN_ITEMS.md` | 3 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 3 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 3 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 13 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 13 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 19 | `79` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.n_retained`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.level0_share_retained.n` |
 | `OPEN_ITEMS.md` | 19 | `28` | 19 | `data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.tp` |
-| `OPEN_ITEMS.md` | 20 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `OPEN_ITEMS.md` | 20 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
 | `OPEN_ITEMS.md` | 20 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 21 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 21 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
@@ -840,7 +858,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 28 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 29 | `−28%` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 29 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 30 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 30 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 30 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `OPEN_ITEMS.md` | 30 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `OPEN_ITEMS.md` | 30 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
@@ -848,99 +866,104 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 30 | `59` | 6 | `data/walk_forward/summary.json :: permutation.block.n_clusters`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.dependence.n_clusters` |
 | `OPEN_ITEMS.md` | 31 | `0.640` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[53].climatology` |
 | `OPEN_ITEMS.md` | 33 | `41%` | 99 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `OPEN_ITEMS.md` | 33 | `73%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 37 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 33 | `73%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 37 | `1.1` | 6 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[0].hi90`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[6].se_ehw` |
+| `OPEN_ITEMS.md` | 37 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 37 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 43 | `6` | 6 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.median`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_structural` |
 | `OPEN_ITEMS.md` | 43 | `48` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.policy_response.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[47].n` |
 | `OPEN_ITEMS.md` | 55 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `OPEN_ITEMS.md` | 61 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 61 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 61 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 66 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
-| `OPEN_ITEMS.md` | 66 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `OPEN_ITEMS.md` | 66 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
 | `OPEN_ITEMS.md` | 68 | `82` | 4 | `data/walk_forward/summary.json :: data_state.n_geo_with_deal_flag`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[81].n` |
-| `OPEN_ITEMS.md` | 69 | `−0.0082` | 7 | `data/ripple/irf.json :: rows[244].irf[0].beta`<br>`data/ripple/irf.json :: rows[248].irf[1].se_ehw` |
-| `OPEN_ITEMS.md` | 69 | `+0.04` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.dm.p_value` |
-| `OPEN_ITEMS.md` | 69 | `0.19` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.mean_diff` |
-| `OPEN_ITEMS.md` | 70 | `9` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
-| `OPEN_ITEMS.md` | 73 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 69 | `+0.04` | 129 | `data/walk_forward/summary.json :: permutation.null_sd`<br>`data/walk_forward/summary.json :: permutation.block.null_sd` |
+| `OPEN_ITEMS.md` | 69 | `0.019` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[4].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[63].skill_engine_vs_clim` |
+| `OPEN_ITEMS.md` | 70 | `9` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 73 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 73 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 95 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `OPEN_ITEMS.md` | 95 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `OPEN_ITEMS.md` | 100 | `1.3` | 6 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
-| `OPEN_ITEMS.md` | 102 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 100 | `1.3` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 102 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 102 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 104 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `OPEN_ITEMS.md` | 107 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `OPEN_ITEMS.md` | 110 | `99` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M03_market_only.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M03_market_only.n` |
 | `OPEN_ITEMS.md` | 111 | `+0.009` | 13 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.0.resolution`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.brier.frozen.dm_p` |
-| `OPEN_ITEMS.md` | 111 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 111 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
-| `OPEN_ITEMS.md` | 111 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 111 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 111 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `OPEN_ITEMS.md` | 111 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 111 | `+0.068` | 18 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.C1_fixed_0.5.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.rps.C1.skill` |
 | `OPEN_ITEMS.md` | 111 | `19` | 14 | `data/walk_forward/summary.json :: regime_blocks.drop_2020.daily.n_dropped`<br>`data/walk_forward/summary.json :: verdict.audit_record.sheet_hostility.hostile` |
 | `OPEN_ITEMS.md` | 111 | `51` | 10 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_a_situation_field_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fp` |
 | `OPEN_ITEMS.md` | 112 | `18` | 12 | `data/walk_forward/summary.json :: spec_curve.materiality[2].n_episodes`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[17].n` |
+| `OPEN_ITEMS.md` | 112 | `−0.117` | 8 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.rps_vs_persistence.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill` |
 | `OPEN_ITEMS.md` | 112 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
-| `OPEN_ITEMS.md` | 113 | `100%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 113 | `100%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 113 | `73` | 4 | `data/walk_forward/summary.json :: data_state.ies90_level_counts.0`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[72].n` |
-| `OPEN_ITEMS.md` | 113 | `7%` | 100 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 113 | `7%` | 99 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
+| `OPEN_ITEMS.md` | 116 | `1.5` | 6 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.dm_hln` |
 | `OPEN_ITEMS.md` | 118 | `+1.003` | 5 | `data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.deff_per_cell.gasoline_crack|h40.deff_used` |
+| `OPEN_ITEMS.md` | 119 | `0.030` | 22 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.skill` |
 | `OPEN_ITEMS.md` | 119 | `−4.067` | 4 | `data/ripple/irf.json :: rows[327].irf[6].hi95`<br>`data/ripple/irf.json :: rows[596].irf[5].hi90` |
-| `OPEN_ITEMS.md` | 120 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 120 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 123 | `36` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.infrastructure_attack.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.location.n_nonzero` |
 | `OPEN_ITEMS.md` | 124 | `56` | 4 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.abstain_rule_departure.abstaining`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[55].n` |
 | `OPEN_ITEMS.md` | 131 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `OPEN_ITEMS.md` | 133 | `32` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[31].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[31].n` |
-| `OPEN_ITEMS.md` | 134 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 134 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 134 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 135 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 135 | `5` | 30 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
-| `OPEN_ITEMS.md` | 140 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 142 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 135 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 135 | `5` | 20 | `data/structural_surface/summary.json :: dm.dm`<br>`data/structural_surface/summary.json :: dm.dm_hln` |
+| `OPEN_ITEMS.md` | 140 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 142 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
 | `OPEN_ITEMS.md` | 142 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 142 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 143 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 143 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 143 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `OPEN_ITEMS.md` | 145 | `0.064` | 15 | `data/walk_forward/summary.json :: placebo.fair_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: spec_curve.rows[37].skill` |
 | `OPEN_ITEMS.md` | 150 | `33` | 5 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[32].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[32].n` |
-| `OPEN_ITEMS.md` | 157 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 157 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 157 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 157 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 157 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 157 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 157 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 157 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `OPEN_ITEMS.md` | 157 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
 | `OPEN_ITEMS.md` | 158 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
-| `OPEN_ITEMS.md` | 159 | `8` | 14 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_structural` |
+| `OPEN_ITEMS.md` | 159 | `8` | 16 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface` |
+| `OPEN_ITEMS.md` | 160 | `14` | 20 | `data/walk_forward/summary.json :: tiers.monthly.n_not_scored_burn_in`<br>`data/walk_forward/summary.json :: tiers.monthly.n_reads` |
 | `OPEN_ITEMS.md` | 160 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 160 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 164 | `83.5%` | 8 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].se_ehw` |
+| `OPEN_ITEMS.md` | 164 | `83.5%` | 4 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
 | `OPEN_ITEMS.md` | 164 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 170 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 170 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 170 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 172 | `1,160` | 5 | `data/grid/g/PANEL.json :: dIES.n_nonzero`<br>`data/grid/g/PANEL.json :: dIES.n_defined.informative` |
 | `OPEN_ITEMS.md` | 172 | `333` | 4 | `data/grid/power_arithmetic.json :: escalation_panel.month_end.mid_family_2014.n_grid_dates_covered`<br>`data/grid/power_arithmetic.json :: price_panel.month_end.availability.henry_hub|h20` |
-| `OPEN_ITEMS.md` | 172 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 172 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 172 | `01` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 172 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 172 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `OPEN_ITEMS.md` | 177 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 182 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `OPEN_ITEMS.md` | 184 | `44.7%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
-| `OPEN_ITEMS.md` | 184 | `17.6%` | 20 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_diff` |
+| `OPEN_ITEMS.md` | 184 | `44.7%` | 13 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `OPEN_ITEMS.md` | 184 | `17.6%` | 17 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_diff` |
 | `OPEN_ITEMS.md` | 185 | `0.95` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.spa.stat`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.engine_vs.climatology.dm_p` |
-| `OPEN_ITEMS.md` | 203 | `4` | 23 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
-| `OPEN_ITEMS.md` | 203 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 203 | `4` | 33 | `data/structural_surface/summary.json :: mean_block`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.mean_block` |
+| `OPEN_ITEMS.md` | 203 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 203 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 206 | `23` | 7 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M09_uniform_strict_050.fn` |
 | `OPEN_ITEMS.md` | 206 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 206 | `43` | 6 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.opec_decision.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.diagnostic_basis.subsets.all.n_nonzero` |
 | `OPEN_ITEMS.md` | 206 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `OPEN_ITEMS.md` | 208 | `01` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 208 | `01` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 208 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 209 | `489` | 4 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].T`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[5].n_events` |
 | `OPEN_ITEMS.md` | 212 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
-| `OPEN_ITEMS.md` | 213 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 214 | `95%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 213 | `02` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 214 | `95%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 216 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
-| `OPEN_ITEMS.md` | 218 | `44.4%` | 15 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
+| `OPEN_ITEMS.md` | 218 | `44.4%` | 13 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: dm.mean_diff` |
 | `OPEN_ITEMS.md` | 225 | `150` | 4 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[149].n`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[1][0]` |
 | `OPEN_ITEMS.md` | 229 | `313` | 11 | `data/walk_forward/summary.json :: data_state.n_events`<br>`data/walk_forward/summary.json :: data_state.n_with_any_situation_field` |
 | `OPEN_ITEMS.md` | 235 | `3` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
@@ -948,25 +971,25 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 241 | `0` | 97 | `data/structural_surface/summary.json :: mean_loss_diff_structural_minus_surface`<br>`data/structural_surface/summary.json :: availability_audit.vintage_after_event_rows` |
 | `OPEN_ITEMS.md` | 241 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
 | `OPEN_ITEMS.md` | 248 | `51` | 10 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_a_situation_field_at_t`<br>`data/walk_forward/summary.json :: tiers.daily.M.M03_market_only.fp` |
-| `OPEN_ITEMS.md` | 248 | `93%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 248 | `93%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 251 | `100` | 74 | `data/walk_forward/summary.json :: G_joint_across_tiers.n`<br>`data/walk_forward/summary.json :: permutation.n_reads` |
-| `OPEN_ITEMS.md` | 252 | `84%` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
-| `OPEN_ITEMS.md` | 255 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 259 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 252 | `84%` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 255 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 259 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 | `OPEN_ITEMS.md` | 259 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
 | `OPEN_ITEMS.md` | 259 | `30` | 15 | `data/walk_forward/summary.json :: registered.min_tier_n`<br>`data/walk_forward/summary.json :: registered.p_scale` |
-| `OPEN_ITEMS.md` | 265 | `1.3` | 6 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 265 | `1.2` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 265 | `1.3` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.dm_hln` |
 | `OPEN_ITEMS.md` | 266 | `2.1` | 6 | `data/walk_forward/summary.json :: regime_blocks.drop_2008.daily.G.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
-| `OPEN_ITEMS.md` | 266 | `2.2` | 4 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.dm_hln` |
-| `OPEN_ITEMS.md` | 266 | `2` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 272 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 266 | `2` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 272 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 272 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
-| `OPEN_ITEMS.md` | 275 | `02` | 19 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
-| `OPEN_ITEMS.md` | 282 | `09` | 6 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
+| `OPEN_ITEMS.md` | 275 | `02` | 9 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.min`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.dm` |
+| `OPEN_ITEMS.md` | 282 | `09` | 5 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.mean_structural` |
 | `OPEN_ITEMS.md` | 282 | `03` | 19 | `data/structural_surface/summary.json :: dm.lag`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.lag` |
 | `OPEN_ITEMS.md` | 282 | `90` | 7 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M09_uniform_strict_050.n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M09_uniform_strict_050.n` |
 | `OPEN_ITEMS.md` | 296 | `27` | 11 | `data/walk_forward/summary.json :: tiers.daily.M.M05_market_2x.fn`<br>`data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tp` |
-| `OPEN_ITEMS.md` | 305 | `1` | 38 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
+| `OPEN_ITEMS.md` | 305 | `1` | 48 | `data/structural_surface/summary.json :: dm.h`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff` |
 
 ## RESOLVED — the number, and where it is in the record
 
@@ -975,50 +998,49 @@ claim to know which field the prose meant. Listed with the first few.
 | document | line | number | n_paths | resolves to |
 |---|---:|---:|---:|---|
 | `README.md` | 5 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `README.md` | 9 | `8.337` | 3 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_a`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_a` |
-| `README.md` | 9 | `8.782` | 3 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_a` |
-| `README.md` | 9 | `−0.623` | 2 | `data/structural_surface/summary.json :: ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[0]` |
-| `README.md` | 9 | `−0.271` | 2 | `data/structural_surface/summary.json :: ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[1]` |
-| `README.md` | 9 | `1.57` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
+| `README.md` | 9 | `8.341` | 3 | `data/structural_surface/summary.json :: mean_loss.structural`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_a`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_a` |
+| `README.md` | 9 | `8.784` | 3 | `data/structural_surface/summary.json :: mean_loss.surface`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_a` |
+| `README.md` | 9 | `−0.613` | 2 | `data/structural_surface/summary.json :: ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[0]` |
+| `README.md` | 9 | `−0.269` | 2 | `data/structural_surface/summary.json :: ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[1]` |
+| `README.md` | 9 | `8.65` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[197].engine`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[200].engine` |
 | `README.md` | 9 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
-| `README.md` | 11 | `8.392` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_b` |
-| `README.md` | 11 | `−0.055` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.mean_diff` |
-| `README.md` | 11 | `−0.115` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
-| `README.md` | 11 | `+0.006` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[1]` |
-| `README.md` | 11 | `0.090` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.p_value` |
+| `README.md` | 11 | `8.390` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_b`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.mean_b` |
+| `README.md` | 11 | `−0.049` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.mean_diff` |
+| `README.md` | 11 | `−0.112` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `README.md` | 11 | `+0.012` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[1]` |
+| `README.md` | 11 | `0.140` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.p_value` |
 | `README.md` | 13 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/BRIEF.md` | 39 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/BRIEF.md` | 41 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 39 | `+0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 39 | `0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 40 | `0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
 | `docs/BRIEF.md` | 41 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/BRIEF.md` | 43 | `−0.074` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 43 | `0.011` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
 | `docs/BRIEF.md` | 50 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/BRIEF.md` | 83 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
-| `docs/BRIEF.md` | 83 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/BRIEF.md` | 83 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/BRIEF.md` | 84 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/BRIEF.md` | 89 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `docs/BRIEF.md` | 90 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
 | `docs/BRIEF.md` | 100 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
 | `docs/BRIEF.md` | 102 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
 | `docs/BRIEF.md` | 107 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
-| `docs/BRIEF.md` | 107 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/BRIEF.md` | 107 | `+2.37` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].beta` |
 | `docs/BRIEF.md` | 108 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/BRIEF.md` | 108 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 108 | `+48.5%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/BRIEF.md` | 115 | `−0.023` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.r` |
 | `docs/BRIEF.md` | 116 | `614` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.n_months` |
-| `docs/BRIEF.md` | 118 | `92.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
-| `docs/BRIEF.md` | 118 | `48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 118 | `92.3%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `docs/BRIEF.md` | 118 | `48.5%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/BRIEF.md` | 126 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
 | `docs/BRIEF.md` | 126 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/BRIEF.md` | 127 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/BRIEF.md` | 133 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
 | `docs/BRIEF.md` | 133 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
 | `docs/BRIEF.md` | 135 | `0.181` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.diagnostic_hostile.rps.climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.3.diagram[0].band95[1]` |
-| `docs/BRIEF.md` | 138 | `−0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/BRIEF.md` | 138 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/BRIEF.md` | 138 | `−0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/BRIEF.md` | 138 | `0.766` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
 | `docs/BRIEF.md` | 144 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
 | `docs/BRIEF.md` | 145 | `+0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/BRIEF.md` | 145 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
-| `docs/BRIEF.md` | 147 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/BRIEF.md` | 147 | `+0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
 | `docs/BRIEF.md` | 148 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
 | `docs/BRIEF.md` | 151 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
 | `docs/BRIEF.md` | 153 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
@@ -1031,49 +1053,49 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 16 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 17 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
 | `docs/PAPER_DRAFT.md` | 52 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 59 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 60 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 62 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 59 | `+0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 59 | `0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 60 | `−0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 66 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 74 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 73 | `0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 74 | `0.26` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 78 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
 | `docs/PAPER_DRAFT.md` | 78 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
 | `docs/PAPER_DRAFT.md` | 81 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
-| `docs/PAPER_DRAFT.md` | 86 | `−0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 86 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/PAPER_DRAFT.md` | 86 | `−0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 86 | `0.766` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 88 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 93 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 94 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 95 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 96 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `docs/PAPER_DRAFT.md` | 97 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
 | `docs/PAPER_DRAFT.md` | 102 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 106 | `+0.12` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 106 | `+0.12` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[0].lo90` |
 | `docs/PAPER_DRAFT.md` | 124 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 126 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 128 | `−0.074` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 128 | `−0.140` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].z_ehw` |
-| `docs/PAPER_DRAFT.md` | 135 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 126 | `+0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 126 | `0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 128 | `−0.140` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 128 | `0.011` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 134 | `0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 135 | `0.26` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 138 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
 | `docs/PAPER_DRAFT.md` | 138 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
 | `docs/PAPER_DRAFT.md` | 143 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
-| `docs/PAPER_DRAFT.md` | 145 | `0.117` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 149 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 149 | `−0.031` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 155 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 149 | `+0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 149 | `+0.058` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 155 | `+0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 160 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `docs/PAPER_DRAFT.md` | 160 | `24` | 1 | `data/structural_surface/summary.json :: abstentions.target_unusable` |
 | `docs/PAPER_DRAFT.md` | 169 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
 | `docs/PAPER_DRAFT.md` | 171 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 177 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
-| `docs/PAPER_DRAFT.md` | 177 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 177 | `+2.37` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].beta` |
 | `docs/PAPER_DRAFT.md` | 177 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 178 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 178 | `+48.5%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 181 | `−0.023` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.r` |
 | `docs/PAPER_DRAFT.md` | 181 | `614` | 1 | `data/ripple/external_checks.json :: corr_tightening_count_vs_bh_supply_shock.n_months` |
-| `docs/PAPER_DRAFT.md` | 184 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 184 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 185 | `80` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[79].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].n` |
-| `docs/PAPER_DRAFT.md` | 228 | `1.1` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 261 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/PAPER_DRAFT.md` | 261 | `726` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.fields_blanked` |
 | `docs/PAPER_DRAFT.md` | 262 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
@@ -1083,7 +1105,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 332 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 332 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
 | `docs/PAPER_DRAFT.md` | 338 | `22` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.bigmove_down` |
-| `docs/PAPER_DRAFT.md` | 339 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 339 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 339 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 339 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 339 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
@@ -1093,104 +1115,90 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 371 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 372 | `598` | 1 | `data/candidates/post1987_candidates.csv :: columns.days_to_corpus[105]` |
 | `docs/PAPER_DRAFT.md` | 376 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
-| `docs/PAPER_DRAFT.md` | 391 | `5.1` | 3 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[4].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].z_ehw` |
 | `docs/PAPER_DRAFT.md` | 406 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 406 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
 | `docs/PAPER_DRAFT.md` | 406 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 408 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `docs/PAPER_DRAFT.md` | 409 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 416 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
-| `docs/PAPER_DRAFT.md` | 416 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 416 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 416 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 417 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 417 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 418 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 418 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 418 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
-| `docs/PAPER_DRAFT.md` | 418 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 418 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 422 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 424 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
-| `docs/PAPER_DRAFT.md` | 425 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 426 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 424 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 427 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 428 | `22` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.bigmove_down` |
 | `docs/PAPER_DRAFT.md` | 433 | `1.61` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].beta` |
 | `docs/PAPER_DRAFT.md` | 433 | `1.61` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].beta` |
 | `docs/PAPER_DRAFT.md` | 433 | `1.85` | 3 | `data/grid/power_arithmetic.json :: multipliers.month_end.2_targets.n_eff_added_per_cell`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_bootstrap_ratio`<br>`data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.wti|h10.deff_used` |
-| `docs/PAPER_DRAFT.md` | 434 | `0.62` | 2 | `data/structural_surface/summary.json :: ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 434 | `0.62` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].lo95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].se_ehw` |
 | `docs/PAPER_DRAFT.md` | 435 | `0.84` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[3].se_ehw` |
 | `docs/PAPER_DRAFT.md` | 437 | `2.29` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[2].hi95` |
 | `docs/PAPER_DRAFT.md` | 437 | `1.98` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.conflict_escalation.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 437 | `2.06` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M13_recalibrated.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 453 | `−0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 453 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 453 | `−0.234` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 453 | `0.104` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 463 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
 | `docs/PAPER_DRAFT.md` | 463 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
 | `docs/PAPER_DRAFT.md` | 464 | `76` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[75].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[75].n` |
 | `docs/PAPER_DRAFT.md` | 465 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
-| `docs/PAPER_DRAFT.md` | 470 | `5.1` | 3 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[4].beta`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].z_ehw` |
-| `docs/PAPER_DRAFT.md` | 482 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 482 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 482 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 505 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
 | `docs/PAPER_DRAFT.md` | 515 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 517 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
-| `docs/PAPER_DRAFT.md` | 526 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 522 | `0.25` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_surface.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 526 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 535 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 535 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
 | `docs/PAPER_DRAFT.md` | 537 | `25` | 1 | `data/structural_surface/summary.json :: abstentions.pool_lt_8` |
 | `docs/PAPER_DRAFT.md` | 539 | `2.32` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].lo90` |
-| `docs/PAPER_DRAFT.md` | 540 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 541 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 543 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 548 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 549 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 556 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
-| `docs/PAPER_DRAFT.md` | 557 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 563 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
-| `docs/PAPER_DRAFT.md` | 567 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 572 | `0.655` | 2 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[1].se_nw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 573 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 575 | `0.022` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 573 | `+0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 573 | `0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 577 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
-| `docs/PAPER_DRAFT.md` | 578 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 579 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 579 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 580 | `0.65` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
 | `docs/PAPER_DRAFT.md` | 586 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
-| `docs/PAPER_DRAFT.md` | 587 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 588 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 593 | `−0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 594 | `0.28` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 594 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 587 | `0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 588 | `0.26` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 593 | `−0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 594 | `+0.056` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 594 | `0.26` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 595 | `+0.144` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M07_uniform_k12.skill`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.dm_hln`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_frozen_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 595 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 598 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 598 | `−0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 600 | `0.85` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
 | `docs/PAPER_DRAFT.md` | 600 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 601 | `+0.134` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 601 | `+0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 601 | `+0.193` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.pin10_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.P.engine_vs.persistence.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 601 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 604 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
 | `docs/PAPER_DRAFT.md` | 605 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 614 | `−0.108` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 615 | `−0.081` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 617 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
 | `docs/PAPER_DRAFT.md` | 619 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
 | `docs/PAPER_DRAFT.md` | 624 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
 | `docs/PAPER_DRAFT.md` | 625 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
-| `docs/PAPER_DRAFT.md` | 625 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 626 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 631 | `−0.083` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 632 | `−0.106` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 633 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 644 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 631 | `−0.008` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 632 | `−0.063` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 633 | `+0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 643 | `−0.058` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 643 | `−0.057` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 644 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 647 | `+0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 647 | `+0.013` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 652 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
-| `docs/PAPER_DRAFT.md` | 652 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 652 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
-| `docs/PAPER_DRAFT.md` | 664 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 672 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 664 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 672 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 675 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 681 | `0.033` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 686 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
 | `docs/PAPER_DRAFT.md` | 686 | `40` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].h` |
 | `docs/PAPER_DRAFT.md` | 688 | `−0.590` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.analogue.ci95[0]`<br>`data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[4][1]` |
@@ -1198,17 +1206,20 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 689 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 702 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/PAPER_DRAFT.md` | 712 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
-| `docs/PAPER_DRAFT.md` | 730 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 714 | `0.29` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 719 | `0.29` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 730 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 739 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
 | `docs/PAPER_DRAFT.md` | 739 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
 | `docs/PAPER_DRAFT.md` | 740 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
 | `docs/PAPER_DRAFT.md` | 741 | `0.5064` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
 | `docs/PAPER_DRAFT.md` | 745 | `0.682` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo90` |
 | `docs/PAPER_DRAFT.md` | 745 | `0.506` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.analogue.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.analogue.mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[2].engine` |
+| `docs/PAPER_DRAFT.md` | 747 | `−0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 747 | `0.764` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].lo90` |
 | `docs/PAPER_DRAFT.md` | 748 | `0.6780` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.level_mixture_M01_M12`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[71].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[79].frozen` |
 | `docs/PAPER_DRAFT.md` | 749 | `0.6822` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.reanchoring_check.sealed_engine_G_13_items` |
-| `docs/PAPER_DRAFT.md` | 762 | `0.90` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 762 | `73.0%` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 767 | `−0.0389` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 767 | `+0.1276` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C1_fixed_0.5.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C1.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 768 | `0.4764` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.scores.C2_walkforward_lambda.brier`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.C2_walkforward_lambda.mean` |
@@ -1231,12 +1242,13 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 771 | `+0.1043` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.brier.climatology.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 776 | `0.867` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.label_block.p_value`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[19].frozen` |
 | `docs/PAPER_DRAFT.md` | 780 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.7` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 780 | `29` | 1 | `data/structural_surface/summary.json :: effective_weight_n_median.surface` |
-| `docs/PAPER_DRAFT.md` | 780 | `0.5` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 780 | `0.5` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 784 | `0.1167` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.by_n.89.mds_skill` |
 | `docs/PAPER_DRAFT.md` | 788 | `0.876` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.random_analogs.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.fdr.p[13]` |
 | `docs/PAPER_DRAFT.md` | 790 | `11.3` | 2 | `data/walk_forward/summary.json :: big_moves_knew[28].reads[2].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[29].reads[0].engine_p90` |
-| `docs/PAPER_DRAFT.md` | 794 | `0.5` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 794 | `0.5` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 800 | `0.4827` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.means.C0r_random_analogs`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.ref_mean`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.mean` |
 | `docs/PAPER_DRAFT.md` | 800 | `+0.0232` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[61].skill_frozen_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 800 | `0.399` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.vs_no_change.brier.C0r.dm_p` |
@@ -1247,17 +1259,17 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 803 | `+0.0584` | 3 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[165].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.pin90_vs_climatology.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 803 | `+0.0224` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[124].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 804 | `0.302` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.rps.C0.dm_p` |
-| `docs/PAPER_DRAFT.md` | 806 | `0.197` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0r.dm_p`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M05_market_2x.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 810 | `−0.0037` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.within_bin_covariance`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[29].skill_engine_vs_clim` |
-| `docs/PAPER_DRAFT.md` | 810 | `0.766` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[92].frozen` |
+| `docs/PAPER_DRAFT.md` | 806 | `0.197` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 810 | `−0.0037` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 810 | `0.766` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 811 | `+0.0169` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.diagnostic_pools.C1_vs.brier.C0.skill` |
 | `docs/PAPER_DRAFT.md` | 819 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
-| `docs/PAPER_DRAFT.md` | 826 | `+0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 832 | `11.4` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
+| `docs/PAPER_DRAFT.md` | 826 | `+0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 832 | `11.4` | 3 | `data/walk_forward/summary.json :: big_moves_knew[27].reads[0].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[33].reads[1].engine_p90`<br>`data/walk_forward/summary.json :: big_moves_knew[34].reads[0].engine_p90` |
 | `docs/PAPER_DRAFT.md` | 841 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 850 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 850 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 850 | `42` | 2 | `data/ripple/external_checks.json :: meta.runtime_s`<br>`data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.sanctions` |
-| `docs/PAPER_DRAFT.md` | 851 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 851 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 852 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
 | `docs/PAPER_DRAFT.md` | 854 | `500` | 1 | `data/ripple/external_checks.json :: meta.n_placebo` |
 | `docs/PAPER_DRAFT.md` | 858 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
@@ -1270,7 +1282,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 866 | `171` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[170].n` |
 | `docs/PAPER_DRAFT.md` | 875 | `128` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.n_announcement_days` |
 | `docs/PAPER_DRAFT.md` | 876 | `+0.85` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
-| `docs/PAPER_DRAFT.md` | 876 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 876 | `+2.37` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].beta` |
 | `docs/PAPER_DRAFT.md` | 876 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 888 | `+20.66` | 3 | `data/ripple/irf.json :: rows[587].placebo.beta_real`<br>`data/ripple/irf.json :: rows[580].irf[1].hi90`<br>`data/ripple/irf.json :: rows[587].irf[3].beta` |
 | `docs/PAPER_DRAFT.md` | 888 | `+8.77` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[169].climatology` |
@@ -1279,14 +1291,14 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 891 | `+4.03` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.diesel_crack|h60.deff_bartlett` |
 | `docs/PAPER_DRAFT.md` | 891 | `+14.96` | 1 | `data/ripple/irf.json :: rows[916].irf[2].hi90` |
 | `docs/PAPER_DRAFT.md` | 894 | `7.2` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].lo95` |
-| `docs/PAPER_DRAFT.md` | 894 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 894 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 894 | `+3.69` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[4].hi95`<br>`data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[2].hi95` |
 | `docs/PAPER_DRAFT.md` | 895 | `+16.99` | 3 | `data/ripple/irf.json :: rows[521].irf[0].hi95`<br>`data/ripple/irf.json :: rows[542].irf[4].lo95`<br>`data/ripple/irf.json :: rows[592].irf[1].hi90` |
 | `docs/PAPER_DRAFT.md` | 900 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
 | `docs/PAPER_DRAFT.md` | 907 | `+1.023` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 912 | `−92.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 912 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 915 | `07` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 912 | `−92.3%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 912 | `+48.5%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 915 | `07` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 916 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 916 | `122` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.recalibration.final_n_fit`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[121].n` |
 | `docs/PAPER_DRAFT.md` | 917 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
@@ -1296,16 +1308,14 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 936 | `+5.079` | 2 | `data/ripple/irf.json :: rows[218].irf[6].se_nw`<br>`data/ripple/irf.json :: rows[652].irf[2].se_nw` |
 | `docs/PAPER_DRAFT.md` | 937 | `+9.364` | 1 | `data/ripple/irf.json :: rows[574].irf[2].hi95` |
 | `docs/PAPER_DRAFT.md` | 937 | `116` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M10_situation_2x_k12.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[115].n` |
-| `docs/PAPER_DRAFT.md` | 937 | `0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 939 | `+2.071` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.brent|h10.deff_bartlett` |
-| `docs/PAPER_DRAFT.md` | 939 | `0.269` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.diagram[0].observed_freq` |
-| `docs/PAPER_DRAFT.md` | 940 | `+2.192` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 939 | `0.269` | 2 | `data/structural_surface/summary.json :: ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 943 | `−1.391` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.mean_block` |
 | `docs/PAPER_DRAFT.md` | 951 | `106` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].n` |
 | `docs/PAPER_DRAFT.md` | 951 | `92` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[91].n` |
-| `docs/PAPER_DRAFT.md` | 956 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 956 | `0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 957 | `411` | 2 | `data/grid/price/summary.json :: per_horizon.h5.n_dates`<br>`data/grid/price/summary.json :: per_horizon.h60.n_dates` |
-| `docs/PAPER_DRAFT.md` | 972 | `12.3` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 972 | `12.3` | 3 | `data/grid/price/summary.json :: spa.stat`<br>`data/grid/price/summary.json :: diagnostic_fair.fitted_vs_climatology_registered.dm_hln`<br>`data/grid/price/summary.json :: fitted_vs.grid_climatology.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 980 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
 | `docs/PAPER_DRAFT.md` | 983 | `128` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.n_announcement_days` |
 | `docs/PAPER_DRAFT.md` | 991 | `−1.572` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.deal.engine_vs.climatology.dm_hln` |
@@ -1316,11 +1326,12 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 994 | `+0.646` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M12_dyads_system_2x.ref_mean` |
 | `docs/PAPER_DRAFT.md` | 1003 | `+0.851` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].beta` |
 | `docs/PAPER_DRAFT.md` | 1003 | `0.103` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_nw` |
-| `docs/PAPER_DRAFT.md` | 1003 | `+2.37` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.dm_hln` |
+| `docs/PAPER_DRAFT.md` | 1003 | `+2.37` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].beta` |
 | `docs/PAPER_DRAFT.md` | 1003 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `docs/PAPER_DRAFT.md` | 1004 | `+1.023` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[5].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 1005 | `+48.5%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1005 | `+48.5%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1011 | `44` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.n` |
+| `docs/PAPER_DRAFT.md` | 1021 | `+0.881` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1021 | `+0.151` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[10].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.frozen.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1025 | `+0.065%` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 1032 | `0.431` | 1 | `data/ripple/external_checks.json :: corr_opec_count_vs_abs_kanzig_monthly.r` |
@@ -1340,7 +1351,6 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1119 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
 | `docs/PAPER_DRAFT.md` | 1121 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
 | `docs/PAPER_DRAFT.md` | 1123 | `0.137` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].z_ehw` |
-| `docs/PAPER_DRAFT.md` | 1124 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1124 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
 | `docs/PAPER_DRAFT.md` | 1128 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/PAPER_DRAFT.md` | 1133 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
@@ -1350,9 +1360,8 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1155 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `docs/PAPER_DRAFT.md` | 1156 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
 | `docs/PAPER_DRAFT.md` | 1156 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
-| `docs/PAPER_DRAFT.md` | 1162 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1162 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1162 | `41` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.n`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.opec_decision.n` |
-| `docs/PAPER_DRAFT.md` | 1165 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1182 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/PAPER_DRAFT.md` | 1186 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
 | `docs/PAPER_DRAFT.md` | 1186 | `83` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.n` |
@@ -1360,13 +1369,10 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1194 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
 | `docs/PAPER_DRAFT.md` | 1201 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
 | `docs/PAPER_DRAFT.md` | 1201 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
-| `docs/PAPER_DRAFT.md` | 1213 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
-| `docs/PAPER_DRAFT.md` | 1215 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1217 | `0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1229 | `0.29` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1237 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
 | `docs/PAPER_DRAFT.md` | 1245 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
 | `docs/PAPER_DRAFT.md` | 1245 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
-| `docs/PAPER_DRAFT.md` | 1264 | `14.1` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1269 | `25` | 1 | `data/structural_surface/summary.json :: abstentions.pool_lt_8` |
 | `docs/PAPER_DRAFT.md` | 1271 | `249` | 3 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_eff`<br>`data/grid/power_arithmetic.json :: multipliers.month_end.1_grid.vs_event_triggered_P_effective`<br>`data/grid/power_arithmetic.json :: multipliers.week_end.1_grid.vs_event_triggered_P_effective` |
 | `docs/PAPER_DRAFT.md` | 1272 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
@@ -1374,7 +1380,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1283 | `−0.0104` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.vs_no_change.rps.C2_walkforward_lambda.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1283 | `+0.0128` | 2 | `data/grid/price/summary.json :: the_comparison.ci95[1]`<br>`data/grid/price/summary.json :: fitted_vs.frozen.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1283 | `0.820` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[35].engine` |
-| `docs/PAPER_DRAFT.md` | 1285 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 1285 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1286 | `414` | 1 | `data/grid/price/summary.json :: training.n_reads_with_a_fit` |
 | `docs/PAPER_DRAFT.md` | 1291 | `−0.0706` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[208].skill_engine_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1291 | `−0.0826` | 2 | `data/grid/price/summary.json :: diagnostic_fair.fitted_vs_climatology_registered.ci95[0]`<br>`data/grid/price/summary.json :: fitted_vs.grid_climatology.ci95[0]` |
@@ -1394,15 +1400,15 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1307 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
 | `docs/PAPER_DRAFT.md` | 1309 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
 | `docs/PAPER_DRAFT.md` | 1309 | `+0.0022` | 3 | `data/walk_forward/summary.json :: spec_curve.rows[139].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[141].dm_p`<br>`data/walk_forward/summary.json :: spec_curve.rows[143].dm_p` |
-| `docs/PAPER_DRAFT.md` | 1310 | `+0.0184` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 1310 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1313 | `0.9` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1310 | `+0.0184` | 1 | `data/ripple/irf.json :: rows[245].irf[1].beta` |
+| `docs/PAPER_DRAFT.md` | 1310 | `0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1313 | `0.9` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
 | `docs/PAPER_DRAFT.md` | 1316 | `+0.0103` | 1 | `data/ripple/irf.json :: rows[50].irf[1].beta` |
 | `docs/PAPER_DRAFT.md` | 1316 | `+0.0102` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.engine_vs.frozen.skill`<br>`data/walk_forward/summary.json :: tiers.daily.P.diagnostic_abnormal.raw_vs_abnormal.frozen.abnormal_skill` |
 | `docs/PAPER_DRAFT.md` | 1317 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
-| `docs/PAPER_DRAFT.md` | 1327 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1338 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
-| `docs/PAPER_DRAFT.md` | 1348 | `+0.12` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_uniform.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1327 | `0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1338 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
+| `docs/PAPER_DRAFT.md` | 1348 | `+0.12` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[0].lo90` |
 | `docs/PAPER_DRAFT.md` | 1348 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 1352 | `322` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[321]` |
 | `docs/PAPER_DRAFT.md` | 1452 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
@@ -1420,33 +1426,31 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/PAPER_DRAFT.md` | 1455 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
 | `docs/PAPER_DRAFT.md` | 1455 | `126` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[125].n` |
 | `docs/PAPER_DRAFT.md` | 1456 | `−0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
-| `docs/PAPER_DRAFT.md` | 1456 | `−0.234` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.items_vs_climatology.M02_situation_only.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M04_situation_2x.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1456 | `−0.234` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.infrastructure_attack.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1456 | `0.104` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.dm.mean_diff` |
 | `docs/PAPER_DRAFT.md` | 1457 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/PAPER_DRAFT.md` | 1459 | `299` | 1 | `data/walk_forward/summary.json :: tiers.daily.n_reads` |
 | `docs/PAPER_DRAFT.md` | 1459 | `253` | 2 | `data/grid/power_arithmetic.json :: event_triggered_baseline.P.n`<br>`data/grid/power_arithmetic.json :: event_triggered_baseline.P.n_nominal` |
 | `docs/PAPER_DRAFT.md` | 1459 | `2.32` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].lo90` |
-| `docs/PAPER_DRAFT.md` | 1460 | `+0.004` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].p_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].p_ehw` |
+| `docs/PAPER_DRAFT.md` | 1460 | `+0.004` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1460 | `0.076` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1460 | `0.655` | 2 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[1].se_nw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 1461 | `−0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
+| `docs/PAPER_DRAFT.md` | 1461 | `0.025` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1461 | `50` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.n` |
 | `docs/PAPER_DRAFT.md` | 1462 | `0.58` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].lo90` |
-| `docs/PAPER_DRAFT.md` | 1462 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 1463 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `docs/PAPER_DRAFT.md` | 1463 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `docs/PAPER_DRAFT.md` | 1463 | `0.65` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].lo95`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[4].se_ehw` |
-| `docs/PAPER_DRAFT.md` | 1464 | `0.26` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 1465 | `−0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1464 | `+0.056` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1464 | `0.26` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_surface.ci95[0]` |
+| `docs/PAPER_DRAFT.md` | 1465 | `−0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1466 | `0.225` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.per_class.demand_shock.ci95[1]`<br>`data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.3.diagram[1].band95[1]` |
 | `docs/PAPER_DRAFT.md` | 1467 | `−0.457` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.sensitivity_covering_ge2.brier.C1_fixed_0.5.mean` |
 | `docs/PAPER_DRAFT.md` | 1467 | `0.001` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].p_ehw` |
 | `docs/PAPER_DRAFT.md` | 1468 | `0.127` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[65].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[63].skill_frozen_vs_clim` |
 | `docs/PAPER_DRAFT.md` | 1468 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
-| `docs/PAPER_DRAFT.md` | 1468 | `+0.05` | 3 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.ci95[0]` |
 | `docs/PAPER_DRAFT.md` | 1469 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
-| `docs/PAPER_DRAFT.md` | 1470 | `−0.083` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.p_value` |
-| `docs/PAPER_DRAFT.md` | 1470 | `−0.106` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.surface_vs_uniform.dm.mean_diff` |
-| `docs/PAPER_DRAFT.md` | 1470 | `+0.017` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.dm.p_value`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.ci95[1]` |
-| `docs/PAPER_DRAFT.md` | 1471 | `−0.101` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[0]` |
-| `docs/PAPER_DRAFT.md` | 1471 | `0.029` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_surface.dm.p_value` |
+| `docs/PAPER_DRAFT.md` | 1470 | `−0.008` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[1]` |
+| `docs/PAPER_DRAFT.md` | 1470 | `+0.017` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_surface.ci95[1]` |
 | `docs/PAPER_DRAFT.md` | 1472 | `34` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.n` |
 | `docs/PAPER_DRAFT.md` | 1472 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `docs/PAPER_DRAFT.md` | 1474 | `0.597` | 1 | `data/walk_forward/summary.json :: leakage_test.scores.G.broken` |
@@ -1456,10 +1460,11 @@ claim to know which field the prose meant. Listed with the first few.
 | `docs/EXPLAIN.md` | 18 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
 | `docs/EXPLAIN.md` | 33 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
 | `docs/EXPLAIN.md` | 61 | `262` | 1 | `data/walk_forward/summary.json :: data_state.situation_knowable.n_events_with_none` |
+| `docs/EXPLAIN.md` | 99 | `0.29` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[1]` |
 | `docs/EXPLAIN.md` | 103 | `0.769` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[61].frozen`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[89].frozen` |
 | `docs/EXPLAIN.md` | 103 | `0.480` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.rps.spa.p_rc` |
-| `docs/EXPLAIN.md` | 130 | `0.64` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff` |
-| `docs/EXPLAIN.md` | 146 | `0.010` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.surface_vs_uniform.ci95[0]` |
+| `docs/EXPLAIN.md` | 130 | `0.64` | 2 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[1].p_ehw`<br>`data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[2].z_ehw` |
+| `docs/EXPLAIN.md` | 146 | `0.010` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[7].p_ehw` |
 | `docs/EXPLAIN.md` | 147 | `413` | 1 | `data/state/situation_knowable.json :: knowable_at_rules.c:coding_date(corpus-derived)` |
 | `docs/EXPLAIN.md` | 151 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
 | `docs/EXPLAIN.md` | 154 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
@@ -1473,11 +1478,10 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 29 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
 | `OPEN_ITEMS.md` | 29 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `OPEN_ITEMS.md` | 30 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
-| `OPEN_ITEMS.md` | 31 | `0.407` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.diagram[0].band95[1]` |
+| `OPEN_ITEMS.md` | 31 | `0.407` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_surface.dm.mean_diff` |
 | `OPEN_ITEMS.md` | 32 | `120` | 2 | `data/walk_forward/summary.json :: tiers.daily.M.M07_uniform_k12.tn`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[119].n` |
 | `OPEN_ITEMS.md` | 32 | `0.484` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_M13.2.diagram[2].forecast_mean` |
-| `OPEN_ITEMS.md` | 32 | `0.407` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_engine.2.diagram[0].band95[1]` |
-| `OPEN_ITEMS.md` | 37 | `1.1` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.structural_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 32 | `0.407` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_surface.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_surface.dm.mean_diff` |
 | `OPEN_ITEMS.md` | 43 | `54` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.n` |
 | `OPEN_ITEMS.md` | 43 | `184` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[183].n` |
 | `OPEN_ITEMS.md` | 54 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
@@ -1488,41 +1492,37 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 68 | `2.24` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].beta` |
 | `OPEN_ITEMS.md` | 69 | `−0.0473` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].skill_engine_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[22].skill_engine_vs_clim` |
 | `OPEN_ITEMS.md` | 69 | `−0.0828` | 2 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[12].skill_frozen_vs_clim`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.items_vs_climatology.M10_situation_2x_k12.ci95[1]` |
-| `OPEN_ITEMS.md` | 69 | `−0.13` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[0]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.5.structural_vs_uniform.ci95[0]` |
-| `OPEN_ITEMS.md` | 69 | `0.019` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_surface.ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.ci95[1]` |
-| `OPEN_ITEMS.md` | 70 | `7` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_surface`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
+| `OPEN_ITEMS.md` | 69 | `−0.0082` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.structural_vs_uniform.ci95[1]` |
+| `OPEN_ITEMS.md` | 69 | `−0.13` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[3].beta` |
+| `OPEN_ITEMS.md` | 69 | `0.19` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[0].p_ehw` |
+| `OPEN_ITEMS.md` | 70 | `7` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_surface` |
 | `OPEN_ITEMS.md` | 95 | `162` | 2 | `data/walk_forward/summary.json :: spec_curve.n_specs`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[161].n` |
 | `OPEN_ITEMS.md` | 103 | `60` | 1 | `data/structural_surface/summary.json :: availability_audit.situation_coded_rows` |
-| `OPEN_ITEMS.md` | 107 | `15` | 1 | `data/structural_surface/summary.json :: pool.min` |
+| `OPEN_ITEMS.md` | 107 | `15` | 3 | `data/structural_surface/summary.json :: pool.min`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `OPEN_ITEMS.md` | 111 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
 | `OPEN_ITEMS.md` | 111 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
 | `OPEN_ITEMS.md` | 111 | `−0.103` | 2 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_ehw`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[0].se_nw` |
 | `OPEN_ITEMS.md` | 112 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
-| `OPEN_ITEMS.md` | 112 | `−0.117` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_diff` |
 | `OPEN_ITEMS.md` | 112 | `87` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[86].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[86].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[86].n` |
 | `OPEN_ITEMS.md` | 112 | `0.751` | 2 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[62].engine`<br>`data/walk_forward/summary.json :: tiers.daily.G.learning_curve[64].frozen` |
-| `OPEN_ITEMS.md` | 112 | `0.659` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[66].climatology` |
+| `OPEN_ITEMS.md` | 112 | `0.659` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.conflict_escalation.mean_diff` |
 | `OPEN_ITEMS.md` | 113 | `26` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.infrastructure_attack` |
-| `OPEN_ITEMS.md` | 116 | `1.5` | 1 | `data/ripple/external_checks.json :: bh_inventory_demand_shock_on_pinksheet_crude.irf[6].se_ehw` |
 | `OPEN_ITEMS.md` | 118 | `+5.079` | 2 | `data/ripple/irf.json :: rows[218].irf[6].se_nw`<br>`data/ripple/irf.json :: rows[652].irf[2].se_nw` |
 | `OPEN_ITEMS.md` | 118 | `+9.364` | 1 | `data/ripple/irf.json :: rows[574].irf[2].hi95` |
-| `OPEN_ITEMS.md` | 119 | `0.030` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.10.structural_vs_uniform.dm.mean_diff` |
 | `OPEN_ITEMS.md` | 119 | `+2.071` | 1 | `data/grid/power_arithmetic.json :: price_panel.week_end.deff_per_cell.brent|h10.deff_bartlett` |
-| `OPEN_ITEMS.md` | 119 | `0.269` | 1 | `data/walk_forward/summary.json :: tiers.daily.G.murphy_climatology.2.diagram[0].observed_freq` |
+| `OPEN_ITEMS.md` | 119 | `0.269` | 2 | `data/structural_surface/summary.json :: ci95[1]`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.structural_vs_surface.ci95[1]` |
 | `OPEN_ITEMS.md` | 124 | `106` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[105].n` |
 | `OPEN_ITEMS.md` | 124 | `92` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[91].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[91].n` |
 | `OPEN_ITEMS.md` | 131 | `102` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[101].n` |
 | `OPEN_ITEMS.md` | 134 | `102` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[101].n` |
-| `OPEN_ITEMS.md` | 143 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `OPEN_ITEMS.md` | 144 | `+4.223` | 2 | `data/ripple/irf.json :: rows[762].irf[4].beta`<br>`data/ripple/irf.json :: rows[885].irf[5].se_ehw` |
-| `OPEN_ITEMS.md` | 144 | `−0.162` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.10.surface_vs_uniform.dm.mean_diff` |
+| `OPEN_ITEMS.md` | 144 | `−0.162` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.permutation.forecast_block.p_value`<br>`data/walk_forward/summary.json :: placebo.vs_climatology.estimator_iid_superseded.ci95[0]`<br>`data/walk_forward/summary.json :: regime_blocks.drop_2026.daily.G.ci95[0]` |
 | `OPEN_ITEMS.md` | 144 | `+8.609` | 1 | `data/ripple/irf.json :: rows[792].irf[3].lo90` |
 | `OPEN_ITEMS.md` | 150 | `187` | 3 | `data/walk_forward/summary.json :: data_state.n_geo`<br>`data/walk_forward/summary.json :: filtration_audit.checks.persistence_window`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[186].n` |
 | `OPEN_ITEMS.md` | 151 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `OPEN_ITEMS.md` | 151 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
 | `OPEN_ITEMS.md` | 157 | `11` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_structural` |
 | `OPEN_ITEMS.md` | 157 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
-| `OPEN_ITEMS.md` | 160 | `14` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_surface` |
 | `OPEN_ITEMS.md` | 160 | `20` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[5].h` |
 | `OPEN_ITEMS.md` | 163 | `16` | 1 | `data/structural_surface/summary.json :: availability_audit.event_vector_fields.max` |
 | `OPEN_ITEMS.md` | 164 | `324` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[323]` |
@@ -1534,7 +1534,7 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 172 | `13,554` | 3 | `data/grid/g/PANEL.json :: dIES.n_defined.n_eff_block`<br>`data/grid/g/PANEL.json :: effective_n.full_panel.n_eff_block`<br>`data/grid/g/PANEL.json :: size.cells.n_eff_block` |
 | `OPEN_ITEMS.md` | 172 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `OPEN_ITEMS.md` | 172 | `156` | 1 | `data/walk_forward/summary.json :: tiers.daily.P.learning_curve[155].n` |
-| `OPEN_ITEMS.md` | 173 | `4.5` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[6].z_ehw` |
+| `OPEN_ITEMS.md` | 173 | `4.5` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.dm.dm_hln` |
 | `OPEN_ITEMS.md` | 177 | `15,740` | 3 | `data/grid/g/PANEL.json :: admission_audit.cells_checked`<br>`data/grid/g/PANEL.json :: size.cells.nominal`<br>`data/grid/g/PANEL.json :: effective_n.reconciliation_with_B.G_panel.n_nominal_cells` |
 | `OPEN_ITEMS.md` | 178 | `861` | 1 | `data/grid/g/PANEL.json :: size.cells_dropped_by_VR3` |
 | `OPEN_ITEMS.md` | 181 | `21` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.n` |
@@ -1550,12 +1550,12 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 213 | `31` | 3 | `data/walk_forward/summary.json :: tiers.daily.G.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.P.learning_curve[30].n`<br>`data/walk_forward/summary.json :: tiers.daily.G.rps.learning_curve[30].n` |
 | `OPEN_ITEMS.md` | 214 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
 | `OPEN_ITEMS.md` | 214 | `12` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_surface` |
-| `OPEN_ITEMS.md` | 214 | `90.2%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
-| `OPEN_ITEMS.md` | 214 | `85.3%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
-| `OPEN_ITEMS.md` | 214 | `54.4%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.chokepoint_disruption.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
+| `OPEN_ITEMS.md` | 214 | `90.2%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 214 | `85.3%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 214 | `54.4%` | 3 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_diff`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.ci95[1]` |
 | `OPEN_ITEMS.md` | 216 | `357` | 1 | `data/candidates/pre1987_ranked.csv :: columns.rank[356]` |
-| `OPEN_ITEMS.md` | 217 | `86.8%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
-| `OPEN_ITEMS.md` | 218 | `88.4%` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.policy_response.mean_diff`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2000s.mean_diff` |
+| `OPEN_ITEMS.md` | 217 | `86.8%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 218 | `88.4%` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.5.surface_vs_uniform.dm.dm_hln` |
 | `OPEN_ITEMS.md` | 218 | `39` | 1 | `data/ripple/external_checks.json :: meta.shock_counts_daily_deoverlapped.policy_response` |
 | `OPEN_ITEMS.md` | 218 | `335` | 1 | `data/grid/g/PANEL.json :: by_year.2002.cells` |
 | `OPEN_ITEMS.md` | 225 | `1,200` | 3 | `data/walk_forward/summary.json :: power.G.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: power.P.n_required_for_skill.scan[7][0]`<br>`data/walk_forward/summary.json :: tiers.daily.G.experiment_delta.power.n_required_for_skill.scan[7][0]` |
@@ -1565,11 +1565,11 @@ claim to know which field the prose meant. Listed with the first few.
 | `OPEN_ITEMS.md` | 236 | `83` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.n` |
 | `OPEN_ITEMS.md` | 247 | `3.1` | 1 | `data/ripple/external_checks.json :: bh_supply_shock_on_pinksheet_crude.irf[3].hi95` |
 | `OPEN_ITEMS.md` | 263 | `13` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.demand_shock.n` |
-| `OPEN_ITEMS.md` | 265 | `1.2` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.structural_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 266 | `2.2` | 3 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[1].hi90`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[2].hi90`<br>`data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].beta` |
 | `OPEN_ITEMS.md` | 275 | `96.75%` | 1 | `data/ripple/external_checks.json :: kanzig_daily_pc_on_brent.irf[6].lo90` |
 | `OPEN_ITEMS.md` | 275 | `10` | 2 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_structural`<br>`data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2020s.mean_surface` |
-| `OPEN_ITEMS.md` | 287 | `4.4` | 1 | `data/structural_surface/summary.json :: diagnostics_non_verdict.raw.20.surface_vs_uniform.dm.dm` |
-| `OPEN_ITEMS.md` | 304 | `6.1` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_class.sanctions.mean_structural` |
+| `OPEN_ITEMS.md` | 287 | `4.4` | 2 | `data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.dm.dm`<br>`data/structural_surface/summary.json :: diagnostics_non_verdict.abnormal.20.surface_vs_uniform.dm.dm_hln` |
+| `OPEN_ITEMS.md` | 304 | `6.1` | 1 | `data/structural_surface/summary.json :: descriptive_non_verdict.by_decade.2010s.mean_structural` |
 
 ## EXCLUDED — not claims, and why
 

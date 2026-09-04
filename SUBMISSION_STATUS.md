@@ -6,7 +6,7 @@ The maintained research product contains one qualified finding, one reproducible
 
 ## Defensible finding
 
-On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.337 versus 8.782 for surface-class matching. The paired difference is −0.446 with 95% stationary-bootstrap interval [−0.623, −0.271]. Uniform pooling scores 8.392; structure’s −0.055 advantage over it has interval [−0.115, +0.006]. Therefore the result is that event-label filtering can discard useful precedents—not that the structural instrument has established forecasting skill beyond pooling.
+On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.341 versus 8.784 for surface-class matching. The paired difference is −0.444 with 95% stationary-bootstrap interval [−0.613, −0.269]. Uniform pooling scores 8.390; structure’s −0.049 advantage over it has interval [−0.112, +0.012]. Therefore the result is that event-label filtering can discard useful precedents—not that the structural instrument has established forecasting skill beyond pooling.
 
 ## Verified release gates
 

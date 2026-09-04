@@ -6,7 +6,7 @@ Joseph Delany · Colby College · 2026
 
 ## Abstract
 
-Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time structural state vector or by event-class identity. Structural weighting records mean CRPS 8.337 against 8.782 for surface matching (paired difference −0.446; 95% stationary-bootstrap interval [−0.623, −0.271]; DM *p*=1.57×10⁻⁶; 264 dates). But uniform pooling scores 8.392, and structure does not distinguishably beat it (difference −0.055; interval [−0.115, +0.006]; *p*=0.090). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
+Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time structural state vector or by event-class identity. Structural weighting records mean CRPS 8.341 against 8.784 for surface matching (paired difference −0.444; 95% stationary-bootstrap interval [−0.613, −0.269]; DM *p*=8.65×10⁻⁷; 264 dates). But uniform pooling scores 8.390, and structure does not distinguishably beat it (difference −0.049; interval [−0.112, +0.012]; *p*=0.140). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
 
 ## 1. Research question
 
@@ -18,9 +18,9 @@ The instrument is the experiment. Its state vector defines “structure”; its 
 
 The input bundle contains 313 events, 29,458 Brent observations, and 11,089 state observations. It is committed as CSV with hashes in `data/structural_surface/input/bundle_manifest.json`.
 
-The primary outcome is cumulative abnormal Brent log return from the event date through 20 trading days. Expected return is a constant mean estimated from up to 250 trading days ending 21 trading days before the event, with at least 100 observations required. This makes the outcome an event-window deviation from the prior market process rather than the raw movement of oil (`src/structural_surface_experiment.py:242`).
+The primary outcome is cumulative abnormal Brent log return over exactly 20 daily returns, from the last close before the event through the nineteenth trading observation on or after it. Expected return is a constant mean estimated from up to 250 trading days ending 21 trading days before the event, with at least 100 observations required. This makes the outcome an event-window deviation from the prior market process rather than the raw movement of oil (`src/structural_surface_experiment.py`, function `abnormal_outcome`).
 
-At each forecast date, both arms receive every prior, outcome-closed event with a usable target and at least three common strict state fields. There is no same-class eligibility filter. A state observation is eligible only when its observation date, vintage, and release date do not exceed the event date and it is not retrospective (`src/structural_surface_experiment.py:161`). Holding support fixed isolates weighting from candidate selection.
+At each forecast date, both arms receive every prior, outcome-closed event with a usable target and at least three common strict state fields. There is no same-class eligibility filter. A state observation is eligible only when its observation date, vintage, and release date do not exceed the event date and it is not retrospective (`src/structural_surface_experiment.py:103–112`, function `strict_panel_rows`). Holding support fixed isolates weighting from candidate selection.
 
 ## 3. Competing analogy rules
 
@@ -30,19 +30,19 @@ The primary score is weighted CRPS, a strictly proper score for predictive distr
 
 ## 4. Primary result
 
-There are 264 scored dates; 24 events have an unusable target and 25 lack the minimum pool of eight prior cases. Structural weighting scores 8.3366 and surface weighting 8.7824. Their paired difference is −0.4458, with interval [−0.6231, −0.2712] and *p*=1.57×10⁻⁶. Under the registered rule, structure beats surface.
+There are 264 scored dates; 24 events have an unusable target and 25 lack the minimum pool of eight prior cases. Structural weighting scores 8.3407 and surface weighting 8.7842. Their paired difference is −0.4435, with interval [−0.6130, −0.2687] and *p*=8.65×10⁻⁷. Under the registered rule, structure beats surface.
 
-The uniform diagnostic determines the interpretation. Pooling scores 8.3917. Structure is better by 0.0551 CRPS, but [−0.1152, +0.0057] crosses zero and *p*=0.0896. Surface is worse than uniform by 0.3906, [0.2158, 0.5720], *p*=3.31×10⁻⁵. Median effective sample size is 130.2 under structure and 28.7 under surface.
+The uniform diagnostic determines the interpretation. Pooling scores 8.3900. Structure is better by 0.0493 CRPS, but [−0.1120, +0.0121] crosses zero and *p*=0.1400. Surface is worse than uniform by 0.3942, [0.2224, 0.5698], *p*=1.43×10⁻⁵. Median effective sample size is 130.2 under structure and 28.7 under surface.
 
 Thus structural comparison preserves information class matching throws away. The experiment does not establish that structural weighting extracts reliable 20-day signal beyond the historical pool itself.
 
-Five- and ten-day outcomes were non-verdict diagnostics. At five days structure beats surface (−0.1767; *p*=0.0280) and uniform (−0.0687; *p*=0.0172). At ten days it beats surface (−0.1896; *p*=0.0456) but not uniform. They are not the headline.
+Five- and ten-day outcomes were non-verdict diagnostics. Neither distinguishes structure from surface or uniform after the exact-horizon correction. They are not the headline.
 
 ## 5. What the audit changed
 
-The earlier price walk forecast raw 20-day Brent returns (`src/engine/read.py:148`). That mixes event response with the ordinary market process. Target-only corrections gave different answers in two legacy designs, showing that target construction matters and those designs are not interchangeable. Neither replaces the direct experiment, and neither supplies an additional headline here.
+The earlier price walk forecast raw 20-day Brent returns (`src/engine/read.py:153–181`, methods `path` and `outcome`). That mixes event response with the ordinary market process. Target-only corrections gave different answers in two legacy designs, showing that target construction matters and those designs are not interchangeable. Neither replaces the direct experiment, and neither supplies an additional headline here.
 
-The earlier event walk admitted only same-class candidates (`src/engine/read.py:208`) and built climatology from that conditioned pool (`src/walk.py:262` in the audited version). It tested within-class reranking, not structural versus surface analogy. The central experiment removes that filter and holds support fixed.
+The earlier event walk admitted only same-class candidates (`src/engine/read.py:205–214`, method `pool`) and built climatology from that conditioned pool (`src/walk.py:257–266`). It tested within-class reranking, not structural versus surface analogy. The central experiment removes that filter and holds support fixed.
 
 The original “knowable at *t*” conclusion was not an availability test. Situation fields without a dated URL inherited their 2026 coding date (`src/situation_vintage.py:279` in the audited version), so they failed mechanically. The defensible statement is that availability could not be demonstrated. In the rebuilt input, only 671 of 11,029 panel-derived rows satisfy observation/vintage/release/non-retrospective rules. At least one strict panel field is available for 227 events, with median six usable fields among them. This is a feasibility and metadata finding, not proof that analysts lacked the information.
 

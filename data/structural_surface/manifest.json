@@ -1,15 +1,22 @@
 {
-  "generated_at": "2026-09-03T21:37:36.237226+00:00",
-  "execution_commit": "6b296b8b4e0e11a2446872f8302bb688352f557f",
-  "registration_commits": [
+  "generated_at": "2026-09-03T23:58:22.486984+00:00",
+  "execution_commit": "cbff0d0029915d7532e7b4c55963e11ca9b60f9e",
+  "initial_registration_commits": [
     "f38fd48250013e0023fed26a02cd8dbda78dfb41",
     "475737638cf2cf30e22bd31472e5e2a45e7d149e"
   ],
-  "implementation_commits": [
+  "initial_implementation_commits": [
     "47fdf3db81b017a1c7f24f52d3591ce38e5cc3e6",
     "132235c13218c8b5e52a0f5b9b4cb7df983f236b",
     "852b5840a717ca648bd8b3f3b602f35edfe2b480",
     "051b188937b5de94e967d2f180ef9d14054594d8"
+  ],
+  "corrections": [
+    {
+      "registration_commit": "07b760c6a262bf7618db240b68dc3143e88f3532",
+      "implementation_commit": "c2dacc4b56d74dcdc7d3412ef34110bf2b27dce4",
+      "reason": "Correct the primary target from 21 daily returns to the registered 20 returns."
+    }
   ],
   "inputs": {
     "bundle": {
@@ -22,12 +29,12 @@
     },
     "registration": {
       "path": "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
-      "sha256": "e800a397edf6e43a4498167d52e1695595d7db750d3be23a6832b704ab7aeae8"
+      "sha256": "39680072346da5318e0df18c809743c195a57de2e70c69f0576e75d1d336fa73"
     }
   },
   "outputs": {
-    "reads.jsonl": "050f9673b26b600c1a9b756d2f354adef971c3e7872bf5e55579133c04f39e88",
-    "scores.jsonl": "c780d92df5ca8e1b6f12104898489d0642bdeb6fce11fcbe00a0bd5e9c27607b",
-    "summary.json": "2d32b4d18a2d9c5908a08a6cb443b8ee8eb25093b3a3b0a45f0778f92902dba9"
+    "reads.jsonl": "1ff63e060c6295c753f5ad255497e764b00497c06ee0259ff92273785bab7531",
+    "scores.jsonl": "baf5c963938da8cd2f0e48d3e3da6a0eaaf8dff1dc3cae830aa4e2fc7b23aaca",
+    "summary.json": "4ea4ed04eaebc1900a53a9cb87996447775a79ca58972a930b2325396c0921cf"
   }
 }
