@@ -54,6 +54,13 @@ counts, the four-way decomposition of exclusion reasons, and which fields surviv
 **No outcome, loss, CRPS, difference or contrast under any relaxed rule has been computed by
 anyone.** The frozen experiment's own losses were read, but those are already published.
 
+Added 2026-09-03 after Amendment 1, and descriptive only: under Amendment 1's admission rule and
+frozen allowlist, **5,742 of 11,089 committed state rows are admitted** (the frozen strict rule
+admits 671), covering **all 313 events**, every one of them clearing `MIN_FIELDS = 3`, with a
+median of **15** allowlisted non-market fields per event. This is a count of admitted rows and
+touches no outcome. It is recorded here because power is a pre-registration concern and because
+knowing the arm is executable is not the same as knowing which way it falls.
+
 ## Fixed design
 
 Identical to the frozen experiment in every respect except the availability rule. Specifically
