@@ -9,6 +9,7 @@ def test_demo_is_one_verified_frozen_read_and_never_the_average_evidence():
     assert "single frozen historical read" in text
     assert "all 264 inferential dates" in text
     assert "not from this example" in text
+    assert "uniform pooling scored best overall" in text
 
 
 def test_demo_arms_have_identical_candidates_and_forecast_atoms():

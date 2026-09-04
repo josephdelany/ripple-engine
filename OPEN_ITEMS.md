@@ -1,4 +1,6 @@
-# Open items — the complete register
+> **ARCHIVED LEGACY REGISTER — NOT CURRENT PROJECT STATUS.** This file tracks the superseded six-week engine. Several predicted corrections below have since been run, including source-event-clustered placebo inference, and their outcomes differ from the predictions recorded here. Current release status is in [`SUBMISSION_STATUS.md`](SUBMISSION_STATUS.md).
+
+# Open items — historical register
 
 *2026-09-03. Everything outstanding, in one place, ranked by whether it changes a published
 sentence. Sources: `docs/red_team_2.md`, the session handoffs in `data/handoffs/`,

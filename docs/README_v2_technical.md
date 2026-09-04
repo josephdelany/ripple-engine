@@ -1,3 +1,5 @@
+> **SUPERSEDED TECHNICAL README.** Links and claims below describe the archived legacy engine. Use [`../README.md`](../README.md) and [`PAPER.md`](PAPER.md) for the maintained project.
+
 # Historical analogy in geopolitical and oil-market forecasting
 
 **Can historical precedent be turned into a systematic, point-in-time forecasting tool for

@@ -1,3 +1,5 @@
+> **HISTORICAL AUDIT SNAPSHOT — SUPERSEDED AS CURRENT STATUS.** This file records the audit state before the maintained structural-versus-surface experiment and later repository-wide closure. Its present-tense coverage and “central finding” statements are not current. Use [`PUBLIC_PRODUCT_CLOSURE.md`](PUBLIC_PRODUCT_CLOSURE.md), [`../PAPER.md`](../PAPER.md), and [`../../SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md). `docs/EVENTS_CODEBOOK.md` now exists.
+
 # Consolidated audit findings — all passes, one document
 
 *2026-09-03. Supersedes `docs/EXTERNAL_REVIEW_2026-09-03.md` and `docs/SYSTEM_AUDIT_2026-09-03.md`,

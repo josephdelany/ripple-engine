@@ -417,7 +417,7 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
     if len(a) < 30:
         verdict = "INSUFFICIENT"
     elif est is not None and est < 0 and lo is not None and hi < 0 and p is not None and p < 0.05:
-        verdict = "STRUCTURE ADDS INFORMATION"
+        verdict = "STRUCTURAL OUTPERFORMS SURFACE-CLASS WEIGHTING"
     elif est is not None and est > 0 and lo is not None and lo > 0 and p is not None and p < 0.05:
         verdict = "SURFACE PERFORMS BETTER"
     else:
@@ -447,6 +447,15 @@ def run(db=DB, bundle=None, out_dir=OUT, n_boot=2000):
                 "structural_vs_uniform": paired_block(aa, uu, dates, n_boot),
                 "surface_vs_uniform": paired_block(bb, uu, dates, n_boot)}
     summary["diagnostics_non_verdict"] = diagnostics
+    pool_cmp = diagnostics["abnormal"]["20"]["structural_vs_uniform"]
+    pool_lo, pool_hi = pool_cmp["ci95"]
+    pool_p = pool_cmp["dm"].get("p_value")
+    if pool_cmp["mean_diff"] < 0 and pool_hi < 0 and pool_p is not None and pool_p < 0.05:
+        summary["pooling_comparison"] = "STRUCTURAL OUTPERFORMS UNIFORM"
+    elif pool_cmp["mean_diff"] > 0 and pool_lo > 0 and pool_p is not None and pool_p < 0.05:
+        summary["pooling_comparison"] = "UNIFORM OUTPERFORMS STRUCTURAL"
+    else:
+        summary["pooling_comparison"] = "NOT DISTINGUISHABLE FROM UNIFORM"
     def descriptive(rows):
         return {"n": len(rows),
                 "mean_structural": float(np.mean([x["structural_crps"] for x in rows])),

@@ -58,10 +58,12 @@ def render(event_id=DEFAULT_EVENT):
             z = x["event"]
             lines.append(f"| {x['weight']:.3f} | {z['event_date']} | `{z['type']}` | {z['title']} | {x['atom']:+.2f}% |")
         lines.append("")
-    winner = "structural" if s["structural_crps"] < s["surface_crps"] else "surface"
+    surface_winner = "structural" if s["structural_crps"] < s["surface_crps"] else "surface"
+    overall = min((s[f"{arm}_crps"], arm) for arm in ("structural", "surface", "uniform"))[1]
+    overall_label = "uniform pooling" if overall == "uniform" else overall
     lines += ["## Resolution", "", f"Realized +20-day abnormal Brent return: **{s['outcome']:+.2f}%**.", "",
               f"CRPS: structural **{s['structural_crps']:.3f}**, surface **{s['surface_crps']:.3f}**, "
-              f"uniform pooling **{s['uniform_crps']:.3f}** (lower is better). The **{winner}** arm scored better on this case.", "",
+              f"uniform pooling **{s['uniform_crps']:.3f}** (lower is better). **{surface_winner.capitalize()}** beat the other analogy arm; **{overall_label}** scored best overall.", "",
               "This one read demonstrates mechanics and auditability. The project-level conclusion comes from all 264 "
               "inferential dates in `data/structural_surface/summary.json`, not from this example.", ""]
     return "\n".join(lines)

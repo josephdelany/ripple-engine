@@ -107,6 +107,12 @@ def test_frozen_manifest_names_every_reproducible_scientific_output():
     assert (M.OUT / "input" / "bundle_manifest.json").exists()
 
 
+def test_machine_verdict_names_both_relevant_comparators():
+    summary = json.loads((M.OUT / "summary.json").read_text())
+    assert summary["verdict"] == "STRUCTURAL OUTPERFORMS SURFACE-CLASS WEIGHTING"
+    assert summary["pooling_comparison"] == "NOT DISTINGUISHABLE FROM UNIFORM"
+
+
 def test_frozen_manifest_distinguishes_registration_implementation_and_execution():
     manifest = json.loads((M.OUT / "manifest.json").read_text())
     assert manifest["initial_registration_commits"] == M.INITIAL_REGISTRATION_COMMITS
