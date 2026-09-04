@@ -2,7 +2,7 @@
 
 ## Release decision
 
-The maintained research product contains one qualified finding, one reproducible central experiment, one registered explanatory ablation, one methods paper, and one instrument demonstration. This revision is a release candidate until every gate below is rerun from a clean checkout and a replacement release tag is created.
+The maintained research product contains one qualified finding, one reproducible central experiment, one registered explanatory ablation, one methods paper, and one instrument demonstration. This revision is the verified v2.0.1 release.
 
 ## Defensible finding
 
@@ -13,7 +13,7 @@ On 264 walk-forward forecast dates from 2001-09-11 through 2026-06-17, the origi
 - `make verify-submission`: passed on the release candidate and in a detached clean worktree.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
 - Pre-separation archive receipt: the complete historical tree passed 1,038 tests, explicitly skipped 13 condition-dependent tests, recorded 1 expected failure, and had zero unexpected failures. It is preserved at `full-research-archive-2026-09-03`.
-- Current public tree: all 57 retained tests pass with zero skips or expected failures. A fresh detached-worktree receipt will be recorded before tagging v2.0.1.
+- Current public tree and detached clean worktree: all 57 retained tests pass with zero skips or expected failures.
 - Public claims match the frozen central and ablation summaries.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.
