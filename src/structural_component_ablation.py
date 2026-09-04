@@ -22,7 +22,7 @@ OUT = ROOT / "data" / "structural_surface" / "ablation"
 REGISTRATION = ROOT / "registrations" / "STRUCTURAL_COMPONENT_ABLATION.md"
 FROZEN_RELEASE_COMMIT = "1705713b801d7ffc48d7cc39adb5a802b613157c"
 REGISTRATION_COMMIT = "75a280fb01452811ccc33c4a33f68967919fc149"
-IMPLEMENTATION_COMMIT = None  # Filled after the implementation commit and before publication run.
+IMPLEMENTATION_COMMIT = "0d2a5a3123f371420a397f58e5ba4b0046325fde"
 TOL = 1e-8
 
 
