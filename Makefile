@@ -57,7 +57,7 @@ reproduce-ablation:
 # The maintained fast public-product check. The complete research suite remains available with
 # `python3 -m pytest -q` and includes loaders and guards for superseded publications.
 test-public:
-	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_structural_component_ablation.py tests/test_paper_field_composition.py tests/test_public_claim_guard.py tests/test_verify_submission.py tests/test_bundle_provenance.py tests/test_doc_status_guard.py
+	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_structural_component_ablation.py tests/test_paper_field_composition.py tests/test_public_claim_guard.py tests/test_verify_submission.py tests/test_bundle_provenance.py tests/test_doc_status_guard.py tests/test_unused_data_inventory.py
 	$(PY) src/public_claim_guard.py
 
 # Complete repository suite; this and plain `pytest -q` are the release gate.

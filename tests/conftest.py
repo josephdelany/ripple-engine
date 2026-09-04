@@ -76,6 +76,7 @@ DB_FREE_FILES = {
     "test_structural_surface_demo.py",
     "test_bundle_provenance.py",
     "test_doc_status_guard.py",
+    "test_unused_data_inventory.py",
 }
 
 

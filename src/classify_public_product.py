@@ -22,6 +22,7 @@ CORE = {
     "tests/test_public_claim_guard.py", "tests/test_verify_submission.py",
     "tests/test_paper_field_composition.py",
     "tests/test_bundle_provenance.py", "tests/test_doc_status_guard.py",
+    "tests/test_unused_data_inventory.py",
     "docs/audit/FILE_CLASSIFICATION.csv",
 }
 DEPENDENCY = {"src/engine/inference.py", "src/engine/scoring.py",

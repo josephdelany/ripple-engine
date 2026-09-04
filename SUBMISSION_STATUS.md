@@ -12,7 +12,7 @@ On 264 walk-forward forecast dates, the original combined-state arm scores mean 
 
 - `make verify-submission`: must be rerun on this release candidate.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
-- Populated research environment: default `pytest -q` passed 1,033 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
+- Populated research environment: default `pytest -q` passed 1,038 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
 - Clean committed checkout: exact reproduction passed; 348 deterministic tests passed, 619 database-dependent and 52 other condition-dependent tests were explicitly skipped, and zero tests failed. This is not presented as full integration coverage because the gitignored research database cannot be reconstructed from the repository alone.
 - Public claims match the frozen central and ablation summaries.
 - Local links in authoritative documents resolve.
