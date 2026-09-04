@@ -29,7 +29,7 @@
   },
   "mean_block": 3.8823529411764706,
   "n_boot": 2000,
-  "verdict": "STRUCTURE ADDS INFORMATION",
+  "verdict": "STRUCTURAL OUTPERFORMS SURFACE-CLASS WEIGHTING",
   "pool": {
     "min": 15,
     "median": 160.5,
@@ -471,6 +471,7 @@
       }
     }
   },
+  "pooling_comparison": "NOT DISTINGUISHABLE FROM UNIFORM",
   "descriptive_non_verdict": {
     "by_class": {
       "chokepoint_disruption": {

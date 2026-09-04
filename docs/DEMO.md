@@ -36,7 +36,7 @@ Forecast abnormal-return distribution: p25 -6.16%, median -1.52%, p75 +5.02% (we
 
 Realized +20-day abnormal Brent return: **+42.46%**.
 
-CRPS: structural **37.876**, surface **38.971**, uniform pooling **37.309** (lower is better). The **structural** arm scored better on this case.
+CRPS: structural **37.876**, surface **38.971**, uniform pooling **37.309** (lower is better). **Structural** beat the other analogy arm; **uniform pooling** scored best overall.
 
 This one read demonstrates mechanics and auditability. The project-level conclusion comes from all 264 inferential dates in `data/structural_surface/summary.json`, not from this example.
 

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T23:58:22.486984+00:00",
-  "execution_commit": "cbff0d0029915d7532e7b4c55963e11ca9b60f9e",
+  "generated_at": "2026-09-04T01:40:42.842226+00:00",
+  "execution_commit": "b912d79bfa47742e20b43407af9a6016f367c3dd",
   "initial_registration_commits": [
     "f38fd48250013e0023fed26a02cd8dbda78dfb41",
     "475737638cf2cf30e22bd31472e5e2a45e7d149e"
@@ -16,6 +16,11 @@
       "registration_commit": "07b760c6a262bf7618db240b68dc3143e88f3532",
       "implementation_commit": "c2dacc4b56d74dcdc7d3412ef34110bf2b27dce4",
       "reason": "Correct the primary target from 21 daily returns to the registered 20 returns."
+    },
+    {
+      "registration_commit": "75a280fb01452811ccc33c4a33f68967919fc149",
+      "implementation_commit": "509cf5a0198b4675d2f6269a631e16fbebfa07c3",
+      "reason": "Rename the machine verdict to name its surface comparator and report pooling separately."
     }
   ],
   "inputs": {
@@ -29,12 +34,12 @@
     },
     "registration": {
       "path": "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
-      "sha256": "39680072346da5318e0df18c809743c195a57de2e70c69f0576e75d1d336fa73"
+      "sha256": "4039fefeb64465dc0a038857473b953cf7bdc466c3b22fbc2a4acb355154c81c"
     }
   },
   "outputs": {
     "reads.jsonl": "1ff63e060c6295c753f5ad255497e764b00497c06ee0259ff92273785bab7531",
     "scores.jsonl": "baf5c963938da8cd2f0e48d3e3da6a0eaaf8dff1dc3cae830aa4e2fc7b23aaca",
-    "summary.json": "4ea4ed04eaebc1900a53a9cb87996447775a79ca58972a930b2325396c0921cf"
+    "summary.json": "589deaeb881eb8e0548e1986a542c4cc2f27d71bdcae003638cd7f79bba63af9"
   }
 }

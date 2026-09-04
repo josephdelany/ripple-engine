@@ -1,0 +1,19 @@
+{
+  "frozen_release_commit": "1705713b801d7ffc48d7cc39adb5a802b613157c",
+  "registration_commit": "75a280fb01452811ccc33c4a33f68967919fc149",
+  "implementation_commit": "0d2a5a3123f371420a397f58e5ba4b0046325fde",
+  "execution_commit": "49dabdeb1f154195d32bbca8046d702d4fe9b015",
+  "inputs": {
+    "data/structural_surface/reads.jsonl": "1ff63e060c6295c753f5ad255497e764b00497c06ee0259ff92273785bab7531",
+    "data/structural_surface/scores.jsonl": "baf5c963938da8cd2f0e48d3e3da6a0eaaf8dff1dc3cae830aa4e2fc7b23aaca"
+  },
+  "registration": {
+    "path": "registrations/STRUCTURAL_COMPONENT_ABLATION.md",
+    "sha256": "30362a4b862b5428c5d2308d2f552e17bb1a80e68040bef6722428928f80de33"
+  },
+  "outputs": {
+    "scores.jsonl": "3a4d93d604a400935f5309483b7b6a8681e8f3d06bc6c4b034a455f22430bed1",
+    "summary.json": "b32339bef60fd069ae685ed9d4be41c5a94eddeb256b2e1cd6d71d84f078bbcd"
+  },
+  "note": "manifest.json cannot contain its own hash"
+}
