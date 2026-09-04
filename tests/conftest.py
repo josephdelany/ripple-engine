@@ -27,6 +27,12 @@ os.environ.setdefault("RIPPLE_READER", "off")
 # Test files that run WITHOUT a built oil.db (pure logic / committed-artifact reads). Verified: these
 # pass on a fresh checkout with no database. They are the deterministic CI gate.
 DB_FREE_FILES = {
+    # v3 disruption foundation: reads only the committed, redistributable PortWatch slice under
+    # data/v3/ plus synthetic series. It never opens oil.db -- tests/test_disruption_blinding.py
+    # proves that mechanically -- so it must run in a clean checkout, or v3's independent
+    # reproducibility claim in docs/V3_STATUS.md would be false.
+    "test_disruption_episodes.py", "test_disruption_blinding.py",
+    "test_disruption_provenance.py", "test_disruption_linkage.py",
     "test_admission_rule.py", "test_corroboration.py", "test_edge_battery.py", "test_engine.py",
     "test_enrichment.py", "test_evaluate.py", "test_living_engine.py", "test_restore.py",
     "test_ripple_fetch.py", "test_ripple_lp.py",
