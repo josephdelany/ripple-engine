@@ -237,3 +237,26 @@ two proportions in §17.
 **Not tested:** anything causal; whether an event *caused* a decline; whether a decline moved any
 price; whether declarations outside this catalogue exist; whether counts track volumes; whether
 these routes represent global oil transport; whether the result generalises beyond 2020–2026.
+
+---
+
+## Amendment 1 — episode-duration reading (2026-09-04, before the first detector run)
+
+**No episode, linkage or price quantity has been computed under this registration at the time of
+this amendment.**
+
+§9 says "5 consecutive impaired days" while §10 permits up to 2 non-impaired days inside an
+episode. Read strictly together these conflict: a run containing a tolerated gap has no 5
+*consecutive* impaired days. The ambiguity is resolved now, before any output exists, rather than
+after seeing which reading gives more episodes.
+
+**Registered reading.** An episode is a maximal run of route-days bounded by more than `MAX_GAP`
+consecutive non-impaired days (§11). It **qualifies** when it contains **at least 5 impaired days
+in total**, whether or not those days are strictly contiguous. Both counts are published for every
+episode: `n_impaired_days` (the qualifying count) and `duration_days` (the calendar span from first
+to last impaired day).
+
+This is the more permissive of the two readings and is chosen for that reason: it cannot suppress a
+real disruption that briefly rebounded, and the stricter reading is recoverable from the published
+columns by filtering on `n_impaired_days == duration_days`. The nine-cell sensitivity grid in §8
+varies the minimum against this same definition.
