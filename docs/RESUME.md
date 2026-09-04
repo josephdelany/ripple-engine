@@ -1,22 +1,52 @@
 # Verified résumé and interview language
 
-This is the only current application document for the project. Every quantitative statement below is tied to `data/structural_surface/summary.json` or `data/structural_surface/ablation/summary.json`. Do not copy claims from `docs/RESUME_AND_APPLICATION.md`, which describes a superseded experiment.
+The only current application document for this project. Every quantitative statement is tied to a
+committed artifact under `data/structural_surface/` or `data/v3/`, and a test fails if this
+document stops matching them.
+
+## Summary
+
+Two independent, preregistered studies of how geopolitical events relate to oil markets — one
+comparing methods of historical analogy, one measuring physical disruption directly from vessel
+traffic. Both reproduce byte-for-byte from committed inputs and both carry a complete audit trail
+of what was withdrawn along the way.
 
 ## Recommended résumé entry
 
-**Independent Research — Testing Historical Analogy in Geopolitical Oil Markets**
-Built and audited a registered walk-forward experiment testing market-state and event-label analogy rules using a 313-event catalogue (1973–2026) and 264 scored daily forecasts (2001–2026).
+**Independent Research — Historical Analogy and Physical Disruption in Oil Markets**
+Designed, preregistered and audited two walk-forward studies over a 313-event geopolitical
+catalogue (1973–2026) and 58,779 daily vessel-transit observations (2019–2026).
 
-- Constructed a point-in-time research pipeline that seals forecasts before outcome attachment and reproduces its central artifacts byte-for-byte from a committed input bundle.
-- In a registered concentration-matched ablation across 264 forecast dates, market-state matching improved mean CRPS from 8.422 to 8.286 versus event-class matching (difference −0.136; 95% bootstrap interval [−0.234, −0.038]; Holm-adjusted *p*=0.013).
-- Reported that the registered event-level nonmarket aggregation did not improve on market state (difference +0.051; interval [−0.001, +0.118]; Holm-adjusted *p*=0.114), while explicitly withholding any conclusion about relational geopolitics because multi-actor values were averaged and dyadic coverage was nearly absent.
-- Mechanically classified every tracked repository file, audited the components behind the central claims, and rebuilt the main experiment after identifying mismatches among the intended estimand, candidate pool, outcome definition, and recorded data availability.
+- **Built a point-in-time forecasting pipeline** that seals every forecast by SHA-256 before its
+  outcome is attached and rebuilds its results byte-for-byte from a committed input bundle.
+- **Found that market-state matching outperforms event-label matching** at equal forecast
+  concentration across 264 scored dates: mean CRPS 8.286 versus 8.422, difference −0.136 (95%
+  bootstrap interval [−0.234, −0.038]; Holm-adjusted *p*=0.013) — evidence that narrowing
+  historical precedent by headline category discards useful information.
+- **Built a preregistered, event-blind detector** for physical chokepoint impairment from IMF
+  PortWatch data, with automated tests proving it cannot read the event catalogue or any price
+  series. Blind to both, it independently recovered the Ever Given grounding, the Red Sea crisis
+  at two chokepoints, the Panama Canal drought and a Hormuz closure.
+- **Found that 33% of detected disruption falls outside the geopolitical record entirely** — 13 of
+  39 impairment episodes, including a 51-day Panama Canal episode, occur on routes with no
+  corresponding event in a 313-event catalogue.
+- **Ran an adversarial audit against my own results**, withdrawing three published claims when the
+  code was found to compute a different quantity from the prose, and reporting one intended
+  analysis as not identifiable rather than publishing a number that could not be defended.
 
-If space permits only two bullets, use the first two. Keep the limitation in the interview explanation.
+- **Reported the accompanying null as prominently as the result**: adding the available non-market
+  state did not improve on market state alone (difference +0.051; interval [−0.001, +0.118];
+  Holm-adjusted *p*=0.114), and no method beat uniform historical pooling.
+
+If space allows only two bullets, use the second and fourth: they are the two findings. Keep the
+fifth if the reader is technical — reporting the null is the point, not an apology for it.
 
 ## One-line version
 
-Built a registered geopolitical-analogy experiment showing that recent market-state matching outperformed event-class matching at equal forecast concentration across 264 oil-market forecasts (2001–2026).
+Built two preregistered studies of geopolitical shocks in oil markets: one showing that market
+context outperforms event-label matching for selecting historical precedent, one measuring
+physical chokepoint disruption directly and finding a third of it absent from the geopolitical
+record.
 
 ## Thirty-second interview explanation
 
