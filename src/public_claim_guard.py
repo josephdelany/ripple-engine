@@ -94,6 +94,9 @@ def violations():
         "beats simple baselines", "predicts oil prices", "validated forecasting skill",
         "structural analogy is validated", "proved historical analogies work",
         "full observable state outperforms", "full geopolitical state outperforms",
+        "non-market state does not add demonstrated value",
+        "nonmarket state does not add demonstrated value",
+        "additional structural information has not yet shown value",
     )
     problems = []
     for name, body in docs.items():
@@ -117,6 +120,11 @@ def violations():
             for phrase in prohibited:
                 if phrase in lower:
                     problems.append(f"{name}: prohibited overclaim {phrase!r}")
+        # Every quantitative public narrative must carry the newly verified boundary: the
+        # nonmarket contrast uses event-level aggregation and is not a test of relational state.
+        lower = body.lower()
+        if "aggregation" not in lower or "relational" not in lower:
+            problems.append(f"{name}: missing relational-aggregation qualification")
     return problems
 
 

@@ -1,6 +1,6 @@
 # The reproducibility boundary
 
-*2026-09-03. What a reader of this repository can verify for themselves, and where that stops.
+*Updated 2026-09-04. What a reader of this repository can verify for themselves, and where that stops.
 Every number below is produced by `python3 src/bundle_provenance.py` or by the command printed
 beside it, against committed files.*
 
@@ -98,8 +98,10 @@ for (f,s),n in collections.Counter((r['field'],r['source']) for r in rows if r['
 ## Relationship to the availability finding
 
 This is a different statement from the paper's §5 availability result, and the two are often
-confused. §5 says that only 671 of 11,029 panel-derived rows can *demonstrate* they were knowable
-at their event date — a property of the recorded metadata. This document says the *CSV bundle
-itself* cannot be rebuilt from its sources by anyone but its author. One is about what the
-forecaster could have known; the other is about what a reader can re-run. Both are limits, and
-neither implies the other.
+confused. §5 says that only 671 of 11,029 panel-derived rows satisfy the registered conservative
+observation/vintage/release/non-retrospective rule. For modern retrospective dataset files,
+`release <= event_date` tests whether that particular file predates the event, not whether an
+equivalent fact appeared in a contemporaneous publication. This document instead says the *CSV
+bundle itself* cannot be rebuilt from its upstream sources. One is an availability-rule and
+metadata limitation; the other is a reproduction limitation. Both are boundaries, and neither
+proves what a historical analyst actually knew.

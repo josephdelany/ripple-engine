@@ -116,8 +116,8 @@ carries observations from 1946→, and `vintage = release date` means the engine
 2001-09-11 sees nothing — the opposite of what WORLD_STATE_FRAMEWORK §7 expects
 ("CINC 2000, Polity 2000, SIPRI 2000 ... with vintages ≤ that day"). Seen in the
 first run and rejected as a definition error. Replaced by two dates on every row:
-- **`vintage`** = the date the value became *knowable* under the dataset's own
-  publication convention, stated per loader: a daily market print on its date; a
+- **`vintage`** = the date the value was *nominally available* under the loader's
+  schedule convention, not an independently verified contemporaneous publication receipt: a daily market print on its date; a
   monthly index on the first day of the following month; an annual value on
   1 January of the following year; an event-resolution value (crisis outcome,
   leader change, dispute) on the day after the event ends. Never null.
@@ -130,3 +130,9 @@ first run and rejected as a definition error. Replaced by two dates on every row
   retrospective fields; a retrospective field alone can never make a read
   VALIDATED.
 The engine at t reads `vintage ≤ t` (unchanged). WS-R2..R5 unchanged.
+
+**Later audit qualification (2026-09-04).** For the public experiment, `vintage <= t` excludes
+none of the 11,029 panel rows, while `release <= t` excludes 10,150. The former is therefore too
+permissive to prove historical knowability and the latter can be too conservative when `release`
+is the date of a modern retrospective file. A future experiment needs source-specific publication
+receipts; neither generic column should be described as ground truth about what an analyst knew.

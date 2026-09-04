@@ -4,17 +4,30 @@ When analysts choose historical precedents, does recent market state carry more 
 
 This repository’s authoritative result is a registered walk-forward experiment and a separately registered explanatory ablation on 313 dated geopolitical and oil-policy events. Every method receives exactly the same prior-event pool and forecasts Brent’s 20-trading-day abnormal return; only the weighting rule changes.
 
+The catalogue spans 1973–2026, but the scored daily backtest does not: its 264 forecast dates run
+from 2001-09-11 through 2026-06-17, and 147 (55.7%) fall in the 2020s. This is a recent-era daily
+experiment, not a 53-year quantitative backtest.
+
 ## Result
 
-Across 264 scored forecast dates, structural weighting had mean CRPS **8.341**, versus **8.784** for surface-class weighting. The paired difference was **−0.444** (95% stationary-bootstrap interval **[−0.613, −0.269]**; Diebold–Mariano *p* = **8.65×10⁻⁷**).
+Across 264 scored forecast dates, the registered combined-state weighting had mean CRPS **8.341**, versus **8.784** for surface-class weighting. The paired difference was **−0.444** (95% stationary-bootstrap interval **[−0.613, −0.269]**; Diebold–Mariano *p* = **8.65×10⁻⁷**).
 
-That result has an essential qualification. Uniform pooling scored **8.390**. Structural weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**). The original surface arm was also much more concentrated: median effective sample size 28.7 versus 130.2.
+That result has an essential qualification. Uniform pooling scored **8.390**. Combined-state weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**). The original surface arm was also much more concentrated: median effective sample size 28.7 versus 130.2.
 
-A registered follow-up matched market-state, combined-state, and event-class weights to the same effective sample size. Market-state matching scored **8.286** against **8.422** for class matching: difference **−0.136**, 95% interval **[−0.234, −0.038]**, Holm-adjusted *p* = **0.013**. Adding the available leadership/dyadic fields did not improve on market-only matching: difference **+0.051**, interval **[−0.001, +0.118]**, Holm-adjusted *p* = **0.114**.
+A registered follow-up matched market-state, combined-state, and event-class weights to the same effective sample size. Market-state matching scored **8.286** against **8.422** for class matching: difference **−0.136**, 95% interval **[−0.234, −0.038]**, Holm-adjusted *p* = **0.013**. Under the registered event-level aggregation, adding the sparse leadership/dyadic fields scored **+0.051** worse than market-only matching (interval **[−0.001, +0.118]**; Holm-adjusted *p* = **0.114**). That contrast does not test properly represented relational geopolitics: numeric values for multiple event entities were averaged before comparison.
 
-> Recent oil-market state outperforms event class as an analogy rule at equal concentration. The available non-market state does not add demonstrated value, and no arm establishes production forecasting skill.
+> Recent oil-market state outperforms event class as an analogy rule at equal concentration. No arm establishes production forecasting skill, and the experiment does not determine whether role-preserving geopolitical structure adds value.
 
-Note what that question is not. The project set out to ask whether correspondence across the wider geopolitical state beats matching on labels, and it cannot answer that. The strict point-in-time rule leaves the “structural” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. So what was tested is a market-and-leadership state against event labels; full structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
+Note what that question is not. The project set out to ask whether correspondence across the wider geopolitical state beats matching on labels, and it cannot answer that. The registered file-release rule leaves the “combined-state” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. Multi-entity numeric values are also averaged into a single event value, erasing actor roles. So what was tested is market state, sometimes augmented by an event-level leadership aggregate, against event labels; full relational structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
+
+## Why it matters
+
+The result separates three claims that commentary often conflates. A method can outperform
+headline-category matching without demonstrating useful prediction; an apparent analogy advantage
+can largely reflect how concentrated its weights are; and a model called “structural” tests only
+the structure that its data representation actually preserves. The contribution is therefore both
+substantive—market context beats event class in the matched comparison—and methodological: analogy
+rules should be tested on identical support, at equal concentration, against unrestricted pooling.
 
 Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. The decisions are frozen in the [central registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) and [ablation registration](registrations/STRUCTURAL_COMPONENT_ABLATION.md).
 
@@ -68,7 +81,7 @@ the distinct verification receipts for the historical and public trees.
 
 ## Scope and integrity
 
-The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare structural and surface analogy on identical support, with point-in-time eligibility and an abnormal-return target.
+The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare registered combined-state and surface-class weighting on identical support, with point-in-time eligibility and an abnormal-return target.
 
 License: [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
 

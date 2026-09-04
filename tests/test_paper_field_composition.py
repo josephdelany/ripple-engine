@@ -11,6 +11,7 @@ to the registered component ablation (`registrations/STRUCTURAL_COMPONENT_ABLATI
 a guard on the prose, not a second copy of that analysis.
 """
 import collections
+import csv
 import json
 from pathlib import Path
 
@@ -19,6 +20,8 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 READS = ROOT / "data" / "structural_surface" / "reads.jsonl"
 PAPER = ROOT / "docs" / "PAPER.md"
+EVENTS = ROOT / "data" / "structural_surface" / "input" / "events.csv"
+STATE = ROOT / "data" / "structural_surface" / "input" / "situation_state.csv"
 
 
 @pytest.fixture(scope="module")
@@ -32,8 +35,11 @@ def composition():
     reads = 0
     all_market_only_reads = 0
     combinations = set()
+    dates = []
     for line in READS.open(encoding="utf-8"):
-        detail = json.loads(line)["structural"]["detail"]
+        read = json.loads(line)
+        detail = read["structural"]["detail"]
+        dates.append(read["date"])
         reads += 1
         every = bool(detail)
         for d in detail:
@@ -50,7 +56,8 @@ def composition():
             all_market_only_reads += 1
     return {"fields": fields, "blocks": blocks, "comparisons": comparisons,
             "market_only": market_only, "reads": reads,
-            "all_market_only_reads": all_market_only_reads, "combinations": combinations}
+            "all_market_only_reads": all_market_only_reads, "combinations": combinations,
+            "dates": dates}
 
 
 def test_frozen_reads_have_the_composition_the_paper_reports(composition):
@@ -124,3 +131,48 @@ def test_two_independent_implementations_agree_on_the_composition(composition):
     assert audit["field_counts"] == dict(c["fields"])
     assert audit["containing_actors"] == c["blocks"]["actors"]
     assert audit["containing_dyads_or_other"] == c["blocks"]["dyads"]
+
+
+def _multi_entity_cells(rows):
+    grouped = collections.defaultdict(set)
+    for row in rows:
+        grouped[(row["event_id"], row["field"])].add(row["entity_id"])
+    return grouped, sum(len(entities) >= 2 for entities in grouped.values())
+
+
+def test_paper_discloses_the_relational_aggregation_boundary():
+    """The event reducer averages actors; the paper must quantify and interpret that loss."""
+    events = {r["event_id"]: r["event_date"] for r in csv.DictReader(EVENTS.open())}
+    rows = list(csv.DictReader(STATE.open()))
+    all_cells, all_multi = _multi_entity_cells(rows)
+    strict = [r for r in rows if r["entity_id"] != "situation"
+              and r["obs_date"] <= events[r["event_id"]]
+              and r["vintage"] <= events[r["event_id"]]
+              and r["release"] <= events[r["event_id"]]
+              and r["retrospective"] == "0"]
+    strict_cells, strict_multi = _multi_entity_cells(strict)
+
+    assert (len(all_cells), all_multi) == (9264, 1643)
+    assert (len(strict_cells), strict_multi) == (535, 127)
+
+    btc = [r for r in rows if r["event_id"] == "btc_pipeline_blast_2008"
+           and r["field"] == "polity2"]
+    assert {(r["entity_id"], float(r["value"])) for r in btc} == {
+        ("country.azerbaijan", -7.0), ("country.turkey", 7.0)}
+
+    paper = PAPER.read_text(encoding="utf-8").lower()
+    for value in ("1,643", "9,264", "17.7%", "127", "535", "23.7%"):
+        assert value in paper
+    assert "actor roles" in paper
+    assert "relational geopolitical structure" in paper
+
+
+def test_paper_discloses_the_actual_scored_era(composition):
+    dates = composition["dates"]
+    decades = collections.Counter(f"{d[:3]}0s" for d in dates)
+    assert min(dates) == "2001-09-11"
+    assert max(dates) == "2026-06-17"
+    assert decades == {"2000s": 34, "2010s": 83, "2020s": 147}
+    paper = PAPER.read_text(encoding="utf-8")
+    for value in ("2001-09-11", "2026-06-17", "34", "83", "147", "55.7%"):
+        assert value in paper

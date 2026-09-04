@@ -52,3 +52,13 @@ def test_primary_comparison_is_numerically_correct():
     assert e["ci"][1] < 0
     assert e["p"] < 0.05
     assert e["structural"] < e["surface"]
+
+
+def test_guard_requires_relational_aggregation_qualification(monkeypatch):
+    real = G.text()
+    stripped = {k: v.replace("aggregation", "reduction").replace("Aggregation", "Reduction")
+                for k, v in real.items()}
+    monkeypatch.setattr(G, "text", lambda: stripped)
+    problems = G.violations()
+    assert all(any(name in p and "relational-aggregation" in p for p in problems)
+               for name in real)

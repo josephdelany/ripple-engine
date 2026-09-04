@@ -7,8 +7,8 @@ authors:
     given-names: Joseph
     email: joseph.delany21@gmail.com
     affiliation: "Colby College"
-version: "3.0"
-date-released: "2026-09-03"
+version: "2.0.1"
+date-released: "2026-09-04"
 repository-code: "https://github.com/josephdelany/ripple-engine"
 license: MIT
 keywords:
@@ -21,8 +21,9 @@ abstract: >-
   A registered walk-forward experiment and concentration-matched ablation compare
   recent market state with event-class matching on identical historical support.
   Across 264 forecast dates, market-state matching outperforms event class at equal
-  effective sample size; sparse leadership and dyadic fields add no demonstrated
-  value. The study does not establish production forecasting skill.
+  effective sample size. Sparse event-level nonmarket aggregates do not improve
+  on market state, but the study does not test role-preserving relational
+  geopolitics or establish production forecasting skill.
 references:
   - type: report
     title: "Market state versus event labels in historical analogy"

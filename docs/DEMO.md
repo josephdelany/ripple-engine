@@ -2,6 +2,11 @@
 
 > A single frozen historical read, shown to explain the instrument—not selected as proof of average performance.
 
+“Structural” below is the frozen registration's arm name. In the realized experiment it means
+market state with sparse event-level aggregates, not a role-preserving geopolitical representation;
+multi-entity numeric values were averaged before comparison. The project-level relational
+geopolitical question remains untested.
+
 **Target:** 2026-03-04 · `chokepoint_disruption` · Iran declares the Strait of Hormuz closed
 
 **Seal:** `49d2206c8da24f1ef0cf391f86b240eb17cdba68ba435f1d809cb9f552a8428b` (verified before the outcome is attached)
@@ -39,4 +44,3 @@ Realized +20-day abnormal Brent return: **+42.46%**.
 CRPS: structural **37.876**, surface **38.971**, uniform pooling **37.309** (lower is better). **Structural** beat the other analogy arm; **uniform pooling** scored best overall.
 
 This one read demonstrates mechanics and auditability. The project-level conclusion comes from all 264 inferential dates in `data/structural_surface/summary.json`, not from this example.
-

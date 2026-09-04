@@ -6,6 +6,8 @@ import public_claim_guard as claims
 
 ROOT = Path(__file__).resolve().parent.parent
 LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
+RELEASE_VERSION = "2.0.1"
+RELEASE_DATE = "2026-09-04"
 
 
 def broken_links():
@@ -31,6 +33,10 @@ def main():
     cff = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
     if "Market state versus event labels in historical analogy" not in cff:
         problems.append("CITATION.cff does not name the authoritative project")
+    if f'version: "{RELEASE_VERSION}"' not in cff:
+        problems.append(f"CITATION.cff does not name release {RELEASE_VERSION}")
+    if f'date-released: "{RELEASE_DATE}"' not in cff:
+        problems.append(f"CITATION.cff does not name release date {RELEASE_DATE}")
     if problems:
         raise SystemExit("\n".join(problems))
     print("submission metadata, claims, and local links: VERIFIED")
