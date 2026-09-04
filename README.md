@@ -79,6 +79,44 @@ The complete six-week research history and superseded analyses are preserved at 
 `docs/audit/PUBLIC_PRODUCT_CLOSURE.md` records what was retained, what moved to the archive tag, and
 the distinct verification receipts for the historical and public trees.
 
+## Second study — measuring physical disruption directly
+
+The experiment above infers disruption from a curated list of geopolitical events. A second,
+self-contained study measures it instead, from vessel traffic.
+
+`src/disruption_episodes.py` is a preregistered, **event-blind** detector for sustained declines in
+tanker transits at seven maritime chokepoints, built on IMF PortWatch daily data (58,779
+observations, 2019–2026). The detection rule was committed before the detector was written, its
+threshold was derived from the input's own noise distribution rather than any outcome, and
+automated tests walk its dependency graph and fail if it can reach the event catalogue, any price
+series, or a known episode date.
+
+Blind to all of them, it independently recovers the Ever Given grounding (Suez, onset 2021-03-23),
+the Red Sea shipping crisis at two chokepoints simultaneously, the 2023–24 Panama Canal drought,
+and a Hormuz closure.
+
+Its one result that does not depend on any linkage rule:
+
+> **13 of 39 detected impairment episodes (33%) — including a 51-day Panama Canal episode and all
+> five Bosporus episodes — occur on routes for which the 313-event geopolitical catalogue contains
+> no eligible event at all.** Linkage requires a shared route, so no temporal rule changes this.
+
+A catalogue organised around notable geopolitical events misses a third of the physically
+measurable chokepoint disruption in this period, because much of that disruption is not
+geopolitical. Drought is not a crisis anyone declares.
+
+The event-linkage analysis this was built for is reported as **not identifiable** with the current
+catalogue, with three documented failure modes, rather than as a number that cannot be defended.
+No price data was analysed. Details: [`docs/V3_STATUS.md`](docs/V3_STATUS.md),
+[`docs/audit/V3_LINKAGE_FEASIBILITY.md`](docs/audit/V3_LINKAGE_FEASIBILITY.md), registration in
+[`registrations/DISRUPTION_REALIZATION.md`](registrations/DISRUPTION_REALIZATION.md).
+
+Unlike the first study, **this one's inputs are committed**: the IMF licence permits redistribution
+of the daily aggregates with attribution, so `data/v3/portwatch_daily.csv` ships in the repository
+and the episode table rebuilds from it offline. Run `make verify-v3-foundation`.
+
+*Sources: UN Global Platform; IMF PortWatch.*
+
 ## Scope and integrity
 
 The project originally attempted escalation forecasting, cross-asset propagation, physical exposure, autonomous feeds, and multiple interfaces. Audit found several cases where correct code computed a different quantity from the prose. Those outputs are evidence about measurement and research design, not additional validated product claims. The central result above was rebuilt to compare registered combined-state and surface-class weighting on identical support, with point-in-time eligibility and an abnormal-return target.
