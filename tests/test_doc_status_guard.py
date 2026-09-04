@@ -22,6 +22,8 @@ def test_known_traps_carry_a_banner():
     for path in ("docs/RIPPLE_FINDINGS.md", "docs/VISION_AND_BUILD.md",
                  "docs/HOW_TO_TALK_ABOUT_IT.md", "docs/README_v2_technical.md",
                  "OPEN_ITEMS.md", "PATH.md", "scaffolding/NORTH_STAR.md"):
+        if not (G.ROOT / path).exists():
+            continue  # slim public HEAD omits traps preserved at the recovery tag
         assert not G.is_authoritative(path), f"{path} must not be treated as authoritative"
         assert G.BANNER.match(G.first_line(path)), f"{path} has no status banner"
 

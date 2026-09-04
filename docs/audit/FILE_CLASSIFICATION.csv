@@ -1,5 +1,5 @@
 path,classification
-.gitignore,archive_scientific_code
+.gitignore,maintained_core
 CITATION.cff,maintained_core
 CLAUDE.md,archive_planning_narrative
 COORDINATION.md,archive_planning_narrative
@@ -1312,7 +1312,7 @@ ops/situation_agent.md,archive_interface_operations
 parked/grid_escalation_scorer/README.md,archive_planning_narrative
 parked/grid_escalation_scorer/escalation_walk.py,archive_scientific_code
 parked/grid_escalation_scorer/test_grid_escalation.py,archive_scientific_code
-pytest.ini,archive_scientific_code
+pytest.ini,maintained_core
 registrations/BIG_MOVES_REGISTRATION.md,archive_planning_narrative
 registrations/BRIEF_SKELETON.md,archive_planning_narrative
 registrations/CLAIM_LEDGER_REGISTRATION.md,archive_planning_narrative
@@ -1425,9 +1425,9 @@ src/engine/grid/power_arithmetic.py,archive_scientific_code
 src/engine/grid/price_walk.py,archive_scientific_code
 src/engine/inference.py,required_dependency
 src/engine/learning.py,archive_scientific_code
-src/engine/persistence.py,archive_scientific_code
+src/engine/persistence.py,evidence_audit
 src/engine/pre1987_candidates.py,archive_scientific_code
-src/engine/read.py,archive_scientific_code
+src/engine/read.py,evidence_audit
 src/engine/recalibrate.py,archive_scientific_code
 src/engine/scoring.py,required_dependency
 src/engine/similarity.py,archive_scientific_code
@@ -1538,12 +1538,13 @@ src/ripple_physical.py,archive_scientific_code
 src/robustness.py,archive_scientific_code
 src/sar_lens.py,archive_scientific_code
 src/scenario.py,archive_scientific_code
+src/schedule_imputed_sensitivity.py,archive_scientific_code
 src/shock_tracer.py,archive_scientific_code
 src/signal_registry.py,archive_scientific_code
 src/situation.html,archive_interface_operations
 src/situation.py,archive_scientific_code
 src/situation_record.py,archive_scientific_code
-src/situation_vintage.py,archive_scientific_code
+src/situation_vintage.py,evidence_audit
 src/source_repair.py,archive_scientific_code
 src/sowhat.py,archive_scientific_code
 src/spec_curve.py,archive_scientific_code
@@ -1568,7 +1569,7 @@ src/state/eia_surplus.py,archive_scientific_code
 src/state/gpr.py,archive_scientific_code
 src/state/gsdb.py,archive_scientific_code
 src/state/icb.py,archive_scientific_code
-src/state/ies90.py,archive_scientific_code
+src/state/ies90.py,evidence_audit
 src/state/kilian.py,archive_scientific_code
 src/state/nyt.py,archive_scientific_code
 src/state/outcomes.py,archive_scientific_code
@@ -1603,12 +1604,12 @@ src/validate.py,archive_scientific_code
 src/validate_gpr.py,archive_scientific_code
 src/verify_submission.py,maintained_core
 src/vintage_check.py,archive_scientific_code
-src/walk.py,archive_scientific_code
+src/walk.py,evidence_audit
 src/walk_forward.py,archive_scientific_code
 src/watch_cycle.py,archive_scientific_code
 src/watcher.py,archive_scientific_code
 src/workbench.html,archive_interface_operations
-tests/conftest.py,archive_scientific_tests
+tests/conftest.py,maintained_core
 tests/fixtures/reader/freightwaves_offtopic.html,archive_interface_operations
 tests/fixtures/reader/freightwaves_offtopic.proposal.json,archive_scientific_tests
 tests/fixtures/reader/gcaptain_tankers.html,archive_interface_operations
@@ -1732,6 +1733,8 @@ tests/test_ripple_lp.py,archive_scientific_tests
 tests/test_ripple_map.py,archive_scientific_tests
 tests/test_ripple_physical.py,archive_scientific_tests
 tests/test_ruling1_retraction.py,archive_scientific_tests
+tests/test_schedule_imputed_independent.py,archive_scientific_tests
+tests/test_schedule_imputed_sensitivity.py,archive_scientific_tests
 tests/test_sentences.py,archive_scientific_tests
 tests/test_similarity.py,archive_scientific_tests
 tests/test_situation.py,archive_scientific_tests

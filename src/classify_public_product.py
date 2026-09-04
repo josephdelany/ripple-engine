@@ -7,7 +7,8 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "audit" / "FILE_CLASSIFICATION.csv"
 
 CORE = {
-    "README.md", "SUBMISSION_STATUS.md", "Makefile", "requirements-public.txt", "LICENSE", "CITATION.cff",
+    ".gitignore", "pytest.ini", "README.md", "SUBMISSION_STATUS.md", "Makefile",
+    "requirements-public.txt", "LICENSE", "CITATION.cff",
     "docs/PAPER.md", "docs/RESUME.md", "docs/README.md", "docs/EVENTS_CODEBOOK.md", "docs/DEMO.md",
     "docs/audit/PUBLIC_PRODUCT_CLOSURE.md",
     "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
@@ -23,11 +24,18 @@ CORE = {
     "tests/test_paper_field_composition.py",
     "tests/test_bundle_provenance.py", "tests/test_doc_status_guard.py",
     "tests/test_unused_data_inventory.py",
+    "tests/conftest.py",
     "docs/audit/FILE_CLASSIFICATION.csv",
 }
 DEPENDENCY = {"src/engine/inference.py", "src/engine/scoring.py",
               "src/engine/__init__.py", "docs/reference/WORLD_STATE_CODEBOOK.md"}
-EVIDENCE = {"docs/ABNORMAL_RETURN_RESULT.md", "docs/audit/UNUSED_DATA_INVENTORY.md"}
+EVIDENCE = {
+    "docs/ABNORMAL_RETURN_RESULT.md", "docs/audit/UNUSED_DATA_INVENTORY.md",
+    # The paper cites these exact audited implementations; retaining them lets a reviewer verify
+    # every correction without checking out the recovery tag.
+    "src/engine/read.py", "src/walk.py", "src/situation_vintage.py",
+    "src/state/ies90.py", "src/engine/persistence.py",
+}
 
 
 def classify(path):
