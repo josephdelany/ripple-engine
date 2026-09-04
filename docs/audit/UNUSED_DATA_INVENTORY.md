@@ -59,9 +59,11 @@ withdrawn. It is inventory, and it is why the ripple data must not be deleted li
 
 ### The single clause that does it
 
-The rule is `obs_date ≤ event_date AND vintage ≤ event_date AND release ≤ event_date AND
-retrospective = 0` (`src/structural_surface_experiment.py`, `strict_panel_rows`). Decomposed
-across all 11,089 rows:
+The rule is `entity_id != 'situation' AND obs_date ≤ event_date AND vintage ≤ event_date AND
+release ≤ event_date AND retrospective = 0` (`src/structural_surface_experiment.py`,
+`strict_panel_rows`). Of the 11,089 committed state rows, 60 are `situation`-coded and excluded by
+the first clause, leaving **11,029 panel rows** — the base the experiment's own
+`availability_audit` uses. Decomposed over those:
 
 | exclusion reason | rows |
 |---|---:|
@@ -69,6 +71,10 @@ across all 11,089 rows:
 | `vintage` after the event | **0** |
 | **`release` after the event** | **10,150** |
 | `retrospective = 1` | 2,682 |
+
+(Over all 11,089 rows including the 60 `situation` ones, `release` excludes 10,210. The two bases
+differ by exactly those 60 rows; the panel base is the one quoted everywhere else in the project,
+and the counts here are asserted against `summary.json` in `tests/test_unused_data_inventory.py`.)
 
 **`release ≤ event_date` is doing all the work.** `release` is the release date of the *dataset
 version* parsed — Polity5 (2018), COW NMC v7.0, SIPRI, UCDP v26.1 (2026). For an event in 1990,
