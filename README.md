@@ -14,6 +14,8 @@ That result has an essential qualification. Uniform pooling scored **8.390**. St
 
 This is professionally consequential without being a claim of production forecasting skill: an analyst should not narrow precedent by event label and assume the remaining cases are more informative.
 
+It also falls short of the question at the top of this page, and the paper says so. The strict point-in-time rule leaves the “structural” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. So what was tested is a market-and-leadership state against event labels; full structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
+
 Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. See [the registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) for the frozen decision rules.
 
 For applications and interviews, use only [the verified résumé language](docs/RESUME.md).

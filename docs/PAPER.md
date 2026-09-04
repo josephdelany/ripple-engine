@@ -6,7 +6,7 @@ Joseph Delany · Colby College · 2026
 
 ## Abstract
 
-Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time structural state vector or by event-class identity. Structural weighting records mean CRPS 8.341 against 8.784 for surface matching (paired difference −0.444; 95% stationary-bootstrap interval [−0.613, −0.269]; DM *p*=8.65×10⁻⁷; 264 dates). But uniform pooling scores 8.390, and structure does not distinguishably beat it (difference −0.049; interval [−0.112, +0.012]; *p*=0.140). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
+Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time state vector or by event-class identity. That vector turns out to be narrow — four market fields reach every comparison, two leadership fields reach half, and one dyadic field reaches three — so what is tested is a market-and-leadership state against event labels, not full structural correspondence. Structural weighting records mean CRPS 8.341 against 8.784 for surface matching (paired difference −0.444; 95% stationary-bootstrap interval [−0.613, −0.269]; DM *p*=8.65×10⁻⁷; 264 dates). But uniform pooling scores 8.390, and structure does not distinguishably beat it (difference −0.049; interval [−0.112, +0.012]; *p*=0.140). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
 
 ## 1. Research question
 
@@ -27,6 +27,37 @@ At each forecast date, both arms receive every prior, outcome-closed event with 
 ## 3. Competing analogy rules
 
 Surface distance is zero when two events share a class and one otherwise. Structural distance is the equal-block average of normalized field distances over fields jointly available to the pair. Both become weights through the same kernel, `exp(−d/0.25)`. The forecast is the weighted empirical distribution of prior abnormal returns.
+
+### What the structural vector actually contains
+
+The rule above admits any field the pair share. The registered eligibility filter is strict enough that
+few survive, and the paper's earlier description of a "structural state" was therefore broader than the
+computation. Recomputed from the frozen reads over all 41,997 target–candidate comparisons in the 264
+scored dates:
+
+| field | block | comparisons | share |
+|---|---|---:|---:|
+| `market:wti_chg20` | market | 41,997 | 100.00% |
+| `market:brent_chg20` | market | 41,982 | 99.96% |
+| `market:brent_vol20` | market | 41,982 | 99.96% |
+| `market:vix_close` | market | 41,322 | 98.39% |
+| `panel:leader_change_last_365d` | actors | 21,082 | 50.20% |
+| `panel:leader_tenure_days` | actors | 21,082 | 50.20% |
+| `panel:mid_last_date` | dyads | 3 | 0.01% |
+
+No other field, and no fourth block, ever enters a distance. 20,915 comparisons (49.8%) use market fields
+only, 73 of the 264 dates are entirely market-only, and the whole experiment contains six distinct field
+combinations. `tests/test_paper_field_composition.py` recomputes these from the ledger and fails if this
+table drifts from it.
+
+Two readings of that are both wrong. It is not a full-state comparison: alignment, regime, capability and
+conflict variables are present in the catalogue and absent from the arithmetic. But neither is it merely a
+market model, because the distance averages *blocks* rather than fields. On the half of comparisons that
+carry the two leadership fields, the `actors` block takes half the distance weight while four market
+fields share the other half — so leadership is weighted heavily exactly where it exists. The accurate
+description is a market-state comparison on half the comparisons and a market-and-leadership comparison,
+equally weighted between the two, on the other half.
+
 
 The primary score is weighted CRPS, a strictly proper score for predictive distributions (Gneiting and Raftery 2007). Each forecast is serialized and sealed by SHA-256 before its target is attached. Inference is paired by date using the Diebold–Mariano comparison with a finite-sample correction (Diebold and Mariano 1995; Harvey, Leybourne, and Newbold 1997), Newey–West variance, and a stationary-bootstrap interval (Politis and Romano 1994). Uniform weighting on identical support is a registered diagnostic separating useful similarity from pooling.
 
@@ -54,7 +85,7 @@ Legacy escalation labels often used violence anywhere in the affected country ra
 
 The consequential result is the primary comparison together with its uniform control: surface class matching can make an analyst worse than retaining the eligible reference class. That argues against event type as an eligibility gate and for testing similarity systems against unrestricted pooling on identical support.
 
-This is not a rescue of the original engine. Structure has not shown 20-day skill beyond pooling. The catalogue is curated, not a probability sample; coverage varies by era; strict state availability is sparse; missingness may encode time and source coverage; the equal-block metric and bandwidth are design choices; and abnormal returns do not remove every concurrent cause. Dependence-aware inference cannot repair catalogue selection or measurement error.
+This is not a rescue of the original engine, and it is not yet an answer to the question in §1. The registered comparison was designed to test whether correspondence across the wider state beats correspondence of labels. What it could execute was a comparison between a market-and-leadership state and labels, because that is all the strict availability rule left standing. The stronger test is therefore not failed here; it is untested, and no result in §4 should be read as evidence about the geopolitical variables that never entered a distance. A registered component and concentration ablation ([`registrations/STRUCTURAL_COMPONENT_ABLATION.md`](../registrations/STRUCTURAL_COMPONENT_ABLATION.md)) separates the remaining possibilities — market conditioning, leadership information, or the breadth of the reference class — on this same frozen support. A further caution follows from the table in §3: with only six distinct field combinations, and one of the three blocks reaching three comparisons out of 41,997, the design has far less independent structural variation than 41,997 comparisons suggests. Structure has not shown 20-day skill beyond pooling. The catalogue is curated, not a probability sample; coverage varies by era; strict state availability is sparse; missingness may encode time and source coverage; the equal-block metric and bandwidth are design choices; and abnormal returns do not remove every concurrent cause. Dependence-aware inference cannot repair catalogue selection or measurement error.
 
 The next serious analysis is prospective collection of time-stamped states and forecasts under this frozen protocol. Until then, the honest headline remains comparative: structure beats surface matching, while pooling remains competitive.
 
