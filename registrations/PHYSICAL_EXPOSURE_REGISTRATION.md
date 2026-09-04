@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # PHYSICAL EXPOSURE — registration, written before any code
 
 *2026-09-03. Registered by Cowork before `src/exposure.py` exists. The project's rule holds: this

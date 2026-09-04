@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Brief Standard — how the Intelligence Desk stays honest
 
 This document is the methodology behind the Ripple Engine **Intelligence Desk**

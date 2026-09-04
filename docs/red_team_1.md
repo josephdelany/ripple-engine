@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Red Team 1 — adversarial review + remediation record
 
 *This file is the frozen record of the first external adversarial review of the

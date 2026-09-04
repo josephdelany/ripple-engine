@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Physical-exposure findings that the audit withdrew. The authoritative documents are [`README.md`](../README.md) and [`PAPER.md`](PAPER.md).
+
 # The physical half of the ripple study — Amendment C, as computed
 
 *2026-09-03, session C. Registered in `RIPPLE_REGISTRATION.md` **Amendment C** (2026-09-02), which

@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Engine MCP — let Claude query the engine
 
 This exposes the engine to **Claude Desktop** (and Cowork) as a read-only MCP

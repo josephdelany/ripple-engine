@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Read — article deconstruction, quant-engine ruled
 
 The flagship. Paste a news story (URL or text) and the engine breaks it into its claims and

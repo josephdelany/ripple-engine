@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** How to audit this repository. It claims no finding; the authoritative result is in [`PAPER.md`](PAPER.md).
+
 # The IES-90 label audit — what you are being asked, exactly
 
 You are the human half of an inter-rater reliability check. The engine assigned an

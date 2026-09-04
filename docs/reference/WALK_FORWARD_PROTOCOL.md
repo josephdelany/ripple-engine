@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # WALK-FORWARD PROTOCOL — the self-enforcing backtest, registered before running
 *2026-09-02. This document fixes what is tested, how it is scored, what it is
 compared against, how the engine is allowed to learn, and which tests of the test

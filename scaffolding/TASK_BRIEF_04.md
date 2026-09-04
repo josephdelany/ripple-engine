@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Task Brief 04 — Automation & Reliability (the engine runs itself)
 
 *Read CLAUDE.md first; its rules override this brief. Commit after each step. Goal: the engine stays current daily without Joe typing anything, and NOTHING can fail silently — silent failure is this project's historic killer.*

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Walk-forward pre-registration (v2) — REGISTERED before building the engine
 
 Per RIPPLE_ENGINE_V2_SPEC §5. Committed **before** Layer G/P are built or scored, so the

@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_06 — Scenario Playbook ("if X happened today")
 
 Read CLAUDE.md first. All guardrails apply.

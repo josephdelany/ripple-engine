@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # WORLD-STATE FRAMEWORK — the spine's memory of *how the world stood* at every shock
 *2026-09-02. Registered before collection. This is the input the predictive engine
 has been missing: a wide, sourced, vintage-stamped record of the state of the

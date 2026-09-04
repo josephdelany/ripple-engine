@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D1b — RIPPLE_REGISTRATION.md/RIPPLE_SOURCES.md audit + Amendment D verification at HEAD
 
 Audited repo: `/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine`

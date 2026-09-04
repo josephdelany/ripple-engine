@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-1 — Registration-vs-Code Audit
 
 Repo: ripple-engine, branch `v2-day1`, HEAD `b7c8ec1` (2026-09-02 14:58:39 -0400).

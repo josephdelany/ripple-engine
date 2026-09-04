@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The News Layer — comprehensive search, the database explorer, and the Ground-News question
 
 This documents the "search any topic, get every article" feature and the engine-database

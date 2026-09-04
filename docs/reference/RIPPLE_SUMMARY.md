@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A summary of withdrawn ripple results. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # RIPPLE SUMMARY — computed once, as registered
 
 *2026-09-02T23:32:21+00:00. Registration RIPPLE_REGISTRATION.md (sealed cbf4fdc; Amendments A, B). Numbers below are read from data/ripple/*.json written by src/ripple_lp.py in this run. Vocabulary: node×shock verdicts are TRANSMITTING / NULL / INSUFFICIENT; the nine expectations are CONSISTENT / INCONSISTENT / INDETERMINATE. Nothing was re-run or re-labelled after reading.*

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** The build route for the legacy six-week engine, kept as a record of what was planned. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](SUBMISSION_STATUS.md).
+
 # PATH — the tested route from here to the finished engine
 *2026-09-02. One document, in execution order, that says for every step: what
 goes in, what comes out, the exact test that proves it, who does it, and how

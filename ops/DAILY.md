@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Daily — reading the front page
 
 Open **http://127.0.0.1:5050/digest** in a browser (the backend re-renders it on

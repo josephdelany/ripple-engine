@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # EDGE PORTFOLIO — the pre-registered battery, scored
 
 *Results of `src/edge_battery.py` (run 2026-07-30, corpus N=289). Registration frozen **before** this

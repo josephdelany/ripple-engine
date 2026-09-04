@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Task Brief 01 — Inventories adapter + the registered H1–H3 run
 
 *Read CLAUDE.md first. Its rules override anything here. Work top to bottom; commit after each numbered step; stop and report if anything forces a design change.*

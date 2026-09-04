@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Task Brief 03 — Systematic Event-Corpus Expansion (the harvester)
 
 *Read CLAUDE.md first; its rules override this brief. Commit after each step. The goal: expand the event dataset from 20 toward the FULL universe of qualifying energy-geopolitical events in the price-data window (1987–present), while keeping every row human-verified and citable.*

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # G-7 REGISTRATION — the chokepoint flow register (PHYSICAL_EXPOSURE §2 T2), and a STRUCTURAL vintage stamp for the whole study
 *2026-09-03, Session G. Registered BEFORE `src/g_vintage.py` and `src/g_chokepoint_register.py`
 exist and BEFORE any exposure value is computed (charter §2 rule 2). Amendments dated and appended.*

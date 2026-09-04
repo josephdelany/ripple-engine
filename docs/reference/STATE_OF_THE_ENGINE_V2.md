@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A status snapshot of the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # State of the engine — v2 after-picture (Situation Engine)
 
 Built per BUILD_V2 (B0→B8), one commit per slice, against RIPPLE_ENGINE_V2_SPEC. Run

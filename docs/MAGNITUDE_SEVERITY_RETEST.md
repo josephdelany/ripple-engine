@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # `severity_dose_response`: RETRACTED
 
 *2026-09-03, Session C. The re-test registered in `MAGNITUDE_REGISTRATION.md` §5 and sealed at

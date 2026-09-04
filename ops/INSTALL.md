@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Ops — scheduling the daily refresh (macOS launchd)
 
 This makes the engine refresh itself every morning without you typing anything.

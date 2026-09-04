@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # WORLD-STATE CODEBOOK — one line per field, registered before any loader runs
 *2026-09-02 (PATH Step 1). Every panel and dossier field the state engine may
 condition on. Columns: block · field (the `state_panel.field` id) · unit ·

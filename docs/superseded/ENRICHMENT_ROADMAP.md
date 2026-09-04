@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # Enrichment Roadmap — making the engine smart
 
 The goal: not just *more feeds*, but a pipeline that turns many free, noisy signals

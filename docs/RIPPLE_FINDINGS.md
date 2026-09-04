@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Cross-asset ripple findings that the audit withdrew. The authoritative documents are [`README.md`](../README.md) and [`PAPER.md`](PAPER.md).
+
 # The ripple study — findings
 
 *2026-09-02, session C. Written from `data/ripple/*.json` only. **No computation was run to

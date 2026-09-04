@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Auto-generated evaluation of the legacy walk, whose registered placebo fails. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # EVALUATION — is the engine sound?
 
 > **THE REGISTERED GATES DO NOT PASS. Read this before any number below.**

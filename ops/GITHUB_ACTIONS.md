@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Ops — run the engine free on GitHub Actions
 
 This makes the engine track, score, and **notify you** every day without any

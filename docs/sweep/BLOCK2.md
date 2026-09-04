@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A claim sweep of the legacy documents, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # Findings sweep — block 2
 
 *2026-09-03, Session C. Same convention and evidence grades as `docs/OIL_FINDINGS.md`:

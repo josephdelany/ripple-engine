@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # Superseded planning docs (archived VISION_ROADMAP Phase V0.3)
 
 These were earlier, parallel roadmap / vision / product-design documents. As of

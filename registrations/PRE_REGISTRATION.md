@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # PRE-REGISTRATION — the edge battery
 
 **Frozen:** 2026-07-30, at corpus N=289 events (1987–2025).

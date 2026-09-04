@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Task Brief 02 — The Forecast Layer (Kalshi benchmark + forecast log)
 
 *Read CLAUDE.md first; its rules override this brief. Commit after each step. Stop and report on any design fork.*

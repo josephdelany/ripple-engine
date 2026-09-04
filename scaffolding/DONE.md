@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Definition of Done — the Intelligence Desk
 
 The frozen bar for "finished." Every item is met and has evidence. This is the target

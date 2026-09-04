@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-8 — Paper review, sentence by sentence
 
 Reviewer: adversarial, read-only. Method: `docs/PAPER_DRAFT.md` (486 lines) was

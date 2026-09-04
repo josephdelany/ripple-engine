@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # RED_TEAM_1_RESPONSE — remediation work order
 Read CLAUDE.md first. Context: docs/red_team_1.md will hold the full attack
 (paste it there verbatim, slice R0). The review is high quality; most

@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Desk — front-end specification
 
 *Written as if handing it to a studio to build exactly as intended. It is opinionated on

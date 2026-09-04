@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # G-6 REGISTRATION — OPEN_ITEMS 1.4, the era confound: can era, pool size, base rate and label basis be separated at n = 150?
 *2026-09-03, Session G. Registered BEFORE `src/g_era_confound.py` is written and BEFORE any
 stratified number is computed (charter §2 rule 2). **This is a DIAGNOSTIC. It gates nothing.**

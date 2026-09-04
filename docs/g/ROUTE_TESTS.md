@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # Session G — retrieval routes, tested 2026-09-03 (first pass) and 2026-09-03 (second pass)
 *Every route below was requested in this session's own fetch log. The status is what came
 back, not what is supposed to come back (SPINE_REGISTRATION §4's convention). This file is

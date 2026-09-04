@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # RIPPLE ENGINE v2 — Concept and Technical Plan of Operation
 *The situation engine for the oil economy. Written 2026-09-01 for a
 technical evaluator. Every claim here is either built, specified with an

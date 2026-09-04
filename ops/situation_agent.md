@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Situation Synthesizer — agent contract
 
 You are the **scoped research agent** for the ripple engine's Situation Memory.

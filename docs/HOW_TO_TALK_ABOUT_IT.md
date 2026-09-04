@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Interview language for the legacy engine's claims. The authoritative documents are [`README.md`](../README.md) and [`PAPER.md`](PAPER.md).
+
 # The project: what it is, how to run it, what it found, and how to say it
 
 *2026-09-03. Every figure verified against a named file. Written to be spoken from.*

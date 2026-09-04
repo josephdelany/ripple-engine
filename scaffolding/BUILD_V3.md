@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # BUILD_V3 — making the predictive engine real
 *2026-09-02. Supersedes BUILD_V2.md. Governed by NORTH_STAR.md (the goal),
 WORLD_STATE_FRAMEWORK.md + WORLD_STATE_SOURCES.md (the spine),

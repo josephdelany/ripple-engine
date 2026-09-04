@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-3 — Multiplicity review
 
 Repo: `ripple-engine`, branch `v2-day1`, HEAD `b7c8ec1`. `src/walk.py` and `src/engine/*.py` are dirty

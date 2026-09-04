@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_08 — GPR index: load + validate (NO conditioning yet)
 
 Read CLAUDE.md first. All guardrails apply. Context: FRONTIER_AUDIT.md F4/F6.

@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Demonstration pages built from the superseded event walk. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # Sealed reads, walked through
 
 PATH Step 10. Each page below is written *from the sealed read and its score* in

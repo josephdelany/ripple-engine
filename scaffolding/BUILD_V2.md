@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # BUILD_V2 — execution directive for the Situation Engine
 Read CLAUDE.md, then NORTH_STAR.md (the purpose and the use), then
 RIPPLE_ENGINE_V2_SPEC.md (the target), then this.

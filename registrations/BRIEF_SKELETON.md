@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # When Do Geopolitical Shocks Actually Move Oil?
 ## Evidence from 40 Years of Events — Registered Analysis Plan & Brief Skeleton
 

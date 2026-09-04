@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # OpenBB Terminal — product design spec (Gulf Risk)
 
 A final-product-quality OpenBB Workspace terminal for **Gulf geopolitical-risk research**,

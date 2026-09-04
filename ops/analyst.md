@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # The Analyst — write-up contract (runs on Claude subscription, caged)
 
 The engine's `divergence.py` computes the *insight* deterministically (the gaps

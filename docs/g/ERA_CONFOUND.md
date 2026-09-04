@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # G-6 — OPEN_ITEMS 1.4, the era confound: can the three confounds be separated at n = 150?
 *Computed by `src/g_era_confound.py` under `docs/g/G6_ERA_CONFOUND_REGISTRATION.md`, which was
 committed first. Generated 2026-09-03T16:19:54+00:00.*

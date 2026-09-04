@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Interface design material for surfaces that were cut. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # DESIGN.md — Amendment 2 (ADOPTED 2026-09-03)
 
 *2026-09-03, session A. Registered under SESSION_CHARTER §2 rule 2 and DESIGN.md's own practice:

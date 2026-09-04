@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # BIG MOVES — registered definition (written before computing)
 *2026-09-01. Fixes the rule for "the market actually changed" so the set is
 not chosen after seeing it. Amendments must be dated and appended, never edited.*

@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # reader_agent — the reading-layer contract (CLAIM_LEDGER_REGISTRATION.md, Amendment 3)
 
 **Who runs this:** Claude through the local `claude` CLI on Joe's subscription — **no API key, $0

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # G-2 — the pre-1974 candidates against the SPINE_REGISTRATION bar, and what admitting them buys
 *2026-09-03, Session G. Six dossiers, six verdicts, and the arithmetic of what each is worth.
 Nothing here enters `events`. Admission is Joe's line (`SPINE_REGISTRATION.md` §3); this file

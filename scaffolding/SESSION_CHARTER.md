@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # SESSION CHARTER — standing orders for every Claude Code session on this repo
 *Read this at the start of EVERY turn, before anything else. Then PATH.md. The
 goal is NORTH_STAR.md; the route is PATH.md; the proof is

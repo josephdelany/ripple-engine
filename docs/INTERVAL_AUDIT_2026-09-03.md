@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Interval audit — where the grid file's defect lives, and where it does not
 *Session B, 2026-09-03. Commissioned after B found and corrected the defect in its own published file
 (`a7fbae9`). **Read-only: nothing was re-run and nothing was fixed.** The scope comes first so the response

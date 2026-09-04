@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_07 — Standardized ripples + honest inference
 
 Read CLAUDE.md first. All guardrails apply. Purpose: close the two

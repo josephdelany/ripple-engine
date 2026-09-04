@@ -96,3 +96,23 @@ def test_paper_does_not_call_the_vector_a_full_geopolitical_state(composition):
     text = PAPER.read_text(encoding="utf-8").lower()
     for phrase in ("full geopolitical state", "full observable state around past events"):
         assert phrase not in text, f"docs/PAPER.md overstates the vector: {phrase!r}"
+
+
+def test_two_independent_implementations_agree_on_the_composition(composition):
+    """The ablation computes this audit too, from the same ledger, by different code.
+
+    Codex's `src/structural_component_ablation.py` publishes a `field_use_audit` block under the
+    registered ablation; this file recomputes the same quantities directly. They must agree. Two
+    implementations agreeing is the only reason to believe either of them.
+    """
+    ablation = ROOT / "data" / "structural_surface" / "ablation" / "summary.json"
+    if not ablation.exists():
+        pytest.skip("registered ablation outputs not present in this checkout")
+    audit = json.loads(ablation.read_text(encoding="utf-8"))["field_use_audit"]
+    c = composition
+    assert audit["n_comparisons"] == c["comparisons"]
+    assert audit["market_only"] == c["market_only"]
+    assert audit["dates_all_comparisons_market_only"] == c["all_market_only_reads"]
+    assert audit["field_counts"] == dict(c["fields"])
+    assert audit["containing_actors"] == c["blocks"]["actors"]
+    assert audit["containing_dyads_or_other"] == c["blocks"]["dyads"]

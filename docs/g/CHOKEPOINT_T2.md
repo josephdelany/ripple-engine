@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # T2 — the chokepoint flow register, and what the corpus can actually carry
 *Built by `src/g_chokepoint_register.py` under `docs/g/G7_CHOKEPOINT_REGISTER_REGISTRATION.md`,
 which was committed first. Generated 2026-09-03T16:14:10+00:00.*

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # STATE OF THE ENGINE — reconciliation inventory + after-picture
 
 *§0 (written 2026-08-04) is the AFTER-PICTURE — what the VISION_ROADMAP build

@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # OUTCOME MAPPING — independent codings to the four branches (PATH Step 4, registered before code)
 *2026-09-02. Fixes, before any join is run, how a corpus event is matched to ICB, MID and
 UCDP, how each source's codes map to CONTAINED / LIMITED_RETALIATION / WIDENING /

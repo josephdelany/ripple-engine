@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # The crack-concentration finding, tested — and it does not survive
 
 *Session B, 2026-09-03. `OIL_FINDINGS` §4 reports that geopolitical classes coincide with top-5 %

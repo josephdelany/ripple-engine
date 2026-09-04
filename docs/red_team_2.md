@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Red team 2 — adversarial review and replication (Session D, 2026-09-02)
 
 *Reviewer stance: the committee's external reviewer. Read everything; edited nobody's code or

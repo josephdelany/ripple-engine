@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Platform audit — one cohesive engine, vs the spec
 
 *Self-audit after the convergence build (2026-09-01). Measured against Joe's brain-dump:

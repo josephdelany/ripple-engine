@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # EXPOSURE & VULNERABILITY — registration, written before any code
 
 *2026-09-03. Committed before `src/exposure.py` and before any field is filled. Verdict words and

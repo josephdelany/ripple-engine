@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_09 — H5: GPR conditioning (exploratory, two-sided)
 
 Read CLAUDE.md first. All guardrails apply.

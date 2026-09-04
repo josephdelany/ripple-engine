@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Interface design material for surfaces that were cut. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # Wireframes — the chosen direction
 
 *2026-09-03, session A. Companion to `docs/design/STUDY.md`. Direction **B spine + C figures**: each

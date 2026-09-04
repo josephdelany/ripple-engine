@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # GRID STUDY — registration
 *2026-09-03. Session B, on Joe's brief of the same date. A **new study**, not a change to the
 event-triggered walk. Registered before anything under it is computed. Amendments are dated and appended.*

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Interface design material for surfaces that were cut. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # The desk — design study
 
 *2026-09-03, session A. Written after building DESIGN.md Steps 0–4 (796f1ef, 27cbc10, 2440847,

@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Tier-1 A1, answered: the price loss was a target artefact — and one finding gets stronger
 
 *Session B, 2026-09-03. Registered before computation in `GRID_STUDY_REGISTRATION.md` Part III

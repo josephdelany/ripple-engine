@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Ops — the synthesis ritual (Mac Pro, on-demand, $0)
 
 GitHub Actions tracks the world for you (data, memory, calibration, phone alerts).

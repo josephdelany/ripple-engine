@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Working record of the pre-1973 admission and vintage work. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # G-3 — the situation fields' `knowable_at`, derived from dossier document dates
 *Computed by `src/situation_vintage.py` under `docs/g/G3_REGISTRATION.md`, which was committed first.*
 *Generated 2026-09-03T02:59:01+00:00. Nothing here is written to `events` or `situation_state`.*

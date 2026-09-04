@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** The event-coding rules behind the 313-event catalogue. It claims no finding; the authoritative result is in [`PAPER.md`](PAPER.md).
+
 # Event catalogue codebook
 
 The central experiment’s authoritative event input is `data/structural_surface/input/events.csv`; its hash is in the bundle manifest.

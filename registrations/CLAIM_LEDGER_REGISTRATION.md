@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # MATERIALITY GATE + CLAIM LEDGER — registered definitions (before computing)
 *2026-09-02. Fixes the rules for "significant," for what counts as a checkable
 claim, for the verdict scale, and for resolution — so none of them are tuned

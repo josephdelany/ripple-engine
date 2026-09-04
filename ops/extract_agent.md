@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # extract_agent — the event-extraction worker contract
 
 **Who runs this:** the Cowork scheduled task = **Claude on Joe's subscription, NO API key** (same model

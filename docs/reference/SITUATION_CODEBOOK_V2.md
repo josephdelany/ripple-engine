@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # Situation Record codebook (v2) — REGISTERED before coding
 
 Codebook amendment for RIPPLE_ENGINE_V2_SPEC §4.1–4.2. Committed **before** any event is

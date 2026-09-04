@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-2 Leakage Hunt — ripple-engine, branch v2-day1, HEAD b7c8ec1
 
 Read-only audit. Working tree was dirty in `src/engine/read.py`, `scoring.py`,

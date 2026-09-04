@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # WORLD-STATE SOURCES — verified register (2026-09-02)
 *Companion to WORLD_STATE_FRAMEWORK.md. Each entry records what was actually
 checked: the page opened, the file offered, its format, the variables that matter

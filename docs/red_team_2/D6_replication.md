@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-6 Replication — ripple-engine, branch v2-day1
 
 Repo under review: `/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine`.

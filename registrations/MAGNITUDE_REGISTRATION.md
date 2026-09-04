@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # MAGNITUDE REGISTRATION — the shock-magnitude study, registered before computing
 
 *2026-09-03, Session C. Written after `docs/RIPPLE_FINDINGS.md` (v2, prices) and

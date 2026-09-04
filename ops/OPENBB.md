@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Operations runbook for the legacy autonomous feeds, which are archived and inert. Not part of the submitted product; see [`README.md`](../README.md).
+
 # Ops — OpenBB Workspace, set up right (+ Claude in the browser)
 
 The engine feeds **OpenBB Workspace** (pro.openbb.co) through the local backend

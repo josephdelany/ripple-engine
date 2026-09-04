@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** The v1 README, kept as a record. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Ripple Engine
 
 A personal, **pre-registered event-study engine** — a **measurement and grounding

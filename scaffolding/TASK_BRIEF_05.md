@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_05 — The Synthesis Layer ("Engine Read")
 
 Read CLAUDE.md first. All its guardrails apply. This brief builds the layer that

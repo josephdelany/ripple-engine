@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # STORIES HUB — the operating plan
 <!-- Synthesized 2026-07-28 by a 9-agent workflow (mine Frontier Alpha -> frame -> judge ->
      synthesize), curated by Claude. Supersedes the daily-brief framing. This is the

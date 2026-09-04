@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # R8 — purpose reframe: PROPOSED wording (⛔ AWAITING JOE'S SIGN-OFF)
 
 *Red-team-1 slice R8 (attacks 11, 12, 19) is a **wording** change and a declared

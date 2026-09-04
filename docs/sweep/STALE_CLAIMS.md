@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A claim sweep of the legacy documents, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # Stale and unsupported claims — reverse sweep
 
 *2026-09-03, Session I. **Report only. Nothing here is fixed, and nothing in the seven

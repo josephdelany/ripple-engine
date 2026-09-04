@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # STATE OF THE ENGINE — generated 2026-09-02T19:54:11+00:00
 
 > **SUPERSEDED, 2026-09-03.** Generated 2026-09-02T19:54Z, which is **two runs and two

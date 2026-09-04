@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** Event-record documentation for the history spine. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # Proposed amendment to EVENTS_CODEBOOK.md — five coding gaps found by the pre-1990 pass
 
 *Session E, 2026-09-02. **Proposed, not applied.** The canonical `EVENTS_CODEBOOK.md`

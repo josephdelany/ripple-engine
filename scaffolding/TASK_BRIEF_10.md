@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_10 — Cross-asset ripples (the edges layer)
 
 Read CLAUDE.md first. All guardrails apply. Purpose: the same 42 registered

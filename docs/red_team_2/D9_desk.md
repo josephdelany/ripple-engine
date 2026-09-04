@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** Adversarial review findings, kept as evidence. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../../SUBMISSION_STATUS.md).
+
 # D-9 — Ripple Engine desk, read as a hostile reader
 
 Repo under audit: `/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine` (untouched — see confirmation at the end).

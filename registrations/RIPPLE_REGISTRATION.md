@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # RIPPLE REGISTRATION — the chain study, registered before computing
 *2026-09-02. Brief R (R1 method, R2 nodes, R3c registration). Written after
 RIPPLE_SOURCES.md and the loaders (commit df66b3c) and before `src/ripple_lp.py`

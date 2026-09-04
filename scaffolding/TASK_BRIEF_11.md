@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # TASK_BRIEF_11 — Quincy data enhancement: quiet set, policy_response type, pump pass-through
 
 Read CLAUDE.md first. All guardrails apply. Context: this implements the

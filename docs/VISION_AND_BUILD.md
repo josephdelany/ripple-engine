@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** The original product vision, most of which was cut. The authoritative documents are [`README.md`](../README.md) and [`PAPER.md`](PAPER.md).
+
 # The intended system, the built system, and the gap between them
 
 *2026-09-03. Written because the two are not the same, and the difference is the most useful thing

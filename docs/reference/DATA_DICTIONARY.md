@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # Data dictionary
 
 _Generated from the live schema of `data/oil.db` by `src/data_dictionary.py` — not hand-typed, so it cannot drift from the actual database._

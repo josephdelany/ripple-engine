@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Selection robustness — the class concentration read from both directions
 
 *2026-09-03, session A. Every figure is read from `data/big_moves/summary.json` at the **registered**

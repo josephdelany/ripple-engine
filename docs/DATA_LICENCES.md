@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** Licence terms for the source datasets. It claims no finding; the authoritative result is in [`PAPER.md`](PAPER.md).
+
 # Data licences
 
 Code and project documents: MIT (`LICENSE`). Data: each source under its own

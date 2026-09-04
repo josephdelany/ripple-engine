@@ -1,3 +1,5 @@
+> **REFERENCE — SPECIFICATION, NOT A RESULT.** A specification or codebook for the legacy engine's data and rules. It claims no finding; the authoritative result is in [`PAPER.md`](../PAPER.md).
+
 # RIPPLE SOURCES — verified register (2026-09-02)
 *Companion to RIPPLE_REGISTRATION.md (brief R, items R2/R3a). Rule inherited from
 WORLD_STATE_SOURCES.md: no source is used until its page was opened, its variables,

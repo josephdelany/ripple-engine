@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A working analysis or evidence record from the legacy engine. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # Stage 0: the kill-test — **MAGNITUDE IS BELIEF, NOT BARRELS**
 
 *2026-09-03, Session C. `MAGNITUDE_REGISTRATION.md` §3, sealed at `8cb9d3d`, with the decision rule's

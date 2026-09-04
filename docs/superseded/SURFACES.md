@@ -1,3 +1,5 @@
+> **SUPERSEDED — NOT A CURRENT CLAIM.** Superseded design and status material for the legacy engine. The authoritative documents are [`README.md`](../../README.md) and [`PAPER.md`](../PAPER.md).
+
 # SURFACES — how an analyst actually uses the engine
 
 > **SUPERSEDED — 2026-09-03.** This document dates from the project's v1 period (July

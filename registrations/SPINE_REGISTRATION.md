@@ -1,3 +1,5 @@
+> **ARCHIVED — HISTORICAL RECORD, NOT A CURRENT CLAIM.** A registration for a superseded study, kept so its pre-commitments stay auditable. Preserved for audit; current release status is in [`SUBMISSION_STATUS.md`](../SUBMISSION_STATUS.md).
+
 # SPINE REGISTRATION — what a complete event record is
 *2026-09-02, Session E, step E-2. Registered BEFORE any event record is rewritten
 (the spine audit, `data/spine/AUDIT.md`, was published first and is the baseline

@@ -1,3 +1,5 @@
+> **WORKING NOTE — INTERNAL BUILD MATERIAL, NOT A CLAIM.** Internal planning and build material. Not part of the submitted product; see [`README.md`](../README.md).
+
 # NORTH STAR — Ground News for the petro economy
 *Agreed direction, 2026-09-01. Every build decision is tested against this file.
 It sits above RIPPLE_ENGINE_V2_SPEC.md (the mechanism) and BUILD_V2.md (the order).*
