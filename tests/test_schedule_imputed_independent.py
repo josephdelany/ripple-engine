@@ -47,7 +47,7 @@ def test_release_date_is_ignored_which_is_the_whole_point_of_the_amendment():
     zero for a reason no reader would guess.
     """
     row = row_tuple(release="2020-01-01")  # 30 years after the event
-    assert M.admission_reason(row, "1990-06-01") == "admitted"
+    assert M.admission_reason(row, "1992-06-01") == "admitted"
 
 
 def test_vintage_after_event_still_excludes():
@@ -65,8 +65,8 @@ def test_the_three_permanent_exclusions_hold():
 
 def test_admission_fails_closed_on_unknown_field_and_unknown_source():
     """Nothing is admitted by default. A new field or a re-worded source string must be excluded."""
-    assert M.admission_reason(row_tuple(field="gpr_monthly"), "1990-06-01") == "field_not_allowlisted"
-    assert M.admission_reason(row_tuple(source="COW NMC v7.0"), "1990-06-01") == "source_not_allowlisted"
+    assert M.admission_reason(row_tuple(field="gpr_monthly"), "1992-06-01") == "field_not_allowlisted"
+    assert M.admission_reason(row_tuple(source="COW NMC v7.0"), "1992-06-01") == "source_not_allowlisted"
 
 
 def test_market_and_narrative_fields_can_never_enter_the_panel_block():
