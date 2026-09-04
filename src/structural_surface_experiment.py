@@ -52,6 +52,11 @@ CORRECTIONS = [
         "registration_commit": "07b760c6a262bf7618db240b68dc3143e88f3532",
         "implementation_commit": "c2dacc4b56d74dcdc7d3412ef34110bf2b27dce4",
         "reason": "Correct the primary target from 21 daily returns to the registered 20 returns.",
+    },
+    {
+        "registration_commit": "75a280fb01452811ccc33c4a33f68967919fc149",
+        "implementation_commit": "509cf5a0198b4675d2f6269a631e16fbebfa07c3",
+        "reason": "Rename the machine verdict to name its surface comparator and report pooling separately.",
     }
 ]
 
