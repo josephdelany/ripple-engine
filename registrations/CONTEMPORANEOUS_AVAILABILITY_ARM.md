@@ -34,13 +34,15 @@ different question, and it must be reported as such.
 
 **This is not the strict rule loosened until something appears.** Relaxing a filter after seeing it
 produce a null is the move `INV-6` exists to prevent. The guard against it is that every
-publication lag below is fixed from source documentation *before* implementation, is capped, and
-may not be revised after any loss is computed. If a declared lag turns out to be wrong, the
-correction is a dated amendment stating the documentary basis, made before re-running, and the
-pre-correction result is published alongside.
+publication lag below is fixed *before* implementation, is capped at five years, is set
+deliberately long, and may not be revised after any loss is computed. If a declared lag turns out
+to be wrong, the correction is a dated amendment stating the documentary basis, made before
+re-running, and the pre-correction result is published alongside. See the provenance note on the
+lag table — they are conservative declarations awaiting confirmation, not figures read off
+publisher documentation at registration time.
 
 **This measures counterfactual availability, not demonstrated availability.** The claim it can
-support is "had these variables been available on their sources' documented schedules, structural
+support is "had these variables been available on their sources' ordinary release schedules, structural
 correspondence would/would not have beaten event class". It can never support "analysts had this
 information". The paper's §5 finding — that availability *could not be demonstrated* from the
 recorded metadata — is unaffected and remains the honest statement about the historical record.
