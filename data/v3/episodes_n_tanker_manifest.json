@@ -1,0 +1,72 @@
+{
+  "attribution": "Sources: UN Global Platform; IMF PortWatch.",
+  "coverage": {
+    "bab_el_mandeb": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 423
+    },
+    "bosporus": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 223
+    },
+    "hormuz": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 405
+    },
+    "malacca": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 25
+    },
+    "panama": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 306
+    },
+    "suez": {
+      "first_eligible": "2020-01-31",
+      "n_days": 2799,
+      "n_eligible": 2404,
+      "n_impaired": 371
+    }
+  },
+  "detector_sha256": "f90c7b54d0572e895516c8ac48012fbb4a291abd49778b06991a4ab81b86a6c0",
+  "detector_version": "1.0.0",
+  "input": {
+    "data/v3/portwatch_daily.csv": "93a37a1e6916d17f94d71ff42deb22d906730ac78c597dace90c709ebbbedfa9"
+  },
+  "n_episodes": 39,
+  "outputs": {
+    "episodes_n_tanker.csv": "4c1807acf4e6c40e7c7782c28a71218ef5acfb9d6cedcb65fab6936871b656a2"
+  },
+  "parameters": {
+    "baseline_gap": 30,
+    "baseline_min_obs": 300,
+    "baseline_window": 365,
+    "diagnostic_routes_excluded": [
+      "cape_of_good_hope"
+    ],
+    "impairment_routes": [
+      "hormuz",
+      "suez",
+      "bab_el_mandeb",
+      "bosporus",
+      "malacca",
+      "panama"
+    ],
+    "max_gap": 2,
+    "measure": "n_tanker",
+    "min_impaired_days": 5,
+    "threshold": 0.7
+  },
+  "registration": "registrations/DISRUPTION_REALIZATION.md",
+  "registration_sha256": "60fc196b7e19986089bd10724eb128e3d9c2b170366b747f71b7a70e200b49c3"
+}

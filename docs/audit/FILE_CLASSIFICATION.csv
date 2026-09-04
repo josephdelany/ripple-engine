@@ -28,8 +28,10 @@ docs/audit/FILE_CLASSIFICATION.csv,maintained_core
 docs/audit/PROVENANCE_BOUNDARY.md,evidence_audit
 docs/audit/PUBLIC_PRODUCT_CLOSURE.md,maintained_core
 docs/audit/UNUSED_DATA_INVENTORY.md,evidence_audit
+docs/audit/V3_DATA_AUDIT.md,archive_planning_narrative
 docs/reference/WORLD_STATE_CODEBOOK.md,required_dependency
 pytest.ini,maintained_core
+registrations/DISRUPTION_REALIZATION.md,archive_planning_narrative
 registrations/STRUCTURAL_COMPONENT_ABLATION.md,maintained_core
 registrations/STRUCTURAL_SURFACE_EXPERIMENT.md,maintained_core
 requirements-public.txt,maintained_core
