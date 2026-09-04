@@ -26,7 +26,7 @@ CORE = {
 }
 DEPENDENCY = {"src/engine/inference.py", "src/engine/scoring.py",
               "src/engine/__init__.py", "docs/reference/WORLD_STATE_CODEBOOK.md"}
-EVIDENCE = {"docs/ABNORMAL_RETURN_RESULT.md"}
+EVIDENCE = {"docs/ABNORMAL_RETURN_RESULT.md", "docs/audit/UNUSED_DATA_INVENTORY.md"}
 
 
 def classify(path):

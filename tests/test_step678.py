@@ -54,8 +54,12 @@ def test_lp1_irf_and_pooling():
 # --- Step 8: signal registry ---
 # sr1 -- status is DERIVED: H1 is the one live edge; H2/H3/analogue/kNN/nowcast are rejected;
 # and H1's 'live' matches its statistically_validated flag in the claims artifact.
-def test_sr1_registry_tiering_is_derived():
+def test_sr1_registry_tiering_is_derived(tmp_path, monkeypatch):
     import signal_registry, json
+    # The registry builder is a production writer. Exercise it against disposable outputs so a
+    # verification run cannot rewrite the committed report or mutate the local research database.
+    monkeypatch.setattr(signal_registry, "OUT", tmp_path / "signal_registry.json")
+    monkeypatch.setattr(signal_registry, "DB", tmp_path / "oil.db")
     r = signal_registry.build()
     by = r["by_status"]
     # H1 was downgraded under the single evidentiary bar (data/evidentiary_bar.json,
