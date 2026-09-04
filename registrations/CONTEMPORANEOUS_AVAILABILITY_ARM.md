@@ -78,8 +78,18 @@ frozen rule's other three clauses, unchanged.
 
 ### Declared publication lags
 
-Fixed now from each source's documented release cadence. A source not listed here is **not
-admissible**; the list may not be extended after implementation except by dated amendment.
+Fixed now, before implementation. **Provenance of these numbers, stated plainly: they are declared
+from general knowledge of these sources' release cadence and were deliberately set long, not read
+off the publishers' documentation during registration.** Each must be confirmed against the
+source's own release history as the first step of implementation, and any correction made as a
+dated amendment below **before** anything is computed — never after seeing a loss. Where confirmation
+is impossible, the lag is set to the 5-year ceiling or the source is dropped, and which of the two
+was chosen is published. A source not listed here is **not admissible**; the list may not be
+extended after implementation except by dated amendment.
+
+The bias is deliberate and one-directional: every lag is long enough to be conservative, so an
+error makes the arm admit *less* data than a contemporaneous analyst would have had, never more.
+An arm that under-admits can produce a false null but cannot manufacture a false positive.
 
 | source family | lag `L` | basis |
 |---|---:|---|
