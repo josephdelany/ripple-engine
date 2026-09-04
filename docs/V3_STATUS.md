@@ -6,11 +6,12 @@ Sources: UN Global Platform; IMF PortWatch.
 
 ## Résumé status
 
-> **Not résumé-ready; research foundation only.**
+> **Résumé-ready, narrowly.** One reproducible instrument, one rule-independent coverage result,
+> and one honest negative on linkage. The v2 bullets stand unchanged; v3 adds two of its own.
 
-There is a reproducible instrument and an honest feasibility conclusion. There is no defensible
-quantitative finding with a usable denominator, so no v3 résumé bullet is drafted and the approved
-v2 bullet in `docs/RESUME.md` stands unchanged.
+The linkage *proportions* remain unusable and are not claimed. What is claimed is the coverage
+result below, which holds under any linkage rule because it depends only on route counts, and the
+engineering validation of the detector itself.
 
 ## What was completed
 
@@ -79,6 +80,11 @@ committed input; 40 tests pass; blinding is machine-enforced over the dependency
 simultaneously, the Panama Canal drought, and the Hormuz closure. This is corroboration that the
 instrument measures something real. **It is not a result**: the comparison was made after the fact
 and no hypothesis was tested by it.
+
+**Rule-independent descriptive result** — 13 of 39 episodes (33.3%), including a 51-day Panama
+Canal episode and all five Bosporus episodes, fall on routes for which the catalogue holds no
+eligible event. Linkage requires a shared route, so no temporal rule can change this. The
+catalogue's only Panama entry is a copper-mine closure.
 
 **Registered confirmatory result** — none. This phase ran no hypothesis test.
 

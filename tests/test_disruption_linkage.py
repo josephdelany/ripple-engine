@@ -108,3 +108,26 @@ def test_unmatched_episodes_are_never_called_undeclared():
                 if word in para:
                     assert any(g in para for g in ("not ", "never", "prohibit", "may not")), \
                         f"{path.name}: unguarded use of {word!r} in {para[:80]!r}"
+
+
+def test_route_coverage_gap_is_rule_independent(result):
+    """The one v3 result quoted on the résumé. It must hold under ANY temporal linkage rule.
+
+    Linkage requires an event and an episode to share a route, so episodes on a route with no
+    eligible catalogue event are unmatchable by construction. This pins that count.
+    """
+    import collections
+    events = [e for e in csv.DictReader(EVENTS.open(encoding="utf-8"))
+              if dt.date.fromisoformat(e["event_date"]) >= L.DETECTION_START]
+    episodes = list(csv.DictReader(EPISODES.open(encoding="utf-8")))
+    per_event = collections.Counter(e["route"] for e in events)
+    zero_event_routes = {p["route"] for p in episodes if per_event[p["route"]] == 0}
+    unmatchable = [p for p in episodes if p["route"] in zero_event_routes]
+
+    assert zero_event_routes == {"panama", "bosporus"}
+    assert len(unmatchable) == 13
+    assert len(episodes) == 39
+    assert max(int(p["duration_days"]) for p in unmatchable) == 51
+    # And the résumé must state it, so the document cannot drift away from the data.
+    resume = (ROOT / "docs" / "RESUME.md").read_text(encoding="utf-8")
+    assert "13 of 39" in resume and "51-day Panama" in resume

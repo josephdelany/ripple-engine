@@ -39,6 +39,36 @@ pre-2019 route-mapped events and the 2020-01-03 Soleimani event, which falls bef
 | dated before the 2020-01-31 detection start (excluded) | 11 |
 | **eligible** | **17** |
 
+## One result that does not depend on the linkage rule
+
+The proportions above are rule-dependent and unusable. **This is not.**
+
+Linkage requires an event and an episode to share a route. So an episode on a route for which the
+catalogue holds *no* eligible event cannot be matched under **any** temporal rule — no window, no
+overlap definition, no amount of recoding changes it. Counting those:
+
+| route | episodes | eligible catalogue events | longest episode |
+|---|---:|---:|---|
+| **panama** | 8 | **0** | **51 days** (2023-12-25 → 2024-02-13) |
+| **bosporus** | 5 | **0** | 10 days |
+
+> **13 of 39 detected impairment episodes (33.3%), spanning 119 impaired route-days, occur on
+> chokepoints for which this 313-event catalogue contains no eligible event at all.**
+
+The Panama Canal case is the clearest. Through late 2023 and early 2024 the canal restricted
+transits during a severe drought; the detector finds eight separate episodes there, the longest
+running 51 days. The catalogue contains exactly one event whose title mentions Panama — the
+closure of the Cobre Panama **copper mine**, coded to `country.panama` — and none at all for the
+canal or the Bosporus.
+
+**What this supports.** A catalogue assembled around notable *geopolitical* events does not capture
+a third of the physically measurable chokepoint disruption in this period, because a substantial
+part of that disruption is not geopolitical. Drought is not a crisis anyone declares.
+
+**What it does not support.** It says nothing about whether other sources declared these events,
+nothing causal, and nothing about routes outside these six. It is a statement about **the coverage
+of this catalogue**, measured against an independent physical instrument.
+
 ## Why the rule fails, with the evidence
 
 The nearest episode to each eligible event, by offset in days between episode start and event date:

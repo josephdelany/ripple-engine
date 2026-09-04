@@ -98,6 +98,59 @@ with event labels, text similarity, market state, and pooling on identical suppo
 
 Be explicit about AI assistance if asked. A defensible formulation is: “I directed multiple coding agents, designed the registrations and acceptance rules, audited their outputs against code and data, and own the final research judgments.” Do not imply that every line was typed manually.
 
+## Second project — physical disruption measurement (v3, branch `research/v3`)
+
+A separate, self-contained piece of work. Every number ties to `data/v3/` and
+`docs/audit/V3_LINKAGE_FEASIBILITY.md`.
+
+**Independent Research — Measuring Physical Disruption of Maritime Oil Chokepoints**
+Built a preregistered, event-blind detector for tanker-transit impairment at seven maritime
+chokepoints from IMF PortWatch daily data (58,779 observations, 2019–2026).
+
+- Preregistered the detection rule — trailing-median baseline, threshold, duration and recovery
+  criteria — and committed it before writing the detector; the threshold was derived from the
+  input's own noise distribution rather than from any outcome.
+- Enforced blinding mechanically: automated tests walk the detector's dependency graph and fail if
+  it can reach the event catalogue, any price series, or any known episode date. Blind to all of
+  them, it independently recovered the Ever Given grounding, the Red Sea shipping crisis at two
+  chokepoints simultaneously, the Panama Canal drought and a Hormuz closure.
+- Found that **13 of 39 detected impairment episodes (33%), including a 51-day Panama Canal
+  episode, occur on routes for which a 313-event geopolitical catalogue contains no eligible
+  event** — a coverage gap that holds under any linkage rule, since linkage requires a shared route.
+- Reported the intended event-linkage analysis as **not identifiable** with the current catalogue,
+  documenting three specific failure modes rather than reporting an unusable proportion, and
+  declining to widen a registered window after observing that it would have captured the largest
+  episode.
+
+### One-line version
+
+Built a preregistered, event-blind instrument measuring physical disruption at maritime oil
+chokepoints, and showed that a third of the disruption it detects falls outside a curated
+geopolitical event catalogue entirely.
+
+### Thirty-second explanation
+
+“Commentary about oil treats geopolitical events as the thing that disrupts supply. I wanted to
+measure the disruption directly instead of inferring it from headlines, so I built a detector over
+IMF vessel-transit data that finds sustained declines in tanker traffic through chokepoints. I
+registered the rule before writing the code and enforced with tests that the detector cannot see
+the event list, so when it independently recovered the Ever Given and the Red Sea crisis I knew
+that wasn't circular. The result I trust is a coverage one: a third of what it detects, including
+a fifty-one-day Panama Canal episode caused by drought, has no corresponding geopolitical event at
+all. The linkage analysis I actually set out to run turned out not to be identifiable with the
+catalogue I have, and I reported that rather than a number I couldn't defend.”
+
+### What must be said alongside it
+
+- This is a **measurement instrument and a coverage result**, not a forecasting result. No price
+  data was analysed.
+- Episode **counts** are sensitive to the detector's parameters (16–195 across the nine
+  preregistered sensitivity cells). The large episodes are stable across all nine; the count is not.
+- The catalogue is **not a census of declarations**. Unmatched episodes are “not matched to this
+  catalogue” — never “undeclared”, “silent” or “ignored”.
+- The registration discloses that a preliminary below-baseline count had been seen before it was
+  written, so the phase is **registered but not blind**.
+
 ## Claims not to make
 
 - “The engine predicts oil prices” or “beats simple baselines.”
