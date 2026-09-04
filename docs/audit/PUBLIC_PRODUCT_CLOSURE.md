@@ -29,7 +29,7 @@ Generated artifacts, repetitive dossiers, tests, interfaces, and planning files 
 
 An earlier closure incorrectly presented the scoped 15-test result as “default test suite: 15 passed.” That statement is retracted. At that point the complete suite still had five observed failures: two provenance reads of a moved superseded source, one stale figure reachability assumption, one unregistered central result in the citation guard, and one cached ICB loader that unnecessarily contacted the network. The causes were repaired directly; collection was restored before the next full-suite run.
 
-After the target correction and repair, the unscoped suite completed with 1,002 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. The skipped and expected-failure counts remain part of the result and must be reported with it.
+After the target correction and repair, the unscoped suite in the populated research environment completed with 1,002 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. A clean checkout cannot run the database-integration portion because `data/oil.db` is gitignored and its full source chain is not committed; its deterministic result is reported separately. Neither environment's count may be substituted for the other. The skipped and expected-failure counts remain part of each result and must be reported with it.
 
 ## Confirmed provenance defect
 

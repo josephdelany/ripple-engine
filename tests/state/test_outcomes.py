@@ -46,6 +46,8 @@ def test_o2_kappa_matches_hand_value():
 def _ready():
     if not O.KAPPA_OUT.exists():
         pytest.skip("run `python3 src/state/outcomes.py` first")
+    if not P.DB.exists():
+        pytest.skip("needs a built data/oil.db (not committed)")
     conn = sqlite3.connect(f"file:{P.DB}?mode=ro", uri=True)
     if not conn.execute("SELECT name FROM sqlite_master WHERE name='event_outcomes'").fetchone():
         conn.close(); pytest.skip("event_outcomes table absent")
