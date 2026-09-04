@@ -17,6 +17,10 @@ AUTHORITATIVE = {
     "docs/README.md", "docs/PAPER.md", "docs/RESUME.md", "docs/DEMO.md",
     "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
     "registrations/STRUCTURAL_COMPONENT_ABLATION.md",
+    # v3 research branch. A live registration is authoritative about what was pre-committed even
+    # before anything is executed under it; banner it only once it is superseded.
+    "registrations/DISRUPTION_REALIZATION.md",
+    "docs/V3_STATUS.md",
 }
 AUTHORITATIVE_DIRS = ("docs/audit/",)
 
