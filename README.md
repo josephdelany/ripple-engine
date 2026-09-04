@@ -1,22 +1,22 @@
-# Structural versus surface historical analogy
+# Market state versus event labels in historical analogy
 
-Can a geopolitical forecasting instrument do better by comparing the full observable state around past events rather than matching a surface label such as “chokepoint disruption” or “sanctions”?
+When analysts choose historical precedents, does recent market state carry more useful information than a surface label such as “chokepoint disruption” or “sanctions”?
 
-This repository’s authoritative result is a registered, walk-forward comparison on 313 dated geopolitical and oil-policy events. Both methods receive exactly the same prior-event pool and forecast the same outcome: Brent’s 20-trading-day abnormal return. The only intended difference is how they weight history.
+This repository’s authoritative result is a registered walk-forward experiment and a separately registered explanatory ablation on 313 dated geopolitical and oil-policy events. Every method receives exactly the same prior-event pool and forecasts Brent’s 20-return abnormal return; only the weighting rule changes.
 
 ## Result
 
 Across 264 scored forecast dates, structural weighting had mean CRPS **8.341**, versus **8.784** for surface-class weighting. The paired difference was **−0.444** (95% stationary-bootstrap interval **[−0.613, −0.269]**; Diebold–Mariano *p* = **8.65×10⁻⁷**).
 
-That result has an essential qualification. Uniform pooling scored **8.390**. Structural weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**), while surface-class weighting was materially worse than pooling. The defensible conclusion is:
+That result has an essential qualification. Uniform pooling scored **8.390**. Structural weighting’s advantage over pooling was only **−0.049** (95% interval **[−0.112, +0.012]**; *p* = **0.140**). The original surface arm was also much more concentrated: median effective sample size 28.7 versus 130.2.
 
-> Strict structural weighting beats surface-class matching, but at the registered 20-day horizon it does not distinguishably beat pooling. Most of the measured gap comes from surface selection doing harm.
+A registered follow-up matched market-state, combined-state, and event-class weights to the same effective sample size. Market-state matching scored **8.286** against **8.422** for class matching: difference **−0.136**, 95% interval **[−0.234, −0.038]**, Holm-adjusted *p* = **0.013**. Adding the available leadership/dyadic fields did not improve on market-only matching: difference **+0.051**, interval **[−0.001, +0.118]**, Holm-adjusted *p* = **0.114**.
 
-This is professionally consequential without being a claim of production forecasting skill: an analyst should not narrow precedent by event label and assume the remaining cases are more informative.
+> Recent oil-market state outperforms event class as an analogy rule at equal concentration. The available non-market state does not add demonstrated value, and no arm establishes production forecasting skill.
 
-It also falls short of the question at the top of this page, and the paper says so. The strict point-in-time rule leaves the “structural” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. So what was tested is a market-and-leadership state against event labels; full structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
+Note what that question is not. The project set out to ask whether correspondence across the wider geopolitical state beats matching on labels, and it cannot answer that. The strict point-in-time rule leaves the “structural” arm comparing four market fields on every one of its 41,997 target–candidate comparisons, two leadership fields on 50.2% of them, and one dyadic field on three. Alignment, regime and capability variables are in the catalogue and never reach the arithmetic. So what was tested is a market-and-leadership state against event labels; full structural correspondence is untested rather than refuted. The measured composition is in [the paper](docs/PAPER.md), §3.
 
-Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. See [the registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) for the frozen decision rules.
+Read [the paper](docs/PAPER.md) for the design, limitations, and interpretation. The decisions are frozen in the [central registration](registrations/STRUCTURAL_SURFACE_EXPERIMENT.md) and [ablation registration](registrations/STRUCTURAL_COMPONENT_ABLATION.md).
 
 For applications and interviews, use only [the verified résumé language](docs/RESUME.md).
 The exact release decision and gates are in [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md).
@@ -28,10 +28,11 @@ Requirements: Python 3.11+ and the packages in `requirements-public.txt`.
 ```bash
 python3 -m pip install -r requirements-public.txt
 make reproduce-central
+make reproduce-ablation
 make test-public
 ```
 
-`make reproduce-central` uses only the committed, transparent input bundle in `data/structural_surface/input/`. It rebuilds the sealed reads, scores, and summary in a temporary directory and requires their SHA-256 hashes to match the frozen manifest. It does not require the uncommitted research database or network access.
+Both reproduction targets use only committed inputs, rebuild into temporary directories, and require SHA-256 hashes to match the frozen manifests. They do not require the uncommitted research database or network access.
 
 That is a transparent input bundle, not a fully reproducible data pipeline. The bundle reproduces the experiment exactly; the bundle itself cannot be rebuilt and checked from its upstream sources, which are partly hand-obtained, key-gated or request-gated. Run `python3 src/bundle_provenance.py` for the checked status, and see [the provenance boundary](docs/audit/PROVENANCE_BOUNDARY.md).
 
@@ -48,10 +49,12 @@ The demo produces one sealed retrospective read for the 2026 Hormuz closure and 
 - `docs/PAPER.md` — authoritative methods-and-evidence paper.
 - `docs/RESUME.md` — verified résumé bullets and interview explanation.
 - `registrations/STRUCTURAL_SURFACE_EXPERIMENT.md` — decisions frozen before computation.
+- `registrations/STRUCTURAL_COMPONENT_ABLATION.md` — concentration and component analysis frozen before computation.
 - `src/structural_surface_experiment.py` — central experiment.
+- `src/structural_component_ablation.py` — registered explanatory ablation.
 - `src/reproduce_structural_surface.py` — offline hash-checked reproduction.
 - `src/structural_surface_demo.py` — small instrument demonstration.
-- `data/structural_surface/` — inputs, sealed reads, scores, summary, and manifest.
+- `data/structural_surface/` — inputs, sealed reads, scores, summaries, ablation, and manifests.
 - `tests/test_structural_surface_*.py` — scientific and reproduction invariants.
 - `docs/audit/` — adversarial audit and claim corrections.
 - `SUBMISSION_STATUS.md` — release scope, verified gates, and excluded local work.

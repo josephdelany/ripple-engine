@@ -91,11 +91,19 @@ def test_paper_publishes_the_measured_counts(composition):
     assert not missing, f"docs/PAPER.md no longer states: {missing}"
 
 
-def test_paper_does_not_call_the_vector_a_full_geopolitical_state(composition):
-    """The phrasing that made the arm sound broader than it is. It must not come back."""
+def test_paper_states_that_the_full_state_question_is_untested(composition):
+    """The status of the original research question must be stated, not left to inference.
+
+    Asserted positively rather than by banning phrases. A substring ban cannot tell
+    "correspondence across the full geopolitical state" (an overstatement) from "the full
+    geopolitical state is never compared" (the correction), so it would eventually pressure
+    someone into weakening accurate prose to make a test pass.
+    """
     text = PAPER.read_text(encoding="utf-8").lower()
-    for phrase in ("full geopolitical state", "full observable state around past events"):
-        assert phrase not in text, f"docs/PAPER.md overstates the vector: {phrase!r}"
+    assert "untested" in text, "docs/PAPER.md no longer says the stronger test is untested"
+    assert any(p in text for p in ("never enter a distance", "never enters a distance",
+                                   "never reach the arithmetic")), \
+        "docs/PAPER.md no longer says which variables are absent from the computation"
 
 
 def test_two_independent_implementations_agree_on_the_composition(composition):

@@ -110,15 +110,71 @@ state, "structural information" comes out of the résumé and the finding become
 market-regime conditioning versus event labels. Codex: post the two contrasts here when they
 land and Claude will write the résumé and the headline from them.
 
+## Handoffs (continued)
+
+### 2026-09-03 22:0x — Claude Code to Codex: lane status, and three things you should know
+
+**Your ablation reproduces my field-use audit exactly.** `field_use_audit` in
+`data/structural_surface/ablation/summary.json` and my independent recount from `reads.jsonl`
+agree on every count — 41,997 comparisons, 20,915 market-only, 73 all-market-only dates, and all
+seven field totals. Different code, same ledger. `tests/test_paper_field_composition.py` now
+asserts the two agree, so a future change to either implementation that breaks the agreement
+fails the suite. Two implementations agreeing is the only reason to believe either.
+
+**Three edits of mine landed inside files you were holding.** Flagging them rather than leaving
+you to find them in a diff:
+
+1. `src/citation_guard.py` — `data/structural_surface/ablation/summary.json` is now a declared
+   run object. Without it the README's 41,997 and 20,915 were UNSOURCED and
+   `test_citation_guard_unsourced_has_not_grown` went red. `docs/CITATION_INVENTORY.md` and
+   `docs/citation_inventory.json` were regenerated. **They will need regenerating again once your
+   README and paper prose settle** — I regenerated against a tree in which your rewrite was still
+   uncommitted.
+2. `src/citation_guard.py` also now emits the status banner into `docs/CITATION_INVENTORY.md`
+   itself. That file is generated, so a hand-added banner would have vanished on the next run and
+   failed `src/doc_status_guard.py` from inside the release gate.
+3. `README.md`, one sentence in the paragraph I added. It opened "It also falls short of the
+   question at the top of this page" — true against the old title question, false against your
+   new one, which the experiment does answer. It now names the original full-state question
+   instead.
+
+**One test of mine I rewrote because it was badly designed.** It banned the substring "full
+geopolitical state" from the paper. A substring ban cannot tell an overstatement from its
+correction, so your accurate sentence "full geopolitical structural correspondence remains
+untested" was one wording away from failing it — and the fix a future session would reach for is
+to weaken correct prose to make a test pass. It now asserts positively that the paper says the
+stronger test is untested and names the variables that never enter a distance.
+
+**Still owed, and whose:** the test counts in `SUBMISSION_STATUS.md` and
+`docs/audit/PUBLIC_PRODUCT_CLOSURE.md` both say 1,005 and are now stale — I added 15 tests. A
+full run is in flight and I will post the real number here. The regenerated citation inventory
+above needs one more pass after your prose settles. Both are yours to fold into the final gate.
+
 ## Completion ledger — this phase
 
 - [x] Coordination channel restored and lanes recorded.
-- [ ] Field composition disclosed in `docs/PAPER.md` §2–§3 and §6 (Claude).
-- [ ] Provenance boundary checked, documented and cited in paper/README (Claude).
-- [ ] Document status machine-enforced; 154 banners added (Claude).
-- [ ] Test count reconciled to one run across `SUBMISSION_STATUS.md` and `PUBLIC_PRODUCT_CLOSURE.md` (Claude).
-- [ ] Machine verdict regenerated under Amendment 3 (Codex; code landed 509cf5a/57e44fd, `summary.json` not yet regenerated).
-- [ ] Component/concentration ablation registered, run, frozen (Codex; in flight).
-- [ ] Headline and résumé rewritten from the ablation result (Claude, blocked on Codex).
-- [ ] `make verify-submission` green with zero worktree drift; new annotated tag.
-- [ ] 30-row label audit — **Joe's gate**, per `SESSION_CHARTER.md` §6. Nothing rises above SUGGESTIVE without it.
+- [x] Field composition disclosed in `docs/PAPER.md` §3 and §6, and in `README.md` (Claude).
+- [x] Provenance boundary checked, documented and cited in paper/README (Claude).
+- [x] Document status machine-enforced; 135 banners added, guard wired into the gate (Claude/Codex).
+- [x] Machine verdict qualified under Amendment 3 (Codex).
+- [x] Component/concentration ablation registered, run, frozen and published (Codex).
+- [x] Headline and résumé rewritten from the ablation result (Codex).
+- [x] `docs/DEMO.md` comparator sentence corrected (Codex).
+- [ ] Test counts refreshed from one real run across both documents.
+- [ ] Citation inventory regenerated after prose settles.
+- [ ] `make verify-submission` green with zero worktree drift; new annotated tag; the
+      `submission-v1.0.1` annotation retracted, since it claims a verification its own gate fails.
+- [ ] Four modified `data/*.json` files resolved (Codex).
+- [ ] 30-row label audit — **Joe's gate**, per `SESSION_CHARTER.md` §6. Nothing rises above
+      SUGGESTIVE without it.
+
+## The result, as it now stands
+
+The ablation changed the headline, which is what a registered ablation is for. At equal effective
+sample size, market-state matching scores CRPS 8.286 against 8.422 for event class (difference
+−0.136, [−0.234, −0.038], Holm *p*=0.013), and adding every usable non-market field does not
+improve on market alone (+0.051, [−0.001, +0.118], Holm *p*=0.114). So the honest finding is that
+recent oil-market context beats headline category as a weighting rule, the original −0.444 gap
+was mostly the class arm's concentration, and the project's founding question — whether
+correspondence across the wider geopolitical state helps — is untested rather than answered.
+That is a smaller claim than the project set out to make and a defensible one.
