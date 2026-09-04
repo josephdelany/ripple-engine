@@ -127,6 +127,16 @@ The frozen verdict is:
 
 No secondary endpoint can promote or reverse this verdict.
 
+### Amendment 3 — comparator-explicit machine verdict (2026-09-03, before regeneration)
+
+The phrase `STRUCTURE ADDS INFORMATION` names the registered structural-versus-surface decision but
+is overbroad when quoted without its comparator, because the same output shows no distinguishable
+advantage over uniform pooling. Preserve every score and decision threshold, but rename that machine
+verdict `STRUCTURAL OUTPERFORMS SURFACE-CLASS WEIGHTING` and add a separate
+`pooling_comparison: NOT DISTINGUISHABLE FROM UNIFORM` field derived from the already-registered
+uniform diagnostic. This is a semantic correction to output labels, not a new statistical run or a
+change to the original registered decision.
+
 ## 7. Required comparators and diagnostics
 
 Uniform pooling over the same candidates is reported as a non-verdict comparator. Raw-return

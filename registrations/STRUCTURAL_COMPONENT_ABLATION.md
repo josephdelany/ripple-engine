@@ -83,3 +83,27 @@ and atoms across arms; prove the matched ratio never reads outcomes; verify atta
 sample size numerically; reproduce the published field-use counts directly from frozen reads; and
 reproduce all outputs byte-for-byte from a clean checkout.
 
+## Amendment 1 — common-concentration comparison (2026-09-03, before implementation)
+
+The binary-only matching rule above controls concentration for the surface arm but does not fully
+isolate representation in the market-versus-combined-state contrast. Supersede the primary analysis
+with a common feasible effective sample size for all three non-uniform representations.
+
+For each frozen read and each distance vector—market, market-plus-available-panel, and surface—find
+the minimum attainable effective sample size as temperature tends to zero, including ties. Set the
+common target `K_t` to the maximum of (a) the sealed registered structural effective sample size and
+(b) those three minima. `K_t` cannot exceed the common pool size. For each representation, choose a
+temperature by deterministic bisection using distances and `K_t` only, never outcomes, so its
+effective sample size matches `K_t` within `1e-8`; a constant-distance arm is uniform and forces
+`K_t` to the pool size. Record temperatures, achieved effective sizes, boundary cases, and dates
+where surface distance is constant.
+
+The two primary explanatory contrasts are:
+
+1. ESS-matched market minus ESS-matched surface: market-state representation versus event class.
+2. ESS-matched combined state minus ESS-matched market: incremental non-market information.
+
+Apply Holm's step-down correction across their two DM p-values at family alpha 0.05. Always publish
+unadjusted p-values, Holm-adjusted p-values, intervals, and effect sizes. The original registered
+structural, surface, and uniform arms remain descriptive anchors. The earlier binary-only
+surface-versus-uniform interpretation is secondary and cannot override these two matched contrasts.
