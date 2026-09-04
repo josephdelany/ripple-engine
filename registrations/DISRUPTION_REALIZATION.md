@@ -260,3 +260,38 @@ This is the more permissive of the two readings and is chosen for that reason: i
 real disruption that briefly rebounded, and the stricter reading is recoverable from the published
 columns by filtering on `n_impaired_days == duration_days`. The nine-cell sensitivity grid in §8
 varies the minimum against this same definition.
+
+## Amendment 2 — corrected eligibility arithmetic (2026-09-04, after the linkage run)
+
+§15's attrition chain (313 → 171 → 75 → 21 → 18) was **arithmetically wrong**. It applied the
+2019 date filter at the route-mapping step, then subtracted only the three 2019 events. It
+therefore omitted seven pre-2019 route-mapped events and the 2020-01-03 Soleimani event, which
+falls before the 2020-01-31 detection start.
+
+The correct chain, computed by `src/disruption_linkage.py`:
+
+> 313 catalogue events → **28** carrying a `location` entity mapped to a PortWatch route → 11
+> dated before 2020-01-31 → **17 eligible**
+
+This is recorded as a correction rather than a silent restatement. It changes the denominator of
+estimand A from 18 to 17 and does not change any detector parameter, any episode, or the reported
+count of linked events. `docs/audit/V3_LINKAGE_FEASIBILITY.md` uses the corrected chain throughout.
+
+## Amendment 3 — linkage rule declared unusable (2026-09-04, after the linkage run)
+
+The §16 onset-window rule was run once, exactly as registered, and its output is published. It is
+now declared **not fit for purpose**, and its proportions may not be quoted as findings. Three
+failure modes, evidenced in `docs/audit/V3_LINKAGE_FEASIBILITY.md`:
+
+1. The largest episode in the record (Hormuz, 183 days at full impairment) is excluded by a
+   one-day margin, because traffic collapsed three days before the declaration and the registered
+   lead is two.
+2. Slow-onset disruptions fall outside the 14-day lag; the Red Sea campaign's declaring events sit
+   27 and 39 days ahead of sustained onset.
+3. Events occurring *inside* an ongoing episode can never link, because linkage keys on episode
+   onset. Four Houthi events fall within one 242-day episode and none count.
+
+**The window has not been widened.** Changing it now, having seen that a wider lead would capture
+the Hormuz closure, is the post-hoc tuning this registration exists to prevent. A corrected rule —
+overlap-based rather than onset-based, with an asymmetric window justified independently of these
+episodes — requires a new registration written before it is run, and a larger eligible set than 17.

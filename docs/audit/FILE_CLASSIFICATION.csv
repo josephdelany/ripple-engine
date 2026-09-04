@@ -16,6 +16,10 @@ data/structural_surface/manifest.json,maintained_core
 data/structural_surface/reads.jsonl,maintained_core
 data/structural_surface/scores.jsonl,maintained_core
 data/structural_surface/summary.json,maintained_core
+data/v3/episodes_n_tanker.csv,archive_generated_data
+data/v3/episodes_n_tanker_manifest.json,archive_generated_data
+data/v3/portwatch_daily.csv,archive_generated_data
+data/v3/portwatch_manifest.json,archive_generated_data
 docs/DEMO.md,maintained_core
 docs/EVENTS_CODEBOOK.md,maintained_core
 docs/PAPER.md,maintained_core
@@ -37,12 +41,14 @@ registrations/STRUCTURAL_SURFACE_EXPERIMENT.md,maintained_core
 requirements-public.txt,maintained_core
 src/bundle_provenance.py,maintained_core
 src/classify_public_product.py,maintained_core
+src/disruption_episodes.py,archive_scientific_code
 src/doc_status_guard.py,maintained_core
 src/engine/__init__.py,required_dependency
 src/engine/inference.py,required_dependency
 src/engine/persistence.py,evidence_audit
 src/engine/read.py,evidence_audit
 src/engine/scoring.py,required_dependency
+src/export_portwatch_slice.py,archive_scientific_code
 src/export_structural_surface_inputs.py,maintained_core
 src/public_claim_guard.py,maintained_core
 src/reproduce_structural_component_ablation.py,maintained_core
@@ -56,6 +62,9 @@ src/verify_submission.py,maintained_core
 src/walk.py,evidence_audit
 tests/conftest.py,maintained_core
 tests/test_bundle_provenance.py,maintained_core
+tests/test_disruption_blinding.py,archive_scientific_tests
+tests/test_disruption_episodes.py,archive_scientific_tests
+tests/test_disruption_provenance.py,archive_scientific_tests
 tests/test_doc_status_guard.py,maintained_core
 tests/test_paper_field_composition.py,maintained_core
 tests/test_public_claim_guard.py,maintained_core

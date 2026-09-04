@@ -1,0 +1,29 @@
+event_id,event_date,type,title,route
+bridgeton_mine_strike_1987,1987-07-24,chokepoint_disruption,Tanker Bridgeton strikes Iranian mine in first Earnest Will convoy,hormuz
+suez_tropic_brilliance_2004,2004-11-08,chokepoint_disruption,Tanker Tropic Brilliance runs aground and blocks the Suez Canal,suez
+egypt_revolution_2011,2011-01-25,conflict_escalation,Egyptian revolution erupts raising Suez transit risk,suez
+hormuz_iran_threat_2011,2011-12-27,chokepoint_disruption,Iran threatens to close the Strait of Hormuz,hormuz
+egypt_coup_suez_2013,2013-07-03,conflict_escalation,Egyptian military ousts Morsi reviving Suez fears,suez
+bab_el_mandeb_houthi_tanker_2018,2018-04-03,chokepoint_disruption,Houthis attack a Saudi crude tanker near the Bab-el-Mandeb approaches,bab_el_mandeb
+saudi_suspends_bab_el_mandeb_2018,2018-07-25,chokepoint_disruption,Saudi Arabia suspends oil shipments through Bab el-Mandeb,bab_el_mandeb
+fujairah_tanker_sabotage_2019,2019-05-12,infrastructure_attack,Four tankers sabotaged off Fujairah near Hormuz,hormuz
+gulf_of_oman_tanker_attacks_2019,2019-06-13,infrastructure_attack,Gulf of Oman tanker attacks,hormuz
+stena_impero_seizure_2019,2019-07-19,chokepoint_disruption,Iran seizes British tanker Stena Impero in Hormuz,hormuz
+soleimani_strike_2020,2020-01-03,conflict_escalation,US strike kills Qassem Soleimani,hormuz
+hankuk_chemi_seizure_2021,2021-01-04,chokepoint_disruption,Iran seizes South Korean tanker Hankuk Chemi in the Strait of Hormuz,hormuz
+suez_ever_given_2021,2021-03-23,chokepoint_disruption,Ever Given blocks the Suez Canal,suez
+mercer_street_2021,2021-07-29,chokepoint_disruption,Drone attack strikes tanker Mercer Street off Oman,hormuz
+me_galaxy_leader_2023,2023-11-19,chokepoint_disruption,Houthis seize Galaxy Leader car carrier in Red Sea,bab_el_mandeb
+red_sea_attacks_2023,2023-12-01,chokepoint_disruption,Houthi attacks disrupt Red Sea shipping,bab_el_mandeb
+me_maersk_diversions_2023,2023-12-15,chokepoint_disruption,Houthi drone strike triggers Red Sea shipping diversions,bab_el_mandeb
+me_us_uk_strikes_2024,2024-01-11,conflict_escalation,US and UK launch first airstrikes on Houthi targets in Yemen,bab_el_mandeb
+me_marlin_luanda_2024,2024-01-26,infrastructure_attack,Houthi missile sets tanker Marlin Luanda ablaze in Gulf of Aden,bab_el_mandeb
+me_rubymar_2024,2024-02-18,infrastructure_attack,"Houthi missile cripples Rubymar, the first ship sunk in the Red Sea crisis",bab_el_mandeb
+me_mv_tutor_2024,2024-06-12,infrastructure_attack,Houthi attack sinks bulk carrier MV Tutor in the Red Sea,bab_el_mandeb
+me_chios_lion_2024,2024-07-15,infrastructure_attack,Houthi drone boat hits tanker Chios Lion,bab_el_mandeb
+me_sounion_2024,2024-08-21,infrastructure_attack,Houthis set crude tanker Sounion ablaze in the Red Sea,bab_el_mandeb
+me_rough_rider_2025,2025-03-15,conflict_escalation,US launches Operation Rough Rider air campaign against Yemen Houthis,bab_el_mandeb
+me_midnight_hammer_2025,2025-06-22,conflict_escalation,US strikes Iranian nuclear sites Fordow Natanz and Isfahan,hormuz
+redsea_houthi_resume_2025,2025-07-06,chokepoint_disruption,Houthis resume Red Sea attacks sinking Magic Seas,bab_el_mandeb
+hormuz_closure_2026,2026-03-04,chokepoint_disruption,Iran declares the Strait of Hormuz closed,hormuz
+us_iran_hormuz_mou_2026,2026-06-17,policy_response,US-Iran MOU reopens the Strait of Hormuz,hormuz

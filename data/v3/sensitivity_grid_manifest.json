@@ -1,0 +1,25 @@
+{
+  "detector_sha256": "f90c7b54d0572e895516c8ac48012fbb4a291abd49778b06991a4ab81b86a6c0",
+  "detector_version": "1.0.0",
+  "input": {
+    "data/v3/portwatch_daily.csv": "93a37a1e6916d17f94d71ff42deb22d906730ac78c597dace90c709ebbbedfa9"
+  },
+  "min_impaired_days": [
+    3,
+    5,
+    7
+  ],
+  "outputs": {
+    "sensitivity_grid.csv": "c43eda61fa600431cc14f5fd9d1e80b08f7b205257e817c5d4a9919eb9c777c0"
+  },
+  "primary": {
+    "min_impaired_days": 5,
+    "threshold": 0.7
+  },
+  "registration": "registrations/DISRUPTION_REALIZATION.md",
+  "thresholds": [
+    0.6,
+    0.7,
+    0.8
+  ]
+}
