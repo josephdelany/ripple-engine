@@ -8,4 +8,6 @@ The current public documents are:
 4. [`EVENTS_CODEBOOK.md`](EVENTS_CODEBOOK.md) — central event-input codebook.
 5. [`audit/PUBLIC_PRODUCT_CLOSURE.md`](audit/PUBLIC_PRODUCT_CLOSURE.md) — audit and archive boundary.
 
-Other documents are retained research history, supporting evidence, registrations, or superseded narratives. Their presence does not make their claims current. When a legacy document conflicts with `PAPER.md`, the paper and frozen `data/structural_surface/summary.json` control.
+The complete research history and superseded analyses are preserved at tag
+`full-research-archive-2026-09-03`, not mixed into public HEAD. When historical material conflicts
+with `PAPER.md`, the paper and frozen central/ablation summaries control.

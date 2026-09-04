@@ -4,6 +4,11 @@
 count below is a live query against `data/oil.db` or `git ls-files`, reproducible with the command
 printed beside it.*
 
+**Archive scope.** File-count and disk-usage sections describe the complete pre-separation tree at
+tag `full-research-archive-2026-09-03`. Public HEAD now retains only the maintained product and audit
+evidence. The database/state-coverage analysis remains applicable because it is independently
+checked against the committed frozen bundle.
+
 ## Summary
 
 The maintained experiment uses **4.3%** of the market data and, of roughly forty collected

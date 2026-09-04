@@ -30,7 +30,9 @@ CORE = {
 DEPENDENCY = {"src/engine/inference.py", "src/engine/scoring.py",
               "src/engine/__init__.py", "docs/reference/WORLD_STATE_CODEBOOK.md"}
 EVIDENCE = {
-    "docs/ABNORMAL_RETURN_RESULT.md", "docs/audit/UNUSED_DATA_INVENTORY.md",
+    "docs/audit/00_INDEX.md", "docs/audit/01_TIER1_design_defects.md",
+    "docs/audit/04_verified_sound.md", "docs/audit/PROVENANCE_BOUNDARY.md",
+    "docs/audit/PUBLIC_PRODUCT_CLOSURE.md", "docs/audit/UNUSED_DATA_INVENTORY.md",
     # The paper cites these exact audited implementations; retaining them lets a reviewer verify
     # every correction without checking out the recovery tag.
     "src/engine/read.py", "src/walk.py", "src/situation_vintage.py",
@@ -43,7 +45,7 @@ def classify(path):
         return "maintained_core"
     if path in DEPENDENCY:
         return "required_dependency"
-    if path in EVIDENCE or path.startswith("docs/audit/"):
+    if path in EVIDENCE:
         return "evidence_audit"
     if path.startswith("archive/"):
         return "archive_preserved"

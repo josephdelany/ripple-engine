@@ -101,7 +101,7 @@ The next serious analysis is prospective collection of time-stamped geopolitical
 
 Run `make reproduce-central` and `make reproduce-ablation`. They use committed inputs, rebuild the central and ablation outputs in isolation, and verify byte-for-byte hashes against their manifests. Tests enforce filtration, equal support, seal-before-outcome order, scoring, concentration matching, field-use accounting, and deterministic reproduction.
 
-The six-week system and retractions remain in repository history and the audit record, but are not additional validated findings. Tag `closure-core-frozen-2026-09-03` is the pre-closure recovery point.
+The six-week system and retractions remain in git history and the audit record, but are not additional validated findings. Tag `full-research-archive-2026-09-03` is the complete pre-separation recovery point.
 
 ## References
 

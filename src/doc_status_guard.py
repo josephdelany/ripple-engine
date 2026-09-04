@@ -1,19 +1,4 @@
-"""Every Markdown file a reader might open must say what it is, on its first line.
-
-The repository preserves six weeks of superseded work on purpose — the retractions are evidence
-of research discipline, and deleting them would destroy that evidence. The cost is that a reader
-who opens `docs/RIPPLE_FINDINGS.md` or `scaffolding/NORTH_STAR.md` has no way to know it is not
-current guidance. `docs/audit/FILE_CLASSIFICATION.csv` classifies every tracked file, but nobody
-consults a CSV before opening a plausible-looking document.
-
-So the label goes on the document. Each non-authoritative Markdown file carries a first-line
-blockquote declaring one of four statuses, and this guard fails if one is missing, unrecognised,
-or attached to a document that is supposed to be authoritative.
-
-This is deliberately a guard rather than a one-time relocation. Moving files would have taken the
-1,005-test historical suite with `src/engine/**`, and a move can silently drift back; a check in
-the release gate cannot.
-"""
+"""Require every retained Markdown document to declare whether it is current or historical."""
 from __future__ import annotations
 
 import re
@@ -28,13 +13,10 @@ EXEMPT_DIRS = ("archive/", "data/", "parked/", "practice/", "tests/", ".github/"
 # The maintained public product plus the working files of the current phase. These must NOT carry
 # a superseded banner; anything else must carry one of the four statuses below.
 AUTHORITATIVE = {
-    "README.md", "SUBMISSION_STATUS.md", "CLAUDE.md", "COORDINATION.md",
+    "README.md", "SUBMISSION_STATUS.md",
     "docs/README.md", "docs/PAPER.md", "docs/RESUME.md", "docs/DEMO.md",
     "registrations/STRUCTURAL_SURFACE_EXPERIMENT.md",
     "registrations/STRUCTURAL_COMPONENT_ABLATION.md",
-    # Registered 2026-09-03 and not yet run. A live registration is authoritative about what was
-    # pre-committed even before anything is executed under it; banner it only if it is superseded.
-    "registrations/CONTEMPORANEOUS_AVAILABILITY_ARM.md",
 }
 AUTHORITATIVE_DIRS = ("docs/audit/",)
 

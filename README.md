@@ -60,9 +60,11 @@ The demo produces one sealed retrospective read for the 2026 Hormuz closure and 
 - `docs/audit/` — adversarial audit and claim corrections.
 - `SUBMISSION_STATUS.md` — release scope, verified gates, and excluded local work.
 
-The repository also preserves the six-week research history and superseded analyses. They are not part of the authoritative claim unless the paper cites them. Recovery tag `closure-core-frozen-2026-09-03` identifies the pre-closure frozen core.
+The complete six-week research history and superseded analyses are preserved at recovery tag
+`full-research-archive-2026-09-03`; they are intentionally absent from public HEAD.
 
-`docs/audit/PUBLIC_PRODUCT_CLOSURE.md` records what was retained, what is archival, and the state of the historical test suite. “Archival” means preserved for auditability and recovery, not endorsed as a current result.
+`docs/audit/PUBLIC_PRODUCT_CLOSURE.md` records what was retained, what moved to the archive tag, and
+the distinct verification receipts for the historical and public trees.
 
 ## Scope and integrity
 

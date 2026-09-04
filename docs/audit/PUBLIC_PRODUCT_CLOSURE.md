@@ -2,43 +2,59 @@
 
 ## Decision
 
-The maintained product is one methods-and-evidence paper, one README, one registered structural-versus-surface experiment, one small demonstration, its transparent input bundle, and its scientific tests. Everything else is retained as an archive of the six-week research process, not as an additional public claim.
+Public HEAD is a deliberately small methods-and-evidence product: one paper, one README, one
+registered central comparison, one registered explanatory ablation, one instrument demonstration,
+the frozen transparent bundle, exact reproducers, audit receipts, and scientific/release tests.
 
-This is a logical archive rather than a destructive file purge. It preserves provenance, avoids breaking paths while another coding session is active, and keeps every prior artifact recoverable. The git tag `closure-core-frozen-2026-09-03` is the recovery point. The authoritative surface is enumerated in `README.md`; files outside that map are historical unless the paper cites them.
+The complete six-week research system is preserved at annotated tag
+`full-research-archive-2026-09-03`. Before removal, every one of the 1,700 archival paths was checked
+to exist at that tag. Public HEAD removed 971 planning/narrative files, 302 legacy generated-data
+files, 226 legacy scientific-code files, 147 historical tests, 48 interface/operations files, and
+6 already-archived files. This was separation, not erasure.
 
-The two legacy GitHub Actions were physically moved to `archive/github-workflows/`. They no longer run autonomous feeds, publish the old dashboard, send alerts, or commit generated state from a submitted research repository.
+Five legacy source files remain because the paper cites their exact lines when explaining withdrawn
+claims: `src/engine/read.py`, `src/walk.py`, `src/situation_vintage.py`, `src/state/ies90.py`, and
+`src/engine/persistence.py`. They are audit evidence, not maintained product code.
 
-## Repository-wide classification
+## What was verified before separation
 
-Every tracked file was classified during closure by path and role. The exhaustive ledger is
-`docs/audit/FILE_CLASSIFICATION.csv`; regenerate it with `python3 src/classify_public_product.py`.
+Immediately before slimming, the populated historical repository completed with **1,038 passed,
+13 explicitly skipped, 1 expected failure, and zero unexpected failures**. Both frozen public
+analyses reproduced exactly, and all claim/link/provenance guards passed. That receipt describes the
+archive tag, not the smaller suite now collected by public HEAD.
 
-- **Maintained core:** registration, central implementation, reproducer, demonstration, frozen transparent inputs/outputs, README, paper, codebook, and central tests.
-- **Required dependency:** inference/scoring code and the world-state codebook directly read by the central implementation.
-- **Evidence/audit:** audit reports and the abnormal-return comparison cited to explain corrected design choices.
-- **Archive—scientific:** prior experiments, outputs, registrations, and tests not used by the central claim.
-- **Archive—interface/operations:** dashboards, APIs, feeds, agents, launch configuration, and operational documentation.
-- **Archive—planning/narrative:** scaffolding, handoffs, duplicate papers, briefs, application prose, and historical plans.
-- **Archive—generated/data:** generated ledgers and datasets not present in the committed central input bundle.
+An earlier release reported a scoped 15-test result as if it were repository verification. That
+statement is retracted. The previously excluded failures were repaired, full collection was
+restored, and test writers that mutated committed outputs were redirected to temporary files.
 
-Generated artifacts, repetitive dossiers, tests, interfaces, and planning files were classified mechanically. Claim-producing code and the files capable of affecting the paper, central experiment, retained measurement evidence, demonstration, provenance, or reproduction received the substantive audit described in `docs/audit/00_INDEX.md` and the closure work.
+## Public release gate
 
-## Frozen evidence
+`make verify-submission` is the complete public-HEAD gate. It:
 
-`make reproduce-central` was run after the final diagnostics and reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. `make test-public` is only a fast 17-test central subset. It is not evidence that the repository suite passes and must never be reported as such. Plain `pytest -q` and `make test-full` collect the complete suite and are the release gate.
+1. reproduces the central and ablation artifacts byte-for-byte;
+2. runs every test retained in public HEAD;
+3. checks every quantitative public claim against the frozen JSON;
+4. verifies citation metadata and local links;
+5. checks document status and the complete retained-file classification; and
+6. fails if verification changes the checkout.
 
-An earlier closure incorrectly presented the scoped 15-test result as “default test suite: 15 passed.” That statement is retracted. At that point the complete suite still had five observed failures: two provenance reads of a moved superseded source, one stale figure reachability assumption, one unregistered central result in the citation guard, and one cached ICB loader that unnecessarily contacted the network. The causes were repaired directly; collection was restored before the next full-suite run.
+This gate does not pretend to rerun the archived autonomous engine or reconstruct `data/oil.db`.
+Those capabilities and their historical tests exist at the archive tag. The public bundle itself is
+exactly reproducible; its upstream database/source chain is only auditable, as documented in
+[`PROVENANCE_BOUNDARY.md`](PROVENANCE_BOUNDARY.md).
 
-After the target correction and repair, the final unscoped suite in the populated research environment completed with 1,038 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. The earlier clean-checkout gate completed with 348 passed, 619 database-dependent skips, 52 other condition-dependent skips, and zero failures; its count must be superseded by the final tagged-checkout run before release. A clean checkout cannot run the database-integration portion because `data/oil.db` is gitignored and its full source chain is not committed. Neither environment's count may be substituted for the other. The skipped and expected-failure counts remain part of each result and must be reported with it.
+## Confirmed legacy provenance defect
 
-## Confirmed provenance defect
-
-The superseded `docs/OIL_FINDINGS.md` and `docs/RESUME_AND_APPLICATION.md` cite `data/ripple/stage0.json`, but the generator writes `data/magnitude/stage0.json` (`src/magnitude_stage0.py:42,332` in the audited revision). Therefore those documents do not point to their generating artifact. Neither document is part of the authoritative public claim.
+At the archive tag, `docs/OIL_FINDINGS.md` and `docs/RESUME_AND_APPLICATION.md` cite
+`data/ripple/stage0.json`, while their generator writes `data/magnitude/stage0.json`
+(`src/magnitude_stage0.py:42,332` in that revision). Those documents and outputs are not public
+claims.
 
 ## Do not claim
 
-- Do not say the structural method beats pooling at 20 trading days.
-- Do not present the 2026 Hormuz demonstration as validation.
-- Do not describe coding dates as historical information-availability dates.
-- Do not describe legacy same-class reranking as a test of structural versus surface analogy.
-- Do not import escalation or propagation results into the central headline without a new claim-level audit.
+- Do not say the maintained method beats uniform pooling at 20 trading days.
+- Do not present the 2026 Hormuz demonstration as validation or a live forecast.
+- Do not describe modern dataset-release dates as historical information availability.
+- Do not describe legacy same-class reranking as structural-versus-surface analogy.
+- Do not claim that full geopolitical structural correspondence was tested.
+- Do not import archived escalation, propagation, or physical-exposure results into the headline.

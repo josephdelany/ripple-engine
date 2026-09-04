@@ -5,14 +5,17 @@ from pathlib import Path
 import public_claim_guard as claims
 
 ROOT = Path(__file__).resolve().parent.parent
-DOCS = [ROOT / "README.md", ROOT / "docs" / "PAPER.md", ROOT / "docs" / "RESUME.md",
-        ROOT / "docs" / "README.md", ROOT / "docs" / "DEMO.md"]
 LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
 
 
 def broken_links():
     broken = []
-    for doc in DOCS:
+    docs = sorted([
+        *ROOT.glob("*.md"),
+        *(ROOT / "docs").rglob("*.md"),
+        *(ROOT / "registrations").rglob("*.md"),
+    ])
+    for doc in docs:
         for target in LINK.findall(doc.read_text(encoding="utf-8")):
             target = target.split("#", 1)[0]
             if not target or "://" in target or target.startswith("mailto:"):

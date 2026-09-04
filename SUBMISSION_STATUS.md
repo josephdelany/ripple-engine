@@ -12,14 +12,12 @@ On 264 walk-forward forecast dates, the original combined-state arm scores mean 
 
 - `make verify-submission`: must be rerun on this release candidate.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
-- Populated research environment: default `pytest -q` passed 1,038 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
-- Clean committed checkout: exact reproduction passed; 348 deterministic tests passed, 619 database-dependent and 52 other condition-dependent tests were explicitly skipped, and zero tests failed. This is not presented as full integration coverage because the gitignored research database cannot be reconstructed from the repository alone.
+- Pre-separation archive receipt: the complete historical tree passed 1,038 tests, explicitly skipped 13 condition-dependent tests, recorded 1 expected failure, and had zero unexpected failures. It is preserved at `full-research-archive-2026-09-03`.
+- Current public tree: all 53 retained tests pass with zero skips or expected failures. The final clean-checkout count will be recorded after the release commit.
 - Public claims match the frozen central and ablation summaries.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.
-- Former self-mutating GitHub Actions are inert under `archive/github-workflows/`.
-- Superseded paper, brief, oil-findings, explanation, and résumé documents carry warnings.
-- The run emitted four non-failing dependency/encoding warnings: three from legacy FastAPI/Starlette APIs and one from a Stata file decoded with its documented Latin-1 fallback.
+- Autonomous feeds, dashboards, superseded papers, duplicate narratives, and their operational tests are absent from public HEAD and recoverable at the archive tag.
 
 ## Submission contents
 
@@ -39,7 +37,7 @@ On 264 walk-forward forecast dates, the original combined-state arm scores mean 
 
 Ignored research databases, raw source distributions, caches, backups, and the legacy `data/walk_forward/unfiltered/` diagnostic are not release contents. They cannot alter the committed frozen results. Their role and the upstream reproducibility boundary are stated in `docs/audit/PROVENANCE_BOUNDARY.md`.
 
-The earlier `submission-v1.0.0` tag was issued after only a 15-test scoped gate and is retracted. It must not be submitted or cited as a verified release.
+Earlier `submission-v1.0.0` and `submission-v1.0.1` tags predate final closure and must not be submitted or cited as the current verified release.
 
 ## Human-use constraint
 
