@@ -66,6 +66,7 @@ verify-submission: reproduce-central test-full
 	$(PY) src/verify_submission.py
 	$(PY) src/classify_public_product.py
 	git diff --exit-code -- docs/audit/FILE_CLASSIFICATION.csv
+	test -z "$$(git status --porcelain)" || { git status --short; echo "verification mutated the checkout" >&2; exit 1; }
 
 reproduce:
 	@set -euo pipefail; \

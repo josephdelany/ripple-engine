@@ -6,8 +6,9 @@ edges, and ranks situations by multi-modal corroboration. Run: python3 -m pytest
 """
 
 
-def test_sw1_read_is_coherent_and_only_claims_validated():
+def test_sw1_read_is_coherent_and_only_claims_validated(tmp_path, monkeypatch):
     import sowhat
+    monkeypatch.setattr(sowhat, "OUT", tmp_path / "sowhat.json")
     r = sowhat.build()
     assert r["regime"] in ("ON", "OFF", "FAILED", "UNKNOWN", "?")
     assert isinstance(r["so_what"], str) and len(r["so_what"]) > 20
@@ -20,8 +21,9 @@ def test_sw1_read_is_coherent_and_only_claims_validated():
         assert b["to"] in validated
 
 
-def test_sw2_situations_ranked_by_corroboration():
+def test_sw2_situations_ranked_by_corroboration(tmp_path, monkeypatch):
     import sowhat
+    monkeypatch.setattr(sowhat, "OUT", tmp_path / "sowhat.json")
     r = sowhat.build()
     sits = r["active_situations"]
     if len(sits) >= 2:

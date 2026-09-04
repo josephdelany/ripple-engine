@@ -9,7 +9,8 @@ import status as S
 import acceptance as A
 
 
-def test_st1_status_verdict_is_valid():
+def test_st1_status_verdict_is_valid(tmp_path, monkeypatch):
+    monkeypatch.setattr(S, "OUT", tmp_path / "engine_status.json")
     r = S.run()
     assert r["verdict"] in ("GREEN", "AMBER", "RED")
     assert isinstance(r["reasons"], list) and r["reasons"]

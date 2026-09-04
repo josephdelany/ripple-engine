@@ -237,7 +237,7 @@ def test_step8_placebo_skill_is_zero_within_ci_on_synthetic_null_data(tmp_path):
     rr = tier["G"]["rps"]["engine_vs"]["random_analogs"]                       # RPS over the ordinal levels: null too
     assert rr["n"] >= 20 and rr["ci95"][0] <= 0 <= rr["ci95"][1], rr
     assert tier["G"]["deal"]["n_scored"] >= 10 and tier["G"]["deal"]["base_rate"] is not None
-    pl = W.placebo(c, MENU, w.reads, w.scores, p, reps=2)
+    pl = W.placebo(c, MENU, w.reads, w.scores, p, reps=2, out_dir_for_placebo=tmp_path)
     assert pl["n"] >= 10 and pl["null_holds"] is True and pl["vs_random_analogs"]["covers_zero"]
     assert pl["fair_vs_climatology"]["covers_zero"]
     assert pl["vs_climatology"]["skill"] < pl["fair_vs_climatology"]["skill"]
