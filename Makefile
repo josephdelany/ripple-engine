@@ -51,8 +51,8 @@ PY := python3
 reproduce-central:
 	$(PY) src/reproduce_structural_surface.py
 
-# The maintained public-product gate. The historical 1,009-test research suite remains available
-# with `python3 -m pytest -q`, but includes networked loaders and guards for superseded publications.
+# The maintained fast public-product check. The complete research suite remains available with
+# `python3 -m pytest -q` and includes loaders and guards for superseded publications.
 test-public:
 	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_public_claim_guard.py tests/test_verify_submission.py
 	$(PY) src/public_claim_guard.py

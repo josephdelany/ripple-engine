@@ -2,7 +2,7 @@
 
 ## Release decision
 
-The maintained research product contains one qualified finding, one reproducible experiment, one methods paper, and one instrument demonstration. It is not release-ready until every gate below passes on the same committed revision and a new release tag is created.
+The maintained research product contains one qualified finding, one reproducible experiment, one methods paper, and one instrument demonstration. The corrected release candidate passed every gate below. A release tag is created only after this status update itself passes the same complete gate.
 
 ## Defensible finding
 
@@ -12,7 +12,7 @@ On 264 walk-forward forecast dates, structural weighting scores mean CRPS 8.341 
 
 - `make verify-submission`: passes.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
-- Default `pytest -q`: latest unscoped run passed 1,000 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
+- Default `pytest -q`: latest unscoped run passed 1,002 tests, explicitly skipped 13 condition-dependent tests, and recorded 1 expected monthly-tier failure, with zero unexpected failures.
 - Public claims match `data/structural_surface/summary.json`.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.

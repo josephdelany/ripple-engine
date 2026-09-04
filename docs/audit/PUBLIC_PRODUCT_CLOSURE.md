@@ -25,11 +25,11 @@ Generated artifacts, repetitive dossiers, tests, interfaces, and planning files 
 
 ## Frozen evidence
 
-`make reproduce-central` was run after the final diagnostics and reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. `make test-public` is only a fast 15-test central subset. It is not evidence that the repository suite passes and must never be reported as such. Plain `pytest -q` and `make test-full` collect the complete suite and are the release gate.
+`make reproduce-central` was run after the final diagnostics and reproduced `reads.jsonl`, `scores.jsonl`, and `summary.json` exactly at the SHA-256 values in `data/structural_surface/manifest.json`. `make test-public` is only a fast 17-test central subset. It is not evidence that the repository suite passes and must never be reported as such. Plain `pytest -q` and `make test-full` collect the complete suite and are the release gate.
 
 An earlier closure incorrectly presented the scoped 15-test result as “default test suite: 15 passed.” That statement is retracted. At that point the complete suite still had five observed failures: two provenance reads of a moved superseded source, one stale figure reachability assumption, one unregistered central result in the citation guard, and one cached ICB loader that unnecessarily contacted the network. The causes were repaired directly; collection was restored before the next full-suite run.
 
-After repair, the unscoped suite completed with 1,000 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. The skipped and expected-failure counts remain part of the result and must be reported with it.
+After the target correction and repair, the unscoped suite completed with 1,002 passed, 13 explicit condition-dependent skips, 1 expected monthly-tier failure, and zero unexpected failures. The skipped and expected-failure counts remain part of the result and must be reported with it.
 
 ## Confirmed provenance defect
 
