@@ -1316,6 +1316,7 @@ pytest.ini,archive_scientific_code
 registrations/BIG_MOVES_REGISTRATION.md,archive_planning_narrative
 registrations/BRIEF_SKELETON.md,archive_planning_narrative
 registrations/CLAIM_LEDGER_REGISTRATION.md,archive_planning_narrative
+registrations/CONTEMPORANEOUS_AVAILABILITY_ARM.md,archive_planning_narrative
 registrations/EXPOSURE_REGISTRATION.md,archive_planning_narrative
 registrations/GRID_STUDY_REGISTRATION.md,archive_planning_narrative
 registrations/MAGNITUDE_REGISTRATION.md,archive_planning_narrative
@@ -1751,6 +1752,7 @@ tests/test_triage.py,archive_scientific_tests
 tests/test_two_source.py,archive_scientific_tests
 tests/test_ucdp.py,archive_scientific_tests
 tests/test_uncheckable_audit.py,archive_scientific_tests
+tests/test_unused_data_inventory.py,maintained_core
 tests/test_v2_challenge.py,archive_scientific_tests
 tests/test_v2_gate_ledger.py,archive_scientific_tests
 tests/test_v2_story_api.py,archive_scientific_tests
