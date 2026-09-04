@@ -180,3 +180,129 @@ checkout.
 **Registered and not run.** No implementation exists at the time of registration. Whoever executes
 this must do so under the rules above without modification, and must publish the result whichever
 way it falls.
+
+## Amendment 1 — 2026-09-03, before implementation or outcome computation
+
+An independent executability audit found that the source-family lag design above is not defensible
+from the frozen bundle. This amendment supersedes the conflicting provisions above. No forecast,
+loss, CRPS, contrast, or outcome-conditioned quantity under either availability rule has been
+computed. Only source strings, field coverage, stored dates, and loader semantics were inspected.
+
+### Corrected estimand and name
+
+This is the **schedule-imputed finalized-data sensitivity arm**, not a contemporaneous-availability
+arm. It asks whether the registered equal-block similarity rule gains predictive accuracy when
+finalized geopolitical data are aligned to the nominal availability dates already encoded by their
+loaders. It cannot prove what an analyst actually knew, because modern finalized datasets may
+contain later corrections or coding decisions. A favorable result supports only this representation
+and weighting rule on this frozen record. An unfavorable result shows no demonstrated increment for
+this operationalization; it does not establish that wider state contains no information.
+
+### Corrected availability rule
+
+The family-specific lag table and `obs_date + L(source)` rule above are withdrawn. Loaders already
+encode nominal availability in `vintage` (for example annual COW/Polity at Y+1, SIPRI at Y+1 May,
+WDI at Y+1 July, and event-derived rolling variables at their calculated as-of date). Adding another
+lag would double-lag some sources. The frozen bundle also contains one selected row per
+event/entity/field, so it cannot fall back to an earlier observation after a second lag rejects the
+selected row.
+
+A panel row is admitted exactly when:
+
+1. `entity_id != "situation"`;
+2. `retrospective == 0`;
+3. `obs_date <= event_date`; and
+4. `vintage <= event_date`.
+
+`release` is recorded as provenance for the modern file actually parsed and is ignored in this
+sensitivity. The claim that conservative under-admission cannot create a false positive is withdrawn:
+missingness and selection can change rankings in either direction.
+
+### Frozen field allowlist
+
+Only the following non-market fields may enter. This list was frozen from the registered codebook
+and bundle metadata before inspecting outcomes:
+
+- Physical: `spare_capacity_opec`, `us_crude_stocks_xspr`, `us_spr_stock`,
+  `us_refinery_utilization`.
+- Actors: `cinc`, `milex_cow`, `milper_cow`, `milex_sipri`,
+  `milex_gdp_share_sipri`, `polity2`, `polity_durable`, `leader_tenure_days`,
+  `leader_change_last_365d`, `oil_rents_gdp`, `coup_last_5y`.
+- Dyads: `atop_defense_pact`, `atop_any_obligation`, `mid_count_10y`,
+  `mid_max_hostlev_10y`, `mid_last_date`, `icb_crisis_count`,
+  `icb_last_outcome_form`, `icb_last_violence`, `icb_last_tension`,
+  `unga_ideal_point_distance`.
+- System: `ucdp_active_conflicts`, `ucdp_intensity_max`, `ucdp_battle_deaths`,
+  `mepv_regional_war`.
+
+Market, derived-market, narrative, retrospective, and corpus-derived OPEC fields are excluded from
+the panel component. In particular, `wti_monthly`, `brent_daily`, `wti_daily`, `diesel_crack`,
+`curve_m1_m4_spread`, `vix`, `ovx`, `cot_managed_money_net`, and `opec_decision_dated` may not enter
+it. The four already-frozen market-vector fields remain the complete market block. Sentinel source
+strings representing no MID, ICB crisis, or ATOP obligation are accepted only for their allowlisted
+fields; there is no source-prefix inference and no source-lag map. Eligibility fails closed unless
+the row's source is exactly one of:
+
+- `EIA STEO Table 3d, surplus crude oil production capacity (STEO_m.xlsx)`
+- `EIA https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCESTUS1&f=W (series eia.crude_stocks_xspr; bridge)`
+- `EIA https://www.eia.gov/petroleum/ (series eia.spr_stocks; bridge)`
+- `EIA https://www.eia.gov/petroleum/ (series eia.refinery_util; bridge)`
+- `COW National Material Capabilities v7.0 (NMC-70-abridged.csv)`
+- `Archigos v4.1 (Archigos_4.1_stata14.dta)`
+- `Polity5 (p5v2018.xls, local file)`
+- `SIPRI Military Expenditure Database (local file)`
+- `World Bank WDI NY.GDP.PETR.RT.ZS (api.worldbank.org/v2)`
+- `CSP Coups d'Etat 1946-2021 (CSPCoupsAnnualv2021.xls, local file)`
+- `CSP Major Episodes of Political Violence 1946-2018 (MEPVv2018.xls, local file)`
+- `UCDP/PRIO Armed Conflict v26.1 + UCDP Battle-Related Deaths v26.1`
+- `COW Dyadic MID 4.03 (dyadic_mid_4.03.csv)`
+- `COW dyadic MID 4.03: no dispute listed (absent = none)`
+- `ICB v16 system level + dyads (Duke)`
+- `ICB v16: no crisis listed for the dyad (absent = none)`
+- `ATOP 5.1 directed dyad-year (atop5_1ddyr.csv)`
+- `ATOP 5.1: no obligation listed (absent = none)`
+- `UNGA ideal points, Bailey-Strezhnev-Voeten (IdealpointestimatesAll_Jun2024.csv)`
+
+### Frozen support and arms
+
+Every scored date reuses the exact candidate IDs, outcome atoms, realized outcome, and date set from
+the 264 frozen central reads. State availability cannot add, remove, or reorder candidates. Only
+distances and weights are recomputed.
+
+The comparison is symmetric: both the target and each historical analogue use the snapshot keyed
+to their own event date. It does not reconstruct what the target-date analyst later knew about the
+historical analogue; that alternative information set is outside this analysis.
+
+The primary arms are market-only, availability-state (the market block plus every admitted
+allowlisted non-market block), and event class, all matched to a common per-date effective sample
+size using the already registered deterministic procedure. Uniform and unmatched arms are
+descriptive. Non-market-only is an explicitly labeled diagnostic restricted to dates where it is
+defined; it is not on identical date support and cannot enter the primary family.
+
+The two primary contrasts and Holm correction remain, but their decision language is replaced:
+
+- C1 tests whether the registered equal-block availability-state operationalization improves on
+  market-only weighting on this frozen record.
+- C2 tests whether that operationalization improves on event-class weighting on this frozen record.
+
+C1 is favorable only when its interval excludes zero in the favorable direction and its
+Holm-adjusted *p* is below 0.05. A null must be reported as “no demonstrated incremental forecast
+improvement for this operationalization,” with realized sample size, field/block coverage, and
+effective sample sizes. C2 cannot rescue a null C1. Neither contrast licenses a claim about actual
+historical analyst knowledge or about every possible representation of wider state.
+
+### Pre-outcome coverage and power correction
+
+The statement above that at most 227 events carry non-market state is withdrawn. Before any outcome
+inspection, metadata show UCDP fields for 294–313 events, actor fields for roughly 223–227, physical
+fields for 37–114, and dyadic/alignment fields for roughly 34–42. These are row/event coverage counts,
+not effective power: pairwise block availability on the exact frozen supports must be published by
+the run. A null can reflect coverage, encoding, aggregation, scaling, missingness, or low power and
+cannot be translated into “the underlying state contains no information.”
+
+### Output correction
+
+The output directory and files remain as registered, except `source_lag_map.json` is replaced by
+`field_admission.json`, which records the exact allowlist, admitted/excluded row counts by field and
+block, and exclusions by rule. Tests must additionally prove exact frozen support against all 264
+central reads and prove that no field outside the allowlist enters a distance.
