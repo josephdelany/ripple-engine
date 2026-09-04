@@ -20,7 +20,7 @@
       "fdr_q": 0.0541,
       "is_rediscovered_h1": true,
       "needs_vol_clustering_defeater": false,
-      "status": "re-discovered H1 -- H1 is NOT validated: DOWNGRADE (SUGGESTIVE) 2026-09-03; data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar). Re-discovery does not answer the placebo, which is a claim about NON-events that a correlation scan over real events cannot detect.",
+      "status": "re-discovered H1 -- H1 is NOT validated: DOWNGRADE (SUGGESTIVE) 2026-09-03; data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar). Re-discovery does not answer the placebo.",
       "retracted": true,
       "retier": "DOWNGRADE (SUGGESTIVE)",
       "retracted_on": "2026-09-03",
@@ -108,7 +108,11 @@
       "fdr_q": 0.0541,
       "is_rediscovered_h1": true,
       "needs_vol_clustering_defeater": false,
-      "status": "re-discovered H1 (already validated)"
+      "status": "re-discovered H1 -- H1 is NOT validated: DOWNGRADE (SUGGESTIVE) 2026-09-03; data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar). Re-discovery does not answer the placebo.",
+      "retracted": true,
+      "retier": "DOWNGRADE (SUGGESTIVE)",
+      "retracted_on": "2026-09-03",
+      "retracted_reference": "data/evidentiary_bar.json#/summary \u00b7 docs/red_team_1.md R7 (the single evidentiary bar)"
     },
     {
       "feature": "derived.brent_wti_spread_z",
@@ -142,5 +146,5 @@
       "fdr_q": 0.2247
     }
   ],
-  "message": "Discovery re-found H1 (VIX->|CAR20|) from scratch -- a good check that the scan works, NOT evidence for H1, which is downgraded. The strongest raw hit, realized-Brent-vol -> |CAR20|, is almost certainly volatility clustering (a known confound), so it is flagged a CANDIDATE needing the standardization defeater, NOT a validated edge. No NEW validated edge is shipped here: survivors are candidates that must clear mechanism scrutiny + OOS forecasting validation first."
+  "message": "Discovery re-found H1 (VIX->|CAR20|) from scratch -- a good check that the scan works. The strongest raw hit, realized-Brent-vol -> |CAR20|, is almost certainly volatility clustering (a known confound), so it is flagged a CANDIDATE needing the standardization defeater, NOT a validated edge. No NEW validated edge is shipped here: survivors are candidates that must clear mechanism scrutiny + OOS forecasting validation first."
 }

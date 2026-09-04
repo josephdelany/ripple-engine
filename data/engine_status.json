@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T05:09:03+00:00",
-  "verdict": "AMBER",
+  "generated_at": "2026-09-04T00:52:00+00:00",
+  "verdict": "RED",
   "freshness": {
     "overall": "OK",
     "n_dead": 0,
@@ -33,12 +33,13 @@
     "restore_tested": true
   },
   "evaluation": {
-    "framework_sound": true
+    "framework_sound": false
   },
   "audit": {
     "blocked_types": []
   },
   "reasons": [
+    "RED: framework soundness check FAILED",
     "AMBER: undercovered domains ['commodities', 'macro', 'energy', 'me-risk', 'conflict', 'geopolitics', 'supply-chain']"
   ]
 }
