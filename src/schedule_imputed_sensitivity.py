@@ -45,7 +45,10 @@ OUT = ROOT / "data" / "structural_surface" / "availability"
 REGISTRATION = ROOT / "registrations" / "CONTEMPORANEOUS_AVAILABILITY_ARM.md"
 REGISTRATION_COMMIT = "3d57f36"
 FROZEN_RELEASE_COMMIT = "1705713b801d7ffc48d7cc39adb5a802b613157c"
-IMPLEMENTATION_COMMIT = "TO_BE_RECORDED_AFTER_IMPLEMENTATION_COMMIT"
+IMPLEMENTATION_COMMIT = "9265ec5a5d4779ccc81a6fbcb2ecc8335b771c03"
+# Joe chose register-and-implement, but do not run before submission. Keeping this as a code-level
+# gate prevents an accidental CLI invocation from creating a result that cannot then be unseen.
+PUBLICATION_AUTHORIZED = False
 
 FIELD_BLOCKS = {
     # physical
@@ -365,8 +368,8 @@ def score_designs(designs, reads_path=READS, scores_path=SCORES, n_boot=2000):
 
 def publish(bundle=BUNDLE, reads_path=READS, scores_path=SCORES, out_dir=OUT, n_boot=2000):
     """Execute the registered publication run. Call explicitly exactly once."""
-    if IMPLEMENTATION_COMMIT.startswith("TO_BE_"):
-        raise RuntimeError("record the implementation commit before the publication run")
+    if not PUBLICATION_AUTHORIZED:
+        raise RuntimeError("publication run is registered and implemented but not authorized")
     designs, admission = prepare_designs(bundle, reads_path)
     rows, summary = score_designs(designs, reads_path, scores_path, n_boot)
     summary["field_admission"] = admission

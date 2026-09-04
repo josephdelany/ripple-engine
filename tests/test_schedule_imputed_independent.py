@@ -136,11 +136,11 @@ def test_allowlists_are_transcribed_from_the_registration_not_invented():
         f"source allowlist drifted: {registered_sources ^ set(M.ALLOWED_SOURCES)}"
 
 
-def test_publication_stays_blocked_until_the_implementation_commit_is_recorded():
-    """Joe ruled register-but-do-not-run. The block is what enforces it in code."""
-    if not M.IMPLEMENTATION_COMMIT.startswith("TO_BE_"):
-        pytest.skip("implementation commit has been recorded; the block is intentionally lifted")
-    with pytest.raises(RuntimeError, match="record the implementation commit"):
+def test_publication_stays_blocked_after_the_implementation_commit_is_recorded():
+    """Joe ruled register-but-do-not-run. Recording provenance must not lift that block."""
+    assert M.IMPLEMENTATION_COMMIT == "9265ec5a5d4779ccc81a6fbcb2ecc8335b771c03"
+    assert M.PUBLICATION_AUTHORIZED is False
+    with pytest.raises(RuntimeError, match="not authorized"):
         M.publish()
     assert not (ROOT / "data" / "structural_surface" / "availability").exists(), \
         "publication output exists for an arm that has not been authorised to run"

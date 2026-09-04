@@ -129,7 +129,8 @@ def test_scoring_math_on_synthetic_data_only(monkeypatch):
     assert all(x["dm_p_holm"] == 1.0 for x in summary["primary"].values())
 
 
-def test_publication_is_blocked_until_implementation_commit_is_recorded():
-    assert S.IMPLEMENTATION_COMMIT.startswith("TO_BE_")
-    with pytest.raises(RuntimeError, match="implementation commit"):
+def test_publication_remains_blocked_by_the_recorded_user_ruling():
+    assert S.IMPLEMENTATION_COMMIT == "9265ec5a5d4779ccc81a6fbcb2ecc8335b771c03"
+    assert S.PUBLICATION_AUTHORIZED is False
+    with pytest.raises(RuntimeError, match="not authorized"):
         S.publish(out_dir=Path("unused"))
