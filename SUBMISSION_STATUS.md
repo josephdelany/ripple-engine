@@ -10,10 +10,10 @@ On 264 walk-forward forecast dates, the original combined-state arm scores mean 
 
 ## Verified release gates
 
-- `make verify-submission`: must be rerun on this release candidate.
+- `make verify-submission`: passed on the release candidate and in a detached clean worktree.
 - Frozen central outputs reproduce byte-for-byte at their recorded SHA-256 hashes.
 - Pre-separation archive receipt: the complete historical tree passed 1,038 tests, explicitly skipped 13 condition-dependent tests, recorded 1 expected failure, and had zero unexpected failures. It is preserved at `full-research-archive-2026-09-03`.
-- Current public tree: all 53 retained tests pass with zero skips or expected failures. The final clean-checkout count will be recorded after the release commit.
+- Current public tree and detached clean worktree: all 53 retained tests pass with zero skips or expected failures.
 - Public claims match the frozen central and ablation summaries.
 - Local links in authoritative documents resolve.
 - All tracked files are classified in `docs/audit/FILE_CLASSIFICATION.csv`.
