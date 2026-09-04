@@ -1,5 +1,6 @@
 import inspect
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -116,3 +117,11 @@ def test_run_preserves_frozen_support_atoms_and_is_byte_reproducible(tmp_path, m
     assert manifest["execution_commit"] == "f" * 40
     assert manifest["inputs"][str(A.READS.relative_to(A.ROOT))] == A.file_hash(A.READS)
     assert manifest["inputs"][str(A.SCORES.relative_to(A.ROOT))] == A.file_hash(A.SCORES)
+
+
+def test_frozen_ablation_was_registered_then_implemented_then_run():
+    manifest = json.loads((A.OUT / "manifest.json").read_text())
+    subprocess.run(["git", "merge-base", "--is-ancestor", manifest["registration_commit"],
+                    manifest["implementation_commit"]], cwd=A.ROOT, check=True)
+    subprocess.run(["git", "merge-base", "--is-ancestor", manifest["implementation_commit"],
+                    manifest["execution_commit"]], cwd=A.ROOT, check=True)

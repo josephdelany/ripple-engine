@@ -44,26 +44,30 @@ REPRO_DB ?=
 REPRO_FORCE ?= 0
 PY := python3
 
-.PHONY: reproduce reproduce-central test-public test-full verify-submission
+.PHONY: reproduce reproduce-central reproduce-ablation test-public test-full verify-submission
 
 # Authoritative public-product reproducer. This target is offline and uses only the committed,
 # transparent input bundle. It must reproduce the three frozen scientific artifacts byte-for-byte.
 reproduce-central:
 	$(PY) src/reproduce_structural_surface.py
 
+reproduce-ablation:
+	$(PY) src/reproduce_structural_component_ablation.py
+
 # The maintained fast public-product check. The complete research suite remains available with
 # `python3 -m pytest -q` and includes loaders and guards for superseded publications.
 test-public:
-	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_public_claim_guard.py tests/test_verify_submission.py
+	$(PY) -m pytest -q tests/test_structural_surface_experiment.py tests/test_structural_surface_demo.py tests/test_structural_component_ablation.py tests/test_paper_field_composition.py tests/test_public_claim_guard.py tests/test_verify_submission.py tests/test_bundle_provenance.py tests/test_doc_status_guard.py
 	$(PY) src/public_claim_guard.py
 
 # Complete repository suite; this and plain `pytest -q` are the release gate.
 test-full:
 	$(PY) -m pytest -q
 
-verify-submission: reproduce-central test-full
+verify-submission: reproduce-central reproduce-ablation test-full
 	$(PY) src/public_claim_guard.py
 	$(PY) src/verify_submission.py
+	$(PY) src/doc_status_guard.py
 	$(PY) src/classify_public_product.py
 	git diff --exit-code -- docs/audit/FILE_CLASSIFICATION.csv
 	test -z "$$(git status --porcelain)" || { git status --short; echo "verification mutated the checkout" >&2; exit 1; }

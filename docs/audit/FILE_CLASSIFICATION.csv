@@ -2,6 +2,7 @@ path,classification
 .gitignore,archive_scientific_code
 CITATION.cff,maintained_core
 CLAUDE.md,archive_planning_narrative
+COORDINATION.md,archive_planning_narrative
 LICENSE,maintained_core
 Makefile,maintained_core
 OPEN_ITEMS.md,archive_planning_narrative
@@ -1126,6 +1127,9 @@ data/state/status.json,archive_generated_data
 data/state/two_source_log.csv,archive_generated_data
 data/stories/opec_fiscal_stress.state.sample.json,archive_generated_data
 data/stories/opec_fiscal_stress.yaml,archive_generated_data
+data/structural_surface/ablation/manifest.json,maintained_core
+data/structural_surface/ablation/scores.jsonl,maintained_core
+data/structural_surface/ablation/summary.json,maintained_core
 data/structural_surface/input/bundle_manifest.json,maintained_core
 data/structural_surface/input/events.csv,maintained_core
 data/structural_surface/input/market_observations.csv,maintained_core
@@ -1161,6 +1165,9 @@ data/walk_forward/placebo_rows.jsonl,archive_generated_data
 data/walk_forward/reads.jsonl,archive_generated_data
 data/walk_forward/scores.jsonl,archive_generated_data
 data/walk_forward/summary.json,archive_generated_data
+data/walk_forward/unfiltered/reads.jsonl,archive_generated_data
+data/walk_forward/unfiltered/scores.jsonl,archive_generated_data
+data/walk_forward/unfiltered/weights.jsonl,archive_generated_data
 data/walk_forward/weights.jsonl,archive_generated_data
 data/watch_feeds.txt,archive_generated_data
 data/watch_keywords.txt,archive_generated_data
@@ -1206,6 +1213,7 @@ docs/audit/06_exact_restatements.md,evidence_audit
 docs/audit/FILE_CLASSIFICATION.csv,maintained_core
 docs/audit/FINDINGS_CONSOLIDATED.md,evidence_audit
 docs/audit/MASTER_BRIEF_FOR_EXTERNAL_AGENT.md,evidence_audit
+docs/audit/PROVENANCE_BOUNDARY.md,evidence_audit
 docs/audit/PUBLIC_PRODUCT_CLOSURE.md,maintained_core
 docs/citation_inventory.json,archive_planning_narrative
 docs/demos/1990.md,archive_planning_narrative
@@ -1316,6 +1324,7 @@ registrations/PRE_REGISTRATION_V2.md,archive_planning_narrative
 registrations/REGISTERED_SAMPLE.md,archive_planning_narrative
 registrations/RIPPLE_REGISTRATION.md,archive_planning_narrative
 registrations/SPINE_REGISTRATION.md,archive_planning_narrative
+registrations/STRUCTURAL_COMPONENT_ABLATION.md,maintained_core
 registrations/STRUCTURAL_SURFACE_EXPERIMENT.md,maintained_core
 repro.sh,archive_scientific_code
 requirements-public.txt,maintained_core
@@ -1371,6 +1380,7 @@ src/big_moves.html,archive_interface_operations
 src/big_moves.py,archive_scientific_code
 src/big_moves_page.py,archive_scientific_code
 src/brief.py,archive_scientific_code
+src/bundle_provenance.py,maintained_core
 src/calibrate.py,archive_scientific_code
 src/calibrate_corroboration.py,archive_scientific_code
 src/calibration_report.py,archive_scientific_code
@@ -1398,6 +1408,7 @@ src/desk.css,archive_interface_operations
 src/digest.py,archive_scientific_code
 src/discovery.py,archive_scientific_code
 src/divergence.py,archive_scientific_code
+src/doc_status_guard.py,maintained_core
 src/domain_conditioning.py,archive_scientific_code
 src/dossier.py,archive_scientific_code
 src/edge_battery.py,archive_scientific_code
@@ -1511,6 +1522,7 @@ src/reader_eval.py,archive_scientific_code
 src/reference_tier.py,archive_scientific_code
 src/refresh.py,archive_scientific_code
 src/regime_block.py,archive_scientific_code
+src/reproduce_structural_component_ablation.py,maintained_core
 src/reproduce_structural_surface.py,maintained_core
 src/research.py,archive_scientific_code
 src/resolve_reads.py,archive_scientific_code
@@ -1572,6 +1584,7 @@ src/state_of_engine.py,archive_scientific_code
 src/status.py,archive_scientific_code
 src/story.py,archive_scientific_code
 src/story_read.py,archive_scientific_code
+src/structural_component_ablation.py,maintained_core
 src/structural_surface_demo.py,maintained_core
 src/structural_surface_experiment.py,maintained_core
 src/supply_chain.py,archive_scientific_code
@@ -1652,6 +1665,7 @@ tests/test_big_moves_variants.py,archive_scientific_tests
 tests/test_brief.py,archive_scientific_tests
 tests/test_brief2_desk.py,archive_scientific_tests
 tests/test_brief3_desk.py,archive_scientific_tests
+tests/test_bundle_provenance.py,maintained_core
 tests/test_candidates_pre1987.py,archive_scientific_tests
 tests/test_capacity.py,archive_scientific_tests
 tests/test_challenge_loop.py,archive_scientific_tests
@@ -1664,6 +1678,7 @@ tests/test_delta_experiment.py,archive_scientific_tests
 tests/test_demo_911.py,archive_scientific_tests
 tests/test_design_spec.py,archive_scientific_tests
 tests/test_diagnostic_hostile.py,archive_scientific_tests
+tests/test_doc_status_guard.py,maintained_core
 tests/test_domain_conditioning.py,archive_scientific_tests
 tests/test_dossier_admit.py,archive_scientific_tests
 tests/test_edge_battery.py,archive_scientific_tests
@@ -1699,6 +1714,7 @@ tests/test_magnitude_severity_retest.py,archive_scientific_tests
 tests/test_magnitude_stage0.py,archive_scientific_tests
 tests/test_monthly_tier.py,archive_scientific_tests
 tests/test_orient.py,archive_scientific_tests
+tests/test_paper_field_composition.py,maintained_core
 tests/test_propagation.py,archive_scientific_tests
 tests/test_public_claim_guard.py,maintained_core
 tests/test_read.py,archive_scientific_tests
@@ -1725,6 +1741,7 @@ tests/test_step2.py,archive_scientific_tests
 tests/test_step4.py,archive_scientific_tests
 tests/test_step5.py,archive_scientific_tests
 tests/test_step678.py,archive_scientific_tests
+tests/test_structural_component_ablation.py,maintained_core
 tests/test_structural_surface_demo.py,maintained_core
 tests/test_structural_surface_experiment.py,maintained_core
 tests/test_supply_chain.py,archive_scientific_tests

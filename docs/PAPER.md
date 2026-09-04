@@ -1,12 +1,12 @@
-# When event labels hurt historical analogy
+# Market state versus event labels in historical analogy
 
-## A registered comparison of structural and surface matching in geopolitical oil events
+## A registered oil-market experiment
 
 Joseph Delany · Colby College · 2026
 
 ## Abstract
 
-Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim behind analogical inference is that cases should correspond across the state in which events occur. I test that distinction directly. On 313 dated geopolitical and oil-policy events, two walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return; they differ only in whether cases are weighted by a point-in-time state vector or by event-class identity. That vector turns out to be narrow — four market fields reach every comparison, two leadership fields reach half, and one dyadic field reaches three — so what is tested is a market-and-leadership state against event labels, not full structural correspondence. Structural weighting records mean CRPS 8.341 against 8.784 for surface matching (paired difference −0.444; 95% stationary-bootstrap interval [−0.613, −0.269]; DM *p*=8.65×10⁻⁷; 264 dates). But uniform pooling scores 8.390, and structure does not distinguishably beat it (difference −0.049; interval [−0.112, +0.012]; *p*=0.140). Surface matching is significantly worse than pooling. The evidence supports a narrow conclusion: class labels sharply down-weight cross-class precedents and can damage forecasts; it does not establish production forecasting skill for the structural instrument. An availability audit also shows why the stronger test remains difficult: only 671 of 11,029 panel-derived state rows satisfy the registered point-in-time rule.
+Analysts often select historical precedents from visible event labels: a closure is compared with other closures, or a sanction with other sanctions. The stronger claim is that cases should correspond across the state in which events occur. On 313 dated geopolitical and oil-policy events, registered walk-forward forecasters use the same eligible prior cases and forecast Brent’s 20-trading-day abnormal return. The first comparison favored a combined-state arm over a much more concentrated event-class arm: mean CRPS 8.341 against 8.784 (difference −0.444; 95% stationary-bootstrap interval [−0.613, −0.269]; DM *p*=8.65×10⁻⁷; 264 dates). It did not distinguishably beat uniform pooling (difference −0.049; interval [−0.112, +0.012]; *p*=0.140; uniform CRPS 8.390). A separately registered ablation then equalized effective sample size. Market-state matching scored 8.286 against 8.422 for event class (difference −0.136; interval [−0.234, −0.038]; Holm-adjusted *p*=0.013), while adding the available leadership and dyadic fields did not improve on market alone (difference +0.051; interval [−0.001, +0.118]; Holm-adjusted *p*=0.114). The defensible finding is that recent market context was more informative than headline category at equal concentration. Because four market fields dominate the usable vector, full geopolitical structural correspondence remains untested, and no arm establishes production forecasting skill.
 
 ## 1. Research question
 
@@ -69,6 +69,14 @@ The uniform diagnostic determines the interpretation. Pooling scores 8.3900. Str
 
 Thus structural comparison preserves information class matching throws away. The experiment does not establish that structural weighting extracts reliable 20-day signal beyond the historical pool itself.
 
+### Registered component and concentration ablation
+
+The original arms differed in concentration as well as representation: median effective sample size was 130.2 for the combined-state arm and 28.7 for event class. Before inspecting the following results, a second protocol froze a common per-date effective sample size and two primary contrasts (`registrations/STRUCTURAL_COMPONENT_ABLATION.md`).
+
+At equal concentration, market-state matching scores 8.2858 and event-class matching 8.4218. The paired market-minus-class difference is −0.1360, interval [−0.2340, −0.0381], raw *p*=0.00666 and Holm-adjusted *p*=0.0133. Adding all usable non-market fields produces CRPS 8.3369: combined-minus-market is +0.0511, interval [−0.0011, +0.1180], Holm-adjusted *p*=0.1144. Thus recent market state, not the sparse leadership/dyadic increment, accounts for the demonstrated advantage over event class.
+
+The original event-class arm scores 0.3624 worse than its concentration-matched version, so roughly 82% of the original combined-versus-class gap is associated with the class arm’s concentration choice. Matched event class remains statistically indistinguishable from uniform pooling (difference +0.0317; interval [−0.0028, +0.0666]; *p*=0.0833). These are explanatory results, not a post-hoc replacement endpoint.
+
 Five- and ten-day outcomes were non-verdict diagnostics. Neither distinguishes structure from surface or uniform after the exact-horizon correction. They are not the headline.
 
 ## 5. What the audit changed
@@ -83,15 +91,15 @@ Legacy escalation labels often used violence anywhere in the affected country ra
 
 ## 6. Significance and limitations
 
-The consequential result is the primary comparison together with its uniform control: surface class matching can make an analyst worse than retaining the eligible reference class. That argues against event type as an eligibility gate and for testing similarity systems against unrestricted pooling on identical support.
+The consequential result is the concentration-matched comparison: recent market state carries more predictive information than event class for weighting the same historical cases. The original class rule’s large deficit is mostly a concentration effect, and the matched class arm is not distinguishable from pooling. This argues for testing analogy representations at equal effective sample size and against unrestricted pooling—not for claiming that event labels are inherently harmful.
 
-This is not a rescue of the original engine, and it is not yet an answer to the question in §1. The registered comparison was designed to test whether correspondence across the wider state beats correspondence of labels. What it could execute was a comparison between a market-and-leadership state and labels, because that is all the strict availability rule left standing. The stronger test is therefore not failed here; it is untested, and no result in §4 should be read as evidence about the geopolitical variables that never entered a distance. A registered component and concentration ablation ([`registrations/STRUCTURAL_COMPONENT_ABLATION.md`](../registrations/STRUCTURAL_COMPONENT_ABLATION.md)) separates the remaining possibilities — market conditioning, leadership information, or the breadth of the reference class — on this same frozen support. A further caution follows from the table in §3: with only six distinct field combinations, and one of the three blocks reaching three comparisons out of 41,997, the design has far less independent structural variation than 41,997 comparisons suggests. Structure has not shown 20-day skill beyond pooling. The catalogue is curated, not a probability sample; coverage varies by era; strict state availability is sparse; missingness may encode time and source coverage; the equal-block metric and bandwidth are design choices; and abnormal returns do not remove every concurrent cause. Dependence-aware inference cannot repair catalogue selection or measurement error.
+This is not a rescue of the original engine, and it is not yet the full test posed in §1. The available computation is market state, sometimes augmented by leadership, against labels. Alignment, regime, capability and conflict variables never enter a distance. The stronger full-state test is therefore untested, not refuted. With only six field combinations and one dyadic field reaching three comparisons out of 41,997, the design has much less geopolitical variation than its catalogue suggests. No method has shown 20-day skill beyond pooling. The catalogue is curated, coverage varies by era, point-in-time state is sparse, missingness may encode era and source coverage, and abnormal returns do not remove every concurrent cause. Dependence-aware inference cannot repair catalogue selection or measurement error.
 
-The next serious analysis is prospective collection of time-stamped states and forecasts under this frozen protocol. Until then, the honest headline remains comparative: structure beats surface matching, while pooling remains competitive.
+The next serious analysis is prospective collection of time-stamped geopolitical states and forecasts under this frozen protocol. Until then, the honest headline is narrower: market state beats event class at equal concentration; additional structural information has not yet shown value.
 
 ## 7. Reproduction
 
-Run `make reproduce-central`. It uses the committed input bundle, rebuilds central outputs in isolation, and verifies byte-for-byte hashes against `data/structural_surface/manifest.json`. The scientific artifacts are `reads.jsonl`, `scores.jsonl`, and `summary.json`. Tests enforce filtration, equal support, seal-before-outcome order, scoring, and deterministic reproduction.
+Run `make reproduce-central` and `make reproduce-ablation`. They use committed inputs, rebuild the central and ablation outputs in isolation, and verify byte-for-byte hashes against their manifests. Tests enforce filtration, equal support, seal-before-outcome order, scoring, concentration matching, field-use accounting, and deterministic reproduction.
 
 The six-week system and retractions remain in repository history and the audit record, but are not additional validated findings. Tag `closure-core-frozen-2026-09-03` is the pre-closure recovery point.
 

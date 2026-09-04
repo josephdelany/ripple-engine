@@ -2,7 +2,7 @@
 
 When analysts choose historical precedents, does recent market state carry more useful information than a surface label such as “chokepoint disruption” or “sanctions”?
 
-This repository’s authoritative result is a registered walk-forward experiment and a separately registered explanatory ablation on 313 dated geopolitical and oil-policy events. Every method receives exactly the same prior-event pool and forecasts Brent’s 20-return abnormal return; only the weighting rule changes.
+This repository’s authoritative result is a registered walk-forward experiment and a separately registered explanatory ablation on 313 dated geopolitical and oil-policy events. Every method receives exactly the same prior-event pool and forecasts Brent’s 20-trading-day abnormal return; only the weighting rule changes.
 
 ## Result
 
@@ -53,6 +53,7 @@ The demo produces one sealed retrospective read for the 2026 Hormuz closure and 
 - `src/structural_surface_experiment.py` — central experiment.
 - `src/structural_component_ablation.py` — registered explanatory ablation.
 - `src/reproduce_structural_surface.py` — offline hash-checked reproduction.
+- `src/reproduce_structural_component_ablation.py` — offline hash-checked ablation reproduction.
 - `src/structural_surface_demo.py` — small instrument demonstration.
 - `data/structural_surface/` — inputs, sealed reads, scores, summaries, ablation, and manifests.
 - `tests/test_structural_surface_*.py` — scientific and reproduction invariants.

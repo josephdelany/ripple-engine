@@ -1,10 +1,12 @@
 """Semantic guard for the authoritative public-product claims."""
 import json
 import csv
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SUMMARY = ROOT / "data" / "structural_surface" / "summary.json"
+ABLATION = ROOT / "data" / "structural_surface" / "ablation" / "summary.json"
 # SUBMISSION_STATUS.md restates the entire result set and decides whether the product may be called
 # ready, so it is guarded exactly like the others. It was unguarded until 2026-09-03.
 PUBLIC = (ROOT / "README.md", ROOT / "docs" / "PAPER.md", ROOT / "docs" / "RESUME.md",
@@ -31,9 +33,12 @@ SUPERSEDED = {
 
 def evidence():
     s = json.loads(SUMMARY.read_text())
+    a = json.loads(ABLATION.read_text())
     d20 = s["diagnostics_non_verdict"]["abnormal"]["20"]
     with (ROOT / "data" / "structural_surface" / "input" / "events.csv").open() as f:
         event_dates = [r["event_date"] for r in csv.DictReader(f)]
+    market_surface = a["primary_explanatory"]["market_minus_surface_matched"]
+    combined_market = a["primary_explanatory"]["combined_minus_market_matched"]
     return {
         "n": s["n_inferential_dates"],
         "structural": s["mean_loss"]["structural"],
@@ -48,6 +53,14 @@ def evidence():
         "surface_uniform_difference": d20["surface_vs_uniform"]["mean_diff"],
         "event_start": min(event_dates)[:4],
         "event_end": max(event_dates)[:4],
+        "market_matched": a["mean_loss"]["market_matched"],
+        "surface_matched": a["mean_loss"]["surface_matched"],
+        "market_surface_difference": market_surface["mean_diff"],
+        "market_surface_ci": market_surface["ci95"],
+        "market_surface_holm": market_surface["dm_p_holm"],
+        "combined_market_difference": combined_market["mean_diff"],
+        "combined_market_ci": combined_market["ci95"],
+        "combined_market_holm": combined_market["dm_p_holm"],
     }
 
 
@@ -64,15 +77,23 @@ def violations():
     intervals = {f"{e['ci'][0]:.3f}", f"{e['ci'][1]:.3f}",
                  f"{e['structure_uniform_ci'][0]:.3f}", f"{e['structure_uniform_ci'][1]:.3f}"}
     pvalues = {f"{e['p']:.2e}".split("e")[0], f"{e['structure_uniform_p']:.3f}"}
+    ablation = {f"{e['market_matched']:.3f}", f"{e['surface_matched']:.3f}",
+                f"{e['market_surface_difference']:.3f}",
+                f"{e['market_surface_ci'][0]:.3f}", f"{e['market_surface_ci'][1]:.3f}",
+                f"{e['market_surface_holm']:.3f}",
+                f"{e['combined_market_difference']:+.3f}",
+                f"{e['combined_market_ci'][0]:.3f}", f"{e['combined_market_ci'][1]:+.3f}",
+                f"{e['combined_market_holm']:.3f}"}
     required = {
-        "README.md": common | {f"{e['uniform']:.3f}"} | intervals | pvalues,
-        "docs/PAPER.md": common | {f"{e['uniform']:.3f}"} | intervals | pvalues,
-        "docs/RESUME.md": common | {f"{e['event_start']}–{e['event_end']}"} | intervals,
-        "SUBMISSION_STATUS.md": common | {f"{e['uniform']:.3f}"} | intervals,
+        "README.md": common | {f"{e['uniform']:.3f}"} | intervals | pvalues | ablation,
+        "docs/PAPER.md": common | {f"{e['uniform']:.3f}"} | intervals | pvalues | ablation,
+        "docs/RESUME.md": common | {f"{e['event_start']}–{e['event_end']}"} | intervals | ablation,
+        "SUBMISSION_STATUS.md": common | {f"{e['uniform']:.3f}"} | intervals | ablation,
     }
     prohibited = (
         "beats simple baselines", "predicts oil prices", "validated forecasting skill",
         "structural analogy is validated", "proved historical analogies work",
+        "full observable state outperforms", "full geopolitical state outperforms",
     )
     problems = []
     for name, body in docs.items():
@@ -87,7 +108,9 @@ def violations():
             for stale, why in SUPERSEDED.items():
                 if stale in current:
                     continue          # a value that is superseded elsewhere but current here is not stale
-                if stale in line:
+                # Match a complete displayed number, not a prefix of a more precise current one
+                # (for example stale 8.336 must not flag current ablation value 8.3369).
+                if re.search(rf"(?<![0-9.]){re.escape(stale)}(?![0-9])", line):
                     problems.append(f"{name}:{line_no}: superseded value {stale!r} ({why})")
         if name != "docs/RESUME.md":
             lower = body.lower()
@@ -101,7 +124,7 @@ def main():
     problems = violations()
     if problems:
         raise SystemExit("\n".join(problems))
-    print("public claims: VERIFIED against data/structural_surface/summary.json")
+    print("public claims: VERIFIED against central and ablation summaries")
 
 
 if __name__ == "__main__":

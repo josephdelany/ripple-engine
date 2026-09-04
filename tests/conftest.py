@@ -68,6 +68,14 @@ DB_FREE_FILES = {
     "test_citation_guard.py",        # Session I: the citation guard over the five published documents --
                                      # committed JSON/Markdown only. In the CI gate on purpose: it is the
                                      # test that goes red when a re-run supersedes the numbers in the prose.
+    "test_structural_component_ablation.py",
+    "test_paper_field_composition.py",
+    "test_public_claim_guard.py",
+    "test_verify_submission.py",
+    "test_structural_surface_experiment.py",
+    "test_structural_surface_demo.py",
+    "test_bundle_provenance.py",
+    "test_doc_status_guard.py",
 }
 
 

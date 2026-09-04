@@ -26,7 +26,7 @@ def main():
     problems = claims.violations()
     problems += [f"broken link: {x}" for x in broken_links()]
     cff = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-    if "When event labels hurt historical analogy" not in cff:
+    if "Market state versus event labels in historical analogy" not in cff:
         problems.append("CITATION.cff does not name the authoritative project")
     if problems:
         raise SystemExit("\n".join(problems))

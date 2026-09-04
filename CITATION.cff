@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this research software or its evidence, please cite it as below."
 type: software
-title: "When event labels hurt historical analogy: structural versus surface matching in geopolitical oil events"
+title: "Market state versus event labels in historical analogy: a registered oil-market experiment"
 authors:
   - family-names: Delany
     given-names: Joseph
@@ -18,15 +18,14 @@ keywords:
   - walk-forward evaluation
   - proper scoring rules
 abstract: >-
-  A registered walk-forward experiment compares structural state similarity with
-  event-class matching on identical prior-event support. Across 264 forecast dates,
-  structural weighting improves mean CRPS relative to surface matching, but is not
-  distinguishable from uniform historical pooling at the registered 20-trading-day
-  horizon. The evidence shows that surface-label filtering can discard useful
-  precedents; it does not establish production forecasting skill.
+  A registered walk-forward experiment and concentration-matched ablation compare
+  recent market state with event-class matching on identical historical support.
+  Across 264 forecast dates, market-state matching outperforms event class at equal
+  effective sample size; sparse leadership and dyadic fields add no demonstrated
+  value. The study does not establish production forecasting skill.
 references:
   - type: report
-    title: "When event labels hurt historical analogy"
+    title: "Market state versus event labels in historical analogy"
     authors:
       - family-names: Delany
         given-names: Joseph
