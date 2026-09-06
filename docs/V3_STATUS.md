@@ -121,8 +121,7 @@ Not reproducible: PortWatch's own aggregates from upstream AIS, which is third-p
 ## Verification
 
 ```bash
-cd "/Users/default/Documents/Claude/Projects/News to Markets/ripple-engine"
-git checkout research/v3
+git clone https://github.com/josephdelany/ripple-engine.git && cd ripple-engine
 make verify-v3-foundation      # detector tests, rebuild, sensitivity grid, drift check
 make verify-submission         # v2 must remain green on this branch
 python3 src/disruption_episodes.py --help
